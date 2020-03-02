@@ -5,6 +5,7 @@
 
 #include "bomberman.hpp"
 #include "Gui.hpp"
+#include "Inputs.hpp"
 
 int start(int ac, char const **av) {
 	(void)ac;
@@ -19,14 +20,15 @@ int start(int ac, char const **av) {
 bool	exampleGui() {
 	GameInfo	gameInfo;
 	Gui			gui(gameInfo);
+	Inputs		inputs;
 
 	if (!gui.init()) {
 		return false;
 	}
 
 	while (true) {
-		gui.updateInput();
-
+		inputs.update();
+		gui.updateInput(inputs);
 		if (gameInfo.quit) {
 			logInfo("exit game")
 			break;
@@ -43,7 +45,7 @@ bool	exampleGui() {
 int main(int ac, char const **av) {
 	int ret = start(ac, av);
 
-	if (ret == EXIT_FAILURE) {
+	if (ret != EXIT_SUCCESS) {
 		return ret;
 	}
 	logDebug("running " << "game");
@@ -54,6 +56,5 @@ int main(int ac, char const **av) {
 	if (!exampleGui()) {
 		return EXIT_FAILURE;
 	}
-
 	return ret;
 }
