@@ -9,7 +9,7 @@ int start(int ac, char const **av) {
 	(void)ac;
 	(void)av;
 	initLogs();  // init logs functions
-	initSettings("assets/settings.json");
+	initSettings("bomberman-assets/settings.json");
 	initUserData(s.s("userDataFilename"));
 
 	return EXIT_SUCCESS;

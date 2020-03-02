@@ -8,17 +8,9 @@
 #define SHADER_SKYBOX_VS "./libsGui/nibblerSDL/shaders/skybox_vs.glsl"
 #define SHADER_SKYBOX_FS "./libsGui/nibblerSDL/shaders/skybox_fs.glsl"
 
-#define SKYBOX_USING 2
+#define SKYBOX_USING 0
 #if SKYBOX_USING == 0
-	#define SKYBOX_START	"./assets/skybox/skybox0/"
-	#define SKYBOX_EXT		".jpg"
-	#define SKYBOX_NAME_TYPE 0
-#elif SKYBOX_USING == 1
-	#define SKYBOX_START	"./assets/skybox/skybox1/miramar_"
-	#define SKYBOX_EXT		".tga"
-	#define SKYBOX_NAME_TYPE 1
-#else
-	#define SKYBOX_START	"./assets/skybox/skybox2/"
+	#define SKYBOX_START	"./bomberman-assets/skybox/cartoonSky/"
 	#define SKYBOX_EXT		".jpg"
 	#define SKYBOX_NAME_TYPE 2
 #endif
