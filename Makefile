@@ -105,6 +105,8 @@ SRC =	main.cpp \
 \
 		Game.cpp \
 \
+		Inputs.cpp \
+\
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
 \
@@ -130,6 +132,8 @@ HEAD =	bomberman.hpp \
 		Bomb.hpp \
 \
 		Game.hpp \
+\
+		Inputs.hpp \
 \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \

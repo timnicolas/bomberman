@@ -31,7 +31,6 @@ Gui::~Gui() {
 	delete _textureManager;
 	delete _cubeShader;
 	delete _cam;
-	delete _textRender;
 	delete _skybox;
 
 	// properly quit sdl
@@ -52,56 +51,31 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
-void Gui::updateInput() {
+void Gui::updateInput(Inputs &inputs) {
 	// manage inputs
-	while (SDL_PollEvent(_event)) {
-		// close button
-		if (_event->window.event == SDL_WINDOWEVENT_CLOSE) {
-			_gameInfo.quit = true;
-		}
-
-		// key release
-		if (_event->key.type == SDL_KEYDOWN) {
-			switch (_event->key.keysym.sym) {
-			case SDLK_ESCAPE:
-				_gameInfo.quit = true;
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		// mouse motion
-		if (_event->type == SDL_MOUSEMOTION) {
-			_cam->processMouseMovement(_event->motion.xrel, -_event->motion.yrel);
-		}
+	// quit
+	if (inputs.shouldQuit() || inputs.getKey(InputType::Enum::CANCEL)) {
+		logDebug("quiting...");
+		_gameInfo.quit = true;
 	}
+	// mouse motion
+	_cam->processMouseMovement(inputs.getMouseRel().x, -inputs.getMouseRel().y);
 
 	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
 
 	// -- camera movement ------------------------------------------------------
-	// get curently pressed keys
-	const Uint8 * keystates = SDL_GetKeyboardState(NULL);
 	// camera movement
-	bool isRun = keystates[SDL_SCANCODE_LSHIFT];
-	if (keystates[SDL_SCANCODE_W]) {
-		_cam->processKeyboard(CamMovement::Forward, _dtTime, isRun);
+	if (inputs.getKey(InputType::Enum::UP)) {
+		_cam->processKeyboard(CamMovement::Forward, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_D]) {
-		_cam->processKeyboard(CamMovement::Right, _dtTime, isRun);
+	if (inputs.getKey(InputType::Enum::RIGHT)) {
+		_cam->processKeyboard(CamMovement::Right, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_S]) {
-		_cam->processKeyboard(CamMovement::Backward, _dtTime, isRun);
+	if (inputs.getKey(InputType::Enum::DOWN)) {
+		_cam->processKeyboard(CamMovement::Backward, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_A]) {
-		_cam->processKeyboard(CamMovement::Left, _dtTime, isRun);
-	}
-	if (keystates[SDL_SCANCODE_Q]) {
-		_cam->processKeyboard(CamMovement::Down, _dtTime, isRun);
-	}
-	if (keystates[SDL_SCANCODE_E]) {
-		_cam->processKeyboard(CamMovement::Up, _dtTime, isRun);
+	if (inputs.getKey(InputType::Enum::LEFT)) {
+		_cam->processKeyboard(CamMovement::Left, _dtTime, false);
 	}
 }
 
