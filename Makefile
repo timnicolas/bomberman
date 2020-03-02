@@ -162,12 +162,16 @@ define CONFIGURE
 # Linux
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
+	# glm
+	sudo apt-get -y install libglm-dev;
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies"
 	mkdir -p $(LIBS_DIR)
 	# json lib
 	wget -O $(LIBS_DIR)/json.hpp https://raw.githubusercontent.com/nlohmann/json/8d92ca8/single_include/nlohmann/json.hpp
+	# glm
+	brew install glm
 fi
 
 exit 0
@@ -194,7 +198,7 @@ export CONFIGURE_LINTER
 # set command to launch linter on LINTER
 # add rules for linter in LINTER_RULES
 LINTER = $(CPPLINT)
-LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn \
+LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn,-whitespace/braces \
 				--linelength=120 --quiet
 
 ################################################################################
@@ -216,11 +220,7 @@ export PRE_COMMIT
 PRE_PUSH_FILE = .git/hooks/pre-push
 define PRE_PUSH
 #!/bin/zsh
-
-$(MAKE) $(MAKE_OPT) check -j8
-res=$$?
-
-exit $${res}
+exit 0
 endef
 export PRE_PUSH
 
