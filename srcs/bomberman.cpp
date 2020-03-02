@@ -26,6 +26,11 @@ bool	initSettings(std::string const & filename) {
 
 	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
 
+
+	SettingsJson list;
+	list.add<uint64_t>("elem", 12);
+	s.addList<SettingsJson>("name", list);
+
 	// s.add<SettingsJson>("screen");
 	// 	s.j("screen").add<std::string>("name", "nibbler").setDescription("name of the game");
 	// 	s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
