@@ -37,4 +37,5 @@
 *.swp
 .dep
 libs/*
+configs/UserData.json
 bomberman
