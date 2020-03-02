@@ -1,11 +1,13 @@
 #include "Inputs.hpp"
 #include "Logging.hpp"
 
+const std::string	Inputs::_conf_file = "configs/controls.json";
+
 Inputs::Inputs(): _quit(false) {
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 	}
-	setKeys();
+	configureKeys();
 }
 
 Inputs::~Inputs() {}
@@ -14,7 +16,33 @@ bool				Inputs::getKey(InputType::Enum type) {
 	return _key_status[static_cast<int>(type)];
 }
 
-void				Inputs::setKeys() {
+void				Inputs::configureKeys() {
+	_controls.name("controls").description("controls settings");
+	_controls.add<SettingsJson>("keys");
+	_controls.j("keys").add<int64_t>("up", SDL_SCANCODE_W) \
+		.setMin(4).setMax(286).setDescription("move up.");
+	_controls.j("keys").add<int64_t>("down", SDL_SCANCODE_S) \
+		.setMin(4).setMax(286).setDescription("move down.");
+	_controls.j("keys").add<int64_t>("left", SDL_SCANCODE_A) \
+		.setMin(4).setMax(286).setDescription("move left.");
+	_controls.j("keys").add<int64_t>("right", SDL_SCANCODE_D) \
+		.setMin(4).setMax(286).setDescription("move right.");
+	_controls.j("keys").add<int64_t>("action", SDL_SCANCODE_SPACE) \
+		.setMin(4).setMax(286).setDescription("action command.");
+	_controls.j("keys").add<int64_t>("confirm", SDL_SCANCODE_RETURN) \
+		.setMin(4).setMax(286).setDescription("confirm choice.");
+	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
+		.setMin(4).setMax(286).setDescription("cancel choice.");
+	try {
+		if (!_controls.loadFile(Inputs::_conf_file)) {
+			logWarn("Invalid value in " << Inputs::_conf_file << ".");
+			_controls.saveToFile(Inputs::_conf_file);
+		}
+	}
+	catch(SettingsJson::SettingsException const & e) {
+		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now");
+		_controls.saveToFile(Inputs::_conf_file);
+	}
 	_input_key_map = {
 		{ SDL_SCANCODE_W, InputType::Enum::UP },
 		{ SDL_SCANCODE_S, InputType::Enum::DOWN },
@@ -24,7 +52,7 @@ void				Inputs::setKeys() {
 		{ SDL_SCANCODE_RETURN, InputType::Enum::CONFIRM },
 		{ SDL_SCANCODE_ESCAPE, InputType::Enum::CANCEL }
 	};
-	logDebug("set keys");
+	logDebug("keys set");
 }
 
 bool				Inputs::shouldQuit() {
@@ -54,6 +82,7 @@ void				Inputs::update() {
 				_key_status[index] = true;
 			}
 			catch(std::out_of_range oor) {
+				// unused key
 				continue;
 			}
 			break;
@@ -64,6 +93,7 @@ void				Inputs::update() {
 				_key_status[index] = false;
 			}
 			catch(std::out_of_range oor) {
+				// unused key
 				continue;
 			}
 			break;

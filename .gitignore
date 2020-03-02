@@ -38,4 +38,5 @@
 .dep
 libs/*
 configs/UserData.json
+configs/controls.json
 bomberman
