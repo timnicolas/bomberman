@@ -70,9 +70,6 @@ uint32_t	textureAtlasFromFile(const std::string path, bool inSpaceSRGB, int tile
 
 	data = stbi_load(path.c_str(), &width, &height, &nrComponents, 0);
 
-	std::cout << "width: " << width << ", height: " << height << std::endl;
-	// TODO(zer0nim): need to check image size
-
 	if (data) {
 		glGenTextures(1, &textureID);
 		if (nrComponents == 1) {

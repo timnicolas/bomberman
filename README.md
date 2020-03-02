@@ -1,1 +1,5 @@
-# bomberman
+# bomberman [[42](https://www.42.fr/) project]
+## ⚠️ Work in progress ⚠️
+Bomberman is one of the most famous video games ever.
+
+With more that 70 adaptations, from the first version on MSX, ZX Spectrum and Sharp MZ-700 in 1983 to the last versions available on the PlayStation Network, WiiWare and the Xbox Live Arcade commercialized in 2010. More than 10 millions units have been sold.
