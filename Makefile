@@ -144,12 +144,16 @@ define CONFIGURE
 # Linux
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
+	# glm
+	sudo apt-get -y install libglm-dev;
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies"
 	mkdir -p $(LIBS_DIR)
 	# json lib
 	wget -O $(LIBS_DIR)/json.hpp https://raw.githubusercontent.com/nlohmann/json/8d92ca8/single_include/nlohmann/json.hpp
+	# glm
+	brew install glm
 fi
 
 exit 0
