@@ -95,6 +95,15 @@ DEBUG_DIR	= $(DEP_DIR)
 # SRCS_DIR/SRC
 SRC =	main.cpp \
 		bomberman.cpp \
+		AEntity.cpp \
+\
+		ACharacter.cpp \
+		Player.cpp \
+\
+		AObject.cpp \
+		Bomb.cpp \
+\
+		Game.cpp \
 \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
@@ -112,6 +121,15 @@ SRC =	main.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
+		AEntity.hpp \
+\
+		ACharacter.hpp \
+		Player.hpp \
+\
+		AObject.hpp \
+		Bomb.hpp \
+\
+		Game.hpp \
 \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
