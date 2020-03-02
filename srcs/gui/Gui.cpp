@@ -305,12 +305,14 @@ void	Gui::_drawBoard() {
 	// board floor
 	_cubeShader->setVec3("blockSize",
 		{_gameInfo.gameboard.x, 1.0f, _gameInfo.gameboard.y});
-	_cubeShader->setInt("blockId", Block::B_FLOOR);  // set block type
+	_cubeShader->setInt("blockId", Block::FLOOR);  // set block type
 	pos = glm::vec3(0.0f, -1.0f, _gameInfo.gameboard.y - 1.0f);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
+	// - draw wall -------------------------------------------------------------
+	_cubeShader->setInt("blockId", Block::DURABLE_WALL);  // set block type
 	// board side 0
 	_cubeShader->setVec3("blockSize",
 		{_gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
@@ -348,13 +350,43 @@ void	Gui::_drawBoard() {
 	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
 	if (_gameInfo.player != VOID_POS) {
 		// set block type
-		_cubeShader->setInt("blockId", Block::FOOD);
+		_cubeShader->setInt("blockId", Block::PLAYER);
 		// set block pos
-		pos = glm::vec3(_gameInfo.player[0], 0.5f, _gameInfo.player[1]);
+		pos = glm::vec3(_gameInfo.player[0], 0.0f, _gameInfo.player[1]);
 		model = glm::translate(glm::mat4(1.0), pos);
 		_cubeShader->setMat4("model", model);
 		glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 	}
+
+	// -- draw bomb ------------------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::BOMB);
+	// set block pos
+	pos = glm::vec3(10, 0.0f, 5);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+
+	// -- draw durable wall ----------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::DURABLE_WALL);
+	// set block pos
+	pos = glm::vec3(7, 0.0f, 7);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+
+	// -- draw durable wall ----------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::DESTRUCTIBLE_WALL);
+	// set block pos
+	pos = glm::vec3(7, 0.0f, 12);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 }
 
 // -- _drawSkybox --------------------------------------------------------------
@@ -387,7 +419,7 @@ GameInfo::GameInfo() {
 	title = "bomberman";
 	windowSize = {1200, 800};
 	gameboard = {32, 32};
-	player = {0, 0};
+	player = {3, 3};
 	play = State::S_PAUSE;
 	quit = false;
 }
