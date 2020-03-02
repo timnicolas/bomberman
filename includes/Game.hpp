@@ -25,13 +25,14 @@ private:
 	// Methods
 	bool	_update(std::chrono::milliseconds last_loop_ms);
 	bool	_draw();
-	void	_loadLevel(uint8_t level);
+	bool	_loadLevel(uint8_t level);
 
 public:
 	// Members
+	// TODO(ebaudet): change board type to std::map<glm::ivec2 pos, std::vector<AEntity*>>
 	std::vector<std::vector<AEntity*>> board;
 	std::vector<ACharacter *>	characters;
-	glm::ivec2					size;
+	glm::uvec2					size;
 	uint8_t						level;
 	State::Enum					state;
 	std::chrono::milliseconds	time;

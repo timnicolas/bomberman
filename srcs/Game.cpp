@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
+// #include <bits/stdc++.h>
 
 #include "Game.hpp"
 #include "bomberman.hpp"
@@ -62,7 +63,7 @@ bool			Game::init() {
  * init game method.
  */
 bool			Game::run() {
-	float						loopTime = 1000 / 60;  // TODO(ebaudet): fps
+	float						loopTime = 1000 / s.j("screen").u("fps");
 	std::chrono::milliseconds	time_start;
 	std::chrono::milliseconds	last_loop_ms = getMs();
 
@@ -96,8 +97,8 @@ bool			Game::run() {
 // -- Private Methods ----------------------------------------------------------
 
 bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
-	for (int j = 0; j < size.y; j++) {
-		for (int i = 0; i < size.x; i++) {
+	for (uint32_t j = 0; j < size.y; j++) {
+		for (uint32_t i = 0; i < size.x; i++) {
 			if (board[j][i] != nullptr) {
 				if (!board[j][i]->update(getMs() - last_loop_ms))
 					return false;
@@ -113,8 +114,8 @@ bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
 }
 
 bool	Game::_draw() {
-	for (int j = 0; j < size.y; j++) {
-		for (int i = 0; i < size.x; i++) {
+	for (uint32_t j = 0; j < size.y; j++) {
+		for (uint32_t i = 0; i < size.x; i++) {
 			if (board[j][i] != nullptr) {
 				if (!board[j][i]->draw())
 					return false;
@@ -129,9 +130,65 @@ bool	Game::_draw() {
 	return true;
 }
 
-void	Game::_loadLevel(uint8_t level) {
-	// TODO(ebaudet): load level json.
-	(void)level;
+bool	Game::_loadLevel(uint8_t level) {
+	SettingsJson	lvl;
+	std::string		filename = "bomberman-assets/maps/level"+std::to_string(level)+".json";
+
+	lvl.name("level"+std::to_string(level)).description("Level map");
+	lvl.add<std::string>("level"+std::to_string(level)+"Filename", filename);
+	lvl.add<std::string>("name");
+	lvl.add<uint64_t>("height", 0);
+	lvl.add<uint64_t>("width", 0);
+	lvl.j("objects").add<char>("wall", 'w');
+	lvl.j("objects").add<char>("empty", ' ');
+	lvl.j("objects").add<char>("player", 'p');
+	lvl.j("objects").add<char>("tree", 't');
+	lvl.j("objects").add<char>("box", 'b');
+	lvl.j("objects").add<char>("end", 'e');
+
+	// lvl.j("map").add<list>(null, nullptr);
+	lvl.j("map").add<std::string>("0", "");
+	lvl.j("map").add<std::string>("1", "");
+	lvl.j("map").add<std::string>("2", "");
+	lvl.j("map").add<std::string>("3", "");
+	lvl.j("map").add<std::string>("4", "");
+	lvl.j("map").add<std::string>("5", "");
+	lvl.j("map").add<std::string>("6", "");
+	lvl.j("map").add<std::string>("7", "");
+	lvl.j("map").add<std::string>("8", "");
+
+	// lvl.j("bonus").get<list>(nullptr).j("pos").add<uint64_t>("x", 0);
+	// lvl.j("bonus").get<list>(nullptr).j("pos").add<uint64_t>("y", 0);
+	// lvl.j("bonus").get<list>(nullptr).add<std::string>("type");
+	lvl.j("bonus").j("0").j("pos").add<uint64_t>("x", 0);
+	lvl.j("bonus").j("0").j("pos").add<uint64_t>("y", 0);
+	lvl.j("bonus").j("0").add<std::string>("type");
+
+	lvl.j("bonus").j("1").j("pos").add<uint64_t>("x", 0);
+	lvl.j("bonus").j("1").j("pos").add<uint64_t>("y", 0);
+	lvl.j("bonus").j("1").add<std::string>("type");
+
+	try {
+		if (lvl.loadFile(filename) == false) {
+			// warning when loading settings
+			return false;
+		}
+	} catch(SettingsJson::SettingsException const & e) {
+		logErr(e.what());
+		return false;
+	}
+	//  s.j("screen").u("fps");
+	size = {lvl.u("width"), lvl.u("width")};
+	// board = std::vect(size.y, std::vect(size.x, nullptr));
+	for (uint32_t j = 0; j < size.y; j++) {
+		if (lvl.j("map").s(std::to_string(j)).length() != size.x)
+			throw GameException(("Map length error on line "+std::to_string(j)).c_str());
+		for (uint32_t i = 0; i < size.x; i++) {
+			/* code */
+		}
+	}
+
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------
