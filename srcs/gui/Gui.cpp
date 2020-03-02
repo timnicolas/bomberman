@@ -31,7 +31,6 @@ Gui::~Gui() {
 	delete _textureManager;
 	delete _cubeShader;
 	delete _cam;
-	delete _textRender;
 	delete _skybox;
 
 	// properly quit sdl
