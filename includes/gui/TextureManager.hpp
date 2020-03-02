@@ -3,8 +3,8 @@
 
 #include <array>
 
-#include "utils/Shader.hpp"
-#include "commonInclude.hpp"
+#include "Shader.hpp"
+#include "includesOpengl.hpp"
 
 #define NB_BLOCK_TYPES 5
 

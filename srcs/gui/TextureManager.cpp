@@ -2,8 +2,8 @@
 
 #include <fstream>
 
-#include "utils/Texture.hpp"
-#include "utils/Logging.hpp"
+#include "utils/opengl/Texture.hpp"
+#include "Logging.hpp"
 
 TextureManager::TextureManager()
 : _textureAtlas(0) {

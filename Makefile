@@ -96,6 +96,9 @@ DEBUG_DIR	= $(DEP_DIR)
 SRC =	main.cpp \
 		bomberman.cpp \
 \
+		gui/Gui.cpp \
+		gui/TextureManager.cpp \
+\
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
 \
@@ -109,6 +112,9 @@ SRC =	main.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
+\
+		gui/Gui.hpp \
+		gui/TextureManager.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
