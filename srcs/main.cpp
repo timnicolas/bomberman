@@ -22,6 +22,7 @@ int main(int ac, char const **av) {
 		return ret;
 	}
 	logDebug("running game");
+	userData.u("highScore")++;
 
 	saveUserData(s.s("userDataFilename"));
 	return ret;
