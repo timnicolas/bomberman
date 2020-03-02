@@ -21,7 +21,7 @@ int main(int ac, char const **av) {
 	if (ret == EXIT_FAILURE) {
 		return ret;
 	}
-	logDebug("running game");
+	logDebug("running " << "game");
 	userData.u("highScore")++;
 
 	saveUserData(s.s("userDataFilename"));
