@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+*.vscode
+.DS_Store
+*.vim
+*.swp
+.dep
+libs/*
+assets/userData.json
+bomberman
