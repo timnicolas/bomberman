@@ -28,8 +28,8 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
  * update is called each frame.
  * @param d_time Delta Time
  */
-bool	Bomb::update(float d_time) {
-	std::cout << "Bomb updated at " << d_time << std::endl;
+bool	Bomb::update(std::chrono::milliseconds d_time) {
+	std::cout << "Last Bomb updated at " << d_time.count() << std::endl;
 	return true;
 }
 

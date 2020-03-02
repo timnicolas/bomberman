@@ -16,7 +16,7 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
-	virtual bool	update(float d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds d_time) = 0;
 	virtual bool	draw() = 0;
 
 	// Exceptions

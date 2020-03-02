@@ -1,8 +1,14 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <time.h>
+
 #include "Game.hpp"
+#include "bomberman.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Game::Game() {
+	board = {{nullptr}};
 	// TODO(ebaudet): init members
 }
 
@@ -20,6 +26,9 @@ Game &Game::operator=(Game const &rhs) {
 		board = rhs.board;
 		characters = rhs.characters;
 		size = rhs.size;
+		level = rhs.level;
+		state = rhs.state;
+		time = rhs.time;
 	}
 	return *this;
 }
@@ -42,7 +51,88 @@ std::string		Game::print() const {
 	return str;
 }
 
-// TODO(ebaudet): put here the methods.
+/**
+ * init game method.
+ */
+bool			Game::init() {
+	return true;
+}
+
+/**
+ * init game method.
+ */
+bool			Game::run() {
+	float						loopTime = 1000 / 60;  // TODO(ebaudet): fps
+	std::chrono::milliseconds	time_start;
+	std::chrono::milliseconds	last_loop_ms = getMs();
+
+	while (true) {
+		time_start = getMs();
+
+		// TODO(ebaudet): input handler here
+
+		_update(last_loop_ms);
+		_draw();
+
+		// fps
+		std::chrono::milliseconds time_loop = getMs() - time_start;
+		if (time_loop.count() > loopTime) {
+			#if DEBUG_FPS_LOW == true
+				if (!firstLoop)
+					logDebug("update loop slow -> " << time_loop.count() << "ms / " << loopTime << "ms (" << FPS << "fps)");
+			#endif
+		}
+		else {
+			usleep((loopTime - time_loop.count()) * 1000);
+		}
+		#if DEBUG_FPS_LOW == true
+			firstLoop = false;
+		#endif
+		last_loop_ms = getMs();
+	}
+	return true;
+}
+
+// -- Private Methods ----------------------------------------------------------
+
+bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
+	for (int j = 0; j < size.y; j++) {
+		for (int i = 0; i < size.x; i++) {
+			if (board[j][i] != nullptr) {
+				if (!board[j][i]->update(getMs() - last_loop_ms))
+					return false;
+			}
+		}
+	}
+	for (auto &&charater : characters) {
+		if (!charater->update(getMs() - last_loop_ms))
+			return false;
+	}
+
+	return true;
+}
+
+bool	Game::_draw() {
+	for (int j = 0; j < size.y; j++) {
+		for (int i = 0; i < size.x; i++) {
+			if (board[j][i] != nullptr) {
+				if (!board[j][i]->draw())
+					return false;
+			}
+		}
+	}
+	for (auto &&charater : characters) {
+		if (!charater->draw())
+			return false;
+	}
+
+	return true;
+}
+
+void	Game::_loadLevel(uint8_t level) {
+	// TODO(ebaudet): load level json.
+	(void)level;
+}
 
 // -- Exceptions errors --------------------------------------------------------
 
