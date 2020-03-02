@@ -4,15 +4,40 @@
 #include <iostream>
 
 #include "bomberman.hpp"
+#include "Gui.hpp"
 
 int start(int ac, char const **av) {
 	(void)ac;
 	(void)av;
 	initLogs();  // init logs functions
-	initSettings("assets/settings.json");
+	initSettings("configs/settings.json");
 	initUserData(s.s("userDataFilename"));
 
 	return EXIT_SUCCESS;
+}
+
+bool	exampleGui() {
+	GameInfo	gameInfo;
+	Gui			gui(gameInfo);
+
+	if (!gui.init()) {
+		return false;
+	}
+
+	while (true) {
+		gui.updateInput();
+
+		if (gameInfo.quit) {
+			logInfo("exit game")
+			break;
+		}
+
+		if (!gui.draw()) {
+			return EXIT_FAILURE;
+		}
+	}
+
+	return true;
 }
 
 int main(int ac, char const **av) {
@@ -25,5 +50,10 @@ int main(int ac, char const **av) {
 	userData.u("highScore")++;
 
 	saveUserData(s.s("userDataFilename"));
+
+	if (!exampleGui()) {
+		return EXIT_FAILURE;
+	}
+
 	return ret;
 }

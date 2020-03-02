@@ -69,7 +69,7 @@ ARGS =
 # compiler (g++ or clang++)
 CC = g++
 # flags for compilation
-CFLAGS = -Ofast -std=c++11 -Wall -Wextra
+CFLAGS = -Ofast -std=c++11 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
 DEBUG_FLAGS = -g3 -DDEBUG=true
 # classic flags
@@ -105,8 +105,19 @@ SRC =	main.cpp \
 \
 		Game.cpp \
 \
+		gui/Gui.cpp \
+		gui/TextureManager.cpp \
+\
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
+\
+		utils/opengl/Texture.cpp \
+		utils/opengl/Shader.cpp \
+		utils/opengl/Camera.cpp \
+		utils/opengl/debug.cpp \
+		utils/opengl/Material.cpp \
+		utils/opengl/TextRender.cpp \
+		utils/opengl/Skybox.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -120,37 +131,57 @@ HEAD =	bomberman.hpp \
 \
 		Game.hpp \
 \
+		gui/Gui.hpp \
+		gui/TextureManager.hpp \
+\
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
+\
+		utils/opengl/Texture.hpp \
+		utils/opengl/Shader.hpp \
+		utils/opengl/Camera.hpp \
+		utils/opengl/debug.hpp \
+		utils/opengl/Material.hpp \
+		utils/opengl/TextRender.hpp \
+		utils/opengl/Skybox.hpp \
 
 
 ################################################################################
 # libs configuration
 
 # for c libs
-LIBS_SRC_C		=
+LIBS_SRC_C =	glad/glad.c \
 
 # for cpp libs
-LIBS_SRC_CPP	=
+LIBS_SRC_CPP =
 
 # headers for c & cpp libs
-LIBS_HEAD		=
+LIBS_HEAD =	glad/glad.h \
+			KHR/khrplatform.h \
+			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS			=
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 \
+				-L ~/.brew/opt/freetype/lib -lfreetype \
+
 # flags for libs on OSX only
-LIBS_FLAGS_OSX		=
+LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
+
 # flags for libs on LINUX only
-LIBS_FLAGS_LINUX	=
+LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU
+
 # includes dir for external libs
-LIBS_INC			= ~/.brew/include \
-					  $(LIBS_DIR) \
+LIBS_INC =	~/.brew/include \
+			$(LIBS_DIR) \
+			/usr/local/opt/freetype/include/freetype2 \
+			~/.brew/opt/freetype/include/freetype2 \
+			/usr/include/freetype2 \
 
 # libs created by user
-UNCOMPILED_LIBS		=
+UNCOMPILED_LIBS =
 
 # libs that need to be maked
-NEED_MAKE			= $(UNCOMPILED_LIBS)
+NEED_MAKE =	$(UNCOMPILED_LIBS)
 
 ################################################################################
 # configure file
@@ -164,15 +195,27 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	# glm
 	sudo apt-get -y install libglm-dev;
+	# freetype (for text)
+	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
+	# sdl2
+	sudo apt-get -y install libsdl2-dev;
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
-	echo "install osx dependencies"
-	mkdir -p $(LIBS_DIR)
-	# json lib
-	wget -O $(LIBS_DIR)/json.hpp https://raw.githubusercontent.com/nlohmann/json/8d92ca8/single_include/nlohmann/json.hpp
+	echo "install osx dependencies";
 	# glm
 	brew install glm
+	# sdl2
+	brew install sdl2;
 fi
+
+mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
+# json lib
+wget -O $(LIBS_DIR)/json.hpp https://raw.githubusercontent.com/nlohmann/json/8d92ca8/single_include/nlohmann/json.hpp
+# stb_image lib
+wget -O $(LIBS_DIR)/glad/glad.h https://raw.githubusercontent.com/tnicolas42/libs/master/cpp/OpenGL/glad/glad/glad.h
+wget -O $(LIBS_DIR)/glad/glad.c https://raw.githubusercontent.com/tnicolas42/libs/master/cpp/OpenGL/glad/glad/glad.c
+wget -O $(LIBS_DIR)/KHR/khrplatform.h https://raw.githubusercontent.com/tnicolas42/libs/master/cpp/OpenGL/glad/KHR/khrplatform.h
+wget -O $(LIBS_DIR)/stb_image.h https://raw.githubusercontent.com/nothings/stb/0224a44/stb_image.h
 
 exit 0
 endef

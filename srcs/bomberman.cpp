@@ -24,7 +24,7 @@ void	initLogs() {
 bool	initSettings(std::string const & filename) {
 	s.name("settings").description("main settings");
 
-	s.add<std::string>("userDataFilename", "assets/userData.json").disableInFile(true);
+	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
 
 	// s.add<SettingsJson>("screen");
 	// 	s.j("screen").add<std::string>("name", "nibbler").setDescription("name of the game");
