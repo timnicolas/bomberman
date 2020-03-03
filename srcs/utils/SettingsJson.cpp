@@ -253,7 +253,7 @@ uint32_t opt, int nbTab) {
 	return getSize<SettingsJson>(map, opt);
 }
 
-std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset) const {
+std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset, bool termWithComma) const {
 	std::ostringstream out;
 	for (uint32_t i = 0; i < tabOffset; i++)
 		out << "\t";
@@ -287,7 +287,10 @@ std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset) const {
 	nbElem -= jsonStringRecursiv(out, jsonMap, opt, tabOffset + 1);
 	for (uint32_t i = 0; i < tabOffset; i++)
 		out << "\t";
-	out << "}" << std::endl;
+	out << "}";
+	if (termWithComma)
+		out << ",";
+	out << std::endl;
 	return out.str();
 }
 
