@@ -29,7 +29,6 @@ public:
 
 	bool				getKey(InputType::Enum type);
 	void				setNextKey(InputType::Enum type);
-	void				configureKeys();
 	bool				shouldQuit();
 	const glm::ivec2	&getMousePos();
 	const glm::ivec2	&getMouseRel();
