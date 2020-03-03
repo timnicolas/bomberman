@@ -35,6 +35,12 @@ bool	initSettings(std::string const & filename) {
 		s.j("font").add<uint64_t>("size", 40).setMin(10).setMax(50)
 			.setDescription("default size for the text");
 
+	s.add<SettingsJson>("audio");
+	s.j("audio").add<double>("musicVolume", 0.7).setMin(0.0).setMax(1.0) \
+		.setDescription("The volume of the music.");
+	s.j("audio").add<double>("soundVolume", 0.7).setMin(0.0).setMax(1.0) \
+		.setDescription("The volume of the sounds effects.");
+
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings
