@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <map>
 #include <glm/glm.hpp>
 #include "glm/gtx/string_cast.hpp"
 
@@ -21,6 +22,7 @@ namespace State {
 class Game {
 private:
 	// Members
+	static std::map<std::string, AEntity *> _entitiesCall;
 
 	// Methods
 	bool	_update(std::chrono::milliseconds last_loop_ms);
@@ -30,7 +32,9 @@ private:
 public:
 	// Members
 	// TODO(ebaudet): change board type to std::map<glm::ivec2 pos, std::vector<AEntity*>>
-	std::vector<std::vector<AEntity*>> board;
+	// AEntity***board;
+	std::vector< std::vector< std::vector< AEntity* > > > board;
+	// std::map<glm::ivec2, std::vector<AEntity*>> board;
 	std::vector<ACharacter *>	characters;
 	glm::uvec2					size;
 	uint8_t						level;

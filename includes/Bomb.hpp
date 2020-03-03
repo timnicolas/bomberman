@@ -21,6 +21,8 @@ public:
 	// Methods
 	bool	update(std::chrono::milliseconds d_time);
 	bool	draw();
+	bool	isDestructable();
+	bool	blockPropagation();
 
 	// Exceptions
 	class BombException : public std::runtime_error {

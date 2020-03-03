@@ -21,6 +21,9 @@ public:
 	// Methods
 	bool	update(std::chrono::milliseconds d_time);
 	bool	draw();
+	bool	isDestructable();
+	bool	blockPropagation();
+	bool	isAlive();
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

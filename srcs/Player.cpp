@@ -40,6 +40,16 @@ bool	Player::draw() {
 	return true;
 }
 
+bool	Player::isDestructable() {
+	return true;
+}
+bool	Player::blockPropagation() {
+	return false;
+}
+bool	Player::isAlive() {
+	return life;
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 Player::PlayerException::PlayerException()
