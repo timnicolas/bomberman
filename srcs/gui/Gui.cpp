@@ -1,5 +1,6 @@
 #include "Gui.hpp"
 #include "Logging.hpp"
+#include "Inputs.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -31,7 +32,6 @@ Gui::~Gui() {
 	delete _textureManager;
 	delete _cubeShader;
 	delete _cam;
-	delete _textRender;
 	delete _skybox;
 
 	// properly quit sdl
@@ -54,54 +54,29 @@ Gui &Gui::operator=(Gui const &rhs) {
 
 void Gui::updateInput() {
 	// manage inputs
-	while (SDL_PollEvent(_event)) {
-		// close button
-		if (_event->window.event == SDL_WINDOWEVENT_CLOSE) {
-			_gameInfo.quit = true;
-		}
-
-		// key release
-		if (_event->key.type == SDL_KEYDOWN) {
-			switch (_event->key.keysym.sym) {
-			case SDLK_ESCAPE:
-				_gameInfo.quit = true;
-				break;
-
-			default:
-				break;
-			}
-		}
-
-		// mouse motion
-		if (_event->type == SDL_MOUSEMOTION) {
-			_cam->processMouseMovement(_event->motion.xrel, -_event->motion.yrel);
-		}
+	// quit
+	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
+		logDebug("quiting...");
+		_gameInfo.quit = true;
 	}
+	// mouse motion
+	_cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
 
 	// -- camera movement ------------------------------------------------------
-	// get curently pressed keys
-	const Uint8 * keystates = SDL_GetKeyboardState(NULL);
 	// camera movement
-	bool isRun = keystates[SDL_SCANCODE_LSHIFT];
-	if (keystates[SDL_SCANCODE_W]) {
-		_cam->processKeyboard(CamMovement::Forward, _dtTime, isRun);
+	if (Inputs::getKey(InputType::Enum::UP)) {
+		_cam->processKeyboard(CamMovement::Forward, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_D]) {
-		_cam->processKeyboard(CamMovement::Right, _dtTime, isRun);
+	if (Inputs::getKey(InputType::Enum::RIGHT)) {
+		_cam->processKeyboard(CamMovement::Right, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_S]) {
-		_cam->processKeyboard(CamMovement::Backward, _dtTime, isRun);
+	if (Inputs::getKey(InputType::Enum::DOWN)) {
+		_cam->processKeyboard(CamMovement::Backward, _dtTime, false);
 	}
-	if (keystates[SDL_SCANCODE_A]) {
-		_cam->processKeyboard(CamMovement::Left, _dtTime, isRun);
-	}
-	if (keystates[SDL_SCANCODE_Q]) {
-		_cam->processKeyboard(CamMovement::Down, _dtTime, isRun);
-	}
-	if (keystates[SDL_SCANCODE_E]) {
-		_cam->processKeyboard(CamMovement::Up, _dtTime, isRun);
+	if (Inputs::getKey(InputType::Enum::LEFT)) {
+		_cam->processKeyboard(CamMovement::Left, _dtTime, false);
 	}
 }
 
@@ -305,12 +280,14 @@ void	Gui::_drawBoard() {
 	// board floor
 	_cubeShader->setVec3("blockSize",
 		{_gameInfo.gameboard.x, 1.0f, _gameInfo.gameboard.y});
-	_cubeShader->setInt("blockId", Block::B_FLOOR);  // set block type
+	_cubeShader->setInt("blockId", Block::FLOOR);  // set block type
 	pos = glm::vec3(0.0f, -1.0f, _gameInfo.gameboard.y - 1.0f);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
+	// - draw wall -------------------------------------------------------------
+	_cubeShader->setInt("blockId", Block::DURABLE_WALL);  // set block type
 	// board side 0
 	_cubeShader->setVec3("blockSize",
 		{_gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
@@ -348,13 +325,43 @@ void	Gui::_drawBoard() {
 	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
 	if (_gameInfo.player != VOID_POS) {
 		// set block type
-		_cubeShader->setInt("blockId", Block::FOOD);
+		_cubeShader->setInt("blockId", Block::PLAYER);
 		// set block pos
-		pos = glm::vec3(_gameInfo.player[0], 0.5f, _gameInfo.player[1]);
+		pos = glm::vec3(_gameInfo.player[0], 0.0f, _gameInfo.player[1]);
 		model = glm::translate(glm::mat4(1.0), pos);
 		_cubeShader->setMat4("model", model);
 		glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 	}
+
+	// -- draw bomb ------------------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::BOMB);
+	// set block pos
+	pos = glm::vec3(10, 0.0f, 5);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+
+	// -- draw durable wall ----------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::DURABLE_WALL);
+	// set block pos
+	pos = glm::vec3(7, 0.0f, 7);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+
+	// -- draw durable wall ----------------------------------------------------
+	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// set block type
+	_cubeShader->setInt("blockId", Block::DESTRUCTIBLE_WALL);
+	// set block pos
+	pos = glm::vec3(7, 0.0f, 12);
+	model = glm::translate(glm::mat4(1.0), pos);
+	_cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 }
 
 // -- _drawSkybox --------------------------------------------------------------
@@ -387,7 +394,7 @@ GameInfo::GameInfo() {
 	title = "bomberman";
 	windowSize = {1200, 800};
 	gameboard = {32, 32};
-	player = {0, 0};
+	player = {3, 3};
 	play = State::S_PAUSE;
 	quit = false;
 }

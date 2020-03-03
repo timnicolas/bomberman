@@ -73,9 +73,10 @@ TextureManager::TextureManagerException::TextureManagerException(const char* wha
 
 // -- statics const ------------------------------------------------------------
 std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks = {{
-	{{3, 3, 3, 3, 3, 3}},  // board floor
-	{{6, 6, 6, 6, 6, 6}},  // snake-body
-	{{5, 5, 5, 5, 5, 5}},  // snake-head
-	{{4, 4, 4, 4, 4, 4}},  // food
-	{{0, 0, 0, 0, 0, 0}}  // water
+	{{0, 0, 0, 0, 0, 0}},  // floor
+	{{9, 10, 10, 10, 11, 8}},  // player
+	{{9, 10, 10, 10, 11, 8}},  // ia
+	{{5, 6, 3, 6, 7, 4}},  // bomb
+	{{1, 1, 1, 1, 1, 1}},  // durable_wall
+	{{2, 2, 2, 2, 2, 2}},  // destructible_wall
 }};
