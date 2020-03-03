@@ -49,6 +49,8 @@ int main(int ac, char const **av) {
 	logDebug("running " << "game");
 	userData.u("highScore")++;
 
+	std::cout << s << std::endl;
+
 	saveUserData(s.s("userDataFilename"));
 
 	if (!exampleGui()) {

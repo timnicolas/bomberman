@@ -14,17 +14,21 @@ SettingsJson::~SettingsJson() {
 	deleteMap<double>(doubleMap);
 	deleteMap<bool>(boolMap);
 	deleteMap<SettingsJson>(jsonMap);
+	deleteMap<SettingsList<SettingsJson> >(jsonList);
 }
 
 SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {
 	if (this != &rhs) {
 		logDebug("WARNING -> SettingsJson object copied");
+		_name = rhs._name;
+		_description = rhs._description;
 		stringMap = copyMap<std::string>(rhs.stringMap);
 		intMap = copyMap<int64_t>(rhs.intMap);
 		uintMap = copyMap<uint64_t>(rhs.uintMap);
 		doubleMap = copyMap<double>(rhs.doubleMap);
 		boolMap = copyMap<bool>(rhs.boolMap);
 		jsonMap = copyMap<SettingsJson>(rhs.jsonMap);
+		jsonList = copyMap<SettingsList<SettingsJson> >(rhs.jsonList);
 	}
 	return *this;
 }
@@ -214,13 +218,15 @@ uint32_t opt, int nbTab) {
 					+ getSize<int64_t>(it->second->get().intMap, opt)
 					+ getSize<double>(it->second->get().doubleMap, opt)
 					+ getSize<bool>(it->second->get().boolMap, opt)
-					+ getSize<SettingsJson>(it->second->get().jsonMap, opt);
+					+ getSize<SettingsJson>(it->second->get().jsonMap, opt)
+					+ getSize<SettingsList<SettingsJson> >(it->second->get().jsonList, opt);
 		nbElem -= jsonString<std::string>(out, it->second->get().stringMap, opt, nbTab + 1,
 																			nbElem, "\"", "\"");
 		nbElem -= jsonString<uint64_t>(out, it->second->get().uintMap, opt, nbTab + 1, nbElem);
 		nbElem -= jsonString<int64_t>(out, it->second->get().intMap, opt, nbTab + 1, nbElem);
 		nbElem -= jsonString<double>(out, it->second->get().doubleMap, opt, nbTab + 1, nbElem);
 		nbElem -= jsonString<bool>(out, it->second->get().boolMap, opt, nbTab + 1, nbElem);
+		nbElem -= jsonString<SettingsList<SettingsJson> >(out, it->second->get().jsonList, opt, nbTab + 1, nbElem);
 		nbElem -= jsonStringRecursiv(out, it->second->get().jsonMap, opt, nbTab + 1);
 		for (int i = 0; i < nbTab; i++)
 			out << "\t";
@@ -232,8 +238,10 @@ uint32_t opt, int nbTab) {
 	return getSize<SettingsJson>(map, opt);
 }
 
-std::string SettingsJson::toString(uint32_t opt) const {
+std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset) const {
 	std::ostringstream out;
+	for (uint32_t i = 0; i < tabOffset; i++)
+		out << "\t";
 	if (opt & JsonOpt::VERBOSE) {
 		out << "\"";
 		if (opt & JsonOpt::COLOR) out << COLOR_BOLD;
@@ -253,13 +261,17 @@ std::string SettingsJson::toString(uint32_t opt) const {
 				+ getSize<int64_t>(intMap, opt)
 				+ getSize<double>(doubleMap, opt)
 				+ getSize<bool>(boolMap, opt)
-				+ getSize<SettingsJson>(jsonMap, opt);
-	nbElem -= jsonString<std::string>(out, stringMap, opt, 1, nbElem, "\"", "\"");
-	nbElem -= jsonString<uint64_t>(out, uintMap, opt, 1, nbElem);
-	nbElem -= jsonString<int64_t>(out, intMap, opt, 1, nbElem);
-	nbElem -= jsonString<double>(out, doubleMap, opt, 1, nbElem);
-	nbElem -= jsonString<bool>(out, boolMap, opt, 1, nbElem);
-	nbElem -= jsonStringRecursiv(out, jsonMap, opt, 1);
+				+ getSize<SettingsJson>(jsonMap, opt)
+				+ getSize<SettingsList<SettingsJson> >(jsonList, opt);
+	nbElem -= jsonString<std::string>(out, stringMap, opt, tabOffset + 1, nbElem, "\"", "\"");
+	nbElem -= jsonString<uint64_t>(out, uintMap, opt, tabOffset + 1, nbElem);
+	nbElem -= jsonString<int64_t>(out, intMap, opt, tabOffset + 1, nbElem);
+	nbElem -= jsonString<double>(out, doubleMap, opt, tabOffset + 1, nbElem);
+	nbElem -= jsonString<bool>(out, boolMap, opt, tabOffset + 1, nbElem);
+	nbElem -= jsonString<SettingsList<SettingsJson> >(out, jsonList, opt, tabOffset + 1, nbElem);
+	nbElem -= jsonStringRecursiv(out, jsonMap, opt, tabOffset + 1);
+	for (uint32_t i = 0; i < tabOffset; i++)
+		out << "\t";
 	out << "}" << std::endl;
 	return out.str();
 }
