@@ -1,6 +1,15 @@
 #include "Inputs.hpp"
 #include "Logging.hpp"
 
+const std::string	Inputs::input_type_name[] = {
+	"up",
+	"down",
+	"left",
+	"right",
+	"action",
+	"confirm",
+	"cancel",
+};
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
 Inputs::Inputs(): _configuring(false), _quit(false) {
@@ -33,9 +42,9 @@ bool				Inputs::getKey(InputType::Enum type) {
 	return _key_status[static_cast<int>(type)];
 }
 
-void				Inputs::setNextKey(std::string name) {
+void				Inputs::setNextKey(InputType::Enum type) {
 	_configuring = true;
-	_next_action_name = name;
+	_next_action_type = type;
 }
 
 void				Inputs::configureKeys() {
@@ -93,7 +102,7 @@ void				Inputs::update() {
 				}
 			}
 			else {
-				_controls.j("keys").i(_next_action_name) = scan;
+				_controls.j("keys").i(input_type_name[_next_action_type]) = scan;
 				_controls.saveToFile(Inputs::_conf_file);
 				configureKeys();
 			}
