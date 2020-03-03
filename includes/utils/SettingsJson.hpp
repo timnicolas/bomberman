@@ -19,21 +19,21 @@ namespace JsonOpt {
 template<class T>
 class JsonObj {
 	public:
-		JsonObj() { init(); }
-		explicit JsonObj(std::string const & name) { init(name); }
+		JsonObj() : _value() { init(); }
+		explicit JsonObj(std::string const & name) : _value() { init(name); }
 		JsonObj(std::string const & name, T const & val) : _value(val) { init(name); }
 		virtual ~JsonObj() {}
 		JsonObj(JsonObj const & src) { *this = src; }
 		JsonObj & operator=(JsonObj const & rhs) {
 			if (this != &rhs) {
-				logDebug("WARNING -> JsonObj object copied");
+				// logDebug("WARNING -> JsonObj object copied");
 				_name = rhs._name;
 				_description = rhs._description;
+				_value = rhs._value;
 				_hasMin = rhs._hasMin;
 				_min = rhs._min;
 				_hasMax = rhs._hasMax;
 				_max = rhs._max;
-				_value = rhs._value;
 				_disableInFile = rhs._disableInFile;
 			}
 			return *this;
@@ -130,21 +130,18 @@ class SettingsList {
 		SettingsList() : pattern(nullptr) {}
 		explicit SettingsList(T * pattern_) : pattern(pattern_) {}
 		virtual ~SettingsList() {
-			for (auto it = list.begin(); it != list.end(); it++) {
-				delete *it;
-			}
+			resetList();
+			delete pattern;
 		}
 		SettingsList(SettingsList const & src) { *this = src; }
 		SettingsList & operator=(SettingsList const & rhs) {
 			if (this != &rhs) {
-				logDebug("WARNING -> SettingsList object copied");
+				// logDebug("WARNING -> SettingsList object copied");
 				pattern = new T(*rhs.pattern);
-				std::vector<T *> tmpList;
 				for (auto it = list.begin(); it != list.end(); it++) {
 					T * tmp = new T(**it);
-					tmpList.push_back(tmp);
+					list.push_back(tmp);
 				}
-				list = tmpList;
 			}
 			return *this;
 		}
@@ -156,6 +153,12 @@ class SettingsList {
 		}
 		void add(T * newObj) {
 			list.push_back(newObj);
+		}
+		void resetList() {
+			for (auto it = list.begin(); it != list.end(); it++) {
+				delete *it;
+			}
+			list.clear();
 		}
 
 		friend std::ostream & operator<<(std::ostream & out, const SettingsList & settingsList) {
@@ -279,23 +282,9 @@ class SettingsJson {
 		std::map<std::string, JsonObj<T> *> const & _getMap() const {
 			if (typeid(T) == typeid(int64_t))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
-			if (typeid(T) == typeid(int32_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
-			if (typeid(T) == typeid(int16_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
-			if (typeid(T) == typeid(int8_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
 			if (typeid(T) == typeid(uint64_t))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
-			if (typeid(T) == typeid(uint32_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
-			if (typeid(T) == typeid(uint16_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
-			if (typeid(T) == typeid(uint8_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
 			if (typeid(T) == typeid(double))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&doubleMap);
-			if (typeid(T) == typeid(float))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&doubleMap);
 			if (typeid(T) == typeid(bool))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&boolMap);
@@ -311,23 +300,9 @@ class SettingsJson {
 		std::map<std::string, JsonObj<T> *> & _getMap() {
 			if (typeid(T) == typeid(int64_t))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
-			if (typeid(T) == typeid(int32_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
-			if (typeid(T) == typeid(int16_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
-			if (typeid(T) == typeid(int8_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
 			if (typeid(T) == typeid(uint64_t))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
-			if (typeid(T) == typeid(uint32_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
-			if (typeid(T) == typeid(uint16_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
-			if (typeid(T) == typeid(uint8_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
 			if (typeid(T) == typeid(double))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&doubleMap);
-			if (typeid(T) == typeid(float))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&doubleMap);
 			if (typeid(T) == typeid(bool))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&boolMap);
@@ -342,7 +317,7 @@ class SettingsJson {
 
 
 		template<class T>
-		void deleteMap(std::map<std::string, JsonObj<T> *> & map) {
+		void _deleteMap(std::map<std::string, JsonObj<T> *> & map) {
 			for (auto it = map.begin(); it != map.end(); it++) {
 				delete it->second;
 			}
@@ -350,12 +325,13 @@ class SettingsJson {
 		}
 
 		template<class T>
-		std::map<std::string, JsonObj<T> *> copyMap(std::map<std::string, JsonObj<T> *> const & map) {
-			std::map<std::string, JsonObj<T> *> cpy;
-			for (auto it = map.begin(); it != map.end(); it++) {
-				cpy.insert(std::pair<std::string, JsonObj<T> *>(it->first, new JsonObj<T>(*it->second)));
+		std::map<std::string, JsonObj<T> *> & _copyMap(std::map<std::string, JsonObj<T> *> & dest,
+			std::map<std::string, JsonObj<T> *> const & src)
+		{
+			for (auto it = src.begin(); it != src.end(); it++) {
+				dest.insert(std::pair<std::string, JsonObj<T> *>(it->first, new JsonObj<T>(*it->second)));
 			}
-			return cpy;
+			return dest;
 		}
 };
 
