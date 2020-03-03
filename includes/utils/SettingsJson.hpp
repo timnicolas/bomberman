@@ -28,11 +28,13 @@ class JsonObj {
 			if (this != &rhs) {
 				logDebug("WARNING -> JsonObj object copied");
 				_name = rhs._name;
+				_description = rhs._description;
 				_hasMin = rhs._hasMin;
 				_min = rhs._min;
 				_hasMax = rhs._hasMax;
 				_max = rhs._max;
 				_value = rhs._value;
+				_disableInFile = rhs._disableInFile;
 			}
 			return *this;
 		}
@@ -122,6 +124,55 @@ class JsonObj {
 		bool		_disableInFile;
 };
 
+template<class T>
+class SettingsList {
+	public:
+		SettingsList() : pattern(nullptr) {}
+		explicit SettingsList(T * pattern_) : pattern(pattern_) {}
+		virtual ~SettingsList() {
+			for (auto it = list.begin(); it != list.end(); it++) {
+				delete *it;
+			}
+		}
+		SettingsList(SettingsList const & src) { *this = src; }
+		SettingsList & operator=(SettingsList const & rhs) {
+			if (this != &rhs) {
+				logDebug("WARNING -> SettingsList object copied");
+				pattern = new T(*rhs.pattern);
+				std::vector<T *> tmpList;
+				for (auto it = list.begin(); it != list.end(); it++) {
+					T * tmp = new T(**it);
+					tmpList.push_back(tmp);
+				}
+				list = tmpList;
+			}
+			return *this;
+		}
+		void setPattern(T * pattern_) {
+			if (pattern != nullptr) {
+				logFatal("unable to add pattern in list -> there is already a pattern");
+			}
+			pattern = pattern_;
+		}
+		void add(T * newObj) {
+			list.push_back(newObj);
+		}
+
+		friend std::ostream & operator<<(std::ostream & out, const SettingsList & settingsList) {
+			out << "[" << std::endl;
+			for (auto it = settingsList.list.begin(); it != settingsList.list.end(); it++) {
+				out << (*it)->toString(JsonOpt::NO_OPT, 2);
+			}
+			out << "\t]" << std::endl;
+			return out;
+		}
+
+		T *					pattern;
+		std::vector<T *>	list;
+
+	private:
+};
+
 class SettingsJson {
 	public:
 		SettingsJson();
@@ -136,7 +187,7 @@ class SettingsJson {
 		bool		loadFile(std::string const & filename);
 		bool		loadJson(nlohmann::json const & json, SettingsJson & jsonObjTmp);
 		void		saveToFile(std::string const & filename);
-		std::string	toString(uint32_t opt = JsonOpt::NO_OPT) const;
+		std::string	toString(uint32_t opt = JsonOpt::NO_OPT, uint32_t tabOffset = 0) const;
 
 		template<class T>
 		JsonObj<T> &	add(std::string const & name) {
@@ -156,6 +207,18 @@ class SettingsJson {
 				return *(tmpMap[name]);
 			}
 			tmpMap.insert(std::pair<std::string, JsonObj<T> *>(name, new JsonObj<T>(name, val)));
+			return *(tmpMap[name]);
+		}
+		template<class T>
+		JsonObj<SettingsList<T> > &	addList(std::string const & name, T * val) {
+			std::map<std::string, JsonObj<SettingsList<T> > *> & tmpMap = _getMap<SettingsList<T> >();
+			if (tmpMap.find(name) != tmpMap.end()) {
+				logWarn("cannot add setting " << name << ": setting already exist");
+				return *(tmpMap[name]);
+			}
+			tmpMap.insert(std::pair<std::string, JsonObj<SettingsList<T> > *>(name,
+				new JsonObj<SettingsList<T> >(name)));
+			tmpMap[name]->get().setPattern(val);
 			return *(tmpMap[name]);
 		}
 		template<class T>
@@ -206,6 +269,7 @@ class SettingsJson {
 		std::map<std::string, JsonObj<double> *>		doubleMap;  // f
 		std::map<std::string, JsonObj<bool> *>			boolMap;  // b
 		std::map<std::string, JsonObj<SettingsJson> *>	jsonMap;  // j
+		std::map<std::string, JsonObj<SettingsList<SettingsJson> > *>	jsonList;  // j
 
 	private:
 		std::string _name;
@@ -239,6 +303,8 @@ class SettingsJson {
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&stringMap);
 			if (typeid(T) == typeid(SettingsJson))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonMap);
+			if (typeid(T) == typeid(SettingsList<SettingsJson>))
+				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonList);
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
 		}
 		template<class T>
@@ -269,6 +335,8 @@ class SettingsJson {
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&stringMap);
 			if (typeid(T) == typeid(SettingsJson))
 				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonMap);
+			if (typeid(T) == typeid(SettingsList<SettingsJson>))
+				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonList);
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
 		}
 

@@ -1,2 +1,12 @@
 {
+	"list": [
+		{
+			"str": "list[0]",
+			"unsigned int": 12
+		},
+		{
+			"str": "test list[1]"
+		},
+		{}
+	]
 }
