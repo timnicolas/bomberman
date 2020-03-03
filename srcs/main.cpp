@@ -5,6 +5,7 @@
 
 #include "bomberman.hpp"
 #include "Gui.hpp"
+#include "Material.hpp"
 
 int start(int ac, char const **av) {
 	(void)ac;
@@ -16,9 +17,17 @@ int start(int ac, char const **av) {
 	return EXIT_SUCCESS;
 }
 
+bool	testAnimatedModels() {
+	return true;
+}
+
 bool	exampleGui() {
 	GameInfo	gameInfo;
 	Gui			gui(gameInfo);
+
+	if (!testAnimatedModels()) {
+		return EXIT_FAILURE;
+	}
 
 	if (!gui.init()) {
 		return false;

@@ -161,7 +161,7 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 \
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l assimp \
 				-L ~/.brew/opt/freetype/lib -lfreetype \
 
 # flags for libs on OSX only
@@ -199,6 +199,8 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
 	sudo apt-get -y install libsdl2-dev;
+	# assimp
+	sudo apt-get install -y assimp-utils
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
@@ -206,6 +208,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install glm
 	# sdl2
 	brew install sdl2;
+	# assimp
+	brew install assimp;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
