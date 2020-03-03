@@ -5,11 +5,19 @@
 
 #include "Game.hpp"
 #include "bomberman.hpp"
+#include "Player.hpp"
+#include "Bomb.hpp"
+
+// -- Static members initialisation --------------------------------------------
+
+std::map<std::string, AEntity *> Game::_entitiesCall = {
+	{"player", new Player()},
+	{"bomb", new Bomb()},
+};
 
 // -- Constructors -------------------------------------------------------------
 
 Game::Game() {
-	board = {{nullptr}};
 	// TODO(ebaudet): init members
 }
 
@@ -97,10 +105,10 @@ bool			Game::run() {
 // -- Private Methods ----------------------------------------------------------
 
 bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
-	for (uint32_t j = 0; j < size.y; j++) {
-		for (uint32_t i = 0; i < size.x; i++) {
-			if (board[j][i] != nullptr) {
-				if (!board[j][i]->update(getMs() - last_loop_ms))
+	for (auto &&board_it1 : board) {
+		for (auto &&board_it1 : board_it1) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->update(getMs() - last_loop_ms))
 					return false;
 			}
 		}
@@ -114,10 +122,10 @@ bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
 }
 
 bool	Game::_draw() {
-	for (uint32_t j = 0; j < size.y; j++) {
-		for (uint32_t i = 0; i < size.x; i++) {
-			if (board[j][i] != nullptr) {
-				if (!board[j][i]->draw())
+	for (auto &&board_it1 : board) {
+		for (auto &&board_it1 : board_it1) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->draw())
 					return false;
 			}
 		}
@@ -177,14 +185,20 @@ bool	Game::_loadLevel(uint8_t level) {
 		logErr(e.what());
 		return false;
 	}
-	//  s.j("screen").u("fps");
+
 	size = {lvl.u("width"), lvl.u("width")};
-	// board = std::vect(size.y, std::vect(size.x, nullptr));
+	board = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
+			std::vector< std::vector<AEntity*> >(size.y,
+			std::vector< AEntity* >()));
+
 	for (uint32_t j = 0; j < size.y; j++) {
-		if (lvl.j("map").s(std::to_string(j)).length() != size.x)
+		std::string line = lvl.j("map").s(std::to_string(j));
+		if (line.length() != size.x)
 			throw GameException(("Map length error on line "+std::to_string(j)).c_str());
 		for (uint32_t i = 0; i < size.x; i++) {
-			/* code */
+			line[i];
+			if (_entitiesCall.find("player") != _entitiesCall.end())
+				board[i][j].push_back(_entitiesCall["player"]);
 		}
 	}
 
