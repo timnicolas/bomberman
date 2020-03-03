@@ -27,14 +27,12 @@ bool	initSettings(std::string const & filename) {
 	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
 
 	SettingsJson * listPattern = new SettingsJson();
-	listPattern->add<uint32_t>("unsigned int", 42);
-	listPattern->add<std::string>("str", "s");
+	listPattern->add<uint64_t>("ui", 42);
+	listPattern->add<std::string>("s", "s");
 	s.addList<SettingsJson>("list", listPattern);
-	s.get<SettingsList<SettingsJson> >("list").add(new SettingsJson(*listPattern));
-	s.get<SettingsList<SettingsJson> >("list").add(new SettingsJson(*listPattern));
 
-	s.get<SettingsList<SettingsJson> >("list").list[1]->s("str") = "test list[1]";
-	// s.lj("list")[1].s("str") = "test list[1]";
+	// add a default value
+	s.get<SettingsList<SettingsJson> >("list").add(new SettingsJson(*listPattern));
 
 	// s.add<SettingsJson>("screen");
 	// 	s.j("screen").add<std::string>("name", "nibbler").setDescription("name of the game");

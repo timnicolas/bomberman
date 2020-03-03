@@ -8,27 +8,27 @@ SettingsJson::SettingsJson(SettingsJson const &src) {
 }
 
 SettingsJson::~SettingsJson() {
-	deleteMap<std::string>(stringMap);
-	deleteMap<int64_t>(intMap);
-	deleteMap<uint64_t>(uintMap);
-	deleteMap<double>(doubleMap);
-	deleteMap<bool>(boolMap);
-	deleteMap<SettingsJson>(jsonMap);
-	deleteMap<SettingsList<SettingsJson> >(jsonList);
+	_deleteMap<std::string>(stringMap);
+	_deleteMap<int64_t>(intMap);
+	_deleteMap<uint64_t>(uintMap);
+	_deleteMap<double>(doubleMap);
+	_deleteMap<bool>(boolMap);
+	_deleteMap<SettingsJson>(jsonMap);
+	_deleteMap<SettingsList<SettingsJson> >(jsonList);
 }
 
 SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {
 	if (this != &rhs) {
-		logDebug("WARNING -> SettingsJson object copied");
+		// logDebug("WARNING -> SettingsJson object copied");
 		_name = rhs._name;
 		_description = rhs._description;
-		stringMap = copyMap<std::string>(rhs.stringMap);
-		intMap = copyMap<int64_t>(rhs.intMap);
-		uintMap = copyMap<uint64_t>(rhs.uintMap);
-		doubleMap = copyMap<double>(rhs.doubleMap);
-		boolMap = copyMap<bool>(rhs.boolMap);
-		jsonMap = copyMap<SettingsJson>(rhs.jsonMap);
-		jsonList = copyMap<SettingsList<SettingsJson> >(rhs.jsonList);
+		_copyMap<std::string>(stringMap, rhs.stringMap);
+		_copyMap<int64_t>(intMap, rhs.intMap);
+		_copyMap<uint64_t>(uintMap, rhs.uintMap);
+		_copyMap<double>(doubleMap, rhs.doubleMap);
+		_copyMap<bool>(boolMap, rhs.boolMap);
+		_copyMap<SettingsJson>(jsonMap, rhs.jsonMap);
+		_copyMap<SettingsList<SettingsJson> >(jsonList, rhs.jsonList);
 	}
 	return *this;
 }
@@ -49,7 +49,7 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 			auto newJsonObj = jsonObjTmp.jsonMap.find(it.key());
 			if (newJsonObj != jsonObjTmp.jsonMap.end()) {
 				if (jsonObjTmp.update<SettingsJson>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
@@ -64,7 +64,7 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 		else {
 			if (it->is_number_integer() && jsonObjTmp.intMap.find(it.key()) != jsonObjTmp.intMap.end()) {
 				if (jsonObjTmp.update<int64_t>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
@@ -74,7 +74,7 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 			}
 			else if (it->is_number_unsigned() && jsonObjTmp.uintMap.find(it.key()) != jsonObjTmp.uintMap.end()) {
 				if (jsonObjTmp.update<uint64_t>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
@@ -84,7 +84,7 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 			}
 			else if (it->is_number_float() && jsonObjTmp.doubleMap.find(it.key()) != jsonObjTmp.doubleMap.end()) {
 				if (jsonObjTmp.update<double>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
@@ -94,7 +94,7 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 			}
 			else if (it->is_boolean() && jsonObjTmp.boolMap.find(it.key()) != jsonObjTmp.boolMap.end()) {
 				if (jsonObjTmp.update<bool>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
@@ -104,12 +104,27 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 			}
 			else if (it->is_string() && jsonObjTmp.stringMap.find(it.key()) != jsonObjTmp.stringMap.end()) {
 				if (jsonObjTmp.update<std::string>(it.key()).isDisabledInFile()) {
-					logWarn("you can't set " << it.key() << " in setting file");
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
 				}
 				else {
 					ret &= jsonObjTmp.update<std::string>(it.key()).checkValue(it->get<std::string>());
 					jsonObjTmp.update<std::string>(it.key()).setValue(it->get<std::string>());
+				}
+			}
+			else if (it->is_array() && jsonObjTmp.jsonList.find(it.key()) != jsonObjTmp.jsonList.end()) {
+				if (jsonObjTmp.update<SettingsList<SettingsJson> >(it.key()).isDisabledInFile()) {
+					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
+					ret = false;
+				}
+				else {
+					SettingsList<SettingsJson> & tmpList = jsonList[it.key()]->get();
+					tmpList.resetList();
+					for (auto & it2 : it->items()) {
+						SettingsJson * newElem = new SettingsJson(*tmpList.pattern);
+						ret &= newElem->loadJson(it2.value(), *newElem);
+						tmpList.add(newElem);
+					}
 				}
 			}
 			else {

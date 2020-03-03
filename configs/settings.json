@@ -1,12 +1,12 @@
 {
-	"list": [
-		{
-			"str": "list[0]",
-			"unsigned int": 12
-		},
-		{
-			"str": "test list[1]"
-		},
-		{}
-	]
+    "list": [
+        {
+            "s": "list[0]",
+            "ui": 12
+        },
+        {
+            "s": "test list[1]"
+        },
+        {}
+    ]
 }
