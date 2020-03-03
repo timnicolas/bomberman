@@ -1,5 +1,6 @@
 #include "Gui.hpp"
 #include "Logging.hpp"
+#include "Inputs.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -51,30 +52,30 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
-void Gui::updateInput(Inputs &inputs) {
+void Gui::updateInput() {
 	// manage inputs
 	// quit
-	if (inputs.shouldQuit() || inputs.getKey(InputType::Enum::CANCEL)) {
+	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
 		logDebug("quiting...");
 		_gameInfo.quit = true;
 	}
 	// mouse motion
-	_cam->processMouseMovement(inputs.getMouseRel().x, -inputs.getMouseRel().y);
+	_cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
 
 	// -- camera movement ------------------------------------------------------
 	// camera movement
-	if (inputs.getKey(InputType::Enum::UP)) {
+	if (Inputs::getKey(InputType::Enum::UP)) {
 		_cam->processKeyboard(CamMovement::Forward, _dtTime, false);
 	}
-	if (inputs.getKey(InputType::Enum::RIGHT)) {
+	if (Inputs::getKey(InputType::Enum::RIGHT)) {
 		_cam->processKeyboard(CamMovement::Right, _dtTime, false);
 	}
-	if (inputs.getKey(InputType::Enum::DOWN)) {
+	if (Inputs::getKey(InputType::Enum::DOWN)) {
 		_cam->processKeyboard(CamMovement::Backward, _dtTime, false);
 	}
-	if (inputs.getKey(InputType::Enum::LEFT)) {
+	if (Inputs::getKey(InputType::Enum::LEFT)) {
 		_cam->processKeyboard(CamMovement::Left, _dtTime, false);
 	}
 }

@@ -24,7 +24,6 @@
 #include "Camera.hpp"
 #include "Skybox.hpp"
 #include "debug.hpp"
-#include "Inputs.hpp"
 
 #define TITLE	"bomberman"
 
@@ -55,7 +54,7 @@ class Gui {
 		Gui(Gui const &src);
 		Gui &operator=(Gui const &rhs);
 
-		void	updateInput(Inputs &inputs);
+		void	updateInput();
 		bool	init();
 		bool	draw();
 

@@ -24,23 +24,31 @@ class Inputs {
 public:
 	static const int						nb_input = 7;
 	static const std::string				input_type_name[Inputs::nb_input];
-
-	Inputs();
-	~Inputs();
-
-	bool				getKey(InputType::Enum type) const;
-	void				configureKey(InputType::Enum type);
-	void				cancelConfiguration();
-	bool				shouldQuit() const;
-	const glm::ivec2	&getMousePos() const;
-	const glm::ivec2	&getMouseRel() const;
-	void				update();
-
-private:
 	static const std::string				_conf_file;
 
+	~Inputs();
+
+	static Inputs							&get();
+	static bool								getKey(InputType::Enum type);
+	static void								configureKey(InputType::Enum type);
+	static void								cancelConfiguration();
+	static bool								shouldQuit();
+	static const glm::ivec2					&getMousePos();
+	static const glm::ivec2					&getMouseRel();
+	static void								update();
+
+private:
+	Inputs();
 	Inputs(const Inputs &src);
-	Inputs 				&operator=(const Inputs &src);
+	Inputs 									&operator=(const Inputs &src);
+
+	bool									pGetKey(InputType::Enum type) const;
+	void									pConfigureKey(InputType::Enum type);
+	void									pCancelConfiguration();
+	bool									pShouldQuit() const;
+	const glm::ivec2						&pGetMousePos() const;
+	const glm::ivec2						&pGetMouseRel() const;
+	void									pUpdate();
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;
