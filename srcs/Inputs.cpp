@@ -13,7 +13,6 @@ const std::string	Inputs::input_type_name[] = {
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
 Inputs::Inputs(): _configuring(false), _quit(false) {
-	// _used_scan = std::unordered_set<SDL_Scancode>();
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 	}
@@ -50,6 +49,15 @@ Inputs::Inputs(): _configuring(false), _quit(false) {
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
 	};
+	_used_scan = {
+		_controls.j("keys").i("up"),
+		_controls.j("keys").i("down"),
+		_controls.j("keys").i("left"),
+		_controls.j("keys").i("right"),
+		_controls.j("keys").i("action"),
+		_controls.j("keys").i("confirm"),
+		_controls.j("keys").i("cancel"),
+	};
 	_controls.saveToFile(Inputs::_conf_file);
 }
 
@@ -62,6 +70,7 @@ bool				Inputs::getKey(InputType::Enum type) {
 void				Inputs::setNextKey(InputType::Enum type) {
 	_configuring = true;
 	_next_action_type = type;
+	_used_scan.erase(_controls.j("keys").i(input_type_name[_next_action_type]));
 }
 
 bool				Inputs::shouldQuit() {
@@ -97,12 +106,19 @@ void				Inputs::update() {
 				}
 			}
 			else {
-				_input_key_map.erase(static_cast<SDL_Scancode>(_controls.j("keys").i(input_type_name[_next_action_type])));
-				_controls.j("keys").i(input_type_name[_next_action_type]) = scan;
-				_input_key_map[scan] = _next_action_type;
-				_controls.saveToFile(Inputs::_conf_file);
-				_configuring = false;
-				_key_status[static_cast<int>(_next_action_type)] = true;
+				if (_used_scan.find(scan) == _used_scan.end()) {
+					_input_key_map.erase(static_cast<SDL_Scancode>(_controls.j("keys").i(input_type_name[_next_action_type])));
+					_controls.j("keys").i(input_type_name[_next_action_type]) = scan;
+					_used_scan.insert(scan);
+					_input_key_map[scan] = _next_action_type;
+					_controls.saveToFile(Inputs::_conf_file);
+					_configuring = false;
+					_key_status[static_cast<int>(_next_action_type)] = true;
+					logInfo("Input '" << input_type_name[_next_action_type] << "' set.")
+				}
+				else {
+					logWarn("This key is already used.");
+				}
 			}
 			break;
 		case SDL_KEYUP:
