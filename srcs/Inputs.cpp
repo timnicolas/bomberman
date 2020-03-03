@@ -80,10 +80,10 @@ Inputs				&Inputs::get() {
 	@return The state of the key (true == pressed).
 */
 bool				Inputs::getKey(InputType::Enum type) {
-	return (Inputs::get().pGetKey(type));
+	return (Inputs::get()._getKey(type));
 }
 
-bool				Inputs::pGetKey(InputType::Enum type) const {
+bool				Inputs::_getKey(InputType::Enum type) const {
 	return _key_status[static_cast<int>(type)];
 }
 
@@ -94,10 +94,10 @@ bool				Inputs::pGetKey(InputType::Enum type) const {
 	@param type The type defining the action to configure.
 */
 void				Inputs::configureKey(InputType::Enum type) {
-	Inputs::get().pConfigureKey(type);
+	Inputs::get()._configureKey(type);
 }
 
-void				Inputs::pConfigureKey(InputType::Enum type) {
+void				Inputs::_configureKey(InputType::Enum type) {
 	_configuring = true;
 	_next_action_type = type;
 	_used_scan.erase(_controls.j("keys").i(input_type_name[_next_action_type]));
@@ -108,10 +108,10 @@ void				Inputs::pConfigureKey(InputType::Enum type) {
 	This function will reset the execution of the update function to its normal state.
 */
 void				Inputs::cancelConfiguration() {
-	Inputs::get().pCancelConfiguration();
+	Inputs::get()._cancelConfiguration();
 }
 
-void				Inputs::pCancelConfiguration() {
+void				Inputs::_cancelConfiguration() {
 	if (_configuring) {
 		_configuring = false;
 		_used_scan.insert(_controls.j("keys").i(input_type_name[_next_action_type]));
@@ -124,10 +124,10 @@ void				Inputs::pCancelConfiguration() {
 	@return true if the user tried to close the window, false otherwise.
 */
 bool				Inputs::shouldQuit() {
-	return (Inputs::get().pShouldQuit());
+	return (Inputs::get()._shouldQuit());
 }
 
-bool				Inputs::pShouldQuit() const {
+bool				Inputs::_shouldQuit() const {
 	return (_quit);
 }
 
@@ -137,10 +137,10 @@ bool				Inputs::pShouldQuit() const {
 	@return A reference to a constant vector containing the mouse position.
 */
 const glm::ivec2	&Inputs::getMousePos() {
-	return (Inputs::get().pGetMousePos());
+	return (Inputs::get()._getMousePos());
 }
 
-const glm::ivec2	&Inputs::pGetMousePos() const {
+const glm::ivec2	&Inputs::_getMousePos() const {
 	return (_mouse_pos);
 }
 
@@ -150,10 +150,10 @@ const glm::ivec2	&Inputs::pGetMousePos() const {
 	@return A reference to a constant vector containing the mouse offset.
 */
 const glm::ivec2	&Inputs::getMouseRel() {
-	return (Inputs::get().pGetMouseRel());
+	return (Inputs::get()._getMouseRel());
 }
 
-const glm::ivec2	&Inputs::pGetMouseRel() const {
+const glm::ivec2	&Inputs::_getMouseRel() const {
 	return (_mouse_rel);
 }
 
@@ -162,10 +162,10 @@ const glm::ivec2	&Inputs::pGetMouseRel() const {
 	This function should be called at the start of each frame in order for this class to have valid values.
 */
 void				Inputs::update() {
-	Inputs::get().pUpdate();
+	Inputs::get()._update();
 }
 
-void				Inputs::pUpdate() {
+void				Inputs::_update() {
 	SDL_Event		event;
 	SDL_Scancode	scan;
 

@@ -20,15 +20,14 @@ int start(int ac, char const **av) {
 bool	exampleGui() {
 	GameInfo	gameInfo;
 	Gui			gui(gameInfo);
-	Inputs		inputs;
 
 	if (!gui.init()) {
 		return false;
 	}
 
 	while (true) {
-		inputs.update();
-		gui.updateInput(inputs);
+		Inputs::update();
+		gui.updateInput();
 		if (gameInfo.quit) {
 			logInfo("exit game")
 			break;
