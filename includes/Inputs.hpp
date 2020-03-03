@@ -42,13 +42,13 @@ private:
 	Inputs(const Inputs &src);
 	Inputs 									&operator=(const Inputs &src);
 
-	bool									pGetKey(InputType::Enum type) const;
-	void									pConfigureKey(InputType::Enum type);
-	void									pCancelConfiguration();
-	bool									pShouldQuit() const;
-	const glm::ivec2						&pGetMousePos() const;
-	const glm::ivec2						&pGetMouseRel() const;
-	void									pUpdate();
+	bool									_getKey(InputType::Enum type) const;
+	void									_configureKey(InputType::Enum type);
+	void									_cancelConfiguration();
+	bool									_shouldQuit() const;
+	const glm::ivec2						&_getMousePos() const;
+	const glm::ivec2						&_getMouseRel() const;
+	void									_update();
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;
