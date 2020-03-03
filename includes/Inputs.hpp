@@ -22,12 +22,13 @@ namespace InputType {
 class Inputs {
 public:
 	static const int						nb_input = 7;
+	static const std::string				input_type_name[Inputs::nb_input];
 
 	Inputs();
 	~Inputs();
 
 	bool				getKey(InputType::Enum type);
-	void				setNextKey(std::string name);
+	void				setNextKey(InputType::Enum type);
 	void				configureKeys();
 	bool				shouldQuit();
 	const glm::ivec2	&getMousePos();
@@ -41,7 +42,7 @@ private:
 	Inputs 				&operator=(const Inputs &src);
 
 	bool									_configuring;
-	std::string								_next_action_name;
+	InputType::Enum							_next_action_type;
 	bool									_quit;
 	glm::ivec2								_mouse_pos;
 	glm::ivec2								_mouse_rel;
