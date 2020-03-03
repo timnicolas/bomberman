@@ -27,6 +27,7 @@ public:
 	~Inputs();
 
 	bool				getKey(InputType::Enum type);
+	void				setNextKey(std::string name);
 	void				configureKeys();
 	bool				shouldQuit();
 	const glm::ivec2	&getMousePos();
@@ -37,8 +38,10 @@ private:
 	static const std::string				_conf_file;
 
 	Inputs(const Inputs &src);
-	Inputs 			&operator=(const Inputs &src);
+	Inputs 				&operator=(const Inputs &src);
 
+	bool									_configuring;
+	std::string								_next_action_name;
 	bool									_quit;
 	glm::ivec2								_mouse_pos;
 	glm::ivec2								_mouse_rel;

@@ -3,20 +3,10 @@
 
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
-Inputs::Inputs(): _quit(false) {
+Inputs::Inputs(): _configuring(false), _quit(false) {
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 	}
-	configureKeys();
-}
-
-Inputs::~Inputs() {}
-
-bool				Inputs::getKey(InputType::Enum type) {
-	return _key_status[static_cast<int>(type)];
-}
-
-void				Inputs::configureKeys() {
 	_controls.name("controls").description("controls settings");
 	_controls.add<SettingsJson>("keys");
 	_controls.j("keys").add<int64_t>("up", SDL_SCANCODE_W) \
@@ -33,15 +23,29 @@ void				Inputs::configureKeys() {
 		.setMin(4).setMax(286).setDescription("confirm choice.");
 	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
 		.setMin(4).setMax(286).setDescription("cancel choice.");
+	configureKeys();
+	_controls.saveToFile(Inputs::_conf_file);
+}
+
+Inputs::~Inputs() {}
+
+bool				Inputs::getKey(InputType::Enum type) {
+	return _key_status[static_cast<int>(type)];
+}
+
+void				Inputs::setNextKey(std::string name) {
+	_configuring = true;
+	_next_action_name = name;
+}
+
+void				Inputs::configureKeys() {
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
-			_controls.saveToFile(Inputs::_conf_file);
 		}
 	}
 	catch(SettingsJson::SettingsException const & e) {
 		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now.");
-		_controls.saveToFile(Inputs::_conf_file);
 	}
 	_input_key_map = {
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::Enum::UP },
@@ -52,6 +56,7 @@ void				Inputs::configureKeys() {
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
 	};
+	_configuring = false;
 	logDebug("keys set");
 }
 
@@ -77,13 +82,20 @@ void				Inputs::update() {
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			scan = event.key.keysym.scancode;
-			try {
-				int index = static_cast<int>(_input_key_map.at(scan));
-				_key_status[index] = true;
+			if (!_configuring) {
+				try {
+					int index = static_cast<int>(_input_key_map.at(scan));
+					_key_status[index] = true;
+				}
+				catch(std::out_of_range oor) {
+					// unused key
+					continue;
+				}
 			}
-			catch(std::out_of_range oor) {
-				// unused key
-				continue;
+			else {
+				_controls.j("keys").i(_next_action_name) = scan;
+				_controls.saveToFile(Inputs::_conf_file);
+				configureKeys();
 			}
 			break;
 		case SDL_KEYUP:
