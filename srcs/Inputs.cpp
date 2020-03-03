@@ -63,28 +63,69 @@ Inputs::Inputs(): _configuring(false), _quit(false) {
 
 Inputs::~Inputs() {}
 
-bool				Inputs::getKey(InputType::Enum type) {
+/**
+	Return the state of the key corresponding to the action passed.
+
+	@param type The type defining the action to verify.
+	@return The state of the key (true == pressed).
+*/
+bool				Inputs::getKey(InputType::Enum type) const {
 	return _key_status[static_cast<int>(type)];
 }
 
-void				Inputs::setNextKey(InputType::Enum type) {
+/**
+	Configure the action passed to be associated to the next key pressed.
+	This function will change the execution of the update function.
+
+	@param type The type defining the action to configure.
+*/
+void				Inputs::configureKey(InputType::Enum type) {
 	_configuring = true;
 	_next_action_type = type;
 	_used_scan.erase(_controls.j("keys").i(input_type_name[_next_action_type]));
 }
 
-bool				Inputs::shouldQuit() {
+/**
+	Cancel the wait for a key to configure an action.
+	This function will reset the execution of the update function to its normal state.
+*/
+void				Inputs::cancelConfiguration() {
+	if (_configuring) {
+		_configuring = false;
+		_used_scan.insert(_controls.j("keys").i(input_type_name[_next_action_type]));
+	}
+}
+
+/**
+	Indicate if the window should be closed or not.
+
+	@return true if the user tried to close the window, false otherwise.
+*/
+bool				Inputs::shouldQuit() const {
 	return (_quit);
 }
 
-const glm::ivec2	&Inputs::getMousePos() {
+/**
+	Gives the current coordinates of the mouse.
+
+	@return A reference to a constant vector containing the mouse position.
+*/
+const glm::ivec2	&Inputs::getMousePos() const {
 	return (_mouse_pos);
 }
 
-const glm::ivec2	&Inputs::getMouseRel() {
+/**
+	Gives the offset of the mouse from the last poll of event.
+
+	@return A reference to a constant vector containing the mouse offset.
+*/
+const glm::ivec2	&Inputs::getMouseRel() const {
 	return (_mouse_rel);
 }
-
+/**
+	Poll all the SDL events from the last update call.
+	This function should be called at the start of each frame in order for this class to have valid values.
+*/
 void				Inputs::update() {
 	SDL_Event		event;
 	SDL_Scancode	scan;

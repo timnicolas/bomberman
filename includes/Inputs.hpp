@@ -28,11 +28,12 @@ public:
 	Inputs();
 	~Inputs();
 
-	bool				getKey(InputType::Enum type);
-	void				setNextKey(InputType::Enum type);
-	bool				shouldQuit();
-	const glm::ivec2	&getMousePos();
-	const glm::ivec2	&getMouseRel();
+	bool				getKey(InputType::Enum type) const;
+	void				configureKey(InputType::Enum type);
+	void				cancelConfiguration();
+	bool				shouldQuit() const;
+	const glm::ivec2	&getMousePos() const;
+	const glm::ivec2	&getMouseRel() const;
 	void				update();
 
 private:
