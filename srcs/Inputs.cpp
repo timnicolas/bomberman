@@ -13,6 +13,7 @@ const std::string	Inputs::input_type_name[] = {
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
 Inputs::Inputs(): _configuring(false), _quit(false) {
+	// _used_scan = std::unordered_set<SDL_Scancode>();
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 	}
@@ -32,22 +33,6 @@ Inputs::Inputs(): _configuring(false), _quit(false) {
 		.setMin(4).setMax(286).setDescription("confirm choice.");
 	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
 		.setMin(4).setMax(286).setDescription("cancel choice.");
-	configureKeys();
-	_controls.saveToFile(Inputs::_conf_file);
-}
-
-Inputs::~Inputs() {}
-
-bool				Inputs::getKey(InputType::Enum type) {
-	return _key_status[static_cast<int>(type)];
-}
-
-void				Inputs::setNextKey(InputType::Enum type) {
-	_configuring = true;
-	_next_action_type = type;
-}
-
-void				Inputs::configureKeys() {
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -65,8 +50,18 @@ void				Inputs::configureKeys() {
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
 	};
-	_configuring = false;
-	logDebug("keys set");
+	_controls.saveToFile(Inputs::_conf_file);
+}
+
+Inputs::~Inputs() {}
+
+bool				Inputs::getKey(InputType::Enum type) {
+	return _key_status[static_cast<int>(type)];
+}
+
+void				Inputs::setNextKey(InputType::Enum type) {
+	_configuring = true;
+	_next_action_type = type;
 }
 
 bool				Inputs::shouldQuit() {
@@ -102,9 +97,12 @@ void				Inputs::update() {
 				}
 			}
 			else {
+				_input_key_map.erase(static_cast<SDL_Scancode>(_controls.j("keys").i(input_type_name[_next_action_type])));
 				_controls.j("keys").i(input_type_name[_next_action_type]) = scan;
+				_input_key_map[scan] = _next_action_type;
 				_controls.saveToFile(Inputs::_conf_file);
-				configureKeys();
+				_configuring = false;
+				_key_status[static_cast<int>(_next_action_type)] = true;
 			}
 			break;
 		case SDL_KEYUP:
