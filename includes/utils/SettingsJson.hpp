@@ -164,9 +164,13 @@ class SettingsList {
 		friend std::ostream & operator<<(std::ostream & out, const SettingsList & settingsList) {
 			out << "[" << std::endl;
 			for (auto it = settingsList.list.begin(); it != settingsList.list.end(); it++) {
-				out << (*it)->toString(JsonOpt::NO_OPT, 2);
+				bool termWithComma = true;
+				if (it + 1 == settingsList.list.end()) {
+					termWithComma = false;
+				}
+				out << (*it)->toString(JsonOpt::NO_OPT, 2, termWithComma);
 			}
-			out << "\t]" << std::endl;
+			out << "\t]";
 			return out;
 		}
 
@@ -190,7 +194,7 @@ class SettingsJson {
 		bool		loadFile(std::string const & filename);
 		bool		loadJson(nlohmann::json const & json, SettingsJson & jsonObjTmp);
 		void		saveToFile(std::string const & filename);
-		std::string	toString(uint32_t opt = JsonOpt::NO_OPT, uint32_t tabOffset = 0) const;
+		std::string	toString(uint32_t opt = JsonOpt::NO_OPT, uint32_t tabOffset = 0, bool termWithComma = false) const;
 
 		template<class T>
 		JsonObj<T> &	add(std::string const & name) {
@@ -258,6 +262,10 @@ class SettingsJson {
 		bool &					b(std::string const & name)  { return get<bool>(name); }
 		SettingsJson const &	j(std::string const & name) const { return get<SettingsJson>(name); }
 		SettingsJson &			j(std::string const & name)  { return get<SettingsJson>(name); }
+		SettingsList<SettingsJson> const &	lj(std::string const & name) const {
+			return get<SettingsList<SettingsJson>>(name);
+		}
+		SettingsList<SettingsJson> &		lj(std::string const & name)  { return get<SettingsList<SettingsJson>>(name); }
 
 		class SettingsException : public std::runtime_error {
 			public:
