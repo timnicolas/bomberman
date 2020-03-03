@@ -6,15 +6,16 @@
 #include "Shader.hpp"
 #include "includesOpengl.hpp"
 
-#define NB_BLOCK_TYPES 5
+#define NB_BLOCK_TYPES 6
 
 namespace Block {
 	enum Enum {
-		B_FLOOR,
-		SNAKE_BODY,
-		SNAKE_HEAD,
-		FOOD,
-		WATER,
+		FLOOR,
+		PLAYER,
+		IA,
+		BOMB,
+		DURABLE_WALL,
+		DESTRUCTIBLE_WALL,
 	};
 }
 
