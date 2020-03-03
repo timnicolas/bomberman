@@ -33,6 +33,12 @@ bool	initSettings(std::string const & filename) {
 	// 	s.j("screen").add<uint64_t>("height", 800).setMin(400).setMax(4000).disableInFile(true)
 	// 		.setDescription("height of the screen /!\\ automatically calculed");
 
+	s.add<SettingsJson>("audio");
+	s.j("audio").add<double>("musicVolume", 0.7).setMin(0.0).setMax(1.0) \
+		.setDescription("The volume of the music.");
+	s.j("audio").add<double>("soundVolume", 0.7).setMin(0.0).setMax(1.0) \
+		.setDescription("The volume of the sounds effects.");
+
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings
