@@ -40,17 +40,17 @@ void				Inputs::configureKeys() {
 		}
 	}
 	catch(SettingsJson::SettingsException const & e) {
-		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now");
+		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now.");
 		_controls.saveToFile(Inputs::_conf_file);
 	}
 	_input_key_map = {
-		{ SDL_SCANCODE_W, InputType::Enum::UP },
-		{ SDL_SCANCODE_S, InputType::Enum::DOWN },
-		{ SDL_SCANCODE_A, InputType::Enum::LEFT },
-		{ SDL_SCANCODE_D, InputType::Enum::RIGHT },
-		{ SDL_SCANCODE_SPACE, InputType::Enum::ACTION },
-		{ SDL_SCANCODE_RETURN, InputType::Enum::CONFIRM },
-		{ SDL_SCANCODE_ESCAPE, InputType::Enum::CANCEL }
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::Enum::UP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("down")), InputType::Enum::DOWN },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("left")), InputType::Enum::LEFT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::Enum::RIGHT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::Enum::ACTION },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
 	};
 	logDebug("keys set");
 }
