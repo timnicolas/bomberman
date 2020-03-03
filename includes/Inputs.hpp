@@ -4,6 +4,7 @@
 # include <SDL2/SDL.h>
 # include <map>
 # include <array>
+# include <unordered_set>
 # include <glm/glm.hpp>
 # include "SettingsJson.hpp"
 
@@ -46,6 +47,7 @@ private:
 	glm::ivec2								_mouse_pos;
 	glm::ivec2								_mouse_rel;
 	std::map<SDL_Scancode, InputType::Enum>	_input_key_map;
+	std::unordered_set<int64_t>				_used_scan;
 	bool									_key_status[Inputs::nb_input];
 	SettingsJson							_controls;
 };
