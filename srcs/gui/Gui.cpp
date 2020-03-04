@@ -16,10 +16,6 @@ Gui::Gui(GameInfo &gameInfo)
 Gui::~Gui() {
 	logInfo("exit SDL");
 
-	// // disable cursor
-	// SDL_ShowCursor(SDL_ENABLE);
-	// SDL_SetRelativeMouseMode(SDL_FALSE);
-
 	// free vao / vbo
 	cubeShader->use();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -136,8 +132,7 @@ bool	Gui::_initOpengl() {
 	}
 
 	// disable cursor for fps camera
-	SDL_ShowCursor(SDL_DISABLE);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	enableCursor(false);
 
 	// create opengl context
 	_context = SDL_GL_CreateContext(_win);
@@ -250,6 +245,18 @@ bool	Gui::_initShaders() {
 	return true;
 }
 
+
+// -- enableCursor -------------------------------------------------------------
+void Gui::enableCursor(bool enable) {
+	if (enable) {
+		SDL_ShowCursor(SDL_ENABLE);
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+	}
+	else {
+		SDL_ShowCursor(SDL_DISABLE);
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	}
+}
 
 // -- draw ---------------------------------------------------------------------
 void Gui::preDraw() {

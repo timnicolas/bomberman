@@ -4,6 +4,7 @@
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
 #include "SceneGame.hpp"
+#include "SceneMenu.hpp"
 
 SceneManager::SceneManager()
 : _scene(nullptr),
@@ -32,16 +33,17 @@ bool SceneManager::init() {
 		logWarn("SceneManager init is already called");
 	}
 
-	// create and init fisrt scene
-	_scene = new SceneGame();
-	if (_scene->init() == false) {
-		logErr("failed to init scene");
-		return false;
-	}
-
 	// create and init first gui
 	_gui = new Gui(_gameInfo);
 	if (!_gui->init()) {
+		return false;
+	}
+
+	// create and init fisrt scene
+	// _scene = new SceneGame(_gui);
+	_scene = new SceneMenu(_gui);
+	if (_scene->init() == false) {
+		logErr("failed to init scene");
 		return false;
 	}
 	return true;
@@ -71,7 +73,7 @@ bool SceneManager::run() {
 			if (_scene->update(last_loop_ms) == false) {
 				return false;
 			}
-			if (_scene->draw(_gui) == false) {
+			if (_scene->draw() == false) {
 				return false;
 			}
 			_gui->postDraw();
