@@ -120,6 +120,8 @@ SRC =	main.cpp \
 		utils/opengl/Material.cpp \
 		utils/opengl/TextRender.cpp \
 		utils/opengl/Skybox.cpp \
+		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/Button.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -148,6 +150,8 @@ HEAD =	bomberman.hpp \
 		utils/opengl/Material.hpp \
 		utils/opengl/TextRender.hpp \
 		utils/opengl/Skybox.hpp \
+		utils/opengl/UI/ABaseUI.hpp \
+		utils/opengl/UI/Button.hpp \
 
 
 ################################################################################
@@ -354,15 +358,15 @@ all:
 ([ -z $(DEBUG) ] && [ -d $(DEBUG_DIR) ] && [ -f $(DEBUG_DIR)/DEBUG ])); then\
 		$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE);\
 	fi;
-
-	$(START)
-	@$(MAKE) $(MAKE_OPT) $(NAME)
-	$(END)
 ifneq ($(DEBUG),)
 	@touch $(DEBUG_DIR)/DEBUG
 else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
+
+	$(START)
+	@$(MAKE) $(MAKE_OPT) $(NAME)
+	$(END)
 
 install:
 	@for i in $(NEED_MAKE); do \
