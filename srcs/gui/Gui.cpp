@@ -5,12 +5,12 @@
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
 : gameInfo(gameInfo),
-  _win(nullptr),
-  _event(new SDL_Event()),
-  _context(0),
   textureManager(nullptr),
   cubeShader(nullptr),
   cam(nullptr),
+  _win(nullptr),
+  _event(new SDL_Event()),
+  _context(0),
   _skybox(nullptr) {}
 
 Gui::~Gui() {
