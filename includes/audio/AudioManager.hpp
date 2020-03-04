@@ -4,20 +4,22 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_mixer.h>
 # include <map>
+# include "Sound.hpp"
 
 class AudioManager {
 public:
-	static const int						nbSoundChannels = 10;
+	static const int						nb_sound_channels = 42;
 	~AudioManager();
 
 	static AudioManager						&get();
+	static bool								isEnabled();
 	static void								updateSettings();
 	static void								loadMusic(std::string filename);
 	static void								loadSound(std::string filename);
 	static void								playMusic();
 	static void								pauseMusic();
-	static void								playSound();
-	static void								stopSound();
+	static void								playSound(std::string sound_name, float volume);
+	static void								unloadSound(std::string sound_name);
 	static void								stopAllSounds();
 
 private:
@@ -30,14 +32,15 @@ private:
 	void									_loadSound(std::string filename);
 	void									_playMusic();
 	void									_pauseMusic();
-	void									_playSound();
-	void									_stopSound();
+	void									_playSound(std::string sound_name, float volume);
+	void									_unloadSound(std::string sound_name);
 	void									_stopAllSounds();
 
-	float									_volumeMusic;
-	float									_volumeSound;
+	float									_volume_master;
+	float									_volume_music;
+	float									_volume_sound;
 	std::map<std::string, Mix_Music *>		_musics;
-	std::map<std::string, Mix_Chunk *>		_sounds;
+	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;
 };
 
