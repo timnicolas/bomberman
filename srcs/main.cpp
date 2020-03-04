@@ -50,6 +50,9 @@ int main(int ac, char const **av) {
 	logDebug("running " << "game");
 	userData.u("highScore")++;
 
+	// std::cout << s.toString(JsonOpt::VERBOSE | JsonOpt::COLOR) << std::endl;
+	// std::cout << s.toString(JsonOpt::DISCARD_DISABLED) << std::endl;
+
 	saveUserData(s.s("userDataFilename"));
 
 	if (!exampleGui()) {

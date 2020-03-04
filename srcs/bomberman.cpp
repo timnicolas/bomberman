@@ -26,13 +26,6 @@ bool	initSettings(std::string const & filename) {
 
 	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
 
-	// s.add<SettingsJson>("screen");
-	// 	s.j("screen").add<std::string>("name", "nibbler").setDescription("name of the game");
-	// 	s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
-	// 	s.j("screen").add<uint64_t>("width", 1200).setMin(400).setMax(4000).setDescription("width of the screen");
-	// 	s.j("screen").add<uint64_t>("height", 800).setMin(400).setMax(4000).disableInFile(true)
-	// 		.setDescription("height of the screen /!\\ automatically calculed");
-
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings
