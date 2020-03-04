@@ -46,6 +46,11 @@ std::ostream &	operator<<(std::ostream & os, const SceneMenu& my_class) {
  */
 bool			SceneMenu::init() {
 	_gui->enableCursor(true);
+	// TODO(tnicolas42) remove addButtons calls
+	addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button")
+		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
+	addButton(glm::vec2(500, 500), glm::vec2(150, 50), "button 2")
+		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
 	return true;
 }
 

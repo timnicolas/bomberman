@@ -5,8 +5,6 @@
 #include "json.hpp"
 #include "Logging.hpp"
 
-// TODO(tnicolas42) add lists in json loading
-
 namespace JsonOpt {
 	enum Enum {
 		NO_OPT = 0,
