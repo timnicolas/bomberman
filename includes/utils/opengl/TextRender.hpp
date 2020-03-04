@@ -23,6 +23,7 @@ class TextRender {
 			glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f));
 		uint32_t	strWidth(std::string const &fontName, std::string text, GLfloat scale = 1);
 
+		void	setWinSize(glm::vec2 winSize);
 
 		Shader			&getShader();
 		Shader const	&getShader() const;

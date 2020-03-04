@@ -15,6 +15,7 @@
 #include <unordered_map>
 #include <map>
 
+#include "bomberman.hpp"
 #include "Logging.hpp"
 #include "includesOpengl.hpp"
 #include "TextureManager.hpp"
@@ -23,6 +24,7 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Skybox.hpp"
+#include "UI/Button.hpp"
 #include "debug.hpp"
 
 #define TITLE	"bomberman"
