@@ -29,6 +29,20 @@ AudioManager				&AudioManager::get() {
 	return (instance);
 }
 
+void						AudioManager::updateSettings() {
+	AudioManager &inst = AudioManager::get();
+	if (inst._enabled) {
+		inst._updateSettings();
+	}
+	else {
+		logWarn("AudioManager is not enabled.");
+	}
+}
+void						AudioManager::_updateSettings() {
+	_volumeMusic = static_cast<float>(s.j("audio").d("musicVolume"));
+	_volumeSound = static_cast<float>(s.j("audio").d("soundVolume"));
+}
+
 void						AudioManager::loadMusic(std::string filename) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
