@@ -104,6 +104,7 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 */
 void ABaseUI::update(glm::vec2 mousePos, MouseState::ENUM mouseState) {
 	(void)mouseState;
+	// TODO(tnicolas42) add the mouse click in update
 	mousePos.y = _winSize.y - mousePos.y;
 	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
 	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)

@@ -40,18 +40,13 @@ bool SceneManager::init() {
 	}
 
 	// create and init fisrt scene
+	// TODO(tnicolas42) create the scene loader (factory ?)
 	// _scene = new SceneGame(_gui);
 	_scene = new SceneMenu(_gui);
 	if (_scene->init() == false) {
 		logErr("failed to init scene");
 		return false;
 	}
-	reinterpret_cast<SceneMenu *>(_scene)
-		->addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button")
-		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
-	reinterpret_cast<SceneMenu *>(_scene)
-		->addButton(glm::vec2(500, 500), glm::vec2(150, 50), "button 2")
-		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
 	return true;
 }
 
@@ -74,16 +69,19 @@ bool SceneManager::run() {
 			Inputs::update();
 			_gui->updateInput();
 
-			// draw the gui
-			_gui->preDraw();
+			// update the scene
 			if (_scene->update(last_loop_ms) == false) {
 				return false;
 			}
+
+			// draw the gui
+			_gui->preDraw();
 			if (_scene->draw() == false) {
 				return false;
 			}
 			_gui->postDraw();
 
+			// quit if it's the end of the game
 			if (_gameInfo.quit) {
 				logInfo("exit game")
 				break;
