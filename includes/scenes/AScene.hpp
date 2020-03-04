@@ -2,6 +2,8 @@
 
 #include <chrono>
 
+#include "Gui.hpp"
+
 class AScene {
 	public:
 		AScene();
@@ -10,7 +12,7 @@ class AScene {
 
 		virtual bool init() = 0;
 		virtual bool update(std::chrono::milliseconds last_loop_ms) = 0;
-		virtual bool draw() = 0;
+		virtual bool draw(Gui * gui) = 0;
 
 		AScene & operator=(AScene const & rhs);
 	protected:

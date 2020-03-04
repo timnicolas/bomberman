@@ -4,13 +4,13 @@
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
-: _gameInfo(gameInfo),
+: gameInfo(gameInfo),
   _win(nullptr),
   _event(new SDL_Event()),
   _context(0),
-  _textureManager(nullptr),
-  _cubeShader(nullptr),
-  _cam(nullptr),
+  textureManager(nullptr),
+  cubeShader(nullptr),
+  cam(nullptr),
   _skybox(nullptr) {}
 
 Gui::~Gui() {
@@ -21,17 +21,17 @@ Gui::~Gui() {
 	// SDL_SetRelativeMouseMode(SDL_FALSE);
 
 	// free vao / vbo
-	_cubeShader->use();
+	cubeShader->use();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-	glDeleteBuffers(1, &_cubeShVbo);
-	glDeleteVertexArrays(1, &_cubeShVao);
-	_cubeShader->unuse();
+	glDeleteBuffers(1, &cubeShVbo);
+	glDeleteVertexArrays(1, &cubeShVao);
+	cubeShader->unuse();
 
 	delete _event;
-	delete _textureManager;
-	delete _cubeShader;
-	delete _cam;
+	delete textureManager;
+	delete cubeShader;
+	delete cam;
 	delete _skybox;
 
 	ABaseUI::destroy();
@@ -43,7 +43,7 @@ Gui::~Gui() {
 }
 
 Gui::Gui(Gui const &src)
-: _gameInfo(src._gameInfo) {
+: gameInfo(src.gameInfo) {
 	*this = src;
 }
 
@@ -59,26 +59,26 @@ void Gui::updateInput() {
 	// quit
 	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
 		logDebug("quiting...");
-		_gameInfo.quit = true;
+		gameInfo.quit = true;
 	}
 	// mouse motion
-	_cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
+	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
 
 	// -- camera movement ------------------------------------------------------
 	// camera movement
 	if (Inputs::getKey(InputType::Enum::UP)) {
-		_cam->processKeyboard(CamMovement::Forward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Forward, _dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::RIGHT)) {
-		_cam->processKeyboard(CamMovement::Right, _dtTime, false);
+		cam->processKeyboard(CamMovement::Right, _dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::DOWN)) {
-		_cam->processKeyboard(CamMovement::Backward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Backward, _dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::LEFT)) {
-		_cam->processKeyboard(CamMovement::Left, _dtTime, false);
+		cam->processKeyboard(CamMovement::Left, _dtTime, false);
 	}
 }
 
@@ -102,6 +102,7 @@ bool	Gui::init() {
 		return false;
 	}
 
+	/* init UI interface */
 	try {
 		ABaseUI::init(s.j("font").s("file"), s.j("font").u("size"));
 	}
@@ -109,8 +110,6 @@ bool	Gui::init() {
 		logErr(e.what());
 		return false;
 	}
-	_button = new Button(_gameInfo.windowSize, glm::vec2(100, 10), glm::vec2(130, 60));
-	_button->setText("click me").setColor(glm::vec4(0.3, 0.3, 0.8, 1.0));
 
 	return true;
 }
@@ -129,8 +128,8 @@ bool	Gui::_initOpengl() {
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
 	// create window
-	_win = SDL_CreateWindow(_gameInfo.title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		_gameInfo.windowSize.x, _gameInfo.windowSize.y, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	_win = SDL_CreateWindow(gameInfo.title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+		gameInfo.windowSize.x, gameInfo.windowSize.y, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	if (_win == nullptr) {
 		logErr("while loading OpenGL: " << SDL_GetError());
 		return false;
@@ -164,21 +163,21 @@ bool	Gui::_initOpengl() {
 // create opengl shader stuffs here (buffers, camera, ...)
 bool	Gui::_initShaders() {
 	// -- create shader -`------------------------------------------------------
-	_cubeShader = new Shader("shaders/cube_vs.glsl",
+	cubeShader = new Shader("shaders/cube_vs.glsl",
 		"shaders/cube_fs.glsl",
 		"shaders/cube_gs.glsl");
-	_cubeShader->use();
+	cubeShader->use();
 
 	// -- textureManager -------------------------------------------------------
-	_textureManager = new TextureManager();
-	_textureManager->setUniform(*_cubeShader);
+	textureManager = new TextureManager();
+	textureManager->setUniform(*cubeShader);
 
 	// -- vao vbo --------------------------------------------------------------
 	// create and bind vao and vbo
-	glGenVertexArrays(1, &_cubeShVao);
-	glBindVertexArray(_cubeShVao);
-	glGenBuffers(1, &_cubeShVbo);
-	glBindBuffer(GL_ARRAY_BUFFER, _cubeShVbo);
+	glGenVertexArrays(1, &cubeShVao);
+	glBindVertexArray(cubeShVao);
+	glGenBuffers(1, &cubeShVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, cubeShVbo);
 
 	// fill buffer
 	glBufferData(GL_ARRAY_BUFFER, _cubeFaces.size() * sizeof(float),
@@ -198,49 +197,49 @@ bool	Gui::_initShaders() {
 	glBindVertexArray(0);
 
 	// -- camera ---------------------------------------------------------------
-	_cam = new Camera({0.0f, 25.0f, 0.0f});
-	_cam->lookAt(glm::vec3(_gameInfo.gameboard[0] / 2 + 0.5f, 1.0f,
-		_gameInfo.gameboard[1] * 0.7f));
+	cam = new Camera({0.0f, 25.0f, 0.0f});
+	cam->lookAt(glm::vec3(gameInfo.gameboard[0] / 2 + 0.5f, 1.0f,
+		gameInfo.gameboard[1] * 0.7f));
 
-	float angle = _cam->zoom;
-	float ratio = static_cast<float>(_gameInfo.windowSize.x) / _gameInfo.windowSize.y;
+	float angle = cam->zoom;
+	float ratio = static_cast<float>(gameInfo.windowSize.x) / gameInfo.windowSize.y;
 	float nearD = 0.1f;
 	float farD = 400;
 	_projection = glm::perspective(glm::radians(angle), ratio, nearD, farD);
 
 	// -- set default uniforms -------------------------------------------------
 	// projection
-	_cubeShader->setMat4("projection", _projection);
+	cubeShader->setMat4("projection", _projection);
 
 	// cube material
 	Material material;
-	_cubeShader->setVec3("material.specular", material.specular);
-	_cubeShader->setFloat("material.shininess", material.shininess);
+	cubeShader->setVec3("material.specular", material.specular);
+	cubeShader->setFloat("material.shininess", material.shininess);
 
 	// direction light
-	_cubeShader->setVec3("dirLight.direction", -0.2f, -0.8f, 0.6f);
-	_cubeShader->setVec3("dirLight.ambient", 0.4f, 0.4f, 0.4f);
-	_cubeShader->setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
-	_cubeShader->setVec3("dirLight.specular", 0.1f, 0.1f, 0.1f);
+	cubeShader->setVec3("dirLight.direction", -0.2f, -0.8f, 0.6f);
+	cubeShader->setVec3("dirLight.ambient", 0.4f, 0.4f, 0.4f);
+	cubeShader->setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
+	cubeShader->setVec3("dirLight.specular", 0.1f, 0.1f, 0.1f);
 
 	// point light
-	_cubeShader->setFloat("pointLight.constant", 1.0f);
-	_cubeShader->setFloat("pointLight.linear", 0.09f);
-	_cubeShader->setFloat("pointLight.quadratic", 0.032f);
+	cubeShader->setFloat("pointLight.constant", 1.0f);
+	cubeShader->setFloat("pointLight.linear", 0.09f);
+	cubeShader->setFloat("pointLight.quadratic", 0.032f);
 
-	_cubeShader->setVec3("pointLight.ambient", 0.4f, 0.4f, 0.4f);
-	_cubeShader->setVec3("pointLight.diffuse", 0.8f, 0.8f, 0.8f);
-	_cubeShader->setVec3("pointLight.specular", 0.1f, 0.1f, 0.1f);
+	cubeShader->setVec3("pointLight.ambient", 0.4f, 0.4f, 0.4f);
+	cubeShader->setVec3("pointLight.diffuse", 0.8f, 0.8f, 0.8f);
+	cubeShader->setVec3("pointLight.specular", 0.1f, 0.1f, 0.1f);
 	// disabled for now
-	_cubeShader->setBool("pointLight.enabled", false);
+	cubeShader->setBool("pointLight.enabled", false);
 
 	// disable texture transparency for now
-	_cubeShader->setBool("enableTransparency", true);
+	cubeShader->setBool("enableTransparency", true);
 
 	// disable fog for now
-	_cubeShader->setBool("fog.enabled", false);
+	cubeShader->setBool("fog.enabled", false);
 
-	_cubeShader->unuse();
+	cubeShader->unuse();
 
 	// -- skybox ---------------------------------------------------------------
 	_skybox = new Skybox;
@@ -253,133 +252,21 @@ bool	Gui::_initShaders() {
 
 
 // -- draw ---------------------------------------------------------------------
-bool Gui::draw() {
+void Gui::preDraw() {
 	// clear buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glViewport(0, 0, _gameInfo.windowSize.x, _gameInfo.windowSize.y);
+	glViewport(0, 0, gameInfo.windowSize.x, gameInfo.windowSize.y);
 	glClearColor(0.11373f, 0.17647f, 0.27059f, 1.0f);
+}
 
-	// use cubeShader, set uniform and activate textures
-	glm::mat4	view = _cam->getViewMatrix();
-	_cubeShader->use();
-	_cubeShader->setMat4("view", view);
-	_cubeShader->setVec3("viewPos", _cam->pos);
-	glBindVertexArray(_cubeShVao);
-	_textureManager->activateTextures();
-	_cubeShader->setInt("blockId", 0);
-
-	// draw scene
-	_drawBoard();
-
-	// release cubeShader and textures
-	_textureManager->disableTextures();
-	_cubeShader->unuse();
-
-	// draw skybox
-	_drawSkybox(view);
-
-	_button->draw();
-
+void Gui::postDraw() {
 	// swap buffer and check errors
 	SDL_GL_SwapWindow(_win);
 	checkError();
-	return true;
-}
-
-// -- _drawBoard ---------------------------------------------------------------
-void	Gui::_drawBoard() {
-	glm::mat4 model(1.0);
-	glm::vec3 pos;
-
-	// board floor
-	_cubeShader->setVec3("blockSize",
-		{_gameInfo.gameboard.x, 1.0f, _gameInfo.gameboard.y});
-	_cubeShader->setInt("blockId", Block::FLOOR);  // set block type
-	pos = glm::vec3(0.0f, -1.0f, _gameInfo.gameboard.y - 1.0f);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// - draw wall -------------------------------------------------------------
-	_cubeShader->setInt("blockId", Block::DURABLE_WALL);  // set block type
-	// board side 0
-	_cubeShader->setVec3("blockSize",
-		{_gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
-	pos = glm::vec3(0.0f, -1.0f, _gameInfo.gameboard.y);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// board side 1
-	_cubeShader->setVec3("blockSize",
-		{1.0f, 2.0f, _gameInfo.gameboard.y + 1.0f});
-	pos = glm::vec3(_gameInfo.gameboard.x, -1.0f, _gameInfo.gameboard.y - 1.0f);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// board side 2
-	_cubeShader->setVec3("blockSize",
-		{_gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
-	pos = glm::vec3(-1.0f, -1.0f, -1.0f);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// board side 3
-	_cubeShader->setVec3("blockSize",
-		{1.0f, 2.0f, _gameInfo.gameboard.y + 1.0f});
-	pos = glm::vec3(-1.0f, -1.0f, _gameInfo.gameboard.y);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-
-	// -- draw player ----------------------------------------------------------
-	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	if (_gameInfo.player != VOID_POS) {
-		// set block type
-		_cubeShader->setInt("blockId", Block::PLAYER);
-		// set block pos
-		pos = glm::vec3(_gameInfo.player[0], 0.0f, _gameInfo.player[1]);
-		model = glm::translate(glm::mat4(1.0), pos);
-		_cubeShader->setMat4("model", model);
-		glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-	}
-
-	// -- draw bomb ------------------------------------------------------------
-	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_cubeShader->setInt("blockId", Block::BOMB);
-	// set block pos
-	pos = glm::vec3(10, 0.0f, 5);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// -- draw durable wall ----------------------------------------------------
-	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_cubeShader->setInt("blockId", Block::DURABLE_WALL);
-	// set block pos
-	pos = glm::vec3(7, 0.0f, 7);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// -- draw durable wall ----------------------------------------------------
-	_cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_cubeShader->setInt("blockId", Block::DESTRUCTIBLE_WALL);
-	// set block pos
-	pos = glm::vec3(7, 0.0f, 12);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 }
 
 // -- _drawSkybox --------------------------------------------------------------
-void	Gui::_drawSkybox(glm::mat4 &view) {
+void	Gui::drawSkybox(glm::mat4 &view) {
 	CAMERA_MAT4	skyView = view;
 	skyView[3][0] = 0;  // remove translation for the skybox
 	skyView[3][1] = 0;
