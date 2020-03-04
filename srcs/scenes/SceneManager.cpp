@@ -46,6 +46,9 @@ bool SceneManager::init() {
 		logErr("failed to init scene");
 		return false;
 	}
+	reinterpret_cast<SceneMenu *>(_scene)
+		->addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button")
+		->setColor(glm::vec4(0.2, 0.2, 0.8, 1.0));
 	return true;
 }
 
