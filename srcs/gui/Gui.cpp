@@ -34,6 +34,8 @@ Gui::~Gui() {
 	delete _cam;
 	delete _skybox;
 
+	ABaseUI::destroy();
+
 	// properly quit sdl
 	SDL_GL_DeleteContext(_context);
 	SDL_DestroyWindow(_win);
@@ -97,6 +99,14 @@ bool	Gui::init() {
 
 	// init shaders attributes
 	if (!_initShaders()) {
+		return false;
+	}
+
+	try {
+		ABaseUI::init(s.j("font").s("file"), s.j("font").u("size"));
+	}
+	catch (ABaseUI::UIException & e) {
+		logErr(e.what());
 		return false;
 	}
 
