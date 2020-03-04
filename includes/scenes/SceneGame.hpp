@@ -24,12 +24,13 @@ namespace GameState {
 
 class SceneGame : public AScene {
 private:
+	SceneGame();
 	// Members
 	static std::map<std::string, AEntity *> _entitiesCall;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);
-	void	_drawBoard(Gui * gui);
+	void	_drawBoard();
 
 public:
 	// Members
@@ -44,7 +45,7 @@ public:
 	std::chrono::milliseconds	time;
 
 	// Constructors
-	SceneGame();
+	explicit SceneGame(Gui * gui);
 	virtual ~SceneGame();
 	SceneGame(SceneGame const &src);
 
@@ -58,14 +59,7 @@ public:
 	// AScene methods
 	virtual bool	init();
 	virtual bool	update(std::chrono::milliseconds last_loop_ms);
-	virtual bool	draw(Gui * gui);
-
-	// Exceptions
-	class GameException : public std::runtime_error {
-	public:
-		GameException();
-		explicit GameException(const char* what_arg);
-	};
+	virtual bool	draw();
 };
 
 #endif  // GAME_HPP_
