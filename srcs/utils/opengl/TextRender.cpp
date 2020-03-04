@@ -170,7 +170,21 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
     }
 	return width;
 }
-
+uint32_t	TextRender::strHeight(std::string const &fontName, std::string text, GLfloat scale) {
+	uint32_t	height = 0;
+	if (font.find(fontName) == font.end()) {
+		logErr("invalid font name " << fontName);
+		return 0;
+	}
+	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
+        Character ch = font[fontName][*c];
+		uint32_t tmpH = ch.size.y * scale;
+        if (tmpH > height) {
+			height = tmpH;
+		}
+    }
+	return height;
+}
 
 Shader			&TextRender::getShader() { return _shader; }
 Shader const	&TextRender::getShader() const { return _shader; }
