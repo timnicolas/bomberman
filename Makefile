@@ -69,7 +69,7 @@ ARGS =
 # compiler (g++ or clang++)
 CC = g++
 # flags for compilation
-CFLAGS = -Ofast -std=c++11 -Wall -Wextra -Wno-deprecated
+CFLAGS = -Ofast -std=c++17 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
 DEBUG_FLAGS = -g3 -DDEBUG=true
 # classic flags
@@ -118,6 +118,9 @@ SRC =	main.cpp \
 		utils/opengl/Material.cpp \
 		utils/opengl/TextRender.cpp \
 		utils/opengl/Skybox.cpp \
+		utils/opengl/assimpUtils.cpp \
+		utils/opengl/Mesh.cpp \
+		utils/opengl/Model.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -144,6 +147,9 @@ HEAD =	bomberman.hpp \
 		utils/opengl/Material.hpp \
 		utils/opengl/TextRender.hpp \
 		utils/opengl/Skybox.hpp \
+		utils/opengl/assimpUtils.hpp \
+		utils/opengl/Mesh.hpp \
+		utils/opengl/Model.hpp \
 
 
 ################################################################################

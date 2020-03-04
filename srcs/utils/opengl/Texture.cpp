@@ -135,7 +135,6 @@ uint32_t	createTexture(uint8_t *data, std::string const name, bool inSpaceSRGB,
 }
 
 // -- Exceptions errors --------------------------------------------------------
-
 TextureException::TextureException()
 : std::runtime_error("TextureException") {}
 
