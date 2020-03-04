@@ -106,7 +106,9 @@ SRC =	main.cpp \
 		Game.cpp \
 \
 		Inputs.cpp \
-		AudioManager.cpp \
+\
+		audio/AudioManager.cpp \
+		audio/Sound.cpp \
 \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
@@ -135,7 +137,9 @@ HEAD =	bomberman.hpp \
 		Game.hpp \
 \
 		Inputs.hpp \
-		AudioManager.hpp \
+\
+		audio/AudioManager.hpp \
+		audio/Sound.hpp \
 \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
