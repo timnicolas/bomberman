@@ -11,6 +11,7 @@ public:
 	~AudioManager();
 
 	static AudioManager						&get();
+	static void								updateSettings();
 	static void								loadMusic(std::string filename);
 	static void								loadSound(std::string filename);
 	static void								playMusic();
@@ -24,6 +25,7 @@ private:
 	AudioManager(const AudioManager &src);
 	AudioManager							&operator=(const AudioManager &src);
 
+	void									_updateSettings();
 	void									_loadMusic(std::string filename);
 	void									_loadSound(std::string filename);
 	void									_playMusic();
