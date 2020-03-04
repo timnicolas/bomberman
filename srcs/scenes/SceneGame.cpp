@@ -3,32 +3,36 @@
 #include <time.h>
 // #include <bits/stdc++.h>
 
-#include "Game.hpp"
+#include "SceneGame.hpp"
 #include "bomberman.hpp"
 
 // -- Static members initialisation --------------------------------------------
 
-std::map<std::string, AEntity *> Game::_entitiesCall = {
+std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
 	{"player", new Player()},
 	{"bomb", new Bomb()},
 };
 
 // -- Constructors -------------------------------------------------------------
 
-Game::Game() {
+SceneGame::SceneGame()
+: AScene()
+{
 	// TODO(ebaudet): init members
 }
 
-Game::~Game() {
+SceneGame::~SceneGame() {
 }
 
-Game::Game(Game const &src) {
+SceneGame::SceneGame(SceneGame const &src)
+: AScene()
+{
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
-Game &Game::operator=(Game const &rhs) {
+SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	if ( this != &rhs ) {
 		board = rhs.board;
 		player = rhs.player;
@@ -42,7 +46,7 @@ Game &Game::operator=(Game const &rhs) {
 	return *this;
 }
 
-std::ostream &	operator<<(std::ostream & os, const Game& my_class) {
+std::ostream &	operator<<(std::ostream & os, const SceneGame& my_class) {
 	os << my_class.print();
 	return (os);
 }
@@ -52,9 +56,9 @@ std::ostream &	operator<<(std::ostream & os, const Game& my_class) {
 /**
  * print params.
  */
-std::string		Game::print() const {
+std::string		SceneGame::print() const {
 	std::string		str;
-	str = "Game info: [" + std::to_string(size.x) + ", "
+	str = "SceneGame info: [" + std::to_string(size.x) + ", "
 	+ std::to_string(size.y) + "]";
 
 	return str;
@@ -63,93 +67,58 @@ std::string		Game::print() const {
 /**
  * init game method.
  */
-bool			Game::init() {
-	_loadLevel(1);
-	return true;
-}
-
-/**
- * init game method.
- */
-bool			Game::run() {
-	float						loopTime = 1000 / s.j("screen").u("fps");
-	std::chrono::milliseconds	time_start;
-	std::chrono::milliseconds	last_loop_ms = getMs();
-
-	while (true) {
-		time_start = getMs();
-
-		// TODO(ebaudet): input handler here
-
-		_update(last_loop_ms);
-		_draw();
-
-		// fps
-		std::chrono::milliseconds time_loop = getMs() - time_start;
-		if (time_loop.count() > loopTime) {
-			#if DEBUG_FPS_LOW == true
-				if (!firstLoop)
-					logDebug("update loop slow -> " << time_loop.count() << "ms / " << loopTime << "ms (" << FPS << "fps)");
-			#endif
-		}
-		else {
-			usleep((loopTime - time_loop.count()) * 1000);
-		}
-		#if DEBUG_FPS_LOW == true
-			firstLoop = false;
-		#endif
-		last_loop_ms = getMs();
-	}
+bool			SceneGame::init() {
+	// _loadLevel(1);
 	return true;
 }
 
 // -- Private Methods ----------------------------------------------------------
 
-bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
-	for (auto &&board_it1 : board) {
-		for (auto &&board_it1 : board_it1) {
-			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->update(getMs() - last_loop_ms))
-					return false;
-			}
-		}
-	}
-	for (auto &&enemy : enemies) {
-		if (!enemy->update(getMs() - last_loop_ms))
-			return false;
-	}
-	for (auto &&bomb : bombs) {
-		if (!bomb->update(getMs() - last_loop_ms))
-			return false;
-	}
-	player->update(getMs() - last_loop_ms);
+bool	SceneGame::update(std::chrono::milliseconds last_loop_ms) {
+	// for (auto &&board_it1 : board) {
+	// 	for (auto &&board_it1 : board_it1) {
+	// 		for (AEntity *board_it2 : board_it1) {
+	// 			if (!board_it2->update(getMs() - last_loop_ms))
+	// 				return false;
+	// 		}
+	// 	}
+	// }
+	// for (auto &&enemy : enemies) {
+	// 	if (!enemy->update(getMs() - last_loop_ms))
+	// 		return false;
+	// }
+	// for (auto &&bomb : bombs) {
+	// 	if (!bomb->update(getMs() - last_loop_ms))
+	// 		return false;
+	// }
+	// player->update(getMs() - last_loop_ms);
 
 	return true;
 }
 
-bool	Game::_draw() {
-	for (auto &&board_it1 : board) {
-		for (auto &&board_it1 : board_it1) {
-			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->draw())
-					return false;
-			}
-		}
-	}
-	for (auto &&enemy : enemies) {
-		if (!enemy->draw())
-			return false;
-	}
-	for (auto &&bomb : bombs) {
-		if (!bomb->draw())
-			return false;
-	}
-	player->draw();
+bool	SceneGame::draw() {
+	// for (auto &&board_it1 : board) {
+	// 	for (auto &&board_it1 : board_it1) {
+	// 		for (AEntity *board_it2 : board_it1) {
+	// 			if (!board_it2->draw())
+	// 				return false;
+	// 		}
+	// 	}
+	// }
+	// for (auto &&enemy : enemies) {
+	// 	if (!enemy->draw())
+	// 		return false;
+	// }
+	// for (auto &&bomb : bombs) {
+	// 	if (!bomb->draw())
+	// 		return false;
+	// }
+	// player->draw();
 
 	return true;
 }
 
-bool	Game::_loadLevel(uint8_t level) {
+bool	SceneGame::_loadLevel(uint8_t level) {
 	SettingsJson	lvl;
 	std::string		filename = "bomberman-assets/maps/level"+std::to_string(level)+".json";
 
@@ -218,8 +187,8 @@ bool	Game::_loadLevel(uint8_t level) {
 
 // -- Exceptions errors --------------------------------------------------------
 
-Game::GameException::GameException()
-: std::runtime_error("Game Exception") {}
+SceneGame::GameException::GameException()
+: std::runtime_error("SceneGame Exception") {}
 
-Game::GameException::GameException(const char* what_arg)
+SceneGame::GameException::GameException(const char* what_arg)
 : std::runtime_error(std::string(std::string("GameError: ") + what_arg).c_str()) {}

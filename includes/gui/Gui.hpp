@@ -71,6 +71,7 @@ class Gui {
 		Camera			*_cam;
 		TextRender		*_textRender;
 		Skybox			*_skybox;
+		Button			*_button;
 
 		uint32_t		_cubeShVao;
 		uint32_t		_cubeShVbo;

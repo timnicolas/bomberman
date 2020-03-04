@@ -109,6 +109,8 @@ bool	Gui::init() {
 		logErr(e.what());
 		return false;
 	}
+	_button = new Button(_gameInfo.windowSize, glm::vec2(100, 10), glm::vec2(130, 60));
+	_button->setText("click me").setColor(glm::vec4(0.3, 0.3, 0.8, 1.0));
 
 	return true;
 }
@@ -275,6 +277,8 @@ bool Gui::draw() {
 
 	// draw skybox
 	_drawSkybox(view);
+
+	_button->draw();
 
 	// swap buffer and check errors
 	SDL_GL_SwapWindow(_win);
