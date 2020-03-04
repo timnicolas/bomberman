@@ -48,7 +48,10 @@ bool SceneManager::init() {
 	}
 	reinterpret_cast<SceneMenu *>(_scene)
 		->addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button")
-		->setColor(glm::vec4(0.2, 0.2, 0.8, 1.0));
+		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
+	reinterpret_cast<SceneMenu *>(_scene)
+		->addButton(glm::vec2(500, 500), glm::vec2(150, 50), "button 2")
+		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
 	return true;
 }
 

@@ -74,9 +74,12 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _color(1.0, 1.0, 1.0, 1.0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
   _borderSize(5.0),
+  _mouseHoverColor(0.0, 0.0, 0.0, 0.01),
   _text("default text"),
   _textColor(0.0, 0.0, 0.0, 1.0),
-  _textScale(1.0)
+  _textScale(1.0),
+  _mouseHover(false),
+  _mouseClick(false)
 {
 	setWinSize(winSize);
 }
@@ -94,6 +97,23 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 		_size = rhs._size;
 	}
 	return *this;
+}
+
+/*
+	this is the update function of buttons objects
+*/
+void ABaseUI::update(glm::vec2 mousePos, MouseState::ENUM mouseState) {
+	(void)mouseState;
+	mousePos.y = _winSize.y - mousePos.y;
+	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
+	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
+	{
+		_mouseHover = true;
+	}
+	else {
+		_mouseHover = false;
+	}
+	_update(mousePos, mouseState);
 }
 
 /*
@@ -152,14 +172,20 @@ void ABaseUI::drawTextCenter(glm::vec2 pos, float scale, std::string const & tex
 
 /* setter */
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
+
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
 ABaseUI &	ABaseUI::setBorderSize(float size) { _borderSize = size; return *this; }
+
+ABaseUI &	ABaseUI::setMouseHoverColor(glm::vec4 color) { _mouseHoverColor = color; return *this; }
 
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
 ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this; }
 
 /* getter */
+bool				ABaseUI::getMouseHover() const { return _mouseHover; }
+bool				ABaseUI::getMouseClick() const { return _mouseClick; }
+
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
 glm::vec2 &			ABaseUI::getSize() { return _size; }
