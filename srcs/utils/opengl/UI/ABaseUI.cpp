@@ -142,7 +142,12 @@ void ABaseUI::drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
 		text -> the text to print
 */
 void ABaseUI::drawTextCenter(glm::vec2 pos, float scale, std::string const & text, glm::vec4 color) {
-	_textRender->write("font", text, pos.x, pos.y, scale, color);
+	glm::vec2 tmpPos = pos;
+	uint32_t width = _textRender->strWidth("font", text, scale);
+	uint32_t height = _textRender->strHeight("font", text, scale);
+	tmpPos.x -= width / 2;
+	tmpPos.y -= height / 2;
+	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
 }
 
 /* setter */
