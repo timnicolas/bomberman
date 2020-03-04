@@ -29,6 +29,7 @@ private:
 
 	// Methods
 	bool	_loadLevel(uint8_t level);
+	void	_drawBoard(Gui * gui);
 
 public:
 	// Members
@@ -57,7 +58,7 @@ public:
 	// AScene methods
 	virtual bool	init();
 	virtual bool	update(std::chrono::milliseconds last_loop_ms);
-	virtual bool	draw();
+	virtual bool	draw(Gui * gui);
 
 	// Exceptions
 	class GameException : public std::runtime_error {

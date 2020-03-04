@@ -66,16 +66,19 @@ bool SceneManager::run() {
 			Inputs::update();
 			_gui->updateInput();
 
-			_scene->update(last_loop_ms);
-			_scene->draw();
+			// draw the gui
+			_gui->preDraw();
+			if (_scene->update(last_loop_ms) == false) {
+				return false;
+			}
+			if (_scene->draw(_gui) == false) {
+				return false;
+			}
+			_gui->postDraw();
 
 			if (_gameInfo.quit) {
 				logInfo("exit game")
 				break;
-			}
-
-			if (!_gui->draw()) {
-				return false;
 			}
 		}
 
