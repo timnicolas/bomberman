@@ -6,6 +6,7 @@
 #include "bomberman.hpp"
 #include "Gui.hpp"
 #include "Inputs.hpp"
+#include "SceneManager.hpp"
 
 int start(int ac, char const **av) {
 	(void)ac;
@@ -17,29 +18,29 @@ int start(int ac, char const **av) {
 	return EXIT_SUCCESS;
 }
 
-bool	exampleGui() {
-	GameInfo	gameInfo;
-	Gui			gui(gameInfo);
+// bool	exampleGui() {
+// 	GameInfo	gameInfo;
+// 	Gui			gui(gameInfo);
 
-	if (!gui.init()) {
-		return false;
-	}
+// 	if (!gui.init()) {
+// 		return false;
+// 	}
 
-	while (true) {
-		Inputs::update();
-		gui.updateInput();
-		if (gameInfo.quit) {
-			logInfo("exit game")
-			break;
-		}
+// 	while (true) {
+// 		Inputs::update();
+// 		gui.updateInput();
+// 		if (gameInfo.quit) {
+// 			logInfo("exit game")
+// 			break;
+// 		}
 
-		if (!gui.draw()) {
-			return EXIT_FAILURE;
-		}
-	}
+// 		if (!gui.draw()) {
+// 			return EXIT_FAILURE;
+// 		}
+// 	}
 
-	return true;
-}
+// 	return true;
+// }
 
 int main(int ac, char const **av) {
 	int ret = start(ac, av);
@@ -55,8 +56,18 @@ int main(int ac, char const **av) {
 
 	saveUserData(s.s("userDataFilename"));
 
-	if (!exampleGui()) {
+	// if (!exampleGui()) {
+	// 	return EXIT_FAILURE;
+	// }
+
+	SceneManager sceneManager;
+
+	if (sceneManager.init() == false) {
 		return EXIT_FAILURE;
 	}
+	if (sceneManager.run() == false) {
+		return EXIT_FAILURE;
+	}
+
 	return ret;
 }
