@@ -5,8 +5,6 @@
 
 #include "Game.hpp"
 #include "bomberman.hpp"
-#include "Player.hpp"
-#include "Bomb.hpp"
 
 // -- Static members initialisation --------------------------------------------
 
@@ -33,7 +31,9 @@ Game::Game(Game const &src) {
 Game &Game::operator=(Game const &rhs) {
 	if ( this != &rhs ) {
 		board = rhs.board;
-		characters = rhs.characters;
+		player = rhs.player;
+		enemies = rhs.enemies;
+		bombs = rhs.bombs;
 		size = rhs.size;
 		level = rhs.level;
 		state = rhs.state;
@@ -64,6 +64,7 @@ std::string		Game::print() const {
  * init game method.
  */
 bool			Game::init() {
+	_loadLevel(1);
 	return true;
 }
 
@@ -113,10 +114,15 @@ bool	Game::_update(std::chrono::milliseconds last_loop_ms) {
 			}
 		}
 	}
-	for (auto &&charater : characters) {
-		if (!charater->update(getMs() - last_loop_ms))
+	for (auto &&enemy : enemies) {
+		if (!enemy->update(getMs() - last_loop_ms))
 			return false;
 	}
+	for (auto &&bomb : bombs) {
+		if (!bomb->update(getMs() - last_loop_ms))
+			return false;
+	}
+	player->update(getMs() - last_loop_ms);
 
 	return true;
 }
@@ -130,10 +136,15 @@ bool	Game::_draw() {
 			}
 		}
 	}
-	for (auto &&charater : characters) {
-		if (!charater->draw())
+	for (auto &&enemy : enemies) {
+		if (!enemy->draw())
 			return false;
 	}
+	for (auto &&bomb : bombs) {
+		if (!bomb->draw())
+			return false;
+	}
+	player->draw();
 
 	return true;
 }
@@ -142,39 +153,33 @@ bool	Game::_loadLevel(uint8_t level) {
 	SettingsJson	lvl;
 	std::string		filename = "bomberman-assets/maps/level"+std::to_string(level)+".json";
 
+	// File json definition:
+
 	lvl.name("level"+std::to_string(level)).description("Level map");
 	lvl.add<std::string>("level"+std::to_string(level)+"Filename", filename);
 	lvl.add<std::string>("name");
-	lvl.add<uint64_t>("height", 0);
-	lvl.add<uint64_t>("width", 0);
-	lvl.j("objects").add<char>("wall", 'w');
-	lvl.j("objects").add<char>("empty", ' ');
-	lvl.j("objects").add<char>("player", 'p');
-	lvl.j("objects").add<char>("tree", 't');
-	lvl.j("objects").add<char>("box", 'b');
-	lvl.j("objects").add<char>("end", 'e');
+	lvl.add<uint64_t>("height", 0).setMin(0);
+	lvl.add<uint64_t>("width", 0).setMin(0);
 
-	// lvl.j("map").add<list>(null, nullptr);
-	lvl.j("map").add<std::string>("0", "");
-	lvl.j("map").add<std::string>("1", "");
-	lvl.j("map").add<std::string>("2", "");
-	lvl.j("map").add<std::string>("3", "");
-	lvl.j("map").add<std::string>("4", "");
-	lvl.j("map").add<std::string>("5", "");
-	lvl.j("map").add<std::string>("6", "");
-	lvl.j("map").add<std::string>("7", "");
-	lvl.j("map").add<std::string>("8", "");
+	lvl.add<SettingsJson>("objects");
+		lvl.j("objects").add<std::string>("wall", "w");
+		lvl.j("objects").add<std::string>("empty", " ");
+		lvl.j("objects").add<std::string>("player", "p");
+		lvl.j("objects").add<std::string>("tree", "t");
+		lvl.j("objects").add<std::string>("box", "b");
+		lvl.j("objects").add<std::string>("end", "e");
+		lvl.j("objects").add<std::string>("bomb", "x");
 
-	// lvl.j("bonus").get<list>(nullptr).j("pos").add<uint64_t>("x", 0);
-	// lvl.j("bonus").get<list>(nullptr).j("pos").add<uint64_t>("y", 0);
-	// lvl.j("bonus").get<list>(nullptr).add<std::string>("type");
-	lvl.j("bonus").j("0").j("pos").add<uint64_t>("x", 0);
-	lvl.j("bonus").j("0").j("pos").add<uint64_t>("y", 0);
-	lvl.j("bonus").j("0").add<std::string>("type");
+	SettingsJson * mapPattern = new SettingsJson();
+	mapPattern->add<std::string>("line", "");
+	lvl.addList<SettingsJson>("map", mapPattern);
 
-	lvl.j("bonus").j("1").j("pos").add<uint64_t>("x", 0);
-	lvl.j("bonus").j("1").j("pos").add<uint64_t>("y", 0);
-	lvl.j("bonus").j("1").add<std::string>("type");
+	SettingsJson * bonusPattern = new SettingsJson();
+	bonusPattern->add<SettingsJson>("pos");
+	bonusPattern->j("pos").add<uint64_t>("x", 0);
+	bonusPattern->j("pos").add<uint64_t>("y", 0);
+	bonusPattern->add<std::string>("type", "");
+	lvl.addList<SettingsJson>("bonus", bonusPattern);
 
 	try {
 		if (lvl.loadFile(filename) == false) {
@@ -186,19 +191,25 @@ bool	Game::_loadLevel(uint8_t level) {
 		return false;
 	}
 
-	size = {lvl.u("width"), lvl.u("width")};
+	// Getting json info
+
+	size = {lvl.u("width"), lvl.u("height")};
 	board = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
 			std::vector< std::vector<AEntity*> >(size.y,
 			std::vector< AEntity* >()));
 
+	if (lvl.lj("map").list.size() != size.y)
+		throw GameException("Map height error");
 	for (uint32_t j = 0; j < size.y; j++) {
-		std::string line = lvl.j("map").s(std::to_string(j));
+		std::string line = lvl.lj("map").list[j]->s("line");
 		if (line.length() != size.x)
-			throw GameException(("Map length error on line "+std::to_string(j)).c_str());
+			throw GameException(("Map width error on line "+std::to_string(j)).c_str());
 		for (uint32_t i = 0; i < size.x; i++) {
-			line[i];
-			if (_entitiesCall.find("player") != _entitiesCall.end())
-				board[i][j].push_back(_entitiesCall["player"]);
+			for (auto &&entitYCall : _entitiesCall) {
+				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
+					board[i][j].push_back(_entitiesCall[entitYCall.first]);
+				}
+			}
 		}
 	}
 

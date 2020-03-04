@@ -10,8 +10,10 @@
 
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
+#include "Player.hpp"
+#include "Bomb.hpp"
 
-namespace State {
+namespace GameState {
 	enum Enum {
 		PLAY,
 		PAUSE,
@@ -31,14 +33,14 @@ private:
 
 public:
 	// Members
-	// TODO(ebaudet): change board type to std::map<glm::ivec2 pos, std::vector<AEntity*>>
-	// AEntity***board;
-	std::vector< std::vector< std::vector< AEntity* > > > board;
-	// std::map<glm::ivec2, std::vector<AEntity*>> board;
-	std::vector<ACharacter *>	characters;
+	std::vector< std::vector< std::vector<AEntity *> > > board;
+	Player						*player;
+	std::vector<ACharacter *>	enemies;
+	std::vector<Bomb *>			bombs;
+
 	glm::uvec2					size;
 	uint8_t						level;
-	State::Enum					state;
+	GameState::Enum				state;
 	std::chrono::milliseconds	time;
 
 	// Constructors
