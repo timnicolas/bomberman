@@ -80,7 +80,7 @@ void Slider::draw() {
 	std::string valStr = std::to_string(_val);
 	if (_val - static_cast<int>(_val) < 0.1 || _val - static_cast<int>(_val) > 0.9)
 		valStr = std::to_string(static_cast<int>(_val));
-	_drawText(tmpPos, tmpSize, _textScale, valStr, _textColor, _textAlign);
+	_drawText(tmpPos, tmpSize, _textScale, valStr, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = _pos;
