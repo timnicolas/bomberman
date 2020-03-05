@@ -37,9 +37,11 @@ void Button::draw() {
 	glm::vec2 tmpSize;
 
 	// draw text
-	tmpPos.x = _pos.x + _size.x / 2;
-	tmpPos.y = _pos.y + _size.y / 2;
-	_drawTextCenter(tmpPos, _textScale, _text, _textColor);
+	tmpPos = _pos;
+	tmpPos.x += _borderSize;
+	tmpSize = _size;
+	tmpSize.x -= _borderSize * 2;
+	_drawText(tmpPos, tmpSize, _textScale, _text, _textColor, _textAlign);
 
 	// get center size and position
 	tmpPos = _pos;
@@ -49,16 +51,22 @@ void Button::draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 
-	// draw color filter if mouse over or left click
-	if (_leftClick) {
-		_drawRect(tmpPos, tmpSize, _mouseClickColor);
-	}
-	else if (_mouseHover) {
-		_drawRect(tmpPos, tmpSize, _mouseHoverColor);
-	}
 
     // draw center
-	_drawRect(tmpPos, tmpSize, _color);
+	// set color filter if mouse over or left click
+	float factor = 1;
+	glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+	if (_leftClick) {
+		secColor = _mouseClickColor;
+		factor = 1 - secColor.a;
+		secColor.a = 1;
+	}
+	else if (_mouseHover) {
+		secColor = _mouseHoverColor;
+		factor = 1 - secColor.a;
+		secColor.a = 1;
+	}
+	_drawRect(tmpPos, tmpSize, _color, secColor, factor);
 
 	// draw border
 	_drawRect(_pos, _size, _borderColor);

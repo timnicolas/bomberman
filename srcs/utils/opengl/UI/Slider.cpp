@@ -70,12 +70,14 @@ void Slider::draw() {
 	glm::vec2 tmpSize;
 
 	// draw text
-	tmpPos.x = _pos.x + _size.x / 2;
-	tmpPos.y = _pos.y + _size.y / 2;
+	tmpPos = _pos;
+	tmpPos.x += _borderSize;
+	tmpSize = _size;
+	tmpSize.x -= _borderSize * 2;
 	std::string valStr = std::to_string(_val);
 	if (_val - static_cast<int>(_val) < 0.1 || _val - static_cast<int>(_val) > 0.9)
 		valStr = std::to_string(static_cast<int>(_val));
-	_drawTextCenter(tmpPos, _textScale, valStr, _textColor);
+	_drawText(tmpPos, tmpSize, _textScale, valStr, _textColor, _textAlign);
 
 	// get center size and position
 	tmpPos = _pos;
