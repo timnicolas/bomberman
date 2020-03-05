@@ -5,5 +5,13 @@
 	"font": {
 		"file": "bomberman-assets/fonts/Roboto-Regular.ttf",
 		"size": 25
+	},
+	"colors": {
+		"buttons": {
+			"r": 0.2,
+			"g": 0.1,
+			"b": 0.9,
+			"a": 1.0
+		}
 	}
 }
