@@ -33,6 +33,18 @@ void										Sound::play(float volume) {
 	_currents_channels.insert(chan);
 }
 
+void										Sound::pause() {
+	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
+		Mix_Pause(*it);
+	}
+}
+
+void										Sound::resume() {
+	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
+		Mix_Resume(*it);
+	}
+}
+
 void										Sound::stop() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_HaltChannel(*it);
