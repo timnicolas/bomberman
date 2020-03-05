@@ -57,7 +57,7 @@ void										Sound::updateVolume(float volume, float previous_settings) {
 
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		previous_volume = Mix_Volume(*it, -1);
-		Mix_Volume(*it, (previous_volume / MIX_MAX_VOLUME / previous_settings) * volume);
+		Mix_Volume(*it, (previous_volume / previous_settings) * volume);
 	}
 }
 
