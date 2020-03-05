@@ -84,6 +84,7 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _text("default text"),
   _textColor(0.0, 0.0, 0.0, 1.0),
   _textScale(1.0),
+  _textPadding(5),
   _textAlign(TextAlign::CENTER),
   _mouseHover(false),
   _rightClick(false),
@@ -113,7 +114,6 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 	this is the update function of buttons objects
 */
 void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	// TODO(tnicolas42) add the mouse click in update
 	_leftClick = false;
 	_leftClick = false;
 	mousePos.y = _winSize.y - mousePos.y;
@@ -186,7 +186,7 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::ve
 		text -> the text to print
 */
 void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
-glm::vec4 color, TextAlign::Enum align) {
+glm::vec4 color, TextAlign::Enum align, float padding) {
 	(void)align;
 	uint32_t width = _textRender->strWidth("font", text, scale);
 	uint32_t height = _textRender->strHeight("font", text, scale);
@@ -194,11 +194,11 @@ glm::vec4 color, TextAlign::Enum align) {
 	// get position of the text
 	glm::vec2 tmpPos;
 	if (align == TextAlign::LEFT)
-		tmpPos.x = pos.x;
+		tmpPos.x = pos.x + padding;
 	else if (align == TextAlign::CENTER)
 		tmpPos.x = (pos.x + size.x / 2) - width / 2;
 	else if (align == TextAlign::RIGHT)
-		tmpPos.x = pos.x + size.x - width;
+		tmpPos.x = pos.x + size.x - width - padding;
 	tmpPos.y = (pos.y + size.y / 2) - height / 2;
 	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
 }
@@ -231,6 +231,7 @@ ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = colo
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
 ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this; }
+ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
 /* getter */
