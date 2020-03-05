@@ -1,8 +1,8 @@
-#include "Slider.hpp"
+#include "SliderUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
 
-Slider::Slider(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
+SliderUI::SliderUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
 : ABaseUI(winSize, pos, size),
   _min(0),
   _max(1),
@@ -12,29 +12,29 @@ Slider::Slider(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
 {
 }
 
-Slider::Slider(Slider const & src)
+SliderUI::SliderUI(SliderUI const & src)
 : ABaseUI(src)
 {
 	*this = src;
 }
 
-Slider::~Slider() {
+SliderUI::~SliderUI() {
 }
 
-Slider & Slider::operator=(Slider const & rhs) {
+SliderUI & SliderUI::operator=(SliderUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
 	return *this;
 }
 
-void Slider::setValues(float min, float max, float val, float step) {
+void SliderUI::setValues(float min, float max, float val, float step) {
 	_min = min;
 	_max = max;
 	_val = val;
 	_step = step;
 }
 
-void Slider::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+void SliderUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
 	(void)rightClick;
 	(void)leftClick;
@@ -68,7 +68,7 @@ void Slider::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	this is the draw function for buttons
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
-void Slider::draw() {
+void SliderUI::draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 
@@ -117,7 +117,7 @@ void Slider::draw() {
 }
 
 /* listener */
-Slider &	Slider::addSliderListener(float * listener) {
+SliderUI &	SliderUI::addSliderListener(float * listener) {
 	_sliderListener = listener;
 	*_sliderListener = _val;
 	return *this;

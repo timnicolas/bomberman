@@ -3,23 +3,23 @@
 #include "includesOpengl.hpp"
 #include "ABaseUI.hpp"
 
-class Slider : public ABaseUI {
+class SliderUI : public ABaseUI {
 	public:
-		Slider(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
-		Slider(Slider const & src);
-		virtual ~Slider();
+		SliderUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
+		SliderUI(SliderUI const & src);
+		virtual ~SliderUI();
 
-		Slider & operator=(Slider const & rhs);
+		SliderUI & operator=(SliderUI const & rhs);
 
 		virtual void	draw();
 
 		void			setValues(float min, float max, float val, float step = 0);
 
-		Slider &		addSliderListener(float * listener);
+		SliderUI &		addSliderListener(float * listener);
 
 	protected:
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
-		Slider();
+		SliderUI();
 
 		float	_min;
 		float	_max;

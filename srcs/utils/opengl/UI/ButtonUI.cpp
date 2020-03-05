@@ -1,28 +1,28 @@
-#include "Button.hpp"
+#include "ButtonUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
 
-Button::Button(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
+ButtonUI::ButtonUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
 : ABaseUI(winSize, pos, size)
 {
 }
 
-Button::Button(Button const & src)
+ButtonUI::ButtonUI(ButtonUI const & src)
 : ABaseUI(src)
 {
 	*this = src;
 }
 
-Button::~Button() {
+ButtonUI::~ButtonUI() {
 }
 
-Button & Button::operator=(Button const & rhs) {
+ButtonUI & ButtonUI::operator=(ButtonUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
 	return *this;
 }
 
-void Button::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+void ButtonUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
 	(void)rightClick;
 	(void)leftClick;
@@ -32,7 +32,7 @@ void Button::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	this is the draw function for buttons
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
-void Button::draw() {
+void ButtonUI::draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 

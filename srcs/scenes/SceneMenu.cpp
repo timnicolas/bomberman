@@ -5,7 +5,6 @@
 
 #include "SceneMenu.hpp"
 #include "bomberman.hpp"
-#include "Button.hpp"
 #include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
@@ -60,7 +59,7 @@ bool			SceneMenu::init() {
 	tmpSize.x = menuWidth;
 	tmpSize.y = menuHeight;
 
-	addTextUI(tmpPos, tmpSize, "MENU").setTextScale(3);
+	addText(tmpPos, tmpSize, "MENU").setTextScale(3);
 
 	tmpPos.y -= menuHeight * 1.2;
 	addButton(tmpPos, tmpSize, "button left").setTextAlign(TextAlign::LEFT);
@@ -70,7 +69,7 @@ bool			SceneMenu::init() {
 
 	tmpPos.y -= menuHeight * 1.2;
 	tmpSize.x = menuWidth / 3;
-	addTextUI(tmpPos, tmpSize, "sound level").setTextAlign(TextAlign::RIGHT);
+	addText(tmpPos, tmpSize, "sound level").setTextAlign(TextAlign::RIGHT);
 	tmpPos.x += tmpSize.x;
 	tmpSize.x = menuWidth / 3 * 2;
 	addSlider(tmpPos, tmpSize, 0, 128, 64, 1);
@@ -79,7 +78,7 @@ bool			SceneMenu::init() {
 
 	tmpPos.y -= menuHeight * 1.2;
 	tmpSize.x = menuWidth / 3;
-	addTextUI(tmpPos, tmpSize, "music level").setTextAlign(TextAlign::RIGHT);
+	addText(tmpPos, tmpSize, "music level").setTextAlign(TextAlign::RIGHT);
 	tmpPos.x += tmpSize.x;
 	tmpSize.x = menuWidth / 3 * 2;
 	addSlider(tmpPos, tmpSize, 0, 128, 64, 1);
@@ -120,8 +119,8 @@ bool	SceneMenu::draw() {
 
 	@return a reference to the UI created
 */
-Button & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
-	Button * ui = new Button(_gui->gameInfo.windowSize, pos, size);
+ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+	ButtonUI * ui = new ButtonUI(_gui->gameInfo.windowSize, pos, size);
 	ui->setText(text);
 	// set default color
 	glm::vec4 color = glm::vec4(
@@ -134,8 +133,8 @@ Button & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const &
 	_buttons.push_back(ui);
 	return *ui;
 }
-Slider & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
-	Slider * ui = new Slider(_gui->gameInfo.windowSize, pos, size);
+SliderUI & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
+	SliderUI * ui = new SliderUI(_gui->gameInfo.windowSize, pos, size);
 	ui->setValues(min, max, val, step);
 	// set default color
 	glm::vec4 color = glm::vec4(
@@ -148,7 +147,7 @@ Slider & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float ma
 	_buttons.push_back(ui);
 	return *ui;
 }
-TextUI & SceneMenu::addTextUI(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+TextUI & SceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	TextUI * ui = new TextUI(_gui->gameInfo.windowSize, pos, size);
 	ui->setText(text);
 	_buttons.push_back(ui);
