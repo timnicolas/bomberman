@@ -26,6 +26,15 @@ bool	initSettings(std::string const & filename) {
 
 	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
 
+	s.add<SettingsJson>("screen");
+		s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
+
+	s.add<SettingsJson>("font");
+		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Pacifico.ttf")
+			.setDescription("this is the main font");
+		s.j("font").add<uint64_t>("size", 40).setMin(10).setMax(50)
+			.setDescription("default size for the text");
+
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings

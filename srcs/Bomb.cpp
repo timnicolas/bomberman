@@ -40,6 +40,14 @@ bool	Bomb::draw() {
 	return true;
 }
 
+bool	Bomb::isDestructable() {
+	return false;
+}
+
+bool	Bomb::blockPropagation() {
+	return false;
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 Bomb::BombException::BombException()
