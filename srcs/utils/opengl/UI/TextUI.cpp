@@ -2,21 +2,16 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-TextUI::TextUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
-: ABaseUI(winSize, pos, size)
-{
+TextUI::TextUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size): ABaseUI(winSize, pos, size) {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
 
-TextUI::TextUI(TextUI const & src)
-: ABaseUI(src)
-{
+TextUI::TextUI(TextUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
-TextUI::~TextUI() {
-}
+TextUI::~TextUI() {}
 
 TextUI & TextUI::operator=(TextUI const & rhs) {
 	(void)rhs;
@@ -31,7 +26,7 @@ void TextUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 }
 
 /*
-	this is the draw function for buttons
+	this is the draw function for UI
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
 void TextUI::draw() {
