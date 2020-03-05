@@ -20,7 +20,14 @@ Music::~Music() {
 	}
 }
 
+/**
+	Play the music at the specified volume.
 
+	@param volume The volume of the music.
+	@param loop Specify if the music should loop, false by default.
+
+	@throw A MusicException if the music failed to be played.
+ */
 void						Music::play(float volume, bool loop) {
 	if (_mix_mus != nullptr) {
 		if (Mix_PlayMusic(_mix_mus, loop ? -1 : 0) != 0) {
