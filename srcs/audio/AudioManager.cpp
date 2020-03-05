@@ -23,6 +23,11 @@ AudioManager::AudioManager() {
 }
 
 AudioManager::~AudioManager() {
+	_stopMusic();
+	for (auto it = _musics.begin(); it != _musics.end(); it++) {
+		delete it->second;
+	}
+	_stopAllSounds();
 	for (auto it = _sounds.begin(); it != _sounds.end(); it++) {
 		delete it->second;
 	}
@@ -43,38 +48,48 @@ void						AudioManager::updateSettings() {
 }
 void						AudioManager::_updateSettings() {
 	float setting_sound = _volume_master * _volume_sound;
-	// float setting_music = _volume_master * _volume_music;
+	float previous_music = Mix_VolumeMusic(-1) / (MIX_MAX_VOLUME * _volume_master * _volume_music);
 	_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
 	_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
 	_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
+	Mix_VolumeMusic(previous_music * _volume_master * _volume_music);
 	for (auto it = _sounds.begin(); it != _sounds.end(); it++) {
 		it->second->updateVolume(_volume_master * _volume_sound, setting_sound);
 	}
 }
 
-void						AudioManager::loadMusic(std::string filename) {
+void						AudioManager::loadMusic(std::string file_name) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		inst._loadMusic(filename);
+		inst._loadMusic(file_name);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_loadMusic(std::string filename) {
-	(void)filename;
+void						AudioManager::_loadMusic(std::string file_name) {
+	_musics[file_name] = new Music(file_name);
 }
 
-void						AudioManager::playMusic() {
+void						AudioManager::playMusic(std::string music_name, float volume, bool loop) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		AudioManager::get()._playMusic();
+		AudioManager::get()._playMusic(music_name, volume, loop);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_playMusic() {}
+void						AudioManager::_playMusic(std::string music_name, float volume, bool loop) {
+	try {
+		Music	*music = _musics.at(music_name);
+		music->play(volume * _volume_master * _volume_sound, loop);
+	}
+	catch (std::out_of_range oor) {
+		logErr("Trying to play the music '" << music_name << "' but it has not been loaded.");
+		return;
+	}
+}
 
 void						AudioManager::pauseMusic() {
 	AudioManager &inst = AudioManager::get();
@@ -85,19 +100,68 @@ void						AudioManager::pauseMusic() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_pauseMusic() {}
+void						AudioManager::_pauseMusic() {
+	Mix_PauseMusic();
+}
 
-void						AudioManager::loadSound(std::string filename) {
+void						AudioManager::resumeMusic() {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		AudioManager::get()._loadSound(filename);
+		AudioManager::get()._resumeMusic();
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_loadSound(std::string filename) {
-	_sounds[filename] = new Sound(filename);
+void						AudioManager::_resumeMusic() {
+	Mix_ResumeMusic();
+}
+
+void						AudioManager::stopMusic() {
+	AudioManager &inst = AudioManager::get();
+	if (inst._enabled) {
+		AudioManager::get()._stopMusic();
+	}
+	else {
+		logWarn("AudioManager is not enabled.");
+	}
+}
+void						AudioManager::_stopMusic() {
+	Mix_HaltMusic();
+}
+
+void						AudioManager::unloadMusic(std::string music_name) {
+	AudioManager &inst = AudioManager::get();
+	if (inst._enabled) {
+		AudioManager::get()._unloadMusic(music_name);
+	}
+	else {
+		logWarn("AudioManager is not enabled.");
+	}
+}
+void						AudioManager::_unloadMusic(std::string music_name) {
+	try {
+		delete _musics.at(music_name);
+		_musics.erase(music_name);
+	}
+	catch (std::out_of_range oor) {
+		logErr("Trying to unload the music '" << music_name << "' but it has not been loaded.");
+		return;
+	}
+}
+
+
+void						AudioManager::loadSound(std::string file_name) {
+	AudioManager &inst = AudioManager::get();
+	if (inst._enabled) {
+		AudioManager::get()._loadSound(file_name);
+	}
+	else {
+		logWarn("AudioManager is not enabled.");
+	}
+}
+void						AudioManager::_loadSound(std::string file_name) {
+	_sounds[file_name] = new Sound(file_name);
 }
 
 void						AudioManager::playSound(std::string sound_name, float volume) {
@@ -201,7 +265,7 @@ void						AudioManager::_unloadSound(std::string sound_name) {
 		_sounds.erase(sound_name);
 	}
 	catch (std::out_of_range oor) {
-		logErr("Trying to unload the sound file '" << sound_name << "' but it has not been loaded.");
+		logErr("Trying to unload the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
 }

@@ -15,7 +15,7 @@ Sound::Sound(std::string filename): _filename(filename), _chunk(nullptr), _curre
 }
 
 Sound::~Sound() {
-	this->stop();
+	stop();
 	if (_chunk != nullptr) {
 		Mix_FreeChunk(_chunk);
 	}
@@ -24,13 +24,15 @@ Sound::~Sound() {
 void										Sound::play(float volume) {
 	int			chan;
 
-	chan = Mix_PlayChannel(-1, _chunk, 0);
-	if (chan < 0) {
-		logErr("Sound error: " << Mix_GetError());
-		return;
+	if (_chunk != nullptr) {
+		chan = Mix_PlayChannel(-1, _chunk, 0);
+		if (chan < 0) {
+			logErr("Sound error: " << Mix_GetError());
+			return;
+		}
+		Mix_Volume(chan, static_cast<int>(volume * MIX_MAX_VOLUME));
+		_currents_channels.insert(chan);
 	}
-	Mix_Volume(chan, static_cast<int>(volume * MIX_MAX_VOLUME));
-	_currents_channels.insert(chan);
 }
 
 void										Sound::pause() {

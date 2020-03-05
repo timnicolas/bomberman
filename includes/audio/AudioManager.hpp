@@ -5,6 +5,7 @@
 # include <SDL2/SDL_mixer.h>
 # include <map>
 # include "Sound.hpp"
+# include "Music.hpp"
 
 class AudioManager {
 public:
@@ -15,11 +16,14 @@ public:
 	static bool								isEnabled();
 	static void								updateSettings();
 
-	static void								loadMusic(std::string filename);
-	static void								playMusic();
+	static void								loadMusic(std::string file_name);
+	static void								playMusic(std::string music_name, float volume = 1.0, bool loop = false);
 	static void								pauseMusic();
+	static void								resumeMusic();
+	static void								stopMusic();
+	static void								unloadMusic(std::string music_name);
 
-	static void								loadSound(std::string filename);
+	static void								loadSound(std::string file_name);
 	static void								playSound(std::string sound_name, float volume = 1.0);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
@@ -35,11 +39,14 @@ private:
 
 	void									_updateSettings();
 
-	void									_loadMusic(std::string filename);
-	void									_playMusic();
+	void									_loadMusic(std::string file_name);
+	void									_playMusic(std::string music_name, float volume = 1.0, bool loop = false);
 	void									_pauseMusic();
+	void									_resumeMusic();
+	void									_stopMusic();
+	void									_unloadMusic(std::string music_name);
 
-	void									_loadSound(std::string filename);
+	void									_loadSound(std::string file_name);
 	void									_playSound(std::string sound_name, float volume);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
@@ -53,7 +60,7 @@ private:
 	float									_volume_master;
 	float									_volume_music;
 	float									_volume_sound;
-	std::map<std::string, Mix_Music *>		_musics;
+	std::map<std::string, Music *>		_musics;
 	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;
 };
