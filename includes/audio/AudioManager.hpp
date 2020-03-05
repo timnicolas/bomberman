@@ -28,6 +28,7 @@ public:
 	static void								playSound(std::string sound_name, float volume = 1.0);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
+	static void								stopSound(std::string sound_name);
 	static void								pauseAllSounds();
 	static void								resumeAllSounds();
 	static void								unloadSound(std::string sound_name);
@@ -53,6 +54,7 @@ private:
 	void									_playSound(std::string sound_name, float volume);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
+	void									_stopSound(std::string sound_name);
 	void									_pauseAllSounds();
 	void									_resumeAllSounds();
 	void									_unloadSound(std::string sound_name);

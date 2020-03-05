@@ -21,6 +21,13 @@ Sound::~Sound() {
 	}
 }
 
+/**
+	Play the sound at the specified volume.
+
+	@param volume The volume of the sound.
+
+	@throw A SoundException if the sound failed to be played. Not enough channels are alocated.
+ */
 void										Sound::play(float volume) {
 	int			chan;
 
@@ -34,24 +41,40 @@ void										Sound::play(float volume) {
 	}
 }
 
+/**
+	Pause all the channels playing this sound.
+*/
 void										Sound::pause() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_Pause(*it);
 	}
 }
 
+/**
+	Resumes all the channels playing this sound.
+*/
 void										Sound::resume() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_Resume(*it);
 	}
 }
 
+/**
+	Stop all the channels playing this sound.
+*/
 void										Sound::stop() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_HaltChannel(*it);
 	}
 }
 
+/**
+	Update the volume for all the channels playing this sound.
+	If a channel was set with volume modifier below 1.0, the modifier will be conserved.
+
+	@param volume The new global volume value.
+	@param previous_settings The previous global volume value.
+*/
 void										Sound::updateVolume(float volume, float previous_settings) {
 	float		previous_volume;
 
@@ -61,6 +84,13 @@ void										Sound::updateVolume(float volume, float previous_settings) {
 	}
 }
 
+/**
+	Remove the specified channel from the list of used channels if found in it.
+
+	@param chan The id of the channel that has just finished playing.
+
+	@return true if the channel was found, false otherwise.
+*/
 bool										Sound::channelFinished(int chan) {
 	if (_currents_channels.find(chan) != _currents_channels.end()) {
 		_currents_channels.erase(chan);
