@@ -1,5 +1,7 @@
 #include "ABaseUI.hpp"
 #include "Logging.hpp"
+#include "debug.hpp"
+#include "Texture.hpp"
 
 Shader *		ABaseUI::_rectShader = nullptr;
 GLuint			ABaseUI::_rectVao = 0;
@@ -14,6 +16,19 @@ const float		ABaseUI::_rectVertices[] = {
 	1.0, 1.0,
 };
 TextRender *	ABaseUI::_textRender = nullptr;
+Shader *		ABaseUI::_imgShader = nullptr;
+GLuint			ABaseUI::_imgVao = 0;
+GLuint			ABaseUI::_imgVbo = 0;
+const float		ABaseUI::_imgVertices[] = {
+//  pos      | texture coord
+	0.0, 1.0,  0.0, 0.0,
+	0.0, 0.0,  0.0, 1.0,
+	1.0, 0.0,  1.0, 1.0,
+
+	0.0, 1.0,  0.0, 0.0,
+	1.0, 0.0,  1.0, 1.0,
+	1.0, 1.0,  1.0, 0.0,
+};
 
 void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 	if (_rectShader != nullptr) {
@@ -42,10 +57,11 @@ void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	// send default values to uniforms
 	_rectShader->setMat4("model", glm::mat4(1.0));
-    _rectShader->setVec4("masterColor", glm::vec4(1.0, 1.0, 1.0, 1.0));  // set color
-    _rectShader->setVec4("secondColor", glm::vec4(1.0, 1.0, 1.0, 1.0));  // set color
-    _rectShader->setFloat("colorFactor", 1);  // set factor
+    _rectShader->setVec4("masterColor", glm::vec4(1.0, 1.0, 1.0, 1.0));
+    _rectShader->setVec4("secondColor", glm::vec4(1.0, 1.0, 1.0, 1.0));
+    _rectShader->setFloat("colorFactor", 1);
 
 	// disable shader
 	_rectShader->unuse();
@@ -58,6 +74,37 @@ void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 	catch (TextRender::TextRenderError & e) {
 		throw UIException(e.what());
 	}
+
+	/* create image shader */
+	// create shader
+	_imgShader = new Shader(SHADER_IMAGE_2D_VS, SHADER_IMAGE_2D_FS);
+	// enable shader
+	_imgShader->use();
+
+	// create VAO & VBO
+	glGenVertexArrays(1, &_imgVao);
+	glGenBuffers(1, &_imgVbo);
+
+	// enable veo & vbo
+	glBindVertexArray(_imgVao);
+	glBindBuffer(GL_ARRAY_BUFFER, _imgVbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * SHADER_IMAGE_2D_ROW_SIZE, _imgVertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, SHADER_IMAGE_2D_ROW_SIZE * sizeof(float), reinterpret_cast<void*>(0));
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, SHADER_IMAGE_2D_ROW_SIZE * sizeof(float),
+							reinterpret_cast<void*>(2 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	// disable vao & vbo
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	// send default values to uniforms
+	_imgShader->setMat4("model", glm::mat4(1.0));
+    _imgShader->setVec4("color", glm::vec4(0.0, 0.0, 0.0, 0.0));
+
+	// disable shader
+	_imgShader->unuse();
 }
 
 void ABaseUI::destroy() {
@@ -71,6 +118,10 @@ void ABaseUI::destroy() {
 	glDeleteBuffers(1, &_rectVbo);
 	delete _rectShader;
 	_rectShader = nullptr;
+	glDeleteVertexArrays(1, &_imgVao);
+	glDeleteBuffers(1, &_imgVbo);
+	delete _imgShader;
+	_imgShader = nullptr;
 }
 
 ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
@@ -86,6 +137,9 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _textScale(1.0),
   _textPadding(5),
   _textAlign(TextAlign::CENTER),
+  _imgTextureID(0),
+  _imgDefWidth(0),
+  _imgDefHeight(0),
   _mouseHover(false),
   _rightClick(false),
   _leftClick(false),
@@ -151,56 +205,10 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 	_rectShader->use();
 	_rectShader->setMat4("projection", _projection);
 	_rectShader->unuse();
+	_imgShader->use();
+	_imgShader->setMat4("projection", _projection);
+	_imgShader->unuse();
 	_textRender->setWinSize(winSize);
-}
-
-/*
-	draw a rect at `pos` of size `size` with the color `color`
-*/
-void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor) {
-	_rectShader->use();
-
-	// set color
-    _rectShader->setVec4("masterColor", color1);  // set master color
-    _rectShader->setVec4("secondColor", color2);  // set secondary color
-    _rectShader->setFloat("colorFactor", factor);  // set factor
-
-	// set model matrix
-	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(pos.x, pos.y, 0));
-	model = glm::scale(model, glm::vec3(size.x, size.y, 0));
-	_rectShader->setMat4("model", model);
-
-	// draw triangles
-	glBindVertexArray(_rectVao);
-	glDrawArrays(GL_TRIANGLES, 0, 6);  // draw
-	glBindVertexArray(0);
-
-    _rectShader->unuse();
-}
-
-/*
-	draw text centered on a pos
-		pos -> position of the center of the text
-		scale -> size of the text
-		text -> the text to print
-*/
-void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
-glm::vec4 color, TextAlign::Enum align, float padding) {
-	(void)align;
-	uint32_t width = _textRender->strWidth("font", text, scale);
-	uint32_t height = _textRender->strHeight("font", text, scale);
-
-	// get position of the text
-	glm::vec2 tmpPos;
-	if (align == TextAlign::LEFT)
-		tmpPos.x = pos.x + padding;
-	else if (align == TextAlign::CENTER)
-		tmpPos.x = (pos.x + size.x / 2) - width / 2;
-	else if (align == TextAlign::RIGHT)
-		tmpPos.x = pos.x + size.x - width - padding;
-	tmpPos.y = (pos.y + size.y / 2) - height / 2;
-	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
 }
 
 /* listener */
