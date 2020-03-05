@@ -16,6 +16,10 @@ SceneMenu::SceneMenu(Gui * gui)
 }
 
 SceneMenu::~SceneMenu() {
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
 }
 
 SceneMenu::SceneMenu(SceneMenu const &src)
@@ -51,6 +55,7 @@ bool			SceneMenu::init() {
 		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
 	addButton(glm::vec2(500, 500), glm::vec2(150, 50), "button 2")
 		->setColor(glm::vec4(0.2, 0.1, 0.9, 1.0));
+	addSlider(glm::vec2(100, 500), glm::vec2(300, 100), 0, 128, 64, 4);
 	return true;
 }
 
@@ -80,11 +85,17 @@ bool	SceneMenu::draw() {
 	sceneobj->addButton(glm::vec2(100, 100), glm::vec2(150, 50), "text in button")
 		->setColor(glm::vec4(0.2, 0.2, 0.8, 1.0));
 */
-Button *		SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+Button * SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	Button * b = new Button(_gui->gameInfo.windowSize, pos, size);
 	b->setText(text);
 	_buttons.push_back(b);
 	return b;
+}
+Slider * SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
+	Slider * s = new Slider(_gui->gameInfo.windowSize, pos, size);
+	s->setValues(min, max, val, step);
+	_buttons.push_back(s);
+	return s;
 }
 
 /* getter */
