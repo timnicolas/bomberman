@@ -130,6 +130,7 @@ SRC =	main.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
 		utils/opengl/UI/Button.cpp \
 		utils/opengl/UI/Slider.cpp \
+		utils/opengl/UI/TextUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -169,6 +170,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
 		utils/opengl/UI/Button.hpp \
 		utils/opengl/UI/Slider.hpp \
+		utils/opengl/UI/TextUI.hpp \
 
 
 ################################################################################

@@ -7,6 +7,7 @@
 #include "ABaseUI.hpp"
 #include "Button.hpp"
 #include "Slider.hpp"
+#include "TextUI.hpp"
 
 class SceneMenu : public AScene {
 	public:
@@ -28,6 +29,7 @@ class SceneMenu : public AScene {
 
 		Button &		addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		Slider &		addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step = 0);
+		TextUI &		addTextUI(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		ABaseUI &		getUIElement(uint32_t id);
 		uint32_t		getNbUIElements() const;
 

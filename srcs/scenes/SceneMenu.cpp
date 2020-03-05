@@ -50,15 +50,44 @@ std::ostream &	operator<<(std::ostream & os, const SceneMenu& my_class) {
  */
 bool			SceneMenu::init() {
 	_gui->enableCursor(true);
-	// TODO(tnicolas42) remove addButtons calls
-	addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button");
-	addButton(glm::vec2(500, 520), glm::vec2(250, 50), "button left")
-		.setTextAlign(TextAlign::LEFT);
-	addButton(glm::vec2(500, 460), glm::vec2(250, 50), "button center")
-		.setTextAlign(TextAlign::CENTER);
-	addButton(glm::vec2(500, 400), glm::vec2(250, 50), "button right")
-		.setTextAlign(TextAlign::RIGHT);
-	addSlider(glm::vec2(100, 500), glm::vec2(300, 100), 0, 128, 64, 4);
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	float menuWidth = winSz.x / 2;
+	float menuHeight = menuWidth / 8;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpPos.y = winSz.y - menuHeight * 2;
+	tmpSize.x = menuWidth;
+	tmpSize.y = menuHeight;
+
+	addTextUI(tmpPos, tmpSize, "MENU").setTextScale(3);
+
+	tmpPos.y -= menuHeight * 1.2;
+	addButton(tmpPos, tmpSize, "button left").setTextAlign(TextAlign::LEFT);
+
+	tmpPos.y -= menuHeight * 1.2;
+	addButton(tmpPos, tmpSize, "button center").setTextAlign(TextAlign::CENTER);
+
+	tmpPos.y -= menuHeight * 1.2;
+	tmpSize.x = menuWidth / 3;
+	addTextUI(tmpPos, tmpSize, "sound level").setTextAlign(TextAlign::RIGHT);
+	tmpPos.x += tmpSize.x;
+	tmpSize.x = menuWidth / 3 * 2;
+	addSlider(tmpPos, tmpSize, 0, 128, 64, 1);
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpSize.x = menuWidth;
+
+	tmpPos.y -= menuHeight * 1.2;
+	tmpSize.x = menuWidth / 3;
+	addTextUI(tmpPos, tmpSize, "music level").setTextAlign(TextAlign::RIGHT);
+	tmpPos.x += tmpSize.x;
+	tmpSize.x = menuWidth / 3 * 2;
+	addSlider(tmpPos, tmpSize, 0, 128, 64, 1);
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpSize.x = menuWidth;
+
+	tmpPos.y -= menuHeight * 1.2;
+	addButton(tmpPos, tmpSize, "button right").setTextAlign(TextAlign::RIGHT);
 	return true;
 }
 
@@ -85,13 +114,16 @@ bool	SceneMenu::draw() {
 
 /*
 	add a button in the menu
-	sceneobj->addButton(glm::vec2(100, 100), glm::vec2(150, 50), "text in button")
-		->setColor(glm::vec4(0.2, 0.2, 0.8, 1.0));
+	sceneobj->addButton(glm::vec2(100, 100), glm::vec2(150, 50), "text in button");
+
+	in these functions, you can set the default settings for buttons / slider / ...
+
+	@return a reference to the UI created
 */
 Button & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	Button * ui = new Button(_gui->gameInfo.windowSize, pos, size);
 	ui->setText(text);
-	// set color
+	// set default color
 	glm::vec4 color = glm::vec4(
 		s.j("colors").j("buttons").d("r"),
 		s.j("colors").j("buttons").d("g"),
@@ -105,7 +137,7 @@ Button & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const &
 Slider & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
 	Slider * ui = new Slider(_gui->gameInfo.windowSize, pos, size);
 	ui->setValues(min, max, val, step);
-	// set color
+	// set default color
 	glm::vec4 color = glm::vec4(
 		s.j("colors").j("buttons").d("r"),
 		s.j("colors").j("buttons").d("g"),
@@ -113,7 +145,12 @@ Slider & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float ma
 		s.j("colors").j("buttons").d("a")
 	);
 	ui->setColor(color);
-	ui->setTextAlign(TextAlign::LEFT);
+	_buttons.push_back(ui);
+	return *ui;
+}
+TextUI & SceneMenu::addTextUI(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+	TextUI * ui = new TextUI(_gui->gameInfo.windowSize, pos, size);
+	ui->setText(text);
 	_buttons.push_back(ui);
 	return *ui;
 }
