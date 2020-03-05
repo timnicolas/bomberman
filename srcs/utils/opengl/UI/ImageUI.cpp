@@ -82,17 +82,24 @@ void ImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
 void ImageUI::draw() {
+	_drawImg(_pos, _size, _textureID, _color);
+}
+
+/*
+	draw a 2D image on the screen
+*/
+void ImageUI::_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color) {
 	_imgShader.use();
-    _imgShader.setVec4("color", _color);
+    _imgShader.setVec4("color", color);
     glBindVertexArray(_vao);
 	// set VBO values
 	GLfloat vertices[6][SHADER_IMAGE_2D_ROW_SIZE] = {
-		{_pos.x,           _pos.y + _size.y, 0.0, 0.0},
-		{_pos.x,           _pos.y,           0.0, 1.0},
-		{_pos.x + _size.x, _pos.y,           1.0, 1.0},
-		{_pos.x,           _pos.y + _size.y, 0.0, 0.0},
-		{_pos.x + _size.x, _pos.y,           1.0, 1.0},
-		{_pos.x + _size.x, _pos.y + _size.y, 1.0, 0.0},
+		{pos.x,          pos.y + size.y, 0.0, 0.0},
+		{pos.x,          pos.y,          0.0, 1.0},
+		{pos.x + size.x, pos.y,          1.0, 1.0},
+		{pos.x,          pos.y + size.y, 0.0, 0.0},
+		{pos.x + size.x, pos.y,          1.0, 1.0},
+		{pos.x + size.x, pos.y + size.y, 1.0, 0.0},
 	};
 	// set VBO on shader
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
@@ -100,7 +107,7 @@ void ImageUI::draw() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	// draw image
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindTexture(GL_TEXTURE_2D, 0);
     glBindVertexArray(0);
