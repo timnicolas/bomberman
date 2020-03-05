@@ -26,7 +26,7 @@ Sound::~Sound() {
 
 	@param volume The volume of the sound.
 
-	@throw A SoundException if the sound failed to be played. Not enough channels are alocated.
+	@throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
 void										Sound::play(float volume) {
 	int			chan;
