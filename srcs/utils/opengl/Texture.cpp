@@ -3,7 +3,7 @@
 #include "libs/stb_image.h"
 #include "Logging.hpp"
 
-uint32_t	textureFromFile(const std::string path, bool inSpaceSRGB, int * width, int * height) {
+uint32_t	textureFromFile(const std::string path, bool inSpaceSRGB, bool pixelateOnZoom, int * width, int * height) {
 	uint32_t	textureID;
     int			nrComponents;
     int			width_;
@@ -44,8 +44,14 @@ uint32_t	textureFromFile(const std::string path, bool inSpaceSRGB, int * width, 
 		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_LEVEL, 5);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		if (pixelateOnZoom) {
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		}
+		else {
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
 
 		stbi_image_free(data);
 		glBindTexture(GL_TEXTURE_2D, 0);

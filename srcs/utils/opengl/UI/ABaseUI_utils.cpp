@@ -61,10 +61,10 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 
 	@return: the texture ID
 */
-void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
+void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool pixelateOnZoom) {
 	// load the texture
 	try {
-		_imgTextureID = textureFromFile(filename, true, &_imgDefWidth, &_imgDefHeight);
+		_imgTextureID = textureFromFile(filename, true, pixelateOnZoom, &_imgDefWidth, &_imgDefHeight);
 	}
 	catch (TextureFailToLoad & e) {
 		throw UIException(e.what());
