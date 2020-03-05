@@ -6,10 +6,10 @@
 #include "ACharacter.hpp"
 
 class Player : public ACharacter {
-private:
-	// Members
-
 public:
+	// Members
+	int		bombs;
+
 	// Constructors
 	Player();
 	~Player();
@@ -19,8 +19,11 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool	update(float d_time);
+	bool	update(std::chrono::milliseconds d_time);
 	bool	draw();
+	bool	isDestructable();
+	bool	blockPropagation();
+	bool	isAlive();
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

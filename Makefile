@@ -103,7 +103,12 @@ SRC =	main.cpp \
 		AObject.cpp \
 		Bomb.cpp \
 \
-		Game.cpp \
+		scenes/SceneManager.cpp \
+		scenes/AScene.cpp \
+		scenes/SceneMenu.cpp \
+		scenes/SceneGame.cpp \
+\
+		Inputs.cpp \
 \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
@@ -121,6 +126,8 @@ SRC =	main.cpp \
 		utils/opengl/assimpUtils.cpp \
 		utils/opengl/Mesh.cpp \
 		utils/opengl/Model.cpp \
+		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/Button.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -132,7 +139,12 @@ HEAD =	bomberman.hpp \
 		AObject.hpp \
 		Bomb.hpp \
 \
-		Game.hpp \
+		scenes/SceneManager.hpp \
+		scenes/AScene.hpp \
+		scenes/SceneMenu.hpp \
+		scenes/SceneGame.hpp \
+\
+		Inputs.hpp \
 \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
@@ -150,6 +162,8 @@ HEAD =	bomberman.hpp \
 		utils/opengl/assimpUtils.hpp \
 		utils/opengl/Mesh.hpp \
 		utils/opengl/Model.hpp \
+		utils/opengl/UI/ABaseUI.hpp \
+		utils/opengl/UI/Button.hpp \
 
 
 ################################################################################
@@ -360,15 +374,15 @@ all:
 ([ -z $(DEBUG) ] && [ -d $(DEBUG_DIR) ] && [ -f $(DEBUG_DIR)/DEBUG ])); then\
 		$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE);\
 	fi;
-
-	$(START)
-	@$(MAKE) $(MAKE_OPT) $(NAME)
-	$(END)
 ifneq ($(DEBUG),)
 	@touch $(DEBUG_DIR)/DEBUG
 else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
+
+	$(START)
+	@$(MAKE) $(MAKE_OPT) $(NAME)
+	$(END)
 
 install:
 	@for i in $(NEED_MAKE); do \
