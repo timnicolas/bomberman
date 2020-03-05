@@ -85,7 +85,7 @@ class ABaseUI {
 		void			_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
 			glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
-		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_loadImg(std::string const & filename, bool updateSize = true, bool pixelateOnZoom = false);
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
