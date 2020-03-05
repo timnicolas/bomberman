@@ -19,6 +19,7 @@ class ImageUI : public ABaseUI {
 
 	protected:
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 		ImageUI();
 
 		std::string	_filename;
