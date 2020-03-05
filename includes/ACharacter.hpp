@@ -7,6 +7,10 @@
 
 class ACharacter : public AEntity {
 public:
+	// Members
+	int		life;
+	float	speed;
+
 	// Constructors
 	ACharacter();
 	virtual ~ACharacter();
@@ -16,8 +20,9 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(float d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds d_time) = 0;
 	virtual bool	draw() = 0;
+	virtual bool	isAlive() = 0;
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

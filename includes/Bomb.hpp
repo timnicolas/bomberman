@@ -19,8 +19,10 @@ public:
 	Bomb &operator=(Bomb const &rhs);
 
 	// Methods
-	bool	update(float d_time);
+	bool	update(std::chrono::milliseconds d_time);
 	bool	draw();
+	bool	isDestructable();
+	bool	blockPropagation();
 
 	// Exceptions
 	class BombException : public std::runtime_error {

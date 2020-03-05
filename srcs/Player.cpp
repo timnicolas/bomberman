@@ -28,8 +28,8 @@ Player &Player::operator=(Player const &rhs) {
  * update is called each frame.
  * @param d_time Delta Time
  */
-bool	Player::update(float d_time) {
-	std::cout << "Player updated at " << d_time << std::endl;
+bool	Player::update(std::chrono::milliseconds d_time) {
+	std::cout << "Last Player updated at " << d_time.count() << std::endl;
 	return true;
 }
 
@@ -38,6 +38,16 @@ bool	Player::update(float d_time) {
  */
 bool	Player::draw() {
 	return true;
+}
+
+bool	Player::isDestructable() {
+	return true;
+}
+bool	Player::blockPropagation() {
+	return false;
+}
+bool	Player::isAlive() {
+	return life;
 }
 
 // -- Exceptions errors --------------------------------------------------------
