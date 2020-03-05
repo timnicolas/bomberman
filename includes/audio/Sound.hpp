@@ -12,6 +12,8 @@ public:
 	~Sound();
 
 	void										play(float volume);
+	void										pause();
+	void										resume();
 	void										stop();
 	void										updateVolume(float volume, float previous_settings);
 	bool										channelFinished(int chan);
