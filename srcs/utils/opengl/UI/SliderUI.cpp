@@ -9,17 +9,13 @@ SliderUI::SliderUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _val(0.5),
   _step(0),
   _sliderListener(nullptr)
-{
-}
+{}
 
-SliderUI::SliderUI(SliderUI const & src)
-: ABaseUI(src)
-{
+SliderUI::SliderUI(SliderUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
-SliderUI::~SliderUI() {
-}
+SliderUI::~SliderUI() {}
 
 SliderUI & SliderUI::operator=(SliderUI const & rhs) {
 	(void)rhs;
@@ -65,7 +61,7 @@ void SliderUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 }
 
 /*
-	this is the draw function for buttons
+	this is the draw function for UI
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
 void SliderUI::draw() {

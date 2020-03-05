@@ -87,6 +87,12 @@ bool			SceneMenu::init() {
 
 	tmpPos.y -= menuHeight * 1.2;
 	addButton(tmpPos, tmpSize, "button right").setTextAlign(TextAlign::RIGHT);
+
+	tmpSize.x = tmpSize.x * 1.2;
+	tmpSize.y = winSz.y - tmpPos.y;
+	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+	tmpPos.y -= menuHeight * 0.5;
+	addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
 	return true;
 }
 
@@ -153,6 +159,14 @@ TextUI & SceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & t
 	_buttons.push_back(ui);
 	return *ui;
 }
+RectUI & SceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm::vec4 borderColor) {
+	RectUI * ui = new RectUI(_gui->gameInfo.windowSize, pos, size);
+	ui->setColor(color);
+	ui->setBorderColor(borderColor);
+	_buttons.push_back(ui);
+	return *ui;
+}
+
 
 /* getter */
 // get an UI element (button, slider, ...)

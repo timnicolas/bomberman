@@ -9,6 +9,7 @@
 #include "ButtonUI.hpp"
 #include "SliderUI.hpp"
 #include "TextUI.hpp"
+#include "RectUI.hpp"
 
 class SceneMenu : public AScene {
 	public:
@@ -31,6 +32,8 @@ class SceneMenu : public AScene {
 		ButtonUI &		addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		SliderUI &		addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step = 0);
 		TextUI &		addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+		RectUI &		addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
+			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
 		ABaseUI &		getUIElement(uint32_t id);
 		uint32_t		getNbUIElements() const;
 
