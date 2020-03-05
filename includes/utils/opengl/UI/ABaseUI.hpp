@@ -8,6 +8,14 @@
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
 #define SHADER_RECT_2D_ROW_SZ 2
 
+namespace TextAlign {
+	enum Enum {
+		LEFT,
+		CENTER,
+		RIGHT,
+	};
+}
+
 class ABaseUI {
 	public:
 		static void init(std::string const & fontName, uint32_t fontSize);
@@ -41,6 +49,7 @@ class ABaseUI {
 		ABaseUI &	setText(std::string const & text);
 		ABaseUI &	setTextColor(glm::vec4 color);
 		ABaseUI &	setTextScale(float scale);
+		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
 		/* getter */
 		bool					getMouseHover() const;
@@ -62,8 +71,10 @@ class ABaseUI {
 	protected:
 		ABaseUI();
 		/* draw base function */
-		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
-		void			_drawTextCenter(glm::vec2 pos, float size, std::string const & text, glm::vec4 color);
+		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
+			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
+		void			_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
+			glm::vec4 color, TextAlign::Enum align);
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
 
 		glm::vec2	_winSize;
@@ -80,6 +91,7 @@ class ABaseUI {
 		std::string	_text;
 		glm::vec4	_textColor;
 		float		_textScale;
+		TextAlign::Enum	_textAlign;
 
 		/* info about mouse */
 		bool		_mouseHover;

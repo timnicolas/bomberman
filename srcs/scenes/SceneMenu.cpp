@@ -52,7 +52,12 @@ bool			SceneMenu::init() {
 	_gui->enableCursor(true);
 	// TODO(tnicolas42) remove addButtons calls
 	addButton(glm::vec2(150, 50), glm::vec2(150, 50), "text button");
-	addButton(glm::vec2(500, 500), glm::vec2(150, 50), "button 2");
+	addButton(glm::vec2(500, 520), glm::vec2(250, 50), "button left")
+		.setTextAlign(TextAlign::LEFT);
+	addButton(glm::vec2(500, 460), glm::vec2(250, 50), "button center")
+		.setTextAlign(TextAlign::CENTER);
+	addButton(glm::vec2(500, 400), glm::vec2(250, 50), "button right")
+		.setTextAlign(TextAlign::RIGHT);
 	addSlider(glm::vec2(100, 500), glm::vec2(300, 100), 0, 128, 64, 4);
 	return true;
 }
@@ -83,7 +88,7 @@ bool	SceneMenu::draw() {
 	sceneobj->addButton(glm::vec2(100, 100), glm::vec2(150, 50), "text in button")
 		->setColor(glm::vec4(0.2, 0.2, 0.8, 1.0));
 */
-Button * SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+Button & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	Button * ui = new Button(_gui->gameInfo.windowSize, pos, size);
 	ui->setText(text);
 	// set color
@@ -95,9 +100,9 @@ Button * SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const &
 	);
 	ui->setColor(color);
 	_buttons.push_back(ui);
-	return ui;
+	return *ui;
 }
-Slider * SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
+Slider & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
 	Slider * ui = new Slider(_gui->gameInfo.windowSize, pos, size);
 	ui->setValues(min, max, val, step);
 	// set color
@@ -108,13 +113,13 @@ Slider * SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float ma
 		s.j("colors").j("buttons").d("a")
 	);
 	ui->setColor(color);
-	ui->setBorderColor(color);
+	ui->setTextAlign(TextAlign::LEFT);
 	_buttons.push_back(ui);
-	return ui;
+	return *ui;
 }
 
 /* getter */
 // get an UI element (button, slider, ...)
-ABaseUI *		SceneMenu::getUIElement(uint32_t id) { return _buttons[id]; }
+ABaseUI &		SceneMenu::getUIElement(uint32_t id) { return *_buttons[id]; }
 // get the total number of UI elements
 uint32_t		SceneMenu::getNbUIElements() const { return _buttons.size(); }
