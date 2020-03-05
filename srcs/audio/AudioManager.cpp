@@ -1,15 +1,23 @@
 #include "AudioManager.hpp"
+#include <unistd.h>
 #include "Logging.hpp"
 #include "bomberman.hpp"
 
+std::string					AudioManager::_assets_path = std::string();
+
 AudioManager::AudioManager() {
+	char	path[PATH_MAX];
+	getcwd(path, PATH_MAX);
+	AudioManager::_assets_path = std::string(path);
+	AudioManager::_assets_path += "/bomberman-assets/";
+	logDebug("Assets_path: " << AudioManager::_assets_path);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 		_enabled = false;
 		logErr("Failed to init sdl audio.");
 	}
 	else if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1) {
-		logErr("Failed while loadingaudio mixer: " << Mix_GetError());
 		_enabled = false;
+		logErr("Failed while loading audio mixer: " << Mix_GetError());
 	}
 	else {
 		Mix_AllocateChannels(AudioManager::nb_sound_channels);
@@ -68,7 +76,7 @@ void						AudioManager::loadMusic(std::string file_name) {
 	}
 }
 void						AudioManager::_loadMusic(std::string file_name) {
-	_musics[file_name] = new Music(file_name);
+	_musics[file_name] = new Music(AudioManager::_assets_path + file_name);
 }
 
 void						AudioManager::playMusic(std::string music_name, float volume, bool loop) {
@@ -83,6 +91,7 @@ void						AudioManager::playMusic(std::string music_name, float volume, bool loo
 void						AudioManager::_playMusic(std::string music_name, float volume, bool loop) {
 	try {
 		Music	*music = _musics.at(music_name);
+		volume = volume > 1.0 ? 1.0 : volume;
 		music->play(volume * _volume_master * _volume_sound, loop);
 	}
 	catch (std::out_of_range oor) {
@@ -161,7 +170,7 @@ void						AudioManager::loadSound(std::string file_name) {
 	}
 }
 void						AudioManager::_loadSound(std::string file_name) {
-	_sounds[file_name] = new Sound(file_name);
+	_sounds[file_name] = new Sound(AudioManager::_assets_path + file_name);
 }
 
 void						AudioManager::playSound(std::string sound_name, float volume) {
@@ -176,6 +185,7 @@ void						AudioManager::playSound(std::string sound_name, float volume) {
 void						AudioManager::_playSound(std::string sound_name, float volume) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
+		volume = volume > 1.0 ? 1.0 : volume;
 		sound->play(volume * _volume_master * _volume_sound);
 	}
 	catch (std::out_of_range oor) {
