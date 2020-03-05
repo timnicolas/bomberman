@@ -56,12 +56,6 @@ bool			SceneMenu::init() {
 	float menuHeight = menuWidth / 8;
 
 	try {
-		tmpPos = glm::vec2(0, 0);
-		tmpSize = glm::vec2(200, 0);
-		addImage(tmpPos, tmpSize, "bomberman-assets/textures/bomb/005-bombFace.png");
-		tmpPos.x = winSz.x - tmpSize.x;
-		addImage(tmpPos, tmpSize, "bomberman-assets/textures/player/009-playerFace.png");
-
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
@@ -100,6 +94,12 @@ bool			SceneMenu::init() {
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
+
+		tmpPos = glm::vec2(0, 0);
+		tmpSize = glm::vec2(400, 0);
+		addImage(tmpPos, tmpSize, "bomberman-assets/textures/bomb/005-bombFace.png");
+		tmpPos.x = winSz.x - tmpSize.x;
+		addImage(tmpPos, tmpSize, "bomberman-assets/textures/player/009-playerFace.png");
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -178,8 +178,8 @@ RectUI & SceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm:
 	_buttons.push_back(ui);
 	return *ui;
 }
-ImageUI & SceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename) {
-	ImageUI * ui = new ImageUI(_gui->gameInfo.windowSize, pos, size, filename);
+ImageUI & SceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom) {
+	ImageUI * ui = new ImageUI(_gui->gameInfo.windowSize, pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
 	return *ui;
 }

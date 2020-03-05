@@ -3,14 +3,14 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
-ImageUI::ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string const & filename)
+ImageUI::ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom)
 : ABaseUI(winSize, pos, size)
 {
 	// disable color
 	_color = glm::vec4(0.0, 0.0, 0.0, 0.0);
 
 	// load the image
-	_loadImg(filename, true);
+	_loadImg(filename, true, pixelateOnZoom);
 }
 
 ImageUI::ImageUI(ImageUI const & src): ABaseUI(src) {
