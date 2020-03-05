@@ -27,6 +27,31 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::ve
 
     _rectShader->unuse();
 }
+/*
+	draw the border of a rect at `pos` of size `size` with the color `color`
+*/
+void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color) {
+	if (borderSize == 0)
+		return;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize = size;
+	tmpSize.y = borderSize;
+
+	tmpPos = pos;
+	_drawRect(tmpPos, tmpSize, color);
+	tmpPos = pos;
+	tmpPos.y += size.y - borderSize;
+	_drawRect(tmpPos, tmpSize, color);
+
+	tmpSize = size;
+	tmpSize.x = borderSize;
+
+	tmpPos = pos;
+	_drawRect(tmpPos, tmpSize, color);
+	tmpPos = pos;
+	tmpPos.x += size.x - borderSize;
+	_drawRect(tmpPos, tmpSize, color);
+}
 
 /*
 	draw text centered on a pos

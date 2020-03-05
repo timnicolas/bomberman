@@ -96,10 +96,22 @@ bool			SceneMenu::init() {
 		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
 
 		tmpPos = glm::vec2(0, 0);
-		tmpSize = glm::vec2(400, 0);
-		addImage(tmpPos, tmpSize, "bomberman-assets/textures/bomb/005-bombFace.png");
-		tmpPos.x = winSz.x - tmpSize.x;
-		addImage(tmpPos, tmpSize, "bomberman-assets/textures/player/009-playerFace.png");
+		tmpSize = glm::vec2(winSz.x / 5, 0);
+		int i = 0;
+		while (tmpPos.y < winSz.y) {
+			tmpPos.x = 0;
+			int j = 0;
+			while (tmpPos.x < winSz.x) {
+				std::string name;
+				if ((i + j) & 1)	name = "bomberman-assets/textures/bomb/005-bombFace.png";
+				else		name = "bomberman-assets/textures/player/009-playerFace.png";
+				addImage(tmpPos, tmpSize, name, false).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
+				tmpPos.x += tmpSize.x;
+				j++;
+			}
+			tmpPos.y += getUIElement(getNbUIElements() - 1).getSize().y;
+			i++;
+		}
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
