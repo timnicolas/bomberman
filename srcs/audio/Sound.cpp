@@ -2,11 +2,11 @@
 #include "AudioManager.hpp"
 #include "Logging.hpp"
 
-Sound::Sound(std::string filename): _filename(filename), _chunk(nullptr), _currents_channels() {
+Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels() {
 	if (AudioManager::isEnabled()) {
 		_chunk = Mix_LoadWAV(filename.c_str());
 		if (_chunk == nullptr) {
-			logErr("Failed to load audio sample '" << filename << "'.");
+			throw Sound::SoundException("Failed to load audio sample '" + filename + "'.");
 		}
 	}
 	else {
@@ -27,8 +27,7 @@ void										Sound::play(float volume) {
 	if (_chunk != nullptr) {
 		chan = Mix_PlayChannel(-1, _chunk, 0);
 		if (chan < 0) {
-			logErr("Sound error: " << Mix_GetError());
-			return;
+			throw Sound::SoundException(Mix_GetError());
 		}
 		Mix_Volume(chan, static_cast<int>(volume * MIX_MAX_VOLUME));
 		_currents_channels.insert(chan);
@@ -69,3 +68,11 @@ bool										Sound::channelFinished(int chan) {
 	}
 	return false;
 }
+
+Sound::SoundException::SoundException(): std::runtime_error("[SoundException]") {}
+
+Sound::SoundException::SoundException(const char* what_arg) \
+	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
+
+Sound::SoundException::SoundException(const std::string what_arg) \
+	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
