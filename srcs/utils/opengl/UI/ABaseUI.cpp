@@ -42,6 +42,11 @@ void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	_rectShader->setMat4("model", glm::mat4(1.0));
+    _rectShader->setVec4("masterColor", glm::vec4(1.0, 1.0, 1.0, 1.0));  // set color
+    _rectShader->setVec4("secondColor", glm::vec4(1.0, 1.0, 1.0, 1.0));  // set color
+    _rectShader->setFloat("colorFactor", 1);  // set factor
+
 	// disable shader
 	_rectShader->unuse();
 
@@ -74,11 +79,12 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _color(1.0, 1.0, 1.0, 1.0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
   _borderSize(5.0),
-  _mouseHoverColor(0.0, 0.0, 0.0, 0.01),
-  _mouseClickColor(0.5, 0.0, 0.0, 0.5),
+  _mouseHoverColor(0.0, 0.0, 0.0, 0.2),
+  _mouseClickColor(0.0, 0.0, 0.0, 0.5),
   _text("default text"),
   _textColor(0.0, 0.0, 0.0, 1.0),
   _textScale(1.0),
+  _textAlign(TextAlign::CENTER),
   _mouseHover(false),
   _rightClick(false),
   _leftClick(false),
@@ -151,11 +157,13 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 /*
 	draw a rect at `pos` of size `size` with the color `color`
 */
-void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
+void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor) {
 	_rectShader->use();
 
 	// set color
-    _rectShader->setVec4("color", color);  // set color
+    _rectShader->setVec4("masterColor", color1);  // set master color
+    _rectShader->setVec4("secondColor", color2);  // set secondary color
+    _rectShader->setFloat("colorFactor", factor);  // set factor
 
 	// set model matrix
 	glm::mat4 model = glm::mat4(1.0);
@@ -177,12 +185,21 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
 		scale -> size of the text
 		text -> the text to print
 */
-void ABaseUI::_drawTextCenter(glm::vec2 pos, float scale, std::string const & text, glm::vec4 color) {
-	glm::vec2 tmpPos = pos;
+void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
+glm::vec4 color, TextAlign::Enum align) {
+	(void)align;
 	uint32_t width = _textRender->strWidth("font", text, scale);
 	uint32_t height = _textRender->strHeight("font", text, scale);
-	tmpPos.x -= width / 2;
-	tmpPos.y -= height / 2;
+
+	// get position of the text
+	glm::vec2 tmpPos;
+	if (align == TextAlign::LEFT)
+		tmpPos.x = pos.x;
+	else if (align == TextAlign::CENTER)
+		tmpPos.x = (pos.x + size.x / 2) - width / 2;
+	else if (align == TextAlign::RIGHT)
+		tmpPos.x = pos.x + size.x - width;
+	tmpPos.y = (pos.y + size.y / 2) - height / 2;
 	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
 }
 
@@ -212,6 +229,7 @@ ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = colo
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
 ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this; }
+ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
 /* getter */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
