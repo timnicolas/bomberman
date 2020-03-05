@@ -111,6 +111,7 @@ SRC =	main.cpp \
 		Inputs.cpp \
 \
 		audio/AudioManager.cpp \
+		audio/Music.cpp \
 		audio/Sound.cpp \
 \
 		gui/Gui.cpp \
@@ -147,6 +148,7 @@ HEAD =	bomberman.hpp \
 		Inputs.hpp \
 \
 		audio/AudioManager.hpp \
+		audio/Music.hpp \
 		audio/Sound.hpp \
 \
 		gui/Gui.hpp \
