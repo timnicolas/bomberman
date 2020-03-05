@@ -93,23 +93,7 @@ void SliderUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
-	tmpSize = _size;
-	tmpSize.y = _borderSize;
-
-	tmpPos = _pos;
-	_drawRect(tmpPos, tmpSize, _borderColor);
-	tmpPos = _pos;
-	tmpPos.y += _size.y - _borderSize;
-	_drawRect(tmpPos, tmpSize, _borderColor);
-
-	tmpSize = _size;
-	tmpSize.x = _borderSize;
-
-	tmpPos = _pos;
-	_drawRect(tmpPos, tmpSize, _borderColor);
-	tmpPos = _pos;
-	tmpPos.x += _size.x - _borderSize;
-	_drawRect(tmpPos, tmpSize, _borderColor);
+	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
 }
 
 /* listener */

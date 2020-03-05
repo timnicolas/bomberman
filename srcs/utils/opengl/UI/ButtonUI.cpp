@@ -64,5 +64,5 @@ void ButtonUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color, secColor, factor);
 
 	// draw border
-	_drawRect(_pos, _size, _borderColor);
+	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
 }
