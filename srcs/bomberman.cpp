@@ -39,9 +39,9 @@ bool	initSettings(std::string const & filename) {
 	s.add<SettingsJson>("audio");
 	s.j("audio").add<double>("masterVolume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("musicVolume", 0.7).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("musicVolume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("soundVolume", 0.7).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
 	/* colors */
