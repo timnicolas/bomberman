@@ -29,6 +29,7 @@ bool	initSettings(std::string const & filename) {
 	s.add<SettingsJson>("screen");
 		s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
 
+	/* font */
 	s.add<SettingsJson>("font");
 		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Pacifico.ttf")
 			.setDescription("this is the main font");
@@ -42,6 +43,15 @@ bool	initSettings(std::string const & filename) {
 		.setDescription("The volume of the music.");
 	s.j("audio").add<double>("soundVolume", 0.7).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
+
+	/* colors */
+	s.add<SettingsJson>("colors");
+	// buttons
+	s.j("colors").add<SettingsJson>("buttons");
+		s.j("colors").j("buttons").add<double>("r", 0.2).setMin(0).setMax(1);
+		s.j("colors").j("buttons").add<double>("g", 0.2).setMin(0).setMax(1);
+		s.j("colors").j("buttons").add<double>("b", 0.2).setMin(0).setMax(1);
+		s.j("colors").j("buttons").add<double>("a", 1.0).setMin(0).setMax(1);
 
 	try {
 		if (s.loadFile(filename) == false) {
