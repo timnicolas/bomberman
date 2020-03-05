@@ -210,10 +210,12 @@ glm::vec4 color, TextAlign::Enum align) {
 */
 ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
 	_rightListener = listener;
+	*_rightListener = _rightClick;
 	return *this;
 }
 ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
+	*_leftListener = _leftClick;
 	return *this;
 }
 

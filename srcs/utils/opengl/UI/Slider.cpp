@@ -7,7 +7,8 @@ Slider::Slider(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _min(0),
   _max(1),
   _val(0.5),
-  _step(0)
+  _step(0),
+  _sliderListener(nullptr)
 {
 }
 
@@ -58,6 +59,8 @@ void Slider::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 			tmpVal += adder;
 		}
 		_val = tmpVal;
+		if (_sliderListener)
+			*_sliderListener = _val;
 	}
 }
 
@@ -111,4 +114,11 @@ void Slider::draw() {
 	tmpPos = _pos;
 	tmpPos.x += _size.x - _borderSize;
 	_drawRect(tmpPos, tmpSize, _borderColor);
+}
+
+/* listener */
+Slider &	Slider::addSliderListener(float * listener) {
+	_sliderListener = listener;
+	*_sliderListener = _val;
+	return *this;
 }
