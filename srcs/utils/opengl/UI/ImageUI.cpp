@@ -8,6 +8,7 @@ ImageUI::ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string c
 {
 	// disable color
 	_color = glm::vec4(0.0, 0.0, 0.0, 0.0);
+	_borderSize = 0;
 
 	// load the image
 	_loadImg(filename, true, pixelateOnZoom);
@@ -37,4 +38,5 @@ void ImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 */
 void ImageUI::draw() {
 	_drawImg(_pos, _size, _imgTextureID, _color);
+	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
 }

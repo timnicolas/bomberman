@@ -9,4 +9,6 @@ uniform float	colorFactor;
 void main()
 {
 	FragColor = mix(secondColor, masterColor, colorFactor);
+	if (FragColor.a < 0.2)
+		discard;
 }
