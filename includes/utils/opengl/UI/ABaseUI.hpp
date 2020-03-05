@@ -8,16 +8,6 @@
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
 #define SHADER_RECT_2D_ROW_SZ 2
 
-namespace MouseState {
-	enum ENUM {
-		START_RIGHT_CLICK,
-		START_LEFT_CLICK,
-		END_RIGHT_CLICK,
-		END_LEFT_CLICK,
-		NO_CLICK,
-	};
-};
-
 class ABaseUI {
 	public:
 		static void init(std::string const & fontName, uint32_t fontSize);
@@ -29,14 +19,15 @@ class ABaseUI {
 
 		ABaseUI & operator=(ABaseUI const & rhs);
 
-		void			update(glm::vec2 mousePos, MouseState::ENUM mouseState);
+		void			update(glm::vec2 mousePos, bool rightClick, bool leftClick);
 		virtual void	draw() = 0;
 
 		void	setWinSize(glm::vec2 winSize);
 
-		/* draw base function */
-		void		drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
-		void		drawTextCenter(glm::vec2 pos, float size, std::string const & text, glm::vec4 color);
+		/* listener */
+		ABaseUI &	addButtonRightListener(bool * listener);
+		ABaseUI &	addButtonLeftListener(bool * listener);
+
 
 		/* setter */
 		ABaseUI &	setColor(glm::vec4 color);
@@ -45,6 +36,7 @@ class ABaseUI {
 		ABaseUI &	setBorderSize(float size);
 
 		ABaseUI &	setMouseHoverColor(glm::vec4 color);
+		ABaseUI &	setMouseClickColor(glm::vec4 color);
 
 		ABaseUI &	setText(std::string const & text);
 		ABaseUI &	setTextColor(glm::vec4 color);
@@ -52,7 +44,8 @@ class ABaseUI {
 
 		/* getter */
 		bool					getMouseHover() const;
-		bool					getMouseClick() const;
+		bool					getMouseRightClick() const;
+		bool					getMouseLeftClick() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
 		glm::vec2 &				getSize();
@@ -68,7 +61,10 @@ class ABaseUI {
 
 	protected:
 		ABaseUI();
-		virtual void	_update(glm::vec2 mousePos, MouseState::ENUM mouseState) = 0;
+		/* draw base function */
+		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
+		void			_drawTextCenter(glm::vec2 pos, float size, std::string const & text, glm::vec4 color);
+		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
 
 		glm::vec2	_winSize;
 		glm::vec2	_pos;
@@ -77,8 +73,9 @@ class ABaseUI {
 		// border
 		glm::vec4	_borderColor;
 		float		_borderSize;
-		// mmouse effect
+		// mouse effect
 		glm::vec4	_mouseHoverColor;
+		glm::vec4	_mouseClickColor;
 		// text
 		std::string	_text;
 		glm::vec4	_textColor;
@@ -86,7 +83,12 @@ class ABaseUI {
 
 		/* info about mouse */
 		bool		_mouseHover;
-		bool		_mouseClick;
+		bool		_rightClick;
+		bool		_leftClick;
+
+		/* listener */
+		bool *		_rightListener;
+		bool *		_leftListener;
 
 		/* shaders */
 		glm::mat4			_projection;  // projection matrix (orthogonal)

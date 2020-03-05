@@ -35,6 +35,8 @@ public:
 	static bool								shouldQuit();
 	static const glm::ivec2					&getMousePos();
 	static const glm::ivec2					&getMouseRel();
+	static bool								getRightClick();
+	static bool								getLeftClick();
 	static void								update();
 
 private:
@@ -48,6 +50,8 @@ private:
 	bool									_shouldQuit() const;
 	const glm::ivec2						&_getMousePos() const;
 	const glm::ivec2						&_getMouseRel() const;
+	bool									_getRightClick() const;
+	bool									_getLeftClick() const;
 	void									_update();
 
 	bool									_configuring;
@@ -55,6 +59,8 @@ private:
 	bool									_quit;
 	glm::ivec2								_mouse_pos;
 	glm::ivec2								_mouse_rel;
+	bool									_left_click;
+	bool									_right_click;
 	std::map<SDL_Scancode, InputType::Enum>	_input_key_map;
 	std::unordered_set<int64_t>				_used_scan;
 	bool									_key_status[Inputs::nb_input];
