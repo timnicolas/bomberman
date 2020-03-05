@@ -29,8 +29,8 @@ class ABaseUI {
 
 		ABaseUI & operator=(ABaseUI const & rhs);
 
-		virtual void		update(glm::vec2 mousePos, MouseState::ENUM mouseState) = 0;
-		virtual void		draw() = 0;
+		void			update(glm::vec2 mousePos, MouseState::ENUM mouseState);
+		virtual void	draw() = 0;
 
 		void	setWinSize(glm::vec2 winSize);
 
@@ -40,14 +40,19 @@ class ABaseUI {
 
 		/* setter */
 		ABaseUI &	setColor(glm::vec4 color);
+
 		ABaseUI &	setBorderColor(glm::vec4 color);
 		ABaseUI &	setBorderSize(float size);
+
+		ABaseUI &	setMouseHoverColor(glm::vec4 color);
 
 		ABaseUI &	setText(std::string const & text);
 		ABaseUI &	setTextColor(glm::vec4 color);
 		ABaseUI &	setTextScale(float scale);
 
 		/* getter */
+		bool					getMouseHover() const;
+		bool					getMouseClick() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
 		glm::vec2 &				getSize();
@@ -63,6 +68,7 @@ class ABaseUI {
 
 	protected:
 		ABaseUI();
+		virtual void	_update(glm::vec2 mousePos, MouseState::ENUM mouseState) = 0;
 
 		glm::vec2	_winSize;
 		glm::vec2	_pos;
@@ -71,10 +77,16 @@ class ABaseUI {
 		// border
 		glm::vec4	_borderColor;
 		float		_borderSize;
+		// mmouse effect
+		glm::vec4	_mouseHoverColor;
 		// text
 		std::string	_text;
 		glm::vec4	_textColor;
 		float		_textScale;
+
+		/* info about mouse */
+		bool		_mouseHover;
+		bool		_mouseClick;
 
 		/* shaders */
 		glm::mat4			_projection;  // projection matrix (orthogonal)

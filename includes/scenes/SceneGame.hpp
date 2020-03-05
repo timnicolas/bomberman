@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include "glm/gtx/string_cast.hpp"
 
+#include "AScene.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Player.hpp"
@@ -21,15 +22,15 @@ namespace GameState {
 	};
 }
 
-class Game {
+class SceneGame : public AScene {
 private:
+	SceneGame();
 	// Members
 	static std::map<std::string, AEntity *> _entitiesCall;
 
 	// Methods
-	bool	_update(std::chrono::milliseconds last_loop_ms);
-	bool	_draw();
 	bool	_loadLevel(uint8_t level);
+	void	_drawBoard();
 
 public:
 	// Members
@@ -44,25 +45,21 @@ public:
 	std::chrono::milliseconds	time;
 
 	// Constructors
-	Game();
-	~Game();
-	Game(Game const &src);
+	explicit SceneGame(Gui * gui);
+	virtual ~SceneGame();
+	SceneGame(SceneGame const &src);
 
 	// Operators
-	Game &operator=(Game const &rhs);
-	friend std::ostream& operator<<(std::ostream& os, const Game& my_class);
+	SceneGame &operator=(SceneGame const &rhs);
+	friend std::ostream& operator<<(std::ostream& os, const SceneGame& my_class);
 
 	// Methods
 	std::string		print() const;
-	bool			init();
-	bool			run();
 
-	// Exceptions
-	class GameException : public std::runtime_error {
-	public:
-		GameException();
-		explicit GameException(const char* what_arg);
-	};
+	// AScene methods
+	virtual bool	init();
+	virtual bool	update(std::chrono::milliseconds last_loop_ms);
+	virtual bool	draw();
 };
 
 #endif  // GAME_HPP_

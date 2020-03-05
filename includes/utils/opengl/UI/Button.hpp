@@ -11,9 +11,9 @@ class Button : public ABaseUI {
 
 		Button & operator=(Button const & rhs);
 
-		virtual void		update(glm::vec2 mousePos, MouseState::ENUM mouseState);
-		virtual void		draw();
+		virtual void	draw();
 
 	protected:
+		virtual void	_update(glm::vec2 mousePos, MouseState::ENUM mouseState);
 		Button();
 };

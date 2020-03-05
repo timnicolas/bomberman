@@ -58,22 +58,26 @@ class Gui {
 
 		void	updateInput();
 		bool	init();
-		bool	draw();
+		void	preDraw();
+		void	postDraw();
+		void	drawSkybox(glm::mat4 &view);
+		void	enableCursor(bool enable);
+
+		GameInfo		&gameInfo;
+		TextureManager	*textureManager;
+		Shader			*cubeShader;
+		Camera			*cam;
+
+		uint32_t		cubeShVao;
+		uint32_t		cubeShVbo;
 
 	private:
-		GameInfo		&_gameInfo;
 		SDL_Window		*_win;
 		SDL_Event		*_event;
 		SDL_GLContext	_context;
 
-		TextureManager	*_textureManager;
-		Shader			*_cubeShader;
-		Camera			*_cam;
-		TextRender		*_textRender;
 		Skybox			*_skybox;
 
-		uint32_t		_cubeShVao;
-		uint32_t		_cubeShVbo;
 		glm::mat4		_projection;
 
 		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;
@@ -82,6 +86,4 @@ class Gui {
 		bool	_init();
 		bool	_initOpengl();
 		bool	_initShaders();
-		void	_drawBoard();
-		void	_drawSkybox(glm::mat4 &view);
 };
