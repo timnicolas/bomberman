@@ -129,6 +129,7 @@ SRC =	main.cpp \
 		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/ABaseUI_utils.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
 		utils/opengl/UI/SliderUI.cpp \
 		utils/opengl/UI/TextUI.cpp \
