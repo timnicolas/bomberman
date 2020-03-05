@@ -24,8 +24,8 @@
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Skybox.hpp"
-#include "UI/Button.hpp"
 #include "debug.hpp"
+#include "ABaseUI.hpp"
 
 #define TITLE	"bomberman"
 
