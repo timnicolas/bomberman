@@ -75,11 +75,15 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _borderColor(0.0, 0.0, 0.0, 1.0),
   _borderSize(5.0),
   _mouseHoverColor(0.0, 0.0, 0.0, 0.01),
+  _mouseClickColor(0.5, 0.0, 0.0, 0.5),
   _text("default text"),
   _textColor(0.0, 0.0, 0.0, 1.0),
   _textScale(1.0),
   _mouseHover(false),
-  _mouseClick(false)
+  _rightClick(false),
+  _leftClick(false),
+  _rightListener(nullptr),
+  _leftListener(nullptr)
 {
 	setWinSize(winSize);
 }
@@ -102,19 +106,30 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 /*
 	this is the update function of buttons objects
 */
-void ABaseUI::update(glm::vec2 mousePos, MouseState::ENUM mouseState) {
-	(void)mouseState;
+void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	// TODO(tnicolas42) add the mouse click in update
+	_leftClick = false;
+	_leftClick = false;
 	mousePos.y = _winSize.y - mousePos.y;
 	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
 	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
 	{
 		_mouseHover = true;
+		if (leftClick) {
+			_leftClick = true;
+		}
+		if (rightClick) {
+			_rightClick = true;
+		}
 	}
 	else {
 		_mouseHover = false;
 	}
-	_update(mousePos, mouseState);
+	if (_rightListener)
+		*_rightListener = _rightClick;
+	if (_leftListener)
+		*_leftListener = _leftClick;
+	_update(mousePos, rightClick, leftClick);
 }
 
 /*
@@ -136,7 +151,7 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 /*
 	draw a rect at `pos` of size `size` with the color `color`
 */
-void ABaseUI::drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
+void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
 	_rectShader->use();
 
 	// set color
@@ -162,13 +177,27 @@ void ABaseUI::drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color) {
 		scale -> size of the text
 		text -> the text to print
 */
-void ABaseUI::drawTextCenter(glm::vec2 pos, float scale, std::string const & text, glm::vec4 color) {
+void ABaseUI::_drawTextCenter(glm::vec2 pos, float scale, std::string const & text, glm::vec4 color) {
 	glm::vec2 tmpPos = pos;
 	uint32_t width = _textRender->strWidth("font", text, scale);
 	uint32_t height = _textRender->strHeight("font", text, scale);
 	tmpPos.x -= width / 2;
 	tmpPos.y -= height / 2;
 	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
+}
+
+/* listener */
+/*
+	the right & left listener are pointer to bool.
+	The bool pointed is equal to true when the button is pressed
+*/
+ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
+	_rightListener = listener;
+	return *this;
+}
+ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
+	_leftListener = listener;
+	return *this;
 }
 
 /* setter */
@@ -178,6 +207,7 @@ ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; retur
 ABaseUI &	ABaseUI::setBorderSize(float size) { _borderSize = size; return *this; }
 
 ABaseUI &	ABaseUI::setMouseHoverColor(glm::vec4 color) { _mouseHoverColor = color; return *this; }
+ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = color; return *this; }
 
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
@@ -185,7 +215,8 @@ ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this;
 
 /* getter */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
-bool				ABaseUI::getMouseClick() const { return _mouseClick; }
+bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
+bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }

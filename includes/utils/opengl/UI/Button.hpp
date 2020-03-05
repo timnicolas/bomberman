@@ -14,6 +14,6 @@ class Button : public ABaseUI {
 		virtual void	draw();
 
 	protected:
-		virtual void	_update(glm::vec2 mousePos, MouseState::ENUM mouseState);
+		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
 		Button();
 };

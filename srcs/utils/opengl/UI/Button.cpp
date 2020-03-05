@@ -22,9 +22,10 @@ Button & Button::operator=(Button const & rhs) {
 	return *this;
 }
 
-void Button::_update(glm::vec2 mousePos, MouseState::ENUM mouseState) {
+void Button::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
-	(void)mouseState;
+	(void)rightClick;
+	(void)leftClick;
 }
 
 /*
@@ -38,7 +39,7 @@ void Button::draw() {
 	// draw text
 	tmpPos.x = _pos.x + _size.x / 2;
 	tmpPos.y = _pos.y + _size.y / 2;
-	drawTextCenter(tmpPos, _textScale, _text, _textColor);
+	_drawTextCenter(tmpPos, _textScale, _text, _textColor);
 
 	// get center size and position
 	tmpPos = _pos;
@@ -48,14 +49,17 @@ void Button::draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 
-	// draw color filter if mouse over
-	if (_mouseHover) {
-		drawRect(tmpPos, tmpSize, _mouseHoverColor);
+	// draw color filter if mouse over or left click
+	if (_leftClick) {
+		_drawRect(tmpPos, tmpSize, _mouseClickColor);
+	}
+	else if (_mouseHover) {
+		_drawRect(tmpPos, tmpSize, _mouseHoverColor);
 	}
 
     // draw center
-	drawRect(tmpPos, tmpSize, _color);
+	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
-	drawRect(_pos, _size, _borderColor);
+	_drawRect(_pos, _size, _borderColor);
 }

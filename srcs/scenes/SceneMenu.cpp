@@ -60,7 +60,7 @@ bool			SceneMenu::init() {
 bool	SceneMenu::update(std::chrono::milliseconds last_loop_ms) {
 	(void)last_loop_ms;
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		(*it)->update(Inputs::getMousePos(), MouseState::NO_CLICK);
+		(*it)->update(Inputs::getMousePos(), Inputs::getRightClick(), Inputs::getLeftClick());
 	}
 	return true;
 }
