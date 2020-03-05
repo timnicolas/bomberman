@@ -179,7 +179,7 @@ bool	SceneGame::draw() {
 bool	SceneGame::_loadLevel(uint8_t level) {
 	logInfo("SceneGame _loadLevel");
 	SettingsJson	lvl;
-	std::string		filename = "bomberman-assets/maps/level"+std::to_string(level)+".json";
+	std::string		filename = "maps/level"+std::to_string(level)+".json";
 
 	// File json definition:
 
