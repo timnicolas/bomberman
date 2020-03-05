@@ -1,5 +1,5 @@
-#ifndef GAME_HPP_
-#define GAME_HPP_
+#ifndef SCENEGAME_HPP_
+#define SCENEGAME_HPP_
 
 #include <iostream>
 #include <stdexcept>
@@ -11,8 +11,9 @@
 #include "AScene.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
-#include "Player.hpp"
 #include "Bomb.hpp"
+
+class Player;
 
 namespace GameState {
 	enum Enum {
@@ -22,11 +23,26 @@ namespace GameState {
 	};
 }
 
+namespace EntityType {
+	enum Enum {
+		PLAYER,
+		BOARD,
+		BOARD_FLAG,
+		ENEMY,
+		BOMB,
+	};
+}
+
+struct Entity {
+	EntityType::Enum	entity_type;
+	AEntity*			entity;
+};
+
 class SceneGame : public AScene {
 private:
 	SceneGame();
 	// Members
-	static std::map<std::string, AEntity *> _entitiesCall;
+	static std::map<std::string, Entity> _entitiesCall;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);
@@ -39,6 +55,7 @@ public:
 	std::vector<ACharacter *>	enemies;
 	std::vector<Bomb *>			bombs;
 
+	uint8_t						flags;
 	glm::uvec2					size;
 	uint8_t						level;
 	GameState::Enum				state;
@@ -62,4 +79,4 @@ public:
 	virtual bool	draw();
 };
 
-#endif  // GAME_HPP_
+#endif  // SCENEGAME_HPP_

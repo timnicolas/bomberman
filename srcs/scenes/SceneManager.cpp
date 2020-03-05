@@ -39,6 +39,17 @@ bool SceneManager::init() {
 		return false;
 	}
 
+	// test Scene Game
+	SceneGame game = SceneGame(_gui);
+
+	try {
+		game.init();
+	} catch (std::exception &e) {
+		logErr("Error : " << e.what());
+	}
+
+	exit(0);  // TODO(ebaudet): delete this for merge when branch loadLevel is ok.
+
 	// create and init fisrt scene
 	// TODO(tnicolas42) create the scene loader (factory ?)
 	// _scene = new SceneGame(_gui);

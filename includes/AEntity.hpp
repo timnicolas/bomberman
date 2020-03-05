@@ -16,9 +16,11 @@ namespace Category {
 namespace Type {
 	enum Enum {
 		PLAYER,
-		IA,
+		ENEMY,
 		BOMB,
 		WALL,
+		END,
+		FLAG,
 	};
 }
 
