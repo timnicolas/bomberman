@@ -3,8 +3,9 @@
 #include "Logging.hpp"
 
 TextRender::TextRender(uint32_t width, uint32_t height) :
-_shader(SHADER_TEXT_VS, SHADER_TEXT_FS),
-_projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfloat>(height))) {
+_shader(SHADER_TEXT_VS, SHADER_TEXT_FS)
+{
+	setWinSize(glm::vec2(width, height));
 	// create VAO & VBO
 	_vao = 0;
 	_vbo = 0;
@@ -18,8 +19,6 @@ _projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfl
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, SHADER_TEXT_ROW_SIZE * sizeof(GLfloat), 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
-	_shader.setMat4("projection", _projection);
 	_shader.unuse();
 }
 
@@ -104,6 +103,20 @@ TextRender &TextRender::operator=(TextRender const &rhs) {
 	return *this;
 }
 
+/*
+	call this function on every window resize
+*/
+void TextRender::setWinSize(glm::vec2 winSize) {
+	_projection = glm::ortho(
+		0.0f,
+		static_cast<GLfloat>(winSize.x),
+		0.0f,
+		static_cast<GLfloat>(winSize.y));
+	_shader.use();
+	_shader.setMat4("projection", _projection);
+	_shader.unuse();
+}
+
 void TextRender::write(std::string const &fontName, std::string text, GLfloat x, GLfloat y,
 GLfloat scale, glm::vec3 color) {
 	if (font.find(fontName) == font.end()) {
@@ -157,7 +170,21 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
     }
 	return width;
 }
-
+uint32_t	TextRender::strHeight(std::string const &fontName, std::string text, GLfloat scale) {
+	uint32_t	height = 0;
+	if (font.find(fontName) == font.end()) {
+		logErr("invalid font name " << fontName);
+		return 0;
+	}
+	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
+        Character ch = font[fontName][*c];
+		uint32_t tmpH = ch.size.y * scale;
+        if (tmpH > height) {
+			height = tmpH;
+		}
+    }
+	return height;
+}
 
 Shader			&TextRender::getShader() { return _shader; }
 Shader const	&TextRender::getShader() const { return _shader; }

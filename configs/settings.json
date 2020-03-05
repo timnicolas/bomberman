@@ -1,2 +1,9 @@
 {
+    "screen": {
+        "fps": 60
+    },
+	"font": {
+		"file": "bomberman-assets/fonts/Pacifico.ttf",
+		"size": 25
+	}
 }
