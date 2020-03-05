@@ -127,6 +127,7 @@ SRC =	main.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
+		utils/opengl/UI/ButtonImageUI.cpp \
 		utils/opengl/UI/SliderUI.cpp \
 		utils/opengl/UI/TextUI.cpp \
 		utils/opengl/UI/RectUI.cpp \
@@ -165,6 +166,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/Skybox.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
 		utils/opengl/UI/ButtonUI.hpp \
+		utils/opengl/UI/ButtonImageUI.hpp \
 		utils/opengl/UI/SliderUI.hpp \
 		utils/opengl/UI/TextUI.hpp \
 		utils/opengl/UI/RectUI.hpp \
