@@ -7,16 +7,23 @@
 
 class Music {
 public:
+	class MusicException: public std::runtime_error {
+		public:
+			MusicException();
+			explicit MusicException(const char* what_arg);
+			explicit MusicException(const std::string what_arg);
+	};
+
 	explicit Music(std::string filename);
 	~Music();
 
 	void									play(float volume, bool loop);
+
 private:
 	Music();
 	Music(const Music &src);
 	Music									&operator=(const Music &src);
 
-	std::exception							_filename;
 	Mix_Music								*_mix_mus;
 };
 

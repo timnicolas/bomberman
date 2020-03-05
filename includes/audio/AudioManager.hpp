@@ -10,6 +10,7 @@
 class AudioManager {
 public:
 	static const int						nb_sound_channels = 42;
+
 	~AudioManager();
 
 	static AudioManager						&get();
@@ -33,6 +34,8 @@ public:
 	static void								stopAllSounds();
 
 private:
+	static std::string						_assets_path;
+
 	AudioManager();
 	AudioManager(const AudioManager &src);
 	AudioManager							&operator=(const AudioManager &src);
@@ -60,7 +63,7 @@ private:
 	float									_volume_master;
 	float									_volume_music;
 	float									_volume_sound;
-	std::map<std::string, Music *>		_musics;
+	std::map<std::string, Music *>			_musics;
 	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;
 };
