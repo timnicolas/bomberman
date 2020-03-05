@@ -4,11 +4,13 @@
 #include <iostream>
 #include <stdexcept>
 #include "ACharacter.hpp"
+#include "SceneGame.hpp"
 
 class Player : public ACharacter {
 public:
 	// Members
-	int		bombs;
+	int			bombs;
+	SceneGame	*game;
 
 	// Constructors
 	Player();

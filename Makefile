@@ -98,10 +98,14 @@ SRC =	main.cpp \
 		AEntity.cpp \
 \
 		ACharacter.cpp \
-		Player.cpp \
+		elements/Player.cpp \
+		elements/Enemy.cpp \
 \
 		AObject.cpp \
-		Bomb.cpp \
+		elements/Bomb.cpp \
+		elements/Wall.cpp \
+		elements/End.cpp \
+		elements/Flag.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
@@ -131,10 +135,14 @@ HEAD =	bomberman.hpp \
 		AEntity.hpp \
 \
 		ACharacter.hpp \
-		Player.hpp \
+		elements/Player.hpp \
+		elements/Enemy.hpp \
 \
 		AObject.hpp \
-		Bomb.hpp \
+		elements/Bomb.hpp \
+		elements/Wall.hpp \
+		elements/End.hpp \
+		elements/Flag.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \

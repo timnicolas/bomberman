@@ -5,12 +5,24 @@
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
+#include "Player.hpp"
+#include "Enemy.hpp"
+#include "Wall.hpp"
+#include "Flag.hpp"
+#include "End.hpp"
 
 // -- Static members initialisation --------------------------------------------
 
-std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
-	{"player", new Player()},
-	{"bomb", new Bomb()},
+std::map<std::string, Entity> SceneGame::_entitiesCall = {
+	{"player", {EntityType::PLAYER, new Player()}},
+	{"bomb", {EntityType::BOMB, new Bomb()}},
+	{"wall", {EntityType::BOARD, new Wall()}},
+	{"block", {EntityType::BOARD, new Wall()}},
+	{"crispy", {EntityType::BOARD, new Wall()}},
+	{"flag", {EntityType::BOARD_FLAG, new Flag()}},
+	{"end", {EntityType::BOARD, new End()}},
+	{"safe", {EntityType::BOARD, nullptr}},
+	{"empty", {EntityType::ENEMY, Enemy::generateEnemy(1.0)}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -18,10 +30,33 @@ std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
 SceneGame::SceneGame(Gui * gui)
 : AScene(gui)
 {
-	// TODO(ebaudet): init members
+	player = nullptr;
+	enemies = std::vector<ACharacter *>();
+	bombs = std::vector<Bomb *>();
+	flags = 0;
+	size = {0, 0};
+	level = 0;
+	state = GameState::PLAY;
+	time = std::chrono::milliseconds(0);
 }
 
 SceneGame::~SceneGame() {
+	logInfo("Clean Game Level");
+
+	for (auto &&box : board) {
+		for (auto &&row : box) {
+			for (auto &&element : row) {
+				delete element;
+			}
+		}
+	}
+	if (player != nullptr) {
+		// TODO(ebaudet): save player if state is not GameOver.
+		delete player;
+	}
+	for (auto &&enemy : enemies) {
+		delete enemy;
+	}
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -38,6 +73,7 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		player = rhs.player;
 		enemies = rhs.enemies;
 		bombs = rhs.bombs;
+		flags = rhs.flags;
 		size = rhs.size;
 		level = rhs.level;
 		state = rhs.state;
@@ -68,8 +104,9 @@ std::string		SceneGame::print() const {
  * init game method.
  */
 bool			SceneGame::init() {
+	logInfo("SceneGame init");
 	_gui->enableCursor(false);
-	// _loadLevel(1);
+	_loadLevel(1);
 	return true;
 }
 
@@ -140,6 +177,7 @@ bool	SceneGame::draw() {
 }
 
 bool	SceneGame::_loadLevel(uint8_t level) {
+	logInfo("SceneGame _loadLevel");
 	SettingsJson	lvl;
 	std::string		filename = "bomberman-assets/maps/level"+std::to_string(level)+".json";
 
@@ -150,15 +188,18 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 	lvl.add<std::string>("name");
 	lvl.add<uint64_t>("height", 0).setMin(0);
 	lvl.add<uint64_t>("width", 0).setMin(0);
+	lvl.add<int64_t>("time", 0).setMin(-1).setMax(86400);
 
 	lvl.add<SettingsJson>("objects");
-		lvl.j("objects").add<std::string>("wall", "w");
 		lvl.j("objects").add<std::string>("empty", " ");
-		lvl.j("objects").add<std::string>("player", "p");
-		lvl.j("objects").add<std::string>("tree", "t");
-		lvl.j("objects").add<std::string>("box", "b");
-		lvl.j("objects").add<std::string>("end", "e");
-		lvl.j("objects").add<std::string>("bomb", "x");
+		lvl.j("objects").add<std::string>("player", "p");  // unique player on game.
+		lvl.j("objects").add<std::string>("bomb", "x");  // destructing element dropped by the player.
+		lvl.j("objects").add<std::string>("wall", "w");  // indestructible element outside the board
+		lvl.j("objects").add<std::string>("block", "b");  // indestructible element of the board
+		lvl.j("objects").add<std::string>("crispy", "c");  // destructable element, who can give bonuses randomly
+		lvl.j("objects").add<std::string>("flag", "f");  // flag to get end
+		lvl.j("objects").add<std::string>("end", "e");  // end of level when all flag
+		lvl.j("objects").add<std::string>("safe", "_");  // no spawn zone
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("line", "");
@@ -190,6 +231,10 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 
 	if (lvl.lj("map").list.size() != size.y)
 		throw SceneException("Map height error");
+
+	time = std::chrono::seconds(lvl.i("time"));
+
+	AEntity *entity;
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");
 		if (line.length() != size.x)
@@ -197,7 +242,27 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 		for (uint32_t i = 0; i < size.x; i++) {
 			for (auto &&entitYCall : _entitiesCall) {
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
-					board[i][j].push_back(_entitiesCall[entitYCall.first]);
+					entity = _entitiesCall[entitYCall.first].entity;
+					if (entity == nullptr)
+						continue;
+					switch (_entitiesCall[entitYCall.first].entity_type) {
+					case EntityType::PLAYER:
+						if (player == nullptr)
+							player = reinterpret_cast<Player *>(entity);
+						break;
+					case EntityType::BOMB:
+						bombs.push_back(reinterpret_cast<Bomb *>(entity));
+						board[i][j].push_back(entity);
+						break;
+					case EntityType::BOARD_FLAG:
+						flags++;
+					case EntityType::BOARD:
+						board[i][j].push_back(entity);
+						break;
+					case EntityType::ENEMY:
+						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
+						break;
+					}
 				}
 			}
 		}
