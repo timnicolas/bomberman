@@ -15,12 +15,15 @@ class Slider : public ABaseUI {
 
 		void			setValues(float min, float max, float val, float step = 0);
 
+		Slider &		addSliderListener(float * listener);
+
 	protected:
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
 		Slider();
 
-		float _min;
-		float _max;
-		float _val;
-		float _step;
+		float	_min;
+		float	_max;
+		float	_val;
+		float	_step;
+		float *	_sliderListener;
 };
