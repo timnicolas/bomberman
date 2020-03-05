@@ -4,9 +4,15 @@
 #include "Shader.hpp"
 #include "TextRender.hpp"
 
+/* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
 #define SHADER_RECT_2D_ROW_SZ 2
+
+/* img */
+#define SHADER_IMAGE_2D_VS "./shaders/image_2D_vs.glsl"
+#define SHADER_IMAGE_2D_FS "./shaders/image_2D_fs.glsl"
+#define SHADER_IMAGE_2D_ROW_SIZE 4
 
 namespace TextAlign {
 	enum Enum {
@@ -72,10 +78,17 @@ class ABaseUI {
 	protected:
 		ABaseUI();
 		/* draw base function */
+		// rect
 		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
 			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
+		// text
 		void			_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
 			glm::vec4 color, TextAlign::Enum align, float padding);
+		// img
+		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
+
+		// update function (redefined in child class)
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
 
 		glm::vec2	_winSize;
@@ -94,6 +107,10 @@ class ABaseUI {
 		float		_textScale;
 		float		_textPadding;
 		TextAlign::Enum	_textAlign;
+		// image
+		GLuint		_imgTextureID;
+		int			_imgDefWidth;
+		int			_imgDefHeight;
 
 		/* info about mouse */
 		bool		_mouseHover;
@@ -106,9 +123,16 @@ class ABaseUI {
 
 		/* shaders */
 		glm::mat4			_projection;  // projection matrix (orthogonal)
+		// rectangle
 		static Shader *		_rectShader;
 		static GLuint		_rectVao;
 		static GLuint		_rectVbo;
 		static const float	_rectVertices[];
+		// text
 		static TextRender *	_textRender;
+		// image 2D
+		static Shader *		_imgShader;
+		static GLuint		_imgVao;
+		static GLuint		_imgVbo;
+		static const float	_imgVertices[];
 };
