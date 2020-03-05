@@ -43,5 +43,5 @@ void TextUI::draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textScale, _text, _textColor, _textAlign);
+	_drawText(tmpPos, tmpSize, _textScale, _text, _textColor, _textAlign, _textPadding);
 }

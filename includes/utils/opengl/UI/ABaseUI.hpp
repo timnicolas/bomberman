@@ -49,6 +49,7 @@ class ABaseUI {
 		ABaseUI &	setText(std::string const & text);
 		ABaseUI &	setTextColor(glm::vec4 color);
 		ABaseUI &	setTextScale(float scale);
+		ABaseUI &	setTextPadding(float padding);
 		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
 		/* getter */
@@ -74,7 +75,7 @@ class ABaseUI {
 		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
 			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
 		void			_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
-			glm::vec4 color, TextAlign::Enum align);
+			glm::vec4 color, TextAlign::Enum align, float padding);
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
 
 		glm::vec2	_winSize;
@@ -91,6 +92,7 @@ class ABaseUI {
 		std::string	_text;
 		glm::vec4	_textColor;
 		float		_textScale;
+		float		_textPadding;
 		TextAlign::Enum	_textAlign;
 
 		/* info about mouse */
