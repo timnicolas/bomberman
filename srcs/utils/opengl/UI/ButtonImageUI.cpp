@@ -1,9 +1,10 @@
-#include "ImageUI.hpp"
+#include "ButtonImageUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
 #include "Texture.hpp"
 
-ImageUI::ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom)
+ButtonImageUI::ButtonImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size,
+	std::string const & filename, bool pixelateOnZoom)
 : ABaseUI(winSize, pos, size)
 {
 	// disable color
@@ -14,19 +15,19 @@ ImageUI::ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string c
 	_loadImg(filename, true, pixelateOnZoom);
 }
 
-ImageUI::ImageUI(ImageUI const & src): ABaseUI(src) {
+ButtonImageUI::ButtonImageUI(ButtonImageUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
-ImageUI::~ImageUI() {}
+ButtonImageUI::~ButtonImageUI() {}
 
-ImageUI & ImageUI::operator=(ImageUI const & rhs) {
+ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
 	return *this;
 }
 
-void ImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+void ButtonImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
 	(void)rightClick;
 	(void)leftClick;
@@ -36,12 +37,21 @@ void ImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	this is the draw function for UI
 	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
 */
-void ImageUI::draw() {
+void ButtonImageUI::draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 
 	// draw border
 	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+
+	// get color (if mouse hover or mouse click)
+	glm::vec4 color = _color;
+	if (_leftClick) {
+		color = _mouseClickColor;
+	}
+	else if (_mouseHover) {
+		color = _mouseHoverColor;
+	}
 
 	// get center size and position
 	tmpPos = _pos;
@@ -51,5 +61,5 @@ void ImageUI::draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 	// draw image
-	_drawImg(tmpPos, tmpSize, _imgTextureID, _color);
+	_drawImg(tmpPos, tmpSize, _imgTextureID, color);
 }

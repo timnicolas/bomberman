@@ -89,6 +89,11 @@ bool			SceneMenu::init() {
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "button right").setTextAlign(TextAlign::RIGHT);
 
+		tmpPos.y -= menuHeight * 1.2;
+		tmpSize.x = 0;
+		addButtonImage(tmpPos, tmpSize, "bomberman-assets/textures/player/011-playerTop.png");
+		tmpSize.x = menuWidth;
+
 		tmpSize.x = tmpSize.x * 1.2;
 		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
@@ -160,6 +165,13 @@ ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const
 		s.j("colors").j("buttons").d("a")
 	);
 	ui->setColor(color);
+	_buttons.push_back(ui);
+	return *ui;
+}
+ButtonImageUI & SceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
+bool pixelateOnZoom)
+{
+	ButtonImageUI * ui = new ButtonImageUI(_gui->gameInfo.windowSize, pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
 	return *ui;
 }
