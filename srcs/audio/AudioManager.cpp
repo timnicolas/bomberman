@@ -56,7 +56,7 @@ void						AudioManager::updateSettings() {
 }
 void						AudioManager::_updateSettings() {
 	float setting_sound = _volume_master * _volume_sound;
-	float previous_music = Mix_VolumeMusic(-1) / (MIX_MAX_VOLUME * _volume_master * _volume_music);
+	float previous_music = Mix_VolumeMusic(-1) / (_volume_master * _volume_music);
 	_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
 	_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
 	_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
