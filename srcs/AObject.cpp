@@ -8,7 +8,7 @@ AObject::AObject() {
 AObject::~AObject() {
 }
 
-AObject::AObject(AObject const &src) {
+AObject::AObject(AObject const &src): AEntity(src) {
 	*this = src;
 }
 

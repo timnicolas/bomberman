@@ -9,7 +9,7 @@ Bomb::Bomb() {
 Bomb::~Bomb() {
 }
 
-Bomb::Bomb(Bomb const &src) {
+Bomb::Bomb(Bomb const &src): AObject(src) {
 	*this = src;
 }
 
