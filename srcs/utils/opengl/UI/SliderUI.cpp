@@ -2,8 +2,8 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-SliderUI::SliderUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
-: ABaseUI(winSize, pos, size),
+SliderUI::SliderUI(glm::vec2 pos, glm::vec2 size)
+: ABaseUI(pos, size),
   _min(0),
   _max(1),
   _val(0.5),
@@ -76,7 +76,7 @@ void SliderUI::draw() {
 	std::string valStr = std::to_string(_val);
 	if (_val - static_cast<int>(_val) < 0.1 || _val - static_cast<int>(_val) > 0.9)
 		valStr = std::to_string(static_cast<int>(_val));
-	_drawText(tmpPos, tmpSize, _textScale, valStr, _textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _textFont, _textScale, valStr, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = _pos;

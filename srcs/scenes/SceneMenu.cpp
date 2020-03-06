@@ -155,7 +155,7 @@ bool	SceneMenu::draw() {
 	@return a reference to the UI created
 */
 ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
-	ButtonUI * ui = new ButtonUI(_gui->gameInfo.windowSize, pos, size);
+	ButtonUI * ui = new ButtonUI(pos, size);
 	ui->setText(text);
 	// set default color
 	glm::vec4 color = glm::vec4(
@@ -171,12 +171,12 @@ ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const
 ButtonImageUI & SceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
 bool pixelateOnZoom)
 {
-	ButtonImageUI * ui = new ButtonImageUI(_gui->gameInfo.windowSize, pos, size, filename, pixelateOnZoom);
+	ButtonImageUI * ui = new ButtonImageUI(pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
 	return *ui;
 }
 SliderUI & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
-	SliderUI * ui = new SliderUI(_gui->gameInfo.windowSize, pos, size);
+	SliderUI * ui = new SliderUI(pos, size);
 	ui->setValues(min, max, val, step);
 	// set default color
 	glm::vec4 color = glm::vec4(
@@ -190,20 +190,20 @@ SliderUI & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float 
 	return *ui;
 }
 TextUI & SceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
-	TextUI * ui = new TextUI(_gui->gameInfo.windowSize, pos, size);
+	TextUI * ui = new TextUI(pos, size);
 	ui->setText(text);
 	_buttons.push_back(ui);
 	return *ui;
 }
 RectUI & SceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm::vec4 borderColor) {
-	RectUI * ui = new RectUI(_gui->gameInfo.windowSize, pos, size);
+	RectUI * ui = new RectUI(pos, size);
 	ui->setColor(color);
 	ui->setBorderColor(borderColor);
 	_buttons.push_back(ui);
 	return *ui;
 }
 ImageUI & SceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom) {
-	ImageUI * ui = new ImageUI(_gui->gameInfo.windowSize, pos, size, filename, pixelateOnZoom);
+	ImageUI * ui = new ImageUI(pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
 	return *ui;
 }
