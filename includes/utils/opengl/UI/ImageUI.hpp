@@ -5,7 +5,7 @@
 
 class ImageUI : public ABaseUI {
 	public:
-		ImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size, std::string const & filename,
+		ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename,
 			bool pixelateOnZoom = true);
 		ImageUI(ImageUI const & src);
 		virtual ~ImageUI();

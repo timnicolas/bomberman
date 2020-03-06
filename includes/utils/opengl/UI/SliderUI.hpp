@@ -5,7 +5,7 @@
 
 class SliderUI : public ABaseUI {
 	public:
-		SliderUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
+		SliderUI(glm::vec2 pos, glm::vec2 size);
 		SliderUI(SliderUI const & src);
 		virtual ~SliderUI();
 
