@@ -5,7 +5,7 @@
 
 class RectUI : public ABaseUI {
 	public:
-		RectUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
+		RectUI(glm::vec2 pos, glm::vec2 size);
 		RectUI(RectUI const & src);
 		virtual ~RectUI();
 

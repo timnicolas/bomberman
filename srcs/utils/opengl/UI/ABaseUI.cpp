@@ -3,6 +3,10 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
+/* global */
+glm::vec2		ABaseUI::_winSize;
+glm::mat4		ABaseUI::_projection;
+/* rect */
 Shader *		ABaseUI::_rectShader = nullptr;
 GLuint			ABaseUI::_rectVao = 0;
 GLuint			ABaseUI::_rectVbo = 0;
@@ -15,7 +19,10 @@ const float		ABaseUI::_rectVertices[] = {
 	1.0, 0.0,
 	1.0, 1.0,
 };
+/* text */
 TextRender *	ABaseUI::_textRender = nullptr;
+std::string		ABaseUI::_defFont = "default";
+/* img */
 Shader *		ABaseUI::_imgShader = nullptr;
 GLuint			ABaseUI::_imgVao = 0;
 GLuint			ABaseUI::_imgVbo = 0;
@@ -30,7 +37,7 @@ const float		ABaseUI::_imgVertices[] = {
 	1.0, 1.0,  1.0, 0.0,
 };
 
-void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
+void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t defFontSize) {
 	if (_rectShader != nullptr) {
 		logWarn("call ABaseUI::init only once");
 		return;
@@ -69,7 +76,7 @@ void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 	/* create text render */
 	_textRender = new TextRender(0, 0);
 	try {
-		_textRender->loadFont("font", fontName, fontSize);
+		_textRender->loadFont(_defFont, defFontName, defFontSize);
 	}
 	catch (TextRender::TextRenderError & e) {
 		throw UIException(e.what());
@@ -105,6 +112,9 @@ void ABaseUI::init(std::string const & fontName, uint32_t fontSize) {
 
 	// disable shader
 	_imgShader->unuse();
+
+	// set projection matrix
+	setWinSize(winSize);
 }
 
 void ABaseUI::destroy() {
@@ -124,7 +134,7 @@ void ABaseUI::destroy() {
 	_imgShader = nullptr;
 }
 
-ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
+ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _pos(pos),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
@@ -134,6 +144,7 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _mouseClickColor(0.0, 0.0, 0.0, 0.5),
   _text("default text"),
   _textColor(0.0, 0.0, 0.0, 1.0),
+  _textFont(_defFont),
   _textScale(1.0),
   _textPadding(5),
   _textAlign(TextAlign::CENTER),
@@ -145,9 +156,7 @@ ABaseUI::ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size)
   _leftClick(false),
   _rightListener(nullptr),
   _leftListener(nullptr)
-{
-	setWinSize(winSize);
-}
+{}
 
 ABaseUI::ABaseUI(ABaseUI const & src) {
 	*this = src;
@@ -238,6 +247,7 @@ ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = colo
 
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
+ABaseUI &	ABaseUI::setTextFont(std::string const & font) { _textFont = font; return *this; }
 ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this; }
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }

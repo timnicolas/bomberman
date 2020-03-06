@@ -100,7 +100,7 @@ bool	Gui::init() {
 
 	/* init UI interface */
 	try {
-		ABaseUI::init(s.j("font").s("file"), s.j("font").u("size"));
+		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());

@@ -5,7 +5,7 @@
 
 class ButtonUI : public ABaseUI {
 	public:
-		ButtonUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
+		ButtonUI(glm::vec2 pos, glm::vec2 size);
 		ButtonUI(ButtonUI const & src);
 		virtual ~ButtonUI();
 

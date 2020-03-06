@@ -2,7 +2,7 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-TextUI::TextUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size): ABaseUI(winSize, pos, size) {
+TextUI::TextUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
@@ -38,5 +38,5 @@ void TextUI::draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textScale, _text, _textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
 }

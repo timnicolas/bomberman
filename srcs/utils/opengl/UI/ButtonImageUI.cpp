@@ -3,9 +3,9 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
-ButtonImageUI::ButtonImageUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size,
+ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
 	std::string const & filename, bool pixelateOnZoom)
-: ABaseUI(winSize, pos, size)
+: ABaseUI(pos, size)
 {
 	// disable color
 	_color = glm::vec4(0.0, 0.0, 0.0, 0.0);

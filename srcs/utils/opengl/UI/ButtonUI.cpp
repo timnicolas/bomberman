@@ -2,7 +2,7 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-ButtonUI::ButtonUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size): ABaseUI(winSize, pos, size) {
+ButtonUI::ButtonUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 }
 
 ButtonUI::ButtonUI(ButtonUI const & src): ABaseUI(src) {
@@ -36,7 +36,7 @@ void ButtonUI::draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textScale, _text, _textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = _pos;

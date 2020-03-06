@@ -59,11 +59,11 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, g
 		scale -> size of the text
 		text -> the text to print
 */
-void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float scale, std::string const & text,
+void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
 glm::vec4 color, TextAlign::Enum align, float padding) {
 	(void)align;
-	uint32_t width = _textRender->strWidth("font", text, scale);
-	uint32_t height = _textRender->strHeight("font", text, scale);
+	uint32_t width = _textRender->strWidth(font, text, scale);
+	uint32_t height = _textRender->strHeight(font, text, scale);
 
 	// get position of the text
 	glm::vec2 tmpPos;
@@ -74,7 +74,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 	else if (align == TextAlign::RIGHT)
 		tmpPos.x = pos.x + size.x - width - padding;
 	tmpPos.y = (pos.y + size.y / 2) - height / 2;
-	_textRender->write("font", text, tmpPos.x, tmpPos.y, scale, color);
+	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, color);
 }
 
 /*
