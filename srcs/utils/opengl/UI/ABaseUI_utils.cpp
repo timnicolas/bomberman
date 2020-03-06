@@ -3,9 +3,15 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
-/*
-	draw a rect at `pos` of size `size` with the color `color`
-*/
+/**
+ * @brief draw a rectangle
+ *
+ * @param pos the rect pos
+ * @param size the rect size
+ * @param color1 the rect master color
+ * @param color2 the rect secondary color (to make a mix)
+ * @param factor the factor of second color on master color
+ */
 void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor) {
 	_rectShader->use();
 
@@ -30,6 +36,15 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::ve
 /*
 	draw the border of a rect at `pos` of size `size` with the color `color`
 */
+
+/**
+ * @brief draw the border of a rect
+ *
+ * @param pos the rect pos
+ * @param size the rect size
+ * @param borderSize the size of the border of the rect
+ * @param color the rect color
+ */
 void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color) {
 	if (borderSize == 0)
 		return;
@@ -53,12 +68,18 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, g
 	_drawRect(tmpPos, tmpSize, color);
 }
 
-/*
-	draw text centered on a pos
-		pos -> position of the center of the text
-		scale -> size of the text
-		text -> the text to print
-*/
+/**
+ * @brief draw text
+ *
+ * @param pos the text pos
+ * @param size the text size
+ * @param font the font used (see loadFont)
+ * @param scale the text scale
+ * @param text the text str
+ * @param color the text color
+ * @param align the text alignement (LEFT | CENTER | RIGHT)
+ * @param padding the text padding (left & right)
+ */
 void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
 glm::vec4 color, TextAlign::Enum align, float padding) {
 	(void)align;
@@ -77,15 +98,18 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, color);
 }
 
-/*
-	create a texture from an image
-	if updateSize is set to true:
-		- if _size.x == 0 && _size.x == 0 -> size auto setted (default size for the image)
-		- if _size.x == 0 -> width auto setted
-		- if _size.y == 0 -> height auto setted
-
-	@return: the texture ID
-*/
+/**
+ * @brief load an image (used in constructors)
+ *
+ * @param filename the image filename
+ * @param updateSize auto update _size variable or not (bool)
+ *   - if _size.x == 0 && _size.x == 0 -> size auto setted (default size for the image)
+ *   - if _size.x == 0 -> width auto setted
+ *   - if _size.y == 0 -> height auto setted
+ * @param pixelateOnZoom when zoom on the image, pixelate or smooth transition
+ *
+ * @throw UIException if the image failed to load
+ */
 void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool pixelateOnZoom) {
 	// load the texture
 	try {
@@ -109,9 +133,15 @@ void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool pixel
 		}
 	}
 }
-/*
-	draw a 2D image on the screen
-*/
+
+/**
+ * @brief draw a 2D image on the screen
+ *
+ * @param pos the text pos
+ * @param size the text size
+ * @param textureID the texture ID (get with _loadImg)
+ * @param color an image filter color
+ */
 void ABaseUI::_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color) {
 	_imgShader->use();
 
