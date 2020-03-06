@@ -27,16 +27,23 @@ ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {
 	return *this;
 }
 
+/**
+ * @brief this is the base update function of UI objects
+ *
+ * @param mousePos the position of the mouse
+ * @param rightClick a boolean to know if right click is pressed
+ * @param leftClick a boolean to know if left click is pressed
+ */
 void ButtonImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
 	(void)rightClick;
 	(void)leftClick;
 }
 
-/*
-	this is the draw function for UI
-	/!\ -> you need to draw in the reverse order (draw at first the element on the top)
-*/
+/**
+ * @brief this is the draw function for UI
+ * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
+ */
 void ButtonImageUI::draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
