@@ -28,6 +28,7 @@ class ABaseUI {
 		static void init(glm::vec2 winSize, std::string const & fontName, uint32_t fontSize);
 		static void destroy();
 		static void	setWinSize(glm::vec2 winSize);
+		static void loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize);
 
 		/* base functions */
 		ABaseUI(glm::vec2 pos, glm::vec2 size);
@@ -127,15 +128,15 @@ class ABaseUI {
 		/* shaders */
 		static glm::vec2	_winSize;
 		static glm::mat4	_projection;  // projection matrix (orthogonal)
-		// rectangle
+		/* rectangle */
 		static Shader *		_rectShader;
 		static GLuint		_rectVao;
 		static GLuint		_rectVbo;
 		static const float	_rectVertices[];
-		// text
+		/* text */
 		static TextRender *	_textRender;
 		static std::string	_defFont;
-		// image 2D
+		/* image 2D */
 		static Shader *		_imgShader;
 		static GLuint		_imgVao;
 		static GLuint		_imgVbo;

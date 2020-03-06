@@ -134,6 +134,44 @@ void ABaseUI::destroy() {
 	_imgShader = nullptr;
 }
 
+/*
+	load a new font
+
+	@param fontName: the font name
+	@param filename: the ttf file to load
+	@param fontSize: the size of the font
+
+	@throw UIException: if the font failed to load
+*/
+void ABaseUI::loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize) {
+	try {
+		_textRender->loadFont(fontName, filename, fontSize);
+	}
+	catch (TextRender::TextRenderError & e) {
+		throw UIException(e.what());
+	}
+}
+
+/*
+	call this function on every window resize
+*/
+void ABaseUI::setWinSize(glm::vec2 winSize) {
+	_winSize = winSize;
+	_projection = glm::ortho(
+		0.0f,
+		static_cast<GLfloat>(_winSize.x),
+		0.0f,
+		static_cast<GLfloat>(_winSize.y));
+	_rectShader->use();
+	_rectShader->setMat4("projection", _projection);
+	_rectShader->unuse();
+	_imgShader->use();
+	_imgShader->setMat4("projection", _projection);
+	_imgShader->unuse();
+	_textRender->setWinSize(winSize);
+}
+
+
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _pos(pos),
   _size(size),
@@ -199,25 +237,6 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	if (_leftListener)
 		*_leftListener = _leftClick;
 	_update(mousePos, rightClick, leftClick);
-}
-
-/*
-	call this function on every window resize
-*/
-void ABaseUI::setWinSize(glm::vec2 winSize) {
-	_winSize = winSize;
-	_projection = glm::ortho(
-		0.0f,
-		static_cast<GLfloat>(_winSize.x),
-		0.0f,
-		static_cast<GLfloat>(_winSize.y));
-	_rectShader->use();
-	_rectShader->setMat4("projection", _projection);
-	_rectShader->unuse();
-	_imgShader->use();
-	_imgShader->setMat4("projection", _projection);
-	_imgShader->unuse();
-	_textRender->setWinSize(winSize);
 }
 
 /* listener */
