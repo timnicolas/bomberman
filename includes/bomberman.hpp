@@ -5,6 +5,7 @@
 #endif
 #define DEBUG_FPS_LOW	DEBUG & false
 
+#include <chrono>
 #include "SettingsJson.hpp"
 #include "Logging.hpp"
 

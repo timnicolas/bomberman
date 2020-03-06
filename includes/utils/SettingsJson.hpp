@@ -286,39 +286,43 @@ class SettingsJson {
 
 		template<class T>
 		std::map<std::string, JsonObj<T> *> const & _getMap() const {
+			std::map<std::string, JsonObj<T> *> const *__attribute__((__may_alias__)) ptr;
 			if (typeid(T) == typeid(int64_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&intMap);
 			if (typeid(T) == typeid(uint64_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&uintMap);
 			if (typeid(T) == typeid(double))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&doubleMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&doubleMap);
 			if (typeid(T) == typeid(bool))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&boolMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&boolMap);
 			if (typeid(T) == typeid(std::string))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&stringMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&stringMap);
 			if (typeid(T) == typeid(SettingsJson))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonMap);
 			if (typeid(T) == typeid(SettingsList<SettingsJson>))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonList);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> const *>(&jsonList);
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
+			return *ptr;
 		}
 		template<class T>
 		std::map<std::string, JsonObj<T> *> & _getMap() {
+			std::map<std::string, JsonObj<T> *> *__attribute__((__may_alias__)) ptr;
 			if (typeid(T) == typeid(int64_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&intMap);
 			if (typeid(T) == typeid(uint64_t))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&uintMap);
 			if (typeid(T) == typeid(double))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&doubleMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&doubleMap);
 			if (typeid(T) == typeid(bool))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&boolMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&boolMap);
 			if (typeid(T) == typeid(std::string))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&stringMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&stringMap);
 			if (typeid(T) == typeid(SettingsJson))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonMap);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonMap);
 			if (typeid(T) == typeid(SettingsList<SettingsJson>))
-				return *reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonList);
+				ptr = reinterpret_cast<std::map<std::string, JsonObj<T> *> *>(&jsonList);
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
+			return *ptr;
 		}
 
 

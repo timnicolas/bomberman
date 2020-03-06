@@ -8,7 +8,7 @@ ACharacter::ACharacter() {
 ACharacter::~ACharacter() {
 }
 
-ACharacter::ACharacter(ACharacter const &src) {
+ACharacter::ACharacter(ACharacter const &src): AEntity(src) {
 	*this = src;
 }
 
