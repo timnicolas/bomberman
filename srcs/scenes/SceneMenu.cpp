@@ -56,11 +56,13 @@ bool			SceneMenu::init() {
 	float menuHeight = menuWidth / 8;
 
 	try {
+		ABaseUI::loadFont("title", s.j("font").s("file"), s.j("font").u("size") * 3);
+
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "MENU").setTextScale(3);
+		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "button left").setTextAlign(TextAlign::LEFT);
