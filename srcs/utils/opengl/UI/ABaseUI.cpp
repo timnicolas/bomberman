@@ -37,6 +37,13 @@ const float		ABaseUI::_imgVertices[] = {
 	1.0, 1.0,  1.0, 0.0,
 };
 
+/**
+ * @brief init the UI interface
+ *
+ * @param winSize the size of the window
+ * @param defFontName the defeult font filename
+ * @param defFontSize the default font size
+ */
 void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t defFontSize) {
 	if (_rectShader != nullptr) {
 		logWarn("call ABaseUI::init only once");
@@ -117,6 +124,10 @@ void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t 
 	setWinSize(winSize);
 }
 
+/**
+ * @brief call this function at the end of the program to free UI interfaces
+ *
+ */
 void ABaseUI::destroy() {
 	if (_rectShader == nullptr) {
 		logWarn("call ABaseUI::destroy only once and only if you have already called ABaseUI::init");
@@ -134,15 +145,15 @@ void ABaseUI::destroy() {
 	_imgShader = nullptr;
 }
 
-/*
-	load a new font
-
-	@param fontName: the font name
-	@param filename: the ttf file to load
-	@param fontSize: the size of the font
-
-	@throw UIException: if the font failed to load
-*/
+/**
+ * @brief load a new font
+ *
+ * @param fontName the font name
+ * @param filename the ttf file to load
+ * @param fontSize the size of the font
+ *
+ * @throw UIException if the font failed to load
+ */
 void ABaseUI::loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize) {
 	try {
 		_textRender->loadFont(fontName, filename, fontSize);
@@ -152,9 +163,11 @@ void ABaseUI::loadFont(std::string const & fontName, std::string const & filenam
 	}
 }
 
-/*
-	call this function on every window resize
-*/
+/**
+ * @brief call this function on every window resize to update projection matrix
+ *
+ * @param winSize the size of the window
+ */
 void ABaseUI::setWinSize(glm::vec2 winSize) {
 	_winSize = winSize;
 	_projection = glm::ortho(
@@ -211,9 +224,13 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 	return *this;
 }
 
-/*
-	this is the update function of buttons objects
-*/
+/**
+ * @brief this is the base update function of UI objects
+ *
+ * @param mousePos the position of the mouse
+ * @param rightClick a boolean to know if right click is pressed
+ * @param leftClick a boolean to know if left click is pressed
+ */
 void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	_leftClick = false;
 	_leftClick = false;
@@ -240,15 +257,23 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 }
 
 /* listener */
-/*
-	the right & left listener are pointer to bool.
-	The bool pointed is equal to true when the button is pressed
-*/
+/**
+ * @brief add a listener on the right click
+ *
+ * @param listener a pointer on the bool listener
+ * @return ABaseUI& the object
+ */
 ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
 	_rightListener = listener;
 	*_rightListener = _rightClick;
 	return *this;
 }
+/**
+ * @brief add a listener on the left click
+ *
+ * @param listener a pointer on the bool listener
+ * @return ABaseUI& the object
+ */
 ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
 	*_leftListener = _leftClick;
