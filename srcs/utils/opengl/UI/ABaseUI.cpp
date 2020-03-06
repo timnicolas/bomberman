@@ -261,7 +261,7 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
  * @brief add a listener on the right click
  *
  * @param listener a pointer on the bool listener
- * @return ABaseUI& the object
+ * @return ABaseUI& a reference to the object
  */
 ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
 	_rightListener = listener;
@@ -272,7 +272,7 @@ ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
  * @brief add a listener on the left click
  *
  * @param listener a pointer on the bool listener
- * @return ABaseUI& the object
+ * @return ABaseUI& a reference to the object
  */
 ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
