@@ -1,4 +1,4 @@
-install: make install
+install: make install && source ~/.cpplinter/alias.zsh
 script: make lint && make -j8
 language:
   - cpp
