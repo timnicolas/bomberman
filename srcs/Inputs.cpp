@@ -12,7 +12,9 @@ const std::string	Inputs::input_type_name[] = {
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
-Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false) {
+Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false), \
+	_left_click_previous(false), _right_click_previous(false)
+{
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 		_key_previous_status[i] = false;
@@ -280,6 +282,11 @@ void				Inputs::_update() {
 
 	_mouse_rel.x = 0;
 	_mouse_rel.y = 0;
+	_left_click_previous = _left_click;
+	_right_click_previous = _right_click;
+	for (int i = 0; i < Inputs::nb_input; i++) {
+		_key_previous_status[i] = _key_status[i];
+	}
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
@@ -287,7 +294,6 @@ void				Inputs::_update() {
 			if (!_configuring) {
 				try {
 					int index = static_cast<int>(_input_key_map.at(scan));
-					_key_previous_status[index] = _key_status[index];
 					_key_status[index] = true;
 				}
 				catch(std::out_of_range oor) {
@@ -315,7 +321,6 @@ void				Inputs::_update() {
 			scan = event.key.keysym.scancode;
 			try {
 				int index = static_cast<int>(_input_key_map.at(scan));
-				_key_previous_status[index] = _key_status[index];
 				_key_status[index] = false;
 			}
 			catch(std::out_of_range oor) {
