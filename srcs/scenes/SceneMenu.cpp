@@ -9,10 +9,8 @@
 
 // -- Constructors -------------------------------------------------------------
 
-SceneMenu::SceneMenu(Gui * gui)
-: AScene(gui)
-{
-}
+SceneMenu::SceneMenu(Gui * gui, float const &dtTime)
+: AScene(gui, dtTime) {}
 
 SceneMenu::~SceneMenu() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
@@ -22,8 +20,7 @@ SceneMenu::~SceneMenu() {
 }
 
 SceneMenu::SceneMenu(SceneMenu const &src)
-: AScene(src)
-{
+: AScene(src) {
 	*this = src;
 }
 
@@ -133,12 +130,10 @@ bool			SceneMenu::init() {
 /**
  * @brief this is the update function (called every frames)
  *
- * @param last_loop_ms the delta time since last loop
  * @return true if the update is a success
  * @return false if there are an error in update
  */
-bool	SceneMenu::update(std::chrono::milliseconds last_loop_ms) {
-	(void)last_loop_ms;
+bool	SceneMenu::update() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->update(Inputs::getMousePos(), Inputs::getRightClick(), Inputs::getLeftClick());
 	}

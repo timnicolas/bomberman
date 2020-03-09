@@ -17,7 +17,7 @@ class SceneMenu : public AScene {
 		// Members
 
 		// Constructors
-		explicit SceneMenu(Gui * gui);
+		explicit SceneMenu(Gui * gui, float const &dtTime);
 		virtual ~SceneMenu();
 		SceneMenu(SceneMenu const &src);
 
@@ -27,7 +27,7 @@ class SceneMenu : public AScene {
 
 		// AScene methods
 		virtual bool		init();
-		virtual bool		update(std::chrono::milliseconds last_loop_ms);
+		virtual bool		update();
 		virtual bool		draw();
 
 		/* add element */
