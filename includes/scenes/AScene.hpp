@@ -24,6 +24,7 @@ class AScene {
 			SceneException();
 			explicit SceneException(const char* whatArg);
 		};
+
 	protected:
 		AScene();
 
