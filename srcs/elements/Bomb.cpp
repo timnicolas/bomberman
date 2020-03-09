@@ -27,10 +27,10 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 
 /**
  * update is called each frame.
- * @param d_time Delta Time
+ * @param dTime Delta Time
  */
-bool	Bomb::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last Bomb updated at " << d_time.count() << std::endl;
+bool	Bomb::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last Bomb updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -54,5 +54,5 @@ bool	Bomb::blockPropagation() {
 Bomb::BombException::BombException()
 : std::runtime_error("Bomb Exception") {}
 
-Bomb::BombException::BombException(const char* what_arg)
-: std::runtime_error(std::string(std::string("BombError: ") + what_arg).c_str()) {}
+Bomb::BombException::BombException(const char* whatArg)
+: std::runtime_error(std::string(std::string("BombError: ") + whatArg).c_str()) {}

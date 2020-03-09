@@ -27,10 +27,10 @@ End &End::operator=(End const &rhs) {
 
 /**
  * update is called each frame.
- * @param d_time Delta Time
+ * @param dTime Delta Time
  */
-bool	End::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last End updated at " << d_time.count() << std::endl;
+bool	End::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last End updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -54,5 +54,5 @@ bool	End::blockPropagation() {
 End::EndException::EndException()
 : std::runtime_error("End Exception") {}
 
-End::EndException::EndException(const char* what_arg)
-: std::runtime_error(std::string(std::string("EndError: ") + what_arg).c_str()) {}
+End::EndException::EndException(const char* whatArg)
+: std::runtime_error(std::string(std::string("EndError: ") + whatArg).c_str()) {}

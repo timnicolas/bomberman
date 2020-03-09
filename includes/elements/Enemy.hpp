@@ -24,7 +24,7 @@ public:
 	Enemy &operator=(Enemy const &rhs);
 
 	// Methods
-	bool			update(std::chrono::milliseconds d_time);
+	bool			update(std::chrono::milliseconds dTime);
 	bool			draw();
 	bool			isDestructable();
 	bool			blockPropagation();
@@ -35,7 +35,7 @@ public:
 	class EnemyException : public std::runtime_error {
 	public:
 		EnemyException();
-		explicit EnemyException(const char* what_arg);
+		explicit EnemyException(const char* whatArg);
 	};
 };
 

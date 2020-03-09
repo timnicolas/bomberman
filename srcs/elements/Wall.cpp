@@ -27,10 +27,10 @@ Wall &Wall::operator=(Wall const &rhs) {
 
 /**
  * update is called each frame.
- * @param d_time Delta Time
+ * @param dTime Delta Time
  */
-bool	Wall::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last Wall updated at " << d_time.count() << std::endl;
+bool	Wall::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last Wall updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -54,5 +54,5 @@ bool	Wall::blockPropagation() {
 Wall::WallException::WallException()
 : std::runtime_error("Wall Exception") {}
 
-Wall::WallException::WallException(const char* what_arg)
-: std::runtime_error(std::string(std::string("WallError: ") + what_arg).c_str()) {}
+Wall::WallException::WallException(const char* whatArg)
+: std::runtime_error(std::string(std::string("WallError: ") + whatArg).c_str()) {}

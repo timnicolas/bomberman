@@ -46,5 +46,5 @@ glm::vec2	AObject::getPos() {
 AObject::AObjectException::AObjectException()
 : std::runtime_error("AObject Exception") {}
 
-AObject::AObjectException::AObjectException(const char* what_arg)
-: std::runtime_error(std::string(std::string("AObjectError: ") + what_arg).c_str()) {}
+AObject::AObjectException::AObjectException(const char* whatArg)
+: std::runtime_error(std::string(std::string("AObjectError: ") + whatArg).c_str()) {}

@@ -29,8 +29,8 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * update is called each frame.
  * @param d_time Delta Time
  */
-bool	Enemy::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last Enemy updated at " << d_time.count() << std::endl;
+bool	Enemy::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last Enemy updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -63,8 +63,8 @@ Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
 	if (rate >= 1)
 		return new Enemy(game);
 
-	int		percent_rate = rand() % 100;
-	if (percent_rate > static_cast<int>(rate * 100))
+	int		percentRate = rand() % 100;
+	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
 	return new Enemy(game);
 }
@@ -74,5 +74,5 @@ Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
 Enemy::EnemyException::EnemyException()
 : std::runtime_error("Enemy Exception") {}
 
-Enemy::EnemyException::EnemyException(const char* what_arg)
-: std::runtime_error(std::string(std::string("EnemyError: ") + what_arg).c_str()) {}
+Enemy::EnemyException::EnemyException(const char* whatArg)
+: std::runtime_error(std::string(std::string("EnemyError: ") + whatArg).c_str()) {}

@@ -20,7 +20,7 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds dTime) = 0;
 	virtual bool	draw() = 0;
 	glm::vec2		getPos();
 
@@ -28,7 +28,7 @@ public:
 	class AObjectException : public std::runtime_error {
 	public:
 		AObjectException();
-		explicit AObjectException(const char* what_arg);
+		explicit AObjectException(const char* whatArg);
 	};
 };
 

@@ -81,8 +81,8 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	return *this;
 }
 
-std::ostream &	operator<<(std::ostream & os, const SceneGame& my_class) {
-	os << my_class.print();
+std::ostream &	operator<<(std::ostream & os, const SceneGame& myClass) {
+	os << myClass.print();
 	return (os);
 }
 
@@ -174,13 +174,13 @@ bool	SceneGame::draw() {
 	return true;
 }
 
-bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t level_id) {
+bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t levelId) {
 	logInfo("SceneGame _initJsonLevel");
 
-	std::string		filename = "maps/level"+std::to_string(level_id)+".json";
+	std::string		filename = "maps/level"+std::to_string(levelId)+".json";
 
-	lvl.name("level"+std::to_string(level_id)).description("Level map");
-	lvl.add<std::string>("level"+std::to_string(level_id)+"Filename", filename);
+	lvl.name("level"+std::to_string(levelId)).description("Level map");
+	lvl.add<std::string>("level"+std::to_string(levelId)+"Filename", filename);
 
 	// File json definition:
 	lvl.add<std::string>("name");
@@ -231,11 +231,11 @@ bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t level_id) {
 	return true;
 }
 
-bool	SceneGame::_loadLevel(uint8_t level_id) {
+bool	SceneGame::_loadLevel(uint8_t levelId) {
 	logInfo("SceneGame _loadLevel");
 	SettingsJson	lvl;
 
-	if (!_initJsonLevel(lvl, level_id))
+	if (!_initJsonLevel(lvl, levelId))
 		return false;
 
 	// Getting json info
@@ -260,7 +260,7 @@ bool	SceneGame::_loadLevel(uint8_t level_id) {
 					entity = _entitiesCall[entitYCall.first].entity(*this);
 					if (entity == nullptr)
 						continue;
-					switch (_entitiesCall[entitYCall.first].entity_type) {
+					switch (_entitiesCall[entitYCall.first].entityType) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);

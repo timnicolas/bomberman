@@ -20,7 +20,7 @@ public:
 	Flag &operator=(Flag const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
+	bool	update(std::chrono::milliseconds dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
@@ -29,7 +29,7 @@ public:
 	class FlagException : public std::runtime_error {
 	public:
 		FlagException();
-		explicit FlagException(const char* what_arg);
+		explicit FlagException(const char* whatArg);
 	};
 };
 

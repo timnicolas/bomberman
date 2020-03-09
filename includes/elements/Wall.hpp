@@ -20,7 +20,7 @@ public:
 	Wall &operator=(Wall const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
+	bool	update(std::chrono::milliseconds dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
@@ -29,7 +29,7 @@ public:
 	class WallException : public std::runtime_error {
 	public:
 		WallException();
-		explicit WallException(const char* what_arg);
+		explicit WallException(const char* whatArg);
 	};
 };
 

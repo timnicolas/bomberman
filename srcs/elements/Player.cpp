@@ -29,10 +29,10 @@ Player &Player::operator=(Player const &rhs) {
 
 /**
  * update is called each frame.
- * @param d_time Delta Time
+ * @param dTime Delta Time
  */
-bool	Player::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last Player updated at " << d_time.count() << std::endl;
+bool	Player::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last Player updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -58,5 +58,5 @@ bool	Player::isAlive() {
 Player::PlayerException::PlayerException()
 : std::runtime_error("Player Exception") {}
 
-Player::PlayerException::PlayerException(const char* what_arg)
-: std::runtime_error(std::string(std::string("PlayerError: ") + what_arg).c_str()) {}
+Player::PlayerException::PlayerException(const char* whatArg)
+: std::runtime_error(std::string(std::string("PlayerError: ") + whatArg).c_str()) {}
