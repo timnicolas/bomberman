@@ -1,5 +1,5 @@
-#ifndef GAME_HPP_
-#define GAME_HPP_
+#ifndef SCENEGAME_HPP_
+#define SCENEGAME_HPP_
 
 #include <iostream>
 #include <stdexcept>
@@ -10,8 +10,9 @@
 #include "AScene.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
-#include "Player.hpp"
 #include "Bomb.hpp"
+
+class Player;
 
 namespace GameState {
 	enum Enum {
@@ -21,14 +22,30 @@ namespace GameState {
 	};
 }
 
+namespace EntityType {
+	enum Enum {
+		PLAYER,
+		BOARD,
+		BOARD_FLAG,
+		ENEMY,
+		BOMB,
+	};
+}
+
 class SceneGame : public AScene {
 private:
 	SceneGame();
 	// Members
-	static std::map<std::string, AEntity *> _entitiesCall;
+	typedef AEntity*(*entityFuncPtr)(SceneGame &);
+	struct Entity {
+		EntityType::Enum	entityType;
+		entityFuncPtr		entity;
+	};
+	static std::map<std::string, Entity> _entitiesCall;
 
 	// Methods
-	bool	_loadLevel(uint8_t level);
+	bool	_loadLevel(uint8_t levelId);
+	bool	_initJsonLevel(SettingsJson &lvl, uint8_t levelId);
 	void	_drawBoard();
 
 public:
@@ -38,6 +55,7 @@ public:
 	std::vector<ACharacter *>	enemies;
 	std::vector<Bomb *>			bombs;
 
+	uint8_t						flags;
 	glm::uvec2					size;
 	uint8_t						level;
 	GameState::Enum				state;
@@ -50,7 +68,7 @@ public:
 
 	// Operators
 	SceneGame &operator=(SceneGame const &rhs);
-	friend std::ostream& operator<<(std::ostream& os, const SceneGame& my_class);
+	friend std::ostream& operator<<(std::ostream& os, const SceneGame& myClass);
 
 	// Methods
 	std::string		print() const;
@@ -61,4 +79,4 @@ public:
 	virtual bool	draw();
 };
 
-#endif  // GAME_HPP_
+#endif  // SCENEGAME_HPP_

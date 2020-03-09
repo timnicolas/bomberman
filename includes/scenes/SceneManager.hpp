@@ -26,7 +26,7 @@ class SceneManager {
 		class SceneManagerException : public std::runtime_error {
 		public:
 			SceneManagerException();
-			explicit SceneManagerException(const char* what_arg);
+			explicit SceneManagerException(const char* whatArg);
 		};
 
 	protected:

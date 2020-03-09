@@ -27,5 +27,5 @@ AScene & AScene::operator=(AScene const & rhs) {
 AScene::SceneException::SceneException()
 : std::runtime_error("SceneException") {}
 
-AScene::SceneException::SceneException(const char* what_arg)
-: std::runtime_error(std::string(std::string("SceneError: ") + what_arg).c_str()) {}
+AScene::SceneException::SceneException(const char* whatArg)
+: std::runtime_error(std::string(std::string("SceneError: ") + whatArg).c_str()) {}

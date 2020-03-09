@@ -5,10 +5,14 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
+// class SceneGame;
+
 class AObject : public AEntity {
+private:
+	AObject();
 public:
 	// Constructors
-	AObject();
+	explicit AObject(SceneGame &game);
 	virtual ~AObject();
 	AObject(AObject const &src);
 
@@ -16,14 +20,15 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds dTime) = 0;
 	virtual bool	draw() = 0;
+	glm::vec2		getPos();
 
 	// Exceptions
 	class AObjectException : public std::runtime_error {
 	public:
 		AObjectException();
-		explicit AObjectException(const char* what_arg);
+		explicit AObjectException(const char* whatArg);
 	};
 };
 
