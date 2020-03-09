@@ -50,7 +50,7 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
-void Gui::updateInput() {
+void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
 	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
@@ -60,21 +60,19 @@ void Gui::updateInput() {
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
-	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
-
 	// -- camera movement ------------------------------------------------------
 	// camera movement
 	if (Inputs::getKey(InputType::Enum::UP)) {
-		cam->processKeyboard(CamMovement::Forward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Forward, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::RIGHT)) {
-		cam->processKeyboard(CamMovement::Right, _dtTime, false);
+		cam->processKeyboard(CamMovement::Right, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::DOWN)) {
-		cam->processKeyboard(CamMovement::Backward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Backward, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::LEFT)) {
-		cam->processKeyboard(CamMovement::Left, _dtTime, false);
+		cam->processKeyboard(CamMovement::Left, dtTime, false);
 	}
 }
 
