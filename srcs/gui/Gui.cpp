@@ -50,7 +50,7 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
-void Gui::updateInput() {
+void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
 	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
@@ -60,21 +60,19 @@ void Gui::updateInput() {
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
-	float _dtTime = 0.01;  // TODO(zer0nim): need to get the correct dtTime
-
 	// -- camera movement ------------------------------------------------------
 	// camera movement
 	if (Inputs::getKey(InputType::Enum::UP)) {
-		cam->processKeyboard(CamMovement::Forward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Forward, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::RIGHT)) {
-		cam->processKeyboard(CamMovement::Right, _dtTime, false);
+		cam->processKeyboard(CamMovement::Right, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::DOWN)) {
-		cam->processKeyboard(CamMovement::Backward, _dtTime, false);
+		cam->processKeyboard(CamMovement::Backward, dtTime, false);
 	}
 	if (Inputs::getKey(InputType::Enum::LEFT)) {
-		cam->processKeyboard(CamMovement::Left, _dtTime, false);
+		cam->processKeyboard(CamMovement::Left, dtTime, false);
 	}
 }
 
@@ -100,7 +98,7 @@ bool	Gui::init() {
 
 	/* init UI interface */
 	try {
-		ABaseUI::init(s.j("font").s("file"), s.j("font").u("size"));
+		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -263,7 +261,7 @@ void Gui::preDraw() {
 	// clear buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0, gameInfo.windowSize.x, gameInfo.windowSize.y);
-	glClearColor(0.11373f, 0.17647f, 0.27059f, 1.0f);
+	glClearColor(0.2, 0.5, 0.95, 1.0);
 }
 
 void Gui::postDraw() {
@@ -291,7 +289,7 @@ glm::mat4	Gui::getProjection() const { return _projection; }
 
 // -- statics const ------------------------------------------------------------
 // cube faces
-std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {
+std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 	// bot left corner,		faceId
 	-0.5f, -0.5f, 0.5f,		0,
 	0.5f, -0.5f, 0.5f,		1,
@@ -299,7 +297,7 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {
 	-0.5f, -0.5f, -0.5f,	3,
 	-0.5f, 0.5f, 0.5f,		4,
 	-0.5f, -0.5f, -0.5f,	5,
-};
+}};
 
 // -- GameInfo struct ----------------------------------------------------------
 GameInfo::GameInfo() {

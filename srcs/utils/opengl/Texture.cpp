@@ -4,20 +4,51 @@
 #include "Logging.hpp"
 
 // -- textureFromFile ----------------------------------------------------------
-uint32_t	textureFromFile(std::string const path, bool inSpaceSRGB) {
+/**
+ * @brief load image from file and convert it to an OpenGl texture
+ *
+ * @param path image file location
+ * @param inSpaceSRGB define if image are in sRGB space (Gamma correction)
+ * @param sizeOut specify a size pointer to retrieve it later
+ * @param glTexMinFilter OpenGl zoom out behaviour flag
+ * @param glTexMagFilter OpenGl zoom in behaviour flag
+ * @return uint32_t OpenGl texture id
+ */
+uint32_t	textureFromFile(std::string const path, bool inSpaceSRGB, glm::ivec2 *sizeOut,
+	GLint glTexMinFilter, GLint glTexMagFilter)
+{
 	int			formatId;
 	glm::ivec2	size;
 	u_char		*data;
 
+	// if the caller whant to retrieve the real image size
+	if (sizeOut != nullptr) {
+		// load texture data
+		data = stbi_load(path.c_str(), &(sizeOut->x), &(sizeOut->y), &formatId, 0);
+		return _createTexture(data, path, inSpaceSRGB, formatId, *sizeOut,
+			glTexMinFilter, glTexMagFilter);
+	}
+
 	// load texture data
 	data = stbi_load(path.c_str(), &(size.x), &(size.y), &formatId, 0);
-
-	return createTexture(data, path, inSpaceSRGB, formatId, size);
+	return _createTexture(data, path, inSpaceSRGB, formatId, *sizeOut,
+		glTexMinFilter, glTexMagFilter);
 }
 
 // -- textureAtlasFromFile -----------------------------------------------------
+/**
+ * @brief load texture atlas from file and convert it to an OpenGl texture array
+ *
+ * @param path image file location
+ * @param inSpaceSRGB define if image are in sRGB space (Gamma correction)
+ * @param tileSize size of one tile
+ * @param layerCount number of tiles
+ * @param glTexMinFilter OpenGl zoom out behaviour flag
+ * @param glTexMagFilter OpenGl zoom in behaviour flag
+ * @return uint32_t OpenGl texture id
+ */
 uint32_t	textureAtlasFromFile(std::string const path, bool inSpaceSRGB,
-	int tileSize, int layerCount)
+	int tileSize, int layerCount, GLint glTexMinFilter, GLint glTexMagFilter)
 {
 	int			formatId;
 	glm::ivec2	size;
@@ -26,11 +57,24 @@ uint32_t	textureAtlasFromFile(std::string const path, bool inSpaceSRGB,
 	// load texture data
 	data = stbi_load(path.c_str(), &(size.x), &(size.y), &formatId, 0);
 
-	return createTexture(data, path, inSpaceSRGB, formatId, size, true, tileSize, layerCount);
+	return _createTexture(data, path, inSpaceSRGB, formatId, size, glTexMinFilter,
+		glTexMagFilter, true, tileSize, layerCount);
 }
 
 // -- textureFromFbx -----------------------------------------------------------
-uint32_t	textureFromFbx(aiScene const *scene, int locationId, bool inSpaceSRGB) {
+/**
+ * @brief load texture from fbx model and convert it to an OpenGl texture
+ *
+ * @param scene Assimp scene to load the texture from
+ * @param locationId Assimp texture location id
+ * @param inSpaceSRGB define if image are in sRGB space (Gamma correction)
+ * @param glTexMinFilter OpenGl zoom out behaviour flag
+ * @param glTexMagFilter OpenGl zoom in behaviour flag
+ * @return uint32_t OpenGl texture id
+ */
+uint32_t	textureFromFbx(aiScene const *scene, int locationId, bool inSpaceSRGB,
+	GLint glTexMinFilter, GLint glTexMagFilter)
+{
 	int			formatId;
 	glm::ivec2	size;
 	aiTexture	*texture = nullptr;
@@ -50,12 +94,14 @@ uint32_t	textureFromFbx(aiScene const *scene, int locationId, bool inSpaceSRGB) 
 			texture->mWidth * texture->mHeight, &(size.x), &(size.y), &formatId, 0);
 	}
 
-	return createTexture(data, "from fbx", inSpaceSRGB, formatId, size);
+	return _createTexture(data, "from fbx", inSpaceSRGB, formatId, size,
+		glTexMinFilter, glTexMagFilter);
 }
 
-// -- createTexture ------------------------------------------------------------
-uint32_t	createTexture(uint8_t *data, std::string const name, bool inSpaceSRGB,
-	int formatId, glm::ivec2 size, bool isAtlas, int tileSize, int layerCount)
+// -- _createTexture -----------------------------------------------------------
+uint32_t	_createTexture(uint8_t *data, std::string const name, bool inSpaceSRGB,
+	int formatId, glm::ivec2 size, GLint glTexMinFilter, GLint glTexMagFilter,
+	bool isAtlas, int tileSize, int layerCount)
 {
 	uint32_t	textureID;
 	GLint		intFormat;
@@ -93,8 +139,8 @@ uint32_t	createTexture(uint8_t *data, std::string const name, bool inSpaceSRGB,
 			glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAX_LEVEL, 5);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glTexMinFilter);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glTexMagFilter);
 
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}

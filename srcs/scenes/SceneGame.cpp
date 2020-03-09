@@ -15,9 +15,8 @@ std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
 
 // -- Constructors -------------------------------------------------------------
 
-SceneGame::SceneGame(Gui * gui)
-: AScene(gui)
-{
+SceneGame::SceneGame(Gui * gui, float const &dtTime)
+: AScene(gui, dtTime) {
 	// TODO(ebaudet): init members
 }
 
@@ -26,8 +25,7 @@ SceneGame::~SceneGame() {
 }
 
 SceneGame::SceneGame(SceneGame const &src)
-: AScene(src)
-{
+: AScene(src) {
 	*this = src;
 }
 
@@ -86,25 +84,24 @@ bool			SceneGame::init() {
 
 // -- Private Methods ----------------------------------------------------------
 
-bool	SceneGame::update(std::chrono::milliseconds last_loop_ms) {
-	(void)last_loop_ms;
+bool	SceneGame::update() {
 	// for (auto &&board_it1 : board) {
 	// 	for (auto &&board_it1 : board_it1) {
 	// 		for (AEntity *board_it2 : board_it1) {
-	// 			if (!board_it2->update(getMs() - last_loop_ms))
+	// 			if (!board_it2->update(_dtTime))
 	// 				return false;
 	// 		}
 	// 	}
 	// }
 	// for (auto &&enemy : enemies) {
-	// 	if (!enemy->update(getMs() - last_loop_ms))
+	// 	if (!enemy->update(_dtTime))
 	// 		return false;
 	// }
 	// for (auto &&bomb : bombs) {
-	// 	if (!bomb->update(getMs() - last_loop_ms))
+	// 	if (!bomb->update(_dtTime))
 	// 		return false;
 	// }
-	// player->update(getMs() - last_loop_ms);
+	// player->update(_dtTime);
 
 	return true;
 }
