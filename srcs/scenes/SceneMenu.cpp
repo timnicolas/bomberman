@@ -45,7 +45,10 @@ std::ostream &	operator<<(std::ostream & os, const SceneMenu& my_class) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * init game method.
+ * @brief init the menu
+ *
+ * @return true if the init succed
+ * @return false if the init failed
  */
 bool			SceneMenu::init() {
 	_gui->enableCursor(true);
@@ -127,9 +130,13 @@ bool			SceneMenu::init() {
 	return true;
 }
 
-/*
-	call this function every frames to update the scene
-*/
+/**
+ * @brief this is the update function (called every frames)
+ *
+ * @param last_loop_ms the delta time since last loop
+ * @return true if the update is a success
+ * @return false if there are an error in update
+ */
 bool	SceneMenu::update(std::chrono::milliseconds last_loop_ms) {
 	(void)last_loop_ms;
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
@@ -138,9 +145,12 @@ bool	SceneMenu::update(std::chrono::milliseconds last_loop_ms) {
 	return true;
 }
 
-/*
-	call this function every frames to draw the scene
-*/
+/**
+ * @brief this is the draw function (called every frames)
+ *
+ * @return true if the draw is a success
+ * @return false if there are an error in draw
+ */
 bool	SceneMenu::draw() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->draw();
@@ -148,14 +158,14 @@ bool	SceneMenu::draw() {
 	return true;
 }
 
-/*
-	add a button in the menu
-	sceneobj->addButton(glm::vec2(100, 100), glm::vec2(150, 50), "text in button");
-
-	in these functions, you can set the default settings for buttons / slider / ...
-
-	@return a reference to the UI created
-*/
+/**
+ * @brief add a button in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param text the text in the button
+ * @return ButtonUI& a reference to the element created
+ */
 ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	ButtonUI * ui = new ButtonUI(pos, size);
 	ui->setText(text);
@@ -170,6 +180,16 @@ ButtonUI & SceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string const
 	_buttons.push_back(ui);
 	return *ui;
 }
+
+/**
+ * @brief add a button with image in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param filename the path to the image
+ * @param pixelateOnZoom a bool to enable/disable pixelate on zoom option
+ * @return ButtonImageUI& a reference to the element created
+ */
 ButtonImageUI & SceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
 bool pixelateOnZoom)
 {
@@ -177,6 +197,18 @@ bool pixelateOnZoom)
 	_buttons.push_back(ui);
 	return *ui;
 }
+
+/**
+ * @brief add a slider in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param min min value in slider
+ * @param max max value in slider
+ * @param val default value in slider
+ * @param step step of the slider
+ * @return SliderUI& a reference to the element created
+ */
 SliderUI & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step) {
 	SliderUI * ui = new SliderUI(pos, size);
 	ui->setValues(min, max, val, step);
@@ -191,12 +223,31 @@ SliderUI & SceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float 
 	_buttons.push_back(ui);
 	return *ui;
 }
+
+/**
+ * @brief add a text in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param text the text
+ * @return TextUI& a reference to the element created
+ */
 TextUI & SceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	TextUI * ui = new TextUI(pos, size);
 	ui->setText(text);
 	_buttons.push_back(ui);
 	return *ui;
 }
+
+/**
+ * @brief add a rectange in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param color the rectangle color
+ * @param borderColor the border rectangle color
+ * @return RectUI& a reference to the element created
+ */
 RectUI & SceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm::vec4 borderColor) {
 	RectUI * ui = new RectUI(pos, size);
 	ui->setColor(color);
@@ -204,6 +255,16 @@ RectUI & SceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm:
 	_buttons.push_back(ui);
 	return *ui;
 }
+
+/**
+ * @brief add an image in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param filename the path to the image
+ * @param pixelateOnZoom a bool to enable/disable pixelate on zoom option
+ * @return ImageUI& a reference to the element created
+ */
 ImageUI & SceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom) {
 	ImageUI * ui = new ImageUI(pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
