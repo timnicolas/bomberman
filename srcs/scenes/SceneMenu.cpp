@@ -48,7 +48,6 @@ std::ostream &	operator<<(std::ostream & os, const SceneMenu& myClass) {
  * @return false if the init failed
  */
 bool			SceneMenu::init() {
-	_gui->enableCursor(true);
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -137,9 +136,6 @@ bool	SceneMenu::update() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->update(Inputs::getMousePos(), Inputs::getRightClick(), Inputs::getLeftClick());
 	}
-	if (getUIElement(1).getMouseLeftClick()) {  // TODO(tnicolas42) remove theses lines
-		SceneManager::loadScene(SceneNames::GAME);
-	}
 	return true;
 }
 
@@ -154,6 +150,19 @@ bool	SceneMenu::draw() {
 		(*it)->draw();
 	}
 	return true;
+}
+/**
+ * @brief called when the scene is loaded
+ *
+ */
+void SceneMenu::load() {
+	_gui->enableCursor(true);
+}
+/**
+ * @brief called when the scene is unloaded
+ *
+ */
+void SceneMenu::unload() {
 }
 
 /**
