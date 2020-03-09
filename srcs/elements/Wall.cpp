@@ -2,14 +2,14 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Wall::Wall() {
+Wall::Wall(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 }
 
 Wall::~Wall() {
 }
 
-Wall::Wall(Wall const &src) {
+Wall::Wall(Wall const &src) : AObject(src) {
 	*this = src;
 }
 

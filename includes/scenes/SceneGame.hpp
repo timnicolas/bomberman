@@ -33,19 +33,20 @@ namespace EntityType {
 	};
 }
 
-struct Entity {
-	EntityType::Enum	entity_type;
-	AEntity*			entity;
-};
-
 class SceneGame : public AScene {
 private:
 	SceneGame();
 	// Members
+	typedef AEntity*(*entityFuncPtr)(SceneGame &);
+	struct Entity {
+		EntityType::Enum	entity_type;
+		entityFuncPtr		entity;
+	};
 	static std::map<std::string, Entity> _entitiesCall;
 
 	// Methods
-	bool	_loadLevel(uint8_t level);
+	bool	_loadLevel(uint8_t level_id);
+	bool	_initJsonLevel(SettingsJson &lvl, uint8_t level_id);
 	void	_drawBoard();
 
 public:

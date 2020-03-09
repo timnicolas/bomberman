@@ -7,11 +7,12 @@
 
 class End : public AObject {
 private:
+	End();
 	// Members
 
 public:
 	// Constructors
-	End();
+	explicit End(SceneGame &game);
 	~End();
 	End(End const &src);
 

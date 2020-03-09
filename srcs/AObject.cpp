@@ -1,14 +1,15 @@
 #include "AObject.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-AObject::AObject() {
+AObject::AObject(SceneGame &game) : AEntity(game) {
 }
 
 AObject::~AObject() {
 }
 
-AObject::AObject(AObject const &src) {
+AObject::AObject(AObject const &src) : AEntity(src) {
 	*this = src;
 }
 

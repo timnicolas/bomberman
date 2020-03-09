@@ -7,11 +7,12 @@
 
 class Wall : public AObject {
 private:
+	Wall();
 	// Members
 
 public:
 	// Constructors
-	Wall();
+	explicit Wall(SceneGame &game);
 	~Wall();
 	Wall(Wall const &src);
 

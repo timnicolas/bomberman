@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include "glm/gtx/string_cast.hpp"
 
+class SceneGame;
+
 namespace Category {
 	enum Enum {
 		STATIC,
@@ -25,6 +27,9 @@ namespace Type {
 }
 
 class AEntity {
+private:
+	AEntity();
+
 public:
 	// Members
 	bool			active;
@@ -32,9 +37,10 @@ public:
 	Category::Enum	category;
 	std::string		name;
 	Type::Enum		type;
+	SceneGame		&game;
 
 	// Constructors
-	AEntity();
+	explicit AEntity(SceneGame &game);
 	virtual ~AEntity();
 	AEntity(AEntity const &src);
 

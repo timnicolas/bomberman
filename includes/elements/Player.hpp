@@ -7,13 +7,15 @@
 #include "SceneGame.hpp"
 
 class Player : public ACharacter {
+private:
+	Player();
+
 public:
 	// Members
 	int			bombs;
-	SceneGame	*game;
 
 	// Constructors
-	Player();
+	explicit Player(SceneGame &game);
 	~Player();
 	Player(Player const &src);
 

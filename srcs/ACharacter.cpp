@@ -1,14 +1,15 @@
 #include "ACharacter.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-ACharacter::ACharacter() {
+ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
 }
 
 ACharacter::~ACharacter() {
 }
 
-ACharacter::ACharacter(ACharacter const &src) {
+ACharacter::ACharacter(ACharacter const &src) : AEntity(src) {
 	*this = src;
 }
 

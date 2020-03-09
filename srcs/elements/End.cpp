@@ -2,14 +2,14 @@
 
 // -- Constructors -------------------------------------------------------------
 
-End::End() {
+End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
 }
 
 End::~End() {
 }
 
-End::End(End const &src) {
+End::End(End const &src) : AObject(src) {
 	*this = src;
 }
 

@@ -5,14 +5,19 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
+// class SceneGame;
+
 class ACharacter : public AEntity {
+private:
+	ACharacter();
+
 public:
 	// Members
 	int		life;
 	float	speed;
 
 	// Constructors
-	ACharacter();
+	explicit ACharacter(SceneGame &game);
 	virtual ~ACharacter();
 	ACharacter(ACharacter const &src);
 

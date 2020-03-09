@@ -5,10 +5,14 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
+// class SceneGame;
+
 class AObject : public AEntity {
+private:
+	AObject();
 public:
 	// Constructors
-	AObject();
+	explicit AObject(SceneGame &game);
 	virtual ~AObject();
 	AObject(AObject const &src);
 
