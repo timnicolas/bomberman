@@ -9,7 +9,7 @@ Player::Player() {
 Player::~Player() {
 }
 
-Player::Player(Player const &src) {
+Player::Player(Player const &src): ACharacter(src) {
 	*this = src;
 }
 

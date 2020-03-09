@@ -163,6 +163,7 @@ HEAD =	bomberman.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
+		utils/useGlm.hpp \
 \
 		utils/opengl/Texture.hpp \
 		utils/opengl/Shader.hpp \
