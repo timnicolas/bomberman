@@ -4,8 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <chrono>
-#include <glm/glm.hpp>
-#include "glm/gtx/string_cast.hpp"
+#include "useGlm.hpp"
 
 namespace Category {
 	enum Enum {

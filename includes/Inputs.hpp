@@ -1,12 +1,12 @@
 #ifndef INPUTS_HPP
 # define INPUTS_HPP
 
-# include <SDL2/SDL.h>
-# include <map>
-# include <array>
-# include <unordered_set>
-# include <glm/glm.hpp>
-# include "SettingsJson.hpp"
+#include <SDL2/SDL.h>
+#include <map>
+#include <array>
+#include <unordered_set>
+#include "useGlm.hpp"
+#include "SettingsJson.hpp"
 
 namespace InputType {
 	enum Enum {
@@ -18,7 +18,7 @@ namespace InputType {
 		CONFIRM = 5,
 		CANCEL = 6,
 	};
-}			// namespace InputType
+}  // namespace InputType
 
 class Inputs {
 public:

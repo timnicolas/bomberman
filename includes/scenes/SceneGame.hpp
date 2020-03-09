@@ -5,8 +5,7 @@
 #include <stdexcept>
 #include <vector>
 #include <map>
-#include <glm/glm.hpp>
-#include "glm/gtx/string_cast.hpp"
+#include "useGlm.hpp"
 
 #include "AScene.hpp"
 #include "AEntity.hpp"
