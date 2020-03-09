@@ -4,8 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <chrono>
-#include <glm/glm.hpp>
-
+#include "useGlm.hpp"
 class SceneGame;
 
 namespace Category {
