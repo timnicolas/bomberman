@@ -122,9 +122,16 @@ SRC =	main.cpp \
 		utils/opengl/debug.cpp \
 		utils/opengl/Material.cpp \
 		utils/opengl/TextRender.cpp \
+		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
-		utils/opengl/UI/Button.cpp \
+		utils/opengl/UI/ABaseUI_utils.cpp \
+		utils/opengl/UI/ButtonUI.cpp \
+		utils/opengl/UI/ButtonImageUI.cpp \
+		utils/opengl/UI/SliderUI.cpp \
+		utils/opengl/UI/TextUI.cpp \
+		utils/opengl/UI/RectUI.cpp \
+		utils/opengl/UI/ImageUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -155,9 +162,15 @@ HEAD =	bomberman.hpp \
 		utils/opengl/debug.hpp \
 		utils/opengl/Material.hpp \
 		utils/opengl/TextRender.hpp \
+		utils/opengl/ImageAtlasRender.hpp \
 		utils/opengl/Skybox.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
-		utils/opengl/UI/Button.hpp \
+		utils/opengl/UI/ButtonUI.hpp \
+		utils/opengl/UI/ButtonImageUI.hpp \
+		utils/opengl/UI/SliderUI.hpp \
+		utils/opengl/UI/TextUI.hpp \
+		utils/opengl/UI/RectUI.hpp \
+		utils/opengl/UI/ImageUI.hpp \
 
 
 ################################################################################
