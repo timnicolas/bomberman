@@ -2,6 +2,7 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 #include "Texture.hpp"
+#include "Inputs.hpp"
 
 /* global */
 glm::vec2		ABaseUI::_winSize;
@@ -232,27 +233,31 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @param leftClick a boolean to know if left click is pressed
  */
 void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	_leftClick = false;
-	_leftClick = false;
 	mousePos.y = _winSize.y - mousePos.y;
 	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
 	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
 	{
 		_mouseHover = true;
-		if (leftClick) {
+		if (Inputs::getLeftClickDown()) {
 			_leftClick = true;
 		}
-		if (rightClick) {
+		if (Inputs::getRightClickDown()) {
 			_rightClick = true;
 		}
 	}
 	else {
 		_mouseHover = false;
 	}
-	if (_rightListener)
-		*_rightListener = _rightClick;
-	if (_leftListener)
-		*_leftListener = _leftClick;
+	if (Inputs::getLeftClickUp()) {
+		if (_mouseHover && _leftClick && _leftListener)
+			*_leftListener = _leftClick;
+		_leftClick = false;
+	}
+	if (Inputs::getRightClickUp()) {
+		if (_mouseHover && _rightClick && _rightListener)
+			*_rightListener = _rightClick;
+		_rightClick = false;
+	}
 	_update(mousePos, rightClick, leftClick);
 }
 
