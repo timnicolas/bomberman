@@ -45,7 +45,7 @@ public:
 	AEntity			&operator=(AEntity const &rhs);
 
 	// Methods
-	virtual bool		update(std::chrono::milliseconds d_time) = 0;
+	virtual bool		update(std::chrono::milliseconds dTime) = 0;
 	virtual bool		draw() = 0;
 	virtual bool		isDestructable() = 0;
 	virtual bool		blockPropagation() = 0;

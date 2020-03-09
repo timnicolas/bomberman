@@ -27,7 +27,7 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds dTime) = 0;
 	virtual bool	draw() = 0;
 	virtual bool	isAlive() = 0;
 	glm::vec2		getPos();
@@ -37,7 +37,7 @@ public:
 	class ACharacterException : public std::runtime_error {
 	public:
 		ACharacterException();
-		explicit ACharacterException(const char* what_arg);
+		explicit ACharacterException(const char* whatArg);
 	};
 };
 

@@ -20,7 +20,7 @@ public:
 	End &operator=(End const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
+	bool	update(std::chrono::milliseconds dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
@@ -29,7 +29,7 @@ public:
 	class EndException : public std::runtime_error {
 	public:
 		EndException();
-		explicit EndException(const char* what_arg);
+		explicit EndException(const char* whatArg);
 	};
 };
 

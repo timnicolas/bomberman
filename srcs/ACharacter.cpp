@@ -45,5 +45,5 @@ ACharacter		*ACharacter::init(glm::vec2 pos) {
 ACharacter::ACharacterException::ACharacterException()
 : std::runtime_error("ACharacter Exception") {}
 
-ACharacter::ACharacterException::ACharacterException(const char* what_arg)
-: std::runtime_error(std::string(std::string("ACharacterError: ") + what_arg).c_str()) {}
+ACharacter::ACharacterException::ACharacterException(const char* whatArg)
+: std::runtime_error(std::string(std::string("ACharacterError: ") + whatArg).c_str()) {}

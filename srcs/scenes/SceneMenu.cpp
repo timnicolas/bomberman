@@ -33,8 +33,8 @@ SceneMenu &SceneMenu::operator=(SceneMenu const &rhs) {
 	return *this;
 }
 
-std::ostream &	operator<<(std::ostream & os, const SceneMenu& my_class) {
-	(void)my_class;
+std::ostream &	operator<<(std::ostream & os, const SceneMenu& myClass) {
+	(void)myClass;
 	os << "<SceneMenu object>";
 	return os;
 }

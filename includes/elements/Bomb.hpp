@@ -20,7 +20,7 @@ public:
 	Bomb &operator=(Bomb const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
+	bool	update(std::chrono::milliseconds dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
@@ -29,7 +29,7 @@ public:
 	class BombException : public std::runtime_error {
 	public:
 		BombException();
-		explicit BombException(const char* what_arg);
+		explicit BombException(const char* whatArg);
 	};
 };
 

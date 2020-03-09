@@ -23,7 +23,7 @@ class SceneMenu : public AScene {
 
 		// Operators
 		SceneMenu &operator=(SceneMenu const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& my_class);
+		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& myClass);
 
 		// AScene methods
 		virtual bool		init();

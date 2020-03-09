@@ -38,14 +38,14 @@ private:
 	// Members
 	typedef AEntity*(*entityFuncPtr)(SceneGame &);
 	struct Entity {
-		EntityType::Enum	entity_type;
+		EntityType::Enum	entityType;
 		entityFuncPtr		entity;
 	};
 	static std::map<std::string, Entity> _entitiesCall;
 
 	// Methods
-	bool	_loadLevel(uint8_t level_id);
-	bool	_initJsonLevel(SettingsJson &lvl, uint8_t level_id);
+	bool	_loadLevel(uint8_t levelId);
+	bool	_initJsonLevel(SettingsJson &lvl, uint8_t levelId);
 	void	_drawBoard();
 
 public:
@@ -68,7 +68,7 @@ public:
 
 	// Operators
 	SceneGame &operator=(SceneGame const &rhs);
-	friend std::ostream& operator<<(std::ostream& os, const SceneGame& my_class);
+	friend std::ostream& operator<<(std::ostream& os, const SceneGame& myClass);
 
 	// Methods
 	std::string		print() const;

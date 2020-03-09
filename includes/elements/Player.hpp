@@ -23,7 +23,7 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
+	bool	update(std::chrono::milliseconds dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
@@ -33,7 +33,7 @@ public:
 	class PlayerException : public std::runtime_error {
 	public:
 		PlayerException();
-		explicit PlayerException(const char* what_arg);
+		explicit PlayerException(const char* whatArg);
 	};
 };
 

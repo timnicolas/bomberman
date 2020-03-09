@@ -27,10 +27,10 @@ Flag &Flag::operator=(Flag const &rhs) {
 
 /**
  * update is called each frame.
- * @param d_time Delta Time
+ * @param dTime Delta Time
  */
-bool	Flag::update(std::chrono::milliseconds d_time) {
-	std::cout << "Last Flag updated at " << d_time.count() << std::endl;
+bool	Flag::update(std::chrono::milliseconds dTime) {
+	std::cout << "Last Flag updated at " << dTime.count() << std::endl;
 	return true;
 }
 
@@ -54,5 +54,5 @@ bool	Flag::blockPropagation() {
 Flag::FlagException::FlagException()
 : std::runtime_error("Flag Exception") {}
 
-Flag::FlagException::FlagException(const char* what_arg)
-: std::runtime_error(std::string(std::string("BombError: ") + what_arg).c_str()) {}
+Flag::FlagException::FlagException(const char* whatArg)
+: std::runtime_error(std::string(std::string("BombError: ") + whatArg).c_str()) {}
