@@ -22,11 +22,12 @@ SceneManager::~SceneManager() {
 	delete _gui;
 }
 
-/*
-	init the SceneManager:
-		- load first scene
-		- load gui
-*/
+/**
+ * @brief init the SceneManager (load the first scene& load gui)
+ *
+ * @return true if success
+ * @return false if failure
+ */
 bool SceneManager::init() {
 	// check double call of init function
 	if (_scene != nullptr) {
@@ -50,9 +51,12 @@ bool SceneManager::init() {
 	return true;
 }
 
-/*
-	this is the main game loop to update & draw everythings
-*/
+/**
+ * @brief this is the main game loop to update & draw everythings
+ *
+ * @return true if success
+ * @return false if failure
+ */
 bool SceneManager::run() {
 	float						loopTime = 1000 / s.j("screen").u("fps");
 	std::chrono::milliseconds	time_start;

@@ -12,7 +12,7 @@ const std::string	Inputs::input_type_name[] = {
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
-Inputs::Inputs(): _configuring(false), _quit(false) {
+Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false) {
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
 	}
@@ -158,6 +158,32 @@ const glm::ivec2	&Inputs::_getMouseRel() const {
 }
 
 /**
+	Gives the right click (true if clicked, else false)
+
+	@return The mouse state
+*/
+bool				Inputs::getRightClick() {
+	return (Inputs::get()._getRightClick());
+}
+
+bool				Inputs::_getRightClick() const {
+	return (_right_click);
+}
+
+/**
+	Gives the left click (true if clicked, else false)
+
+	@return The mouse state
+*/
+bool				Inputs::getLeftClick() {
+	return (Inputs::get()._getLeftClick());
+}
+
+bool				Inputs::_getLeftClick() const {
+	return (_left_click);
+}
+
+/**
 	Poll all the SDL events from the last update call.
 	This function should be called at the start of each frame in order for this class to have valid values.
 */
@@ -218,6 +244,30 @@ void				Inputs::_update() {
 			_mouse_rel.x = event.motion.xrel;
 			_mouse_rel.y = event.motion.yrel;
 			break;
+		 case SDL_MOUSEBUTTONDOWN:
+                switch (event.button.button) {
+                    case SDL_BUTTON_LEFT:
+						_left_click = true;
+                        break;
+                    case SDL_BUTTON_RIGHT:
+						_right_click = true;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+		 case SDL_MOUSEBUTTONUP:
+                switch (event.button.button) {
+                    case SDL_BUTTON_LEFT:
+						_left_click = false;
+                        break;
+                    case SDL_BUTTON_RIGHT:
+						_right_click = false;
+                        break;
+                    default:
+                        break;
+                }
+                break;
 		case SDL_WINDOWEVENT:
 			_quit = event.window.type == SDL_WINDOWEVENT_CLOSE;
 			break;
