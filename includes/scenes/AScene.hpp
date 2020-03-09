@@ -16,11 +16,11 @@ class AScene {
 
 		AScene & operator=(AScene const & rhs);
 
-			// Exceptions
+		// Exceptions
 		class SceneException : public std::runtime_error {
 		public:
 			SceneException();
-			explicit SceneException(const char* what_arg);
+			explicit SceneException(const char* whatArg);
 		};
 	protected:
 		AScene();

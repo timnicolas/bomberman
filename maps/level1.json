@@ -1,0 +1,43 @@
+{
+    "name": "level1",
+    "height": 9,
+    "width": 15,
+    "time": 150,
+    "objects": {
+        "empty": " ",
+        "player": "p",
+        "wall": "w",
+        "block": "b",
+        "crispy": "c",
+        "flag": "f",
+        "end": "e",
+        "safe": "_"
+    },
+    "map": [
+        { "line": "wwwwwwwwwwwwwww" },
+        { "line": "w_p_ccc    wwww" },
+        { "line": "w_bcbcb b bwwww" },
+        { "line": "wc        cccfw" },
+        { "line": "w b b bcb b bcw" },
+        { "line": "w   c  c      e" },
+        { "line": "w bb b b b b  w" },
+        { "line": "w cfc         w" },
+        { "line": "wwwwwwwwwwwwwww" }
+    ],
+    "bonus": [
+        {
+            "pos": {
+                "x": 5,
+                "y": 0
+            },
+            "type": "bomb"
+        },
+        {
+            "pos": {
+                "x": 5,
+                "y": 8
+            },
+            "type": "speed"
+        }
+    ]
+}

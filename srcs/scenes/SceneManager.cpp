@@ -50,7 +50,16 @@ bool SceneManager::init() {
 		return false;
 	}
 
-	// create and init fisrt scene
+	// test Scene Game
+	SceneGame game = SceneGame(_gui, _dtTime);
+
+	try {
+		game.init();
+	} catch (std::exception &e) {
+		logErr("Error : " << e.what());
+	}
+
+	// create and init first scene
 	// TODO(tnicolas42) create the scene loader (factory ?)
 	// _scene = new SceneGame(_gui, _dtTime);
 	_scene = new SceneMenu(_gui, _dtTime);
@@ -68,8 +77,8 @@ bool SceneManager::init() {
  * @return false if failure
  */
 bool SceneManager::run() {
-	float						loopTime = 1000 / s.j("screen").u("fps");
-	std::chrono::milliseconds	last_loop_ms = getMs();
+	float						fps = 1000 / s.j("screen").u("fps");
+	std::chrono::milliseconds	lastLoopMs = getMs();
 
 	while (true) {
 		if (_scene == nullptr) {
@@ -77,8 +86,8 @@ bool SceneManager::run() {
 		}
 		else {
 			// update dtTime
-			_dtTime = (getMs().count() - last_loop_ms.count()) / 1000.0;
-			last_loop_ms = getMs();
+			_dtTime = (getMs().count() - lastLoopMs.count()) / 1000.0;
+			lastLoopMs = getMs();
 
 			// get inputs
 			Inputs::update();
@@ -104,15 +113,15 @@ bool SceneManager::run() {
 		}
 
 		// fps
-		std::chrono::milliseconds time_loop = getMs() - last_loop_ms;
-		if (time_loop.count() > loopTime) {
+		std::chrono::milliseconds loopDuration = getMs() - lastLoopMs;
+		if (loopDuration.count() > fps) {
 			#if DEBUG_FPS_LOW == true
 				if (!firstLoop)
-					logDebug("update loop slow -> " << time_loop.count() << "ms / " << loopTime << "ms (" << FPS << "fps)");
+					logDebug("update loop slow -> " << loopDuration.count() << "ms / " << fps << "ms (" << FPS << "fps)");
 			#endif
 		}
 		else {
-			usleep((loopTime - time_loop.count()) * 1000);
+			usleep((fps - loopDuration.count()) * 1000);
 		}
 		#if DEBUG_FPS_LOW == true
 			firstLoop = false;
@@ -121,9 +130,9 @@ bool SceneManager::run() {
 	return true;
 }
 
-/* execption */
+/* exception */
 SceneManager::SceneManagerException::SceneManagerException()
 : std::runtime_error("SceneManager Exception") {}
 
-SceneManager::SceneManagerException::SceneManagerException(const char* what_arg)
-: std::runtime_error(std::string(std::string("SceneManagerException: ") + what_arg).c_str()) {}
+SceneManager::SceneManagerException::SceneManagerException(const char* whatArg)
+: std::runtime_error(std::string(std::string("SceneManagerException: ") + whatArg).c_str()) {}
