@@ -77,6 +77,8 @@ bool SceneManager::_init() {
 			logErr("Error : " << e.what());
 		}
 	}
+
+	_sceneMap[_scene]->load();  // load first scene
 	return true;
 }
 
@@ -156,7 +158,9 @@ AScene * SceneManager::_loadScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
 		logErr("invalid scnene name: " << _scene << " in loadScene");
 	}
+	_sceneMap[_scene]->unload();  // unload last scene
 	_scene = name;
+	_sceneMap[_scene]->load();  // load new scene
 	return _sceneMap[_scene];
 }
 

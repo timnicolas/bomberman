@@ -30,12 +30,14 @@ class SceneMenu : public AScene {
 		virtual bool		init();
 		virtual bool		update();
 		virtual bool		draw();
+		virtual void		load();
+		virtual void		unload();
 
 		/* add element */
 		ButtonUI &			addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
 			bool pixelateOnZoom = true);
-		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step = 0);
+		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step);
 		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
 			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
