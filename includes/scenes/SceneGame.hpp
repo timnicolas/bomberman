@@ -5,9 +5,7 @@
 #include <stdexcept>
 #include <vector>
 #include <map>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/glm.hpp>
-#include "glm/gtx/string_cast.hpp"
+#include "useGlm.hpp"
 
 #include "AScene.hpp"
 #include "AEntity.hpp"
