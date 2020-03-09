@@ -1,11 +1,12 @@
 #include "AScene.hpp"
 
-AScene::AScene(Gui *gui)
-: _gui(gui)
-{
-}
+AScene::AScene(Gui *gui, float const &dtTime)
+: _gui(gui),
+  _dtTime(dtTime) {}
 
-AScene::AScene(AScene const & src) {
+AScene::AScene(AScene const & src)
+: _gui(src._gui),
+  _dtTime(src._dtTime) {
 	*this = src;
 }
 
