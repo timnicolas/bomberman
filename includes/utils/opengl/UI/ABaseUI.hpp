@@ -4,39 +4,46 @@
 #include "Shader.hpp"
 #include "TextRender.hpp"
 
+/* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
 #define SHADER_RECT_2D_ROW_SZ 2
 
-namespace MouseState {
-	enum ENUM {
-		START_RIGHT_CLICK,
-		START_LEFT_CLICK,
-		END_RIGHT_CLICK,
-		END_LEFT_CLICK,
-		NO_CLICK,
+/* img */
+#define SHADER_IMAGE_2D_VS "./shaders/image_2D_vs.glsl"
+#define SHADER_IMAGE_2D_FS "./shaders/image_2D_fs.glsl"
+#define SHADER_IMAGE_2D_ROW_SIZE 4
+
+namespace TextAlign {
+	enum Enum {
+		LEFT,
+		CENTER,
+		RIGHT,
 	};
-};
+}
 
 class ABaseUI {
 	public:
-		static void init(std::string const & fontName, uint32_t fontSize);
+		/* static functions */
+		static void init(glm::vec2 winSize, std::string const & fontName, uint32_t fontSize);
 		static void destroy();
+		static void	setWinSize(glm::vec2 winSize);
+		static void loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize);
 
-		ABaseUI(glm::vec2 winSize, glm::vec2 pos, glm::vec2 size);
+		/* base functions */
+		ABaseUI(glm::vec2 pos, glm::vec2 size);
 		ABaseUI(ABaseUI const & src);
 		virtual ~ABaseUI();
 
 		ABaseUI & operator=(ABaseUI const & rhs);
 
-		void			update(glm::vec2 mousePos, MouseState::ENUM mouseState);
+		/* others */
+		void			update(glm::vec2 mousePos, bool rightClick, bool leftClick);
 		virtual void	draw() = 0;
 
-		void	setWinSize(glm::vec2 winSize);
-
-		/* draw base function */
-		void		drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color);
-		void		drawTextCenter(glm::vec2 pos, float size, std::string const & text, glm::vec4 color);
+		/* listener */
+		ABaseUI &	addButtonRightListener(bool * listener);
+		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
 		ABaseUI &	setColor(glm::vec4 color);
@@ -45,14 +52,19 @@ class ABaseUI {
 		ABaseUI &	setBorderSize(float size);
 
 		ABaseUI &	setMouseHoverColor(glm::vec4 color);
+		ABaseUI &	setMouseClickColor(glm::vec4 color);
 
 		ABaseUI &	setText(std::string const & text);
 		ABaseUI &	setTextColor(glm::vec4 color);
+		ABaseUI &	setTextFont(std::string const & font);
 		ABaseUI &	setTextScale(float scale);
+		ABaseUI &	setTextPadding(float padding);
+		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
 		/* getter */
 		bool					getMouseHover() const;
-		bool					getMouseClick() const;
+		bool					getMouseRightClick() const;
+		bool					getMouseLeftClick() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
 		glm::vec2 &				getSize();
@@ -68,31 +80,64 @@ class ABaseUI {
 
 	protected:
 		ABaseUI();
-		virtual void	_update(glm::vec2 mousePos, MouseState::ENUM mouseState) = 0;
+		/* draw base function */
+		// rect
+		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
+			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
+		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color);
+		// text
+		void			_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
+			glm::vec4 color, TextAlign::Enum align, float padding);
+		// img
+		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 
-		glm::vec2	_winSize;
+		// update function (redefined in child class)
+		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
+
 		glm::vec2	_pos;
 		glm::vec2	_size;
 		glm::vec4	_color;
 		// border
 		glm::vec4	_borderColor;
 		float		_borderSize;
-		// mmouse effect
+		// mouse effect
 		glm::vec4	_mouseHoverColor;
+		glm::vec4	_mouseClickColor;
 		// text
 		std::string	_text;
 		glm::vec4	_textColor;
+		std::string _textFont;
 		float		_textScale;
+		float		_textPadding;
+		TextAlign::Enum	_textAlign;
+		// image
+		GLuint		_imgTextureID;
+		glm::ivec2	_imgDefSize;
 
 		/* info about mouse */
 		bool		_mouseHover;
-		bool		_mouseClick;
+		bool		_rightClick;
+		bool		_leftClick;
+
+		/* listener */
+		bool *		_rightListener;
+		bool *		_leftListener;
 
 		/* shaders */
-		glm::mat4			_projection;  // projection matrix (orthogonal)
+		static glm::vec2	_winSize;
+		static glm::mat4	_projection;  // projection matrix (orthogonal)
+		/* rectangle */
 		static Shader *		_rectShader;
 		static GLuint		_rectVao;
 		static GLuint		_rectVbo;
 		static const float	_rectVertices[];
+		/* text */
 		static TextRender *	_textRender;
+		static std::string	_defFont;
+		/* image 2D */
+		static Shader *		_imgShader;
+		static GLuint		_imgVao;
+		static GLuint		_imgVbo;
+		static const float	_imgVertices[];
 };
