@@ -28,8 +28,11 @@ Player &Player::operator=(Player const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * update is called each frame.
+ * @brief update is called each frame.
+ *
  * @param dTime Delta Time
+ * @return true if success
+ * @return false if failure
  */
 bool	Player::update(std::chrono::milliseconds dTime) {
 	std::cout << "Last Player updated at " << dTime.count() << std::endl;
@@ -37,20 +40,13 @@ bool	Player::update(std::chrono::milliseconds dTime) {
 }
 
 /**
- * draw is called each frame.
+ * @brief draw is called each frame.
+ *
+ * @return true if success
+ * @return false if failure
  */
 bool	Player::draw() {
 	return true;
-}
-
-bool	Player::isDestructable() {
-	return true;
-}
-bool	Player::blockPropagation() {
-	return false;
-}
-bool	Player::isAlive() {
-	return lives;
 }
 
 // -- Exceptions errors --------------------------------------------------------

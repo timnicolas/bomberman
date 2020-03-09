@@ -31,13 +31,53 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 
 // -- Methods ------------------------------------------------------------------
 
+/**
+ * @brief Get the current postion of the ACharacter
+ *
+ * @return glm::vec2
+ */
 glm::vec2		ACharacter::getPos() {
 	return pos;
 }
 
+/**
+ * @brief Init the Class. Needed to be called before any usage of the Class.
+ *
+ * @param pos
+ * @return ACharacter*
+ */
 ACharacter		*ACharacter::init(glm::vec2 pos) {
 	this->pos = pos;
 	return this;
+}
+
+/**
+ * @brief A Character is destructible. This method always return true.
+ *
+ * @return true
+ */
+bool	ACharacter::isDestructable() {
+	return true;
+}
+
+/**
+ * @brief A Character doesn't block the progation. This method always return
+ * false.
+ *
+ * @return false
+ */
+bool	ACharacter::blockPropagation() {
+	return false;
+}
+
+/**
+ * @brief If the character still have lives, he is alive.
+ *
+ * @return true if alive
+ * @return false if dead
+ */
+bool	ACharacter::isAlive() {
+	return lives;
 }
 
 // -- Exceptions errors --------------------------------------------------------

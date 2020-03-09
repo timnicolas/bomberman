@@ -26,8 +26,11 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * update is called each frame.
+ * @brief update is called each frame.
+ *
  * @param dTime Delta Time
+ * @return true if success
+ * @return false if failure
  */
 bool	Bomb::update(std::chrono::milliseconds dTime) {
 	std::cout << "Last Bomb updated at " << dTime.count() << std::endl;
@@ -35,16 +38,31 @@ bool	Bomb::update(std::chrono::milliseconds dTime) {
 }
 
 /**
- * draw is called each frame.
+ * @brief draw is called each frame.
+ *
+ * @return true if success
+ * @return false if failure
  */
 bool	Bomb::draw() {
 	return true;
 }
 
+/**
+ * @brief The bombe is destructible. This methode always return true.
+ *
+ * @return true
+ */
 bool	Bomb::isDestructable() {
-	return false;
+	return true;
 }
 
+/**
+ * @brief The bombe doesn't block the propagation. This methode always return
+ * false.
+ *
+ * @return true
+ * @return false
+ */
 bool	Bomb::blockPropagation() {
 	return false;
 }

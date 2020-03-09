@@ -26,8 +26,11 @@ End &End::operator=(End const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * update is called each frame.
+ * @brief update is called each frame.
+ *
  * @param dTime Delta Time
+ * @return true if success
+ * @return false if failure
  */
 bool	End::update(std::chrono::milliseconds dTime) {
 	std::cout << "Last End updated at " << dTime.count() << std::endl;
@@ -35,18 +38,31 @@ bool	End::update(std::chrono::milliseconds dTime) {
 }
 
 /**
- * draw is called each frame.
+ * @brief draw is called each frame.
+ *
+ * @return true if success
+ * @return false if failure
  */
 bool	End::draw() {
 	return true;
 }
 
+/**
+ * @brief The End is indestrutible. This method always return false;
+ *
+ * @return false
+ */
 bool	End::isDestructable() {
 	return false;
 }
 
+/**
+ * @brief The End blocks the propagation. This method always return true.
+ *
+ * @return true
+ */
 bool	End::blockPropagation() {
-	return false;
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------
