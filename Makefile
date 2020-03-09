@@ -110,6 +110,10 @@ SRC =	main.cpp \
 \
 		Inputs.cpp \
 \
+		audio/AudioManager.cpp \
+		audio/Music.cpp \
+		audio/Sound.cpp \
+\
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
 \
@@ -150,6 +154,10 @@ HEAD =	bomberman.hpp \
 \
 		Inputs.hpp \
 \
+		audio/AudioManager.hpp \
+		audio/Music.hpp \
+		audio/Sound.hpp \
+\
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
 \
@@ -188,7 +196,7 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 \
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
 				-L ~/.brew/opt/freetype/lib -lfreetype \
 
 # flags for libs on OSX only
@@ -233,6 +241,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install glm
 	# sdl2
 	brew install sdl2;
+	# sdl2_mixer
+	brew install sdl2_mixer;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
