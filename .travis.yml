@@ -1,1 +1,11 @@
-language: cpp
+install: make install
+script: make lint && make -j8
+language:
+  - cpp
+os:
+  - osx
+  # - linux # TODO(tnicolas42) add linux when compilation is fixed
+compiler:
+  - g++
+notifications:
+  email: false
