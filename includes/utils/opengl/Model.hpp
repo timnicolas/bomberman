@@ -15,6 +15,7 @@
 #include <assimp/Importer.hpp>
 #include "Texture.hpp"
 #include "Mesh.hpp"
+#include "Gui.hpp"
 
 namespace AnimKeyType {
 	enum Enum {
@@ -32,7 +33,7 @@ namespace AnimKeyType {
 
 class Model {
 	public:
-        Model(std::string const &path, float const &dtTime, float const &animationSpeed);
+        Model(Gui const &_gui, std::string const &path, float const &dtTime, float const &animationSpeed);
 		virtual ~Model();
 		Model(Model const &src);
 		Model &operator=(Model const &rhs);
@@ -49,6 +50,8 @@ class Model {
 
 	private:
 		Model();  // private default constructor, should not be called
+
+		void	_setConstUniforms();
 
 		// -- model loading ----------------------------------------------------
 		void	_loadModel();
@@ -84,8 +87,9 @@ class Model {
 		// -- members ----------------------------------------------------------
 		static std::unique_ptr<Shader>	_sh;
 
+		Gui const			&_gui;
 		std::string const	_path;  // model file path
-		std::vector<Mesh>	_meshes;  // all model meshes
+		std::vector<Mesh *>	_meshes;  // all model meshes
 
 		// assimp utility
 		aiScene const		*_scene;
