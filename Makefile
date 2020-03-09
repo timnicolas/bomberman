@@ -410,7 +410,7 @@ install:
 	@./.tmpfile.sh
 	@rm -f ./.tmpfile.sh
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
-	@$(MAKE) $(MAKE_OPT) install_linter
+	printf $(MAKE) $(MAKE_OPT) install_linter
 	@$(MAKE) $(MAKE_OPT) init
 
 install_linter:
