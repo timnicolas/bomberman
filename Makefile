@@ -229,12 +229,14 @@ define CONFIGURE
 # Linux
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
+	sudo apt-get update -y
 	# glm
 	sudo apt-get -y install libglm-dev;
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
-	sudo apt-get -y install libsdl2-dev;
+	sudo apt-get -y install libsdl2-dev
+	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
