@@ -4,6 +4,7 @@
 
 Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
+	name = "Flag";
 }
 
 Flag::~Flag() {

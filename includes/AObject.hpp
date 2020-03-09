@@ -22,6 +22,7 @@ public:
 	// Methods
 	virtual bool	update(std::chrono::milliseconds d_time) = 0;
 	virtual bool	draw() = 0;
+	glm::vec2		getPos();
 
 	// Exceptions
 	class AObjectException : public std::runtime_error {

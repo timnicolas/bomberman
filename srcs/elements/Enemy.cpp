@@ -4,6 +4,7 @@
 
 Enemy::Enemy(SceneGame &game) : ACharacter(game) {
 	type = Type::ENEMY;
+	name = "Enemy";
 }
 
 Enemy::~Enemy() {
@@ -47,7 +48,7 @@ bool	Enemy::blockPropagation() {
 	return false;
 }
 bool	Enemy::isAlive() {
-	return life;
+	return lives;
 }
 
 /**

@@ -4,6 +4,7 @@
 
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
+	name = "Bomb";
 }
 
 Bomb::~Bomb() {

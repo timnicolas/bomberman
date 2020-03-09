@@ -266,6 +266,7 @@ bool	SceneGame::_loadLevel(uint8_t level_id) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
+						player->init({i, j});
 						break;
 					case EntityType::BOMB:
 						bombs.push_back(reinterpret_cast<Bomb *>(entity));
@@ -278,6 +279,7 @@ bool	SceneGame::_loadLevel(uint8_t level_id) {
 						break;
 					case EntityType::ENEMY:
 						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
+						enemies.back()->init({i, j});
 						break;
 					}
 				}
