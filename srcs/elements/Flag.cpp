@@ -2,14 +2,14 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Flag::Flag() {
+Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
 }
 
 Flag::~Flag() {
 }
 
-Flag::Flag(Flag const &src) {
+Flag::Flag(Flag const &src) : AObject(src) {
 	*this = src;
 }
 

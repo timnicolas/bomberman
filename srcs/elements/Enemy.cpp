@@ -2,14 +2,14 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Enemy::Enemy() {
+Enemy::Enemy(SceneGame &game) : ACharacter(game) {
 	type = Type::ENEMY;
 }
 
 Enemy::~Enemy() {
 }
 
-Enemy::Enemy(Enemy const &src) {
+Enemy::Enemy(Enemy const &src) : ACharacter(src) {
 	*this = src;
 }
 
@@ -54,18 +54,18 @@ bool	Enemy::isAlive() {
  * Static class to generate enemies
  * @param rate Probability to generate an enemy is between 0 and 1.
  */
-Enemy*	Enemy::generateEnemy(float rate) {
+Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
 	srand(time(NULL));
 
 	if (rate <= 0)
 		return nullptr;
 	if (rate >= 1)
-		return new Enemy();
+		return new Enemy(game);
 
 	int		percent_rate = rand() % 100;
 	if (percent_rate > static_cast<int>(rate * 100))
 		return nullptr;
-	return new Enemy();
+	return new Enemy(game);
 }
 
 // -- Exceptions errors --------------------------------------------------------

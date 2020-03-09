@@ -7,13 +7,16 @@
 #include "SceneGame.hpp"
 
 class Enemy : public ACharacter {
+private:
+	Enemy();
+
 public:
 	// Members
 	int			bombs;
 	SceneGame	*game;
 
 	// Constructors
-	Enemy();
+	explicit Enemy(SceneGame &game);
 	~Enemy();
 	Enemy(Enemy const &src);
 
@@ -26,7 +29,7 @@ public:
 	bool			isDestructable();
 	bool			blockPropagation();
 	bool			isAlive();
-	static Enemy*	generateEnemy(float rate);
+	static Enemy*	generateEnemy(SceneGame &game, float rate);
 
 	// Exceptions
 	class EnemyException : public std::runtime_error {

@@ -1,14 +1,15 @@
 #include "AEntity.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-AEntity::AEntity() {
+AEntity::AEntity(SceneGame &game): game(game) {
 }
 
 AEntity::~AEntity() {
 }
 
-AEntity::AEntity(AEntity const &src) {
+AEntity::AEntity(AEntity const &src) : AEntity(src.game) {
 	*this = src;
 }
 

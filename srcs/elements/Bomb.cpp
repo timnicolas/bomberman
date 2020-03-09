@@ -2,14 +2,14 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Bomb::Bomb() {
+Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 }
 
 Bomb::~Bomb() {
 }
 
-Bomb::Bomb(Bomb const &src) {
+Bomb::Bomb(Bomb const &src) : AObject(src) {
 	*this = src;
 }
 

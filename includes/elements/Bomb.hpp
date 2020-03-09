@@ -7,11 +7,12 @@
 
 class Bomb : public AObject {
 private:
+	Bomb();
 	// Members
 
 public:
 	// Constructors
-	Bomb();
+	explicit Bomb(SceneGame &game);
 	~Bomb();
 	Bomb(Bomb const &src);
 

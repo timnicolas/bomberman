@@ -7,11 +7,12 @@
 
 class Flag : public AObject {
 private:
+	Flag();
 	// Members
 
 public:
 	// Constructors
-	Flag();
+	explicit Flag(SceneGame &game);
 	~Flag();
 	Flag(Flag const &src);
 

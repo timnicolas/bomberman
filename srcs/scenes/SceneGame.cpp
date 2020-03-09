@@ -13,16 +13,16 @@
 
 // -- Static members initialisation --------------------------------------------
 
-std::map<std::string, Entity> SceneGame::_entitiesCall = {
-	{"player", {EntityType::PLAYER, new Player()}},
-	{"bomb", {EntityType::BOMB, new Bomb()}},
-	{"wall", {EntityType::BOARD, new Wall()}},
-	{"block", {EntityType::BOARD, new Wall()}},
-	{"crispy", {EntityType::BOARD, new Wall()}},
-	{"flag", {EntityType::BOARD_FLAG, new Flag()}},
-	{"end", {EntityType::BOARD, new End()}},
-	{"safe", {EntityType::BOARD, nullptr}},
-	{"empty", {EntityType::ENEMY, Enemy::generateEnemy(1.0)}},
+std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
+	{"player", {EntityType::PLAYER, [](SceneGame &game) -> AEntity* {return new Player(game);}}},
+	{"bomb", {EntityType::BOMB, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
+	{"wall", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
+	{"block", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
+	{"crispy", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
+	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
+	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
+	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
+	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 1.0);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -176,15 +176,15 @@ bool	SceneGame::draw() {
 	return true;
 }
 
-bool	SceneGame::_loadLevel(uint8_t level) {
-	logInfo("SceneGame _loadLevel");
-	SettingsJson	lvl;
-	std::string		filename = "maps/level"+std::to_string(level)+".json";
+bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t level_id) {
+	logInfo("SceneGame _initJsonLevel");
+
+	std::string		filename = "maps/level"+std::to_string(level_id)+".json";
+
+	lvl.name("level"+std::to_string(level_id)).description("Level map");
+	lvl.add<std::string>("level"+std::to_string(level_id)+"Filename", filename);
 
 	// File json definition:
-
-	lvl.name("level"+std::to_string(level)).description("Level map");
-	lvl.add<std::string>("level"+std::to_string(level)+"Filename", filename);
 	lvl.add<std::string>("name");
 	lvl.add<uint64_t>("height", 0).setMin(0);
 	lvl.add<uint64_t>("width", 0).setMin(0);
@@ -192,14 +192,22 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 
 	lvl.add<SettingsJson>("objects");
 		lvl.j("objects").add<std::string>("empty", " ");
-		lvl.j("objects").add<std::string>("player", "p");  // unique player on game.
-		lvl.j("objects").add<std::string>("bomb", "x");  // destructing element dropped by the player.
-		lvl.j("objects").add<std::string>("wall", "w");  // indestructible element outside the board
-		lvl.j("objects").add<std::string>("block", "b");  // indestructible element of the board
-		lvl.j("objects").add<std::string>("crispy", "c");  // destructable element, who can give bonuses randomly
-		lvl.j("objects").add<std::string>("flag", "f");  // flag to get end
-		lvl.j("objects").add<std::string>("end", "e");  // end of level when all flag
-		lvl.j("objects").add<std::string>("safe", "_");  // no spawn zone
+		// unique player on game.
+		lvl.j("objects").add<std::string>("player", "p");
+		// destructing element dropped by the player.
+		lvl.j("objects").add<std::string>("bomb", "x");
+		// indestructible element outside the board
+		lvl.j("objects").add<std::string>("wall", "w");
+		// indestructible element of the board
+		lvl.j("objects").add<std::string>("block", "b");
+		// destructable element, who can give bonuses randomly
+		lvl.j("objects").add<std::string>("crispy", "c");
+		// flag to get end
+		lvl.j("objects").add<std::string>("flag", "f");
+		// end of level when all flag
+		lvl.j("objects").add<std::string>("end", "e");
+		// no spawn zone
+		lvl.j("objects").add<std::string>("safe", "_");
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("line", "");
@@ -207,8 +215,8 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 
 	SettingsJson * bonusPattern = new SettingsJson();
 	bonusPattern->add<SettingsJson>("pos");
-	bonusPattern->j("pos").add<uint64_t>("x", 0);
-	bonusPattern->j("pos").add<uint64_t>("y", 0);
+		bonusPattern->j("pos").add<uint64_t>("x", 0);
+		bonusPattern->j("pos").add<uint64_t>("y", 0);
 	bonusPattern->add<std::string>("type", "");
 	lvl.addList<SettingsJson>("bonus", bonusPattern);
 
@@ -222,8 +230,17 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 		return false;
 	}
 
-	// Getting json info
+	return true;
+}
 
+bool	SceneGame::_loadLevel(uint8_t level_id) {
+	logInfo("SceneGame _loadLevel");
+	SettingsJson	lvl;
+
+	if (!_initJsonLevel(lvl, level_id))
+		return false;
+
+	// Getting json info
 	size = {lvl.u("width"), lvl.u("height")};
 	board = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
 			std::vector< std::vector<AEntity*> >(size.y,
@@ -242,7 +259,7 @@ bool	SceneGame::_loadLevel(uint8_t level) {
 		for (uint32_t i = 0; i < size.x; i++) {
 			for (auto &&entitYCall : _entitiesCall) {
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
-					entity = _entitiesCall[entitYCall.first].entity;
+					entity = _entitiesCall[entitYCall.first].entity(*this);
 					if (entity == nullptr)
 						continue;
 					switch (_entitiesCall[entitYCall.first].entity_type) {
