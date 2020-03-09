@@ -1,11 +1,16 @@
 #pragma once
 
 #include <vector>
-#include <glm/glm.hpp>
-#include "glm/gtx/string_cast.hpp"
+#include "useGlm.hpp"
 
 #include "AScene.hpp"
 #include "ABaseUI.hpp"
+#include "ButtonUI.hpp"
+#include "ButtonImageUI.hpp"
+#include "SliderUI.hpp"
+#include "TextUI.hpp"
+#include "RectUI.hpp"
+#include "ImageUI.hpp"
 
 class SceneMenu : public AScene {
 	public:
@@ -21,13 +26,24 @@ class SceneMenu : public AScene {
 		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& my_class);
 
 		// AScene methods
-		virtual bool	init();
-		virtual bool	update(std::chrono::milliseconds last_loop_ms);
-		virtual bool	draw();
+		virtual bool		init();
+		virtual bool		update(std::chrono::milliseconds last_loop_ms);
+		virtual bool		draw();
 
-		Button *		addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
-		ABaseUI *		getUIElement(uint32_t id);
-		uint32_t		getNbUIElements() const;
+		/* add element */
+		ButtonUI &			addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
+		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
+			bool pixelateOnZoom = true);
+		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step = 0);
+		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
+			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
+		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
+			bool pixelateOnZoom = true);
+
+		/* getter */
+		ABaseUI &			getUIElement(uint32_t id);
+		uint32_t			getNbUIElements() const;
 
 	protected:
 		std::vector<ABaseUI *>	_buttons;

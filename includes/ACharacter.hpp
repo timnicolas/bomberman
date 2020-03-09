@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <glm/glm.hpp>
-#include "glm/gtx/string_cast.hpp"
+#include "useGlm.hpp"
 #include "AEntity.hpp"
 
 // class SceneGame;

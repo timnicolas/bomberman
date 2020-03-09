@@ -114,6 +114,10 @@ SRC =	main.cpp \
 \
 		Inputs.cpp \
 \
+		audio/AudioManager.cpp \
+		audio/Music.cpp \
+		audio/Sound.cpp \
+\
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
 \
@@ -126,9 +130,16 @@ SRC =	main.cpp \
 		utils/opengl/debug.cpp \
 		utils/opengl/Material.cpp \
 		utils/opengl/TextRender.cpp \
+		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
-		utils/opengl/UI/Button.cpp \
+		utils/opengl/UI/ABaseUI_utils.cpp \
+		utils/opengl/UI/ButtonUI.cpp \
+		utils/opengl/UI/ButtonImageUI.cpp \
+		utils/opengl/UI/SliderUI.cpp \
+		utils/opengl/UI/TextUI.cpp \
+		utils/opengl/UI/RectUI.cpp \
+		utils/opengl/UI/ImageUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -151,11 +162,16 @@ HEAD =	bomberman.hpp \
 \
 		Inputs.hpp \
 \
+		audio/AudioManager.hpp \
+		audio/Music.hpp \
+		audio/Sound.hpp \
+\
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
+		utils/useGlm.hpp \
 \
 		utils/opengl/Texture.hpp \
 		utils/opengl/Shader.hpp \
@@ -163,9 +179,15 @@ HEAD =	bomberman.hpp \
 		utils/opengl/debug.hpp \
 		utils/opengl/Material.hpp \
 		utils/opengl/TextRender.hpp \
+		utils/opengl/ImageAtlasRender.hpp \
 		utils/opengl/Skybox.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
-		utils/opengl/UI/Button.hpp \
+		utils/opengl/UI/ButtonUI.hpp \
+		utils/opengl/UI/ButtonImageUI.hpp \
+		utils/opengl/UI/SliderUI.hpp \
+		utils/opengl/UI/TextUI.hpp \
+		utils/opengl/UI/RectUI.hpp \
+		utils/opengl/UI/ImageUI.hpp \
 
 
 ################################################################################
@@ -183,7 +205,7 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 \
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
 				-L ~/.brew/opt/freetype/lib -lfreetype \
 
 # flags for libs on OSX only
@@ -215,12 +237,14 @@ define CONFIGURE
 # Linux
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
+	sudo apt-get update -y
 	# glm
 	sudo apt-get -y install libglm-dev;
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
-	sudo apt-get -y install libsdl2-dev;
+	sudo apt-get -y install libsdl2-dev
+	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
@@ -228,6 +252,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install glm
 	# sdl2
 	brew install sdl2;
+	# sdl2_mixer
+	brew install sdl2_mixer;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
