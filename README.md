@@ -1,4 +1,4 @@
-# bomberman [[42](https://www.42.fr/) project]
+# bomberman [[42](https://www.42.fr/) project] [![Build Status](https://travis-ci.org/tnicolas42/bomberman.svg?branch=master)](https://travis-ci.org/tnicolas42/bomberman)
 ## ⚠️ Work in progress ⚠️
 Bomberman is one of the most famous video games ever.
 

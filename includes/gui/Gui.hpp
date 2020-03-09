@@ -3,7 +3,7 @@
 #define C_VAO_WIDTH 4
 #define C_NB_FACES 6
 // C_VAO_WIDTH * C_NB_FACES
-#define C_FACE_A_SIZE 42
+#define C_FACE_A_SIZE 24
 #define CAM_POS_OFFSET glm::vec3(0.0f, 20.0f, -10.0f)
 #define CAM_TARG_OFFSET glm::vec3(0.0f, 1.0f, 0.0f)
 #define CAM_SPEED 1.5f
