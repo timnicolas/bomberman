@@ -11,6 +11,7 @@
 #include "TextUI.hpp"
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
+#include "SceneManager.hpp"
 
 class SceneMenu : public AScene {
 	public:

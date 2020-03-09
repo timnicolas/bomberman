@@ -137,6 +137,9 @@ bool	SceneMenu::update() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->update(Inputs::getMousePos(), Inputs::getRightClick(), Inputs::getLeftClick());
 	}
+	if (getUIElement(1).getMouseLeftClick()) {  // TODO(tnicolas42) remove theses lines
+		SceneManager::loadScene(SceneNames::GAME);
+	}
 	return true;
 }
 
