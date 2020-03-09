@@ -1,5 +1,6 @@
 #include "Mesh.hpp"
 #include "Logging.hpp"
+#include "debug.hpp"
 
 // -- Constructors -------------------------------------------------------------
 Mesh::Mesh(Shader &sh, std::string const &name, std::vector<Vertex> vertices,
@@ -10,7 +11,10 @@ Mesh::Mesh(Shader &sh, std::string const &name, std::vector<Vertex> vertices,
   _vertices(vertices),
   _vertIndices(vertIndices),
   _textures(textures),
-  _material(material) {}
+  _material(material),
+  _vao(0),
+  _vbo(0),
+  _ebo(0) {}
 
 Mesh::Mesh(Mesh const &src) : _sh(src._sh) {
 	*this = src;
@@ -48,9 +52,11 @@ void	Mesh::draw() const {
 
 	// drawing mesh
 	_sh.use();
+
 	glBindVertexArray(_vao);
 	glDrawElements(GL_TRIANGLES, _vertIndices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
+
 	_sh.unuse();
 }
 
@@ -156,6 +162,8 @@ void	Mesh::sendMesh() {
 		reinterpret_cast<void *>(offsetof(Vertex, bonesW)));
 
     glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 // -- addBoneData --------------------------------------------------------------

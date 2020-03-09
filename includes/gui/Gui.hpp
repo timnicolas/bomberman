@@ -63,6 +63,8 @@ class Gui {
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
 
+		glm::mat4	getProjection() const;
+
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
 		Shader			*cubeShader;

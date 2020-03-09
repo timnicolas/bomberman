@@ -41,8 +41,8 @@ bool SceneManager::init() {
 
 	// create and init fisrt scene
 	// TODO(tnicolas42) create the scene loader (factory ?)
-	// _scene = new SceneGame(_gui);
-	_scene = new SceneMenu(_gui);
+	_scene = new SceneGame(_gui);
+	// _scene = new SceneMenu(_gui);
 	if (_scene->init() == false) {
 		logErr("failed to init scene");
 		return false;

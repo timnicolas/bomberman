@@ -9,8 +9,10 @@
 std::unique_ptr<Shader> Model::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
-Model::Model(std::string const &path, float const &dtTime, float const &animationSpeed)
-: _path(path),
+Model::Model(Gui const &_gui, std::string const &path, float const &dtTime,
+	float const &animationSpeed)
+: _gui(_gui),
+  _path(path),
   _dtTime(dtTime),
   _animationSpeed(animationSpeed)
 {
@@ -33,20 +35,29 @@ Model::Model(std::string const &path, float const &dtTime, float const &animatio
 	// retrieve path directory
 	_pathDir = _path.substr(0, _path.find_last_of('/'));
 
-	// init animation settings
+	// init model and animation settings
+	_model = glm::mat4(1.0f);
 	_boneOffset = {glm::mat4()};
 	_bones = {glm::mat4(1.0f)};
 	_animationTime = 0.0f;
 
 	// load the model from file
 	_loadModel();
+
+	// send constants uniforms (lighting, projection mat, ...)
+	_setConstUniforms();
 }
 
 Model::~Model() {
+	// free meshes
+	for (Mesh *mesh : _meshes) {
+		delete(mesh);
+	}
 }
 
 Model::Model(Model const &src)
-: _path(src._path),
+: _gui(src._gui),
+  _path(src._path),
   _dtTime(src._dtTime),
   _animationSpeed(src._animationSpeed) {
 	*this = src;
@@ -54,21 +65,44 @@ Model::Model(Model const &src)
 
 Model &Model::operator=(Model const &rhs) {
 	if (this != &rhs) {
-		_meshes = rhs._meshes;
+		_meshes = std::vector<Mesh *>();
+		_scene = nullptr;
 		_texturesLoaded = rhs._texturesLoaded;
-
-		_minPos = rhs._minPos;
-		_maxPos = rhs._maxPos;
+		_pathDir = rhs._pathDir;
 		_model = rhs._model;
-		_modelScale = rhs._modelScale;
+		_minPos = {
+			std::numeric_limits<float>::max(),
+			std::numeric_limits<float>::max(),
+			std::numeric_limits<float>::max()};
+		_maxPos = {
+			std::numeric_limits<float>::lowest(),
+			std::numeric_limits<float>::lowest(),
+			std::numeric_limits<float>::lowest()};
+		_boneMap = std::map<std::string, uint32_t>();
+		_boneOffset = {glm::mat4()};
+		_bones = {glm::mat4(1.0f)};
+		_animationTime = 0.0f;
 
-		_boneMap = rhs._boneMap;
-		_boneOffset = rhs._boneOffset;
-		_bones = rhs._bones;
-		_nextBoneId = rhs._nextBoneId;
-		_globalTransform = rhs._globalTransform;
+		// reload the model to avoid conflicts in meshes destruction
+		_loadModel();
 	}
 	return *this;
+}
+
+// -- _setConstUniforms --------------------------------------------------------
+void	Model::_setConstUniforms() {
+	_sh->use();
+
+	// camera projection
+	_sh->setMat4("projection", _gui.getProjection());
+
+	// direction light
+	_sh->setVec3("dirLight.direction", -0.2f, -0.8f, 0.6f);
+	_sh->setVec3("dirLight.ambient", 0.4f, 0.4f, 0.4f);
+	_sh->setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
+	_sh->setVec3("dirLight.specular", 0.1f, 0.1f, 0.1f);
+
+	_sh->unuse();
 }
 
 // -- _loadModel ---------------------------------------------------------------
@@ -201,13 +235,14 @@ void	Model::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	Material	mat = _loadMaterial(material);
 
 	// create the mesh
-	Mesh mesh(*_sh, aiMesh->mName.C_Str(), vertices, vertIndices, textures, mat);
+	Mesh	*mesh = new Mesh(*_sh, aiMesh->mName.C_Str(), vertices, vertIndices,
+		textures, mat);
 
 	// process mesh bones
-	_processBones(aiMesh, mesh);
+	_processBones(aiMesh, *mesh);
 
 	// send mesh to gpu
-	mesh.sendMesh();
+	mesh->sendMesh();
 
 	// save the mesh
 	_meshes.push_back(mesh);
@@ -246,8 +281,7 @@ void	Model::_loadMaterialTextures(std::vector<Texture> &textures,
 		}
 		// regular file texture type
 		else {
-			// TODO(zer0nim): verify that `_pathDir + location` is correct
-			texture.id = textureFromFile(_pathDir + location, inSpaceSRGB);
+			texture.id = textureFromFile(_pathDir + "/" + location, inSpaceSRGB);
 		}
 		texture.type = textType;
 		texture.path = location;
@@ -416,12 +450,14 @@ void	Model::draw() {
 
 	// update uniforms
 	_sh->setMat4("model", _model);
+	_sh->setMat4("view", _gui.cam->getViewMatrix());
 	_sh->setMat4("modelScale", _modelScale);
 	_sh->setBool("isAnimated", _isAnimated);
+	_sh->setVec3("viewPos", _gui.cam->pos);
 
 	// draw all meshs
 	for (auto &mesh : _meshes) {
-		mesh.draw();
+		mesh->draw();
 	}
 
 	glBindVertexArray(0);
@@ -607,9 +643,9 @@ std::pair<uint32_t, uint32_t>	Model::_findAnimIndex(AnimKeyType::Enum animType,
 	}
 
 	// exception if no key exist
-	if (!(nbAnimKeys < 1)) {
+	if (nbAnimKeys < 1) {
 		throw Model::ModelException(std::string("animation: no " +
-			AnimKeyType::enumName[animType] + "animation key finded").c_str());
+			AnimKeyType::enumName[animType] + " animation key finded").c_str());
 	}
 
 	// find the corect key pair

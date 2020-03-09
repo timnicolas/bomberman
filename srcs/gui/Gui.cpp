@@ -285,6 +285,10 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->getShader().unuse();
 }
 
+// -- getProjection ------------------------------------------------------------
+glm::mat4	Gui::getProjection() const { return _projection; }
+
+
 // -- statics const ------------------------------------------------------------
 // cube faces
 std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {

@@ -3,7 +3,7 @@
 
 #include "includesOpengl.hpp"
 
-#define CONSTRAINT_Y		true  // if true, move forward didn't affect Y position
+#define CONSTRAINT_Y		false  // if true, move forward didn't affect Y position
 #define MOVEMENT_SPEED		15.0f
 #define RUN_FACTOR			3.0f
 #define MOUSE_SENSITIVITY	0.1f

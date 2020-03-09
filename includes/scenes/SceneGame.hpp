@@ -13,6 +13,7 @@
 #include "ACharacter.hpp"
 #include "Player.hpp"
 #include "Bomb.hpp"
+#include "Model.hpp"
 
 namespace GameState {
 	enum Enum {
@@ -27,6 +28,11 @@ private:
 	SceneGame();
 	// Members
 	static std::map<std::string, AEntity *> _entitiesCall;
+
+	// just to test model class
+	float	dtTime = 0.01f;  // TODO(zer0nim): need to get the real dtTime
+	float	animationSpeed = 1.0f;
+	Model	*_model;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);

@@ -22,6 +22,7 @@ SceneGame::SceneGame(Gui * gui)
 }
 
 SceneGame::~SceneGame() {
+	delete	_model;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -70,6 +71,16 @@ std::string		SceneGame::print() const {
 bool			SceneGame::init() {
 	_gui->enableCursor(false);
 	// _loadLevel(1);
+
+	try {
+		_model = new Model(*_gui, "bomberman-assets/3dModels/man.fbx", dtTime,
+		animationSpeed);
+	}
+	catch(Model::ModelException const &e) {
+		_model = nullptr;
+		logErr(e.what())
+	}
+
 	return true;
 }
 
@@ -132,6 +143,16 @@ bool	SceneGame::draw() {
 	// release cubeShader and textures
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
+
+	// test to draw a fbx model
+	if (_model) {
+		try {
+			_model->draw();
+		}
+		catch(Model::ModelException const &e) {
+			logErr(e.what())
+		}
+	}
 
 	// draw skybox
 	_gui->drawSkybox(view);

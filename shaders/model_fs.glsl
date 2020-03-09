@@ -45,8 +45,8 @@ vec3 calcDirLight(DirLight light, vec3 norm, vec3 viewDir) {
 	float	spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess * 4);
 
 	// use texture or color for the diffuse
-	vec3	ambient = light.ambient;
-	vec3	diffuse = light.diffuse;
+	vec3	ambient = light.ambient * GAMMA;
+	vec3	diffuse = light.diffuse * GAMMA;
 	if (material.diffuse.isTexture) {
 		ambient *= vec3(texture(material.diffuse.texture, fs_in.TexCoords));
 		diffuse *= diff * vec3(texture(material.diffuse.texture, fs_in.TexCoords));
@@ -57,11 +57,13 @@ vec3 calcDirLight(DirLight light, vec3 norm, vec3 viewDir) {
 	}
 
 	// use texture or color for the specular
-	vec3 specular = light.specular;
-	if (material.specular.isTexture)
+	vec3 specular = light.specular * GAMMA;
+	if (material.specular.isTexture) {
 		specular *= spec * vec3(texture(material.specular.texture, fs_in.TexCoords));
-	else
+	}
+	else {
 		specular *= spec * pow(material.specular.color, vec3(GAMMA));
+	}
 
 	return (ambient + diffuse + specular);
 }
