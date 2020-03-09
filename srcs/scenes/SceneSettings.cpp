@@ -1,7 +1,7 @@
 #include "SceneSettings.hpp"
 
 SceneSettings::~SceneSettings() {}
-SceneSettings::SceneSettings(Gui *gui) : SceneMenu(gui),
+SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtTime),
 	_current_pane(SettingsType::GRAPHICS),
 	_next_resolution(false),
 	_prev_resolution(false),
@@ -38,6 +38,7 @@ SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
 	for (auto i = 0; i < Inputs::nb_input; i++) {
 		_update_key[i] = rhs._update_key[i];
 	}
+	return *this;
 }
 
 
@@ -45,8 +46,8 @@ bool			SceneSettings::init() {
 	return true;
 }
 
-bool			SceneSettings::update(std::chrono::milliseconds last_loop_ms) {
-	SceneMenu::update(last_loop_ms);
+bool			SceneSettings::update() {
+	SceneMenu::update();
 	if (_update_fullscreen) {
 		_updateFullscreen();
 	}
@@ -66,11 +67,11 @@ void			SceneSettings::_updateFullscreen() {
 
 void			SceneSettings::_confirmQuit() {
 	_confirm = false;
-	// TODO @gsmith: Save settings in json
+	// TODO(gsmith): Save settings in json
 	_cancelQuit();
 }
 
 void			SceneSettings::_cancelQuit() {
 	_cancel = false;
-	// TODO @gsmith: quit to main menu;
+	// TODO(gsmith): quit to main menu;
 }

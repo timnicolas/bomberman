@@ -107,6 +107,7 @@ SRC =	main.cpp \
 		scenes/AScene.cpp \
 		scenes/SceneMenu.cpp \
 		scenes/SceneGame.cpp \
+		scenes/SceneSettings.cpp \
 \
 		Inputs.cpp \
 \
@@ -151,6 +152,7 @@ HEAD =	bomberman.hpp \
 		scenes/AScene.hpp \
 		scenes/SceneMenu.hpp \
 		scenes/SceneGame.hpp \
+		scenes/SceneSettings.hpp \
 \
 		Inputs.hpp \
 \
