@@ -1,0 +1,56 @@
+\hypertarget{class_text_render}{}\doxysection{Text\+Render Class Reference}
+\label{class_text_render}\index{TextRender@{TextRender}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_text_render_1_1_character}{Character}}
+\item 
+class \mbox{\hyperlink{class_text_render_1_1_load_text_render_exception}{Load\+Text\+Render\+Exception}}
+\item 
+class \mbox{\hyperlink{class_text_render_1_1_text_render_error}{Text\+Render\+Error}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}\label{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}} 
+{\bfseries Text\+Render} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+\mbox{\Hypertarget{class_text_render_a019cb58785504de382da100b05a06a36}\label{class_text_render_a019cb58785504de382da100b05a06a36}} 
+{\bfseries Text\+Render} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&src)
+\item 
+\mbox{\Hypertarget{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}\label{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}} 
+\mbox{\hyperlink{class_text_render}{Text\+Render}} \& {\bfseries operator=} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}\label{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}} 
+void {\bfseries load\+Font} (std\+::string name, std\+::string const \&filename, uint32\+\_\+t size)
+\item 
+\mbox{\Hypertarget{class_text_render_af6af671efef20ff18fba6ce8ff0ba5dd}\label{class_text_render_af6af671efef20ff18fba6ce8ff0ba5dd}} 
+void {\bfseries write} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat x=0, G\+Lfloat y=0, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
+\item 
+\mbox{\Hypertarget{class_text_render_a26975c1b71e98bf4d60abfebc2942816}\label{class_text_render_a26975c1b71e98bf4d60abfebc2942816}} 
+uint32\+\_\+t {\bfseries str\+Width} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
+\item 
+\mbox{\Hypertarget{class_text_render_ab9294880cc54590120d6ca78eee2f7a5}\label{class_text_render_ab9294880cc54590120d6ca78eee2f7a5}} 
+uint32\+\_\+t {\bfseries str\+Height} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
+\item 
+\mbox{\Hypertarget{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}\label{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}} 
+void {\bfseries set\+Win\+Size} (glm\+::vec2 win\+Size)
+\item 
+\mbox{\Hypertarget{class_text_render_a72d433b2f5aeed7eabeae31e788c4f57}\label{class_text_render_a72d433b2f5aeed7eabeae31e788c4f57}} 
+\mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} ()
+\item 
+\mbox{\Hypertarget{class_text_render_ab4e5c44bbf80351e01d868604ff2c656}\label{class_text_render_ab4e5c44bbf80351e01d868604ff2c656}} 
+const \mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_render_a0c196776d7ad5f5bb52928edd5727144}\label{class_text_render_a0c196776d7ad5f5bb52928edd5727144}} 
+std\+::map$<$ std\+::string, std\+::map$<$ G\+Lchar, \mbox{\hyperlink{struct_text_render_1_1_character}{Character}} $>$ $>$ {\bfseries font}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Text\+Render.\+hpp\item 
+srcs/utils/opengl/Text\+Render.\+cpp\end{DoxyCompactItemize}

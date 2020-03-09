@@ -1,0 +1,61 @@
+\hypertarget{class_button_u_i}{}\doxysection{Button\+UI Class Reference}
+\label{class_button_u_i}\index{ButtonUI@{ButtonUI}}
+Inheritance diagram for Button\+UI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_button_u_i}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}\label{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}} 
+{\bfseries Button\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}\label{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}} 
+{\bfseries Button\+UI} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}\label{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}} 
+\mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_button_u_i_a4fb910bad88dc4d3d7b208d7d31c64c1}\label{class_button_u_i_a4fb910bad88dc4d3d7b208d7d31c64c1}} 
+virtual void \mbox{\hyperlink{class_button_u_i_a4fb910bad88dc4d3d7b208d7d31c64c1}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function for UI /!\textbackslash{} -\/$>$ you need to draw in the reverse order (draw at first the element on the top) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_button_u_i_aec9a3a141d0c55a907256f3b3fc3f09a}{\+\_\+update}} (glm\+::vec2 mouse\+Pos, bool right\+Click, bool left\+Click)
+\begin{DoxyCompactList}\small\item\em this is the base update function of UI objects \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_u_i_aec9a3a141d0c55a907256f3b3fc3f09a}\label{class_button_u_i_aec9a3a141d0c55a907256f3b3fc3f09a}} 
+\index{ButtonUI@{ButtonUI}!\_update@{\_update}}
+\index{\_update@{\_update}!ButtonUI@{ButtonUI}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily void Button\+U\+I\+::\+\_\+update (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{mouse\+Pos,  }\item[{bool}]{right\+Click,  }\item[{bool}]{left\+Click }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+this is the base update function of UI objects 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & the position of the mouse \\
+\hline
+{\em right\+Click} & a boolean to know if right click is pressed \\
+\hline
+{\em left\+Click} & a boolean to know if left click is pressed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/Button\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/Button\+U\+I.\+cpp\end{DoxyCompactItemize}

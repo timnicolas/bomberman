@@ -1,0 +1,7 @@
+digraph "Skybox"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Skybox\n||+ Skybox()\l+ Skybox()\l+ ~Skybox()\l+ operator=()\l+ load()\l+ draw()\l+ getShader()\l+ getShader()\l+ getTextureID()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

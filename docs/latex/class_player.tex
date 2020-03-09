@@ -1,0 +1,75 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_player}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_player_1_1_player_exception}{Player\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}\label{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}} 
+{\bfseries Player} (\mbox{\hyperlink{class_player}{Player}} const \&src)
+\item 
+\mbox{\Hypertarget{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}\label{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}} 
+\mbox{\hyperlink{class_player}{Player}} \& {\bfseries operator=} (\mbox{\hyperlink{class_player}{Player}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_player_addd98ad65b4907ac660fcf6acdc12ecc}{update}} (std\+::chrono\+::milliseconds d\+\_\+time)
+\item 
+bool \mbox{\hyperlink{class_player_ab8b13fc7ca001cc8b09e208299fa5575}{draw}} ()
+\item 
+\mbox{\Hypertarget{class_player_a5c02bf20d69b92d084b4d2f17f723559}\label{class_player_a5c02bf20d69b92d084b4d2f17f723559}} 
+bool {\bfseries is\+Destructable} ()
+\item 
+\mbox{\Hypertarget{class_player_a7dfc96fc1fba4e236acdd6b383df45df}\label{class_player_a7dfc96fc1fba4e236acdd6b383df45df}} 
+bool {\bfseries block\+Propagation} ()
+\item 
+\mbox{\Hypertarget{class_player_a06e38c0f57e67eb006c9d09779bd8f8f}\label{class_player_a06e38c0f57e67eb006c9d09779bd8f8f}} 
+bool {\bfseries is\+Alive} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a948d5a3b282419b995dcc32f66bf6b54}\label{class_player_a948d5a3b282419b995dcc32f66bf6b54}} 
+int {\bfseries bombs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_ab8b13fc7ca001cc8b09e208299fa5575}\label{class_player_ab8b13fc7ca001cc8b09e208299fa5575}} 
+\index{Player@{Player}!draw@{draw}}
+\index{draw@{draw}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Player\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+draw is called each frame. 
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+\mbox{\Hypertarget{class_player_addd98ad65b4907ac660fcf6acdc12ecc}\label{class_player_addd98ad65b4907ac660fcf6acdc12ecc}} 
+\index{Player@{Player}!update@{update}}
+\index{update@{update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Player\+::update (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{d\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+update is called each frame. 
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+time} & Delta Time \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/Player.\+hpp\item 
+srcs/Player.\+cpp\end{DoxyCompactItemize}

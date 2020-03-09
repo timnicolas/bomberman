@@ -1,0 +1,39 @@
+\hypertarget{class_image_atlas_render}{}\doxysection{Image\+Atlas\+Render Class Reference}
+\label{class_image_atlas_render}\index{ImageAtlasRender@{ImageAtlasRender}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_image_atlas_render_1_1_image_render_error}{Image\+Render\+Error}}
+\item 
+class \mbox{\hyperlink{class_image_atlas_render_1_1_load_image_exception}{Load\+Image\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}\label{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}} 
+{\bfseries Image\+Atlas\+Render} (\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} const \&texture\+Manager, uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}\label{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}} 
+{\bfseries Image\+Atlas\+Render} (\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&src)
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}\label{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}} 
+\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} \& {\bfseries operator=} (\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}\label{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}} 
+void {\bfseries draw} (glm\+::vec2 pos, glm\+::vec2 size, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}\label{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}} 
+void {\bfseries draw} (float posx, float posy, float w, float h, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a2596eb48c3974c4f52d9d7fd0b699ab9}\label{class_image_atlas_render_a2596eb48c3974c4f52d9d7fd0b699ab9}} 
+\mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} ()
+\item 
+\mbox{\Hypertarget{class_image_atlas_render_a6d8230e5194bfde27b0c45c891a4cebb}\label{class_image_atlas_render_a6d8230e5194bfde27b0c45c891a4cebb}} 
+const \mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Image\+Atlas\+Render.\+hpp\item 
+srcs/utils/opengl/Image\+Atlas\+Render.\+cpp\end{DoxyCompactItemize}

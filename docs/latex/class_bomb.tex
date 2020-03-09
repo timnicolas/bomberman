@@ -1,0 +1,67 @@
+\hypertarget{class_bomb}{}\doxysection{Bomb Class Reference}
+\label{class_bomb}\index{Bomb@{Bomb}}
+Inheritance diagram for Bomb\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_bomb}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_bomb_1_1_bomb_exception}{Bomb\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}\label{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}} 
+{\bfseries Bomb} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&src)
+\item 
+\mbox{\Hypertarget{class_bomb_a85eb751af149c92278eafdbabced0d3d}\label{class_bomb_a85eb751af149c92278eafdbabced0d3d}} 
+\mbox{\hyperlink{class_bomb}{Bomb}} \& {\bfseries operator=} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_bomb_a82697505daebe717130ce06c423c0fd2}{update}} (std\+::chrono\+::milliseconds d\+\_\+time)
+\item 
+bool \mbox{\hyperlink{class_bomb_a4aef3d446231ae730e2f03fa3cdf0f77}{draw}} ()
+\item 
+\mbox{\Hypertarget{class_bomb_a427e53d138611be629ba82ac951353d2}\label{class_bomb_a427e53d138611be629ba82ac951353d2}} 
+bool {\bfseries is\+Destructable} ()
+\item 
+\mbox{\Hypertarget{class_bomb_acf9c4f91e487e8379c6903f7275ae3c1}\label{class_bomb_acf9c4f91e487e8379c6903f7275ae3c1}} 
+bool {\bfseries block\+Propagation} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bomb_a4aef3d446231ae730e2f03fa3cdf0f77}\label{class_bomb_a4aef3d446231ae730e2f03fa3cdf0f77}} 
+\index{Bomb@{Bomb}!draw@{draw}}
+\index{draw@{draw}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Bomb\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+draw is called each frame. 
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bomb_a82697505daebe717130ce06c423c0fd2}\label{class_bomb_a82697505daebe717130ce06c423c0fd2}} 
+\index{Bomb@{Bomb}!update@{update}}
+\index{update@{update}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Bomb\+::update (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{d\+\_\+time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+update is called each frame. 
+\begin{DoxyParams}{Parameters}
+{\em d\+\_\+time} & Delta Time \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/Bomb.\+hpp\item 
+srcs/Bomb.\+cpp\end{DoxyCompactItemize}

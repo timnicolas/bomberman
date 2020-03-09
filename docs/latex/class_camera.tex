@@ -1,0 +1,86 @@
+\hypertarget{class_camera}{}\doxysection{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_a5f00faf16e41e230e481b1732f9f5e62}\label{class_camera_a5f00faf16e41e230e481b1732f9f5e62}} 
+{\bfseries Camera} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 pos=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0f, 0.\+0f, 0.\+0f), C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 up=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0f, 1.\+0f, 0.\+0f), C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT yaw=-\/90.\+0f, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT pitch=0.\+0f)
+\item 
+\mbox{\Hypertarget{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}\label{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}} 
+{\bfseries Camera} (\mbox{\hyperlink{class_camera}{Camera}} const \&src)
+\item 
+\mbox{\Hypertarget{class_camera_a7df2f4b79b58047d59902a2e8b40855d}\label{class_camera_a7df2f4b79b58047d59902a2e8b40855d}} 
+\mbox{\hyperlink{class_camera}{Camera}} \& {\bfseries operator=} (\mbox{\hyperlink{class_camera}{Camera}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_camera_a77622b311faaff8a7864bd62e1156927}\label{class_camera_a77622b311faaff8a7864bd62e1156927}} 
+virtual void {\bfseries run} (C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT dt\+Time)
+\item 
+\mbox{\Hypertarget{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}\label{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}} 
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 {\bfseries get\+View\+Matrix} () const
+\item 
+\mbox{\Hypertarget{class_camera_a1f28b91cb62dd318b5acf27296c99242}\label{class_camera_a1f28b91cb62dd318b5acf27296c99242}} 
+virtual void {\bfseries process\+Keyboard} (Cam\+Movement direction, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT dt\+Time, bool is\+Run=false)
+\item 
+\mbox{\Hypertarget{class_camera_a8bc58ffebed8d701ae279d363736dc42}\label{class_camera_a8bc58ffebed8d701ae279d363736dc42}} 
+virtual void {\bfseries process\+Mouse\+Movement} (C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT x\+Offset, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT y\+Offset, bool constrain\+Pitch=true)
+\item 
+\mbox{\Hypertarget{class_camera_ae68ec7e88a3b10beb68568568bc23c32}\label{class_camera_ae68ec7e88a3b10beb68568568bc23c32}} 
+virtual void {\bfseries process\+Mouse\+Scroll} (C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT y\+Offset)
+\item 
+\mbox{\Hypertarget{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}\label{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}} 
+virtual void {\bfseries look\+At} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 target)
+\item 
+\mbox{\Hypertarget{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}\label{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}} 
+virtual void {\bfseries reset\+Position} ()
+\item 
+\mbox{\Hypertarget{class_camera_a4287af0eacc2cf50765360a8e1b5db74}\label{class_camera_a4287af0eacc2cf50765360a8e1b5db74}} 
+void {\bfseries frustum\+Culling\+Init} (C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT angle\+Deg, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT ratio, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT nearD, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT farD)
+\item 
+\mbox{\Hypertarget{class_camera_a4b044dc6132be3a98d77bd74a727e70c}\label{class_camera_a4b044dc6132be3a98d77bd74a727e70c}} 
+int {\bfseries frustum\+Culling\+Check\+Point} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&point)
+\item 
+\mbox{\Hypertarget{class_camera_ae0d68a4caaf74b25214c55e69f3ecdb5}\label{class_camera_ae0d68a4caaf74b25214c55e69f3ecdb5}} 
+int {\bfseries frustum\+Culling\+Check\+Cube} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&start\+Point, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \&size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_a645cd9343d8c0160ce2281111240f9fd}\label{class_camera_a645cd9343d8c0160ce2281111240f9fd}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries pos}
+\item 
+\mbox{\Hypertarget{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}\label{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries front}
+\item 
+\mbox{\Hypertarget{class_camera_a02d03a426815c0d64522724fbe2374ca}\label{class_camera_a02d03a426815c0d64522724fbe2374ca}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries up}
+\item 
+\mbox{\Hypertarget{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}\label{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries right}
+\item 
+\mbox{\Hypertarget{class_camera_a9088ff173e443938f31ed4b6c0f75756}\label{class_camera_a9088ff173e443938f31ed4b6c0f75756}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries world\+Up}
+\item 
+\mbox{\Hypertarget{class_camera_aa11a0643425580b4115bb9b839542891}\label{class_camera_aa11a0643425580b4115bb9b839542891}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries yaw}
+\item 
+\mbox{\Hypertarget{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}\label{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries pitch}
+\item 
+\mbox{\Hypertarget{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}\label{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries movement\+Speed}
+\item 
+\mbox{\Hypertarget{class_camera_a0fd9adbe4484147947bc1f51452edd6f}\label{class_camera_a0fd9adbe4484147947bc1f51452edd6f}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries mouse\+Sensitivity}
+\item 
+\mbox{\Hypertarget{class_camera_a891d353a14161c6be625f6a52b75375d}\label{class_camera_a891d353a14161c6be625f6a52b75375d}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries run\+Factor}
+\item 
+\mbox{\Hypertarget{class_camera_a974737372b1917dab8e6a02c38413bce}\label{class_camera_a974737372b1917dab8e6a02c38413bce}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries zoom}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Camera.\+hpp\item 
+srcs/utils/opengl/Camera.\+cpp\end{DoxyCompactItemize}

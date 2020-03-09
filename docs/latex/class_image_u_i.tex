@@ -1,0 +1,61 @@
+\hypertarget{class_image_u_i}{}\doxysection{Image\+UI Class Reference}
+\label{class_image_u_i}\index{ImageUI@{ImageUI}}
+Inheritance diagram for Image\+UI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_image_u_i}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_image_u_i_a842275e83f5e3d988b73ab701e84aa07}\label{class_image_u_i_a842275e83f5e3d988b73ab701e84aa07}} 
+{\bfseries Image\+UI} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename, bool pixelate\+On\+Zoom=true)
+\item 
+\mbox{\Hypertarget{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}\label{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}} 
+{\bfseries Image\+UI} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}\label{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}} 
+\mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_image_u_i_adf9be86eedf83a6e23946a1514741d33}\label{class_image_u_i_adf9be86eedf83a6e23946a1514741d33}} 
+virtual void \mbox{\hyperlink{class_image_u_i_adf9be86eedf83a6e23946a1514741d33}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function for UI /!\textbackslash{} -\/$>$ you need to draw in the reverse order (draw at first the element on the top) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_image_u_i_a3184bee4d24f811be0b10c7ed9ddc27e}{\+\_\+update}} (glm\+::vec2 mouse\+Pos, bool right\+Click, bool left\+Click)
+\begin{DoxyCompactList}\small\item\em this is the base update function of UI objects \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_image_u_i_a3184bee4d24f811be0b10c7ed9ddc27e}\label{class_image_u_i_a3184bee4d24f811be0b10c7ed9ddc27e}} 
+\index{ImageUI@{ImageUI}!\_update@{\_update}}
+\index{\_update@{\_update}!ImageUI@{ImageUI}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily void Image\+U\+I\+::\+\_\+update (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{mouse\+Pos,  }\item[{bool}]{right\+Click,  }\item[{bool}]{left\+Click }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+this is the base update function of UI objects 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & the position of the mouse \\
+\hline
+{\em right\+Click} & a boolean to know if right click is pressed \\
+\hline
+{\em left\+Click} & a boolean to know if left click is pressed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/Image\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/Image\+U\+I.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,7 @@
+digraph "JsonObj&lt; T &gt;"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{JsonObj\< T \>\n|# _name\l# _description\l# _value\l# _hasMin\l# _min\l# _hasMax\l# _max\l# _disableInFile\l|+ JsonObj()\l+ JsonObj()\l+ JsonObj()\l+ ~JsonObj()\l+ JsonObj()\l+ operator=()\l+ init()\l+ get()\l+ get()\l+ setValue()\land 14 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

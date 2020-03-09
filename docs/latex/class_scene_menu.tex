@@ -1,0 +1,271 @@
+\hypertarget{class_scene_menu}{}\doxysection{Scene\+Menu Class Reference}
+\label{class_scene_menu}\index{SceneMenu@{SceneMenu}}
+Inheritance diagram for Scene\+Menu\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_scene_menu}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_menu_a3ea9a95c887e3fcd6085b4e1c11582fe}\label{class_scene_menu_a3ea9a95c887e3fcd6085b4e1c11582fe}} 
+{\bfseries Scene\+Menu} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui)
+\item 
+\mbox{\Hypertarget{class_scene_menu_a9dfa1701db4bc201f4c8d76e2b61143e}\label{class_scene_menu_a9dfa1701db4bc201f4c8d76e2b61143e}} 
+{\bfseries Scene\+Menu} (\mbox{\hyperlink{class_scene_menu}{Scene\+Menu}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_menu_af2d47a2e3233303bf0eea75a9fbe40a5}\label{class_scene_menu_af2d47a2e3233303bf0eea75a9fbe40a5}} 
+\mbox{\hyperlink{class_scene_menu}{Scene\+Menu}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_menu}{Scene\+Menu}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_menu_ab7b5a36bb22228005369342e83e3400a}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_menu_a2dfefd0ed735db4240149fd22059eafc}{update}} (std\+::chrono\+::milliseconds last\+\_\+loop\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_menu_a92937e56ceac61af8fbcbfc947827598}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function (called every frames) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& \mbox{\hyperlink{class_scene_menu_a6740685ed6ddf8c5d7cf310715760929}{add\+Button}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&text)
+\begin{DoxyCompactList}\small\item\em add a button in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& \mbox{\hyperlink{class_scene_menu_ac14e012e0f232d9dcff8228a19ae741d}{add\+Button\+Image}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename, bool pixelate\+On\+Zoom=true)
+\begin{DoxyCompactList}\small\item\em add a button with image in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& \mbox{\hyperlink{class_scene_menu_a4c77f4673bd24cbed1374aef6813c95c}{add\+Slider}} (glm\+::vec2 pos, glm\+::vec2 size, float min, float max, float val, float step=0)
+\begin{DoxyCompactList}\small\item\em add a slider in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_text_u_i}{Text\+UI}} \& \mbox{\hyperlink{class_scene_menu_a3e2aadbd9b0a80bfe645c121f90ac1e6}{add\+Text}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&text)
+\begin{DoxyCompactList}\small\item\em add a text in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_rect_u_i}{Rect\+UI}} \& \mbox{\hyperlink{class_scene_menu_a7e69f1f16a4f8acdf80d4f406842b975}{add\+Rect}} (glm\+::vec2 pos, glm\+::vec2 size, glm\+::vec4 color, glm\+::vec4 border\+Color=glm\+::vec4(0.\+0, 0.\+0, 0.\+0, 1.\+0))
+\begin{DoxyCompactList}\small\item\em add a rectange in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& \mbox{\hyperlink{class_scene_menu_a68e4236a5ad5488671c2947ad22a2235}{add\+Image}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename, bool pixelate\+On\+Zoom=true)
+\begin{DoxyCompactList}\small\item\em add an image in the menu with menu settings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_menu_a8904553913498ba824eda361af232c86}\label{class_scene_menu_a8904553913498ba824eda361af232c86}} 
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries get\+U\+I\+Element} (uint32\+\_\+t id)
+\item 
+\mbox{\Hypertarget{class_scene_menu_a7e41182c75c1ec7bf58c5eb2a29abe31}\label{class_scene_menu_a7e41182c75c1ec7bf58c5eb2a29abe31}} 
+uint32\+\_\+t {\bfseries get\+Nb\+U\+I\+Elements} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_menu_a8ea1419f30ba0eee7df937c289db0e45}\label{class_scene_menu_a8ea1419f30ba0eee7df937c289db0e45}} 
+std\+::vector$<$ \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$ $>$ {\bfseries \+\_\+buttons}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_menu_a1c6a2f7b52674ef66f3d801b6f433e24}\label{class_scene_menu_a1c6a2f7b52674ef66f3d801b6f433e24}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_menu}{Scene\+Menu}} \&my\+\_\+class)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_menu_a6740685ed6ddf8c5d7cf310715760929}\label{class_scene_menu_a6740685ed6ddf8c5d7cf310715760929}} 
+\index{SceneMenu@{SceneMenu}!addButton@{addButton}}
+\index{addButton@{addButton}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addButton()}{addButton()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& Scene\+Menu\+::add\+Button (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{text }\end{DoxyParamCaption})}
+
+
+
+add a button in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em text} & the text in the button \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_button_u_i}{Button\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_ac14e012e0f232d9dcff8228a19ae741d}\label{class_scene_menu_ac14e012e0f232d9dcff8228a19ae741d}} 
+\index{SceneMenu@{SceneMenu}!addButtonImage@{addButtonImage}}
+\index{addButtonImage@{addButtonImage}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addButtonImage()}{addButtonImage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& Scene\+Menu\+::add\+Button\+Image (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{filename,  }\item[{bool}]{pixelate\+On\+Zoom = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+add a button with image in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em filename} & the path to the image \\
+\hline
+{\em pixelate\+On\+Zoom} & a bool to enable/disable pixelate on zoom option \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_a68e4236a5ad5488671c2947ad22a2235}\label{class_scene_menu_a68e4236a5ad5488671c2947ad22a2235}} 
+\index{SceneMenu@{SceneMenu}!addImage@{addImage}}
+\index{addImage@{addImage}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addImage()}{addImage()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& Scene\+Menu\+::add\+Image (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{filename,  }\item[{bool}]{pixelate\+On\+Zoom = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+add an image in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em filename} & the path to the image \\
+\hline
+{\em pixelate\+On\+Zoom} & a bool to enable/disable pixelate on zoom option \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_image_u_i}{Image\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_a7e69f1f16a4f8acdf80d4f406842b975}\label{class_scene_menu_a7e69f1f16a4f8acdf80d4f406842b975}} 
+\index{SceneMenu@{SceneMenu}!addRect@{addRect}}
+\index{addRect@{addRect}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addRect()}{addRect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_rect_u_i}{Rect\+UI}} \& Scene\+Menu\+::add\+Rect (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{glm\+::vec4}]{color,  }\item[{glm\+::vec4}]{border\+Color = {\ttfamily glm\+:\+:vec4(0.0,~0.0,~0.0,~1.0)} }\end{DoxyParamCaption})}
+
+
+
+add a rectange in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em color} & the rectangle color \\
+\hline
+{\em border\+Color} & the border rectangle color \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_rect_u_i}{Rect\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_a4c77f4673bd24cbed1374aef6813c95c}\label{class_scene_menu_a4c77f4673bd24cbed1374aef6813c95c}} 
+\index{SceneMenu@{SceneMenu}!addSlider@{addSlider}}
+\index{addSlider@{addSlider}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addSlider()}{addSlider()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& Scene\+Menu\+::add\+Slider (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{float}]{min,  }\item[{float}]{max,  }\item[{float}]{val,  }\item[{float}]{step = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+add a slider in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em min} & min value in slider \\
+\hline
+{\em max} & max value in slider \\
+\hline
+{\em val} & default value in slider \\
+\hline
+{\em step} & step of the slider \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_a3e2aadbd9b0a80bfe645c121f90ac1e6}\label{class_scene_menu_a3e2aadbd9b0a80bfe645c121f90ac1e6}} 
+\index{SceneMenu@{SceneMenu}!addText@{addText}}
+\index{addText@{addText}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{addText()}{addText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_text_u_i}{Text\+UI}} \& Scene\+Menu\+::add\+Text (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{text }\end{DoxyParamCaption})}
+
+
+
+add a text in the menu with menu settings 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the position \\
+\hline
+{\em size} & the size \\
+\hline
+{\em text} & the text \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_text_u_i}{Text\+UI}}\& a reference to the element created 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_menu_a92937e56ceac61af8fbcbfc947827598}\label{class_scene_menu_a92937e56ceac61af8fbcbfc947827598}} 
+\index{SceneMenu@{SceneMenu}!draw@{draw}}
+\index{draw@{draw}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Scene\+Menu\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the draw function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the draw is a success 
+
+false if there are an error in draw 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene}{A\+Scene}}.
+
+\mbox{\Hypertarget{class_scene_menu_ab7b5a36bb22228005369342e83e3400a}\label{class_scene_menu_ab7b5a36bb22228005369342e83e3400a}} 
+\index{SceneMenu@{SceneMenu}!init@{init}}
+\index{init@{init}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Menu\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene}{A\+Scene}}.
+
+\mbox{\Hypertarget{class_scene_menu_a2dfefd0ed735db4240149fd22059eafc}\label{class_scene_menu_a2dfefd0ed735db4240149fd22059eafc}} 
+\index{SceneMenu@{SceneMenu}!update@{update}}
+\index{update@{update}!SceneMenu@{SceneMenu}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Menu\+::update (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{last\+\_\+loop\+\_\+ms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+\_\+loop\+\_\+ms} & the delta time since last loop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene}{A\+Scene}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Menu.\+hpp\item 
+srcs/scenes/Scene\+Menu.\+cpp\end{DoxyCompactItemize}

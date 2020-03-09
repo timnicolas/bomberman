@@ -1,0 +1,71 @@
+\hypertarget{class_scene_manager}{}\doxysection{Scene\+Manager Class Reference}
+\label{class_scene_manager}\index{SceneManager@{SceneManager}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_scene_manager_1_1_scene_manager_exception}{Scene\+Manager\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_manager_a0829f5fc6a5f7e13204334fc200c65f0}\label{class_scene_manager_a0829f5fc6a5f7e13204334fc200c65f0}} 
+{\bfseries Scene\+Manager} (\mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} const \&src)
+\item 
+bool \mbox{\hyperlink{class_scene_manager_afdfd47d1316c64d753bf192d513cbb6e}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} (load the first scene\& load gui) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_scene_manager_a7d88d1c5611d84ca9a08bda535ff46f1}{run}} ()
+\begin{DoxyCompactList}\small\item\em this is the main game loop to update \& draw everythings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_manager_a08f9a0fb4793055b0681a2ee0c0ce375}\label{class_scene_manager_a08f9a0fb4793055b0681a2ee0c0ce375}} 
+\mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} const \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_manager_a6d9d96cee38c41d726fd39813c9e01ac}\label{class_scene_manager_a6d9d96cee38c41d726fd39813c9e01ac}} 
+\mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ {\bfseries \+\_\+scene}
+\item 
+\mbox{\Hypertarget{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}\label{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}} 
+\mbox{\hyperlink{struct_game_info}{Game\+Info}} {\bfseries \+\_\+game\+Info}
+\item 
+\mbox{\Hypertarget{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}\label{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}} 
+\mbox{\hyperlink{class_gui}{Gui}} $\ast$ {\bfseries \+\_\+gui}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_manager_afdfd47d1316c64d753bf192d513cbb6e}\label{class_scene_manager_afdfd47d1316c64d753bf192d513cbb6e}} 
+\index{SceneManager@{SceneManager}!init@{init}}
+\index{init@{init}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+init the \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} (load the first scene\& load gui) 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_a7d88d1c5611d84ca9a08bda535ff46f1}\label{class_scene_manager_a7d88d1c5611d84ca9a08bda535ff46f1}} 
+\index{SceneManager@{SceneManager}!run@{run}}
+\index{run@{run}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+this is the main game loop to update \& draw everythings 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Manager.\+hpp\item 
+srcs/scenes/Scene\+Manager.\+cpp\end{DoxyCompactItemize}

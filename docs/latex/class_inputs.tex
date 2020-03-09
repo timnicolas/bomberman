@@ -1,0 +1,174 @@
+\hypertarget{class_inputs}{}\doxysection{Inputs Class Reference}
+\label{class_inputs}\index{Inputs@{Inputs}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_inputs}{Inputs}} \& \mbox{\hyperlink{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}{get}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a775b7e5d409834058a8bc067b6f77998}{get\+Key}} (Input\+Type\+::\+Enum type)
+\item 
+static void \mbox{\hyperlink{class_inputs_a61cc1d165b796b3be516d2fd083cc646}{configure\+Key}} (Input\+Type\+::\+Enum type)
+\item 
+static void \mbox{\hyperlink{class_inputs_aff002b44212b7ba7ba44adeb17375185}{cancel\+Configuration}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a3844589a1c88f346f5daae1d2088748f}{should\+Quit}} ()
+\item 
+static const glm\+::ivec2 \& \mbox{\hyperlink{class_inputs_afc7227e1c5cd934309955f8db3c36097}{get\+Mouse\+Pos}} ()
+\item 
+static const glm\+::ivec2 \& \mbox{\hyperlink{class_inputs_abf9d434be64729115891ba206add1c68}{get\+Mouse\+Rel}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}{get\+Right\+Click}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}{get\+Left\+Click}} ()
+\item 
+static void \mbox{\hyperlink{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}{update}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}\label{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}} 
+static const int {\bfseries nb\+\_\+input} = 7
+\item 
+static const std\+::string {\bfseries input\+\_\+type\+\_\+name} \mbox{[}Inputs\+::nb\+\_\+input\mbox{]}
+\item 
+\mbox{\Hypertarget{class_inputs_a7f5aef2de7bf97b129c291eac4bdbd59}\label{class_inputs_a7f5aef2de7bf97b129c291eac4bdbd59}} 
+static const std\+::string {\bfseries \+\_\+conf\+\_\+file} = \char`\"{}configs/controls.\+json\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_inputs_aff002b44212b7ba7ba44adeb17375185}\label{class_inputs_aff002b44212b7ba7ba44adeb17375185}} 
+\index{Inputs@{Inputs}!cancelConfiguration@{cancelConfiguration}}
+\index{cancelConfiguration@{cancelConfiguration}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{cancelConfiguration()}{cancelConfiguration()}}
+{\footnotesize\ttfamily void Inputs\+::cancel\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Cancel the wait for a key to configure an action. This function will reset the execution of the update function to its normal state. \mbox{\Hypertarget{class_inputs_a61cc1d165b796b3be516d2fd083cc646}\label{class_inputs_a61cc1d165b796b3be516d2fd083cc646}} 
+\index{Inputs@{Inputs}!configureKey@{configureKey}}
+\index{configureKey@{configureKey}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{configureKey()}{configureKey()}}
+{\footnotesize\ttfamily void Inputs\+::configure\+Key (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Configure the action passed to be associated to the next key pressed. This function will change the execution of the update function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to configure. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}\label{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}} 
+\index{Inputs@{Inputs}!get@{get}}
+\index{get@{get}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_inputs}{Inputs}} \& Inputs\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return a reference to singleton \mbox{\hyperlink{class_inputs}{Inputs}}.
+
+\begin{DoxyReturn}{Returns}
+the reference to the singleton. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a775b7e5d409834058a8bc067b6f77998}\label{class_inputs_a775b7e5d409834058a8bc067b6f77998}} 
+\index{Inputs@{Inputs}!getKey@{getKey}}
+\index{getKey@{getKey}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKey()}{getKey()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return the state of the key corresponding to the action passed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to verify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state of the key (true == pressed). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}\label{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}} 
+\index{Inputs@{Inputs}!getLeftClick@{getLeftClick}}
+\index{getLeftClick@{getLeftClick}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getLeftClick()}{getLeftClick()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Left\+Click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the left click (true if clicked, else false)
+
+\begin{DoxyReturn}{Returns}
+The mouse state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_afc7227e1c5cd934309955f8db3c36097}\label{class_inputs_afc7227e1c5cd934309955f8db3c36097}} 
+\index{Inputs@{Inputs}!getMousePos@{getMousePos}}
+\index{getMousePos@{getMousePos}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getMousePos()}{getMousePos()}}
+{\footnotesize\ttfamily const glm\+::ivec2 \& Inputs\+::get\+Mouse\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the current coordinates of the mouse.
+
+\begin{DoxyReturn}{Returns}
+A reference to a constant vector containing the mouse position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_abf9d434be64729115891ba206add1c68}\label{class_inputs_abf9d434be64729115891ba206add1c68}} 
+\index{Inputs@{Inputs}!getMouseRel@{getMouseRel}}
+\index{getMouseRel@{getMouseRel}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getMouseRel()}{getMouseRel()}}
+{\footnotesize\ttfamily const glm\+::ivec2 \& Inputs\+::get\+Mouse\+Rel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the offset of the mouse from the last poll of event.
+
+\begin{DoxyReturn}{Returns}
+A reference to a constant vector containing the mouse offset. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}\label{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}} 
+\index{Inputs@{Inputs}!getRightClick@{getRightClick}}
+\index{getRightClick@{getRightClick}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getRightClick()}{getRightClick()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Right\+Click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the right click (true if clicked, else false)
+
+\begin{DoxyReturn}{Returns}
+The mouse state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a3844589a1c88f346f5daae1d2088748f}\label{class_inputs_a3844589a1c88f346f5daae1d2088748f}} 
+\index{Inputs@{Inputs}!shouldQuit@{shouldQuit}}
+\index{shouldQuit@{shouldQuit}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{shouldQuit()}{shouldQuit()}}
+{\footnotesize\ttfamily bool Inputs\+::should\+Quit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the window should be closed or not.
+
+\begin{DoxyReturn}{Returns}
+true if the user tried to close the window, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}\label{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}} 
+\index{Inputs@{Inputs}!update@{update}}
+\index{update@{update}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Inputs\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Poll all the S\+DL events from the last update call. This function should be called at the start of each frame in order for this class to have valid values. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_inputs_a617379938c0c70b30922928e4fff4052}\label{class_inputs_a617379938c0c70b30922928e4fff4052}} 
+\index{Inputs@{Inputs}!input\_type\_name@{input\_type\_name}}
+\index{input\_type\_name@{input\_type\_name}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{input\_type\_name}{input\_type\_name}}
+{\footnotesize\ttfamily const std\+::string Inputs\+::input\+\_\+type\+\_\+name\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"up"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"down"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"left"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"right"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"action"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"confirm"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"cancel"},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/Inputs.\+hpp\item 
+srcs/Inputs.\+cpp\end{DoxyCompactItemize}

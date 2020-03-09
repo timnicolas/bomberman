@@ -1,0 +1,61 @@
+\hypertarget{class_text_u_i}{}\doxysection{Text\+UI Class Reference}
+\label{class_text_u_i}\index{TextUI@{TextUI}}
+Inheritance diagram for Text\+UI\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_text_u_i}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_u_i_ac985cfaf70bceed7f26d1f184836e523}\label{class_text_u_i_ac985cfaf70bceed7f26d1f184836e523}} 
+{\bfseries Text\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_text_u_i_ab960011cbb3e815bf698640def9974bd}\label{class_text_u_i_ab960011cbb3e815bf698640def9974bd}} 
+{\bfseries Text\+UI} (\mbox{\hyperlink{class_text_u_i}{Text\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_text_u_i_a9e461e80a257b84e3739e38364de1dd1}\label{class_text_u_i_a9e461e80a257b84e3739e38364de1dd1}} 
+\mbox{\hyperlink{class_text_u_i}{Text\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_text_u_i}{Text\+UI}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_text_u_i_a4470cc97e963e70fec404b92f6ede011}\label{class_text_u_i_a4470cc97e963e70fec404b92f6ede011}} 
+virtual void \mbox{\hyperlink{class_text_u_i_a4470cc97e963e70fec404b92f6ede011}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function for UI /!\textbackslash{} -\/$>$ you need to draw in the reverse order (draw at first the element on the top) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_text_u_i_adbcdf161935f016781bd143d0fdecbaf}{\+\_\+update}} (glm\+::vec2 mouse\+Pos, bool right\+Click, bool left\+Click)
+\begin{DoxyCompactList}\small\item\em this is the base update function of UI objects \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_u_i_adbcdf161935f016781bd143d0fdecbaf}\label{class_text_u_i_adbcdf161935f016781bd143d0fdecbaf}} 
+\index{TextUI@{TextUI}!\_update@{\_update}}
+\index{\_update@{\_update}!TextUI@{TextUI}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily void Text\+U\+I\+::\+\_\+update (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{mouse\+Pos,  }\item[{bool}]{right\+Click,  }\item[{bool}]{left\+Click }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+this is the base update function of UI objects 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Pos} & the position of the mouse \\
+\hline
+{\em right\+Click} & a boolean to know if right click is pressed \\
+\hline
+{\em left\+Click} & a boolean to know if left click is pressed \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/Text\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/Text\+U\+I.\+cpp\end{DoxyCompactItemize}

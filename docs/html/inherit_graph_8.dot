@@ -1,0 +1,24 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node25 [label="exception",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node25 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="ImageAtlasRender::ImageRender\lError",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_image_atlas_render_1_1_image_render_error.html",tooltip=" "];
+  Node0 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 [label="ImageAtlasRender::LoadImage\lException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_image_atlas_render_1_1_load_image_exception.html",tooltip=" "];
+  Node25 -> Node28 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node28 [label="Shader::ShaderError",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_shader_1_1_shader_error.html",tooltip=" "];
+  Node28 -> Node29 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node29 [label="Shader::ShaderCompileException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_shader_1_1_shader_compile_exception.html",tooltip=" "];
+  Node28 -> Node30 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node30 [label="Shader::ShaderLinkingException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_shader_1_1_shader_linking_exception.html",tooltip=" "];
+  Node25 -> Node31 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node31 [label="TextRender::TextRenderError",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_text_render_1_1_text_render_error.html",tooltip=" "];
+  Node31 -> Node32 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node32 [label="TextRender::LoadTextRender\lException",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_text_render_1_1_load_text_render_exception.html",tooltip=" "];
+  Node25 -> Node33 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node33 [label="TextureFailToLoad",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_texture_fail_to_load.html",tooltip=" "];
+}

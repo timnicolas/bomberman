@@ -1,0 +1,7 @@
+digraph "GameInfo"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{GameInfo\n|+ title\l+ windowSize\l+ gameboard\l+ player\l+ play\l+ quit\l|+ GameInfo()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+}

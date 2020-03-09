@@ -1,0 +1,11 @@
+digraph "AObject"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{AObject\n||+ AObject()\l+ ~AObject()\l+ AObject()\l+ operator=()\l+ update()\l+ draw()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node2 [label="{AEntity\n|+ active\l+ pos\l+ category\l+ name\l+ type\l|+ AEntity()\l+ ~AEntity()\l+ AEntity()\l+ operator=()\l+ update()\l+ draw()\l+ isDestructable()\l+ blockPropagation()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_entity.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal"];
+  Node3 [label="{Bomb\n||+ Bomb()\l+ ~Bomb()\l+ Bomb()\l+ operator=()\l+ update()\l+ draw()\l+ isDestructable()\l+ blockPropagation()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_bomb.html",tooltip=" "];
+}

@@ -1,0 +1,9 @@
+digraph "TextUI"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{TextUI\n||+ TextUI()\l+ TextUI()\l+ ~TextUI()\l+ operator=()\l+ draw()\l# _update()\l# TextUI()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{ABaseUI\n|# _pos\l# _size\l# _color\l# _borderColor\l# _borderSize\l# _mouseHoverColor\l# _mouseClickColor\l# _text\l# _textColor\l# _textFont\land 11 more...\l# _winSize\l# _projection\l# _rectShader\l# _rectVao\l# _rectVbo\l# _rectVertices\l# _textRender\l# _defFont\l# _imgShader\l# _imgVao\l# _imgVbo\l# _imgVertices\l|+ ABaseUI()\l+ ABaseUI()\l+ ~ABaseUI()\l+ operator=()\l+ update()\l+ draw()\l+ addButtonRightListener()\l+ addButtonLeftListener()\l+ setColor()\l+ setBorderColor()\land 16 more...\l+ init()\l+ destroy()\l+ setWinSize()\l+ loadFont()\l+ getRectShader()\l# ABaseUI()\l# _drawRect()\l# _drawBorderRect()\l# _drawText()\l# _loadImg()\l# _drawImg()\l# _update()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_a_base_u_i.html",tooltip=" "];
+}

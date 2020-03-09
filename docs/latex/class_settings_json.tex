@@ -1,0 +1,124 @@
+\hypertarget{class_settings_json}{}\doxysection{Settings\+Json Class Reference}
+\label{class_settings_json}\index{SettingsJson@{SettingsJson}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_settings_json_1_1_settings_exception}{Settings\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_settings_json_a449a6c3026583d1ee209e6086f663996}\label{class_settings_json_a449a6c3026583d1ee209e6086f663996}} 
+{\bfseries Settings\+Json} (\mbox{\hyperlink{class_settings_json}{Settings\+Json}} const \&src)
+\item 
+\mbox{\Hypertarget{class_settings_json_aeacbc8e4b3c2ada35b2303d0ae1bf4b9}\label{class_settings_json_aeacbc8e4b3c2ada35b2303d0ae1bf4b9}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries operator=} (\mbox{\hyperlink{class_settings_json}{Settings\+Json}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_settings_json_a301eda8c47d1140298fade3907c723d6}\label{class_settings_json_a301eda8c47d1140298fade3907c723d6}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries name} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_aed042d48b268ef368bd1b6b0a9e013fd}\label{class_settings_json_aed042d48b268ef368bd1b6b0a9e013fd}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries description} (std\+::string const \&description)
+\item 
+\mbox{\Hypertarget{class_settings_json_ab57c9f2b4353baf2a7668eed3c45e05c}\label{class_settings_json_ab57c9f2b4353baf2a7668eed3c45e05c}} 
+bool {\bfseries load\+File} (std\+::string const \&filename)
+\item 
+\mbox{\Hypertarget{class_settings_json_aa2379955d326fae834583000cb323d1a}\label{class_settings_json_aa2379955d326fae834583000cb323d1a}} 
+bool {\bfseries load\+Json} (nlohmann\+::json const \&json, \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \&json\+Obj\+Tmp)
+\item 
+\mbox{\Hypertarget{class_settings_json_a5def57414c2a77c94452447d23a89f8e}\label{class_settings_json_a5def57414c2a77c94452447d23a89f8e}} 
+void {\bfseries save\+To\+File} (std\+::string const \&filename)
+\item 
+\mbox{\Hypertarget{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}\label{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}} 
+std\+::string {\bfseries to\+String} (uint32\+\_\+t opt=Json\+Opt\+::\+N\+O\+\_\+\+O\+PT, uint32\+\_\+t tab\+Offset=0, bool term\+With\+Comma=false) const
+\item 
+\mbox{\Hypertarget{class_settings_json_ac889f7a07a5819175f963e1ee85da0d6}\label{class_settings_json_ac889f7a07a5819175f963e1ee85da0d6}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries add} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a1a26fd210c68d89a10996d95e82561e8}\label{class_settings_json_a1a26fd210c68d89a10996d95e82561e8}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries add} (std\+::string const \&name, T val)
+\item 
+\mbox{\Hypertarget{class_settings_json_a5c95aa5367813289491b4380e2902067}\label{class_settings_json_a5c95aa5367813289491b4380e2902067}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ T $>$ $>$ \& {\bfseries add\+List} (std\+::string const \&name, T $\ast$val)
+\item 
+\mbox{\Hypertarget{class_settings_json_ae11e812ff606270e59007c1000c7434c}\label{class_settings_json_ae11e812ff606270e59007c1000c7434c}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries update} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a05cb2369c8902e3fc5d4db9c06eb14bf}\label{class_settings_json_a05cb2369c8902e3fc5d4db9c06eb14bf}} 
+{\footnotesize template$<$class T $>$ }\\const T \& {\bfseries get} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a55879571926455d789d0523627408f0c}\label{class_settings_json_a55879571926455d789d0523627408f0c}} 
+{\footnotesize template$<$class T $>$ }\\T \& {\bfseries get} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a07a6c9f8a87c31928a27bd5f01ce1cb7}\label{class_settings_json_a07a6c9f8a87c31928a27bd5f01ce1cb7}} 
+const std\+::string \& {\bfseries s} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a28b88888063d5efe00ef2d8488129f2e}\label{class_settings_json_a28b88888063d5efe00ef2d8488129f2e}} 
+std\+::string \& {\bfseries s} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_aa50f32b0c76000304dbd24dd5a862319}\label{class_settings_json_aa50f32b0c76000304dbd24dd5a862319}} 
+const int64\+\_\+t \& {\bfseries i} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a0ccde304adda110610395b3b1f3b6fd0}\label{class_settings_json_a0ccde304adda110610395b3b1f3b6fd0}} 
+int64\+\_\+t \& {\bfseries i} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a4dd0ab43a96ea15cf866894f9c84e373}\label{class_settings_json_a4dd0ab43a96ea15cf866894f9c84e373}} 
+const uint64\+\_\+t \& {\bfseries u} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a70e9ce2aa10aed5d45fda0409b36db64}\label{class_settings_json_a70e9ce2aa10aed5d45fda0409b36db64}} 
+uint64\+\_\+t \& {\bfseries u} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a05f7e12d6c155f2ec92bb787472a2e36}\label{class_settings_json_a05f7e12d6c155f2ec92bb787472a2e36}} 
+const double \& {\bfseries d} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a29dcf05e16ab9ecb60c48e7a7e0b4fe5}\label{class_settings_json_a29dcf05e16ab9ecb60c48e7a7e0b4fe5}} 
+double \& {\bfseries d} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_a99e6ade36b5f135b2623df57077c1297}\label{class_settings_json_a99e6ade36b5f135b2623df57077c1297}} 
+const bool \& {\bfseries b} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_aa5ff7200ce8ae660ab3c7c2172040147}\label{class_settings_json_aa5ff7200ce8ae660ab3c7c2172040147}} 
+bool \& {\bfseries b} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_aa7cdcac871440c30c3a2951b8c09f92b}\label{class_settings_json_aa7cdcac871440c30c3a2951b8c09f92b}} 
+const \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries j} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a82fa95fc018937756569c75e6bf6cd83}\label{class_settings_json_a82fa95fc018937756569c75e6bf6cd83}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries j} (std\+::string const \&name)
+\item 
+\mbox{\Hypertarget{class_settings_json_acbdb40b33bf201b77bdcb1dd085455e6}\label{class_settings_json_acbdb40b33bf201b77bdcb1dd085455e6}} 
+const \mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ \& {\bfseries lj} (std\+::string const \&name) const
+\item 
+\mbox{\Hypertarget{class_settings_json_ac2ae204a71639b25c82563eb49d8edcd}\label{class_settings_json_ac2ae204a71639b25c82563eb49d8edcd}} 
+\mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ \& {\bfseries lj} (std\+::string const \&name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_settings_json_a84ac99a71e39c546ac5b685acf7d57ec}\label{class_settings_json_a84ac99a71e39c546ac5b685acf7d57ec}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ std\+::string $>$ $\ast$ $>$ {\bfseries string\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a0e4166c9ce03889e5afdec95d14558a4}\label{class_settings_json_a0e4166c9ce03889e5afdec95d14558a4}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ int64\+\_\+t $>$ $\ast$ $>$ {\bfseries int\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a6ccee345ddcbf7f3bf8e8d5095153b35}\label{class_settings_json_a6ccee345ddcbf7f3bf8e8d5095153b35}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ uint64\+\_\+t $>$ $\ast$ $>$ {\bfseries uint\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_adcdcce079145c37461af329511cd1c25}\label{class_settings_json_adcdcce079145c37461af329511cd1c25}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ double $>$ $\ast$ $>$ {\bfseries double\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a34a59bde0b2758c8d9160681cc0e666e}\label{class_settings_json_a34a59bde0b2758c8d9160681cc0e666e}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ bool $>$ $\ast$ $>$ {\bfseries bool\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a53d8eda20a8dc989065225b7064f4211}\label{class_settings_json_a53d8eda20a8dc989065225b7064f4211}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ $\ast$ $>$ {\bfseries json\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a689e48666555a947bbeca14554f2baa9}\label{class_settings_json_a689e48666555a947bbeca14554f2baa9}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ $>$ $\ast$ $>$ {\bfseries json\+List}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/Settings\+Json.\+hpp\item 
+srcs/utils/Settings\+Json.\+cpp\end{DoxyCompactItemize}
