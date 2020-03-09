@@ -44,7 +44,7 @@ public:
 	std::chrono::milliseconds	time;
 
 	// Constructors
-	explicit SceneGame(Gui * gui);
+	explicit SceneGame(Gui * gui, float const &dtTime);
 	virtual ~SceneGame();
 	SceneGame(SceneGame const &src);
 
@@ -57,7 +57,7 @@ public:
 
 	// AScene methods
 	virtual bool	init();
-	virtual bool	update(std::chrono::milliseconds last_loop_ms);
+	virtual bool	update();
 	virtual bool	draw();
 };
 

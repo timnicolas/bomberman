@@ -9,17 +9,27 @@
 SceneManager::SceneManager()
 : _scene(nullptr),
   _gameInfo(),
-  _gui(nullptr)
-{
+  _gui(nullptr),
+  _dtTime(0.0f) {}
+
+SceneManager::~SceneManager() {
+	delete _scene;
+	delete _gui;
 }
 
 SceneManager::SceneManager(SceneManager const & src) {
 	*this = src;
 }
 
-SceneManager::~SceneManager() {
-	delete _scene;
-	delete _gui;
+SceneManager & SceneManager::operator=(SceneManager const & rhs) {
+	if (this != &rhs) {
+		logWarn("SceneManager object copied");
+		_scene = rhs._scene;
+		_gameInfo = rhs._gameInfo;
+		_gui = rhs._gui;
+		_dtTime = rhs._dtTime;
+	}
+	return *this;
 }
 
 /**
@@ -42,8 +52,8 @@ bool SceneManager::init() {
 
 	// create and init fisrt scene
 	// TODO(tnicolas42) create the scene loader (factory ?)
-	// _scene = new SceneGame(_gui);
-	_scene = new SceneMenu(_gui);
+	// _scene = new SceneGame(_gui, _dtTime);
+	_scene = new SceneMenu(_gui, _dtTime);
 	if (_scene->init() == false) {
 		logErr("failed to init scene");
 		return false;
@@ -59,28 +69,29 @@ bool SceneManager::init() {
  */
 bool SceneManager::run() {
 	float						loopTime = 1000 / s.j("screen").u("fps");
-	std::chrono::milliseconds	time_start;
 	std::chrono::milliseconds	last_loop_ms = getMs();
 
 	while (true) {
-		time_start = getMs();
-
 		if (_scene == nullptr) {
 			logWarn("scene object is null");
 		}
 		else {
+			// update dtTime
+			_dtTime = (getMs().count() - last_loop_ms.count()) / 1000.0;
+			last_loop_ms = getMs();
+
 			// get inputs
 			Inputs::update();
-			_gui->updateInput();
+			_gui->updateInput(_dtTime);
 
 			// update the scene
-			if (_scene->update(last_loop_ms) == false) {
+			if (!_scene->update()) {
 				return false;
 			}
 
 			// draw the gui
 			_gui->preDraw();
-			if (_scene->draw() == false) {
+			if (!_scene->draw()) {
 				return false;
 			}
 			_gui->postDraw();
@@ -93,7 +104,7 @@ bool SceneManager::run() {
 		}
 
 		// fps
-		std::chrono::milliseconds time_loop = getMs() - time_start;
+		std::chrono::milliseconds time_loop = getMs() - last_loop_ms;
 		if (time_loop.count() > loopTime) {
 			#if DEBUG_FPS_LOW == true
 				if (!firstLoop)
@@ -106,19 +117,8 @@ bool SceneManager::run() {
 		#if DEBUG_FPS_LOW == true
 			firstLoop = false;
 		#endif
-		last_loop_ms = getMs();
 	}
 	return true;
-}
-
-SceneManager & SceneManager::operator=(SceneManager const & rhs) {
-	if (this != &rhs) {
-		logWarn("SceneManager object copied");
-		_scene = rhs._scene;
-		_gameInfo = rhs._gameInfo;
-		_gui = rhs._gui;
-	}
-	return *this;
 }
 
 /* execption */

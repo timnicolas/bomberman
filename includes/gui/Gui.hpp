@@ -56,7 +56,7 @@ class Gui {
 		Gui(Gui const &src);
 		Gui &operator=(Gui const &rhs);
 
-		void	updateInput();
+		void	updateInput(float const dtTime);
 		bool	init();
 		void	preDraw();
 		void	postDraw();
