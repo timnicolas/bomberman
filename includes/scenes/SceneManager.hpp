@@ -33,4 +33,5 @@ class SceneManager {
 		AScene *	_scene;
 		GameInfo	_gameInfo;
 		Gui *		_gui;
+		float		_dtTime;
 };
