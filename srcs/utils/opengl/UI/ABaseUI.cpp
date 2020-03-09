@@ -249,12 +249,12 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 		_mouseHover = false;
 	}
 	if (Inputs::getLeftClickUp()) {
-		if (_leftClick && _leftListener)
+		if (_mouseHover && _leftClick && _leftListener)
 			*_leftListener = _leftClick;
 		_leftClick = false;
 	}
 	if (Inputs::getRightClickUp()) {
-		if (_rightClick && _rightListener)
+		if (_mouseHover && _rightClick && _rightListener)
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
