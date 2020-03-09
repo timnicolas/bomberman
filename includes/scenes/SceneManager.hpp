@@ -39,8 +39,8 @@ class SceneManager {
 		GameInfo	_gameInfo;
 		Gui *		_gui;
 		float		_dtTime;
-		std::string	_scene;
-		std::map<std::string, AScene *>	_sceneMap;
+		std::string	_scene;  // the name of the current scene
+		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
 
 		bool				_init();
 		bool				_run();
