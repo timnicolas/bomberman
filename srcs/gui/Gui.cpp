@@ -287,7 +287,7 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 
 // -- statics const ------------------------------------------------------------
 // cube faces
-std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {
+std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 	// bot left corner,		faceId
 	-0.5f, -0.5f, 0.5f,		0,
 	0.5f, -0.5f, 0.5f,		1,
@@ -295,7 +295,7 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {
 	-0.5f, -0.5f, -0.5f,	3,
 	-0.5f, 0.5f, 0.5f,		4,
 	-0.5f, -0.5f, -0.5f,	5,
-};
+}};
 
 // -- GameInfo struct ----------------------------------------------------------
 GameInfo::GameInfo() {
