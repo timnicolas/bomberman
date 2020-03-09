@@ -1,9 +1,10 @@
 install: make install
-script: make lint
+script: make lint && make -j8
 language:
   - cpp
 os:
   - osx
+  - linux
 compiler:
   - g++
 notifications:
