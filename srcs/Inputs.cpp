@@ -12,9 +12,12 @@ const std::string	Inputs::input_type_name[] = {
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
-Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false) {
+Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false), \
+	_left_click_previous(false), _right_click_previous(false)
+{
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
+		_key_previous_status[i] = false;
 	}
 	_controls.name("controls").description("controls settings");
 	_controls.add<SettingsJson>("keys");
@@ -85,6 +88,36 @@ bool				Inputs::getKey(InputType::Enum type) {
 
 bool				Inputs::_getKey(InputType::Enum type) const {
 	return _key_status[static_cast<int>(type)];
+}
+
+/**
+	Indicate if the key corresponding to the action passed has just been released.
+
+	@param type The type defining the action to verify.
+	@return true if the key has been released.
+*/
+bool				Inputs::getKeyUp(InputType::Enum type) {
+	return (Inputs::get()._getKeyUp(type));
+}
+
+bool				Inputs::_getKeyUp(InputType::Enum type) const {
+	int		index = static_cast<int>(type);
+	return (!_key_status[index] && _key_previous_status[index]);
+}
+
+/**
+	Indicate if the key corresponding to the action passed has just been pressed.
+
+	@param type The type defining the action to verify.
+	@return true if the key has been pressed.
+*/
+bool				Inputs::getKeyDown(InputType::Enum type) {
+	return (Inputs::get()._getKeyDown(type));
+}
+
+bool				Inputs::_getKeyDown(InputType::Enum type) const {
+	int		index = static_cast<int>(type);
+	return (_key_status[index] && !_key_previous_status[index]);
 }
 
 /**
@@ -184,6 +217,58 @@ bool				Inputs::_getLeftClick() const {
 }
 
 /**
+	Indicate if the right click has just been released.
+
+	@return true if the right click has just been released.
+*/
+bool				Inputs::getRightClickUp() {
+	return (Inputs::get()._getRightClickUp());
+}
+
+bool				Inputs::_getRightClickUp() const {
+	return (!_right_click && _right_click_previous);
+}
+
+/**
+	Indicate if the left click has just been released.
+
+	@return true if the left click has just been released.
+*/
+bool				Inputs::getLeftClickUp() {
+	return (Inputs::get()._getLeftClickUp());
+}
+
+bool				Inputs::_getLeftClickUp() const {
+	return (!_left_click && _left_click_previous);
+}
+
+/**
+	Indicate if the right click has just been pressed.
+
+	@return true if the right click has just been pressed.
+*/
+bool				Inputs::getRightClickDown() {
+	return (Inputs::get()._getRightClickDown());
+}
+
+bool				Inputs::_getRightClickDown() const {
+	return (_right_click && !_right_click_previous);
+}
+
+/**
+	Indicate if the left click has just been pressed.
+
+	@return true if the left click has just been pressed.
+*/
+bool				Inputs::getLeftClickDown() {
+	return (Inputs::get()._getLeftClickDown());
+}
+
+bool				Inputs::_getLeftClickDown() const {
+	return (_left_click && !_left_click_previous);
+}
+
+/**
 	Poll all the SDL events from the last update call.
 	This function should be called at the start of each frame in order for this class to have valid values.
 */
@@ -197,6 +282,11 @@ void				Inputs::_update() {
 
 	_mouse_rel.x = 0;
 	_mouse_rel.y = 0;
+	_left_click_previous = _left_click;
+	_right_click_previous = _right_click;
+	for (int i = 0; i < Inputs::nb_input; i++) {
+		_key_previous_status[i] = _key_status[i];
+	}
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
