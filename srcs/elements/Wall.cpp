@@ -4,6 +4,7 @@
 
 Wall::Wall(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
+	name = "Wall";
 }
 
 Wall::~Wall() {

@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <glm/glm.hpp>
+#include "glm/gtx/string_cast.hpp"
 #include "AEntity.hpp"
 
 // class SceneGame;
@@ -13,8 +15,9 @@ private:
 
 public:
 	// Members
-	int		life;
-	float	speed;
+	int			lives;
+	float		speed;
+	glm::vec2	pos;
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);
@@ -28,6 +31,8 @@ public:
 	virtual bool	update(std::chrono::milliseconds d_time) = 0;
 	virtual bool	draw() = 0;
 	virtual bool	isAlive() = 0;
+	glm::vec2		getPos();
+	ACharacter		*init(glm::vec2 pos);
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

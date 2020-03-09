@@ -4,6 +4,7 @@
 // -- Constructors -------------------------------------------------------------
 
 AObject::AObject(SceneGame &game) : AEntity(game) {
+	category = Category::STATIC;
 }
 
 AObject::~AObject() {
@@ -20,6 +21,24 @@ AObject &AObject::operator=(AObject const &rhs) {
 		AEntity::operator=(rhs);
 	}
 	return *this;
+}
+
+// -- Methods ------------------------------------------------------------------
+
+glm::vec2	AObject::getPos() {
+	uint8_t i = 0;
+	for (auto &&board_it0 : game.board) {
+		uint8_t j = 0;
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (board_it2 == this)
+					return {i, j};
+			}
+			j++;
+		}
+		i++;
+	}
+	throw AObjectException("Impossible to found the position of the object");
 }
 
 // -- Exceptions errors --------------------------------------------------------

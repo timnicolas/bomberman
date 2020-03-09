@@ -4,6 +4,8 @@
 
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
+	bombs = 1;
+	name = "Player";
 }
 
 Player::~Player() {
@@ -18,6 +20,7 @@ Player::Player(Player const &src) : ACharacter(src) {
 Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
+		bombs = rhs.bombs;
 	}
 	return *this;
 }
@@ -47,7 +50,7 @@ bool	Player::blockPropagation() {
 	return false;
 }
 bool	Player::isAlive() {
-	return life;
+	return lives;
 }
 
 // -- Exceptions errors --------------------------------------------------------

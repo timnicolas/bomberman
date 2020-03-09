@@ -4,6 +4,7 @@
 
 End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
+	name = "End";
 }
 
 End::~End() {
