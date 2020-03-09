@@ -17,13 +17,14 @@ namespace SettingsType {
 class SceneSettings: public SceneMenu {
 public:
 	virtual ~SceneSettings();
-	explicit SceneSettings(Gui * gui);
+	explicit SceneSettings(Gui * gui, float const &dtTime);
 	SceneSettings(SceneSettings const &src);
 
 	SceneSettings		&operator=(SceneSettings const &rhs);
 
 	virtual bool		init();
-	virtual bool		update(std::chrono::milliseconds last_loop_ms);
+	virtual bool		update();
+
 private:
 	SceneSettings();
 
