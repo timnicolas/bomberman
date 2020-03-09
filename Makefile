@@ -229,6 +229,7 @@ define CONFIGURE
 # Linux
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
+	sudo apt-get update -y
 	# glm
 	sudo apt-get -y install libglm-dev;
 	# freetype (for text)
