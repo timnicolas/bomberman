@@ -1,1 +1,10 @@
-language: cpp
+install: make install
+script: make lint
+language:
+  - cpp
+os:
+  - osx
+compiler:
+  - g++
+notifications:
+  email: false
