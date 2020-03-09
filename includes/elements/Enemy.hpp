@@ -26,9 +26,6 @@ public:
 	// Methods
 	bool			update(std::chrono::milliseconds dTime);
 	bool			draw();
-	bool			isDestructable();
-	bool			blockPropagation();
-	bool			isAlive();
 	static Enemy*	generateEnemy(SceneGame &game, float rate);
 
 	// Exceptions

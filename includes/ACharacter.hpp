@@ -29,7 +29,9 @@ public:
 	// Methods
 	virtual bool	update(std::chrono::milliseconds dTime) = 0;
 	virtual bool	draw() = 0;
-	virtual bool	isAlive() = 0;
+	bool			isAlive();
+	bool			isDestructable();
+	bool			blockPropagation();
 	glm::vec2		getPos();
 	ACharacter		*init(glm::vec2 pos);
 

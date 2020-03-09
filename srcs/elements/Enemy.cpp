@@ -26,8 +26,11 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * update is called each frame.
- * @param d_time Delta Time
+ * @brief update is called each frame.
+ *
+ * @param dTime Delta Time
+ * @return true if success
+ * @return false if failure
  */
 bool	Enemy::update(std::chrono::milliseconds dTime) {
 	std::cout << "Last Enemy updated at " << dTime.count() << std::endl;
@@ -35,25 +38,21 @@ bool	Enemy::update(std::chrono::milliseconds dTime) {
 }
 
 /**
- * draw is called each frame.
+ * @brief draw is called each frame.
+ *
+ * @return true if success
+ * @return false if failure
  */
 bool	Enemy::draw() {
 	return true;
 }
 
-bool	Enemy::isDestructable() {
-	return true;
-}
-bool	Enemy::blockPropagation() {
-	return false;
-}
-bool	Enemy::isAlive() {
-	return lives;
-}
-
 /**
- * Static class to generate enemies
+ * @brief Static class to generate enemies
+ *
+ * @param game
  * @param rate Probability to generate an enemy is between 0 and 1.
+ * @return Enemy*
  */
 Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
 	srand(time(NULL));
