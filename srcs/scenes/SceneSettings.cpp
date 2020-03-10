@@ -48,31 +48,39 @@ bool			SceneSettings::init() {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
 	glm::vec2 tmp_pos;
 	glm::vec2 tmp_size;
-	float menu_width = win_size.x / 2;
-	float menu_height = menu_width / 8;
+	float menu_width = win_size.x * 0.8;
+	float menu_height = win_size.y * 0.9;
+	ABaseUI *ptr;
 
 	try {
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y = win_size.y - menu_height * 2;
 		tmp_size.x = menu_width;
-		tmp_size.y = menu_height;
+		tmp_size.y = menu_height * 0.2;
+		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
 		addText(tmp_pos, tmp_size, "SETTINGS").setTextFont("title");
-		tmp_pos.x = (win_size.x / 3) - (menu_width / 3);
-		tmp_pos.y -= menu_height * 1.2;
-		tmp_size.x = menu_width / 3;
+		tmp_size.y = menu_height * 0.1;
+		tmp_size.x = menu_width / 3 * 0.9;
+		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
+		tmp_pos.y -= tmp_size.y;
 		addButton(tmp_pos, tmp_size, "Graphics").addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS]) \
 			.setTextAlign(TextAlign::CENTER);
-		tmp_pos.x += (menu_width / 2);
+		tmp_pos.x += (menu_width / 3);
 		addButton(tmp_pos, tmp_size, "Audio").addButtonLeftListener(&_select_pane[SettingsType::AUDIO]) \
 			.setTextAlign(TextAlign::CENTER);
-		tmp_pos.x += (menu_width / 2);
+		tmp_pos.x += (menu_width / 3);
 		addButton(tmp_pos, tmp_size, "Controls").addButtonLeftListener(&_select_pane[SettingsType::CONTROLS]) \
 			.setTextAlign(TextAlign::CENTER);
 
 		/* graphics */
+		// TODO(gsmith): add graphics settings UI
 		/* audio */
+		// TODO(gsmith): add audio settings UI
 		/* controls */
-		// _panes[SettingsType::GRAPHICS].push_front(&);
+		// tmp_pos.y = win_size.y - menu_height * 4.4;
+		// tmp_pos.x = 0;
+		// tmp_size.x = menu_width * 2 / 3;
+		// ptr = &addButton(tmp_pos, tmp_size, "UP :").setTextAlign(TextAlign::LEFT);
+		// _panes[SettingsType::GRAPHICS].push_front(ptr);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
