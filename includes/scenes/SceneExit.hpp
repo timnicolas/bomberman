@@ -16,6 +16,7 @@ class SceneExit : public ASceneMenu {
 		// Methods
 		virtual bool		init();
 		virtual bool		update();
+		virtual void		load();
 
 	protected:
 		struct ButtonsStates {
@@ -23,6 +24,7 @@ class SceneExit : public ASceneMenu {
 			bool	cancel;
 		};
 		ButtonsStates	_states;
+		std::string		_lastSceneName;
 
 		bool			_initBG();
 

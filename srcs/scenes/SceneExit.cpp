@@ -1,7 +1,8 @@
 #include "SceneExit.hpp"
 
 SceneExit::SceneExit(Gui * gui, float const &dtTime)
-: ASceneMenu(gui, dtTime)
+: ASceneMenu(gui, dtTime),
+  _lastSceneName(SceneNames::MAIN_MENU)
 {}
 
 SceneExit::SceneExit(SceneExit const & src)
@@ -76,13 +77,24 @@ bool	SceneExit::update() {
 		_states.exit = false;
 	}
 	else if (_states.cancel) {
-		logWarn("cancel to do");
+		SceneManager::loadScene(_lastSceneName);
 		_states.cancel = false;
 	}
 	return true;
 }
 
-bool			SceneExit::_initBG() {
+/**
+ * @brief called when the scene is loaded
+ *
+ */
+void SceneExit::load() {
+	ASceneMenu::load();
+	if (SceneManager::getSceneName() != SceneNames::EXIT) {
+		_lastSceneName = SceneManager::getSceneName();
+	}
+}
+
+bool SceneExit::_initBG() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos = glm::vec2(0, 0);
 	glm::vec2 tmpSize = glm::vec2(200, 0);
