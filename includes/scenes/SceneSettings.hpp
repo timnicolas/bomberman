@@ -36,6 +36,7 @@ private:
 	void				_confirmQuit();
 	void				_cancelQuit();
 
+	void				_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 
 	/* UI object */
 	SettingsType::Enum	_current_pane;

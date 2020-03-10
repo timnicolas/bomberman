@@ -50,7 +50,6 @@ bool			SceneSettings::init() {
 	glm::vec2 tmp_size;
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
-	ABaseUI *ptr;
 
 	try {
 		tmp_size.x = menu_width;
@@ -76,11 +75,7 @@ bool			SceneSettings::init() {
 		/* audio */
 		// TODO(gsmith): add audio settings UI
 		/* controls */
-		// tmp_pos.y = win_size.y - menu_height * 4.4;
-		// tmp_pos.x = 0;
-		// tmp_size.x = menu_width * 2 / 3;
-		// ptr = &addButton(tmp_pos, tmp_size, "UP :").setTextAlign(TextAlign::LEFT);
-		// _panes[SettingsType::GRAPHICS].push_front(ptr);
+		_init_control_pane(tmp_pos, menu_width, menu_height);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -89,11 +84,80 @@ bool			SceneSettings::init() {
 	return true;
 }
 
+void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+	glm::vec2 win_size = _gui->gameInfo.windowSize;
+	glm::vec2 tmp_size;
+	ABaseUI *ptr;
+
+	tmp_size.x = menu_width / 3;
+	tmp_size.y = menu_height * 0.09;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "UP :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::UP]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "DOWN :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::DOWN]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "LEFT :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::LEFT]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "RIGHT :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::RIGHT]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "ACTION :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::ACTION]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "CONFIRM :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::CONFIRM]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "CANCEL :").setTextAlign(TextAlign::RIGHT);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addButton(tmp_pos, tmp_size, "key").addButtonLeftListener(&_update_key[InputType::CANCEL]) \
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+}
 bool			SceneSettings::update() {
 	SceneMenu::update();
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
 		if (_select_pane[i]) {
 			_selectPane(static_cast<SettingsType::Enum>(i));
+		}
+	}
+	for (auto i = 0; i < Inputs::nb_input; i++) {
+		if (_update_key[i]) {
+			_updateKey(static_cast<InputType::Enum>(i));
 		}
 	}
 	if (_update_fullscreen) {
@@ -112,6 +176,13 @@ void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
 	// TODO(gsmith): update which ABaseUI should be displayed.
 	logDebug("Switch to pane " << pane_type);
+}
+
+void			SceneSettings::_updateKey(InputType::Enum key_type) {
+	_update_key[key_type] = false;
+	// TODO(gsmith): add button to cancel key configuration ?
+	logInfo("Start configuring key...");
+	Inputs::configureKey(key_type);
 }
 
 void			SceneSettings::_updateFullscreen() {
