@@ -15,6 +15,7 @@ class SceneMainMenu : public ASceneMenu {
 
 		// AScene methods
 		virtual bool		init();
+		virtual bool		update();
 
 	private:
 		SceneMainMenu();
