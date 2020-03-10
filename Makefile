@@ -115,6 +115,7 @@ SRC =	main.cpp \
 		scenes/SceneGame.cpp \
 		scenes/ScenePause.cpp \
 		scenes/SceneGameOver.cpp \
+		scenes/SceneVictory.cpp \
 		scenes/SceneExit.cpp \
 \
 		Inputs.cpp \
@@ -168,6 +169,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneGame.hpp \
 		scenes/ScenePause.hpp \
 		scenes/SceneGameOver.hpp \
+		scenes/SceneVictory.hpp \
 		scenes/SceneExit.hpp \
 \
 		Inputs.hpp \
