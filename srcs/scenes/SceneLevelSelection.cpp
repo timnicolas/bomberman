@@ -1,4 +1,5 @@
 #include "SceneLevelSelection.hpp"
+#include "SceneGame.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
@@ -31,6 +32,7 @@ bool			SceneLevelSelection::init() {
 	glm::vec2 tmpSize;
 	float menuWidth = winSz.x / 2;
 	float menuHeight = menuWidth / 8;
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
@@ -39,9 +41,15 @@ bool			SceneLevelSelection::init() {
 		tmpSize.y = menuHeight;
 		addText(tmpPos, tmpSize, "LEVEL SELECTION").setTextFont("title");
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "PLAY").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.play);
+
+		_states.nbLevel = scGame.getNbLevel();
+		for (uint32_t i = 0; i < _states.nbLevel; i++) {
+			tmpPos.y -= menuHeight * 1.2;
+			addButton(tmpPos, tmpSize, scGame.getLevelName(i)).setTextAlign(TextAlign::CENTER);
+			if (i == 0) {
+				_states.firstLevelID = getNbUIElements() - 1;
+			}
+		}
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
@@ -71,11 +79,15 @@ bool			SceneLevelSelection::init() {
 bool	SceneLevelSelection::update() {
 	ASceneMenu::update();
 
-	if (_states.play) {
-		SceneManager::loadScene(SceneNames::GAME);
-		_states.play = false;
+	for (uint32_t i = 0; i < _states.nbLevel; i++) {
+		if (getUIElement(_states.firstLevelID + i).getMouseLeftClick()) {
+			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+			scGame.loadLevel(i);
+			SceneManager::loadScene(SceneNames::GAME);
+			return true;
+		}
 	}
-	else if (_states.menu) {
+	if (_states.menu) {
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 		_states.menu = false;
 	}

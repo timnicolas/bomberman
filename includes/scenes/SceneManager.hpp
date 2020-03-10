@@ -28,6 +28,7 @@ class SceneManager {
 		static bool					init();
 		static bool					run();
 		static AScene *				loadScene(std::string const & name);
+		static AScene *				getScene(std::string const & name);
 		static std::string const &	getSceneName();
 		static void					quit();
 
@@ -48,6 +49,7 @@ class SceneManager {
 		bool				_init();
 		bool				_run();
 		AScene *			_loadScene(std::string const & name);
+		AScene *			_getScene(std::string const & name);
 		std::string const &	_getSceneName() const;
 		void				_quit();
 

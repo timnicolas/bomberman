@@ -173,6 +173,23 @@ AScene * SceneManager::_loadScene(std::string const & name) {
 }
 
 /**
+ * @brief get a scene
+ *
+ * @param name the name of the scene to get
+ * @return AScene* a pointer to the scene
+ */
+AScene * SceneManager::getScene(std::string const & name) {
+	return SceneManager::get()._getScene(name);
+}
+AScene * SceneManager::_getScene(std::string const & name) {
+	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
+		logErr("invalid scnene name: " << name << " in getScene");
+		return _sceneMap[_scene];
+	}
+	return _sceneMap[name];
+}
+
+/**
  * @brief get the current scene name
  *
  * @return std::string const& the current scene name
