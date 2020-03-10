@@ -304,6 +304,5 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 GameInfo::GameInfo() {
 	title = "bomberman";
 	windowSize = {1200, 800};
-	play = State::S_PAUSE;
 	quit = false;
 }
