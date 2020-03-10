@@ -198,8 +198,6 @@ bool	Gui::_initShaders() {
 
 	// -- camera ---------------------------------------------------------------
 	cam = new Camera({0.0f, 25.0f, 0.0f});
-	cam->lookAt(glm::vec3(gameInfo.gameboard[0] / 2 + 0.5f, 1.0f,
-		gameInfo.gameboard[1] * 0.7f));
 
 	float angle = cam->zoom;
 	float ratio = static_cast<float>(gameInfo.windowSize.x) / gameInfo.windowSize.y;
@@ -306,8 +304,6 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 GameInfo::GameInfo() {
 	title = "bomberman";
 	windowSize = {1200, 800};
-	gameboard = {32, 32};
-	player = {3, 3};
 	play = State::S_PAUSE;
 	quit = false;
 }
