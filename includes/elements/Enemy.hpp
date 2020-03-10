@@ -24,7 +24,7 @@ public:
 	Enemy &operator=(Enemy const &rhs);
 
 	// Methods
-	bool			update(std::chrono::milliseconds dTime);
+	bool			update(float const dTime);
 	bool			draw();
 	static Enemy*	generateEnemy(SceneGame &game, float rate);
 

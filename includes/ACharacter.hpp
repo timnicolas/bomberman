@@ -27,7 +27,7 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds dTime) = 0;
+	virtual bool	update(float const dTime) = 0;
 	virtual bool	draw() = 0;
 	bool			isAlive();
 	bool			isDestructable();

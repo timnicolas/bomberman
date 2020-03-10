@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <chrono>
 #include "useGlm.hpp"
+#include "Logging.hpp"
 class SceneGame;
 
 namespace Category {
@@ -45,7 +46,7 @@ public:
 	AEntity			&operator=(AEntity const &rhs);
 
 	// Methods
-	virtual bool		update(std::chrono::milliseconds dTime) = 0;
+	virtual bool		update(float const dTime) = 0;
 	virtual bool		draw() = 0;
 	virtual bool		isDestructable() = 0;
 	virtual bool		blockPropagation() = 0;

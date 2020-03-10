@@ -20,7 +20,7 @@ public:
 	End &operator=(End const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
+	bool	update(float const dTime);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();

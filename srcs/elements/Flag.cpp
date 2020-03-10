@@ -32,8 +32,8 @@ Flag &Flag::operator=(Flag const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Flag::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Flag updated at " << dTime.count() << std::endl;
+bool	Flag::update(float const dTime) {
+	logDebug("Last Flag updated at " + std::to_string(dTime));
 	return true;
 }
 

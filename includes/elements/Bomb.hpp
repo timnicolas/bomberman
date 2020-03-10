@@ -9,6 +9,11 @@ class Bomb : public AObject {
 private:
 	Bomb();
 	// Members
+	float	_countdown;
+
+	// Methods
+	bool	_propagationExplosion(glm::vec2 const pos,
+	std::vector<AEntity *> box, int i);
 
 public:
 	// Constructors
@@ -20,7 +25,8 @@ public:
 	Bomb &operator=(Bomb const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
+	bool	update(float const dTime);
+	Bomb*	explode(glm::vec2 const pos);
 	bool	draw();
 	bool	isDestructable();
 	bool	blockPropagation();
