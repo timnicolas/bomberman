@@ -34,8 +34,8 @@ Player &Player::operator=(Player const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Player::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Player updated at " << dTime.count() << std::endl;
+bool	Player::update(float const dTime) {
+	logDebug("Last Player updated at " << dTime);
 	return true;
 }
 

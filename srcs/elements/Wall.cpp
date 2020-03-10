@@ -32,8 +32,8 @@ Wall &Wall::operator=(Wall const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Wall::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Wall updated at " << dTime.count() << std::endl;
+bool	Wall::update(float const dTime) {
+	logDebug("Last Wall updated at " + std::to_string(dTime));
 	return true;
 }
 

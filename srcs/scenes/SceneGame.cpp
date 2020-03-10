@@ -112,23 +112,23 @@ bool			SceneGame::init() {
 // -- Private Methods ----------------------------------------------------------
 
 bool	SceneGame::update() {
-	// for (auto &&board_it1 : board) {
-	// 	for (auto &&board_it1 : board_it1) {
-	// 		for (AEntity *board_it2 : board_it1) {
-	// 			if (!board_it2->update(_dtTime))
-	// 				return false;
-	// 		}
-	// 	}
-	// }
-	// for (auto &&enemy : enemies) {
-	// 	if (!enemy->update(_dtTime))
-	// 		return false;
-	// }
-	// for (auto &&bomb : bombs) {
-	// 	if (!bomb->update(_dtTime))
-	// 		return false;
-	// }
-	// player->update(_dtTime);
+	for (auto &&board_it1 : board) {
+		for (auto &&board_it1 : board_it1) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->update(_dtTime))
+					return false;
+			}
+		}
+	}
+	for (auto &&enemy : enemies) {
+		if (!enemy->update(_dtTime))
+			return false;
+	}
+	for (auto &&bomb : bombs) {
+		if (!bomb->update(_dtTime))
+			return false;
+	}
+	player->update(_dtTime);
 
 	return true;
 }

@@ -32,8 +32,8 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Enemy updated at " << dTime.count() << std::endl;
+bool	Enemy::update(float const dTime) {
+	logDebug("Last Enemy updated at " << dTime);
 	return true;
 }
 

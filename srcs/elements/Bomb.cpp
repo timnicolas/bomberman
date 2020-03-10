@@ -1,10 +1,12 @@
 #include "Bomb.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = "Bomb";
+	_countdown = 4.0;
 }
 
 Bomb::~Bomb() {
@@ -32,9 +34,66 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Bomb::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Bomb updated at " << dTime.count() << std::endl;
+bool	Bomb::update(float const dTime) {
+	_countdown -= dTime;
+	if (_countdown <= 0.0) {
+		explode(getPos());
+	}
 	return true;
+}
+
+Bomb	*Bomb::explode(glm::vec2 const pos) {
+	int		propagation = 5;
+	int		i;
+	std::vector<AEntity *>	box;
+
+	// top
+	i = 0;
+	while (++i < propagation) {
+		box = game.board[pos.x][pos.y + i];
+		if (!_propagationExplosion(pos, box, i))
+			break;
+	}
+	// right
+	i = 0;
+	while (++i < propagation) {
+		box = game.board[pos.x + i][pos.y];
+		if (!_propagationExplosion(pos, box, i))
+			break;
+	}
+	// bottom
+	i = 0;
+	while (++i < propagation) {
+		box = game.board[pos.x][pos.y - i];
+		if (!_propagationExplosion(pos, box, i))
+			break;
+	}
+	// left
+	i = 0;
+	while (++i < propagation) {
+		box = game.board[pos.x - i][pos.y];
+		if (!_propagationExplosion(pos, box, i))
+			break;
+	}
+
+	return this;
+}
+
+bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box, int i) {
+	bool	result = true;
+	for (std::vector<AEntity *>::iterator it = box.begin();
+	it != box.end(); ++it) {
+		if (*it == nullptr)
+			continue;
+		if ((*it)->blockPropagation()) {
+			result = false;
+		}
+		if ((*it)->isDestructable()) {
+			delete (*it);
+			game.board[pos.x][pos.y + i].erase(it);
+		}
+	}
+	return result;
 }
 
 /**

@@ -32,8 +32,8 @@ End &End::operator=(End const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	End::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last End updated at " << dTime.count() << std::endl;
+bool	End::update(float const dTime) {
+	logDebug("Last End updated at " << dTime);
 	return true;
 }
 
