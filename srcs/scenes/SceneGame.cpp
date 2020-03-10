@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-// #include <bits/stdc++.h>
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"

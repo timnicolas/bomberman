@@ -12,20 +12,14 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <array>
-#include <unordered_map>
-#include <map>
 
 #include "bomberman.hpp"
-#include "Logging.hpp"
 #include "includesOpengl.hpp"
 #include "TextureManager.hpp"
-#include "TextRender.hpp"
-#include "Material.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Skybox.hpp"
 #include "debug.hpp"
-#include "ABaseUI.hpp"
 
 #define TITLE	"bomberman"
 

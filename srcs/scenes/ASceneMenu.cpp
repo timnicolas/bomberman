@@ -1,11 +1,4 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <time.h>
-// #include <bits/stdc++.h>
-
 #include "ASceneMenu.hpp"
-#include "bomberman.hpp"
-#include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
 

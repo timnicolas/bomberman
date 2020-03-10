@@ -4,8 +4,6 @@
 #include <iostream>
 
 #include "bomberman.hpp"
-#include "Gui.hpp"
-#include "Inputs.hpp"
 #include "SceneManager.hpp"
 
 int start(int ac, char const **av) {

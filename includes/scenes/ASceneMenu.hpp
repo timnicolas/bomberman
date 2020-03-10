@@ -4,6 +4,9 @@
 #include "useGlm.hpp"
 
 #include "AScene.hpp"
+#include "SceneManager.hpp"
+
+/* import all UI objects */
 #include "ABaseUI.hpp"
 #include "ButtonUI.hpp"
 #include "ButtonImageUI.hpp"
@@ -11,7 +14,6 @@
 #include "TextUI.hpp"
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
-#include "SceneManager.hpp"
 
 class ASceneMenu : public AScene {
 	public:
