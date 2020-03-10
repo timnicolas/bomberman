@@ -22,8 +22,9 @@ namespace Type {
 		WALL,
 		END,
 		FLAG,
+		FIRE,
 	};
-}
+}  // namespace Type
 
 class AEntity {
 private:
@@ -36,6 +37,8 @@ public:
 	std::string		name;
 	Type::Enum		type;
 	SceneGame		&game;
+	bool			destructible;
+	bool			blockPropagation;
 
 	// Constructors
 	explicit AEntity(SceneGame &game);
@@ -48,8 +51,6 @@ public:
 	// Methods
 	virtual bool		update(float const dTime) = 0;
 	virtual bool		draw() = 0;
-	virtual bool		isDestructable() = 0;
-	virtual bool		blockPropagation() = 0;
 	virtual glm::vec2	getPos() = 0;
 };
 

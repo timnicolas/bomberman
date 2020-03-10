@@ -8,6 +8,8 @@ ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
 	lives = 1;
 	speed = 1.0;
 	pos = {0.0, 0.0};
+	blockPropagation = false;
+	destructible = true;
 }
 
 ACharacter::~ACharacter() {
@@ -49,25 +51,6 @@ glm::vec2		ACharacter::getPos() {
 ACharacter		*ACharacter::init(glm::vec2 pos) {
 	this->pos = pos;
 	return this;
-}
-
-/**
- * @brief A Character is destructible. This method always return true.
- *
- * @return true
- */
-bool	ACharacter::isDestructable() {
-	return true;
-}
-
-/**
- * @brief A Character doesn't block the progation. This method always return
- * false.
- *
- * @return false
- */
-bool	ACharacter::blockPropagation() {
-	return false;
 }
 
 /**

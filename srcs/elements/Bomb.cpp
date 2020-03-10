@@ -1,4 +1,5 @@
 #include "Bomb.hpp"
+#include "Fire.hpp"
 #include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
@@ -81,16 +82,20 @@ Bomb	*Bomb::explode(glm::vec2 const pos) {
 
 bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box, int i) {
 	bool	result = true;
-	for (std::vector<AEntity *>::iterator it = box.begin();
-	it != box.end(); ++it) {
-		if (*it == nullptr)
-			continue;
-		if ((*it)->blockPropagation()) {
-			result = false;
-		}
-		if ((*it)->isDestructable()) {
-			delete (*it);
-			game.board[pos.x][pos.y + i].erase(it);
+	if (box.size() == 0) {
+		box.push_back(new Fire(game));
+	}
+	else {
+		for (std::vector<AEntity *>::iterator it = box.begin();
+		it != box.end(); ++it) {
+			if ((*it)->blockPropagation) {
+				result = false;
+			}
+			if ((*it)->destructible) {
+				game.board[pos.x][pos.y + i].erase(it);
+				delete (*it);
+				box.push_back(new Fire(game));
+			}
 		}
 	}
 	return result;
@@ -104,26 +109,6 @@ bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box
  */
 bool	Bomb::draw() {
 	return true;
-}
-
-/**
- * @brief The bombe is destructible. This methode always return true.
- *
- * @return true
- */
-bool	Bomb::isDestructable() {
-	return true;
-}
-
-/**
- * @brief The bombe doesn't block the propagation. This methode always return
- * false.
- *
- * @return true
- * @return false
- */
-bool	Bomb::blockPropagation() {
-	return false;
 }
 
 // -- Exceptions errors --------------------------------------------------------
