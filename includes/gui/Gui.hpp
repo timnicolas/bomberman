@@ -62,6 +62,7 @@ class Gui {
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
+		void	drawCube(Block::Enum typeBlock, glm::vec3 pos = {0, 0, 0}, glm::vec3 scale = {1, 1, 1});
 
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;

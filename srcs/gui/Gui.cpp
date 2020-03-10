@@ -256,6 +256,21 @@ void Gui::enableCursor(bool enable) {
 	}
 }
 
+// -- drawCube -----------------------------------------------------------------
+
+void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
+	glm::mat4 model(1.0);
+	cubeShader->use();
+	cubeShader->setVec3("blockSize", scale);
+	// set block type
+	cubeShader->setInt("blockId", typeBlock);
+	// set block pos
+	model = glm::translate(glm::mat4(1.0), pos);
+	cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	cubeShader->unuse();
+}
+
 // -- draw ---------------------------------------------------------------------
 void Gui::preDraw() {
 	// clear buffer
