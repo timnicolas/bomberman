@@ -1,6 +1,7 @@
 #include "Gui.hpp"
 #include "Logging.hpp"
 #include "Inputs.hpp"
+#include "SceneManager.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -54,8 +55,7 @@ void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
 	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
-		logDebug("quiting...");
-		gameInfo.quit = true;
+		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);

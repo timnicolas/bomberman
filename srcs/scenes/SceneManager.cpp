@@ -162,8 +162,8 @@ AScene * SceneManager::_loadScene(std::string const & name) {
 		return _sceneMap[_scene];
 	}
 	_sceneMap[_scene]->unload();  // unload last scene
+	_sceneMap[name]->load();  // load new scene (getScene return the name of the last scene)
 	_scene = name;
-	_sceneMap[_scene]->load();  // load new scene
 	return _sceneMap[_scene];
 }
 
