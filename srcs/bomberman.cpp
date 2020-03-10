@@ -31,7 +31,7 @@ bool	initSettings(std::string const & filename) {
 
 	/* font */
 	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Pacifico.ttf")
+		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Roboto-Regular.ttf")
 			.setDescription("this is the main font");
 		s.j("font").add<uint64_t>("size", 40).setMin(10).setMax(50)
 			.setDescription("default size for the text");
@@ -53,8 +53,6 @@ bool	initSettings(std::string const & filename) {
 		.setDescription("The volume of the music.");
 	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
-
-	s.add<bool>("askBeforeQuit", true).setDescription("load qui menu before quit");
 
 	try {
 		if (s.loadFile(filename) == false) {
