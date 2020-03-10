@@ -20,8 +20,7 @@ class SceneLevelSelection : public ASceneMenu {
 	protected:
 		struct ButtonsStates {
 			bool	play;
-			bool	loadSettings;
-			bool	exit;
+			bool	menu;
 		};
 		ButtonsStates	_states;
 

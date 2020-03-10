@@ -76,7 +76,7 @@ bool	SceneMainMenu::update() {
 	ASceneMenu::update();
 
 	if (_states.play) {
-		SceneManager::loadScene(SceneNames::GAME);
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 		_states.play = false;
 	}
 	else if (_states.loadSettings) {
