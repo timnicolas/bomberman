@@ -48,7 +48,6 @@ std::ostream &	operator<<(std::ostream & os, const SceneMenu& myClass) {
  * @return false if the init failed
  */
 bool			SceneMenu::init() {
-	_gui->enableCursor(true);
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -151,6 +150,19 @@ bool	SceneMenu::draw() {
 		(*it)->draw();
 	}
 	return true;
+}
+/**
+ * @brief called when the scene is loaded
+ *
+ */
+void SceneMenu::load() {
+	_gui->enableCursor(true);
+}
+/**
+ * @brief called when the scene is unloaded
+ *
+ */
+void SceneMenu::unload() {
 }
 
 /**

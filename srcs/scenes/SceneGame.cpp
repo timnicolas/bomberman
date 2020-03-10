@@ -174,6 +174,20 @@ bool	SceneGame::draw() {
 	return true;
 }
 
+/**
+ * @brief called when the scene is loaded
+ *
+ */
+void SceneGame::load() {
+	_gui->enableCursor(false);
+}
+/**
+ * @brief called when the scene is unloaded
+ *
+ */
+void SceneGame::unload() {
+}
+
 bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t levelId) {
 	logInfo("SceneGame _initJsonLevel");
 

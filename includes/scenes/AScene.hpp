@@ -13,6 +13,8 @@ class AScene {
 		virtual bool init() = 0;
 		virtual bool update() = 0;
 		virtual bool draw() = 0;
+		virtual void load() = 0;
+		virtual void unload() = 0;
 
 		AScene & operator=(AScene const & rhs);
 
@@ -22,6 +24,7 @@ class AScene {
 			SceneException();
 			explicit SceneException(const char* whatArg);
 		};
+
 	protected:
 		AScene();
 
