@@ -119,6 +119,8 @@ bool			SceneGame::init() {
 }
 
 bool	SceneGame::update() {
+	if (level == NO_LEVEL)
+		return true;
 	// for (auto &&board_it1 : board) {
 	// 	for (auto &&board_it1 : board_it1) {
 	// 		for (AEntity *board_it2 : board_it1) {
@@ -345,6 +347,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 // -- _drawBoard ---------------------------------------------------------------
 void	SceneGame::_drawBoard() {
+	if (level == NO_LEVEL)
+		return;
+
 	glm::mat4 model(1.0);
 	glm::vec3 pos;
 
