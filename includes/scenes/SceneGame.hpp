@@ -28,7 +28,6 @@ namespace EntityType {
 		BOARD,
 		BOARD_FLAG,
 		ENEMY,
-		BOMB,
 	};
 }
 
@@ -53,7 +52,6 @@ public:
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
 	std::vector<ACharacter *>	enemies;
-	std::vector<Bomb *>			bombs;
 
 	uint8_t						flags;
 	glm::uvec2					size;
