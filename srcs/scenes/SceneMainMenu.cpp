@@ -29,3 +29,14 @@ bool			SceneMainMenu::init() {
 	addButton(glm::vec2(100, 100), glm::vec2(300, 100), "bouton");
 	return true;
 }
+
+/**
+ * @brief this is the update function (called every frames)
+ *
+ * @return true if the update is a success
+ * @return false if there are an error in update
+ */
+bool	SceneMainMenu::update() {
+	ASceneMenu::update();
+	return true;
+}
