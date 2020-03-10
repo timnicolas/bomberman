@@ -96,6 +96,15 @@ bool	SceneLevelSelection::update() {
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
 		ABaseUI & elem = getUIElement(_states.firstLevelID + i);
 
+		/* get click if needed */
+		if (_transition == 0) {
+			if (elem.getMouseLeftClick()) {
+				scGame.loadLevel(i);
+				SceneManager::loadScene(SceneNames::GAME);
+				return true;
+			}
+		}
+
 		/* create a smooth transition */
 		float xoffset = -(_currentLvl * winSz.x) + _transition * winSz.x;
 		if (_transition > 0) {
@@ -109,13 +118,6 @@ bool	SceneLevelSelection::update() {
 				_transition = 0;
 		}
 		elem.setPosOffset(glm::vec2(xoffset, 0));
-
-		/* get click if needed */
-		if (elem.getMouseLeftClick()) {
-			scGame.loadLevel(i);
-			SceneManager::loadScene(SceneNames::GAME);
-			return true;
-		}
 	}
 	if (_states.menu) {
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
