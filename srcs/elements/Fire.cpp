@@ -45,7 +45,8 @@ bool	Fire::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Fire::draw() {
+bool	Fire::draw(Gui &gui) {
+	gui.drawCube(Block::FIRE, getPos());
 	return true;
 }
 

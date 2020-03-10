@@ -107,7 +107,8 @@ bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box
  * @return true if success
  * @return false if failure
  */
-bool	Bomb::draw() {
+bool	Bomb::draw(Gui &gui) {
+	gui.drawCube(Block::BOMB, getPos());
 	return true;
 }
 

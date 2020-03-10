@@ -43,7 +43,8 @@ bool	End::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	End::draw() {
+bool	End::draw(Gui &gui) {
+	gui.drawCube(Block::END, getPos());
 	return true;
 }
 

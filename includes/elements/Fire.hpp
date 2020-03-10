@@ -21,7 +21,7 @@ public:
 
 	// Methods
 	bool	update(float const dTime);
-	bool	draw();
+	bool	draw(Gui &gui);
 
 	// Exceptions
 	class FireException : public std::runtime_error {

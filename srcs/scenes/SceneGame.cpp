@@ -128,20 +128,6 @@ bool	SceneGame::update() {
 }
 
 bool	SceneGame::draw() {
-	for (auto &&board_it0 : board) {
-		for (auto &&board_it1 : board_it0) {
-			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->draw())
-					return false;
-			}
-		}
-	}
-	for (auto &&enemy : enemies) {
-		if (!enemy->draw())
-			return false;
-	}
-	player->draw();
-
 	// use cubeShader, set uniform and activate textures
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->cubeShader->use();
@@ -150,11 +136,27 @@ bool	SceneGame::draw() {
 	glBindVertexArray(_gui->cubeShVao);
 	_gui->textureManager->activateTextures();
 	_gui->cubeShader->setInt("blockId", 0);
+	_gui->cubeShader->unuse();
+
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->draw(*_gui))
+					return false;
+			}
+		}
+	}
+	for (auto &&enemy : enemies) {
+		if (!enemy->draw(*_gui))
+			return false;
+	}
+	player->draw(*_gui);
 
 	// draw scene
 	_drawBoard();
 
 	// release cubeShader and textures
+	_gui->cubeShader->use();
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
@@ -268,7 +270,7 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
-						player->init({i, j});
+						player->init({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
@@ -277,7 +279,7 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 						break;
 					case EntityType::ENEMY:
 						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
-						enemies.back()->init({i, j});
+						enemies.back()->init({i, 0, j});
 						break;
 					}
 				}
@@ -292,37 +294,37 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 void	SceneGame::_drawBoard() {
 	glm::mat4 model(1.0);
 	glm::vec3 pos;
-
+	_gui->cubeShader->use();
 	// board floor
 	_gui->cubeShader->setVec3("blockSize",
-		{_gui->gameInfo.gameboard.x, 1.0f, _gui->gameInfo.gameboard.y});
+		{size.x, 1.0f, size.y});
 	_gui->cubeShader->setInt("blockId", Block::FLOOR);  // set block type
-	pos = glm::vec3(0.0f, -1.0f, _gui->gameInfo.gameboard.y - 1.0f);
+	pos = glm::vec3(0.0f, -1.0f, size.y - 1.0f);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_gui->cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
-	// - draw wall -------------------------------------------------------------
-	_gui->cubeShader->setInt("blockId", Block::DURABLE_WALL);  // set block type
-	// board side 0
-	_gui->cubeShader->setVec3("blockSize",
-		{_gui->gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
-	pos = glm::vec3(0.0f, -1.0f, _gui->gameInfo.gameboard.y);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_gui->cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	// // - draw wall -------------------------------------------------------------
+	// _gui->cubeShader->setInt("blockId", Block::DURABLE_WALL);  // set block type
+	// // board side 0
+	// _gui->cubeShader->setVec3("blockSize",
+	// 	{size.x + 1.0f, 2.0f, 1.0f});
+	// pos = glm::vec3(0.0f, -1.0f, size.y);
+	// model = glm::translate(glm::mat4(1.0), pos);
+	// _gui->cubeShader->setMat4("model", model);
+	// glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
 	// board side 1
 	_gui->cubeShader->setVec3("blockSize",
-		{1.0f, 2.0f, _gui->gameInfo.gameboard.y + 1.0f});
-	pos = glm::vec3(_gui->gameInfo.gameboard.x, -1.0f, _gui->gameInfo.gameboard.y - 1.0f);
+		{1.0f, 2.0f, size.y + 1.0f});
+	pos = glm::vec3(size.x, -1.0f, size.y - 1.0f);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_gui->cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
 	// board side 2
 	_gui->cubeShader->setVec3("blockSize",
-		{_gui->gameInfo.gameboard.x + 1.0f, 2.0f, 1.0f});
+		{size.x + 1.0f, 2.0f, 1.0f});
 	pos = glm::vec3(-1.0f, -1.0f, -1.0f);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_gui->cubeShader->setMat4("model", model);
@@ -330,52 +332,55 @@ void	SceneGame::_drawBoard() {
 
 	// board side 3
 	_gui->cubeShader->setVec3("blockSize",
-		{1.0f, 2.0f, _gui->gameInfo.gameboard.y + 1.0f});
-	pos = glm::vec3(-1.0f, -1.0f, _gui->gameInfo.gameboard.y);
+		{1.0f, 2.0f, size.y + 1.0f});
+	pos = glm::vec3(-1.0f, -1.0f, size.y);
 	model = glm::translate(glm::mat4(1.0), pos);
 	_gui->cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
 
 	// -- draw player ----------------------------------------------------------
-	_gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	if (_gui->gameInfo.player != VOID_POS) {
-		// set block type
-		_gui->cubeShader->setInt("blockId", Block::PLAYER);
-		// set block pos
-		pos = glm::vec3(_gui->gameInfo.player[0], 0.0f, _gui->gameInfo.player[1]);
-		model = glm::translate(glm::mat4(1.0), pos);
-		_gui->cubeShader->setMat4("model", model);
-		glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-	}
+	// _gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// if (_gui->gameInfo.player != VOID_POS) {
+	// 	// set block type
+	// 	_gui->cubeShader->setInt("blockId", Block::PLAYER);
+	// 	// set block pos
+	// 	pos = glm::vec3(_gui->gameInfo.player[0], 0.0f, _gui->gameInfo.player[1]);
+	// 	model = glm::translate(glm::mat4(1.0), pos);
+	// 	_gui->cubeShader->setMat4("model", model);
+	// 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	// }
 
 	// -- draw bomb ------------------------------------------------------------
-	_gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_gui->cubeShader->setInt("blockId", Block::BOMB);
-	// set block pos
-	pos = glm::vec3(10, 0.0f, 5);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_gui->cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	// _gui->drawCube(Block::BOMB, {10, 0.0f, 5});
+	// _gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// // set block type
+	// _gui->cubeShader->setInt("blockId", Block::BOMB);
+	// // set block pos
+	// pos = glm::vec3(10, 0.0f, 5);
+	// model = glm::translate(glm::mat4(1.0), pos);
+	// _gui->cubeShader->setMat4("model", model);
+	// glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
 	// -- draw durable wall ----------------------------------------------------
-	_gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_gui->cubeShader->setInt("blockId", Block::DURABLE_WALL);
-	// set block pos
-	pos = glm::vec3(7, 0.0f, 7);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_gui->cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	// _gui->cubeShader->use();
+	// _gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// // set block type
+	// _gui->cubeShader->setInt("blockId", Block::DURABLE_WALL);
+	// // set block pos
+	// pos = glm::vec3(7, 0.0f, 7);
+	// model = glm::translate(glm::mat4(1.0), pos);
+	// _gui->cubeShader->setMat4("model", model);
+	// glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
 
 	// -- draw durable wall ----------------------------------------------------
-	_gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	// set block type
-	_gui->cubeShader->setInt("blockId", Block::DESTRUCTIBLE_WALL);
-	// set block pos
-	pos = glm::vec3(7, 0.0f, 12);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_gui->cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	// _gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
+	// // set block type
+	// _gui->cubeShader->setInt("blockId", Block::DESTRUCTIBLE_WALL);
+	// // set block pos
+	// pos = glm::vec3(7, 0.0f, 12);
+	// model = glm::translate(glm::mat4(1.0), pos);
+	// _gui->cubeShader->setMat4("model", model);
+	// glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	_gui->cubeShader->unuse();
 }

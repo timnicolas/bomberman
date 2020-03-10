@@ -6,6 +6,7 @@
 #include <chrono>
 #include "useGlm.hpp"
 #include "Logging.hpp"
+#include "Gui.hpp"
 class SceneGame;
 
 namespace Category {
@@ -40,6 +41,7 @@ public:
 	SceneGame		&game;
 	bool			destructible;
 	bool			blockPropagation;
+	glm::vec3		pos;
 
 	// Constructors
 	explicit AEntity(SceneGame &game);
@@ -51,8 +53,8 @@ public:
 
 	// Methods
 	virtual bool		update(const float dTime) = 0;
-	virtual bool		draw() = 0;
-	virtual glm::vec2	getPos() = 0;
+	virtual bool		draw(Gui &gui) = 0;
+	virtual glm::vec3	getPos() = 0;
 	virtual void		takeDamage(const int damage) = 0;
 };
 
