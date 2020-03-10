@@ -17,6 +17,7 @@ namespace SceneNames {
 	static std::string const LEVEL_SELECTION = "levelSelection";
 	static std::string const GAME = "game";
 	static std::string const PAUSE = "pause";
+	static std::string const GAME_OVER = "gameOver";
 	static std::string const EXIT = "exit";
 }
 
