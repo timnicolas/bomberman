@@ -203,6 +203,7 @@ void SceneGame::unload() {
  * @return false if the level loading failed
  */
 bool SceneGame::loadLevel(int32_t levelId) {
+	logInfo("load level " << levelId);
 	if (_unloadLevel() == false) {
 		level = NO_LEVEL;
 		return false;

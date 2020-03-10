@@ -19,8 +19,9 @@ class SceneLevelSelection : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
-			bool	play;
-			bool	menu;
+			uint32_t	firstLevelID;
+			uint32_t	nbLevel;
+			bool		menu;
 		};
 		ButtonsStates	_states;
 
