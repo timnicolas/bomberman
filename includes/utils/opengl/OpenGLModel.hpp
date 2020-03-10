@@ -1,5 +1,5 @@
-#ifndef MODEL_HPP_
-#define MODEL_HPP_
+#ifndef OPENGLMODEL_HPP_
+#define OPENGLMODEL_HPP_
 
 // maximum bones on one model
 #define MAX_BONES 100
@@ -31,12 +31,12 @@ namespace AnimKeyType {
 	};
 }  // namespace AnimKeyType
 
-class Model {
+class OpenGLModel {
 	public:
-        Model(Gui const &_gui, std::string const &path, float const &dtTime, float const &animationSpeed);
-		virtual ~Model();
-		Model(Model const &src);
-		Model &operator=(Model const &rhs);
+        OpenGLModel(Gui const &_gui, std::string const &path, float const &dtTime, float const &animationSpeed);
+		virtual ~OpenGLModel();
+		OpenGLModel(OpenGLModel const &src);
+		OpenGLModel &operator=(OpenGLModel const &rhs);
 
 		void	draw();
 		void	loadNextAnimation();
@@ -49,7 +49,7 @@ class Model {
 		};
 
 	private:
-		Model();  // private default constructor, should not be called
+		OpenGLModel();  // private default constructor, should not be called
 
 		void	_setConstUniforms();
 
@@ -124,4 +124,4 @@ class Model {
 		aiAnimation			*_curAnimation;
 };
 
-#endif  // MODEL_HPP_
+#endif  // OPENGLMODEL_HPP_

@@ -12,7 +12,7 @@
 #include "ACharacter.hpp"
 #include "Player.hpp"
 #include "Bomb.hpp"
-#include "Model.hpp"
+#include "OpenGLModel.hpp"
 
 namespace GameState {
 	enum Enum {
@@ -31,7 +31,7 @@ private:
 	// just to test model class
 	float	dtTime = 0.01f;  // TODO(zer0nim): need to get the real dtTime
 	float	animationSpeed = 1.0f;
-	Model	*_model;
+	OpenGLModel	*_model;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);
