@@ -37,19 +37,15 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
+		addText(tmpPos, tmpSize, "LEVEL SELECTION").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "PLAY").setTextAlign(TextAlign::CENTER)
 			.addButtonLeftListener(&_states.play);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "SETTINGS").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.loadSettings);
-
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.exit);
+		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
+			.addButtonLeftListener(&_states.menu);
 
 		tmpSize.x = tmpSize.x * 1.2;
 		tmpSize.y = winSz.y - tmpPos.y;
@@ -79,13 +75,9 @@ bool	SceneLevelSelection::update() {
 		SceneManager::loadScene(SceneNames::GAME);
 		_states.play = false;
 	}
-	else if (_states.loadSettings) {
-		logWarn("load settings to do");  // TODO(tnicolas42) load settings
-		_states.loadSettings = false;
-	}
-	else if (_states.exit) {
-		SceneManager::loadScene(SceneNames::EXIT);
-		_states.exit = false;
+	else if (_states.menu) {
+		SceneManager::loadScene(SceneNames::MAIN_MENU);
+		_states.menu = false;
 	}
 	return true;
 }
