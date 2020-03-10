@@ -35,8 +35,6 @@ namespace State {
 struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
-	glm::ivec2	gameboard;
-	glm::ivec2	player;
 	State::Enum	play;
 	bool		quit;
 

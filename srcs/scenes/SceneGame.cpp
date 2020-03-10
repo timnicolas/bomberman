@@ -337,6 +337,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		}
 	}
 
+	// set camera
+	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
+
 	return true;
 }
 
