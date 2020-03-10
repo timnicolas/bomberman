@@ -2,6 +2,8 @@
 
 #include "ASceneMenu.hpp"
 
+#define TRANSITION_SPEED 0.05
+
 class SceneLevelSelection : public ASceneMenu {
 	public:
 		// Constructors
@@ -26,8 +28,9 @@ class SceneLevelSelection : public ASceneMenu {
 			bool		nextLevel;
 		};
 		ButtonsStates	_states;
-
 		uint32_t		_currentLvl;
+
+		float			_transition;  // used to do a smooth transition
 
 		bool			_initBG();
 
