@@ -49,8 +49,8 @@ bool			SceneLevelSelection::init() {
 			addButtonImage(tmpPos, tmpSize, scGame.getLevelImg(i), false);
 			if (i == 0) {
 				_states.firstLevelID = getNbUIElements() - 1;
-			tmpPos.x += winSz.x;
 			}
+			tmpPos.x += winSz.x;
 		}
 
 		tmpPos.x = 30;
