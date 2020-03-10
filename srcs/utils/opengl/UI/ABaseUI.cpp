@@ -188,6 +188,7 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _pos(pos),
+  _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
@@ -219,6 +220,7 @@ ABaseUI::~ABaseUI() {
 
 ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 	if (this != &rhs) {
+		logWarn("UI object copied");
 		_pos = rhs._pos;
 		_size = rhs._size;
 	}
@@ -234,8 +236,8 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  */
 void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	mousePos.y = _winSize.y - mousePos.y;
-	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
-	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
+	if (mousePos.x >= getRealPos().x && mousePos.x <= getRealPos().x + _size.x
+	&& mousePos.y >= getRealPos().y && mousePos.y <= getRealPos().y + _size.y)
 	{
 		_mouseHover = true;
 		if (Inputs::getLeftClickDown()) {
@@ -286,6 +288,10 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 }
 
 /* setter */
+ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
+ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
+ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
+ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -308,6 +314,7 @@ bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
+glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }
 glm::vec2 &			ABaseUI::getSize() { return _size; }
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }

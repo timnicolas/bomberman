@@ -41,7 +41,7 @@ void TextUI::draw() {
 	glm::vec2 tmpSize;
 
 	// draw text
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
