@@ -3,6 +3,8 @@
 
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
+
+/* import all scenes */
 #include "SceneMainMenu.hpp"
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"

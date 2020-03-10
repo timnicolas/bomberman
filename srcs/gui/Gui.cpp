@@ -2,6 +2,8 @@
 #include "Logging.hpp"
 #include "Inputs.hpp"
 #include "SceneManager.hpp"
+#include "Material.hpp"
+#include "ABaseUI.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
