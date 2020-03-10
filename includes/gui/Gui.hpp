@@ -23,19 +23,9 @@
 
 #define TITLE	"bomberman"
 
-// TODO(zer0nim): move GameInfo
-namespace State {
-	enum Enum {
-		S_PLAY,
-		S_PAUSE,
-		S_GAMEOVER,
-	};
-}
-
 struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
-	State::Enum	play;
 	bool		quit;
 
 	GameInfo();
