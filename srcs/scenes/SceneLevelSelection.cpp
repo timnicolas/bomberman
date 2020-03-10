@@ -3,7 +3,8 @@
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
-  _currentLvl(0)
+  _currentLvl(0),
+  _transition(0)
 {}
 
 SceneLevelSelection::SceneLevelSelection(SceneLevelSelection const & src)
@@ -35,14 +36,17 @@ bool			SceneLevelSelection::init() {
 	float menuHeight = menuWidth / 8;
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
+	_transition = 0;  // reset transition
+	_currentLvl = 0;  // reset current level
+
 	try {
 		_states.nbLevel = scGame.getNbLevel();
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = winSz.y - tmpSize.y * 1.2;
+		tmpPos.x = (winSz.x / 2) - (tmpSize.x / 2);
+		tmpPos.y = (winSz.y / 2) - (tmpSize.y / 2);
 		for (uint32_t i = 0; i < _states.nbLevel; i++) {
-			addButton(tmpPos, tmpSize, scGame.getLevelName(i)).setTextAlign(TextAlign::CENTER);
+			addButtonImage(tmpPos, tmpSize, scGame.getLevelImg(i), false);
 			if (i == 0) {
 				_states.firstLevelID = getNbUIElements() - 1;
 			tmpPos.x += winSz.x;
@@ -91,7 +95,22 @@ bool	SceneLevelSelection::update() {
 
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
 		ABaseUI & elem = getUIElement(_states.firstLevelID + i);
-		elem.setPosOffset(glm::vec2(-(_currentLvl * winSz.x), 0));
+
+		/* create a smooth transition */
+		float xoffset = -(_currentLvl * winSz.x) + _transition * winSz.x;
+		if (_transition > 0) {
+			_transition -= TRANSITION_SPEED;
+			if (_transition <= 0)
+				_transition = 0;
+		}
+		if (_transition < 0) {
+			_transition += TRANSITION_SPEED;
+			if (_transition >= 0)
+				_transition = 0;
+		}
+		elem.setPosOffset(glm::vec2(xoffset, 0));
+
+		/* get click if needed */
 		if (elem.getMouseLeftClick()) {
 			scGame.loadLevel(i);
 			SceneManager::loadScene(SceneNames::GAME);
@@ -105,12 +124,14 @@ bool	SceneLevelSelection::update() {
 	else if (_states.lastLevel) {
 		if (_currentLvl > 0) {
 			_currentLvl--;
+			_transition = -1;
 		}
 		_states.lastLevel = false;
 	}
 	else if (_states.nextLevel) {
 		if (_currentLvl < _states.nbLevel - 1) {
 			_currentLvl++;
+			_transition = 1;
 		}
 		_states.nextLevel = false;
 	}

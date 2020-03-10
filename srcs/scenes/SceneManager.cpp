@@ -82,6 +82,7 @@ bool SceneManager::_init() {
 			}
 		} catch (std::exception &e) {
 			logErr("Error : " << e.what());
+			return false;
 		}
 	}
 
