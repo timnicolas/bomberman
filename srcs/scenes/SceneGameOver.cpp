@@ -1,21 +1,22 @@
-#include "ScenePause.hpp"
+#include "SceneGameOver.hpp"
+#include "SceneGame.hpp"
 
-ScenePause::ScenePause(Gui * gui, float const &dtTime)
+SceneGameOver::SceneGameOver(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
 {}
 
-ScenePause::ScenePause(ScenePause const & src)
+SceneGameOver::SceneGameOver(SceneGameOver const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
-ScenePause::~ScenePause() {}
+SceneGameOver::~SceneGameOver() {}
 
-ScenePause & ScenePause::operator=(ScenePause const & rhs) {
+SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {
 	if (this != &rhs) {
-		logWarn("you are copying ScenePause")
+		logWarn("you are copying SceneGameOver")
 	}
 	return *this;
 }
@@ -26,7 +27,7 @@ ScenePause & ScenePause::operator=(ScenePause const & rhs) {
  * @return true if the init succed
  * @return false if the init failed
  */
-bool			ScenePause::init() {
+bool			SceneGameOver::init() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -38,11 +39,11 @@ bool			ScenePause::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Paused").setTextFont("title");
+		addText(tmpPos, tmpSize, "Game Over").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "RESUME").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.resume);
+		addButton(tmpPos, tmpSize, "RESTART").setTextAlign(TextAlign::CENTER)
+			.addButtonLeftListener(&_states.restart);
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
@@ -73,12 +74,14 @@ bool			ScenePause::init() {
  * @return true if the update is a success
  * @return false if there are an error in update
  */
-bool	ScenePause::update() {
+bool	SceneGameOver::update() {
 	ASceneMenu::update();
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
-	if (_states.resume) {
+	if (_states.restart) {
+		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
-		_states.resume = false;
+		_states.restart = false;
 	}
 	else if (_states.menu) {
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
@@ -95,14 +98,14 @@ bool	ScenePause::update() {
  * @brief called when the scene is loaded
  *
  */
-void ScenePause::load() {
+void SceneGameOver::load() {
 	ASceneMenu::load();
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 	}
 }
 
-bool ScenePause::_initBG() {
+bool SceneGameOver::_initBG() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos = glm::vec2(0, 0);
 	glm::vec2 tmpSize = glm::vec2(200, 0);
