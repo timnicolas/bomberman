@@ -28,8 +28,6 @@ public:
 	bool	update(float const dTime);
 	Bomb*	explode(glm::vec2 const pos);
 	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
 
 	// Exceptions
 	class BombException : public std::runtime_error {

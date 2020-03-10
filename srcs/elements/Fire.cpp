@@ -1,22 +1,24 @@
-#include "End.hpp"
+#include "Fire.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-End::End(SceneGame &game) : AObject(game) {
-	type = Type::END;
-	name = "End";
+Fire::Fire(SceneGame &game) : AObject(game) {
+	type = Type::FIRE;
+	name = "Fire";
+	blockPropagation = false;
+	destructible = false;
 }
 
-End::~End() {
+Fire::~Fire() {
 }
 
-End::End(End const &src) : AObject(src) {
+Fire::Fire(Fire const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
-End &End::operator=(End const &rhs) {
+Fire &Fire::operator=(Fire const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
 	}
@@ -32,8 +34,8 @@ End &End::operator=(End const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	End::update(float const dTime) {
-	logDebug("Last End updated at " << dTime);
+bool	Fire::update(float const dTime) {
+	logDebug("Last Fire updated at " + std::to_string(dTime));
 	return true;
 }
 
@@ -43,14 +45,15 @@ bool	End::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	End::draw() {
+bool	Fire::draw() {
 	return true;
 }
 
+
 // -- Exceptions errors --------------------------------------------------------
 
-End::EndException::EndException()
-: std::runtime_error("End Exception") {}
+Fire::FireException::FireException()
+: std::runtime_error("Fire Exception") {}
 
-End::EndException::EndException(const char* whatArg)
-: std::runtime_error(std::string(std::string("EndError: ") + whatArg).c_str()) {}
+Fire::FireException::FireException(const char* whatArg)
+: std::runtime_error(std::string(std::string("FireError: ") + whatArg).c_str()) {}

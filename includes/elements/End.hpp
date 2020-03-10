@@ -22,8 +22,6 @@ public:
 	// Methods
 	bool	update(float const dTime);
 	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
 
 	// Exceptions
 	class EndException : public std::runtime_error {

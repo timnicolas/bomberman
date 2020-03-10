@@ -47,24 +47,6 @@ bool	Wall::draw() {
 	return true;
 }
 
-/**
- * @brief A wall is indestructible. This method always return false.
- *
- * @return false
- */
-bool	Wall::isDestructable() {
-	return false;
-}
-
-/**
- * @brief A wall blocks the bomb propagation. This method always return true.
- *
- * @return true
- */
-bool	Wall::blockPropagation() {
-	return true;
-}
-
 // -- Exceptions errors --------------------------------------------------------
 
 Wall::WallException::WallException()

@@ -103,6 +103,7 @@ SRC =	main.cpp \
 \
 		AObject.cpp \
 		elements/Bomb.cpp \
+		elements/Fire.cpp \
 		elements/Wall.cpp \
 		elements/End.cpp \
 		elements/Flag.cpp \
@@ -151,6 +152,7 @@ HEAD =	bomberman.hpp \
 \
 		AObject.hpp \
 		elements/Bomb.hpp \
+		elements/Fire.hpp \
 		elements/Wall.hpp \
 		elements/End.hpp \
 		elements/Flag.hpp \

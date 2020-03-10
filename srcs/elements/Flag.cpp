@@ -47,28 +47,10 @@ bool	Flag::draw() {
 	return true;
 }
 
-/**
- * @brief A Flag is destructible. This method always return true.
- *
- * @return true
- */
-bool	Flag::isDestructable() {
-	return true;
-}
-
-/**
- * @brief A Flag blocks the propagation. This method always return true.
- *
- * @return true
- */
-bool	Flag::blockPropagation() {
-	return true;
-}
-
 // -- Exceptions errors --------------------------------------------------------
 
 Flag::FlagException::FlagException()
 : std::runtime_error("Flag Exception") {}
 
 Flag::FlagException::FlagException(const char* whatArg)
-: std::runtime_error(std::string(std::string("BombError: ") + whatArg).c_str()) {}
+: std::runtime_error(std::string(std::string("FlagError: ") + whatArg).c_str()) {}

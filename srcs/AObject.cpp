@@ -5,6 +5,8 @@
 
 AObject::AObject(SceneGame &game) : AEntity(game) {
 	category = Category::STATIC;
+	blockPropagation = true;
+	destructible = false;
 }
 
 AObject::~AObject() {

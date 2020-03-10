@@ -30,8 +30,6 @@ public:
 	virtual bool	update(float const dTime) = 0;
 	virtual bool	draw() = 0;
 	bool			isAlive();
-	bool			isDestructable();
-	bool			blockPropagation();
 	glm::vec2		getPos();
 	ACharacter		*init(glm::vec2 pos);
 
