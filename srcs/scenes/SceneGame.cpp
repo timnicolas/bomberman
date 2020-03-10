@@ -11,6 +11,8 @@
 #include "Flag.hpp"
 #include "End.hpp"
 
+#include "SceneManager.hpp"
+
 // -- Static members initialisation --------------------------------------------
 
 std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
