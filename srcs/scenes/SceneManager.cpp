@@ -8,6 +8,7 @@
 #include "SceneMainMenu.hpp"
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
+#include "ScenePause.hpp"
 #include "SceneExit.hpp"
 
 SceneManager::SceneManager()
@@ -72,6 +73,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LEVEL_SELECTION,
 		new SceneLevelSelection(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME, new SceneGame(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::PAUSE, new ScenePause(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
