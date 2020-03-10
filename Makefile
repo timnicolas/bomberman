@@ -111,8 +111,9 @@ SRC =	main.cpp \
 		scenes/AScene.cpp \
 		scenes/ASceneMenu.cpp \
 		scenes/SceneMainMenu.cpp \
-		scenes/SceneExit.cpp \
+		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
+		scenes/SceneExit.cpp \
 \
 		Inputs.cpp \
 \
@@ -161,8 +162,9 @@ HEAD =	bomberman.hpp \
 		scenes/AScene.hpp \
 		scenes/ASceneMenu.hpp \
 		scenes/SceneMainMenu.hpp \
-		scenes/SceneExit.hpp \
+		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
+		scenes/SceneExit.hpp \
 \
 		Inputs.hpp \
 \
@@ -402,15 +404,16 @@ all:
 ([ -z $(DEBUG) ] && [ -d $(DEBUG_DIR) ] && [ -f $(DEBUG_DIR)/DEBUG ])); then\
 		$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE);\
 	fi;
+
+	$(START)
+	@$(MAKE) $(MAKE_OPT) $(NAME)
+	$(END)
+
 ifneq ($(DEBUG),)
 	@touch $(DEBUG_DIR)/DEBUG
 else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
-
-	$(START)
-	@$(MAKE) $(MAKE_OPT) $(NAME)
-	$(END)
 
 install:
 	@for i in $(NEED_MAKE); do \
