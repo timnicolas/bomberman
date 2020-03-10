@@ -77,6 +77,8 @@ public:
 	virtual bool	init();
 	virtual bool	update();
 	virtual bool	draw();
+	virtual void	load();
+	virtual void	unload();
 };
 
 #endif  // SCENEGAME_HPP_
