@@ -55,7 +55,10 @@ void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
 	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
-		SceneManager::loadScene(SceneNames::EXIT);
+		if (s.b("askBeforeQuit"))
+			SceneManager::loadScene(SceneNames::EXIT);
+		else
+			SceneManager::quit();
 	}
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);

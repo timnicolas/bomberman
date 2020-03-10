@@ -54,6 +54,8 @@ bool	initSettings(std::string const & filename) {
 	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
+	s.add<bool>("askBeforeQuit", true).setDescription("load qui menu before quit");
+
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings
