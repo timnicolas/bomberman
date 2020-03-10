@@ -43,7 +43,8 @@ bool	Wall::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Wall::draw() {
+bool	Wall::draw(Gui &gui) {
+	gui.drawCube(Block::DURABLE_WALL, getPos());
 	return true;
 }
 

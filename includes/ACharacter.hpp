@@ -16,7 +16,6 @@ public:
 	// Members
 	int			lives;
 	float		speed;
-	glm::vec2	pos;
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);
@@ -28,10 +27,10 @@ public:
 
 	// Methods
 	virtual bool	update(float const dTime) = 0;
-	virtual bool	draw() = 0;
+	virtual bool	draw(Gui &gui) = 0;
 	bool			isAlive();
-	glm::vec2		getPos();
-	ACharacter		*init(glm::vec2 pos);
+	glm::vec3		getPos();
+	ACharacter		*init(glm::vec3 pos);
 	void			takeDamage(const int damage);
 
 	// Exceptions

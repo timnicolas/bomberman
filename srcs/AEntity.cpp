@@ -6,6 +6,7 @@
 AEntity::AEntity(SceneGame &game): game(game) {
 	active = true;
 	alive = true;
+	pos = VOID_POS3;
 	category = Category::STATIC;
 	name = "Entity";
 }

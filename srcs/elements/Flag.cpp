@@ -43,7 +43,8 @@ bool	Flag::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Flag::draw() {
+bool	Flag::draw(Gui &gui) {
+	gui.drawCube(Block::FLAG, getPos());
 	return true;
 }
 

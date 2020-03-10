@@ -25,7 +25,7 @@ public:
 
 	// Methods
 	bool			update(float const dTime);
-	bool			draw();
+	bool			draw(Gui &gui);
 	static Enemy*	generateEnemy(SceneGame &game, float rate);
 
 	// Exceptions

@@ -45,7 +45,8 @@ bool	Player::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Player::draw() {
+bool	Player::draw(Gui &gui) {
+	gui.drawCube(Block::PLAYER, getPos());
 	return true;
 }
 

@@ -8,6 +8,7 @@
 #define CAM_TARG_OFFSET glm::vec3(0.0f, 1.0f, 0.0f)
 #define CAM_SPEED 1.5f
 #define VOID_POS glm::ivec2 {-1, -1}
+#define VOID_POS3 glm::vec3 {-1, -1, -1}
 
 #include <SDL2/SDL.h>
 #include <iostream>

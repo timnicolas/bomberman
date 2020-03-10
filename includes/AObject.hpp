@@ -10,6 +10,7 @@
 class AObject : public AEntity {
 private:
 	AObject();
+
 public:
 	// Constructors
 	explicit AObject(SceneGame &game);
@@ -21,8 +22,9 @@ public:
 
 	// Methods
 	virtual bool	update(float const dTime) = 0;
-	virtual bool	draw() = 0;
-	glm::vec2		getPos();
+	virtual bool	draw(Gui &gui) = 0;
+	void			setPos(glm::vec3 pos = VOID_POS3);
+	glm::vec3		getPos();
 	void			takeDamage(int damage);
 
 	// Exceptions

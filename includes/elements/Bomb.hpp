@@ -27,7 +27,7 @@ public:
 	// Methods
 	bool	update(float const dTime);
 	Bomb*	explode(glm::vec2 const pos);
-	bool	draw();
+	bool	draw(Gui &gui);
 
 	// Exceptions
 	class BombException : public std::runtime_error {

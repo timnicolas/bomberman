@@ -43,7 +43,8 @@ bool	Enemy::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::draw() {
+bool	Enemy::draw(Gui &gui) {
+	gui.drawCube(Block::IA, getPos());
 	return true;
 }
 
