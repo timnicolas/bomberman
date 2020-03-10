@@ -5,6 +5,7 @@
 
 AEntity::AEntity(SceneGame &game): game(game) {
 	active = true;
+	alive = true;
 	category = Category::STATIC;
 	name = "Entity";
 }

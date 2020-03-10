@@ -32,6 +32,7 @@ public:
 	bool			isAlive();
 	glm::vec2		getPos();
 	ACharacter		*init(glm::vec2 pos);
+	void			takeDamage(const int damage);
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

@@ -23,6 +23,7 @@ public:
 	virtual bool	update(float const dTime) = 0;
 	virtual bool	draw() = 0;
 	glm::vec2		getPos();
+	void			takeDamage(int damage);
 
 	// Exceptions
 	class AObjectException : public std::runtime_error {
