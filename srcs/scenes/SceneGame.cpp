@@ -15,7 +15,7 @@
 
 std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"player", {EntityType::PLAYER, [](SceneGame &game) -> AEntity* {return new Player(game);}}},
-	{"bomb", {EntityType::BOMB, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
+	{"bomb", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
 	{"wall", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
 	{"block", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
 	{"crispy", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
@@ -32,7 +32,6 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 {
 	player = nullptr;
 	enemies = std::vector<ACharacter *>();
-	bombs = std::vector<Bomb *>();
 	flags = 0;
 	size = {0, 0};
 	level = 0;
@@ -71,7 +70,6 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		board = rhs.board;
 		player = rhs.player;
 		enemies = rhs.enemies;
-		bombs = rhs.bombs;
 		flags = rhs.flags;
 		size = rhs.size;
 		level = rhs.level;
@@ -124,33 +122,25 @@ bool	SceneGame::update() {
 		if (!enemy->update(_dtTime))
 			return false;
 	}
-	for (auto &&bomb : bombs) {
-		if (!bomb->update(_dtTime))
-			return false;
-	}
 	player->update(_dtTime);
 
 	return true;
 }
 
 bool	SceneGame::draw() {
-	// for (auto &&board_it1 : board) {
-	// 	for (auto &&board_it1 : board_it1) {
-	// 		for (AEntity *board_it2 : board_it1) {
-	// 			if (!board_it2->draw())
-	// 				return false;
-	// 		}
-	// 	}
-	// }
-	// for (auto &&enemy : enemies) {
-	// 	if (!enemy->draw())
-	// 		return false;
-	// }
-	// for (auto &&bomb : bombs) {
-	// 	if (!bomb->draw())
-	// 		return false;
-	// }
-	// player->draw();
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->draw())
+					return false;
+			}
+		}
+	}
+	for (auto &&enemy : enemies) {
+		if (!enemy->draw())
+			return false;
+	}
+	player->draw();
 
 	// use cubeShader, set uniform and activate textures
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -279,10 +269,6 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
 						player->init({i, j});
-						break;
-					case EntityType::BOMB:
-						bombs.push_back(reinterpret_cast<Bomb *>(entity));
-						board[i][j].push_back(entity);
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
