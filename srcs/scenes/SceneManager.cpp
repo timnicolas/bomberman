@@ -7,29 +7,39 @@
 #include "SceneMenu.hpp"
 
 SceneManager::SceneManager()
-: _scene(nullptr),
-  _gameInfo(),
+: _gameInfo(),
   _gui(nullptr),
-  _dtTime(0.0f) {}
-
-SceneManager::~SceneManager() {
-	delete _scene;
-	delete _gui;
-}
+  _dtTime(0.0f),
+  _scene(SceneNames::MAIN_MENU)
+{}
 
 SceneManager::SceneManager(SceneManager const & src) {
 	*this = src;
 }
 
-SceneManager & SceneManager::operator=(SceneManager const & rhs) {
-	if (this != &rhs) {
-		logWarn("SceneManager object copied");
-		_scene = rhs._scene;
-		_gameInfo = rhs._gameInfo;
-		_gui = rhs._gui;
-		_dtTime = rhs._dtTime;
+SceneManager::~SceneManager() {
+	delete _gui;
+	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
+		delete it->second;
 	}
+	_sceneMap.clear();
+}
+
+
+SceneManager & SceneManager::operator=(SceneManager const & rhs) {
+	(void)rhs;
+	logErr("You sould never call copy opertor for SceneManager");
 	return *this;
+}
+
+/**
+ * @brief get the SceneManager
+ *
+ * @return SceneManager& the instance of the SceneManager
+ */
+SceneManager & SceneManager::get() {
+	static SceneManager	instance;
+	return instance;
 }
 
 /**
@@ -39,9 +49,12 @@ SceneManager & SceneManager::operator=(SceneManager const & rhs) {
  * @return false if failure
  */
 bool SceneManager::init() {
-	// check double call of init function
-	if (_scene != nullptr) {
-		logWarn("SceneManager init is already called");
+	return SceneManager::get()._init();
+}
+bool SceneManager::_init() {
+	if (_sceneMap.find(SceneNames::MAIN_MENU) != _sceneMap.end()) {
+		logWarn("SceneManager::init already called");
+		return false;
 	}
 
 	// create and init first gui
@@ -50,14 +63,22 @@ bool SceneManager::init() {
 		return false;
 	}
 
-	// create and init fisrt scene
-	// TODO(tnicolas42) create the scene loader (factory ?)
-	// _scene = new SceneGame(_gui, _dtTime);
-	_scene = new SceneMenu(_gui, _dtTime);
-	if (_scene->init() == false) {
-		logErr("failed to init scene");
-		return false;
+	// create and init all scene
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME, new SceneGame(_gui, _dtTime)));
+
+	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
+		try {
+			if (it->second->init() == false) {
+				logErr("failed to init scene: " << it->first);
+				return false;
+			}
+		} catch (std::exception &e) {
+			logErr("Error : " << e.what());
+		}
 	}
+
+	_sceneMap[_scene]->load();  // load first scene
 	return true;
 }
 
@@ -68,30 +89,33 @@ bool SceneManager::init() {
  * @return false if failure
  */
 bool SceneManager::run() {
-	float						loopTime = 1000 / s.j("screen").u("fps");
-	std::chrono::milliseconds	last_loop_ms = getMs();
+	return SceneManager::get()._run();
+}
+bool SceneManager::_run() {
+	float						fps = 1000 / s.j("screen").u("fps");
+	std::chrono::milliseconds	lastLoopMs = getMs();
 
 	while (true) {
-		if (_scene == nullptr) {
-			logWarn("scene object is null");
+		if (_sceneMap.find(_scene) == _sceneMap.end()) {
+			logWarn("invalid scnene name: " << _scene);
 		}
 		else {
 			// update dtTime
-			_dtTime = (getMs().count() - last_loop_ms.count()) / 1000.0;
-			last_loop_ms = getMs();
+			_dtTime = (getMs().count() - lastLoopMs.count()) / 1000.0;
+			lastLoopMs = getMs();
 
 			// get inputs
 			Inputs::update();
 			_gui->updateInput(_dtTime);
 
 			// update the scene
-			if (!_scene->update()) {
+			if (_sceneMap[_scene]->update() == false) {
 				return false;
 			}
 
 			// draw the gui
 			_gui->preDraw();
-			if (!_scene->draw()) {
+			if (_sceneMap[_scene]->draw() == false) {
 				return false;
 			}
 			_gui->postDraw();
@@ -104,15 +128,15 @@ bool SceneManager::run() {
 		}
 
 		// fps
-		std::chrono::milliseconds time_loop = getMs() - last_loop_ms;
-		if (time_loop.count() > loopTime) {
+		std::chrono::milliseconds loopDuration = getMs() - lastLoopMs;
+		if (loopDuration.count() > fps) {
 			#if DEBUG_FPS_LOW == true
 				if (!firstLoop)
-					logDebug("update loop slow -> " << time_loop.count() << "ms / " << loopTime << "ms (" << FPS << "fps)");
+					logDebug("update loop slow -> " << loopDuration.count() << "ms / " << fps << "ms (" << FPS << "fps)");
 			#endif
 		}
 		else {
-			usleep((loopTime - time_loop.count()) * 1000);
+			usleep((fps - loopDuration.count()) * 1000);
 		}
 		#if DEBUG_FPS_LOW == true
 			firstLoop = false;
@@ -121,9 +145,28 @@ bool SceneManager::run() {
 	return true;
 }
 
+/**
+ * @brief load a scene from his name
+ *
+ * @param name the scene name
+ * @return AScene* a pointer to the scene loaded
+ */
+AScene * SceneManager::loadScene(std::string const & name) {
+	return SceneManager::get()._loadScene(name);
+}
+AScene * SceneManager::_loadScene(std::string const & name) {
+	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
+		logErr("invalid scnene name: " << _scene << " in loadScene");
+	}
+	_sceneMap[_scene]->unload();  // unload last scene
+	_scene = name;
+	_sceneMap[_scene]->load();  // load new scene
+	return _sceneMap[_scene];
+}
+
 /* execption */
 SceneManager::SceneManagerException::SceneManagerException()
 : std::runtime_error("SceneManager Exception") {}
 
-SceneManager::SceneManagerException::SceneManagerException(const char* what_arg)
-: std::runtime_error(std::string(std::string("SceneManagerException: ") + what_arg).c_str()) {}
+SceneManager::SceneManagerException::SceneManagerException(const char* whatArg)
+: std::runtime_error(std::string(std::string("SceneManagerException: ") + whatArg).c_str()) {}

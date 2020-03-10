@@ -25,12 +25,10 @@ int main(int ac, char const **av) {
 		return ret;
 	}
 
-	SceneManager sceneManager;
-
-	if (sceneManager.init() == false) {
+	if (SceneManager::init() == false) {
 		return EXIT_FAILURE;
 	}
-	if (sceneManager.run() == false) {
+	if (SceneManager::run() == false) {
 		return EXIT_FAILURE;
 	}
 

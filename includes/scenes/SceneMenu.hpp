@@ -11,6 +11,7 @@
 #include "TextUI.hpp"
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
+#include "SceneManager.hpp"
 
 class SceneMenu : public AScene {
 	public:
@@ -23,18 +24,20 @@ class SceneMenu : public AScene {
 
 		// Operators
 		SceneMenu &operator=(SceneMenu const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& my_class);
+		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& myClass);
 
 		// AScene methods
 		virtual bool		init();
 		virtual bool		update();
 		virtual bool		draw();
+		virtual void		load();
+		virtual void		unload();
 
 		/* add element */
 		ButtonUI &			addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
 			bool pixelateOnZoom = true);
-		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step = 0);
+		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step);
 		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
 			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
