@@ -130,6 +130,7 @@ SRC =	main.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/assimpUtils.cpp \
 		utils/opengl/Mesh.cpp \
+		utils/opengl/Model.cpp \
 		utils/opengl/OpenGLModel.cpp \
 		utils/opengl/ETransform.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
@@ -179,6 +180,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/Skybox.hpp \
 		utils/opengl/assimpUtils.hpp \
 		utils/opengl/Mesh.hpp \
+		utils/opengl/Model.hpp \
 		utils/opengl/OpenGLModel.hpp \
 		utils/opengl/ETransform.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
