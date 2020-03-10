@@ -2,7 +2,8 @@
 #include "SceneGame.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
-: ASceneMenu(gui, dtTime)
+: ASceneMenu(gui, dtTime),
+  _currentLvl(0)
 {}
 
 SceneLevelSelection::SceneLevelSelection(SceneLevelSelection const & src)
@@ -35,31 +36,36 @@ bool			SceneLevelSelection::init() {
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	try {
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = winSz.y - menuHeight * 2;
-		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "LEVEL SELECTION").setTextFont("title");
-
-
 		_states.nbLevel = scGame.getNbLevel();
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight * 5;
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - tmpSize.y * 1.2;
 		for (uint32_t i = 0; i < _states.nbLevel; i++) {
-			tmpPos.y -= menuHeight * 1.2;
 			addButton(tmpPos, tmpSize, scGame.getLevelName(i)).setTextAlign(TextAlign::CENTER);
 			if (i == 0) {
 				_states.firstLevelID = getNbUIElements() - 1;
+			tmpPos.x += winSz.x;
 			}
 		}
 
-		tmpPos.y -= menuHeight * 1.2;
+		tmpPos.x = 30;
+		tmpPos.y = winSz.y / 2 - menuHeight / 2;
+		tmpSize.x = menuHeight;
+		tmpSize.y = menuHeight;
+		addButton(tmpPos, tmpSize, "<").setTextFont("title")
+			.addButtonLeftListener(&_states.lastLevel);
+
+		tmpPos.x = winSz.x - 30 - tmpSize.x;
+		addButton(tmpPos, tmpSize, ">").setTextFont("title")
+			.addButtonLeftListener(&_states.nextLevel);
+
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = menuHeight * 0.8;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
 		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
 			.addButtonLeftListener(&_states.menu);
-
-		tmpSize.x = tmpSize.x * 1.2;
-		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
-		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
 
 		_initBG();
 	}
@@ -78,10 +84,15 @@ bool			SceneLevelSelection::init() {
  */
 bool	SceneLevelSelection::update() {
 	ASceneMenu::update();
+	// size of the window
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	// SceneGame reference
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
-		if (getUIElement(_states.firstLevelID + i).getMouseLeftClick()) {
-			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ABaseUI & elem = getUIElement(_states.firstLevelID + i);
+		elem.setPosOffset(glm::vec2(-(_currentLvl * winSz.x), 0));
+		if (elem.getMouseLeftClick()) {
 			scGame.loadLevel(i);
 			SceneManager::loadScene(SceneNames::GAME);
 			return true;
@@ -90,6 +101,18 @@ bool	SceneLevelSelection::update() {
 	if (_states.menu) {
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 		_states.menu = false;
+	}
+	else if (_states.lastLevel) {
+		if (_currentLvl > 0) {
+			_currentLvl--;
+		}
+		_states.lastLevel = false;
+	}
+	else if (_states.nextLevel) {
+		if (_currentLvl < _states.nbLevel - 1) {
+			_currentLvl++;
+		}
+		_states.nextLevel = false;
 	}
 	return true;
 }

@@ -22,8 +22,12 @@ class SceneLevelSelection : public ASceneMenu {
 			uint32_t	firstLevelID;
 			uint32_t	nbLevel;
 			bool		menu;
+			bool		lastLevel;
+			bool		nextLevel;
 		};
 		ButtonsStates	_states;
+
+		uint32_t		_currentLvl;
 
 		bool			_initBG();
 
