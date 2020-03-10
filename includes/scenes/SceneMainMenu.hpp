@@ -13,9 +13,19 @@ class SceneMainMenu : public ASceneMenu {
 		SceneMainMenu &operator=(SceneMainMenu const &rhs);
 		friend std::ostream& operator<<(std::ostream& os, const SceneMainMenu& myClass);
 
-		// AScene methods
+		// Methods
 		virtual bool		init();
 		virtual bool		update();
+
+	protected:
+		struct ButtonsStates {
+			bool	play;
+			bool	loadSettings;
+			bool	exit;
+		};
+		ButtonsStates	_states;
+
+		bool			_initBG();
 
 	private:
 		SceneMainMenu();

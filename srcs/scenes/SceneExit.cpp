@@ -1,20 +1,20 @@
-#include "SceneMainMenu.hpp"
+#include "SceneExit.hpp"
 
-SceneMainMenu::SceneMainMenu(Gui * gui, float const &dtTime)
+SceneExit::SceneExit(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {}
 
-SceneMainMenu::SceneMainMenu(SceneMainMenu const & src)
+SceneExit::SceneExit(SceneExit const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
-SceneMainMenu::~SceneMainMenu() {}
+SceneExit::~SceneExit() {}
 
-SceneMainMenu & SceneMainMenu::operator=(SceneMainMenu const & rhs) {
+SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 	if (this != &rhs) {
-		logWarn("you are copying SceneMainMenu")
+		logWarn("you are copying SceneExit")
 	}
 	return *this;
 }
@@ -25,7 +25,7 @@ SceneMainMenu & SceneMainMenu::operator=(SceneMainMenu const & rhs) {
  * @return true if the init succed
  * @return false if the init failed
  */
-bool			SceneMainMenu::init() {
+bool			SceneExit::init() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -37,19 +37,15 @@ bool			SceneMainMenu::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
-
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "PLAY").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.play);
-
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "SETTINGS").setTextAlign(TextAlign::CENTER)
-			.addButtonLeftListener(&_states.loadSettings);
+		addText(tmpPos, tmpSize, "Do you want to exit ?").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
 			.addButtonLeftListener(&_states.exit);
+
+		tmpPos.y -= menuHeight * 1.2;
+		addButton(tmpPos, tmpSize, "CANCEL").setTextAlign(TextAlign::CENTER)
+			.addButtonLeftListener(&_states.cancel);
 
 		tmpSize.x = tmpSize.x * 1.2;
 		tmpSize.y = winSz.y - tmpPos.y;
@@ -72,25 +68,21 @@ bool			SceneMainMenu::init() {
  * @return true if the update is a success
  * @return false if there are an error in update
  */
-bool	SceneMainMenu::update() {
+bool	SceneExit::update() {
 	ASceneMenu::update();
 
-	if (_states.play) {
-		SceneManager::loadScene(SceneNames::GAME);
-		_states.play = false;
-	}
-	else if (_states.loadSettings) {
-		logWarn("load settings to do");  // TODO(tnicolas42) load settings
-		_states.loadSettings = false;
-	}
-	else if (_states.exit) {
-		SceneManager::loadScene(SceneNames::EXIT);
+	if (_states.exit) {
+		SceneManager::quit();
 		_states.exit = false;
+	}
+	else if (_states.cancel) {
+		logWarn("cancel to do");
+		_states.cancel = false;
 	}
 	return true;
 }
 
-bool			SceneMainMenu::_initBG() {
+bool			SceneExit::_initBG() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos = glm::vec2(0, 0);
 	glm::vec2 tmpSize = glm::vec2(200, 0);
