@@ -48,10 +48,10 @@ void ImageUI::draw() {
 	glm::vec2 tmpSize;
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpPos.y += _borderSize;
 	tmpSize = _size;

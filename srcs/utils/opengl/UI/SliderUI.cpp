@@ -43,7 +43,7 @@ void SliderUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)leftClick;
 	if (_leftClick) {
 		// get a factor (btw 0 & 1)
-		float factor = (mousePos.x - _pos.x - _borderSize) / (_size.x - _borderSize * 2);
+		float factor = (mousePos.x - getRealPos().x - _borderSize) / (_size.x - _borderSize * 2);
 		if (factor < 0) factor = 0;
 		if (factor > 1) factor = 1;
 		// get the value from the factor
@@ -76,7 +76,7 @@ void SliderUI::draw() {
 	glm::vec2 tmpSize;
 
 	// draw text
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
@@ -86,7 +86,7 @@ void SliderUI::draw() {
 	_drawText(tmpPos, tmpSize, _textFont, _textScale, valStr, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpSize = _size;
 
 	tmpPos.y += _borderSize;
@@ -100,7 +100,7 @@ void SliderUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }
 
 /* listener */

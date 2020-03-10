@@ -46,6 +46,10 @@ class ABaseUI {
 		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
+		ABaseUI &	setPos(glm::vec2 pos);
+		ABaseUI &	setPosOffset(glm::vec2 offset);
+		ABaseUI &	addPosOffset(glm::vec2 offset);
+		ABaseUI &	setSize(glm::vec2 size);
 		ABaseUI &	setColor(glm::vec4 color);
 
 		ABaseUI &	setBorderColor(glm::vec4 color);
@@ -67,6 +71,7 @@ class ABaseUI {
 		bool					getMouseLeftClick() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
+		glm::vec2				getRealPos() const;  // get pos + offset
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
@@ -96,6 +101,7 @@ class ABaseUI {
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
 
 		glm::vec2	_pos;
+		glm::vec2	_posOffset;
 		glm::vec2	_size;
 		glm::vec4	_color;
 		// border

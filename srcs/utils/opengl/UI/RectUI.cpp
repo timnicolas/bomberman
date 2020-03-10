@@ -38,7 +38,7 @@ void RectUI::draw() {
 	glm::vec2 tmpSize;
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpPos.y += _borderSize;
 	tmpSize = _size;
@@ -47,5 +47,5 @@ void RectUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }
