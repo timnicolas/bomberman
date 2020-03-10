@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdexcept>
+#include <map>
 #include "AScene.hpp"
 #include "Inputs.hpp"
 #include "Gui.hpp"
@@ -11,27 +12,41 @@
 		- update & draw scene
 */
 
+namespace SceneNames {
+	static std::string const MAIN_MENU = "mainMenu";
+	static std::string const GAME = "game";
+}
+
 class SceneManager {
 	public:
 		SceneManager();
-		SceneManager(SceneManager const & src);
 		virtual ~SceneManager();
 
-		bool init();
-		bool run();
+		static SceneManager &	get();
+		static bool				init();
+		static bool				run();
+		static AScene *			loadScene(std::string const & name);
 
-		SceneManager & operator=(SceneManager const & rhs);
 
 		/* Exceptions */
 		class SceneManagerException : public std::runtime_error {
 		public:
 			SceneManagerException();
-			explicit SceneManagerException(const char* what_arg);
+			explicit SceneManagerException(const char* whatArg);
 		};
 
 	protected:
-		AScene *	_scene;
 		GameInfo	_gameInfo;
 		Gui *		_gui;
 		float		_dtTime;
+		std::string	_scene;  // the name of the current scene
+		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
+
+		bool				_init();
+		bool				_run();
+		AScene *			_loadScene(std::string const & name);
+
+	private:
+		SceneManager(SceneManager const & src);
+		SceneManager & operator=(SceneManager const & rhs);
 };

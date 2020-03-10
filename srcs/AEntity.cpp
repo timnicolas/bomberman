@@ -1,14 +1,18 @@
 #include "AEntity.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-AEntity::AEntity() {
+AEntity::AEntity(SceneGame &game): game(game) {
+	active = true;
+	category = Category::STATIC;
+	name = "Entity";
 }
 
 AEntity::~AEntity() {
 }
 
-AEntity::AEntity(AEntity const &src) {
+AEntity::AEntity(AEntity const &src) : AEntity(src.game) {
 	*this = src;
 }
 
@@ -16,7 +20,6 @@ AEntity::AEntity(AEntity const &src) {
 
 AEntity &AEntity::operator=(AEntity const &rhs) {
 	if ( this != &rhs ) {
-		pos = rhs.pos;
 		category = rhs.category;
 		name = rhs.name;
 		type = rhs.type;

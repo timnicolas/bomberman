@@ -1,14 +1,19 @@
 #include "ACharacter.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-ACharacter::ACharacter() {
+ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
+	category = Category::MOBILE;
+	lives = 1;
+	speed = 1.0;
+	pos = {0.0, 0.0};
 }
 
 ACharacter::~ACharacter() {
 }
 
-ACharacter::ACharacter(ACharacter const &src): AEntity(src) {
+ACharacter::ACharacter(ACharacter const &src) : AEntity(src) {
 	*this = src;
 }
 
@@ -17,8 +22,62 @@ ACharacter::ACharacter(ACharacter const &src): AEntity(src) {
 ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 	if ( this != &rhs ) {
 		AEntity::operator=(rhs);
+		lives = rhs.lives;
+		speed = rhs.speed;
+		pos = rhs.pos;
 	}
 	return *this;
+}
+
+// -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Get the current postion of the ACharacter
+ *
+ * @return glm::vec2
+ */
+glm::vec2		ACharacter::getPos() {
+	return pos;
+}
+
+/**
+ * @brief Init the Class. Needed to be called before any usage of the Class.
+ *
+ * @param pos
+ * @return ACharacter*
+ */
+ACharacter		*ACharacter::init(glm::vec2 pos) {
+	this->pos = pos;
+	return this;
+}
+
+/**
+ * @brief A Character is destructible. This method always return true.
+ *
+ * @return true
+ */
+bool	ACharacter::isDestructable() {
+	return true;
+}
+
+/**
+ * @brief A Character doesn't block the progation. This method always return
+ * false.
+ *
+ * @return false
+ */
+bool	ACharacter::blockPropagation() {
+	return false;
+}
+
+/**
+ * @brief If the character still have lives, he is alive.
+ *
+ * @return true if alive
+ * @return false if dead
+ */
+bool	ACharacter::isAlive() {
+	return lives;
 }
 
 // -- Exceptions errors --------------------------------------------------------
@@ -26,5 +85,5 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 ACharacter::ACharacterException::ACharacterException()
 : std::runtime_error("ACharacter Exception") {}
 
-ACharacter::ACharacterException::ACharacterException(const char* what_arg)
-: std::runtime_error(std::string(std::string("ACharacterError: ") + what_arg).c_str()) {}
+ACharacter::ACharacterException::ACharacterException(const char* whatArg)
+: std::runtime_error(std::string(std::string("ACharacterError: ") + whatArg).c_str()) {}

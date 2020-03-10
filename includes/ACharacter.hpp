@@ -3,16 +3,23 @@
 
 #include <iostream>
 #include <stdexcept>
+#include "useGlm.hpp"
 #include "AEntity.hpp"
 
+// class SceneGame;
+
 class ACharacter : public AEntity {
+private:
+	ACharacter();
+
 public:
 	// Members
-	int		life;
-	float	speed;
+	int			lives;
+	float		speed;
+	glm::vec2	pos;
 
 	// Constructors
-	ACharacter();
+	explicit ACharacter(SceneGame &game);
 	virtual ~ACharacter();
 	ACharacter(ACharacter const &src);
 
@@ -20,15 +27,19 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
+	virtual bool	update(std::chrono::milliseconds dTime) = 0;
 	virtual bool	draw() = 0;
-	virtual bool	isAlive() = 0;
+	bool			isAlive();
+	bool			isDestructable();
+	bool			blockPropagation();
+	glm::vec2		getPos();
+	ACharacter		*init(glm::vec2 pos);
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {
 	public:
 		ACharacterException();
-		explicit ACharacterException(const char* what_arg);
+		explicit ACharacterException(const char* whatArg);
 	};
 };
 
