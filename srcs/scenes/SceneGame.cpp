@@ -18,10 +18,13 @@ std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
 SceneGame::SceneGame(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime) {
 	// TODO(ebaudet): init members
+	_model = nullptr;
+	_openGLModel = nullptr;
 }
 
 SceneGame::~SceneGame() {
 	delete	_model;
+	delete	_openGLModel;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -71,11 +74,12 @@ bool			SceneGame::init() {
 	// _loadLevel(1);
 
 	try {
-		_model = new OpenGLModel(*_gui, "bomberman-assets/3dModels/man.fbx", dtTime,
-		animationSpeed);
+		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/man.fbx");
+		_model = new Model(*_openGLModel, _dtTime);
+		_model->play = true;
 	}
 	catch(OpenGLModel::ModelException const &e) {
-		_model = nullptr;
+		_openGLModel = nullptr;
 		logErr(e.what())
 	}
 

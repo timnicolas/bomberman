@@ -8,6 +8,7 @@
 #include <assimp/scene.h>
 
 #include <array>
+#include <unordered_map>
 #include <stdexcept>
 #include <memory>
 #include <utility>  // for pair
@@ -24,22 +25,25 @@ namespace AnimKeyType {
 		POSITION
 	};
 
-	std::array<std::string, 3> const	enumName = {
+	std::array<std::string, 3> const	enumName = {{
 		"scale",
 		"rotation",
 		"position"
-	};
+	}};
 }  // namespace AnimKeyType
 
 class OpenGLModel {
 	public:
-        OpenGLModel(Gui const &_gui, std::string const &path, float const &dtTime, float const &animationSpeed);
+        OpenGLModel(Gui const &_gui, std::string const &path);
 		virtual ~OpenGLModel();
 		OpenGLModel(OpenGLModel const &src);
 		OpenGLModel &operator=(OpenGLModel const &rhs);
 
-		void	draw();
-		void	loadNextAnimation();
+		void		draw(float animationTimeTick = 0.0f);
+		bool		setAnimation(uint32_t id);
+		bool		getAnimationId(std::string const name, uint32_t &outId) const;
+		aiAnimation	*getAiAnimation(uint32_t id);
+		bool		isAnimated() const;
 
 		// Exceptions
 		class ModelException : public std::runtime_error {
@@ -66,23 +70,23 @@ class OpenGLModel {
 		void	_calcModelMatrix();
 
 		// -- animation bones calculation --------------------------------------
-		void	_setBonesTransform(float animationTime, aiNode *node,
+		void	_setBonesTransform(float animationTimeTick, aiNode *node,
 			aiScene const *scene, glm::mat4 parentTransform);
 		aiNodeAnim const	*_findNodeAnim(aiAnimation const *animation,
 			std::string const nodeName);
 
 		// interpolate scaling
-		glm::vec3	_calcInterpolatedScaling(float animationTime,
+		glm::vec3	_calcInterpolatedScaling(float animationTimeTick,
 			const aiNodeAnim* nodeAnim);
 		// interpolate rotation
-		glm::quat	_calcInterpolatedRotation(float animationTime,
+		glm::quat	_calcInterpolatedRotation(float animationTimeTick,
 			aiNodeAnim const *nodeAnim);
 		// interpolate position
-		glm::vec3	_calcInterpolatedPosition(float animationTime,
+		glm::vec3	_calcInterpolatedPosition(float animationTimeTick,
 			aiNodeAnim const *nodeAnim);
 
 		std::pair<uint32_t, uint32_t>	_findAnimIndex(AnimKeyType::Enum animType,
-			float animationTime, aiNodeAnim const *nodeAnim);
+			float animationTimeTick, aiNodeAnim const *nodeAnim);
 
 		// -- members ----------------------------------------------------------
 		static std::unique_ptr<Shader>	_sh;
@@ -100,12 +104,12 @@ class OpenGLModel {
 		std::string				_pathDir;
 
 		// model position
-		glm::mat4				_model;  // position in real world
-		glm::vec3				_minPos, _maxPos;  // to scale the model
-		glm::mat4				_modelScale;
+		glm::mat4	_model;  // position in real world
+		glm::vec3	_minPos, _maxPos;  // to scale the model
+		glm::mat4	_modelScale;
 
 		// global transform matrix
-		glm::mat4			_globalTransform;
+		glm::mat4	_globalTransform;
 
 		// -- animation related ------------------------------------------------
 		bool	_isAnimated;
@@ -114,14 +118,11 @@ class OpenGLModel {
 		std::array<glm::mat4, MAX_BONES>	_boneOffset;
 		std::array<glm::mat4, MAX_BONES>	_bones;  // final bone transformation
 		std::map<std::string, uint32_t>		_boneMap;  // link bone name to index
-		uint32_t			_nextBoneId;  // to keep track of the bones id
+		uint32_t	_nextBoneId;  // to keep track of the bones id
 
 		// animation settings
-		float const			&_dtTime;
-		float const			&_animationSpeed;
-		float				_animationTime;
-		uint32_t			_curAnimationId;
-		aiAnimation			*_curAnimation;
+		aiAnimation					*_curAnimation;
+		std::vector<std::string>	_animationNames;
 };
 
 #endif  // OPENGLMODEL_HPP_

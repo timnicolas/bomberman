@@ -183,6 +183,6 @@ void Mesh::addBoneData(u_int32_t boneID, float weight, u_int32_t vertexID) {
 // -- Vertex -------------------------------------------------------------------
 Vertex::Vertex() {
 	// init all bones to 0
-	bonesId = {0};
-	bonesW = {0.0f};
+	bonesId = {{0}};
+	bonesW = {{0.0f}};
 }

@@ -12,6 +12,7 @@
 #include "ACharacter.hpp"
 #include "Player.hpp"
 #include "Bomb.hpp"
+#include "Model.hpp"
 #include "OpenGLModel.hpp"
 
 namespace GameState {
@@ -29,9 +30,8 @@ private:
 	static std::map<std::string, AEntity *> _entitiesCall;
 
 	// just to test model class
-	float	dtTime = 0.01f;  // TODO(zer0nim): need to get the real dtTime
-	float	animationSpeed = 1.0f;
-	OpenGLModel	*_model;
+	Model		*_model;
+	OpenGLModel	*_openGLModel;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);

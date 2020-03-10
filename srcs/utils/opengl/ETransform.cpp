@@ -1,5 +1,6 @@
 #include "ETransform.hpp"
 
+// -- Constructors -------------------------------------------------------------
 ETransform::ETransform(glm::vec3 pos, glm::vec3 scale, glm::quat rotQ)
 : pos(pos),
   rot(rotQ),

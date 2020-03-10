@@ -1,5 +1,6 @@
 #include <limits>
 #include <algorithm>
+#include <iterator>
 
 #include "OpenGLModel.hpp"
 #include "Logging.hpp"
@@ -9,12 +10,9 @@
 std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
-OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, float const &dtTime,
-	float const &animationSpeed)
+OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path)
 : _gui(_gui),
-  _path(path),
-  _dtTime(dtTime),
-  _animationSpeed(animationSpeed)
+  _path(path)
 {
 	// init static shader if null
 	if (!_sh) {
@@ -37,9 +35,8 @@ OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, float const &
 
 	// init model and animation settings
 	_model = glm::mat4(1.0f);
-	_boneOffset = {glm::mat4()};
-	_bones = {glm::mat4(1.0f)};
-	_animationTime = 0.0f;
+	_boneOffset = {{glm::mat4()}};
+	_bones = {{glm::mat4(1.0f)}};
 
 	// load the model from file
 	_loadModel();
@@ -57,9 +54,7 @@ OpenGLModel::~OpenGLModel() {
 
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
 : _gui(src._gui),
-  _path(src._path),
-  _dtTime(src._dtTime),
-  _animationSpeed(src._animationSpeed) {
+  _path(src._path) {
 	*this = src;
 }
 
@@ -79,9 +74,8 @@ OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 			std::numeric_limits<float>::lowest(),
 			std::numeric_limits<float>::lowest()};
 		_boneMap = std::map<std::string, uint32_t>();
-		_boneOffset = {glm::mat4()};
-		_bones = {glm::mat4(1.0f)};
-		_animationTime = 0.0f;
+		_boneOffset = {{glm::mat4()}};
+		_bones = {{glm::mat4(1.0f)}};
 
 		// reload the model to avoid conflicts in meshes destruction
 		_loadModel();
@@ -129,14 +123,20 @@ void	OpenGLModel::_loadModel() {
 	_processNode(_scene->mRootNode, _scene);
 
 	// -- animations -----------------------------------------------------------
-	_curAnimationId = 0;
 	_curAnimation = nullptr;
 
 	// animation finded
 	if (_scene->mNumAnimations > 0) {
 		_isAnimated = true;
+
+		// save animation names
+		for (uint32_t i = 0; i < _scene->mNumAnimations; ++i) {
+			_animationNames.push_back(_scene->mAnimations[i]->mName.C_Str());
+		}
+
 		// set the current animation
-		_curAnimation = _scene->mAnimations[_curAnimationId];
+		_curAnimation = _scene->mAnimations[0];
+		std::cout << "_curAnimation->mName: " << _curAnimation->mName.C_Str() << std::endl;
 	}
 	// no animation finded
 	else {
@@ -424,23 +424,13 @@ void	OpenGLModel::_calcModelMatrix() {
 }
 
 // -- draw ---------------------------------------------------------------------
-void	OpenGLModel::draw() {
+void	OpenGLModel::draw(float animationTimeTick) {
 	_sh->use();
 
 	// update bones if the model is animated
 	if (_isAnimated) {
-		// update _animationTime
-		_animationTime += 1000 * _dtTime * _animationSpeed;
-		// retrieve the animation ticks/second
-		float ticksPerSecond = (_curAnimation->mTicksPerSecond != 0)
-			? _curAnimation->mTicksPerSecond : 25.0f;
-		// convert _animationTime to tick time
-		float timeInTicks = (_animationTime / 1000.0) * ticksPerSecond;
-		// loops the animation
-		float animationTime = fmod(timeInTicks, _curAnimation->mDuration);
-
 		// recalculate bones pos according to the animation
-		_setBonesTransform(animationTime, _scene->mRootNode, _scene, _globalTransform);
+		_setBonesTransform(animationTimeTick, _scene->mRootNode, _scene, _globalTransform);
 
 		// update bones uniforms
 		for (uint16_t i = 0; i < MAX_BONES; ++i) {
@@ -464,20 +454,74 @@ void	OpenGLModel::draw() {
 	_sh->unuse();
 }
 
-// -- loadNextAnimation -------------------------------------------------------
-void	OpenGLModel::loadNextAnimation() {
+// -- loadNextAnimation --------------------------------------------------------
+bool	OpenGLModel::setAnimation(uint32_t id) {
 	if (_isAnimated) {
-		// update animation id
-		if (++_curAnimationId >= _scene->mNumAnimations) {
-			_curAnimationId = 0;
+		if (id < _scene->mNumAnimations) {
+			// retrieve animation
+			_curAnimation = _scene->mAnimations[id];
+			return true;
 		}
-		// retrieve animation
-		_curAnimation = _scene->mAnimations[_curAnimationId];
+
+		logErr("invalid animation id");
 	}
+	else {
+		logWarn("the model have no animation");
+	}
+
+	return false;
 }
 
+// -- getAnimationId -----------------------------------------------------------
+/**
+ * @brief retrieve animation id from name
+ *
+ * @param name the animation name
+ * @param outId modified with result on success
+ * @return true on success
+ * @return false on failure
+ */
+bool	OpenGLModel::getAnimationId(std::string const name, uint32_t &outId) const {
+	auto it = std::find(_animationNames.begin(), _animationNames.end(), name);
+
+	// if the name was finded
+	if (it != _animationNames.end()) {
+		// save the id to outId ref
+		outId = std::distance(_animationNames.begin(), it);
+		return true;
+	}
+
+	logErr("animation name not found");
+	return false;
+}
+
+// -- getters ------------------------------------------------------------------
+/**
+ * @brief get assimp animation object from id
+ *
+ * @param id the animation id
+ * @return aiAnimation* on success
+ * @return nullptr on failure
+ */
+aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) {
+	if (_isAnimated) {
+		// on valid id
+		if (id < _scene->mNumAnimations) {
+			return _scene->mAnimations[id];
+		}
+
+		logErr("invalid animation id");
+	} else {
+		logWarn("the model have no animation");
+	}
+
+	return nullptr;
+}
+bool	OpenGLModel::isAnimated() const { return _isAnimated; }
+
+
 // -- _setBonesTransform -------------------------------------------------------
-void	OpenGLModel::_setBonesTransform(float animationTime, aiNode *node,
+void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 	aiScene const *scene, glm::mat4 parentTransform)
 {
 	// retrieve animation node
@@ -489,15 +533,15 @@ void	OpenGLModel::_setBonesTransform(float animationTime, aiNode *node,
 		// if we have an animation node, interpolate the bone transformation
 		if (nodeAnim) {
 			// interpolate scaling
-			glm::vec3	scaling = _calcInterpolatedScaling(animationTime, nodeAnim);
+			glm::vec3	scaling = _calcInterpolatedScaling(animationTimeTick, nodeAnim);
 			glm::mat4	scalingM = glm::scale(glm::mat4(1.0), scaling);
 
 			// interpolate rotation
-			glm::quat	rotationQ = _calcInterpolatedRotation(animationTime, nodeAnim);
+			glm::quat	rotationQ = _calcInterpolatedRotation(animationTimeTick, nodeAnim);
 			glm::mat4	rotationM = glm::toMat4(rotationQ);
 
 			// interpolate translation
-			glm::vec3	translation = _calcInterpolatedPosition(animationTime, nodeAnim);
+			glm::vec3	translation = _calcInterpolatedPosition(animationTimeTick, nodeAnim);
 			glm::mat4	translationM = glm::translate(glm::mat4(1.0), translation);
 
 			// Combine the above transformations
@@ -516,7 +560,7 @@ void	OpenGLModel::_setBonesTransform(float animationTime, aiNode *node,
 
 		// recursion with each of the bone childs
 		for (uint32_t i = 0; i < node->mNumChildren; ++i) {
-			_setBonesTransform(animationTime, node->mChildren[i], scene,
+			_setBonesTransform(animationTimeTick, node->mChildren[i], scene,
 				boneGlobalTransform);
 		}
 	}
@@ -543,7 +587,7 @@ aiNodeAnim const	*OpenGLModel::_findNodeAnim(aiAnimation const *animation,
 }
 
 // -- _calcInterpolatedScaling -------------------------------------------------
-glm::vec3	OpenGLModel::_calcInterpolatedScaling(float animationTime,
+glm::vec3	OpenGLModel::_calcInterpolatedScaling(float animationTimeTick,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -553,12 +597,12 @@ glm::vec3	OpenGLModel::_calcInterpolatedScaling(float animationTime,
 
 	// retrieve curent and next scaling index
 	std::pair<uint32_t, uint32_t>	animIndex = _findAnimIndex(AnimKeyType::SCALE,
-		animationTime, nodeAnim);
+		animationTimeTick, nodeAnim);
 	// calculate dtTime between first, second animation index
 	float	indexDtTime = static_cast<float>(nodeAnim->mScalingKeys[animIndex.second].mTime
 		- nodeAnim->mScalingKeys[animIndex.first].mTime);
 	// calculate the mix factor
-	float	factor = (animationTime - static_cast<float>(
+	float	factor = (animationTimeTick - static_cast<float>(
 		nodeAnim->mScalingKeys[animIndex.first].mTime)) / indexDtTime;
 	factor = std::clamp(factor, 0.0f, 1.0f);
 
@@ -572,7 +616,7 @@ glm::vec3	OpenGLModel::_calcInterpolatedScaling(float animationTime,
 }
 
 // -- _calcInterpolatedRotation ------------------------------------------------
-glm::quat	OpenGLModel::_calcInterpolatedRotation(float animationTime,
+glm::quat	OpenGLModel::_calcInterpolatedRotation(float animationTimeTick,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -582,12 +626,12 @@ glm::quat	OpenGLModel::_calcInterpolatedRotation(float animationTime,
 
 	// retrieve curent and next scaling index
 	std::pair<uint32_t, uint32_t>	animIndex = _findAnimIndex(AnimKeyType::SCALE,
-		animationTime, nodeAnim);
+		animationTimeTick, nodeAnim);
 	// calculate dtTime between first, second animation index
 	float	indexDtTime = static_cast<float>(nodeAnim->mRotationKeys[animIndex.second].mTime
 		- nodeAnim->mRotationKeys[animIndex.first].mTime);
 	// calculate the mix factor
-	float	factor = (animationTime - static_cast<float>(
+	float	factor = (animationTimeTick - static_cast<float>(
 		nodeAnim->mRotationKeys[animIndex.first].mTime)) / indexDtTime;
 	factor = std::clamp(factor, 0.0f, 1.0f);
 
@@ -601,7 +645,7 @@ glm::quat	OpenGLModel::_calcInterpolatedRotation(float animationTime,
 }
 
 // -- _calcInterpolatedPosition ------------------------------------------------
-glm::vec3	OpenGLModel::_calcInterpolatedPosition(float animationTime,
+glm::vec3	OpenGLModel::_calcInterpolatedPosition(float animationTimeTick,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -611,12 +655,12 @@ glm::vec3	OpenGLModel::_calcInterpolatedPosition(float animationTime,
 
 	// retrieve curent and next scaling index
 	std::pair<uint32_t, uint32_t>	animIndex = _findAnimIndex(AnimKeyType::SCALE,
-		animationTime, nodeAnim);
+		animationTimeTick, nodeAnim);
 	// calculate dtTime between first, second animation index
 	float	indexDtTime = static_cast<float>(nodeAnim->mPositionKeys[animIndex.second].mTime
 		- nodeAnim->mPositionKeys[animIndex.first].mTime);
 	// calculate the mix factor
-	float	factor = (animationTime - static_cast<float>(
+	float	factor = (animationTimeTick - static_cast<float>(
 		nodeAnim->mPositionKeys[animIndex.first].mTime)) / indexDtTime;
 	factor = std::clamp(factor, 0.0f, 1.0f);
 
@@ -631,7 +675,7 @@ glm::vec3	OpenGLModel::_calcInterpolatedPosition(float animationTime,
 
 // -- _findAnimIndex -----------------------------------------------------------
 std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum animType,
-	float animationTime, aiNodeAnim const *nodeAnim)
+	float animationTimeTick, aiNodeAnim const *nodeAnim)
 {
 	// retrieve number of animation keys
 	uint32_t	nbAnimKeys = nodeAnim->mNumScalingKeys;
@@ -650,16 +694,16 @@ std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum anim
 
 	// find the corect key pair
 	for (uint32_t i = 0; i < nbAnimKeys - 1; ++i) {
-		if (animType == AnimKeyType::SCALE &&
-			animationTime <= static_cast<float>(nodeAnim->mScalingKeys[i + 1].mTime)) {
+		if (animType == AnimKeyType::SCALE && animationTimeTick <=
+			static_cast<float>(nodeAnim->mScalingKeys[i + 1].mTime)) {
 			return std::make_pair(i, i + 1);
 		}
-		else if (animType == AnimKeyType::ROTATION &&
-			animationTime <= static_cast<float>(nodeAnim->mRotationKeys[i + 1].mTime)) {
+		else if (animType == AnimKeyType::ROTATION && animationTimeTick <=
+			static_cast<float>(nodeAnim->mRotationKeys[i + 1].mTime))  {
 			return std::make_pair(i, i + 1);
 		}
-		else if (animType == AnimKeyType::POSITION &&
-			animationTime <= static_cast<float>(nodeAnim->mPositionKeys[i + 1].mTime)) {
+		else if (animType == AnimKeyType::POSITION && animationTimeTick <=
+			static_cast<float>(nodeAnim->mPositionKeys[i + 1].mTime))  {
 			return std::make_pair(i, i + 1);
 		}
 	}
