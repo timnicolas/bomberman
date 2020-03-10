@@ -63,6 +63,16 @@ bool	ACharacter::isAlive() {
 	return lives;
 }
 
+void	ACharacter::takeDamage(const int damage) {
+	if (!destructible)
+		return;
+	lives -= damage;
+	if (lives <= 0) {
+		lives = 0;
+		alive = false;
+	}
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 ACharacter::ACharacterException::ACharacterException()

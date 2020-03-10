@@ -49,6 +49,19 @@ glm::vec2	AObject::getPos() {
 	throw AObjectException("Impossible to found the position of the object");
 }
 
+/**
+ * @brief
+ *
+ * @param damage
+ */
+void	AObject::takeDamage(const int damage) {
+	(void)damage;
+	if (!destructible)
+		return;
+
+	alive = false;
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 AObject::AObjectException::AObjectException()
