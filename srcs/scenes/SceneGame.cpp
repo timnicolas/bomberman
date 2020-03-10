@@ -71,10 +71,10 @@ bool			SceneGame::init() {
 	// _loadLevel(1);
 
 	try {
-		_model = new Model(*_gui, "bomberman-assets/3dModels/man.fbx", dtTime,
+		_model = new OpenGLModel(*_gui, "bomberman-assets/3dModels/man.fbx", dtTime,
 		animationSpeed);
 	}
-	catch(Model::ModelException const &e) {
+	catch(OpenGLModel::ModelException const &e) {
 		_model = nullptr;
 		logErr(e.what())
 	}
@@ -146,7 +146,7 @@ bool	SceneGame::draw() {
 		try {
 			_model->draw();
 		}
-		catch(Model::ModelException const &e) {
+		catch(OpenGLModel::ModelException const &e) {
 			logErr(e.what())
 		}
 	}

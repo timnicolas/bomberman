@@ -1,15 +1,15 @@
 #include <limits>
 #include <algorithm>
 
-#include "Model.hpp"
+#include "OpenGLModel.hpp"
 #include "Logging.hpp"
 #include "assimpUtils.hpp"
 
 // -- static initialisation ----------------------------------------------------
-std::unique_ptr<Shader> Model::_sh = nullptr;
+std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
-Model::Model(Gui const &_gui, std::string const &path, float const &dtTime,
+OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, float const &dtTime,
 	float const &animationSpeed)
 : _gui(_gui),
   _path(path),
@@ -48,14 +48,14 @@ Model::Model(Gui const &_gui, std::string const &path, float const &dtTime,
 	_setConstUniforms();
 }
 
-Model::~Model() {
+OpenGLModel::~OpenGLModel() {
 	// free meshes
 	for (Mesh *mesh : _meshes) {
 		delete(mesh);
 	}
 }
 
-Model::Model(Model const &src)
+OpenGLModel::OpenGLModel(OpenGLModel const &src)
 : _gui(src._gui),
   _path(src._path),
   _dtTime(src._dtTime),
@@ -63,7 +63,7 @@ Model::Model(Model const &src)
 	*this = src;
 }
 
-Model &Model::operator=(Model const &rhs) {
+OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 	if (this != &rhs) {
 		_meshes = std::vector<Mesh *>();
 		_scene = nullptr;
@@ -90,7 +90,7 @@ Model &Model::operator=(Model const &rhs) {
 }
 
 // -- _setConstUniforms --------------------------------------------------------
-void	Model::_setConstUniforms() {
+void	OpenGLModel::_setConstUniforms() {
 	_sh->use();
 
 	// camera projection
@@ -106,7 +106,7 @@ void	Model::_setConstUniforms() {
 }
 
 // -- _loadModel ---------------------------------------------------------------
-void	Model::_loadModel() {
+void	OpenGLModel::_loadModel() {
 	// load the model with assimp
 	_scene = _importer.ReadFile(_path,
 		aiProcess_Triangulate |
@@ -118,7 +118,7 @@ void	Model::_loadModel() {
 
 	// if assimp failed to load the model
 	if (!_scene || (_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !_scene->mRootNode) {
-		throw Model::ModelException(std::string(
+		throw OpenGLModel::ModelException(std::string(
 			"assimp: " + std::string(_importer.GetErrorString())).c_str());
 	}
 
@@ -159,7 +159,7 @@ void	Model::_loadModel() {
 }
 
 // -- _processNode -------------------------------------------------------------
-void	Model::_processNode(aiNode *node, aiScene const *scene) {
+void	OpenGLModel::_processNode(aiNode *node, aiScene const *scene) {
 	aiMesh	*mesh;
 
 	// process all the node's meshes (if any)
@@ -175,7 +175,7 @@ void	Model::_processNode(aiNode *node, aiScene const *scene) {
 }
 
 // -- _processMesh -------------------------------------------------------------
-void	Model::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
+void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	std::vector<Vertex>		vertices;
 	std::vector<uint32_t>	vertIndices;
 
@@ -249,7 +249,7 @@ void	Model::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 }
 
 // -- _loadMaterialTextures ----------------------------------------------------
-void	Model::_loadMaterialTextures(std::vector<Texture> &textures,
+void	OpenGLModel::_loadMaterialTextures(std::vector<Texture> &textures,
 	aiScene const *scene, aiMaterial *aiMat, aiTextureType type,
 	TextureType::Enum textType)
 {
@@ -292,7 +292,7 @@ void	Model::_loadMaterialTextures(std::vector<Texture> &textures,
 }
 
 // -- _loadMaterial ------------------------------------------------------------
-Material	Model::_loadMaterial(aiMaterial *aiMat) {
+Material	OpenGLModel::_loadMaterial(aiMaterial *aiMat) {
 	Material	mat;
 	aiColor3D	color(0.f, 0.f, 0.f);
 	float		shininess;
@@ -330,7 +330,7 @@ Material	Model::_loadMaterial(aiMaterial *aiMat) {
 }
 
 // -- _processBones ------------------------------------------------------------
-void	Model::_processBones(aiMesh *aiMesh, Mesh &mesh) {
+void	OpenGLModel::_processBones(aiMesh *aiMesh, Mesh &mesh) {
 	uint32_t				boneId;
 	std::string				boneName;
 	int						vertexID;
@@ -372,7 +372,7 @@ void	Model::_processBones(aiMesh *aiMesh, Mesh &mesh) {
 
 // -- _updateMinMaxPos ---------------------------------------------------------
 // update min/max pos to use later to scale and center the model
-void	Model::_updateMinMaxPos(glm::vec3 pos) {
+void	OpenGLModel::_updateMinMaxPos(glm::vec3 pos) {
 	if (pos.x > _maxPos.x)
 		_maxPos.x = pos.x;
 	if (pos.y > _maxPos.y)
@@ -389,8 +389,8 @@ void	Model::_updateMinMaxPos(glm::vec3 pos) {
 }
 
 // -- _calcModelMatrix ---------------------------------------------------------
-// calculate the model matrix to scale and center the Model
-void	Model::_calcModelMatrix() {
+// calculate the model matrix to scale and center the OpenGLModel
+void	OpenGLModel::_calcModelMatrix() {
 	glm::vec3	transl;
 	float		maxDiff;
 	float		scale;
@@ -424,7 +424,7 @@ void	Model::_calcModelMatrix() {
 }
 
 // -- draw ---------------------------------------------------------------------
-void	Model::draw() {
+void	OpenGLModel::draw() {
 	_sh->use();
 
 	// update bones if the model is animated
@@ -465,7 +465,7 @@ void	Model::draw() {
 }
 
 // -- loadNextAnimation -------------------------------------------------------
-void	Model::loadNextAnimation() {
+void	OpenGLModel::loadNextAnimation() {
 	if (_isAnimated) {
 		// update animation id
 		if (++_curAnimationId >= _scene->mNumAnimations) {
@@ -477,7 +477,7 @@ void	Model::loadNextAnimation() {
 }
 
 // -- _setBonesTransform -------------------------------------------------------
-void	Model::_setBonesTransform(float animationTime, aiNode *node,
+void	OpenGLModel::_setBonesTransform(float animationTime, aiNode *node,
 	aiScene const *scene, glm::mat4 parentTransform)
 {
 	// retrieve animation node
@@ -526,7 +526,7 @@ void	Model::_setBonesTransform(float animationTime, aiNode *node,
 }
 
 // -- _findNodeAnim ------------------------------------------------------------
-aiNodeAnim const	*Model::_findNodeAnim(aiAnimation const *animation,
+aiNodeAnim const	*OpenGLModel::_findNodeAnim(aiAnimation const *animation,
 	std::string const nodeName)
 {
 	// loop through animations nodes until we find the desired node
@@ -543,7 +543,7 @@ aiNodeAnim const	*Model::_findNodeAnim(aiAnimation const *animation,
 }
 
 // -- _calcInterpolatedScaling -------------------------------------------------
-glm::vec3	Model::_calcInterpolatedScaling(float animationTime,
+glm::vec3	OpenGLModel::_calcInterpolatedScaling(float animationTime,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -572,7 +572,7 @@ glm::vec3	Model::_calcInterpolatedScaling(float animationTime,
 }
 
 // -- _calcInterpolatedRotation ------------------------------------------------
-glm::quat	Model::_calcInterpolatedRotation(float animationTime,
+glm::quat	OpenGLModel::_calcInterpolatedRotation(float animationTime,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -601,7 +601,7 @@ glm::quat	Model::_calcInterpolatedRotation(float animationTime,
 }
 
 // -- _calcInterpolatedPosition ------------------------------------------------
-glm::vec3	Model::_calcInterpolatedPosition(float animationTime,
+glm::vec3	OpenGLModel::_calcInterpolatedPosition(float animationTime,
 	aiNodeAnim const *nodeAnim)
 {
 	// if the scaling is not animated, return the scale value
@@ -630,7 +630,7 @@ glm::vec3	Model::_calcInterpolatedPosition(float animationTime,
 }
 
 // -- _findAnimIndex -----------------------------------------------------------
-std::pair<uint32_t, uint32_t>	Model::_findAnimIndex(AnimKeyType::Enum animType,
+std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum animType,
 	float animationTime, aiNodeAnim const *nodeAnim)
 {
 	// retrieve number of animation keys
@@ -644,7 +644,7 @@ std::pair<uint32_t, uint32_t>	Model::_findAnimIndex(AnimKeyType::Enum animType,
 
 	// exception if no key exist
 	if (nbAnimKeys < 1) {
-		throw Model::ModelException(std::string("animation: no " +
+		throw OpenGLModel::ModelException(std::string("animation: no " +
 			AnimKeyType::enumName[animType] + " animation key finded").c_str());
 	}
 
@@ -669,9 +669,9 @@ std::pair<uint32_t, uint32_t>	Model::_findAnimIndex(AnimKeyType::Enum animType,
 }
 
 // -- Exceptions errors --------------------------------------------------------
-Model::ModelException::ModelException()
+OpenGLModel::ModelException::ModelException()
 : std::runtime_error("ModelException") {}
 
-Model::ModelException::ModelException(char const *what_arg)
+OpenGLModel::ModelException::ModelException(char const *what_arg)
 : std::runtime_error(
 	std::string(std::string("ModelException: ") + what_arg).c_str()) {}
