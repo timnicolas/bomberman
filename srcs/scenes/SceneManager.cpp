@@ -4,7 +4,7 @@
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
 #include "SceneGame.hpp"
-#include "SceneMenu.hpp"
+#include "SceneMainMenu.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -64,7 +64,7 @@ bool SceneManager::_init() {
 	}
 
 	// create and init all scene
-	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMainMenu(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME, new SceneGame(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
