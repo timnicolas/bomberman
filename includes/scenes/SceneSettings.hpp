@@ -1,6 +1,7 @@
 #ifndef SCENESETTINGS_HPP
 # define SCENESETTINGS_HPP
 
+# include <list>
 # include "SceneMenu.hpp"
 # include "Inputs.hpp"
 
@@ -35,7 +36,10 @@ private:
 	void				_confirmQuit();
 	void				_cancelQuit();
 
+
+	/* UI object */
 	SettingsType::Enum	_current_pane;
+	std::list<ABaseUI*>	_panes[SettingsType::nb_types];
 
 	/* temporary settings */
 	bool				_fullscreen;
