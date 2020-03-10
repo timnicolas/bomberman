@@ -13,21 +13,21 @@
 #include "ImageUI.hpp"
 #include "SceneManager.hpp"
 
-class SceneMenu : public AScene {
+class ASceneMenu : public AScene {
 	public:
 		// Members
 
 		// Constructors
-		explicit SceneMenu(Gui * gui, float const &dtTime);
-		virtual ~SceneMenu();
-		SceneMenu(SceneMenu const &src);
+		explicit ASceneMenu(Gui * gui, float const &dtTime);
+		virtual ~ASceneMenu();
+		ASceneMenu(ASceneMenu const &src);
 
 		// Operators
-		SceneMenu &operator=(SceneMenu const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& myClass);
+		ASceneMenu &operator=(ASceneMenu const &rhs);
+		friend std::ostream& operator<<(std::ostream& os, const ASceneMenu& myClass);
 
 		// AScene methods
-		virtual bool		init();
+		virtual bool		init() = 0;
 		virtual bool		update();
 		virtual bool		draw();
 		virtual void		load();
