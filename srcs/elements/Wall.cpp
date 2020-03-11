@@ -2,7 +2,10 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Wall::Wall(SceneGame &game) : AObject(game) {
+
+Wall::Wall(SceneGame &game, Block::Enum blockType)
+: AObject(game), _blockType(blockType)
+{
 	type = Type::BOMB;
 	name = "Wall";
 }
@@ -44,7 +47,7 @@ bool	Wall::update(float const dTime) {
  * @return false if failure
  */
 bool	Wall::draw(Gui &gui) {
-	gui.drawCube(Block::DURABLE_WALL, getPos());
+	gui.drawCube(_blockType, getPos());
 	return true;
 }
 

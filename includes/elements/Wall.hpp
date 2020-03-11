@@ -9,10 +9,12 @@ class Wall : public AObject {
 private:
 	Wall();
 	// Members
+	// graphic information.
+	Block::Enum		_blockType;
 
 public:
 	// Constructors
-	explicit Wall(SceneGame &game);
+	explicit Wall(SceneGame &game, Block::Enum blockType = Block::DURABLE_WALL);
 	~Wall();
 	Wall(Wall const &src);
 
