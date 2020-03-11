@@ -43,6 +43,7 @@ bool			SceneVictory::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "NEXT LEVEL")
+			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.nextLevel);
 
 		tmpPos.y -= menuHeight * 1.2;
@@ -55,6 +56,7 @@ bool			SceneVictory::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT")
+			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;
@@ -83,6 +85,7 @@ bool	SceneVictory::update() {
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	if (_states.nextLevel) {
+		_states.nextLevel = false;
 		if (scGame.level + 1 < static_cast<int32_t>(scGame.getNbLevel())) {
 			scGame.loadLevel(scGame.level + 1);  // reload the current level
 			SceneManager::loadScene(_lastSceneName);
@@ -90,20 +93,19 @@ bool	SceneVictory::update() {
 		else {
 			SceneManager::loadScene(SceneNames::MAIN_MENU);
 		}
-		_states.nextLevel = false;
 	}
 	else if (_states.restart) {
+		_states.restart = false;
 		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
-		_states.restart = false;
 	}
 	else if (_states.menu) {
-		SceneManager::loadScene(SceneNames::MAIN_MENU);
 		_states.menu = false;
+		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
-		SceneManager::loadScene(SceneNames::EXIT);
 		_states.exit = false;
+		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
 }

@@ -56,12 +56,12 @@ Gui &Gui::operator=(Gui const &rhs) {
 void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
-	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
-		#if DEBUG
-			SceneManager::quit();
-		#else
+	if (Inputs::shouldQuit() || Inputs::getKeyUp(InputType::Enum::CANCEL)) {
+		// #if DEBUG
+		// 	SceneManager::quit();
+		// #else
 			SceneManager::loadScene(SceneNames::EXIT);
-		#endif
+		// #endif
 	}
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);

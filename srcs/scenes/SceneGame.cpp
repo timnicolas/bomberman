@@ -123,6 +123,21 @@ bool			SceneGame::init() {
 bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
+
+	// TODO(tnicolas42) remove the scene loader
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_1)) {
+		SceneManager::loadScene(SceneNames::PAUSE);
+		return true;
+	}
+	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_2)) {
+		SceneManager::loadScene(SceneNames::VICTORY);
+		return true;
+	}
+	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_3)) {
+		SceneManager::loadScene(SceneNames::GAME_OVER);
+		return true;
+	}
+
 	// for (auto &&board_it1 : board) {
 	// 	for (auto &&board_it1 : board_it1) {
 	// 		for (AEntity *board_it2 : board_it1) {

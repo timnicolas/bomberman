@@ -41,14 +41,17 @@ bool			SceneMainMenu::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "PLAY")
+			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.play);
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "SETTINGS")
+			.setKeyLeftClickScancode(SDL_SCANCODE_COMMA)
 			.addButtonLeftListener(&_states.loadSettings);
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT")
+			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;
@@ -76,16 +79,16 @@ bool	SceneMainMenu::update() {
 	ASceneMenu::update();
 
 	if (_states.play) {
-		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 		_states.play = false;
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 	}
 	else if (_states.loadSettings) {
-		logWarn("load settings to do");  // TODO(tnicolas42) load settings
 		_states.loadSettings = false;
+		logWarn("load settings to do");  // TODO(tnicolas42) load settings
 	}
 	else if (_states.exit) {
-		SceneManager::loadScene(SceneNames::EXIT);
 		_states.exit = false;
+		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
 }

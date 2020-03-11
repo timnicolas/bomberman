@@ -306,7 +306,8 @@ void ABaseUI::update() {
  */
 ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
 	_rightListener = listener;
-	*_rightListener = _rightClick;
+	if (_rightListener)
+		*_rightListener = _rightClick;
 	return *this;
 }
 /**
@@ -317,7 +318,8 @@ ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
  */
 ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
-	*_leftListener = _leftClick;
+	if (_leftListener)
+		*_leftListener = _leftClick;
 	return *this;
 }
 

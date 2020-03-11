@@ -23,15 +23,17 @@ class SceneLevelSelection : public ASceneMenu {
 		struct ButtonsStates {
 			uint32_t	firstLevelID;
 			uint32_t	nbLevel;
+			bool		loadLevel;
 			bool		menu;
 			bool		lastLevel;
 			bool		nextLevel;
 		};
 		ButtonsStates	_states;
-		uint32_t		_currentLvl;
+		int32_t			_currentLvl;
 
 		float			_transition;  // used to do a smooth transition
 
+		void			_setLevel(int32_t level);
 		bool			_initBG();
 
 	private:
