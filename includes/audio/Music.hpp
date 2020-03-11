@@ -5,7 +5,9 @@
 # include <SDL2/SDL_mixer.h>
 # include <string>
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief Music class for AutioManager
+ */
 class Music {
 public:
 	class MusicException: public std::runtime_error {

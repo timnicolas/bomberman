@@ -8,7 +8,6 @@
 
 #define NB_BLOCK_TYPES 6
 
-// TODO(tnicolas42) docs -> class description
 namespace Block {
 	enum Enum {
 		FLOOR,
@@ -20,7 +19,7 @@ namespace Block {
 	};
 }
 
-// TODO(tnicolas42) docs -> class description
+// TODO(tnicolas42) docs -> class description @zer0nim
 class TextureManager {
 	public:
 		TextureManager();

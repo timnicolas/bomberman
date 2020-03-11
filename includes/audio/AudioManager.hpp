@@ -7,7 +7,9 @@
 # include "Sound.hpp"
 # include "Music.hpp"
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief This is the audio manager. In this static class, you can play musics and sound
+ */
 class AudioManager {
 public:
 	static const int						nb_sound_channels = 42;
