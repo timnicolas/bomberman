@@ -7,7 +7,8 @@
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = "Bomb";
-	_countdown = 4.0;
+	_countdown = 2.0;
+	_propagation = 3;
 }
 
 Bomb::~Bomb() {
@@ -36,65 +37,86 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
  * @return false if failure
  */
 bool	Bomb::update(float const dTime) {
+	if (!active)
+		return true;
+	if (_countdown > 0)
+		logInfo("countdown:" << _countdown);
 	_countdown -= dTime;
 	if (_countdown <= 0.0) {
-		explode(getPos());
+		glm::vec3	pos = getPos();
+		explode({pos.x, pos.z});
 	}
 	return true;
 }
 
 Bomb	*Bomb::explode(glm::vec2 const pos) {
-	int		propagation = 5;
 	int		i;
 	std::vector<AEntity *>	box;
 
 	// top
 	i = 0;
-	while (++i < propagation) {
-		box = game.board[pos.x][pos.y + i];
-		if (!_propagationExplosion(pos, box, i))
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x, pos.y + i}))
 			break;
 	}
 	// right
 	i = 0;
-	while (++i < propagation) {
-		box = game.board[pos.x + i][pos.y];
-		if (!_propagationExplosion(pos, box, i))
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x + i, pos.y}))
 			break;
 	}
 	// bottom
 	i = 0;
-	while (++i < propagation) {
-		box = game.board[pos.x][pos.y - i];
-		if (!_propagationExplosion(pos, box, i))
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x, pos.y - i}))
 			break;
 	}
 	// left
 	i = 0;
-	while (++i < propagation) {
-		box = game.board[pos.x - i][pos.y];
-		if (!_propagationExplosion(pos, box, i))
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x - i, pos.y}))
 			break;
 	}
+	active = false;
 
 	return this;
 }
 
-bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box, int i) {
-	bool	result = true;
+bool	Bomb::_propagationExplosion(glm::vec2 const place) {
+	logDebug("_propagationExplosion");
+
+	if (place.x < 0 || place.y < 0)
+		return false;
+	std::vector<AEntity *>	&box = game.board[place.x][place.y];
+	bool					result = true;
+
+	logDebug("initialisation");
 	if (box.size() == 0) {
+		logDebug("box.size == 0");
 		box.push_back(new Fire(game));
+		logInfo("push fire on case [" << place.x << ", " << place.y << "]");
 	}
 	else {
-		for (std::vector<AEntity *>::iterator it = box.begin();
-		it != box.end(); ++it) {
+		logDebug("box.size > 0:" << box.size());
+		std::vector<AEntity *>::iterator it = box.begin();
+		while(it != box.end()) {
+			logDebug("blockPropagation ?");
 			if ((*it)->blockPropagation) {
+				logDebug("blockPropagation !");
 				result = false;
 			}
+			logDebug("destructible ?");
 			if ((*it)->destructible) {
-				game.board[pos.x][pos.y + i].erase(it);
+				logDebug("destructible !");
 				delete (*it);
+				logDebug("clear entity");
+				it = game.board[place.x][place.y].erase(it);
+				logDebug("clear place on board");
 				box.push_back(new Fire(game));
+				logDebug("new fire");
+				logDebug("destruction !");
+			} else {
+				++it;
 			}
 		}
 	}
@@ -108,7 +130,9 @@ bool	Bomb::_propagationExplosion(glm::vec2 const pos, std::vector<AEntity *> box
  * @return false if failure
  */
 bool	Bomb::draw(Gui &gui) {
-	gui.drawCube(Block::BOMB, getPos());
+	if (active) {
+		gui.drawCube(Block::BOMB, getPos());
+	}
 	return true;
 }
 

@@ -11,13 +11,14 @@
         "crispy": "c",
         "flag": "f",
         "end": "e",
+        "bomb": "y",
         "safe": "_"
     },
     "map": [
         { "line": "wwwwwwwwwwwwwww" },
         { "line": "w_p_ccc    wwww" },
         { "line": "w_bcbcb b bwwww" },
-        { "line": "wc        cccfw" },
+        { "line": "wc     y  cccfw" },
         { "line": "w b b bcb b bcw" },
         { "line": "w   c  c      e" },
         { "line": "w bb b b b b  w" },

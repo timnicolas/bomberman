@@ -10,10 +10,10 @@ private:
 	Bomb();
 	// Members
 	float	_countdown;
+	int		_propagation;
 
 	// Methods
-	bool	_propagationExplosion(glm::vec2 const pos,
-	std::vector<AEntity *> box, int i);
+	bool	_propagationExplosion(glm::vec2 const pos);
 
 public:
 	// Constructors
