@@ -42,15 +42,15 @@ bool			SceneGameOver::init() {
 		addText(tmpPos, tmpSize, "Game Over").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "RESTART").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "RESTART")
 			.addButtonLeftListener(&_states.restart);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "MAIN MENU")
 			.addButtonLeftListener(&_states.menu);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "EXIT")
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;

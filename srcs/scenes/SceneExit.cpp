@@ -41,11 +41,11 @@ bool			SceneExit::init() {
 		addText(tmpPos, tmpSize, "Do you want to exit ?").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "EXIT")
 			.addButtonLeftListener(&_states.exit);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "CANCEL").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "CANCEL")
 			.addButtonLeftListener(&_states.cancel);
 
 		tmpSize.x = tmpSize.x * 1.2;

@@ -41,15 +41,15 @@ bool			ScenePause::init() {
 		addText(tmpPos, tmpSize, "Paused").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "RESUME").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "RESUME")
 			.addButtonLeftListener(&_states.resume);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "MAIN MENU")
 			.addButtonLeftListener(&_states.menu);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "EXIT")
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;

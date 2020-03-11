@@ -40,15 +40,15 @@ bool			SceneMainMenu::init() {
 		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "PLAY").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "PLAY")
 			.addButtonLeftListener(&_states.play);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "SETTINGS").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "SETTINGS")
 			.addButtonLeftListener(&_states.loadSettings);
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "EXIT")
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;
