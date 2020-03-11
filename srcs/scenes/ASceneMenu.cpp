@@ -42,7 +42,7 @@ std::ostream &	operator<<(std::ostream & os, const ASceneMenu& myClass) {
  */
 bool	ASceneMenu::update() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		(*it)->update(Inputs::getMousePos(), Inputs::getRightClick(), Inputs::getLeftClick());
+		(*it)->update();
 	}
 	return true;
 }

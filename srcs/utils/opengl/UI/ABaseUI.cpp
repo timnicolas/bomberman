@@ -2,7 +2,6 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 #include "Texture.hpp"
-#include "Inputs.hpp"
 
 /* global */
 glm::vec2		ABaseUI::_winSize;
@@ -230,11 +229,9 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 /**
  * @brief this is the base update function of UI objects
  *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+void ABaseUI::update() {
+	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
 	if (mousePos.x >= getRealPos().x && mousePos.x <= getRealPos().x + _size.x
 	&& mousePos.y >= getRealPos().y && mousePos.y <= getRealPos().y + _size.y)
@@ -260,7 +257,7 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
-	_update(mousePos, rightClick, leftClick);
+	_update();
 }
 
 /* listener */
