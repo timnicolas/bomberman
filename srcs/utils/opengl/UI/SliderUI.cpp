@@ -32,7 +32,6 @@ void SliderUI::setValues(float min, float max, float val, float step) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void SliderUI::_update() {
 	glm::vec2 mousePos = Inputs::getMousePos();

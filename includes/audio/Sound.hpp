@@ -6,6 +6,7 @@
 # include <string>
 # include <unordered_set>
 
+// TODO(tnicolas42) docs -> class description
 class Sound {
 public:
 	class SoundException: public std::runtime_error {

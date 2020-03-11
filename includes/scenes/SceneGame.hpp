@@ -34,6 +34,7 @@ namespace EntityType {
 	};
 }
 
+// TODO(tnicolas42) docs -> class description
 class SceneGame : public AScene {
 private:
 	SceneGame();

@@ -184,14 +184,12 @@ bool	SceneGame::draw() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneGame::load() {
 	_gui->enableCursor(false);
 }
 /**
  * @brief called when the scene is unloaded
- *
  */
 void SceneGame::unload() {
 }

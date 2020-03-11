@@ -96,7 +96,6 @@ bool	ScenePause::update() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void ScenePause::load() {
 	ASceneMenu::load();

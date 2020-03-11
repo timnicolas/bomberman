@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+/**
+ * @brief This is the bomb object
+ */
 class Bomb : public AObject {
 private:
 	Bomb();

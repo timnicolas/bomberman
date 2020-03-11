@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+/**
+ * @brief This is the wall object
+ */
 class Wall : public AObject {
 private:
 	Wall();

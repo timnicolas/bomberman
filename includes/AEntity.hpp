@@ -24,6 +24,7 @@ namespace Type {
 	};
 }
 
+// TODO(tnicolas42) docs -> class description
 class AEntity {
 private:
 	AEntity();

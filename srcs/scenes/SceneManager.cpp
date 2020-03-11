@@ -210,7 +210,6 @@ std::string const & SceneManager::_getSceneName() const {
 
 /**
  * @brief quit the game
- *
  */
 void SceneManager::quit() {
 	SceneManager::get()._quit();

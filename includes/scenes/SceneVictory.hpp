@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief this is the victory menu
+ */
 class SceneVictory : public ASceneMenu {
 	public:
 		// Constructors

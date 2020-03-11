@@ -138,7 +138,6 @@ bool	SceneLevelSelection::update() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneLevelSelection::load() {
 	ASceneMenu::load();

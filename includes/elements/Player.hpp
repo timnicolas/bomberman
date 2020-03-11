@@ -6,6 +6,9 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 
+/**
+ * @brief This is the player object
+ */
 class Player : public ACharacter {
 private:
 	Player();

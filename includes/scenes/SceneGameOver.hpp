@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief menu for game over
+ */
 class SceneGameOver : public ASceneMenu {
 	public:
 		// Constructors
