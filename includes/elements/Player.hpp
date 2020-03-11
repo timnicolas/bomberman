@@ -9,6 +9,9 @@
 class Player : public ACharacter {
 private:
 	Player();
+	// Methods
+	void	_move(float const dTime);
+	bool	_canMove(glm::vec3 pos);
 
 public:
 	// Members
