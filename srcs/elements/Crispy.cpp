@@ -34,7 +34,7 @@ Crispy &Crispy::operator=(Crispy const &rhs) {
  * @return false if failure
  */
 bool	Crispy::update(float const dTime) {
-	logDebug("Last Crispy updated at " + std::to_string(dTime));
+	(void)dTime;
 	return true;
 }
 

@@ -35,7 +35,7 @@ Player &Player::operator=(Player const &rhs) {
  * @return false if failure
  */
 bool	Player::update(float const dTime) {
-	logDebug("Last Player updated at " << dTime);
+	(void)dTime;
 	return true;
 }
 

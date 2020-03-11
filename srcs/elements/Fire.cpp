@@ -35,7 +35,7 @@ Fire &Fire::operator=(Fire const &rhs) {
  * @return false if failure
  */
 bool	Fire::update(float const dTime) {
-	logDebug("Last Fire updated at " + std::to_string(dTime));
+	(void)dTime;
 	return true;
 }
 

@@ -33,7 +33,7 @@ Wall &Wall::operator=(Wall const &rhs) {
  * @return false if failure
  */
 bool	Wall::update(float const dTime) {
-	logDebug("Last Wall updated at " + std::to_string(dTime));
+	(void)dTime;
 	return true;
 }
 

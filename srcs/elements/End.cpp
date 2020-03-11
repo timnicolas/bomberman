@@ -33,7 +33,7 @@ End &End::operator=(End const &rhs) {
  * @return false if failure
  */
 bool	End::update(float const dTime) {
-	logDebug("Last End updated at " << dTime);
+	(void)dTime;
 	return true;
 }
 
