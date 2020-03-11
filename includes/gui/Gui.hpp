@@ -12,38 +12,20 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <array>
-#include <unordered_map>
-#include <map>
 
 #include "bomberman.hpp"
-#include "Logging.hpp"
 #include "includesOpengl.hpp"
 #include "TextureManager.hpp"
-#include "TextRender.hpp"
-#include "Material.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Skybox.hpp"
 #include "debug.hpp"
-#include "ABaseUI.hpp"
 
 #define TITLE	"bomberman"
-
-// TODO(zer0nim): move GameInfo
-namespace State {
-	enum Enum {
-		S_PLAY,
-		S_PAUSE,
-		S_GAMEOVER,
-	};
-}
 
 struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
-	glm::ivec2	gameboard;
-	glm::ivec2	player;
-	State::Enum	play;
 	bool		quit;
 
 	GameInfo();

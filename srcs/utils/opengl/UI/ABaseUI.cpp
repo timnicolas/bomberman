@@ -2,7 +2,6 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 #include "Texture.hpp"
-#include "Inputs.hpp"
 
 /* global */
 glm::vec2		ABaseUI::_winSize;
@@ -188,6 +187,7 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _pos(pos),
+  _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
@@ -205,7 +205,11 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _imgDefHeight(0),
   _mouseHover(false),
   _rightClick(false),
+  _keyRightClickBindScancode(NO_SCANCODE),
+  _keyRightClickBindInput(InputType::NO_KEY),
   _leftClick(false),
+  _keyLeftClickBindScancode(NO_SCANCODE),
+  _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
   _leftListener(nullptr)
 {}
@@ -219,6 +223,7 @@ ABaseUI::~ABaseUI() {
 
 ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 	if (this != &rhs) {
+		logWarn("UI object copied");
 		_pos = rhs._pos;
 		_size = rhs._size;
 	}
@@ -228,14 +233,37 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 /**
  * @brief this is the base update function of UI objects
  *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+void ABaseUI::update() {
+	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
-	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
-	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
+
+	/* state of the keys */
+	// right
+	bool keyRightDown = false;
+	if (_keyRightClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeDown(_keyRightClickBindScancode))
+		keyRightDown = true;
+	if (_keyRightClickBindInput != InputType::NO_KEY && Inputs::getKeyDown(_keyRightClickBindInput))
+		keyRightDown = true;
+	bool keyRightUp = false;
+	if (_keyRightClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeUp(_keyRightClickBindScancode))
+		keyRightUp = true;
+	if (_keyRightClickBindInput != InputType::NO_KEY && Inputs::getKeyUp(_keyRightClickBindInput))
+		keyRightUp = true;
+	// left
+	bool keyLeftDown = false;
+	if (_keyLeftClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeDown(_keyLeftClickBindScancode))
+		keyLeftDown = true;
+	if (_keyLeftClickBindInput != InputType::NO_KEY && Inputs::getKeyDown(_keyLeftClickBindInput))
+		keyLeftDown = true;
+	bool keyLeftUp = false;
+	if (_keyLeftClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeUp(_keyLeftClickBindScancode))
+		keyLeftUp = true;
+	if (_keyLeftClickBindInput != InputType::NO_KEY && Inputs::getKeyUp(_keyLeftClickBindInput))
+		keyLeftUp = true;
+
+	if (mousePos.x >= getRealPos().x && mousePos.x <= getRealPos().x + _size.x
+	&& mousePos.y >= getRealPos().y && mousePos.y <= getRealPos().y + _size.y)
 	{
 		_mouseHover = true;
 		if (Inputs::getLeftClickDown()) {
@@ -248,17 +276,25 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	else {
 		_mouseHover = false;
 	}
-	if (Inputs::getLeftClickUp()) {
-		if (_mouseHover && _leftClick && _leftListener)
+
+	if (keyRightDown) {
+		_rightClick = true;
+	}
+	if (keyLeftDown) {
+		_leftClick = true;
+	}
+
+	if (Inputs::getLeftClickUp() || keyLeftUp) {
+		if ((_mouseHover || keyLeftUp) && _leftClick && _leftListener)
 			*_leftListener = _leftClick;
 		_leftClick = false;
 	}
-	if (Inputs::getRightClickUp()) {
-		if (_mouseHover && _rightClick && _rightListener)
+	if (Inputs::getRightClickUp() || keyRightUp) {
+		if ((_mouseHover || keyRightUp) && _rightClick && _rightListener)
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
-	_update(mousePos, rightClick, leftClick);
+	_update();
 }
 
 /* listener */
@@ -270,7 +306,8 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
  */
 ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
 	_rightListener = listener;
-	*_rightListener = _rightClick;
+	if (_rightListener)
+		*_rightListener = _rightClick;
 	return *this;
 }
 /**
@@ -281,11 +318,29 @@ ABaseUI &	ABaseUI::addButtonRightListener(bool * listener) {
  */
 ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
-	*_leftListener = _leftClick;
+	if (_leftListener)
+		*_leftListener = _leftClick;
 	return *this;
 }
 
 /* setter */
+ABaseUI &	ABaseUI::setKeyRightClickScancode(SDL_Scancode scancode) {
+	_keyRightClickBindScancode = scancode; return *this;
+}
+ABaseUI &	ABaseUI::setKeyLeftClickScancode(SDL_Scancode scancode) {
+	_keyLeftClickBindScancode = scancode; return *this;
+}
+ABaseUI &	ABaseUI::setKeyRightClickInput(InputType::Enum input) {
+	_keyRightClickBindInput = input; return *this;
+}
+ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
+	_keyLeftClickBindInput = input; return *this;
+}
+
+ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
+ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
+ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
+ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -308,6 +363,7 @@ bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
+glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }
 glm::vec2 &			ABaseUI::getSize() { return _size; }
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }

@@ -14,6 +14,6 @@ class RectUI : public ABaseUI {
 		virtual void	draw();
 
 	protected:
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		virtual void	_update();
 		RectUI();
 };

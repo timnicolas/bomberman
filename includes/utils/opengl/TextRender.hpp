@@ -13,7 +13,7 @@
 
 class TextRender {
 	public:
-		explicit TextRender(uint32_t width, uint32_t height);
+		TextRender(uint32_t width, uint32_t height);
 		TextRender(TextRender const &src);
 		virtual ~TextRender();
 

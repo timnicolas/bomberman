@@ -1,6 +1,9 @@
 #include "Gui.hpp"
 #include "Logging.hpp"
 #include "Inputs.hpp"
+#include "SceneManager.hpp"
+#include "Material.hpp"
+#include "ABaseUI.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -53,9 +56,12 @@ Gui &Gui::operator=(Gui const &rhs) {
 void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
-	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
-		logDebug("quiting...");
-		gameInfo.quit = true;
+	if (Inputs::shouldQuit() || Inputs::getKeyUp(InputType::Enum::CANCEL)) {
+		// #if DEBUG
+		// 	SceneManager::quit();
+		// #else
+			SceneManager::loadScene(SceneNames::EXIT);
+		// #endif
 	}
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
@@ -99,6 +105,7 @@ bool	Gui::init() {
 	/* init UI interface */
 	try {
 		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
+		ABaseUI::loadFont("title", s.j("font").s("file"), s.j("font").u("size") * 3);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -191,8 +198,6 @@ bool	Gui::_initShaders() {
 
 	// -- camera ---------------------------------------------------------------
 	cam = new Camera({0.0f, 25.0f, 0.0f});
-	cam->lookAt(glm::vec3(gameInfo.gameboard[0] / 2 + 0.5f, 1.0f,
-		gameInfo.gameboard[1] * 0.7f));
 
 	float angle = cam->zoom;
 	float ratio = static_cast<float>(gameInfo.windowSize.x) / gameInfo.windowSize.y;
@@ -299,8 +304,5 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 GameInfo::GameInfo() {
 	title = "bomberman";
 	windowSize = {1200, 800};
-	gameboard = {32, 32};
-	player = {3, 3};
-	play = State::S_PAUSE;
 	quit = false;
 }

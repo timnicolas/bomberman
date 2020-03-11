@@ -13,5 +13,6 @@
 			"b": 0.8,
 			"a": 1.0
 		}
-	}
+	},
+	"mapsPath": "bomberman-assets/maps/"
 }

@@ -3,6 +3,7 @@
 #include "includesOpengl.hpp"
 #include "Shader.hpp"
 #include "TextRender.hpp"
+#include "Inputs.hpp"
 
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
@@ -38,7 +39,7 @@ class ABaseUI {
 		ABaseUI & operator=(ABaseUI const & rhs);
 
 		/* others */
-		void			update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		void			update();
 		virtual void	draw() = 0;
 
 		/* listener */
@@ -46,6 +47,15 @@ class ABaseUI {
 		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
+		ABaseUI &	setKeyRightClickScancode(SDL_Scancode scancode);
+		ABaseUI &	setKeyLeftClickScancode(SDL_Scancode scancode);
+		ABaseUI &	setKeyRightClickInput(InputType::Enum input);
+		ABaseUI &	setKeyLeftClickInput(InputType::Enum input);
+
+		ABaseUI &	setPos(glm::vec2 pos);
+		ABaseUI &	setPosOffset(glm::vec2 offset);
+		ABaseUI &	addPosOffset(glm::vec2 offset);
+		ABaseUI &	setSize(glm::vec2 size);
 		ABaseUI &	setColor(glm::vec4 color);
 
 		ABaseUI &	setBorderColor(glm::vec4 color);
@@ -67,6 +77,7 @@ class ABaseUI {
 		bool					getMouseLeftClick() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
+		glm::vec2				getRealPos() const;  // get pos + offset
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
@@ -93,37 +104,42 @@ class ABaseUI {
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
+		virtual void	_update() = 0;
 
-		glm::vec2	_pos;
-		glm::vec2	_size;
-		glm::vec4	_color;
+		glm::vec2		_pos;
+		glm::vec2		_posOffset;
+		glm::vec2		_size;
+		glm::vec4		_color;
 		// border
-		glm::vec4	_borderColor;
-		float		_borderSize;
+		glm::vec4		_borderColor;
+		float			_borderSize;
 		// mouse effect
-		glm::vec4	_mouseHoverColor;
-		glm::vec4	_mouseClickColor;
+		glm::vec4		_mouseHoverColor;
+		glm::vec4		_mouseClickColor;
 		// text
-		std::string	_text;
-		glm::vec4	_textColor;
-		std::string _textFont;
-		float		_textScale;
-		float		_textPadding;
+		std::string		_text;
+		glm::vec4		_textColor;
+		std::string 	_textFont;
+		float			_textScale;
+		float			_textPadding;
 		TextAlign::Enum	_textAlign;
 		// image
-		GLuint		_imgTextureID;
-		int			_imgDefWidth;
-		int			_imgDefHeight;
+		GLuint			_imgTextureID;
+		int				_imgDefWidth;
+		int				_imgDefHeight;
 
 		/* info about mouse */
-		bool		_mouseHover;
-		bool		_rightClick;
-		bool		_leftClick;
+		bool			_mouseHover;
+		bool			_rightClick;
+		SDL_Scancode	_keyRightClickBindScancode;
+		InputType::Enum	_keyRightClickBindInput;
+		bool			_leftClick;
+		SDL_Scancode	_keyLeftClickBindScancode;
+		InputType::Enum	_keyLeftClickBindInput;
 
 		/* listener */
-		bool *		_rightListener;
-		bool *		_leftListener;
+		bool *			_rightListener;
+		bool *			_leftListener;
 
 		/* shaders */
 		static glm::vec2	_winSize;
