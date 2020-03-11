@@ -1,6 +1,13 @@
 #include "debug.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Check if there are errors on opengl -> call the define checkError()
+ *
+ * @param file The file of the calling function
+ * @param line The line of the calling function
+ * @return GLenum The error (or GL_NO_ERROR)
+ */
 GLenum checkError_(const char *file, int line) {
     GLenum errorCode;
     GLenum lastError = GL_NO_ERROR;
@@ -21,6 +28,12 @@ GLenum checkError_(const char *file, int line) {
     return lastError;
 }
 
+/**
+ * @brief Check if there are errors on opengl and exit if there are errors -> call the define checkErrorExit()
+ *
+ * @param file The file of the calling function
+ * @param line The line of the calling function
+ */
 void checkErrorExit_(const char *file, int line) {
     GLenum ret = checkError_(file, line);
     if (ret != GL_NO_ERROR)

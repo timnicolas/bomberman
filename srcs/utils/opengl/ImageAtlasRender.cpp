@@ -2,6 +2,8 @@
 #include "debug.hpp"
 #include "Logging.hpp"
 
+// TODO(tnicolas42) docs -> do docs for this file @zer0nim
+
 ImageAtlasRender::ImageAtlasRender(TextureManager const &textureManager, uint32_t width, uint32_t height) :
 _textureManager(textureManager), _shader(SHADER_IMAGE_VS, SHADER_IMAGE_FS),
 _projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfloat>(height))) {
