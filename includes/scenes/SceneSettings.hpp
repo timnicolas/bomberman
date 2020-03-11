@@ -38,9 +38,12 @@ private:
 
 	void				_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 
+	int					_input_configuring;
+
 	/* UI object */
 	SettingsType::Enum	_current_pane;
 	std::list<ABaseUI*>	_panes[SettingsType::nb_types];
+	ButtonUI			*_key_buttons[Inputs::nb_input];
 
 	/* temporary settings */
 	bool				_fullscreen;
