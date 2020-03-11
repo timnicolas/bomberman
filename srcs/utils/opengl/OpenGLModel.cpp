@@ -136,7 +136,6 @@ void	OpenGLModel::_loadModel() {
 
 		// set the current animation
 		_curAnimation = _scene->mAnimations[0];
-		std::cout << "_curAnimation->mName: " << _curAnimation->mName.C_Str() << std::endl;
 	}
 	// no animation finded
 	else {
@@ -471,6 +470,9 @@ bool	OpenGLModel::setAnimation(uint32_t id) {
 
 	return false;
 }
+
+// -- setModel -----------------------------------------------------------------
+void	OpenGLModel::setModel(glm::mat4 const model) { _model = model; }
 
 // -- getAnimationId -----------------------------------------------------------
 /**
