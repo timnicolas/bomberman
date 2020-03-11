@@ -27,7 +27,7 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 	_fullscreen = s.j("graphics").b("fullscreen");
 	int width = s.j("graphics").i("width");
 	int height = s.j("graphics").i("height");
-	_selected_resolution = {
+	_current_resolution = {
 		width,
 		height
 	};
@@ -147,7 +147,7 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 		.setTextScale(_text_scale).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
-	tmp_pos.x += (menu_width / 2);
+	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
 	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
 	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(_text_scale) \
 		.setTextAlign(TextAlign::CENTER);
@@ -164,7 +164,16 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_resolution_text = &addText(tmp_pos, tmp_size, "800x600");
 	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER) \
 		.setTextScale(_text_scale).setEnabled(true);
-	_updateResolution();
+	_updateResolutionText();
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_size.x = menu_width / 10;
+	tmp_pos.x -= tmp_size.x;
+	ptr = &addButton(tmp_pos, tmp_size, "<").addButtonLeftListener(&_prev_resolution) \
+		.setTextScale(_text_scale).setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_pos.x += menu_width / 3 + tmp_size.x;
+	ptr = &addButton(tmp_pos, tmp_size, ">").addButtonLeftListener(&_next_resolution) \
+		.setTextScale(_text_scale).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
@@ -214,9 +223,9 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	}
 }
 
-void					SceneSettings::_updateResolution() {
-	std::string		text = std::to_string(_selected_resolution.width) + "x" \
-		+ std::to_string(_selected_resolution.height);
+void					SceneSettings::_updateResolutionText() {
+	std::string		text = std::to_string(_current_resolution.width) + "x" \
+		+ std::to_string(_current_resolution.height);
 	_resolution_text->setText(text);
 }
 
@@ -262,6 +271,12 @@ bool					SceneSettings::update() {
 	}
 	if (_update_fullscreen) {
 		_updateFullscreen();
+	}
+	if (_prev_resolution) {
+		_updateResolution(false);
+	}
+	if (_next_resolution) {
+		_updateResolution(true);
 	}
 	if (_return) {
 		_returnQuit();
@@ -322,6 +337,17 @@ void					SceneSettings::_updateFullscreen() {
 	_updateFullscreenButton();
 	s.j("graphics").b("fullscreen") = _fullscreen;
 	s.saveToFile("configs/settings.json");
+}
+
+void					SceneSettings::_updateResolution(bool go_right) {
+	if (go_right) {
+		_next_resolution = false;
+	}
+	else {
+		_prev_resolution = false;
+	}
+	// TODO(gsmith): actually change the resolution.
+	logDebug("Change resolution.");
 }
 
 void					SceneSettings::_returnQuit() {
