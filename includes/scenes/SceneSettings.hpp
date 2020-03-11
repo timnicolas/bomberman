@@ -31,6 +31,7 @@ public:
 private:
 	SceneSettings();
 
+	void				_saveAudioVolume(int audio_index);
 	void				_updateAudioVolume(int audio_index);
 	void				_updateKey(InputType::Enum key_type);
 	void				_selectPane(SettingsType::Enum pane_type);
@@ -57,7 +58,8 @@ private:
 	bool				_next_resolution;
 	bool				_prev_resolution;
 	bool				_update_fullscreen;
-	bool				_update_audio[3];
+	bool				_save_audio[3];
+	float				_update_audio[3];
 	float				_audio_volume[3];
 	bool				_select_pane[SettingsType::nb_types];
 	bool				_update_key[Inputs::nb_input];
