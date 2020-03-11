@@ -210,7 +210,6 @@ void			SceneSettings::_updateAudioVolume(int audio_index) {
 	_audio_volume[audio_index] = _update_audio[audio_index];
 	s.j("audio").d(volume_name) = volume / 100;
 	AudioManager::updateSettings();
-	logDebug(volume_name << " : " << volume);
 }
 
 void			SceneSettings::_saveAudioVolume(int audio_index) {

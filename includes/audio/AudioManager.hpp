@@ -65,6 +65,7 @@ private:
 	float									_volume_master;
 	float									_volume_music;
 	float									_volume_sound;
+	float									_music_modifier;
 	std::map<std::string, Music *>			_musics;
 	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;
