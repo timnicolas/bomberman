@@ -11,7 +11,8 @@ Gui::Gui(GameInfo &gameInfo)
   _win(nullptr),
   _event(new SDL_Event()),
   _context(0),
-  _skybox(nullptr) {}
+  _skybox(nullptr),
+  _canMove(false) {}
 
 Gui::~Gui() {
 	logInfo("exit SDL");
@@ -61,18 +62,22 @@ void Gui::updateInput(float const dtTime) {
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	// -- camera movement ------------------------------------------------------
-	// camera movement
-	if (Inputs::getKey(InputType::Enum::UP)) {
-		cam->processKeyboard(CamMovement::Forward, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::RIGHT)) {
-		cam->processKeyboard(CamMovement::Right, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::DOWN)) {
-		cam->processKeyboard(CamMovement::Backward, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::LEFT)) {
-		cam->processKeyboard(CamMovement::Left, dtTime, false);
+	if (Inputs::getKey(InputType::Enum::CONFIRM))
+		_canMove = !_canMove;
+	if (_canMove) {
+		// camera movement
+		if (Inputs::getKey(InputType::Enum::UP)) {
+			cam->processKeyboard(CamMovement::Forward, dtTime, false);
+		}
+		if (Inputs::getKey(InputType::Enum::RIGHT)) {
+			cam->processKeyboard(CamMovement::Right, dtTime, false);
+		}
+		if (Inputs::getKey(InputType::Enum::DOWN)) {
+			cam->processKeyboard(CamMovement::Backward, dtTime, false);
+		}
+		if (Inputs::getKey(InputType::Enum::LEFT)) {
+			cam->processKeyboard(CamMovement::Left, dtTime, false);
+		}
 	}
 }
 
