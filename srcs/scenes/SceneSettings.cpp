@@ -11,8 +11,9 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 	_update_fullscreen(false)
 {
 	for (auto i = 0; i < 3; i++) {
-		_update_audio[i] = false;
-		_audio_volume[i] = 100 * s.j("audio").d(audio_name[i]);
+		_save_audio[i] = false;
+		_update_audio[i] = 100 * s.j("audio").d(audio_name[i]);
+		_audio_volume[i] = _update_audio[i];
 	}
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
 		_select_pane[i] = false;
@@ -37,6 +38,7 @@ SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
 	_prev_resolution = rhs._prev_resolution;
 	_update_fullscreen = rhs._update_fullscreen;
 	for (auto i = 0; i < 3; i++) {
+		_save_audio[i] = rhs._save_audio[i];
 		_update_audio[i] = rhs._update_audio[i];
 		_audio_volume[i] = rhs._audio_volume[i];
 	}
@@ -116,8 +118,8 @@ void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, floa
 		tmp_size.x *= 2;
 		tmp_pos.x += (menu_width / 3);
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
-		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_audio_volume[i]) \
-			.addButtonLeftListener(&_update_audio[i]);
+		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
+			.addButtonLeftListener(&_save_audio[i]);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 }
@@ -160,8 +162,11 @@ bool			SceneSettings::update() {
 		}
 	}
 	for (auto i = 0; i < 3; i++) {
-		if (_update_audio[i]) {
+		if (_update_audio[i] != _audio_volume[i]) {
 			_updateAudioVolume(i);
+		}
+		if (_save_audio[i]) {
+			_saveAudioVolume(i);
 		}
 	}
 	if (_update_fullscreen) {
@@ -201,10 +206,16 @@ void			SceneSettings::_updateKey(InputType::Enum key_type) {
 
 void			SceneSettings::_updateAudioVolume(int audio_index) {
 	std::string volume_name = SceneSettings::audio_name[audio_index];
-	float volume = _audio_volume[audio_index];
-
-	_update_audio[audio_index] = false;
+	float volume = _update_audio[audio_index];
+	_audio_volume[audio_index] = _update_audio[audio_index];
+	s.j("audio").d(volume_name) = volume / 100;
+	AudioManager::updateSettings();
 	logDebug(volume_name << " : " << volume);
+}
+
+void			SceneSettings::_saveAudioVolume(int audio_index) {
+	_save_audio[audio_index] = false;
+	s.saveToFile("configs/settings.json");
 }
 
 void			SceneSettings::_updateFullscreen() {
