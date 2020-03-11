@@ -77,9 +77,10 @@ std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks 
 	{{9, 10, 10, 10, 11, 8}},  // player
 	{{10, 10, 10, 10, 10, 10}},  // ia
 	{{5, 6, 3, 6, 7, 4}},  // bomb
-	{{1, 1, 1, 1, 1, 1}},  // durable_wall
+	{{0, 0, 0, 0, 1, 0}},  // durable_wall
 	{{2, 2, 2, 2, 2, 2}},  // destructible_wall
 	{{3, 3, 3, 3, 3, 3}},  // fire
 	{{4, 4, 4, 4, 4, 4}},  // end
 	{{5, 5, 5, 5, 5, 5}},  // flag
+	{{1, 1, 1, 1, 1, 1}},  // block
 }};

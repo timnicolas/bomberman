@@ -6,7 +6,7 @@
 #include "Shader.hpp"
 #include "includesOpengl.hpp"
 
-#define NB_BLOCK_TYPES 9
+#define NB_BLOCK_TYPES 10
 
 namespace Block {
 	enum Enum {
@@ -19,6 +19,7 @@ namespace Block {
 		FIRE,
 		END,
 		FLAG,
+		BLOCK,
 	};
 }  // namespace Block
 
