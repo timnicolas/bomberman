@@ -8,6 +8,9 @@
 #include "useGlm.hpp"
 #include "SettingsJson.hpp"
 
+// equivalent of NULL for scancode
+#define NO_SCANCODE SDL_SCANCODE_F24
+
 namespace InputType {
 	enum Enum {
 		UP = 0,

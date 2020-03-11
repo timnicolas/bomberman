@@ -47,6 +47,9 @@ class ABaseUI {
 		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
+		ABaseUI &	setKeyRightClick(SDL_Scancode scancode);
+		ABaseUI &	setKeyLeftClick(SDL_Scancode scancode);
+
 		ABaseUI &	setPos(glm::vec2 pos);
 		ABaseUI &	setPosOffset(glm::vec2 offset);
 		ABaseUI &	addPosOffset(glm::vec2 offset);
@@ -101,36 +104,38 @@ class ABaseUI {
 		// update function (redefined in child class)
 		virtual void	_update() = 0;
 
-		glm::vec2	_pos;
-		glm::vec2	_posOffset;
-		glm::vec2	_size;
-		glm::vec4	_color;
+		glm::vec2		_pos;
+		glm::vec2		_posOffset;
+		glm::vec2		_size;
+		glm::vec4		_color;
 		// border
-		glm::vec4	_borderColor;
-		float		_borderSize;
+		glm::vec4		_borderColor;
+		float			_borderSize;
 		// mouse effect
-		glm::vec4	_mouseHoverColor;
-		glm::vec4	_mouseClickColor;
+		glm::vec4		_mouseHoverColor;
+		glm::vec4		_mouseClickColor;
 		// text
-		std::string	_text;
-		glm::vec4	_textColor;
-		std::string _textFont;
-		float		_textScale;
-		float		_textPadding;
+		std::string		_text;
+		glm::vec4		_textColor;
+		std::string 	_textFont;
+		float			_textScale;
+		float			_textPadding;
 		TextAlign::Enum	_textAlign;
 		// image
-		GLuint		_imgTextureID;
-		int			_imgDefWidth;
-		int			_imgDefHeight;
+		GLuint			_imgTextureID;
+		int				_imgDefWidth;
+		int				_imgDefHeight;
 
 		/* info about mouse */
-		bool		_mouseHover;
-		bool		_rightClick;
-		bool		_leftClick;
+		bool			_mouseHover;
+		bool			_rightClick;
+		SDL_Scancode	_keyRightClickBind;
+		bool			_leftClick;
+		SDL_Scancode	_keyLeftClickBind;
 
 		/* listener */
-		bool *		_rightListener;
-		bool *		_leftListener;
+		bool *			_rightListener;
+		bool *			_leftListener;
 
 		/* shaders */
 		static glm::vec2	_winSize;
