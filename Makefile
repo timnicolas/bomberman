@@ -118,8 +118,6 @@ SRC =	main.cpp \
 		scenes/SceneVictory.cpp \
 		scenes/SceneExit.cpp \
 \
-		Inputs.cpp \
-\
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
 		audio/Sound.cpp \
@@ -130,6 +128,7 @@ SRC =	main.cpp \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
 \
+		utils/opengl/Inputs.cpp \
 		utils/opengl/Texture.cpp \
 		utils/opengl/Shader.cpp \
 		utils/opengl/Camera.cpp \
@@ -172,8 +171,6 @@ HEAD =	bomberman.hpp \
 		scenes/SceneVictory.hpp \
 		scenes/SceneExit.hpp \
 \
-		Inputs.hpp \
-\
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
 		audio/Sound.hpp \
@@ -185,6 +182,7 @@ HEAD =	bomberman.hpp \
 		utils/SettingsJson.hpp \
 		utils/useGlm.hpp \
 \
+		utils/opengl/Inputs.hpp \
 		utils/opengl/Texture.hpp \
 		utils/opengl/Shader.hpp \
 		utils/opengl/Camera.hpp \
