@@ -17,6 +17,8 @@ namespace SettingsType {
 
 class SceneSettings: public SceneMenu {
 public:
+	static std::string	audio_name[3];
+
 	virtual ~SceneSettings();
 	explicit SceneSettings(Gui * gui, float const &dtTime);
 	SceneSettings(SceneSettings const &src);
@@ -36,6 +38,7 @@ private:
 	void				_confirmQuit();
 	void				_cancelQuit();
 
+	void				_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 	void				_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 
 	int					_input_configuring;

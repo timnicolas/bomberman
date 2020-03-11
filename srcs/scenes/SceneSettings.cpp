@@ -1,4 +1,6 @@
 #include "SceneSettings.hpp"
+#include "AudioManager.hpp"
+
 
 SceneSettings::~SceneSettings() {}
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtTime),
@@ -47,6 +49,11 @@ SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
 	return *this;
 }
 
+std::string		SceneSettings::audio_name[3] = {
+	"Master volume",
+	"Music volume",
+	"Sound volume",
+};
 
 bool			SceneSettings::init() {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
@@ -77,15 +84,39 @@ bool			SceneSettings::init() {
 		/* graphics */
 		// TODO(gsmith): add graphics settings UI
 		/* audio */
-		// TODO(gsmith): add audio settings UI
+		_init_audio_pane(tmp_pos, menu_width, menu_height);
 		/* controls */
-		_init_control_pane(tmp_pos, menu_width, menu_height);
+		// _init_control_pane(tmp_pos, menu_width, menu_height);
+		AudioManager::loadSound("sounds/bell.ogg");
+		AudioManager::loadMusic("sounds/puzzle.ogg");
+		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
 		return false;
 	}
 	return true;
+}
+
+void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+	glm::vec2	win_size = _gui->gameInfo.windowSize;
+	glm::vec2	tmp_size;
+	ABaseUI		*ptr;
+	float		tmp_val;
+
+	tmp_size.y = menu_height * 0.1;
+	for (auto i = 0; i < 3; i++) {
+		tmp_size.x = menu_width / 3;
+		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+		tmp_pos.y -= menu_height * 0.2;
+		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT);
+		_panes[SettingsType::AUDIO].push_front(ptr);
+		tmp_size.x *= 2;
+		tmp_pos.x += (menu_width / 3);
+		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
+		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addButtonLeftListener(&_update_audio[0]);
+		_panes[SettingsType::AUDIO].push_front(ptr);
+	}
 }
 
 void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
@@ -133,6 +164,14 @@ bool			SceneSettings::update() {
 	}
 	if (_cancel) {
 		_cancelQuit();
+	}
+	if (Inputs::getKeyDown(InputType::ACTION)) {
+		try {
+			AudioManager::playSound("sounds/bell.ogg");
+		}
+		catch (Sound::SoundException e) {
+			logErr(e.what());
+		}
 	}
 	return true;
 }
