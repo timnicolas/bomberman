@@ -15,18 +15,20 @@ namespace InputType {
 	enum Enum {
 		NO_KEY = -1,
 		UP = 0,
-		DOWN = 1,
-		LEFT = 2,
-		RIGHT = 3,
-		ACTION = 4,
-		CONFIRM = 5,
-		CANCEL = 6,
+		DOWN,
+		LEFT,
+		RIGHT,
+		ACTION,
+		CONFIRM,
+		CANCEL,
+		GOTO_MENU,
+		NB_INPUTS  // need to be the last element
 	};
 }  // namespace InputType
 
 class Inputs {
 public:
-	static const int						nb_input = 7;
+	static const int						nb_input = InputType::NB_INPUTS;
 	static const std::string				input_type_name[Inputs::nb_input];
 	static const std::string				_conf_file;
 

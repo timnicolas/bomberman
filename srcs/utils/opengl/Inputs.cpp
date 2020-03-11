@@ -9,6 +9,7 @@ const std::string	Inputs::input_type_name[] = {
 	"action",
 	"confirm",
 	"cancel",
+	"goto_menu",
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
@@ -35,6 +36,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		.setMin(4).setMax(286).setDescription("confirm choice.");
 	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
 		.setMin(4).setMax(286).setDescription("cancel choice.");
+	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
+		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -50,7 +53,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::Enum::RIGHT },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::Enum::ACTION },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::Enum::GOTO_MENU },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -60,6 +64,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		_controls.j("keys").i("action"),
 		_controls.j("keys").i("confirm"),
 		_controls.j("keys").i("cancel"),
+		_controls.j("keys").i("goto_menu"),
 	};
 	_controls.saveToFile(Inputs::_conf_file);
 }

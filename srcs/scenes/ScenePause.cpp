@@ -47,6 +47,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "MAIN MENU")
+			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
 		tmpPos.y -= menuHeight * 1.2;
