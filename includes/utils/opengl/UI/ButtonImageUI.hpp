@@ -12,7 +12,7 @@ class ButtonImageUI : public ABaseUI {
 
 		ButtonImageUI & operator=(ButtonImageUI const & rhs);
 
-		virtual void	draw();
+		virtual void	_draw();
 
 	protected:
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);

@@ -39,13 +39,14 @@ class ABaseUI {
 
 		/* others */
 		void			update(glm::vec2 mousePos, bool rightClick, bool leftClick);
-		virtual void	draw() = 0;
+		void			draw();
 
 		/* listener */
 		ABaseUI &	addButtonRightListener(bool * listener);
 		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
+		ABaseUI &	setEnabled(bool enable);
 		ABaseUI &	setColor(glm::vec4 color);
 
 		ABaseUI &	setBorderColor(glm::vec4 color);
@@ -62,6 +63,7 @@ class ABaseUI {
 		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
 		/* getter */
+		bool					isEnabled() const;
 		bool					getMouseHover() const;
 		bool					getMouseRightClick() const;
 		bool					getMouseLeftClick() const;
@@ -94,6 +96,10 @@ class ABaseUI {
 
 		// update function (redefined in child class)
 		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
+		virtual void	_draw() = 0;
+
+		// enable functionnalities
+		bool		_enabled;
 
 		glm::vec2	_pos;
 		glm::vec2	_size;
