@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief main menu (opened at the game startup)
+ */
 class SceneMainMenu : public ASceneMenu {
 	public:
 		// Constructors

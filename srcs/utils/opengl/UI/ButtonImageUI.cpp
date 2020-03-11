@@ -29,7 +29,6 @@ ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void ButtonImageUI::_update() {
 }

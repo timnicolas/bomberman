@@ -5,8 +5,7 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
-// class SceneGame;
-
+// TODO(tnicolas42) docs -> class description
 class AObject : public AEntity {
 private:
 	AObject();

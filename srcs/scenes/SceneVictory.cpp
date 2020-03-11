@@ -113,7 +113,6 @@ bool	SceneVictory::update() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneVictory::load() {
 	ASceneMenu::load();

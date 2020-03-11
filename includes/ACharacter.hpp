@@ -8,6 +8,7 @@
 
 // class SceneGame;
 
+// TODO(tnicolas42) docs -> class description
 class ACharacter : public AEntity {
 private:
 	ACharacter();

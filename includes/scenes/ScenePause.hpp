@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief this is the pause menu
+ */
 class ScenePause : public ASceneMenu {
 	public:
 		// Constructors

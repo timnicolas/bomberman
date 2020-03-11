@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+/**
+ * @brief This is the end object
+ */
 class End : public AObject {
 private:
 	End();

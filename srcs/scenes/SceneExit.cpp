@@ -87,7 +87,6 @@ bool	SceneExit::update() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneExit::load() {
 	ASceneMenu::load();

@@ -36,6 +36,15 @@ enum class CamMovement {
 
 #define WORD_UP			glm::vec3(0.0f, 1.0f, 0.0f)
 
+/**
+ * @brief this is a camera 3D object
+ *
+ * this object implements functions to:
+ *  - move with keyboard (processKeyboard)
+ *  - turn camera with mouse (processMouseMovement)
+ *  - look at a point (lookAt)
+ *  - know if a 3D point or a 3D rectangle is inside the camera angle (frustumCulling...)
+ */
 class Camera {
 	public:
 		Camera(CAMERA_VEC3 pos = CAMERA_VEC3(0.0f, 0.0f, 0.0f), CAMERA_VEC3 up = \

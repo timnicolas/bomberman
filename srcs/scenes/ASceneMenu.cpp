@@ -61,14 +61,12 @@ bool	ASceneMenu::draw() {
 }
 /**
  * @brief called when the scene is loaded
- *
  */
 void ASceneMenu::load() {
 	_gui->enableCursor(true);
 }
 /**
  * @brief called when the scene is unloaded
- *
  */
 void ASceneMenu::unload() {
 }

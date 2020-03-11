@@ -7,6 +7,7 @@
 # include "Sound.hpp"
 # include "Music.hpp"
 
+// TODO(tnicolas42) docs -> class description
 class AudioManager {
 public:
 	static const int						nb_sound_channels = 42;

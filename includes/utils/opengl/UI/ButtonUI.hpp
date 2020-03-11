@@ -3,6 +3,9 @@
 #include "includesOpengl.hpp"
 #include "ABaseUI.hpp"
 
+/**
+ * @brief this is the UI for button
+ */
 class ButtonUI : public ABaseUI {
 	public:
 		ButtonUI(glm::vec2 pos, glm::vec2 size);

@@ -31,6 +31,7 @@ struct GameInfo {
 	GameInfo();
 };
 
+// TODO(tnicolas42) docs -> class description
 class Gui {
 	public:
 		explicit	Gui(GameInfo &gameInfo);

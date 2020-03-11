@@ -8,6 +8,7 @@
 #define SHADER_IMAGE_FS "./shaders/image_atlas_fs.glsl"
 #define SHADER_IMAGE_ROW_SIZE 5
 
+// TODO(tnicolas42) docs -> class description
 class ImageAtlasRender {
 	public:
 		ImageAtlasRender(TextureManager const &textureManager, uint32_t width, \

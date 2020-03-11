@@ -99,7 +99,6 @@ bool	SceneGameOver::update() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneGameOver::load() {
 	ASceneMenu::load();

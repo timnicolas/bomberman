@@ -4,6 +4,9 @@
 
 #define TRANSITION_SPEED 0.05
 
+/**
+ * @brief menu for the level selection
+ */
 class SceneLevelSelection : public ASceneMenu {
 	public:
 		// Constructors

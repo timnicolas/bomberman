@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief menu for exit
+ */
 class SceneExit : public ASceneMenu {
 	public:
 		// Constructors

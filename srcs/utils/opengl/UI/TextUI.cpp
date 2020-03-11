@@ -21,7 +21,6 @@ TextUI & TextUI::operator=(TextUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void TextUI::_update() {
 }
