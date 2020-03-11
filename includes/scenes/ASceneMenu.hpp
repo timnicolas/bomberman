@@ -57,4 +57,6 @@ class ASceneMenu : public AScene {
 
 	protected:
 		std::vector<ABaseUI *>	_buttons;
+
+		bool			_initBG();
 };
