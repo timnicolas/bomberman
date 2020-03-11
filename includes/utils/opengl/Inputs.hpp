@@ -13,6 +13,7 @@
 
 namespace InputType {
 	enum Enum {
+		NO_KEY = -1,
 		UP = 0,
 		DOWN = 1,
 		LEFT = 2,

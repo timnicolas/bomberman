@@ -205,9 +205,11 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _imgDefHeight(0),
   _mouseHover(false),
   _rightClick(false),
-  _keyRightClickBind(NO_SCANCODE),
+  _keyRightClickBindScancode(NO_SCANCODE),
+  _keyRightClickBindInput(InputType::NO_KEY),
   _leftClick(false),
-  _keyLeftClickBind(NO_SCANCODE),
+  _keyLeftClickBindScancode(NO_SCANCODE),
+  _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
   _leftListener(nullptr)
 {}
@@ -236,9 +238,29 @@ void ABaseUI::update() {
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
 
-	// state of the keys
-	bool keyRight = _keyRightClickBind != NO_SCANCODE;
-	bool keyLeft = _keyLeftClickBind != NO_SCANCODE;
+	/* state of the keys */
+	// right
+	bool keyRightDown = false;
+	if (_keyRightClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeDown(_keyRightClickBindScancode))
+		keyRightDown = true;
+	if (_keyRightClickBindInput != InputType::NO_KEY && Inputs::getKeyDown(_keyRightClickBindInput))
+		keyRightDown = true;
+	bool keyRightUp = false;
+	if (_keyRightClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeUp(_keyRightClickBindScancode))
+		keyRightUp = true;
+	if (_keyRightClickBindInput != InputType::NO_KEY && Inputs::getKeyUp(_keyRightClickBindInput))
+		keyRightUp = true;
+	// left
+	bool keyLeftDown = false;
+	if (_keyLeftClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeDown(_keyLeftClickBindScancode))
+		keyLeftDown = true;
+	if (_keyLeftClickBindInput != InputType::NO_KEY && Inputs::getKeyDown(_keyLeftClickBindInput))
+		keyLeftDown = true;
+	bool keyLeftUp = false;
+	if (_keyLeftClickBindScancode != NO_SCANCODE && Inputs::getKeyByScancodeUp(_keyLeftClickBindScancode))
+		keyLeftUp = true;
+	if (_keyLeftClickBindInput != InputType::NO_KEY && Inputs::getKeyUp(_keyLeftClickBindInput))
+		keyLeftUp = true;
 
 	if (mousePos.x >= getRealPos().x && mousePos.x <= getRealPos().x + _size.x
 	&& mousePos.y >= getRealPos().y && mousePos.y <= getRealPos().y + _size.y)
@@ -255,24 +277,20 @@ void ABaseUI::update() {
 		_mouseHover = false;
 	}
 
-	if (keyRight && Inputs::getKeyByScancodeDown(_keyRightClickBind)) {
+	if (keyRightDown) {
 		_rightClick = true;
 	}
-	if (keyLeft && Inputs::getKeyByScancodeDown(_keyLeftClickBind)) {
+	if (keyLeftDown) {
 		_leftClick = true;
 	}
 
-	if (Inputs::getLeftClickUp()
-	|| (keyLeft && Inputs::getKeyByScancodeUp(_keyLeftClickBind)))
-	{
-		if ((_mouseHover || Inputs::getKeyByScancodeUp(_keyLeftClickBind)) && _leftClick && _leftListener)
+	if (Inputs::getLeftClickUp() || keyLeftUp) {
+		if ((_mouseHover || keyLeftUp) && _leftClick && _leftListener)
 			*_leftListener = _leftClick;
 		_leftClick = false;
 	}
-	if (Inputs::getRightClickUp()
-	|| (keyRight && Inputs::getKeyByScancodeUp(_keyRightClickBind)))
-	{
-		if ((_mouseHover || Inputs::getKeyByScancodeUp(_keyRightClickBind)) && _rightClick && _rightListener)
+	if (Inputs::getRightClickUp() || keyRightUp) {
+		if ((_mouseHover || keyRightUp) && _rightClick && _rightListener)
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
@@ -304,8 +322,18 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 }
 
 /* setter */
-ABaseUI &	ABaseUI::setKeyRightClick(SDL_Scancode scancode) { _keyRightClickBind = scancode; return *this; }
-ABaseUI &	ABaseUI::setKeyLeftClick(SDL_Scancode scancode) { _keyLeftClickBind = scancode; return *this; }
+ABaseUI &	ABaseUI::setKeyRightClickScancode(SDL_Scancode scancode) {
+	_keyRightClickBindScancode = scancode; return *this;
+}
+ABaseUI &	ABaseUI::setKeyLeftClickScancode(SDL_Scancode scancode) {
+	_keyLeftClickBindScancode = scancode; return *this;
+}
+ABaseUI &	ABaseUI::setKeyRightClickInput(InputType::Enum input) {
+	_keyRightClickBindInput = input; return *this;
+}
+ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
+	_keyLeftClickBindInput = input; return *this;
+}
 
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
