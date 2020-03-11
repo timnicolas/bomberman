@@ -23,6 +23,7 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 		_update_key[i] = false;
 		_key_buttons[i] = nullptr;
 	}
+	_fullscreen_button = nullptr;
 	_fullscreen = s.j("graphics").b("fullscreen");
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : SceneMenu(src) {
@@ -50,6 +51,7 @@ SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
 		_update_key[i] = rhs._update_key[i];
 		_key_buttons[i] = rhs._key_buttons[i];
 	}
+	_fullscreen_button = rhs._fullscreen_button;
 	return *this;
 }
 
@@ -91,7 +93,7 @@ bool			SceneSettings::init() {
 			.setTextAlign(TextAlign::CENTER);
 
 		/* graphics */
-		// TODO(gsmith): add graphics settings UI
+		_init_graphics_pane(tmp_pos, menu_width, menu_height);
 		/* audio */
 		_init_audio_pane(tmp_pos, menu_width, menu_height);
 		/* controls */
@@ -105,6 +107,43 @@ bool			SceneSettings::init() {
 		return false;
 	}
 	return true;
+}
+
+void			SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+	// TODO(gsmith): add graphics settings UI
+	glm::vec2	win_size = _gui->gameInfo.windowSize;
+	glm::vec2	tmp_size;
+	ABaseUI		*ptr;
+
+	tmp_size.y = menu_height * 0.2;
+	tmp_pos.y -= menu_height * 0.2;
+	tmp_size.x = menu_width;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	std::string warning = "Modifications on the graphical settings will be applied after the game restarts.";
+	ptr = &addText(tmp_pos, tmp_size, warning).setTextAlign(TextAlign::CENTER) \
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+
+	tmp_size.y = menu_height * 0.1;
+	tmp_size.x = menu_width / 3;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.1;
+	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :").setTextAlign(TextAlign::RIGHT) \
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_size.x = menu_width / 10;
+	tmp_pos.x += (menu_width / 3);
+	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
+	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(2);
+	_updateFullscreenButton();
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+
+	tmp_size.x = menu_width / 3;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= menu_height * 0.3;
+	ptr = &addText(tmp_pos, tmp_size, "Resolution :").setTextAlign(TextAlign::RIGHT) \
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
 void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
@@ -152,6 +191,23 @@ void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, fl
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
 }
+
+void			SceneSettings::_updateFullscreenButton() {
+	if (_fullscreen_button != nullptr) {
+		std::string symbol;
+		glm::vec4 color;
+		if (_fullscreen) {
+			symbol = "ON";
+			color = glm::vec4(0.2, 0.8, 0.2, 1.0);
+		}
+		else {
+			symbol = "OFF";
+			color = glm::vec4(0.8, 0.2, 0.2, 1.0);
+		}
+		_fullscreen_button->setText(symbol).setTextColor(color);
+	}
+}
+
 bool			SceneSettings::update() {
 	SceneMenu::update();
 	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
@@ -235,6 +291,9 @@ void			SceneSettings::_saveAudioVolume(int audio_index) {
 void			SceneSettings::_updateFullscreen() {
 	_update_fullscreen = false;
 	_fullscreen = !_fullscreen;
+	_updateFullscreenButton();
+	s.j("graphics").b("fullscreen") = _fullscreen;
+	s.saveToFile("configs/settings.json");
 }
 
 void			SceneSettings::_returnQuit() {

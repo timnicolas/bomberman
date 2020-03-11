@@ -39,8 +39,11 @@ private:
 	void				_returnQuit();
 	void				_cancelQuit();
 
+	void				_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 	void				_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 	void				_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
+
+	void				_updateFullscreenButton();
 
 	int					_input_configuring;
 
@@ -48,9 +51,11 @@ private:
 	SettingsType::Enum	_current_pane;
 	std::list<ABaseUI*>	_panes[SettingsType::nb_types];
 	ButtonUI			*_key_buttons[Inputs::nb_input];
+	ButtonUI			*_fullscreen_button;
 
 	/* temporary settings */
 	bool				_fullscreen;
+	float				_audio_volume[3];
 
 	/* UI listeners */
 	bool				_return;
@@ -59,7 +64,6 @@ private:
 	bool				_update_fullscreen;
 	bool				_save_audio[3];
 	float				_update_audio[3];
-	float				_audio_volume[3];
 	bool				_select_pane[SettingsType::nb_types];
 	bool				_update_key[Inputs::nb_input];
 };
