@@ -68,7 +68,7 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = menuHeight * 0.8;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "MAIN MENU").setTextAlign(TextAlign::CENTER)
+		addButton(tmpPos, tmpSize, "MAIN MENU")
 			.addButtonLeftListener(&_states.menu);
 
 		_initBG();
