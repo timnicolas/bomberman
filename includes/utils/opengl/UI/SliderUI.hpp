@@ -18,7 +18,7 @@ class SliderUI : public ABaseUI {
 		SliderUI &		addSliderListener(float * listener);
 
 	protected:
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		virtual void	_update();
 		SliderUI();
 
 		float	_min;

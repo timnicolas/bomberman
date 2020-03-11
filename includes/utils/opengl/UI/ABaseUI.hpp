@@ -3,6 +3,7 @@
 #include "includesOpengl.hpp"
 #include "Shader.hpp"
 #include "TextRender.hpp"
+#include "Inputs.hpp"
 
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
@@ -38,7 +39,7 @@ class ABaseUI {
 		ABaseUI & operator=(ABaseUI const & rhs);
 
 		/* others */
-		void			update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		void			update();
 		virtual void	draw() = 0;
 
 		/* listener */
@@ -98,7 +99,7 @@ class ABaseUI {
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick) = 0;
+		virtual void	_update() = 0;
 
 		glm::vec2	_pos;
 		glm::vec2	_posOffset;

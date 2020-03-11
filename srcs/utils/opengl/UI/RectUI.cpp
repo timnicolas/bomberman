@@ -19,14 +19,8 @@ RectUI & RectUI::operator=(RectUI const & rhs) {
 /**
  * @brief this is the base update function of UI objects
  *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void RectUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	(void)mousePos;
-	(void)rightClick;
-	(void)leftClick;
+void RectUI::_update() {
 }
 
 /**

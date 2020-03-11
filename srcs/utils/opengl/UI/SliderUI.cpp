@@ -33,14 +33,9 @@ void SliderUI::setValues(float min, float max, float val, float step) {
 /**
  * @brief this is the base update function of UI objects
  *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void SliderUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	(void)mousePos;
-	(void)rightClick;
-	(void)leftClick;
+void SliderUI::_update() {
+	glm::vec2 mousePos = Inputs::getMousePos();
 	if (_leftClick) {
 		// get a factor (btw 0 & 1)
 		float factor = (mousePos.x - getRealPos().x - _borderSize) / (_size.x - _borderSize * 2);
