@@ -38,6 +38,9 @@ Player &Player::operator=(Player const &rhs) {
  */
 bool	Player::update(float const dTime) {
 	_move(dTime);
+	if (Inputs::getKeyDown(InputType::ACTION)){
+		_putBomb();
+	}
 	return true;
 }
 
@@ -50,6 +53,32 @@ bool	Player::update(float const dTime) {
 bool	Player::draw(Gui &gui) {
 	gui.drawCube(Block::PLAYER, getPos());
 	return true;
+}
+
+/**
+ * @brief get a list of entity in collision with the Player at position pos.
+ *
+ * @param pos default VOID_POS3
+ * @return std::unordered_set<AEntity *> collisions
+ */
+std::unordered_set<AEntity *>	Player::getCollision(glm::vec3 pos) {
+	if (pos == VOID_POS3)
+		pos = getPos();
+	std::unordered_set<AEntity *> collisions;
+
+	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.05]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.05]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.95]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.95]) {
+		collisions.insert(entity);
+	}
+	return collisions;
 }
 
 // -- Private Methods ----------------------------------------------------------
@@ -68,20 +97,45 @@ void	Player::_move(float const dTime) {
 	if (Inputs::getKey(InputType::LEFT)) {
 		pos.x -= speed * dTime;
 	}
-	if (_canMove(pos))
+	std::unordered_set<AEntity *> collisions = getCollision(pos);
+	logDebug("There are " << collisions.size() << " collisions");
+	if (_canMove(collisions)) {
 		position = pos;
+		_clearCollisionObjects(collisions);
+	}
 }
 
-bool	Player::_canMove(glm::vec3 pos) {
-	if (game.board[pos.x + 0.05][pos.z + 0.05].size() == 0
-	&& game.board[pos.x + 0.05][pos.z + 0.95].size() == 0
-	&& game.board[pos.x + 0.95][pos.z + 0.05].size() == 0
-	&& game.board[pos.x + 0.95][pos.z + 0.95].size() == 0) {
-		logDebug("player can move");
-		return true;
+bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
+	for (auto &&entity : collisions) {
+		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
+			continue;
+		return false;
 	}
-	logDebug("player cannot move");
-	return false;
+	return true;
+}
+
+void	Player::_putBomb() {
+	if (bombs <= 0)
+		return;
+	if (game.board[position.x + 0.5][position.z + 0.5].size() == 0) {
+		Bomb	*bomb = new Bomb(game);
+		game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
+		_noCollisionObjects.insert(bomb);
+		bombs -= 1;
+	}
+}
+
+void	Player::_clearCollisionObjects(std::unordered_set<AEntity *> collisions) {
+	// clear _noCollisionObjects list
+	std::unordered_set<AEntity *>::iterator it = _noCollisionObjects.begin();
+	while (it != _noCollisionObjects.end()) {
+		if (collisions.find(*it) == collisions.end()) {
+			it = _noCollisionObjects.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
 }
 
 // -- Exceptions errors --------------------------------------------------------

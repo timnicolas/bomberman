@@ -1,13 +1,14 @@
 #include "Bomb.hpp"
 #include "Fire.hpp"
 #include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = "Bomb";
-	_countdown = 2.0;
+	_countdown = 4.0;
 	_propagation = 3;
 }
 
@@ -49,6 +50,12 @@ bool	Bomb::update(float const dTime) {
 	return true;
 }
 
+/**
+ * @brief The bomb explode in the N.E.S.W. directions at _propagation distance.
+ *
+ * @param pos
+ * @return Bomb* this
+ */
 Bomb	*Bomb::explode(glm::vec2 const pos) {
 	int		i;
 	std::vector<AEntity *>	box;
@@ -77,10 +84,27 @@ Bomb	*Bomb::explode(glm::vec2 const pos) {
 		if (!_propagationExplosion({pos.x - i, pos.y}))
 			break;
 	}
+	game.board[pos.x][pos.y].push_back(new Fire(game));
 	active = false;
+	game.player->bombs++;
 
 	return this;
 }
+
+/**
+ * @brief draw is called each frame.
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Bomb::draw(Gui &gui) {
+	if (active) {
+		gui.drawCube(Block::BOMB, getPos());
+	}
+	return true;
+}
+
+// -- Private Methods ----------------------------------------------------------
 
 bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 	logDebug("_propagationExplosion");
@@ -108,7 +132,8 @@ bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 			logDebug("destructible ?");
 			if ((*it)->destructible) {
 				logDebug("destructible !");
-				delete (*it);
+				(*it)->active = false;
+				// delete (*it);
 				logDebug("clear entity");
 				it = game.board[place.x][place.y].erase(it);
 				logDebug("clear place on board");
@@ -121,19 +146,6 @@ bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 		}
 	}
 	return result;
-}
-
-/**
- * @brief draw is called each frame.
- *
- * @return true if success
- * @return false if failure
- */
-bool	Bomb::draw(Gui &gui) {
-	if (active) {
-		gui.drawCube(Block::BOMB, getPos());
-	}
-	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------
