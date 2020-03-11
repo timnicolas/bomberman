@@ -24,7 +24,9 @@ namespace Type {
 	};
 }
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief This is the base class for entity (Charactere, Objects, ...)
+ */
 class AEntity {
 private:
 	AEntity();

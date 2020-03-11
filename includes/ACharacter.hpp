@@ -6,9 +6,9 @@
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
-// class SceneGame;
-
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief This is the base for Charactere (Player, AI, ...)
+ */
 class ACharacter : public AEntity {
 private:
 	ACharacter();

@@ -5,7 +5,9 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief This is the base class for objects (Bomb, wall, ...)
+ */
 class AObject : public AEntity {
 private:
 	AObject();

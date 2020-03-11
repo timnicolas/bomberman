@@ -34,7 +34,9 @@ namespace EntityType {
 	};
 }
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief This is the game Scene. In this scene, you can play to the game and load levels
+ */
 class SceneGame : public AScene {
 private:
 	SceneGame();

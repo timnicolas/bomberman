@@ -6,7 +6,9 @@
 # include <string>
 # include <unordered_set>
 
-// TODO(tnicolas42) docs -> class description
+/**
+ * @brief Sound class for AudioManager
+ */
 class Sound {
 public:
 	class SoundException: public std::runtime_error {
