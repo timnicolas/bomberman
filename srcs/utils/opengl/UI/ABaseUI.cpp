@@ -205,7 +205,9 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _imgDefHeight(0),
   _mouseHover(false),
   _rightClick(false),
+  _keyRightClickBind(NO_SCANCODE),
   _leftClick(false),
+  _keyLeftClickBind(NO_SCANCODE),
   _rightListener(nullptr),
   _leftListener(nullptr)
 {}
@@ -233,6 +235,11 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 void ABaseUI::update() {
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
+
+	// state of the keys
+	bool keyRight = _keyRightClickBind != NO_SCANCODE;
+	bool keyLeft = _keyLeftClickBind != NO_SCANCODE;
+
 	if (mousePos.x >= getRealPos().x && mousePos.x <= getRealPos().x + _size.x
 	&& mousePos.y >= getRealPos().y && mousePos.y <= getRealPos().y + _size.y)
 	{
@@ -247,13 +254,25 @@ void ABaseUI::update() {
 	else {
 		_mouseHover = false;
 	}
-	if (Inputs::getLeftClickUp()) {
-		if (_mouseHover && _leftClick && _leftListener)
+
+	if (keyRight && Inputs::getKeyByScancodeDown(_keyRightClickBind)) {
+		_rightClick = true;
+	}
+	if (keyLeft && Inputs::getKeyByScancodeDown(_keyLeftClickBind)) {
+		_leftClick = true;
+	}
+
+	if (Inputs::getLeftClickUp()
+	|| (keyLeft && Inputs::getKeyByScancodeUp(_keyLeftClickBind)))
+	{
+		if ((_mouseHover || Inputs::getKeyByScancodeUp(_keyLeftClickBind)) && _leftClick && _leftListener)
 			*_leftListener = _leftClick;
 		_leftClick = false;
 	}
-	if (Inputs::getRightClickUp()) {
-		if (_mouseHover && _rightClick && _rightListener)
+	if (Inputs::getRightClickUp()
+	|| (keyRight && Inputs::getKeyByScancodeUp(_keyRightClickBind)))
+	{
+		if ((_mouseHover || Inputs::getKeyByScancodeUp(_keyRightClickBind)) && _rightClick && _rightListener)
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
@@ -285,6 +304,9 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 }
 
 /* setter */
+ABaseUI &	ABaseUI::setKeyRightClick(SDL_Scancode scancode) { _keyRightClickBind = scancode; return *this; }
+ABaseUI &	ABaseUI::setKeyLeftClick(SDL_Scancode scancode) { _keyLeftClickBind = scancode; return *this; }
+
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
