@@ -31,14 +31,14 @@ AObject &AObject::operator=(AObject const &rhs) {
  * @brief Set the position of the object according of his position on the board.
  */
 void		AObject::setPos(glm::vec3 pos) {
-	if (pos != glm::vec3(VOID_POS3)) {
+	if (pos == glm::vec3(VOID_POS3)) {
 		uint8_t i = 0;
 		for (auto &&board_it0 : game.board) {
 			uint8_t j = 0;
 			for (auto &&board_it1 : board_it0) {
 				for (AEntity *board_it2 : board_it1) {
 					if (board_it2 == this) {
-						pos = {i, 0, j};
+						this->pos = {i, 0, j};
 						return;
 					}
 				}

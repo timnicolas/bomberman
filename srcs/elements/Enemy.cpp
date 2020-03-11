@@ -56,14 +56,14 @@ bool	Enemy::draw(Gui &gui) {
  * @return Enemy*
  */
 Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
-	srand(time(NULL));
-
-	if (rate <= 0)
+	if (rate <= 0.0f)
 		return nullptr;
-	if (rate >= 1)
+	if (rate >= 1.0f)
 		return new Enemy(game);
 
 	int		percentRate = rand() % 100;
+	// logInfo("percentRate: " << percentRate);
+	// logInfo("rate: " << static_cast<int>(rate * 100));
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
 	return new Enemy(game);
