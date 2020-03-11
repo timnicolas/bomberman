@@ -1,6 +1,6 @@
 #include "SceneSettings.hpp"
 #include "AudioManager.hpp"
-
+#include "SceneManager.hpp"
 
 SceneSettings::~SceneSettings() {}
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtTime),
@@ -67,9 +67,14 @@ bool			SceneSettings::init() {
 	float menu_height = win_size.y * 0.9;
 
 	try {
+		tmp_size.y = menu_height * 0.1;
+		tmp_size.x = tmp_size.y;
+		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
+		addButtonImage(tmp_pos, tmp_size, "bomberman-assets/textures/player/011-playerTop.png", true) \
+			.addButtonLeftListener(&_return);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
 		addText(tmp_pos, tmp_size, "SETTINGS").setTextFont("title");
 		tmp_size.y = menu_height * 0.1;
@@ -174,11 +179,8 @@ bool			SceneSettings::update() {
 	if (_update_fullscreen) {
 		_updateFullscreen();
 	}
-	if (_confirm) {
-		_confirmQuit();
-	}
-	if (_cancel) {
-		_cancelQuit();
+	if (_return) {
+		_returnQuit();
 	}
 	if (Inputs::getKeyDown(InputType::ACTION)) {
 		try {
@@ -193,8 +195,11 @@ bool			SceneSettings::update() {
 
 void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
-	// TODO(gsmith): update which ABaseUI should be displayed.
-	logDebug("Switch to pane " << pane_type);
+	if (_input_configuring >= 0) {
+		Inputs::cancelConfiguration();
+		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_input_configuring = -1;
+	}
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
 		for (auto it = _panes[i].begin(); it != _panes[i].end(); it++) {
 			(*it)->setEnabled(i == pane_type);
@@ -204,7 +209,10 @@ void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 
 void			SceneSettings::_updateKey(InputType::Enum key_type) {
 	_update_key[key_type] = false;
-	// TODO(gsmith): add button to cancel key configuration ?
+	if (_input_configuring >= 0) {
+		Inputs::cancelConfiguration();
+		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+	}
 	logInfo("Start configuring key...");
 	_key_buttons[key_type]->setText("...");
 	_input_configuring = key_type;
@@ -229,13 +237,7 @@ void			SceneSettings::_updateFullscreen() {
 	_fullscreen = !_fullscreen;
 }
 
-void			SceneSettings::_confirmQuit() {
-	_confirm = false;
-	// TODO(gsmith): Save settings in json
-	_cancelQuit();
-}
-
-void			SceneSettings::_cancelQuit() {
-	_cancel = false;
-	// TODO(gsmith): quit to main menu;
+void			SceneSettings::_returnQuit() {
+	_return = false;
+	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }

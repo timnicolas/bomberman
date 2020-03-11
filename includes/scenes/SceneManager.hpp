@@ -15,6 +15,7 @@
 namespace SceneNames {
 	static std::string const MAIN_MENU = "mainMenu";
 	static std::string const GAME = "game";
+	static std::string const SETTINGS = "settings";
 }
 
 class SceneManager {

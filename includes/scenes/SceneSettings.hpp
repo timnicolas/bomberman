@@ -36,7 +36,7 @@ private:
 	void				_updateKey(InputType::Enum key_type);
 	void				_selectPane(SettingsType::Enum pane_type);
 	void				_updateFullscreen();
-	void				_confirmQuit();
+	void				_returnQuit();
 	void				_cancelQuit();
 
 	void				_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
@@ -53,8 +53,7 @@ private:
 	bool				_fullscreen;
 
 	/* UI listeners */
-	bool				_confirm;
-	bool				_cancel;
+	bool				_return;
 	bool				_next_resolution;
 	bool				_prev_resolution;
 	bool				_update_fullscreen;
