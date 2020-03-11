@@ -20,10 +20,11 @@ namespace Type {
 		PLAYER,
 		ENEMY,
 		BOMB,
-		WALL,
-		END,
-		FLAG,
 		FIRE,
+		WALL,
+		CRISPY,
+		FLAG,
+		END,
 	};
 }  // namespace Type
 

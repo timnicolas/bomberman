@@ -75,11 +75,11 @@ TextureManager::TextureManagerException::TextureManagerException(const char* wha
 std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks = {{
 	{{0, 0, 0, 0, 0, 0}},  // floor
 	{{9, 10, 10, 10, 11, 8}},  // player
-	{{9, 10, 10, 10, 11, 8}},  // ia
+	{{10, 10, 10, 10, 10, 10}},  // ia
 	{{5, 6, 3, 6, 7, 4}},  // bomb
 	{{1, 1, 1, 1, 1, 1}},  // durable_wall
 	{{2, 2, 2, 2, 2, 2}},  // destructible_wall
-	{{2, 2, 2, 2, 2, 2}},  // fire
-	{{2, 2, 2, 2, 2, 2}},  // end
-	{{2, 2, 2, 2, 2, 2}},  // flag
+	{{3, 3, 3, 3, 3, 3}},  // fire
+	{{4, 4, 4, 4, 4, 4}},  // end
+	{{5, 5, 5, 5, 5, 5}},  // flag
 }};
