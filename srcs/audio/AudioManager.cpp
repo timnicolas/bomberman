@@ -22,9 +22,9 @@ AudioManager::AudioManager() {
 	else {
 		Mix_AllocateChannels(AudioManager::nb_sound_channels);
 		Mix_ChannelFinished(&AudioManager::_channelHalted);
-		_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
-		_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
-		_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
+		_volume_master = static_cast<float>(s.j("audio").d("Master volume"));
+		_volume_music = static_cast<float>(s.j("audio").d("Music volume"));
+		_volume_sound = static_cast<float>(s.j("audio").d("Sound volume"));
 		_enabled = true;
 		logInfo("Audio loaded.");
 	}
@@ -70,9 +70,9 @@ void						AudioManager::updateSettings() {
 void						AudioManager::_updateSettings() {
 	float setting_sound = _volume_master * _volume_sound;
 	float previous_music = Mix_VolumeMusic(-1) / (_volume_master * _volume_music);
-	_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
-	_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
-	_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
+	_volume_master = static_cast<float>(s.j("audio").d("Master volume"));
+	_volume_music = static_cast<float>(s.j("audio").d("Music volume"));
+	_volume_sound = static_cast<float>(s.j("audio").d("Sound volume"));
 	Mix_VolumeMusic(previous_music * _volume_master * _volume_music);
 	for (auto it = _sounds.begin(); it != _sounds.end(); it++) {
 		it->second->updateVolume(_volume_master * _volume_sound, setting_sound);

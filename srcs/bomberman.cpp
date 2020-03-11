@@ -47,11 +47,11 @@ bool	initSettings(std::string const & filename) {
 
 	/* Audio */
 	s.add<SettingsJson>("audio");
-	s.j("audio").add<double>("masterVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("musicVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Music volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
 	/* Graphics */
