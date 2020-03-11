@@ -28,6 +28,10 @@ Model::Model(Model const &src)
 }
 
 Model &Model::operator=(Model const &rhs) {
+	#if DEBUG
+		logWarn("Model::operator= called, remove if it's desired")
+	#endif
+
 	if (this != &rhs) {
 		play = rhs.play;
 		_animationId = rhs._animationId;
@@ -45,6 +49,8 @@ void	Model::draw() {
 	if (_openGLModel.isAnimated() && play && _curAnimation != nullptr) {
 		// change openGLModel current animation
 		_openGLModel.setAnimation(_animationId);
+		// update openGLModel model matrix
+		_openGLModel.setModel(transform.getModel());
 
 		_updateAnimationTime();
 	}

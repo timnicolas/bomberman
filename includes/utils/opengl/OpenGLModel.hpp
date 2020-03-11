@@ -41,6 +41,8 @@ class OpenGLModel {
 
 		void		draw(float animationTimeTick = 0.0f);
 		bool		setAnimation(uint32_t id);
+		void		setModel(glm::mat4 const model);
+
 		bool		getAnimationId(std::string const name, uint32_t &outId) const;
 		aiAnimation	*getAiAnimation(uint32_t id);
 		bool		isAnimated() const;
