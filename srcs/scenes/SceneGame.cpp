@@ -75,7 +75,8 @@ bool			SceneGame::init() {
 
 	try {
 		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/man.fbx");
-		_model = new Model(*_openGLModel, _dtTime);
+		_model = new Model(*_openGLModel, _dtTime, ETransform(
+			{0, 0, 0}, {0.01, 0.01, 0.01}));
 		_model->play = true;
 	}
 	catch(OpenGLModel::ModelException const &e) {
