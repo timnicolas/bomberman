@@ -81,6 +81,7 @@ class Gui {
 		Skybox			*_skybox;
 
 		glm::mat4		_projection;
+		bool			_canMove;
 
 		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;
 
