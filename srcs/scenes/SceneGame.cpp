@@ -106,10 +106,10 @@ bool			SceneGame::init() {
 	_gui->enableCursor(false);
 	_loadLevel(1);
 
-	_gui->cam->pos = {size.x / 2 + 0.5f, 25.0f, 2 * size.y};
+	_gui->cam->pos = {size.x / 2, 15.0f, 2 * size.y};
 	_gui->cam->lookAt(glm::vec3(
-		size.x / 2 + 0.5f, 1.0f,
-		size.y * 0.7f
+		size.x / 2, 1.0f,
+		size.y / 1.61803398875f
 	));
 
 	return true;
