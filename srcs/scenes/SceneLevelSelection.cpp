@@ -137,6 +137,15 @@ bool	SceneLevelSelection::update() {
 }
 
 /**
+ * @brief called when the scene is loaded
+ *
+ */
+void SceneLevelSelection::load() {
+	ASceneMenu::load();
+	_transition = 1;
+}
+
+/**
  * @brief set the current level in selection
  *
  * @param level the level ID

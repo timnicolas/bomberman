@@ -18,6 +18,7 @@ class SceneLevelSelection : public ASceneMenu {
 		// Methods
 		virtual bool		init();
 		virtual bool		update();
+		virtual void		load();
 
 	protected:
 		struct ButtonsStates {
