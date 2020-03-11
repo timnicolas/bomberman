@@ -187,7 +187,8 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
-: _pos(pos),
+: _enabled(true),
+  _pos(pos),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
@@ -233,6 +234,9 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @param leftClick a boolean to know if left click is pressed
  */
 void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
+	if (!_enabled) {
+		return;
+	}
 	mousePos.y = _winSize.y - mousePos.y;
 	if (mousePos.x >= _pos.x && mousePos.x <= _pos.x + _size.x
 	&& mousePos.y >= _pos.y && mousePos.y <= _pos.y + _size.y)
@@ -260,6 +264,15 @@ void ABaseUI::update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	}
 	_update(mousePos, rightClick, leftClick);
 }
+/**
+ * @brief this is the draw function for UI.
+ */
+void		ABaseUI::draw() {
+	if (!_enabled) {
+		return;
+	}
+	_draw();
+}
 
 /* listener */
 /**
@@ -286,6 +299,7 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 }
 
 /* setter */
+ABaseUI &	ABaseUI::setEnabled(bool enable) { _enabled = enable; return *this; }
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -302,6 +316,7 @@ ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; retur
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
 /* getter */
+bool				ABaseUI::isEnabled() const { return _enabled; }
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
