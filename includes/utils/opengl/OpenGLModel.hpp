@@ -34,7 +34,8 @@ namespace AnimKeyType {
 
 class OpenGLModel {
 	public:
-        OpenGLModel(Gui const &_gui, std::string const &path);
+        OpenGLModel(Gui const &_gui, std::string const &path, bool centerEnabled = false,
+			bool scaleEnabled = false);
 		virtual ~OpenGLModel();
 		OpenGLModel(OpenGLModel const &src);
 		OpenGLModel &operator=(OpenGLModel const &rhs);
@@ -69,7 +70,7 @@ class OpenGLModel {
 		static Material	_loadMaterial(aiMaterial *aiMat);
 		void	_processBones(aiMesh *aiMesh, Mesh &mesh);
 		void	_updateMinMaxPos(glm::vec3 pos);
-		void	_calcModelMatrix();
+		void	_calcCenterScale();
 
 		// -- animation bones calculation --------------------------------------
 		void	_setBonesTransform(float animationTimeTick, aiNode *node,
@@ -107,6 +108,8 @@ class OpenGLModel {
 
 		// model position
 		glm::mat4	_model;  // position in real world
+		bool		_centerEnabled;  // center the model on loading
+		bool		_scaleEnabled;  // scale the model on loading
 		glm::vec3	_minPos, _maxPos;  // to scale the model
 		glm::mat4	_modelScale;
 

@@ -10,9 +10,12 @@
 std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
-OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path)
+OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, bool centerEnabled,
+	bool scaleEnabled)
 : _gui(_gui),
-  _path(path)
+  _path(path),
+  _centerEnabled(centerEnabled),
+  _scaleEnabled(scaleEnabled)
 {
 	// init static shader if null
 	if (!_sh) {
@@ -76,6 +79,7 @@ OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 		_boneMap = std::map<std::string, uint32_t>();
 		_boneOffset = {{glm::mat4()}};
 		_bones = {{glm::mat4(1.0f)}};
+		_scaleEnabled = rhs._scaleEnabled;
 
 		// reload the model to avoid conflicts in meshes destruction
 		_loadModel();
@@ -148,7 +152,8 @@ void	OpenGLModel::_loadModel() {
 		_sh->unuse();
 	}
 
-	_calcModelMatrix();
+	// center/scale the model if activated
+	_calcCenterScale();
 
 	// send animation and model uniform
 	_sh->use();
@@ -387,39 +392,48 @@ void	OpenGLModel::_updateMinMaxPos(glm::vec3 pos) {
 		_minPos.z = pos.z;
 }
 
-// -- _calcModelMatrix ---------------------------------------------------------
+// -- _calcCenterScale ---------------------------------------------------------
 // calculate the model matrix to scale and center the OpenGLModel
-void	OpenGLModel::_calcModelMatrix() {
+void	OpenGLModel::_calcCenterScale() {
 	glm::vec3	transl;
 	float		maxDiff;
-	float		scale;
+	float		scale = 1.0f;
 
-	// calculate scale
-	maxDiff = _maxPos.x - _minPos.x;
-	if (maxDiff < _maxPos.y - _minPos.y)
-		maxDiff = _maxPos.y - _minPos.y;
-	if (maxDiff < _maxPos.z - _minPos.z)
-		maxDiff = _maxPos.z - _minPos.z;
-	maxDiff /= 2;
-	scale = 1.0f / maxDiff;
+	_modelScale = glm::mat4(1.0f);
 
-	// apply the scale
-	_modelScale = glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, scale));
+	// quit if center and scale are disabled
+	if (!_scaleEnabled && !_centerEnabled) {
+		return;
+	}
 
-	// calculate the translation
-	// TODO(zer0nim): check if it's working
-	transl = -((_minPos + _maxPos) * 0.5f);
-	// transl.x = -((_minPos.x + _maxPos.x) / 2);
-	// transl.y = -((_minPos.y + _maxPos.y) / 2);
-	// transl.z = -((_minPos.z + _maxPos.z) / 2);
+	// scale
+	if (_scaleEnabled) {
+		maxDiff = _maxPos.x - _minPos.x;
+		if (maxDiff < _maxPos.y - _minPos.y) {
+			maxDiff = _maxPos.y - _minPos.y;
+		}
+		if (maxDiff < _maxPos.z - _minPos.z) {
+			maxDiff = _maxPos.z - _minPos.z;
+		}
+		maxDiff /= 2;
+		scale /= maxDiff;
 
-	// verification due to float precision
-	transl.x = scale * ((transl.x < 0.00001f && transl.x > -0.00001f) ? 0.0f : transl.x);
-	transl.y = scale * ((transl.y < 0.00001f && transl.y > -0.00001f) ? 0.0f : transl.y);
-	transl.z = scale * ((transl.z < 0.00001f && transl.z > -0.00001f) ? 0.0f : transl.z);
+		// apply the scale
+		_modelScale = glm::scale(glm::mat4(1.0f), glm::vec3(scale, scale, scale));
+	}
 
-	// apply the translation
-	_modelScale = glm::translate(_modelScale, transl);
+	// center
+	if (_centerEnabled) {
+		transl = -((_minPos + _maxPos) * 0.5f);
+
+		// verification due to float precision
+		transl.x = scale * ((transl.x < 0.00001f && transl.x > -0.00001f) ? 0.0f : transl.x);
+		transl.y = scale * ((transl.y < 0.00001f && transl.y > -0.00001f) ? 0.0f : transl.y);
+		transl.z = scale * ((transl.z < 0.00001f && transl.z > -0.00001f) ? 0.0f : transl.z);
+
+		// apply the translation
+		_modelScale = glm::translate(_modelScale, transl);
+	}
 }
 
 // -- draw ---------------------------------------------------------------------
