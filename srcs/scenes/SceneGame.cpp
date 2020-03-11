@@ -291,9 +291,15 @@ bool	SceneGame::_unloadLevel() {
 			}
 		}
 	}
+	board.clear();
 	for (auto &&enemy : enemies) {
 		delete enemy;
 	}
+	enemies.clear();
+	for (auto &&bomb : bombs) {
+		delete bomb;
+	}
+	bombs.clear();
 	level = NO_LEVEL;
 	return true;
 }
