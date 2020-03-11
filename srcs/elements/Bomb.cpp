@@ -8,7 +8,7 @@
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = "Bomb";
-	_countdown = 4.0;
+	_countdown = 2.0f;
 	_propagation = 3;
 }
 
@@ -54,9 +54,8 @@ bool	Bomb::update(float const dTime) {
  * @brief The bomb explode in the N.E.S.W. directions at _propagation distance.
  *
  * @param pos
- * @return Bomb* this
  */
-Bomb	*Bomb::explode(glm::vec2 const pos) {
+void	Bomb::explode(glm::vec2 const pos) {
 	int		i;
 	std::vector<AEntity *>	box;
 
@@ -85,10 +84,21 @@ Bomb	*Bomb::explode(glm::vec2 const pos) {
 			break;
 	}
 	game.board[pos.x][pos.y].push_back(new Fire(game));
-	active = false;
 	game.player->bombs++;
+	active = false;
+	alive = false;
+}
 
-	return this;
+bool	Bomb::postUpdate() {
+	if (!alive) {
+		getPos();
+		// TODO(ebaudet): check segfault for deleting bomb from board.
+		// if (game.clearFromBoard(this, {position.x, position.z})) {
+		// 	logDebug("delete bomb");
+		// 	// delete this;
+		// }
+	}
+	return true;
 }
 
 /**

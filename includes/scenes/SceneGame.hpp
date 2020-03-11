@@ -70,10 +70,12 @@ public:
 
 	// Methods
 	std::string		print() const;
+	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
 
 	// AScene methods
 	virtual bool	init();
 	virtual bool	update();
+	virtual bool	postUpdate();
 	virtual bool	draw();
 	virtual void	load();
 	virtual void	unload();
