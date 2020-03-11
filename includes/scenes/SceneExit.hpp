@@ -29,8 +29,6 @@ class SceneExit : public ASceneMenu {
 		ButtonsStates	_states;
 		std::string		_lastSceneName;
 
-		bool			_initBG();
-
 	private:
 		SceneExit();
 };

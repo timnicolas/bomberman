@@ -28,8 +28,6 @@ class SceneMainMenu : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 
-		bool			_initBG();
-
 	private:
 		SceneMainMenu();
 };
