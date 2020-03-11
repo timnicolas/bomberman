@@ -5,7 +5,7 @@
 class SceneExit : public ASceneMenu {
 	public:
 		// Constructors
-		explicit SceneExit(Gui * gui, float const &dtTime);
+		SceneExit(Gui * gui, float const &dtTime);
 		virtual ~SceneExit();
 		SceneExit(SceneExit const &src);
 

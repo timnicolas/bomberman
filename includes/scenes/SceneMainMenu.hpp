@@ -5,7 +5,7 @@
 class SceneMainMenu : public ASceneMenu {
 	public:
 		// Constructors
-		explicit SceneMainMenu(Gui * gui, float const &dtTime);
+		SceneMainMenu(Gui * gui, float const &dtTime);
 		virtual ~SceneMainMenu();
 		SceneMainMenu(SceneMainMenu const &src);
 

@@ -67,7 +67,7 @@ public:
 	std::chrono::milliseconds	time;
 
 	// Constructors
-	explicit SceneGame(Gui * gui, float const &dtTime);
+	SceneGame(Gui * gui, float const &dtTime);
 	virtual ~SceneGame();
 	SceneGame(SceneGame const &src);
 

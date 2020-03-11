@@ -5,7 +5,7 @@
 class SceneVictory : public ASceneMenu {
 	public:
 		// Constructors
-		explicit SceneVictory(Gui * gui, float const &dtTime);
+		SceneVictory(Gui * gui, float const &dtTime);
 		virtual ~SceneVictory();
 		SceneVictory(SceneVictory const &src);
 
