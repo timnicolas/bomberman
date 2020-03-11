@@ -34,6 +34,9 @@ public:
 	static bool								getKeyDown(InputType::Enum type);
 	static void								configureKey(InputType::Enum type);
 	static void								cancelConfiguration();
+	static bool								getKeyByScancode(SDL_Scancode scancode);
+	static bool								getKeyByScancodeUp(SDL_Scancode scancode);
+	static bool								getKeyByScancodeDown(SDL_Scancode scancode);
 	static bool								shouldQuit();
 	static const glm::ivec2					&getMousePos();
 	static const glm::ivec2					&getMouseRel();
@@ -55,6 +58,9 @@ private:
 	bool									_getKeyDown(InputType::Enum type) const;
 	void									_configureKey(InputType::Enum type);
 	void									_cancelConfiguration();
+	bool									_getKeyByScancode(SDL_Scancode scancode) const;
+	bool									_getKeyByScancodeUp(SDL_Scancode scancode) const;
+	bool									_getKeyByScancodeDown(SDL_Scancode scancode) const;
 	bool									_shouldQuit() const;
 	const glm::ivec2						&_getMousePos() const;
 	const glm::ivec2						&_getMouseRel() const;
@@ -80,6 +86,8 @@ private:
 	bool									_key_status[Inputs::nb_input];
 	bool									_key_previous_status[Inputs::nb_input];
 	SettingsJson							_controls;
+	std::vector<SDL_Scancode>				_scancodes_previous;
+	std::vector<SDL_Scancode>				_scancodes_pressed;
 };
 
 #endif
