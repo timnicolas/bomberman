@@ -31,7 +31,7 @@ public:
 private:
 	SceneSettings();
 
-	void				_updateAudioVolume(std::string volume_name);
+	void				_updateAudioVolume(int audio_index);
 	void				_updateKey(InputType::Enum key_type);
 	void				_selectPane(SettingsType::Enum pane_type);
 	void				_updateFullscreen();
@@ -58,6 +58,7 @@ private:
 	bool				_prev_resolution;
 	bool				_update_fullscreen;
 	bool				_update_audio[3];
+	float				_audio_volume[3];
 	bool				_select_pane[SettingsType::nb_types];
 	bool				_update_key[Inputs::nb_input];
 };
