@@ -5,7 +5,7 @@
 class ScenePause : public ASceneMenu {
 	public:
 		// Constructors
-		explicit ScenePause(Gui * gui, float const &dtTime);
+		ScenePause(Gui * gui, float const &dtTime);
 		virtual ~ScenePause();
 		ScenePause(ScenePause const &src);
 

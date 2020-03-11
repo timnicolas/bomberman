@@ -20,7 +20,7 @@ class ASceneMenu : public AScene {
 		// Members
 
 		// Constructors
-		explicit ASceneMenu(Gui * gui, float const &dtTime);
+		ASceneMenu(Gui * gui, float const &dtTime);
 		virtual ~ASceneMenu();
 		ASceneMenu(ASceneMenu const &src);
 

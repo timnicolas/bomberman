@@ -5,7 +5,7 @@
 class SceneGameOver : public ASceneMenu {
 	public:
 		// Constructors
-		explicit SceneGameOver(Gui * gui, float const &dtTime);
+		SceneGameOver(Gui * gui, float const &dtTime);
 		virtual ~SceneGameOver();
 		SceneGameOver(SceneGameOver const &src);
 
