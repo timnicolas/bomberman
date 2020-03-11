@@ -3,7 +3,7 @@
 // -- Constructors -------------------------------------------------------------
 
 Wall::Wall(SceneGame &game) : AObject(game) {
-	type = Type::BOMB;
+	type = Type::WALL;
 	name = "Wall";
 }
 

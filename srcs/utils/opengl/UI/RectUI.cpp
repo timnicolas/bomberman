@@ -19,14 +19,8 @@ RectUI & RectUI::operator=(RectUI const & rhs) {
 /**
  * @brief this is the base update function of UI objects
  *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void RectUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	(void)mousePos;
-	(void)rightClick;
-	(void)leftClick;
+void RectUI::_update() {
 }
 
 /**
@@ -38,7 +32,7 @@ void RectUI::draw() {
 	glm::vec2 tmpSize;
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpPos.y += _borderSize;
 	tmpSize = _size;
@@ -47,5 +41,5 @@ void RectUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }

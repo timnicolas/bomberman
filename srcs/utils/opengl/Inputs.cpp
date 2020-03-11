@@ -9,6 +9,7 @@ const std::string	Inputs::input_type_name[] = {
 	"action",
 	"confirm",
 	"cancel",
+	"goto_menu",
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
@@ -35,6 +36,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		.setMin(4).setMax(286).setDescription("confirm choice.");
 	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
 		.setMin(4).setMax(286).setDescription("cancel choice.");
+	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
+		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -50,7 +53,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::Enum::RIGHT },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::Enum::ACTION },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL }
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::Enum::GOTO_MENU },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -60,6 +64,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		_controls.j("keys").i("action"),
 		_controls.j("keys").i("confirm"),
 		_controls.j("keys").i("cancel"),
+		_controls.j("keys").i("goto_menu"),
 	};
 	_controls.saveToFile(Inputs::_conf_file);
 }
@@ -149,6 +154,52 @@ void				Inputs::_cancelConfiguration() {
 		_configuring = false;
 		_used_scan.insert(_controls.j("keys").i(input_type_name[_next_action_type]));
 	}
+}
+
+/**
+ * @brief get the state of a key
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key is pressed
+ * @return false if the key is not pressed
+ */
+bool				Inputs::getKeyByScancode(SDL_Scancode scancode) {
+	return Inputs::get()._getKeyByScancode(scancode);
+}
+bool				Inputs::_getKeyByScancode(SDL_Scancode scancode) const {
+	return std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
+}
+
+/**
+ * @brief know if a key was released
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key was just released
+ * @return false in other cases
+ */
+bool				Inputs::getKeyByScancodeUp(SDL_Scancode scancode) {
+	return Inputs::get()._getKeyByScancodeUp(scancode);
+}
+bool				Inputs::_getKeyByScancodeUp(SDL_Scancode scancode) const {
+	auto before = std::find(_scancodes_previous.begin(), _scancodes_previous.end(), scancode) != _scancodes_previous.end();
+	auto now = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
+	return !now && before;
+}
+
+/**
+ * @brief know if a key was pressed
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key was just pressed
+ * @return false in other cases
+ */
+bool				Inputs::getKeyByScancodeDown(SDL_Scancode scancode) {
+	return Inputs::get()._getKeyByScancodeDown(scancode);
+}
+bool				Inputs::_getKeyByScancodeDown(SDL_Scancode scancode) const {
+	auto before = std::find(_scancodes_previous.begin(), _scancodes_previous.end(), scancode) != _scancodes_previous.end();
+	auto now = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
+	return now && !before;
 }
 
 /**
@@ -287,10 +338,16 @@ void				Inputs::_update() {
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_previous_status[i] = _key_status[i];
 	}
+	_scancodes_previous = _scancodes_pressed;
+	std::vector<SDL_Scancode>::iterator elemScan;
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
 			scan = event.key.keysym.scancode;
+			elemScan = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scan);
+			if (elemScan == _scancodes_pressed.end()) {  // if doesn't exist for now
+				_scancodes_pressed.push_back(scan);
+			}
 			if (!_configuring) {
 				try {
 					int index = static_cast<int>(_input_key_map.at(scan));
@@ -319,6 +376,10 @@ void				Inputs::_update() {
 			break;
 		case SDL_KEYUP:
 			scan = event.key.keysym.scancode;
+			elemScan = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scan);
+			if (elemScan != _scancodes_pressed.end()) {  // if scancode exist -> remove it
+				_scancodes_pressed.erase(elemScan);
+			}
 			try {
 				int index = static_cast<int>(_input_key_map.at(scan));
 				_key_status[index] = false;

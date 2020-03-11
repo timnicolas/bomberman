@@ -3,8 +3,15 @@
 
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
+
+/* import all scenes */
+#include "SceneMainMenu.hpp"
+#include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
-#include "SceneMenu.hpp"
+#include "ScenePause.hpp"
+#include "SceneGameOver.hpp"
+#include "SceneVictory.hpp"
+#include "SceneExit.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -64,8 +71,14 @@ bool SceneManager::_init() {
 	}
 
 	// create and init all scene
-	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMainMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LEVEL_SELECTION,
+		new SceneLevelSelection(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME, new SceneGame(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::PAUSE, new ScenePause(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME_OVER, new SceneGameOver(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::VICTORY, new SceneVictory(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
@@ -75,6 +88,7 @@ bool SceneManager::_init() {
 			}
 		} catch (std::exception &e) {
 			logErr("Error : " << e.what());
+			return false;
 		}
 	}
 
@@ -156,12 +170,53 @@ AScene * SceneManager::loadScene(std::string const & name) {
 }
 AScene * SceneManager::_loadScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
-		logErr("invalid scnene name: " << _scene << " in loadScene");
+		logErr("invalid scnene name: " << name << " in loadScene");
+		return _sceneMap[_scene];
 	}
 	_sceneMap[_scene]->unload();  // unload last scene
+	_sceneMap[name]->load();  // load new scene (getScene return the name of the last scene)
 	_scene = name;
-	_sceneMap[_scene]->load();  // load new scene
 	return _sceneMap[_scene];
+}
+
+/**
+ * @brief get a scene
+ *
+ * @param name the name of the scene to get
+ * @return AScene* a pointer to the scene
+ */
+AScene * SceneManager::getScene(std::string const & name) {
+	return SceneManager::get()._getScene(name);
+}
+AScene * SceneManager::_getScene(std::string const & name) {
+	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
+		logErr("invalid scnene name: " << name << " in getScene");
+		return _sceneMap[_scene];
+	}
+	return _sceneMap[name];
+}
+
+/**
+ * @brief get the current scene name
+ *
+ * @return std::string const& the current scene name
+ */
+std::string const & SceneManager::getSceneName() {
+	return SceneManager::get()._getSceneName();
+}
+std::string const & SceneManager::_getSceneName() const {
+	return _scene;
+}
+
+/**
+ * @brief quit the game
+ *
+ */
+void SceneManager::quit() {
+	SceneManager::get()._quit();
+}
+void SceneManager::_quit() {
+	_gameInfo.quit = true;
 }
 
 /* execption */
