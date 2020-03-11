@@ -43,6 +43,7 @@ private:
 	void						_updateKey(InputType::Enum key_type);
 	void						_selectPane(SettingsType::Enum pane_type);
 	void						_updateFullscreen();
+	void						_updateResolution(bool go_right);
 	void						_returnQuit();
 	void						_cancelQuit();
 
@@ -51,11 +52,11 @@ private:
 	void						_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
 
 	void						_updateFullscreenButton();
-	void						_updateResolution();
+	void						_updateResolutionText();
 
 	float						_text_scale = 1.5f;
 	int							_input_configuring;
-	SceneSettings::res			_selected_resolution;
+	SceneSettings::res			_current_resolution;
 
 	/* UI object */
 	SettingsType::Enum			_current_pane;
