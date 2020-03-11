@@ -128,6 +128,11 @@ bool	Gui::_initOpengl() {
 		logErr("while loading OpenGL: " << SDL_GetError());
 		return false;
 	}
+	if (s.j("graphics").b("fullscreen")) {
+		if (SDL_SetWindowFullscreen(_win, SDL_WINDOW_FULLSCREEN) != 0) {
+			logErr("failed to set window fullscreen.")
+		}
+	}
 
 	// disable cursor for fps camera
 	enableCursor(false);
@@ -298,7 +303,10 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 // -- GameInfo struct ----------------------------------------------------------
 GameInfo::GameInfo() {
 	title = "bomberman";
-	windowSize = {1200, 800};
+	windowSize = {
+		s.j("graphics").i("width"),
+		s.j("graphics").i("height")
+	};
 	gameboard = {32, 32};
 	player = {3, 3};
 	play = State::S_PAUSE;
