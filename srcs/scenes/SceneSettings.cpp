@@ -90,7 +90,7 @@ bool			SceneSettings::init() {
 		/* audio */
 		_init_audio_pane(tmp_pos, menu_width, menu_height);
 		/* controls */
-		// _init_control_pane(tmp_pos, menu_width, menu_height);
+		_init_control_pane(tmp_pos, menu_width, menu_height);
 		AudioManager::loadSound("sounds/bell.ogg");
 		AudioManager::loadMusic("sounds/puzzle.ogg");
 		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
@@ -113,13 +113,14 @@ void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, floa
 		tmp_size.x = menu_width / 3;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.2;
-		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT);
+		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+			.setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 		tmp_size.x *= 2;
 		tmp_pos.x += (menu_width / 3);
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
 		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
-			.addButtonLeftListener(&_save_audio[i]);
+			.addButtonLeftListener(&_save_audio[i]).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 }
@@ -135,12 +136,13 @@ void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, fl
 	for (auto i = 0; i < Inputs::nb_input; i++) {
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.1;
-		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :").setTextAlign(TextAlign::RIGHT);
+		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+			.setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		tmp_pos.x += (menu_width / 2);
 		key_name = Inputs::getInputKeyName(static_cast<InputType::Enum>(i));
 		ptr = &addButton(tmp_pos, tmp_size, key_name).addButtonLeftListener(&_update_key[i]) \
-			.setTextAlign(TextAlign::CENTER);
+			.setTextAlign(TextAlign::CENTER).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
@@ -193,6 +195,11 @@ void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
 	// TODO(gsmith): update which ABaseUI should be displayed.
 	logDebug("Switch to pane " << pane_type);
+	for (auto i = 0; i < SettingsType::nb_types; i++) {
+		for (auto it = _panes[i].begin(); it != _panes[i].end(); it++) {
+			(*it)->setEnabled(i == pane_type);
+		}
+	}
 }
 
 void			SceneSettings::_updateKey(InputType::Enum key_type) {
