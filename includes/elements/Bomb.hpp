@@ -26,7 +26,8 @@ public:
 
 	// Methods
 	bool	update(float const dTime);
-	Bomb*	explode(glm::vec2 const pos);
+	bool	postUpdate();
+	void	explode(glm::vec2 const pos);
 	bool	draw(Gui &gui);
 
 	// Exceptions

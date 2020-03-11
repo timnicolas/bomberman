@@ -32,6 +32,9 @@ class AEntity {
 private:
 	AEntity();
 
+protected:
+	float			_timeToDie;
+
 public:
 	// Members
 	bool			active;
@@ -54,6 +57,7 @@ public:
 
 	// Methods
 	virtual bool		update(const float dTime) = 0;
+	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
 	virtual glm::vec3	getPos() = 0;
 	virtual void		takeDamage(const int damage) = 0;

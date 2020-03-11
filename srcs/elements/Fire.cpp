@@ -1,4 +1,5 @@
 #include "Fire.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -7,6 +8,7 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	name = "Fire";
 	blockPropagation = false;
 	destructible = false;
+	_timeToDie = 1.0f;
 }
 
 Fire::~Fire() {
@@ -35,7 +37,19 @@ Fire &Fire::operator=(Fire const &rhs) {
  * @return false if failure
  */
 bool	Fire::update(float const dTime) {
-	(void)dTime;
+	_timeToDie -= dTime;
+	if (_timeToDie <= 0.0) {
+		alive = false;
+	}
+	return true;
+}
+
+bool	Fire::postUpdate() {
+	if (!alive) {
+		getPos();
+		game.clearFromBoard(this, {position.x, position.z});
+		delete this;
+	}
 	return true;
 }
 

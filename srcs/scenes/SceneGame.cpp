@@ -106,7 +106,7 @@ bool			SceneGame::init() {
 	_gui->enableCursor(false);
 	_loadLevel(1);
 
-	_gui->cam->pos = {size.x / 2, 15.0f, 2 * size.y};
+	_gui->cam->pos = {size.x / 2, 25.0f, 2 * size.y};
 	_gui->cam->lookAt(glm::vec3(
 		size.x / 2, 1.0f,
 		size.y / 1.61803398875f
@@ -115,11 +115,29 @@ bool			SceneGame::init() {
 	return true;
 }
 
+/**
+ * @brief clear entity at position pos from board.
+ *
+ * @param entity
+ * @param pos
+ * @return true if cleared
+ * @return false if not found
+ */
+bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
+	std::vector<AEntity *> &box = board[pos.x][pos.y];
+	std::vector<AEntity *>::iterator find = std::find(box.begin(), box.end(), entity);
+	if (find == box.end())
+		return false;
+	box.erase(find);
+	return true;
+}
+
 // -- Private Methods ----------------------------------------------------------
 
 bool	SceneGame::update() {
-	for (auto &&board_it1 : board) {
-		for (auto &&board_it1 : board_it1) {
+	logDebug("update");
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
 				if (!board_it2->update(_dtTime))
 					return false;
@@ -132,10 +150,30 @@ bool	SceneGame::update() {
 	}
 	player->update(_dtTime);
 
+	return postUpdate();
+}
+
+bool	SceneGame::postUpdate() {
+	logDebug("postUpdate");
+	player->postUpdate();
+	for (auto &&enemy : enemies) {
+		if (!enemy->postUpdate())
+			return false;
+	}
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->postUpdate())
+					return false;
+			}
+		}
+	}
+
 	return true;
 }
 
 bool	SceneGame::draw() {
+	logDebug("draw");
 	// use cubeShader, set uniform and activate textures
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->cubeShader->use();
