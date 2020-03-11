@@ -1,17 +1,25 @@
 {
-    "screen": {
-        "fps": 60
-    },
+	"audio": {
+		"Master volume": 0.9,
+		"Music volume": 0.5,
+		"Sound volume": 0.7
+	},
+	"colors": {
+		"buttons": {
+			"a": 1,
+			"b": 0.8,
+			"g": 0.37,
+			"r": 0.07
+		}
+	},
 	"font": {
 		"file": "bomberman-assets/fonts/Roboto-Regular.ttf",
 		"size": 25
 	},
-	"colors": {
-		"buttons": {
-			"r": 0.07,
-			"g": 0.37,
-			"b": 0.8,
-			"a": 1.0
-		}
+	"graphics": {
+		"fullscreen": true
+	},
+	"screen": {
+		"fps": 60
 	}
 }

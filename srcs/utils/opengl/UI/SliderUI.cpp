@@ -1,6 +1,7 @@
 #include "SliderUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
+#include "Inputs.hpp"
 
 SliderUI::SliderUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
@@ -41,6 +42,9 @@ void SliderUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
 	(void)mousePos;
 	(void)rightClick;
 	(void)leftClick;
+	if (Inputs::getLeftClickUp() && _leftListener) {
+		*_leftListener = true;
+	}
 	if (_leftClick) {
 		// get a factor (btw 0 & 1)
 		float factor = (mousePos.x - _pos.x - _borderSize) / (_size.x - _borderSize * 2);
