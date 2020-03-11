@@ -25,12 +25,20 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 	}
 	_fullscreen_button = nullptr;
 	_fullscreen = s.j("graphics").b("fullscreen");
+	int width = s.j("graphics").i("width");
+	int height = s.j("graphics").i("height");
+	_selected_resolution = {
+		width,
+		height
+	};
+	_text_scale = static_cast<float>(width) * 0.001;
+	logDebug(_text_scale);
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : SceneMenu(src) {
 	*this = src;
 }
 
-SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
+SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	SceneMenu::operator=(rhs);
 	_input_configuring = rhs._input_configuring;
 	_fullscreen = rhs._fullscreen;
@@ -52,16 +60,23 @@ SceneSettings	&SceneSettings::operator=(SceneSettings const &rhs) {
 		_key_buttons[i] = rhs._key_buttons[i];
 	}
 	_fullscreen_button = rhs._fullscreen_button;
+	_text_scale = rhs._text_scale;
 	return *this;
 }
+SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
+	{800, 600},
+	{1200, 600},
+	{1600, 900},
+	{1920, 1080}
+};
 
-std::string		SceneSettings::audio_name[3] = {
+const std::string		SceneSettings::audio_name[3] = {
 	"Master volume",
 	"Music volume",
 	"Sound volume",
 };
 
-bool			SceneSettings::init() {
+bool					SceneSettings::init() {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
 	glm::vec2 tmp_pos;
 	glm::vec2 tmp_size;
@@ -84,13 +99,13 @@ bool			SceneSettings::init() {
 		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
 		tmp_pos.y -= tmp_size.y;
 		addButton(tmp_pos, tmp_size, "Graphics").addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS]) \
-			.setTextAlign(TextAlign::CENTER);
+			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
 		tmp_pos.x += (menu_width / 3);
 		addButton(tmp_pos, tmp_size, "Audio").addButtonLeftListener(&_select_pane[SettingsType::AUDIO]) \
-			.setTextAlign(TextAlign::CENTER);
+			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
 		tmp_pos.x += (menu_width / 3);
 		addButton(tmp_pos, tmp_size, "Controls").addButtonLeftListener(&_select_pane[SettingsType::CONTROLS]) \
-			.setTextAlign(TextAlign::CENTER);
+			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
 
 		/* graphics */
 		_init_graphics_pane(tmp_pos, menu_width, menu_height);
@@ -109,7 +124,7 @@ bool			SceneSettings::init() {
 	return true;
 }
 
-void			SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	// TODO(gsmith): add graphics settings UI
 	glm::vec2	win_size = _gui->gameInfo.windowSize;
 	glm::vec2	tmp_size;
@@ -121,7 +136,7 @@ void			SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, f
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 	std::string warning = "Modifications on the graphical settings will be applied after the game restarts.";
 	ptr = &addText(tmp_pos, tmp_size, warning).setTextAlign(TextAlign::CENTER) \
-		.setEnabled(true);
+		.setTextScale(_text_scale).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
 	tmp_size.y = menu_height * 0.1;
@@ -129,12 +144,13 @@ void			SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, f
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 	tmp_pos.y -= menu_height * 0.1;
 	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :").setTextAlign(TextAlign::RIGHT) \
-		.setEnabled(true);
+		.setTextScale(_text_scale).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
-	tmp_pos.x += (menu_width / 3);
+	tmp_pos.x += (menu_width / 2);
 	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
-	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(2);
+	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(_text_scale) \
+		.setTextAlign(TextAlign::CENTER);
 	_updateFullscreenButton();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
@@ -142,11 +158,17 @@ void			SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, f
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 	tmp_pos.y -= menu_height * 0.3;
 	ptr = &addText(tmp_pos, tmp_size, "Resolution :").setTextAlign(TextAlign::RIGHT) \
-		.setEnabled(true);
+		.setTextScale(_text_scale).setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	_resolution_text = &addText(tmp_pos, tmp_size, "800x600");
+	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER) \
+		.setTextScale(_text_scale).setEnabled(true);
+	_updateResolution();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
-void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	glm::vec2	win_size = _gui->gameInfo.windowSize;
 	glm::vec2	tmp_size;
 	ABaseUI		*ptr;
@@ -157,19 +179,19 @@ void			SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, floa
 		tmp_size.x = menu_width / 3;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.2;
-		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
-			.setEnabled(false);
+		ptr = &addText(tmp_pos, tmp_size,		 SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 		tmp_size.x *= 2;
 		tmp_pos.x += (menu_width / 3);
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
 		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
-			.addButtonLeftListener(&_save_audio[i]).setEnabled(false);
+			.addButtonLeftListener(&_save_audio[i]).setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 }
 
-void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
+void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
 	glm::vec2 tmp_size;
 	ABaseUI *ptr;
@@ -181,18 +203,24 @@ void			SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, fl
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.1;
 		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
-			.setEnabled(false);
+			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		tmp_pos.x += (menu_width / 2);
 		key_name = Inputs::getInputKeyName(static_cast<InputType::Enum>(i));
 		ptr = &addButton(tmp_pos, tmp_size, key_name).addButtonLeftListener(&_update_key[i]) \
-			.setTextAlign(TextAlign::CENTER).setEnabled(false);
+			.setTextAlign(TextAlign::CENTER).setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
 }
 
-void			SceneSettings::_updateFullscreenButton() {
+void					SceneSettings::_updateResolution() {
+	std::string		text = std::to_string(_selected_resolution.width) + "x" \
+		+ std::to_string(_selected_resolution.height);
+	_resolution_text->setText(text);
+}
+
+void					SceneSettings::_updateFullscreenButton() {
 	if (_fullscreen_button != nullptr) {
 		std::string symbol;
 		glm::vec4 color;
@@ -208,7 +236,7 @@ void			SceneSettings::_updateFullscreenButton() {
 	}
 }
 
-bool			SceneSettings::update() {
+bool					SceneSettings::update() {
 	SceneMenu::update();
 	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
 		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
@@ -249,7 +277,7 @@ bool			SceneSettings::update() {
 	return true;
 }
 
-void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
+void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
@@ -263,7 +291,7 @@ void			SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	}
 }
 
-void			SceneSettings::_updateKey(InputType::Enum key_type) {
+void					SceneSettings::_updateKey(InputType::Enum key_type) {
 	_update_key[key_type] = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
@@ -275,20 +303,20 @@ void			SceneSettings::_updateKey(InputType::Enum key_type) {
 	Inputs::configureKey(key_type);
 }
 
-void			SceneSettings::_updateAudioVolume(int audio_index) {
-	std::string volume_name = SceneSettings::audio_name[audio_index];
+void					SceneSettings::_updateAudioVolume(int audio_index) {
+	std::string volume_name =		 SceneSettings::audio_name[audio_index];
 	float volume = _update_audio[audio_index];
 	_audio_volume[audio_index] = _update_audio[audio_index];
 	s.j("audio").d(volume_name) = volume / 100;
 	AudioManager::updateSettings();
 }
 
-void			SceneSettings::_saveAudioVolume(int audio_index) {
+void					SceneSettings::_saveAudioVolume(int audio_index) {
 	_save_audio[audio_index] = false;
 	s.saveToFile("configs/settings.json");
 }
 
-void			SceneSettings::_updateFullscreen() {
+void					SceneSettings::_updateFullscreen() {
 	_update_fullscreen = false;
 	_fullscreen = !_fullscreen;
 	_updateFullscreenButton();
@@ -296,7 +324,7 @@ void			SceneSettings::_updateFullscreen() {
 	s.saveToFile("configs/settings.json");
 }
 
-void			SceneSettings::_returnQuit() {
+void					SceneSettings::_returnQuit() {
 	_return = false;
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }
