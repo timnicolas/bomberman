@@ -119,7 +119,7 @@ void						AudioManager::_playMusic(std::string music_name, float volume, bool lo
 	try {
 		Music	*music = _musics.at(music_name);
 		volume = volume > 1.0 ? 1.0 : volume;
-		music->play(volume * _volume_master * _volume_sound, loop);
+		music->play(volume * _volume_master * _volume_music, loop);
 		_music_modifier = volume;
 	}
 	catch (std::out_of_range oor) {
