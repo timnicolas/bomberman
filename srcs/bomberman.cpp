@@ -70,7 +70,9 @@ bool	initSettings(std::string const & filename) {
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
-	s.j("graphics").add<bool>("fullscreen", true).setDescription("Display the game on fullscreen or not.");
+	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");
+	s.j("graphics").add<int64_t>("width", 1600).setDescription("The resolution's width.");
+	s.j("graphics").add<int64_t>("height", 900).setDescription("The resolution's height.");
 
 	try {
 		if (s.loadFile(filename) == false) {
