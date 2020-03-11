@@ -47,8 +47,10 @@ class ABaseUI {
 		ABaseUI &	addButtonLeftListener(bool * listener);
 
 		/* setter */
-		ABaseUI &	setKeyRightClick(SDL_Scancode scancode);
-		ABaseUI &	setKeyLeftClick(SDL_Scancode scancode);
+		ABaseUI &	setKeyRightClickScancode(SDL_Scancode scancode);
+		ABaseUI &	setKeyLeftClickScancode(SDL_Scancode scancode);
+		ABaseUI &	setKeyRightClickInput(InputType::Enum input);
+		ABaseUI &	setKeyLeftClickInput(InputType::Enum input);
 
 		ABaseUI &	setPos(glm::vec2 pos);
 		ABaseUI &	setPosOffset(glm::vec2 offset);
@@ -129,9 +131,11 @@ class ABaseUI {
 		/* info about mouse */
 		bool			_mouseHover;
 		bool			_rightClick;
-		SDL_Scancode	_keyRightClickBind;
+		SDL_Scancode	_keyRightClickBindScancode;
+		InputType::Enum	_keyRightClickBindInput;
 		bool			_leftClick;
-		SDL_Scancode	_keyLeftClickBind;
+		SDL_Scancode	_keyLeftClickBindScancode;
+		InputType::Enum	_keyLeftClickBindInput;
 
 		/* listener */
 		bool *			_rightListener;
