@@ -33,7 +33,7 @@ Flag &Flag::operator=(Flag const &rhs) {
  * @return false if failure
  */
 bool	Flag::update(float const dTime) {
-	logDebug("Last Flag updated at " + std::to_string(dTime));
+	(void)dTime;
 	return true;
 }
 

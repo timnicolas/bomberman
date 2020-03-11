@@ -33,7 +33,7 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return false if failure
  */
 bool	Enemy::update(float const dTime) {
-	logDebug("Last Enemy updated at " << dTime);
+	(void)dTime;
 	return true;
 }
 
