@@ -40,15 +40,34 @@ Camera	&Camera::operator=(Camera const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Call this function in each loop.
+ *
+ * This function can be used for example to go down with gravity
+ *
+ * @param dtTime The delta time since last call
+ */
 void	Camera::run(CAMERA_FLOAT dtTime) {
 	// process for each frame (gravity)
 	(void)dtTime;
 }
 
+/**
+ * @brief Return the view matrix
+ *
+ * @return CAMERA_MAT4 The view matrix
+ */
 CAMERA_MAT4 Camera::getViewMatrix() const {
 	return glm::lookAt(pos, pos + front, up);
 }
 
+/**
+ * @brief Move camera from keyboard interaction
+ *
+ * @param direction The direction to move (CamMovement::Forward, CamMovement::Left, ...)
+ * @param dtTime The delta time since last call
+ * @param isRun Option to know is the player is running or not
+ */
 void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun) {
 	CAMERA_FLOAT	velocity;
 
@@ -87,6 +106,13 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
 	}
 }
 
+/**
+ * @brief Move the camera from the mouse movements
+ *
+ * @param xOffset The camera offset in x from last call
+ * @param yOffset The camera offset in y from last call
+ * @param constrainPitch Constrain pitch to block camera up to 90 deg (enable by default)
+ */
 void	Camera::processMouseMovement(CAMERA_FLOAT xOffset, CAMERA_FLOAT yOffset, bool constrainPitch) {
 	xOffset *= mouseSensitivity;
 	yOffset *= mouseSensitivity;
@@ -105,6 +131,11 @@ void	Camera::processMouseMovement(CAMERA_FLOAT xOffset, CAMERA_FLOAT yOffset, bo
 	updateCameraVectors();
 }
 
+/**
+ * @brief Process mouse scroll to zoom in or out
+ *
+ * @param yOffset The scrolling offset
+ */
 void	Camera::processMouseScroll(CAMERA_FLOAT yOffset) {
 	if (zoom >= 1.0f && zoom <= 45.0f)
 		zoom -= yOffset;
@@ -114,6 +145,11 @@ void	Camera::processMouseScroll(CAMERA_FLOAT yOffset) {
 		zoom = 45.0f;
 }
 
+/**
+ * @brief Move the camera orientation to look at the target
+ *
+ * @param target The target to look at
+ */
 void	Camera::lookAt(CAMERA_VEC3 target) {
 	CAMERA_VEC3	newFront(glm::normalize(target - pos));
 	yaw = glm::degrees(glm::atan(newFront.z, newFront.x));
@@ -121,6 +157,9 @@ void	Camera::lookAt(CAMERA_VEC3 target) {
 	updateCameraVectors();
 }
 
+/**
+ * @brief Update the camera after moving or changing orientation
+ */
 void	Camera::updateCameraVectors() {
 	CAMERA_VEC3 nFront;
 
@@ -134,6 +173,9 @@ void	Camera::updateCameraVectors() {
 	up = glm::normalize(glm::cross(right, front));
 }
 
+/**
+ * @brief Reset the camera position
+ */
 void	Camera::resetPosition() {
 	pos = _startPos;
 	yaw = _startYaw;
@@ -142,9 +184,14 @@ void	Camera::resetPosition() {
 	updateCameraVectors();
 }
 
-/*
-init the frustum culling (take the same args as projection matrix)
-*/
+/**
+ * @brief init the frustum culling (take the same args as projection matrix)
+ *
+ * @param angleDeg The projection angle (in degrees)
+ * @param ratio The ratio (width / height)
+ * @param nearD The near distance (don't show before this distance)
+ * @param farD The far distance (don't show after this distance)
+ */
 void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMERA_FLOAT nearD, CAMERA_FLOAT farD) {
 	_frustumCulling.tang = static_cast<CAMERA_FLOAT>(glm::tan(glm::radians(angleDeg * 0.5)));
 
@@ -158,9 +205,12 @@ void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMER
 	_frustumCulling.enabled = true;
 }
 
-/*
-check if a point is inside or outside the camera
-*/
+/**
+ * @brief Check if a point is inside or outside the camera
+ *
+ * @param point The 3D point
+ * @return int The point position (FRCL_INSIDE == is inside)
+ */
 int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) {
 	CAMERA_FLOAT	pcz, pcx, pcy, aux;
 	int		res = FRCL_INSIDE;
@@ -199,11 +249,13 @@ int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) {
 	return res;
 }
 
-/*
-check if a cube is inside or outside of the camera
-startPoint is the 0|0|0 coordinate of the cube
-size if the scale in X Y and Z
-*/
+/**
+ * @brief Check if a cube or rectangle is inside or outside of the camera
+ *
+ * @param startPoint The 0|0|0 coordinate of the cube
+ * @param size The scale in X Y and Z of the cube
+ * @return int The point position (FRCL_INSIDE == is inside)
+ */
 int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size) {
 	int			res;  // point1 & point2 & point3 ...
 	int			tmpRes;
