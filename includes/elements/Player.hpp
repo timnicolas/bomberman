@@ -3,15 +3,20 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <unordered_set>
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 
 class Player : public ACharacter {
 private:
 	Player();
+	std::unordered_set<AEntity *>	_noCollisionObjects;
+
 	// Methods
 	void	_move(float const dTime);
-	bool	_canMove(glm::vec3 pos);
+	bool	_canMove(std::unordered_set<AEntity *> collisions);
+	void	_putBomb();
+	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
 
 public:
 	// Members
@@ -26,8 +31,9 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool	update(float const dTime);
-	bool	draw(Gui &gui);
+	bool							update(float const dTime);
+	bool							draw(Gui &gui);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos = VOID_POS3);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {
