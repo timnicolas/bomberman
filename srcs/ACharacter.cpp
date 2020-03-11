@@ -7,7 +7,7 @@ ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
 	category = Category::MOBILE;
 	lives = 1;
 	speed = 1.0;
-	pos = {0.0, 0.0, 0.0};
+	position = {0.0, 0.0, 0.0};
 	blockPropagation = false;
 	destructible = true;
 }
@@ -26,7 +26,7 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 		AEntity::operator=(rhs);
 		lives = rhs.lives;
 		speed = rhs.speed;
-		pos = rhs.pos;
+		position = rhs.position;
 	}
 	return *this;
 }
@@ -39,7 +39,7 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
  * @return glm::vec2
  */
 glm::vec3		ACharacter::getPos() {
-	return pos;
+	return position;
 }
 
 /**
@@ -49,7 +49,7 @@ glm::vec3		ACharacter::getPos() {
  * @return ACharacter*
  */
 ACharacter		*ACharacter::init(glm::vec3 pos) {
-	this->pos = pos;
+	this->position = pos;
 	return this;
 }
 

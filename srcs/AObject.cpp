@@ -38,7 +38,7 @@ void		AObject::setPos(glm::vec3 pos) {
 			for (auto &&board_it1 : board_it0) {
 				for (AEntity *board_it2 : board_it1) {
 					if (board_it2 == this) {
-						this->pos = {i, 0, j};
+						this->position = {i, 0, j};
 						return;
 					}
 				}
@@ -49,7 +49,7 @@ void		AObject::setPos(glm::vec3 pos) {
 		throw AObjectException("Impossible to found the position of the object");
 	}
 	else {
-		this->pos = pos;
+		this->position = pos;
 	}
 }
 
@@ -60,10 +60,10 @@ void		AObject::setPos(glm::vec3 pos) {
  * @return glm::vec2
  */
 glm::vec3	AObject::getPos() {
-	if (pos == glm::vec3(VOID_POS3)) {
+	if (position == glm::vec3(VOID_POS3)) {
 		setPos();
 	}
-	return pos;
+	return position;
 }
 
 /**

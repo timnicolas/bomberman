@@ -42,7 +42,7 @@ public:
 	SceneGame		&game;
 	bool			destructible;
 	bool			blockPropagation;
-	glm::vec3		pos;
+	glm::vec3		position;
 
 	// Constructors
 	explicit AEntity(SceneGame &game);
