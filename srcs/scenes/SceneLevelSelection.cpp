@@ -3,7 +3,7 @@
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
-  _currentLvl(0),
+  _currentLvl(-1),
   _transition(0)
 {}
 
@@ -37,7 +37,6 @@ bool			SceneLevelSelection::init() {
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	_transition = 0;  // reset transition
-	_currentLvl = 0;  // reset current level
 
 	try {
 		_states.nbLevel = scGame.getNbLevel();
@@ -58,10 +57,12 @@ bool			SceneLevelSelection::init() {
 		tmpSize.x = menuHeight;
 		tmpSize.y = menuHeight;
 		addButton(tmpPos, tmpSize, "<").setTextFont("title")
+			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.lastLevel);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
 		addButton(tmpPos, tmpSize, ">").setTextFont("title")
+			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.nextLevel);
 
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
@@ -77,6 +78,7 @@ bool			SceneLevelSelection::init() {
 		logErr(e.what());
 		return false;
 	}
+	_setLevel(0);
 	return true;
 }
 
@@ -96,15 +98,6 @@ bool	SceneLevelSelection::update() {
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
 		ABaseUI & elem = getUIElement(_states.firstLevelID + i);
 
-		/* get click if needed */
-		if (_transition == 0) {
-			if (elem.getMouseLeftClick()) {
-				scGame.loadLevel(i);
-				SceneManager::loadScene(SceneNames::GAME);
-				return true;
-			}
-		}
-
 		/* create a smooth transition */
 		float xoffset = -(_currentLvl * winSz.x) + _transition * winSz.x;
 		if (_transition > 0) {
@@ -119,27 +112,65 @@ bool	SceneLevelSelection::update() {
 		}
 		elem.setPosOffset(glm::vec2(xoffset, 0));
 	}
+	if (_states.loadLevel) {
+		_states.loadLevel = false;
+		if (_transition == 0) {  // load only if the transition is over
+			scGame.loadLevel(_currentLvl);
+			SceneManager::loadScene(SceneNames::GAME);
+			return true;
+		}
+	}
 	if (_states.menu) {
-		SceneManager::loadScene(SceneNames::MAIN_MENU);
 		_states.menu = false;
+		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.lastLevel) {
-		if (_currentLvl > 0) {
-			_currentLvl--;
-			_transition = -1;
-		}
 		_states.lastLevel = false;
+		_setLevel(_currentLvl - 1);
 	}
 	else if (_states.nextLevel) {
-		if (_currentLvl < _states.nbLevel - 1) {
-			_currentLvl++;
-			_transition = 1;
-		}
 		_states.nextLevel = false;
+		_setLevel(_currentLvl + 1);
 	}
 	return true;
 }
 
+/**
+ * @brief set the current level in selection
+ *
+ * @param level the level ID
+ */
+void			SceneLevelSelection::_setLevel(int32_t level) {
+	// set right level ID
+	if (level < 0) level = 0;
+	if (level >= static_cast<int32_t>(_states.nbLevel)) level = _states.nbLevel - 1;
+	if (level == _currentLvl)
+		return;
+
+	// set transition
+	if (level == _currentLvl - 1) _transition = -1;
+	else if (level == _currentLvl + 1) _transition = 1;
+	else _transition = 0;
+
+	if (_currentLvl >= 0 && _currentLvl < static_cast<int32_t>(_states.nbLevel)) {
+		getUIElement(_states.firstLevelID + _currentLvl)
+			.setKeyLeftClickInput(InputType::NO_KEY)
+			.addButtonLeftListener(nullptr);
+	}
+
+	_currentLvl = level;
+
+	getUIElement(_states.firstLevelID + _currentLvl)
+		.setKeyLeftClickInput(InputType::CONFIRM)
+		.addButtonLeftListener(&_states.loadLevel);
+}
+
+/**
+ * @brief set the background
+ *
+ * @return true if success
+ * @return false if failed
+ */
 bool			SceneLevelSelection::_initBG() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos = glm::vec2(0, 0);
@@ -150,8 +181,8 @@ bool			SceneLevelSelection::_initBG() {
 		int j = 0;
 		while (tmpPos.x < winSz.x) {
 			std::string name;
-			if ((i + j) & 1)	name = "bomberman-assets/textures/bomb/005-bombFace.png";
-			else		name = "bomberman-assets/textures/player/009-playerFace.png";
+			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/005-bombFace.png";
+			else name = "bomberman-assets/textures/player/009-playerFace.png";
 			addImage(tmpPos, tmpSize, name, false).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
 			tmpPos.x += tmpSize.x;
 			j++;

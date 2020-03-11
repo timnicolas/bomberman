@@ -42,10 +42,12 @@ bool			SceneExit::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT")
+			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.exit);
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "CANCEL")
+			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.cancel);
 
 		tmpSize.x = tmpSize.x * 1.2;
@@ -73,12 +75,12 @@ bool	SceneExit::update() {
 	ASceneMenu::update();
 
 	if (_states.exit) {
-		SceneManager::quit();
 		_states.exit = false;
+		SceneManager::quit();
 	}
 	else if (_states.cancel) {
-		SceneManager::loadScene(_lastSceneName);
 		_states.cancel = false;
+		SceneManager::loadScene(_lastSceneName);
 	}
 	return true;
 }

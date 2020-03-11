@@ -42,6 +42,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "RESUME")
+			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.resume);
 
 		tmpPos.y -= menuHeight * 1.2;
@@ -50,6 +51,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT")
+			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.2;
@@ -77,16 +79,16 @@ bool	ScenePause::update() {
 	ASceneMenu::update();
 
 	if (_states.resume) {
-		SceneManager::loadScene(_lastSceneName);
 		_states.resume = false;
+		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {
-		SceneManager::loadScene(SceneNames::MAIN_MENU);
 		_states.menu = false;
+		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
-		SceneManager::loadScene(SceneNames::EXIT);
 		_states.exit = false;
+		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
 }
