@@ -70,6 +70,7 @@ bool			SceneLevelSelection::init() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
 		addButton(tmpPos, tmpSize, "MAIN MENU")
+			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
 		_initBG();
