@@ -14,7 +14,7 @@ class ButtonUI : public ABaseUI {
 
 		ButtonUI & operator=(ButtonUI const & rhs);
 
-		virtual void	draw();
+		virtual void	_draw();
 
 	protected:
 		virtual void	_update();
