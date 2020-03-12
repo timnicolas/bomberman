@@ -470,15 +470,6 @@ void				Inputs::_update() {
 	}
 }
 
-std::string								Inputs::getInputKeyName(InputType::Enum type) {
-	return Inputs::get()._getInputKeyName(type);
-}
-std::string								Inputs::_getInputKeyName(InputType::Enum type) {
-	SDL_Scancode code = static_cast<SDL_Scancode>(_controls.j("keys").i(Inputs::input_type_name[type]));
-	const char *name_c = SDL_GetScancodeName(code);
-	return std::string(name_c);
-}
-
 bool									Inputs::isConfiguring() {
 	return Inputs::get()._isConfiguring();
 }
