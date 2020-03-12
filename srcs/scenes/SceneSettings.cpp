@@ -1,6 +1,7 @@
 #include "SceneSettings.hpp"
 #include "AudioManager.hpp"
 #include "SceneManager.hpp"
+#include "Gui.hpp"
 
 SceneSettings::~SceneSettings() {}
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtTime),
@@ -37,7 +38,6 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 	};
 	_select_res = SceneSettings::nb_resolution;
 	_text_scale = static_cast<float>(width) * 0.001;
-	logDebug(_text_scale);
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : SceneMenu(src) {
 	*this = src;
@@ -74,7 +74,7 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
 	{800, 600},
 	{1080, 720},
-	{1200, 600},
+	{1200, 800},
 	{1600, 900},
 	{1920, 1080},
 	{2560, 1440}
@@ -148,19 +148,10 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	glm::vec2	tmp_size;
 	ABaseUI		*ptr;
 
-	tmp_size.y = menu_height * 0.2;
-	tmp_pos.y -= menu_height * 0.2;
-	tmp_size.x = menu_width;
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	std::string warning = "Modifications on the graphical settings will be applied after the game restarts.";
-	ptr = &addText(tmp_pos, tmp_size, warning).setTextAlign(TextAlign::CENTER) \
-		.setTextScale(_text_scale).setEnabled(true);
-	_panes[SettingsType::GRAPHICS].push_front(ptr);
-
 	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= menu_height * 0.1;
+	tmp_pos.y -= menu_height * 0.2;
 	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :").setTextAlign(TextAlign::RIGHT) \
 		.setTextScale(_text_scale).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
@@ -355,6 +346,7 @@ void					SceneSettings::_updateFullscreen() {
 	_updateFullscreenButton();
 	s.j("graphics").b("fullscreen") = _fullscreen;
 	s.saveToFile("configs/settings.json");
+	_gui->updateFullscreen();
 }
 
 void					SceneSettings::_updateResolution(bool go_right) {
@@ -386,6 +378,7 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	s.j("graphics").i("height") = _current_resolution.height;
 	s.saveToFile("configs/settings.json");
 	_updateResolutionText();
+	_gui->udpateDimension();
 }
 
 void					SceneSettings::_returnQuit() {
