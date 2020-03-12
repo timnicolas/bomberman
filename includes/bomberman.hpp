@@ -7,6 +7,8 @@
 #define DEBUG_FPS_LOW	DEBUG & false  // always false in normal mode
 /* open the exit menu before quitting */
 #define ASK_BEFORE_QUIT	!DEBUG | true  // always true in normal mode
+/* show help (shortcuts in buttons) */
+#define DEBUG_SHOW_HELP	DEBUG & true  // always false in normal mode
 
 #include <chrono>
 #include "SettingsJson.hpp"

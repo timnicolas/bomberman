@@ -10,6 +10,7 @@ const std::string	Inputs::input_type_name[] = {
 	"confirm",
 	"cancel",
 	"goto_menu",
+	"show_help",
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
@@ -38,6 +39,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		.setMin(4).setMax(286).setDescription("cancel choice.");
 	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
 		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
+	_controls.j("keys").add<int64_t>("show_help", SDL_SCANCODE_F1) \
+		.setMin(4).setMax(286).setDescription("show shorcuts fo buttons");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -55,6 +58,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::Enum::GOTO_MENU },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show_help")), InputType::Enum::SHOW_HELP },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -65,6 +69,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		_controls.j("keys").i("confirm"),
 		_controls.j("keys").i("cancel"),
 		_controls.j("keys").i("goto_menu"),
+		_controls.j("keys").i("show_help"),
 	};
 	_controls.saveToFile(Inputs::_conf_file);
 }
@@ -123,6 +128,25 @@ bool				Inputs::getKeyDown(InputType::Enum type) {
 bool				Inputs::_getKeyDown(InputType::Enum type) const {
 	int		index = static_cast<int>(type);
 	return (_key_status[index] && !_key_previous_status[index]);
+}
+
+/**
+ * @brief Get the name of a given key
+ *
+ * @param type The key
+ * @return std::string The name of the key
+ */
+std::string			Inputs::getKeyName(InputType::Enum type) {
+	return (Inputs::get()._getKeyName(type));
+}
+
+std::string			Inputs::_getKeyName(InputType::Enum type) const {
+	for (auto it = _input_key_map.begin(); it != _input_key_map.end(); it++) {
+		if (it->second == type) {
+			return SDL_GetScancodeName(it->first);
+		}
+	}
+	return "ERROR";
 }
 
 /**
@@ -200,6 +224,20 @@ bool				Inputs::_getKeyByScancodeDown(SDL_Scancode scancode) const {
 	auto before = std::find(_scancodes_previous.begin(), _scancodes_previous.end(), scancode) != _scancodes_previous.end();
 	auto now = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
 	return now && !before;
+}
+
+/**
+ * @brief Get the name of a given scancode
+ *
+ * @param scancode The scancode
+ * @return std::string The name of the scancode
+ */
+std::string			Inputs::getScancodeName(SDL_Scancode scancode) {
+	return (Inputs::get()._getScancodeName(scancode));
+}
+
+std::string			Inputs::_getScancodeName(SDL_Scancode scancode) const {
+	return SDL_GetScancodeName(scancode);
 }
 
 /**
