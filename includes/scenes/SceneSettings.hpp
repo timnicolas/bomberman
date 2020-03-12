@@ -2,7 +2,7 @@
 # define SCENESETTINGS_HPP
 
 # include <list>
-# include "SceneMenu.hpp"
+# include "ASceneMenu.hpp"
 # include "Inputs.hpp"
 
 namespace SettingsType {
@@ -15,7 +15,7 @@ namespace SettingsType {
 	const int	nb_types = 3;
 }
 
-class SceneSettings: public SceneMenu {
+class SceneSettings: public ASceneMenu {
 public:
 	struct				res {
 		int				width;

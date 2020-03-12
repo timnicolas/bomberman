@@ -4,7 +4,7 @@
 #include "Gui.hpp"
 
 SceneSettings::~SceneSettings() {}
-SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtTime),
+SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dtTime),
 	_input_configuring(-1),
 	_current_pane(SettingsType::GRAPHICS),
 	_next_resolution(false),
@@ -39,12 +39,12 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 	_select_res = SceneSettings::nb_resolution;
 	_text_scale = static_cast<float>(width) * 0.001;
 }
-SceneSettings::SceneSettings(SceneSettings const &src) : SceneMenu(src) {
+SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
 	*this = src;
 }
 
 SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
-	SceneMenu::operator=(rhs);
+	ASceneMenu::operator=(rhs);
 	_input_configuring = rhs._input_configuring;
 	_fullscreen = rhs._fullscreen;
 	_current_pane = rhs._current_pane;
@@ -136,8 +136,6 @@ bool					SceneSettings::init() {
 		/* controls */
 		_init_control_pane(tmp_pos, menu_width, menu_height);
 		AudioManager::loadSound("sounds/bell.ogg");
-		AudioManager::loadMusic("sounds/puzzle.ogg");
-		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -228,10 +226,10 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	std::string key_name;
 
 	tmp_size.x = menu_width / 3;
-	tmp_size.y = menu_height * 0.09;
+	tmp_size.y = menu_height * 0.63 / Inputs::nb_input;
 	for (auto i = 0; i < Inputs::nb_input; i++) {
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y -= menu_height * 0.1;
+		tmp_pos.y -= tmp_size.y + 0.15 * Inputs::nb_input;
 		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
@@ -276,7 +274,7 @@ void					SceneSettings::_updateFullscreenButton() {
  * @brief React to the user input at each frame.
  */
 bool					SceneSettings::update() {
-	SceneMenu::update();
+	ASceneMenu::update();
 	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
 		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
 		_input_configuring = -1;
@@ -440,5 +438,6 @@ void					SceneSettings::_returnQuit() {
 		Inputs::cancelConfiguration();
 		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
+	AudioManager::unloadSound("sounds/bell.ogg");
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }

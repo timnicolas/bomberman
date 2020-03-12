@@ -1,7 +1,8 @@
 {
+	"mapsPath": "bomberman-assets/maps/",
 	"audio": {
-		"Master volume": 0.9,
-		"Music volume": 0.5,
+		"Master volume": 0.65,
+		"Music volume": 0.6,
 		"Sound volume": 0.7
 	},
 	"colors": {
@@ -12,13 +13,14 @@
 			"r": 0.07
 		}
 	},
-	"mapsPath": "bomberman-assets/maps/",
 	"font": {
 		"file": "bomberman-assets/fonts/Roboto-Regular.ttf",
 		"size": 25
 	},
 	"graphics": {
-		"fullscreen": true
+		"height": 720,
+		"width": 1080,
+		"fullscreen": false
 	},
 	"screen": {
 		"fps": 60

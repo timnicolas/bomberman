@@ -12,14 +12,13 @@
 #include "SceneGameOver.hpp"
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
-#include "SceneMenu.hpp"
 #include "SceneSettings.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
-  _scene(SceneNames::SETTINGS)
+  _scene(SceneNames::MAIN_MENU)
 {}
 
 SceneManager::SceneManager(SceneManager const & src) {
