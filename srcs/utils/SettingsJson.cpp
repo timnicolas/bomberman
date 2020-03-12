@@ -102,7 +102,9 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 					jsonObjTmp.update<uint64_t>(it.key()).setValue(it->get<uint64_t>());
 				}
 			}
-			else if (it->is_number_float() && jsonObjTmp.doubleMap.find(it.key()) != jsonObjTmp.doubleMap.end()) {
+			else if ((it->is_number_float() || it->is_number_integer())
+			&& jsonObjTmp.doubleMap.find(it.key()) != jsonObjTmp.doubleMap.end())
+			{
 				if (jsonObjTmp.update<double>(it.key()).isDisabledInFile()) {
 					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
