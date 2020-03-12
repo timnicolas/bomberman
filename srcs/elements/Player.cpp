@@ -84,25 +84,40 @@ std::unordered_set<AEntity *>	Player::getCollision(glm::vec3 pos) {
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
-	glm::vec3 pos = getPos();
+	glm::vec3 						pos = getPos();
+	std::unordered_set<AEntity *>	collisions;
+
 	if (Inputs::getKey(InputType::UP)) {
 		pos.z -= speed * dTime;
+		collisions = getCollision(pos);
+		if (_canMove(collisions))
+			position = pos;
 	}
+	pos = position;
 	if (Inputs::getKey(InputType::RIGHT)) {
 		pos.x += speed * dTime;
+		collisions = getCollision(pos);
+		if (_canMove(collisions))
+			position = pos;
 	}
+	pos = position;
 	if (Inputs::getKey(InputType::DOWN)) {
 		pos.z += speed * dTime;
+		collisions = getCollision(pos);
+		if (_canMove(collisions))
+			position = pos;
 	}
+	pos = position;
 	if (Inputs::getKey(InputType::LEFT)) {
 		pos.x -= speed * dTime;
+		collisions = getCollision(pos);
+		if (_canMove(collisions))
+			position = pos;
 	}
-	std::unordered_set<AEntity *> collisions = getCollision(pos);
+	pos = position;
+	collisions = getCollision(pos);
 	logDebug("There are " << collisions.size() << " collisions");
-	if (_canMove(collisions)) {
-		position = pos;
-		_clearCollisionObjects(collisions);
-	}
+	_clearCollisionObjects(collisions);
 }
 
 bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
