@@ -37,9 +37,13 @@ Player &Player::operator=(Player const &rhs) {
  * @return false if failure
  */
 bool	Player::update(float const dTime) {
-	_move(dTime);
-	if (Inputs::getKeyDown(InputType::ACTION)){
-		_putBomb();
+	if (!active)
+		return true;
+	if (alive) {
+		_move(dTime);
+		if (Inputs::getKeyDown(InputType::ACTION)){
+			_putBomb();
+		}
 	}
 	return true;
 }

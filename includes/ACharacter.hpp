@@ -10,10 +10,11 @@
 // class SceneGame;
 namespace Dirrection {
 	enum Enum {
-		UP,
+		UP = 0,
 		RIGHT,
 		DOWN,
 		LEFT,
+		NB_DIRECTIONS  // keep it at last position
 	};
 }
 class ACharacter : public AEntity {
@@ -49,7 +50,7 @@ public:
 	glm::vec3						getPos();
 	ACharacter						*init(glm::vec3 pos);
 	void							takeDamage(const int damage);
-	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
 	bool							clearNoCollisionObjects(AEntity *entity);
 
 
