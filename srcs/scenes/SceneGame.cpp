@@ -72,15 +72,22 @@ bool			SceneGame::init() {
 	// _loadLevel(1);
 
 	try {
-		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/paladin/paladin.fbx");
+		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/stomp/stomp.fbx");
 
-		ETransform	modelTransform;
-		for (std::string const & animName : _openGLModel->getAnimationNames()) {
-			modelTransform.setPos(modelTransform.getPos() + glm::vec3(3, 0, 3));
-			_models.push_back(Model(*_openGLModel, _dtTime, modelTransform));
-			_models.back().setAnimation(animName);
-			_models.back().play = true;
-		}
+		logDebug("new OpenGLModel");
+
+		_models.push_back(Model(*_openGLModel, _dtTime, ETransform({1, 0, 1})));
+		// logDebug("pos: " << glm::to_string(_models.back().transform.getPos()));
+		// _models.back().setAnimation("Character|TPose");
+		// _models.back().play = true;
+
+		// ETransform	modelTransform;
+		// for (std::string const & animName : _openGLModel->getAnimationNames()) {
+		// 	modelTransform.setPos(modelTransform.getPos() + glm::vec3(3, 0, 3));
+		// 	_models.push_back(Model(*_openGLModel, _dtTime, modelTransform));
+		// 	_models.back().setAnimation(animName);
+		// 	_models.back().play = true;
+		// }
 	}
 	catch(OpenGLModel::ModelException const &e) {
 		_openGLModel = nullptr;
@@ -149,14 +156,17 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
+	logDebug("let's draw");
 	// test to draw a fbx model
 	for (Model & model : _models) {
 		try {
 			model.draw();
 		}
 		catch (OpenGLModel::ModelException const &e) {
+			logDebug("catch");
 			logErr(e.what())
 		}
+		logDebug("hey");
 	}
 
 	// draw skybox

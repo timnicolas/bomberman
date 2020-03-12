@@ -46,6 +46,8 @@ void	Model::draw() {
 		// change openGLModel current animation
 		_openGLModel.setAnimation(_animationId);
 
+		logDebug("_animationId: " << _animationId);
+
 		if (play) {
 			_updateAnimationTime();
 		}
@@ -53,6 +55,8 @@ void	Model::draw() {
 
 	// update openGLModel model matrix
 	_openGLModel.setModel(transform.getModel());
+
+	logDebug("Model::draw()");
 
 	// render the model
 	_openGLModel.draw(_animationTimeTick);

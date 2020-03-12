@@ -71,7 +71,7 @@ CC = g++
 # flags for compilation
 CFLAGS = -Ofast -std=c++17 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
-DEBUG_FLAGS = -g3 -DDEBUG=true
+DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
 NODEBUG_FLAGS = -Werror
 # flags to create the .d files
