@@ -86,6 +86,9 @@ const std::string		SceneSettings::audio_name[3] = {
 	"Sound volume",
 };
 
+/**
+ * @brief initialize all the UI section. Should not be called twice.
+ */
 bool					SceneSettings::init() {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
 	glm::vec2 tmp_pos;
@@ -143,6 +146,9 @@ bool					SceneSettings::init() {
 	return true;
 }
 
+/**
+ * @brief initialize the graphics section. Should not be called twice.
+ */
 void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	glm::vec2	win_size = _gui->gameInfo.windowSize;
 	glm::vec2	tmp_size;
@@ -186,6 +192,9 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
+/**
+ * @brief initialize the audio section. Should not be called twice.
+ */
 void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	glm::vec2	win_size = _gui->gameInfo.windowSize;
 	glm::vec2	tmp_size;
@@ -209,6 +218,9 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 	}
 }
 
+/**
+ * @brief initialize the controls section. Should not be called twice.
+ */
 void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
 	glm::vec2 win_size = _gui->gameInfo.windowSize;
 	glm::vec2 tmp_size;
@@ -232,12 +244,18 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	}
 }
 
+/**
+ * @brief Change the display of the resolution button according to the resolution setting.
+ */
 void					SceneSettings::_updateResolutionText() {
 	std::string		text = std::to_string(_current_resolution.width) + "x" \
 		+ std::to_string(_current_resolution.height);
 	_resolution_text->setText(text);
 }
 
+/**
+ * @brief Change the display of the fullscreen button according to the fullscreen setting.
+ */
 void					SceneSettings::_updateFullscreenButton() {
 	if (_fullscreen_button != nullptr) {
 		std::string symbol;
@@ -254,6 +272,9 @@ void					SceneSettings::_updateFullscreenButton() {
 	}
 }
 
+/**
+ * @brief React to the user input at each frame.
+ */
 bool					SceneSettings::update() {
 	SceneMenu::update();
 	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
@@ -301,6 +322,11 @@ bool					SceneSettings::update() {
 	return true;
 }
 
+/**
+ * @brief disable and enable multiple UI element according to their section.
+ * 
+ * @param pane_type the id of the section to enable. Other section will be disabled.
+ */
 void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
 	if (_input_configuring >= 0) {
@@ -315,6 +341,11 @@ void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	}
 }
 
+/**
+ * @brief enable the input configuration for the given input type.
+ * 
+ * @param key_type the type of the input to configure.
+ */
 void					SceneSettings::_updateKey(InputType::Enum key_type) {
 	_update_key[key_type] = false;
 	if (_input_configuring >= 0) {
@@ -327,6 +358,11 @@ void					SceneSettings::_updateKey(InputType::Enum key_type) {
 	Inputs::configureKey(key_type);
 }
 
+/**
+ * @brief update the audio volume for sound and/or music.
+ * 
+ * @param audio_index the audio settings that has been modified.
+ */
 void					SceneSettings::_updateAudioVolume(int audio_index) {
 	std::string volume_name =		 SceneSettings::audio_name[audio_index];
 	float volume = _update_audio[audio_index];
@@ -335,11 +371,19 @@ void					SceneSettings::_updateAudioVolume(int audio_index) {
 	AudioManager::updateSettings();
 }
 
+/**
+ * @brief Save the audio volume in the settings file.
+ * 
+ * @param audio_index the audio settings that has been modified.
+ */
 void					SceneSettings::_saveAudioVolume(int audio_index) {
 	_save_audio[audio_index] = false;
 	s.saveToFile("configs/settings.json");
 }
 
+/**
+ * @brief Enable or disable the fullscreen.
+ */
 void					SceneSettings::_updateFullscreen() {
 	_update_fullscreen = false;
 	_fullscreen = !_fullscreen;
@@ -349,6 +393,11 @@ void					SceneSettings::_updateFullscreen() {
 	_gui->updateFullscreen();
 }
 
+/**
+ * @brief Change the resolution.
+ * 
+ * @param go_right true if the resolution should cycle to the right.
+ */
 void					SceneSettings::_updateResolution(bool go_right) {
 	if (go_right) {
 		_next_resolution = false;
@@ -378,9 +427,13 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	s.j("graphics").i("height") = _current_resolution.height;
 	s.saveToFile("configs/settings.json");
 	_updateResolutionText();
+	_text_scale = static_cast<float>(_current_resolution.width) * 0.001;
 	_gui->udpateDimension();
 }
 
+/**
+ * @brief Quit the settings menu and go back to the main menu.
+ */
 void					SceneSettings::_returnQuit() {
 	_return = false;
 	if (_input_configuring >= 0) {
