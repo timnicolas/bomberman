@@ -342,19 +342,27 @@ void Gui::enableCursor(bool enable) {
 }
 
 // -- change settings ----------------------------------------------------------
+/**
+ * Update the fullscreen mode from its settings.
+ */
 void	Gui::updateFullscreen() {
 	if (s.j("graphics").b("fullscreen")) {
 		SDL_SetWindowFullscreen(_win, SDL_WINDOW_FULLSCREEN);
 	}
 	else {
 		SDL_SetWindowFullscreen(_win, 0);
+		SDL_SetWindowPosition(_win, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	}
 }
 
+/**
+ * Update the dimension of the window from its settings.
+ */
 void	Gui::udpateDimension() {
 	gameInfo.windowSize.x = s.j("graphics").i("width");
 	gameInfo.windowSize.y = s.j("graphics").i("height");
 	SDL_SetWindowSize(_win, gameInfo.windowSize.x, gameInfo.windowSize.y);
+	ABaseUI::setWinSize({gameInfo.windowSize.x, gameInfo.windowSize.y});
 	SDL_SetWindowPosition(_win, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 }
 
