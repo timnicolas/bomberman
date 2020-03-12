@@ -88,8 +88,8 @@ bool					SceneSettings::init() {
 		tmp_size.x = tmp_size.y;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-		addButtonImage(tmp_pos, tmp_size, "bomberman-assets/textures/player/011-playerTop.png", true) \
-			.addButtonLeftListener(&_return);
+		addButton(tmp_pos, tmp_size, "X").addButtonLeftListener(&_return) \
+			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
@@ -125,7 +125,6 @@ bool					SceneSettings::init() {
 }
 
 void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
-	// TODO(gsmith): add graphics settings UI
 	glm::vec2	win_size = _gui->gameInfo.windowSize;
 	glm::vec2	tmp_size;
 	ABaseUI		*ptr;
@@ -352,5 +351,9 @@ void					SceneSettings::_updateResolution(bool go_right) {
 
 void					SceneSettings::_returnQuit() {
 	_return = false;
+	if (_input_configuring >= 0) {
+		Inputs::cancelConfiguration();
+		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+	}
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }
