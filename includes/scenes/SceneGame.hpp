@@ -30,8 +30,8 @@ private:
 	static std::map<std::string, AEntity *> _entitiesCall;
 
 	// just to test model class
-	Model		*_model;
-	OpenGLModel	*_openGLModel;
+	std::vector<Model>	_models;
+	OpenGLModel			*_openGLModel;
 
 	// Methods
 	bool	_loadLevel(uint8_t level);

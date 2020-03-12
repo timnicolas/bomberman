@@ -28,10 +28,6 @@ Model::Model(Model const &src)
 }
 
 Model &Model::operator=(Model const &rhs) {
-	#if DEBUG
-		logWarn("Model::operator= called, remove if it's desired")
-	#endif
-
 	if (this != &rhs) {
 		play = rhs.play;
 		_animationId = rhs._animationId;
@@ -46,14 +42,17 @@ Model &Model::operator=(Model const &rhs) {
 // -- draw ---------------------------------------------------------------------
 void	Model::draw() {
 	// the model is animated
-	if (_openGLModel.isAnimated() && play && _curAnimation != nullptr) {
+	if (_openGLModel.isAnimated() && _curAnimation != nullptr) {
 		// change openGLModel current animation
 		_openGLModel.setAnimation(_animationId);
-		// update openGLModel model matrix
-		_openGLModel.setModel(transform.getModel());
 
-		_updateAnimationTime();
+		if (play) {
+			_updateAnimationTime();
+		}
 	}
+
+	// update openGLModel model matrix
+	_openGLModel.setModel(transform.getModel());
 
 	// render the model
 	_openGLModel.draw(_animationTimeTick);
@@ -77,6 +76,7 @@ void	Model::setAnimation(uint32_t id) {
 	if (_openGLModel.setAnimation(id)) {
 		_animationId = id;
 		_curAnimation = _openGLModel.getAiAnimation(_animationId);
+		_animationTime = 0;  // reset animation time
 	}
 }
 
@@ -84,4 +84,5 @@ void	Model::setAnimation(uint32_t id) {
 void	Model::setAnimation(std::string name) {
 	_openGLModel.getAnimationId(name, _animationId);
 	_curAnimation = _openGLModel.getAiAnimation(_animationId);
+	_animationTime = 0;  // reset animation time
 }
