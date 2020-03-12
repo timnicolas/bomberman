@@ -306,12 +306,12 @@ bool	Gui::_protect_resolution() {
 		height = dm.h;
 		resolution_corrected = true;
 	}
-	if (static_cast<float>(width) / static_cast<float>(height) < 4.0 / 3.0) {
+	if (static_cast<double>(width) / static_cast<double>(height) < 4.0 / 3.0) {
 		logWarn("ratio too small");
 		width = height * 4.0 / 3.0;
 		resolution_corrected = true;
 	}
-	if (static_cast<float>(width) / static_cast<float>(height) > 16.0 / 9.0) {
+	if (static_cast<double>(width) / static_cast<double>(height) > 16.0 / 9.0) {
 		logWarn("ratio too big");
 		height = width * 9.0 / 16.0;
 		resolution_corrected = true;
