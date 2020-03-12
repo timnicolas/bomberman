@@ -92,11 +92,9 @@ void	Bomb::explode(glm::vec2 const pos) {
 bool	Bomb::postUpdate() {
 	if (!alive) {
 		getPos();
-		// TODO(ebaudet): check segfault for deleting bomb from board.
-		// if (game.clearFromBoard(this, {position.x, position.z})) {
-		// 	logDebug("delete bomb");
-		// 	// delete this;
-		// }
+		if (game.clearFromBoard(this, {position.x, position.z})) {
+			delete this;
+		}
 	}
 	return true;
 }

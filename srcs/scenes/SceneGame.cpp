@@ -154,7 +154,6 @@ bool	SceneGame::update() {
 }
 
 bool	SceneGame::postUpdate() {
-	logDebug("postUpdate");
 	player->postUpdate();
 	for (auto &&enemy : enemies) {
 		if (!enemy->postUpdate())
@@ -162,9 +161,16 @@ bool	SceneGame::postUpdate() {
 	}
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
-			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->postUpdate())
+			std::vector<AEntity *>::iterator it = board_it1.begin();
+			AEntity * copy;
+			while (it != board_it1.end()) {
+				copy = *it;
+				if (!(*it)->postUpdate())
 					return false;
+				if (it == board_it1.end())
+					continue;
+				if (copy == *it)
+					it++;
 			}
 		}
 	}
