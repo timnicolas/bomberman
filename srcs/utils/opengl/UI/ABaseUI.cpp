@@ -307,6 +307,15 @@ void		ABaseUI::draw() {
 	}
 	_draw();
 }
+/**
+ * @brief this is the draw function for UI.
+ */
+void		ABaseUI::draw() {
+	if (!_enabled) {
+		return;
+	}
+	_draw();
+}
 
 /* listener */
 /**
