@@ -31,6 +31,9 @@ struct GameInfo {
 	GameInfo();
 };
 
+/**
+ * @brief This is the GUI class with function to init window, draw, ...
+ */
 class Gui {
 	public:
 		explicit	Gui(GameInfo &gameInfo);

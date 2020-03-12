@@ -27,23 +27,57 @@ Logging & Logging::operator=(Logging const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief The the minimum log level to pring
+ *
+ * logging.setLoglevel(LOGINFO);  // to discard logDebug
+ *
+ * @param loglevel The minimum log to print
+ */
 void Logging::setLoglevel(eLoglevel loglevel) {
 	_loglevel = loglevel;
 }
 
+/**
+ * @brief Set the color for a given log function
+ *
+ * @param loglevel The log to update
+ * @param color The new color
+ */
 void Logging::setLogColor(eLoglevel loglevel, std::string const & color) {
 	_colors[loglevel] = color;
 }
 
+/**
+ * @brief Enable a given log function to print his file and line
+ *
+ * @param loglevel The log to update
+ * @param printFileLine Enable or disable option
+ */
 void Logging::setPrintFileLine(eLoglevel loglevel, bool printFileLine) {
 	_printFileLine[loglevel] = printFileLine;
 }
+/**
+ * @brief Enable all log function to print his file and line
+ *
+ * @param printFileLine Enable or disable option
+ */
 void Logging::setPrintFileLine(bool printFileLine) {
 	for (int level = 0; level < static_cast<int>(NBLOG); level++) {
 		setPrintFileLine(static_cast<eLoglevel>(level), printFileLine);
 	}
 }
 
+/**
+ * @brief Log a mesage
+ *
+ * Normally, this function is called by defines (logDebug(...), logWarn(...), ...)
+ *
+ * @param level The log level
+ * @param message The message
+ * @param file The file of calling function
+ * @param line the line of calling function
+ */
 void	Logging::log(eLoglevel level, std::string message, std::string file, int line) {
 	if (level < _loglevel)
 		return;

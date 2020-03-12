@@ -6,6 +6,13 @@
 #include "bomberman.hpp"
 #include "SceneManager.hpp"
 
+/**
+ * @brief start the game (init logs & settings)
+ *
+ * @param ac argc from main
+ * @param av argv from main
+ * @return int exit value
+ */
 int start(int ac, char const **av) {
 	(void)ac;
 	(void)av;
@@ -17,15 +24,19 @@ int start(int ac, char const **av) {
 }
 
 int main(int ac, char const **av) {
+	/* init program & load settings */
 	int ret = start(ac, av);
 
 	if (ret != EXIT_SUCCESS) {
 		return ret;
 	}
 
+	/* init the scene manager */
 	if (SceneManager::init() == false) {
 		return EXIT_FAILURE;
 	}
+
+	/* run the game */
 	if (SceneManager::run() == false) {
 		return EXIT_FAILURE;
 	}

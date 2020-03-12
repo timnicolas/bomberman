@@ -35,6 +35,11 @@ TextureManager &TextureManager::operator=(TextureManager const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief set the uniform for the textureAtlas in the shader
+ *
+ * @param sh the shader
+ */
 void	TextureManager::setUniform(Shader &sh) const {
 	// activate textures
 	sh.setInt("textureAtlas", 0);
@@ -53,12 +58,18 @@ void	TextureManager::setUniform(Shader &sh) const {
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 }
 
+/**
+ * @brief bind the texture atlas
+ */
 void	TextureManager::activateTextures() const {
 	// activate textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D_ARRAY, _textureAtlas);
 }
 
+/**
+ * @brief unbind the texture atlas
+ */
 void	TextureManager::disableTextures() const {
 	// disable textures
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);

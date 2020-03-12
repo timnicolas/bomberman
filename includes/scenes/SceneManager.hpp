@@ -6,12 +6,9 @@
 #include "Inputs.hpp"
 #include "Gui.hpp"
 
-/*
-	this object can manage all scenes (AScene):
-		- load scene
-		- update & draw scene
-*/
-
+/**
+ * @brief this is the list of all existing scenes
+ */
 namespace SceneNames {
 	static std::string const MAIN_MENU = "mainMenu";
 	static std::string const LEVEL_SELECTION = "levelSelection";
@@ -22,6 +19,11 @@ namespace SceneNames {
 	static std::string const EXIT = "exit";
 }
 
+/**
+ * @brief this object can manage all scenes (AScene objects)
+ *
+ * you can load a scene (SceneManager::loadScene) and his update & draw will be automatically updated
+ */
 class SceneManager {
 	public:
 		SceneManager();

@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief main menu (opened at the game startup)
+ */
 class SceneMainMenu : public ASceneMenu {
 	public:
 		// Constructors
@@ -24,8 +27,6 @@ class SceneMainMenu : public ASceneMenu {
 			bool	exit;
 		};
 		ButtonsStates	_states;
-
-		bool			_initBG();
 
 	private:
 		SceneMainMenu();

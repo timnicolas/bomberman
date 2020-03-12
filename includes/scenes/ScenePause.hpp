@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief this is the pause menu
+ */
 class ScenePause : public ASceneMenu {
 	public:
 		// Constructors
@@ -26,8 +29,6 @@ class ScenePause : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 		std::string		_lastSceneName;
-
-		bool			_initBG();
 
 	private:
 		ScenePause();

@@ -38,6 +38,9 @@
 	#define SKYBOX_NAME_BACK	"nz"
 #endif
 
+/**
+ * @brief create a skybox for a project
+ */
 class Skybox {
 	public:
 		Skybox();

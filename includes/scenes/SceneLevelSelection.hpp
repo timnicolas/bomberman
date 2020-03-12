@@ -4,6 +4,9 @@
 
 #define TRANSITION_SPEED 0.05
 
+/**
+ * @brief menu for the level selection
+ */
 class SceneLevelSelection : public ASceneMenu {
 	public:
 		// Constructors
@@ -35,7 +38,6 @@ class SceneLevelSelection : public ASceneMenu {
 		float			_transition;  // used to do a smooth transition
 
 		void			_setLevel(int32_t level);
-		bool			_initBG();
 
 	private:
 		SceneLevelSelection();

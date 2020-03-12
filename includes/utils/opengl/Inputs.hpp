@@ -11,6 +11,9 @@
 // equivalent of NULL for scancode
 #define NO_SCANCODE SDL_SCANCODE_F24
 
+/**
+ * @brief this is the list of all user-defined inputs
+ */
 namespace InputType {
 	enum Enum {
 		NO_KEY = -1,
@@ -26,6 +29,13 @@ namespace InputType {
 	};
 }  // namespace InputType
 
+/**
+ * @brief static class to manage input
+ *
+ * With this class, you can:
+ *  - set key used for all InputType
+ *  - get the state of a key | the mouse
+ */
 class Inputs {
 public:
 	static const int						nb_input = InputType::NB_INPUTS;

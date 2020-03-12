@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief this is the victory menu
+ */
 class SceneVictory : public ASceneMenu {
 	public:
 		// Constructors
@@ -27,8 +30,6 @@ class SceneVictory : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 		std::string		_lastSceneName;
-
-		bool			_initBG();
 
 	private:
 		SceneVictory();

@@ -8,6 +8,9 @@
 #define SHADER_IMAGE_FS "./shaders/image_atlas_fs.glsl"
 #define SHADER_IMAGE_ROW_SIZE 5
 
+/**
+ * @brief Render an image atlas (load png & draw image by ID)
+ */
 class ImageAtlasRender {
 	public:
 		ImageAtlasRender(TextureManager const &textureManager, uint32_t width, \
