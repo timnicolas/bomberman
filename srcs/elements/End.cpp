@@ -8,7 +8,7 @@ End::End(SceneGame &game) : AObject(game) {
 	name = "End";
 	_texture = Block::END;
 }
-
+\
 End::~End() {
 }
 
