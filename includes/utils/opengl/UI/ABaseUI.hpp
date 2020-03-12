@@ -130,6 +130,7 @@ class ABaseUI {
 		virtual void	_update() = 0;
 		virtual void	_draw() = 0;
 
+		// enable functionnalities
 		bool			_enabled;
 		glm::vec2		_pos;
 		glm::vec2		_posOffset;

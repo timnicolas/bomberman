@@ -59,16 +59,21 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("buttons").add<double>("b", 0.2).setMin(0).setMax(1);
 		s.j("colors").j("buttons").add<double>("a", 1.0).setMin(0).setMax(1);
 
-
+	/* Audio */
 	s.add<SettingsJson>("audio");
-	s.j("audio").add<double>("masterVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("musicVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Music volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
+	/* Graphics */
+	s.add<SettingsJson>("graphics");
+	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");
+	s.j("graphics").add<int64_t>("width", 1600).setMin(800).setMax(2560).setDescription("The resolution's width.");
+	s.j("graphics").add<int64_t>("height", 900).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
 	try {
 		if (s.loadFile(filename) == false) {
