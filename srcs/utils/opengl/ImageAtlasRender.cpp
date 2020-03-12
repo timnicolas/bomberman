@@ -2,8 +2,6 @@
 #include "debug.hpp"
 #include "Logging.hpp"
 
-// TODO(tnicolas42) docs -> do docs for this file @zer0nim
-
 ImageAtlasRender::ImageAtlasRender(TextureManager const &textureManager, uint32_t width, uint32_t height) :
 _textureManager(textureManager), _shader(SHADER_IMAGE_VS, SHADER_IMAGE_FS),
 _projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfloat>(height))) {
@@ -53,9 +51,27 @@ ImageAtlasRender &ImageAtlasRender::operator=(ImageAtlasRender const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Draw an image on the screen
+ *
+ * @param pos Position of the image
+ * @param size Size of the image
+ * @param texID Texture ID of the image
+ * @param color Color of the image
+ */
 void ImageAtlasRender::draw(glm::vec2 pos, glm::vec2 size, int texID, glm::vec4 color) {
 	draw(pos.x, pos.y, size.x, size.y, texID, color);
 }
+/**
+ * @brief Draw an image on the screen
+ *
+ * @param posx Position x of the image
+ * @param posy Position y of the image
+ * @param w Width of the image
+ * @param h Height of the image
+ * @param texID Texture ID of the image
+ * @param color Color of the image
+ */
 void ImageAtlasRender::draw(float posx, float posy, float w, float h, int texID, glm::vec4 color) {
     _shader.use();
     _shader.setVec4("color", color);
