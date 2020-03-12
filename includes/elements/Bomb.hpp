@@ -29,6 +29,8 @@ public:
 	bool	postUpdate();
 	void	explode(glm::vec2 const pos);
 	bool	draw(Gui &gui);
+	void	takeDamage(const int damage);
+
 
 	// Exceptions
 	class BombException : public std::runtime_error {

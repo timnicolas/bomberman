@@ -45,6 +45,18 @@ bool	Flag::update(float const dTime) {
 }
 
 /**
+ * @brief postUpdate is called each frame. After update.
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Flag::postUpdate() {
+	if (active == false || alive == false)
+		delete this;
+	return true;
+}
+
+/**
  * @brief draw is called each frame.
  *
  * @return true if success

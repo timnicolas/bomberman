@@ -10,9 +10,13 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 	name = "Bomb";
 	_countdown = 2.0f;
 	_propagation = 3;
+	blockPropagation = true;
 }
 
 Bomb::~Bomb() {
+	getPos();
+	game.clearFromBoard(this, {position.x, position.z});
+	game.player->clearNoCollisionObjects(this);
 }
 
 Bomb::Bomb(Bomb const &src) : AObject(src) {
@@ -31,34 +35,15 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * @brief update is called each frame.
- *
- * @param dTime Delta Time
- * @return true if success
- * @return false if failure
- */
-bool	Bomb::update(float const dTime) {
-	if (!active)
-		return true;
-	if (_countdown > 0)
-		logInfo("countdown:" << _countdown);
-	_countdown -= dTime;
-	if (_countdown <= 0.0) {
-		glm::vec3	pos = getPos();
-		explode({pos.x, pos.z});
-	}
-	return true;
-}
-
-/**
  * @brief The bomb explode in the N.E.S.W. directions at _propagation distance.
  *
  * @param pos
  */
 void	Bomb::explode(glm::vec2 const pos) {
-	int		i;
+	int						i;
 	std::vector<AEntity *>	box;
 
+	active = false;
 	// top
 	i = 0;
 	while (++i < _propagation) {
@@ -85,16 +70,52 @@ void	Bomb::explode(glm::vec2 const pos) {
 	}
 	game.board[pos.x][pos.y].push_back(new Fire(game));
 	game.player->bombs++;
-	active = false;
 	alive = false;
 }
 
+/**
+ * @brief TakeDamage make explode the bomb.
+ *
+ * @param damage
+ */
+void	Bomb::takeDamage(const int damage) {
+	if (!active)
+		return;
+	if (damage <= 0)
+		return;
+	getPos();
+	explode({position.x, position.z});
+}
+
+/**
+ * @brief update is called each frame.
+ *
+ * @param dTime Delta Time
+ * @return true if success
+ * @return false if failure
+ */
+bool	Bomb::update(float const dTime) {
+	if (!active)
+		return true;
+	if (_countdown > 0)
+		logInfo("countdown:" << _countdown);
+	_countdown -= dTime;
+	if (_countdown <= 0.0) {
+		getPos();
+		explode({position.x, position.z});
+	}
+	return true;
+}
+
+/**
+ * @brief PostUpdate is called each frame, after update().
+ *
+ * @return true if success
+ * @return false if failure
+ */
 bool	Bomb::postUpdate() {
 	if (!alive) {
-		getPos();
-		if (game.clearFromBoard(this, {position.x, position.z})) {
-			delete this;
-		}
+		delete this;
 	}
 	return true;
 }
@@ -115,45 +136,44 @@ bool	Bomb::draw(Gui &gui) {
 // -- Private Methods ----------------------------------------------------------
 
 bool	Bomb::_propagationExplosion(glm::vec2 const place) {
-	logDebug("_propagationExplosion");
-
-	if (place.x < 0 || place.y < 0)
+	if (!game.positionInGame(place))
 		return false;
 	std::vector<AEntity *>	&box = game.board[place.x][place.y];
-	bool					result = true;
+	bool					continuePropagation = true;
+	bool					addFire = false;
 
-	logDebug("initialisation");
 	if (box.size() == 0) {
-		logDebug("box.size == 0");
-		box.push_back(new Fire(game));
-		logInfo("push fire on case [" << place.x << ", " << place.y << "]");
+		addFire = true;
 	}
 	else {
-		logDebug("box.size > 0:" << box.size());
 		std::vector<AEntity *>::iterator it = box.begin();
-		while(it != box.end()) {
-			logDebug("blockPropagation ?");
-			if ((*it)->blockPropagation) {
-				logDebug("blockPropagation !");
-				result = false;
-			}
-			logDebug("destructible ?");
-			if ((*it)->destructible) {
-				logDebug("destructible !");
-				(*it)->active = false;
-				// delete (*it);
-				logDebug("clear entity");
-				it = game.board[place.x][place.y].erase(it);
-				logDebug("clear place on board");
-				box.push_back(new Fire(game));
-				logDebug("new fire");
-				logDebug("destruction !");
-			} else {
+		while (it != box.end()) {
+			if (*it == this) {
 				++it;
+				continue;
 			}
+			if ((*it)->blockPropagation) {
+				continuePropagation = false;
+			}
+			if ((*it)->destructible) {
+				addFire = true;
+			}
+			if ((*it)->type == Type::BOMB && (*it)->active) {
+				(*it)->takeDamage(1);
+				it = box.begin();
+				continue;
+			}
+			(*it)->takeDamage(1);
+			if (it == box.end())
+				continue;
+			++it;
 		}
 	}
-	return result;
+	// add fire
+	if (addFire)
+		box.push_back(new Fire(game));
+
+	return continuePropagation;
 }
 
 // -- Exceptions errors --------------------------------------------------------

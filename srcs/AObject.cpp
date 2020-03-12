@@ -29,6 +29,8 @@ AObject &AObject::operator=(AObject const &rhs) {
 
 /**
  * @brief Set the position of the object according of his position on the board.
+ *
+ * @param pos default value VOID_POS3
  */
 void		AObject::setPos(glm::vec3 pos) {
 	if (pos == glm::vec3(VOID_POS3)) {
@@ -67,15 +69,16 @@ glm::vec3	AObject::getPos() {
 }
 
 /**
- * @brief
+ * @brief TakeDamage put an object to die.
  *
  * @param damage
  */
 void	AObject::takeDamage(const int damage) {
 	(void)damage;
+	if (!active)
+		return;
 	if (!destructible)
 		return;
-
 	alive = false;
 }
 

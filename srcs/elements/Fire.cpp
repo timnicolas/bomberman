@@ -7,11 +7,13 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	type = Type::FIRE;
 	name = "Fire";
 	blockPropagation = false;
-	destructible = false;
+	destructible = true;
 	_timeToDie = 1.0f;
 }
 
 Fire::~Fire() {
+	getPos();
+	game.clearFromBoard(this, {position.x, position.z});
 }
 
 Fire::Fire(Fire const &src) : AObject(src) {
@@ -46,8 +48,6 @@ bool	Fire::update(float const dTime) {
 
 bool	Fire::postUpdate() {
 	if (!alive) {
-		getPos();
-		game.clearFromBoard(this, {position.x, position.z});
 		delete this;
 	}
 	return true;

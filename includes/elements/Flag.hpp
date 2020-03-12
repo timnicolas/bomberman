@@ -21,6 +21,7 @@ public:
 
 	// Methods
 	bool	update(float const dTime);
+	bool	postUpdate();
 	bool	draw(Gui &gui);
 
 	// Exceptions

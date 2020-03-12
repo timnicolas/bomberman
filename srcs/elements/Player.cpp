@@ -5,7 +5,7 @@
 
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
-	bombs = 1;
+	bombs = 20;
 	name = "Player";
 	speed = 5;
 }
@@ -81,6 +81,21 @@ std::unordered_set<AEntity *>	Player::getCollision(glm::vec3 pos) {
 	return collisions;
 }
 
+/**
+ * @brief Clear entity from list of no collision objects
+ *
+ * @param entity
+ * @return true if element cleared.
+ * @return false if no element to clear.
+ */
+bool	Player::clearNoCollisionObjects(AEntity *entity) {
+	if (_noCollisionObjects.find(entity) != _noCollisionObjects.end()) {
+		_noCollisionObjects.erase(entity);
+		return true;
+	}
+	return false;
+}
+
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
@@ -123,6 +138,8 @@ void	Player::_move(float const dTime) {
 bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
 	for (auto &&entity : collisions) {
 		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
+			continue;
+		if (entity->type == Type::FIRE)
 			continue;
 		return false;
 	}
