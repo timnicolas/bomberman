@@ -138,6 +138,7 @@ class ABaseUI {
 		int				_imgDefHeight;
 
 		/* info about mouse */
+		bool			_isClickableUI;  // set to false for no buttons UI
 		bool			_mouseHover;
 		bool			_rightClick;
 		SDL_Scancode	_keyRightClickBindScancode;
@@ -166,4 +167,7 @@ class ABaseUI {
 		static GLuint		_imgVao;
 		static GLuint		_imgVbo;
 		static const float	_imgVertices[];
+
+	private:
+		void			_updateClick();
 };

@@ -202,6 +202,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _imgTextureID(0),
   _imgDefWidth(0),
   _imgDefHeight(0),
+  _isClickableUI(true),
   _mouseHover(false),
   _rightClick(false),
   _keyRightClickBindScancode(NO_SCANCODE),
@@ -233,6 +234,18 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @brief this is the base update function of UI objects
  */
 void ABaseUI::update() {
+	if (_isClickableUI) {
+		// buttons calculation only if the UI is clickable
+		_updateClick();
+	}
+	// update of UI element
+	_update();
+}
+
+/**
+ * @brief Called by update if UI is clickable. Update mousehover, mouseclick, ...
+ */
+void ABaseUI::_updateClick() {
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
 
@@ -292,7 +305,6 @@ void ABaseUI::update() {
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
-	_update();
 }
 
 /* listener */
