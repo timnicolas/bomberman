@@ -18,12 +18,10 @@ std::map<std::string, AEntity *> SceneGame::_entitiesCall = {
 SceneGame::SceneGame(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime) {
 	// TODO(ebaudet): init members
-	_model = nullptr;
 	_openGLModel = nullptr;
 }
 
 SceneGame::~SceneGame() {
-	delete	_model;
 	delete	_openGLModel;
 }
 
@@ -74,10 +72,15 @@ bool			SceneGame::init() {
 	// _loadLevel(1);
 
 	try {
-		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/man.fbx");
-		_model = new Model(*_openGLModel, _dtTime, ETransform(
-			{0, 0, 0}, {0.01, 0.01, 0.01}));
-		_model->play = true;
+		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/paladin/paladin.fbx");
+
+		ETransform	modelTransform;
+		for (std::string const & animName : _openGLModel->getAnimationNames()) {
+			modelTransform.setPos(modelTransform.getPos() + glm::vec3(3, 0, 3));
+			_models.push_back(Model(*_openGLModel, _dtTime, modelTransform));
+			_models.back().setAnimation(animName);
+			_models.back().play = true;
+		}
 	}
 	catch(OpenGLModel::ModelException const &e) {
 		_openGLModel = nullptr;
@@ -147,11 +150,11 @@ bool	SceneGame::draw() {
 	_gui->cubeShader->unuse();
 
 	// test to draw a fbx model
-	if (_model) {
+	for (Model & model : _models) {
 		try {
-			_model->draw();
+			model.draw();
 		}
-		catch(OpenGLModel::ModelException const &e) {
+		catch (OpenGLModel::ModelException const &e) {
 			logErr(e.what())
 		}
 	}

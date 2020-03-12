@@ -47,6 +47,7 @@ class OpenGLModel {
 		bool		getAnimationId(std::string const name, uint32_t &outId) const;
 		aiAnimation	*getAiAnimation(uint32_t id);
 		bool		isAnimated() const;
+		std::vector<std::string>	getAnimationNames() const;
 
 		// Exceptions
 		class ModelException : public std::runtime_error {

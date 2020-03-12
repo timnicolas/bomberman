@@ -62,6 +62,10 @@ OpenGLModel::OpenGLModel(OpenGLModel const &src)
 }
 
 OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
+	#if DEBUG
+		logWarn("OpenGLModel::operator= called, remove if it's desired")
+	#endif
+
 	if (this != &rhs) {
 		_meshes = std::vector<Mesh *>();
 		_scene = nullptr;
@@ -112,7 +116,8 @@ void	OpenGLModel::_loadModel() {
 		aiProcess_GenNormals |
 		aiProcess_GenUVCoords |
 		aiProcess_LimitBoneWeights |
-		aiProcess_CalcTangentSpace);
+		aiProcess_CalcTangentSpace |
+		aiProcess_GlobalScale);
 
 	// if assimp failed to load the model
 	if (!_scene || (_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !_scene->mRootNode) {
@@ -534,7 +539,9 @@ aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) {
 	return nullptr;
 }
 bool	OpenGLModel::isAnimated() const { return _isAnimated; }
-
+std::vector<std::string>	OpenGLModel::getAnimationNames() const {
+	return _animationNames;
+}
 
 // -- _setBonesTransform -------------------------------------------------------
 void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
