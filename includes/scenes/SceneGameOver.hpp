@@ -2,6 +2,9 @@
 
 #include "ASceneMenu.hpp"
 
+/**
+ * @brief menu for game over
+ */
 class SceneGameOver : public ASceneMenu {
 	public:
 		// Constructors
@@ -26,8 +29,6 @@ class SceneGameOver : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 		std::string		_lastSceneName;
-
-		bool			_initBG();
 
 	private:
 		SceneGameOver();

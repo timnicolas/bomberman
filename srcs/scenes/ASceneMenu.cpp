@@ -61,14 +61,12 @@ bool	ASceneMenu::draw() {
 }
 /**
  * @brief called when the scene is loaded
- *
  */
 void ASceneMenu::load() {
 	_gui->enableCursor(true);
 }
 /**
  * @brief called when the scene is unloaded
- *
  */
 void ASceneMenu::unload() {
 }
@@ -184,6 +182,34 @@ ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const 
 	ImageUI * ui = new ImageUI(pos, size, filename, pixelateOnZoom);
 	_buttons.push_back(ui);
 	return *ui;
+}
+
+/**
+ * @brief init the basic background of the menu
+ *
+ * @return true if success
+ * @return false if error
+ */
+bool ASceneMenu::_initBG() {
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos = glm::vec2(0, 0);
+	glm::vec2 tmpSize = glm::vec2(200, 0);
+	int i = 0;
+	while (tmpPos.y < winSz.y) {
+		tmpPos.x = 0;
+		int j = 0;
+		while (tmpPos.x < winSz.x) {
+			std::string name;
+			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/005-bombFace.png";
+			else name = "bomberman-assets/textures/player/009-playerFace.png";
+			addImage(tmpPos, tmpSize, name, false).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
+			tmpPos.x += tmpSize.x;
+			j++;
+		}
+		tmpPos.y += getUIElement(getNbUIElements() - 1).getSize().y;
+		i++;
+	}
+	return true;
 }
 
 /* getter */

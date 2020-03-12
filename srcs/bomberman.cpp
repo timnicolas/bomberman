@@ -8,6 +8,12 @@
 SettingsJson s;
 SettingsJson userData;
 
+/**
+ * @brief Init the logs
+ *
+ * You need to call this function only once at program startup.
+ * This function init the logs functions
+ */
 void	initLogs() {
 	// init logging
 	#if DEBUG
@@ -21,6 +27,13 @@ void	initLogs() {
 	logDebug("using debug mode");
 }
 
+/**
+ * @brief Create the pattern for master settings object & load settings
+ *
+ * @param filename the filename to read to set right values for settings
+ * @return true if success
+ * @return false if error
+ */
 bool	initSettings(std::string const & filename) {
 	s.name("settings").description("main settings");
 
@@ -69,6 +82,13 @@ bool	initSettings(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Create the pattern for user data object & load last saved user data
+ *
+ * @param filename the filename to read to set right values for user data
+ * @return true if success
+ * @return false if error
+ */
 bool	initUserData(std::string const & filename) {
 	userData.name("userData").description("all data saved");
 
@@ -88,6 +108,13 @@ bool	initUserData(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Save the user data
+ *
+ * @param filename The file to save user data
+ * @return true if success
+ * @return false if error
+ */
 bool	saveUserData(std::string const & filename) {
 	try {
 		userData.saveToFile(filename);
@@ -99,6 +126,11 @@ bool	saveUserData(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Get the current time in ms
+ *
+ * @return std::chrono::milliseconds the ms object
+ */
 std::chrono::milliseconds getMs() {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(
 		std::chrono::system_clock::now().time_since_epoch());

@@ -15,6 +15,9 @@
 #define SHADER_IMAGE_2D_FS "./shaders/image_2D_fs.glsl"
 #define SHADER_IMAGE_2D_ROW_SIZE 4
 
+/**
+ * @brief this is the text alignement (LEFT RIGTH or CENTER)
+ */
 namespace TextAlign {
 	enum Enum {
 		LEFT,
@@ -23,6 +26,12 @@ namespace TextAlign {
 	};
 }
 
+/**
+ * @brief this is the base UI interface
+ *
+ * You can reinplement this class to create your UI elements.
+ * This base class implement functions to draw rectangles, images, text, ...
+ */
 class ABaseUI {
 	public:
 		/* static functions */

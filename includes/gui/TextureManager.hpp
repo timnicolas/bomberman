@@ -19,6 +19,7 @@ namespace Block {
 	};
 }
 
+// TODO(tnicolas42) docs -> class description @zer0nim
 class TextureManager {
 	public:
 		TextureManager();

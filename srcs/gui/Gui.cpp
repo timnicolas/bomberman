@@ -53,6 +53,11 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief update the game with keyboards input
+ *
+ * @param dtTime the delta time since last call
+ */
 void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
@@ -83,6 +88,12 @@ void Gui::updateInput(float const dtTime) {
 }
 
 // -- init ---------------------------------------------------------------------
+/**
+ * @brief init the gui object
+ *
+ * @return true if the gui was init successfully
+ * @return false if there is an error in init
+ */
 bool	Gui::init() {
 	logInfo("create gui");
 
@@ -117,6 +128,12 @@ bool	Gui::init() {
 
 
 // -- _initOpengl --------------------------------------------------------------
+/**
+ * @brief init openGL (called in Gui::init)
+ *
+ * @return true if success
+ * @return false if error
+ */
 bool	Gui::_initOpengl() {
 	// opengl version 4.1
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
@@ -160,7 +177,12 @@ bool	Gui::_initOpengl() {
 }
 
 // -- _initShaders -------------------------------------------------------------
-// create opengl shader stuffs here (buffers, camera, ...)
+/**
+ * @brief create opengl shader stuffs here (buffers, camera, ...)
+ *
+ * @return true if success
+ * @return false if error
+ */
 bool	Gui::_initShaders() {
 	// -- create shader -`------------------------------------------------------
 	cubeShader = new Shader("shaders/cube_vs.glsl",
@@ -250,6 +272,11 @@ bool	Gui::_initShaders() {
 
 
 // -- enableCursor -------------------------------------------------------------
+/**
+ * @brief enable or disable the cursor visibility
+ *
+ * @param enable enable boolean
+ */
 void Gui::enableCursor(bool enable) {
 	if (enable) {
 		SDL_ShowCursor(SDL_ENABLE);
@@ -262,6 +289,9 @@ void Gui::enableCursor(bool enable) {
 }
 
 // -- draw ---------------------------------------------------------------------
+/**
+ * @brief call this function to do stuff before drawing scene
+ */
 void Gui::preDraw() {
 	// clear buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -269,6 +299,9 @@ void Gui::preDraw() {
 	glClearColor(0.2, 0.5, 0.95, 1.0);
 }
 
+/**
+ * @brief call this function to do stuff after drawing scene
+ */
 void Gui::postDraw() {
 	// swap buffer and check errors
 	SDL_GL_SwapWindow(_win);
@@ -276,6 +309,11 @@ void Gui::postDraw() {
 }
 
 // -- _drawSkybox --------------------------------------------------------------
+/**
+ * @brief draw the skybox
+ *
+ * @param view the view matrix of the camera (Camera::getViewMatrix())
+ */
 void	Gui::drawSkybox(glm::mat4 &view) {
 	CAMERA_MAT4	skyView = view;
 	skyView[3][0] = 0;  // remove translation for the skybox

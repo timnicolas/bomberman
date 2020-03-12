@@ -18,7 +18,6 @@ RectUI & RectUI::operator=(RectUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void RectUI::_update() {
 }

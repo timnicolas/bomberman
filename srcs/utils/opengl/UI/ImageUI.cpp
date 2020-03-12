@@ -28,7 +28,6 @@ ImageUI & ImageUI::operator=(ImageUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void ImageUI::_update() {
 }

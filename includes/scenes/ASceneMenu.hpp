@@ -15,6 +15,11 @@
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
 
+/**
+ * @brief Scene object to reimplement in all scenes for menu
+ *
+ * this object contains functions to create buttons, images, ...
+ */
 class ASceneMenu : public AScene {
 	public:
 		// Members
@@ -52,4 +57,6 @@ class ASceneMenu : public AScene {
 
 	protected:
 		std::vector<ABaseUI *>	_buttons;
+
+		bool			_initBG();
 };

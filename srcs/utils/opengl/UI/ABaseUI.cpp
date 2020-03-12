@@ -126,7 +126,6 @@ void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t 
 
 /**
  * @brief call this function at the end of the program to free UI interfaces
- *
  */
 void ABaseUI::destroy() {
 	if (_rectShader == nullptr) {
@@ -232,7 +231,6 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
  */
 void ABaseUI::update() {
 	glm::vec2 mousePos = Inputs::getMousePos();

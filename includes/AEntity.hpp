@@ -24,6 +24,9 @@ namespace Type {
 	};
 }
 
+/**
+ * @brief This is the base class for entity (Charactere, Objects, ...)
+ */
 class AEntity {
 private:
 	AEntity();
