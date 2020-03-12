@@ -35,6 +35,7 @@ class SceneManager {
 		static AScene *				loadScene(std::string const & name);
 		static AScene *				getScene(std::string const & name);
 		static std::string const &	getSceneName();
+		static bool					isSceneChangedInCurFrame();
 		static void					quit();
 
 		/* Exceptions */
@@ -51,11 +52,15 @@ class SceneManager {
 		std::string	_scene;  // the name of the current scene
 		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
 
+		bool		_sceneLoadedCurrentFrame;  // true if a scene was loaded in the current frame
+
 		bool				_init();
 		bool				_run();
+		bool				_update();
 		AScene *			_loadScene(std::string const & name);
 		AScene *			_getScene(std::string const & name);
 		std::string const &	_getSceneName() const;
+		bool				_isSceneChangedInCurFrame() const;
 		void				_quit();
 
 	private:

@@ -54,20 +54,12 @@ Gui &Gui::operator=(Gui const &rhs) {
 }
 
 /**
- * @brief update the game with keyboards input
+ * @brief Called each frame before others updates functions
  *
- * @param dtTime the delta time since last call
+ * @param dtTime The delta time since last call
  */
-void Gui::updateInput(float const dtTime) {
-	// manage inputs
-	// quit
-	if (Inputs::shouldQuit() || Inputs::getKeyUp(InputType::Enum::CANCEL)) {
-		// #if DEBUG
-		// 	SceneManager::quit();
-		// #else
-			SceneManager::loadScene(SceneNames::EXIT);
-		// #endif
-	}
+void Gui::preUpdate(float const dtTime) {
+	/* manage mouse movement */
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
@@ -84,6 +76,27 @@ void Gui::updateInput(float const dtTime) {
 	}
 	if (Inputs::getKey(InputType::Enum::LEFT)) {
 		cam->processKeyboard(CamMovement::Left, dtTime, false);
+	}
+}
+
+/**
+ * @brief Called each frame after others updates functions
+ *
+ * @param dtTime The delta time since last call
+ */
+void Gui::postUpdate(float const dtTime) {
+	(void)dtTime;
+	/* quit if needed */
+	if (Inputs::shouldQuit()
+	|| (Inputs::getKeyUp(InputType::Enum::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
+	{
+		#if ASK_BEFORE_QUIT
+			if (SceneManager::getSceneName() != SceneNames::EXIT) {
+				SceneManager::loadScene(SceneNames::EXIT);
+			}
+		#else
+			SceneManager::quit();
+		#endif
 	}
 }
 
