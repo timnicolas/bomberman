@@ -61,7 +61,7 @@ Gui &Gui::operator=(Gui const &rhs) {
 void Gui::updateInput(float const dtTime) {
 	// manage inputs
 	// quit
-	if (Inputs::shouldQuit() || Inputs::getKeyDown(InputType::Enum::CANCEL)) {
+	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
 		// #if DEBUG
 		// 	SceneManager::quit();
 		// #else
