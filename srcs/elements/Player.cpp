@@ -55,95 +55,26 @@ bool	Player::draw(Gui &gui) {
 	return true;
 }
 
-/**
- * @brief get a list of entity in collision with the Player at position pos.
- *
- * @param pos default VOID_POS3
- * @return std::unordered_set<AEntity *> collisions
- */
-std::unordered_set<AEntity *>	Player::getCollision(glm::vec3 pos) {
-	if (pos == VOID_POS3)
-		pos = getPos();
-	std::unordered_set<AEntity *> collisions;
-
-	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.05]) {
-		collisions.insert(entity);
-	}
-	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.05]) {
-		collisions.insert(entity);
-	}
-	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.95]) {
-		collisions.insert(entity);
-	}
-	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.95]) {
-		collisions.insert(entity);
-	}
-	return collisions;
-}
-
-/**
- * @brief Clear entity from list of no collision objects
- *
- * @param entity
- * @return true if element cleared.
- * @return false if no element to clear.
- */
-bool	Player::clearNoCollisionObjects(AEntity *entity) {
-	if (_noCollisionObjects.find(entity) != _noCollisionObjects.end()) {
-		_noCollisionObjects.erase(entity);
-		return true;
-	}
-	return false;
-}
-
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
-	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
-		pos.z -= speed * dTime;
-		collisions = getCollision(pos);
-		if (_canMove(collisions))
-			position = pos;
+		_moveTo(Dirrection::UP, dTime);
 	}
-	pos = position;
 	if (Inputs::getKey(InputType::RIGHT)) {
-		pos.x += speed * dTime;
-		collisions = getCollision(pos);
-		if (_canMove(collisions))
-			position = pos;
+		_moveTo(Dirrection::RIGHT, dTime);
 	}
-	pos = position;
 	if (Inputs::getKey(InputType::DOWN)) {
-		pos.z += speed * dTime;
-		collisions = getCollision(pos);
-		if (_canMove(collisions))
-			position = pos;
+		_moveTo(Dirrection::DOWN, dTime);
 	}
-	pos = position;
 	if (Inputs::getKey(InputType::LEFT)) {
-		pos.x -= speed * dTime;
-		collisions = getCollision(pos);
-		if (_canMove(collisions))
-			position = pos;
+		_moveTo(Dirrection::LEFT, dTime);
 	}
-	pos = position;
-	collisions = getCollision(pos);
+	collisions = getCollision(position);
 	logDebug("There are " << collisions.size() << " collisions");
 	_clearCollisionObjects(collisions);
-}
-
-bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
-	for (auto &&entity : collisions) {
-		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
-			continue;
-		if (entity->type == Type::FIRE)
-			continue;
-		return false;
-	}
-	return true;
 }
 
 void	Player::_putBomb() {
@@ -154,19 +85,6 @@ void	Player::_putBomb() {
 		game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
-	}
-}
-
-void	Player::_clearCollisionObjects(std::unordered_set<AEntity *> collisions) {
-	// clear _noCollisionObjects list
-	std::unordered_set<AEntity *>::iterator it = _noCollisionObjects.begin();
-	while (it != _noCollisionObjects.end()) {
-		if (collisions.find(*it) == collisions.end()) {
-			it = _noCollisionObjects.erase(it);
-		}
-		else {
-			it++;
-		}
 	}
 }
 

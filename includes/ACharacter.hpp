@@ -3,14 +3,31 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <unordered_set>
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
 // class SceneGame;
-
+namespace Dirrection {
+	enum Enum {
+		UP,
+		RIGHT,
+		DOWN,
+		LEFT,
+	};
+}
 class ACharacter : public AEntity {
 private:
 	ACharacter();
+
+protected:
+	// Members
+	std::unordered_set<AEntity *>	_noCollisionObjects;
+
+	// Methods
+	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
+	bool	_canMove(std::unordered_set<AEntity *> collisions);
+	glm::vec3	_moveTo(Dirrection::Enum direction, float const dTime);
 
 public:
 	// Members
@@ -26,12 +43,15 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(float const dTime) = 0;
-	virtual bool	draw(Gui &gui) = 0;
-	bool			isAlive();
-	glm::vec3		getPos();
-	ACharacter		*init(glm::vec3 pos);
-	void			takeDamage(const int damage);
+	virtual bool					update(float const dTime) = 0;
+	virtual bool					draw(Gui &gui) = 0;
+	bool							isAlive();
+	glm::vec3						getPos();
+	ACharacter						*init(glm::vec3 pos);
+	void							takeDamage(const int damage);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos);
+	bool							clearNoCollisionObjects(AEntity *entity);
+
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {
