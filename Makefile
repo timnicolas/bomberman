@@ -117,6 +117,7 @@ SRC =	main.cpp \
 		scenes/SceneGameOver.cpp \
 		scenes/SceneVictory.cpp \
 		scenes/SceneExit.cpp \
+		scenes/SceneSettings.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -171,6 +172,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneGameOver.hpp \
 		scenes/SceneVictory.hpp \
 		scenes/SceneExit.hpp \
+		scenes/SceneSettings.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \

@@ -66,6 +66,8 @@ public:
 	static bool								getRightClickDown();
 	static bool								getLeftClickDown();
 	static void								update();
+	static std::string						getInputKeyName(InputType::Enum type);
+	static bool								isConfiguring();
 
 private:
 	Inputs();
@@ -92,6 +94,8 @@ private:
 	bool									_getRightClickDown() const;
 	bool									_getLeftClickDown() const;
 	void									_update();
+	std::string								_getInputKeyName(InputType::Enum type);
+	bool									_isConfiguring();
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;

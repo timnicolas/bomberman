@@ -13,6 +13,7 @@
 #include "SceneGameOver.hpp"
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
+#include "SceneSettings.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -81,6 +82,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME_OVER, new SceneGameOver(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::VICTORY, new SceneVictory(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
