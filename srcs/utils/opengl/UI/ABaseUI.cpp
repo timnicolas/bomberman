@@ -38,7 +38,9 @@ const float		ABaseUI::_imgVertices[] = {
 };
 
 /**
- * @brief init the UI interface
+ * @brief init the UI interface.
+ *
+ * Call this function at program startup.
  *
  * @param winSize the size of the window
  * @param defFontName the defeult font filename
@@ -185,7 +187,8 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
-: _pos(pos),
+: _enabled(true),
+  _pos(pos),
   _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
@@ -231,9 +234,11 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 }
 
 /**
- * @brief this is the base update function of UI objects
+ * @brief This is the base update function of UI objects
  */
 void ABaseUI::update() {
+	if (!_enabled)
+		return;
 	if (_isClickableUI) {
 		// buttons calculation only if the UI is clickable
 		_updateClick();
@@ -307,6 +312,16 @@ void ABaseUI::_updateClick() {
 	}
 }
 
+/**
+ * @brief This is the base draw function of UI objects
+ */
+void ABaseUI::draw() {
+	if (!_enabled)
+		return;
+	// draw the UI element
+	_draw();
+}
+
 /* listener */
 /**
  * @brief add a listener on the right click
@@ -347,6 +362,7 @@ ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
 	_keyLeftClickBindInput = input; return *this;
 }
 
+ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
@@ -371,6 +387,7 @@ bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
+bool				ABaseUI::isEnabled() const { return _enabled; }
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
 glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }

@@ -14,9 +14,8 @@ class TextUI : public ABaseUI {
 
 		TextUI & operator=(TextUI const & rhs);
 
-		virtual void	draw();
-
 	protected:
 		virtual void	_update();
+		virtual void	_draw();
 		TextUI();
 };
