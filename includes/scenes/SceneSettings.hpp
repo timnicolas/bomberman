@@ -22,7 +22,7 @@ public:
 		int				height;
 	};
 
-	static const int			nb_resolution = 4;
+	static const int			nb_resolution = 6;
 	static SceneSettings::res	resolutions[SceneSettings::nb_resolution];
 	static const std::string	audio_name[3];
 
@@ -57,6 +57,8 @@ private:
 	float						_text_scale = 1.5f;
 	int							_input_configuring;
 	SceneSettings::res			_current_resolution;
+	SceneSettings::res			_custom_res;
+	int							_select_res;
 
 	/* UI object */
 	SettingsType::Enum			_current_pane;
