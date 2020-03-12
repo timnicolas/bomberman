@@ -64,6 +64,11 @@ bool	ACharacter::isAlive() {
 	return lives;
 }
 
+/**
+ * @brief Character Take <damage> damages.
+ *
+ * @param damage
+ */
 void	ACharacter::takeDamage(const int damage) {
 	if (!destructible)
 		return;
@@ -78,23 +83,24 @@ void	ACharacter::takeDamage(const int damage) {
  * @brief get a list of entity in collision with the Player at position pos.
  *
  * @param pos default VOID_POS3
+ * @param offset default offset = 0.05f. need to be a positive value.
  * @return std::unordered_set<AEntity *> collisions
  */
-std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos) {
+std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offset) {
 	if (pos == VOID_POS3)
 		pos = getPos();
 	std::unordered_set<AEntity *> collisions;
 
-	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.05]) {
+	for (auto &&entity : game.board[pos.x + offset][pos.z + offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.05]) {
+	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + 0.05][pos.z + 0.95]) {
+	for (auto &&entity : game.board[pos.x + offset][pos.z + 1.0 - offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + 0.95][pos.z + 0.95]) {
+	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + 1.0 - offset]) {
 		collisions.insert(entity);
 	}
 	return collisions;
@@ -117,8 +123,12 @@ bool	ACharacter::clearNoCollisionObjects(AEntity *entity) {
 
 // -- Protected Methods --------------------------------------------------------
 
+/**
+ * @brief clear _noCollisionObjects list if not in <collisions>
+ *
+ * @param collisions
+ */
 void	ACharacter::_clearCollisionObjects(std::unordered_set<AEntity *> collisions) {
-	// clear _noCollisionObjects list
 	std::unordered_set<AEntity *>::iterator it = _noCollisionObjects.begin();
 	while (it != _noCollisionObjects.end()) {
 		if (collisions.find(*it) == collisions.end()) {
@@ -160,18 +170,20 @@ glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
 	std::unordered_set<AEntity *>	collisions;
 
 	switch (direction) {
-	case Dirrection::UP:
-		pos.z -= speed * dTime;
-		break;
-	case Dirrection::RIGHT:
-		pos.x += speed * dTime;
-		break;
-	case Dirrection::DOWN:
-		pos.z += speed * dTime;
-		break;
-	case Dirrection::LEFT:
-		pos.x -= speed * dTime;
-		break;
+		case Dirrection::UP:
+			pos.z -= speed * dTime;
+			break;
+		case Dirrection::RIGHT:
+			pos.x += speed * dTime;
+			break;
+		case Dirrection::DOWN:
+			pos.z += speed * dTime;
+			break;
+		case Dirrection::LEFT:
+			pos.x -= speed * dTime;
+			break;
+		default:
+			return position;
 	}
 	if (_canMove(getCollision(pos)))
 		position = pos;

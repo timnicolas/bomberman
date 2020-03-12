@@ -1,13 +1,21 @@
 #include "Enemy.hpp"
+// #include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Enemy::Enemy(SceneGame &game) : ACharacter(game) {
 	type = Type::ENEMY;
 	name = "Enemy";
+	_direction = Dirrection::LEFT;
 }
 
 Enemy::~Enemy() {
+	// TODO(ebaudet): correct segfault
+	// std::vector<ACharacter *>::iterator find;
+	// find = std::find(game->enemies.begin(), game->enemies.end(), this);
+	// if (find != game->enemies.end()) {
+	// 	game->enemies.erase(find);
+	// }
 }
 
 Enemy::Enemy(Enemy const &src) : ACharacter(src) {
@@ -19,6 +27,7 @@ Enemy::Enemy(Enemy const &src) : ACharacter(src) {
 Enemy &Enemy::operator=(Enemy const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
+		_direction = rhs._direction;
 	}
 	return *this;
 }
@@ -33,7 +42,25 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return false if failure
  */
 bool	Enemy::update(float const dTime) {
-	(void)dTime;
+	if (!active)
+		return true;
+	glm::vec3 pos = getPos();
+	if (pos == _moveTo(_direction, dTime)) {
+		_direction = static_cast<Dirrection::Enum>(((_direction + 1) % Dirrection::NB_DIRECTIONS));
+	}
+	return true;
+}
+
+/**
+ * @brief postUpdate is called each frame. After update()
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Enemy::postUpdate() {
+	if (!active) {
+		delete this;
+	}
 	return true;
 }
 

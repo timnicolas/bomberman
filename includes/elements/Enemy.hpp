@@ -9,6 +9,7 @@
 class Enemy : public ACharacter {
 private:
 	Enemy();
+	Dirrection::Enum	_direction;
 
 public:
 	// Members
@@ -25,6 +26,7 @@ public:
 
 	// Methods
 	bool			update(float const dTime);
+	bool			postUpdate();
 	bool			draw(Gui &gui);
 	static Enemy*	generateEnemy(SceneGame &game, float rate);
 
