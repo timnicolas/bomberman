@@ -62,6 +62,8 @@ class Gui {
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
+		void	updateFullscreen();
+		void	udpateDimension();
 
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
