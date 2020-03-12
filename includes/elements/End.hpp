@@ -9,6 +9,7 @@ class End : public AObject {
 private:
 	End();
 	// Members
+	Block::Enum	_texture;
 
 public:
 	// Constructors

@@ -1,13 +1,20 @@
 #include "Flag.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
 	name = "Flag";
+	destructible = true;
+	blockPropagation = true;
 }
 
 Flag::~Flag() {
+	getPos();
+	if (game.clearFromBoard(this, {position.x, position.z})) {
+		game.flags--;
+	}
 }
 
 Flag::Flag(Flag const &src) : AObject(src) {

@@ -1,10 +1,12 @@
 #include "End.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
 	name = "End";
+	_texture = Block::END;
 }
 
 End::~End() {
@@ -34,6 +36,8 @@ End &End::operator=(End const &rhs) {
  */
 bool	End::update(float const dTime) {
 	(void)dTime;
+	if (game.flags <= 0)
+		_texture = Block::END_OPEN;
 	return true;
 }
 
@@ -44,7 +48,7 @@ bool	End::update(float const dTime) {
  * @return false if failure
  */
 bool	End::draw(Gui &gui) {
-	gui.drawCube(Block::END, getPos());
+	gui.drawCube(_texture, getPos());
 	return true;
 }
 
