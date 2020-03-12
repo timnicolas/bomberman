@@ -6,6 +6,9 @@
 ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom)
 : ABaseUI(pos, size)
 {
+	// set the UI to non clickable
+	_isClickableUI = false;
+
 	// disable color
 	_color = glm::vec4(0.0, 0.0, 0.0, 0.0);
 	_borderSize = 0;
