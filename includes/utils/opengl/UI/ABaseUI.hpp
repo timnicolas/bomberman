@@ -49,7 +49,7 @@ class ABaseUI {
 
 		/* others */
 		void			update();
-		virtual void	draw() = 0;
+		void			draw();
 
 		/* listener */
 		ABaseUI &	addButtonRightListener(bool * listener);
@@ -61,6 +61,7 @@ class ABaseUI {
 		ABaseUI &	setKeyRightClickInput(InputType::Enum input);
 		ABaseUI &	setKeyLeftClickInput(InputType::Enum input);
 
+		ABaseUI &	setEnabled(bool enabled);
 		ABaseUI &	setPos(glm::vec2 pos);
 		ABaseUI &	setPosOffset(glm::vec2 offset);
 		ABaseUI &	addPosOffset(glm::vec2 offset);
@@ -84,6 +85,7 @@ class ABaseUI {
 		bool					getMouseHover() const;
 		bool					getMouseRightClick() const;
 		bool					getMouseLeftClick() const;
+		bool					isEnabled() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
 		glm::vec2				getRealPos() const;  // get pos + offset
@@ -114,7 +116,9 @@ class ABaseUI {
 
 		// update function (redefined in child class)
 		virtual void	_update() = 0;
+		virtual void	_draw() = 0;
 
+		bool			_enabled;
 		glm::vec2		_pos;
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
