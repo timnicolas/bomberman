@@ -81,6 +81,7 @@ std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks 
 	{{2, 2, 2, 2, 2, 2}},  // destructible_wall
 	{{3, 3, 3, 3, 3, 3}},  // fire
 	{{4, 4, 4, 4, 4, 4}},  // end
+	{{8, 8, 8, 8, 8, 8}},  // end_open
 	{{5, 5, 5, 5, 5, 5}},  // flag
 	{{1, 1, 1, 1, 1, 1}},  // block
 }};
