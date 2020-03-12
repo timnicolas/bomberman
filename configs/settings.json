@@ -18,8 +18,8 @@
 		"size": 25
 	},
 	"graphics": {
-		"height": 720,
-		"width": 1080,
+		"height": 800,
+		"width": 1200,
 		"fullscreen": false
 	},
 	"screen": {
