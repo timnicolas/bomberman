@@ -53,6 +53,8 @@ OpenGLModel::~OpenGLModel() {
 	for (Mesh *mesh : _meshes) {
 		delete(mesh);
 	}
+
+	delete _scene;
 }
 
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
@@ -119,6 +121,9 @@ void	OpenGLModel::_loadModel() {
 		aiProcess_CalcTangentSpace |
 		aiProcess_GlobalScale);
 
+	// take owneship of the scene
+	_scene = _importer.GetOrphanedScene();
+
 	// if assimp failed to load the model
 	if (!_scene || (_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !_scene->mRootNode) {
 		throw OpenGLModel::ModelException(std::string(
@@ -145,6 +150,7 @@ void	OpenGLModel::_loadModel() {
 
 		// set the current animation
 		_curAnimation = _scene->mAnimations[0];
+		logDebug("_curAnimation: " << _curAnimation);
 	}
 	// no animation finded
 	else {
@@ -210,7 +216,13 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 			vertex.texCoords = AiUtils::aiToVec2(aiMesh->mTextureCoords[0][i]);
 		}
 		// process vertex tangents (for normal map)
-		vertex.tangents = AiUtils::aiToVec3(aiMesh->mTangents[i]);
+		if (aiMesh->mTangents) {
+			vertex.tangents = AiUtils::aiToVec3(aiMesh->mTangents[i]);
+		}
+		else {
+			vertex.tangents = glm::vec3();
+		}
+
 		vertices.push_back(vertex);
 	}
 
@@ -474,6 +486,8 @@ void	OpenGLModel::draw(float animationTimeTick) {
 
 // -- loadNextAnimation --------------------------------------------------------
 bool	OpenGLModel::setAnimation(uint32_t id) {
+	logWarn("setAnimation: " << id << ", _curAnimation: " << _curAnimation);
+
 	if (_isAnimated) {
 		if (id < _scene->mNumAnimations) {
 			// retrieve animation
@@ -550,7 +564,11 @@ void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 	// retrieve animation node
 	std::string	nodeName(node->mName.data);
 	glm::mat4	nodeTransform = AiUtils::aiToGlmMat(node->mTransformation);
-	aiNodeAnim const	*nodeAnim = _findNodeAnim(_curAnimation, nodeName);
+
+	logDebug("_curAnimation: " << _curAnimation);
+	logDebug("nodeName: " << nodeName)
+
+	aiNodeAnim const	*nodeAnim = _findNodeAnim(nodeName);
 
 	try {
 		// if we have an animation node, interpolate the bone transformation
@@ -593,12 +611,13 @@ void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 }
 
 // -- _findNodeAnim ------------------------------------------------------------
-aiNodeAnim const	*OpenGLModel::_findNodeAnim(aiAnimation const *animation,
-	std::string const nodeName)
+aiNodeAnim const	*OpenGLModel::_findNodeAnim(std::string const nodeName)
 {
+	logDebug("----------- _findNodeAnim")
+
 	// loop through animations nodes until we find the desired node
-	for (uint32_t i = 0; i < animation->mNumChannels; ++i) {
-		aiNodeAnim const	*nodeAnim = animation->mChannels[i];
+	for (uint32_t i = 0; i < _curAnimation->mNumChannels; ++i) {
+		aiNodeAnim const	*nodeAnim = _curAnimation->mChannels[i];
 
 		// animation node finded, return it
 		if (std::string(nodeAnim->mNodeName.data) == nodeName) {

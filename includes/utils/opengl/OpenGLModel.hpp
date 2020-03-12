@@ -76,8 +76,7 @@ class OpenGLModel {
 		// -- animation bones calculation --------------------------------------
 		void	_setBonesTransform(float animationTimeTick, aiNode *node,
 			aiScene const *scene, glm::mat4 parentTransform);
-		aiNodeAnim const	*_findNodeAnim(aiAnimation const *animation,
-			std::string const nodeName);
+		aiNodeAnim const	*_findNodeAnim(std::string const nodeName);
 
 		// interpolate scaling
 		glm::vec3	_calcInterpolatedScaling(float animationTimeTick,
