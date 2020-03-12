@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-#include <boost/filesystem.hpp>
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
@@ -217,7 +216,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	std::string		levelName = "level" + std::to_string(levelId);
 	// $(mapsPath)/$(levelName).json
 	std::string		filename = s.s("mapsPath") + "/" + levelName + ".json";
-	if (boost::filesystem::exists(filename) == false) {
+	if (fileExists(filename) == false) {
 		return false;  // file does not exist
 	}
 

@@ -19,6 +19,8 @@ bool						initSettings(std::string const & filename);
 bool						initUserData(std::string const & filename);
 bool						saveUserData(std::string const & filename);
 std::chrono::milliseconds	getMs();
+bool						fileExists(std::string const & filename);
+
 
 /**
  * @brief global variable for general settings

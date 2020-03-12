@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <chrono>
+#include <fstream>
 
 #include "bomberman.hpp"
 #include "Logging.hpp"
@@ -134,4 +135,17 @@ bool	saveUserData(std::string const & filename) {
 std::chrono::milliseconds getMs() {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(
 		std::chrono::system_clock::now().time_since_epoch());
+}
+
+/**
+ * @brief Try if a file exist
+ *
+ * @param filename The file to check
+ * @return true If the file exist
+ */
+bool fileExists(std::string const & filename) {
+	std::ifstream ifile(filename);
+	if (ifile)
+		return true;
+	return false;
 }
