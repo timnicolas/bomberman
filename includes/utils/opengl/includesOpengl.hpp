@@ -7,4 +7,6 @@
 // glm
 #include "useGlm.hpp"
 
+#include "debug.hpp"
+
 #endif  // INCLUDESOPENGL_HPP_
