@@ -103,6 +103,10 @@ bool	Gui::init() {
 		return false;
 	}
 
+	if (!_protect_resolution()) {
+		return false;
+	}
+
 	// create window and init opengl settings
 	if (!_initOpengl()) {
 		return false;
@@ -275,6 +279,50 @@ bool	Gui::_initShaders() {
 	return true;
 }
 
+/**
+ * @brief Protect the resolution read in the config file and update it if required.
+ * 
+ * @return false if the screen is too small to display the game correctly.
+ */
+bool	Gui::_protect_resolution() {
+	bool			resolution_corrected = false;
+	SDL_DisplayMode dm;
+	int64_t			&width = s.j("graphics").i("width");
+	int64_t			&height = s.j("graphics").i("height");
+
+	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
+		logErr("SDL_GetDesktopDisplayMode failed: %s" << SDL_GetError());
+	}
+	if (dm.w < Gui::_min_width || dm.h < Gui::_min_height) {
+		logWarn("Screen too small.");
+		return false;
+	}
+	logDebug("width max: " << dm.w << " ; height max: " << dm.h);
+	if (dm.w < width) {
+		width = dm.w;
+		resolution_corrected = true;
+	}
+	if (dm.h < height) {
+		height = dm.h;
+		resolution_corrected = true;
+	}
+	if (static_cast<float>(width) / static_cast<float>(height) < 4.0 / 3.0) {
+		logWarn("ratio too small");
+		width = height * 4.0 / 3.0;
+		resolution_corrected = true;
+	}
+	if (static_cast<float>(width) / static_cast<float>(height) > 16.0 / 9.0) {
+		logWarn("ratio too big");
+		height = width * 9.0 / 16.0;
+		resolution_corrected = true;
+	}
+	if (resolution_corrected) {
+		gameInfo.windowSize.x = width;
+		gameInfo.windowSize.y = height;
+		s.saveToFile("configs/settings.json");
+	}
+	return true;
+}
 
 // -- enableCursor -------------------------------------------------------------
 /**
