@@ -53,7 +53,7 @@ public:
 	Player						*player;
 	std::vector<ACharacter *>	enemies;
 
-	uint8_t						flags;
+	int							flags;
 	glm::uvec2					size;
 	uint8_t						level;
 	GameState::Enum				state;
@@ -71,6 +71,7 @@ public:
 	// Methods
 	std::string		print() const;
 	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
+	bool			positionInGame(glm::vec2 pos);
 
 	// AScene methods
 	virtual bool	init();

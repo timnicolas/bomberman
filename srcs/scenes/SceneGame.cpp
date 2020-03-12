@@ -132,8 +132,27 @@ bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
 	return true;
 }
 
-// -- Private Methods ----------------------------------------------------------
+/**
+ * @brief Check if the given pos is in the board.
+ *
+ * @param pos
+ * @return true
+ * @return false
+ */
+bool	SceneGame::positionInGame(glm::vec2 pos) {
+	if (pos.x < 0 || pos.x > size.x || pos.y < 0 || pos.y > size.y)
+		return false;
+	return true;
+}
 
+// -- AScene Methods -----------------------------------------------------------
+
+/**
+ * @brief update is called each frame.
+ *
+ * @return true
+ * @return false
+ */
 bool	SceneGame::update() {
 	logDebug("update");
 	for (auto &&board_it0 : board) {
@@ -153,6 +172,12 @@ bool	SceneGame::update() {
 	return postUpdate();
 }
 
+/**
+ * @brief postUpdate is called each frame, after update.
+ *
+ * @return true
+ * @return false
+ */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
 	for (auto &&enemy : enemies) {
@@ -178,6 +203,12 @@ bool	SceneGame::postUpdate() {
 	return true;
 }
 
+/**
+ * @brief draw is called each frame to draw the Game Scene.
+ *
+ * @return true
+ * @return false
+ */
 bool	SceneGame::draw() {
 	logDebug("draw");
 	// use cubeShader, set uniform and activate textures
@@ -231,6 +262,8 @@ void SceneGame::load() {
  */
 void SceneGame::unload() {
 }
+
+// -- Private Methods ----------------------------------------------------------
 
 bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t levelId) {
 	logInfo("SceneGame _initJsonLevel");
@@ -307,6 +340,7 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 
 	time = std::chrono::seconds(lvl.i("time"));
 
+	flags = 0;
 	AEntity *entity;
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");

@@ -1,4 +1,6 @@
 #include "Crispy.hpp"
+#include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -9,6 +11,9 @@ Crispy::Crispy(SceneGame &game) : AObject(game) {
 }
 
 Crispy::~Crispy() {
+	getPos();
+	game.clearFromBoard(this, {position.x, position.z});
+	game.player->clearNoCollisionObjects(this);
 }
 
 Crispy::Crispy(Crispy const &src) : AObject(src) {
@@ -35,6 +40,14 @@ Crispy &Crispy::operator=(Crispy const &rhs) {
  */
 bool	Crispy::update(float const dTime) {
 	(void)dTime;
+	if (!alive)
+		active = false;
+	return true;
+}
+
+bool	Crispy::postUpdate() {
+	if (!active)
+		delete this;
 	return true;
 }
 

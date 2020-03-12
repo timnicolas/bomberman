@@ -34,6 +34,7 @@ public:
 	bool							update(float const dTime);
 	bool							draw(Gui &gui);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos = VOID_POS3);
+	bool							clearNoCollisionObjects(AEntity *entity);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {
