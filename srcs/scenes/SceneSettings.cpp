@@ -31,6 +31,11 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : SceneMenu(gui, dtT
 		width,
 		height
 	};
+	_custom_res = {
+		width,
+		height
+	};
+	_select_res = SceneSettings::nb_resolution;
 	_text_scale = static_cast<float>(width) * 0.001;
 	logDebug(_text_scale);
 }
@@ -61,13 +66,18 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	}
 	_fullscreen_button = rhs._fullscreen_button;
 	_text_scale = rhs._text_scale;
+	_custom_res = rhs._custom_res;
+	_select_res = rhs._select_res;
 	return *this;
 }
+
 SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
 	{800, 600},
+	{1080, 720},
 	{1200, 600},
 	{1600, 900},
-	{1920, 1080}
+	{1920, 1080},
+	{2560, 1440}
 };
 
 const std::string		SceneSettings::audio_name[3] = {
@@ -83,6 +93,15 @@ bool					SceneSettings::init() {
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
 
+	for (auto i = 0; i < SceneSettings::nb_resolution; i++) {
+		if (SceneSettings::resolutions[i].width == _custom_res.width \
+			&& SceneSettings::resolutions[i].height == _custom_res.height)
+		{
+			_custom_res = { 0, 0 };
+			_select_res = i;
+			break;
+		}
+	}
 	try {
 		tmp_size.y = menu_height * 0.1;
 		tmp_size.x = tmp_size.y;
@@ -345,8 +364,28 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	else {
 		_prev_resolution = false;
 	}
-	// TODO(gsmith): actually change the resolution.
-	logDebug("Change resolution.");
+	_select_res = go_right ? _select_res + 1 : _select_res - 1;
+	if (_select_res < 0) {
+		_select_res = SceneSettings::nb_resolution;
+		if (_custom_res.width == 0 && _custom_res.height == 0) {
+			_select_res--;
+		}
+	}
+	else if (_select_res > SceneSettings::nb_resolution || (_select_res == SceneSettings::nb_resolution \
+			&& _custom_res.width == 0 && _custom_res.height == 0))
+	{
+		_select_res = 0;
+	}
+	if (_select_res == SceneSettings::nb_resolution) {
+		_current_resolution = _custom_res;
+	}
+	else {
+		_current_resolution = SceneSettings::resolutions[_select_res];
+	}
+	s.j("graphics").i("width") = _current_resolution.width;
+	s.j("graphics").i("height") = _current_resolution.height;
+	s.saveToFile("configs/settings.json");
+	_updateResolutionText();
 }
 
 void					SceneSettings::_returnQuit() {
