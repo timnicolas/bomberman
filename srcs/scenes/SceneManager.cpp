@@ -3,6 +3,7 @@
 
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
+#include "ABaseUI.hpp"
 
 /* import all scenes */
 #include "SceneMainMenu.hpp"
@@ -160,6 +161,7 @@ bool SceneManager::_update() {
 	Inputs::update();
 
 	/* update */
+	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
 	// update the scene
 	if (_sceneMap[_scene]->update() == false) {

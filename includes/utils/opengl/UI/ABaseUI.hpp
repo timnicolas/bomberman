@@ -31,14 +31,26 @@ namespace TextAlign {
  *
  * You can reinplement this class to create your UI elements.
  * This base class implement functions to draw rectangles, images, text, ...
+ * You need to call some static functions to have functionnal UI
+ *  - ABaseUI::init(...) once on startup
+ *  - ABaseUI::staticUpdate() in each loop
+ *  - ABaseUI::destroy() at the end
  */
 class ABaseUI {
 	public:
 		/* static functions */
 		static void init(glm::vec2 winSize, std::string const & fontName, uint32_t fontSize);
 		static void destroy();
+		static void staticUpdate();
 		static void	setWinSize(glm::vec2 winSize);
 		static void loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize);
+		/* help */
+		static void showHelp(bool show);
+		static void setHelpFont(std::string fontName);
+		static void setHelpToogleScancode(SDL_Scancode scancode);
+		static void setHelpToogleInput(InputType::Enum input);
+		static void setHelpTextScale(float scale);
+		static void setHelpBorderSize(float borderSize);
 
 		/* base functions */
 		ABaseUI(glm::vec2 pos, glm::vec2 size);
@@ -156,21 +168,29 @@ class ABaseUI {
 		bool *			_leftListener;
 
 		/* shaders */
-		static glm::vec2	_winSize;
-		static glm::mat4	_projection;  // projection matrix (orthogonal)
+		static glm::vec2		_winSize;
+		static glm::mat4		_projection;  // projection matrix (orthogonal)
 		/* rectangle */
-		static Shader *		_rectShader;
-		static GLuint		_rectVao;
-		static GLuint		_rectVbo;
-		static const float	_rectVertices[];
+		static Shader *			_rectShader;
+		static GLuint			_rectVao;
+		static GLuint			_rectVbo;
+		static const float		_rectVertices[];
 		/* text */
-		static TextRender *	_textRender;
-		static std::string	_defFont;
+		static TextRender *		_textRender;
+		static std::string		_defFont;
 		/* image 2D */
-		static Shader *		_imgShader;
-		static GLuint		_imgVao;
-		static GLuint		_imgVbo;
-		static const float	_imgVertices[];
+		static Shader *			_imgShader;
+		static GLuint			_imgVao;
+		static GLuint			_imgVbo;
+		static const float		_imgVertices[];
+		/* help */
+		static bool				_showHelp;
+		static std::string		_helpFont;
+		static float			_helpTextScale;
+		static float			_helpBorderSize;
+		static float			_helpPadding;
+		static SDL_Scancode		_helpKeyBindScancode;
+		static InputType::Enum	_helpKeyBindInput;
 
 	private:
 		void			_updateClick();
