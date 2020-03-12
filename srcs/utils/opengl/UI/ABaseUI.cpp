@@ -144,7 +144,7 @@ void ABaseUI::draw() {
 
 		/* show shortcut */
 		if (helpText != "") {
-			glm::vec2 tmpPos = _pos;
+			glm::vec2 tmpPos = getRealPos();
 			glm::vec2 tmpSize = _size;
 
 			/* get text informations */
@@ -152,8 +152,8 @@ void ABaseUI::draw() {
 			uint32_t height = _textRender->strHeight(_helpFont, helpText, _helpTextScale);
 
 			tmpSize = glm::vec2(width + _helpPadding, height + _helpPadding);
-			tmpPos.x = _pos.x + _size.x - tmpSize.x - _borderSize - _helpPadding;
-			tmpPos.y = _pos.y + _borderSize + _helpPadding;
+			tmpPos.x = getRealPos().x + _size.x - tmpSize.x - _borderSize - _helpPadding;
+			tmpPos.y = getRealPos().y + _borderSize + _helpPadding;
 
 			_drawText(tmpPos, tmpSize, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
 
