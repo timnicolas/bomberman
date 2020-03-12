@@ -31,7 +31,7 @@ uint32_t	textureFromFile(std::string const path, bool inSpaceSRGB, glm::ivec2 *s
 
 	// load texture data
 	data = stbi_load(path.c_str(), &(size.x), &(size.y), &formatId, 0);
-	return _createTexture(data, path, inSpaceSRGB, formatId, *sizeOut,
+	return _createTexture(data, path, inSpaceSRGB, formatId, size,
 		glTexMinFilter, glTexMagFilter);
 }
 
