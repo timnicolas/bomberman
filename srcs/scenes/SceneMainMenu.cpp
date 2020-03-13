@@ -1,4 +1,5 @@
 #include "SceneMainMenu.hpp"
+#include "AudioManager.hpp"
 
 SceneMainMenu::SceneMainMenu(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
@@ -60,6 +61,9 @@ bool			SceneMainMenu::init() {
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
 
+		AudioManager::loadMusic("sounds/puzzle.ogg");
+		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
+
 		_initBG();
 	}
 	catch (ABaseUI::UIException & e) {
@@ -84,7 +88,7 @@ bool	SceneMainMenu::update() {
 	}
 	else if (_states.loadSettings) {
 		_states.loadSettings = false;
-		logWarn("load settings to do");  // TODO(tnicolas42) load settings
+		SceneManager::loadScene(SceneNames::SETTINGS);
 	}
 	else if (_states.exit) {
 		_states.exit = false;

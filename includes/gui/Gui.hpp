@@ -47,6 +47,8 @@ class Gui {
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
+		void	updateFullscreen();
+		void	udpateDimension();
 
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
@@ -71,4 +73,8 @@ class Gui {
 		bool	_init();
 		bool	_initOpengl();
 		bool	_initShaders();
+
+		static const int									_min_width = 800;
+		static const int									_min_height = 600;
+		bool	_protect_resolution();
 };

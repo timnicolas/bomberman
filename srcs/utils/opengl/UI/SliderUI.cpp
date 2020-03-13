@@ -1,6 +1,7 @@
 #include "SliderUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
+#include "Inputs.hpp"
 
 SliderUI::SliderUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
@@ -35,6 +36,9 @@ void SliderUI::setValues(float min, float max, float val, float step) {
  */
 void SliderUI::_update() {
 	glm::vec2 mousePos = Inputs::getMousePos();
+	if (Inputs::getLeftClickUp() && _leftListener) {
+		*_leftListener = true;
+	}
 	if (_leftClick) {
 		// get a factor (btw 0 & 1)
 		float factor = (mousePos.x - getRealPos().x - _borderSize) / (_size.x - _borderSize * 2);
@@ -65,7 +69,7 @@ void SliderUI::_update() {
  * @brief this is the draw function for UI
  * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
  */
-void SliderUI::draw() {
+void SliderUI::_draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 

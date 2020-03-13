@@ -367,6 +367,7 @@ void				Inputs::_update() {
 					_controls.saveToFile(Inputs::_conf_file);
 					_configuring = false;
 					_key_status[static_cast<int>(_next_action_type)] = true;
+					_key_previous_status[_next_action_type] = true;
 					logInfo("Input '" << input_type_name[_next_action_type] << "' set.")
 				}
 				else {
@@ -429,4 +430,20 @@ void				Inputs::_update() {
 			break;
 		}
 	}
+}
+
+std::string								Inputs::getInputKeyName(InputType::Enum type) {
+	return Inputs::get()._getInputKeyName(type);
+}
+std::string								Inputs::_getInputKeyName(InputType::Enum type) {
+	SDL_Scancode code = static_cast<SDL_Scancode>(_controls.j("keys").i(Inputs::input_type_name[type]));
+	const char *name_c = SDL_GetScancodeName(code);
+	return std::string(name_c);
+}
+
+bool									Inputs::isConfiguring() {
+	return Inputs::get()._isConfiguring();
+}
+bool									Inputs::_isConfiguring() {
+	return _configuring;
 }

@@ -14,7 +14,7 @@ class RectUI : public ABaseUI {
 
 		RectUI & operator=(RectUI const & rhs);
 
-		virtual void	draw();
+		virtual void	_draw();
 
 	protected:
 		virtual void	_update();
