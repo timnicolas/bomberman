@@ -1,13 +1,22 @@
 #include "Bomb.hpp"
+#include "Fire.hpp"
+#include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = "Bomb";
+	_countdown = 2.0f;
+	_propagation = 3;
+	blockPropagation = true;
 }
 
 Bomb::~Bomb() {
+	getPos();
+	game.clearFromBoard(this, {position.x, position.z});
+	game.player->clearNoCollisionObjects(this);
 }
 
 Bomb::Bomb(Bomb const &src) : AObject(src) {
@@ -26,14 +35,88 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
+ * @brief The bomb explode in the N.E.S.W. directions at _propagation distance.
+ *
+ * @param pos
+ */
+void	Bomb::explode(glm::vec2 const pos) {
+	int						i;
+	std::vector<AEntity *>	box;
+
+	active = false;
+	// top
+	i = 0;
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x, pos.y + i}))
+			break;
+	}
+	// right
+	i = 0;
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x + i, pos.y}))
+			break;
+	}
+	// bottom
+	i = 0;
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x, pos.y - i}))
+			break;
+	}
+	// left
+	i = 0;
+	while (++i < _propagation) {
+		if (!_propagationExplosion({pos.x - i, pos.y}))
+			break;
+	}
+	game.board[pos.x][pos.y].push_back(new Fire(game));
+	game.player->bombs++;
+	alive = false;
+}
+
+/**
+ * @brief TakeDamage make explode the bomb.
+ *
+ * @param damage
+ */
+void	Bomb::takeDamage(const int damage) {
+	if (!active)
+		return;
+	if (damage <= 0)
+		return;
+	getPos();
+	explode({position.x, position.z});
+}
+
+/**
  * @brief update is called each frame.
  *
  * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Bomb::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Bomb updated at " << dTime.count() << std::endl;
+bool	Bomb::update(float const dTime) {
+	if (!active)
+		return true;
+	if (_countdown > 0)
+		logInfo("countdown:" << _countdown);
+	_countdown -= dTime;
+	if (_countdown <= 0.0) {
+		getPos();
+		explode({position.x, position.z});
+	}
+	return true;
+}
+
+/**
+ * @brief PostUpdate is called each frame, after update().
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Bomb::postUpdate() {
+	if (!alive) {
+		delete this;
+	}
 	return true;
 }
 
@@ -43,28 +126,54 @@ bool	Bomb::update(std::chrono::milliseconds dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Bomb::draw() {
+bool	Bomb::draw(Gui &gui) {
+	if (active) {
+		gui.drawCube(Block::BOMB, getPos());
+	}
 	return true;
 }
 
-/**
- * @brief The bombe is destructible. This methode always return true.
- *
- * @return true
- */
-bool	Bomb::isDestructable() {
-	return true;
-}
+// -- Private Methods ----------------------------------------------------------
 
-/**
- * @brief The bombe doesn't block the propagation. This methode always return
- * false.
- *
- * @return true
- * @return false
- */
-bool	Bomb::blockPropagation() {
-	return false;
+bool	Bomb::_propagationExplosion(glm::vec2 const place) {
+	if (!game.positionInGame(place))
+		return false;
+	std::vector<AEntity *>	&box = game.board[place.x][place.y];
+	bool					continuePropagation = true;
+	bool					addFire = false;
+
+	if (box.size() == 0) {
+		addFire = true;
+	}
+	else {
+		std::vector<AEntity *>::iterator it = box.begin();
+		while (it != box.end()) {
+			if (*it == this) {
+				++it;
+				continue;
+			}
+			if ((*it)->blockPropagation) {
+				continuePropagation = false;
+			}
+			if ((*it)->destructible) {
+				addFire = true;
+			}
+			if ((*it)->type == Type::BOMB && (*it)->active) {
+				(*it)->takeDamage(1);
+				it = box.begin();
+				continue;
+			}
+			(*it)->takeDamage(1);
+			if (it == box.end())
+				continue;
+			++it;
+		}
+	}
+	// add fire
+	if (addFire)
+		box.push_back(new Fire(game));
+
+	return continuePropagation;
 }
 
 // -- Exceptions errors --------------------------------------------------------

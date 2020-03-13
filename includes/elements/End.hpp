@@ -12,6 +12,7 @@ class End : public AObject {
 private:
 	End();
 	// Members
+	Block::Enum	_texture;
 
 public:
 	// Constructors
@@ -23,10 +24,8 @@ public:
 	End &operator=(End const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
-	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
+	bool	update(float const dTime);
+	bool	draw(Gui &gui);
 
 	// Exceptions
 	class EndException : public std::runtime_error {

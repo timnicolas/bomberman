@@ -14,7 +14,8 @@ Gui::Gui(GameInfo &gameInfo)
   _win(nullptr),
   _event(new SDL_Event()),
   _context(0),
-  _skybox(nullptr) {}
+  _skybox(nullptr),
+  _canMove(false) {}
 
 Gui::~Gui() {
 	logInfo("exit SDL");
@@ -64,18 +65,22 @@ void Gui::preUpdate(float const dtTime) {
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	// -- camera movement ------------------------------------------------------
-	// camera movement
-	if (Inputs::getKey(InputType::Enum::UP)) {
-		cam->processKeyboard(CamMovement::Forward, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::RIGHT)) {
-		cam->processKeyboard(CamMovement::Right, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::DOWN)) {
-		cam->processKeyboard(CamMovement::Backward, dtTime, false);
-	}
-	if (Inputs::getKey(InputType::Enum::LEFT)) {
-		cam->processKeyboard(CamMovement::Left, dtTime, false);
+	if (Inputs::getKey(InputType::Enum::CONFIRM))
+		_canMove = !_canMove;
+	if (_canMove) {
+		// camera movement
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
+			cam->processKeyboard(CamMovement::Forward, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
+			cam->processKeyboard(CamMovement::Right, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
+			cam->processKeyboard(CamMovement::Backward, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
+			cam->processKeyboard(CamMovement::Left, dtTime, false);
+		}
 	}
 }
 
@@ -296,7 +301,7 @@ bool	Gui::_initShaders() {
 
 /**
  * @brief Protect the resolution read in the config file and update it if required.
- * 
+ *
  * @return false if the screen is too small to display the game correctly.
  */
 bool	Gui::_protect_resolution() {
@@ -354,6 +359,20 @@ void Gui::enableCursor(bool enable) {
 		SDL_ShowCursor(SDL_DISABLE);
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
+}
+
+// -- drawCube -----------------------------------------------------------------
+void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
+	glm::mat4 model(1.0);
+	cubeShader->use();
+	cubeShader->setVec3("blockSize", scale);
+	// set block type
+	cubeShader->setInt("blockId", typeBlock);
+	// set block pos
+	model = glm::translate(glm::mat4(1.0), pos);
+	cubeShader->setMat4("model", model);
+	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+	cubeShader->unuse();
 }
 
 // -- change settings ----------------------------------------------------------

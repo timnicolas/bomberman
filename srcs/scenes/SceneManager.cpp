@@ -38,7 +38,7 @@ SceneManager::~SceneManager() {
 
 SceneManager & SceneManager::operator=(SceneManager const & rhs) {
 	(void)rhs;
-	logErr("You sould never call copy opertor for SceneManager");
+	logErr("You should never call copy operator for SceneManager");
 	return *this;
 }
 
@@ -120,7 +120,7 @@ bool SceneManager::_run() {
 		lastLoopMs = getMs();
 
 		if (_sceneMap.find(_scene) == _sceneMap.end()) {
-			logWarn("invalid scnene name: " << _scene);
+			logWarn("invalid scene name: " << _scene);
 		}
 		else {
 			/* update & draw scene */
@@ -193,7 +193,7 @@ AScene * SceneManager::loadScene(std::string const & name) {
 }
 AScene * SceneManager::_loadScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
-		logErr("invalid scnene name: " << name << " in loadScene");
+		logErr("invalid scene name: " << name << " in loadScene");
 		return _sceneMap[_scene];
 	}
 	if (_scene == name) {
@@ -218,7 +218,7 @@ AScene * SceneManager::getScene(std::string const & name) {
 }
 AScene * SceneManager::_getScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
-		logErr("invalid scnene name: " << name << " in getScene");
+		logErr("invalid scene name: " << name << " in getScene");
 		return _sceneMap[_scene];
 	}
 	return _sceneMap[name];
@@ -258,7 +258,7 @@ void SceneManager::_quit() {
 	_gameInfo.quit = true;
 }
 
-/* execption */
+/* exception */
 SceneManager::SceneManagerException::SceneManagerException()
 : std::runtime_error("SceneManager Exception") {}
 

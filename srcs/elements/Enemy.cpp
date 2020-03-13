@@ -1,13 +1,21 @@
 #include "Enemy.hpp"
+// #include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Enemy::Enemy(SceneGame &game) : ACharacter(game) {
 	type = Type::ENEMY;
 	name = "Enemy";
+	_direction = Dirrection::LEFT;
 }
 
 Enemy::~Enemy() {
+	// TODO(ebaudet): correct segfault
+	// std::vector<ACharacter *>::iterator find;
+	// find = std::find(game->enemies.begin(), game->enemies.end(), this);
+	// if (find != game->enemies.end()) {
+	// 	game->enemies.erase(find);
+	// }
 }
 
 Enemy::Enemy(Enemy const &src) : ACharacter(src) {
@@ -19,6 +27,7 @@ Enemy::Enemy(Enemy const &src) : ACharacter(src) {
 Enemy &Enemy::operator=(Enemy const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
+		_direction = rhs._direction;
 	}
 	return *this;
 }
@@ -32,8 +41,26 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Enemy updated at " << dTime.count() << std::endl;
+bool	Enemy::update(float const dTime) {
+	if (!active)
+		return true;
+	glm::vec3 pos = getPos();
+	if (pos == _moveTo(_direction, dTime)) {
+		_direction = static_cast<Dirrection::Enum>(((_direction + 1) % Dirrection::NB_DIRECTIONS));
+	}
+	return true;
+}
+
+/**
+ * @brief postUpdate is called each frame. After update()
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Enemy::postUpdate() {
+	if (!active) {
+		delete this;
+	}
 	return true;
 }
 
@@ -43,7 +70,8 @@ bool	Enemy::update(std::chrono::milliseconds dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::draw() {
+bool	Enemy::draw(Gui &gui) {
+	gui.drawCube(Block::IA, getPos());
 	return true;
 }
 
@@ -55,14 +83,14 @@ bool	Enemy::draw() {
  * @return Enemy*
  */
 Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
-	srand(time(NULL));
-
-	if (rate <= 0)
+	if (rate <= 0.0f)
 		return nullptr;
-	if (rate >= 1)
+	if (rate >= 1.0f)
 		return new Enemy(game);
 
 	int		percentRate = rand() % 100;
+	// logInfo("percentRate: " << percentRate);
+	// logInfo("rate: " << static_cast<int>(rate * 100));
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
 	return new Enemy(game);

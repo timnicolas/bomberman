@@ -26,6 +26,7 @@ int start(int ac, char const **av) {
 int main(int ac, char const **av) {
 	/* init program & load settings */
 	int ret = start(ac, av);
+	srand(time(NULL));
 
 	if (ret != EXIT_SUCCESS) {
 		return ret;

@@ -30,7 +30,6 @@ namespace EntityType {
 		BOARD,
 		BOARD_FLAG,
 		ENEMY,
-		BOMB,
 	};
 }
 
@@ -61,9 +60,8 @@ public:
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
 	std::vector<ACharacter *>	enemies;
-	std::vector<Bomb *>			bombs;
 
-	uint8_t						flags;
+	int							flags;
 	glm::uvec2					size;
 	int32_t						level;  // the current level ID (-1 for no level)
 	GameState::Enum				state;
@@ -80,10 +78,13 @@ public:
 
 	// Methods
 	std::string		print() const;
+	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
+	bool			positionInGame(glm::vec2 pos);
 
 	// SceneGame methods
 	virtual bool	init();
 	virtual bool	update();
+	virtual bool	postUpdate();
 	virtual bool	draw();
 	virtual void	load();
 	virtual void	unload();

@@ -8,6 +8,7 @@
 #define CAM_TARG_OFFSET glm::vec3(0.0f, 1.0f, 0.0f)
 #define CAM_SPEED 1.5f
 #define VOID_POS glm::ivec2 {-1, -1}
+#define VOID_POS3 glm::vec3 {-1, -1, -1}
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -48,6 +49,7 @@ class Gui {
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
+		void	drawCube(Block::Enum typeBlock, glm::vec3 pos = {0, 0, 0}, glm::vec3 scale = {1, 1, 1});
 		void	updateFullscreen();
 		void	udpateDimension();
 
@@ -67,6 +69,7 @@ class Gui {
 		Skybox			*_skybox;
 
 		glm::mat4		_projection;
+		bool			_canMove;
 
 		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;
 

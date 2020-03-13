@@ -13,6 +13,10 @@ class Player : public ACharacter {
 private:
 	Player();
 
+	// Methods
+	void	_move(float const dTime);
+	void	_putBomb();
+
 public:
 	// Members
 	int			bombs;
@@ -26,8 +30,8 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
-	bool	draw();
+	bool							update(float const dTime);
+	bool							draw(Gui &gui);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

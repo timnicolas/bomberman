@@ -12,6 +12,7 @@
 class Enemy : public ACharacter {
 private:
 	Enemy();
+	Dirrection::Enum	_direction;
 
 public:
 	// Members
@@ -27,8 +28,9 @@ public:
 	Enemy &operator=(Enemy const &rhs);
 
 	// Methods
-	bool			update(std::chrono::milliseconds dTime);
-	bool			draw();
+	bool			update(float const dTime);
+	bool			postUpdate();
+	bool			draw(Gui &gui);
 	static Enemy*	generateEnemy(SceneGame &game, float rate);
 
 	// Exceptions

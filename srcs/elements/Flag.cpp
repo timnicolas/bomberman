@@ -1,13 +1,20 @@
 #include "Flag.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
 	name = "Flag";
+	destructible = true;
+	blockPropagation = true;
 }
 
 Flag::~Flag() {
+	getPos();
+	if (game.clearFromBoard(this, {position.x, position.z})) {
+		game.flags--;
+	}
 }
 
 Flag::Flag(Flag const &src) : AObject(src) {
@@ -32,8 +39,20 @@ Flag &Flag::operator=(Flag const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Flag::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last Flag updated at " << dTime.count() << std::endl;
+bool	Flag::update(float const dTime) {
+	(void)dTime;
+	return true;
+}
+
+/**
+ * @brief postUpdate is called each frame. After update.
+ *
+ * @return true if success
+ * @return false if failure
+ */
+bool	Flag::postUpdate() {
+	if (active == false || alive == false)
+		delete this;
 	return true;
 }
 
@@ -43,25 +62,8 @@ bool	Flag::update(std::chrono::milliseconds dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Flag::draw() {
-	return true;
-}
-
-/**
- * @brief A Flag is destructible. This method always return true.
- *
- * @return true
- */
-bool	Flag::isDestructable() {
-	return true;
-}
-
-/**
- * @brief A Flag blocks the propagation. This method always return true.
- *
- * @return true
- */
-bool	Flag::blockPropagation() {
+bool	Flag::draw(Gui &gui) {
+	gui.drawCube(Block::FLAG, getPos());
 	return true;
 }
 
@@ -71,4 +73,4 @@ Flag::FlagException::FlagException()
 : std::runtime_error("Flag Exception") {}
 
 Flag::FlagException::FlagException(const char* whatArg)
-: std::runtime_error(std::string(std::string("BombError: ") + whatArg).c_str()) {}
+: std::runtime_error(std::string(std::string("FlagError: ") + whatArg).c_str()) {}

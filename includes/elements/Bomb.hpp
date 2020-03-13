@@ -12,6 +12,11 @@ class Bomb : public AObject {
 private:
 	Bomb();
 	// Members
+	float	_countdown;
+	int		_propagation;
+
+	// Methods
+	bool	_propagationExplosion(glm::vec2 const pos);
 
 public:
 	// Constructors
@@ -23,10 +28,12 @@ public:
 	Bomb &operator=(Bomb const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
-	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
+	bool	update(float const dTime);
+	bool	postUpdate();
+	void	explode(glm::vec2 const pos);
+	bool	draw(Gui &gui);
+	void	takeDamage(const int damage);
+
 
 	// Exceptions
 	class BombException : public std::runtime_error {
