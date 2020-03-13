@@ -346,6 +346,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
+						board[i][j].push_back(entity);
+						break;
 					case EntityType::BOARD:
 						board[i][j].push_back(entity);
 						break;

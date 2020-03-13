@@ -6,6 +6,7 @@
 # include <string>
 # include <unordered_set>
 # include <map>
+#include <stdexcept>
 
 /**
  * @brief Sound class for AudioManager
