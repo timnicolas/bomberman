@@ -17,6 +17,9 @@ namespace Dirrection {
 		NB_DIRECTIONS  // keep it at last position
 	};
 }
+/**
+ * @brief This is the base for Charactere (Player, AI, ...)
+ */
 class ACharacter : public AEntity {
 private:
 	ACharacter();

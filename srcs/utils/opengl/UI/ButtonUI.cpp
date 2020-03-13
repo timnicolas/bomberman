@@ -19,34 +19,27 @@ ButtonUI & ButtonUI::operator=(ButtonUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void ButtonUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	(void)mousePos;
-	(void)rightClick;
-	(void)leftClick;
+void ButtonUI::_update() {
 }
 
 /**
  * @brief this is the draw function for UI
  * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
  */
-void ButtonUI::draw() {
+void ButtonUI::_draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 
 	// draw text
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
 	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpPos.y += _borderSize;
 	tmpSize = _size;
@@ -71,5 +64,5 @@ void ButtonUI::draw() {
 	_drawRect(tmpPos, tmpSize, _color, secColor, factor);
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }

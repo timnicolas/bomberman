@@ -4,6 +4,9 @@
 #include <iostream>
 #include "includesOpengl.hpp"
 
+/**
+ * @brief basic material for shaders
+ */
 class Material {
 	public:
 		Material(glm::vec3 const diffuse = glm::vec3(.36f, .34f, .32f), \

@@ -3,6 +3,9 @@
 #include "includesOpengl.hpp"
 #include "ABaseUI.hpp"
 
+/**
+ * @brief this is the UI for text
+ */
 class TextUI : public ABaseUI {
 	public:
 		TextUI(glm::vec2 pos, glm::vec2 size);
@@ -11,9 +14,8 @@ class TextUI : public ABaseUI {
 
 		TextUI & operator=(TextUI const & rhs);
 
-		virtual void	draw();
-
 	protected:
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		virtual void	_update();
+		virtual void	_draw();
 		TextUI();
 };

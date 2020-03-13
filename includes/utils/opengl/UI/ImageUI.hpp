@@ -3,6 +3,9 @@
 #include "includesOpengl.hpp"
 #include "ABaseUI.hpp"
 
+/**
+ * @brief this is the UI for images
+ */
 class ImageUI : public ABaseUI {
 	public:
 		ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename,
@@ -12,9 +15,8 @@ class ImageUI : public ABaseUI {
 
 		ImageUI & operator=(ImageUI const & rhs);
 
-		virtual void	draw();
-
 	protected:
-		virtual void	_update(glm::vec2 mousePos, bool rightClick, bool leftClick);
+		virtual void	_update();
+		virtual void	_draw();
 		ImageUI();
 };

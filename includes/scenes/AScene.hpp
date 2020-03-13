@@ -4,6 +4,9 @@
 
 #include "Gui.hpp"
 
+/**
+ * @brief base object to implement in all scenes
+ */
 class AScene {
 	public:
 		AScene(Gui * gui, float const &dtTime);

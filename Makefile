@@ -69,7 +69,7 @@ ARGS =
 # compiler (g++ or clang++)
 CC = g++
 # flags for compilation
-CFLAGS = -Ofast -std=c++11 -Wall -Wextra -Wno-deprecated
+CFLAGS = -Ofast -std=c++17 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
 DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
@@ -111,10 +111,15 @@ SRC =	main.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
-		scenes/SceneMenu.cpp \
+		scenes/ASceneMenu.cpp \
+		scenes/SceneMainMenu.cpp \
+		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
-\
-		Inputs.cpp \
+		scenes/ScenePause.cpp \
+		scenes/SceneGameOver.cpp \
+		scenes/SceneVictory.cpp \
+		scenes/SceneExit.cpp \
+		scenes/SceneSettings.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -126,6 +131,7 @@ SRC =	main.cpp \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
 \
+		utils/opengl/Inputs.cpp \
 		utils/opengl/Texture.cpp \
 		utils/opengl/Shader.cpp \
 		utils/opengl/Camera.cpp \
@@ -135,6 +141,7 @@ SRC =	main.cpp \
 		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/ABaseUI_static.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
 		utils/opengl/UI/ButtonImageUI.cpp \
@@ -161,10 +168,15 @@ HEAD =	bomberman.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \
-		scenes/SceneMenu.hpp \
+		scenes/ASceneMenu.hpp \
+		scenes/SceneMainMenu.hpp \
+		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
-\
-		Inputs.hpp \
+		scenes/ScenePause.hpp \
+		scenes/SceneGameOver.hpp \
+		scenes/SceneVictory.hpp \
+		scenes/SceneExit.hpp \
+		scenes/SceneSettings.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
@@ -177,6 +189,7 @@ HEAD =	bomberman.hpp \
 		utils/SettingsJson.hpp \
 		utils/useGlm.hpp \
 \
+		utils/opengl/Inputs.hpp \
 		utils/opengl/Texture.hpp \
 		utils/opengl/Shader.hpp \
 		utils/opengl/Camera.hpp \
@@ -211,12 +224,14 @@ LIBS_HEAD =	glad/glad.h \
 # all flags for libs
 LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
 				-L ~/.brew/opt/freetype/lib -lfreetype \
+				-lboost_filesystem \
 
 # flags for libs on OSX only
 LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
 
 # flags for libs on LINUX only
-LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU
+LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
+					-lboost_system \
 
 # includes dir for external libs
 LIBS_INC =	~/.brew/include \
@@ -243,7 +258,7 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	sudo apt-get update -y
 	# glm
-	sudo apt-get -y install libglm-dev;
+	sudo apt-get -y install libglm-dev
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
@@ -402,15 +417,16 @@ all:
 ([ -z $(DEBUG) ] && [ -d $(DEBUG_DIR) ] && [ -f $(DEBUG_DIR)/DEBUG ])); then\
 		$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE);\
 	fi;
+
+	$(START)
+	@$(MAKE) $(MAKE_OPT) $(NAME)
+	$(END)
+
 ifneq ($(DEBUG),)
 	@touch $(DEBUG_DIR)/DEBUG
 else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
-
-	$(START)
-	@$(MAKE) $(MAKE_OPT) $(NAME)
-	$(END)
 
 install:
 	@for i in $(NEED_MAKE); do \

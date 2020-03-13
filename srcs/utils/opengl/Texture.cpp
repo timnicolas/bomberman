@@ -3,6 +3,16 @@
 #include "libs/stb_image.h"
 #include "Logging.hpp"
 
+/**
+ * @brief Load a texture from a file
+ *
+ * @param path The texture path
+ * @param inSpaceSRGB inSpaceSRGB option
+ * @param pixelateOnZoom Option to pixelate or show a smooth transition when zoom on an image
+ * @param width Pointer on int. If not nullptr, setted to the base width of the loaded texture
+ * @param height Pointer on int. If not nullptr, setted to the base height of the loaded texture
+ * @return uint32_t The texture ID
+ */
 uint32_t	textureFromFile(const std::string path, bool inSpaceSRGB, bool pixelateOnZoom, int * width, int * height) {
 	uint32_t	textureID;
     int			nrComponents;
@@ -68,6 +78,15 @@ uint32_t	textureFromFile(const std::string path, bool inSpaceSRGB, bool pixelate
     return textureID;
 }
 
+/**
+ * @brief Load a texture atlas from a file
+ *
+ * @param path The texture path
+ * @param inSpaceSRGB inSpaceSRGB option
+ * @param tileSize The size of an element
+ * @param layerCount The total number of elements
+ * @return uint32_t The texture ID
+ */
 uint32_t	textureAtlasFromFile(const std::string path, bool inSpaceSRGB, int tileSize, int layerCount) {
 	uint32_t	textureID;
     int			nrComponents;

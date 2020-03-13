@@ -11,9 +11,12 @@
 #define SHADER_TEXT_FS "shaders/text_fs.glsl"
 #define SHADER_TEXT_ROW_SIZE 4
 
+/**
+ * @brief render 2D text on an openGL 3D context
+ */
 class TextRender {
 	public:
-		explicit TextRender(uint32_t width, uint32_t height);
+		TextRender(uint32_t width, uint32_t height);
 		TextRender(TextRender const &src);
 		virtual ~TextRender();
 

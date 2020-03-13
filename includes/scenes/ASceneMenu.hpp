@@ -4,6 +4,9 @@
 #include "useGlm.hpp"
 
 #include "AScene.hpp"
+#include "SceneManager.hpp"
+
+/* import all UI objects */
 #include "ABaseUI.hpp"
 #include "ButtonUI.hpp"
 #include "ButtonImageUI.hpp"
@@ -11,23 +14,27 @@
 #include "TextUI.hpp"
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
-#include "SceneManager.hpp"
 
-class SceneMenu : public AScene {
+/**
+ * @brief Scene object to reimplement in all scenes for menu
+ *
+ * this object contains functions to create buttons, images, ...
+ */
+class ASceneMenu : public AScene {
 	public:
 		// Members
 
 		// Constructors
-		explicit SceneMenu(Gui * gui, float const &dtTime);
-		virtual ~SceneMenu();
-		SceneMenu(SceneMenu const &src);
+		ASceneMenu(Gui * gui, float const &dtTime);
+		virtual ~ASceneMenu();
+		ASceneMenu(ASceneMenu const &src);
 
 		// Operators
-		SceneMenu &operator=(SceneMenu const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneMenu& myClass);
+		ASceneMenu &operator=(ASceneMenu const &rhs);
+		friend std::ostream& operator<<(std::ostream& os, const ASceneMenu& myClass);
 
 		// AScene methods
-		virtual bool		init();
+		virtual bool		init() = 0;
 		virtual bool		update();
 		virtual bool		draw();
 		virtual void		load();
@@ -50,4 +57,6 @@ class SceneMenu : public AScene {
 
 	protected:
 		std::vector<ABaseUI *>	_buttons;
+
+		bool			_initBG();
 };

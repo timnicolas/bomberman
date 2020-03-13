@@ -5,8 +5,9 @@
 #include <stdexcept>
 #include "AEntity.hpp"
 
-// class SceneGame;
-
+/**
+ * @brief This is the base class for objects (Bomb, wall, ...)
+ */
 class AObject : public AEntity {
 private:
 	AObject();

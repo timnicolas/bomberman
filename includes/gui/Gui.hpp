@@ -13,43 +13,28 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <array>
-#include <unordered_map>
-#include <map>
 
 #include "bomberman.hpp"
-#include "Logging.hpp"
 #include "includesOpengl.hpp"
 #include "TextureManager.hpp"
-#include "TextRender.hpp"
-#include "Material.hpp"
 #include "Shader.hpp"
 #include "Camera.hpp"
 #include "Skybox.hpp"
 #include "debug.hpp"
-#include "ABaseUI.hpp"
 
 #define TITLE	"bomberman"
-
-// TODO(zer0nim): move GameInfo
-namespace State {
-	enum Enum {
-		S_PLAY,
-		S_PAUSE,
-		S_GAMEOVER,
-	};
-}
 
 struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
-	glm::ivec2	gameboard;
-	glm::ivec2	player;
-	State::Enum	play;
 	bool		quit;
 
 	GameInfo();
 };
 
+/**
+ * @brief This is the GUI class with function to init window, draw, ...
+ */
 class Gui {
 	public:
 		explicit	Gui(GameInfo &gameInfo);
@@ -57,13 +42,16 @@ class Gui {
 		Gui(Gui const &src);
 		Gui &operator=(Gui const &rhs);
 
-		void	updateInput(float const dtTime);
 		bool	init();
+		void	preUpdate(float const dtTime);
+		void	postUpdate(float const dtTime);
 		void	preDraw();
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);
 		void	enableCursor(bool enable);
 		void	drawCube(Block::Enum typeBlock, glm::vec3 pos = {0, 0, 0}, glm::vec3 scale = {1, 1, 1});
+		void	updateFullscreen();
+		void	udpateDimension();
 
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
@@ -89,4 +77,8 @@ class Gui {
 		bool	_init();
 		bool	_initOpengl();
 		bool	_initShaders();
+
+		static const int									_min_width = 800;
+		static const int									_min_height = 600;
+		bool	_protect_resolution();
 };

@@ -33,15 +33,35 @@ SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief set the name of this SettingsJson (used in toString())
+ *
+ * @param name the new SettingsJson's name
+ * @return SettingsJson& a reference to SettingsJson object
+ */
 SettingsJson & SettingsJson::name(std::string const & name) {
 	_name = name;
 	return *this;
 }
+/**
+ * @brief set the description of this SettingsJson (used in toString())
+ *
+ * @param description the new SettingsJson's description
+ * @return SettingsJson& a reference to SettingsJson object
+ */
 SettingsJson & SettingsJson::description(std::string const & description) {
 	_description = description;
 	return *this;
 }
 
+/**
+ * @brief load a nlohmann::json object in current SettingsJson
+ *
+ * @param json The nlohmann::json object
+ * @param jsonObjTmp The current SettingsJson object
+ * @return true if success
+ * @return false if error
+ */
 bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjTmp) {
 	bool ret = true;
 	for (auto it = json.begin(); it != json.end(); ++it) {
@@ -82,7 +102,9 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 					jsonObjTmp.update<uint64_t>(it.key()).setValue(it->get<uint64_t>());
 				}
 			}
-			else if (it->is_number_float() && jsonObjTmp.doubleMap.find(it.key()) != jsonObjTmp.doubleMap.end()) {
+			else if ((it->is_number_float() || it->is_number_integer())
+			&& jsonObjTmp.doubleMap.find(it.key()) != jsonObjTmp.doubleMap.end())
+			{
 				if (jsonObjTmp.update<double>(it.key()).isDisabledInFile()) {
 					logWarn("you can't set " << it.key() << " in setting file (isDisabledInFile)");
 					ret = false;
@@ -136,6 +158,15 @@ bool SettingsJson::loadJson(nlohmann::json const & json, SettingsJson & jsonObjT
 	return ret;
 }
 
+/**
+ * @brief Load a json file in SettingsJson object
+ *
+ * @param filename The file to load
+ * @return true if success
+ * @return false if error
+ *
+ * @throw SettingsException if the loading failed
+ */
 bool SettingsJson::loadFile(std::string const &filename) {
 	try {
 		std::ifstream fileStream(filename, std::ifstream::in);
@@ -158,6 +189,13 @@ bool SettingsJson::loadFile(std::string const &filename) {
 	return true;
 }
 
+/**
+ * @brief Save the current SettingsJson object in a file
+ *
+ * @param filename The file to save
+ *
+ * @throw SettingsException if the saving failed
+ */
 void SettingsJson::saveToFile(std::string const & filename) {
 	std::ofstream settingsFile(filename);
 	if (settingsFile.fail()) {
@@ -171,7 +209,7 @@ void SettingsJson::saveToFile(std::string const & filename) {
 }
 
 template<class T>
-int getSize(std::map<std::string, JsonObj<T> *> const & map, uint32_t opt) {
+static int getSize(std::map<std::string, JsonObj<T> *> const & map, uint32_t opt) {
 	int size = 0;
 	for (auto it = map.begin(); it != map.end(); it++) {
 		if (opt & JsonOpt::DISCARD_DISABLED && it->second->isDisabledInFile())
@@ -182,7 +220,7 @@ int getSize(std::map<std::string, JsonObj<T> *> const & map, uint32_t opt) {
 }
 
 template<class T>
-int jsonString(std::ostream & out, std::map<std::string, JsonObj<T> *> const & map, uint32_t opt, int nbTab,
+static int jsonString(std::ostream & out, std::map<std::string, JsonObj<T> *> const & map, uint32_t opt, int nbTab,
 int nbElemRemain, std::string const & before = "", std::string const & after = "") {
 	for (auto it = map.begin(); it != map.end(); it++) {
 		if (opt & JsonOpt::DISCARD_DISABLED && it->second->isDisabledInFile())
@@ -209,7 +247,7 @@ int nbElemRemain, std::string const & before = "", std::string const & after = "
 	return getSize<T>(map, opt);
 }
 
-int jsonStringRecursiv(std::ostream & out, std::map<std::string, JsonObj<SettingsJson> *> const & map,
+static int jsonStringRecursiv(std::ostream & out, std::map<std::string, JsonObj<SettingsJson> *> const & map,
 uint32_t opt, int nbTab) {
 	int nbRem = getSize<SettingsJson>(map, opt);
 	for (auto it = map.begin(); it != map.end(); it++) {
@@ -253,6 +291,20 @@ uint32_t opt, int nbTab) {
 	return getSize<SettingsJson>(map, opt);
 }
 
+/**
+ * @brief Convert SettingsJson to string
+ *
+ * You can change print options:
+ *  - JsonOpt::NO_OPT -> default value (just print the json)
+ *  - JsonOpt::DISCARD_DISABLED -> dont print values disard in file (used to print the variable in a file)
+ *  - JsonOpt::VERBOSE -> verbose mode: print description, min, max, ...
+ *  - JsonOpt::COLOR -> enable color to print
+ *
+ * @param opt All the option, you can use pipe to set multiple options (JsonOpt::VERBOSE | JsonOpt::COLOR)
+ * @param tabOffset Don't use this option
+ * @param termWithComma Don't use this option
+ * @return std::string The SettingsJson object as string
+ */
 std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset, bool termWithComma) const {
 	std::ostringstream out;
 	for (uint32_t i = 0; i < tabOffset; i++)
