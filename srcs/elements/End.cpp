@@ -1,12 +1,14 @@
 #include "End.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
 	name = "End";
+	_texture = Block::END;
 }
-
+\
 End::~End() {
 }
 
@@ -32,8 +34,10 @@ End &End::operator=(End const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	End::update(std::chrono::milliseconds dTime) {
-	std::cout << "Last End updated at " << dTime.count() << std::endl;
+bool	End::update(float const dTime) {
+	(void)dTime;
+	if (game.flags <= 0)
+		_texture = Block::END_OPEN;
 	return true;
 }
 
@@ -43,25 +47,8 @@ bool	End::update(std::chrono::milliseconds dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	End::draw() {
-	return true;
-}
-
-/**
- * @brief The End is indestrutible. This method always return false;
- *
- * @return false
- */
-bool	End::isDestructable() {
-	return false;
-}
-
-/**
- * @brief The End blocks the propagation. This method always return true.
- *
- * @return true
- */
-bool	End::blockPropagation() {
+bool	End::draw(Gui &gui) {
+	gui.drawCube(_texture, getPos());
 	return true;
 }
 

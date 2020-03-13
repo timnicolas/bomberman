@@ -23,13 +23,13 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 	}
 	_controls.name("controls").description("controls settings");
 	_controls.add<SettingsJson>("keys");
-	_controls.j("keys").add<int64_t>("up", SDL_SCANCODE_W) \
+	_controls.j("keys").add<int64_t>("up", SDL_SCANCODE_UP) \
 		.setMin(4).setMax(286).setDescription("move up.");
-	_controls.j("keys").add<int64_t>("down", SDL_SCANCODE_S) \
+	_controls.j("keys").add<int64_t>("down", SDL_SCANCODE_DOWN) \
 		.setMin(4).setMax(286).setDescription("move down.");
-	_controls.j("keys").add<int64_t>("left", SDL_SCANCODE_A) \
+	_controls.j("keys").add<int64_t>("left", SDL_SCANCODE_LEFT) \
 		.setMin(4).setMax(286).setDescription("move left.");
-	_controls.j("keys").add<int64_t>("right", SDL_SCANCODE_D) \
+	_controls.j("keys").add<int64_t>("right", SDL_SCANCODE_RIGHT) \
 		.setMin(4).setMax(286).setDescription("move right.");
 	_controls.j("keys").add<int64_t>("action", SDL_SCANCODE_SPACE) \
 		.setMin(4).setMax(286).setDescription("action command.");

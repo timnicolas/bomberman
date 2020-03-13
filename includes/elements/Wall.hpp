@@ -12,10 +12,12 @@ class Wall : public AObject {
 private:
 	Wall();
 	// Members
+	// graphic information.
+	Block::Enum		_blockType;
 
 public:
 	// Constructors
-	explicit Wall(SceneGame &game);
+	explicit Wall(SceneGame &game, Block::Enum blockType = Block::DURABLE_WALL);
 	~Wall();
 	Wall(Wall const &src);
 
@@ -23,10 +25,8 @@ public:
 	Wall &operator=(Wall const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
-	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
+	bool	update(float const dTime);
+	bool	draw(Gui &gui);
 
 	// Exceptions
 	class WallException : public std::runtime_error {

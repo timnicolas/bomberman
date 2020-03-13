@@ -7,7 +7,9 @@ ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
 	category = Category::MOBILE;
 	lives = 1;
 	speed = 1.0;
-	pos = {0.0, 0.0};
+	position = {0.0, 0.0, 0.0};
+	blockPropagation = false;
+	destructible = true;
 }
 
 ACharacter::~ACharacter() {
@@ -24,7 +26,8 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 		AEntity::operator=(rhs);
 		lives = rhs.lives;
 		speed = rhs.speed;
-		pos = rhs.pos;
+		position = rhs.position;
+		_noCollisionObjects = rhs._noCollisionObjects;
 	}
 	return *this;
 }
@@ -36,8 +39,8 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
  *
  * @return glm::vec2
  */
-glm::vec2		ACharacter::getPos() {
-	return pos;
+glm::vec3		ACharacter::getPos() {
+	return position;
 }
 
 /**
@@ -46,28 +49,9 @@ glm::vec2		ACharacter::getPos() {
  * @param pos
  * @return ACharacter*
  */
-ACharacter		*ACharacter::init(glm::vec2 pos) {
-	this->pos = pos;
+ACharacter		*ACharacter::init(glm::vec3 pos) {
+	this->position = pos;
 	return this;
-}
-
-/**
- * @brief A Character is destructible. This method always return true.
- *
- * @return true
- */
-bool	ACharacter::isDestructable() {
-	return true;
-}
-
-/**
- * @brief A Character doesn't block the progation. This method always return
- * false.
- *
- * @return false
- */
-bool	ACharacter::blockPropagation() {
-	return false;
 }
 
 /**
@@ -78,6 +62,132 @@ bool	ACharacter::blockPropagation() {
  */
 bool	ACharacter::isAlive() {
 	return lives;
+}
+
+/**
+ * @brief Character Take <damage> damages.
+ *
+ * @param damage
+ */
+void	ACharacter::takeDamage(const int damage) {
+	if (!destructible)
+		return;
+	lives -= damage;
+	if (lives <= 0) {
+		lives = 0;
+		alive = false;
+	}
+}
+
+/**
+ * @brief get a list of entity in collision with the Player at position pos.
+ *
+ * @param pos default VOID_POS3
+ * @param offset default offset = 0.05f. need to be a positive value.
+ * @return std::unordered_set<AEntity *> collisions
+ */
+std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offset) {
+	if (pos == VOID_POS3)
+		pos = getPos();
+	std::unordered_set<AEntity *> collisions;
+
+	for (auto &&entity : game.board[pos.x + offset][pos.z + offset]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + offset]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + offset][pos.z + 1.0 - offset]) {
+		collisions.insert(entity);
+	}
+	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + 1.0 - offset]) {
+		collisions.insert(entity);
+	}
+	return collisions;
+}
+
+/**
+ * @brief Clear entity from list of no collision objects
+ *
+ * @param entity
+ * @return true if element cleared.
+ * @return false if no element to clear.
+ */
+bool	ACharacter::clearNoCollisionObjects(AEntity *entity) {
+	if (_noCollisionObjects.find(entity) != _noCollisionObjects.end()) {
+		_noCollisionObjects.erase(entity);
+		return true;
+	}
+	return false;
+}
+
+// -- Protected Methods --------------------------------------------------------
+
+/**
+ * @brief clear _noCollisionObjects list if not in <collisions>
+ *
+ * @param collisions
+ */
+void	ACharacter::_clearCollisionObjects(std::unordered_set<AEntity *> collisions) {
+	std::unordered_set<AEntity *>::iterator it = _noCollisionObjects.begin();
+	while (it != _noCollisionObjects.end()) {
+		if (collisions.find(*it) == collisions.end()) {
+			it = _noCollisionObjects.erase(it);
+		}
+		else {
+			it++;
+		}
+	}
+}
+
+/**
+ * @brief Check if there are collisions that cannot be passed.
+ *
+ * @param collisions list of AEntity collisions
+ * @return true
+ * @return false
+ */
+bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
+	for (auto &&entity : collisions) {
+		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
+			continue;
+		if (entity->type == Type::FIRE)
+			continue;
+		return false;
+	}
+	return true;
+}
+
+/**
+ * @brief Move to direction if possible.
+ *
+ * @param direction
+ * @param dTime
+ * @return glm::vec3 finale position
+ */
+glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
+	glm::vec3 						pos = getPos();
+	std::unordered_set<AEntity *>	collisions;
+
+	switch (direction) {
+		case Dirrection::UP:
+			pos.z -= speed * dTime;
+			break;
+		case Dirrection::RIGHT:
+			pos.x += speed * dTime;
+			break;
+		case Dirrection::DOWN:
+			pos.z += speed * dTime;
+			break;
+		case Dirrection::LEFT:
+			pos.x -= speed * dTime;
+			break;
+		default:
+			return position;
+	}
+	if (_canMove(getCollision(pos)))
+		position = pos;
+	return position;
 }
 
 // -- Exceptions errors --------------------------------------------------------

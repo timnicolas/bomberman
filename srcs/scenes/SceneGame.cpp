@@ -7,6 +7,7 @@
 #include "Player.hpp"
 #include "Enemy.hpp"
 #include "Wall.hpp"
+#include "Crispy.hpp"
 #include "Flag.hpp"
 #include "End.hpp"
 
@@ -16,14 +17,14 @@
 
 std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"player", {EntityType::PLAYER, [](SceneGame &game) -> AEntity* {return new Player(game);}}},
-	{"bomb", {EntityType::BOMB, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
+	{"bomb", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
 	{"wall", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
-	{"block", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
-	{"crispy", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
+	{"block", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game, Block::BLOCK);}}},
+	{"crispy", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Crispy(game);}}},
 	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 1.0);}}},
+	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 0.1f);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -33,7 +34,6 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 {
 	player = nullptr;
 	enemies = std::vector<ACharacter *>();
-	bombs = std::vector<Bomb *>();
 	flags = 0;
 	size = {0, 0};
 	level = NO_LEVEL;
@@ -76,7 +76,6 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		board = rhs.board;
 		player = rhs.player;
 		enemies = rhs.enemies;
-		bombs = rhs.bombs;
 		flags = rhs.flags;
 		size = rhs.size;
 		level = rhs.level;
@@ -116,9 +115,48 @@ bool			SceneGame::init() {
 		}
 		i++;
 	}
+
 	return true;
 }
 
+/**
+ * @brief clear entity at position pos from board.
+ *
+ * @param entity
+ * @param pos
+ * @return true if cleared
+ * @return false if not found
+ */
+bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
+	std::vector<AEntity *> &box = board[pos.x][pos.y];
+	std::vector<AEntity *>::iterator find = std::find(box.begin(), box.end(), entity);
+	if (find == box.end())
+		return false;
+	box.erase(find);
+	return true;
+}
+
+/**
+ * @brief Check if the given pos is in the board.
+ *
+ * @param pos
+ * @return true
+ * @return false
+ */
+bool	SceneGame::positionInGame(glm::vec2 pos) {
+	if (pos.x < 0 || pos.x > size.x || pos.y < 0 || pos.y > size.y)
+		return false;
+	return true;
+}
+
+// -- AScene Methods -----------------------------------------------------------
+
+/**
+ * @brief update is called each frame.
+ *
+ * @return true
+ * @return false
+ */
 bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
@@ -137,27 +175,60 @@ bool	SceneGame::update() {
 		return true;
 	}
 
-	// for (auto &&board_it1 : board) {
-	// 	for (auto &&board_it1 : board_it1) {
-	// 		for (AEntity *board_it2 : board_it1) {
-	// 			if (!board_it2->update(_dtTime))
-	// 				return false;
-	// 		}
-	// 	}
-	// }
-	// for (auto &&enemy : enemies) {
-	// 	if (!enemy->update(_dtTime))
-	// 		return false;
-	// }
-	// for (auto &&bomb : bombs) {
-	// 	if (!bomb->update(_dtTime))
-	// 		return false;
-	// }
-	// player->update(_dtTime);
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->update(_dtTime))
+					return false;
+			}
+		}
+	}
+	for (auto &&enemy : enemies) {
+		if (!enemy->update(_dtTime))
+			return false;
+	}
+	player->update(_dtTime);
+
+	return postUpdate();
+}
+
+/**
+ * @brief postUpdate is called each frame, after update.
+ *
+ * @return true
+ * @return false
+ */
+bool	SceneGame::postUpdate() {
+	player->postUpdate();
+	for (auto &&enemy : enemies) {
+		if (!enemy->postUpdate())
+			return false;
+	}
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			std::vector<AEntity *>::iterator it = board_it1.begin();
+			AEntity * copy;
+			while (it != board_it1.end()) {
+				copy = *it;
+				if (!(*it)->postUpdate())
+					return false;
+				if (it == board_it1.end())
+					continue;
+				if (copy == *it)
+					it++;
+			}
+		}
+	}
 
 	return true;
 }
 
+/**
+ * @brief draw is called each frame to draw the Game Scene.
+ *
+ * @return true
+ * @return false
+ */
 bool	SceneGame::draw() {
 	// use cubeShader, set uniform and activate textures
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -167,11 +238,27 @@ bool	SceneGame::draw() {
 	glBindVertexArray(_gui->cubeShVao);
 	_gui->textureManager->activateTextures();
 	_gui->cubeShader->setInt("blockId", 0);
+	_gui->cubeShader->unuse();
 
-	// draw scene
-	_drawBoard();
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (!board_it2->draw(*_gui))
+					return false;
+			}
+		}
+	}
+	for (auto &&enemy : enemies) {
+		if (!enemy->draw(*_gui))
+			return false;
+	}
+	player->draw(*_gui);
+
+	// draw board
+	_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, size.y - 1.0f}, {size.x, 0.3f, size.y});
 
 	// release cubeShader and textures
+	_gui->cubeShader->use();
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
@@ -206,7 +293,15 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		level = NO_LEVEL;
 		return false;
 	}
-	return _loadLevel(levelId);
+	bool result = _loadLevel(levelId);
+
+	_gui->cam->pos = {size.x / 2, 25.0f, 2 * size.y};
+	_gui->cam->lookAt(glm::vec3(
+		size.x / 2, 1.0f,
+		size.y / 1.61803398875f
+	));
+
+	return result;
 }
 
 // -- Private Methods ----------------------------------------------------------
@@ -293,10 +388,6 @@ bool	SceneGame::_unloadLevel() {
 		delete enemy;
 	}
 	enemies.clear();
-	for (auto &&bomb : bombs) {
-		delete bomb;
-	}
-	bombs.clear();
 	level = NO_LEVEL;
 	return true;
 }
@@ -323,6 +414,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	time = std::chrono::seconds(lvl.i("time"));
 
+	flags = 0;
 	AEntity *entity;
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");
@@ -338,11 +430,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
-						player->init({i, j});
-						break;
-					case EntityType::BOMB:
-						bombs.push_back(reinterpret_cast<Bomb *>(entity));
-						board[i][j].push_back(entity);
+						player->init({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
@@ -353,7 +441,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						break;
 					case EntityType::ENEMY:
 						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
-						enemies.back()->init({i, j});
+						enemies.back()->init({i, 0, j});
 						break;
 					}
 				}
@@ -365,48 +453,6 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
 
 	return true;
-}
-
-// -- _drawBoard ---------------------------------------------------------------
-void	SceneGame::_drawBoard() {
-	if (level == NO_LEVEL)
-		return;
-
-	glm::mat4 model(1.0);
-	glm::vec3 pos;
-
-	// board floor
-	_gui->cubeShader->setVec3("blockSize", {size.x, 1.0f, size.y});
-	_gui->cubeShader->setInt("blockId", Block::FLOOR);  // set block type
-	pos = glm::vec3(0.0f, -1.0f, size.y - 1);
-	model = glm::translate(glm::mat4(1.0), pos);
-	_gui->cubeShader->setMat4("model", model);
-	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-
-	// -- draw entity ----------------------------------------------------------
-	_gui->cubeShader->setVec3("blockSize", {1.0f, 1.0f, 1.0f});
-	for (uint32_t x = 0; x < size.x; x++) {
-		for (uint32_t y = 0; y < size.y; y++) {
-			for (AEntity *entity : board[x][y]) {
-				bool draw = true;
-				switch (entity->type) {
-					case Type::WALL:
-						_gui->cubeShader->setInt("blockId", Block::DURABLE_WALL);
-						break;
-					default:
-						draw = false;
-						break;
-				}
-				if (draw) {
-					// set block pos
-					pos = glm::vec3(x, 0.0f, y);
-					model = glm::translate(glm::mat4(1.0), pos);
-					_gui->cubeShader->setMat4("model", model);
-					glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
-				}
-			}
-		}
-	}
 }
 
 // -- getter -------------------------------------------------------------------

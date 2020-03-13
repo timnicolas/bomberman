@@ -23,10 +23,9 @@ public:
 	Flag &operator=(Flag const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds dTime);
-	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
+	bool	update(float const dTime);
+	bool	postUpdate();
+	bool	draw(Gui &gui);
 
 	// Exceptions
 	class FlagException : public std::runtime_error {
