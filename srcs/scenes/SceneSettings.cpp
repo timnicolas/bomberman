@@ -438,6 +438,5 @@ void					SceneSettings::_returnQuit() {
 		Inputs::cancelConfiguration();
 		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
-	AudioManager::unloadSound("sounds/bell.ogg");
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }
