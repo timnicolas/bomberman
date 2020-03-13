@@ -1,7 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <time.h>
-// #include <bits/stdc++.h>
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
@@ -11,6 +10,8 @@
 #include "Crispy.hpp"
 #include "Flag.hpp"
 #include "End.hpp"
+
+#include "SceneManager.hpp"
 
 // -- Static members initialisation --------------------------------------------
 
@@ -35,14 +36,12 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 	enemies = std::vector<ACharacter *>();
 	flags = 0;
 	size = {0, 0};
-	level = 0;
+	level = NO_LEVEL;
 	state = GameState::PLAY;
 	time = std::chrono::milliseconds(0);
 }
 
 SceneGame::~SceneGame() {
-	logInfo("Clean Game Level");
-
 	for (auto &&box : board) {
 		for (auto &&row : box) {
 			for (auto &&element : row) {
@@ -57,6 +56,11 @@ SceneGame::~SceneGame() {
 	for (auto &&enemy : enemies) {
 		delete enemy;
 	}
+
+	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
+		delete *it;
+	}
+	_mapsList.clear();
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -68,6 +72,7 @@ SceneGame::SceneGame(SceneGame const &src)
 
 SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	if ( this != &rhs ) {
+		logWarn("SceneGame object copied");
 		board = rhs.board;
 		player = rhs.player;
 		enemies = rhs.enemies;
@@ -102,15 +107,14 @@ std::string		SceneGame::print() const {
  * init game method.
  */
 bool			SceneGame::init() {
-	logInfo("SceneGame init");
 	_gui->enableCursor(false);
-	_loadLevel(1);
-
-	_gui->cam->pos = {size.x / 2, 25.0f, 2 * size.y};
-	_gui->cam->lookAt(glm::vec3(
-		size.x / 2, 1.0f,
-		size.y / 1.61803398875f
-	));
+	int32_t i = 0;
+	while (_initJsonLevel(i)) {
+		if (i >= 100000) {  // max level
+			break;
+		}
+		i++;
+	}
 
 	return true;
 }
@@ -154,6 +158,23 @@ bool	SceneGame::positionInGame(glm::vec2 pos) {
  * @return false
  */
 bool	SceneGame::update() {
+	if (level == NO_LEVEL)
+		return true;
+
+	// TODO(tnicolas42) remove the scene loader
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_1)) {
+		SceneManager::loadScene(SceneNames::PAUSE);
+		return true;
+	}
+	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_2)) {
+		SceneManager::loadScene(SceneNames::VICTORY);
+		return true;
+	}
+	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_3)) {
+		SceneManager::loadScene(SceneNames::GAME_OVER);
+		return true;
+	}
+
 	logDebug("update");
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
@@ -210,7 +231,6 @@ bool	SceneGame::postUpdate() {
  * @return false
  */
 bool	SceneGame::draw() {
-	logDebug("draw");
 	// use cubeShader, set uniform and activate textures
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->cubeShader->use();
@@ -251,83 +271,138 @@ bool	SceneGame::draw() {
 
 /**
  * @brief called when the scene is loaded
- *
  */
 void SceneGame::load() {
 	_gui->enableCursor(false);
 }
 /**
  * @brief called when the scene is unloaded
- *
  */
 void SceneGame::unload() {
 }
 
+/**
+ * @brief load a level by ID
+ *
+ * @param levelId the level ID
+ * @return true if the level loading is a success
+ * @return false if the level loading failed
+ */
+bool SceneGame::loadLevel(int32_t levelId) {
+	logInfo("load level " << levelId);
+	if (_unloadLevel() == false) {
+		level = NO_LEVEL;
+		return false;
+	}
+	bool result = _loadLevel(levelId);
+
+	_gui->cam->pos = {size.x / 2, 25.0f, 2 * size.y};
+	_gui->cam->lookAt(glm::vec3(
+		size.x / 2, 1.0f,
+		size.y / 1.61803398875f
+	));
+
+	return result;
+}
+
 // -- Private Methods ----------------------------------------------------------
 
-bool	SceneGame::_initJsonLevel(SettingsJson &lvl, uint8_t levelId) {
-	logInfo("SceneGame _initJsonLevel");
+bool	SceneGame::_initJsonLevel(int32_t levelId) {
+	// level$(levelID)
+	std::string		levelName = "level" + std::to_string(levelId);
+	// $(mapsPath)/$(levelName).json
+	std::string		filename = s.s("mapsPath") + "/" + levelName + ".json";
+	if (fileExists(filename) == false) {
+		return false;  // file does not exist
+	}
 
-	std::string		filename = "maps/level"+std::to_string(levelId)+".json";
+	SettingsJson *	lvl = new SettingsJson();
 
-	lvl.name("level"+std::to_string(levelId)).description("Level map");
-	lvl.add<std::string>("level"+std::to_string(levelId)+"Filename", filename);
+	lvl->name(levelName).description("Level map");
+	lvl->add<std::string>(levelName + "Filename", filename);
 
 	// File json definition:
-	lvl.add<std::string>("name");
-	lvl.add<uint64_t>("height", 0).setMin(0);
-	lvl.add<uint64_t>("width", 0).setMin(0);
-	lvl.add<int64_t>("time", 0).setMin(-1).setMax(86400);
+	lvl->add<std::string>("name");
+	lvl->add<std::string>("img", "bomberman-assets/img/icon_level1");
+	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
+	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
+	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
 
-	lvl.add<SettingsJson>("objects");
-		lvl.j("objects").add<std::string>("empty", " ");
+	lvl->add<SettingsJson>("objects");
+		lvl->j("objects").add<std::string>("empty", " ");
 		// unique player on game.
-		lvl.j("objects").add<std::string>("player", "p");
+		lvl->j("objects").add<std::string>("player", "p");
 		// destructing element dropped by the player.
-		lvl.j("objects").add<std::string>("bomb", "x");
+		lvl->j("objects").add<std::string>("bomb", "x");
 		// indestructible element outside the board
-		lvl.j("objects").add<std::string>("wall", "w");
+		lvl->j("objects").add<std::string>("wall", "w");
 		// indestructible element of the board
-		lvl.j("objects").add<std::string>("block", "b");
+		lvl->j("objects").add<std::string>("block", "b");
 		// destructable element, who can give bonuses randomly
-		lvl.j("objects").add<std::string>("crispy", "c");
+		lvl->j("objects").add<std::string>("crispy", "c");
 		// flag to get end
-		lvl.j("objects").add<std::string>("flag", "f");
+		lvl->j("objects").add<std::string>("flag", "f");
 		// end of level when all flag
-		lvl.j("objects").add<std::string>("end", "e");
+		lvl->j("objects").add<std::string>("end", "e");
 		// no spawn zone
-		lvl.j("objects").add<std::string>("safe", "_");
+		lvl->j("objects").add<std::string>("safe", "_");
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("line", "");
-	lvl.addList<SettingsJson>("map", mapPattern);
+	lvl->addList<SettingsJson>("map", mapPattern);
 
 	SettingsJson * bonusPattern = new SettingsJson();
 	bonusPattern->add<SettingsJson>("pos");
 		bonusPattern->j("pos").add<uint64_t>("x", 0);
 		bonusPattern->j("pos").add<uint64_t>("y", 0);
 	bonusPattern->add<std::string>("type", "");
-	lvl.addList<SettingsJson>("bonus", bonusPattern);
+	lvl->addList<SettingsJson>("bonus", bonusPattern);
 
 	try {
-		if (lvl.loadFile(filename) == false) {
+		if (lvl->loadFile(filename) == false) {
 			// warning when loading settings
-			return false;
+			return true;
 		}
 	} catch(SettingsJson::SettingsException const & e) {
 		logErr(e.what());
 		return false;
 	}
 
+	_mapsList.push_back(lvl);
+
 	return true;
 }
 
-bool	SceneGame::_loadLevel(uint8_t levelId) {
-	logInfo("SceneGame _loadLevel");
-	SettingsJson	lvl;
+bool	SceneGame::_unloadLevel() {
+	if (level == NO_LEVEL)
+		return true;
 
-	if (!_initJsonLevel(lvl, levelId))
+	for (auto &&box : board) {
+		for (auto &&row : box) {
+			for (auto &&element : row) {
+				delete element;
+			}
+		}
+	}
+	board.clear();
+	for (auto &&enemy : enemies) {
+		delete enemy;
+	}
+	enemies.clear();
+	level = NO_LEVEL;
+	return true;
+}
+
+bool	SceneGame::_loadLevel(int32_t levelId) {
+	if (levelId == NO_LEVEL)
+		return true;
+	if (levelId > (int32_t)_mapsList.size()) {
+		logErr("unable to load level " << levelId << ": doesn't exist");
 		return false;
+	}
+
+	level = levelId;  // save new level ID
+	SettingsJson & lvl = *(_mapsList[level]);
 
 	// Getting json info
 	size = {lvl.u("width"), lvl.u("height")};
@@ -373,5 +448,24 @@ bool	SceneGame::_loadLevel(uint8_t levelId) {
 		}
 	}
 
+	// set camera
+	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
+
 	return true;
+}
+
+// -- getter -------------------------------------------------------------------
+
+uint32_t	SceneGame::getNbLevel() const { return _mapsList.size(); }
+std::string	SceneGame::getLevelName(int32_t levelId) const {
+	if (levelId == NO_LEVEL)
+		return "NO_LEVEL";
+	return _mapsList[levelId]->s("name");
+}
+std::string	SceneGame::getLevelImg(int32_t levelId) const {
+	if (levelId == NO_LEVEL) {
+		logErr("can't get image for level 'NO_LEVEL'");
+		return "";
+	}
+	return _mapsList[levelId]->s("img");
 }

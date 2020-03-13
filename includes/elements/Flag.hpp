@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+/**
+ * @brief This is the flag object
+ */
 class Flag : public AObject {
 private:
 	Flag();

@@ -1,6 +1,9 @@
 #include "Gui.hpp"
 #include "Logging.hpp"
 #include "Inputs.hpp"
+#include "SceneManager.hpp"
+#include "Material.hpp"
+#include "ABaseUI.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -51,13 +54,13 @@ Gui &Gui::operator=(Gui const &rhs) {
 	return *this;
 }
 
-void Gui::updateInput(float const dtTime) {
-	// manage inputs
-	// quit
-	if (Inputs::shouldQuit() || Inputs::getKey(InputType::Enum::CANCEL)) {
-		logDebug("quiting...");
-		gameInfo.quit = true;
-	}
+/**
+ * @brief Called each frame before others updates functions
+ *
+ * @param dtTime The delta time since last call
+ */
+void Gui::preUpdate(float const dtTime) {
+	/* manage mouse movement */
 	// mouse motion
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
@@ -81,13 +84,44 @@ void Gui::updateInput(float const dtTime) {
 	}
 }
 
+/**
+ * @brief Called each frame after others updates functions
+ *
+ * @param dtTime The delta time since last call
+ */
+void Gui::postUpdate(float const dtTime) {
+	(void)dtTime;
+	/* quit if needed */
+	if (Inputs::shouldQuit()
+	|| (Inputs::getKeyUp(InputType::Enum::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
+	{
+		#if ASK_BEFORE_QUIT
+			if (SceneManager::getSceneName() != SceneNames::EXIT) {
+				SceneManager::loadScene(SceneNames::EXIT);
+			}
+		#else
+			SceneManager::quit();
+		#endif
+	}
+}
+
 // -- init ---------------------------------------------------------------------
+/**
+ * @brief init the gui object
+ *
+ * @return true if the gui was init successfully
+ * @return false if there is an error in init
+ */
 bool	Gui::init() {
 	logInfo("create gui");
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		logErr("while loading SDL: " << SDL_GetError());
 		SDL_Quit();
+		return false;
+	}
+
+	if (!_protect_resolution()) {
 		return false;
 	}
 
@@ -104,6 +138,9 @@ bool	Gui::init() {
 	/* init UI interface */
 	try {
 		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
+		ABaseUI::loadFont("title", s.j("font").s("file"), s.j("font").u("size") * 3);
+		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);
+		ABaseUI::showHelp(DEBUG_SHOW_HELP);
 	}
 	catch (ABaseUI::UIException & e) {
 		logErr(e.what());
@@ -115,6 +152,12 @@ bool	Gui::init() {
 
 
 // -- _initOpengl --------------------------------------------------------------
+/**
+ * @brief init openGL (called in Gui::init)
+ *
+ * @return true if success
+ * @return false if error
+ */
 bool	Gui::_initOpengl() {
 	// opengl version 4.1
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
@@ -132,6 +175,11 @@ bool	Gui::_initOpengl() {
 	if (_win == nullptr) {
 		logErr("while loading OpenGL: " << SDL_GetError());
 		return false;
+	}
+	if (s.j("graphics").b("fullscreen")) {
+		if (SDL_SetWindowFullscreen(_win, SDL_WINDOW_FULLSCREEN) != 0) {
+			logErr("failed to set window fullscreen.")
+		}
 	}
 
 	// disable cursor for fps camera
@@ -158,7 +206,12 @@ bool	Gui::_initOpengl() {
 }
 
 // -- _initShaders -------------------------------------------------------------
-// create opengl shader stuffs here (buffers, camera, ...)
+/**
+ * @brief create opengl shader stuffs here (buffers, camera, ...)
+ *
+ * @return true if success
+ * @return false if error
+ */
 bool	Gui::_initShaders() {
 	// -- create shader -`------------------------------------------------------
 	cubeShader = new Shader("shaders/cube_vs.glsl",
@@ -196,8 +249,6 @@ bool	Gui::_initShaders() {
 
 	// -- camera ---------------------------------------------------------------
 	cam = new Camera({0.0f, 25.0f, 0.0f});
-	cam->lookAt(glm::vec3(gameInfo.gameboard[0] / 2 + 0.5f, 1.0f,
-		gameInfo.gameboard[1] * 0.7f));
 
 	float angle = cam->zoom;
 	float ratio = static_cast<float>(gameInfo.windowSize.x) / gameInfo.windowSize.y;
@@ -248,8 +299,57 @@ bool	Gui::_initShaders() {
 	return true;
 }
 
+/**
+ * @brief Protect the resolution read in the config file and update it if required.
+ *
+ * @return false if the screen is too small to display the game correctly.
+ */
+bool	Gui::_protect_resolution() {
+	bool			resolution_corrected = false;
+	SDL_DisplayMode dm;
+	int64_t			&width = s.j("graphics").i("width");
+	int64_t			&height = s.j("graphics").i("height");
+
+	if (SDL_GetDesktopDisplayMode(0, &dm) != 0) {
+		logErr("SDL_GetDesktopDisplayMode failed: %s" << SDL_GetError());
+	}
+	if (dm.w < Gui::_min_width || dm.h < Gui::_min_height) {
+		logWarn("Screen too small.");
+		return false;
+	}
+	logDebug("width max: " << dm.w << " ; height max: " << dm.h);
+	if (dm.w < width) {
+		width = dm.w;
+		resolution_corrected = true;
+	}
+	if (dm.h < height) {
+		height = dm.h;
+		resolution_corrected = true;
+	}
+	if (static_cast<double>(width) / static_cast<double>(height) < 4.0 / 3.0) {
+		logWarn("ratio too small");
+		width = height * 4.0 / 3.0;
+		resolution_corrected = true;
+	}
+	if (static_cast<double>(width) / static_cast<double>(height) > 16.0 / 9.0) {
+		logWarn("ratio too big");
+		height = width * 9.0 / 16.0;
+		resolution_corrected = true;
+	}
+	if (resolution_corrected) {
+		gameInfo.windowSize.x = width;
+		gameInfo.windowSize.y = height;
+		s.saveToFile("configs/settings.json");
+	}
+	return true;
+}
 
 // -- enableCursor -------------------------------------------------------------
+/**
+ * @brief enable or disable the cursor visibility
+ *
+ * @param enable enable boolean
+ */
 void Gui::enableCursor(bool enable) {
 	if (enable) {
 		SDL_ShowCursor(SDL_ENABLE);
@@ -262,7 +362,6 @@ void Gui::enableCursor(bool enable) {
 }
 
 // -- drawCube -----------------------------------------------------------------
-
 void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
 	glm::mat4 model(1.0);
 	cubeShader->use();
@@ -276,7 +375,35 @@ void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
 	cubeShader->unuse();
 }
 
+// -- change settings ----------------------------------------------------------
+/**
+ * Update the fullscreen mode from its settings.
+ */
+void	Gui::updateFullscreen() {
+	if (s.j("graphics").b("fullscreen")) {
+		SDL_SetWindowFullscreen(_win, SDL_WINDOW_FULLSCREEN);
+	}
+	else {
+		SDL_SetWindowFullscreen(_win, 0);
+		SDL_SetWindowPosition(_win, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	}
+}
+
+/**
+ * Update the dimension of the window from its settings.
+ */
+void	Gui::udpateDimension() {
+	gameInfo.windowSize.x = s.j("graphics").i("width");
+	gameInfo.windowSize.y = s.j("graphics").i("height");
+	SDL_SetWindowSize(_win, gameInfo.windowSize.x, gameInfo.windowSize.y);
+	ABaseUI::setWinSize({gameInfo.windowSize.x, gameInfo.windowSize.y});
+	SDL_SetWindowPosition(_win, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+}
+
 // -- draw ---------------------------------------------------------------------
+/**
+ * @brief call this function to do stuff before drawing scene
+ */
 void Gui::preDraw() {
 	// clear buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -284,6 +411,9 @@ void Gui::preDraw() {
 	glClearColor(0.2, 0.5, 0.95, 1.0);
 }
 
+/**
+ * @brief call this function to do stuff after drawing scene
+ */
 void Gui::postDraw() {
 	// swap buffer and check errors
 	SDL_GL_SwapWindow(_win);
@@ -291,6 +421,11 @@ void Gui::postDraw() {
 }
 
 // -- _drawSkybox --------------------------------------------------------------
+/**
+ * @brief draw the skybox
+ *
+ * @param view the view matrix of the camera (Camera::getViewMatrix())
+ */
 void	Gui::drawSkybox(glm::mat4 &view) {
 	CAMERA_MAT4	skyView = view;
 	skyView[3][0] = 0;  // remove translation for the skybox
@@ -318,9 +453,9 @@ std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 // -- GameInfo struct ----------------------------------------------------------
 GameInfo::GameInfo() {
 	title = "bomberman";
-	windowSize = {1200, 800};
-	gameboard = {32, 32};
-	player = {3, 3};
-	play = State::S_PAUSE;
+	windowSize = {
+		s.j("graphics").i("width"),
+		s.j("graphics").i("height")
+	};
 	quit = false;
 }

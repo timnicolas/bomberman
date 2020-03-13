@@ -3,14 +3,24 @@
 
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
+#include "ABaseUI.hpp"
+
+/* import all scenes */
+#include "SceneMainMenu.hpp"
+#include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
-#include "SceneMenu.hpp"
+#include "ScenePause.hpp"
+#include "SceneGameOver.hpp"
+#include "SceneVictory.hpp"
+#include "SceneExit.hpp"
+#include "SceneSettings.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
-  _scene(SceneNames::GAME)
+  _scene(SceneNames::MAIN_MENU),
+  _sceneLoadedCurrentFrame(false)
 {}
 
 SceneManager::SceneManager(SceneManager const & src) {
@@ -64,8 +74,15 @@ bool SceneManager::_init() {
 	}
 
 	// create and init all scene
-	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::MAIN_MENU, new SceneMainMenu(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LEVEL_SELECTION,
+		new SceneLevelSelection(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME, new SceneGame(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::PAUSE, new ScenePause(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::GAME_OVER, new SceneGameOver(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::VICTORY, new SceneVictory(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
@@ -75,6 +92,7 @@ bool SceneManager::_init() {
 			}
 		} catch (std::exception &e) {
 			logErr("Error : " << e.what());
+			return false;
 		}
 	}
 
@@ -96,38 +114,27 @@ bool SceneManager::_run() {
 	std::chrono::milliseconds	lastLoopMs = getMs();
 
 	while (true) {
+		/* reset variables */
+		_sceneLoadedCurrentFrame = false;
+		_dtTime = (getMs().count() - lastLoopMs.count()) / 1000.0;
+		lastLoopMs = getMs();
+
 		if (_sceneMap.find(_scene) == _sceneMap.end()) {
 			logWarn("invalid scene name: " << _scene);
 		}
 		else {
-			// update dtTime
-			_dtTime = (getMs().count() - lastLoopMs.count()) / 1000.0;
-			lastLoopMs = getMs();
-
-			// get inputs
-			Inputs::update();
-			_gui->updateInput(_dtTime);
-
-			// update the scene
-			if (_sceneMap[_scene]->update() == false) {
+			/* update & draw scene */
+			if (_update() == false)
 				return false;
-			}
-
-			// draw the gui
-			_gui->preDraw();
-			if (_sceneMap[_scene]->draw() == false) {
-				return false;
-			}
-			_gui->postDraw();
-
-			// quit if it's the end of the game
-			if (_gameInfo.quit) {
-				logInfo("exit game")
-				break;
-			}
 		}
 
-		// fps
+		/* quit if it's the end of the game */
+		if (_gameInfo.quit) {
+			logInfo("exit game")
+			break;
+		}
+
+		/* fps control */
 		std::chrono::milliseconds loopDuration = getMs() - lastLoopMs;
 		if (loopDuration.count() > fps) {
 			#if DEBUG_FPS_LOW == true
@@ -146,6 +153,36 @@ bool SceneManager::_run() {
 }
 
 /**
+ * @brief Update & draw the current scene
+ *
+ * @return true if success
+ * @return false if error
+ */
+bool SceneManager::_update() {
+	/* get inputs */
+	Inputs::update();
+
+	/* update */
+	ABaseUI::staticUpdate();
+	_gui->preUpdate(_dtTime);
+	// update the scene
+	if (_sceneMap[_scene]->update() == false) {
+		return false;
+	}
+	_gui->postUpdate(_dtTime);
+
+	/* draw */
+	_gui->preDraw();
+	// draw the scene
+	if (_sceneMap[_scene]->draw() == false) {
+		return false;
+	}
+	_gui->postDraw();
+
+	return true;
+}
+
+/**
  * @brief load a scene from his name
  *
  * @param name the scene name
@@ -156,12 +193,69 @@ AScene * SceneManager::loadScene(std::string const & name) {
 }
 AScene * SceneManager::_loadScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
-		logErr("invalid scene name: " << _scene << " in loadScene");
+		logErr("invalid scene name: " << name << " in loadScene");
+		return _sceneMap[_scene];
 	}
+	if (_scene == name) {
+		return _sceneMap[_scene];
+	}
+	// scene changed, load the new
+	_sceneLoadedCurrentFrame = true;
 	_sceneMap[_scene]->unload();  // unload last scene
+	_sceneMap[name]->load();  // load new scene (getScene return the name of the last scene)
 	_scene = name;
-	_sceneMap[_scene]->load();  // load new scene
 	return _sceneMap[_scene];
+}
+
+/**
+ * @brief get a scene
+ *
+ * @param name the name of the scene to get
+ * @return AScene* a pointer to the scene
+ */
+AScene * SceneManager::getScene(std::string const & name) {
+	return SceneManager::get()._getScene(name);
+}
+AScene * SceneManager::_getScene(std::string const & name) {
+	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
+		logErr("invalid scene name: " << name << " in getScene");
+		return _sceneMap[_scene];
+	}
+	return _sceneMap[name];
+}
+
+/**
+ * @brief get the current scene name
+ *
+ * @return std::string const& the current scene name
+ */
+std::string const & SceneManager::getSceneName() {
+	return SceneManager::get()._getSceneName();
+}
+std::string const & SceneManager::_getSceneName() const {
+	return _scene;
+}
+
+/**
+ * @brief Return if the scene has changed in the current frame
+ *
+ * @return true If the scene changed in the current frame
+ */
+bool SceneManager::isSceneChangedInCurFrame() {
+	return SceneManager::get()._isSceneChangedInCurFrame();
+}
+bool SceneManager::_isSceneChangedInCurFrame() const {
+	return _sceneLoadedCurrentFrame;;
+}
+
+/**
+ * @brief quit the game
+ */
+void SceneManager::quit() {
+	SceneManager::get()._quit();
+}
+void SceneManager::_quit() {
+	_gameInfo.quit = true;
 }
 
 /* exception */
