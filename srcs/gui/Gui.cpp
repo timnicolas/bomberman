@@ -69,16 +69,16 @@ void Gui::preUpdate(float const dtTime) {
 		_canMove = !_canMove;
 	if (_canMove) {
 		// camera movement
-		if (Inputs::getKey(InputType::Enum::UP)) {
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
 			cam->processKeyboard(CamMovement::Forward, dtTime, false);
 		}
-		if (Inputs::getKey(InputType::Enum::RIGHT)) {
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
 			cam->processKeyboard(CamMovement::Right, dtTime, false);
 		}
-		if (Inputs::getKey(InputType::Enum::DOWN)) {
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
 			cam->processKeyboard(CamMovement::Backward, dtTime, false);
 		}
-		if (Inputs::getKey(InputType::Enum::LEFT)) {
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
 			cam->processKeyboard(CamMovement::Left, dtTime, false);
 		}
 	}

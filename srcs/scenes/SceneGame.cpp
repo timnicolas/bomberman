@@ -175,7 +175,6 @@ bool	SceneGame::update() {
 		return true;
 	}
 
-	logDebug("update");
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
