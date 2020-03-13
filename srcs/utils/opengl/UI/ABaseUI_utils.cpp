@@ -96,7 +96,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 	else if (align == TextAlign::RIGHT)
 		tmpPos.x = pos.x + size.x - width - padding;
 	tmpPos.y = (pos.y + size.y / 2) - height / 2;
-	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, color);
+	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, glm::vec3(color.x, color.y, color.z));
 }
 
 /**
