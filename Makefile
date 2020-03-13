@@ -69,7 +69,7 @@ ARGS =
 # compiler (g++ or clang++)
 CC = g++
 # flags for compilation
-CFLAGS = -Ofast -std=c++11 -Wall -Wextra -Wno-deprecated
+CFLAGS = -Ofast -std=c++17 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
 DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
@@ -139,6 +139,7 @@ SRC =	main.cpp \
 		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/ABaseUI_static.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
 		utils/opengl/UI/ButtonImageUI.cpp \
@@ -252,8 +253,6 @@ define CONFIGURE
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	sudo apt-get update -y
-	# boost
-	sudo apt-get -y install libboost-all-dev
 	# glm
 	sudo apt-get -y install libglm-dev
 	# freetype (for text)
@@ -264,8 +263,6 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
-	# boost
-	brew install boost  # c++ lib
 	# glm
 	brew install glm
 	# sdl2

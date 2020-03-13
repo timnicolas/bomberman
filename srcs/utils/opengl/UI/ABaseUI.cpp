@@ -1,188 +1,5 @@
 #include "ABaseUI.hpp"
 #include "Logging.hpp"
-#include "debug.hpp"
-#include "Texture.hpp"
-
-/* global */
-glm::vec2		ABaseUI::_winSize;
-glm::mat4		ABaseUI::_projection;
-/* rect */
-Shader *		ABaseUI::_rectShader = nullptr;
-GLuint			ABaseUI::_rectVao = 0;
-GLuint			ABaseUI::_rectVbo = 0;
-const float		ABaseUI::_rectVertices[] = {
-	0.0, 0.0,
-	1.0, 1.0,
-	0.0, 1.0,
-
-	0.0, 0.0,
-	1.0, 0.0,
-	1.0, 1.0,
-};
-/* text */
-TextRender *	ABaseUI::_textRender = nullptr;
-std::string		ABaseUI::_defFont = "default";
-/* img */
-Shader *		ABaseUI::_imgShader = nullptr;
-GLuint			ABaseUI::_imgVao = 0;
-GLuint			ABaseUI::_imgVbo = 0;
-const float		ABaseUI::_imgVertices[] = {
-//  pos      | texture coord
-	0.0, 1.0,  0.0, 0.0,
-	0.0, 0.0,  0.0, 1.0,
-	1.0, 0.0,  1.0, 1.0,
-
-	0.0, 1.0,  0.0, 0.0,
-	1.0, 0.0,  1.0, 1.0,
-	1.0, 1.0,  1.0, 0.0,
-};
-
-/**
- * @brief init the UI interface
- *
- * @param winSize the size of the window
- * @param defFontName the defeult font filename
- * @param defFontSize the default font size
- */
-void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t defFontSize) {
-	if (_rectShader != nullptr) {
-		logWarn("call ABaseUI::init only once");
-		return;
-	}
-
-	/* create rect shader */
-	// create shader
-	_rectShader = new Shader(SHADER_RECT_2D_VS, SHADER_RECT_2D_FS);
-	// enable shader
-	_rectShader->use();
-
-	// create VAO & VBO
-	glGenVertexArrays(1, &_rectVao);
-	glGenBuffers(1, &_rectVbo);
-
-	// enable vao & vbo
-	glBindVertexArray(_rectVao);
-	glBindBuffer(GL_ARRAY_BUFFER, _rectVbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(_rectVertices), _rectVertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, SHADER_RECT_2D_ROW_SZ * sizeof(float), reinterpret_cast<void*>(0));
-	glEnableVertexAttribArray(0);
-
-	// disable vao & vbo
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	// send default values to uniforms
-	_rectShader->setMat4("model", glm::mat4(1.0));
-    _rectShader->setVec4("masterColor", glm::vec4(1.0, 1.0, 1.0, 1.0));
-    _rectShader->setVec4("secondColor", glm::vec4(1.0, 1.0, 1.0, 1.0));
-    _rectShader->setFloat("colorFactor", 1);
-
-	// disable shader
-	_rectShader->unuse();
-
-	/* create text render */
-	_textRender = new TextRender(0, 0);
-	try {
-		_textRender->loadFont(_defFont, defFontName, defFontSize);
-	}
-	catch (TextRender::TextRenderError & e) {
-		throw UIException(e.what());
-	}
-
-	/* create image shader */
-	// create shader
-	_imgShader = new Shader(SHADER_IMAGE_2D_VS, SHADER_IMAGE_2D_FS);
-	// enable shader
-	_imgShader->use();
-
-	// create VAO & VBO
-	glGenVertexArrays(1, &_imgVao);
-	glGenBuffers(1, &_imgVbo);
-
-	// enable veo & vbo
-	glBindVertexArray(_imgVao);
-	glBindBuffer(GL_ARRAY_BUFFER, _imgVbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * SHADER_IMAGE_2D_ROW_SIZE, _imgVertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, SHADER_IMAGE_2D_ROW_SIZE * sizeof(float), reinterpret_cast<void*>(0));
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, SHADER_IMAGE_2D_ROW_SIZE * sizeof(float),
-							reinterpret_cast<void*>(2 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	// disable vao & vbo
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-
-	// send default values to uniforms
-	_imgShader->setMat4("model", glm::mat4(1.0));
-    _imgShader->setVec4("color", glm::vec4(0.0, 0.0, 0.0, 0.0));
-
-	// disable shader
-	_imgShader->unuse();
-
-	// set projection matrix
-	setWinSize(winSize);
-}
-
-/**
- * @brief call this function at the end of the program to free UI interfaces
- */
-void ABaseUI::destroy() {
-	if (_rectShader == nullptr) {
-		logWarn("call ABaseUI::destroy only once and only if you have already called ABaseUI::init");
-		return;
-	}
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glDeleteVertexArrays(1, &_rectVao);
-	glDeleteBuffers(1, &_rectVbo);
-	delete _rectShader;
-	_rectShader = nullptr;
-	glDeleteVertexArrays(1, &_imgVao);
-	glDeleteBuffers(1, &_imgVbo);
-	delete _imgShader;
-	_imgShader = nullptr;
-}
-
-/**
- * @brief load a new font
- *
- * @param fontName the font name
- * @param filename the ttf file to load
- * @param fontSize the size of the font
- *
- * @throw UIException if the font failed to load
- */
-void ABaseUI::loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize) {
-	try {
-		_textRender->loadFont(fontName, filename, fontSize);
-	}
-	catch (TextRender::TextRenderError & e) {
-		throw UIException(e.what());
-	}
-}
-
-/**
- * @brief call this function on every window resize to update projection matrix
- *
- * @param winSize the size of the window
- */
-void ABaseUI::setWinSize(glm::vec2 winSize) {
-	_winSize = winSize;
-	_projection = glm::ortho(
-		0.0f,
-		static_cast<GLfloat>(_winSize.x),
-		0.0f,
-		static_cast<GLfloat>(_winSize.y));
-	_rectShader->use();
-	_rectShader->setMat4("projection", _projection);
-	_rectShader->unuse();
-	_imgShader->use();
-	_imgShader->setMat4("projection", _projection);
-	_imgShader->unuse();
-	_textRender->setWinSize(winSize);
-}
-
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
@@ -203,6 +20,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _imgTextureID(0),
   _imgDefWidth(0),
   _imgDefHeight(0),
+  _isClickableUI(true),
   _mouseHover(false),
   _rightClick(false),
   _keyRightClickBindScancode(NO_SCANCODE),
@@ -231,12 +49,23 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 }
 
 /**
- * @brief this is the base update function of UI objects
+ * @brief This is the base update function of UI objects
  */
 void ABaseUI::update() {
-	if (!_enabled) {
+	if (!_enabled)
 		return;
+	if (_isClickableUI) {
+		// buttons calculation only if the UI is clickable
+		_updateClick();
 	}
+	// update of UI element
+	_update();
+}
+
+/**
+ * @brief Called by update if UI is clickable. Update mousehover, mouseclick, ...
+ */
+void ABaseUI::_updateClick() {
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
 
@@ -296,15 +125,44 @@ void ABaseUI::update() {
 			*_rightListener = _rightClick;
 		_rightClick = false;
 	}
-	_update();
 }
+
 /**
- * @brief this is the draw function for UI.
+ * @brief This is the base draw function of UI objects
  */
-void		ABaseUI::draw() {
-	if (!_enabled) {
+void ABaseUI::draw() {
+	if (!_enabled)
 		return;
+
+	if (_showHelp) {
+		/* get shortcut if exist */
+		std::string helpText = "";
+		if (_keyLeftClickBindInput != InputType::NO_KEY)
+			helpText = Inputs::getKeyName(_keyLeftClickBindInput);
+		else if (_keyLeftClickBindScancode != NO_SCANCODE)
+			helpText = Inputs::getScancodeName(_keyLeftClickBindScancode);
+
+		/* show shortcut */
+		if (helpText != "") {
+			glm::vec2 tmpPos = getRealPos();
+			glm::vec2 tmpSize = _size;
+
+			/* get text informations */
+			uint32_t width = _textRender->strWidth(_helpFont, helpText, _helpTextScale);
+			uint32_t height = _textRender->strHeight(_helpFont, helpText, _helpTextScale);
+
+			tmpSize = glm::vec2(width + _helpPadding, height + _helpPadding);
+			tmpPos.x = getRealPos().x + _size.x - tmpSize.x - _borderSize - _helpPadding;
+			tmpPos.y = getRealPos().y + _borderSize + _helpPadding;
+
+			_drawText(tmpPos, tmpSize, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
+
+			_drawBorderRect(tmpPos, tmpSize, _helpBorderSize, _borderColor);
+			_drawRect(tmpPos, tmpSize, _color);
+		}
 	}
+
+	// draw the UI element
 	_draw();
 }
 
@@ -348,11 +206,11 @@ ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
 	_keyLeftClickBindInput = input; return *this;
 }
 
+ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
-ABaseUI &	ABaseUI::setEnabled(bool enable) { _enabled = enable; return *this; }
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -369,11 +227,11 @@ ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; retur
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
 /* getter */
-bool				ABaseUI::isEnabled() const { return _enabled; }
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
+bool				ABaseUI::isEnabled() const { return _enabled; }
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
 glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }

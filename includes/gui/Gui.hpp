@@ -41,8 +41,9 @@ class Gui {
 		Gui(Gui const &src);
 		Gui &operator=(Gui const &rhs);
 
-		void	updateInput(float const dtTime);
 		bool	init();
+		void	preUpdate(float const dtTime);
+		void	postUpdate(float const dtTime);
 		void	preDraw();
 		void	postDraw();
 		void	drawSkybox(glm::mat4 &view);

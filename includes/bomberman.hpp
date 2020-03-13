@@ -3,7 +3,12 @@
 #ifndef DEBUG
 	#define DEBUG false
 #endif
-#define DEBUG_FPS_LOW	DEBUG & false
+/* print log when fps level is too low */
+#define DEBUG_FPS_LOW	DEBUG & false  // always false in normal mode
+/* open the exit menu before quitting */
+#define ASK_BEFORE_QUIT	!DEBUG | true  // always true in normal mode
+/* show help (shortcuts in buttons) */
+#define DEBUG_SHOW_HELP	DEBUG & true  // always false in normal mode
 
 #include <chrono>
 #include "SettingsJson.hpp"
@@ -14,6 +19,8 @@ bool						initSettings(std::string const & filename);
 bool						initUserData(std::string const & filename);
 bool						saveUserData(std::string const & filename);
 std::chrono::milliseconds	getMs();
+bool						fileExists(std::string const & filename);
+
 
 /**
  * @brief global variable for general settings

@@ -2,7 +2,10 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-RectUI::RectUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {}
+RectUI::RectUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
+	// set the UI to non clickable
+	_isClickableUI = false;
+}
 
 RectUI::RectUI(RectUI const & src): ABaseUI(src) {
 	*this = src;
