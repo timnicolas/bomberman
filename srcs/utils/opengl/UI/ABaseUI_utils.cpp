@@ -88,6 +88,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 
 	// get position of the text
 	glm::vec2 tmpPos;
+	tmpPos.x = 0;
 	if (align == TextAlign::LEFT)
 		tmpPos.x = pos.x + padding;
 	else if (align == TextAlign::CENTER)
