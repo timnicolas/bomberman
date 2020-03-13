@@ -25,6 +25,7 @@ namespace InputType {
 		CONFIRM,
 		CANCEL,
 		GOTO_MENU,
+		SHOW_HELP,
 		NB_INPUTS  // need to be the last element
 	};
 }  // namespace InputType
@@ -48,11 +49,13 @@ public:
 	static bool								getKey(InputType::Enum type);
 	static bool								getKeyUp(InputType::Enum type);
 	static bool								getKeyDown(InputType::Enum type);
+	static std::string						getKeyName(InputType::Enum type);
 	static void								configureKey(InputType::Enum type);
 	static void								cancelConfiguration();
 	static bool								getKeyByScancode(SDL_Scancode scancode);
 	static bool								getKeyByScancodeUp(SDL_Scancode scancode);
 	static bool								getKeyByScancodeDown(SDL_Scancode scancode);
+	static std::string						getScancodeName(SDL_Scancode scancode);
 	static bool								shouldQuit();
 	static const glm::ivec2					&getMousePos();
 	static const glm::ivec2					&getMouseRel();
@@ -63,7 +66,6 @@ public:
 	static bool								getRightClickDown();
 	static bool								getLeftClickDown();
 	static void								update();
-	static std::string						getInputKeyName(InputType::Enum type);
 	static bool								isConfiguring();
 
 private:
@@ -74,11 +76,13 @@ private:
 	bool									_getKey(InputType::Enum type) const;
 	bool									_getKeyUp(InputType::Enum type) const;
 	bool									_getKeyDown(InputType::Enum type) const;
+	std::string								_getKeyName(InputType::Enum type) const;
 	void									_configureKey(InputType::Enum type);
 	void									_cancelConfiguration();
 	bool									_getKeyByScancode(SDL_Scancode scancode) const;
 	bool									_getKeyByScancodeUp(SDL_Scancode scancode) const;
 	bool									_getKeyByScancodeDown(SDL_Scancode scancode) const;
+	std::string								_getScancodeName(SDL_Scancode scancode) const;
 	bool									_shouldQuit() const;
 	const glm::ivec2						&_getMousePos() const;
 	const glm::ivec2						&_getMouseRel() const;
@@ -89,7 +93,6 @@ private:
 	bool									_getRightClickDown() const;
 	bool									_getLeftClickDown() const;
 	void									_update();
-	std::string								_getInputKeyName(InputType::Enum type);
 	bool									_isConfiguring();
 
 	bool									_configuring;

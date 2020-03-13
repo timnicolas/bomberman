@@ -14,14 +14,13 @@ class SliderUI : public ABaseUI {
 
 		SliderUI & operator=(SliderUI const & rhs);
 
-		virtual void	_draw();
-
 		void			setValues(float min, float max, float val, float step = 0);
 
 		SliderUI &		addSliderListener(float * listener);
 
 	protected:
 		virtual void	_update();
+		virtual void	_draw();
 		SliderUI();
 
 		float	_min;

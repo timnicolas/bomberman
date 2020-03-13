@@ -234,7 +234,7 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		tmp_pos.x += (menu_width / 2);
-		key_name = Inputs::getInputKeyName(static_cast<InputType::Enum>(i));
+		key_name = Inputs::getKeyName(static_cast<InputType::Enum>(i));
 		ptr = &addButton(tmp_pos, tmp_size, key_name).addButtonLeftListener(&_update_key[i]) \
 			.setTextAlign(TextAlign::CENTER).setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
@@ -276,7 +276,7 @@ void					SceneSettings::_updateFullscreenButton() {
 bool					SceneSettings::update() {
 	ASceneMenu::update();
 	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
-		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 		_input_configuring = -1;
 	}
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
@@ -329,7 +329,7 @@ void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	_select_pane[pane_type] = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
-		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 		_input_configuring = -1;
 	}
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
@@ -348,7 +348,7 @@ void					SceneSettings::_updateKey(InputType::Enum key_type) {
 	_update_key[key_type] = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
-		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
 	logInfo("Start configuring key...");
 	_key_buttons[key_type]->setText("...");
@@ -436,7 +436,7 @@ void					SceneSettings::_returnQuit() {
 	_return = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
-		_key_buttons[_input_configuring]->setText(Inputs::getInputKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
 	AudioManager::unloadSound("sounds/bell.ogg");
 	SceneManager::loadScene(SceneNames::MAIN_MENU);

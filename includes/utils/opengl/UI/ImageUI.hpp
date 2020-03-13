@@ -15,9 +15,8 @@ class ImageUI : public ABaseUI {
 
 		ImageUI & operator=(ImageUI const & rhs);
 
-		virtual void	_draw();
-
 	protected:
 		virtual void	_update();
+		virtual void	_draw();
 		ImageUI();
 };
