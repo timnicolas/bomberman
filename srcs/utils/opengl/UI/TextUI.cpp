@@ -29,7 +29,7 @@ void TextUI::_update() {
  * @brief this is the draw function for UI
  * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
  */
-void TextUI::draw() {
+void TextUI::_draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 

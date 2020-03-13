@@ -185,7 +185,8 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
-: _pos(pos),
+: _enabled(true),
+  _pos(pos),
   _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
@@ -233,6 +234,9 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @brief this is the base update function of UI objects
  */
 void ABaseUI::update() {
+	if (!_enabled) {
+		return;
+	}
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
 
@@ -294,6 +298,15 @@ void ABaseUI::update() {
 	}
 	_update();
 }
+/**
+ * @brief this is the draw function for UI.
+ */
+void		ABaseUI::draw() {
+	if (!_enabled) {
+		return;
+	}
+	_draw();
+}
 
 /* listener */
 /**
@@ -339,6 +352,7 @@ ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
+ABaseUI &	ABaseUI::setEnabled(bool enable) { _enabled = enable; return *this; }
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -355,6 +369,7 @@ ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; retur
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
 /* getter */
+bool				ABaseUI::isEnabled() const { return _enabled; }
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
