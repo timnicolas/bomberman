@@ -20,7 +20,7 @@ End::End(End const &src) : AObject(src) {
 // -- Operators ----------------------------------------------------------------
 
 End &End::operator=(End const &rhs) {
-	if ( this != &rhs ) {
+	if (this != &rhs) {
 		AObject::operator=(rhs);
 	}
 	return *this;
@@ -71,14 +71,9 @@ bool	End::draw(Gui &gui) {
  */
 std::unordered_set<AEntity *>	End::_getCollision(float offset) {
 	getPos();
-	glm::vec3 player = game.player->getPos();
 	std::unordered_set<AEntity *> collisions;
-	if (player.x >= position.x - 1.0 + offset
-	&& player.x <= position.x + 1.0 - offset
-	&& player.z >= position.z - 1.0 + offset
-	&& player.z <= position.z + 1.0 - offset)
+	if (game.player->hasCollision(position, offset))
 		collisions.insert(game.player);
-
 	return collisions;
 }
 
