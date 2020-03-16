@@ -1,5 +1,6 @@
 #include "End.hpp"
 #include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -8,7 +9,7 @@ End::End(SceneGame &game) : AObject(game) {
 	name = "End";
 	_texture = Block::END;
 }
-\
+
 End::~End() {
 }
 
@@ -36,8 +37,16 @@ End &End::operator=(End const &rhs) {
  */
 bool	End::update(float const dTime) {
 	(void)dTime;
-	if (game.flags <= 0)
+	if (game.flags <= 0) {
 		_texture = Block::END_OPEN;
+		crossable = Type::PLAYER;
+		std::unordered_set<AEntity *> collisions = _getCollision(0.2f);
+		for (auto &&entity : collisions) {
+			if (entity->type == Type::PLAYER) {
+				game.state = GameState::WIN;
+			}
+		}
+	}
 	return true;
 }
 
@@ -50,6 +59,27 @@ bool	End::update(float const dTime) {
 bool	End::draw(Gui &gui) {
 	gui.drawCube(_texture, getPos());
 	return true;
+}
+
+// -- Private Methods ----------------------------------------------------------
+
+/**
+ * @brief get a list of entity in collision with the End.
+ *
+ * @param offset default offset = 0.05f. need to be a positive value.
+ * @return std::unordered_set<AEntity *> collisions
+ */
+std::unordered_set<AEntity *>	End::_getCollision(float offset) {
+	getPos();
+	glm::vec3 player = game.player->getPos();
+	std::unordered_set<AEntity *> collisions;
+	if (player.x >= position.x - 1.0 + offset
+	&& player.x <= position.x + 1.0 - offset
+	&& player.z >= position.z - 1.0 + offset
+	&& player.z <= position.z + 1.0 - offset)
+		collisions.insert(game.player);
+
+	return collisions;
 }
 
 // -- Exceptions errors --------------------------------------------------------

@@ -9,6 +9,7 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	position = VOID_POS3;
 	category = Category::STATIC;
 	name = "Entity";
+	crossable = Type::NONE;
 	_timeToDie = 0.5f;
 }
 
