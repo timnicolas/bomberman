@@ -53,8 +53,13 @@ SceneGame::~SceneGame() {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	for (auto &&enemy : enemies) {
-		delete enemy;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		delete *enemy;
+		// deleting an enemy also erase it from the list of enemies
+		enemy = enemies.begin();
+		if (enemy != enemies.end())
+			enemy++;
 	}
 
 	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
@@ -394,8 +399,13 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
-	for (auto &&enemy : enemies) {
-		delete enemy;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		delete *enemy;
+		// deleting an enemy also erase it from the list of enemies
+		enemy = enemies.begin();
+		if (enemy != enemies.end())
+			enemy++;
 	}
 	enemies.clear();
 	level = NO_LEVEL;
