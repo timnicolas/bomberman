@@ -203,10 +203,15 @@ bool	SceneGame::update() {
  */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
-	for (auto &&enemy : enemies) {
-		if (!enemy->postUpdate())
-			return false;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		if (!(*enemy)->postUpdate()) {
+			enemy = enemies.begin();
+		}
+		if (enemy != enemies.end())
+			enemy++;
 	}
+
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			std::vector<AEntity *>::iterator it = board_it1.begin();
