@@ -18,6 +18,7 @@ private:
 protected:
 	virtual bool	_update(float const dTime);
 	virtual bool	_postUpdate();
+	virtual bool	_draw(Gui &gui);
 
 public:
 	// Constructors
