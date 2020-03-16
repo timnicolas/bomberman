@@ -65,7 +65,7 @@ void Gui::preUpdate(float const dtTime) {
 	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
 
 	// -- camera movement ------------------------------------------------------
-	if (Inputs::getKey(InputType::Enum::CONFIRM))
+	if (Inputs::getKeyDown(InputType::Enum::CONFIRM))
 		_canMove = !_canMove;
 	if (_canMove) {
 		// camera movement
