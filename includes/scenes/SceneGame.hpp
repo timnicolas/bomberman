@@ -1,5 +1,5 @@
-#ifndef GAME_HPP_
-#define GAME_HPP_
+#ifndef SCENEGAME_HPP_
+#define SCENEGAME_HPP_
 
 #include <iostream>
 #include <stdexcept>
@@ -10,10 +10,13 @@
 #include "AScene.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
-#include "Player.hpp"
 #include "Bomb.hpp"
 #include "Model.hpp"
 #include "OpenGLModel.hpp"
+
+#define NO_LEVEL -1  // value is no level loaded
+
+class Player;
 
 namespace GameState {
 	enum Enum {
@@ -23,18 +26,39 @@ namespace GameState {
 	};
 }
 
+namespace EntityType {
+	enum Enum {
+		PLAYER,
+		BOARD,
+		BOARD_FLAG,
+		ENEMY,
+	};
+}
+
+/**
+ * @brief This is the game Scene. In this scene, you can play to the game and load levels
+ */
 class SceneGame : public AScene {
 private:
 	SceneGame();
 	// Members
-	static std::map<std::string, AEntity *> _entitiesCall;
+	typedef AEntity*(*entityFuncPtr)(SceneGame &);
+	struct Entity {
+		EntityType::Enum	entityType;
+		entityFuncPtr		entity;
+	};
+	static std::map<std::string, Entity> _entitiesCall;
+
+	std::vector<SettingsJson *>	_mapsList;
 
 	// just to test model class
 	std::vector<Model>	_models;
 	OpenGLModel			*_openGLModel;
 
 	// Methods
-	bool	_loadLevel(uint8_t level);
+	bool	_loadLevel(int32_t levelId);
+	bool	_unloadLevel();
+	bool	_initJsonLevel(int32_t levelId);
 	void	_drawBoard();
 
 public:
@@ -42,29 +66,40 @@ public:
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
 	std::vector<ACharacter *>	enemies;
-	std::vector<Bomb *>			bombs;
 
+	int							flags;
 	glm::uvec2					size;
-	uint8_t						level;
+	int32_t						level;  // the current level ID (-1 for no level)
 	GameState::Enum				state;
 	std::chrono::milliseconds	time;
 
 	// Constructors
-	explicit SceneGame(Gui * gui, float const &dtTime);
+	SceneGame(Gui * gui, float const &dtTime);
 	virtual ~SceneGame();
 	SceneGame(SceneGame const &src);
 
 	// Operators
 	SceneGame &operator=(SceneGame const &rhs);
-	friend std::ostream& operator<<(std::ostream& os, const SceneGame& my_class);
+	friend std::ostream& operator<<(std::ostream& os, const SceneGame& myClass);
 
 	// Methods
 	std::string		print() const;
+	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
+	bool			positionInGame(glm::vec2 pos);
 
-	// AScene methods
+	// SceneGame methods
 	virtual bool	init();
 	virtual bool	update();
+	virtual bool	postUpdate();
 	virtual bool	draw();
+	virtual void	load();
+	virtual void	unload();
+	bool			loadLevel(int32_t levelId);
+
+	// getter
+	uint32_t		getNbLevel() const;
+	std::string		getLevelName(int32_t levelId) const;
+	std::string		getLevelImg(int32_t levelId) const;
 };
 
-#endif  // GAME_HPP_
+#endif  // SCENEGAME_HPP_

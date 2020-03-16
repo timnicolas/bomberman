@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include <chrono>
 #include "useGlm.hpp"
+#include "Logging.hpp"
+#include "Gui.hpp"
+class SceneGame;
 
 namespace Category {
 	enum Enum {
@@ -15,34 +18,52 @@ namespace Category {
 namespace Type {
 	enum Enum {
 		PLAYER,
-		IA,
+		ENEMY,
 		BOMB,
+		FIRE,
 		WALL,
+		CRISPY,
+		FLAG,
+		END,
 	};
-}
+}  // namespace Type
 
+/**
+ * @brief This is the base class for entity (Charactere, Objects, ...)
+ */
 class AEntity {
+private:
+	AEntity();
+
+protected:
+	float			_timeToDie;
+
 public:
 	// Members
 	bool			active;
-	glm::vec2		pos;
+	bool			alive;
 	Category::Enum	category;
 	std::string		name;
 	Type::Enum		type;
+	SceneGame		&game;
+	bool			destructible;
+	bool			blockPropagation;
+	glm::vec3		position;
 
 	// Constructors
-	AEntity();
+	explicit AEntity(SceneGame &game);
 	virtual ~AEntity();
-	AEntity(AEntity const &src);
+	AEntity(const AEntity &src);
 
 	// Operators
-	AEntity			&operator=(AEntity const &rhs);
+	AEntity			&operator=(const AEntity &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
-	virtual bool	draw() = 0;
-	virtual bool	isDestructable() = 0;
-	virtual bool	blockPropagation() = 0;
+	virtual bool		update(const float dTime) = 0;
+	virtual bool		postUpdate();
+	virtual bool		draw(Gui &gui) = 0;
+	virtual glm::vec3	getPos() = 0;
+	virtual void		takeDamage(const int damage) = 0;
 };
 
 #endif  // ENTITY_HPP_

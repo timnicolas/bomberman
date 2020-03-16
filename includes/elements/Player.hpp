@@ -4,14 +4,25 @@
 #include <iostream>
 #include <stdexcept>
 #include "ACharacter.hpp"
+#include "SceneGame.hpp"
 
+/**
+ * @brief This is the player object
+ */
 class Player : public ACharacter {
+private:
+	Player();
+
+	// Methods
+	void	_move(float const dTime);
+	void	_putBomb();
+
 public:
 	// Members
-	int		bombs;
+	int			bombs;
 
 	// Constructors
-	Player();
+	explicit Player(SceneGame &game);
 	~Player();
 	Player(Player const &src);
 
@@ -19,17 +30,14 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool	update(std::chrono::milliseconds d_time);
-	bool	draw();
-	bool	isDestructable();
-	bool	blockPropagation();
-	bool	isAlive();
+	bool							update(float const dTime);
+	bool							draw(Gui &gui);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {
 	public:
 		PlayerException();
-		explicit PlayerException(const char* what_arg);
+		explicit PlayerException(const char* whatArg);
 	};
 };
 

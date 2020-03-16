@@ -8,8 +8,9 @@
 #include "glm/gtx/string_cast.hpp"  // to print vect/mat with glm::to_string
 #include <glm/gtx/quaternion.hpp>
 
-// to use glm::vec as map key
-// and add lerp function to glm
+/**
+ * @brief to use glm::vec as map key and add lerp function to glm
+ */
 namespace glm {
 	template <typename T>
 	bool operator<(tvec3<T> const &lhs, tvec3<T> const &rhs) {

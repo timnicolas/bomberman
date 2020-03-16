@@ -22,6 +22,13 @@ _shader(SHADER_TEXT_VS, SHADER_TEXT_FS)
 	_shader.unuse();
 }
 
+/**
+ * @brief Load a ttf file
+ *
+ * @param name The name of the font created (used later to draw)
+ * @param filename The ttf filename
+ * @param size The text default size
+ */
 void TextRender::loadFont(std::string name, std::string const &filename, uint32_t size) {
 	FT_Library ft;
 	if (FT_Init_FreeType(&ft)) {
@@ -74,7 +81,6 @@ void TextRender::loadFont(std::string name, std::string const &filename, uint32_
 	FT_Done_FreeType(ft);
 }
 
-
 TextRender::TextRender(TextRender const &src) :
 _shader(src.getShader()) {
 	*this = src;
@@ -103,9 +109,11 @@ TextRender &TextRender::operator=(TextRender const &rhs) {
 	return *this;
 }
 
-/*
-	call this function on every window resize
-*/
+/**
+ * @brief Call this function when the window is resized
+ *
+ * @param winSize The new window size
+ */
 void TextRender::setWinSize(glm::vec2 winSize) {
 	_projection = glm::ortho(
 		0.0f,
@@ -117,6 +125,16 @@ void TextRender::setWinSize(glm::vec2 winSize) {
 	_shader.unuse();
 }
 
+/**
+ * @brief Write 2D text on screen
+ *
+ * @param fontName The name of the font (choose name when load font)
+ * @param text The text to write
+ * @param x The text x position
+ * @param y The text y position
+ * @param scale The text scale
+ * @param color The text color
+ */
 void TextRender::write(std::string const &fontName, std::string text, GLfloat x, GLfloat y,
 GLfloat scale, glm::vec3 color) {
 	if (font.find(fontName) == font.end()) {
@@ -158,6 +176,14 @@ GLfloat scale, glm::vec3 color) {
     _shader.unuse();
 }
 
+/**
+ * @brief Get the width of a text (in pixel) with a given font and size
+ *
+ * @param fontName The name of the font (choose name when load font)
+ * @param text The text to write
+ * @param scale The text scale
+ * @return uint32_t The text width
+ */
 uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLfloat scale) {
 	uint32_t	width = 0;
 	if (font.find(fontName) == font.end()) {
@@ -170,6 +196,15 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
     }
 	return width;
 }
+
+/**
+ * @brief Get the height of a text (in pixel) with a given font and size
+ *
+ * @param fontName The name of the font (choose name when load font)
+ * @param text The text to write
+ * @param scale The text scale
+ * @return uint32_t The text height
+ */
 uint32_t	TextRender::strHeight(std::string const &fontName, std::string text, GLfloat scale) {
 	uint32_t	height = 0;
 	if (font.find(fontName) == font.end()) {

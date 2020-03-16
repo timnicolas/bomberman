@@ -150,7 +150,6 @@ void	OpenGLModel::_loadModel() {
 
 		// set the current animation
 		_curAnimation = _scene->mAnimations[0];
-		logDebug("_curAnimation: " << _curAnimation);
 	}
 	// no animation finded
 	else {
@@ -228,10 +227,9 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 
 	// process vertIndices
 	for (uint32_t i = 0; i < aiMesh->mNumFaces; ++i) {
-		aiFace	face = aiMesh->mFaces[i];
 		// all face is conposed of 3 vertIndices due to aiProcess_Triangulate
-		for (uint32_t j = 0; j < face.mNumIndices; ++j) {
-			vertIndices.push_back(face.mIndices[j]);
+		for (uint32_t j = 0; j < aiMesh->mFaces[i].mNumIndices; ++j) {
+			vertIndices.push_back(aiMesh->mFaces[i].mIndices[j]);
 		}
 	}
 
@@ -249,7 +247,9 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 			TextureType::NORMAL);
 	}
 	catch (ModelException const &e) {
-		logDebug("failed to load texture: " << e.what())
+		#if DEBUG
+			logWarn("failed to load texture: " << e.what())
+		#endif
 	}
 
 	// load material
@@ -322,29 +322,20 @@ Material	OpenGLModel::_loadMaterial(aiMaterial *aiMat) {
 	if (aiMat->Get(AI_MATKEY_COLOR_DIFFUSE, color) == AI_SUCCESS) {
 		mat.diffuse = glm::vec3(color.r, color.g, color.b);
 	}
-	else {
-		logDebug("failed to load mat diffuse");
-	}
+
 	// ambient
 	if (aiMat->Get(AI_MATKEY_COLOR_AMBIENT, color) == AI_SUCCESS) {
 		mat.ambient = glm::vec3(color.r, color.g, color.b);
 	}
-	else {
-		logDebug("failed to load mat ambient");
-	}
+
 	// specular
 	if (aiMat->Get(AI_MATKEY_COLOR_SPECULAR, color) == AI_SUCCESS) {
 		mat.specular = glm::vec3(color.r, color.g, color.b);
 	}
-	else {
-		logDebug("failed to load mat specular");
-	}
+
 	// shininess
 	if (aiMat->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS) {
 		mat.shininess = shininess;
-	}
-	else {
-		logDebug("failed to load mat shininess");
 	}
 
 	return mat;
@@ -486,8 +477,6 @@ void	OpenGLModel::draw(float animationTimeTick) {
 
 // -- loadNextAnimation --------------------------------------------------------
 bool	OpenGLModel::setAnimation(uint32_t id) {
-	logWarn("setAnimation: " << id << ", _curAnimation: " << _curAnimation);
-
 	if (_isAnimated) {
 		if (id < _scene->mNumAnimations) {
 			// retrieve animation
@@ -565,9 +554,6 @@ void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 	std::string	nodeName(node->mName.data);
 	glm::mat4	nodeTransform = AiUtils::aiToGlmMat(node->mTransformation);
 
-	logDebug("_curAnimation: " << _curAnimation);
-	logDebug("nodeName: " << nodeName)
-
 	aiNodeAnim const	*nodeAnim = _findNodeAnim(nodeName);
 
 	try {
@@ -613,8 +599,6 @@ void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 // -- _findNodeAnim ------------------------------------------------------------
 aiNodeAnim const	*OpenGLModel::_findNodeAnim(std::string const nodeName)
 {
-	logDebug("----------- _findNodeAnim")
-
 	// loop through animations nodes until we find the desired node
 	for (uint32_t i = 0; i < _curAnimation->mNumChannels; ++i) {
 		aiNodeAnim const	*nodeAnim = _curAnimation->mChannels[i];

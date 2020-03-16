@@ -2,9 +2,9 @@
 #include "Logging.hpp"
 
 /*
-	load shader source code to string
-*/
-void	fillShaderStr(std::string const vsPath, std::string const fsPath, std::string const gsPath,
+	Load shader source code to string
+ */
+static void	fillShaderStr(std::string const vsPath, std::string const fsPath, std::string const gsPath,
 std::string *vsCode, std::string *fsCode, std::string *gsCode
 ) {
 	std::ifstream		vsFile;
@@ -37,7 +37,7 @@ std::string *vsCode, std::string *fsCode, std::string *gsCode
 			gsFile.close();
 		}
 	}
-	catch (std::ifstream::failure e) {
+	catch (std::ifstream::failure const & e) {
 		logErr("failed to load Shader file: " << vsPath);
 		throw Shader::ShaderCompileException();
 	}
@@ -111,9 +111,15 @@ Shader &Shader::operator=(Shader const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Use the shader
+ */
 void	Shader::use() {
 	glUseProgram(id);
 }
+/**
+ * @brief Release the shader
+ */
 void	Shader::unuse() {
 	glUseProgram(0);
 }
@@ -179,9 +185,12 @@ void	Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 	glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
-/*
-	checking shader compilation/linking errors.
-*/
+/**
+ * @brief Checking shader compilation/linking errors.
+ *
+ * @param shader The shader ID
+ * @param type The shader type (VERTEX | FRAGMENT | GEOMETRY)
+ */
 void	Shader::checkCompileErrors(uint32_t shader, std::string type) {
 	int		success;
 	char	infoLog[1024];

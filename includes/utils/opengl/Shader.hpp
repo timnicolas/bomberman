@@ -7,13 +7,12 @@
 
 #include "includesOpengl.hpp"
 
-/*
-	Shader class used to manage shader compilation
-	It also adds some tools to set uniform and activate shader easier
-
-	Warning! before instantiating a Shader object you need to create the opengl contex
-	with glfwCreateWindow
-*/
+/**
+ * @brief Shader class used to manage shader compilation
+ *
+ * It also adds some tools to set uniform and activate shader easier
+ * Warning! before instantiating a Shader object you need to create the opengl contex with glfwCreateWindow
+ */
 class Shader {
 	public:
 		Shader(std::string const vsPath, std::string const fsPath, std::string const gsPath = "");

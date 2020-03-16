@@ -6,7 +6,7 @@
 #include "Shader.hpp"
 #include "includesOpengl.hpp"
 
-#define NB_BLOCK_TYPES 6
+#define NB_BLOCK_TYPES 11
 
 namespace Block {
 	enum Enum {
@@ -16,9 +16,15 @@ namespace Block {
 		BOMB,
 		DURABLE_WALL,
 		DESTRUCTIBLE_WALL,
+		FIRE,
+		END,
+		END_OPEN,
+		FLAG,
+		BLOCK,
 	};
-}
+}  // namespace Block
 
+// TODO(tnicolas42) docs -> class description @zer0nim
 class TextureManager {
 	public:
 		TextureManager();

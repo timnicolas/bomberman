@@ -1,16 +1,19 @@
 #include "AudioManager.hpp"
 #include <unistd.h>
+#if __linux__
+# include <linux/limits.h>
+#endif
 #include "Logging.hpp"
 #include "bomberman.hpp"
 
 std::string					AudioManager::_assets_path = std::string();
 
-AudioManager::AudioManager() {
-	char	path[PATH_MAX];
-	getcwd(path, PATH_MAX);
+AudioManager::AudioManager(): _music_modifier(1.0) {
+	char	*path = getcwd(NULL, PATH_MAX);
 	AudioManager::_assets_path = std::string(path);
 	AudioManager::_assets_path += "/bomberman-assets/";
-	logDebug("Assets_path: " << AudioManager::_assets_path);
+	free(path);
+	// logDebug("Assets_path: " << AudioManager::_assets_path);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 		_enabled = false;
 		logErr("Failed to init sdl audio.");
@@ -22,9 +25,9 @@ AudioManager::AudioManager() {
 	else {
 		Mix_AllocateChannels(AudioManager::nb_sound_channels);
 		Mix_ChannelFinished(&AudioManager::_channelHalted);
-		_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
-		_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
-		_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
+		_volume_master = static_cast<float>(s.j("audio").d("Master volume"));
+		_volume_music = static_cast<float>(s.j("audio").d("Music volume"));
+		_volume_sound = static_cast<float>(s.j("audio").d("Sound volume"));
 		_enabled = true;
 		logInfo("Audio loaded.");
 	}
@@ -68,14 +71,12 @@ void						AudioManager::updateSettings() {
 	AudioManager::get()._updateSettings();
 }
 void						AudioManager::_updateSettings() {
-	float setting_sound = _volume_master * _volume_sound;
-	float previous_music = Mix_VolumeMusic(-1) / (_volume_master * _volume_music);
-	_volume_master = static_cast<float>(s.j("audio").d("masterVolume"));
-	_volume_music = static_cast<float>(s.j("audio").d("musicVolume"));
-	_volume_sound = static_cast<float>(s.j("audio").d("soundVolume"));
-	Mix_VolumeMusic(previous_music * _volume_master * _volume_music);
+	_volume_master = static_cast<float>(s.j("audio").d("Master volume"));
+	_volume_music = static_cast<float>(s.j("audio").d("Music volume"));
+	_volume_sound = static_cast<float>(s.j("audio").d("Sound volume"));
+	Mix_VolumeMusic(_music_modifier * MIX_MAX_VOLUME * _volume_master * _volume_music);
 	for (auto it = _sounds.begin(); it != _sounds.end(); it++) {
-		it->second->updateVolume(_volume_master * _volume_sound, setting_sound);
+		it->second->updateVolume(_volume_master * _volume_sound);
 	}
 }
 
@@ -121,9 +122,10 @@ void						AudioManager::_playMusic(std::string music_name, float volume, bool lo
 	try {
 		Music	*music = _musics.at(music_name);
 		volume = volume > 1.0 ? 1.0 : volume;
-		music->play(volume * _volume_master * _volume_sound, loop);
+		music->play(volume * _volume_master * _volume_music, loop);
+		_music_modifier = volume;
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the music '" << music_name << "' but it has not been loaded.");
 		return;
 	}
@@ -196,7 +198,7 @@ void						AudioManager::_unloadMusic(std::string music_name) {
 		delete _musics.at(music_name);
 		_musics.erase(music_name);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to unload the music '" << music_name << "' but it has not been loaded.");
 		return;
 	}
@@ -244,9 +246,9 @@ void						AudioManager::_playSound(std::string sound_name, float volume) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
 		volume = volume > 1.0 ? 1.0 : volume;
-		sound->play(volume * _volume_master * _volume_sound);
+		sound->play(volume,  _volume_master * _volume_sound);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -271,7 +273,7 @@ void						AudioManager::_pauseSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->pause();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to pause the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -296,7 +298,7 @@ void						AudioManager::_resumeSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->resume();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to resume the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -321,7 +323,7 @@ void						AudioManager::_stopSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->stop();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to stop the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -378,7 +380,7 @@ void						AudioManager::_unloadSound(std::string sound_name) {
 		delete _sounds.at(sound_name);
 		_sounds.erase(sound_name);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to unload the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}

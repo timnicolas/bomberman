@@ -5,7 +5,12 @@
 # include <SDL2/SDL_mixer.h>
 # include <string>
 # include <unordered_set>
+# include <map>
+#include <stdexcept>
 
+/**
+ * @brief Sound class for AudioManager
+ */
 class Sound {
 public:
 	class SoundException: public std::runtime_error {
@@ -18,11 +23,11 @@ public:
 	explicit Sound(std::string filename);
 	~Sound();
 
-	void										play(float volume);
+	void										play(float volume, float env_volume);
 	void										pause();
 	void										resume();
 	void										stop();
-	void										updateVolume(float volume, float previous_settings);
+	void										updateVolume(float volume);
 	bool										channelFinished(int chan);
 
 private:
@@ -32,6 +37,7 @@ private:
 
 	Mix_Chunk *									_chunk;
 	std::unordered_set<int>						_currents_channels;
+	std::map<int, float>						_chan_volume;
 };
 
 #endif
