@@ -8,7 +8,7 @@
 #include "AEntity.hpp"
 
 // class SceneGame;
-namespace Dirrection {
+namespace Direction {
 	enum Enum {
 		UP = 0,
 		RIGHT,
@@ -31,7 +31,7 @@ protected:
 	// Methods
 	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
 	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Dirrection::Enum direction, float const dTime);
+	glm::vec3	_moveTo(Direction::Enum direction, float const dTime);
 
 public:
 	// Members

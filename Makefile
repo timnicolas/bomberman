@@ -98,6 +98,7 @@ SRC =	main.cpp \
 		AEntity.cpp \
 \
 		ACharacter.cpp \
+		AEnemy.cpp \
 		elements/Player.cpp \
 		elements/Enemy.cpp \
 \
@@ -155,6 +156,7 @@ HEAD =	bomberman.hpp \
 		AEntity.hpp \
 \
 		ACharacter.hpp \
+		AEnemy.hpp \
 		elements/Player.hpp \
 		elements/Enemy.hpp \
 \

@@ -1,19 +1,23 @@
-#ifndef ENEMY_HPP_
-#define ENEMY_HPP_
+#pragma once
 
 #include <iostream>
 #include <stdexcept>
-#include "ACharacter.hpp"
+#include <vector>
+#include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
 /**
  * @brief This is the enemy object
  */
-class Enemy : public ACharacter {
+class Enemy : public AEnemy {
 private:
 	Enemy();
-	// Members
-	Dirrection::Enum	_direction;
+	std::vector<Direction::Enum>	_directionsOrder;
+	uint32_t						_dirIdx;
+
+protected:
+	virtual bool	_update(float const dTime);
+	virtual bool	_postUpdate();
 
 public:
 	// Constructors
@@ -25,17 +29,5 @@ public:
 	Enemy &operator=(Enemy const &rhs);
 
 	// Methods
-	bool			update(float const dTime);
-	bool			postUpdate();
-	bool			draw(Gui &gui);
-	static Enemy*	generateEnemy(SceneGame &game, float rate);
-
-	// Exceptions
-	class EnemyException : public std::runtime_error {
-	public:
-		EnemyException();
-		explicit EnemyException(const char* whatArg);
-	};
+	static Enemy *	generateEnemy(SceneGame &game, float rate);
 };
-
-#endif  // ENEMY_HPP_
