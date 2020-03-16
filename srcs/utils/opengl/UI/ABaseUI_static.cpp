@@ -8,13 +8,16 @@
  */
 
 /* global */
-glm::vec2		ABaseUI::_winSize;
-glm::mat4		ABaseUI::_projection;
+bool					ABaseUI::_isInit = false;
+std::vector<ABaseUI *>	ABaseUI::_allUI;
+/* shaders */
+glm::vec2				ABaseUI::_winSize;
+glm::mat4				ABaseUI::_projection;
 /* rect */
-Shader *		ABaseUI::_rectShader = nullptr;
-GLuint			ABaseUI::_rectVao = 0;
-GLuint			ABaseUI::_rectVbo = 0;
-const float		ABaseUI::_rectVertices[] = {
+Shader *				ABaseUI::_rectShader = nullptr;
+GLuint					ABaseUI::_rectVao = 0;
+GLuint					ABaseUI::_rectVbo = 0;
+const float				ABaseUI::_rectVertices[] = {
 	0.0, 0.0,
 	1.0, 1.0,
 	0.0, 1.0,
@@ -24,13 +27,13 @@ const float		ABaseUI::_rectVertices[] = {
 	1.0, 1.0,
 };
 /* text */
-TextRender *	ABaseUI::_textRender = nullptr;
-std::string		ABaseUI::_defFont = "default";
+TextRender *			ABaseUI::_textRender = nullptr;
+std::string				ABaseUI::_defFont = "default";
 /* img */
-Shader *		ABaseUI::_imgShader = nullptr;
-GLuint			ABaseUI::_imgVao = 0;
-GLuint			ABaseUI::_imgVbo = 0;
-const float		ABaseUI::_imgVertices[] = {
+Shader *				ABaseUI::_imgShader = nullptr;
+GLuint					ABaseUI::_imgVao = 0;
+GLuint					ABaseUI::_imgVbo = 0;
+const float				ABaseUI::_imgVertices[] = {
 //  pos      | texture coord
 	0.0, 1.0,  0.0, 0.0,
 	0.0, 0.0,  0.0, 1.0,
@@ -41,13 +44,13 @@ const float		ABaseUI::_imgVertices[] = {
 	1.0, 1.0,  1.0, 0.0,
 };
 /* help */
-bool			ABaseUI::_showHelp = false;
-std::string		ABaseUI::_helpFont = ABaseUI::_defFont;
-float			ABaseUI::_helpTextScale = 0.8;
-float			ABaseUI::_helpBorderSize = 1;
-float			ABaseUI::_helpPadding = 8;
-SDL_Scancode	ABaseUI::_helpKeyBindScancode = NO_SCANCODE;
-InputType::Enum	ABaseUI::_helpKeyBindInput = InputType::NO_KEY;
+bool					ABaseUI::_showHelp = false;
+std::string				ABaseUI::_helpFont = ABaseUI::_defFont;
+float					ABaseUI::_helpTextScale = 0.8;
+float					ABaseUI::_helpBorderSize = 1;
+float					ABaseUI::_helpPadding = 8;
+SDL_Scancode			ABaseUI::_helpKeyBindScancode = NO_SCANCODE;
+InputType::Enum			ABaseUI::_helpKeyBindInput = InputType::NO_KEY;
 
 /**
  * @brief init the UI interface.
@@ -59,8 +62,8 @@ InputType::Enum	ABaseUI::_helpKeyBindInput = InputType::NO_KEY;
  * @param defFontSize the default font size
  */
 void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t defFontSize) {
-	if (_rectShader != nullptr) {
-		logWarn("call ABaseUI::init only once");
+	if (_isInit) {
+		logWarn("call ABaseUI::init() only once");
 		return;
 	}
 
@@ -136,16 +139,19 @@ void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t 
 
 	// set projection matrix
 	setWinSize(winSize);
+
+	_isInit = true;
 }
 
 /**
  * @brief call this function at the end of the program to free UI interfaces
  */
 void ABaseUI::destroy() {
-	if (_rectShader == nullptr) {
-		logWarn("call ABaseUI::destroy only once and only if you have already called ABaseUI::init");
+	if (!_isInit) {
+		logErr("Unable to call ABaseUI::destroy() -> you need to call ABaseUI::init() first");
 		return;
 	}
+	_isInit = false;
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteVertexArrays(1, &_rectVao);
@@ -195,6 +201,13 @@ void ABaseUI::loadFont(std::string const & fontName, std::string const & filenam
  * @param winSize the size of the window
  */
 void ABaseUI::setWinSize(glm::vec2 winSize) {
+	/* set window scale factor */
+	glm::vec2 winScale2f;
+	winScale2f.x = winSize.x / _winSize.x;
+	winScale2f.y = winSize.y / _winSize.y;
+	float winScale1f = winScale2f.x;
+
+	/* update variables for new size */
 	_winSize = winSize;
 	_projection = glm::ortho(
 		0.0f,
@@ -208,6 +221,10 @@ void ABaseUI::setWinSize(glm::vec2 winSize) {
 	_imgShader->setMat4("projection", _projection);
 	_imgShader->unuse();
 	_textRender->setWinSize(winSize);
+	/* update on all UI */
+	for (auto && ui : _allUI) {
+		ui->_resizeWin(winScale2f, winScale1f);
+	}
 }
 
 /**

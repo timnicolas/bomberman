@@ -322,7 +322,7 @@ bool					SceneSettings::update() {
 
 /**
  * @brief disable and enable multiple UI element according to their section.
- * 
+ *
  * @param pane_type the id of the section to enable. Other section will be disabled.
  */
 void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
@@ -341,7 +341,7 @@ void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 
 /**
  * @brief enable the input configuration for the given input type.
- * 
+ *
  * @param key_type the type of the input to configure.
  */
 void					SceneSettings::_updateKey(InputType::Enum key_type) {
@@ -358,7 +358,7 @@ void					SceneSettings::_updateKey(InputType::Enum key_type) {
 
 /**
  * @brief update the audio volume for sound and/or music.
- * 
+ *
  * @param audio_index the audio settings that has been modified.
  */
 void					SceneSettings::_updateAudioVolume(int audio_index) {
@@ -371,7 +371,7 @@ void					SceneSettings::_updateAudioVolume(int audio_index) {
 
 /**
  * @brief Save the audio volume in the settings file.
- * 
+ *
  * @param audio_index the audio settings that has been modified.
  */
 void					SceneSettings::_saveAudioVolume(int audio_index) {
@@ -393,7 +393,7 @@ void					SceneSettings::_updateFullscreen() {
 
 /**
  * @brief Change the resolution.
- * 
+ *
  * @param go_right true if the resolution should cycle to the right.
  */
 void					SceneSettings::_updateResolution(bool go_right) {
