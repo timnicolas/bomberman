@@ -15,6 +15,7 @@ private:
 protected:
 	virtual bool	_update(float const dTime) = 0;
 	virtual bool	_postUpdate() = 0;
+	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
@@ -22,7 +23,6 @@ protected:
 public:
 	// Members
 	int			bombs;
-	SceneGame	*game;
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);
@@ -35,7 +35,7 @@ public:
 	// Methods
 	bool			update(float const dTime);
 	bool			postUpdate();
-	virtual bool	draw(Gui &gui);
+	bool			draw(Gui &gui);
 
 	// Exceptions
 	class EnemyException : public std::runtime_error {

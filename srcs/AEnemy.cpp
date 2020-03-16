@@ -74,8 +74,7 @@ bool	AEnemy::postUpdate() {
  * @return false if failure
  */
 bool	AEnemy::draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
-	return true;
+	return _draw(gui);
 }
 
 /**
