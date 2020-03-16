@@ -142,7 +142,7 @@ bool	Gui::init() {
 		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);
 		ABaseUI::showHelp(DEBUG_SHOW_HELP);
 	}
-	catch (ABaseUI::UIException & e) {
+	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 		return false;
 	}

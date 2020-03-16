@@ -63,7 +63,7 @@ bool			ScenePause::init() {
 
 		_initBG();
 	}
-	catch (ABaseUI::UIException & e) {
+	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 		return false;
 	}

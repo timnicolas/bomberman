@@ -137,7 +137,7 @@ bool					SceneSettings::init() {
 		_init_control_pane(tmp_pos, menu_width, menu_height);
 		AudioManager::loadSound("sounds/bell.ogg");
 	}
-	catch (ABaseUI::UIException & e) {
+	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 		return false;
 	}
@@ -313,7 +313,7 @@ bool					SceneSettings::update() {
 		try {
 			AudioManager::playSound("sounds/bell.ogg");
 		}
-		catch (Sound::SoundException e) {
+		catch (Sound::SoundException const & e) {
 			logErr(e.what());
 		}
 	}

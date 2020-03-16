@@ -90,7 +90,7 @@ bool SceneManager::_init() {
 				logErr("failed to init scene: " << it->first);
 				return false;
 			}
-		} catch (std::exception &e) {
+		} catch (std::exception const & e) {
 			logErr("Error : " << e.what());
 			return false;
 		}

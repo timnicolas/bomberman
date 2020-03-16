@@ -99,7 +99,7 @@ void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t 
 	try {
 		_textRender->loadFont(_defFont, defFontName, defFontSize);
 	}
-	catch (TextRender::TextRenderError & e) {
+	catch (TextRender::TextRenderError const & e) {
 		throw UIException(e.what());
 	}
 
@@ -184,7 +184,7 @@ void ABaseUI::loadFont(std::string const & fontName, std::string const & filenam
 	try {
 		_textRender->loadFont(fontName, filename, fontSize);
 	}
-	catch (TextRender::TextRenderError & e) {
+	catch (TextRender::TextRenderError const & e) {
 		throw UIException(e.what());
 	}
 }
