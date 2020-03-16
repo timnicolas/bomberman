@@ -37,7 +37,7 @@ std::string *vsCode, std::string *fsCode, std::string *gsCode
 			gsFile.close();
 		}
 	}
-	catch (std::ifstream::failure e) {
+	catch (std::ifstream::failure const & e) {
 		logErr("failed to load Shader file: " << vsPath);
 		throw Shader::ShaderCompileException();
 	}

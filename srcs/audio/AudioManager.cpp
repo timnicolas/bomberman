@@ -125,7 +125,7 @@ void						AudioManager::_playMusic(std::string music_name, float volume, bool lo
 		music->play(volume * _volume_master * _volume_music, loop);
 		_music_modifier = volume;
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the music '" << music_name << "' but it has not been loaded.");
 		return;
 	}
@@ -198,7 +198,7 @@ void						AudioManager::_unloadMusic(std::string music_name) {
 		delete _musics.at(music_name);
 		_musics.erase(music_name);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to unload the music '" << music_name << "' but it has not been loaded.");
 		return;
 	}
@@ -248,7 +248,7 @@ void						AudioManager::_playSound(std::string sound_name, float volume) {
 		volume = volume > 1.0 ? 1.0 : volume;
 		sound->play(volume,  _volume_master * _volume_sound);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -273,7 +273,7 @@ void						AudioManager::_pauseSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->pause();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to pause the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -298,7 +298,7 @@ void						AudioManager::_resumeSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->resume();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to resume the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -323,7 +323,7 @@ void						AudioManager::_stopSound(std::string sound_name) {
 		Sound	*sound = _sounds.at(sound_name);
 		sound->stop();
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to stop the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
@@ -380,7 +380,7 @@ void						AudioManager::_unloadSound(std::string sound_name) {
 		delete _sounds.at(sound_name);
 		_sounds.erase(sound_name);
 	}
-	catch (std::out_of_range oor) {
+	catch (std::out_of_range const &oor) {
 		logErr("Trying to unload the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}

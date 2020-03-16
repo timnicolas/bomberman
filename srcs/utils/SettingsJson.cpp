@@ -180,10 +180,10 @@ bool SettingsJson::loadFile(std::string const &filename) {
 		}
 		return loadJson(data, *this);
 	}
-	catch (const nlohmann::json::parse_error& e) {
+	catch (nlohmann::json::parse_error const & e) {
 		throw SettingsException("invalid file format: " + filename);
 	}
-	catch (std::exception &e) {
+	catch (std::exception const & e) {
 		throw SettingsException("unable to open file: " + filename);
 	}
 	return true;

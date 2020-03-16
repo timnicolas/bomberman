@@ -391,7 +391,7 @@ void				Inputs::_update() {
 					int index = static_cast<int>(_input_key_map.at(scan));
 					_key_status[index] = true;
 				}
-				catch(std::out_of_range oor) {
+				catch(std::out_of_range const & oor) {
 					// unused key
 					continue;
 				}
@@ -423,7 +423,7 @@ void				Inputs::_update() {
 				int index = static_cast<int>(_input_key_map.at(scan));
 				_key_status[index] = false;
 			}
-			catch(std::out_of_range oor) {
+			catch(std::out_of_range const & oor) {
 				// unused key
 				continue;
 			}

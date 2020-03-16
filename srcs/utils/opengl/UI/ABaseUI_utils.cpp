@@ -116,7 +116,7 @@ void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool pixel
 	try {
 		_imgTextureID = textureFromFile(filename, false, pixelateOnZoom, &_imgDefWidth, &_imgDefHeight);
 	}
-	catch (TextureFailToLoad & e) {
+	catch (TextureFailToLoad const & e) {
 		throw UIException(e.what());
 	}
 

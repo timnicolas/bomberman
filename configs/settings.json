@@ -1,7 +1,7 @@
 {
 	"mapsPath": "bomberman-assets/maps/",
 	"audio": {
-		"Master volume": 0.65,
+		"Master volume": 0.56,
 		"Music volume": 0.6,
 		"Sound volume": 0.7
 	},
