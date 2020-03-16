@@ -100,16 +100,16 @@ void	Player::_move(float const dTime) {
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Dirrection::UP, dTime);
+		_moveTo(Direction::UP, dTime);
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Dirrection::RIGHT, dTime);
+		_moveTo(Direction::RIGHT, dTime);
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Dirrection::DOWN, dTime);
+		_moveTo(Direction::DOWN, dTime);
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Dirrection::LEFT, dTime);
+		_moveTo(Direction::LEFT, dTime);
 	}
 	collisions = getCollision(position);
 	_clearCollisionObjects(collisions);

@@ -186,21 +186,21 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
  * @param dTime
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
 	switch (direction) {
-		case Dirrection::UP:
+		case Direction::UP:
 			pos.z -= speed * dTime;
 			break;
-		case Dirrection::RIGHT:
+		case Direction::RIGHT:
 			pos.x += speed * dTime;
 			break;
-		case Dirrection::DOWN:
+		case Direction::DOWN:
 			pos.z += speed * dTime;
 			break;
-		case Dirrection::LEFT:
+		case Direction::LEFT:
 			pos.x -= speed * dTime;
 			break;
 		default:
