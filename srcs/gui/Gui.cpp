@@ -81,6 +81,12 @@ void Gui::preUpdate(float const dtTime) {
 		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
 			cam->processKeyboard(CamMovement::Left, dtTime, false);
 		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
+			cam->processKeyboard(CamMovement::Down, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
+			cam->processKeyboard(CamMovement::Up, dtTime, false);
+		}
 	}
 }
 
