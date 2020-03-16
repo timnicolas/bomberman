@@ -3,16 +3,43 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <unordered_set>
+#include "useGlm.hpp"
 #include "AEntity.hpp"
 
+// class SceneGame;
+namespace Dirrection {
+	enum Enum {
+		UP = 0,
+		RIGHT,
+		DOWN,
+		LEFT,
+		NB_DIRECTIONS  // keep it at last position
+	};
+}
+/**
+ * @brief This is the base for Charactere (Player, AI, ...)
+ */
 class ACharacter : public AEntity {
+private:
+	ACharacter();
+
+protected:
+	// Members
+	std::unordered_set<AEntity *>	_noCollisionObjects;
+
+	// Methods
+	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
+	bool	_canMove(std::unordered_set<AEntity *> collisions);
+	glm::vec3	_moveTo(Dirrection::Enum direction, float const dTime);
+
 public:
 	// Members
-	int		life;
-	float	speed;
+	int			lives;
+	float		speed;
 
 	// Constructors
-	ACharacter();
+	explicit ACharacter(SceneGame &game);
 	virtual ~ACharacter();
 	ACharacter(ACharacter const &src);
 
@@ -20,15 +47,21 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool	update(std::chrono::milliseconds d_time) = 0;
-	virtual bool	draw() = 0;
-	virtual bool	isAlive() = 0;
+	virtual bool					update(float const dTime) = 0;
+	virtual bool					draw(Gui &gui) = 0;
+	bool							isAlive();
+	glm::vec3						getPos();
+	ACharacter						*init(glm::vec3 pos);
+	void							takeDamage(const int damage);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
+	bool							clearNoCollisionObjects(AEntity *entity);
+
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {
 	public:
 		ACharacterException();
-		explicit ACharacterException(const char* what_arg);
+		explicit ACharacterException(const char* whatArg);
 	};
 };
 

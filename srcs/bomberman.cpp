@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <chrono>
+#include <fstream>
 
 #include "bomberman.hpp"
 #include "Logging.hpp"
@@ -8,6 +9,12 @@
 SettingsJson s;
 SettingsJson userData;
 
+/**
+ * @brief Init the logs
+ *
+ * You need to call this function only once at program startup.
+ * This function init the logs functions
+ */
 void	initLogs() {
 	// init logging
 	#if DEBUG
@@ -21,6 +28,13 @@ void	initLogs() {
 	logDebug("using debug mode");
 }
 
+/**
+ * @brief Create the pattern for master settings object & load settings
+ *
+ * @param filename the filename to read to set right values for settings
+ * @return true if success
+ * @return false if error
+ */
 bool	initSettings(std::string const & filename) {
 	s.name("settings").description("main settings");
 
@@ -31,7 +45,7 @@ bool	initSettings(std::string const & filename) {
 
 	/* font */
 	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Pacifico.ttf")
+		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Roboto-Regular.ttf")
 			.setDescription("this is the main font");
 		s.j("font").add<uint64_t>("size", 40).setMin(10).setMax(50)
 			.setDescription("default size for the text");
@@ -45,14 +59,21 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("buttons").add<double>("b", 0.2).setMin(0).setMax(1);
 		s.j("colors").j("buttons").add<double>("a", 1.0).setMin(0).setMax(1);
 
-
+	/* Audio */
 	s.add<SettingsJson>("audio");
-	s.j("audio").add<double>("masterVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("musicVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Music volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("soundVolume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
+
+	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
+	/* Graphics */
+	s.add<SettingsJson>("graphics");
+	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");
+	s.j("graphics").add<int64_t>("width", 1600).setMin(800).setMax(2560).setDescription("The resolution's width.");
+	s.j("graphics").add<int64_t>("height", 900).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
 	try {
 		if (s.loadFile(filename) == false) {
@@ -67,6 +88,13 @@ bool	initSettings(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Create the pattern for user data object & load last saved user data
+ *
+ * @param filename the filename to read to set right values for user data
+ * @return true if success
+ * @return false if error
+ */
 bool	initUserData(std::string const & filename) {
 	userData.name("userData").description("all data saved");
 
@@ -86,6 +114,13 @@ bool	initUserData(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Save the user data
+ *
+ * @param filename The file to save user data
+ * @return true if success
+ * @return false if error
+ */
 bool	saveUserData(std::string const & filename) {
 	try {
 		userData.saveToFile(filename);
@@ -97,7 +132,25 @@ bool	saveUserData(std::string const & filename) {
 	return true;
 }
 
+/**
+ * @brief Get the current time in ms
+ *
+ * @return std::chrono::milliseconds the ms object
+ */
 std::chrono::milliseconds getMs() {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(
 		std::chrono::system_clock::now().time_since_epoch());
+}
+
+/**
+ * @brief Try if a file exist
+ *
+ * @param filename The file to check
+ * @return true If the file exist
+ */
+bool fileExists(std::string const & filename) {
+	std::ifstream ifile(filename);
+	if (ifile)
+		return true;
+	return false;
 }

@@ -102,6 +102,11 @@ Skybox &Skybox::operator=(Skybox const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Load a skybox
+ *
+ * @param faces List off all faces images
+ */
 void Skybox::load(std::vector<std::string> &faces) {
     glGenTextures(1, &_textureID);
 	glActiveTexture(GL_TEXTURE0);
@@ -147,6 +152,11 @@ void Skybox::load(std::vector<std::string> &faces) {
 	glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
+/**
+ * @brief Draw the skybox (call this function in every loop at the end)
+ *
+ * @param nightProgress The progress of the night: 0 if no night, 1 for full night
+ */
 void Skybox::draw(float nightProgress) {
 	_shader.use();
 	glDepthFunc(GL_LEQUAL);

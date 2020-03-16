@@ -6,6 +6,9 @@
 ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename)
 : ABaseUI(pos, size)
 {
+	// set the UI to non clickable
+	_isClickableUI = false;
+
 	// disable color
 	_color = glm::vec4(0.0, 0.0, 0.0, 0.0);
 	_borderSize = 0;
@@ -28,30 +31,23 @@ ImageUI & ImageUI::operator=(ImageUI const & rhs) {
 
 /**
  * @brief this is the base update function of UI objects
- *
- * @param mousePos the position of the mouse
- * @param rightClick a boolean to know if right click is pressed
- * @param leftClick a boolean to know if left click is pressed
  */
-void ImageUI::_update(glm::vec2 mousePos, bool rightClick, bool leftClick) {
-	(void)mousePos;
-	(void)rightClick;
-	(void)leftClick;
+void ImageUI::_update() {
 }
 
 /**
  * @brief this is the draw function for UI
  * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
  */
-void ImageUI::draw() {
+void ImageUI::_draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 
 	// draw border
-	_drawBorderRect(_pos, _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 
 	// get center size and position
-	tmpPos = _pos;
+	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
 	tmpPos.y += _borderSize;
 	tmpSize = _size;

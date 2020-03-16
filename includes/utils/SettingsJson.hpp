@@ -5,6 +5,15 @@
 #include "json.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief options list to print SettingsJson object
+ *
+ * Options:
+ *  - NO_OPT -> default value (just print the json)
+ *  - DISCARD_DISABLED -> dont print values disard in file (used to print the variable in a file)
+ *  - VERBOSE -> verbose mode: print description, min, max, ...
+ *  - COLOR -> enable color to print
+ */
 namespace JsonOpt {
 	enum Enum {
 		NO_OPT = 0,
@@ -14,6 +23,11 @@ namespace JsonOpt {
 	};
 }
 
+/**
+ * @brief object to save an element in SettingsJson (dont use this)
+ *
+ * @tparam T the object type
+ */
 template<class T>
 class JsonObj {
 	public:
@@ -122,6 +136,11 @@ class JsonObj {
 		bool		_disableInFile;
 };
 
+/**
+ * @brief this is the object to save json list object (dont use this)
+ *
+ * @tparam T the list type (only SettingsJson for now)
+ */
 template<class T>
 class SettingsList {
 	public:
@@ -178,6 +197,11 @@ class SettingsList {
 	private:
 };
 
+/**
+ * @brief this is the settings master object
+ *
+ * With this object, you can create a json pattern, load files, save files, ...
+ */
 class SettingsJson {
 	public:
 		SettingsJson();

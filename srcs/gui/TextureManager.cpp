@@ -35,6 +35,11 @@ TextureManager &TextureManager::operator=(TextureManager const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief set the uniform for the textureAtlas in the shader
+ *
+ * @param sh the shader
+ */
 void	TextureManager::setUniform(Shader &sh) const {
 	// activate textures
 	sh.setInt("textureAtlas", 0);
@@ -53,12 +58,18 @@ void	TextureManager::setUniform(Shader &sh) const {
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 }
 
+/**
+ * @brief bind the texture atlas
+ */
 void	TextureManager::activateTextures() const {
 	// activate textures
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D_ARRAY, _textureAtlas);
 }
 
+/**
+ * @brief unbind the texture atlas
+ */
 void	TextureManager::disableTextures() const {
 	// disable textures
 	glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
@@ -75,8 +86,13 @@ TextureManager::TextureManagerException::TextureManagerException(const char* wha
 std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks = {{
 	{{0, 0, 0, 0, 0, 0}},  // floor
 	{{9, 10, 10, 10, 11, 8}},  // player
-	{{9, 10, 10, 10, 11, 8}},  // ia
+	{{10, 10, 10, 10, 10, 10}},  // ia
 	{{5, 6, 3, 6, 7, 4}},  // bomb
-	{{1, 1, 1, 1, 1, 1}},  // durable_wall
+	{{0, 0, 0, 0, 1, 0}},  // durable_wall
 	{{2, 2, 2, 2, 2, 2}},  // destructible_wall
+	{{3, 3, 3, 3, 3, 3}},  // fire
+	{{4, 4, 4, 4, 4, 4}},  // end
+	{{8, 8, 8, 8, 8, 8}},  // end_open
+	{{5, 5, 5, 5, 5, 5}},  // flag
+	{{1, 1, 1, 1, 1, 1}},  // block
 }};

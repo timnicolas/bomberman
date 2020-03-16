@@ -98,17 +98,28 @@ SRC =	main.cpp \
 		AEntity.cpp \
 \
 		ACharacter.cpp \
-		Player.cpp \
+		elements/Player.cpp \
+		elements/Enemy.cpp \
 \
 		AObject.cpp \
-		Bomb.cpp \
+		elements/Bomb.cpp \
+		elements/Fire.cpp \
+		elements/Wall.cpp \
+		elements/Crispy.cpp \
+		elements/End.cpp \
+		elements/Flag.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
-		scenes/SceneMenu.cpp \
+		scenes/ASceneMenu.cpp \
+		scenes/SceneMainMenu.cpp \
+		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
-\
-		Inputs.cpp \
+		scenes/ScenePause.cpp \
+		scenes/SceneGameOver.cpp \
+		scenes/SceneVictory.cpp \
+		scenes/SceneExit.cpp \
+		scenes/SceneSettings.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -120,6 +131,7 @@ SRC =	main.cpp \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
 \
+		utils/opengl/Inputs.cpp \
 		utils/opengl/Texture.cpp \
 		utils/opengl/Shader.cpp \
 		utils/opengl/Camera.cpp \
@@ -134,6 +146,7 @@ SRC =	main.cpp \
 		utils/opengl/OpenGLModel.cpp \
 		utils/opengl/ETransform.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
+		utils/opengl/UI/ABaseUI_static.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
 		utils/opengl/UI/ButtonImageUI.cpp \
@@ -147,17 +160,28 @@ HEAD =	bomberman.hpp \
 		AEntity.hpp \
 \
 		ACharacter.hpp \
-		Player.hpp \
+		elements/Player.hpp \
+		elements/Enemy.hpp \
 \
 		AObject.hpp \
-		Bomb.hpp \
+		elements/Bomb.hpp \
+		elements/Fire.hpp \
+		elements/Wall.hpp \
+		elements/Crispy.hpp \
+		elements/End.hpp \
+		elements/Flag.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \
-		scenes/SceneMenu.hpp \
+		scenes/ASceneMenu.hpp \
+		scenes/SceneMainMenu.hpp \
+		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
-\
-		Inputs.hpp \
+		scenes/ScenePause.hpp \
+		scenes/SceneGameOver.hpp \
+		scenes/SceneVictory.hpp \
+		scenes/SceneExit.hpp \
+		scenes/SceneSettings.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
@@ -170,6 +194,7 @@ HEAD =	bomberman.hpp \
 		utils/SettingsJson.hpp \
 		utils/useGlm.hpp \
 \
+		utils/opengl/Inputs.hpp \
 		utils/opengl/Texture.hpp \
 		utils/opengl/Shader.hpp \
 		utils/opengl/Camera.hpp \
@@ -222,6 +247,7 @@ LIBS_INC =	~/.brew/include \
 			/usr/local/opt/freetype/include/freetype2 \
 			~/.brew/opt/freetype/include/freetype2 \
 			/usr/include/freetype2 \
+			/usr/include/assimp \
 
 # libs created by user
 UNCOMPILED_LIBS =
@@ -241,7 +267,7 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	sudo apt-get update -y
 	# glm
-	sudo apt-get -y install libglm-dev;
+	sudo apt-get -y install libglm-dev
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
@@ -250,7 +276,7 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	sudo apt-get -y install libsdl2-dev
 	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
 	# assimp
-	sudo apt-get install -y assimp-utils
+	sudo apt-get install -y libassimp-dev
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
@@ -406,15 +432,16 @@ all:
 ([ -z $(DEBUG) ] && [ -d $(DEBUG_DIR) ] && [ -f $(DEBUG_DIR)/DEBUG ])); then\
 		$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE);\
 	fi;
+
+	$(START)
+	@$(MAKE) $(MAKE_OPT) $(NAME)
+	$(END)
+
 ifneq ($(DEBUG),)
 	@touch $(DEBUG_DIR)/DEBUG
 else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
-
-	$(START)
-	@$(MAKE) $(MAKE_OPT) $(NAME)
-	$(END)
 
 install:
 	@for i in $(NEED_MAKE); do \

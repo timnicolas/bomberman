@@ -7,6 +7,9 @@
 # include "Sound.hpp"
 # include "Music.hpp"
 
+/**
+ * @brief This is the audio manager. In this static class, you can play musics and sound
+ */
 class AudioManager {
 public:
 	static const int						nb_sound_channels = 42;
@@ -65,6 +68,7 @@ private:
 	float									_volume_master;
 	float									_volume_music;
 	float									_volume_sound;
+	float									_music_modifier;
 	std::map<std::string, Music *>			_musics;
 	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;

@@ -43,6 +43,20 @@ enum	eLoglevel {
 #define logErrExit(x) log_(LOGERROR, x)
 #define logFatalExit(x) log_(LOGFATAL, x)
 
+/**
+ * @brief manage logging in all project
+ *
+ * To use Logging, you need to call the defines:
+ *  - logDebug
+ *  - logInfo
+ *  - logSuccess
+ *  - logWarn
+ *  - logErr
+ *  - logFatal
+ *  - logErrExit
+ *  - logFatalExit
+ * For example `logDebug("fps: " << fps);
+ */
 class Logging {
 	public:
 		Logging();

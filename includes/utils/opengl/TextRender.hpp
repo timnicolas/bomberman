@@ -11,15 +11,18 @@
 #define SHADER_TEXT_FS "shaders/text_fs.glsl"
 #define SHADER_TEXT_ROW_SIZE 4
 
+/**
+ * @brief render 2D text on an openGL 3D context
+ */
 class TextRender {
 	public:
-		explicit TextRender(uint32_t width, uint32_t height);
+		TextRender(uint32_t width, uint32_t height);
 		TextRender(TextRender const &src);
 		virtual ~TextRender();
 
 		TextRender &operator=(TextRender const &rhs);
 		void loadFont(std::string name, std::string const &filename, uint32_t size);
-		void write(std::string const &fontName, std::string text, GLfloat x = 0, GLfloat y = 0, GLfloat scale = 1,
+		void write(std::string const &fontName, std::string text, GLfloat x = 0, GLfloat y = 0, GLfloat scale = 1, \
 			glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f));
 		uint32_t	strWidth(std::string const &fontName, std::string text, GLfloat scale = 1);
 		uint32_t	strHeight(std::string const &fontName, std::string text, GLfloat scale = 1);

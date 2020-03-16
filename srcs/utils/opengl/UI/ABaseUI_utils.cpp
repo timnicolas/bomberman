@@ -88,6 +88,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 
 	// get position of the text
 	glm::vec2 tmpPos;
+	tmpPos.x = 0;
 	if (align == TextAlign::LEFT)
 		tmpPos.x = pos.x + padding;
 	else if (align == TextAlign::CENTER)
@@ -95,7 +96,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 	else if (align == TextAlign::RIGHT)
 		tmpPos.x = pos.x + size.x - width - padding;
 	tmpPos.y = (pos.y + size.y / 2) - height / 2;
-	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, color);
+	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, glm::vec3(color.x, color.y, color.z));
 }
 
 /**
@@ -114,7 +115,7 @@ void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
 	try {
 		_imgTextureID = textureFromFile(filename, true, &_imgDefSize);
 	}
-	catch (TextureException const &e) {
+	catch (TextureException const & e) {
 		throw UIException(e.what());
 	}
 
