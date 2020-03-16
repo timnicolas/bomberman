@@ -60,9 +60,10 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
-	/* manage mouse movement */
-	// mouse motion
-	cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
+	cam->mouseSensitivity = s.d("mouse_sensitivity");
+
+	// mouse movement
+	cam->processMouseMovement(Inputs::getMouseRel());
 
 	// -- camera movement ------------------------------------------------------
 	if (Inputs::getKeyDown(InputType::Enum::CONFIRM))

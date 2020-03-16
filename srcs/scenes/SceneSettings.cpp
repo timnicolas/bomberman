@@ -24,6 +24,8 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 		_update_key[i] = false;
 		_key_buttons[i] = nullptr;
 	}
+	_save_mouse_sens = false;
+	_update_mouse_sens = s.d("mouse_sensitivity");
 	_fullscreen_button = nullptr;
 	_fullscreen = s.j("graphics").b("fullscreen");
 	int width = s.j("graphics").i("width");
@@ -64,6 +66,8 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 		_update_key[i] = rhs._update_key[i];
 		_key_buttons[i] = rhs._key_buttons[i];
 	}
+	_save_mouse_sens = rhs._save_mouse_sens;
+	_update_mouse_sens = rhs._update_mouse_sens;
 	_fullscreen_button = rhs._fullscreen_button;
 	_text_scale = rhs._text_scale;
 	_custom_res = rhs._custom_res;
@@ -240,6 +244,18 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
+	// add mouse sensitivity slider
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= tmp_size.y + 0.15 * Inputs::nb_input;
+	ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :").setTextAlign(TextAlign::RIGHT) \
+		.setTextScale(_text_scale).setEnabled(false);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	tmp_pos.x += (menu_width / 2);
+	ptr = &addSlider(tmp_pos, tmp_size, 0, 3, _update_mouse_sens, 0.05)
+		.addSliderListener(&_update_mouse_sens) \
+		.addButtonLeftListener(&_save_mouse_sens).setTextScale(_text_scale) \
+		.setEnabled(false);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
 }
 
 /**
@@ -297,6 +313,9 @@ bool					SceneSettings::update() {
 			_saveAudioVolume(i);
 		}
 	}
+	if (_save_mouse_sens) {
+		_updateMouseSensitivity();
+	}
 	if (_update_fullscreen) {
 		_updateFullscreen();
 	}
@@ -322,7 +341,7 @@ bool					SceneSettings::update() {
 
 /**
  * @brief disable and enable multiple UI element according to their section.
- * 
+ *
  * @param pane_type the id of the section to enable. Other section will be disabled.
  */
 void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
@@ -341,14 +360,15 @@ void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 
 /**
  * @brief enable the input configuration for the given input type.
- * 
+ *
  * @param key_type the type of the input to configure.
  */
 void					SceneSettings::_updateKey(InputType::Enum key_type) {
 	_update_key[key_type] = false;
 	if (_input_configuring >= 0) {
 		Inputs::cancelConfiguration();
-		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
+		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(
+			static_cast<InputType::Enum>(_input_configuring)));
 	}
 	logInfo("Start configuring key...");
 	_key_buttons[key_type]->setText("...");
@@ -358,7 +378,7 @@ void					SceneSettings::_updateKey(InputType::Enum key_type) {
 
 /**
  * @brief update the audio volume for sound and/or music.
- * 
+ *
  * @param audio_index the audio settings that has been modified.
  */
 void					SceneSettings::_updateAudioVolume(int audio_index) {
@@ -371,11 +391,20 @@ void					SceneSettings::_updateAudioVolume(int audio_index) {
 
 /**
  * @brief Save the audio volume in the settings file.
- * 
+ *
  * @param audio_index the audio settings that has been modified.
  */
 void					SceneSettings::_saveAudioVolume(int audio_index) {
 	_save_audio[audio_index] = false;
+	s.saveToFile("configs/settings.json");
+}
+
+/**
+ * @brief Save the mouse sensitivity in the settings file.
+ */
+void					SceneSettings::_updateMouseSensitivity() {
+	_save_mouse_sens = false;
+	s.d("mouse_sensitivity") = _update_mouse_sens;
 	s.saveToFile("configs/settings.json");
 }
 
@@ -393,7 +422,7 @@ void					SceneSettings::_updateFullscreen() {
 
 /**
  * @brief Change the resolution.
- * 
+ *
  * @param go_right true if the resolution should cycle to the right.
  */
 void					SceneSettings::_updateResolution(bool go_right) {
