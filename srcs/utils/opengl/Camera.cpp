@@ -113,12 +113,12 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
  * @param yOffset The camera offset in y from last call
  * @param constrainPitch Constrain pitch to block camera up to 90 deg (enable by default)
  */
-void	Camera::processMouseMovement(CAMERA_FLOAT xOffset, CAMERA_FLOAT yOffset, bool constrainPitch) {
-	xOffset *= mouseSensitivity;
-	yOffset *= mouseSensitivity;
+void	Camera::processMouseMovement(glm::vec2 offset, bool constrainPitch) {
+	offset.y = -offset.y;
+	offset *= mouseSensitivity;
 
-	yaw += xOffset;
-	pitch += yOffset;
+	yaw += offset.x;
+	pitch += offset.y;
 
 	// constrain pitch to avoid screen flip
 	if (constrainPitch) {

@@ -57,7 +57,7 @@ class Camera {
 		virtual void run(CAMERA_FLOAT dtTime);  // call this function each frame
 		CAMERA_MAT4 getViewMatrix() const;
 		virtual void processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun = false);
-		virtual void processMouseMovement(CAMERA_FLOAT xOffset, CAMERA_FLOAT yOffset, bool constrainPitch = true);
+		virtual void processMouseMovement(glm::vec2 offset, bool constrainPitch = true);
 		virtual void processMouseScroll(CAMERA_FLOAT yOffset);
 		virtual void lookAt(CAMERA_VEC3 target);
 		virtual void resetPosition();
