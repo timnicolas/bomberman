@@ -30,13 +30,27 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
   _leftListener(nullptr)
-{}
+{
+	if (!_isInit) {
+		logErr("You need to call ABaseUI::init() before creating UI objects");
+		return;
+	}
+	_allUI.push_back(this);  // add pointer to the new UI in _allUI
+}
 
 ABaseUI::ABaseUI(ABaseUI const & src) {
 	*this = src;
 }
 
 ABaseUI::~ABaseUI() {
+	// remove the reference to this UI
+	auto it = std::find(_allUI.begin(), _allUI.end(), this);
+	if (it == _allUI.end()) {
+		logErr("unable to find UI reference in allUI list");
+	}
+	else {
+		_allUI.erase(it);
+	}
 }
 
 ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
@@ -164,6 +178,24 @@ void ABaseUI::draw() {
 
 	// draw the UI element
 	_draw();
+}
+
+/**
+ * @brief Called in setWinSize for all UI
+ *
+ * @param winScale2f Scale for new window size (vec2)
+ * @param winScale1f Scale for new window size (float)
+ */
+void ABaseUI::_resizeWin(glm::vec2 const & winScale2f, float winScale1f) {
+	// basics
+	_pos *= winScale2f;
+	_posOffset *= winScale2f;
+	_size *= winScale2f;
+	// border
+	_borderSize *= winScale1f;
+	// text
+	_textScale *= winScale1f;
+	_textPadding *= winScale1f;
 }
 
 /* listener */
