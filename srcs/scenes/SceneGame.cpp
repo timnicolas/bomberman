@@ -412,6 +412,13 @@ bool	SceneGame::_unloadLevel() {
 	return true;
 }
 
+/**
+ * @brief Load Level method. Throw a SceneException if the level is incomplete.
+ *
+ * @param levelId
+ * @return true
+ * @return false
+ */
 bool	SceneGame::_loadLevel(int32_t levelId) {
 	if (levelId == NO_LEVEL)
 		return true;
@@ -468,6 +475,21 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 			}
 		}
 	}
+
+	if (player == nullptr)
+		throw SceneException("No player on this level.");
+
+	bool	end = false;
+	for (uint32_t j = 0; j < size.y; j++) {
+		for (uint32_t i = 0; i < size.x; i++) {
+			for(auto entity : board[i][j]) {
+				if (entity->type == Type::END)
+					end = true;
+			}
+		}
+	}
+	if (!end)
+		throw SceneException("No end on this level.");
 
 	// set camera
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
