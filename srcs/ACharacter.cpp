@@ -1,5 +1,6 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
+#include "useGlm.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -80,7 +81,7 @@ void	ACharacter::takeDamage(const int damage) {
 }
 
 /**
- * @brief get a list of entity in collision with the Player at position pos.
+ * @brief get a list of entity in collision with the Character at position pos.
  *
  * @param pos default VOID_POS3
  * @param offset default offset = 0.05f. need to be a positive value.
@@ -151,7 +152,7 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
 	for (auto &&entity : collisions) {
 		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
 			continue;
-		if (entity->type == Type::FIRE)
+		if (entity->crossable == Type::ALL || entity->crossable == type)
 			continue;
 		return false;
 	}
@@ -185,8 +186,10 @@ glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
 		default:
 			return position;
 	}
-	if (_canMove(getCollision(pos)))
-		position = pos;
+	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
+		if (_canMove(getCollision(pos)))
+			position = pos;
+	}
 	return position;
 }
 

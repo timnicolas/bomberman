@@ -144,7 +144,7 @@ bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
  * @return false
  */
 bool	SceneGame::positionInGame(glm::vec2 pos) {
-	if (pos.x < 0 || pos.x > size.x || pos.y < 0 || pos.y > size.y)
+	if (pos.x < 0 || pos.x > (size.x - 1) || pos.y < 0 || pos.y > (size.y - 1))
 		return false;
 	return true;
 }
@@ -161,16 +161,19 @@ bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
 
+	if (Inputs::getKeyUp(InputType::CANCEL))
+		state = GameState::PAUSE;
+
 	// TODO(tnicolas42) remove the scene loader
-	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_1)) {
+	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
-	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_2)) {
+	else if (state == GameState::WIN) {
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
-	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_3)) {
+	else if (state == GameState::GAME_OVER) {
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -272,6 +275,8 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
+	if (state == GameState::PAUSE)
+		state = GameState::PLAY;
 	_gui->enableCursor(false);
 }
 /**
