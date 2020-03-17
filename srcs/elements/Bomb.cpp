@@ -77,6 +77,8 @@ void	Bomb::explode(glm::vec2 const pos) {
  * @brief TakeDamage make explode the bomb.
  *
  * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
  */
 bool	Bomb::takeDamage(const int damage) {
 	if (!active)
