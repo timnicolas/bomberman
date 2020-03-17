@@ -69,15 +69,20 @@ bool	ACharacter::isAlive() {
  * @brief Character Take <damage> damages.
  *
  * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
  */
-void	ACharacter::takeDamage(const int damage) {
+bool	ACharacter::takeDamage(const int damage) {
+	if (!active)
+		return false;
 	if (!destructible)
-		return;
+		return false;
 	lives -= damage;
 	if (lives <= 0) {
 		lives = 0;
 		alive = false;
 	}
+	return true;
 }
 
 /**

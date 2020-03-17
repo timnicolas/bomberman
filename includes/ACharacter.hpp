@@ -52,7 +52,7 @@ public:
 	bool							isAlive();
 	glm::vec3						getPos();
 	ACharacter						*init(glm::vec3 pos);
-	void							takeDamage(const int damage);
+	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
 	bool							clearNoCollisionObjects(AEntity *entity);
 	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
