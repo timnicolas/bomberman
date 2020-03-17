@@ -8,6 +8,7 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	name = "Fire";
 	blockPropagation = false;
 	destructible = true;
+	crossable = Type::ALL;
 	_timeToDie = 1.0f;
 }
 
@@ -42,6 +43,12 @@ bool	Fire::update(float const dTime) {
 	_timeToDie -= dTime;
 	if (_timeToDie <= 0.0) {
 		alive = false;
+	}
+	getPos();
+	for (auto &&enemy : game.enemies) {
+		if (enemy->hasCollision(position, 0.2f)) {
+			enemy->takeDamage(1);
+		}
 	}
 	return true;
 }

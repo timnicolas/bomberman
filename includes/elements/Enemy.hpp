@@ -17,7 +17,6 @@ private:
 public:
 	// Members
 	int			bombs;
-	SceneGame	*game;
 
 	// Constructors
 	explicit Enemy(SceneGame &game);
