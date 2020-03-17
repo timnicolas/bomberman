@@ -179,6 +179,8 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
+		// clear game infos.
+		player->initParams();
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
