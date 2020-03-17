@@ -23,6 +23,7 @@ namespace GameState {
 		PLAY,
 		PAUSE,
 		GAME_OVER,
+		WIN,
 	};
 }
 
