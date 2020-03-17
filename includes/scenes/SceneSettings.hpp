@@ -42,14 +42,18 @@ private:
 	void						_updateAudioVolume(int audio_index);
 	void						_updateKey(InputType::Enum key_type);
 	void						_selectPane(SettingsType::Enum pane_type);
+	void						_updateMouseSensitivity();
 	void						_updateFullscreen();
 	void						_updateResolution(bool go_right);
 	void						_returnQuit();
 	void						_cancelQuit();
 
-	void						_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
-	void						_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
-	void						_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height);
+	void						_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
+		float menu_height);
+	void						_init_audio_pane(glm::vec2 tmp_pos, float menu_width,
+		float menu_height);
+	void						_init_control_pane(glm::vec2 tmp_pos, float menu_width,
+		float menu_height);
 
 	void						_updateFullscreenButton();
 	void						_updateResolutionText();
@@ -78,6 +82,8 @@ private:
 	bool						_update_fullscreen;
 	bool						_save_audio[3];
 	float						_update_audio[3];
+	bool						_save_mouse_sens;
+	float						_update_mouse_sens;
 	bool						_select_pane[SettingsType::nb_types];
 	bool						_update_key[Inputs::nb_input];
 };

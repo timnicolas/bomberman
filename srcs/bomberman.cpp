@@ -75,6 +75,10 @@ bool	initSettings(std::string const & filename) {
 	s.j("graphics").add<int64_t>("width", 1600).setMin(800).setMax(2560).setDescription("The resolution's width.");
 	s.j("graphics").add<int64_t>("height", 900).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
+	// mouse sensitivity
+	s.add<double>("mouse_sensitivity", 0.1).setMin(0.0).setMax(3.0) \
+		.setDescription("Camera mouse sensitivity.");
+
 	try {
 		if (s.loadFile(filename) == false) {
 			// warning when loading settings

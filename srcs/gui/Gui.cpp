@@ -61,12 +61,17 @@ Gui &Gui::operator=(Gui const &rhs) {
  */
 void Gui::preUpdate(float const dtTime) {
 	// -- camera movement ------------------------------------------------------
-	if (Inputs::getKeyByScancode(SDL_SCANCODE_C))
+	// toggle camera movement
+	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
 		_canMove = !_canMove;
+	}
+
 	if (_canMove) {
-		/* manage mouse movement */
-		// mouse motion
-		cam->processMouseMovement(Inputs::getMouseRel().x, -Inputs::getMouseRel().y);
+		cam->mouseSensitivity = s.d("mouse_sensitivity");
+
+		// mouse movement
+		cam->processMouseMovement(Inputs::getMouseRel());
+
 		// camera movement
 		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
 			cam->processKeyboard(CamMovement::Forward, dtTime, false);
@@ -79,6 +84,12 @@ void Gui::preUpdate(float const dtTime) {
 		}
 		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
 			cam->processKeyboard(CamMovement::Left, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
+			cam->processKeyboard(CamMovement::Down, dtTime, false);
+		}
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
+			cam->processKeyboard(CamMovement::Up, dtTime, false);
 		}
 	}
 }
