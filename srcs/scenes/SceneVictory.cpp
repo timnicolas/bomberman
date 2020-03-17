@@ -88,7 +88,12 @@ bool	SceneVictory::update() {
 	if (_states.nextLevel) {
 		_states.nextLevel = false;
 		if (scGame.level + 1 < static_cast<int32_t>(scGame.getNbLevel())) {
-			scGame.loadLevel(scGame.level + 1);  // reload the current level
+			try {
+				scGame.loadLevel(scGame.level + 1);  // reload the current level
+			} catch (std::exception const &e) {
+				logErr("Error: " << e.what());
+				return false;
+			}
 			SceneManager::loadScene(_lastSceneName);
 		}
 		else {

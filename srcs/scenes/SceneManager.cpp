@@ -96,7 +96,12 @@ bool SceneManager::_init() {
 		}
 	}
 
-	_sceneMap[_scene]->load();  // load first scene
+	try {
+		_sceneMap[_scene]->load();  // load first scene
+	} catch (std::exception const & e) {
+		logErr("Error : " << e.what());
+		return false;
+	}
 	return true;
 }
 
@@ -202,7 +207,11 @@ AScene * SceneManager::_loadScene(std::string const & name) {
 	// scene changed, load the new
 	_sceneLoadedCurrentFrame = true;
 	_sceneMap[_scene]->unload();  // unload last scene
-	_sceneMap[name]->load();  // load new scene (getScene return the name of the last scene)
+	try {
+		_sceneMap[name]->load();  // load new scene (getScene return the name of the last scene)
+	} catch (std::exception const &e) {
+		logErr("Error: " << e.what());
+	}
 	_scene = name;
 	return _sceneMap[_scene];
 }
