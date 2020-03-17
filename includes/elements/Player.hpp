@@ -32,6 +32,7 @@ public:
 	// Methods
 	bool							update(float const dTime);
 	bool							draw(Gui &gui);
+	void							initParams();
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

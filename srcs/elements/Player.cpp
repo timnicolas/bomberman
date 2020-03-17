@@ -5,9 +5,8 @@
 
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
-	bombs = 20;
 	name = "Player";
-	speed = 5;
+	initParams();
 }
 
 Player::~Player() {
@@ -28,6 +27,17 @@ Player &Player::operator=(Player const &rhs) {
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Initial value for player.
+ *
+ */
+void	Player::initParams() {
+	bombs = 1;
+	speed = 5;
+	alive = true;
+	lives = 1;
+}
 
 /**
  * @brief update is called each frame.
