@@ -2,6 +2,7 @@
 #define END_HPP_
 
 #include <iostream>
+#include <unordered_set>
 #include <stdexcept>
 #include "AObject.hpp"
 
@@ -13,6 +14,9 @@ private:
 	End();
 	// Members
 	Block::Enum	_texture;
+
+	// Methods
+	std::unordered_set<AEntity *>	_getCollision(float offset);
 
 public:
 	// Constructors

@@ -53,8 +53,13 @@ SceneGame::~SceneGame() {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	for (auto &&enemy : enemies) {
-		delete enemy;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		delete *enemy;
+		// deleting an enemy also erase it from the list of enemies
+		enemy = enemies.begin();
+		if (enemy != enemies.end())
+			enemy++;
 	}
 
 	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
@@ -144,7 +149,7 @@ bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
  * @return false
  */
 bool	SceneGame::positionInGame(glm::vec2 pos) {
-	if (pos.x < 0 || pos.x > size.x || pos.y < 0 || pos.y > size.y)
+	if (pos.x < 0 || pos.x > (size.x - 1) || pos.y < 0 || pos.y > (size.y - 1))
 		return false;
 	return true;
 }
@@ -161,16 +166,19 @@ bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
 
+	if (Inputs::getKeyUp(InputType::CANCEL))
+		state = GameState::PAUSE;
+
 	// TODO(tnicolas42) remove the scene loader
-	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_1)) {
+	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
-	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_2)) {
+	else if (state == GameState::WIN) {
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
-	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_3)) {
+	else if (state == GameState::GAME_OVER) {
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -200,10 +208,15 @@ bool	SceneGame::update() {
  */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
-	for (auto &&enemy : enemies) {
-		if (!enemy->postUpdate())
-			return false;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		if (!(*enemy)->postUpdate()) {
+			enemy = enemies.begin();
+		}
+		if (enemy != enemies.end())
+			enemy++;
 	}
+
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			std::vector<AEntity *>::iterator it = board_it1.begin();
@@ -272,6 +285,8 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
+	if (state == GameState::PAUSE || state == GameState::WIN)
+		state = GameState::PLAY;
 	_gui->enableCursor(false);
 }
 /**
@@ -384,14 +399,26 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
-	for (auto &&enemy : enemies) {
-		delete enemy;
+	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	while (enemy != enemies.end()) {
+		delete *enemy;
+		// deleting an enemy also erase it from the list of enemies
+		enemy = enemies.begin();
+		if (enemy != enemies.end())
+			enemy++;
 	}
 	enemies.clear();
 	level = NO_LEVEL;
 	return true;
 }
 
+/**
+ * @brief Load Level method. Throw a SceneException if the level is incomplete.
+ *
+ * @param levelId
+ * @return true
+ * @return false
+ */
 bool	SceneGame::_loadLevel(int32_t levelId) {
 	if (levelId == NO_LEVEL)
 		return true;
@@ -448,6 +475,21 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 			}
 		}
 	}
+
+	if (player == nullptr)
+		throw SceneException("No player on this level.");
+
+	bool	end = false;
+	for (uint32_t j = 0; j < size.y; j++) {
+		for (uint32_t i = 0; i < size.x; i++) {
+			for(auto entity : board[i][j]) {
+				if (entity->type == Type::END)
+					end = true;
+			}
+		}
+	}
+	if (!end)
+		throw SceneException("No end on this level.");
 
 	// set camera
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));

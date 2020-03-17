@@ -60,15 +60,18 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
-	cam->mouseSensitivity = s.d("mouse_sensitivity");
-
-	// mouse movement
-	cam->processMouseMovement(Inputs::getMouseRel());
-
 	// -- camera movement ------------------------------------------------------
-	if (Inputs::getKeyDown(InputType::Enum::CONFIRM))
+	// toggle camera movement
+	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
 		_canMove = !_canMove;
+	}
+
 	if (_canMove) {
+		cam->mouseSensitivity = s.d("mouse_sensitivity");
+
+		// mouse movement
+		cam->processMouseMovement(Inputs::getMouseRel());
+
 		// camera movement
 		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
 			cam->processKeyboard(CamMovement::Forward, dtTime, false);
@@ -100,7 +103,7 @@ void Gui::postUpdate(float const dtTime) {
 	(void)dtTime;
 	/* quit if needed */
 	if (Inputs::shouldQuit()
-	|| (Inputs::getKeyUp(InputType::Enum::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
+	|| (Inputs::getKeyUp(InputType::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
 	{
 		#if ASK_BEFORE_QUIT
 			if (SceneManager::getSceneName() != SceneNames::EXIT) {
