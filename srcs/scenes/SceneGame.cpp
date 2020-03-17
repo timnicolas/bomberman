@@ -285,8 +285,11 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
-	if (state == GameState::PAUSE || state == GameState::WIN)
+	if (state == GameState::PAUSE
+	|| state == GameState::WIN
+	|| state == GameState::GAME_OVER) {
 		state = GameState::PLAY;
+	}
 	_gui->enableCursor(false);
 }
 /**

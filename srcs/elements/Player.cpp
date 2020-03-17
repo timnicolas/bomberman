@@ -41,9 +41,12 @@ bool	Player::update(float const dTime) {
 		return true;
 	if (alive) {
 		_move(dTime);
-		if (Inputs::getKeyDown(InputType::ACTION)){
+		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
+	} else {
+		logDebug("Player is dead.")
+		game.state = GameState::GAME_OVER;
 	}
 	return true;
 }

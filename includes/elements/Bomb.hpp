@@ -32,7 +32,7 @@ public:
 	bool	postUpdate();
 	void	explode(glm::vec2 const pos);
 	bool	draw(Gui &gui);
-	void	takeDamage(const int damage);
+	bool	takeDamage(const int damage);
 
 
 	// Exceptions

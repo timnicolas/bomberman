@@ -1,5 +1,6 @@
 #include "Fire.hpp"
 #include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -49,6 +50,9 @@ bool	Fire::update(float const dTime) {
 		if (enemy->hasCollision(position, 0.2f)) {
 			enemy->takeDamage(1);
 		}
+	}
+	if (game.player->hasCollision(position, 0.2f)) {
+		game.player->takeDamage(1);
 	}
 	return true;
 }

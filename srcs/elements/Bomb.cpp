@@ -78,13 +78,14 @@ void	Bomb::explode(glm::vec2 const pos) {
  *
  * @param damage
  */
-void	Bomb::takeDamage(const int damage) {
+bool	Bomb::takeDamage(const int damage) {
 	if (!active)
-		return;
+		return false;
 	if (damage <= 0)
-		return;
+		return false;
 	getPos();
 	explode({position.x, position.z});
+	return true;
 }
 
 /**

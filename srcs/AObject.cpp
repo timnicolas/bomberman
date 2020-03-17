@@ -73,13 +73,14 @@ glm::vec3	AObject::getPos() {
  *
  * @param damage
  */
-void	AObject::takeDamage(const int damage) {
+bool	AObject::takeDamage(const int damage) {
 	(void)damage;
 	if (!active)
-		return;
+		return false;
 	if (!destructible)
-		return;
+		return false;
 	alive = false;
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------

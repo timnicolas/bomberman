@@ -26,7 +26,7 @@ public:
 	virtual bool	draw(Gui &gui) = 0;
 	void			setPos(glm::vec3 pos = VOID_POS3);
 	glm::vec3		getPos();
-	void			takeDamage(int damage);
+	bool			takeDamage(int damage);
 
 	// Exceptions
 	class AObjectException : public std::runtime_error {
