@@ -1,5 +1,5 @@
 #include "Enemy.hpp"
-// #include "SceneGame.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -50,6 +50,9 @@ bool	Enemy::update(float const dTime) {
 	glm::vec3 pos = getPos();
 	if (pos == _moveTo(_direction, dTime)) {
 		_direction = static_cast<Dirrection::Enum>(((_direction + 1) % Dirrection::NB_DIRECTIONS));
+	}
+	if (game.player->hasCollision(position)) {
+		game.player->takeDamage(1);
 	}
 	return true;
 }
