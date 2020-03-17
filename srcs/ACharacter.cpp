@@ -50,7 +50,7 @@ glm::vec3		ACharacter::getPos() {
  * @param pos
  * @return ACharacter*
  */
-ACharacter		*ACharacter::init(glm::vec3 pos) {
+ACharacter		*ACharacter::setPosition(glm::vec3 pos) {
 	this->position = pos;
 	return this;
 }

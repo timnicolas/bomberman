@@ -460,7 +460,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
-						player->init({i, 0, j});
+						player->setPosition({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
@@ -471,7 +471,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						break;
 					case EntityType::ENEMY:
 						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
-						enemies.back()->init({i, 0, j});
+						enemies.back()->setPosition({i, 0, j});
 						break;
 					}
 				}
