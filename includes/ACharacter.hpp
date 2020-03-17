@@ -55,6 +55,7 @@ public:
 	void							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
 	bool							clearNoCollisionObjects(AEntity *entity);
+	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
 
 
 	// Exceptions

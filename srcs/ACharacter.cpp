@@ -1,5 +1,6 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
+#include "useGlm.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -80,7 +81,7 @@ void	ACharacter::takeDamage(const int damage) {
 }
 
 /**
- * @brief get a list of entity in collision with the Player at position pos.
+ * @brief get a list of entity in collision with the Character at position pos.
  *
  * @param pos default VOID_POS3
  * @param offset default offset = 0.05f. need to be a positive value.
@@ -104,6 +105,24 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offs
 		collisions.insert(entity);
 	}
 	return collisions;
+}
+
+/**
+ * @brief Test if Character have a collision at position <atPosition>.
+ *
+ * @param atPosition
+ * @param offset
+ * @return true if has a collision
+ * @return false if no collision
+ */
+bool	ACharacter::hasCollision(glm::vec3 atPosition, float offset) {
+	getPos();
+	if (position.x >= atPosition.x - 1.0 + offset
+	&& position.x <= atPosition.x + 1.0 - offset
+	&& position.z >= atPosition.z - 1.0 + offset
+	&& position.z <= atPosition.z + 1.0 - offset)
+		return true;
+	return false;
 }
 
 /**
@@ -151,7 +170,7 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
 	for (auto &&entity : collisions) {
 		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
 			continue;
-		if (entity->type == Type::FIRE)
+		if (entity->crossable == Type::ALL || entity->crossable == type)
 			continue;
 		return false;
 	}
@@ -185,8 +204,10 @@ glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
 		default:
 			return position;
 	}
-	if (_canMove(getCollision(pos)))
-		position = pos;
+	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
+		if (_canMove(getCollision(pos)))
+			position = pos;
+	}
 	return position;
 }
 
