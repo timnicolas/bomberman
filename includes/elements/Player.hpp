@@ -12,7 +12,9 @@
 class Player : public ACharacter {
 private:
 	Player();
-
+	// Members
+	float	_invulnerable;
+	int		_toDraw;
 	// Methods
 	void	_move(float const dTime);
 	void	_putBomb();
@@ -33,6 +35,7 @@ public:
 	bool							update(float const dTime);
 	bool							draw(Gui &gui);
 	void							initParams();
+	bool							takeDamage(const int damage);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {
