@@ -10,12 +10,13 @@ Enemy::Enemy(SceneGame &game) : ACharacter(game) {
 }
 
 Enemy::~Enemy() {
-	// TODO(ebaudet): correct segfault
-	// std::vector<ACharacter *>::iterator find;
-	// find = std::find(game->enemies.begin(), game->enemies.end(), this);
-	// if (find != game->enemies.end()) {
-	// 	game->enemies.erase(find);
-	// }
+	std::vector<ACharacter *>::iterator it = game.enemies.begin();
+	while (it != game.enemies.end()) {
+		if ((*it) == this)
+			game.enemies.erase(it);
+		else
+			it++;
+	}
 }
 
 Enemy::Enemy(Enemy const &src) : ACharacter(src) {
@@ -44,6 +45,8 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
 bool	Enemy::update(float const dTime) {
 	if (!active)
 		return true;
+	if (!alive)
+		active = false;
 	glm::vec3 pos = getPos();
 	if (pos == _moveTo(_direction, dTime)) {
 		_direction = static_cast<Dirrection::Enum>(((_direction + 1) % Dirrection::NB_DIRECTIONS));
@@ -60,6 +63,7 @@ bool	Enemy::update(float const dTime) {
 bool	Enemy::postUpdate() {
 	if (!active) {
 		delete this;
+		return false;
 	}
 	return true;
 }

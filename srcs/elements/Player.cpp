@@ -77,8 +77,6 @@ void	Player::_move(float const dTime) {
 		_moveTo(Dirrection::LEFT, dTime);
 	}
 	collisions = getCollision(position);
-	if (collisions.size())
-		logDebug("There are " << collisions.size() << " collisions");
 	_clearCollisionObjects(collisions);
 }
 
