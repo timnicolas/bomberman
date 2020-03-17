@@ -97,8 +97,6 @@ void	Bomb::takeDamage(const int damage) {
 bool	Bomb::update(float const dTime) {
 	if (!active)
 		return true;
-	if (_countdown > 0)
-		logInfo("countdown:" << _countdown);
 	_countdown -= dTime;
 	if (_countdown <= 0.0) {
 		getPos();
