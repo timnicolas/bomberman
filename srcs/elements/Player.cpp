@@ -5,9 +5,8 @@
 
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
-	bombs = 20;
 	name = "Player";
-	speed = 5;
+	initParams();
 }
 
 Player::~Player() {
@@ -23,11 +22,26 @@ Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
 		bombs = rhs.bombs;
+		_toDraw = rhs._toDraw;
+		_invulnerable = rhs._invulnerable;
 	}
 	return *this;
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Initial value for player.
+ *
+ */
+void	Player::initParams() {
+	bombs = 1;
+	speed = 5;
+	alive = true;
+	lives = 2;
+	_invulnerable = 3.0f;
+	_toDraw = 0;
+}
 
 /**
  * @brief update is called each frame.
@@ -40,10 +54,17 @@ bool	Player::update(float const dTime) {
 	if (!active)
 		return true;
 	if (alive) {
+		if (_invulnerable > 0.0f)
+			_invulnerable -= dTime;
+		if (_invulnerable < 0.0f)
+			_invulnerable = 0.0f;
 		_move(dTime);
-		if (Inputs::getKeyDown(InputType::ACTION)){
+		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
+	} else {
+		logDebug("Player is dead.")
+		game.state = GameState::GAME_OVER;
 	}
 	return true;
 }
@@ -55,8 +76,22 @@ bool	Player::update(float const dTime) {
  * @return false if failure
  */
 bool	Player::draw(Gui &gui) {
+	if (_invulnerable > 0) {
+		_toDraw = ((_toDraw + 1) % 10);
+		if (_toDraw > 5)
+			return true;
+	}
 	gui.drawCube(Block::PLAYER, getPos());
 	return true;
+}
+
+bool	Player::takeDamage(const int damage) {
+	if (_invulnerable <= 0.0f) {
+		if (ACharacter::takeDamage(damage)) {
+			_invulnerable = 3.0f;
+		}
+	}
+	return false;
 }
 
 // -- Private Methods ----------------------------------------------------------

@@ -11,7 +11,6 @@
 class Flag : public AObject {
 private:
 	Flag();
-	// Members
 
 public:
 	// Constructors
