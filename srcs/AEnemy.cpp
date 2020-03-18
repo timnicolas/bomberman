@@ -110,6 +110,43 @@ bool AEnemy::_movePatternBasic(float const dTime, std::vector<Direction::Enum> d
 }
 
 /**
+ * @brief Follow the given path
+ *
+ * @param dTime Delta Time
+ * @param path The path to follow
+ * @return false If the Entity is blocked
+ */
+bool AEnemy::_followPath(float const dTime, std::deque<PathNode> & path) {
+	// if the path is finished
+	if (path.size() == 0)
+		return true;
+
+	while (1) {
+		// if the current path node is finished
+		if (_isOn(path.front().goal)) {
+			path.pop_front();
+		}
+		else {
+			break;
+		}
+		// if the path is finished
+		if (path.size() == 0)
+			return true;
+	}
+
+	// if the path is finished
+	if (path.size() == 0)
+		return true;
+
+	// move
+	glm::vec3 pos = getPos();
+	if (pos == _moveTo(path.front().dir, dTime))
+		return false;
+
+	return true;
+}
+
+/**
  * @brief If the player is visible by the entity, return the direction of the player
  *
  * @return Direction::Enum Return the direction of the player (NO_DIRECTION if not visible)
@@ -143,6 +180,21 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 	}
 
 	return Direction::NO_DIRECTION;
+}
+
+/**
+ * @brief Check if the enemy is on dest
+ *
+ * @param dest The postion to compare with enemy pos
+ * @return true If is on the destination
+ */
+bool AEnemy::_isOn(glm::ivec2 dest) const {
+	if (position.x >= static_cast<float>(dest.x)  // - IS_ON_POS_OFFSET
+	&& position.x <= static_cast<float>(dest.x) + IS_ON_POS_OFFSET
+	&& position.z >= static_cast<float>(dest.y)  // - IS_ON_POS_OFFSET
+	&& position.z <= static_cast<float>(dest.y) + IS_ON_POS_OFFSET)
+		return true;
+	return false;
 }
 
 // -- Exceptions errors --------------------------------------------------------

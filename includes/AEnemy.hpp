@@ -2,8 +2,16 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <deque>
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
+
+#define IS_ON_POS_OFFSET 0.1
+
+struct PathNode {
+	Direction::Enum	dir;
+	glm::ivec2		goal;
+};
 
 /**
  * @brief This is the base enemy object
@@ -19,9 +27,11 @@ protected:
 
 	/* movements functions */
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
+	bool			_followPath(float const dTime, std::deque<PathNode> & path);
 
 	/* check functions */
 	Direction::Enum	_isPlayerVisible() const;
+	bool			_isOn(glm::ivec2 dest) const;
 
 public:
 	// Members

@@ -5,11 +5,13 @@
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
 #include "Player.hpp"
-#include "Enemy.hpp"
 #include "Wall.hpp"
 #include "Crispy.hpp"
 #include "Flag.hpp"
 #include "End.hpp"
+
+#include "EnemyBasic.hpp"
+#include "EnemyFollow.hpp"
 
 #include "SceneManager.hpp"
 
@@ -24,7 +26,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 0.1f);}}},
+	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return EnemyBasic::generateEnemy(game, 0.0f);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -33,7 +35,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime)
 {
 	player = nullptr;
-	enemies = std::vector<ACharacter *>();
+	enemies = std::vector<AEnemy *>();
 	flags = 0;
 	size = {0, 0};
 	level = NO_LEVEL;
@@ -53,7 +55,7 @@ SceneGame::~SceneGame() {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -210,7 +212,7 @@ bool	SceneGame::update() {
  */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		if (!(*enemy)->postUpdate()) {
 			enemy = enemies.begin();
@@ -404,7 +406,7 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -472,7 +474,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						board[i][j].push_back(entity);
 						break;
 					case EntityType::ENEMY:
-						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
+						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 						enemies.back()->setPosition({i, 0, j});
 						break;
 					}
@@ -480,6 +482,10 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 			}
 		}
 	}
+
+	// TODO(tnicolas42) remove theses lines and reset generate rate in map implementation
+	enemies.push_back(EnemyFollow::generateEnemy(*this, 1.0f));
+	enemies.back()->setPosition({7, 0, 1});
 
 	if (player == nullptr)
 		throw SceneException("No player on this level.");
