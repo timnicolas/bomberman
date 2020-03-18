@@ -53,8 +53,6 @@ class Gui {
 		void	updateFullscreen();
 		void	udpateDimension();
 
-		glm::mat4	getProjection() const;
-
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
 		Shader			*cubeShader;

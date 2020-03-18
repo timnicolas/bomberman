@@ -125,20 +125,12 @@ bool			SceneGame::init() {
 	}
 
 	try {
-		_openGLModel = new OpenGLModel(*_gui,
-			"bomberman-assets/3dModels/paladin/paladin.fbx", {0, -0.5, 0});
+		_openGLModel = new OpenGLModel(*_gui->cam, "bomberman-assets/3dModels/"
+			"paladin/paladin.fbx", {0, -0.5, 0});
 
 		_models.push_back(Model(*_openGLModel, _dtTime, ETransform({1, 0, 1})));
 		_models.back().setAnimation("Character|walk");
 		_models.back().play = true;
-
-		// ETransform	modelTransform;
-		// for (std::string const & animName : _openGLModel->getAnimationNames()) {
-		// 	modelTransform.setPos(modelTransform.getPos() + glm::vec3(3, 0, 3));
-		// 	_models.push_back(Model(*_openGLModel, _dtTime, modelTransform));
-		// 	_models.back().setAnimation(animName);
-		// 	_models.back().play = true;
-		// }
 	}
 	catch(OpenGLModel::ModelException const &e) {
 		_openGLModel = nullptr;
@@ -302,10 +294,10 @@ bool	SceneGame::draw() {
 	// test to draw a fbx model
 	for (Model & model : _models) {
 		try {
-			logDebug("---------------");
-			logDebug("AnimDuration: " << model.getAnimDuration());
-			logDebug("AnimCurrentTime: " << model.getAnimCurrentTime());
-			logDebug("AnimProgress: " << model.getAnimProgress());
+			// logDebug("---------------");
+			// logDebug("AnimDuration: " << model.getAnimDuration());
+			// logDebug("AnimCurrentTime: " << model.getAnimCurrentTime());
+			// logDebug("AnimProgress: " << model.getAnimProgress());
 
 			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_0)) {
 				model.play = !model.play;
