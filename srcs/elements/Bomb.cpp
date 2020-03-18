@@ -28,6 +28,8 @@ Bomb::Bomb(Bomb const &src) : AObject(src) {
 Bomb &Bomb::operator=(Bomb const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
+		_countdown = rhs._countdown;
+		_propagation = rhs._propagation;
 	}
 	return *this;
 }
@@ -81,9 +83,7 @@ void	Bomb::explode(glm::vec2 const pos) {
  * @return false if damage not taken
  */
 bool	Bomb::takeDamage(const int damage) {
-	if (!active)
-		return false;
-	if (damage <= 0)
+	if (!active || damage <= 0)
 		return false;
 	getPos();
 	explode({position.x, position.z});
