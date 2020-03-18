@@ -1,5 +1,6 @@
 install: make install
 script: make lint && make -j8
+dist: bionic
 language:
   - cpp
 os:
