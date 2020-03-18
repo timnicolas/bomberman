@@ -96,8 +96,6 @@ Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
 		return new Enemy(game);
 
 	int		percentRate = rand() % 100;
-	// logInfo("percentRate: " << percentRate);
-	// logInfo("rate: " << static_cast<int>(rate * 100));
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
 	return new Enemy(game);

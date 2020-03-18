@@ -22,8 +22,13 @@ Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
 		bombs = rhs.bombs;
-		_toDraw = rhs._toDraw;
 		_invulnerable = rhs._invulnerable;
+		_toDraw = rhs._toDraw;
+		passFire = rhs.passFire;
+		passWall = rhs.passWall;
+		detonator = rhs.detonator;
+		passBomb = rhs.passBomb;
+		bombProgation = rhs.bombProgation;
 	}
 	return *this;
 }
@@ -85,6 +90,13 @@ bool	Player::draw(Gui &gui) {
 	return true;
 }
 
+/**
+ * @brief Player Take <damage> damages.
+ *
+ * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
+ */
 bool	Player::takeDamage(const int damage) {
 	if (_invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
@@ -92,6 +104,48 @@ bool	Player::takeDamage(const int damage) {
 		}
 	}
 	return false;
+}
+
+/**
+ * @brief Player take a <bonus> which allow to power up.
+ *
+ * @param bonus
+ * @return true
+ * @return false
+ */
+bool	Player::takeBonus(BonusType::Enum bonus) {
+	switch (bonus) {
+		case BonusType::LIFE:
+			lives++;
+			break;
+		case BonusType::BOMBS:
+			bombs++;
+			break;
+		case BonusType::FLAMES:
+			bombProgation++;
+			break;
+		case BonusType::SPEED:
+			speed = (speed >= 4) ? 4 : ++speed;
+			break;
+		case BonusType::WALLPASS:
+			passWall = true;
+			break;
+		case BonusType::DETONATOR:
+			detonator = true;
+			break;
+		case BonusType::BOMBPASS:
+			passBomb = true;
+			break;
+		case BonusType::FLAMPASS:
+			passFire = true;
+			break;
+		case BonusType::SHIELD:
+			_invulnerable += 5.0f;
+			break;
+		default:
+			break;
+	}
+	return true;
 }
 
 // -- Private Methods ----------------------------------------------------------

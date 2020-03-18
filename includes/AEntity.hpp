@@ -25,6 +25,7 @@ namespace Type {
 		CRISPY,
 		FLAG,
 		END,
+		BONUS,
 		ALL,
 		NONE,
 	};
