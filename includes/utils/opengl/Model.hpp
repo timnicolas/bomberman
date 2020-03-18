@@ -4,6 +4,11 @@
 #include "OpenGLModel.hpp"
 #include "ETransform.hpp"
 
+/**
+ * @brief class to easy manage OpenGLModel,
+ * pos/rot/scale transformations and animations settings
+ *
+ */
 class Model {
 	public:
 		Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform = ETransform());
