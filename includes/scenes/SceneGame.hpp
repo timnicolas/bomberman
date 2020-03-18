@@ -11,8 +11,6 @@
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
-#include "Model.hpp"
-#include "OpenGLModel.hpp"
 
 #define NO_LEVEL -1  // value is no level loaded
 
@@ -51,10 +49,6 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
-
-	// just to test model class
-	std::vector<Model>	_models;
-	OpenGLModel			*_openGLModel;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);

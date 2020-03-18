@@ -39,7 +39,6 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 	level = NO_LEVEL;
 	state = GameState::PLAY;
 	time = std::chrono::milliseconds(0);
-	_openGLModel = nullptr;
 }
 
 SceneGame::~SceneGame() {
@@ -67,8 +66,6 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
-
-	delete	_openGLModel;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -122,19 +119,6 @@ bool			SceneGame::init() {
 			break;
 		}
 		i++;
-	}
-
-	try {
-		_openGLModel = new OpenGLModel(*_gui->cam, "bomberman-assets/3dModels/"
-			"paladin/paladin.fbx", {0, -0.5, 0});
-
-		_models.push_back(Model(*_openGLModel, _dtTime, ETransform({1, 0, 1})));
-		_models.back().setAnimation("Character|walk");
-		_models.back().play = true;
-	}
-	catch(OpenGLModel::ModelException const &e) {
-		_openGLModel = nullptr;
-		logErr(e.what())
 	}
 
 	return true;
@@ -292,41 +276,6 @@ bool	SceneGame::draw() {
 	_gui->cubeShader->use();
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
-
-	// test to draw a fbx model
-	for (Model & model : _models) {
-		try {
-			// logDebug("---------------");
-			// logDebug("AnimDuration: " << model.getAnimDuration());
-			// logDebug("AnimCurrentTime: " << model.getAnimCurrentTime());
-			// logDebug("AnimProgress: " << model.getAnimProgress());
-
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_0)) {
-				model.play = !model.play;
-			}
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_1)) {
-				model.loopAnimation = !model.loopAnimation;
-			}
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_2)) {
-				model.setAnimation(0);
-			}
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_3)) {
-				model.setAnimation("Character|jump");
-			}
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_4)) {
-				model.setAnimProgress(0.5);
-			}
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_5)) {
-				model.setAnimCurrentTime(model.getAnimDuration() / 2);
-			}
-
-
-			model.draw();
-		}
-		catch (OpenGLModel::ModelException const &e) {
-			logErr(e.what())
-		}
-	}
 
 	// draw skybox
 	_gui->drawSkybox(view);
