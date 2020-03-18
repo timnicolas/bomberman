@@ -125,8 +125,7 @@ bool			SceneGame::init() {
 	}
 
 	try {
-		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/paladin/paladin.fbx",
-			false, true);
+		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/paladin/paladin.fbx");
 
 		_models.push_back(Model(*_openGLModel, _dtTime, ETransform({1, 0, 1})));
 		_models.back().setAnimation("Character|TPose");

@@ -248,6 +248,7 @@ LIBS_INC =	~/.brew/include \
 			~/.brew/opt/freetype/include/freetype2 \
 			/usr/include/freetype2 \
 			/usr/include/assimp \
+			/usr/include/SDL2 \
 
 # libs created by user
 UNCOMPILED_LIBS =
@@ -273,10 +274,12 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	# sdl2
 	sudo apt-get -y install libsdl2-dev;
 	# sdl2_mixer
-	sudo apt-get -y install libsdl2-dev
-	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
-	# assimp
-	sudo apt-get install -y libassimp-dev
+	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
+	# assimp 5
+	sudo add-apt-repository -y 'deb http://cz.archive.ubuntu.com/ubuntu focal main universe'
+	sudo apt-get -y update
+	sudo apt-get -y install libassimp-dev
+
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
