@@ -125,7 +125,8 @@ bool			SceneGame::init() {
 	}
 
 	try {
-		_openGLModel = new OpenGLModel(*_gui, "bomberman-assets/3dModels/paladin/paladin.fbx");
+		_openGLModel = new OpenGLModel(*_gui,
+			"bomberman-assets/3dModels/paladin/paladin.fbx", {0, -0.5, 0});
 
 		_models.push_back(Model(*_openGLModel, _dtTime, ETransform({1, 0, 1})));
 		_models.back().setAnimation("Character|walk");
