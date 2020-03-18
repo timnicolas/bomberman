@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
+#include "Bonus.hpp"
 
 /**
  * @brief This is the player object
@@ -15,6 +16,7 @@ private:
 	// Members
 	float	_invulnerable;
 	int		_toDraw;
+
 	// Methods
 	void	_move(float const dTime);
 	void	_putBomb();
@@ -22,6 +24,11 @@ private:
 public:
 	// Members
 	int			bombs;
+	bool		passFire;
+	bool		passWall;
+	bool		detonator;
+	bool		passBomb;
+	int			bombProgation;
 
 	// Constructors
 	explicit Player(SceneGame &game);
@@ -36,6 +43,7 @@ public:
 	bool							draw(Gui &gui);
 	void							initParams();
 	bool							takeDamage(const int damage);
+	bool							takeBonus(BonusType::Enum bonus);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

@@ -214,9 +214,9 @@ bool	SceneGame::postUpdate() {
 	while (enemy != enemies.end()) {
 		if (!(*enemy)->postUpdate()) {
 			enemy = enemies.begin();
+			continue;
 		}
-		if (enemy != enemies.end())
-			enemy++;
+		enemy++;
 	}
 
 	for (auto &&board_it0 : board) {
@@ -225,8 +225,10 @@ bool	SceneGame::postUpdate() {
 			AEntity * copy;
 			while (it != board_it1.end()) {
 				copy = *it;
-				if (!(*it)->postUpdate())
-					return false;
+				if (!(*it)->postUpdate()) {
+					it = board_it1.begin();
+					continue;
+				}
 				if (it == board_it1.end())
 					continue;
 				if (copy == *it)

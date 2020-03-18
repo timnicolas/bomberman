@@ -1,6 +1,7 @@
 #include "Crispy.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "Bonus.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -46,8 +47,14 @@ bool	Crispy::update(float const dTime) {
 }
 
 bool	Crispy::postUpdate() {
-	if (!active)
+	if (!active) {
+		Bonus	*bonus = Bonus::generateBonus(game, 0.3f);
+		if (bonus != nullptr) {
+			game.board[position.x][position.z].push_back(bonus);
+		}
 		delete this;
+		return false;
+	}
 	return true;
 }
 
