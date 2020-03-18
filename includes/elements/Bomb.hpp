@@ -34,7 +34,6 @@ public:
 	bool	draw(Gui &gui);
 	bool	takeDamage(const int damage);
 
-
 	// Exceptions
 	class BombException : public std::runtime_error {
 	public:

@@ -8,7 +8,6 @@
 class Crispy : public AObject {
 private:
 	Crispy();
-	// Members
 
 public:
 	// Constructors

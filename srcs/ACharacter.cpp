@@ -27,7 +27,6 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 		AEntity::operator=(rhs);
 		lives = rhs.lives;
 		speed = rhs.speed;
-		position = rhs.position;
 		_noCollisionObjects = rhs._noCollisionObjects;
 	}
 	return *this;
@@ -73,9 +72,7 @@ bool	ACharacter::isAlive() {
  * @return false if damage not taken
  */
 bool	ACharacter::takeDamage(const int damage) {
-	if (!active)
-		return false;
-	if (!destructible)
+	if (!active || !destructible)
 		return false;
 	lives -= damage;
 	if (lives <= 0) {

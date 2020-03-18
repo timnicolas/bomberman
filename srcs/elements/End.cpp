@@ -22,6 +22,7 @@ End::End(End const &src) : AObject(src) {
 End &End::operator=(End const &rhs) {
 	if (this != &rhs) {
 		AObject::operator=(rhs);
+		_texture = rhs._texture;
 	}
 	return *this;
 }

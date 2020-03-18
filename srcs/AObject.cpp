@@ -76,10 +76,7 @@ glm::vec3	AObject::getPos() {
  * @return false if damage not taken
  */
 bool	AObject::takeDamage(const int damage) {
-	(void)damage;
-	if (!active)
-		return false;
-	if (!destructible)
+	if (!active || !destructible || damage <= 0)
 		return false;
 	alive = false;
 	return true;

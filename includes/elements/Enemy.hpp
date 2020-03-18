@@ -12,12 +12,10 @@
 class Enemy : public ACharacter {
 private:
 	Enemy();
+	// Members
 	Dirrection::Enum	_direction;
 
 public:
-	// Members
-	int			bombs;
-
 	// Constructors
 	explicit Enemy(SceneGame &game);
 	~Enemy();
