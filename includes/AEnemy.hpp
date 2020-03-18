@@ -20,6 +20,9 @@ protected:
 	/* movements functions */
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
 
+	/* check functions */
+	Direction::Enum	_isPlayerVisible() const;
+
 public:
 	// Members
 	int			bombs;

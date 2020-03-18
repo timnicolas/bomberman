@@ -118,9 +118,10 @@ void	Player::_move(float const dTime) {
 void	Player::_putBomb() {
 	if (bombs <= 0)
 		return;
-	if (game.board[position.x + 0.5][position.z + 0.5].size() == 0) {
+	glm::ivec2 intPos = getIntPos();
+	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
-		game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
+		game.board[intPos.x][intPos.y].push_back(bomb);
 		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
 	}

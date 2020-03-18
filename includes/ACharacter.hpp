@@ -10,6 +10,7 @@
 // class SceneGame;
 namespace Direction {
 	enum Enum {
+		NO_DIRECTION = -1,
 		UP = 0,
 		RIGHT,
 		DOWN,
@@ -51,6 +52,7 @@ public:
 	virtual bool					draw(Gui &gui) = 0;
 	bool							isAlive();
 	glm::vec3						getPos();
+	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
