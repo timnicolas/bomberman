@@ -9,11 +9,10 @@
 /**
  * @brief This is the enemy object
  */
-class Enemy : public AEnemy {
+class EnemyFollow : public AEnemy {
 private:
-	Enemy();
-	std::vector<Direction::Enum>	_directionsOrder;
-	uint32_t						_dirIdx;
+	EnemyFollow();
+	std::deque<PathNode>	_path;
 
 protected:
 	virtual bool	_update(float const dTime);
@@ -21,14 +20,17 @@ protected:
 	virtual bool	_draw(Gui &gui);
 
 public:
+	// Members
+	int			bombs;
+
 	// Constructors
-	explicit Enemy(SceneGame &game);
-	~Enemy();
-	Enemy(Enemy const &src);
+	explicit EnemyFollow(SceneGame &game);
+	~EnemyFollow();
+	EnemyFollow(EnemyFollow const &src);
 
 	// Operators
-	Enemy &operator=(Enemy const &rhs);
+	EnemyFollow &operator=(EnemyFollow const &rhs);
 
 	// Methods
-	static Enemy *	generateEnemy(SceneGame &game, float rate);
+	static EnemyFollow *	generateEnemy(SceneGame &game, float rate);
 };
