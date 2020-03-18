@@ -44,6 +44,18 @@ glm::vec3		ACharacter::getPos() {
 }
 
 /**
+ * @brief Get the current position (in integer)
+ *
+ * @return glm::ivec2 The integer position
+ */
+glm::ivec2		ACharacter::getIntPos() const {
+	return glm::ivec2(
+		static_cast<int>(position.x + 0.5),
+		static_cast<int>(position.z + 0.5)
+	);
+}
+
+/**
  * @brief Init the Class. Needed to be called before any usage of the Class.
  *
  * @param pos

@@ -44,7 +44,16 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return false if failure
  */
 bool	Enemy::_update(float const dTime) {
-	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+	Direction::Enum playerVisibleDir = _isPlayerVisible();
+
+	// try to move to the player position
+	glm::vec3 pos = getPos();
+
+
+	if (pos == _moveTo(playerVisibleDir, dTime)) {
+		// if blocked, move with a basic pattern
+		_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+	}
 	return true;
 }
 
