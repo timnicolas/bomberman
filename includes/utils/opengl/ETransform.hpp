@@ -6,6 +6,10 @@
 
 #include "useGlm.hpp"
 
+/**
+ * @brief Class to manage model transformation
+ *
+ */
 class ETransform {
 	public:
 		// -- constructors -----------------------------------------------------

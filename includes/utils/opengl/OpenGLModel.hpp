@@ -32,6 +32,10 @@ namespace AnimKeyType {
 	}};
 }  // namespace AnimKeyType
 
+/**
+ * @brief class to load and draw a 3d model from file
+ *
+ */
 class OpenGLModel {
 	public:
         OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset = {0, 0, 0},

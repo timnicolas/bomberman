@@ -46,23 +46,53 @@ void	ETransform::_updateModel() {
 }
 
 // -- setters ------------------------------------------------------------------
+/**
+ * @brief change the transform position and update the model matrix
+ *
+ * @param pos the new position
+ */
 void	ETransform::setPos(glm::vec3 const pos) {
 	_pos = pos;
 	_updateModel();
 }
+
+/**
+ * @brief change the transform rotation and update the model matrix
+ *
+ * @param rot the new rotation quaternion
+ */
 void	ETransform::setRot(glm::quat const rot) {
 	_rot = rot;
 	_updateModel();
 }
+
+/**
+ * @brief change the transform rotation and update the model matrix
+ *
+ * @param rotM the new rotation matrix
+ */
 void	ETransform::setRot(glm::mat4 const rotM) {
 	_rot = glm::toQuat(rotM);
 	_updateModel();
 }
+
+/**
+ * @brief change the transform rotation and update the model matrix
+ *
+ * @param rotAngle the new rotation angle
+ * @param rotAxis the new rotation axis
+ */
 void	ETransform::setRot(float const rotAngle, glm::vec3 const rotAxis) {
 	_rot = glm::toQuat(
 		glm::rotate(glm::mat4(1.0), rotAngle, rotAxis));
 		_updateModel();
 }
+
+/**
+ * @brief change the transform scale and update the model matrix
+ *
+ * @param scale the new scale value
+ */
 void	ETransform::setScale(glm::vec3 const scale) {
 	_scale = scale;
 	_updateModel();

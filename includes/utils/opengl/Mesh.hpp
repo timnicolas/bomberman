@@ -19,6 +19,10 @@ namespace TextureType {
 	};
 }
 
+/**
+ * @brief Struct to store vertex infos
+ *
+ */
 struct	Vertex {
 	glm::vec3	pos;
 	glm::vec3	norm;
@@ -36,6 +40,10 @@ struct	Texture {
 	std::string			path;
 };
 
+/**
+ * @brief Class to store and draw a 3d model Mesh
+ *
+ */
 class	Mesh {
 	public:
 		Mesh(Shader &sh, std::string const &name, std::vector<Vertex> vertices,

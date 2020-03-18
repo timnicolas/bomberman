@@ -46,6 +46,10 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
 }
 
 // -- draw ---------------------------------------------------------------------
+/**
+ * @brief draw the Mesh
+ *
+ */
 void	Mesh::draw() const {
 	// send textures
 	_setUniformsTextures();
@@ -119,6 +123,10 @@ void	Mesh::_setUniformsTextures() const {
 }
 
 // -- sendMesh -----------------------------------------------------------------
+/**
+ * @brief send the mesh data to openGL
+ *
+ */
 void	Mesh::sendMesh() {
 	// create vao, vbo, ebo
 	glGenVertexArrays(1, &_vao);
@@ -167,6 +175,13 @@ void	Mesh::sendMesh() {
 }
 
 // -- addBoneData --------------------------------------------------------------
+/**
+ * @brief store the bone info to the mesh
+ *
+ * @param boneID the bone id
+ * @param weight the weight of the bone to the vertex
+ * @param vertexID the vertex id
+ */
 void Mesh::addBoneData(u_int32_t boneID, float weight, u_int32_t vertexID) {
 	for (u_int32_t i = 0; i < NB_BONES_PER_VERTEX; ++i) {
 		// if the vertex bone weight as not been set

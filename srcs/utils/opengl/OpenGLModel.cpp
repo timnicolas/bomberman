@@ -10,6 +10,15 @@
 std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new OpenGLModel object
+ *
+ * @param _gui gui ref to access to the camera view and projection
+ * @param path the 3d model file path
+ * @param offset an optional offset to shift the model manualy
+ * @param centerEnabled option to center the model based on the min/max vertices, not recommanded
+ * @param scaleEnabled option to scale the model based on the min/max vertices, not recommanded
+ */
 OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset,
 	bool centerEnabled, bool scaleEnabled)
 : _gui(_gui),
@@ -444,6 +453,11 @@ void	OpenGLModel::_calcCenterScale() {
 }
 
 // -- draw ---------------------------------------------------------------------
+/**
+ * @brief draw the 3d model
+ *
+ * @param animationTimeTick the curent animation time in tick
+ */
 void	OpenGLModel::draw(float animationTimeTick) {
 	_sh->use();
 
@@ -475,6 +489,13 @@ void	OpenGLModel::draw(float animationTimeTick) {
 }
 
 // -- loadNextAnimation --------------------------------------------------------
+/**
+ * @brief change the selected animation by id
+ *
+ * @param id the animation id
+ * @return true on success
+ * @return false on failure
+ */
 bool	OpenGLModel::setAnimation(uint32_t id) {
 	if (_isAnimated) {
 		if (id < _scene->mNumAnimations) {
@@ -493,6 +514,11 @@ bool	OpenGLModel::setAnimation(uint32_t id) {
 }
 
 // -- setModel -----------------------------------------------------------------
+/**
+ * @brief change the model matrix
+ *
+ * @param model
+ */
 void	OpenGLModel::setModel(glm::mat4 const model) { _model = model; }
 
 // -- getAnimationId -----------------------------------------------------------
@@ -540,7 +566,21 @@ aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) {
 
 	return nullptr;
 }
+
+/**
+ * @brief to check if a model is animated
+ *
+ * @return true if animated
+ * @return false if not animated
+ */
 bool	OpenGLModel::isAnimated() const { return _isAnimated; }
+
+
+/**
+ * @brief return the availables animations names
+ *
+ * @return std::vector<std::string>
+ */
 std::vector<std::string>	OpenGLModel::getAnimationNames() const {
 	return _animationNames;
 }
