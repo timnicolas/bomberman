@@ -130,8 +130,12 @@ class ABaseUI {
 		virtual void	_update() = 0;
 		virtual void	_draw() = 0;
 
+		// called by setWinSize
+		virtual void	_resizeWin(glm::vec2 const & winScale2f, float winScale1f);
+
 		// enable functionnalities
 		bool			_enabled;
+		// basics
 		glm::vec2		_pos;
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
@@ -168,30 +172,33 @@ class ABaseUI {
 		bool *			_rightListener;
 		bool *			_leftListener;
 
+		/* global */
+		static bool						_isInit;
+		static std::vector<ABaseUI *>	_allUI;
 		/* shaders */
-		static glm::vec2		_winSize;
-		static glm::mat4		_projection;  // projection matrix (orthogonal)
+		static glm::vec2				_winSize;
+		static glm::mat4				_projection;  // projection matrix (orthogonal)
 		/* rectangle */
-		static Shader *			_rectShader;
-		static GLuint			_rectVao;
-		static GLuint			_rectVbo;
-		static const float		_rectVertices[];
+		static Shader *					_rectShader;
+		static GLuint					_rectVao;
+		static GLuint					_rectVbo;
+		static const float				_rectVertices[];
 		/* text */
-		static TextRender *		_textRender;
-		static std::string		_defFont;
+		static TextRender *				_textRender;
+		static std::string				_defFont;
 		/* image 2D */
-		static Shader *			_imgShader;
-		static GLuint			_imgVao;
-		static GLuint			_imgVbo;
-		static const float		_imgVertices[];
+		static Shader *					_imgShader;
+		static GLuint					_imgVao;
+		static GLuint					_imgVbo;
+		static const float				_imgVertices[];
 		/* help */
-		static bool				_showHelp;
-		static std::string		_helpFont;
-		static float			_helpTextScale;
-		static float			_helpBorderSize;
-		static float			_helpPadding;
-		static SDL_Scancode		_helpKeyBindScancode;
-		static InputType::Enum	_helpKeyBindInput;
+		static bool						_showHelp;
+		static std::string				_helpFont;
+		static float					_helpTextScale;
+		static float					_helpBorderSize;
+		static float					_helpPadding;
+		static SDL_Scancode				_helpKeyBindScancode;
+		static InputType::Enum			_helpKeyBindInput;
 
 	private:
 		void			_updateClick();
