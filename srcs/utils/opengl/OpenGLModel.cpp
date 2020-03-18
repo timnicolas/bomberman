@@ -515,7 +515,7 @@ bool	OpenGLModel::getAnimationId(std::string const name, uint32_t &outId) const 
 		return true;
 	}
 
-	logErr("animation name not found");
+	logWarn("animation name \"" << name << "\" not found");
 	return false;
 }
 
