@@ -2,7 +2,7 @@
 #define ETRANSFORM_HPP_
 
 #define WORLD_UP glm::vec3(0, 1, 0)
-#define GLM_QUAT_IDENTITY glm::quat_identity<float, glm::defaultp>()
+#define GLM_QUAT_IDENTITY glm::quat(1, 0, 0, 0)
 
 #include "useGlm.hpp"
 
