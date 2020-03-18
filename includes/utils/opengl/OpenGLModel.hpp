@@ -34,8 +34,8 @@ namespace AnimKeyType {
 
 class OpenGLModel {
 	public:
-        OpenGLModel(Gui const &_gui, std::string const &path, bool centerEnabled = false,
-			bool scaleEnabled = false);
+        OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset = {0, 0, 0},
+			bool centerEnabled = false, bool scaleEnabled = false);
 		virtual ~OpenGLModel();
 		OpenGLModel(OpenGLModel const &src);
 		OpenGLModel &operator=(OpenGLModel const &rhs);
@@ -112,6 +112,7 @@ class OpenGLModel {
 		bool		_scaleEnabled;  // scale the model on loading
 		glm::vec3	_minPos, _maxPos;  // to scale the model
 		glm::mat4	_modelScale;
+		glm::vec3	_offset;  // offset to shift the model manualy
 
 		// global transform matrix
 		glm::mat4	_globalTransform;

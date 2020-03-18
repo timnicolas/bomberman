@@ -10,12 +10,13 @@
 std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 
 // -- Constructors -------------------------------------------------------------
-OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, bool centerEnabled,
-	bool scaleEnabled)
+OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset,
+	bool centerEnabled, bool scaleEnabled)
 : _gui(_gui),
   _path(path),
   _centerEnabled(centerEnabled),
-  _scaleEnabled(scaleEnabled)
+  _scaleEnabled(scaleEnabled),
+  _offset(offset)
 {
 	// init static shader if null
 	if (!_sh) {
@@ -403,16 +404,11 @@ void	OpenGLModel::_updateMinMaxPos(glm::vec3 pos) {
 // -- _calcCenterScale ---------------------------------------------------------
 // calculate the model matrix to scale and center the OpenGLModel
 void	OpenGLModel::_calcCenterScale() {
-	glm::vec3	transl;
+	glm::vec3	transl(0, 0, 0);
 	float		maxDiff;
 	float		scale = 1.0f;
 
 	_modelScale = glm::mat4(1.0f);
-
-	// quit if center and scale are disabled
-	if (!_scaleEnabled && !_centerEnabled) {
-		return;
-	}
 
 	// scale
 	if (_scaleEnabled) {
@@ -438,10 +434,13 @@ void	OpenGLModel::_calcCenterScale() {
 		transl.x = scale * ((transl.x < 0.00001f && transl.x > -0.00001f) ? 0.0f : transl.x);
 		transl.y = scale * ((transl.y < 0.00001f && transl.y > -0.00001f) ? 0.0f : transl.y);
 		transl.z = scale * ((transl.z < 0.00001f && transl.z > -0.00001f) ? 0.0f : transl.z);
-
-		// apply the translation
-		_modelScale = glm::translate(_modelScale, transl);
 	}
+
+	// add the optional offset to shift the model manualy
+	transl += _offset;
+
+	// apply the translation
+	_modelScale = glm::translate(_modelScale, transl);
 }
 
 // -- draw ---------------------------------------------------------------------
