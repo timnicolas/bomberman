@@ -38,7 +38,7 @@ namespace AnimKeyType {
  */
 class OpenGLModel {
 	public:
-        OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset = {0, 0, 0},
+        OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 offset = {0, 0, 0},
 			bool centerEnabled = false, bool scaleEnabled = false);
 		virtual ~OpenGLModel();
 		OpenGLModel(OpenGLModel const &src);
@@ -98,7 +98,7 @@ class OpenGLModel {
 		// -- members ----------------------------------------------------------
 		static std::unique_ptr<Shader>	_sh;
 
-		Gui const			&_gui;
+		Camera const		&_cam;
 		std::string const	_path;  // model file path
 		std::vector<Mesh *>	_meshes;  // all model meshes
 

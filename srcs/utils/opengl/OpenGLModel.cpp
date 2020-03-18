@@ -13,15 +13,15 @@ std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 /**
  * @brief Construct a new OpenGLModel object
  *
- * @param _gui gui ref to access to the camera view and projection
+ * @param _cam camera ref to access to view and projection
  * @param path the 3d model file path
  * @param offset an optional offset to shift the model manualy
  * @param centerEnabled option to center the model based on the min/max vertices, not recommanded
  * @param scaleEnabled option to scale the model based on the min/max vertices, not recommanded
  */
-OpenGLModel::OpenGLModel(Gui const &_gui, std::string const &path, glm::vec3 offset,
+OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 offset,
 	bool centerEnabled, bool scaleEnabled)
-: _gui(_gui),
+: _cam(cam),
   _path(path),
   _centerEnabled(centerEnabled),
   _scaleEnabled(scaleEnabled),
@@ -68,7 +68,7 @@ OpenGLModel::~OpenGLModel() {
 }
 
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
-: _gui(src._gui),
+: _cam(src._cam),
   _path(src._path) {
 	*this = src;
 }
@@ -108,7 +108,7 @@ void	OpenGLModel::_setConstUniforms() {
 	_sh->use();
 
 	// camera projection
-	_sh->setMat4("projection", _gui.getProjection());
+	_sh->setMat4("projection", _cam.getProjection());
 
 	// direction light
 	_sh->setVec3("dirLight.direction", -0.2f, -0.8f, 0.6f);
@@ -474,10 +474,10 @@ void	OpenGLModel::draw(float animationTimeTick) {
 
 	// update uniforms
 	_sh->setMat4("model", _model);
-	_sh->setMat4("view", _gui.cam->getViewMatrix());
+	_sh->setMat4("view", _cam.getViewMatrix());
 	_sh->setMat4("modelScale", _modelScale);
 	_sh->setBool("isAnimated", _isAnimated);
-	_sh->setVec3("viewPos", _gui.cam->pos);
+	_sh->setVec3("viewPos", _cam.pos);
 
 	// draw all meshs
 	for (auto &mesh : _meshes) {

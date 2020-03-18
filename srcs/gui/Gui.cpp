@@ -258,17 +258,12 @@ bool	Gui::_initShaders() {
 	glBindVertexArray(0);
 
 	// -- camera ---------------------------------------------------------------
-	cam = new Camera({0.0f, 25.0f, 0.0f});
-
-	float angle = cam->zoom;
 	float ratio = static_cast<float>(gameInfo.windowSize.x) / gameInfo.windowSize.y;
-	float nearD = 0.1f;
-	float farD = 400;
-	_projection = glm::perspective(glm::radians(angle), ratio, nearD, farD);
+	cam = new Camera(ratio, {0.0f, 25.0f, 0.0f});
 
 	// -- set default uniforms -------------------------------------------------
 	// projection
-	cubeShader->setMat4("projection", _projection);
+	cubeShader->setMat4("projection", cam->getProjection());
 
 	// cube material
 	Material material;
@@ -303,7 +298,7 @@ bool	Gui::_initShaders() {
 	// -- skybox ---------------------------------------------------------------
 	_skybox = new Skybox;
 	_skybox->getShader().use();
-	_skybox->getShader().setMat4("projection", _projection);
+	_skybox->getShader().setMat4("projection", cam->getProjection());
 	_skybox->getShader().unuse();
 
 	return true;
@@ -447,10 +442,6 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->draw(0.5);
 	_skybox->getShader().unuse();
 }
-
-// -- getProjection ------------------------------------------------------------
-glm::mat4	Gui::getProjection() const { return _projection; }
-
 
 // -- statics const ------------------------------------------------------------
 // cube faces
