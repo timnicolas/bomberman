@@ -8,7 +8,6 @@
 class Fire : public AObject {
 private:
 	Fire();
-	// Members
 
 public:
 	// Constructors
