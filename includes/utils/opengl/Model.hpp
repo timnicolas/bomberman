@@ -14,19 +14,28 @@ class Model {
 		void	draw();
 		void	setAnimation(uint32_t id);
 		void	setAnimation(std::string name);
+		void	setAnimProgress(float progress);
+		void	setAnimCurrentTime(float animTime);
+
+		float	getAnimCurrentTime();
+		float	getAnimProgress();
+		float	getAnimDuration();
 
 		ETransform	transform;  // to move/scale/rotate the model
 		bool		play;
+		bool		loopAnimation;
 
 	private:
 		Model();  // private constructor, should not be called
 		void	_updateAnimationTime();
+		void	_upateTicksPerSecond();
 
 		OpenGLModel &_openGLModel;
 		float const	&_dtTime;
 		uint32_t	_animationId;
 		aiAnimation	*_curAnimation;
-		float		_animationTime;
+		float		_ticksPerSecond;
+		float		_animationTime;  // in ms
 		float		_animationTimeTick;
 		float		_animationSpeed;
 };
