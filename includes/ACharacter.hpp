@@ -51,8 +51,8 @@ public:
 	virtual bool					draw(Gui &gui) = 0;
 	bool							isAlive();
 	glm::vec3						getPos();
-	ACharacter						*init(glm::vec3 pos);
-	void							takeDamage(const int damage);
+	ACharacter						*setPosition(glm::vec3 pos);
+	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
 	bool							clearNoCollisionObjects(AEntity *entity);
 	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);

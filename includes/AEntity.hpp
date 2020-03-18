@@ -66,7 +66,7 @@ public:
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
 	virtual glm::vec3	getPos() = 0;
-	virtual void		takeDamage(const int damage) = 0;
+	virtual bool		takeDamage(const int damage) = 0;
 };
 
 #endif  // ENTITY_HPP_

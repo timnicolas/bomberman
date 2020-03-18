@@ -72,14 +72,14 @@ glm::vec3	AObject::getPos() {
  * @brief TakeDamage put an object to die.
  *
  * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
  */
-void	AObject::takeDamage(const int damage) {
-	(void)damage;
-	if (!active)
-		return;
-	if (!destructible)
-		return;
+bool	AObject::takeDamage(const int damage) {
+	if (!active || !destructible || damage <= 0)
+		return false;
 	alive = false;
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------

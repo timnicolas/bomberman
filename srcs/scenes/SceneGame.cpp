@@ -179,6 +179,8 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
+		// clear game infos.
+		player->initParams();
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -285,8 +287,11 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
-	if (state == GameState::PAUSE || state == GameState::WIN)
+	if (state == GameState::PAUSE
+	|| state == GameState::WIN
+	|| state == GameState::GAME_OVER) {
 		state = GameState::PLAY;
+	}
 	_gui->enableCursor(false);
 }
 /**
@@ -457,7 +462,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
-						player->init({i, 0, j});
+						player->setPosition({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:
 						flags++;
@@ -468,7 +473,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						break;
 					case EntityType::ENEMY:
 						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
-						enemies.back()->init({i, 0, j});
+						enemies.back()->setPosition({i, 0, j});
 						break;
 					}
 				}

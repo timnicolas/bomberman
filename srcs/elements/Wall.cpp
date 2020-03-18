@@ -22,6 +22,7 @@ Wall::Wall(Wall const &src) : AObject(src) {
 Wall &Wall::operator=(Wall const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
+		_blockType = rhs._blockType;
 	}
 	return *this;
 }
