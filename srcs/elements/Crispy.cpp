@@ -48,7 +48,7 @@ bool	Crispy::update(float const dTime) {
 
 bool	Crispy::postUpdate() {
 	if (!active) {
-		Bonus	*bonus = Bonus::generateBonus(game, 0.3f);
+		Bonus	*bonus = Bonus::generateBonus(game, .3f);
 		if (bonus != nullptr) {
 			game.board[position.x][position.z].push_back(bonus);
 		}

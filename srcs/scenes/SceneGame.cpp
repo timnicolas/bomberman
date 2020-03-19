@@ -66,6 +66,9 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
+
+	if (_gameInfo)
+		delete _gameInfo;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -121,6 +124,23 @@ bool			SceneGame::init() {
 		i++;
 	}
 
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	float menuWidth = winSz.x / 2;
+	float menuHeight = menuWidth / 8;
+
+	try {
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+		addText(tmpPos, tmpSize, "Game infos");
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -169,7 +189,6 @@ bool	SceneGame::update() {
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
-	// TODO(tnicolas42) remove the scene loader
 	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
@@ -180,7 +199,7 @@ bool	SceneGame::update() {
 	}
 	else if (state == GameState::GAME_OVER) {
 		// clear game infos.
-		player->initParams();
+		player->resetParams();
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -198,6 +217,11 @@ bool	SceneGame::update() {
 			return false;
 	}
 	player->update(_dtTime);
+
+	std::string gameInfosStr = _getGameInfos();
+	_gameInfo->setText(gameInfosStr);
+
+	_gameInfo->update();
 
 	return postUpdate();
 }
@@ -241,6 +265,39 @@ bool	SceneGame::postUpdate() {
 }
 
 /**
+ * @brief add a text in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param text the text
+ * @return TextUI& a reference to the element created
+ */
+TextUI & SceneGame::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+	TextUI * ui = new TextUI(pos, size);
+	ui->setText(text);
+	_gameInfo = ui;
+	return *ui;
+}
+
+std::string			SceneGame::_getGameInfos() {
+	std::string			str;
+	str = "life:" + std::to_string(player->lives)
+		+ " speed:" + std::to_string(player->speed)
+		+ " bombs:" + std::to_string(player->totalBombs)
+		+ " propag:" + std::to_string(player->bombProgation);
+	if (player->passFire)
+		str += " pf";
+	if (player->passWall)
+		str += " pw";
+	if (player->detonator)
+		str += " det";
+	if (player->passBomb)
+		str += " pb";
+
+	return str;
+}
+
+/**
  * @brief draw is called each frame to draw the Game Scene.
  *
  * @return true
@@ -278,6 +335,8 @@ bool	SceneGame::draw() {
 	_gui->cubeShader->use();
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
+
+	_gameInfo->draw();
 
 	// draw skybox
 	_gui->drawSkybox(view);
@@ -322,6 +381,8 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.x / 2, 1.0f,
 		size.y / 1.61803398875f
 	));
+
+	player->init();
 
 	return result;
 }

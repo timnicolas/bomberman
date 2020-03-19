@@ -34,6 +34,13 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 	return *this;
 }
 
+// -- Getters / Setters --------------------------------------------------------
+
+Bomb*	Bomb::setPropagation(const int propagation) {
+	_propagation = propagation;
+	return this;
+}
+
 // -- Methods ------------------------------------------------------------------
 
 /**
@@ -71,7 +78,7 @@ void	Bomb::explode(glm::vec2 const pos) {
 			break;
 	}
 	game.board[pos.x][pos.y].push_back(new Fire(game));
-	game.player->bombs++;
+	game.player->addBomb();
 	alive = false;
 }
 
