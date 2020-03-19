@@ -49,7 +49,7 @@ class OpenGLModel {
 		void		setModel(glm::mat4 const model);
 
 		bool		getAnimationId(std::string const name, uint32_t &outId) const;
-		aiAnimation	*getAiAnimation(uint32_t id);
+		aiAnimation	*getAiAnimation(uint32_t id) const;
 		bool		isAnimated() const;
 		std::vector<std::string>	getAnimationNames() const;
 

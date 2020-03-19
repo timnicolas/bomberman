@@ -552,7 +552,7 @@ bool	OpenGLModel::getAnimationId(std::string const name, uint32_t &outId) const 
  * @return aiAnimation* on success
  * @return nullptr on failure
  */
-aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) {
+aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) const {
 	if (_isAnimated) {
 		// on valid id
 		if (id < _scene->mNumAnimations) {
