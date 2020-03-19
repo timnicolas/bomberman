@@ -6,7 +6,7 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 
-#define IS_ON_POS_OFFSET 0.1
+#define IS_ON_POS_OFFSET 0.2
 
 struct PathNode {
 	Direction::Enum	dir;

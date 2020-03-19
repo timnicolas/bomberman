@@ -189,9 +189,9 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
  * @return true If is on the destination
  */
 bool AEnemy::_isOn(glm::ivec2 dest) const {
-	if (position.x >= static_cast<float>(dest.x)  // - IS_ON_POS_OFFSET
+	if (position.x >= static_cast<float>(dest.x) - IS_ON_POS_OFFSET
 	&& position.x <= static_cast<float>(dest.x) + IS_ON_POS_OFFSET
-	&& position.z >= static_cast<float>(dest.y)  // - IS_ON_POS_OFFSET
+	&& position.z >= static_cast<float>(dest.y) - IS_ON_POS_OFFSET
 	&& position.z <= static_cast<float>(dest.y) + IS_ON_POS_OFFSET)
 		return true;
 	return false;
