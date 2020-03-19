@@ -13,8 +13,8 @@ EnemyFollow::EnemyFollow(SceneGame &game)
 	_path.push_back({Direction::DOWN, {9, 5}});
 	_path.push_back({Direction::LEFT, {8, 5}});
 	_path.push_back({Direction::DOWN, {8, 7}});
-	_path.push_back({Direction::RIGHT, {11, 7}});
-	_path.push_back({Direction::UP, {11, 5}});
+	_path.push_back({Direction::RIGHT, {12, 7}});
+	_path.push_back({Direction::UP, {12, 5}});
 }
 
 EnemyFollow::~EnemyFollow() {
@@ -51,7 +51,7 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  */
 bool	EnemyFollow::_update(float const dTime) {
 	if (_followPath(dTime, _path) == false) {
-		logWarn("invalid path");
+		logWarn("invalid path " << glm::to_string(position) << " " << glm::to_string(_path[0].goal) << " " << _path[0].dir);
 	}
 	if (_path.size() == 0) {
 		logSuccess("arrived to destination");
