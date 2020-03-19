@@ -10,7 +10,7 @@ Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform
 	loopAnimation = false;
 	_animationId = 0;
 	_animationTime = 0;
-	_animationSpeed = 1.0;
+	animationSpeed = 1.0;
 
 	_curAnimation = nullptr;
 	_ticksPerSecond = 0.0;
@@ -39,7 +39,7 @@ Model &Model::operator=(Model const &rhs) {
 		_ticksPerSecond = rhs._ticksPerSecond;
 		_animationTime = rhs._animationTime;
 		_animationTimeTick = rhs._animationTimeTick;
-		_animationSpeed = rhs._animationSpeed;
+		animationSpeed = rhs.animationSpeed;
 	}
 	return *this;
 }
@@ -182,7 +182,7 @@ float	Model::getAnimDuration() {
 
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
-	_animationTime += 1000 * _dtTime * _animationSpeed;
+	_animationTime += 1000 * _dtTime * animationSpeed;
 
 	if (loopAnimation) {
 		_animationTime = fmod(_animationTime, getAnimDuration());

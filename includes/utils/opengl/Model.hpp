@@ -29,6 +29,7 @@ class Model {
 		ETransform	transform;  // to move/scale/rotate the model
 		bool		play;
 		bool		loopAnimation;
+		float		animationSpeed;
 
 	private:
 		Model();  // private constructor, should not be called
@@ -42,7 +43,6 @@ class Model {
 		float		_ticksPerSecond;
 		float		_animationTime;  // in ms
 		float		_animationTimeTick;
-		float		_animationSpeed;
 };
 
 #endif  // MODEL_HPP_
