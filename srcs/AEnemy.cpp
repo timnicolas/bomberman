@@ -154,29 +154,33 @@ bool AEnemy::_followPath(float const dTime, std::deque<PathNode> & path) {
 Direction::Enum AEnemy::_isPlayerVisible() const {
 	glm::ivec2 playerPos = game.player->getIntPos();
 	glm::ivec2 thisPos = getIntPos();
-	for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
-		if (x == playerPos.x)
-			return Direction::RIGHT;
-		if (game.board[x][thisPos.y].size() > 0)
-			break;
+	if (playerPos.y == thisPos.y) {
+		for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
+			if (x == playerPos.x)
+				return Direction::RIGHT;
+			if (game.board[x][thisPos.y].size() > 0)
+				break;
+		}
+		for (int x = thisPos.x; x >= 0; x--) {
+			if (x == playerPos.x)
+				return Direction::LEFT;
+			if (game.board[x][thisPos.y].size() > 0)
+				break;
+		}
 	}
-	for (int x = thisPos.x; x >= 0; x--) {
-		if (x == playerPos.x)
-			return Direction::LEFT;
-		if (game.board[x][thisPos.y].size() > 0)
-			break;
-	}
-	for (int y = thisPos.y; y < static_cast<int>(game.size.y); y++) {
-		if (y == playerPos.y)
-			return Direction::DOWN;
-		if (game.board[thisPos.x][y].size() > 0)
-			break;
-	}
-	for (int y = thisPos.y; y >= 0; y--) {
-		if (y == playerPos.y)
-			return Direction::UP;
-		if (game.board[thisPos.x][y].size() > 0)
-			break;
+	else if (playerPos.x == thisPos.x) {
+		for (int y = thisPos.y; y < static_cast<int>(game.size.y); y++) {
+			if (y == playerPos.y)
+				return Direction::DOWN;
+			if (game.board[thisPos.x][y].size() > 0)
+				break;
+		}
+		for (int y = thisPos.y; y >= 0; y--) {
+			if (y == playerPos.y)
+				return Direction::UP;
+			if (game.board[thisPos.x][y].size() > 0)
+				break;
+		}
 	}
 
 	return Direction::NO_DIRECTION;
