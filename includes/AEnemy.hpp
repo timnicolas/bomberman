@@ -20,6 +20,14 @@ class AEnemy : public ACharacter {
 private:
 	AEnemy();
 
+	struct DFSNode {
+		bool		visited;
+		glm::ivec2	last;
+
+		DFSNode() : visited(false), last{-1, -1} {}
+	};
+	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec2 pos, glm::ivec2 dest, bool & find);
+
 protected:
 	virtual bool	_update(float const dTime) = 0;
 	virtual bool	_postUpdate() = 0;
@@ -29,9 +37,10 @@ protected:
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
 	bool			_followPath(float const dTime, std::deque<PathNode> & path);
 
-	/* check functions */
+	/* check and calcultation functions */
 	Direction::Enum	_isPlayerVisible() const;
 	bool			_isOn(glm::ivec2 dest) const;
+	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);
 
 public:
 	// Members

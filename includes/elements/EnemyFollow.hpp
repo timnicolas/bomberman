@@ -14,7 +14,9 @@
 class EnemyFollow : public AEnemy {
 private:
 	EnemyFollow();
-	std::deque<PathNode>	_path;
+	bool						_findPlayer;
+	std::deque<PathNode>		_path;
+	std::chrono::milliseconds	_lastFindMs;
 
 protected:
 	virtual bool	_update(float const dTime);

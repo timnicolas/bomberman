@@ -485,7 +485,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	}
 
 	// TODO(tnicolas42) remove theses lines and reset generate rate in map implementation
-	enemies.push_back(EnemyWithEye::generateEnemy(*this, 1.0f));
+	enemies.push_back(EnemyFollow::generateEnemy(*this, 1.0f));
 	enemies.back()->setPosition({7, 0, 1});
 
 	if (player == nullptr)
