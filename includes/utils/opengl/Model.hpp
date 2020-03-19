@@ -34,7 +34,7 @@ class Model {
 	private:
 		Model();  // private constructor, should not be called
 		void	_updateAnimationTime();
-		void	_upateTicksPerSecond();
+		void	_updateTicksPerSecond();
 
 		OpenGLModel &_openGLModel;
 		float const	&_dtTime;
