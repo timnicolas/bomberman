@@ -1,20 +1,15 @@
 #include "EnemyFollow.hpp"
+#include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
+  _findPlayer(false),
   _path()
 {
 	name = "EnemyFollow";
-
-	// TODO(tnicolas42) remove this
-	_path.push_back({Direction::RIGHT, {9, 1}});
-	_path.push_back({Direction::DOWN, {9, 5}});
-	_path.push_back({Direction::LEFT, {8, 5}});
-	_path.push_back({Direction::DOWN, {8, 7}});
-	_path.push_back({Direction::RIGHT, {12, 7}});
-	_path.push_back({Direction::UP, {12, 5}});
+	_lastFindMs = getMs();
 }
 
 EnemyFollow::~EnemyFollow() {
@@ -50,11 +45,22 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  * @return false if failure
  */
 bool	EnemyFollow::_update(float const dTime) {
-	if (_followPath(dTime, _path) == false) {
-		logWarn("invalid path " << glm::to_string(position) << " " << glm::to_string(_path[0].goal) << " " << _path[0].dir);
+	// try to find a path to the player
+	// after 3sec, 1 chance over 10 to relaunch path calculation
+	if (!_findPlayer){  // || ((getMs() - _lastFindMs).count() > 3000 && rand() % 100 < 10)) {
+		_lastFindMs = getMs();
+		_findPlayer = _getPathTo(game.player->getIntPos(), _path);
 	}
-	if (_path.size() == 0) {
-		logSuccess("arrived to destination");
+
+	if (_findPlayer) {
+		if (_followPath(dTime, _path) == false) {
+			// blocked by a wall
+			_findPlayer = false;
+		}
+		if (_path.size() == 0) {
+			// arrived to destination
+			_findPlayer = false;
+		}
 	}
 	return true;
 }
