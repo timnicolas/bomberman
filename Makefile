@@ -102,6 +102,7 @@ SRC =	main.cpp \
 		elements/Player.cpp \
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
+		elements/EnemyWithEye.cpp \
 \
 		AObject.cpp \
 		elements/Bomb.cpp \
@@ -161,6 +162,7 @@ HEAD =	bomberman.hpp \
 		elements/Player.hpp \
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
+		elements/EnemyWithEye.hpp \
 \
 		AObject.hpp \
 		elements/Bomb.hpp \
