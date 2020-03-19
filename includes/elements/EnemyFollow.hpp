@@ -7,7 +7,9 @@
 #include "SceneGame.hpp"
 
 /**
- * @brief This is the enemy object
+ * @brief This is an enemy object
+ *
+ * EnemyFollow will always try to find the player and follow him
  */
 class EnemyFollow : public AEnemy {
 private:

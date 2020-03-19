@@ -7,7 +7,9 @@
 #include "SceneGame.hpp"
 
 /**
- * @brief This is the enemy object
+ * @brief This is an enemy object
+ *
+ * EnemyBasic will simply follow a pattern
  */
 class EnemyBasic : public AEnemy {
 private:
