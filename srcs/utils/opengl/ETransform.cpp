@@ -99,7 +99,7 @@ void	ETransform::setScale(glm::vec3 const scale) {
 }
 
 // -- getters ------------------------------------------------------------------
-glm::vec3 const	ETransform::getPos() const { return _pos; }
-glm::quat const	ETransform::getRot() const { return _rot; }
-glm::vec3 const	ETransform::getScale() const { return _scale; }
-glm::mat4 const	ETransform::getModel() const { return _model; }
+glm::vec3	ETransform::getPos() const { return _pos; }
+glm::quat	ETransform::getRot() const { return _rot; }
+glm::vec3	ETransform::getScale() const { return _scale; }
+glm::mat4	ETransform::getModel() const { return _model; }

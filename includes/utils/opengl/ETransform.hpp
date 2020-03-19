@@ -30,10 +30,10 @@ class ETransform {
 		void	setScale(glm::vec3 const scale);
 
 		// -- getters ----------------------------------------------------------
-		glm::vec3 const	getPos() const;
-		glm::quat const	getRot() const;
-		glm::vec3 const	getScale() const;
-		glm::mat4 const	getModel() const;
+		glm::vec3	getPos() const;
+		glm::quat	getRot() const;
+		glm::vec3	getScale() const;
+		glm::mat4	getModel() const;
 
 	private:
 		void	_updateModel();

@@ -22,9 +22,9 @@ class Model {
 		void	setAnimProgress(float progress);
 		void	setAnimCurrentTime(float animTime);
 
-		float	getAnimCurrentTime();
-		float	getAnimProgress();
-		float	getAnimDuration();
+		float	getAnimCurrentTime() const;
+		float	getAnimProgress() const;
+		float	getAnimDuration() const;
 
 		ETransform	transform;  // to move/scale/rotate the model
 		bool		play;

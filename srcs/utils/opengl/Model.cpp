@@ -142,7 +142,7 @@ void	Model::setAnimCurrentTime(float animTime) {
  *
  * @return float, time in ms between 0 and animationDuration
  */
-float	Model::getAnimCurrentTime() {
+float	Model::getAnimCurrentTime() const {
 	if (_openGLModel.isAnimated()) {
 		return _animationTime;
 	}
@@ -156,7 +156,7 @@ float	Model::getAnimCurrentTime() {
  *
  * @return float, a value between 0 and 1
  */
-float	Model::getAnimProgress() {
+float	Model::getAnimProgress() const {
 	if (_openGLModel.isAnimated()) {
 		float	timeInTicks = (_animationTime / 1000.0) * _ticksPerSecond;
 		return timeInTicks / _curAnimation->mDuration;
@@ -171,7 +171,7 @@ float	Model::getAnimProgress() {
  *
  * @return float, the time in ms
  */
-float	Model::getAnimDuration() {
+float	Model::getAnimDuration() const {
 	if (_openGLModel.isAnimated()) {
 		return (_curAnimation->mDuration / _ticksPerSecond) * 1000;
 	}
