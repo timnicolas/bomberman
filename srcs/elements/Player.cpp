@@ -6,7 +6,7 @@
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
 	name = "Player";
-	initParams();
+	resetParams();
 }
 
 Player::~Player() {
@@ -21,6 +21,7 @@ Player::Player(Player const &src) : ACharacter(src) {
 Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
+		totalBombs = rhs.totalBombs;
 		bombs = rhs.bombs;
 		_invulnerable = rhs._invulnerable;
 		_toDraw = rhs._toDraw;
@@ -36,16 +37,34 @@ Player &Player::operator=(Player const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * @brief Initial value for player.
+ * @brief Init player for new levels
+ *
+ * @return true
+ * @return false
+ */
+bool	Player::init() {
+	_invulnerable = 3.0f;
+	bombs = totalBombs;
+	return true;
+}
+
+/**
+ * @brief Reset values for player.
  *
  */
-void	Player::initParams() {
-	bombs = 1;
-	speed = 5;
+void	Player::resetParams() {
+	totalBombs = 1;
+	bombs = totalBombs;
+	speed = 3;
 	alive = true;
 	lives = 2;
 	_invulnerable = 3.0f;
 	_toDraw = 0;
+	bombProgation = 3;
+	passFire = false;
+	passWall = false;
+	detonator = false;
+	passBomb = false;
 }
 
 /**
@@ -119,13 +138,14 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			lives++;
 			break;
 		case BonusType::BOMBS:
+			totalBombs++;
 			bombs++;
 			break;
 		case BonusType::FLAMES:
 			bombProgation++;
 			break;
 		case BonusType::SPEED:
-			speed = (speed >= 4) ? 4 : ++speed;
+			speed = (speed >= MAX_SPEED) ? MAX_SPEED : ++speed;
 			break;
 		case BonusType::WALLPASS:
 			passWall = true;
@@ -147,6 +167,29 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 	}
 	return true;
 }
+
+void	Player::addBomb() {
+	bombs++;
+	if (bombs > totalBombs)
+		bombs = totalBombs;
+}
+
+// -- Protected Methods --------------------------------------------------------
+bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
+	for (auto &&entity : collisions) {
+		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
+			continue;
+		if (entity->crossable == Type::ALL || entity->crossable == type)
+			continue;
+		if (passWall && entity->type == Type::CRISPY)
+			continue;
+		if (passBomb && entity->type == Type::BOMB)
+			continue;
+		return false;
+	}
+	return true;
+}
+
 
 // -- Private Methods ----------------------------------------------------------
 
@@ -174,6 +217,7 @@ void	Player::_putBomb() {
 		return;
 	if (game.board[position.x + 0.5][position.z + 0.5].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
+		bomb->setPropagation(bombProgation);
 		game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		_noCollisionObjects.insert(bomb);
 		bombs -= 1;

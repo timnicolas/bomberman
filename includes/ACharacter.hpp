@@ -7,6 +7,8 @@
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
+#define MAX_SPEED 6
+
 // class SceneGame;
 namespace Dirrection {
 	enum Enum {
@@ -29,9 +31,9 @@ protected:
 	std::unordered_set<AEntity *>	_noCollisionObjects;
 
 	// Methods
-	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
-	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Dirrection::Enum direction, float const dTime);
+	void			_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
+	virtual bool	_canMove(std::unordered_set<AEntity *> collisions);
+	glm::vec3		_moveTo(Dirrection::Enum direction, float const dTime);
 
 public:
 	// Members

@@ -12,6 +12,9 @@
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
 
+#include "ABaseUI.hpp"
+#include "TextUI.hpp"
+
 #define NO_LEVEL -1  // value is no level loaded
 
 class Player;
@@ -55,6 +58,14 @@ private:
 	bool	_unloadLevel();
 	bool	_initJsonLevel(int32_t levelId);
 	void	_drawBoard();
+
+protected:
+	// TextUI &	_addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+	std::string			_getGameInfos();
+	ABaseUI *			_gameInfo;
+	// std::vector<ABaseUI *>	_buttons;
+	TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+
 
 public:
 	// Members

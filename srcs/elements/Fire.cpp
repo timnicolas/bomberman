@@ -52,7 +52,8 @@ bool	Fire::update(float const dTime) {
 		}
 	}
 	if (game.player->hasCollision(position, 0.2f)) {
-		game.player->takeDamage(1);
+		if (!game.player->passFire)
+			game.player->takeDamage(1);
 	}
 	return true;
 }
