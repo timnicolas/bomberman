@@ -291,6 +291,7 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install sdl2_mixer;
 	# assimp
 	brew install assimp;
+	brew upgrade assimp;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
