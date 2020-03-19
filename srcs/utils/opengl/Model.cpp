@@ -16,7 +16,7 @@ Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform
 	_ticksPerSecond = 0.0;
 	if (_openGLModel.isAnimated()) {
 		_curAnimation = _openGLModel.getAiAnimation(_animationId);
-		_upateTicksPerSecond();
+		_updateTicksPerSecond();
 	}
 }
 
@@ -77,7 +77,7 @@ void	Model::setAnimation(uint32_t id) {
 	if (_openGLModel.setAnimation(id)) {
 		_animationId = id;
 		_curAnimation = _openGLModel.getAiAnimation(_animationId);
-		_upateTicksPerSecond();
+		_updateTicksPerSecond();
 		_animationTime = 0;  // reset animation time
 	}
 }
@@ -91,7 +91,7 @@ void	Model::setAnimation(uint32_t id) {
 void	Model::setAnimation(std::string name) {
 	_openGLModel.getAnimationId(name, _animationId);
 	_curAnimation = _openGLModel.getAiAnimation(_animationId);
-	_upateTicksPerSecond();
+	_updateTicksPerSecond();
 	_animationTime = 0;  // reset animation time
 }
 
@@ -194,8 +194,8 @@ void	Model::_updateAnimationTime() {
 	_animationTimeTick = (_animationTime / 1000.0) * _ticksPerSecond;
 }
 
-// -- _upateTicksPerSecond -----------------------------------------------------
-void	Model::_upateTicksPerSecond() {
+// -- _updateTicksPerSecond ----------------------------------------------------
+void	Model::_updateTicksPerSecond() {
 	if (_openGLModel.isAnimated()) {
 		_ticksPerSecond = _curAnimation->mTicksPerSecond;
 		if (_curAnimation->mTicksPerSecond == 0) {

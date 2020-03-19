@@ -15,7 +15,7 @@ std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
  *
  * @param _cam camera ref to access to view and projection
  * @param path the 3d model file path
- * @param offset an optional offset to shift the model manualy
+ * @param offset an optional offset to shift the model manually
  * @param centerEnabled option to center the model based on the min/max vertices, not recommanded
  * @param scaleEnabled option to scale the model based on the min/max vertices, not recommanded
  */
@@ -445,7 +445,7 @@ void	OpenGLModel::_calcCenterScale() {
 		transl.z = scale * ((transl.z < 0.00001f && transl.z > -0.00001f) ? 0.0f : transl.z);
 	}
 
-	// add the optional offset to shift the model manualy
+	// add the optional offset to shift the model manually
 	transl += _offset;
 
 	// apply the translation

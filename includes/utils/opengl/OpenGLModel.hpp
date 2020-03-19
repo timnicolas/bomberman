@@ -116,7 +116,7 @@ class OpenGLModel {
 		bool		_scaleEnabled;  // scale the model on loading
 		glm::vec3	_minPos, _maxPos;  // to scale the model
 		glm::mat4	_modelScale;
-		glm::vec3	_offset;  // offset to shift the model manualy
+		glm::vec3	_offset;  // offset to shift the model manually
 
 		// global transform matrix
 		glm::mat4	_globalTransform;
