@@ -14,9 +14,14 @@
 class EnemyFollow : public AEnemy {
 private:
 	EnemyFollow();
-	bool						_findPlayer;
-	std::deque<PathNode>		_path;
-	std::chrono::milliseconds	_lastFindMs;
+	// followbasic pattern when cannot go to the player position
+	std::vector<Direction::Enum>	_directionsOrder;
+	uint32_t						_dirIdx;
+	// player pathfinding info
+	bool							_findPlayer;
+	std::deque<PathNode>			_path;
+	// last calculation of path
+	std::chrono::milliseconds		_lastFindMs;
 
 protected:
 	virtual bool	_update(float const dTime);
