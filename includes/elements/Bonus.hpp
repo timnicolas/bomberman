@@ -2,9 +2,11 @@
 #define BONUS_HPP_
 
 #include <iostream>
+#include <map>
 #include <stdexcept>
 #include "AObject.hpp"
 #include "SceneGame.hpp"
+#include "TextureManager.hpp"
 
 namespace BonusType {
 	enum Enum {
@@ -26,6 +28,7 @@ private:
 	Bonus();
 	// Member
 	BonusType::Enum		_typeBonus;
+	static std::map<BonusType::Enum, Block::Enum> _textures;
 
 public:
 	// Constructors
