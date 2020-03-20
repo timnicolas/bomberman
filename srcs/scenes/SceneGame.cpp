@@ -27,7 +27,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return EnemyBasic::generateEnemy(game, 0.0f);}}},
+	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return EnemyFollow::generateEnemy(game, 0.1f);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -483,10 +483,6 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 			}
 		}
 	}
-
-	// TODO(tnicolas42) remove theses lines and reset generate rate in map implementation
-	enemies.push_back(EnemyFollow::generateEnemy(*this, 1.0f));
-	enemies.back()->setPosition({7, 0, 1});
 
 	if (player == nullptr)
 		throw SceneException("No player on this level.");

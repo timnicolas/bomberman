@@ -5,6 +5,8 @@
 
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
+  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
+  _dirIdx(0),
   _findPlayer(false),
   _path()
 {
@@ -51,17 +53,22 @@ bool	EnemyFollow::_update(float const dTime) {
 		_lastFindMs = getMs();
 		_findPlayer = _getPathTo(game.player->getIntPos(), _path);
 	}
-
-	if (_findPlayer) {
-		if (_followPath(dTime, _path) == false) {
-			// blocked by a wall
-			_findPlayer = false;
-		}
-		if (_path.size() == 0) {
-			// arrived to destination
-			_findPlayer = false;
-		}
+	glm::vec3 lastPos = position;
+	if (_path.size() == 0) {
+		// arrived to destination
+		_findPlayer = false;
 	}
+	else if (_followPath(dTime, _path) == false) {
+		// blocked by a wall
+		_findPlayer = false;
+		_path.clear();
+	}
+
+	if (lastPos == position) {
+		// if the enemy doesn't move
+		_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+	}
+
 	return true;
 }
 
