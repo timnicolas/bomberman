@@ -8,6 +8,8 @@
 
 #define IS_ON_POS_OFFSET 0.2
 
+#define INF_DIST 9999999
+
 struct PathNode {
 	Direction::Enum	dir;
 	glm::ivec2		goal;
@@ -21,12 +23,13 @@ private:
 	AEnemy();
 
 	struct DFSNode {
-		bool		visited;
+		uint32_t	dist;
 		glm::ivec2	last;
 
-		DFSNode() : visited(false), last{-1, -1} {}
+		DFSNode() : dist(INF_DIST), last{-1, -1} {}
 	};
 	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec2 pos, glm::ivec2 dest, bool & find);
+	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
 protected:
 	virtual bool	_update(float const dTime) = 0;

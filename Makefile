@@ -99,6 +99,7 @@ SRC =	main.cpp \
 \
 		ACharacter.cpp \
 		AEnemy.cpp \
+		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
