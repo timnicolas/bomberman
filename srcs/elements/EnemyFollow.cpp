@@ -46,8 +46,8 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  */
 bool	EnemyFollow::_update(float const dTime) {
 	// try to find a path to the player
-	// after 3sec, 1 chance over 10 to relaunch path calculation
-	if (!_findPlayer){  // || ((getMs() - _lastFindMs).count() > 3000 && rand() % 100 < 10)) {
+	// after 1sec, 1 chance over 10 to relaunch path calculation
+	if ((getMs() - _lastFindMs).count() > 1000 && (!_findPlayer || rand() % 100 < 10)) {
 		_lastFindMs = getMs();
 		_findPlayer = _getPathTo(game.player->getIntPos(), _path);
 	}
