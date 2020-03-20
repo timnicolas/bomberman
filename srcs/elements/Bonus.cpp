@@ -2,6 +2,20 @@
 #include "SceneGame.hpp"
 #include "Player.hpp"
 
+// -- Static members -----------------------------------------------------------
+
+std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
+	{ BonusType::LIFE, Block::BONUS_LIFE },
+	{ BonusType::BOMBS, Block::BONUS_BOMBS },
+	{ BonusType::FLAMES, Block::BONUS_FLAMES },
+	{ BonusType::SPEED, Block::BONUS_SPEED },
+	{ BonusType::WALLPASS, Block::BONUS_WALLPASS },
+	{ BonusType::DETONATOR, Block::BONUS_DETONATOR },
+	{ BonusType::BOMBPASS, Block::BONUS_BOMBPASS },
+	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
+	{ BonusType::SHIELD, Block::BONUS_SHIELD },
+};
+
 // -- Constructors -------------------------------------------------------------
 
 Bonus::Bonus(SceneGame &game) : AObject(game) {
@@ -77,7 +91,7 @@ bool	Bonus::postUpdate() {
  * @return false if failure
  */
 bool	Bonus::draw(Gui &gui) {
-	gui.drawCube(Block::END, getPos());
+	gui.drawCube(_textures[_typeBonus], getPos());
 	return true;
 }
 
