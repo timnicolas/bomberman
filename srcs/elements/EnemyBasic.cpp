@@ -1,16 +1,18 @@
-#include "Enemy.hpp"
+#include "EnemyBasic.hpp"
 #include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-Enemy::Enemy(SceneGame &game) : ACharacter(game) {
-	type = Type::ENEMY;
-	name = "Enemy";
-	_direction = Dirrection::LEFT;
+EnemyBasic::EnemyBasic(SceneGame &game)
+: AEnemy(game),
+  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
+  _dirIdx(0)
+{
+	name = "EnemyBasic";
 }
 
-Enemy::~Enemy() {
-	std::vector<ACharacter *>::iterator it = game.enemies.begin();
+EnemyBasic::~EnemyBasic() {
+	auto it = game.enemies.begin();
 	while (it != game.enemies.end()) {
 		if ((*it) == this)
 			game.enemies.erase(it);
@@ -19,16 +21,15 @@ Enemy::~Enemy() {
 	}
 }
 
-Enemy::Enemy(Enemy const &src) : ACharacter(src) {
+EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
-Enemy &Enemy::operator=(Enemy const &rhs) {
+EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
 	if ( this != &rhs ) {
-		ACharacter::operator=(rhs);
-		_direction = rhs._direction;
+		AEnemy::operator=(rhs);
 	}
 	return *this;
 }
@@ -42,18 +43,8 @@ Enemy &Enemy::operator=(Enemy const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::update(float const dTime) {
-	if (!active)
-		return true;
-	if (!alive)
-		active = false;
-	glm::vec3 pos = getPos();
-	if (pos == _moveTo(_direction, dTime)) {
-		_direction = static_cast<Dirrection::Enum>(((_direction + 1) % Dirrection::NB_DIRECTIONS));
-	}
-	if (game.player->hasCollision(position)) {
-		game.player->takeDamage(1);
-	}
+bool	EnemyBasic::_update(float const dTime) {
+	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
 	return true;
 }
 
@@ -63,11 +54,7 @@ bool	Enemy::update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::postUpdate() {
-	if (!active) {
-		delete this;
-		return false;
-	}
+bool	EnemyBasic::_postUpdate() {
 	return true;
 }
 
@@ -77,7 +64,7 @@ bool	Enemy::postUpdate() {
  * @return true if success
  * @return false if failure
  */
-bool	Enemy::draw(Gui &gui) {
+bool	EnemyBasic::_draw(Gui &gui) {
 	gui.drawCube(Block::IA, getPos());
 	return true;
 }
@@ -87,26 +74,18 @@ bool	Enemy::draw(Gui &gui) {
  *
  * @param game
  * @param rate Probability to generate an enemy is between 0 and 1.
- * @return Enemy*
+ * @return EnemyBasic*
  */
-Enemy*	Enemy::generateEnemy(SceneGame &game, float rate) {
+EnemyBasic*	EnemyBasic::generateEnemy(SceneGame &game, float rate) {
 	if (rate <= 0.0f)
 		return nullptr;
 	if (rate >= 1.0f)
-		return new Enemy(game);
+		return new EnemyBasic(game);
 
 	int		percentRate = rand() % 100;
 	// logInfo("percentRate: " << percentRate);
 	// logInfo("rate: " << static_cast<int>(rate * 100));
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
-	return new Enemy(game);
+	return new EnemyBasic(game);
 }
-
-// -- Exceptions errors --------------------------------------------------------
-
-Enemy::EnemyException::EnemyException()
-: std::runtime_error("Enemy Exception") {}
-
-Enemy::EnemyException::EnemyException(const char* whatArg)
-: std::runtime_error(std::string(std::string("EnemyError: ") + whatArg).c_str()) {}

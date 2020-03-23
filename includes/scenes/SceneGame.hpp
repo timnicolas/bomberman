@@ -15,6 +15,7 @@
 #define NO_LEVEL -1  // value is no level loaded
 
 class Player;
+class AEnemy;
 
 namespace GameState {
 	enum Enum {
@@ -60,7 +61,7 @@ public:
 	// Members
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
-	std::vector<ACharacter *>	enemies;
+	std::vector<AEnemy *>		enemies;
 
 	int							flags;
 	glm::uvec2					size;
