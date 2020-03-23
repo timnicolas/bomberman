@@ -30,7 +30,4 @@ public:
 
 	// Operators
 	EnemyBasic &operator=(EnemyBasic const &rhs);
-
-	// Methods
-	static EnemyBasic *	generateEnemy(SceneGame &game, float rate);
 };
