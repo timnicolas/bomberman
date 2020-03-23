@@ -39,7 +39,4 @@ public:
 
 	// Operators
 	EnemyFollow &operator=(EnemyFollow const &rhs);
-
-	// Methods
-	static EnemyFollow *	generateEnemy(SceneGame &game, float rate);
 };
