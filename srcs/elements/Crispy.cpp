@@ -68,7 +68,7 @@ Crispy * Crispy::generateCrispy(SceneGame &game, uint32_t genWallPercent) {
 	if (genWallPercent >= 100)
 		return new Crispy(game);
 
-	if (rand() % 100 > genWallPercent)
+	if (static_cast<uint32_t>(rand() % 100) > genWallPercent)
 		return nullptr;
 	return new Crispy(game);
 }
