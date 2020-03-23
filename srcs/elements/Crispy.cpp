@@ -62,6 +62,17 @@ bool	Crispy::draw(Gui &gui) {
 	return true;
 }
 
+Crispy * Crispy::generateCrispy(SceneGame &game, uint32_t genWallPercent) {
+	if (genWallPercent <= 0)
+		return nullptr;
+	if (genWallPercent >= 100)
+		return new Crispy(game);
+
+	if (rand() % 100 > genWallPercent)
+		return nullptr;
+	return new Crispy(game);
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 Crispy::CrispyException::CrispyException()

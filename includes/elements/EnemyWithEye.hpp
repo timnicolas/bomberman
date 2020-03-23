@@ -31,7 +31,4 @@ public:
 
 	// Operators
 	EnemyWithEye &operator=(EnemyWithEye const &rhs);
-
-	// Methods
-	static EnemyWithEye *	generateEnemy(SceneGame &game, float rate);
 };
