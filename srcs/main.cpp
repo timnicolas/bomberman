@@ -5,6 +5,7 @@
 
 #include "bomberman.hpp"
 #include "SceneManager.hpp"
+#include "FileUtils.hpp"
 
 /**
  * @brief start the game (init logs & settings)
@@ -17,8 +18,10 @@ int start(int ac, char const **av) {
 	(void)ac;
 	(void)av;
 	initLogs();  // init logs functions
-	initSettings("configs/settings.json");
-	initUserData(s.s("userDataFilename"));
+
+	file::mkdir(CONFIG_DIR);
+
+	initSettings(SETTINGS_FILE);
 
 	return EXIT_SUCCESS;
 }
@@ -42,6 +45,6 @@ int main(int ac, char const **av) {
 		return EXIT_FAILURE;
 	}
 
-	saveUserData(s.s("userDataFilename"));
+	saveSettings(SETTINGS_FILE);
 	return ret;
 }
