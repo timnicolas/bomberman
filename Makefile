@@ -134,6 +134,7 @@ SRC =	main.cpp \
 \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
+		utils/FileUtils.cpp \
 \
 		utils/opengl/Inputs.cpp \
 		utils/opengl/Texture.cpp \
@@ -194,6 +195,7 @@ HEAD =	bomberman.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
+		utils/FileUtils.hpp \
 		utils/useGlm.hpp \
 \
 		utils/opengl/Inputs.hpp \
