@@ -4,6 +4,7 @@
 
 #include "bomberman.hpp"
 #include "Logging.hpp"
+#include "FileUtils.hpp"
 
 SettingsJson s;
 
@@ -78,7 +79,10 @@ bool	initSettings(std::string const & filename) {
 		.setDescription("Camera mouse sensitivity.");
 
 	try {
-		if (s.loadFile(filename) == false) {
+		if (file::isDir(filename)) {
+			logWarn(filename << " is not the settings file, it is a directory");
+		}
+		else if (s.loadFile(filename) == false) {
 			// warning when loading settings
 			return false;
 		}
@@ -100,6 +104,9 @@ bool	initSettings(std::string const & filename) {
  */
 bool	saveSettings(std::string const & filename) {
 	try {
+		if (file::isDir(filename)) {
+			logWarn("cannot write in " << filename << " -> it is a directory");
+		}
 		s.saveToFile(filename);
 	}
 	catch(SettingsJson::SettingsException const & e) {
