@@ -21,6 +21,9 @@ void						initLogs();
 bool						checkPrgm();
 bool						initSettings(std::string const & filename);
 bool						saveSettings(std::string const & filename);
+bool						usage();
+bool						argparse(int nbArgs, char const ** args);
+
 std::chrono::milliseconds	getMs();
 
 /**
