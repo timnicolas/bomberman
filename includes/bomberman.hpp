@@ -18,6 +18,7 @@
 #include "Logging.hpp"
 
 void						initLogs();
+bool						checkPrgm();
 bool						initSettings(std::string const & filename);
 bool						saveSettings(std::string const & filename);
 std::chrono::milliseconds	getMs();

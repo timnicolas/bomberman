@@ -28,6 +28,41 @@ void	initLogs() {
 }
 
 /**
+ * @brief Check if the program is valid (right files, folders, ...)
+ *
+ * @return false If program is invalid
+ */
+bool	checkPrgm() {
+	/* list of required directories */
+	std::vector<std::string> requiredDirs = {
+		"bomberman-assets",
+		"bomberman-assets/sounds",
+		"bomberman-assets/textures",
+		"bomberman-assets/skybox",
+		s.s("mapsPath"),
+	};
+
+	/* list of required files */
+	std::vector<std::string> requiredFiles = {
+		s.j("font").s("file"),
+	};
+
+	for (auto && it : requiredDirs) {
+		if (file::isDir(it) == false) {
+			logErr(it << " directory doesn't exist");
+			return false;
+		}
+	}
+	for (auto && it : requiredFiles) {
+		if (file::isFile(it) == false) {
+			logErr(it << " file doesn't exist");
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
  * @brief Create the pattern for master settings object & load settings
  *
  * @param filename the filename to read to set right values for settings
