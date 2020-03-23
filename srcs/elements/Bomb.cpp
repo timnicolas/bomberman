@@ -107,10 +107,17 @@ bool	Bomb::takeDamage(const int damage) {
 bool	Bomb::update(float const dTime) {
 	if (!active)
 		return true;
-	_countdown -= dTime;
-	if (_countdown <= 0.0) {
-		getPos();
-		explode({position.x, position.z});
+	if (game.player->detonator) {
+		if (Inputs::getKey(InputType::ACTION_2)) {
+			getPos();
+			explode({position.x, position.z});
+		}
+	} else {
+		_countdown -= dTime;
+		if (_countdown <= 0.0) {
+			getPos();
+			explode({position.x, position.z});
+		}
 	}
 	return true;
 }
