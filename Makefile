@@ -232,13 +232,15 @@ LIBS_HEAD =	glad/glad.h \
 
 # all flags for libs
 LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
-				-L ~/.brew/opt/freetype/lib -lfreetype
+				-L ~/.brew/opt/freetype/lib -lfreetype \
+				-lboost_filesystem \
 
 # flags for libs on OSX only
 LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
 
 # flags for libs on LINUX only
-LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU
+LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
+					-lboost_system \
 
 # includes dir for external libs
 LIBS_INC =	~/.brew/include \
@@ -264,6 +266,8 @@ define CONFIGURE
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	sudo apt-get update -y
+	# boost
+	sudo apt-get -y install libboost-all-dev
 	# glm
 	sudo apt-get -y install libglm-dev
 	# freetype (for text)
@@ -274,6 +278,8 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
+	# boost
+	brew install boost
 	# glm
 	brew install glm
 	# sdl2
