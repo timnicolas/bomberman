@@ -152,6 +152,51 @@ bool	saveSettings(std::string const & filename) {
 }
 
 /**
+ * @brief Show usage for program
+ *
+ * @return false Return always false
+ */
+bool	usage() {
+	std::cout << "usage: ./bomberman [-u] [--reset-settings]" << std::endl;
+	std::cout << "\t" COLOR_BOLD "--reset-settings" COLOR_EOC ": "
+		"reset all users settings before starting" << std::endl;
+	std::cout << "\t" COLOR_BOLD "-u" COLOR_EOC ", " COLOR_BOLD "--usage" COLOR_EOC ": "
+		"show usage" << std::endl;
+	return false;
+}
+
+/**
+ * @brief Parse args for program
+ *
+ * @param nbArgs number of arguments (argc - 1)
+ * @param args arguments (av + 1)
+ * @return false If need to quit
+ */
+bool	argparse(int nbArgs, char const ** args) {
+	bool	reset_settings = false;
+	int		i = 0;
+	while (i < nbArgs) {
+		if (strcmp(args[i], "--usage") == 0 || strcmp(args[i], "-u") == 0) {
+			return usage();
+		}
+		else if (strcmp(args[i], "--reset-settings") == 0) {
+			i++;
+			reset_settings = true;
+		}
+		else {
+			std::cout << "invalid argument: " << args[i] << std::endl;
+			return usage();
+		}
+		i++;
+	}
+	if (reset_settings) {
+		logInfo("reset all user settings...");
+		file::rm(CONFIG_DIR);
+	}
+	return true;
+}
+
+/**
  * @brief Get the current time in ms
  *
  * @return std::chrono::milliseconds the ms object
