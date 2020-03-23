@@ -100,16 +100,16 @@ void	Player::_move(float const dTime) {
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Dirrection::UP, dTime);
+		_moveTo(Direction::UP, dTime);
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Dirrection::RIGHT, dTime);
+		_moveTo(Direction::RIGHT, dTime);
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Dirrection::DOWN, dTime);
+		_moveTo(Direction::DOWN, dTime);
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Dirrection::LEFT, dTime);
+		_moveTo(Direction::LEFT, dTime);
 	}
 	collisions = getCollision(position);
 	_clearCollisionObjects(collisions);
@@ -118,9 +118,10 @@ void	Player::_move(float const dTime) {
 void	Player::_putBomb() {
 	if (bombs <= 0)
 		return;
-	if (game.board[position.x + 0.5][position.z + 0.5].size() == 0) {
+	glm::ivec2 intPos = getIntPos();
+	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
-		game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
+		game.board[intPos.x][intPos.y].push_back(bomb);
 		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
 	}

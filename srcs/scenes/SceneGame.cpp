@@ -5,11 +5,14 @@
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
 #include "Player.hpp"
-#include "Enemy.hpp"
 #include "Wall.hpp"
 #include "Crispy.hpp"
 #include "Flag.hpp"
 #include "End.hpp"
+
+#include "EnemyBasic.hpp"
+#include "EnemyFollow.hpp"
+#include "EnemyWithEye.hpp"
 
 #include "SceneManager.hpp"
 
@@ -24,7 +27,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 0.1f);}}},
+	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return EnemyFollow::generateEnemy(game, 0.1f);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -33,7 +36,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime)
 {
 	player = nullptr;
-	enemies = std::vector<ACharacter *>();
+	enemies = std::vector<AEnemy *>();
 	flags = 0;
 	size = {0, 0};
 	level = NO_LEVEL;
@@ -53,7 +56,7 @@ SceneGame::~SceneGame() {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -210,7 +213,7 @@ bool	SceneGame::update() {
  */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		if (!(*enemy)->postUpdate()) {
 			enemy = enemies.begin();
@@ -404,7 +407,7 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -472,7 +475,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						board[i][j].push_back(entity);
 						break;
 					case EntityType::ENEMY:
-						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
+						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 						enemies.back()->setPosition({i, 0, j});
 						break;
 					}

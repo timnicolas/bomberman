@@ -98,8 +98,12 @@ SRC =	main.cpp \
 		AEntity.cpp \
 \
 		ACharacter.cpp \
+		AEnemy.cpp \
+		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
-		elements/Enemy.cpp \
+		elements/EnemyBasic.cpp \
+		elements/EnemyFollow.cpp \
+		elements/EnemyWithEye.cpp \
 \
 		AObject.cpp \
 		elements/Bomb.cpp \
@@ -155,8 +159,11 @@ HEAD =	bomberman.hpp \
 		AEntity.hpp \
 \
 		ACharacter.hpp \
+		AEnemy.hpp \
 		elements/Player.hpp \
-		elements/Enemy.hpp \
+		elements/EnemyBasic.hpp \
+		elements/EnemyFollow.hpp \
+		elements/EnemyWithEye.hpp \
 \
 		AObject.hpp \
 		elements/Bomb.hpp \

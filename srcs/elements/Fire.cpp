@@ -1,6 +1,7 @@
 #include "Fire.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "AEnemy.hpp"
 
 // -- Constructors -------------------------------------------------------------
 

@@ -7,9 +7,12 @@
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
+#define OFFSET_TURN_CORRECTION 0.7
+
 // class SceneGame;
-namespace Dirrection {
+namespace Direction {
 	enum Enum {
+		NO_DIRECTION = -1,
 		UP = 0,
 		RIGHT,
 		DOWN,
@@ -31,7 +34,7 @@ protected:
 	// Methods
 	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
 	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Dirrection::Enum direction, float const dTime);
+	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
@@ -51,6 +54,7 @@ public:
 	virtual bool					draw(Gui &gui) = 0;
 	bool							isAlive();
 	glm::vec3						getPos();
+	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
