@@ -1,6 +1,6 @@
-#include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <boost/filesystem.hpp>
 #include "FileUtils.hpp"
 #include "Logging.hpp"
 
@@ -12,7 +12,7 @@ namespace file {
 	 * @return true If the file exist
 	 */
 	bool isFile(std::string const & filename) {
-		return std::filesystem::is_regular_file(filename);
+		return boost::filesystem::is_regular_file(filename);
 	}
 
 	/**
@@ -22,7 +22,7 @@ namespace file {
 	 * @return true If the directory exist
 	 */
 	bool	isDir(std::string const & path) {
-		return std::filesystem::is_directory(path);
+		return boost::filesystem::is_directory(path);
 	}
 
 	/**
@@ -36,7 +36,7 @@ namespace file {
 		bool		error = false;
 		std::string	msg = "";
 		try {
-			std::filesystem::create_directories(path);
+			boost::filesystem::create_directories(path);
 			if (file::isDir(path) == false)
 				error = true;
 		}
@@ -63,7 +63,7 @@ namespace file {
 		bool		error = false;
 		std::string	msg = "";
 		try {
-			std::filesystem::remove_all(path);
+			boost::filesystem::remove_all(path);
 			if (file::isDir(path))
 				error = true;
 		}
