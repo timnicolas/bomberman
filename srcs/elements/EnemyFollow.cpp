@@ -92,24 +92,3 @@ bool	EnemyFollow::_draw(Gui &gui) {
 	gui.drawCube(Block::IA, getPos());
 	return true;
 }
-
-/**
- * @brief Static class to generate enemies
- *
- * @param game
- * @param rate Probability to generate an enemy is between 0 and 1.
- * @return EnemyFollow*
- */
-EnemyFollow*	EnemyFollow::generateEnemy(SceneGame &game, float rate) {
-	if (rate <= 0.0f)
-		return nullptr;
-	if (rate >= 1.0f)
-		return new EnemyFollow(game);
-
-	int		percentRate = rand() % 100;
-	// logInfo("percentRate: " << percentRate);
-	// logInfo("rate: " << static_cast<int>(rate * 100));
-	if (percentRate > static_cast<int>(rate * 100))
-		return nullptr;
-	return new EnemyFollow(game);
-}
