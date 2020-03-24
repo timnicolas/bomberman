@@ -148,6 +148,8 @@ SliderUI & ASceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float
 TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
 	TextUI * ui = new TextUI(pos, size);
 	ui->setText(text);
+	if (size == VOID_SIZE)
+		ui->setCalculatedSize();
 	_buttons.push_back(ui);
 	return *ui;
 }

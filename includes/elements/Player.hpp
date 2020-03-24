@@ -14,7 +14,6 @@ class Player : public ACharacter {
 private:
 	Player();
 	// Members
-	float	_invulnerable;
 	int		_toDraw;
 
 	// Methods
@@ -33,6 +32,7 @@ public:
 	bool		detonator;
 	bool		passBomb;
 	int			bombProgation;
+	float		invulnerable;
 
 	// Constructors
 	explicit Player(SceneGame &game);
