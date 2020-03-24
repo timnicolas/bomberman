@@ -45,6 +45,8 @@ ABaseUI::ABaseUI(ABaseUI const & src) {
 }
 
 ABaseUI::~ABaseUI() {
+	// remove reference in master
+	setMaster(nullptr);
 	// remove the reference to this UI
 	auto it = std::find(_allUI.begin(), _allUI.end(), this);
 	if (it == _allUI.end()) {
@@ -317,7 +319,14 @@ ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this;
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
-ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) { _master = master; return *this; }
+ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) {
+	if (_master != nullptr)
+		_master->removeChild(this);
+	_master = master;
+	if (_master != nullptr)
+		_master->addChild(this);
+	return *this;
+}
 
 /* getter */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }

@@ -2,7 +2,11 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
-ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size): ABaseMasterUI(pos, size) {
+ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
+: ABaseMasterUI(pos, size),
+  _vertScroll(false),
+  _horizScroll(false)
+{
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
 
@@ -22,6 +26,7 @@ ScrollbarUI & ScrollbarUI::operator=(ScrollbarUI const & rhs) {
  * @brief this is the base update function of UI objects
  */
 void ScrollbarUI::_update() {
+	logInfo(glm::to_string(getTotalMasterSize()));
 }
 
 /**
@@ -44,3 +49,7 @@ void ScrollbarUI::_draw() {
 	// draw border
 	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }
+
+/* setter */
+ScrollbarUI &	ScrollbarUI::enableVertScroll(bool enable) { _vertScroll = enable; return *this; }
+ScrollbarUI &	ScrollbarUI::enableHorizScroll(bool enable) { _horizScroll = enable; return *this; }
