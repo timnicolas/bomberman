@@ -98,6 +98,12 @@ class ABaseUI {
 		/* master */
 		ABaseUI &	setMaster(ABaseMasterUI * master);
 
+		/* check */
+		bool					isPatriallyOutOfScreen() const;  // ret true if partially out of the screen
+		bool					isTotallyOutOfScreen() const;  // ret true if totally out of the screen
+		bool					isPartiallyOutOfMaster() const;  // ret true if partially out of the master element
+		bool					isTotallyOutOfMaster() const;  // ret true if totally out of the screen element
+
 		/* getter */
 		bool					getMouseHover() const;
 		bool					getMouseRightClick() const;
