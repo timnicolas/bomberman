@@ -6,11 +6,17 @@ ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
 : ABaseMasterUI(pos, size),
   _scrollbarSize(20),
   _scrollbarColor(0.3, 0.3, 0.3, 1.0),
+  _mouseScrollSpeed(15),
+
   _vertScroll(false),
+  _vertScrollInverted(false),
   _vertScrollbarPos(0),
   _vertScrollBarDrawSize(0),
+
   _horizScroll(false),
-  _horizScrollbarPos(0)
+  _horizScrollInverted(false),
+  _horizScrollbarPos(0),
+  _horizScrollBarDrawSize(0)
 {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
@@ -37,6 +43,7 @@ void ScrollbarUI::_update() {
 	/* get mouse position */
 	glm::vec2 mousePos = Inputs::getMousePos();
 	mousePos.y = _winSize.y - mousePos.y;
+	glm::vec2 mouseScroll = Inputs::getMouseScroll();
 
 	if (_vertScroll) {
 		/* size of the slider */
@@ -45,13 +52,13 @@ void ScrollbarUI::_update() {
 		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
 		_vertScrollBarDrawSize = (_size.y - _borderSize * 2) * scrollSizeFactor;
 
+		// if click on the scroll zone
 		if (_leftClick) {
 			if (mousePos.x >= getRealPos().x + _size.x - _borderSize - _scrollbarSize
 			&& mousePos.x <= getRealPos().x + _size.x - _borderSize
 			&& mousePos.y >= getRealPos().y + _borderSize
 			&& mousePos.y <= getRealPos().y + _size.y - _borderSize)
 			{
-				// if click on the right zone
 				float yMin = getRealPos().y + _borderSize;
 				float yMax = getRealPos().y + _size.y - (_borderSize * 2);
 				// float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
@@ -64,6 +71,18 @@ void ScrollbarUI::_update() {
 					_vertScrollbarPos = 1 - (mousePos.y - yMin) / (yMax - yMin);
 			}
 		}
+
+		// if scrolling
+		if (mouseScroll.y != 0) {
+			float offset = mouseScroll.y * _mouseScrollSpeed * (1 / _masterTotalSize.y);
+			if (_vertScrollInverted)
+				_vertScrollbarPos += offset;
+			else
+				_vertScrollbarPos -= offset;
+			if (_vertScrollbarPos < 0) _vertScrollbarPos = 0;
+			if (_vertScrollbarPos > 1) _vertScrollbarPos = 1;
+		}
+
 		_masterOffset.y = (_masterTotalSize.y - (_size.y - _borderSize * 2)) * _vertScrollbarPos;
 	}
 }
@@ -113,7 +132,10 @@ void ScrollbarUI::_draw() {
 /* setter */
 ScrollbarUI &	ScrollbarUI::enableVertScroll(bool enable) { _vertScroll = enable; return *this; }
 ScrollbarUI &	ScrollbarUI::enableHorizScroll(bool enable) { _horizScroll = enable; return *this; }
-ScrollbarUI &	ScrollbarUI::setScrollBarSize(float size) { _scrollbarSize = size; return *this; }
+ScrollbarUI &	ScrollbarUI::setScrollbarSize(float size) { _scrollbarSize = size; return *this; }
+ScrollbarUI &	ScrollbarUI::setScrollbarSpeed(float speed) { _mouseScrollSpeed = speed; return *this; }
+ScrollbarUI &	ScrollbarUI::invertVertScroll(bool invert) { _vertScrollInverted = invert; return *this; }
+ScrollbarUI &	ScrollbarUI::invertHorizScroll(bool invert) { _horizScrollInverted = invert; return *this; }
 
 /**
  * @brief Get size of master element inside the borders
