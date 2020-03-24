@@ -19,7 +19,10 @@ class ScrollbarUI : public ABaseMasterUI {
 		ScrollbarUI &		enableVertScroll(bool enable);
 		ScrollbarUI &		enableHorizScroll(bool enable);
 
-		ScrollbarUI &		setScrollBarSize(float size);
+		ScrollbarUI &		setScrollbarSize(float size);
+		ScrollbarUI &		setScrollbarSpeed(float speed);
+		ScrollbarUI &		invertVertScroll(bool invert);
+		ScrollbarUI &		invertHorizScroll(bool invert);
 
 		/* overwrite functions */
 		virtual glm::vec2	getMasterSize() const;
@@ -32,13 +35,17 @@ class ScrollbarUI : public ABaseMasterUI {
 		/* scrollbar info */
 		float		_scrollbarSize;
 		glm::vec4	_scrollbarColor;
+		float		_mouseScrollSpeed;
 
 		// vertical
 		bool		_vertScroll;
+		bool		_vertScrollInverted;
 		float		_vertScrollbarPos;
 		float		_vertScrollBarDrawSize;
 
 		// horizontal
 		bool		_horizScroll;
+		bool		_horizScrollInverted;
 		float		_horizScrollbarPos;
+		float		_horizScrollBarDrawSize;
 };
