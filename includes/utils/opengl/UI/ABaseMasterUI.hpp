@@ -21,8 +21,8 @@ class ABaseMasterUI : public ABaseUI {
 		void				removeChild(ABaseUI * child);
 
 		/* getter */
-		glm::vec2			getMasterPos() const;
-		glm::vec2			getMasterRealPos() const;
+		virtual glm::vec2	getMasterPos() const;
+		virtual glm::vec2	getMasterRealPos() const;
 		virtual glm::vec2	getMasterSize() const;
 
 	protected:
