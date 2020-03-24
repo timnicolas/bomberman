@@ -100,13 +100,12 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
  * @param pos the position
  * @param size the size
  * @param filename the path to the image
- * @param pixelateOnZoom a bool to enable/disable pixelate on zoom option
  * @return ButtonImageUI& a reference to the element created
  */
-ButtonImageUI & ASceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
-bool pixelateOnZoom)
+ButtonImageUI & ASceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size,
+	std::string const & filename)
 {
-	ButtonImageUI * ui = new ButtonImageUI(pos, size, filename, pixelateOnZoom);
+	ButtonImageUI * ui = new ButtonImageUI(pos, size, filename);
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -175,11 +174,10 @@ RectUI & ASceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm
  * @param pos the position
  * @param size the size
  * @param filename the path to the image
- * @param pixelateOnZoom a bool to enable/disable pixelate on zoom option
  * @return ImageUI& a reference to the element created
  */
-ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom) {
-	ImageUI * ui = new ImageUI(pos, size, filename, pixelateOnZoom);
+ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename) {
+	ImageUI * ui = new ImageUI(pos, size, filename);
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -202,7 +200,7 @@ bool ASceneMenu::_initBG() {
 			std::string name;
 			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/005-bombFace.png";
 			else name = "bomberman-assets/textures/player/009-playerFace.png";
-			addImage(tmpPos, tmpSize, name, false).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
+			addImage(tmpPos, tmpSize, name).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
 			tmpPos.x += tmpSize.x;
 			j++;
 		}
