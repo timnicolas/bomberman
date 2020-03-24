@@ -14,7 +14,8 @@ const std::string	Inputs::input_type_name[] = {
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
-Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_click(false), \
+Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
+	_left_click(false), _right_click(false),
 	_left_click_previous(false), _right_click_previous(false)
 {
 	for (int i = 0; i < Inputs::nb_input; i++) {
@@ -280,6 +281,19 @@ const glm::ivec2	&Inputs::_getMouseRel() const {
 }
 
 /**
+	Gives the offset of the mouse wheel from the last poll of event.
+
+	@return A reference to a constant vector containing the mouse wheel offset.
+*/
+const glm::ivec2	&Inputs::getMouseScroll() {
+	return (Inputs::get()._getMouseScroll());
+}
+
+const glm::ivec2	&Inputs::_getMouseScroll() const {
+	return _scroll_rel;
+}
+
+/**
 	Gives the right click (true if clicked, else false)
 
 	@return The mouse state
@@ -371,6 +385,7 @@ void				Inputs::_update() {
 
 	_mouse_rel.x = 0;
 	_mouse_rel.y = 0;
+	_scroll_rel = glm::ivec2(0, 0);
 	_left_click_previous = _left_click;
 	_right_click_previous = _right_click;
 	for (int i = 0; i < Inputs::nb_input; i++) {
@@ -458,6 +473,10 @@ void				Inputs::_update() {
                         break;
                 }
                 break;
+		case SDL_MOUSEWHEEL:
+			_scroll_rel.x = event.wheel.x;
+			_scroll_rel.y = event.wheel.y;
+			break;
 		case SDL_WINDOWEVENT:
 			_quit = event.window.type == SDL_WINDOWEVENT_CLOSE;
 			break;

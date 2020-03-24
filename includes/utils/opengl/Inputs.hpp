@@ -59,6 +59,7 @@ public:
 	static bool								shouldQuit();
 	static const glm::ivec2					&getMousePos();
 	static const glm::ivec2					&getMouseRel();
+	static const glm::ivec2					&getMouseScroll();
 	static bool								getRightClick();
 	static bool								getLeftClick();
 	static bool								getRightClickUp();
@@ -86,6 +87,7 @@ private:
 	bool									_shouldQuit() const;
 	const glm::ivec2						&_getMousePos() const;
 	const glm::ivec2						&_getMouseRel() const;
+	const glm::ivec2						&_getMouseScroll() const;
 	bool									_getRightClick() const;
 	bool									_getLeftClick() const;
 	bool									_getRightClickUp() const;
@@ -100,6 +102,7 @@ private:
 	bool									_quit;
 	glm::ivec2								_mouse_pos;
 	glm::ivec2								_mouse_rel;
+	glm::ivec2								_scroll_rel;
 	bool									_left_click;
 	bool									_right_click;
 	bool									_left_click_previous;
