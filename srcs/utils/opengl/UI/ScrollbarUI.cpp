@@ -116,9 +116,9 @@ void ScrollbarUI::_update() {
 		if (mouseScroll.x != 0) {
 			float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
 			if (_horizScrollInverted)
-				_horizScrollbarPos += offset;
-			else
 				_horizScrollbarPos -= offset;
+			else
+				_horizScrollbarPos += offset;
 			if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
 			if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
 		}
