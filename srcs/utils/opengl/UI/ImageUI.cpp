@@ -3,7 +3,7 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
-ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename, bool pixelateOnZoom)
+ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename)
 : ABaseUI(pos, size)
 {
 	// set the UI to non clickable
@@ -14,7 +14,7 @@ ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename, bo
 	_borderSize = 0;
 
 	// load the image
-	_loadImg(filename, true, pixelateOnZoom);
+	_loadImg(filename, true);
 }
 
 ImageUI::ImageUI(ImageUI const & src): ABaseUI(src) {

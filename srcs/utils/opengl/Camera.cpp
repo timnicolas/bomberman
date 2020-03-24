@@ -1,7 +1,9 @@
 #include "Camera.hpp"
 #include "Logging.hpp"
 
-Camera::Camera(CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw, CAMERA_FLOAT pitch)
+// -- Constructors -------------------------------------------------------------
+Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw,
+	CAMERA_FLOAT pitch)
 : pos(pos),
   front(CAMERA_VEC3(0.0f, 0.0f, -1.0f)),
   worldUp(up),
@@ -10,18 +12,24 @@ Camera::Camera(CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw, CAMERA_FLOAT p
   movementSpeed(MOVEMENT_SPEED),
   mouseSensitivity(MOUSE_SENSITIVITY),
   runFactor(RUN_FACTOR),
-  zoom(45.0f),
+  _ratio(ratio),
   _startPos(pos),
   _startYaw(yaw),
-  _startPitch(pitch) {
-	updateCameraVectors();
+  _startPitch(pitch)
+{
+	_fovY = 45.0f;
+	_near = 0.1f;
+	_far = 1000;
+	_updateProjection();
+
+	_updateCameraVectors();
+}
+
+Camera::~Camera() {
 }
 
 Camera::Camera(Camera const &src) {
 	*this = src;
-}
-
-Camera::~Camera() {
 }
 
 Camera	&Camera::operator=(Camera const &rhs) {
@@ -35,32 +43,61 @@ Camera	&Camera::operator=(Camera const &rhs) {
 		pitch = rhs.pitch;
 		movementSpeed = rhs.movementSpeed;
 		mouseSensitivity = rhs.mouseSensitivity;
-		zoom = rhs.zoom;
+		_ratio = rhs._ratio;
+		_fovY = rhs._fovY;
+		_near = rhs._near;
+		_far = rhs._far;
+		_projection = rhs._projection;
 	}
 	return *this;
 }
 
+// -- lookAt -------------------------------------------------------------------
 /**
- * @brief Call this function in each loop.
+ * @brief Move the camera orientation to look at the target
  *
- * This function can be used for example to go down with gravity
- *
- * @param dtTime The delta time since last call
+ * @param target The target to look at
  */
-void	Camera::run(CAMERA_FLOAT dtTime) {
-	// process for each frame (gravity)
-	(void)dtTime;
+void	Camera::lookAt(CAMERA_VEC3 target) {
+	CAMERA_VEC3	newFront(glm::normalize(target - pos));
+	yaw = glm::degrees(glm::atan(newFront.z, newFront.x));
+	pitch = glm::degrees(glm::asin(newFront.y));
+	_updateCameraVectors();
 }
 
+// -- setters ------------------------------------------------------------------
 /**
- * @brief Return the view matrix
- *
- * @return CAMERA_MAT4 The view matrix
+ * @brief Reset the camera position
  */
-CAMERA_MAT4 Camera::getViewMatrix() const {
-	return glm::lookAt(pos, pos + front, up);
+void	Camera::resetPosition() {
+	pos = _startPos;
+	yaw = _startYaw;
+	pitch = _startPitch;
+
+	_updateCameraVectors();
 }
 
+void	Camera::setRatio(float ratio) {
+	_ratio = ratio;
+	_updateProjection();
+}
+
+void	Camera::setFovY(float fovY) {
+	_fovY = fovY;
+	_updateProjection();
+}
+
+void	Camera::setNearAndFar(float near, float far) {
+	if (near > far) {
+		logErr("near should be < than far");
+		return;
+	}
+	_near = near;
+	_far = far;
+	_updateProjection();
+}
+
+// -- processKeyboard ----------------------------------------------------------
 /**
  * @brief Move camera from keyboard interaction
  *
@@ -74,6 +111,7 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
 	velocity = movementSpeed * dtTime * ((isRun) ? runFactor : 1);
 	if (direction == CamMovement::Forward) {
 		#if CONSTRAINT_Y == true
+
 			CAMERA_VEC3 tmpFront = front;
 			tmpFront.y = 0;
 			tmpFront = glm::normalize(tmpFront);
@@ -106,6 +144,7 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
 	}
 }
 
+// -- processMouseMovement -----------------------------------------------------
 /**
  * @brief Move the camera from the mouse movements
  *
@@ -128,62 +167,10 @@ void	Camera::processMouseMovement(glm::vec2 offset, bool constrainPitch) {
 			pitch = -89.0f;
 	}
 
-	updateCameraVectors();
+	_updateCameraVectors();
 }
 
-/**
- * @brief Process mouse scroll to zoom in or out
- *
- * @param yOffset The scrolling offset
- */
-void	Camera::processMouseScroll(CAMERA_FLOAT yOffset) {
-	if (zoom >= 1.0f && zoom <= 45.0f)
-		zoom -= yOffset;
-	if (zoom <= 1.0f)
-		zoom = 1.0f;
-	if (zoom >= 45.0f)
-		zoom = 45.0f;
-}
-
-/**
- * @brief Move the camera orientation to look at the target
- *
- * @param target The target to look at
- */
-void	Camera::lookAt(CAMERA_VEC3 target) {
-	CAMERA_VEC3	newFront(glm::normalize(target - pos));
-	yaw = glm::degrees(glm::atan(newFront.z, newFront.x));
-	pitch = glm::degrees(glm::asin(newFront.y));
-	updateCameraVectors();
-}
-
-/**
- * @brief Update the camera after moving or changing orientation
- */
-void	Camera::updateCameraVectors() {
-	CAMERA_VEC3 nFront;
-
-	nFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	nFront.y = sin(glm::radians(pitch));
-	nFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-
-	front = glm::normalize(nFront);
-
-	right = glm::normalize(glm::cross(front, worldUp));
-	up = glm::normalize(glm::cross(right, front));
-}
-
-/**
- * @brief Reset the camera position
- */
-void	Camera::resetPosition() {
-	pos = _startPos;
-	yaw = _startYaw;
-	pitch = _startPitch;
-
-	updateCameraVectors();
-}
-
+// -- frustumCullingInit -------------------------------------------------------
 /**
  * @brief init the frustum culling (take the same args as projection matrix)
  *
@@ -192,8 +179,11 @@ void	Camera::resetPosition() {
  * @param nearD The near distance (don't show before this distance)
  * @param farD The far distance (don't show after this distance)
  */
-void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMERA_FLOAT nearD, CAMERA_FLOAT farD) {
-	_frustumCulling.tang = static_cast<CAMERA_FLOAT>(glm::tan(glm::radians(angleDeg * 0.5)));
+void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio,
+	CAMERA_FLOAT nearD, CAMERA_FLOAT farD)
+{
+	_frustumCulling.tang = static_cast<CAMERA_FLOAT>(glm::tan(
+		glm::radians(angleDeg * 0.5)));
 
 	_frustumCulling.ratio = ratio;
 	_frustumCulling.nearD = nearD;
@@ -205,6 +195,7 @@ void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMER
 	_frustumCulling.enabled = true;
 }
 
+// -- frustumCullingCheckPoint -------------------------------------------------
 /**
  * @brief Check if a point is inside or outside the camera
  *
@@ -249,6 +240,7 @@ int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) {
 	return res;
 }
 
+// -- frustumCullingCheckCube --------------------------------------------------
 /**
  * @brief Check if a cube or rectangle is inside or outside of the camera
  *
@@ -319,3 +311,32 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 	else
 		return FRCL_INSIDE;
 }
+
+// -- _updateCameraVectors -----------------------------------------------------
+/**
+ * @brief Update the camera after moving or changing orientation
+ */
+void	Camera::_updateCameraVectors() {
+	CAMERA_VEC3 nFront;
+
+	nFront.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	nFront.y = sin(glm::radians(pitch));
+	nFront.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
+	front = glm::normalize(nFront);
+
+	right = glm::normalize(glm::cross(front, worldUp));
+	up = glm::normalize(glm::cross(right, front));
+}
+
+// -- _updateProjection --------------------------------------------------------
+void	Camera::_updateProjection() {
+	_projection = glm::perspective(glm::radians(_fovY), _ratio, _near, _far);
+}
+
+// -- getters ------------------------------------------------------------------
+CAMERA_MAT4 Camera::getViewMatrix() const {
+	return glm::lookAt(pos, pos + front, up);
+}
+
+CAMERA_MAT4	Camera::getProjection() const { return _projection; }

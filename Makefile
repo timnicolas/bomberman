@@ -144,6 +144,11 @@ SRC =	main.cpp \
 		utils/opengl/TextRender.cpp \
 		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
+		utils/opengl/assimpUtils.cpp \
+		utils/opengl/Mesh.cpp \
+		utils/opengl/Model.cpp \
+		utils/opengl/OpenGLModel.cpp \
+		utils/opengl/ETransform.cpp \
 		utils/opengl/UI/ABaseUI.cpp \
 		utils/opengl/UI/ABaseUI_static.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
@@ -205,6 +210,11 @@ HEAD =	bomberman.hpp \
 		utils/opengl/TextRender.hpp \
 		utils/opengl/ImageAtlasRender.hpp \
 		utils/opengl/Skybox.hpp \
+		utils/opengl/assimpUtils.hpp \
+		utils/opengl/Mesh.hpp \
+		utils/opengl/Model.hpp \
+		utils/opengl/OpenGLModel.hpp \
+		utils/opengl/ETransform.hpp \
 		utils/opengl/UI/ABaseUI.hpp \
 		utils/opengl/UI/ButtonUI.hpp \
 		utils/opengl/UI/ButtonImageUI.hpp \
@@ -229,8 +239,8 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
-				-L ~/.brew/opt/freetype/lib -lfreetype
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer -l assimp \
+				-L ~/.brew/opt/freetype/lib -lfreetype \
 
 # flags for libs on OSX only
 LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
@@ -244,6 +254,8 @@ LIBS_INC =	~/.brew/include \
 			/usr/local/opt/freetype/include/freetype2 \
 			~/.brew/opt/freetype/include/freetype2 \
 			/usr/include/freetype2 \
+			/usr/include/assimp \
+			/usr/include/SDL2 \
 
 # libs created by user
 UNCOMPILED_LIBS =
@@ -267,8 +279,14 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
-	sudo apt-get -y install libsdl2-dev
-	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
+	sudo apt-get -y install libsdl2-dev;
+	# sdl2_mixer
+	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
+	# assimp 5
+	sudo add-apt-repository -y 'deb http://cz.archive.ubuntu.com/ubuntu focal main universe'
+	sudo apt-get -y update
+	sudo apt-get -y install libassimp-dev
+
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
@@ -278,6 +296,9 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install sdl2;
 	# sdl2_mixer
 	brew install sdl2_mixer;
+	# assimp
+	brew install assimp;
+	brew upgrade assimp;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
