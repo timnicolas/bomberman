@@ -30,7 +30,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 // -- Constructors -------------------------------------------------------------
 
 SceneGame::SceneGame(Gui * gui, float const &dtTime)
-: AScene(gui, dtTime)
+: ASceneMenu(gui, dtTime)
 {
 	player = nullptr;
 	enemies = std::vector<ACharacter *>();
@@ -66,13 +66,10 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
-
-	if (_gameInfo)
-		delete _gameInfo;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
-: AScene(src) {
+: ASceneMenu(src) {
 	*this = src;
 }
 
@@ -122,23 +119,6 @@ bool			SceneGame::init() {
 			break;
 		}
 		i++;
-	}
-
-	glm::vec2 winSz = _gui->gameInfo.windowSize;
-	glm::vec2 tmpPos;
-	glm::vec2 tmpSize;
-	float menuWidth = winSz.x / 2;
-	float menuHeight = menuWidth / 8;
-
-	try {
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = winSz.y - menuHeight * 2;
-		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Game infos");
-	} catch (ABaseUI::UIException const & e) {
-		logErr(e.what());
-		return false;
 	}
 
 	return true;
@@ -218,10 +198,7 @@ bool	SceneGame::update() {
 	}
 	player->update(_dtTime);
 
-	std::string gameInfosStr = _getGameInfos();
-	_gameInfo->setText(gameInfosStr);
-
-	_gameInfo->update();
+	_updateGameInfos();
 
 	return postUpdate();
 }
@@ -264,37 +241,73 @@ bool	SceneGame::postUpdate() {
 	return true;
 }
 
-/**
- * @brief add a text in the menu with menu settings
- *
- * @param pos the position
- * @param size the size
- * @param text the text
- * @return TextUI& a reference to the element created
- */
-TextUI & SceneGame::addText(glm::vec2 pos, glm::vec2 size, std::string const & text) {
-	TextUI * ui = new TextUI(pos, size);
-	ui->setText(text);
-	_gameInfo = ui;
-	return *ui;
-}
+void			SceneGame::_updateGameInfos() {
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
 
-std::string			SceneGame::_getGameInfos() {
-	std::string			str;
-	str = "life:" + std::to_string(player->lives)
-		+ " speed:" + std::to_string(player->speed)
-		+ " bombs:" + std::to_string(player->totalBombs)
-		+ " propag:" + std::to_string(player->bombProgation);
-	if (player->passFire)
-		str += " pf";
-	if (player->passWall)
-		str += " pw";
-	if (player->detonator)
-		str += " det";
-	if (player->passBomb)
-		str += " pb";
+	glm::vec2	winSz = _gui->gameInfo.windowSize;
+	glm::vec2	tmpPos;
+	glm::vec2	tmpSize;
+	uint32_t	padding = 5;
+	float		menuWidth = winSz.x / 2;
+	float		menuHeight = menuWidth / 8;
 
-	return str;
+	try {
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+		tmpSize = {32, 32};
+
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png", false).getSize().x;
+		std::string	speed = std::to_string(player->speed);
+		speed = speed.substr(0, speed.find("."));
+		tmpPos.x += addText(tmpPos, VOID_SIZE, speed).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::LEFT)
+					.getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::LEFT)
+					.getSize().x;
+
+		if (player->passFire) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png", false)
+						.getSize().x;
+		}
+		if (player->passWall) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png", false)
+						.getSize().x;
+		}
+		if (player->detonator) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png", false)
+						.getSize().x;
+		}
+		if (player->passBomb) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png", false)
+						.getSize().x;
+		}
+		if (player->invulnerable > 0) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png", false)
+						.getSize().x;
+			std::string	invulnerable = std::to_string(player->invulnerable);
+			invulnerable = invulnerable.substr(0, invulnerable.find("."));
+			tmpPos.x += addText(tmpPos, VOID_SIZE, invulnerable).setTextAlign(TextAlign::LEFT).getSize().x;
+		}
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
 }
 
 /**
@@ -336,7 +349,7 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	_gameInfo->draw();
+	ASceneMenu::draw();
 
 	// draw skybox
 	_gui->drawSkybox(view);
@@ -476,6 +489,12 @@ bool	SceneGame::_unloadLevel() {
 			enemy++;
 	}
 	enemies.clear();
+
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
+
 	level = NO_LEVEL;
 	return true;
 }

@@ -23,7 +23,7 @@ Player &Player::operator=(Player const &rhs) {
 		ACharacter::operator=(rhs);
 		totalBombs = rhs.totalBombs;
 		bombs = rhs.bombs;
-		_invulnerable = rhs._invulnerable;
+		invulnerable = rhs.invulnerable;
 		_toDraw = rhs._toDraw;
 		passFire = rhs.passFire;
 		passWall = rhs.passWall;
@@ -43,7 +43,7 @@ Player &Player::operator=(Player const &rhs) {
  * @return false
  */
 bool	Player::init() {
-	_invulnerable = 3.0f;
+	invulnerable = 3.0f;
 	bombs = totalBombs;
 	return true;
 }
@@ -58,7 +58,7 @@ void	Player::resetParams() {
 	speed = 3;
 	alive = true;
 	lives = 2;
-	_invulnerable = 3.0f;
+	invulnerable = 3.0f;
 	_toDraw = 0;
 	bombProgation = 3;
 	passFire = false;
@@ -78,10 +78,10 @@ bool	Player::update(float const dTime) {
 	if (!active)
 		return true;
 	if (alive) {
-		if (_invulnerable > 0.0f)
-			_invulnerable -= dTime;
-		if (_invulnerable < 0.0f)
-			_invulnerable = 0.0f;
+		if (invulnerable > 0.0f)
+			invulnerable -= dTime;
+		if (invulnerable < 0.0f)
+			invulnerable = 0.0f;
 		_move(dTime);
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
@@ -100,7 +100,7 @@ bool	Player::update(float const dTime) {
  * @return false if failure
  */
 bool	Player::draw(Gui &gui) {
-	if (_invulnerable > 0) {
+	if (invulnerable > 0) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
@@ -117,9 +117,9 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
-	if (_invulnerable <= 0.0f) {
+	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
-			_invulnerable = 3.0f;
+			invulnerable = 3.0f;
 		}
 	}
 	return false;
@@ -160,7 +160,7 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			passFire = true;
 			break;
 		case BonusType::SHIELD:
-			_invulnerable += 5.0f;
+			invulnerable += 5.0f;
 			break;
 		default:
 			break;

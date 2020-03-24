@@ -43,7 +43,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
 		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
 	_controls.j("keys").add<int64_t>("show_help", SDL_SCANCODE_F1) \
-		.setMin(4).setMax(286).setDescription("show shorcuts fo buttons");
+		.setMin(4).setMax(286).setDescription("show shortcuts fo buttons");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");

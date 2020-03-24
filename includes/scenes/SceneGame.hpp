@@ -7,7 +7,7 @@
 #include <map>
 #include "useGlm.hpp"
 
-#include "AScene.hpp"
+#include "ASceneMenu.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
@@ -40,7 +40,7 @@ namespace EntityType {
 /**
  * @brief This is the game Scene. In this scene, you can play to the game and load levels
  */
-class SceneGame : public AScene {
+class SceneGame : public ASceneMenu {
 private:
 	SceneGame();
 	// Members
@@ -61,10 +61,10 @@ private:
 
 protected:
 	// TextUI &	_addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
-	std::string			_getGameInfos();
-	ABaseUI *			_gameInfo;
+	void			_updateGameInfos();
+	// ABaseUI *			_gameInfo;
 	// std::vector<ABaseUI *>	_buttons;
-	TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+	// TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 
 
 public:
