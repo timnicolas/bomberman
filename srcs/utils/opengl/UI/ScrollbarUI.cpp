@@ -197,6 +197,32 @@ ScrollbarUI &	ScrollbarUI::invertVertScroll(bool invert) { _vertScrollInverted =
 ScrollbarUI &	ScrollbarUI::invertHorizScroll(bool invert) { _horizScrollInverted = invert; return *this; }
 
 /**
+ * @brief Get position of master element (bottom left after border)
+ *
+ * !!! This functions can be overwirte in childs class
+ *
+ * @return glm::vec2 The position
+ */
+glm::vec2 ScrollbarUI::getMasterPos() const {
+	glm::vec2 pos = getRealPos() + _borderSize;
+	if (_horizScroll)
+		pos.y += _scrollbarSize;
+	return pos;
+}
+/**
+ * @brief Get position of master element (bottom left after border) considering offset
+ *
+ * !!! This functions can be overwirte in childs class
+ *
+ * @return glm::vec2 The position
+ */
+glm::vec2 ScrollbarUI::getMasterRealPos() const {
+	glm::vec2 pos = getRealPos() + _masterOffset + _borderSize;
+	if (_horizScroll)
+		pos.y += _scrollbarSize;
+	return pos;
+}
+/**
  * @brief Get size of master element inside the borders
  *
  * !!! This functions can be overwirte in childs class

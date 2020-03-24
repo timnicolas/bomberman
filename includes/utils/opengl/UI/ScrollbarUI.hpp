@@ -25,6 +25,8 @@ class ScrollbarUI : public ABaseMasterUI {
 		ScrollbarUI &		invertHorizScroll(bool invert);
 
 		/* overwrite functions */
+		virtual glm::vec2	getMasterPos() const;
+		virtual glm::vec2	getMasterRealPos() const;
 		virtual glm::vec2	getMasterSize() const;
 
 	protected:
