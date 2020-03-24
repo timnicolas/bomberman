@@ -71,20 +71,21 @@ void ScrollbarUI::_update() {
 					_vertScrollbarPos = 1 - (mousePos.y - yMin) / (yMax - yMin);
 			}
 		}
-
-		// if scrolling
-		if (mouseScroll.y != 0) {
-			float offset = mouseScroll.y * _mouseScrollSpeed * (1 / _masterTotalSize.y);
-			if (_vertScrollInverted)
-				_vertScrollbarPos += offset;
-			else
-				_vertScrollbarPos -= offset;
-			if (_vertScrollbarPos < 0) _vertScrollbarPos = 0;
-			if (_vertScrollbarPos > 1) _vertScrollbarPos = 1;
+		if (_mouseHover) {
+			// if scrolling
+			if (mouseScroll.y != 0) {
+				float offset = mouseScroll.y * _mouseScrollSpeed * (1 / _masterTotalSize.y);
+				if (_vertScrollInverted)
+					_vertScrollbarPos += offset;
+				else
+					_vertScrollbarPos -= offset;
+				if (_vertScrollbarPos < 0) _vertScrollbarPos = 0;
+				if (_vertScrollbarPos > 1) _vertScrollbarPos = 1;
+			}
 		}
-
 		_masterOffset.y = (_masterTotalSize.y - (_size.y - _borderSize * 2)) * _vertScrollbarPos;
 	}
+
 	if (_horizScroll) {
 		/* size of the slider */
 		float scrollSizeFactor = getMasterSize().x / _masterTotalSize.x;
@@ -111,18 +112,18 @@ void ScrollbarUI::_update() {
 					_horizScrollbarPos = (mousePos.x - xMin) / (xMax - xMin);
 			}
 		}
-
-		// if scrolling
-		if (mouseScroll.x != 0) {
-			float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
-			if (_horizScrollInverted)
-				_horizScrollbarPos -= offset;
-			else
-				_horizScrollbarPos += offset;
-			if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
-			if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
+		if (_mouseHover) {
+			// if scrolling
+			if (mouseScroll.x != 0) {
+				float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
+				if (_horizScrollInverted)
+					_horizScrollbarPos -= offset;
+				else
+					_horizScrollbarPos += offset;
+				if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
+				if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
+			}
 		}
-
 		_masterOffset.x = -1 * (_masterTotalSize.x - (_size.x - _borderSize * 2)) * _horizScrollbarPos;
 	}
 }
