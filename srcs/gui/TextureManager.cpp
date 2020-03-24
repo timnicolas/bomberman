@@ -13,7 +13,7 @@ TextureManager::TextureManager()
 	try {
 		_textureAtlas = textureAtlasFromFile(path, inSpaceSRGB, 32, 256);
 	}
-	catch(TextureFailToLoad const & e) {
+	catch(TextureException const & e) {
 		throw TextureManagerException("failed to load texture atlas");
 	}
 }
