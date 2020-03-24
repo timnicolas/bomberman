@@ -144,8 +144,7 @@ void ScrollbarUI::_draw() {
 		/* position of the scrollbar */
 		tmpPos.x = getRealPos().x + _size.x - _borderSize - tmpSize.x;
 
-		float y = (1 - _vertScrollbarPos) * (_size.y - _borderSize * 2);
-		y -= tmpSize.y / 2;
+		float y = (1 - _vertScrollbarPos) * ((_size.y - _borderSize * 2) - _vertScrollBarDrawSize);
 		if (y < 0) y = 0;
 		if (y > (_size.y - _borderSize * 2) - tmpSize.y) y = (_size.y - _borderSize * 2) - tmpSize.y;
 
@@ -163,8 +162,7 @@ void ScrollbarUI::_draw() {
 		/* position of the scrollbar */
 		tmpPos.y = getRealPos().y + _borderSize;
 
-		float x = _horizScrollbarPos * (_size.x - _borderSize * 2);
-		x -= tmpSize.x / 2;
+		float x = _horizScrollbarPos * ((_size.x - _borderSize * 2) - _horizScrollBarDrawSize);
 		if (x < 0) x = 0;
 		if (x > (_size.x - _borderSize * 2) - tmpSize.x) x = (_size.x - _borderSize * 2) - tmpSize.x;
 
