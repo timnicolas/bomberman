@@ -337,7 +337,7 @@ bool				ABaseUI::isEnabled() const { return _enabled; }
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
 glm::vec2			ABaseUI::getRealPos() const {
-	glm::vec2 masterPos = (_master) ? _master->getMasterPos() : glm::vec2(0, 0);
+	glm::vec2 masterPos = (_master) ? _master->getMasterRealPos() : glm::vec2(0, 0);
 	return masterPos + _pos + _posOffset;
 }
 glm::vec2 &			ABaseUI::getSize() { return _size; }

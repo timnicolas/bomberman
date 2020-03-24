@@ -17,18 +17,24 @@ class ABaseMasterUI : public ABaseUI {
 		ABaseMasterUI & operator=(ABaseMasterUI const & rhs);
 
 		/* setter */
-		void			addChild(ABaseUI * child);
-		void			removeChild(ABaseUI * child);
+		void				addChild(ABaseUI * child);
+		void				removeChild(ABaseUI * child);
 
 		/* getter */
-		glm::vec2		getMasterPos() const;
-		glm::vec2		getMasterSize() const;
-		glm::vec2		getTotalMasterSize() const;
+		glm::vec2			getMasterPos() const;
+		glm::vec2			getMasterRealPos() const;
+		virtual glm::vec2	getMasterSize() const;
 
 	protected:
 		virtual void	_update() = 0;
 		virtual void	_draw() = 0;
+		void			_updateTotalMasterSize();
 		ABaseMasterUI();
 
+		glm::vec2				_masterPadding;
+		glm::vec2				_masterOffset;
+		glm::vec2				_masterMinPos;
+		glm::vec2				_masterMaxPos;
+		glm::vec2				_masterTotalSize;
 		std::vector<ABaseUI *>	_childUI;
 };
