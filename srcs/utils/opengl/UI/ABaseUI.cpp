@@ -68,7 +68,7 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @brief This is the base update function of UI objects
  */
 void ABaseUI::update() {
-	if (!_enabled)
+	if (!_enabled || isTotallyOutOfScreen() || isPartiallyOutOfMaster())
 		return;
 	if (_isClickableUI) {
 		// buttons calculation only if the UI is clickable
@@ -147,7 +147,7 @@ void ABaseUI::_updateClick() {
  * @brief This is the base draw function of UI objects
  */
 void ABaseUI::draw() {
-	if (!_enabled)
+	if (!_enabled || isTotallyOutOfScreen() || isPartiallyOutOfMaster())
 		return;
 
 	if (_showHelp) {
@@ -238,6 +238,63 @@ ABaseUI &	ABaseUI::setKeyRightClickInput(InputType::Enum input) {
 }
 ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
 	_keyLeftClickBindInput = input; return *this;
+}
+
+/**
+ * @brief Check if the UI element is partially out of the screen
+ *
+ * @return true if partially out of the screen
+ */
+bool	ABaseUI::isPatriallyOutOfScreen() const {
+	glm::vec2 rpos = getRealPos();
+	if (rpos.x < 0 || rpos.y < 0 || rpos.x + _size.x > _winSize.x || rpos.y + _size.y > _winSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is totally out of the screen
+ *
+ * @return true if totally out of the screen
+ */
+bool	ABaseUI::isTotallyOutOfScreen() const {
+	glm::vec2 rpos = getRealPos();
+	if (rpos.x + _size.x < 0 || rpos.y + _size.y < 0 || rpos.x > _winSize.x || rpos.y > _winSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is partially out of the master element
+ *
+ * @return true if partially out of the master element
+ * @return false if totally on master or if master doesn't exist
+ */
+bool	ABaseUI::isPartiallyOutOfMaster() const {
+	if (_master == nullptr)
+		return false;
+	// relative pos in master
+	glm::vec2 posInMaster = getRealPos() - _master->getMasterPos();
+	// master size
+	glm::vec2 mSize = _master->getMasterSize();
+	if (posInMaster.x < 0 || posInMaster.y < 0 || posInMaster.x + _size.x > mSize.x || posInMaster.y + _size.y > mSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is totally out of the master element
+ *
+ * @return true if totally out of the master element
+ * @return false if partially or totally on master or if master doesn't exist
+ */
+bool	ABaseUI::isTotallyOutOfMaster() const {
+	if (_master == nullptr)
+		return false;
+	// relative pos in master
+	glm::vec2 posInMaster = getRealPos() - _master->getMasterPos();
+	// master size
+	glm::vec2 mSize = _master->getMasterSize();
+	if (posInMaster.x + _size.x < 0 || posInMaster.y + _size.y < 0 || posInMaster.x > mSize.x || posInMaster.y > mSize.y)
+		return true;
+	return false;
 }
 
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
