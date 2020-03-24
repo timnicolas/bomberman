@@ -97,15 +97,16 @@ void ABaseMasterUI::_updateTotalMasterSize() {
 	_masterMaxPos = glm::vec2(0, 0);
 
 	for (auto && it : _childUI) {
-		glm::vec2 tmpSize = it->getRealPos() - getMasterRealPos() + it->getSize();
-		if (tmpSize.x > _masterMaxPos.x)
-			_masterMaxPos.x = tmpSize.x;
-		if (tmpSize.x < _masterMinPos.x)
-			_masterMinPos.x = tmpSize.x;
-		if (tmpSize.y > _masterMaxPos.y)
-			_masterMaxPos.y = tmpSize.y;
-		if (tmpSize.y < _masterMinPos.y)
-			_masterMinPos.y = tmpSize.y;
+		glm::vec2 tmpPos1 = it->getRealPos() - getMasterRealPos();
+		glm::vec2 tmpPos2 = tmpPos1 + it->getSize();
+		if (tmpPos2.x > _masterMaxPos.x)
+			_masterMaxPos.x = tmpPos2.x;
+		if (tmpPos1.x < _masterMinPos.x)
+			_masterMinPos.x = tmpPos1.x;
+		if (tmpPos2.y > _masterMaxPos.y)
+			_masterMaxPos.y = tmpPos2.y;
+		if (tmpPos1.y < _masterMinPos.y)
+			_masterMinPos.y = tmpPos1.y;
 	}
 	_masterMinPos -= _masterPadding;
 	_masterMaxPos += _masterPadding;
