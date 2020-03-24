@@ -43,14 +43,12 @@ class ASceneMenu : public AScene {
 
 		/* add element */
 		ButtonUI &			addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
-		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
-			bool pixelateOnZoom = true);
+		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
 		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step);
 		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
 			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
-		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
-			bool pixelateOnZoom = true);
+		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
 		ScrollbarUI &		addScrollbar(glm::vec2 pos, glm::vec2 size);
 
 		/* getter */

@@ -4,6 +4,8 @@
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
+#include "FileUtils.hpp"
+
 #include "Player.hpp"
 #include "Wall.hpp"
 #include "Crispy.hpp"
@@ -337,7 +339,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	std::string		levelName = "level" + std::to_string(levelId);
 	// $(mapsPath)/$(levelName).json
 	std::string		filename = s.s("mapsPath") + "/" + levelName + ".json";
-	if (fileExists(filename) == false) {
+	if (file::isFile(filename) == false) {
 		return false;  // file does not exist
 	}
 

@@ -425,7 +425,7 @@ void					SceneSettings::_updateAudioVolume(int audio_index) {
  */
 void					SceneSettings::_saveAudioVolume(int audio_index) {
 	_save_audio[audio_index] = false;
-	s.saveToFile("configs/settings.json");
+	saveSettings(SETTINGS_FILE);
 }
 
 /**
@@ -434,7 +434,7 @@ void					SceneSettings::_saveAudioVolume(int audio_index) {
 void					SceneSettings::_updateMouseSensitivity() {
 	_save_mouse_sens = false;
 	s.d("mouse_sensitivity") = _update_mouse_sens;
-	s.saveToFile("configs/settings.json");
+	saveSettings(SETTINGS_FILE);
 }
 
 /**
@@ -445,7 +445,7 @@ void					SceneSettings::_updateFullscreen() {
 	_fullscreen = !_fullscreen;
 	_updateFullscreenButton();
 	s.j("graphics").b("fullscreen") = _fullscreen;
-	s.saveToFile("configs/settings.json");
+	saveSettings(SETTINGS_FILE);
 	_gui->updateFullscreen();
 }
 
@@ -481,7 +481,7 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	}
 	s.j("graphics").i("width") = _current_resolution.width;
 	s.j("graphics").i("height") = _current_resolution.height;
-	s.saveToFile("configs/settings.json");
+	saveSettings(SETTINGS_FILE);
 	_updateResolutionText();
 	_text_scale = static_cast<float>(_current_resolution.width) * 0.001;
 	_gui->udpateDimension();

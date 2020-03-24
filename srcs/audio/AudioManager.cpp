@@ -13,7 +13,7 @@ AudioManager::AudioManager(): _music_modifier(1.0) {
 	AudioManager::_assets_path = std::string(path);
 	AudioManager::_assets_path += "/bomberman-assets/";
 	free(path);
-	logDebug("Assets_path: " << AudioManager::_assets_path);
+	// logDebug("Assets_path: " << AudioManager::_assets_path);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
 		_enabled = false;
 		logErr("Failed to init sdl audio.");
