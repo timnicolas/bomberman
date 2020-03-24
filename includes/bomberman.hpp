@@ -10,23 +10,23 @@
 /* show help (shortcuts in buttons) */
 #define DEBUG_SHOW_HELP	DEBUG & true  // always false in normal mode
 
+#define CONFIG_DIR		"configs/"
+#define SETTINGS_FILE	CONFIG_DIR"settings.json"
+
 #include <chrono>
 #include "SettingsJson.hpp"
 #include "Logging.hpp"
 
 void						initLogs();
+bool						checkPrgm();
 bool						initSettings(std::string const & filename);
-bool						initUserData(std::string const & filename);
-bool						saveUserData(std::string const & filename);
-std::chrono::milliseconds	getMs();
-bool						fileExists(std::string const & filename);
+bool						saveSettings(std::string const & filename);
+bool						usage();
+bool						argparse(int nbArgs, char const ** args);
 
+std::chrono::milliseconds	getMs();
 
 /**
  * @brief global variable for general settings
  */
 extern SettingsJson s;
-/**
- * @brief global variable for all the user specific data
- */
-extern SettingsJson userData;
