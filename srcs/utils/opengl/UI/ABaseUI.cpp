@@ -1,4 +1,5 @@
 #include "ABaseUI.hpp"
+#include "ABaseMasterUI.hpp"
 #include "Logging.hpp"
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
@@ -29,7 +30,8 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _keyLeftClickBindScancode(NO_SCANCODE),
   _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
-  _leftListener(nullptr)
+  _leftListener(nullptr),
+  _master(nullptr)
 {
 	if (!_isInit) {
 		logErr("You need to call ABaseUI::init() before creating UI objects");
@@ -258,6 +260,8 @@ ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this;
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
+ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) { _master = master; return *this; }
+
 /* getter */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
@@ -266,7 +270,10 @@ bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 bool				ABaseUI::isEnabled() const { return _enabled; }
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
-glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }
+glm::vec2			ABaseUI::getRealPos() const {
+	glm::vec2 masterPos = (_master) ? _master->getMasterPos() : glm::vec2(0, 0);
+	return masterPos + _pos + _posOffset;
+}
 glm::vec2 &			ABaseUI::getSize() { return _size; }
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }

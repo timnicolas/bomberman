@@ -1,19 +1,18 @@
-#include "TextUI.hpp"
+#include "ScrollbarUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
 
-TextUI::TextUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
+ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size): ABaseMasterUI(pos, size) {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
-	setBorderSize(0);
 }
 
-TextUI::TextUI(TextUI const & src): ABaseUI(src) {
+ScrollbarUI::ScrollbarUI(ScrollbarUI const & src): ABaseMasterUI(src) {
 	*this = src;
 }
 
-TextUI::~TextUI() {}
+ScrollbarUI::~ScrollbarUI() {}
 
-TextUI & TextUI::operator=(TextUI const & rhs) {
+ScrollbarUI & ScrollbarUI::operator=(ScrollbarUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
 	return *this;
@@ -22,23 +21,25 @@ TextUI & TextUI::operator=(TextUI const & rhs) {
 /**
  * @brief this is the base update function of UI objects
  */
-void TextUI::_update() {
+void ScrollbarUI::_update() {
 }
 
 /**
  * @brief this is the draw function for UI
  * /!\ -> you need to draw in the reverse order (draw at first the element on the top)
  */
-void TextUI::_draw() {
+void ScrollbarUI::_draw() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 
-	// draw text
+	// get center size and position
 	tmpPos = getRealPos();
 	tmpPos.x += _borderSize;
+	tmpPos.y += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
+	tmpSize.y -= _borderSize * 2;
+	_drawRect(tmpPos, tmpSize, _color);
 
 	// draw border
 	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);

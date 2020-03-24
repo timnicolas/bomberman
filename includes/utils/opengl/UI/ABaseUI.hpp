@@ -26,6 +26,8 @@ namespace TextAlign {
 	};
 }
 
+class ABaseMasterUI;
+
 /**
  * @brief this is the base UI interface
  *
@@ -93,6 +95,9 @@ class ABaseUI {
 		ABaseUI &	setTextPadding(float padding);
 		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
+		/* master */
+		ABaseUI &	setMaster(ABaseMasterUI * master);
+
 		/* getter */
 		bool					getMouseHover() const;
 		bool					getMouseRightClick() const;
@@ -100,7 +105,7 @@ class ABaseUI {
 		bool					isEnabled() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
-		glm::vec2				getRealPos() const;  // get pos + offset
+		glm::vec2				getRealPos() const;  // get master + pos + offset
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
@@ -171,6 +176,10 @@ class ABaseUI {
 		/* listener */
 		bool *			_rightListener;
 		bool *			_leftListener;
+
+		/* master */
+		// master element are an element that contains others
+		ABaseMasterUI *	_master;
 
 		/* global */
 		static bool						_isInit;
