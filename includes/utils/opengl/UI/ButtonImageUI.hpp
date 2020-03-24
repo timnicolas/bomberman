@@ -8,8 +8,7 @@
  */
 class ButtonImageUI : public ABaseUI {
 	public:
-		ButtonImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename,
-			bool pixelateOnZoom = true);
+		ButtonImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename);
 		ButtonImageUI(ButtonImageUI const & src);
 		virtual ~ButtonImageUI();
 

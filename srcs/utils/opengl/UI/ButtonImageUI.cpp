@@ -4,7 +4,7 @@
 #include "Texture.hpp"
 
 ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
-	std::string const & filename, bool pixelateOnZoom)
+	std::string const & filename)
 : ABaseUI(pos, size)
 {
 	// disable color
@@ -12,7 +12,7 @@ ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
 	_borderSize = 0;
 
 	// load the image
-	_loadImg(filename, true, pixelateOnZoom);
+	_loadImg(filename, true);
 }
 
 ButtonImageUI::ButtonImageUI(ButtonImageUI const & src): ABaseUI(src) {

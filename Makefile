@@ -134,6 +134,7 @@ SRC =	main.cpp \
 \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
+		utils/FileUtils.cpp \
 \
 		utils/opengl/Inputs.cpp \
 		utils/opengl/Texture.cpp \
@@ -144,6 +145,11 @@ SRC =	main.cpp \
 		utils/opengl/TextRender.cpp \
 		utils/opengl/ImageAtlasRender.cpp \
 		utils/opengl/Skybox.cpp \
+		utils/opengl/assimpUtils.cpp \
+		utils/opengl/Mesh.cpp \
+		utils/opengl/Model.cpp \
+		utils/opengl/OpenGLModel.cpp \
+		utils/opengl/ETransform.cpp \
 \
 		utils/opengl/UI/ABaseUI.cpp \
 		utils/opengl/UI/ABaseUI_static.cpp \
@@ -197,6 +203,7 @@ HEAD =	bomberman.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
+		utils/FileUtils.hpp \
 		utils/useGlm.hpp \
 \
 		utils/opengl/Inputs.hpp \
@@ -208,6 +215,11 @@ HEAD =	bomberman.hpp \
 		utils/opengl/TextRender.hpp \
 		utils/opengl/ImageAtlasRender.hpp \
 		utils/opengl/Skybox.hpp \
+		utils/opengl/assimpUtils.hpp \
+		utils/opengl/Mesh.hpp \
+		utils/opengl/Model.hpp \
+		utils/opengl/OpenGLModel.hpp \
+		utils/opengl/ETransform.hpp \
 \
 		utils/opengl/UI/ABaseUI.hpp \
 		utils/opengl/UI/ButtonUI.hpp \
@@ -235,14 +247,16 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer \
-				-L ~/.brew/opt/freetype/lib -lfreetype
+LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer -l assimp \
+				-L ~/.brew/opt/freetype/lib -lfreetype \
+				-lboost_filesystem \
 
 # flags for libs on OSX only
 LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
 
 # flags for libs on LINUX only
-LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU
+LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
+					-lboost_system \
 
 # includes dir for external libs
 LIBS_INC =	~/.brew/include \
@@ -250,6 +264,8 @@ LIBS_INC =	~/.brew/include \
 			/usr/local/opt/freetype/include/freetype2 \
 			~/.brew/opt/freetype/include/freetype2 \
 			/usr/include/freetype2 \
+			/usr/include/assimp \
+			/usr/include/SDL2 \
 
 # libs created by user
 UNCOMPILED_LIBS =
@@ -268,22 +284,35 @@ define CONFIGURE
 if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	echo "install linux dependencies"
 	sudo apt-get update -y
+	# boost
+	sudo apt-get -y install libboost-all-dev
 	# glm
 	sudo apt-get -y install libglm-dev
 	# freetype (for text)
 	sudo apt-get -y install libfreetype6-dev libfontconfig1-dev
 	# sdl2
-	sudo apt-get -y install libsdl2-dev
-	sudo apt install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev libsdl2-mixer-2.0-0 -y
+	sudo apt-get -y install libsdl2-dev;
+	# sdl2_mixer
+	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
+	# assimp 5
+	sudo add-apt-repository -y 'deb http://cz.archive.ubuntu.com/ubuntu focal main universe'
+	sudo apt-get -y update
+	sudo apt-get -y install libassimp-dev
+
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	echo "install osx dependencies";
+	# boost
+	brew install boost
 	# glm
 	brew install glm
 	# sdl2
 	brew install sdl2;
 	# sdl2_mixer
 	brew install sdl2_mixer;
+	# assimp
+	brew install assimp;
+	brew upgrade assimp;
 fi
 
 mkdir -p $(LIBS_DIR) $(LIBS_DIR)/glad $(LIBS_DIR)/KHR
