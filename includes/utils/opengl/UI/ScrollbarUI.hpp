@@ -13,10 +13,17 @@ class ScrollbarUI : public ABaseMasterUI {
 		ScrollbarUI(ScrollbarUI const & src);
 		virtual ~ScrollbarUI();
 
-		ScrollbarUI & operator=(ScrollbarUI const & rhs);
+		ScrollbarUI &	operator=(ScrollbarUI const & rhs);
+
+		/* setter */
+		ScrollbarUI &	enableVertScroll(bool enable);
+		ScrollbarUI &	enableHorizScroll(bool enable);
 
 	protected:
 		virtual void	_update();
 		virtual void	_draw();
 		ScrollbarUI();
+
+		bool	_vertScroll;
+		bool	_horizScroll;
 };
