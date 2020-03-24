@@ -85,6 +85,46 @@ void ScrollbarUI::_update() {
 
 		_masterOffset.y = (_masterTotalSize.y - (_size.y - _borderSize * 2)) * _vertScrollbarPos;
 	}
+	if (_horizScroll) {
+		/* size of the slider */
+		float scrollSizeFactor = getMasterSize().x / _masterTotalSize.x;
+		if (scrollSizeFactor < 0.1) scrollSizeFactor = 0.1;
+		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
+		_horizScrollBarDrawSize = (_size.x - _borderSize * 2) * scrollSizeFactor;
+
+		// if click on the scroll zone
+		if (_leftClick) {
+			if (mousePos.y >= getRealPos().y + _borderSize
+			&& mousePos.y <= getRealPos().y + _borderSize + _scrollbarSize
+			&& mousePos.x >= getRealPos().x + _borderSize
+			&& mousePos.x <= getRealPos().x + _size.x - _borderSize)
+			{
+				float xMin = getRealPos().x + _borderSize;
+				float xMax = getRealPos().x + _size.x - (_borderSize * 2);
+				// float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
+				// float xMax = getRealPos().x + _size.x - (_borderSize * 2 + _horizScrollBarDrawSize / 2);
+				if (mousePos.x < xMin)
+					_horizScrollbarPos = 0;
+				else if (mousePos.x > xMax)
+					_horizScrollbarPos = 1;
+				else
+					_horizScrollbarPos = (mousePos.x - xMin) / (xMax - xMin);
+			}
+		}
+
+		// if scrolling
+		if (mouseScroll.x != 0) {
+			float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
+			if (_horizScrollInverted)
+				_horizScrollbarPos += offset;
+			else
+				_horizScrollbarPos -= offset;
+			if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
+			if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
+		}
+
+		_masterOffset.x = -1 * (_masterTotalSize.x - (_size.x - _borderSize * 2)) * _horizScrollbarPos;
+	}
 }
 
 /**
@@ -111,6 +151,25 @@ void ScrollbarUI::_draw() {
 
 		tmpPos.x = getRealPos().x + _size.x - _borderSize - _scrollbarSize;
 		tmpPos.y = getRealPos().y + _borderSize + y;
+
+		/* draw scrollbar */
+		_drawRect(tmpPos, tmpSize, _scrollbarColor);
+	}
+	if (_horizScroll) {
+		/* size of the scrollbar */
+		tmpSize.y = _scrollbarSize;
+		tmpSize.x = _horizScrollBarDrawSize;  // height depend to the total master size
+
+		/* position of the scrollbar */
+		tmpPos.y = getRealPos().y + _borderSize;
+
+		float x = _horizScrollbarPos * (_size.x - _borderSize * 2);
+		x -= tmpSize.x / 2;
+		if (x < 0) x = 0;
+		if (x > (_size.x - _borderSize * 2) - tmpSize.x) x = (_size.x - _borderSize * 2) - tmpSize.x;
+
+		tmpPos.x = getRealPos().x + _size.x - _borderSize - _scrollbarSize;
+		tmpPos.x = getRealPos().x + _borderSize + x;
 
 		/* draw scrollbar */
 		_drawRect(tmpPos, tmpSize, _scrollbarColor);
