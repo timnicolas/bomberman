@@ -27,10 +27,11 @@ Material &Material::operator=(Material const &rhs) {
 
 
 std::ostream & operator << (std::ostream &out, Material const &m) {
-	out << "material_____________" << std::endl;
-	out << " diffuse: (" << m.diffuse.x << ", " << m.diffuse.y << ", " << m.diffuse.z << ")" << std::endl;
-	out << " specular: (" << m.specular.x << ", " << m.specular.y << ", " << m.specular.z << ")" << std::endl;
-	out << " ambient: (" << m.ambient.x << ", " << m.ambient.y << ", " << m.ambient.z << ")" << std::endl;
-	out << " shininess: " << m.shininess << std::endl;
+	out << "{" << std::endl;
+	out << "  diffuse: " << glm::to_string(m.diffuse) << "," << std::endl;
+	out << "  specular: " << glm::to_string(m.specular) << "," << std::endl;
+	out << "  ambient: " << glm::to_string(m.ambient) << "," << std::endl;
+	out << "  shininess: " << m.shininess << std::endl;
+	out << "}" << std::endl;
 	return out;
 }

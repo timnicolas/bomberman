@@ -107,30 +107,29 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
  *   - if _size.x == 0 && _size.x == 0 -> size auto setted (default size for the image)
  *   - if _size.x == 0 -> width auto setted
  *   - if _size.y == 0 -> height auto setted
- * @param pixelateOnZoom when zoom on the image, pixelate or smooth transition
  *
  * @throw UIException if the image failed to load
  */
-void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool pixelateOnZoom) {
+void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
 	// load the texture
 	try {
-		_imgTextureID = textureFromFile(filename, false, pixelateOnZoom, &_imgDefWidth, &_imgDefHeight);
+		_imgTextureID = textureFromFile(filename, true, &_imgDefSize);
 	}
-	catch (TextureFailToLoad const & e) {
+	catch (TextureException const & e) {
 		throw UIException(e.what());
 	}
 
 	// auto set size if needed
 	if (updateSize) {
 		if (_size.x == 0 && _size.y == 0) {
-			_size.x = _imgDefWidth;
-			_size.y = _imgDefHeight;
+			_size.x = _imgDefSize.x;
+			_size.y = _imgDefSize.y;
 		}
 		else if (_size.x == 0) {
-			_size.x = _size.y * (static_cast<float>(_imgDefWidth) / _imgDefHeight);
+			_size.x = _size.y * (static_cast<float>(_imgDefSize.x) / _imgDefSize.y);
 		}
 		else if (_size.y == 0) {
-			_size.y = _size.x * (static_cast<float>(_imgDefHeight) / _imgDefWidth);
+			_size.y = _size.x * (static_cast<float>(_imgDefSize.y) / _imgDefSize.x);
 		}
 	}
 }
