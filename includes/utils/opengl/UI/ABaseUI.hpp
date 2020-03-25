@@ -16,7 +16,7 @@
 #define SHADER_IMAGE_2D_ROW_SIZE 4
 
 /**
- * @brief this is the text alignement (LEFT RIGTH or CENTER)
+ * @brief this is the text alignment (LEFT RIGTH or CENTER)
  */
 namespace TextAlign {
 	enum Enum {
@@ -33,7 +33,7 @@ class ABaseMasterUI;
  *
  * You can reinplement this class to create your UI elements.
  * This base class implement functions to draw rectangles, images, text, ...
- * You need to call some static functions to have functionnal UI
+ * You need to call some static functions to have functional UI
  *  - ABaseUI::init(...) once on startup
  *  - ABaseUI::staticUpdate() in each loop
  *  - ABaseUI::destroy() at the end
@@ -99,7 +99,7 @@ class ABaseUI {
 		ABaseUI &	setMaster(ABaseMasterUI * master);
 
 		/* check */
-		bool					isPatriallyOutOfScreen() const;  // ret true if partially out of the screen
+		bool					isPartiallyOutOfScreen() const;  // ret true if partially out of the screen
 		bool					isTotallyOutOfScreen() const;  // ret true if totally out of the screen
 		bool					isPartiallyOutOfMaster() const;  // ret true if partially out of the master element
 		bool					isTotallyOutOfMaster() const;  // ret true if totally out of the screen element
@@ -144,7 +144,7 @@ class ABaseUI {
 		// called by setWinSize
 		virtual void	_resizeWin(glm::vec2 const & winScale2f, float winScale1f);
 
-		// enable functionnalities
+		// enable functionalities
 		bool			_enabled;
 		// basics
 		glm::vec2		_pos;

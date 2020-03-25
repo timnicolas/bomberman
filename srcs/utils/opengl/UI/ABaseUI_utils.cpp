@@ -77,7 +77,7 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, g
  * @param scale the text scale
  * @param text the text str
  * @param color the text color
- * @param align the text alignement (LEFT | CENTER | RIGHT)
+ * @param align the text alignment (LEFT | CENTER | RIGHT)
  * @param padding the text padding (left & right)
  */
 void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
