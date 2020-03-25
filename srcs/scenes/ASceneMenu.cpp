@@ -183,7 +183,7 @@ ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const 
 }
 
 /**
- * @brief add a ccrollbar in the menu with menu settings
+ * @brief add a scrollbar in the menu with menu settings
  *
  * @param pos the position
  * @param size the size

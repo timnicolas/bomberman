@@ -246,7 +246,7 @@ ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
  *
  * @return true if partially out of the screen
  */
-bool	ABaseUI::isPatriallyOutOfScreen() const {
+bool	ABaseUI::isPartiallyOutOfScreen() const {
 	glm::vec2 rpos = getRealPos();
 	if (rpos.x < 0 || rpos.y < 0 || rpos.x + _size.x > _winSize.x || rpos.y + _size.y > _winSize.y)
 		return true;
