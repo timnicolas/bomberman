@@ -2,9 +2,12 @@
 #include <time.h>
 #include <dlfcn.h>
 #include <iostream>
+#include <vector>
 
 #include "bomberman.hpp"
 #include "SceneManager.hpp"
+#include "FileUtils.hpp"
+#include "Logging.hpp"
 
 /**
  * @brief start the game (init logs & settings)
@@ -14,11 +17,17 @@
  * @return int exit value
  */
 int start(int ac, char const **av) {
-	(void)ac;
-	(void)av;
 	initLogs();  // init logs functions
-	initSettings("configs/settings.json");
-	initUserData(s.s("userDataFilename"));
+	srand(time(NULL));  // init random
+
+	if (argparse(ac - 1, av + 1) == false)  // parse arguments
+		return EXIT_FAILURE;
+
+	file::mkdir(CONFIG_DIR);  // create config folder
+	initSettings(SETTINGS_FILE);  // create settings object
+
+	if (!checkPrgm())  // check validity
+		return EXIT_FAILURE;
 
 	return EXIT_SUCCESS;
 }
@@ -26,8 +35,6 @@ int start(int ac, char const **av) {
 int main(int ac, char const **av) {
 	/* init program & load settings */
 	int ret = start(ac, av);
-	srand(time(NULL));
-
 	if (ret != EXIT_SUCCESS) {
 		return ret;
 	}
@@ -42,6 +49,7 @@ int main(int ac, char const **av) {
 		return EXIT_FAILURE;
 	}
 
-	saveUserData(s.s("userDataFilename"));
+	/* save before quit */
+	saveSettings(SETTINGS_FILE);
 	return ret;
 }
