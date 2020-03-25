@@ -547,6 +547,8 @@ void			SceneGame::_updateGameInfos() {
 
 	glm::vec2	winSz = _gui->gameInfo.windowSize;
 	glm::vec2	tmpPos;
+	float		imgY;
+	float		textY;
 	glm::vec2	tmpSize;
 	uint32_t	padding = 5;
 	float		menuWidth = winSz.x / 2;
@@ -555,53 +557,55 @@ void			SceneGame::_updateGameInfos() {
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
+		imgY = tmpPos.y;
+		textY = tmpPos.y + 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png").getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/life.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::RIGHT).getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png").getSize().x;
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/speed.png").getSize().x;
 		std::string	speed = std::to_string(player->speed);
 		speed = speed.substr(0, speed.find("."));
-		tmpPos.x += addText(tmpPos, VOID_SIZE, speed).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, speed).setTextAlign(TextAlign::RIGHT).getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png").getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::LEFT)
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bomb.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::RIGHT)
 					.getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png").getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::LEFT)
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flame.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::RIGHT)
 					.getSize().x;
 
 		if (player->passFire) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png")
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flampass.png")
 						.getSize().x;
 		}
 		if (player->passWall) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png")
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/wallpass.png")
 						.getSize().x;
 		}
 		if (player->detonator) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png")
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/detonator.png")
 						.getSize().x;
 		}
 		if (player->passBomb) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png")
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bombpass.png")
 						.getSize().x;
 		}
 		if (player->invulnerable > 0) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png")
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/shield.png")
 						.getSize().x;
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
-			tmpPos.x += addText(tmpPos, VOID_SIZE, invulnerable).setTextAlign(TextAlign::LEFT).getSize().x;
+			tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, invulnerable).setTextAlign(TextAlign::RIGHT).getSize().x;
 		}
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
