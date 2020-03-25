@@ -1,6 +1,6 @@
 #version 410 core
 
-#define NB_BLOCK_TYPES 11
+#define NB_BLOCK_TYPES 20
 
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in float aFaceId;

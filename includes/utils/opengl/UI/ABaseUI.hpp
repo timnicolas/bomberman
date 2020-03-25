@@ -14,6 +14,7 @@
 #define SHADER_IMAGE_2D_VS "./shaders/image_2D_vs.glsl"
 #define SHADER_IMAGE_2D_FS "./shaders/image_2D_fs.glsl"
 #define SHADER_IMAGE_2D_ROW_SIZE 4
+#define VOID_SIZE glm::vec2 {-1, -1}
 
 /**
  * @brief this is the text alignment (LEFT RIGHT or CENTER)
@@ -80,6 +81,7 @@ class ABaseUI {
 		ABaseUI &	setPosOffset(glm::vec2 offset);
 		ABaseUI &	addPosOffset(glm::vec2 offset);
 		ABaseUI &	setSize(glm::vec2 size);
+		ABaseUI &	setCalculatedSize();
 		ABaseUI &	setColor(glm::vec4 color);
 
 		ABaseUI &	setBorderColor(glm::vec4 color);
@@ -115,6 +117,7 @@ class ABaseUI {
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
+		uint32_t				getTextWidth() const;
 
 		/* Exceptions */
 	class UIException : public std::runtime_error {

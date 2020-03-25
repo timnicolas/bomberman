@@ -7,6 +7,7 @@
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
+#define MAX_SPEED 6.0
 #define OFFSET_TURN_CORRECTION 0.7
 
 // class SceneGame;

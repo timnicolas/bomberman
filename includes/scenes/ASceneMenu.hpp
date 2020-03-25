@@ -17,7 +17,7 @@
 #include "ScrollbarUI.hpp"
 
 /**
- * @brief Scene object to reimplement in all scenes for menu
+ * @brief Scene object to re-implement in all scenes for menu
  *
  * this object contains functions to create buttons, images, ...
  */
