@@ -6,7 +6,7 @@
 Player::Player(SceneGame &game) : ACharacter(game) {
 	type = Type::PLAYER;
 	name = "Player";
-	initParams();
+	resetParams();
 }
 
 Player::~Player() {
@@ -21,9 +21,15 @@ Player::Player(Player const &src) : ACharacter(src) {
 Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
+		totalBombs = rhs.totalBombs;
 		bombs = rhs.bombs;
+		invulnerable = rhs.invulnerable;
 		_toDraw = rhs._toDraw;
-		_invulnerable = rhs._invulnerable;
+		passFire = rhs.passFire;
+		passWall = rhs.passWall;
+		detonator = rhs.detonator;
+		passBomb = rhs.passBomb;
+		bombProgation = rhs.bombProgation;
 	}
 	return *this;
 }
@@ -31,16 +37,34 @@ Player &Player::operator=(Player const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
- * @brief Initial value for player.
+ * @brief Init player for new levels
+ *
+ * @return true
+ * @return false
+ */
+bool	Player::init() {
+	invulnerable = 3.0f;
+	bombs = totalBombs;
+	return true;
+}
+
+/**
+ * @brief Reset values for player.
  *
  */
-void	Player::initParams() {
-	bombs = 1;
-	speed = 5;
+void	Player::resetParams() {
+	totalBombs = 1;
+	bombs = totalBombs;
+	speed = 3;
 	alive = true;
 	lives = 2;
-	_invulnerable = 3.0f;
+	invulnerable = 3.0f;
 	_toDraw = 0;
+	bombProgation = 3;
+	passFire = false;
+	passWall = false;
+	detonator = false;
+	passBomb = false;
 }
 
 /**
@@ -54,16 +78,16 @@ bool	Player::update(float const dTime) {
 	if (!active)
 		return true;
 	if (alive) {
-		if (_invulnerable > 0.0f)
-			_invulnerable -= dTime;
-		if (_invulnerable < 0.0f)
-			_invulnerable = 0.0f;
+		if (invulnerable > 0.0f)
+			invulnerable -= dTime;
+		if (invulnerable < 0.0f)
+			invulnerable = 0.0f;
 		_move(dTime);
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
 	} else {
-		logDebug("Player is dead.")
+		logInfo("Player is dead.")
 		game.state = GameState::GAME_OVER;
 	}
 	return true;
@@ -76,7 +100,7 @@ bool	Player::update(float const dTime) {
  * @return false if failure
  */
 bool	Player::draw(Gui &gui) {
-	if (_invulnerable > 0) {
+	if (invulnerable > 0) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
@@ -85,14 +109,89 @@ bool	Player::draw(Gui &gui) {
 	return true;
 }
 
+/**
+ * @brief Player Take <damage> damages.
+ *
+ * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
+ */
 bool	Player::takeDamage(const int damage) {
-	if (_invulnerable <= 0.0f) {
+	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
-			_invulnerable = 3.0f;
+			invulnerable = 3.0f;
 		}
 	}
 	return false;
 }
+
+/**
+ * @brief Player take a <bonus> which allow to power up.
+ *
+ * @param bonus
+ * @return true
+ * @return false
+ */
+bool	Player::takeBonus(BonusType::Enum bonus) {
+	switch (bonus) {
+		case BonusType::LIFE:
+			lives++;
+			break;
+		case BonusType::BOMBS:
+			totalBombs++;
+			bombs++;
+			break;
+		case BonusType::FLAMES:
+			bombProgation++;
+			break;
+		case BonusType::SPEED:
+			speed++;
+			if (speed > MAX_SPEED)
+				speed = MAX_SPEED;
+			break;
+		case BonusType::WALLPASS:
+			passWall = true;
+			break;
+		case BonusType::DETONATOR:
+			detonator = true;
+			break;
+		case BonusType::BOMBPASS:
+			passBomb = true;
+			break;
+		case BonusType::FLAMPASS:
+			passFire = true;
+			break;
+		case BonusType::SHIELD:
+			invulnerable += 10.0f;
+			break;
+		default:
+			break;
+	}
+	return true;
+}
+
+void	Player::addBomb() {
+	bombs++;
+	if (bombs > totalBombs)
+		bombs = totalBombs;
+}
+
+// -- Protected Methods --------------------------------------------------------
+bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
+	for (auto &&entity : collisions) {
+		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
+			continue;
+		if (entity->crossable == Type::ALL || entity->crossable == type)
+			continue;
+		if (passWall && entity->type == Type::CRISPY)
+			continue;
+		if (passBomb && entity->type == Type::BOMB)
+			continue;
+		return false;
+	}
+	return true;
+}
+
 
 // -- Private Methods ----------------------------------------------------------
 
@@ -121,6 +220,8 @@ void	Player::_putBomb() {
 	glm::ivec2 intPos = getIntPos();
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
+		bomb->setPropagation(bombProgation);
+		// game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		game.board[intPos.x][intPos.y].push_back(bomb);
 		_noCollisionObjects.insert(bomb);
 		bombs -= 1;

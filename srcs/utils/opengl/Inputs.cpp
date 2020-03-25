@@ -7,6 +7,7 @@ const std::string	Inputs::input_type_name[] = {
 	"left",
 	"right",
 	"action",
+	"action_2",
 	"confirm",
 	"cancel",
 	"goto_menu",
@@ -33,6 +34,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		.setMin(4).setMax(286).setDescription("move right.");
 	_controls.j("keys").add<int64_t>("action", SDL_SCANCODE_SPACE) \
 		.setMin(4).setMax(286).setDescription("action command.");
+	_controls.j("keys").add<int64_t>("action_2", SDL_SCANCODE_B) \
+		.setMin(4).setMax(286).setDescription("action command bonus.");
 	_controls.j("keys").add<int64_t>("confirm", SDL_SCANCODE_RETURN) \
 		.setMin(4).setMax(286).setDescription("confirm choice.");
 	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
@@ -40,7 +43,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
 		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
 	_controls.j("keys").add<int64_t>("show_help", SDL_SCANCODE_F1) \
-		.setMin(4).setMax(286).setDescription("show shorcuts fo buttons");
+		.setMin(4).setMax(286).setDescription("show shortcuts fo buttons");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -50,15 +53,16 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now.");
 	}
 	_input_key_map = {
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::Enum::UP },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("down")), InputType::Enum::DOWN },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("left")), InputType::Enum::LEFT },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::Enum::RIGHT },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::Enum::ACTION },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::Enum::GOTO_MENU },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show_help")), InputType::Enum::SHOW_HELP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::UP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("down")), InputType::DOWN },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("left")), InputType::LEFT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::RIGHT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::ACTION },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action_2")), InputType::ACTION_2 },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::CONFIRM },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::CANCEL },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::GOTO_MENU },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show_help")), InputType::SHOW_HELP },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -66,6 +70,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _left_click(false), _right_
 		_controls.j("keys").i("left"),
 		_controls.j("keys").i("right"),
 		_controls.j("keys").i("action"),
+		_controls.j("keys").i("action_2"),
 		_controls.j("keys").i("confirm"),
 		_controls.j("keys").i("cancel"),
 		_controls.j("keys").i("goto_menu"),

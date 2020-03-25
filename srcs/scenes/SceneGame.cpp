@@ -38,7 +38,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 // -- Constructors -------------------------------------------------------------
 
 SceneGame::SceneGame(Gui * gui, float const &dtTime)
-: AScene(gui, dtTime)
+: ASceneMenu(gui, dtTime)
 {
 	player = nullptr;
 	enemies = std::vector<AEnemy *>();
@@ -52,8 +52,10 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 SceneGame::~SceneGame() {
 	for (auto &&box : board) {
 		for (auto &&row : box) {
-			for (auto &&element : row) {
-				delete element;
+			std::vector<AEntity *>::iterator element = row.begin();
+			while (element != row.end()) {
+				row.erase(element);
+				element = row.begin();
 			}
 		}
 	}
@@ -77,7 +79,7 @@ SceneGame::~SceneGame() {
 }
 
 SceneGame::SceneGame(SceneGame const &src)
-: AScene(src) {
+: ASceneMenu(src) {
 	*this = src;
 }
 
@@ -177,7 +179,6 @@ bool	SceneGame::update() {
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
-	// TODO(tnicolas42) remove the scene loader
 	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
@@ -188,7 +189,7 @@ bool	SceneGame::update() {
 	}
 	else if (state == GameState::GAME_OVER) {
 		// clear game infos.
-		player->initParams();
+		player->resetParams();
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -207,6 +208,8 @@ bool	SceneGame::update() {
 	}
 	player->update(_dtTime);
 
+	_updateGameInfos();
+
 	return postUpdate();
 }
 
@@ -222,9 +225,9 @@ bool	SceneGame::postUpdate() {
 	while (enemy != enemies.end()) {
 		if (!(*enemy)->postUpdate()) {
 			enemy = enemies.begin();
+			continue;
 		}
-		if (enemy != enemies.end())
-			enemy++;
+		enemy++;
 	}
 
 	for (auto &&board_it0 : board) {
@@ -233,8 +236,10 @@ bool	SceneGame::postUpdate() {
 			AEntity * copy;
 			while (it != board_it1.end()) {
 				copy = *it;
-				if (!(*it)->postUpdate())
-					return false;
+				if (!(*it)->postUpdate()) {
+					it = board_it1.begin();
+					continue;
+				}
 				if (it == board_it1.end())
 					continue;
 				if (copy == *it)
@@ -285,6 +290,8 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
+	ASceneMenu::draw();
+
 	// draw skybox
 	_gui->drawSkybox(view);
 
@@ -328,6 +335,8 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.x / 2, 1.0f,
 		size.y / 1.61803398875f
 	));
+
+	player->init();
 
 	return result;
 }
@@ -385,13 +394,12 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	mapPattern->add<std::string>("line", "");
 	lvl->addList<SettingsJson>("map", mapPattern);
 
-	SettingsJson * bonusPattern = new SettingsJson();
-	bonusPattern->add<SettingsJson>("pos");
-		bonusPattern->j("pos").add<uint64_t>("x", 0);
-		bonusPattern->j("pos").add<uint64_t>("y", 0);
-	bonusPattern->add<std::string>("type", "");
-	lvl->addList<SettingsJson>("bonus", bonusPattern);
-
+	lvl->add<SettingsJson>("bonus");
+		for (auto &&pair : Bonus::bonus) {
+			lvl->j("bonus").add<SettingsJson>(pair.first);
+			lvl->j("bonus").j(pair.first).add<int64_t>("chance", 0).setMin(0).setMax(25);
+			lvl->j("bonus").j(pair.first).add<int64_t>("nb", -1).setMin(-1).setMax(100);
+		}
 	try {
 		if (lvl->loadFile(filename) == false) {
 			// warning when loading settings
@@ -428,6 +436,12 @@ bool	SceneGame::_unloadLevel() {
 			enemy++;
 	}
 	enemies.clear();
+
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
+
 	level = NO_LEVEL;
 	return true;
 }
@@ -463,6 +477,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	flags = 0;
 	AEntity *entity;
+	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");
 		if (line.length() != size.x)
@@ -515,9 +530,115 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	if (!end)
 		throw SceneException("No end on this level.");
 
+	_initBonus();
+
 	// set camera
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
 
+	return true;
+}
+
+/**
+ * @brief Update game informations
+ */
+void			SceneGame::_updateGameInfos() {
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
+
+	glm::vec2	winSz = _gui->gameInfo.windowSize;
+	glm::vec2	tmpPos;
+	float		imgY;
+	float		textY;
+	glm::vec2	tmpSize;
+	uint32_t	padding = 5;
+	float		menuWidth = winSz.x / 2;
+	float		menuHeight = menuWidth / 8;
+
+	try {
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		imgY = tmpPos.y;
+		textY = tmpPos.y + 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+		tmpSize = {32, 32};
+
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/life.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->lives))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/speed.png").getSize().x;
+		std::string	speed = std::to_string(player->speed);
+		speed = speed.substr(0, speed.find("."));
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, speed).setTextAlign(TextAlign::RIGHT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bomb.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->totalBombs))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flame.png").getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->bombProgation))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
+
+		if (player->passFire) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flampass.png")
+						.getSize().x;
+		}
+		if (player->passWall) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/wallpass.png")
+						.getSize().x;
+		}
+		if (player->detonator) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/detonator.png")
+						.getSize().x;
+		}
+		if (player->passBomb) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bombpass.png")
+						.getSize().x;
+		}
+		if (player->invulnerable > 0) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/shield.png")
+						.getSize().x;
+			std::string	invulnerable = std::to_string(player->invulnerable);
+			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
+			tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, invulnerable).setTextAlign(TextAlign::RIGHT).getSize().x;
+		}
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
+}
+
+/**
+ * @brief Init the bonus member according to the description in level.json
+ *
+ * @return true if success
+ * @return false if error.
+ */
+bool			SceneGame::_initBonus() {
+	try {
+		if (bonus.size())
+			bonus.erase(bonus.begin(), bonus.end());
+		SettingsJson	&lvl = getSettingsLevel();
+		for (auto &&pair : Bonus::bonus) {
+			bonus.insert({
+				pair.first,
+				{
+					lvl.j("bonus").j(pair.first).i("chance"),
+					lvl.j("bonus").j(pair.first).i("nb")
+				}
+			});
+		}
+	} catch (SceneGameException &e) {
+		logErr(e.what());
+		return false;
+	}
 	return true;
 }
 
@@ -536,3 +657,25 @@ std::string	SceneGame::getLevelImg(int32_t levelId) const {
 	}
 	return _mapsList[levelId]->s("img");
 }
+
+/**
+ * @brief Return JSON Settings of level.
+ *
+ * @return SettingsJson& JSON Settings of level
+ * @throw SceneGameException if error
+ */
+SettingsJson	&SceneGame::getSettingsLevel() const {
+	if (level == NO_LEVEL)
+		throw SceneGameException("no level set");
+	if (level > (int32_t)_mapsList.size())
+		throw SceneGameException(("unable to load level " + std::to_string(level) + ": doesn't exist").c_str());
+	return *(_mapsList[level]);
+}
+
+// -- Exceptions errors --------------------------------------------------------
+
+SceneGame::SceneGameException::SceneGameException()
+: std::runtime_error("SceneGame Exception") {}
+
+SceneGame::SceneGameException::SceneGameException(const char* whatArg)
+: std::runtime_error(std::string(std::string("SceneGameError: ") + whatArg).c_str()) {}
