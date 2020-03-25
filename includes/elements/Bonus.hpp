@@ -29,8 +29,11 @@ private:
 	// Member
 	BonusType::Enum		_typeBonus;
 	static std::map<BonusType::Enum, Block::Enum> _textures;
+	// Methods
+	BonusType::Enum		_pickBonus();
 
 public:
+	static std::unordered_map<std::string, BonusType::Enum>	bonus;
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();

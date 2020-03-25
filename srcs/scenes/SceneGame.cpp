@@ -241,75 +241,6 @@ bool	SceneGame::postUpdate() {
 	return true;
 }
 
-void			SceneGame::_updateGameInfos() {
-	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		delete *it;
-	}
-	_buttons.clear();
-
-	glm::vec2	winSz = _gui->gameInfo.windowSize;
-	glm::vec2	tmpPos;
-	glm::vec2	tmpSize;
-	uint32_t	padding = 5;
-	float		menuWidth = winSz.x / 2;
-	float		menuHeight = menuWidth / 8;
-
-	try {
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = winSz.y - menuHeight * 2;
-		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
-		tmpSize = {32, 32};
-
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png", false).getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::LEFT).getSize().x;
-		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png", false).getSize().x;
-		std::string	speed = std::to_string(player->speed);
-		speed = speed.substr(0, speed.find("."));
-		tmpPos.x += addText(tmpPos, VOID_SIZE, speed).setTextAlign(TextAlign::LEFT).getSize().x;
-		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png", false).getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::LEFT)
-					.getSize().x;
-		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png", false).getSize().x;
-		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::LEFT)
-					.getSize().x;
-
-		if (player->passFire) {
-			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png", false)
-						.getSize().x;
-		}
-		if (player->passWall) {
-			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png", false)
-						.getSize().x;
-		}
-		if (player->detonator) {
-			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png", false)
-						.getSize().x;
-		}
-		if (player->passBomb) {
-			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png", false)
-						.getSize().x;
-		}
-		if (player->invulnerable > 0) {
-			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png", false)
-						.getSize().x;
-			std::string	invulnerable = std::to_string(player->invulnerable);
-			invulnerable = invulnerable.substr(0, invulnerable.find("."));
-			tmpPos.x += addText(tmpPos, VOID_SIZE, invulnerable).setTextAlign(TextAlign::LEFT).getSize().x;
-		}
-	} catch (ABaseUI::UIException const & e) {
-		logErr(e.what());
-	}
-}
-
 /**
  * @brief draw is called each frame to draw the Game Scene.
  *
@@ -446,13 +377,12 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	mapPattern->add<std::string>("line", "");
 	lvl->addList<SettingsJson>("map", mapPattern);
 
-	SettingsJson * bonusPattern = new SettingsJson();
-	bonusPattern->add<SettingsJson>("pos");
-		bonusPattern->j("pos").add<uint64_t>("x", 0);
-		bonusPattern->j("pos").add<uint64_t>("y", 0);
-	bonusPattern->add<std::string>("type", "");
-	lvl->addList<SettingsJson>("bonus", bonusPattern);
-
+	lvl->add<SettingsJson>("bonus");
+		for (auto &&pair : Bonus::bonus) {
+			lvl->j("bonus").add<SettingsJson>(pair.first);
+			lvl->j("bonus").j(pair.first).add<int64_t>("chance", 0).setMin(0).setMax(25);
+			lvl->j("bonus").j(pair.first).add<int64_t>("nb", -1).setMin(-1).setMax(100);
+		}
 	try {
 		if (lvl->loadFile(filename) == false) {
 			// warning when loading settings
@@ -530,6 +460,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	flags = 0;
 	AEntity *entity;
+	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");
 		if (line.length() != size.x)
@@ -578,9 +509,110 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	if (!end)
 		throw SceneException("No end on this level.");
 
+	_initBonus();
+
 	// set camera
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
 
+	return true;
+}
+
+/**
+ * @brief Update game informations
+ */
+void			SceneGame::_updateGameInfos() {
+	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
+		delete *it;
+	}
+	_buttons.clear();
+
+	glm::vec2	winSz = _gui->gameInfo.windowSize;
+	glm::vec2	tmpPos;
+	glm::vec2	tmpSize;
+	uint32_t	padding = 5;
+	float		menuWidth = winSz.x / 2;
+	float		menuHeight = menuWidth / 8;
+
+	try {
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+		tmpSize = {32, 32};
+
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png", false).getSize().x;
+		std::string	speed = std::to_string(player->speed);
+		speed = speed.substr(0, speed.find("."));
+		tmpPos.x += addText(tmpPos, VOID_SIZE, speed).setTextAlign(TextAlign::LEFT).getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::LEFT)
+					.getSize().x;
+		tmpPos.x += padding;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png", false).getSize().x;
+		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::LEFT)
+					.getSize().x;
+
+		if (player->passFire) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png", false)
+						.getSize().x;
+		}
+		if (player->passWall) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png", false)
+						.getSize().x;
+		}
+		if (player->detonator) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png", false)
+						.getSize().x;
+		}
+		if (player->passBomb) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png", false)
+						.getSize().x;
+		}
+		if (player->invulnerable > 0) {
+			tmpPos.x += padding;
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png", false)
+						.getSize().x;
+			std::string	invulnerable = std::to_string(player->invulnerable);
+			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
+			tmpPos.x += addText(tmpPos, VOID_SIZE, invulnerable).setTextAlign(TextAlign::LEFT).getSize().x;
+		}
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
+}
+
+/**
+ * @brief Init the bonus member according to the description in level.json
+ *
+ * @return true if success
+ * @return false if error.
+ */
+bool			SceneGame::_initBonus() {
+	try {
+		if (bonus.begin() != bonus.end())
+			bonus.erase(bonus.begin());
+		SettingsJson	&lvl = getSettingsLevel();
+		for (auto &&pair : Bonus::bonus) {
+			bonus.insert({
+				pair.first,
+				{
+					lvl.j("bonus").j(pair.first).i("chance"),
+					lvl.j("bonus").j(pair.first).i("nb")
+				}
+			});
+		}
+	} catch (SceneGameException &e) {
+		logErr(e.what());
+		return false;
+	}
 	return true;
 }
 
@@ -599,3 +631,25 @@ std::string	SceneGame::getLevelImg(int32_t levelId) const {
 	}
 	return _mapsList[levelId]->s("img");
 }
+
+/**
+ * @brief Return JSON Settings of level.
+ *
+ * @return SettingsJson& JSON Settings of level
+ * @throw SceneGameException if error
+ */
+SettingsJson	&SceneGame::getSettingsLevel() const {
+	if (level == NO_LEVEL)
+		throw SceneGameException("no level set");
+	if (level > (int32_t)_mapsList.size())
+		throw SceneGameException(("unable to load level " + std::to_string(level) + ": doesn't exist").c_str());
+	return *(_mapsList[level]);
+}
+
+// -- Exceptions errors --------------------------------------------------------
+
+SceneGame::SceneGameException::SceneGameException()
+: std::runtime_error("SceneGame Exception") {}
+
+SceneGame::SceneGameException::SceneGameException(const char* whatArg)
+: std::runtime_error(std::string(std::string("SceneGameError: ") + whatArg).c_str()) {}
