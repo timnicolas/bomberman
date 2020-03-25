@@ -58,6 +58,7 @@ class SceneManager {
 		bool				_init();
 		bool				_run();
 		bool				_update();
+		bool				_draw();
 		AScene *			_loadScene(std::string const & name);
 		AScene *			_getScene(std::string const & name);
 		std::string const &	_getSceneName() const;

@@ -165,8 +165,8 @@ class ABaseUI {
 		float			_textPadding;
 		TextAlign::Enum	_textAlign;
 		// image
-		GLuint		_imgTextureID;
-		glm::ivec2	_imgDefSize;
+		GLuint			_imgTextureID;
+		glm::ivec2		_imgDefSize;
 
 		/* info about mouse */
 		bool			_isClickableUI;  // set to false for no buttons UI
