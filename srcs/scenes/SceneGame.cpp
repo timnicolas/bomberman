@@ -52,8 +52,10 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 SceneGame::~SceneGame() {
 	for (auto &&box : board) {
 		for (auto &&row : box) {
-			for (auto &&element : row) {
-				delete element;
+			std::vector<AEntity *>::iterator element = row.begin();
+			while (element != row.end()) {
+				row.erase(element);
+				element = row.begin();
 			}
 		}
 	}
