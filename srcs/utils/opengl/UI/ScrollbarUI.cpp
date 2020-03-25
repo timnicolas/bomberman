@@ -12,13 +12,13 @@ ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
   _vertScrollInverted(false),
   _vertScrollbarPos(0),
   _vertScrollBarDrawSize(0),
-  _isVertSCrollClicked(false),
+  _isVertScrollClicked(false),
 
   _horizScroll(false),
   _horizScrollInverted(false),
   _horizScrollbarPos(0),
   _horizScrollBarDrawSize(0),
-  _isHorizSCrollClicked(false)
+  _isHorizScrollClicked(false)
 {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
@@ -61,9 +61,9 @@ void ScrollbarUI::_update() {
 			&& mousePos.y >= getRealPos().y + _borderSize
 			&& mousePos.y <= getRealPos().y + _size.y - _borderSize)
 			{
-				_isVertSCrollClicked = true;
+				_isVertScrollClicked = true;
 			}
-			if (_isVertSCrollClicked) {
+			if (_isVertScrollClicked) {
 				// float yMin = getRealPos().y + _borderSize;
 				// float yMax = getRealPos().y + _size.y - (_borderSize * 2);
 				float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
@@ -77,7 +77,7 @@ void ScrollbarUI::_update() {
 			}
 		}
 		else {
-			_isVertSCrollClicked = false;
+			_isVertScrollClicked = false;
 		}
 		if (_mouseHover) {
 			// if scrolling
@@ -108,9 +108,9 @@ void ScrollbarUI::_update() {
 			&& mousePos.x >= getRealPos().x + _borderSize
 			&& mousePos.x <= getRealPos().x + _size.x - _borderSize)
 			{
-				_isHorizSCrollClicked = true;
+				_isHorizScrollClicked = true;
 			}
-			if (_isHorizSCrollClicked) {
+			if (_isHorizScrollClicked) {
 				// float xMin = getRealPos().x + _borderSize;
 				// float xMax = getRealPos().x + _size.x - (_borderSize * 2);
 				float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
@@ -124,7 +124,7 @@ void ScrollbarUI::_update() {
 			}
 		}
 		else {
-			_isHorizSCrollClicked = false;
+			_isHorizScrollClicked = false;
 		}
 		if (_mouseHover) {
 			// if scrolling
@@ -169,7 +169,7 @@ void ScrollbarUI::_draw() {
 		/* clicked color */
 		float factor = 1;
 		glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
-		if (_isVertSCrollClicked) {
+		if (_isVertScrollClicked) {
 			secColor = _mouseHoverColor;
 			factor = 1 - secColor.a;
 			secColor.a = 1;
@@ -196,7 +196,7 @@ void ScrollbarUI::_draw() {
 		/* clicked color */
 		float factor = 1;
 		glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
-		if (_isHorizSCrollClicked) {
+		if (_isHorizScrollClicked) {
 			secColor = _mouseHoverColor;
 			factor = 1 - secColor.a;
 			secColor.a = 1;
@@ -230,7 +230,7 @@ ScrollbarUI &	ScrollbarUI::invertHorizScroll(bool invert) { _horizScrollInverted
 /**
  * @brief Get position of master element (bottom left after border)
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The position
  */
@@ -243,7 +243,7 @@ glm::vec2 ScrollbarUI::getMasterPos() const {
 /**
  * @brief Get position of master element (bottom left after border) considering offset
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The position
  */
@@ -256,7 +256,7 @@ glm::vec2 ScrollbarUI::getMasterRealPos() const {
 /**
  * @brief Get size of master element inside the borders
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The size
  */
