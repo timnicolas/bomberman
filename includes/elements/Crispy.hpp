@@ -23,6 +23,8 @@ public:
 	bool	postUpdate();
 	bool	draw(Gui &gui);
 
+	static Crispy *	generateCrispy(SceneGame &game, uint32_t genWallPercent);
+
 	// Exceptions
 	class CrispyException : public std::runtime_error {
 	public:

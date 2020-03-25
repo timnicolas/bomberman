@@ -4,12 +4,17 @@
 
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
+#include "FileUtils.hpp"
+
 #include "Player.hpp"
-#include "Enemy.hpp"
 #include "Wall.hpp"
 #include "Crispy.hpp"
 #include "Flag.hpp"
 #include "End.hpp"
+
+#include "EnemyBasic.hpp"
+#include "EnemyFollow.hpp"
+#include "EnemyWithEye.hpp"
 
 #include "SceneManager.hpp"
 
@@ -24,7 +29,10 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"empty", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return Enemy::generateEnemy(game, 0.1f);}}},
+	{"empty", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
+	{"enemyBasic", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyBasic(game);}}},
+	{"enemyWithEye", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
+	{"enemyFollow", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFollow(game);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -33,7 +41,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
 	player = nullptr;
-	enemies = std::vector<ACharacter *>();
+	enemies = std::vector<AEnemy *>();
 	flags = 0;
 	size = {0, 0};
 	level = NO_LEVEL;
@@ -53,7 +61,7 @@ SceneGame::~SceneGame() {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -211,7 +219,7 @@ bool	SceneGame::update() {
  */
 bool	SceneGame::postUpdate() {
 	player->postUpdate();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		if (!(*enemy)->postUpdate()) {
 			enemy = enemies.begin();
@@ -338,7 +346,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	std::string		levelName = "level" + std::to_string(levelId);
 	// $(mapsPath)/$(levelName).json
 	std::string		filename = s.s("mapsPath") + "/" + levelName + ".json";
-	if (fileExists(filename) == false) {
+	if (file::isFile(filename) == false) {
 		return false;  // file does not exist
 	}
 
@@ -353,6 +361,9 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
 	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
 	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
+
+	// foreach empty zone, chance to create a wall
+	lvl->add<uint64_t>("wallGenPercent", 40).setMin(0).setMax(100);
 
 	lvl->add<SettingsJson>("objects");
 		lvl->j("objects").add<std::string>("empty", " ");
@@ -372,6 +383,10 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 		lvl->j("objects").add<std::string>("end", "e");
 		// no spawn zone
 		lvl->j("objects").add<std::string>("safe", "_");
+		/* enemies */
+		lvl->j("objects").add<std::string>("enemyBasic", "0");
+		lvl->j("objects").add<std::string>("enemyWithEye", "1");
+		lvl->j("objects").add<std::string>("enemyFollow", "2");
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("line", "");
@@ -410,7 +425,7 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
-	std::vector<ACharacter *>::iterator enemy = enemies.begin();
+	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
 		// deleting an enemy also erase it from the list of enemies
@@ -468,7 +483,11 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		for (uint32_t i = 0; i < size.x; i++) {
 			for (auto &&entitYCall : _entitiesCall) {
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
-					entity = _entitiesCall[entitYCall.first].entity(*this);
+					// if it's empty, generate crispy wall with a certain probability
+					if (entitYCall.first == "empty")
+						entity = Crispy::generateCrispy(*this, lvl.u("wallGenPercent"));
+					else
+						entity = _entitiesCall[entitYCall.first].entity(*this);
 					if (entity == nullptr)
 						continue;
 					switch (_entitiesCall[entitYCall.first].entityType) {
@@ -485,7 +504,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						board[i][j].push_back(entity);
 						break;
 					case EntityType::ENEMY:
-						enemies.push_back(reinterpret_cast<ACharacter *>(entity));
+						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 						enemies.back()->setPosition({i, 0, j});
 						break;
 					}
@@ -540,45 +559,45 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png", false).getSize().x;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/012-bonus_life.png").getSize().x;
 		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::LEFT).getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png", false).getSize().x;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/015-bonus_speed.png").getSize().x;
 		std::string	speed = std::to_string(player->speed);
 		speed = speed.substr(0, speed.find("."));
 		tmpPos.x += addText(tmpPos, VOID_SIZE, speed).setTextAlign(TextAlign::LEFT).getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png", false).getSize().x;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/013-bonus_bomb.png").getSize().x;
 		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::LEFT)
 					.getSize().x;
 		tmpPos.x += padding;
-		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png", false).getSize().x;
+		tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/014-bonus_flame.png").getSize().x;
 		tmpPos.x += addText(tmpPos, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::LEFT)
 					.getSize().x;
 
 		if (player->passFire) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png", false)
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/019-bonus_flampass.png")
 						.getSize().x;
 		}
 		if (player->passWall) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png", false)
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/016-bonus_wallpass.png")
 						.getSize().x;
 		}
 		if (player->detonator) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png", false)
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/017-bonus_detonator.png")
 						.getSize().x;
 		}
 		if (player->passBomb) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png", false)
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/018-bonus_bombpass.png")
 						.getSize().x;
 		}
 		if (player->invulnerable > 0) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png", false)
+			tmpPos.x += addImage(tmpPos, tmpSize, "bomberman-assets/textures/bonus/020-bonus_shield.png")
 						.getSize().x;
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);

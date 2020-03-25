@@ -44,6 +44,18 @@ glm::vec3		ACharacter::getPos() {
 }
 
 /**
+ * @brief Get the current position (in integer)
+ *
+ * @return glm::ivec2 The integer position
+ */
+glm::ivec2		ACharacter::getIntPos() const {
+	return glm::ivec2(
+		static_cast<int>(position.x + 0.5),
+		static_cast<int>(position.z + 0.5)
+	);
+}
+
+/**
  * @brief Init the Class. Needed to be called before any usage of the Class.
  *
  * @param pos
@@ -182,33 +194,63 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
 /**
  * @brief Move to direction if possible.
  *
- * @param direction
- * @param dTime
+ * @param direction Direction to move
+ * @param dTime Delta time
+ * @param offset Offset to turn correction (-1 to don't use correction)
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Dirrection::Enum direction, float const dTime) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
 	switch (direction) {
-		case Dirrection::UP:
+		case Direction::UP:
 			pos.z -= speed * dTime;
 			break;
-		case Dirrection::RIGHT:
+		case Direction::RIGHT:
 			pos.x += speed * dTime;
 			break;
-		case Dirrection::DOWN:
+		case Direction::DOWN:
 			pos.z += speed * dTime;
 			break;
-		case Dirrection::LEFT:
+		case Direction::LEFT:
 			pos.x -= speed * dTime;
 			break;
 		default:
 			return position;
 	}
 	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
-		if (_canMove(getCollision(pos)))
+		if (_canMove(getCollision(pos))) {  // if we can move
 			position = pos;
+		}
+		else if (offset > 0) {  // if we cannot move
+			if (direction == Direction::UP || direction == Direction::DOWN) {
+				glm::vec3 tmpPos = pos;
+				tmpPos.x = static_cast<int>(pos.x);
+				if (pos.x - tmpPos.x < offset && _canMove(getCollision(tmpPos))) {
+					// can move up or down
+					return _moveTo(Direction::LEFT, dTime, -1);
+				}
+				tmpPos.x = static_cast<int>(pos.x + 1);
+				if (pos.x - tmpPos.x - 1 < offset && _canMove(getCollision(tmpPos))) {
+					// can move up or down
+					return _moveTo(Direction::RIGHT, dTime, -1);
+				}
+			}
+			else {  // left | right
+				glm::vec3 tmpPos = pos;
+				tmpPos.z = static_cast<int>(pos.z);
+				if (pos.z - tmpPos.z < offset && _canMove(getCollision(tmpPos))) {
+					// can move left or right
+					return _moveTo(Direction::UP, dTime, -1);
+				}
+				tmpPos.z = static_cast<int>(pos.z + 1);
+				if (pos.z - tmpPos.z - 1 < offset && _canMove(getCollision(tmpPos))) {
+					// can move left or right
+					return _moveTo(Direction::DOWN, dTime, -1);
+				}
+			}
+		}
 	}
 	return position;
 }
