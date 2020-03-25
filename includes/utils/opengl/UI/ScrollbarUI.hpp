@@ -44,10 +44,12 @@ class ScrollbarUI : public ABaseMasterUI {
 		bool		_vertScrollInverted;
 		float		_vertScrollbarPos;
 		float		_vertScrollBarDrawSize;
+		bool		_isVertSCrollClicked;
 
 		// horizontal
 		bool		_horizScroll;
 		bool		_horizScrollInverted;
 		float		_horizScrollbarPos;
 		float		_horizScrollBarDrawSize;
+		bool		_isHorizSCrollClicked;
 };

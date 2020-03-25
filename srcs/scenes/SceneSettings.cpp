@@ -240,6 +240,7 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	tmp_size.y = menu_height * 0.65;
 	ptr = &addScrollbar(tmp_pos, tmp_size)
 		.enableVertScroll(true)
+		.enableHorizScroll(true)
 		.setEnabled(false);
 	scrollbar = reinterpret_cast<ABaseMasterUI*>(ptr);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
