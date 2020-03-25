@@ -14,9 +14,10 @@
 #define SHADER_IMAGE_2D_VS "./shaders/image_2D_vs.glsl"
 #define SHADER_IMAGE_2D_FS "./shaders/image_2D_fs.glsl"
 #define SHADER_IMAGE_2D_ROW_SIZE 4
+#define VOID_SIZE glm::vec2 {-1, -1}
 
 /**
- * @brief this is the text alignement (LEFT RIGTH or CENTER)
+ * @brief this is the text alignment (LEFT RIGHT or CENTER)
  */
 namespace TextAlign {
 	enum Enum {
@@ -29,9 +30,9 @@ namespace TextAlign {
 /**
  * @brief this is the base UI interface
  *
- * You can reinplement this class to create your UI elements.
+ * You can re-implement this class to create your UI elements.
  * This base class implement functions to draw rectangles, images, text, ...
- * You need to call some static functions to have functionnal UI
+ * You need to call some static functions to have functional UI
  *  - ABaseUI::init(...) once on startup
  *  - ABaseUI::staticUpdate() in each loop
  *  - ABaseUI::destroy() at the end
@@ -78,6 +79,7 @@ class ABaseUI {
 		ABaseUI &	setPosOffset(glm::vec2 offset);
 		ABaseUI &	addPosOffset(glm::vec2 offset);
 		ABaseUI &	setSize(glm::vec2 size);
+		ABaseUI &	setCalculatedSize();
 		ABaseUI &	setColor(glm::vec4 color);
 
 		ABaseUI &	setBorderColor(glm::vec4 color);
@@ -93,6 +95,7 @@ class ABaseUI {
 		ABaseUI &	setTextPadding(float padding);
 		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
+
 		/* getter */
 		bool					getMouseHover() const;
 		bool					getMouseRightClick() const;
@@ -104,6 +107,7 @@ class ABaseUI {
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
+		uint32_t				getTextWidth() const;
 
 		/* Exceptions */
 	class UIException : public std::runtime_error {
@@ -133,7 +137,7 @@ class ABaseUI {
 		// called by setWinSize
 		virtual void	_resizeWin(glm::vec2 const & winScale2f, float winScale1f);
 
-		// enable functionnalities
+		// enable functionalities
 		bool			_enabled;
 		// basics
 		glm::vec2		_pos;

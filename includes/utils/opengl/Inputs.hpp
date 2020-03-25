@@ -22,6 +22,7 @@ namespace InputType {
 		LEFT,
 		RIGHT,
 		ACTION,
+		ACTION_2,
 		CONFIRM,
 		CANCEL,
 		GOTO_MENU,

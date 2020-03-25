@@ -27,6 +27,9 @@ public:
 	// Operators
 	Bomb &operator=(Bomb const &rhs);
 
+	// Getters/Setters
+	Bomb*	setPropagation(const int propagation);
+
 	// Methods
 	bool	update(float const dTime);
 	bool	postUpdate();

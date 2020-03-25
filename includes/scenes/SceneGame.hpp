@@ -7,10 +7,13 @@
 #include <map>
 #include "useGlm.hpp"
 
-#include "AScene.hpp"
+#include "ASceneMenu.hpp"
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
+
+#include "ABaseUI.hpp"
+#include "TextUI.hpp"
 
 #define NO_LEVEL -1  // value is no level loaded
 
@@ -38,7 +41,7 @@ namespace EntityType {
 /**
  * @brief This is the game Scene. In this scene, you can play to the game and load levels
  */
-class SceneGame : public AScene {
+class SceneGame : public ASceneMenu {
 private:
 	SceneGame();
 	// Members
@@ -57,11 +60,20 @@ private:
 	bool	_initJsonLevel(int32_t levelId);
 	void	_drawBoard();
 
+protected:
+	void			_updateGameInfos();
+	bool			_initBonus();
+
 public:
 	// Members
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
 	std::vector<AEnemy *>		enemies;
+	struct BonusValues {
+		int64_t	chance;
+		int64_t	nb;
+	};
+	std::unordered_map<std::string, BonusValues>	bonus;
 
 	int							flags;
 	glm::uvec2					size;
@@ -96,6 +108,14 @@ public:
 	uint32_t		getNbLevel() const;
 	std::string		getLevelName(int32_t levelId) const;
 	std::string		getLevelImg(int32_t levelId) const;
+	SettingsJson	&getSettingsLevel() const;
+
+	// Exceptions
+	class SceneGameException : public std::runtime_error {
+	public:
+		SceneGameException();
+		explicit SceneGameException(const char* whatArg);
+	};
 };
 
 #endif  // SCENEGAME_HPP_

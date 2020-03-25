@@ -95,4 +95,13 @@ std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks 
 	{{8, 8, 8, 8, 8, 8}},  // end_open
 	{{5, 5, 5, 5, 5, 5}},  // flag
 	{{1, 1, 1, 1, 1, 1}},  // block
+	{{12, 12, 12, 12, 12, 12}},  // bonus life
+	{{13, 13, 13, 13, 13, 13}},  // bonus bombs
+	{{14, 14, 14, 14, 14, 14}},  // bonus flame
+	{{15, 15, 15, 15, 15, 15}},  // bonus speed
+	{{16, 16, 16, 16, 16, 16}},  // bonus wallpass
+	{{17, 17, 17, 17, 17, 17}},  // bonus detonator
+	{{18, 18, 18, 18, 18, 18}},  // bonus bombpass
+	{{19, 19, 19, 19, 19, 19}},  // bonus flampass
+	{{20, 20, 20, 20, 20, 20}},  // bonus shield
 }};
