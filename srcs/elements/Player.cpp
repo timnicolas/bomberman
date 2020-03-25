@@ -145,7 +145,9 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			bombProgation++;
 			break;
 		case BonusType::SPEED:
-			speed = (speed >= MAX_SPEED) ? MAX_SPEED : ++speed;
+			speed++;
+			if (speed > MAX_SPEED)
+				speed = MAX_SPEED;
 			break;
 		case BonusType::WALLPASS:
 			passWall = true;
