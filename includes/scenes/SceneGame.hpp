@@ -60,18 +60,19 @@ private:
 	void	_drawBoard();
 
 protected:
-	// TextUI &	_addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 	void			_updateGameInfos();
-	// ABaseUI *			_gameInfo;
-	// std::vector<ABaseUI *>	_buttons;
-	// TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
-
+	bool			_initBonus();
 
 public:
 	// Members
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	Player						*player;
 	std::vector<ACharacter *>	enemies;
+	struct BonusValues {
+		int64_t	chance;
+		int64_t	nb;
+	};
+	std::unordered_map<std::string, BonusValues>	bonus;
 
 	int							flags;
 	glm::uvec2					size;
@@ -106,6 +107,14 @@ public:
 	uint32_t		getNbLevel() const;
 	std::string		getLevelName(int32_t levelId) const;
 	std::string		getLevelImg(int32_t levelId) const;
+	SettingsJson	&getSettingsLevel() const;
+
+	// Exceptions
+	class SceneGameException : public std::runtime_error {
+	public:
+		SceneGameException();
+		explicit SceneGameException(const char* whatArg);
+	};
 };
 
 #endif  // SCENEGAME_HPP_

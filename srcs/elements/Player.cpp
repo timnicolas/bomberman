@@ -87,7 +87,7 @@ bool	Player::update(float const dTime) {
 			_putBomb();
 		}
 	} else {
-		logDebug("Player is dead.")
+		logInfo("Player is dead.")
 		game.state = GameState::GAME_OVER;
 	}
 	return true;
@@ -160,7 +160,7 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			passFire = true;
 			break;
 		case BonusType::SHIELD:
-			invulnerable += 5.0f;
+			invulnerable += 10.0f;
 			break;
 		default:
 			break;

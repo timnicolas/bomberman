@@ -16,6 +16,18 @@ std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
 	{ BonusType::SHIELD, Block::BONUS_SHIELD },
 };
 
+std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
+	{ "life", BonusType::LIFE },
+	{ "bombs", BonusType::BOMBS },
+	{ "flames", BonusType::FLAMES },
+	{ "speed", BonusType::SPEED },
+	{ "wallpass", BonusType::WALLPASS },
+	{ "detonator", BonusType::DETONATOR },
+	{ "bombpass", BonusType::BOMBPASS },
+	{ "flampass", BonusType::FLAMPASS },
+	{ "shield", BonusType::SHIELD },
+};
+
 // -- Constructors -------------------------------------------------------------
 
 Bonus::Bonus(SceneGame &game) : AObject(game) {
@@ -25,7 +37,7 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	destructible = false;
 	crossable = Type::ALL;
 	_timeToDie = 10.0f;
-	_typeBonus = static_cast<BonusType::Enum>(rand() % BonusType::NB_BONUS);
+	_typeBonus = _pickBonus();
 }
 
 Bonus::~Bonus() {
@@ -111,6 +123,35 @@ Bonus	*Bonus::generateBonus(SceneGame &game, float rate) {
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
 	return new Bonus(game);
+}
+
+// -- Privates methods ---------------------------------------------------------
+
+/**
+ * @brief pick randomly type of bonus according to his chance.
+ *
+ * @return BonusType::Enum bonus type
+ */
+BonusType::Enum		Bonus::_pickBonus() {
+	int32_t	totalChances = 0;
+
+	for (auto &&it : game.bonus) {
+		if (it.second.nb > 0 || it.second.nb == -1)
+			totalChances += it.second.chance;
+	}
+	int32_t	n = ((static_cast<double>(rand()) / (RAND_MAX)) + 1) * totalChances;
+	while (true) {
+		for (auto &&it : game.bonus) {
+			if (it.second.nb == 0)
+				continue;
+			n -= it.second.chance;
+			if (n < 0) {
+				if (it.second.nb > 0)
+					it.second.nb--;
+				return bonus[it.first];
+			}
+		}
+	}
 }
 
 // -- Exceptions errors --------------------------------------------------------
