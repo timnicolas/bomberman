@@ -131,6 +131,8 @@ bool SceneManager::_run() {
 			/* update & draw scene */
 			if (_update() == false)
 				return false;
+			if (_draw() == false)
+				return false;
 		}
 
 		/* quit if it's the end of the game */
@@ -158,9 +160,8 @@ bool SceneManager::_run() {
 }
 
 /**
- * @brief Update & draw the current scene
+ * @brief Update the current scene
  *
- * @return true if success
  * @return false if error
  */
 bool SceneManager::_update() {
@@ -175,7 +176,15 @@ bool SceneManager::_update() {
 		return false;
 	}
 	_gui->postUpdate(_dtTime);
+	return true;
+}
 
+/**
+ * @brief Draw the current scene
+ *
+ * @return false if error
+ */
+bool SceneManager::_draw() {
 	/* draw */
 	_gui->preDraw();
 	// draw the scene
