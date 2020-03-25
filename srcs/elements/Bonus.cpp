@@ -117,6 +117,13 @@ bool	Bonus::draw(Gui &gui) {
 Bonus	*Bonus::generateBonus(SceneGame &game, float rate) {
 	if (rate <= 0.0f)
 		return nullptr;
+	int32_t	totalChances = 0;
+	for (auto &&it : game.bonus) {
+		if (it.second.nb > 0 || it.second.nb == -1)
+			totalChances += it.second.chance;
+	}
+	if (totalChances == 0)
+		return nullptr;
 	if (rate >= 1.0f)
 		return new Bonus(game);
 	int		percentRate = rand() % 100;
