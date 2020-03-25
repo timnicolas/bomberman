@@ -16,7 +16,7 @@
 #define SHADER_IMAGE_2D_ROW_SIZE 4
 
 /**
- * @brief this is the text alignment (LEFT RIGTH or CENTER)
+ * @brief this is the text alignment (LEFT RIGHT or CENTER)
  */
 namespace TextAlign {
 	enum Enum {
@@ -31,7 +31,7 @@ class ABaseMasterUI;
 /**
  * @brief this is the base UI interface
  *
- * You can reinplement this class to create your UI elements.
+ * You can re-implement this class to create your UI elements.
  * This base class implement functions to draw rectangles, images, text, ...
  * You need to call some static functions to have functional UI
  *  - ABaseUI::init(...) once on startup
