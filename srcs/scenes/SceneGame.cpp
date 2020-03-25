@@ -597,8 +597,8 @@ void			SceneGame::_updateGameInfos() {
  */
 bool			SceneGame::_initBonus() {
 	try {
-		if (bonus.begin() != bonus.end())
-			bonus.erase(bonus.begin());
+		if (bonus.size())
+			bonus.erase(bonus.begin(), bonus.end());
 		SettingsJson	&lvl = getSettingsLevel();
 		for (auto &&pair : Bonus::bonus) {
 			bonus.insert({
