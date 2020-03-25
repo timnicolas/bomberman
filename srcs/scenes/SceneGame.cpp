@@ -564,7 +564,8 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize = {32, 32};
 
 		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/life.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->lives)).setTextAlign(TextAlign::RIGHT).getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->lives))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
 		tmpPos.x += padding;
 		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/speed.png").getSize().x;
 		std::string	speed = std::to_string(player->speed);
@@ -572,12 +573,12 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, speed).setTextAlign(TextAlign::RIGHT).getSize().x;
 		tmpPos.x += padding;
 		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bomb.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->totalBombs)).setTextAlign(TextAlign::RIGHT)
-					.getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->totalBombs))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
 		tmpPos.x += padding;
 		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flame.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->bombProgation)).setTextAlign(TextAlign::RIGHT)
-					.getSize().x;
+		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->bombProgation))
+					.setTextAlign(TextAlign::RIGHT).getSize().x;
 
 		if (player->passFire) {
 			tmpPos.x += padding;
