@@ -12,11 +12,13 @@ ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
   _vertScrollInverted(false),
   _vertScrollbarPos(0),
   _vertScrollBarDrawSize(0),
+  _isVertSCrollClicked(false),
 
   _horizScroll(false),
   _horizScrollInverted(false),
   _horizScrollbarPos(0),
-  _horizScrollBarDrawSize(0)
+  _horizScrollBarDrawSize(0),
+  _isHorizSCrollClicked(false)
 {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
@@ -59,10 +61,13 @@ void ScrollbarUI::_update() {
 			&& mousePos.y >= getRealPos().y + _borderSize
 			&& mousePos.y <= getRealPos().y + _size.y - _borderSize)
 			{
-				float yMin = getRealPos().y + _borderSize;
-				float yMax = getRealPos().y + _size.y - (_borderSize * 2);
-				// float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
-				// float yMax = getRealPos().y + _size.y - (_borderSize * 2 + _vertScrollBarDrawSize / 2);
+				_isVertSCrollClicked = true;
+			}
+			if (_isVertSCrollClicked) {
+				// float yMin = getRealPos().y + _borderSize;
+				// float yMax = getRealPos().y + _size.y - (_borderSize * 2);
+				float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
+				float yMax = getRealPos().y + _size.y - (_borderSize * 2 + _vertScrollBarDrawSize / 2);
 				if (mousePos.y < yMin)
 					_vertScrollbarPos = 1;
 				else if (mousePos.y > yMax)
@@ -70,6 +75,9 @@ void ScrollbarUI::_update() {
 				else
 					_vertScrollbarPos = 1 - (mousePos.y - yMin) / (yMax - yMin);
 			}
+		}
+		else {
+			_isVertSCrollClicked = false;
 		}
 		if (_mouseHover) {
 			// if scrolling
@@ -100,10 +108,13 @@ void ScrollbarUI::_update() {
 			&& mousePos.x >= getRealPos().x + _borderSize
 			&& mousePos.x <= getRealPos().x + _size.x - _borderSize)
 			{
-				float xMin = getRealPos().x + _borderSize;
-				float xMax = getRealPos().x + _size.x - (_borderSize * 2);
-				// float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
-				// float xMax = getRealPos().x + _size.x - (_borderSize * 2 + _horizScrollBarDrawSize / 2);
+				_isHorizSCrollClicked = true;
+			}
+			if (_isHorizSCrollClicked) {
+				// float xMin = getRealPos().x + _borderSize;
+				// float xMax = getRealPos().x + _size.x - (_borderSize * 2);
+				float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
+				float xMax = getRealPos().x + _size.x - (_borderSize * 2 + _horizScrollBarDrawSize / 2);
 				if (mousePos.x < xMin)
 					_horizScrollbarPos = 0;
 				else if (mousePos.x > xMax)
@@ -111,6 +122,9 @@ void ScrollbarUI::_update() {
 				else
 					_horizScrollbarPos = (mousePos.x - xMin) / (xMax - xMin);
 			}
+		}
+		else {
+			_isHorizSCrollClicked = false;
 		}
 		if (_mouseHover) {
 			// if scrolling
@@ -152,8 +166,17 @@ void ScrollbarUI::_draw() {
 		tmpPos.x = getRealPos().x + _size.x - _borderSize - _scrollbarSize;
 		tmpPos.y = getRealPos().y + _borderSize + y;
 
+		/* clicked color */
+		float factor = 1;
+		glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+		if (_isVertSCrollClicked) {
+			secColor = _mouseHoverColor;
+			factor = 1 - secColor.a;
+			secColor.a = 1;
+		}
+
 		/* draw scrollbar */
-		_drawRect(tmpPos, tmpSize, _scrollbarColor);
+		_drawRect(tmpPos, tmpSize, _scrollbarColor, secColor, factor);
 	}
 	if (_horizScroll) {
 		/* size of the scrollbar */
@@ -170,8 +193,17 @@ void ScrollbarUI::_draw() {
 		tmpPos.x = getRealPos().x + _size.x - _borderSize - _scrollbarSize;
 		tmpPos.x = getRealPos().x + _borderSize + x;
 
+		/* clicked color */
+		float factor = 1;
+		glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+		if (_isHorizSCrollClicked) {
+			secColor = _mouseHoverColor;
+			factor = 1 - secColor.a;
+			secColor.a = 1;
+		}
+
 		/* draw scrollbar */
-		_drawRect(tmpPos, tmpSize, _scrollbarColor);
+		_drawRect(tmpPos, tmpSize, _scrollbarColor, secColor, factor);
 	}
 
 	// get center size and position
