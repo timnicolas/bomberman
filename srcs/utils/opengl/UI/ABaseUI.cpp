@@ -227,7 +227,7 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	return *this;
 }
 
-/* setter */
+// -- setter -------------------------------------------------------------------
 ABaseUI &	ABaseUI::setKeyRightClickScancode(SDL_Scancode scancode) {
 	_keyRightClickBindScancode = scancode; return *this;
 }
@@ -303,6 +303,12 @@ ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
+ABaseUI &	ABaseUI::setCalculatedSize() {
+	uint32_t width = _textRender->strWidth(_textFont, _text, _textScale);
+	uint32_t height = _textRender->strHeight(_textFont, _text, _textScale);
+	_size = glm::vec2(width + _textPadding * 2, height + _textPadding * 2);;
+	return *this;
+}
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
@@ -342,8 +348,11 @@ glm::vec2			ABaseUI::getRealPos() const {
 glm::vec2 &			ABaseUI::getSize() { return _size; }
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }
+uint32_t			ABaseUI::getTextWidth() const {
+	return _textRender->strWidth(_textFont, _text, _textScale) + _textPadding * 2;
+}
 
-/* exception */
+// -- exception ----------------------------------------------------------------
 ABaseUI::UIException::UIException()
 : std::runtime_error("UI Exception") {}
 
