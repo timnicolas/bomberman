@@ -224,36 +224,65 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
  * @brief initialize the controls section. Should not be called twice.
  */
 void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
-	glm::vec2 win_size = _gui->gameInfo.windowSize;
-	glm::vec2 tmp_size;
-	ABaseUI *ptr;
-	std::string key_name;
+	glm::vec2		win_size = _gui->gameInfo.windowSize;
+	glm::vec2		tmp_size;
+	ABaseUI *		ptr;
+	std::string		key_name;
+	ABaseMasterUI *	scrollbar;
+	float			keyMenuWidth = menu_width / 1.5;
+	float			keyMenuHeight = win_size.x / 25;
+	float			keyMenuPadding = win_size.x * 0.01;
 
-	tmp_size.x = menu_width / 3;
-	tmp_size.y = menu_height * 0.63 / Inputs::nb_input;
+	// create scrollbar
+	tmp_pos.x = (win_size.x / 2) - ((keyMenuWidth + 2 * keyMenuPadding) / 2);
+	tmp_pos.y = (win_size.y / 20);
+	tmp_size.x = (keyMenuWidth + 3 * keyMenuPadding);
+	tmp_size.y = menu_height * 0.65;
+	ptr = &addScrollbar(tmp_pos, tmp_size)
+		.enableVertScroll(true)
+		.setEnabled(false);
+	scrollbar = reinterpret_cast<ABaseMasterUI*>(ptr);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+
+	// add buttons
+	tmp_pos.y = scrollbar->getMasterSize().y;
+	tmp_size.x = (keyMenuWidth - keyMenuPadding) / 2;
+	tmp_size.y = keyMenuHeight;
 	for (auto i = 0; i < Inputs::nb_input; i++) {
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y -= tmp_size.y + 0.15 * Inputs::nb_input;
-		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
-			.setTextScale(_text_scale).setEnabled(false);
+		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
+		tmp_pos.x = 0;
+		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :")
+			.setTextAlign(TextAlign::RIGHT)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
-		tmp_pos.x += (menu_width / 2);
+		tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
 		key_name = Inputs::getKeyName(static_cast<InputType::Enum>(i));
-		ptr = &addButton(tmp_pos, tmp_size, key_name).addButtonLeftListener(&_update_key[i]) \
-			.setTextAlign(TextAlign::CENTER).setTextScale(_text_scale).setEnabled(false);
+		ptr = &addButton(tmp_pos, tmp_size, key_name)
+			.addButtonLeftListener(&_update_key[i])
+			.setTextAlign(TextAlign::CENTER)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
 	// add mouse sensitivity slider
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= tmp_size.y + 0.15 * Inputs::nb_input;
-	ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :").setTextAlign(TextAlign::RIGHT) \
-		.setTextScale(_text_scale).setEnabled(false);
+	tmp_pos.y -= keyMenuHeight + keyMenuPadding;
+	tmp_pos.x = 0;
+	ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setMaster(scrollbar)
+		.setEnabled(false);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
-	tmp_pos.x += (menu_width / 2);
+	tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
 	ptr = &addSlider(tmp_pos, tmp_size, 0, 3, _update_mouse_sens, 0.05)
-		.addSliderListener(&_update_mouse_sens) \
-		.addButtonLeftListener(&_save_mouse_sens).setTextScale(_text_scale) \
+		.addSliderListener(&_update_mouse_sens)
+		.addButtonLeftListener(&_save_mouse_sens)
+		.setTextScale(_text_scale)
+		.setMaster(scrollbar)
 		.setEnabled(false);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 }

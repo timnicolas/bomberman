@@ -151,15 +151,18 @@ SRC =	main.cpp \
 		utils/opengl/Model.cpp \
 		utils/opengl/OpenGLModel.cpp \
 		utils/opengl/ETransform.cpp \
+\
 		utils/opengl/UI/ABaseUI.cpp \
 		utils/opengl/UI/ABaseUI_static.cpp \
 		utils/opengl/UI/ABaseUI_utils.cpp \
+		utils/opengl/UI/ABaseMasterUI.cpp \
 		utils/opengl/UI/ButtonUI.cpp \
 		utils/opengl/UI/ButtonImageUI.cpp \
 		utils/opengl/UI/SliderUI.cpp \
 		utils/opengl/UI/TextUI.cpp \
 		utils/opengl/UI/RectUI.cpp \
 		utils/opengl/UI/ImageUI.cpp \
+		utils/opengl/UI/ScrollbarUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -219,13 +222,16 @@ HEAD =	bomberman.hpp \
 		utils/opengl/Model.hpp \
 		utils/opengl/OpenGLModel.hpp \
 		utils/opengl/ETransform.hpp \
+\
 		utils/opengl/UI/ABaseUI.hpp \
 		utils/opengl/UI/ButtonUI.hpp \
+		utils/opengl/UI/ABaseMasterUI.hpp \
 		utils/opengl/UI/ButtonImageUI.hpp \
 		utils/opengl/UI/SliderUI.hpp \
 		utils/opengl/UI/TextUI.hpp \
 		utils/opengl/UI/RectUI.hpp \
 		utils/opengl/UI/ImageUI.hpp \
+		utils/opengl/UI/ScrollbarUI.hpp \
 
 
 ################################################################################

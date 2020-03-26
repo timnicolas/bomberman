@@ -27,6 +27,8 @@ namespace TextAlign {
 	};
 }
 
+class ABaseMasterUI;
+
 /**
  * @brief this is the base UI interface
  *
@@ -95,6 +97,14 @@ class ABaseUI {
 		ABaseUI &	setTextPadding(float padding);
 		ABaseUI &	setTextAlign(TextAlign::Enum align);
 
+		/* master */
+		ABaseUI &	setMaster(ABaseMasterUI * master);
+
+		/* check */
+		bool					isPartiallyOutOfScreen() const;  // ret true if partially out of the screen
+		bool					isTotallyOutOfScreen() const;  // ret true if totally out of the screen
+		bool					isPartiallyOutOfMaster() const;  // ret true if partially out of the master element
+		bool					isTotallyOutOfMaster() const;  // ret true if totally out of the screen element
 
 		/* getter */
 		bool					getMouseHover() const;
@@ -103,7 +113,7 @@ class ABaseUI {
 		bool					isEnabled() const;
 		glm::vec2 &				getPos();
 		glm::vec2 const &		getPos() const;
-		glm::vec2				getRealPos() const;  // get pos + offset
+		glm::vec2				getRealPos() const;  // get master + pos + offset
 		glm::vec2 &				getSize();
 		glm::vec2 const &		getSize() const;
 		static Shader &			getRectShader();
@@ -158,8 +168,8 @@ class ABaseUI {
 		float			_textPadding;
 		TextAlign::Enum	_textAlign;
 		// image
-		GLuint		_imgTextureID;
-		glm::ivec2	_imgDefSize;
+		GLuint			_imgTextureID;
+		glm::ivec2		_imgDefSize;
 
 		/* info about mouse */
 		bool			_isClickableUI;  // set to false for no buttons UI
@@ -174,6 +184,10 @@ class ABaseUI {
 		/* listener */
 		bool *			_rightListener;
 		bool *			_leftListener;
+
+		/* master */
+		// master element are an element that contains others
+		ABaseMasterUI *	_master;
 
 		/* global */
 		static bool						_isInit;

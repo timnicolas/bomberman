@@ -1,4 +1,5 @@
 #include "ABaseUI.hpp"
+#include "ABaseMasterUI.hpp"
 #include "Logging.hpp"
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
@@ -28,7 +29,8 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _keyLeftClickBindScancode(NO_SCANCODE),
   _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
-  _leftListener(nullptr)
+  _leftListener(nullptr),
+  _master(nullptr)
 {
 	if (!_isInit) {
 		logErr("You need to call ABaseUI::init() before creating UI objects");
@@ -42,6 +44,8 @@ ABaseUI::ABaseUI(ABaseUI const & src) {
 }
 
 ABaseUI::~ABaseUI() {
+	// remove reference in master
+	setMaster(nullptr);
 	// remove the reference to this UI
 	auto it = std::find(_allUI.begin(), _allUI.end(), this);
 	if (it == _allUI.end()) {
@@ -65,7 +69,7 @@ ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
  * @brief This is the base update function of UI objects
  */
 void ABaseUI::update() {
-	if (!_enabled)
+	if (!_enabled || isTotallyOutOfScreen() || isPartiallyOutOfMaster())
 		return;
 	if (_isClickableUI) {
 		// buttons calculation only if the UI is clickable
@@ -144,7 +148,7 @@ void ABaseUI::_updateClick() {
  * @brief This is the base draw function of UI objects
  */
 void ABaseUI::draw() {
-	if (!_enabled)
+	if (!_enabled || isTotallyOutOfScreen() || isPartiallyOutOfMaster())
 		return;
 
 	if (_showHelp) {
@@ -237,6 +241,63 @@ ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
 	_keyLeftClickBindInput = input; return *this;
 }
 
+/**
+ * @brief Check if the UI element is partially out of the screen
+ *
+ * @return true if partially out of the screen
+ */
+bool	ABaseUI::isPartiallyOutOfScreen() const {
+	glm::vec2 rpos = getRealPos();
+	if (rpos.x < 0 || rpos.y < 0 || rpos.x + _size.x > _winSize.x || rpos.y + _size.y > _winSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is totally out of the screen
+ *
+ * @return true if totally out of the screen
+ */
+bool	ABaseUI::isTotallyOutOfScreen() const {
+	glm::vec2 rpos = getRealPos();
+	if (rpos.x + _size.x < 0 || rpos.y + _size.y < 0 || rpos.x > _winSize.x || rpos.y > _winSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is partially out of the master element
+ *
+ * @return true if partially out of the master element
+ * @return false if totally on master or if master doesn't exist
+ */
+bool	ABaseUI::isPartiallyOutOfMaster() const {
+	if (_master == nullptr)
+		return false;
+	// relative pos in master
+	glm::vec2 posInMaster = getRealPos() - _master->getMasterPos();
+	// master size
+	glm::vec2 mSize = _master->getMasterSize();
+	if (posInMaster.x < 0 || posInMaster.y < 0 || posInMaster.x + _size.x > mSize.x || posInMaster.y + _size.y > mSize.y)
+		return true;
+	return false;
+}
+/**
+ * @brief Check if the UI element is totally out of the master element
+ *
+ * @return true if totally out of the master element
+ * @return false if partially or totally on master or if master doesn't exist
+ */
+bool	ABaseUI::isTotallyOutOfMaster() const {
+	if (_master == nullptr)
+		return false;
+	// relative pos in master
+	glm::vec2 posInMaster = getRealPos() - _master->getMasterPos();
+	// master size
+	glm::vec2 mSize = _master->getMasterSize();
+	if (posInMaster.x + _size.x < 0 || posInMaster.y + _size.y < 0 || posInMaster.x > mSize.x || posInMaster.y > mSize.y)
+		return true;
+	return false;
+}
+
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
@@ -263,7 +324,16 @@ ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this;
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
-// -- getter -------------------------------------------------------------------
+ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) {
+	if (_master != nullptr)
+		_master->removeChild(this);
+	_master = master;
+	if (_master != nullptr)
+		_master->addChild(this);
+	return *this;
+}
+
+/* getter */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
@@ -271,7 +341,10 @@ bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 bool				ABaseUI::isEnabled() const { return _enabled; }
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
-glm::vec2			ABaseUI::getRealPos() const { return _pos + _posOffset; }
+glm::vec2			ABaseUI::getRealPos() const {
+	glm::vec2 masterPos = (_master) ? _master->getMasterRealPos() : glm::vec2(0, 0);
+	return masterPos + _pos + _posOffset;
+}
 glm::vec2 &			ABaseUI::getSize() { return _size; }
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }
