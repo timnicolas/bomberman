@@ -50,6 +50,7 @@ protected:
 public:
 	// Members
 	int			bombs;
+	int32_t		points;
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);

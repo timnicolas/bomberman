@@ -113,7 +113,9 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		size = rhs.size;
 		level = rhs.level;
 		state = rhs.state;
+		levelTime = rhs.levelTime;
 		time = rhs.time;
+		score = rhs.score;
 	}
 	return *this;
 }
@@ -196,6 +198,10 @@ bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
 
+	time += _dtTime;
+	if ((levelTime - time) < 0)
+		state = GameState::GAME_OVER;
+
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
@@ -204,6 +210,7 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::WIN) {
+		score.addBonusTime(levelTime, time);
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
@@ -373,6 +380,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	));
 
 	player->init();
+	time = 0;
 
 	return result;
 }
@@ -528,7 +536,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	if (lvl.lj("map").list.size() != size.y)
 		throw SceneException("Map height error");
 
-	time = std::chrono::seconds(lvl.i("time"));
+	levelTime = lvl.i("time");
 
 	flags = 0;
 	AEntity *entity;
@@ -623,8 +631,10 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
  */
 void SceneGame::_initGameInfos() {
 	try {
+		allUI.timeLeftText = &addText(VOID_SIZE, VOID_SIZE, "time-left").setTextAlign(TextAlign::RIGHT);
+		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
-		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lifes").setTextAlign(TextAlign::RIGHT);
+		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
 		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
 		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusBombImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb.png");
@@ -652,11 +662,11 @@ void			SceneGame::_updateGameInfos() {
 	float		textY;
 	glm::vec2	tmpSize;
 	uint32_t	padding = 5;
-	float		menuWidth = winSz.x / 2;
-	float		menuHeight = menuWidth / 8;
+	float		menuWidth = winSz.x - winSz.x / 16;
+	float		menuHeight = winSz.x / 16;
 
 	try {
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.x = (winSz.x / 8);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		imgY = tmpPos.y;
 		textY = tmpPos.y + 2;
@@ -664,7 +674,24 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
+		/* time left */
+		std::string	timeLeft = std::to_string(levelTime - time);
+		timeLeft = timeLeft.substr(0, timeLeft.find(".")+2);
+		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeLeft)
+			.setSize(VOID_POS).setCalculatedSize();
+		tmpPos.x += allUI.timeLeftText->getSize().x;
+
+		/* score */
+		tmpPos.x += padding;
+		std::stringstream ss;
+		ss << "score: " << score;
+		std::string scoreStr = ss.str();
+		allUI.scoreText->setPos({tmpPos.x, textY}).setText(scoreStr)
+			.setSize(VOID_POS).setCalculatedSize();
+		tmpPos.x += allUI.scoreText->getSize().x;
+
 		/* life */
+		tmpPos.x += padding;
 		allUI.lifeImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 		tmpPos.x += allUI.lifeImg->getSize().x;
 		allUI.lifeText->setPos({tmpPos.x, textY}).setText(std::to_string(player->lives))

@@ -114,6 +114,7 @@ SRC =	main.cpp \
 		elements/Crispy.cpp \
 		elements/End.cpp \
 		elements/Flag.cpp \
+		elements/Score.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
@@ -185,6 +186,7 @@ HEAD =	bomberman.hpp \
 		elements/Crispy.hpp \
 		elements/End.hpp \
 		elements/Flag.hpp \
+		elements/Score.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \

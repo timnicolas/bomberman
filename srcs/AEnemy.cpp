@@ -9,6 +9,7 @@ AEnemy::AEnemy(SceneGame &game)
 {
 	name = "AEnemy";
 	type = Type::ENEMY;
+	points = 200;
 }
 
 AEnemy::~AEnemy() {
@@ -17,6 +18,8 @@ AEnemy::~AEnemy() {
 	if (find != game.enemies.end()) {
 		game.enemies.erase(find);
 	}
+	if (game.state == GameState::PLAY)
+		game.score += points;
 }
 
 AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
@@ -29,6 +32,8 @@ AEnemy &AEnemy::operator=(AEnemy const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("Enemy object copied");
 		ACharacter::operator=(rhs);
+		bombs = rhs.bombs;
+		points = rhs.points;
 	}
 	return *this;
 }
