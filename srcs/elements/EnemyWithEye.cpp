@@ -45,6 +45,8 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
  * @return false if failure
  */
 bool	EnemyWithEye::_update(float const dTime) {
+	if (_isBlocked())  // do nothing if blocked
+		return true;
 	Direction::Enum dir = _isPlayerVisible();
 	if (dir != Direction::NO_DIRECTION)
 		_playerDir = dir;

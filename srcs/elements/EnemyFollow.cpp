@@ -47,6 +47,8 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  * @return false if failure
  */
 bool	EnemyFollow::_update(float const dTime) {
+	if (_isBlocked())  // do nothing if blocked
+		return true;
 	// try to find a path to the player
 	// after 1sec, 1 chance over 10 to relaunch path calculation
 	if ((getMs() - _lastFindMs).count() > 1000 && (!_findPlayer || rand() % 100 < 10)) {

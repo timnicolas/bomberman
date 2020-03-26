@@ -202,6 +202,45 @@ bool AEnemy::_isOn(glm::ivec2 dest) const {
 	return false;
 }
 
+/**
+ * @brief Check if the enemy is blocked btw walls
+ *
+ * @return true If the enemy is blocked
+ */
+bool AEnemy::_isBlocked() const {
+	glm::ivec2 ipos = getIntPos();
+
+	int nbColisions = 0;  // nb of walls around enemy
+	// all blocks around enemy
+	int nexts[4][2] = {
+		{-1,  0},
+		{ 1,  0},
+		{ 0, -1},
+		{ 0,  1},
+	};
+	for (int i = 0; i < 4; i++) {
+		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
+		if (game.positionInGame(tmpPos) == false)
+			continue;
+		for (auto &&entity : game.board[tmpPos.x][tmpPos.y]) {
+			// don't go into fire if a bomb remove a wall and the enemy was blocked before
+			if (entity->type == Type::FIRE) {
+				nbColisions++;
+				break;
+			}
+			if (entity->crossable == Type::ALL || entity->crossable == type)
+				continue;
+
+			nbColisions++;
+			break;
+		}
+	}
+	// il walls all around entity
+	if (nbColisions == 4)
+		return true;
+	return false;
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 AEnemy::EnemyException::EnemyException()
