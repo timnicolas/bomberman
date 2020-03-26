@@ -138,6 +138,7 @@ class ABaseUI {
 			glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
 		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_unloadImg();
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
