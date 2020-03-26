@@ -24,6 +24,7 @@ class ScenePause : public ASceneMenu {
 	protected:
 		struct ButtonsStates {
 			bool	resume;
+			bool	restart;
 			bool	menu;
 			bool	exit;
 		};
