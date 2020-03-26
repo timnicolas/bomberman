@@ -151,8 +151,6 @@ bool			SceneGame::init() {
 		i++;
 	}
 
-	_initGameInfos();
-
 	return true;
 }
 
@@ -378,6 +376,8 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.x / 2, 1.0f,
 		size.y / 1.61803398875f
 	));
+
+	_initGameInfos();
 
 	player->init();
 	time = 0;
