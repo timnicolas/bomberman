@@ -24,7 +24,7 @@ SceneVictory & SceneVictory::operator=(SceneVictory const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneVictory::init() {

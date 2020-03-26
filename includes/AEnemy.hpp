@@ -41,7 +41,7 @@ protected:
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
 	bool			_followPath(float const dTime, std::deque<PathNode> & path);
 
-	/* check and calcultation functions */
+	/* check and calculation functions */
 	Direction::Enum	_isPlayerVisible() const;
 	bool			_isOn(glm::ivec2 dest) const;
 	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);

@@ -12,12 +12,11 @@ AEnemy::AEnemy(SceneGame &game)
 }
 
 AEnemy::~AEnemy() {
-	// TODO(ebaudet): correct segfault
-	// std::vector<ACharacter *>::iterator find;
-	// find = std::find(game->enemies.begin(), game->enemies.end(), this);
-	// if (find != game->enemies.end()) {
-	// 	game->enemies.erase(find);
-	// }
+	std::vector<AEnemy *>::iterator find;
+	find = std::find(game.enemies.begin(), game.enemies.end(), this);
+	if (find != game.enemies.end()) {
+		game.enemies.erase(find);
+	}
 }
 
 AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
