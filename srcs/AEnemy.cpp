@@ -79,6 +79,45 @@ bool	AEnemy::draw(Gui &gui) {
 }
 
 /**
+ * @brief Base moving function for enemy
+ *
+ * @param dTime Delta time
+ * @param dir The actual direction of the enemy
+ * @return false If the enemy is blocked
+ */
+bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
+	logInfo(dir);
+	// foreach direction, define the next direction to turn left or right
+	Direction::Enum nextDir[4][3] = {
+		{Direction::LEFT, Direction::RIGHT, Direction::DOWN},  // after UP, turn LEFT or RIGHT
+		{Direction::UP, Direction::DOWN, Direction::LEFT},  // after RIGHT, turn UP or DOWN
+		{Direction::LEFT, Direction::RIGHT, Direction::UP},  // after DOWN, turn LEFT or RIGHT
+		{Direction::UP, Direction::DOWN, Direction::RIGHT},  // after LEFT, turn UP or DOWN
+	};
+
+	bool rightFirst = rand() & 1;  // random the first element btw right and left
+	// order to try direction (front, left/right, back)
+	Direction::Enum tryDirOrder[4] = {
+		dir,  // first try to continue
+		nextDir[dir][rightFirst ? 1 : 0],  // then right or left
+		nextDir[dir][rightFirst ? 0 : 1],  // then left or right
+		nextDir[dir][2],  // then, go back
+	};
+
+	for (int i = 0; i < 4; i++) {
+		glm::vec3 startPos = position;
+		if (startPos != _moveTo(tryDirOrder[i], dTime, 0.4)) {
+			dir = tryDirOrder[i];
+			break;
+		}
+		if (i == 3)
+			return false;  // cannot move
+	}
+
+	return true;
+}
+
+/**
  * @brief Move and follow a basic pattern (list of direction).
  *
  * start at directionOrder[startDirID] and try to move.

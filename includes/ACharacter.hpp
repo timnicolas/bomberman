@@ -15,9 +15,9 @@ namespace Direction {
 	enum Enum {
 		NO_DIRECTION = -1,
 		UP = 0,
-		RIGHT,
-		DOWN,
-		LEFT,
+		RIGHT = 1,
+		DOWN = 2,
+		LEFT = 3,
 		NB_DIRECTIONS  // keep it at last position
 	};
 }
