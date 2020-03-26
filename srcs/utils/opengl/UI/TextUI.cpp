@@ -4,7 +4,7 @@
 
 TextUI::TextUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
-	setBorderColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
+	setBorderSize(0);
 }
 
 TextUI::TextUI(TextUI const & src): ABaseUI(src) {
@@ -39,4 +39,7 @@ void TextUI::_draw() {
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
 	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
+
+	// draw border
+	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }

@@ -14,6 +14,7 @@
 #include "TextUI.hpp"
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
+#include "ScrollbarUI.hpp"
 
 /**
  * @brief Scene object to re-implement in all scenes for menu
@@ -48,6 +49,7 @@ class ASceneMenu : public AScene {
 		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color,
 			glm::vec4 borderColor = glm::vec4(0.0, 0.0, 0.0, 1.0));
 		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
+		ScrollbarUI &		addScrollbar(glm::vec2 pos, glm::vec2 size);
 
 		/* getter */
 		ABaseUI &			getUIElement(uint32_t id);

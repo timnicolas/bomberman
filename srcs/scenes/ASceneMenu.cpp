@@ -185,6 +185,19 @@ ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const 
 }
 
 /**
+ * @brief add a scrollbar in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @return ScrollbarUI& a reference to the element created
+ */
+ScrollbarUI & ASceneMenu::addScrollbar(glm::vec2 pos, glm::vec2 size) {
+	ScrollbarUI * ui = new ScrollbarUI(pos, size);
+	_buttons.push_back(ui);
+	return *ui;
+}
+
+/**
  * @brief init the basic background of the menu
  *
  * @return true if success
