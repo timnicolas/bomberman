@@ -86,7 +86,12 @@ bool	AEnemy::draw(Gui &gui) {
  * @return false If the enemy is blocked
  */
 bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
-	logInfo(dir);
+	// try to move forward
+	glm::vec3 startPos = position;
+	if (startPos != _moveTo(dir, dTime, -1)) {
+		return true;
+	}
+
 	// foreach direction, define the next direction to turn left or right
 	Direction::Enum nextDir[4][3] = {
 		{Direction::LEFT, Direction::RIGHT, Direction::DOWN},  // after UP, turn LEFT or RIGHT
@@ -97,21 +102,39 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
 
 	bool rightFirst = rand() & 1;  // random the first element btw right and left
 	// order to try direction (front, left/right, back)
-	Direction::Enum tryDirOrder[4] = {
-		dir,  // first try to continue
+	Direction::Enum tryDirOrder[3] = {
 		nextDir[dir][rightFirst ? 1 : 0],  // then right or left
 		nextDir[dir][rightFirst ? 0 : 1],  // then left or right
 		nextDir[dir][2],  // then, go back
 	};
 
-	for (int i = 0; i < 4; i++) {
-		glm::vec3 startPos = position;
-		if (startPos != _moveTo(tryDirOrder[i], dTime, 0.4)) {
-			dir = tryDirOrder[i];
-			break;
+	glm::ivec2 ipos = getIntPos();
+	glm::ivec2 nextPos[4] = {
+		{ 0, -1},  // UP
+		{ 1,  0},  // RIGHT
+		{ 0,  1},  // DOWN
+		{-1,  0},  // LEFT
+	};
+
+	for (int i = 0; i < 3; i++) {
+		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
+		bool canMove = true;
+		if (game.positionInGame(tmpPos) == false)
+			canMove = false;
+		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
+			if (entity->crossable == Type::ALL || entity->crossable == type)
+				continue;
+			canMove = false;
 		}
-		if (i == 3)
-			return false;  // cannot move
+		if (canMove) {
+			glm::vec3 startPos = position;
+			if (startPos != _moveTo(tryDirOrder[i], dTime)) {
+				dir = tryDirOrder[i];
+				break;
+			}
+			if (i == 3)
+				return false;  // cannot move
+		}
 	}
 
 	return true;

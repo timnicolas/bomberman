@@ -5,8 +5,7 @@
 
 EnemyBasic::EnemyBasic(SceneGame &game)
 : AEnemy(game),
-  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
-  _dirIdx(0)
+  _dir(Direction::UP)
 {
 	name = "EnemyBasic";
 }
@@ -46,7 +45,7 @@ EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
 bool	EnemyBasic::_update(float const dTime) {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
-	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+	_baseEnemyMove(dTime, _dir);
 	return true;
 }
 
