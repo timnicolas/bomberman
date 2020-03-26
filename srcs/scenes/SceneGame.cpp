@@ -59,6 +59,15 @@ SceneGame::~SceneGame() {
 			}
 		}
 	}
+	for (auto &&box : boardFly) {
+		for (auto &&row : box) {
+			std::vector<AEntity *>::iterator element = row.begin();
+			while (element != row.end()) {
+				row.erase(element);
+				element = row.begin();
+			}
+		}
+	}
 	if (player != nullptr) {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
@@ -89,6 +98,7 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("SceneGame object copied");
 		board = rhs.board;
+		boardFly = rhs.boardFly;
 		player = rhs.player;
 		enemies = rhs.enemies;
 		flags = rhs.flags;
@@ -276,6 +286,16 @@ bool	SceneGame::draw() {
 			}
 		}
 	}
+	if (s.j("debug").b("showFlyHeight")) {
+		for (auto &&board_it0 : boardFly) {
+			for (auto &&board_it1 : board_it0) {
+				for (AEntity *board_it2 : board_it1) {
+					if (!board_it2->draw(*_gui))
+						return false;
+				}
+			}
+		}
+	}
 	for (auto &&enemy : enemies) {
 		if (!enemy->draw(*_gui))
 			return false;
@@ -391,7 +411,8 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 		lvl->j("objects").add<std::string>("enemyFollow", "2");
 
 	SettingsJson * mapPattern = new SettingsJson();
-	mapPattern->add<std::string>("line", "");
+	mapPattern->add<std::string>("0", "");
+	mapPattern->add<std::string>("1", "");
 	lvl->addList<SettingsJson>("map", mapPattern);
 
 	lvl->add<SettingsJson>("bonus");
@@ -427,6 +448,14 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	board.clear();
+	for (auto &&box : boardFly) {
+		for (auto &&row : box) {
+			for (auto &&element : row) {
+				delete element;
+			}
+		}
+	}
+	boardFly.clear();
 	auto enemy = enemies.begin();
 	while (enemy != enemies.end()) {
 		delete *enemy;
@@ -469,6 +498,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	board = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
 			std::vector< std::vector<AEntity*> >(size.y,
 			std::vector< AEntity* >()));
+	boardFly = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
+			   std::vector< std::vector<AEntity*> >(size.y,
+			   std::vector< AEntity* >()));
 
 	if (lvl.lj("map").list.size() != size.y)
 		throw SceneException("Map height error");
@@ -479,7 +511,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	AEntity *entity;
 	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
-		std::string line = lvl.lj("map").list[j]->s("line");
+		/* base board creation */
+		std::string line = lvl.lj("map").list[j]->s("0");
 		if (line.length() != size.x)
 			throw SceneException(("Map width error on line "+std::to_string(j)).c_str());
 		for (uint32_t i = 0; i < size.x; i++) {
@@ -509,6 +542,30 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 						enemies.back()->setPosition({i, 0, j});
 						break;
+					}
+				}
+			}
+		}
+		/* fly board creation */
+		line = lvl.lj("map").list[j]->s("1");
+		if (line.length() != size.x)
+			throw SceneException(("Map fly width error on line "+std::to_string(j)).c_str());
+		for (uint32_t i = 0; i < size.x; i++) {
+			for (auto &&entitYCall : _entitiesCall) {
+				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
+					entity = _entitiesCall[entitYCall.first].entity(*this);
+					if (entity == nullptr)
+						continue;
+					if (entity->type == Type::WALL) {
+						reinterpret_cast<AObject *>(entity)->isInFlyBoard = true;
+						boardFly[i][j].push_back(entity);
+					}
+					else if (_entitiesCall[entitYCall.first].entityType == EntityType::ENEMY) {
+						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
+						enemies.back()->setPosition({i, 1, j});
+					}
+					else {
+						logWarn("board fly can only contains walls and enemy");
 					}
 				}
 			}

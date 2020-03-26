@@ -67,6 +67,7 @@ protected:
 public:
 	// Members
 	std::vector< std::vector< std::vector<AEntity *> > > board;
+	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
 	Player						*player;
 	std::vector<AEnemy *>		enemies;
 	struct BonusValues {
