@@ -1,10 +1,18 @@
 #include <iomanip>
 #include "Score.hpp"
+#include "Logging.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Score::Score() {
 	_score = 0;
+	_score = 0;
+	_levelEnemies = 0;
+	_killedEnemies = 0;
+	_levelCrispies = 0;
+	_crispiesDestroyed = 0;
+	_levelTime = 0;
+	_timeDone = 0;
 }
 
 Score::Score(int32_t score): _score(score) {
@@ -21,7 +29,14 @@ Score::Score(Score const &src) {
 
 Score &Score::operator=(Score const &rhs) {
 	if ( this != &rhs ) {
+		logWarn("Score object copied");
 		_score = rhs._score;
+		_levelEnemies = rhs._levelEnemies;
+		_killedEnemies = rhs._killedEnemies;
+		_levelCrispies = rhs._levelCrispies;
+		_crispiesDestroyed = rhs._crispiesDestroyed;
+		_levelTime = rhs._levelTime;
+		_timeDone = rhs._timeDone;
 	}
 	return *this;
 }
@@ -44,17 +59,70 @@ Score	&Score::setScore(int32_t score) { _score = score; return *this; }
 
 // -- Methods ------------------------------------------------------------------
 
+/**
+ * @brief Add points to scrore.
+ *
+ * @param points
+ * @return Score& this
+ */
 Score	&Score::addPoints(int32_t points) {
 	_score += points;
 	return *this;
 }
 
+/**
+ * @brief Add bonus points for time.
+ * 		+ 10000 points if made in 50% of given time.
+ * 		+ 600 points if made in 75% of given time.
+ *
+ * @param levelTime
+ * @param time
+ * @return Score&
+ */
 Score	&Score::addBonusTime(float const levelTime, float const time) {
+	_levelTime = levelTime;
+	_timeDone = time;
 	float	ratio = time / levelTime;
 	if (ratio < 0.5)
-		_score += 1000;
+		_score += 10000;
 	else if (ratio < 0.75)
 		_score += 600;
+	return *this;
+}
+
+/**
+ * @brief Add bonus points according to number of killed enemies.
+ * 		+ 20000 points if destroyed every crispies and no enemy killed
+ * 		+ 1000 points if no enemy killed
+ * 		+ 500 points if all enemies are dead.
+ *
+ * @param levelEnemies
+ * @param enemiesLast
+ * @param levelCrispies
+ * @param crispiesLast
+ * @return Score&
+ */
+Score	&Score::addBonusEnemies(uint32_t levelEnemies, uint32_t enemiesLast,
+uint32_t levelCrispies, uint32_t crispiesLast)
+{
+	_levelEnemies = levelEnemies;
+	_killedEnemies = levelEnemies - enemiesLast;
+	_levelCrispies = levelCrispies;
+	_crispiesDestroyed = levelCrispies - crispiesLast;
+	if (levelEnemies != 0) {
+		if (_killedEnemies == 0) {
+			if (levelCrispies != 0 && crispiesLast == 0) {
+				// super bonus all crispies destroyed without kill any enemies
+				_score += 20000;
+			} else {
+				// bonus no enemies killed.
+				_score += 1000;
+			}
+		} else if (enemiesLast == 0){
+			// bonus kill all enemies.
+			_score += 500;
+		}
+	}
 	return *this;
 }
 

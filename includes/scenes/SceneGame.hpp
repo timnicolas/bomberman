@@ -102,6 +102,8 @@ public:
 	glm::uvec2					size;
 	int32_t						level;  // the current level ID (-1 for no level)
 	GameState::Enum				state;
+	uint32_t					levelEnemies;
+	uint32_t					levelCrispies;
 	float						levelTime;
 	float						time;
 	Score						score;

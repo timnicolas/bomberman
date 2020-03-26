@@ -49,6 +49,8 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelTime = 0;
 	time = 0;
 	score = 0;
+	levelEnemies = 0;
+	levelCrispies = 0;
 }
 
 SceneGame::~SceneGame() {
@@ -116,6 +118,8 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		levelTime = rhs.levelTime;
 		time = rhs.time;
 		score = rhs.score;
+		levelEnemies = rhs.levelEnemies;
+		levelCrispies = rhs.levelCrispies;
 	}
 	return *this;
 }
@@ -208,7 +212,17 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::WIN) {
+		int32_t	crispiesLast = 0;
+		for (auto &&box : board) {
+			for (auto &&row : box) {
+				for (auto &&element : row) {
+					if (element->type == Type::CRISPY)
+						crispiesLast++;
+				}
+			}
+		}
 		score.addBonusTime(levelTime, time);
+		score.addBonusEnemies(levelEnemies, enemies.size(), levelCrispies, crispiesLast);
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
@@ -381,6 +395,19 @@ bool SceneGame::loadLevel(int32_t levelId) {
 
 	player->init();
 	time = 0;
+	levelEnemies = enemies.size();
+
+	levelCrispies = 0;
+	for (auto &&box : board) {
+		for (auto &&row : box) {
+			for (auto &&element : row) {
+				if (element->type == Type::CRISPY)
+					levelCrispies++;
+			}
+		}
+	}
+
+	score = 0;
 
 	return result;
 }

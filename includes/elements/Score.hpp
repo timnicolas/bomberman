@@ -8,6 +8,12 @@ class Score {
 private:
 	// Members
 	int32_t		_score;
+	int32_t		_levelEnemies;
+	int32_t		_killedEnemies;
+	int32_t		_levelCrispies;
+	int32_t		_crispiesDestroyed;
+	float		_levelTime;
+	float		_timeDone;
 
 public:
 	// Constructors
@@ -33,6 +39,8 @@ public:
 	// Methods
 	Score	&addPoints(int32_t points);
 	Score	&addBonusTime(float const levelTime, float const time);
+	Score	&addBonusEnemies(uint32_t levelEnemies, uint32_t enemiesLast,
+			uint32_t levelCrispies, uint32_t crispiesLast);
 
 	// Exceptions
 	class ScoreException : public std::runtime_error {
