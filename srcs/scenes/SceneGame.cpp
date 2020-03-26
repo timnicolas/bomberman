@@ -143,6 +143,8 @@ bool			SceneGame::init() {
 		i++;
 	}
 
+	_initGameInfos();
+
 	return true;
 }
 
@@ -605,14 +607,33 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 }
 
 /**
+ * @brief Init game informations
+ */
+void SceneGame::_initGameInfos() {
+	try {
+		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
+		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lifes").setTextAlign(TextAlign::RIGHT);
+		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
+		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
+		allUI.bonusBombImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb.png");
+		allUI.bonusBombText = &addText(VOID_SIZE, VOID_SIZE, "total-bombs").setTextAlign(TextAlign::RIGHT);
+		allUI.bonusFlameImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/flame.png");
+		allUI.bonusFlameText = &addText(VOID_SIZE, VOID_SIZE, "bomb-propagation").setTextAlign(TextAlign::RIGHT);
+		allUI.bonusFlampassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/flampass.png");
+		allUI.bonusWallpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/wallpass.png");
+		allUI.bonusDetonatorImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/detonator.png");
+		allUI.bonusBombpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bombpass.png");
+		allUI.bonusShieldImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/shield.png");
+		allUI.bonusShieldText = &addText(VOID_SIZE, VOID_SIZE, "invulnerable").setTextAlign(TextAlign::RIGHT);
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
+}
+
+/**
  * @brief Update game informations
  */
 void			SceneGame::_updateGameInfos() {
-	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		delete *it;
-	}
-	_buttons.clear();
-
 	glm::vec2	winSz = _gui->gameInfo.windowSize;
 	glm::vec2	tmpPos;
 	float		imgY;
@@ -631,50 +652,73 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
-		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/life.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->lives))
-					.setTextAlign(TextAlign::RIGHT).getSize().x;
+		/* life */
+		allUI.lifeImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.lifeImg->getSize().x;
+		allUI.lifeText->setPos({tmpPos.x, textY}).setText(std::to_string(player->lives))
+			.setSize(VOID_SIZE).setCalculatedSize();
+		tmpPos.x += allUI.lifeText->getSize().x;
+
+		/* speed */
 		tmpPos.x += padding;
-		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/speed.png").getSize().x;
+		allUI.speedImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.speedImg->getSize().x;
 		std::string	speed = std::to_string(player->speed);
 		speed = speed.substr(0, speed.find("."));
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, speed).setTextAlign(TextAlign::RIGHT).getSize().x;
-		tmpPos.x += padding;
-		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bomb.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->totalBombs))
-					.setTextAlign(TextAlign::RIGHT).getSize().x;
-		tmpPos.x += padding;
-		tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flame.png").getSize().x;
-		tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, std::to_string(player->bombProgation))
-					.setTextAlign(TextAlign::RIGHT).getSize().x;
+		allUI.speedText->setPos({tmpPos.x, textY}).setText(speed)
+			.setSize(VOID_SIZE).setCalculatedSize();
+		tmpPos.x += allUI.speedText->getSize().x;
 
+		/* bonus bomb */
+		tmpPos.x += padding;
+		allUI.bonusBombImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.bonusBombImg->getSize().x;
+		allUI.bonusBombText->setPos({tmpPos.x, textY}).setText(std::to_string(player->totalBombs))
+			.setSize(VOID_SIZE).setCalculatedSize();
+		tmpPos.x += allUI.bonusBombText->getSize().x;
+
+		/* bonus flame */
+		tmpPos.x += padding;
+		allUI.bonusFlameImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.bonusFlameImg->getSize().x;
+		allUI.bonusFlameText->setPos({tmpPos.x, textY}).setText(std::to_string(player->bombProgation))
+			.setSize(VOID_SIZE).setCalculatedSize();
+		tmpPos.x += allUI.bonusFlameText->getSize().x;
+
+		/* bonus flampass */
 		if (player->passFire) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/flampass.png")
-						.getSize().x;
+			allUI.bonusFlampassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			tmpPos.x += allUI.bonusFlampassImg->getSize().x;
 		}
+		/* bonus wallpass */
 		if (player->passWall) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/wallpass.png")
-						.getSize().x;
+			allUI.bonusWallpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			tmpPos.x += allUI.bonusWallpassImg->getSize().x;
 		}
+		/* bonus detonator */
 		if (player->detonator) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/detonator.png")
-						.getSize().x;
+			allUI.bonusDetonatorImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			tmpPos.x += allUI.bonusDetonatorImg->getSize().x;
 		}
+		/* bonus passBomb */
 		if (player->passBomb) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/bombpass.png")
-						.getSize().x;
+			allUI.bonusBombpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			tmpPos.x += allUI.bonusBombpassImg->getSize().x;
 		}
-		if (player->invulnerable > 0) {
+		/* bonus invulnerable */
+		if (player->invulnerable) {
 			tmpPos.x += padding;
-			tmpPos.x += addImage({tmpPos.x, imgY}, tmpSize, "bomberman-assets/textures/bonus/shield.png")
-						.getSize().x;
+			allUI.bonusShieldImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			tmpPos.x += allUI.bonusShieldImg->getSize().x;
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
-			tmpPos.x += addText({tmpPos.x, textY}, VOID_SIZE, invulnerable).setTextAlign(TextAlign::RIGHT).getSize().x;
+			allUI.bonusShieldText->setPos({tmpPos.x, textY}).setText(invulnerable)
+				.setSize(VOID_SIZE).setCalculatedSize();
+			tmpPos.x += allUI.bonusShieldText->getSize().x;
 		}
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
