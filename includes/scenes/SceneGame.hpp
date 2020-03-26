@@ -61,6 +61,25 @@ private:
 	void	_drawBoard();
 
 protected:
+	struct AllUI {
+		ABaseUI *	lifeImg;  // ImageUI
+		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	speedImg;  // ImageUI
+		ABaseUI *	speedText;  // TextUI
+		ABaseUI *	bonusBombImg;  // ImageUI
+		ABaseUI *	bonusBombText;  // TextUI
+		ABaseUI *	bonusFlameImg;  // ImageUI
+		ABaseUI *	bonusFlameText;  // TextUI
+		ABaseUI *	bonusFlampassImg;  // ImageUI
+		ABaseUI *	bonusWallpassImg;  // ImageUI
+		ABaseUI *	bonusDetonatorImg;  // ImageUI
+		ABaseUI *	bonusBombpassImg;  // ImageUI
+		ABaseUI *	bonusShieldImg;  // ImageUI
+		ABaseUI *	bonusShieldText;  // TextUI
+	};
+	AllUI			allUI;
+
+	void			_initGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
 
