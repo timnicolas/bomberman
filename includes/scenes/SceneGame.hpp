@@ -15,6 +15,8 @@
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
 
+#include "Model.hpp"
+
 #define NO_LEVEL -1  // value is no level loaded
 
 class Player;
@@ -59,6 +61,9 @@ private:
 	bool	_unloadLevel();
 	bool	_initJsonLevel(int32_t levelId);
 	void	_drawBoard();
+
+	OpenGLModel	*_openGLModel;
+	Model		*_model;
 
 protected:
 	void			_updateGameInfos();
