@@ -44,6 +44,8 @@ EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
  * @return false if failure
  */
 bool	EnemyBasic::_update(float const dTime) {
+	if (_isBlocked())  // do nothing if blocked
+		return true;
 	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
 	return true;
 }
