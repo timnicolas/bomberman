@@ -5,8 +5,7 @@
 
 EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game),
-  _directionsOrder{Direction::UP, Direction::RIGHT, Direction::DOWN, Direction::LEFT},
-  _dirIdx(0)
+  _dir(Direction::UP)
 {
 	name = "EnemyFly";
 }
@@ -46,7 +45,7 @@ EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 bool	EnemyFly::_update(float const dTime) {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
-	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+	_baseEnemyMove(dTime, _dir);
 	return true;
 }
 

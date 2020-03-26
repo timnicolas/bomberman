@@ -14,8 +14,7 @@
 class EnemyFly : public AEnemy {
 private:
 	EnemyFly();
-	std::vector<Direction::Enum>	_directionsOrder;
-	uint32_t						_dirIdx;
+	Direction::Enum	_dir;
 
 protected:
 	virtual bool	_update(float const dTime);

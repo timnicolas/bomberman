@@ -280,11 +280,13 @@ bool	SceneGame::draw() {
 	_gui->cubeShader->setInt("blockId", 0);
 	_gui->cubeShader->unuse();
 
-	for (auto &&board_it0 : board) {
-		for (auto &&board_it1 : board_it0) {
-			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->draw(*_gui))
-					return false;
+	if (s.j("debug").b("showBaseBoard")) {
+		for (auto &&board_it0 : board) {
+			for (auto &&board_it1 : board_it0) {
+				for (AEntity *board_it2 : board_it1) {
+					if (!board_it2->draw(*_gui))
+						return false;
+				}
 			}
 		}
 	}
@@ -298,14 +300,18 @@ bool	SceneGame::draw() {
 			}
 		}
 	}
-	for (auto &&enemy : enemies) {
-		if (!enemy->draw(*_gui))
-			return false;
+	if (s.j("debug").b("showEntity")) {
+		for (auto &&enemy : enemies) {
+			if (!enemy->draw(*_gui))
+				return false;
+		}
+		player->draw(*_gui);
 	}
-	player->draw(*_gui);
 
-	// draw board
-	_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, size.y - 1.0f}, {size.x, 0.3f, size.y});
+	if (s.j("debug").b("showBaseBoard")) {
+		// draw floor
+		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, size.y - 1.0f}, {size.x, 0.3f, size.y});
+	}
 
 	// release cubeShader and textures
 	_gui->cubeShader->use();

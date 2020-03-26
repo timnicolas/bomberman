@@ -37,6 +37,7 @@ protected:
 	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
+	bool			_baseEnemyMove(float const dTime, Direction::Enum & dir);
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
 	bool			_followPath(float const dTime, std::deque<PathNode> & path);
 
