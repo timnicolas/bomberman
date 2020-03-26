@@ -11,13 +11,6 @@ EnemyBasic::EnemyBasic(SceneGame &game)
 }
 
 EnemyBasic::~EnemyBasic() {
-	auto it = game.enemies.begin();
-	while (it != game.enemies.end()) {
-		if ((*it) == this)
-			game.enemies.erase(it);
-		else
-			it++;
-	}
 }
 
 EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {

@@ -39,28 +39,32 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 
 // -- Constructors -------------------------------------------------------------
 
-SceneGame::SceneGame(Gui * gui, float const &dtTime)
-: ASceneMenu(gui, dtTime)
-{
+SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	player = nullptr;
 	enemies = std::vector<AEnemy *>();
 	flags = 0;
 	size = {0, 0};
 	level = NO_LEVEL;
 	state = GameState::PLAY;
-	time = std::chrono::milliseconds(0);
+	levelTime = 0;
+	time = 0;
+	score = 0;
 }
 
 SceneGame::~SceneGame() {
 	for (auto &&box : board) {
 		for (auto &&row : box) {
 			std::vector<AEntity *>::iterator element = row.begin();
+			AEntity *entity;
 			while (element != row.end()) {
+				entity = *element;
 				row.erase(element);
+				delete entity;
 				element = row.begin();
 			}
 		}
 	}
+	board.clear();
 	for (auto &&box : boardFly) {
 		for (auto &&row : box) {
 			std::vector<AEntity *>::iterator element = row.begin();
@@ -70,18 +74,20 @@ SceneGame::~SceneGame() {
 			}
 		}
 	}
+	boardFly.clear();
 	if (player != nullptr) {
 		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
 	}
-	auto enemy = enemies.begin();
-	while (enemy != enemies.end()) {
-		delete *enemy;
-		// deleting an enemy also erase it from the list of enemies
-		enemy = enemies.begin();
-		if (enemy != enemies.end())
-			enemy++;
+	std::vector<AEnemy *>::iterator it = enemies.begin();
+	AEnemy *enemy;
+	while (it != enemies.end()) {
+		enemy = *it;
+		enemies.erase(it);
+		delete enemy;
+		it = enemies.begin();
 	}
+	enemies.clear();
 
 	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
 		delete *it;
@@ -448,13 +454,19 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 }
 
 bool	SceneGame::_unloadLevel() {
+	logInfo("Unload level");
 	if (level == NO_LEVEL)
 		return true;
 
 	for (auto &&box : board) {
 		for (auto &&row : box) {
-			for (auto &&element : row) {
-				delete element;
+			std::vector<AEntity *>::iterator element = row.begin();
+			AEntity *entity;
+			while (element != row.end()) {
+				entity = *element;
+				row.erase(element);
+				delete entity;
+				element = row.begin();
 			}
 		}
 	}
@@ -467,13 +479,13 @@ bool	SceneGame::_unloadLevel() {
 		}
 	}
 	boardFly.clear();
-	auto enemy = enemies.begin();
-	while (enemy != enemies.end()) {
-		delete *enemy;
-		// deleting an enemy also erase it from the list of enemies
-		enemy = enemies.begin();
-		if (enemy != enemies.end())
-			enemy++;
+	std::vector<AEnemy *>::iterator it = enemies.begin();
+	AEnemy *enemy;
+	while (it != enemies.end()) {
+		enemy = *it;
+		enemies.erase(it);
+		delete enemy;
+		it = enemies.begin();
 	}
 	enemies.clear();
 
