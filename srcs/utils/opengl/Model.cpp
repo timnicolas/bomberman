@@ -95,6 +95,21 @@ void	Model::setAnimation(std::string name) {
 	_animationTime = 0;  // reset animation time
 }
 
+// -- setNextAnimation ---------------------------------------------------------
+/**
+ * @brief change the animation to the next one
+ *
+ */
+void	Model::setNextAnimation() {
+	uint32_t nextId = _animationId + 1;
+
+	if (nextId >= _openGLModel.getNbAnimations()) {
+		nextId = 0;
+	}
+
+	setAnimation(nextId);
+}
+
 // -- setAnimProgress ----------------------------------------------------------
 /**
  * @brief set the animation current time by percent

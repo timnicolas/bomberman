@@ -19,6 +19,7 @@ class Model {
 		void	draw();
 		void	setAnimation(uint32_t id);
 		void	setAnimation(std::string name);
+		void	setNextAnimation();
 		void	setAnimProgress(float progress);
 		void	setAnimCurrentTime(float animTime);
 
