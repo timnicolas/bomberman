@@ -27,7 +27,8 @@ public:
 	void			setPos(glm::vec3 pos = VOID_POS3);
 	glm::vec3		getPos();
 	bool			takeDamage(int damage);
-	std::vector< std::vector< std::vector<AEntity *> > > &	getBoard();
+	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
+	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 
 	bool			isInFlyBoard;
 

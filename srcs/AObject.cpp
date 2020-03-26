@@ -91,6 +91,16 @@ bool	AObject::takeDamage(const int damage) {
  *
  * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
  */
+std::vector< std::vector< std::vector<AEntity *> > > const & AObject::getBoard() const {
+	if (isInFlyBoard)
+		return game.boardFly;
+	return game.board;
+}
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
 std::vector< std::vector< std::vector<AEntity *> > > & AObject::getBoard() {
 	if (isInFlyBoard)
 		return game.boardFly;
