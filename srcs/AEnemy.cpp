@@ -159,13 +159,13 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 		for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
 			if (x == playerPos.x)
 				return Direction::RIGHT;
-			if (game.board[x][thisPos.y].size() > 0)
+			if (getBoard()[x][thisPos.y].size() > 0)
 				break;
 		}
 		for (int x = thisPos.x; x >= 0; x--) {
 			if (x == playerPos.x)
 				return Direction::LEFT;
-			if (game.board[x][thisPos.y].size() > 0)
+			if (getBoard()[x][thisPos.y].size() > 0)
 				break;
 		}
 	}
@@ -173,13 +173,13 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 		for (int y = thisPos.y; y < static_cast<int>(game.size.y); y++) {
 			if (y == playerPos.y)
 				return Direction::DOWN;
-			if (game.board[thisPos.x][y].size() > 0)
+			if (getBoard()[thisPos.x][y].size() > 0)
 				break;
 		}
 		for (int y = thisPos.y; y >= 0; y--) {
 			if (y == playerPos.y)
 				return Direction::UP;
-			if (game.board[thisPos.x][y].size() > 0)
+			if (getBoard()[thisPos.x][y].size() > 0)
 				break;
 		}
 	}
@@ -222,7 +222,7 @@ bool AEnemy::_isBlocked() const {
 		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
 		if (game.positionInGame(tmpPos) == false)
 			continue;
-		for (auto &&entity : game.board[tmpPos.x][tmpPos.y]) {
+		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
 			// don't go into fire if a bomb remove a wall and the enemy was blocked before
 			if (entity->type == Type::FIRE) {
 				nbColisions++;

@@ -53,6 +53,8 @@ public:
 	// Methods
 	virtual bool					update(float const dTime) = 0;
 	virtual bool					draw(Gui &gui) = 0;
+	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
+	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	bool							isAlive();
 	glm::vec3						getPos();
 	glm::ivec2						getIntPos() const;
@@ -61,7 +63,6 @@ public:
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
 	bool							clearNoCollisionObjects(AEntity *entity);
 	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
-
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

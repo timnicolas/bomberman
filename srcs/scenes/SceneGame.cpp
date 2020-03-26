@@ -15,6 +15,7 @@
 #include "EnemyBasic.hpp"
 #include "EnemyFollow.hpp"
 #include "EnemyWithEye.hpp"
+#include "EnemyFly.hpp"
 
 #include "SceneManager.hpp"
 
@@ -33,6 +34,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"enemyBasic", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyBasic(game);}}},
 	{"enemyWithEye", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
 	{"enemyFollow", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFollow(game);}}},
+	{"enemyFly", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFly(game);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -409,6 +411,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 		lvl->j("objects").add<std::string>("enemyBasic", "0");
 		lvl->j("objects").add<std::string>("enemyWithEye", "1");
 		lvl->j("objects").add<std::string>("enemyFollow", "2");
+		lvl->j("objects").add<std::string>("enemyFly", "3");
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("0", "");
