@@ -6,6 +6,8 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define TIME_BEFORE_TRANSFORM_TO_WALL	8000
+
 /**
  * @brief This is an enemy object
  *
@@ -17,6 +19,7 @@ private:
 	bool			_isWall;
 	Direction::Enum	_dir;
 	Direction::Enum	_playerDir;  // direction of the player (if view it)
+	int64_t			_lastPayerSeenMs;  // last time that a player has been seen
 
 protected:
 	virtual bool	_update(float const dTime);
