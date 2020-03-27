@@ -538,6 +538,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
+						else
+							delete entity;
 						player->setPosition({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:
