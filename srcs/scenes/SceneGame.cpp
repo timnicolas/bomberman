@@ -76,9 +76,6 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
-
-	delete _model;
-	delete _openGLModel;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -132,20 +129,6 @@ bool			SceneGame::init() {
 			break;
 		}
 		i++;
-	}
-
-	try {
-		_openGLModel = new OpenGLModel(*_gui->cam, "bomberman-assets/3dModels/"
-			"white/white_with_anims.fbx", {0, -0.5, 0});
-		_model = new Model(*_openGLModel, _dtTime, ETransform({1, 0, 1}));
-		_model->play = true;
-		_model->loopAnimation = true;
-
-		_model->setAnimation("Armature|idle");
-	}
-	catch(OpenGLModel::ModelException const & e) {
-		logErr(e.what());
-		return false;
 	}
 
 	return true;
@@ -308,18 +291,6 @@ bool	SceneGame::draw() {
 	_gui->cubeShader->unuse();
 
 	ASceneMenu::draw();
-
-	try {
-		if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_1)) {
-			_model->setNextAnimation();
-		}
-
-		_model->draw();
-	}
-	catch(OpenGLModel::ModelException const & e) {
-		logErr(e.what());
-		return false;
-	}
 
 	// draw skybox
 	_gui->drawSkybox(view);
