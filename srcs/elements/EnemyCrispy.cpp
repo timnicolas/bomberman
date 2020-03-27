@@ -7,7 +7,8 @@ EnemyCrispy::EnemyCrispy(SceneGame &game)
 : AEnemy(game),
   _isWall(true),
   _dir(Direction::UP),
-  _playerDir(Direction::NO_DIRECTION)
+  _playerDir(Direction::NO_DIRECTION),
+  _lastPayerSeenMs(0)
 {
 	name = "EnemyCrispy";
 }
@@ -48,12 +49,20 @@ bool	EnemyCrispy::_update(float const dTime) {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
 
+	/* retransform to a wall */
+	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL)
+		_isWall = true;
+
+	/* try to find player */
 	Direction::Enum viewPlayerDir = _isPlayerVisible();
 	if (viewPlayerDir != Direction::NO_DIRECTION) {
 		_playerDir = viewPlayerDir;
 		_dir = viewPlayerDir;
 		_isWall = false;
+		_lastPayerSeenMs = getMs().count();
 	}
+
+	/* move */
 	if (!_isWall) {
 		glm::vec3 tmpPos = position;
 		if (tmpPos == _moveTo(_playerDir, dTime)) {
