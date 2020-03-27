@@ -477,11 +477,6 @@ bool	SceneGame::_unloadLevel() {
 	}
 	enemies.clear();
 
-	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		delete *it;
-	}
-	_buttons.clear();
-
 	level = NO_LEVEL;
 	return true;
 }
