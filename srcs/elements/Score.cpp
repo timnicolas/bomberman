@@ -13,6 +13,7 @@ Score::Score() {
 	_crispiesDestroyed = 0;
 	_levelTime = 0;
 	_timeDone = 0;
+	_levelId = -1;
 }
 
 Score::Score(int32_t score): _score(score) {
@@ -37,6 +38,7 @@ Score &Score::operator=(Score const &rhs) {
 		_crispiesDestroyed = rhs._crispiesDestroyed;
 		_levelTime = rhs._levelTime;
 		_timeDone = rhs._timeDone;
+		_levelId = rhs._levelId;
 	}
 	return *this;
 }
@@ -54,8 +56,19 @@ std::ostream &	operator<<(std::ostream & os, const Score& my_class) {
 
 // -- Accessors ----------------------------------------------------------------
 
+/* _score */
 int32_t	Score::getScore() const { return _score; }
 Score	&Score::setScore(int32_t score) { _score = score; return *this; }
+/* _levelId */
+int32_t	Score::getLevelId() const { return _levelId; }
+Score	&Score::setLevelId(int32_t levelId) { _levelId = levelId; return *this; }
+/* toString */
+std::string	Score::toString() {
+	std::stringstream ss;
+	ss << *this;
+	std::string scoreStr = ss.str();
+	return scoreStr;
+}
 
 // -- Methods ------------------------------------------------------------------
 
@@ -124,6 +137,17 @@ uint32_t levelCrispies, uint32_t crispiesLast)
 		}
 	}
 	return *this;
+}
+
+std::vector<std::string>	Score::getStats(std::vector<std::string> vec) {
+	vec.push_back("Blocks destroyed: " + std::to_string(_crispiesDestroyed) + "/"+std::to_string(_levelCrispies));
+	vec.push_back("Killed enemies: " + std::to_string(_killedEnemies) + "/"+std::to_string(_levelEnemies));
+	std::string	timeDoneStr = std::to_string(_timeDone);
+	timeDoneStr = timeDoneStr.substr(0, timeDoneStr.find(".")+2);
+	std::string	levelTimeStr = std::to_string(_levelTime);
+	levelTimeStr = levelTimeStr.substr(0, levelTimeStr.find(".")+2);
+	vec.push_back("Time: " + timeDoneStr + "/"+levelTimeStr);
+	return vec;
 }
 
 // -- Exceptions errors --------------------------------------------------------

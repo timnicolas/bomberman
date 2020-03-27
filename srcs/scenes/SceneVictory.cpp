@@ -42,6 +42,18 @@ bool			SceneVictory::init() {
 		addText(tmpPos, tmpSize, "Victory !").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		statistics.score = &addText(tmpPos, tmpSize, "LVL " + std::to_string(scGame.score.getLevelId())
+			+ " || SCORE: " + scGame.score.toString());
+
+		std::vector<std::string> scoreStat;
+		scoreStat = scGame.score.getStats(scoreStat);
+		for (auto &&stat : scoreStat) {
+			tmpPos.y -= menuHeight * 0.8;
+			statistics.stats.push_back(&addText(tmpPos, tmpSize, stat));
+		}
+
+		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "NEXT LEVEL")
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.nextLevel);
@@ -84,6 +96,21 @@ bool			SceneVictory::init() {
 bool	SceneVictory::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+
+	statistics.score->setText("LVL " + std::to_string(scGame.score.getLevelId())
+		+ " || SCORE: " + scGame.score.toString());
+
+	std::vector<ABaseUI *>::iterator	it = statistics.stats.begin();
+	while (it != statistics.stats.end()) {
+		std::vector<std::string> scoreStat;
+		scoreStat = scGame.score.getStats(scoreStat);
+		for (auto &&stat : scoreStat) {
+			(*it)->setText(stat);
+			it++;
+			if (it == statistics.stats.end())
+				break;
+		}
+	}
 
 	if (_states.nextLevel) {
 		_states.nextLevel = false;

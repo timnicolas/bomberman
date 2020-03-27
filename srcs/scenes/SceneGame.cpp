@@ -408,6 +408,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	}
 
 	score = 0;
+	score.setLevelId(levelId);
 
 	return result;
 }
