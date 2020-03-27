@@ -43,13 +43,14 @@ protected:
 
 	/* check and calcultation functions */
 	Direction::Enum	_isPlayerVisible() const;
-	bool			_isOn(glm::ivec2 dest) const;
+	bool			_isOn(glm::ivec2 dest, float offset = IS_ON_POS_OFFSET) const;
 	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);
 	bool			_isBlocked() const;
 
 public:
 	// Members
 	int			bombs;
+	int			strength;  // number of damage if hit player
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);

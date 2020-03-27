@@ -199,7 +199,8 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
  * @param offset Offset to turn correction (-1 to don't use correction)
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset,
+float ignoreColisions) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
@@ -220,7 +221,7 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 			return position;
 	}
 	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
-		if (_canMove(getCollision(pos))) {  // if we can move
+		if (ignoreColisions || _canMove(getCollision(pos))) {  // if we can move
 			position = pos;
 		}
 		else if (offset > 0) {  // if we cannot move

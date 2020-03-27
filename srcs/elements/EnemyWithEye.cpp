@@ -5,8 +5,8 @@
 
 EnemyWithEye::EnemyWithEye(SceneGame &game)
 : AEnemy(game),
-  _playerDir(Direction::NO_DIRECTION),
-  _dir(Direction::UP)
+  _dir(Direction::UP),
+  _playerDir(Direction::NO_DIRECTION)
 {
 	name = "EnemyWithEye";
 }
