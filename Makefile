@@ -101,10 +101,12 @@ SRC =	main.cpp \
 		AEnemy.cpp \
 		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
+\
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
 		elements/EnemyWithEye.cpp \
 		elements/EnemyFly.cpp \
+		elements/EnemyCrispy.cpp \
 \
 		AObject.cpp \
 		elements/Bomb.cpp \
@@ -172,10 +174,12 @@ HEAD =	bomberman.hpp \
 		ACharacter.hpp \
 		AEnemy.hpp \
 		elements/Player.hpp \
+\
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
 		elements/EnemyWithEye.hpp \
 		elements/EnemyFly.hpp \
+		elements/EnemyCrispy.hpp \
 \
 		AObject.hpp \
 		elements/Bomb.hpp \
