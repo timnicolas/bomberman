@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 class Score {
 private:
 	// Members
 	int32_t		_score;
+	int32_t		_levelId;
 	int32_t		_levelEnemies;
 	int32_t		_killedEnemies;
 	int32_t		_levelCrispies;
@@ -34,13 +36,16 @@ public:
 	// Accessors
 	int32_t	getScore() const;
 	Score	&setScore(int32_t score);
-
+	int32_t	getLevelId() const;
+	Score	&setLevelId(int32_t levelId);
+	std::string	toString();
 
 	// Methods
 	Score	&addPoints(int32_t points);
 	Score	&addBonusTime(float const levelTime, float const time);
 	Score	&addBonusEnemies(uint32_t levelEnemies, uint32_t enemiesLast,
 			uint32_t levelCrispies, uint32_t crispiesLast);
+	std::vector<std::string>	getStats(std::vector<std::string> vec);
 
 	// Exceptions
 	class ScoreException : public std::runtime_error {
