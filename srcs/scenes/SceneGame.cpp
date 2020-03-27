@@ -480,35 +480,47 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
 		std::string line = lvl.lj("map").list[j]->s("line");
+
+		// throw on bad line width
 		if (line.length() != size.x)
 			throw SceneException(("Map width error on line "+std::to_string(j)).c_str());
+
+		// loop through line to create the entities
 		for (uint32_t i = 0; i < size.x; i++) {
 			for (auto &&entitYCall : _entitiesCall) {
+				// if the curent line char match the entity char
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
 					// if it's empty, generate crispy wall with a certain probability
 					if (entitYCall.first == "empty")
 						entity = Crispy::generateCrispy(*this, lvl.u("wallGenPercent"));
 					else
 						entity = _entitiesCall[entitYCall.first].entity(*this);
+
+					// continue on empty block
 					if (entity == nullptr)
 						continue;
+
 					switch (_entitiesCall[entitYCall.first].entityType) {
-					case EntityType::PLAYER:
-						if (player == nullptr)
-							player = reinterpret_cast<Player *>(entity);
-						player->setPosition({i, 0, j});
-						break;
-					case EntityType::BOARD_FLAG:
-						flags++;
-						board[i][j].push_back(entity);
-						break;
-					case EntityType::BOARD:
-						board[i][j].push_back(entity);
-						break;
-					case EntityType::ENEMY:
-						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
-						enemies.back()->setPosition({i, 0, j});
-						break;
+						case EntityType::PLAYER:
+							if (player == nullptr)
+								player = reinterpret_cast<Player *>(entity);
+							else
+								delete entity;
+							player->setPosition({i, 0, j});
+							break;
+						case EntityType::BOARD_FLAG:
+							flags++;
+							board[i][j].push_back(entity);
+							break;
+						case EntityType::BOARD:
+							board[i][j].push_back(entity);
+							break;
+						case EntityType::ENEMY:
+							enemies.push_back(reinterpret_cast<AEnemy *>(entity));
+							enemies.back()->setPosition({i, 0, j});
+							break;
+						default:
+							delete entity;
 					}
 				}
 			}
