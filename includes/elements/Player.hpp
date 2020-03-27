@@ -6,6 +6,7 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "Bonus.hpp"
+#include "Model.hpp"
 
 /**
  * @brief This is the player object
@@ -14,7 +15,8 @@ class Player : public ACharacter {
 private:
 	Player();
 	// Members
-	int		_toDraw;
+	int			_toDraw;
+	Model		*_model;
 
 	// Methods
 	void	_move(float const dTime);
