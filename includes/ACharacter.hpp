@@ -35,7 +35,8 @@ protected:
 	// Methods
 	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
 	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION,
+		float ignoreColisions = false);
 
 public:
 	// Members
