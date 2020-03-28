@@ -63,7 +63,9 @@ private:
 
 protected:
 	struct AllUI {
+		ABaseUI *	timeLeftImg;  // TextUI
 		ABaseUI *	timeLeftText;  // TextUI
+		ABaseUI *	scoreImg;  // TextUI
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI

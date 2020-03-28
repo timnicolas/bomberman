@@ -213,8 +213,8 @@ bool ASceneMenu::_initBG() {
 		int j = 0;
 		while (tmpPos.x < winSz.x) {
 			std::string name;
-			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/005-bombFace.png";
-			else name = "bomberman-assets/textures/player/009-playerFace.png";
+			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/004-bombBott.png";
+			else name = "bomberman-assets/textures/player/010-playerSide.png";
 			addImage(tmpPos, tmpSize, name).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
 			tmpPos.x += tmpSize.x;
 			j++;

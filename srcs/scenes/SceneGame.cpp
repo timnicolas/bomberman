@@ -48,7 +48,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	state = GameState::PLAY;
 	levelTime = 0;
 	time = 0;
-	score = 0;
+	score.reset();
 	levelEnemies = 0;
 	levelCrispies = 0;
 }
@@ -385,10 +385,10 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	}
 	bool result = _loadLevel(levelId);
 
-	_gui->cam->pos = {size.x / 2, 25.0f, 2 * size.y};
+	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
 	_gui->cam->lookAt(glm::vec3(
 		size.x / 2, 1.0f,
-		size.y / 1.61803398875f
+		size.y / 1.9
 	));
 
 	_initGameInfos();
@@ -407,7 +407,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		}
 	}
 
-	score = 0;
+	score.reset();
 	score.setLevelId(levelId);
 
 	return result;
@@ -659,7 +659,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
  */
 void SceneGame::_initGameInfos() {
 	try {
+		allUI.timeLeftImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/time.png");
 		allUI.timeLeftText = &addText(VOID_SIZE, VOID_SIZE, "time-left").setTextAlign(TextAlign::RIGHT);
+		allUI.scoreImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/score.png");
 		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
 		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
@@ -690,11 +692,11 @@ void			SceneGame::_updateGameInfos() {
 	float		textY;
 	glm::vec2	tmpSize;
 	uint32_t	padding = 5;
-	float		menuWidth = winSz.x - winSz.x / 16;
-	float		menuHeight = winSz.x / 16;
+	float		menuWidth = winSz.x / 2;
+	float		menuHeight = menuWidth / 8;
 
 	try {
-		tmpPos.x = (winSz.x / 8);
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		imgY = tmpPos.y;
 		textY = tmpPos.y + 2;
@@ -702,21 +704,13 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
+		// -- Top -----------
 		/* time left */
-		std::string	timeLeft = std::to_string(levelTime - time);
-		timeLeft = timeLeft.substr(0, timeLeft.find(".")+2);
-		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeLeft)
+		allUI.timeLeftImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.timeLeftImg->getSize().x;
+		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeToString(levelTime - time))
 			.setSize(VOID_POS).setCalculatedSize();
 		tmpPos.x += allUI.timeLeftText->getSize().x;
-
-		/* score */
-		tmpPos.x += padding;
-		std::stringstream ss;
-		ss << "score: " << score;
-		std::string scoreStr = ss.str();
-		allUI.scoreText->setPos({tmpPos.x, textY}).setText(scoreStr)
-			.setSize(VOID_POS).setCalculatedSize();
-		tmpPos.x += allUI.scoreText->getSize().x;
 
 		/* life */
 		tmpPos.x += padding;
@@ -726,8 +720,22 @@ void			SceneGame::_updateGameInfos() {
 			.setSize(VOID_SIZE).setCalculatedSize();
 		tmpPos.x += allUI.lifeText->getSize().x;
 
-		/* speed */
+		/* score */
 		tmpPos.x += padding;
+		allUI.scoreImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		tmpPos.x += allUI.scoreImg->getSize().x;
+		allUI.scoreText->setPos({tmpPos.x, textY}).setText(score.toString())
+			.setSize(VOID_POS).setCalculatedSize();
+		tmpPos.x += allUI.scoreText->getSize().x;
+
+		// -- Bottom -----------
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = menuHeight;
+		imgY = tmpPos.y;
+		textY = tmpPos.y + 2;
+
+		/* speed */
+		// tmpPos.x += padding;
 		allUI.speedImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 		tmpPos.x += allUI.speedImg->getSize().x;
 		std::string	speed = std::to_string(player->speed);
@@ -757,24 +765,32 @@ void			SceneGame::_updateGameInfos() {
 			tmpPos.x += padding;
 			allUI.bonusFlampassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			tmpPos.x += allUI.bonusFlampassImg->getSize().x;
+		} else {
+			allUI.bonusFlampassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus wallpass */
 		if (player->passWall) {
 			tmpPos.x += padding;
 			allUI.bonusWallpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			tmpPos.x += allUI.bonusWallpassImg->getSize().x;
+		} else {
+			allUI.bonusWallpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus detonator */
 		if (player->detonator) {
 			tmpPos.x += padding;
 			allUI.bonusDetonatorImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			tmpPos.x += allUI.bonusDetonatorImg->getSize().x;
+		} else {
+			allUI.bonusDetonatorImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus passBomb */
 		if (player->passBomb) {
 			tmpPos.x += padding;
 			allUI.bonusBombpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			tmpPos.x += allUI.bonusBombpassImg->getSize().x;
+		} else {
+			allUI.bonusBombpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus invulnerable */
 		if (player->invulnerable) {
@@ -783,9 +799,12 @@ void			SceneGame::_updateGameInfos() {
 			tmpPos.x += allUI.bonusShieldImg->getSize().x;
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
-			allUI.bonusShieldText->setPos({tmpPos.x, textY}).setText(invulnerable)
+			allUI.bonusShieldText->setPos({tmpPos.x, textY}).setText(timeToString(player->invulnerable))
 				.setSize(VOID_SIZE).setCalculatedSize();
 			tmpPos.x += allUI.bonusShieldText->getSize().x;
+		} else {
+			allUI.bonusShieldImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			allUI.bonusShieldText->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
