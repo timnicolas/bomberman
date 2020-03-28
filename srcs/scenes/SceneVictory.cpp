@@ -41,16 +41,33 @@ bool			SceneVictory::init() {
 		tmpSize.y = menuHeight;
 		addText(tmpPos, tmpSize, "Victory !").setTextFont("title");
 
-		tmpPos.y -= menuHeight * 1.2;
-		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
-		statistics.score = &addText(tmpPos, tmpSize, "LVL " + std::to_string(scGame.score.getLevelId())
-			+ " || SCORE: " + scGame.score.toString());
-
-		std::vector<std::string> scoreStat;
-		scoreStat = scGame.score.getStats(scoreStat);
-		for (auto &&stat : scoreStat) {
-			tmpPos.y -= menuHeight * 0.8;
-			statistics.stats.push_back(&addText(tmpPos, tmpSize, stat));
+		try {
+			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+			statistics.level = &addText(
+				{tmpPos.x - 30, tmpPos.y + 30},
+				tmpSize,
+				"LVL " + std::to_string(scGame.score.getLevelId()))
+					.setTextAlign(TextAlign::LEFT);
+			tmpPos.y -= menuHeight * 0.6;
+			std::vector<Score::Stat> scoreStat;
+			scGame.score.getStats(scoreStat);
+			for (auto &&stat : scoreStat) {
+				tmpPos.y -= menuHeight * 0.6;
+				if (stat.image.size()) {
+					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y + 9}, {32, 32}, stat.image));
+					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
+						.setTextAlign(TextAlign::LEFT));
+				} else {
+					statistics.stats.push_back(&addText(tmpPos, tmpSize, stat.label)
+						.setTextAlign(TextAlign::LEFT));
+				}
+				if (stat.points.size()) {
+					statistics.stats.push_back(&addText(tmpPos, tmpSize, stat.points)
+						.setTextAlign(TextAlign::RIGHT));
+				}
+			}
+		} catch (ABaseUI::UIException const & e) {
+			logErr(e.what());
 		}
 
 		tmpPos.y -= menuHeight * 1.2;
@@ -96,19 +113,29 @@ bool			SceneVictory::init() {
 bool	SceneVictory::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
-
-	statistics.score->setText("LVL " + std::to_string(scGame.score.getLevelId())
-		+ " || SCORE: " + scGame.score.toString());
+	statistics.level->setText("LVL " + std::to_string(scGame.score.getLevelId()));
+	// statistics.score->setText("Score: " + scGame.score.toString());
 
 	std::vector<ABaseUI *>::iterator	it = statistics.stats.begin();
 	while (it != statistics.stats.end()) {
-		std::vector<std::string> scoreStat;
-		scoreStat = scGame.score.getStats(scoreStat);
+		std::vector<Score::Stat> scoreStat;
+		scGame.score.getStats(scoreStat);
 		for (auto &&stat : scoreStat) {
-			(*it)->setText(stat);
+			if (stat.image.size()) {
+				it++;
+				if (it == statistics.stats.end())
+					break;
+			}
+			(*it)->setText(stat.label);
 			it++;
 			if (it == statistics.stats.end())
 				break;
+			if (stat.points.size()) {
+				(*it)->setText(stat.points);
+				it++;
+				if (it == statistics.stats.end())
+					break;
+			}
 		}
 	}
 

@@ -1,19 +1,12 @@
 #include <iomanip>
 #include "Score.hpp"
 #include "Logging.hpp"
+#include "bomberman.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 Score::Score() {
-	_score = 0;
-	_score = 0;
-	_levelEnemies = 0;
-	_killedEnemies = 0;
-	_levelCrispies = 0;
-	_crispiesDestroyed = 0;
-	_levelTime = 0;
-	_timeDone = 0;
-	_levelId = -1;
+	reset();
 }
 
 Score::Score(int32_t score): _score(score) {
@@ -32,6 +25,9 @@ Score &Score::operator=(Score const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("Score object copied");
 		_score = rhs._score;
+		_bonusDestruction = rhs._bonusDestruction;
+		_bonusEnemies = rhs._bonusEnemies;
+		_bonusTime = rhs._bonusTime;
 		_levelEnemies = rhs._levelEnemies;
 		_killedEnemies = rhs._killedEnemies;
 		_levelCrispies = rhs._levelCrispies;
@@ -57,7 +53,7 @@ std::ostream &	operator<<(std::ostream & os, const Score& my_class) {
 // -- Accessors ----------------------------------------------------------------
 
 /* _score */
-int32_t	Score::getScore() const { return _score; }
+int32_t	Score::getScore() const { return _score + _bonusDestruction + _bonusEnemies + _bonusTime; }
 Score	&Score::setScore(int32_t score) { _score = score; return *this; }
 /* _levelId */
 int32_t	Score::getLevelId() const { return _levelId; }
@@ -73,6 +69,26 @@ std::string	Score::toString() {
 // -- Methods ------------------------------------------------------------------
 
 /**
+ * @brief Reset Score.
+ *
+ * @return Score& this
+ */
+Score	&Score::reset() {
+	_score = 0;
+	_bonusDestruction = 0;
+	_bonusEnemies = 0;
+	_bonusTime = 0;
+	_levelEnemies = 0;
+	_killedEnemies = 0;
+	_levelCrispies = 0;
+	_crispiesDestroyed = 0;
+	_levelTime = 0;
+	_timeDone = 0;
+	_levelId = -1;
+	return *this;
+}
+
+/**
  * @brief Add points to scrore.
  *
  * @param points
@@ -85,8 +101,6 @@ Score	&Score::addPoints(int32_t points) {
 
 /**
  * @brief Add bonus points for time.
- * 		+ 10000 points if made in 50% of given time.
- * 		+ 600 points if made in 75% of given time.
  *
  * @param levelTime
  * @param time
@@ -95,11 +109,12 @@ Score	&Score::addPoints(int32_t points) {
 Score	&Score::addBonusTime(float const levelTime, float const time) {
 	_levelTime = levelTime;
 	_timeDone = time;
+	_bonusTime = levelTime - time;
 	float	ratio = time / levelTime;
-	if (ratio < 0.5)
-		_score += 10000;
+	if (ratio < 0.25)
+		_bonusTime *= 100;
 	else if (ratio < 0.75)
-		_score += 600;
+		_bonusTime *= 25;
 	return *this;
 }
 
@@ -122,32 +137,62 @@ uint32_t levelCrispies, uint32_t crispiesLast)
 	_killedEnemies = levelEnemies - enemiesLast;
 	_levelCrispies = levelCrispies;
 	_crispiesDestroyed = levelCrispies - crispiesLast;
+	if (levelCrispies != 0 && crispiesLast == 0) {
+		_bonusDestruction = 125;
+	}
 	if (levelEnemies != 0) {
 		if (_killedEnemies == 0) {
+			// bonus no enemies killed.
+			_bonusEnemies = 1000;
 			if (levelCrispies != 0 && crispiesLast == 0) {
 				// super bonus all crispies destroyed without kill any enemies
-				_score += 20000;
-			} else {
-				// bonus no enemies killed.
-				_score += 1000;
+				_bonusDestruction = 19000;
 			}
 		} else if (enemiesLast == 0){
 			// bonus kill all enemies.
-			_score += 500;
+			_bonusEnemies = 500;
 		}
 	}
 	return *this;
 }
 
-std::vector<std::string>	Score::getStats(std::vector<std::string> vec) {
-	vec.push_back("Blocks destroyed: " + std::to_string(_crispiesDestroyed) + "/"+std::to_string(_levelCrispies));
-	vec.push_back("Killed enemies: " + std::to_string(_killedEnemies) + "/"+std::to_string(_levelEnemies));
-	std::string	timeDoneStr = std::to_string(_timeDone);
-	timeDoneStr = timeDoneStr.substr(0, timeDoneStr.find(".")+2);
-	std::string	levelTimeStr = std::to_string(_levelTime);
-	levelTimeStr = levelTimeStr.substr(0, levelTimeStr.find(".")+2);
-	vec.push_back("Time: " + timeDoneStr + "/"+levelTimeStr);
-	return vec;
+/**
+ * @brief Get Statistic Score
+ *
+ * @param vec
+ * @return std::vector<Score::Stat>
+ */
+void	Score::getStats(std::vector<Score::Stat> &vec) {
+	vec.push_back({
+		"Blocks destroyed:",
+		std::to_string(_crispiesDestroyed) + "/"+std::to_string(_levelCrispies),
+		""
+	});
+	vec.push_back({
+		"Bonus destruction: ",
+		std::to_string(_bonusDestruction) + " pts",
+		""
+	});
+	vec.push_back({
+		"Killed enemies: " + std::to_string(_killedEnemies) + "/"+std::to_string(_levelEnemies),
+		std::to_string(_score) + " pts",
+		""
+	});
+	vec.push_back({
+		"Bonus enemies: ",
+		std::to_string(_bonusEnemies) + " pts",
+		""
+	});
+	vec.push_back({
+		"Time: " + timeToString(_timeDone) + " / " + timeToString(_levelTime),
+		std::to_string(_bonusTime) + " pts",
+		"bomberman-assets/textures/bonus/time.png"
+	});
+	vec.push_back({
+		"TOTAL",
+		std::to_string(getScore()) + " pts",
+		"bomberman-assets/textures/bonus/score.png"
+	});
 }
 
 // -- Exceptions errors --------------------------------------------------------

@@ -9,6 +9,9 @@ class Score {
 private:
 	// Members
 	int32_t		_score;
+	int32_t		_bonusDestruction;
+	int32_t		_bonusEnemies;
+	int32_t		_bonusTime;
 	int32_t		_levelId;
 	int32_t		_levelEnemies;
 	int32_t		_killedEnemies;
@@ -41,11 +44,17 @@ public:
 	std::string	toString();
 
 	// Methods
+	Score	&reset();
 	Score	&addPoints(int32_t points);
 	Score	&addBonusTime(float const levelTime, float const time);
 	Score	&addBonusEnemies(uint32_t levelEnemies, uint32_t enemiesLast,
 			uint32_t levelCrispies, uint32_t crispiesLast);
-	std::vector<std::string>	getStats(std::vector<std::string> vec);
+	struct Stat {
+		std::string		label;
+		std::string		points;
+		std::string		image;
+	};
+	void	getStats(std::vector<Stat> &vec);
 
 	// Exceptions
 	class ScoreException : public std::runtime_error {

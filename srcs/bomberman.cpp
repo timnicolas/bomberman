@@ -79,9 +79,9 @@ bool	initSettings(std::string const & filename) {
 
 	/* font */
 	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/Roboto-Regular.ttf")
+		s.j("font").add<std::string>("file", "bomberman-assets/fonts/snakebold.TTF")
 			.setDescription("this is the main font");
-		s.j("font").add<uint64_t>("size", 25).setMin(10).setMax(50)
+		s.j("font").add<uint64_t>("size", 20).setMin(10).setMax(50)
 			.setDescription("default size for the text");
 
 	/* colors */
@@ -210,4 +210,18 @@ bool	argparse(int nbArgs, char const ** args) {
 std::chrono::milliseconds getMs() {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(
 		std::chrono::system_clock::now().time_since_epoch());
+}
+
+/**
+ * @brief Return time as a string formated m:ss
+ *
+ * @param time
+ * @return std::string formated m:ss
+ */
+std::string					timeToString(float time) {
+	int	minutes = time / 60;
+	int	seconds = static_cast<int>(time) % 60;
+	std::stringstream ss;
+	ss << std::setw(2) << std::setfill('0') << seconds;
+	return std::to_string(minutes) + ":" + ss.str();
 }

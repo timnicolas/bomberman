@@ -31,7 +31,7 @@ class SceneVictory : public ASceneMenu {
 		ButtonsStates	_states;
 		std::string		_lastSceneName;
 		struct StatUI {
-			ABaseUI *				score;
+			ABaseUI *				level;
 			std::vector<ABaseUI *>	stats;
 		};
 		StatUI			statistics;
