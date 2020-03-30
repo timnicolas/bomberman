@@ -75,7 +75,7 @@ bool	Bonus::update(float const dTime) {
 		alive = false;
 	}
 	getPos();
-	if (game.player->hasCollision(position, 0.2f)) {
+	if (game.player->hasCollision(position)) {
 		game.player->takeBonus(_typeBonus);
 		active = false;
 	}

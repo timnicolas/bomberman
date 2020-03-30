@@ -62,7 +62,7 @@ public:
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest);
-	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
+	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

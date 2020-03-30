@@ -49,7 +49,7 @@ bool	AEnemy::update(float const dTime) {
 		return true;
 	if (!alive)
 		active = false;
-	if (strength != 0 && game.player->hasCollision(position)) {
+	if (strength != 0 && game.player->hasCollision(position, size)) {
 		game.player->takeDamage(strength);
 	}
 	return _update(dTime);

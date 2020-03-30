@@ -87,7 +87,7 @@ bool	EnemyFrog::_update(float const dTime) {
 		_moveTo(_dir, dTime, -1);
 	}
 	else {  // if stay in a position
-		if (game.player->hasCollision(position)) {
+		if (game.player->hasCollision(position, size)) {
 			game.player->takeDamage(1);
 		}
 	}
