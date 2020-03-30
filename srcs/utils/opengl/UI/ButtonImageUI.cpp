@@ -19,7 +19,9 @@ ButtonImageUI::ButtonImageUI(ButtonImageUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
-ButtonImageUI::~ButtonImageUI() {}
+ButtonImageUI::~ButtonImageUI() {
+	_unloadImg();
+}
 
 ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {
 	(void)rhs;

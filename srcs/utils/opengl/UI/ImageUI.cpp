@@ -21,7 +21,9 @@ ImageUI::ImageUI(ImageUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
-ImageUI::~ImageUI() {}
+ImageUI::~ImageUI() {
+	_unloadImg();
+}
 
 ImageUI & ImageUI::operator=(ImageUI const & rhs) {
 	(void)rhs;

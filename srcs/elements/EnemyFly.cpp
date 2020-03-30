@@ -1,16 +1,16 @@
-#include "EnemyBasic.hpp"
+#include "EnemyFly.hpp"
 #include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-EnemyBasic::EnemyBasic(SceneGame &game)
+EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game),
   _dir(Direction::UP)
 {
-	name = "EnemyBasic";
+	name = "EnemyFly";
 }
 
-EnemyBasic::~EnemyBasic() {
+EnemyFly::~EnemyFly() {
 	auto it = game.enemies.begin();
 	while (it != game.enemies.end()) {
 		if ((*it) == this)
@@ -20,13 +20,13 @@ EnemyBasic::~EnemyBasic() {
 	}
 }
 
-EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
+EnemyFly::EnemyFly(EnemyFly const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
-EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
+EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);
 	}
@@ -42,7 +42,7 @@ EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyBasic::_update(float const dTime) {
+bool	EnemyFly::_update(float const dTime) {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
 	_baseEnemyMove(dTime, _dir);
@@ -55,7 +55,7 @@ bool	EnemyBasic::_update(float const dTime) {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyBasic::_postUpdate() {
+bool	EnemyFly::_postUpdate() {
 	return true;
 }
 
@@ -65,7 +65,7 @@ bool	EnemyBasic::_postUpdate() {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyBasic::_draw(Gui &gui) {
+bool	EnemyFly::_draw(Gui &gui) {
 	gui.drawCube(Block::IA, getPos());
 	return true;
 }

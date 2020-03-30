@@ -135,6 +135,13 @@ void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
 }
 
 /**
+ * @brief Unload a previously load image
+ */
+void ABaseUI::_unloadImg() {
+	glDeleteTextures(1, &_imgTextureID);
+}
+
+/**
  * @brief draw a 2D image on the screen
  *
  * @param pos the text pos
