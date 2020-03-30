@@ -32,13 +32,14 @@ bool			SceneVictory::init() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 	float menuWidth = winSz.x / 2;
-	float menuHeight = menuWidth / 8;
+	float menuHeight = winSz.y / 14;
+	float statisticHeight = menuHeight * 0.6;
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
+		tmpSize.y = statisticHeight;
 		addText(tmpPos, tmpSize, "Victory !").setTextFont("title");
 
 		try {
@@ -48,13 +49,13 @@ bool			SceneVictory::init() {
 				tmpSize,
 				"LVL " + std::to_string(scGame.score.getLevelId()))
 					.setTextAlign(TextAlign::LEFT);
-			tmpPos.y -= menuHeight * 0.6;
+			tmpPos.y -= statisticHeight;
 			std::vector<Score::Stat> scoreStat;
 			scGame.score.getStats(scoreStat);
 			for (auto &&stat : scoreStat) {
-				tmpPos.y -= menuHeight * 0.6;
+				tmpPos.y -= statisticHeight;
 				if (stat.image.size()) {
-					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y + 9}, {32, 32}, stat.image));
+					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y}, {32, 32}, stat.image));
 					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
 						.setTextAlign(TextAlign::LEFT));
 				} else {
@@ -70,6 +71,7 @@ bool			SceneVictory::init() {
 			logErr(e.what());
 		}
 
+		tmpSize.y = menuHeight;
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "NEXT LEVEL")
 			.setKeyLeftClickInput(InputType::CONFIRM)
