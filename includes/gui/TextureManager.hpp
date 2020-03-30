@@ -6,7 +6,7 @@
 #include "Shader.hpp"
 #include "includesOpengl.hpp"
 
-#define NB_BLOCK_TYPES 20
+#define NB_BLOCK_TYPES 22
 
 namespace Block {
 	enum Enum {
@@ -30,6 +30,8 @@ namespace Block {
 		BONUS_BOMBPASS,
 		BONUS_FLAMPASS,
 		BONUS_SHIELD,
+		BONUS_TIME,
+		BONUS_POINTS,
 	};
 }  // namespace Block
 

@@ -101,9 +101,13 @@ SRC =	main.cpp \
 		AEnemy.cpp \
 		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
+\
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
 		elements/EnemyWithEye.cpp \
+		elements/EnemyFly.cpp \
+		elements/EnemyCrispy.cpp \
+		elements/EnemyFrog.cpp \
 \
 		AObject.cpp \
 		elements/Bomb.cpp \
@@ -113,6 +117,7 @@ SRC =	main.cpp \
 		elements/Crispy.cpp \
 		elements/End.cpp \
 		elements/Flag.cpp \
+		elements/Score.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
@@ -172,9 +177,13 @@ HEAD =	bomberman.hpp \
 		ACharacter.hpp \
 		AEnemy.hpp \
 		elements/Player.hpp \
+\
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
 		elements/EnemyWithEye.hpp \
+		elements/EnemyFly.hpp \
+		elements/EnemyCrispy.hpp \
+		elements/EnemyFrog.hpp \
 \
 		AObject.hpp \
 		elements/Bomb.hpp \
@@ -184,6 +193,7 @@ HEAD =	bomberman.hpp \
 		elements/Crispy.hpp \
 		elements/End.hpp \
 		elements/Flag.hpp \
+		elements/Score.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \

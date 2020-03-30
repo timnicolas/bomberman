@@ -5,8 +5,7 @@
 
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
-  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
-  _dirIdx(0),
+  _dir(Direction::UP),
   _findPlayer(false),
   _path()
 {
@@ -15,13 +14,6 @@ EnemyFollow::EnemyFollow(SceneGame &game)
 }
 
 EnemyFollow::~EnemyFollow() {
-	auto it = game.enemies.begin();
-	while (it != game.enemies.end()) {
-		if ((*it) == this)
-			game.enemies.erase(it);
-		else
-			it++;
-	}
 }
 
 EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
@@ -46,6 +38,8 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  * @return false if failure
  */
 bool	EnemyFollow::_update() {
+	if (_isBlocked())  // do nothing if blocked
+		return true;
 	// try to find a path to the player
 	// after 1sec, 1 chance over 10 to relaunch path calculation
 	if ((getMs() - _lastFindMs).count() > 1000 && (!_findPlayer || rand() % 100 < 10)) {
@@ -65,7 +59,7 @@ bool	EnemyFollow::_update() {
 
 	if (lastPos == position) {
 		// if the enemy doesn't move
-		_movePatternBasic(_directionsOrder, _dirIdx);
+		_baseEnemyMove(_dir);
 	}
 
 	return true;

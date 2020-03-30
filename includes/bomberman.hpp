@@ -25,6 +25,7 @@ bool						usage();
 bool						argparse(int nbArgs, char const ** args);
 
 std::chrono::milliseconds	getMs();
+std::string					timeToString(float time);
 
 /**
  * @brief global variable for general settings

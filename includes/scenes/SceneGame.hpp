@@ -11,6 +11,7 @@
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
+#include "Score.hpp"
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
@@ -53,6 +54,7 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
+	Player						*_playerSaved;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -61,12 +63,36 @@ private:
 	void	_drawBoard();
 
 protected:
+	struct AllUI {
+		ABaseUI *	timeLeftImg;  // TextUI
+		ABaseUI *	timeLeftText;  // TextUI
+		ABaseUI *	scoreImg;  // TextUI
+		ABaseUI *	scoreText;  // TextUI
+		ABaseUI *	lifeImg;  // ImageUI
+		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	speedImg;  // ImageUI
+		ABaseUI *	speedText;  // TextUI
+		ABaseUI *	bonusBombImg;  // ImageUI
+		ABaseUI *	bonusBombText;  // TextUI
+		ABaseUI *	bonusFlameImg;  // ImageUI
+		ABaseUI *	bonusFlameText;  // TextUI
+		ABaseUI *	bonusFlampassImg;  // ImageUI
+		ABaseUI *	bonusWallpassImg;  // ImageUI
+		ABaseUI *	bonusDetonatorImg;  // ImageUI
+		ABaseUI *	bonusBombpassImg;  // ImageUI
+		ABaseUI *	bonusShieldImg;  // ImageUI
+		ABaseUI *	bonusShieldText;  // TextUI
+	};
+	AllUI			allUI;
+
+	void			_initGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
 
 public:
 	// Members
 	std::vector< std::vector< std::vector<AEntity *> > > board;
+	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
 	Player						*player;
 	std::vector<AEnemy *>		enemies;
 	struct BonusValues {
@@ -79,7 +105,11 @@ public:
 	glm::uvec2					size;
 	int32_t						level;  // the current level ID (-1 for no level)
 	GameState::Enum				state;
-	std::chrono::milliseconds	time;
+	uint32_t					levelEnemies;
+	uint32_t					levelCrispies;
+	float						levelTime;
+	float						time;
+	Score						score;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);

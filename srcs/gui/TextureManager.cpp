@@ -104,4 +104,6 @@ std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	TextureManager::_blocks 
 	{{18, 18, 18, 18, 18, 18}},  // bonus bombpass
 	{{19, 19, 19, 19, 19, 19}},  // bonus flampass
 	{{20, 20, 20, 20, 20, 20}},  // bonus shield
+	{{21, 21, 21, 21, 21, 21}},  // bonus time
+	{{22, 22, 22, 22, 22, 22}},  // bonus points
 }};

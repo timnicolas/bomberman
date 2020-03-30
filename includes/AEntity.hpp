@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <chrono>
 #include "useGlm.hpp"
 #include "Logging.hpp"
 #include "Gui.hpp"
@@ -68,6 +67,8 @@ public:
 	virtual bool		draw(Gui &gui) = 0;
 	virtual glm::vec3	getPos() = 0;
 	virtual bool		takeDamage(const int damage) = 0;
+	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
+	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
 };
 
 #endif  // ENTITY_HPP_

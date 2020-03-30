@@ -14,9 +14,8 @@
 class EnemyWithEye : public AEnemy {
 private:
 	EnemyWithEye();
-	Direction::Enum					_playerDir;  // direction of the player (if view it)
-	std::vector<Direction::Enum>	_directionsOrder;
-	uint32_t						_dirIdx;
+	Direction::Enum	_dir;
+	Direction::Enum	_playerDir;  // direction of the player (if view it)
 
 protected:
 	virtual bool	_update();

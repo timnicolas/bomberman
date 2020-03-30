@@ -1,26 +1,32 @@
-#include "EnemyWithEye.hpp"
+#include "EnemyFly.hpp"
 #include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
-EnemyWithEye::EnemyWithEye(SceneGame &game)
+EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game),
-  _dir(Direction::UP),
-  _playerDir(Direction::NO_DIRECTION)
+  _dir(Direction::UP)
 {
-	name = "EnemyWithEye";
+	name = "EnemyFly";
 }
 
-EnemyWithEye::~EnemyWithEye() {
+EnemyFly::~EnemyFly() {
+	auto it = game.enemies.begin();
+	while (it != game.enemies.end()) {
+		if ((*it) == this)
+			game.enemies.erase(it);
+		else
+			it++;
+	}
 }
 
-EnemyWithEye::EnemyWithEye(EnemyWithEye const &src) : AEnemy(src) {
+EnemyFly::EnemyFly(EnemyFly const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
-EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
+EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);
 	}
@@ -35,19 +41,10 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyWithEye::_update() {
+bool	EnemyFly::_update() {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
-	Direction::Enum viewPlayerDir = _isPlayerVisible();
-	if (viewPlayerDir != Direction::NO_DIRECTION) {
-		_playerDir = viewPlayerDir;
-		_dir = viewPlayerDir;
-	}
-	glm::vec3 tmpPos = position;
-	if (tmpPos == _moveTo(_playerDir)) {
-		_playerDir = Direction::NO_DIRECTION;
-		_baseEnemyMove(_dir);
-	}
+	_baseEnemyMove(_dir);
 	return true;
 }
 
@@ -57,7 +54,7 @@ bool	EnemyWithEye::_update() {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyWithEye::_postUpdate() {
+bool	EnemyFly::_postUpdate() {
 	return true;
 }
 
@@ -67,7 +64,7 @@ bool	EnemyWithEye::_postUpdate() {
  * @return true if success
  * @return false if failure
  */
-bool	EnemyWithEye::_draw(Gui &gui) {
+bool	EnemyFly::_draw(Gui &gui) {
 	gui.drawCube(Block::IA, getPos());
 	return true;
 }

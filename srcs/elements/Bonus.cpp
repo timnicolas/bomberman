@@ -14,6 +14,8 @@ std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
 	{ BonusType::BOMBPASS, Block::BONUS_BOMBPASS },
 	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
 	{ BonusType::SHIELD, Block::BONUS_SHIELD },
+	{ BonusType::TIME, Block::BONUS_TIME },
+	{ BonusType::POINTS, Block::BONUS_POINTS },
 };
 
 std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
@@ -26,6 +28,8 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "bombpass", BonusType::BOMBPASS },
 	{ "flampass", BonusType::FLAMPASS },
 	{ "shield", BonusType::SHIELD },
+	{ "time", BonusType::TIME },
+	{ "points", BonusType::POINTS },
 };
 
 // -- Constructors -------------------------------------------------------------
