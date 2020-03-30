@@ -62,8 +62,8 @@ glm::vec3		ACharacter::getPos() {
  */
 glm::ivec2		ACharacter::getIntPos() const {
 	return glm::ivec2(
-		static_cast<int>(position.x + 0.5),
-		static_cast<int>(position.z + 0.5)
+		static_cast<int>(position.x + size.x / 2),
+		static_cast<int>(position.z + size.z / 2)
 	);
 }
 
