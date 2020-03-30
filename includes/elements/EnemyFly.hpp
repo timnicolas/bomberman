@@ -9,11 +9,11 @@
 /**
  * @brief This is an enemy object
  *
- * EnemyBasic will simply follow a pattern
+ * EnemyFly will simply follow a pattern in the boardSky
  */
-class EnemyBasic : public AEnemy {
+class EnemyFly : public AEnemy {
 private:
-	EnemyBasic();
+	EnemyFly();
 	Direction::Enum	_dir;
 
 protected:
@@ -23,10 +23,10 @@ protected:
 
 public:
 	// Constructors
-	explicit EnemyBasic(SceneGame &game);
-	~EnemyBasic();
-	EnemyBasic(EnemyBasic const &src);
+	explicit EnemyFly(SceneGame &game);
+	~EnemyFly();
+	EnemyFly(EnemyFly const &src);
 
 	// Operators
-	EnemyBasic &operator=(EnemyBasic const &rhs);
+	EnemyFly &operator=(EnemyFly const &rhs);
 };

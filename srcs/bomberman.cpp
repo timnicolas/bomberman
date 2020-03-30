@@ -113,6 +113,12 @@ bool	initSettings(std::string const & filename) {
 	s.add<double>("mouse_sensitivity", 0.1).setMin(0.0).setMax(3.0) \
 		.setDescription("Camera mouse sensitivity.");
 
+	/* Debug */
+	s.add<SettingsJson>("debug").setDescription("All debug settings");
+	s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
+	s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
+	s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
+
 	try {
 		if (file::isDir(filename)) {
 			logWarn(filename << " is not the settings file, it is a directory");

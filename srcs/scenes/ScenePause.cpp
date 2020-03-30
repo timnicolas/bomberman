@@ -1,4 +1,5 @@
 #include "ScenePause.hpp"
+#include "SceneGame.hpp"
 
 ScenePause::ScenePause(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -46,6 +47,10 @@ bool			ScenePause::init() {
 			.addButtonLeftListener(&_states.resume);
 
 		tmpPos.y -= menuHeight * 1.2;
+		addButton(tmpPos, tmpSize, "RESTART")
+			.addButtonLeftListener(&_states.restart);
+
+		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "MAIN MENU")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
@@ -78,9 +83,15 @@ bool			ScenePause::init() {
  */
 bool	ScenePause::update() {
 	ASceneMenu::update();
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	if (_states.resume) {
 		_states.resume = false;
+		SceneManager::loadScene(_lastSceneName);
+	}
+	else if (_states.restart) {
+		_states.restart = false;
+		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {

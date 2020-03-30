@@ -106,16 +106,16 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offs
 		pos = getPos();
 	std::unordered_set<AEntity *> collisions;
 
-	for (auto &&entity : game.board[pos.x + offset][pos.z + offset]) {
+	for (auto &&entity : getBoard()[pos.x + offset][pos.z + offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + offset]) {
+	for (auto &&entity : getBoard()[pos.x + 1.0 - offset][pos.z + offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + offset][pos.z + 1.0 - offset]) {
+	for (auto &&entity : getBoard()[pos.x + offset][pos.z + 1.0 - offset]) {
 		collisions.insert(entity);
 	}
-	for (auto &&entity : game.board[pos.x + 1.0 - offset][pos.z + 1.0 - offset]) {
+	for (auto &&entity : getBoard()[pos.x + 1.0 - offset][pos.z + 1.0 - offset]) {
 		collisions.insert(entity);
 	}
 	return collisions;
@@ -199,7 +199,8 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
  * @param offset Offset to turn correction (-1 to don't use correction)
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset,
+float ignoreColisions) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
@@ -220,7 +221,7 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 			return position;
 	}
 	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
-		if (_canMove(getCollision(pos))) {  // if we can move
+		if (ignoreColisions || _canMove(getCollision(pos))) {  // if we can move
 			position = pos;
 		}
 		else if (offset > 0) {  // if we cannot move
@@ -253,6 +254,27 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 		}
 	}
 	return position;
+}
+
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > const & ACharacter::getBoard() const {
+	if (position.y >= 0.5)
+		return game.boardFly;
+	return game.board;
+}
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > & ACharacter::getBoard() {
+	if (position.y >= 0.5)
+		return game.boardFly;
+	return game.board;
 }
 
 // -- Exceptions errors --------------------------------------------------------

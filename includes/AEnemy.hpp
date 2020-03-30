@@ -37,17 +37,20 @@ protected:
 	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
+	bool			_baseEnemyMove(float const dTime, Direction::Enum & dir);
 	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
 	bool			_followPath(float const dTime, std::deque<PathNode> & path);
 
 	/* check and calcultation functions */
 	Direction::Enum	_isPlayerVisible() const;
-	bool			_isOn(glm::ivec2 dest) const;
+	bool			_isOn(glm::ivec2 dest, float offset = IS_ON_POS_OFFSET) const;
 	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);
+	bool			_isBlocked() const;
 
 public:
 	// Members
 	int			bombs;
+	int			strength;  // number of damage if hit player
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);
