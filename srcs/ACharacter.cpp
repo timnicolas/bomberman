@@ -156,16 +156,16 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
  * @brief Test if Character have a collision at position <atPosition>.
  *
  * @param atPosition
- * @param offset
+ * @param atSize
  * @return true if has a collision
  * @return false if no collision
  */
-bool	ACharacter::hasCollision(glm::vec3 atPosition, float offset) {
+bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
 	getPos();
-	if (position.x >= atPosition.x - size.x + offset
-	&& position.x <= atPosition.x + size.x - offset
-	&& position.z >= atPosition.z - size.z + offset
-	&& position.z <= atPosition.z + size.z - offset)
+	if (position.x < atPosition.x + atSize.x
+	&& position.x + size.x > atPosition.x
+	&& position.z < atPosition.z + atSize.z
+	&& position.z + size.z > atPosition.z)
 		return true;
 	return false;
 }

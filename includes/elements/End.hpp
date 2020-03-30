@@ -16,7 +16,7 @@ private:
 	Block::Enum	_texture;
 
 	// Methods
-	std::unordered_set<AEntity *>	_getCollision(float offset);
+	std::unordered_set<AEntity *>	_getCollision();
 
 public:
 	// Constructors
