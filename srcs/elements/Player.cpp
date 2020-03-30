@@ -209,7 +209,6 @@ void	Player::_putBomb() {
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
 		bomb->setPropagation(bombProgation);
-		// game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		game.board[intPos.x][intPos.y].push_back(bomb);
 		bombs -= 1;
 	}
