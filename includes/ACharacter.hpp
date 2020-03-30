@@ -42,6 +42,7 @@ public:
 	// Members
 	int			lives;
 	float		speed;
+	glm::vec3	size;
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);

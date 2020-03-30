@@ -10,6 +10,7 @@ EnemyFrog::EnemyFrog(SceneGame &game)
   _nextJumpTime(0)
 {
 	name = "EnemyFrog";
+	size = glm::vec3(0.7, 0.7, 0.5);
 	strength = 0;  // remove auto damage
 }
 
@@ -143,6 +144,6 @@ bool	EnemyFrog::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyFrog::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
+	gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }
