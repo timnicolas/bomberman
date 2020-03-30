@@ -82,8 +82,10 @@ SceneGame::~SceneGame() {
 	}
 	boardFly.clear();
 	if (player != nullptr) {
-		// TODO(ebaudet): save player if state is not GameOver.
 		delete player;
+	}
+	if (playerSaved != nullptr) {
+		delete playerSaved;
 	}
 	std::vector<AEnemy *>::iterator it = enemies.begin();
 	AEnemy *enemy;
@@ -159,6 +161,8 @@ bool			SceneGame::init() {
 		i++;
 	}
 
+	playerSaved = new Player(*this);
+
 	_initGameInfos();
 
 	return true;
@@ -230,11 +234,13 @@ bool	SceneGame::update() {
 		score.addBonusTime(levelTime, time);
 		score.addBonusEnemies(levelEnemies, enemies.size(), levelCrispies, crispiesLast);
 		SceneManager::loadScene(SceneNames::VICTORY);
+		*playerSaved = *player;
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
 		// clear game infos.
 		player->resetParams();
+		*playerSaved = *player;
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -397,6 +403,9 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.y / 1.9
 	));
 
+	playerSaved->setPosition(player->getPos());
+	// get saved values
+	*player = *playerSaved;
 	player->init();
 	time = 0;
 	levelEnemies = enemies.size();
