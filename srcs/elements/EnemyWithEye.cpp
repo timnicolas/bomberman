@@ -5,9 +5,8 @@
 
 EnemyWithEye::EnemyWithEye(SceneGame &game)
 : AEnemy(game),
-  _playerDir(Direction::NO_DIRECTION),
-  _directionsOrder{Direction::LEFT, Direction::DOWN, Direction::UP, Direction::RIGHT},
-  _dirIdx(0)
+  _dir(Direction::UP),
+  _playerDir(Direction::NO_DIRECTION)
 {
 	name = "EnemyWithEye";
 }
@@ -40,13 +39,15 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
 bool	EnemyWithEye::_update(float const dTime) {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
-	Direction::Enum dir = _isPlayerVisible();
-	if (dir != Direction::NO_DIRECTION)
-		_playerDir = dir;
+	Direction::Enum viewPlayerDir = _isPlayerVisible();
+	if (viewPlayerDir != Direction::NO_DIRECTION) {
+		_playerDir = viewPlayerDir;
+		_dir = viewPlayerDir;
+	}
 	glm::vec3 tmpPos = position;
 	if (tmpPos == _moveTo(_playerDir, dTime)) {
 		_playerDir = Direction::NO_DIRECTION;
-		_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+		_baseEnemyMove(dTime, _dir);
 	}
 	return true;
 }

@@ -5,8 +5,7 @@
 
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
-  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
-  _dirIdx(0),
+  _dir(Direction::UP),
   _findPlayer(false),
   _path()
 {
@@ -61,7 +60,7 @@ bool	EnemyFollow::_update(float const dTime) {
 
 	if (lastPos == position) {
 		// if the enemy doesn't move
-		_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+		_baseEnemyMove(dTime, _dir);
 	}
 
 	return true;

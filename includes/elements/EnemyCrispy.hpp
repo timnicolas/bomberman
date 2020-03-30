@@ -6,16 +6,20 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define TIME_BEFORE_TRANSFORM_TO_WALL	8000
+
 /**
  * @brief This is an enemy object
  *
- * EnemyWithEye will follow a pattern and go to the player if it can view it
+ * EnemyCrispy is a crispy wall. If the enemy can show the player, it transform to a crispy wall
  */
-class EnemyWithEye : public AEnemy {
+class EnemyCrispy : public AEnemy {
 private:
-	EnemyWithEye();
+	EnemyCrispy();
+	bool			_isWall;
 	Direction::Enum	_dir;
 	Direction::Enum	_playerDir;  // direction of the player (if view it)
+	int64_t			_lastPayerSeenMs;  // last time that a player has been seen
 
 protected:
 	virtual bool	_update(float const dTime);
@@ -24,10 +28,10 @@ protected:
 
 public:
 	// Constructors
-	explicit EnemyWithEye(SceneGame &game);
-	~EnemyWithEye();
-	EnemyWithEye(EnemyWithEye const &src);
+	explicit EnemyCrispy(SceneGame &game);
+	~EnemyCrispy();
+	EnemyCrispy(EnemyCrispy const &src);
 
 	// Operators
-	EnemyWithEye &operator=(EnemyWithEye const &rhs);
+	EnemyCrispy &operator=(EnemyCrispy const &rhs);
 };
