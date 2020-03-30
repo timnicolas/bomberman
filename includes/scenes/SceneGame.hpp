@@ -54,6 +54,7 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
+	Player						*_playerSaved;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
