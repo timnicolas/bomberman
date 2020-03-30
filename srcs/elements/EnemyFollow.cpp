@@ -10,7 +10,7 @@ EnemyFollow::EnemyFollow(SceneGame &game)
   _path()
 {
 	name = "EnemyFollow";
-	size = glm::vec3(0.8, 0.8, 1.5);
+	size = glm::vec3(0.8, 1.5, 0.8);
 	_lastFindMs = getMs();
 }
 
