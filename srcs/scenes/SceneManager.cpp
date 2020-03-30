@@ -75,7 +75,7 @@ bool SceneManager::_init() {
 	}
 
 	// load and init 3d models
-	if (!ModelsManager::get().init(*(_gui->cam))) {
+	if (!ModelsManager::init(*(_gui->cam))) {
 		return false;
 	}
 
