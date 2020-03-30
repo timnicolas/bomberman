@@ -50,8 +50,11 @@ bool	EnemyCrispy::_update(float const dTime) {
 		return true;
 
 	/* retransform to a wall */
-	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL)
+	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL && _isOn(getIntPos(), dTime * speed * 3)) {
+		position.x = getIntPos().x;
+		position.z = getIntPos().y;
 		_isWall = true;
+	}
 
 	/* try to find player */
 	Direction::Enum viewPlayerDir = _isPlayerVisible();
