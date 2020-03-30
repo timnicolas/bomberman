@@ -119,17 +119,7 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
 
 	for (int i = 0; i < 3; i++) {
 		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
-		bool canMove = true;
-		if (game.positionInGame(tmpPos) == false) {
-			canMove = false;
-			continue;
-		}
-		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			if (entity->crossable == Type::ALL || entity->crossable == type)
-				continue;
-			canMove = false;
-		}
-		if (canMove) {
+		if (_canWalkOnBlock(tmpPos)) {
 			glm::vec3 startPos = position;
 			if (startPos != _moveTo(tryDirOrder[i], dTime)) {
 				dir = tryDirOrder[i];
@@ -285,19 +275,8 @@ bool AEnemy::_isBlocked() const {
 	};
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
-		if (game.positionInGame(tmpPos) == false)
-			continue;
-		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			// don't go into fire if a bomb remove a wall and the enemy was blocked before
-			if (entity->type == Type::FIRE) {
-				nbColisions++;
-				break;
-			}
-			if (entity->crossable == Type::ALL || entity->crossable == type)
-				continue;
-
+		if (_canWalkOnBlock(tmpPos) == false) {
 			nbColisions++;
-			break;
 		}
 	}
 	// il walls all around entity

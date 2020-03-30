@@ -10,7 +10,6 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	name = "Fire";
 	blockPropagation = false;
 	destructible = true;
-	crossable = Type::ALL;
 	_timeToDie = 1.0f;
 }
 

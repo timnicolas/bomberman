@@ -29,20 +29,18 @@ private:
 	ACharacter();
 
 protected:
-	// Members
-	std::unordered_set<AEntity *>	_noCollisionObjects;
-
 	// Methods
-	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
-	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION,
-		float ignoreColisions = false);
+	bool		_canWalkOnBlock(glm::ivec2 pos) const;
+	bool		_canWalkOnEntity(AEntity * entity) const;
+	bool		_canMoveOn(glm::vec3 dest);
+	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
 	int			lives;
 	float		speed;
 	glm::vec3	size;
+	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);
@@ -53,6 +51,7 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
+	virtual void					resetCrossable();
 	virtual bool					update(float const dTime) = 0;
 	virtual bool					draw(Gui &gui) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
@@ -62,8 +61,7 @@ public:
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
-	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
-	bool							clearNoCollisionObjects(AEntity *entity);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest);
 	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
 
 	// Exceptions

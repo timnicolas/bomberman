@@ -14,6 +14,7 @@ ACharacter::ACharacter(SceneGame &game)
 	position = {0.0, 0.0, 0.0};
 	blockPropagation = false;
 	destructible = true;
+	resetCrossable();
 }
 
 ACharacter::~ACharacter() {
@@ -30,12 +31,20 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 		AEntity::operator=(rhs);
 		lives = rhs.lives;
 		speed = rhs.speed;
-		_noCollisionObjects = rhs._noCollisionObjects;
 	}
 	return *this;
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Set the Entity that the Character can cross
+ */
+void ACharacter::resetCrossable() {
+	crossableTypes.clear();
+	crossableTypes.push_back(Type::FIRE);
+	crossableTypes.push_back(Type::BONUS);
+}
 
 /**
  * @brief Get the current postion of the ACharacter
@@ -98,28 +107,47 @@ bool	ACharacter::takeDamage(const int damage) {
 }
 
 /**
- * @brief get a list of entity in collision with the Character at position pos.
+ * @brief get a list of entity in collision with the Character at a position.
  *
  * @param pos default VOID_POS3
- * @param offset default offset = 0.05f. need to be a positive value.
  * @return std::unordered_set<AEntity *> collisions
  */
-std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offset) {
-	if (pos == VOID_POS3)
-		pos = getPos();
+std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
+	if (dest == VOID_POS3) {
+		logWarn("dest is VOID_POS3 in ACharacter::getCollision");
+		dest = getPos();
+	}
 	std::unordered_set<AEntity *> collisions;
 
-	for (auto &&entity : getBoard()[pos.x + offset][pos.z + offset]) {
-		collisions.insert(entity);
+	/* get all positions blocks under character on a position */
+	std::vector<glm::ivec2> allPos;
+	glm::ivec2 idest = glm::ivec2(static_cast<int>(dest.x), static_cast<int>(dest.z));
+	glm::ivec2 tmpPos;
+
+	allPos.push_back(idest);
+
+	if (static_cast<int>(dest.x + size.x) > idest.x) {
+		tmpPos = idest;
+		tmpPos.x += 1;
+		allPos.push_back(tmpPos);
+
+		if (static_cast<int>(dest.z + size.z) > idest.y) {
+			tmpPos = idest;
+			tmpPos.x += 1;
+			tmpPos.y += 1;
+			allPos.push_back(tmpPos);
+		}
 	}
-	for (auto &&entity : getBoard()[pos.x + 1.0 - offset][pos.z + offset]) {
-		collisions.insert(entity);
+	if (static_cast<int>(dest.z + size.z) > idest.y) {
+		tmpPos = idest;
+		tmpPos.y += 1;
+		allPos.push_back(tmpPos);
 	}
-	for (auto &&entity : getBoard()[pos.x + offset][pos.z + 1.0 - offset]) {
-		collisions.insert(entity);
-	}
-	for (auto &&entity : getBoard()[pos.x + 1.0 - offset][pos.z + 1.0 - offset]) {
-		collisions.insert(entity);
+
+	for (auto && blockPos : allPos) {
+		for (auto &&entity : getBoard()[blockPos.x][blockPos.y]) {
+			collisions.insert(entity);
+		}
 	}
 	return collisions;
 }
@@ -134,62 +162,63 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 pos, float offs
  */
 bool	ACharacter::hasCollision(glm::vec3 atPosition, float offset) {
 	getPos();
-	if (position.x >= atPosition.x - 1.0 + offset
-	&& position.x <= atPosition.x + 1.0 - offset
-	&& position.z >= atPosition.z - 1.0 + offset
-	&& position.z <= atPosition.z + 1.0 - offset)
+	if (position.x >= atPosition.x - size.x + offset
+	&& position.x <= atPosition.x + size.x - offset
+	&& position.z >= atPosition.z - size.z + offset
+	&& position.z <= atPosition.z + size.z - offset)
 		return true;
-	return false;
-}
-
-/**
- * @brief Clear entity from list of no collision objects
- *
- * @param entity
- * @return true if element cleared.
- * @return false if no element to clear.
- */
-bool	ACharacter::clearNoCollisionObjects(AEntity *entity) {
-	if (_noCollisionObjects.find(entity) != _noCollisionObjects.end()) {
-		_noCollisionObjects.erase(entity);
-		return true;
-	}
 	return false;
 }
 
 // -- Protected Methods --------------------------------------------------------
 
 /**
- * @brief clear _noCollisionObjects list if not in <collisions>
+ * @brief Check if we can walk on a block
  *
- * @param collisions
+ * @param pos The block pos
+ * @return true If we can walk on this block
  */
-void	ACharacter::_clearCollisionObjects(std::unordered_set<AEntity *> collisions) {
-	std::unordered_set<AEntity *>::iterator it = _noCollisionObjects.begin();
-	while (it != _noCollisionObjects.end()) {
-		if (collisions.find(*it) == collisions.end()) {
-			it = _noCollisionObjects.erase(it);
-		}
-		else {
-			it++;
-		}
+bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
+	for (auto && entity : getBoard()[pos.x][pos.y]) {
+		if (_canWalkOnEntity(entity) == false)
+			return false;
 	}
+	return true;
 }
 
 /**
- * @brief Check if there are collisions that cannot be passed.
+ * @brief Check if we can walk on an entity
  *
- * @param collisions list of AEntity collisions
- * @return true
- * @return false
+ * @param pos The block pos
+ * @return true If we can walk on this block
  */
-bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
-	for (auto &&entity : collisions) {
-		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
-			continue;
-		if (entity->crossable == Type::ALL || entity->crossable == type)
-			continue;
+bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
+	bool ok = false;
+	for (auto && crossable : crossableTypes) {
+		if (entity->type == Type::ALL || crossable == Type::ALL || entity->type == crossable) {
+			ok = true;
+		}
+	}
+	return ok;
+}
+
+/**
+ * @brief Check if the entity can move on a position
+ *
+ * @param dest The position to check
+ * @return true If the entity can move
+ */
+bool	ACharacter::_canMoveOn(glm::vec3 dest) {
+	/* check if we are on the game board */
+	if (game.positionInGame(dest, size) == false) {
 		return false;
+	}
+
+	/* check colision with all entities under character */
+	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);
+	for (auto && entity : allColisionsEntity) {
+		if (!_canWalkOnEntity(entity))
+			return false;
 	}
 	return true;
 }
@@ -202,10 +231,8 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
  * @param offset Offset to turn correction (-1 to don't use correction)
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset,
-float ignoreColisions) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
 	glm::vec3 						pos = getPos();
-	std::unordered_set<AEntity *>	collisions;
 
 	switch (direction) {
 		case Direction::UP:
@@ -223,38 +250,38 @@ float ignoreColisions) {
 		default:
 			return position;
 	}
-	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
-		if (ignoreColisions || _canMove(getCollision(pos))) {  // if we can move
+	if (game.positionInGame(pos, size)) {
+		if (_canMoveOn(pos)) {  // if we can move
 			position = pos;
 		}
-		else if (offset > 0) {  // if we cannot move
-			if (direction == Direction::UP || direction == Direction::DOWN) {
-				glm::vec3 tmpPos = pos;
-				tmpPos.x = static_cast<int>(pos.x);
-				if (pos.x - tmpPos.x < offset && _canMove(getCollision(tmpPos))) {
-					// can move up or down
-					return _moveTo(Direction::LEFT, dTime, -1);
-				}
-				tmpPos.x = static_cast<int>(pos.x + 1);
-				if (pos.x - tmpPos.x - 1 < offset && _canMove(getCollision(tmpPos))) {
-					// can move up or down
-					return _moveTo(Direction::RIGHT, dTime, -1);
-				}
-			}
-			else {  // left | right
-				glm::vec3 tmpPos = pos;
-				tmpPos.z = static_cast<int>(pos.z);
-				if (pos.z - tmpPos.z < offset && _canMove(getCollision(tmpPos))) {
-					// can move left or right
-					return _moveTo(Direction::UP, dTime, -1);
-				}
-				tmpPos.z = static_cast<int>(pos.z + 1);
-				if (pos.z - tmpPos.z - 1 < offset && _canMove(getCollision(tmpPos))) {
-					// can move left or right
-					return _moveTo(Direction::DOWN, dTime, -1);
-				}
-			}
-		}
+		// else if (offset > 0) {  // if we cannot move
+		// 	if (direction == Direction::UP || direction == Direction::DOWN) {
+		// 		glm::vec3 tmpPos = pos;
+		// 		tmpPos.x = static_cast<int>(pos.x);
+		// 		if (pos.x - tmpPos.x < offset && _canMove(getCollision(tmpPos))) {
+		// 			// can move up or down
+		// 			return _moveTo(Direction::LEFT, dTime, -1);
+		// 		}
+		// 		tmpPos.x = static_cast<int>(pos.x + 1);
+		// 		if (pos.x - tmpPos.x - 1 < offset && _canMove(getCollision(tmpPos))) {
+		// 			// can move up or down
+		// 			return _moveTo(Direction::RIGHT, dTime, -1);
+		// 		}
+		// 	}
+		// 	else {  // left | right
+		// 		glm::vec3 tmpPos = pos;
+		// 		tmpPos.z = static_cast<int>(pos.z);
+		// 		if (pos.z - tmpPos.z < offset && _canMove(getCollision(tmpPos))) {
+		// 			// can move left or right
+		// 			return _moveTo(Direction::UP, dTime, -1);
+		// 		}
+		// 		tmpPos.z = static_cast<int>(pos.z + 1);
+		// 		if (pos.z - tmpPos.z - 1 < offset && _canMove(getCollision(tmpPos))) {
+		// 			// can move left or right
+		// 			return _moveTo(Direction::DOWN, dTime, -1);
+		// 		}
+		// 	}
+		// }
 	}
 	return position;
 }
