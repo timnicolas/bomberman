@@ -89,19 +89,18 @@ void	Player::resetParams() {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Player::update(float const dTime) {
+bool	Player::update() {
 	if (!active)
 		return true;
 	if (alive) {
 		if (invulnerable > 0.0f)
-			invulnerable -= dTime;
+			invulnerable -= game.getDtTime();
 		if (invulnerable < 0.0f)
 			invulnerable = 0.0f;
-		_move(dTime);
+		_move();
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
@@ -228,20 +227,20 @@ bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
 
 // -- Private Methods ----------------------------------------------------------
 
-void	Player::_move(float const dTime) {
+void	Player::_move() {
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Direction::UP, dTime);
+		_moveTo(Direction::UP, game.getDtTime());
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Direction::RIGHT, dTime);
+		_moveTo(Direction::RIGHT, game.getDtTime());
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Direction::DOWN, dTime);
+		_moveTo(Direction::DOWN, game.getDtTime());
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Direction::LEFT, dTime);
+		_moveTo(Direction::LEFT, game.getDtTime());
 	}
 	collisions = getCollision(position);
 	_clearCollisionObjects(collisions);

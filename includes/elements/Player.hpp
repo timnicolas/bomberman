@@ -20,7 +20,7 @@ private:
 	Model		*_model;
 
 	// Methods
-	void	_move(float const dTime);
+	void	_move();
 	void	_putBomb();
 
 protected:
@@ -47,7 +47,7 @@ public:
 
 	// Methods
 	bool							init();
-	bool							update(float const dTime);
+	bool							update();
 	bool							draw(Gui &gui);
 	void							resetParams();
 	bool							takeDamage(const int damage);

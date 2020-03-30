@@ -43,7 +43,7 @@ public:
 	Bonus &operator=(Bonus const &rhs);
 
 	// Methods
-	bool			update(float const dTime);
+	bool			update();
 	bool			postUpdate();
 	bool			draw(Gui &gui);
 	static Bonus*	generateBonus(SceneGame &game, float rate = 0.1f);

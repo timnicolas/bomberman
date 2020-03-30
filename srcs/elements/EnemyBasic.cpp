@@ -39,12 +39,11 @@ EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyBasic::_update(float const dTime) {
-	_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+bool	EnemyBasic::_update() {
+	_movePatternBasic(_directionsOrder, _dirIdx);
 	return true;
 }
 

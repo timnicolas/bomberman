@@ -40,18 +40,17 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyWithEye::_update(float const dTime) {
+bool	EnemyWithEye::_update() {
 	Direction::Enum dir = _isPlayerVisible();
 	if (dir != Direction::NO_DIRECTION)
 		_playerDir = dir;
 	glm::vec3 tmpPos = position;
-	if (tmpPos == _moveTo(_playerDir, dTime)) {
+	if (tmpPos == _moveTo(_playerDir)) {
 		_playerDir = Direction::NO_DIRECTION;
-		_movePatternBasic(dTime, _directionsOrder, _dirIdx);
+		_movePatternBasic(_directionsOrder, _dirIdx);
 	}
 	return true;
 }

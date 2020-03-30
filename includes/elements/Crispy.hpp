@@ -19,7 +19,7 @@ public:
 	Crispy &operator=(Crispy const &rhs);
 
 	// Methods
-	bool	update(float const dTime);
+	bool	update();
 	bool	postUpdate();
 	bool	draw(Gui &gui);
 

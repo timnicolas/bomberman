@@ -19,7 +19,7 @@ private:
 	uint32_t						_dirIdx;
 
 protected:
-	virtual bool	_update(float const dTime);
+	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 
