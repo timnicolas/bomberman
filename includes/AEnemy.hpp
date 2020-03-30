@@ -45,7 +45,7 @@ protected:
 	Direction::Enum	_isPlayerVisible() const;
 	bool			_isOn(glm::ivec2 dest, float offset = IS_ON_POS_OFFSET) const;
 	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);
-	bool			_isBlocked() const;
+	bool			_isBlocked();
 
 public:
 	// Members
