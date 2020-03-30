@@ -3,7 +3,10 @@
 
 // -- Constructors -------------------------------------------------------------
 
-AObject::AObject(SceneGame &game) : AEntity(game) {
+AObject::AObject(SceneGame &game)
+: AEntity(game),
+  isInFlyBoard(false)
+{
 	category = Category::STATIC;
 	blockPropagation = true;
 	destructible = false;
@@ -35,12 +38,13 @@ AObject &AObject::operator=(AObject const &rhs) {
 void		AObject::setPos(glm::vec3 pos) {
 	if (pos == glm::vec3(VOID_POS3)) {
 		uint8_t i = 0;
-		for (auto &&board_it0 : game.board) {
+		float height = (isInFlyBoard) ? 1 : 0;
+		for (auto &&board_it0 : getBoard()) {
 			uint8_t j = 0;
 			for (auto &&board_it1 : board_it0) {
 				for (AEntity *board_it2 : board_it1) {
 					if (board_it2 == this) {
-						this->position = {i, 0, j};
+						this->position = {i, height, j};
 						return;
 					}
 				}
@@ -80,6 +84,27 @@ bool	AObject::takeDamage(const int damage) {
 		return false;
 	alive = false;
 	return true;
+}
+
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > const & AObject::getBoard() const {
+	if (isInFlyBoard)
+		return game.boardFly;
+	return game.board;
+}
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > & AObject::getBoard() {
+	if (isInFlyBoard)
+		return game.boardFly;
+	return game.board;
 }
 
 // -- Exceptions errors --------------------------------------------------------

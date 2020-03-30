@@ -5,19 +5,22 @@
 // -- Constructors -------------------------------------------------------------
 
 AEnemy::AEnemy(SceneGame &game)
-: ACharacter(game)
+: ACharacter(game),
+  strength(1)
 {
 	name = "AEnemy";
 	type = Type::ENEMY;
+	points = 200;
 }
 
 AEnemy::~AEnemy() {
-	// TODO(ebaudet): correct segfault
-	// std::vector<ACharacter *>::iterator find;
-	// find = std::find(game->enemies.begin(), game->enemies.end(), this);
-	// if (find != game->enemies.end()) {
-	// 	game->enemies.erase(find);
-	// }
+	std::vector<AEnemy *>::iterator find;
+	find = std::find(game.enemies.begin(), game.enemies.end(), this);
+	if (find != game.enemies.end()) {
+		game.enemies.erase(find);
+	}
+	if (game.state == GameState::PLAY)
+		game.score += points;
 }
 
 AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
@@ -30,6 +33,8 @@ AEnemy &AEnemy::operator=(AEnemy const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("Enemy object copied");
 		ACharacter::operator=(rhs);
+		bombs = rhs.bombs;
+		points = rhs.points;
 	}
 	return *this;
 }
@@ -47,8 +52,8 @@ bool	AEnemy::update() {
 		return true;
 	if (!alive)
 		active = false;
-	if (game.player->hasCollision(position)) {
-		game.player->takeDamage(1);
+	if (strength != 0 && game.player->hasCollision(position)) {
+		game.player->takeDamage(strength);
 	}
 	return _update();
 }
@@ -75,6 +80,69 @@ bool	AEnemy::postUpdate() {
  */
 bool	AEnemy::draw(Gui &gui) {
 	return _draw(gui);
+}
+
+/**
+ * @brief Base moving function for enemy
+ *
+ * @param dir The actual direction of the enemy
+ * @return false If the enemy is blocked
+ */
+bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
+	// try to move forward
+	glm::vec3 startPos = position;
+	if (startPos != _moveTo(dir, -1)) {
+		return true;
+	}
+
+	// foreach direction, define the next direction to turn left or right
+	Direction::Enum nextDir[4][3] = {
+		{Direction::LEFT, Direction::RIGHT, Direction::DOWN},  // after UP, turn LEFT or RIGHT
+		{Direction::UP, Direction::DOWN, Direction::LEFT},  // after RIGHT, turn UP or DOWN
+		{Direction::LEFT, Direction::RIGHT, Direction::UP},  // after DOWN, turn LEFT or RIGHT
+		{Direction::UP, Direction::DOWN, Direction::RIGHT},  // after LEFT, turn UP or DOWN
+	};
+
+	bool rightFirst = rand() & 1;  // random the first element btw right and left
+	// order to try direction (front, left/right, back)
+	Direction::Enum tryDirOrder[3] = {
+		nextDir[dir][rightFirst ? 1 : 0],  // then right or left
+		nextDir[dir][rightFirst ? 0 : 1],  // then left or right
+		nextDir[dir][2],  // then, go back
+	};
+
+	glm::ivec2 ipos = getIntPos();
+	glm::ivec2 nextPos[4] = {
+		{ 0, -1},  // UP
+		{ 1,  0},  // RIGHT
+		{ 0,  1},  // DOWN
+		{-1,  0},  // LEFT
+	};
+
+	for (int i = 0; i < 3; i++) {
+		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
+		bool canMove = true;
+		if (game.positionInGame(tmpPos) == false) {
+			canMove = false;
+			continue;
+		}
+		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
+			if (entity->crossable == Type::ALL || entity->crossable == type)
+				continue;
+			canMove = false;
+		}
+		if (canMove) {
+			glm::vec3 startPos = position;
+			if (startPos != _moveTo(tryDirOrder[i])) {
+				dir = tryDirOrder[i];
+				break;
+			}
+			if (i == 3)
+				return false;  // cannot move
+		}
+	}
+
+	return true;
 }
 
 /**
@@ -156,13 +224,13 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 		for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
 			if (x == playerPos.x)
 				return Direction::RIGHT;
-			if (game.board[x][thisPos.y].size() > 0)
+			if (getBoard()[x][thisPos.y].size() > 0)
 				break;
 		}
 		for (int x = thisPos.x; x >= 0; x--) {
 			if (x == playerPos.x)
 				return Direction::LEFT;
-			if (game.board[x][thisPos.y].size() > 0)
+			if (getBoard()[x][thisPos.y].size() > 0)
 				break;
 		}
 	}
@@ -170,13 +238,13 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 		for (int y = thisPos.y; y < static_cast<int>(game.size.y); y++) {
 			if (y == playerPos.y)
 				return Direction::DOWN;
-			if (game.board[thisPos.x][y].size() > 0)
+			if (getBoard()[thisPos.x][y].size() > 0)
 				break;
 		}
 		for (int y = thisPos.y; y >= 0; y--) {
 			if (y == playerPos.y)
 				return Direction::UP;
-			if (game.board[thisPos.x][y].size() > 0)
+			if (getBoard()[thisPos.x][y].size() > 0)
 				break;
 		}
 	}
@@ -190,11 +258,50 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
  * @param dest The postion to compare with enemy pos
  * @return true If is on the destination
  */
-bool AEnemy::_isOn(glm::ivec2 dest) const {
-	if (position.x >= static_cast<float>(dest.x) - IS_ON_POS_OFFSET
-	&& position.x <= static_cast<float>(dest.x) + IS_ON_POS_OFFSET
-	&& position.z >= static_cast<float>(dest.y) - IS_ON_POS_OFFSET
-	&& position.z <= static_cast<float>(dest.y) + IS_ON_POS_OFFSET)
+bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
+	if (position.x >= static_cast<float>(dest.x) - offset
+	&& position.x <= static_cast<float>(dest.x) + offset
+	&& position.z >= static_cast<float>(dest.y) - offset
+	&& position.z <= static_cast<float>(dest.y) + offset)
+		return true;
+	return false;
+}
+
+/**
+ * @brief Check if the enemy is blocked btw walls
+ *
+ * @return true If the enemy is blocked
+ */
+bool AEnemy::_isBlocked() const {
+	glm::ivec2 ipos = getIntPos();
+
+	int nbColisions = 0;  // nb of walls around enemy
+	// all blocks around enemy
+	int nexts[4][2] = {
+		{-1,  0},
+		{ 1,  0},
+		{ 0, -1},
+		{ 0,  1},
+	};
+	for (int i = 0; i < 4; i++) {
+		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
+		if (game.positionInGame(tmpPos) == false)
+			continue;
+		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
+			// don't go into fire if a bomb remove a wall and the enemy was blocked before
+			if (entity->type == Type::FIRE) {
+				nbColisions++;
+				break;
+			}
+			if (entity->crossable == Type::ALL || entity->crossable == type)
+				continue;
+
+			nbColisions++;
+			break;
+		}
+	}
+	// il walls all around entity
+	if (nbColisions == 4)
 		return true;
 	return false;
 }

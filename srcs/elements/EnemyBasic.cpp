@@ -5,20 +5,12 @@
 
 EnemyBasic::EnemyBasic(SceneGame &game)
 : AEnemy(game),
-  _directionsOrder{Direction::UP, Direction::DOWN, Direction::LEFT, Direction::RIGHT},
-  _dirIdx(0)
+  _dir(Direction::UP)
 {
 	name = "EnemyBasic";
 }
 
 EnemyBasic::~EnemyBasic() {
-	auto it = game.enemies.begin();
-	while (it != game.enemies.end()) {
-		if ((*it) == this)
-			game.enemies.erase(it);
-		else
-			it++;
-	}
 }
 
 EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
@@ -43,7 +35,9 @@ EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
  * @return false if failure
  */
 bool	EnemyBasic::_update() {
-	_movePatternBasic(_directionsOrder, _dirIdx);
+	if (_isBlocked())  // do nothing if blocked
+		return true;
+	_baseEnemyMove(_dir);
 	return true;
 }
 

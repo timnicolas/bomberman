@@ -19,6 +19,8 @@ namespace BonusType {
 		BOMBPASS,
 		FLAMPASS,
 		SHIELD,
+		TIME,
+		POINTS,
 		NB_BONUS,  // need to stay at last position
 	};
 }  // namespace BonusType

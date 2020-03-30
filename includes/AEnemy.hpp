@@ -28,7 +28,8 @@ private:
 
 		DFSNode() : dist(INF_DIST), last{-1, -1} {}
 	};
-	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec2 pos, glm::ivec2 dest, bool & find);
+	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS,
+		glm::ivec2 pos, glm::ivec2 dest, bool & find);
 	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
 protected:
@@ -37,17 +38,22 @@ protected:
 	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
-	bool			_movePatternBasic(std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
+	bool			_baseEnemyMove(Direction::Enum & dir);
+	bool			_movePatternBasic(std::vector<Direction::Enum> directionOrder,
+		uint32_t & dirIdx);
 	bool			_followPath(std::deque<PathNode> & path);
 
-	/* check and calcultation functions */
+	/* check and calculation functions */
 	Direction::Enum	_isPlayerVisible() const;
-	bool			_isOn(glm::ivec2 dest) const;
+	bool			_isOn(glm::ivec2 dest, float offset = IS_ON_POS_OFFSET) const;
 	bool			_getPathTo(glm::ivec2 dest, std::deque<PathNode> & path);
+	bool			_isBlocked() const;
 
 public:
 	// Members
 	int			bombs;
+	int32_t		points;
+	int			strength;  // number of damage if hit player
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);

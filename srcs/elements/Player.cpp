@@ -196,6 +196,12 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
 			break;
+		case BonusType::TIME:
+			game.time -= 15.0f;
+			break;
+		case BonusType::POINTS:
+			game.score += 1500;
+			break;
 		default:
 			break;
 	}
@@ -231,16 +237,16 @@ void	Player::_move() {
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Direction::UP, game.getDtTime());
+		_moveTo(Direction::UP);
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Direction::RIGHT, game.getDtTime());
+		_moveTo(Direction::RIGHT);
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Direction::DOWN, game.getDtTime());
+		_moveTo(Direction::DOWN);
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Direction::LEFT, game.getDtTime());
+		_moveTo(Direction::LEFT);
 	}
 	collisions = getCollision(position);
 	_clearCollisionObjects(collisions);
