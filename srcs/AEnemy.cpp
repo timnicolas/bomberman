@@ -262,7 +262,7 @@ bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
  *
  * @return true If the enemy is blocked
  */
-bool AEnemy::_isBlocked() const {
+bool AEnemy::_isBlocked() {
 	glm::ivec2 ipos = getIntPos();
 
 	int nbColisions = 0;  // nb of walls around enemy
@@ -275,11 +275,15 @@ bool AEnemy::_isBlocked() const {
 	};
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
-		if (_canWalkOnBlock(tmpPos) == false) {
-			nbColisions++;
+		if (game.positionInGame(glm::vec3(tmpPos.x, position.y, tmpPos.y), size) == false) {
+			continue;
+		}
+		std::unordered_set<AEntity *> colisions = getCollision({tmpPos.x, position.y, tmpPos.y});
+		for (auto && entity : getBoard()[tmpPos.x][tmpPos.y]) {
+			if (entity->type == Type::FIRE || _canWalkOnEntity(entity) == false)
+				nbColisions++;
 		}
 	}
-	// il walls all around entity
 	if (nbColisions == 4)
 		return true;
 	return false;
