@@ -206,7 +206,9 @@ bool	SceneGame::update() {
 		if (!enemy->update(_dtTime))
 			return false;
 	}
-	player->update(_dtTime);
+	if (!player->update(_dtTime)) {
+		return false;
+	}
 
 	_updateGameInfos();
 
@@ -258,16 +260,6 @@ bool	SceneGame::postUpdate() {
  * @return false
  */
 bool	SceneGame::draw() {
-	// use cubeShader, set uniform and activate textures
-	glm::mat4	view = _gui->cam->getViewMatrix();
-	_gui->cubeShader->use();
-	_gui->cubeShader->setMat4("view", view);
-	_gui->cubeShader->setVec3("viewPos", _gui->cam->pos);
-	glBindVertexArray(_gui->cubeShVao);
-	_gui->textureManager->activateTextures();
-	_gui->cubeShader->setInt("blockId", 0);
-	_gui->cubeShader->unuse();
-
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
@@ -293,6 +285,7 @@ bool	SceneGame::draw() {
 	ASceneMenu::draw();
 
 	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
 
 	return true;
@@ -336,7 +329,9 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.y / 1.61803398875f
 	));
 
-	player->init();
+	if (!player->init()) {
+		return false;
+	}
 
 	return result;
 }

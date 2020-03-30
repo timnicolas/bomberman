@@ -89,7 +89,10 @@ bool	SceneVictory::update() {
 		_states.nextLevel = false;
 		if (scGame.level + 1 < static_cast<int32_t>(scGame.getNbLevel())) {
 			try {
-				scGame.loadLevel(scGame.level + 1);  // reload the current level
+				// reload the current level
+				if (!scGame.loadLevel(scGame.level + 1)) {
+					return false;
+				}
 			} catch (std::exception const &e) {
 				logErr("Error: " << e.what());
 				return false;
@@ -102,7 +105,10 @@ bool	SceneVictory::update() {
 	}
 	else if (_states.restart) {
 		_states.restart = false;
-		scGame.loadLevel(scGame.level);  // reload the current level
+		// reload the current level
+		if (!scGame.loadLevel(scGame.level)) {
+			return false;
+		}
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {

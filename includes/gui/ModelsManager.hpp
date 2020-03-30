@@ -14,14 +14,25 @@
 class ModelsManager {
 	public:
 		virtual ~ModelsManager();
-
 		static ModelsManager	&get();
-		bool	init(Camera const &cam);
+
+		static bool			init(Camera const &cam);
+		static OpenGLModel	&getModel(std::string const &name);
+
+		// -- exceptions -------------------------------------------------------
+		class ModelsManagerException : public std::runtime_error {
+			public:
+				ModelsManagerException();
+				explicit ModelsManagerException(const char* what_arg);
+		};
 
 	private:
 		ModelsManager();
 		ModelsManager(ModelsManager const &src);
 		ModelsManager &operator=(ModelsManager const &rhs);
+
+		bool		_init(Camera const &cam);
+		OpenGLModel	&_getModel(std::string const &name);
 
 		std::unordered_map<std::string, OpenGLModel *>	_models;
 		bool	_initDone;

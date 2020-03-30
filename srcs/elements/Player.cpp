@@ -3,7 +3,9 @@
 
 // -- Constructors -------------------------------------------------------------
 
-Player::Player(SceneGame &game) : ACharacter(game) {
+Player::Player(SceneGame &game)
+: ACharacter(game),
+  _model(nullptr) {
 	type = Type::PLAYER;
 	name = "Player";
 	resetParams();
@@ -45,6 +47,23 @@ Player &Player::operator=(Player const &rhs) {
 bool	Player::init() {
 	invulnerable = 3.0f;
 	bombs = totalBombs;
+
+	try {
+		OpenGLModel	&openglModel = ModelsManager::getModel("white");
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle");
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -86,6 +105,11 @@ bool	Player::update(float const dTime) {
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
+
+		// TODO(zer0nim): remove, just for testing
+		if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_1)) {
+			_model->setNextAnimation();
+		}
 	} else {
 		logInfo("Player is dead.")
 		game.state = GameState::GAME_OVER;
@@ -106,6 +130,15 @@ bool	Player::draw(Gui &gui) {
 			return true;
 	}
 	gui.drawCube(Block::PLAYER, getPos());
+
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 

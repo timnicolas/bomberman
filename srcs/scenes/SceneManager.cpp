@@ -14,6 +14,7 @@
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
 #include "SceneSettings.hpp"
+#include "ModelsManager.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -70,6 +71,11 @@ bool SceneManager::_init() {
 	// create and init first gui
 	_gui = new Gui(_gameInfo);
 	if (!_gui->init()) {
+		return false;
+	}
+
+	// load and init 3d models
+	if (!ModelsManager::get().init(*(_gui->cam))) {
 		return false;
 	}
 
