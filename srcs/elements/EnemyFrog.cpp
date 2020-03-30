@@ -10,7 +10,7 @@ EnemyFrog::EnemyFrog(SceneGame &game)
   _nextJumpTime(0)
 {
 	name = "EnemyFrog";
-	size = glm::vec3(0.7, 0.7, 0.5);
+	size = glm::vec3(0.7, 0.5, 0.7);
 	strength = 0;  // remove auto damage
 	resetCrossable();
 }

@@ -30,8 +30,10 @@ private:
 
 protected:
 	// Methods
+	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest);
 	bool		_canWalkOnBlock(glm::ivec2 pos) const;
 	bool		_canWalkOnEntity(AEntity * entity) const;
+	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to);
 	bool		_canMoveOn(glm::vec3 dest);
 	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
 

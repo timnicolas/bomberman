@@ -173,6 +173,21 @@ bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
 // -- Protected Methods --------------------------------------------------------
 
 /**
+ * @brief Get all entities that block the player on a given position
+ *
+ * @return std::unordered_set<AEntity *> The list of entity
+ */
+std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) {
+	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);  // all entity on character
+	std::unordered_set<AEntity *> allColisionsBlock;  // all entity that block character
+	for (auto && entity : allColisionsEntity) {
+		if (!_canWalkOnEntity(entity))
+			allColisionsBlock.insert(entity);
+	}
+	return allColisionsBlock;
+}
+
+/**
  * @brief Check if we can walk on a block
  *
  * @param pos The block pos
@@ -224,6 +239,43 @@ bool	ACharacter::_canMoveOn(glm::vec3 dest) {
 }
 
 /**
+ * @brief Check if the entity can move on from a position to a destination
+ *
+ * This function allow you to put bomb and walk on it
+ *
+ * @param from The actual position
+ * @param to The goal position
+ * @return true If the entity can move
+ */
+bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) {
+	/* check if we are on the game board */
+	if (game.positionInGame(to, size) == false) {
+		return false;
+	}
+
+	/* check colision with all entities under character */
+	std::unordered_set<AEntity *> allColisionsEntityNow = _getAllBlockableEntity(to);
+	if (allColisionsEntityNow.empty())
+		return true;
+	// if there is a collision, check if there was the same collision in last time
+	std::unordered_set<AEntity *> allColisionsEntityLast = _getAllBlockableEntity(from);
+	if (allColisionsEntityNow.empty())
+		return false;
+	for (auto && nowEnt : allColisionsEntityNow) {
+		bool ok = false;
+		for (auto && lastEnt : allColisionsEntityLast) {
+			if (nowEnt == lastEnt) {
+				ok = true;
+				break;
+			}
+		}
+		if (!ok)
+			return false;
+	}
+	return true;
+}
+
+/**
  * @brief Move to direction if possible.
  *
  * @param direction Direction to move
@@ -251,19 +303,19 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 			return position;
 	}
 	if (game.positionInGame(pos, size)) {
-		if (_canMoveOn(pos)) {  // if we can move
+		if (_canMoveOnFromTo(position, pos)) {  // if we can move
 			position = pos;
 		}
 		else if (offset > 0) {  // if we cannot move
 			if (direction == Direction::UP || direction == Direction::DOWN) {
 				glm::vec3 tmpPos = pos;
 				tmpPos.x = static_cast<int>(pos.x);
-				if (pos.x - tmpPos.x < offset && _canMoveOn(tmpPos)) {
+				if (pos.x - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
 					// can move up or down
 					return _moveTo(Direction::LEFT, dTime, -1);
 				}
 				tmpPos.x = static_cast<int>(pos.x + 1);
-				if (pos.x - tmpPos.x - 1 < offset && _canMoveOn(tmpPos)) {
+				if (pos.x - tmpPos.x - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
 					// can move up or down
 					return _moveTo(Direction::RIGHT, dTime, -1);
 				}
@@ -271,12 +323,12 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 			else {  // left | right
 				glm::vec3 tmpPos = pos;
 				tmpPos.z = static_cast<int>(pos.z);
-				if (pos.z - tmpPos.z < offset && _canMoveOn(tmpPos)) {
+				if (pos.z - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
 					// can move left or right
 					return _moveTo(Direction::UP, dTime, -1);
 				}
 				tmpPos.z = static_cast<int>(pos.z + 1);
-				if (pos.z - tmpPos.z - 1 < offset && _canMoveOn(tmpPos)) {
+				if (pos.z - tmpPos.z - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
 					// can move left or right
 					return _moveTo(Direction::DOWN, dTime, -1);
 				}
