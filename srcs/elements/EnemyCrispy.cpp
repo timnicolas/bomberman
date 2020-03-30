@@ -97,6 +97,6 @@ bool	EnemyCrispy::_draw(Gui &gui) {
 	if (_isWall) {
 		blockType = Block::DESTRUCTIBLE_WALL;
 	}
-	gui.drawCube(blockType, getPos());
+	gui.drawCube(blockType, getPos(), size);
 	return true;
 }

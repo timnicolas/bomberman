@@ -4,7 +4,10 @@
 
 // -- Constructors -------------------------------------------------------------
 
-ACharacter::ACharacter(SceneGame &game) : AEntity(game) {
+ACharacter::ACharacter(SceneGame &game)
+: AEntity(game),
+  size(0.95, 0.95, 0.95)
+{
 	category = Category::MOBILE;
 	lives = 1;
 	speed = 1.0;

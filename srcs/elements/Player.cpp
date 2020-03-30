@@ -105,7 +105,7 @@ bool	Player::draw(Gui &gui) {
 		if (_toDraw > 5)
 			return true;
 	}
-	gui.drawCube(Block::PLAYER, getPos());
+	gui.drawCube(Block::PLAYER, getPos(), size);
 	return true;
 }
 
