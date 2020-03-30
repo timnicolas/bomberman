@@ -144,11 +144,17 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
 		allPos.push_back(tmpPos);
 	}
 
+	// std::cout << glm::to_string(dest) << " | ";
 	for (auto && blockPos : allPos) {
+		// std::cout << glm::to_string(blockPos) << " ";
+		if (game.positionInGame(glm::vec3(blockPos.x, position.y, blockPos.y), size) == false) {
+			continue;
+		}
 		for (auto &&entity : getBoard()[blockPos.x][blockPos.y]) {
 			collisions.insert(entity);
 		}
 	}
+	// std::cout << std::endl;
 	return collisions;
 }
 
@@ -194,6 +200,11 @@ std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest)
  * @return true If we can walk on this block
  */
 bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
+	/* check if we are on the game board */
+	if (game.positionInGame(glm::vec3(pos.x, position.y, pos.y), size) == false) {
+		return false;
+	}
+
 	for (auto && entity : getBoard()[pos.x][pos.y]) {
 		if (_canWalkOnEntity(entity) == false)
 			return false;

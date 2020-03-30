@@ -317,7 +317,7 @@ bool	SceneGame::draw() {
 
 	if (s.j("debug").b("showBaseBoard")) {
 		// draw floor
-		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, size.y - 1.0f}, {size.x, 0.3f, size.y});
+		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
 	}
 
 	// release cubeShader and textures
