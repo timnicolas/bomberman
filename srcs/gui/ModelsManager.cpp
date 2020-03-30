@@ -46,6 +46,11 @@ ModelsManager	&ModelsManager::get() {
  * @return false on failure
  */
 bool	ModelsManager::init(Camera const &cam) {
+	return get()._init(cam);
+}
+
+
+bool	ModelsManager::_init(Camera const &cam) {
 	if (!_initDone) {
 		_initDone = true;
 
@@ -60,3 +65,32 @@ bool	ModelsManager::init(Camera const &cam) {
 	}
 	return true;
 }
+
+// -- init ----------------------------------------------------------------------
+/**
+ * @brief Get the Model object
+ *
+ * @param name
+ * @return OpenGLModel&
+ */
+OpenGLModel	&ModelsManager::getModel(std::string const &name) {
+	return get()._getModel(name);
+}
+
+OpenGLModel	&ModelsManager::_getModel(std::string const &name) {
+	auto	it = _models.find(name);
+
+	if (it != _models.end()) {
+		return *(it->second);
+	}
+
+	throw ModelsManagerException(std::string("model \"" + name + "\" not found").c_str());
+}
+
+// -- exceptions ---------------------------------------------------------------
+ModelsManager::ModelsManagerException::ModelsManagerException()
+: std::runtime_error("[ModelsManagerException]") {}
+
+ModelsManager::ModelsManagerException::ModelsManagerException(const char* what_arg)
+: std::runtime_error(std::string(std::string("[ModelsManagerException] ") +
+	what_arg).c_str()) {}

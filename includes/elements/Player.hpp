@@ -6,6 +6,7 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "Bonus.hpp"
+#include "ModelsManager.hpp"
 #include "Model.hpp"
 
 /**
