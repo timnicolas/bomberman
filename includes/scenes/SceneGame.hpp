@@ -54,6 +54,7 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
+	Player						*_playerSaved;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -93,7 +94,6 @@ public:
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
 	Player						*player;
-	Player						*playerSaved;
 	std::vector<AEnemy *>		enemies;
 	struct BonusValues {
 		int64_t	chance;
