@@ -11,6 +11,7 @@
 #include "AEntity.hpp"
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
+#include "Score.hpp"
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
@@ -62,6 +63,10 @@ private:
 
 protected:
 	struct AllUI {
+		ABaseUI *	timeLeftImg;  // TextUI
+		ABaseUI *	timeLeftText;  // TextUI
+		ABaseUI *	scoreImg;  // TextUI
+		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
@@ -99,7 +104,11 @@ public:
 	glm::uvec2					size;
 	int32_t						level;  // the current level ID (-1 for no level)
 	GameState::Enum				state;
-	std::chrono::milliseconds	time;
+	uint32_t					levelEnemies;
+	uint32_t					levelCrispies;
+	float						levelTime;
+	float						time;
+	Score						score;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);

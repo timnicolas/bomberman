@@ -12,13 +12,6 @@ EnemyWithEye::EnemyWithEye(SceneGame &game)
 }
 
 EnemyWithEye::~EnemyWithEye() {
-	auto it = game.enemies.begin();
-	while (it != game.enemies.end()) {
-		if ((*it) == this)
-			game.enemies.erase(it);
-		else
-			it++;
-	}
 }
 
 EnemyWithEye::EnemyWithEye(EnemyWithEye const &src) : AEnemy(src) {

@@ -14,13 +14,6 @@ EnemyFollow::EnemyFollow(SceneGame &game)
 }
 
 EnemyFollow::~EnemyFollow() {
-	auto it = game.enemies.begin();
-	while (it != game.enemies.end()) {
-		if ((*it) == this)
-			game.enemies.erase(it);
-		else
-			it++;
-	}
 }
 
 EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
