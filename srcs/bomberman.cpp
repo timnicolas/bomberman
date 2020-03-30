@@ -79,7 +79,7 @@ bool	initSettings(std::string const & filename) {
 
 	/* font */
 	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/snakebold.TTF")
+		s.j("font").add<std::string>("file", "bomberman-assets/fonts/snakebold.ttf")
 			.setDescription("this is the main font");
 		s.j("font").add<uint64_t>("size", 20).setMin(10).setMax(50)
 			.setDescription("default size for the text");
