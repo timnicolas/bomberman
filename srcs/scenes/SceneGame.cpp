@@ -197,16 +197,16 @@ bool	SceneGame::update() {
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
-				if (!board_it2->update(_dtTime))
+				if (!board_it2->update())
 					return false;
 			}
 		}
 	}
 	for (auto &&enemy : enemies) {
-		if (!enemy->update(_dtTime))
+		if (!enemy->update())
 			return false;
 	}
-	if (!player->update(_dtTime)) {
+	if (!player->update()) {
 		return false;
 	}
 

@@ -37,12 +37,11 @@ Fire &Fire::operator=(Fire const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Fire::update(float const dTime) {
-	_timeToDie -= dTime;
+bool	Fire::update() {
+	_timeToDie -= game.getDtTime();
 	if (_timeToDie <= 0.0) {
 		alive = false;
 	}

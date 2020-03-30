@@ -35,7 +35,7 @@ protected:
 	// Methods
 	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
 	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
@@ -51,7 +51,7 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
-	virtual bool					update(float const dTime) = 0;
+	virtual bool					update() = 0;
 	virtual bool					draw(Gui &gui) = 0;
 	bool							isAlive();
 	glm::vec3						getPos();

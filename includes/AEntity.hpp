@@ -63,7 +63,7 @@ public:
 	AEntity			&operator=(const AEntity &rhs);
 
 	// Methods
-	virtual bool		update(const float dTime) = 0;
+	virtual bool		update() = 0;
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
 	virtual glm::vec3	getPos() = 0;

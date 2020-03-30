@@ -195,26 +195,25 @@ bool	ACharacter::_canMove(std::unordered_set<AEntity *> collisions) {
  * @brief Move to direction if possible.
  *
  * @param direction Direction to move
- * @param dTime Delta time
  * @param offset Offset to turn correction (-1 to don't use correction)
  * @return glm::vec3 finale position
  */
-glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
+glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const offset) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
 	switch (direction) {
 		case Direction::UP:
-			pos.z -= speed * dTime;
+			pos.z -= speed * game.getDtTime();
 			break;
 		case Direction::RIGHT:
-			pos.x += speed * dTime;
+			pos.x += speed * game.getDtTime();
 			break;
 		case Direction::DOWN:
-			pos.z += speed * dTime;
+			pos.z += speed * game.getDtTime();
 			break;
 		case Direction::LEFT:
-			pos.x -= speed * dTime;
+			pos.x -= speed * game.getDtTime();
 			break;
 		default:
 			return position;
@@ -229,12 +228,12 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 				tmpPos.x = static_cast<int>(pos.x);
 				if (pos.x - tmpPos.x < offset && _canMove(getCollision(tmpPos))) {
 					// can move up or down
-					return _moveTo(Direction::LEFT, dTime, -1);
+					return _moveTo(Direction::LEFT, -1);
 				}
 				tmpPos.x = static_cast<int>(pos.x + 1);
 				if (pos.x - tmpPos.x - 1 < offset && _canMove(getCollision(tmpPos))) {
 					// can move up or down
-					return _moveTo(Direction::RIGHT, dTime, -1);
+					return _moveTo(Direction::RIGHT, -1);
 				}
 			}
 			else {  // left | right
@@ -242,12 +241,12 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 				tmpPos.z = static_cast<int>(pos.z);
 				if (pos.z - tmpPos.z < offset && _canMove(getCollision(tmpPos))) {
 					// can move left or right
-					return _moveTo(Direction::UP, dTime, -1);
+					return _moveTo(Direction::UP, -1);
 				}
 				tmpPos.z = static_cast<int>(pos.z + 1);
 				if (pos.z - tmpPos.z - 1 < offset && _canMove(getCollision(tmpPos))) {
 					// can move left or right
-					return _moveTo(Direction::DOWN, dTime, -1);
+					return _moveTo(Direction::DOWN, -1);
 				}
 			}
 		}
