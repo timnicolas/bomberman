@@ -40,7 +40,11 @@ bool	End::update(float const dTime) {
 	(void)dTime;
 	if (game.flags <= 0) {
 		_texture = Block::END_OPEN;
-		crossable = Type::PLAYER;
+		if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
+		== game.player->crossableTypes.end())
+		{
+			game.player->crossableTypes.push_back(Type::END);
+		}
 		std::unordered_set<AEntity *> collisions = _getCollision(0.2f);
 		for (auto &&entity : collisions) {
 			if (entity->type == Type::PLAYER) {

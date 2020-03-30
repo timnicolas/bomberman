@@ -173,11 +173,12 @@ bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
  * @brief Check if the given pos is in the board.
  *
  * @param pos
+ * @param size
  * @return true
  * @return false
  */
-bool	SceneGame::positionInGame(glm::vec2 pos) {
-	if (pos.x < 0 || pos.x > (size.x - 1) || pos.y < 0 || pos.y > (size.y - 1))
+bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
+	if (pos.x < 0 || pos.x + sz.x > size.x || pos.z < 0 || pos.z + sz.z > size.y)
 		return false;
 	return true;
 }

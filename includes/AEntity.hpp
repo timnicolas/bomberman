@@ -51,7 +51,6 @@ public:
 	SceneGame		&game;
 	bool			destructible;
 	bool			blockPropagation;
-	Type::Enum		crossable;
 	glm::vec3		position;
 
 	// Constructors

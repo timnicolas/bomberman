@@ -14,7 +14,6 @@ Crispy::Crispy(SceneGame &game) : AObject(game) {
 Crispy::~Crispy() {
 	getPos();
 	game.clearFromBoard(this, {position.x, position.z});
-	game.player->clearNoCollisionObjects(this);
 }
 
 Crispy::Crispy(Crispy const &src) : AObject(src) {

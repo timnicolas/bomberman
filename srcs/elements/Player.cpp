@@ -49,6 +49,13 @@ bool	Player::init() {
 }
 
 /**
+ * @brief Set the Entity that the Character can cross
+ */
+void Player::resetCrossable() {
+	ACharacter::resetCrossable();
+}
+
+/**
  * @brief Reset values for player.
  *
  */
@@ -176,23 +183,6 @@ void	Player::addBomb() {
 		bombs = totalBombs;
 }
 
-// -- Protected Methods --------------------------------------------------------
-bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
-	for (auto &&entity : collisions) {
-		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
-			continue;
-		if (entity->crossable == Type::ALL || entity->crossable == type)
-			continue;
-		if (passWall && entity->type == Type::CRISPY)
-			continue;
-		if (passBomb && entity->type == Type::BOMB)
-			continue;
-		return false;
-	}
-	return true;
-}
-
-
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
@@ -210,8 +200,6 @@ void	Player::_move(float const dTime) {
 	if (Inputs::getKey(InputType::LEFT)) {
 		_moveTo(Direction::LEFT, dTime);
 	}
-	collisions = getCollision(position);
-	_clearCollisionObjects(collisions);
 }
 
 void	Player::_putBomb() {
@@ -223,7 +211,6 @@ void	Player::_putBomb() {
 		bomb->setPropagation(bombProgation);
 		// game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		game.board[intPos.x][intPos.y].push_back(bomb);
-		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
 	}
 }
