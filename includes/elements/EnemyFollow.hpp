@@ -14,9 +14,7 @@
 class EnemyFollow : public AEnemy {
 private:
 	EnemyFollow();
-	// followbasic pattern when cannot go to the player position
-	std::vector<Direction::Enum>	_directionsOrder;
-	uint32_t						_dirIdx;
+	Direction::Enum	_dir;
 	// player pathfinding info
 	bool							_findPlayer;
 	std::deque<PathNode>			_path;

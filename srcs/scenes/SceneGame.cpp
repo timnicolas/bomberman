@@ -16,6 +16,8 @@
 #include "EnemyFollow.hpp"
 #include "EnemyWithEye.hpp"
 #include "EnemyFly.hpp"
+#include "EnemyCrispy.hpp"
+#include "EnemyFrog.hpp"
 
 #include "SceneManager.hpp"
 
@@ -35,6 +37,8 @@ std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
 	{"enemyWithEye", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
 	{"enemyFollow", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFollow(game);}}},
 	{"enemyFly", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFly(game);}}},
+	{"enemyCrispy", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyCrispy(game);}}},
+	{"enemyFrog", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFrog(game);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -462,6 +466,8 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 		lvl->j("objects").add<std::string>("enemyWithEye", "1");
 		lvl->j("objects").add<std::string>("enemyFollow", "2");
 		lvl->j("objects").add<std::string>("enemyFly", "3");
+		lvl->j("objects").add<std::string>("enemyCrispy", "4");
+		lvl->j("objects").add<std::string>("enemyFrog", "5");
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("0", "");
@@ -525,11 +531,6 @@ bool	SceneGame::_unloadLevel() {
 	}
 	enemies.clear();
 
-	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
-		delete *it;
-	}
-	_buttons.clear();
-
 	level = NO_LEVEL;
 	return true;
 }
@@ -588,6 +589,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					case EntityType::PLAYER:
 						if (player == nullptr)
 							player = reinterpret_cast<Player *>(entity);
+						else
+							delete entity;
 						player->setPosition({i, 0, j});
 						break;
 					case EntityType::BOARD_FLAG:

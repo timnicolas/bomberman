@@ -5,7 +5,8 @@
 // -- Constructors -------------------------------------------------------------
 
 AEnemy::AEnemy(SceneGame &game)
-: ACharacter(game)
+: ACharacter(game),
+  strength(1)
 {
 	name = "AEnemy";
 	type = Type::ENEMY;
@@ -52,8 +53,8 @@ bool	AEnemy::update(float const dTime) {
 		return true;
 	if (!alive)
 		active = false;
-	if (game.player->hasCollision(position)) {
-		game.player->takeDamage(1);
+	if (strength != 0 && game.player->hasCollision(position)) {
+		game.player->takeDamage(strength);
 	}
 	return _update(dTime);
 }
@@ -123,8 +124,10 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
 	for (int i = 0; i < 3; i++) {
 		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
 		bool canMove = true;
-		if (game.positionInGame(tmpPos) == false)
+		if (game.positionInGame(tmpPos) == false) {
 			canMove = false;
+			continue;
+		}
 		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
 			if (entity->crossable == Type::ALL || entity->crossable == type)
 				continue;
@@ -259,11 +262,11 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
  * @param dest The postion to compare with enemy pos
  * @return true If is on the destination
  */
-bool AEnemy::_isOn(glm::ivec2 dest) const {
-	if (position.x >= static_cast<float>(dest.x) - IS_ON_POS_OFFSET
-	&& position.x <= static_cast<float>(dest.x) + IS_ON_POS_OFFSET
-	&& position.z >= static_cast<float>(dest.y) - IS_ON_POS_OFFSET
-	&& position.z <= static_cast<float>(dest.y) + IS_ON_POS_OFFSET)
+bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
+	if (position.x >= static_cast<float>(dest.x) - offset
+	&& position.x <= static_cast<float>(dest.x) + offset
+	&& position.z >= static_cast<float>(dest.y) - offset
+	&& position.z <= static_cast<float>(dest.y) + offset)
 		return true;
 	return false;
 }
