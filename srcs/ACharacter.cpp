@@ -203,6 +203,11 @@ float ignoreColisions) {
 	glm::vec3 						pos = getPos();
 	std::unordered_set<AEntity *>	collisions;
 
+	// update status on first move
+	if (_entityStatus.status != EntityStatus::RUNNING) {
+		setStatus(EntityStatus::RUNNING);
+	}
+
 	switch (direction) {
 		case Direction::UP:
 			pos.z -= speed * game.getDtTime();
@@ -219,6 +224,7 @@ float ignoreColisions) {
 		default:
 			return position;
 	}
+
 	if (game.positionInGame(glm::vec2{pos.x, pos.z})) {
 		if (ignoreColisions || _canMove(getCollision(pos))) {  // if we can move
 			position = pos;

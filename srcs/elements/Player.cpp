@@ -95,27 +95,60 @@ void	Player::resetParams() {
 bool	Player::update() {
 	if (!active)
 		return true;
+
 	if (alive) {
+		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();
 		if (invulnerable < 0.0f)
 			invulnerable = 0.0f;
 
+		// move player
 		_move();
 		_model->transform.setPos(position);
 
+		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
-			_putBomb();
+			if (bombs > 0) {
+				setStatus(EntityStatus::DROP_BOMB);
+			}
 		}
-
-		// TODO(zer0nim): remove, just for testing
-		if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_1)) {
-			_model->setNextAnimation();
-		}
-	} else {
-		logInfo("Player is dead.")
-		game.state = GameState::GAME_OVER;
 	}
+
+	// update animation on status change
+	if (_entityStatus.updated) {
+		_entityStatus.updated = false;
+		switch (_entityStatus.status) {
+			case EntityStatus::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+				break;
+			case EntityStatus::DYING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityStatus::RUNNING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityStatus::DROP_BOMB:
+				_model->animationSpeed = 10;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
+				break;
+			case EntityStatus::VICTORY_EMOTE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+
 	return true;
 }
 
@@ -155,9 +188,16 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
+	bool wasAlive = alive;
+
 	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
-			invulnerable = 3.0f;
+			if (alive) {
+				invulnerable = 3.0f;
+			}
+			else if (wasAlive) {
+				setStatus(EntityStatus::DYING);
+			}
 		}
 	}
 	return false;
@@ -230,7 +270,15 @@ void	Player::addBomb() {
  * @param animName the current animation name
  */
 void	Player::animEndCb(std::string animName) {
-	logDebug("animEndCb -> " << animName);
+	// logDebug("animEndCb -> " << animName);
+	if (animName == "Armature|drop") {
+		_putBomb();
+		setStatus(EntityStatus::IDLE);
+	}
+	else if (animName == "Armature|death") {
+		logInfo("Player is dead.")
+		game.state = GameState::GAME_OVER;
+	}
 }
 
 
@@ -254,27 +302,38 @@ bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move() {
+	bool	moved = false;
 	std::unordered_set<AEntity *>	collisions;
 
 	if (Inputs::getKey(InputType::UP)) {
+		moved = true;
 		_moveTo(Direction::UP);
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
+		moved = true;
 		_moveTo(Direction::RIGHT);
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
+		moved = true;
 		_moveTo(Direction::DOWN);
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
+		moved = true;
 		_moveTo(Direction::LEFT);
 	}
 	collisions = getCollision(position);
 	_clearCollisionObjects(collisions);
+
+	// update status on end move
+	if (!moved && _entityStatus.status == EntityStatus::RUNNING) {
+		setStatus(EntityStatus::IDLE);
+	}
 }
 
 void	Player::_putBomb() {
 	if (bombs <= 0)
 		return;
+
 	glm::ivec2 intPos = getIntPos();
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
