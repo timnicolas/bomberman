@@ -140,6 +140,8 @@ bool					SceneSettings::init() {
 		/* controls */
 		_init_control_pane(tmp_pos, menu_width, menu_height);
 		AudioManager::loadSound("sounds/bell.ogg");
+
+		_initBG();
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());

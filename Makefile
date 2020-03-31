@@ -123,6 +123,7 @@ SRC =	main.cpp \
 		scenes/AScene.cpp \
 		scenes/ASceneMenu.cpp \
 		scenes/SceneMainMenu.cpp \
+		scenes/SceneLoadGame.cpp \
 		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
 		scenes/ScenePause.cpp \
@@ -198,6 +199,7 @@ HEAD =	bomberman.hpp \
 		scenes/AScene.hpp \
 		scenes/ASceneMenu.hpp \
 		scenes/SceneMainMenu.hpp \
+		scenes/SceneLoadGame.hpp \
 		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
 		scenes/ScenePause.hpp \

@@ -73,6 +73,12 @@ bool			SceneLevelSelection::init() {
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
+		tmpSize.x = tmpSize.x * 1.2;
+		tmpSize.y = winSz.y - tmpPos.y;
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+		tmpPos.y -= menuHeight * 0.5;
+		addRect(tmpPos, tmpSize);
+
 		_initBG();
 	}
 	catch (ABaseUI::UIException const & e) {

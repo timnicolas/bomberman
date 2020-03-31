@@ -41,9 +41,14 @@ bool			SceneMainMenu::init() {
 		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "PLAY")
+		addButton(tmpPos, tmpSize, "new  game")
 			.setKeyLeftClickInput(InputType::CONFIRM)
-			.addButtonLeftListener(&_states.play);
+			.addButtonLeftListener(&_states.newGame);
+
+		tmpPos.y -= menuHeight * 1.2;
+		addButton(tmpPos, tmpSize, "load   saved   game")
+			.setKeyLeftClickInput(InputType::ACTION)
+			.addButtonLeftListener(&_states.loadGame);
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "SETTINGS")
@@ -59,7 +64,7 @@ bool			SceneMainMenu::init() {
 		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
 		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
+		addRect(tmpPos, tmpSize);
 
 		AudioManager::loadMusic("sounds/puzzle.ogg");
 		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
@@ -82,9 +87,13 @@ bool			SceneMainMenu::init() {
 bool	SceneMainMenu::update() {
 	ASceneMenu::update();
 
-	if (_states.play) {
-		_states.play = false;
+	if (_states.newGame) {
+		_states.newGame = false;
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	else if (_states.loadGame) {
+		_states.loadGame = false;
+		SceneManager::loadScene(SceneNames::LOADGAME);
 	}
 	else if (_states.loadSettings) {
 		_states.loadSettings = false;
