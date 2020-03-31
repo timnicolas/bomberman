@@ -11,6 +11,8 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	name = "Entity";
 	crossable = Type::NONE;
 	_timeToDie = 0.5f;
+	_entityStatus.status = EntityStatus::IDLE;
+	_entityStatus.updated = false;
 }
 
 AEntity::~AEntity() {
@@ -37,6 +39,16 @@ void	AEntity::animEndCb(std::string animName) {
 	return;
 }
 
+/**
+ * @brief update the entity status
+ *
+ * @param status the new status
+ */
+void	AEntity::setStatus(EntityStatus::Enum status) {
+	_entityStatus.status = status;
+	_entityStatus.updated = true;
+}
+
 
 // -- Operators ----------------------------------------------------------------
 
@@ -53,6 +65,8 @@ AEntity &AEntity::operator=(AEntity const &rhs) {
 		crossable = rhs.crossable;
 		position = rhs.position;
 		_timeToDie = rhs._timeToDie;
+		_entityStatus.status = rhs._entityStatus.status;
+		_entityStatus.updated = rhs._entityStatus.updated;
 	}
 	return *this;
 }

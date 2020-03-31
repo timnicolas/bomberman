@@ -34,7 +34,7 @@ namespace EntityStatus {
 	enum Enum {
 		IDLE,
 		DYING,
-		WALKING,
+		RUNNING,
 		DROP_BOMB,
 		LOOSE_EMOTE,
 		VICTORY_EMOTE,
@@ -87,6 +87,7 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
 	virtual void	animEndCb(std::string animName);
+	void			setStatus(EntityStatus::Enum status);
 };
 
 #endif  // ENTITY_HPP_

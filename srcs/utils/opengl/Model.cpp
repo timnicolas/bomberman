@@ -1,5 +1,7 @@
 #include "Model.hpp"
 
+#include <cmath>
+
 // -- Constructors -------------------------------------------------------------
 Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform)
 : transform(transform),
@@ -87,6 +89,7 @@ void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
 		_curAnimation = _openGLModel.getAiAnimation(_animationId);
 		_updateTicksPerSecond();
 		_animationTime = 0;  // reset animation time
+		_animationTimeTick = 0;
 		_animEndCbFunc = animEndCbFunc;
 		_animEndCbClass = animEndCbClass;
 	}
@@ -107,6 +110,7 @@ void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
 	_curAnimation = _openGLModel.getAiAnimation(_animationId);
 	_updateTicksPerSecond();
 	_animationTime = 0;  // reset animation time
+	_animationTimeTick = 0;
 	_animEndCbFunc = animEndCbFunc;
 	_animEndCbClass = animEndCbClass;
 }
@@ -215,7 +219,7 @@ float	Model::getAnimDuration() const {
 
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
-	float	lastAnimTimeTick = _animationTimeTick;
+	int	lastAnimTimeTick = _animationTimeTick;
 
 	_animationTime += 1000 * _dtTime * animationSpeed;
 
@@ -229,8 +233,8 @@ void	Model::_updateAnimationTime() {
 	_animationTimeTick = (_animationTime / 1000.0) * _ticksPerSecond;
 
 	// call member func cb on animation end
-	if (((_animationTimeTick != lastAnimTimeTick && _animationTimeTick ==
-		_curAnimation->mDuration) || lastAnimTimeTick > _animationTimeTick) &&
+	if (((std::round(_animationTimeTick) == std::round(_curAnimation->mDuration) &&
+		_animationTimeTick != lastAnimTimeTick) || lastAnimTimeTick > _animationTimeTick) &&
 		_animEndCbFunc && _animEndCbClass)
 	{
 		(_animEndCbClass->*_animEndCbFunc)(std::string(_curAnimation->mName.C_Str()));
