@@ -53,7 +53,7 @@ bool	Player::init() {
 		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}));
 		_model->play = true;
 		_model->loopAnimation = true;
-		_model->setAnimation("Armature|idle");
+		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
 	}
 	catch(ModelsManager::ModelsManagerException const &e) {
 		logErr(e.what());
@@ -100,7 +100,10 @@ bool	Player::update() {
 			invulnerable -= game.getDtTime();
 		if (invulnerable < 0.0f)
 			invulnerable = 0.0f;
+
 		_move();
+		_model->transform.setPos(position);
+
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			_putBomb();
 		}
@@ -123,13 +126,16 @@ bool	Player::update() {
  * @return false if failure
  */
 bool	Player::draw(Gui &gui) {
+	(void)gui;
+
+	// blink if invulnerable
 	if (invulnerable > 0) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
 	}
-	gui.drawCube(Block::PLAYER, getPos());
 
+	// draw model
 	try {
 		_model->draw();
 	}
@@ -208,11 +214,25 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 	return true;
 }
 
+/**
+ * @brief increment bomb, clamp to totalBombs
+ *
+ */
 void	Player::addBomb() {
 	bombs++;
 	if (bombs > totalBombs)
 		bombs = totalBombs;
 }
+
+/**
+ * @brief called on animation end if passed to Model
+ *
+ * @param animName the current animation name
+ */
+void	Player::animEndCb(std::string animName) {
+	logDebug("animEndCb -> " << animName);
+}
+
 
 // -- Protected Methods --------------------------------------------------------
 bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {

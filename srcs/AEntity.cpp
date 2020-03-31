@@ -26,6 +26,18 @@ bool		AEntity::postUpdate() {
 	return true;
 }
 
+/**
+ * @brief called on animation end if passed to Model
+ * need to be redefined by children
+ *
+ * @param animName the current animation name
+ */
+void	AEntity::animEndCb(std::string animName) {
+	(void)animName;
+	return;
+}
+
+
 // -- Operators ----------------------------------------------------------------
 
 AEntity &AEntity::operator=(AEntity const &rhs) {

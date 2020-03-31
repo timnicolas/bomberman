@@ -46,13 +46,15 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool							init();
-	bool							update();
-	bool							draw(Gui &gui);
-	void							resetParams();
-	bool							takeDamage(const int damage);
-	bool							takeBonus(BonusType::Enum bonus);
-	void							addBomb();
+	bool			init();
+	bool			update();
+	bool			draw(Gui &gui);
+	void			resetParams();
+	bool			takeDamage(const int damage);
+	bool			takeBonus(BonusType::Enum bonus);
+	void			addBomb();
+
+	virtual void	animEndCb(std::string animName);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {
