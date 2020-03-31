@@ -36,6 +36,7 @@ protected:
 	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to);
 	bool		_canMoveOn(glm::vec3 dest);
 	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(glm::vec3 direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
