@@ -157,6 +157,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 				speed = MAX_SPEED;
 			break;
 		case BonusType::WALLPASS:
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
+				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
 			break;
 		case BonusType::DETONATOR:
@@ -164,6 +166,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
+				crossableTypes.push_back(Type::BOMB);
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
