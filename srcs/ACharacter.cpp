@@ -440,6 +440,12 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 	return position;
 }
 
+/**
+ * @brief Move in a really short distance -> called by ACharecter::_moveTo
+ *
+ * @param movement The movement to do (final dest = position + movement)
+ * @return glm::vec3 The final position (start position if move is impossible)
+ */
 glm::vec3	ACharacter::_miniMove(glm::vec3 movement) {
 	glm::vec3 pos = getPos() + movement;
 	if (position == pos)
