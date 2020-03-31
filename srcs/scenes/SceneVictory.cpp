@@ -24,7 +24,7 @@ SceneVictory & SceneVictory::operator=(SceneVictory const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneVictory::init() {
@@ -32,15 +32,46 @@ bool			SceneVictory::init() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 	float menuWidth = winSz.x / 2;
-	float menuHeight = menuWidth / 8;
+	float menuHeight = winSz.y / 14;
+	float statisticHeight = menuHeight * 0.6;
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
+		tmpSize.y = statisticHeight;
 		addText(tmpPos, tmpSize, "Victory !").setTextFont("title");
 
+		try {
+			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+			statistics.level = &addText(
+				{tmpPos.x - 30, tmpPos.y + 30},
+				tmpSize,
+				"LVL " + std::to_string(scGame.score.getLevelId()))
+					.setTextAlign(TextAlign::LEFT);
+			tmpPos.y -= statisticHeight;
+			std::vector<Score::Stat> scoreStat;
+			scGame.score.getStats(scoreStat);
+			for (auto &&stat : scoreStat) {
+				tmpPos.y -= statisticHeight;
+				if (stat.image.size()) {
+					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y}, {32, 32}, stat.image));
+					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
+						.setTextAlign(TextAlign::LEFT));
+				} else {
+					statistics.stats.push_back(&addText(tmpPos, tmpSize, stat.label)
+						.setTextAlign(TextAlign::LEFT));
+				}
+				if (stat.points.size()) {
+					statistics.stats.push_back(&addText(tmpPos, tmpSize, stat.points)
+						.setTextAlign(TextAlign::RIGHT));
+				}
+			}
+		} catch (ABaseUI::UIException const & e) {
+			logErr(e.what());
+		}
+
+		tmpSize.y = menuHeight;
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "NEXT LEVEL")
 			.setKeyLeftClickInput(InputType::CONFIRM)
@@ -84,6 +115,31 @@ bool			SceneVictory::init() {
 bool	SceneVictory::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+	statistics.level->setText("LVL " + std::to_string(scGame.score.getLevelId()));
+	// statistics.score->setText("Score: " + scGame.score.toString());
+
+	std::vector<ABaseUI *>::iterator	it = statistics.stats.begin();
+	while (it != statistics.stats.end()) {
+		std::vector<Score::Stat> scoreStat;
+		scGame.score.getStats(scoreStat);
+		for (auto &&stat : scoreStat) {
+			if (stat.image.size()) {
+				it++;
+				if (it == statistics.stats.end())
+					break;
+			}
+			(*it)->setText(stat.label);
+			it++;
+			if (it == statistics.stats.end())
+				break;
+			if (stat.points.size()) {
+				(*it)->setText(stat.points);
+				it++;
+				if (it == statistics.stats.end())
+					break;
+			}
+		}
+	}
 
 	if (_states.nextLevel) {
 		_states.nextLevel = false;

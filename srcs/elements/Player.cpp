@@ -171,6 +171,12 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
 			break;
+		case BonusType::TIME:
+			game.time -= 15.0f;
+			break;
+		case BonusType::POINTS:
+			game.score += 1500;
+			break;
 		default:
 			break;
 	}
