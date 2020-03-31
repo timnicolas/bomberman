@@ -72,28 +72,28 @@ bool			SceneVictory::init() {
 		}
 
 		tmpSize.y = menuHeight;
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "NEXT LEVEL")
+		tmpPos.y -= menuHeight * 1.8;
+		addButton(tmpPos, tmpSize, "next   level")
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.nextLevel);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "RESTART")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "restart")
 			.addButtonLeftListener(&_states.restart);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "MAIN MENU")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "main   menu")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
-		tmpSize.x = tmpSize.x * 1.2;
+		tmpSize.x = tmpSize.x * 1.3;
 		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize);
 
