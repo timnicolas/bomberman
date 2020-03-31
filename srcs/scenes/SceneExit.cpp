@@ -23,7 +23,7 @@ SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneExit::init() {
@@ -38,7 +38,7 @@ bool			SceneExit::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Do you want to exit ?").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Do you want to exit ?");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "EXIT")

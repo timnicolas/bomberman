@@ -24,7 +24,7 @@ ScenePause & ScenePause::operator=(ScenePause const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			ScenePause::init() {
@@ -39,7 +39,7 @@ bool			ScenePause::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Paused").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Paused");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "RESUME")

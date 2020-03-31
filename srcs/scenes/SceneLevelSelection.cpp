@@ -25,7 +25,7 @@ SceneLevelSelection & SceneLevelSelection::operator=(SceneLevelSelection const &
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneLevelSelection::init() {

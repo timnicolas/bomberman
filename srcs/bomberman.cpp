@@ -101,12 +101,12 @@ bool	initSettings(std::string const & filename) {
 	s.j("colors").add<SettingsJson>("background");
 		s.j("colors").j("background").add<uint64_t>("color", 0x181818).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("background").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
-	s.j("colors").add<SettingsJson>("background-line");
-		s.j("colors").j("background-line").add<uint64_t>("color", 0x000000).setMin(0x000000).setMax(0xFFFFFF);
-		s.j("colors").j("background-line").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
-	s.j("colors").add<SettingsJson>("background-box");
-		s.j("colors").j("background-box").add<uint64_t>("color", 0xff0000).setMin(0x000000).setMax(0xFFFFFF);
-		s.j("colors").j("background-box").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("bg-rect");
+		s.j("colors").j("bg-rect").add<uint64_t>("color", 0x121212).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("bg-rect-border");
+		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x000000).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
 	/* Audio */
 	s.add<SettingsJson>("audio");

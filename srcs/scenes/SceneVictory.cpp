@@ -40,7 +40,7 @@ bool			SceneVictory::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = statisticHeight;
-		addText(tmpPos, tmpSize, "Victory !").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Victory !");
 
 		try {
 			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
