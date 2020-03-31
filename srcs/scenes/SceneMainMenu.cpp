@@ -38,7 +38,7 @@ bool			SceneMainMenu::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "MENU");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "new  game")

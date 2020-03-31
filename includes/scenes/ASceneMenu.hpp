@@ -48,6 +48,7 @@ class ASceneMenu : public AScene {
 		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
 		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step);
 		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
+		TextUI &			addTitle(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		RectUI &			addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color = VOID_COLOR,
 			glm::vec4 borderColor = VOID_COLOR);
 		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);

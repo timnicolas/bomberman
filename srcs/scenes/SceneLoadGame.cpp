@@ -39,7 +39,7 @@ bool			SceneLoadGame::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Load Game").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Load Game");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "RESTART")

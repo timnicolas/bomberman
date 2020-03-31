@@ -119,7 +119,7 @@ bool					SceneSettings::init() {
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-		addText(tmp_pos, tmp_size, "SETTINGS").setTextFont("title");
+		addTitle(tmp_pos, tmp_size, "SETTINGS");
 		tmp_size.y = menu_height * 0.1;
 		tmp_size.x = menu_width / 3 * 0.9;
 		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;

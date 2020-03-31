@@ -143,6 +143,26 @@ TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & 
 	return *ui;
 }
 
+
+/**
+ * @brief add a Title in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param text the text
+ * @return TextUI& a reference to the element created
+ */
+TextUI & ASceneMenu::addTitle(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+	TextUI * ui = new TextUI(pos, size);
+	ui->setText(text);
+	ui->setTextFont("title");
+	if (size == VOID_SIZE)
+		ui->setCalculatedSize();
+	ui->setTextColor(colorise(s.j("colors").j("font").u("color")));
+	_buttons.push_back(ui);
+	return *ui;
+}
+
 /**
  * @brief add a rectange in the menu with menu settings
  *
@@ -155,9 +175,9 @@ TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & 
 RectUI & ASceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm::vec4 borderColor) {
 	RectUI * ui = new RectUI(pos, size);
 	if (color == VOID_COLOR)
-		color = colorise(s.j("colors").j("background").u("color"), s.j("colors").j("background").u("alpha"));
+		color = colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha"));
 	if (borderColor == VOID_COLOR)
-		borderColor = colorise(s.j("colors").j("background-line").u("color"), s.j("colors").j("background-line").u("alpha"));
+		borderColor = colorise(s.j("colors").j("bg-rect-border").u("color"), s.j("colors").j("bg-rect-border").u("alpha"));
 	ui->setColor(color);
 	ui->setBorderColor(borderColor);
 	_buttons.push_back(ui);
@@ -202,8 +222,8 @@ bool ASceneMenu::_initBG() {
 	glm::vec2 tmpPos = glm::vec2(0, 0);
 
 	addRect(tmpPos, winSz, colorise(
-		s.j("colors").j("background-box").u("color"),
-		s.j("colors").j("background-box").u("alpha")
+		s.j("colors").j("background").u("color"),
+		s.j("colors").j("background").u("alpha")
 	));
 	// glm::vec2 tmpSize = glm::vec2(200, 0);
 	// int i = 0;

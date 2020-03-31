@@ -1,20 +1,19 @@
 #include "ABaseUI.hpp"
 #include "ABaseMasterUI.hpp"
 #include "Logging.hpp"
-#include "bomberman.hpp"
 
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
   _pos(pos),
   _posOffset(glm::vec2(0, 0)),
   _size(size),
-  _color(colorise(s.j("colors").j("buttons").u("color"), s.j("colors").j("buttons").u("alpha"))),
-  _borderColor(colorise(s.j("colors").j("buttons-border").u("color"), s.j("colors").j("buttons-border").u("alpha"))),
+  _color(0.0, 0.0, 0.0, 1.0),
+  _borderColor(0.0, 0.0, 0.0, 1.0),
   _borderSize(2.0),
   _mouseHoverColor(0.0, 0.0, 0.0, 0.2),
   _mouseClickColor(0.0, 0.0, 0.0, 0.5),
   _text("default text"),
-  _textColor(colorise(s.j("colors").j("font").u("color"), s.j("colors").j("font").u("alpha"))),
+  _textColor(0.0, 0.0, 0.0, 1.0),
   _textFont(_defFont),
   _textScale(1.0),
   _textPadding(5),

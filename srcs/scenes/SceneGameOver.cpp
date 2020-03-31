@@ -24,7 +24,7 @@ SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneGameOver::init() {
@@ -39,7 +39,7 @@ bool			SceneGameOver::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Game Over").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Game Over");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "RESTART")
