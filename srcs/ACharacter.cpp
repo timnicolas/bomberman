@@ -6,7 +6,8 @@
 
 ACharacter::ACharacter(SceneGame &game)
 : AEntity(game),
-  size(0.95, 0.95, 0.95)
+  size(0.95, 0.95, 0.95),
+  front(0, 0, 1)
 {
 	category = Category::MOBILE;
 	lives = 1;
@@ -334,8 +335,11 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 
 	pos += direction * speed * dTime;
 
+	if (position == pos)
+		return position;
 	if (game.positionInGame(pos, size)) {
 		if (_canMoveOnFromTo(position, pos)) {  // if we can move
+			front = direction;
 			position = pos;
 		}
 		// else if (offset > 0) {  // if we cannot move
