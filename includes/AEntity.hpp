@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <stdexcept>
-#include <chrono>
 #include "useGlm.hpp"
 #include "Logging.hpp"
 #include "Gui.hpp"
