@@ -43,6 +43,7 @@ public:
 	int			lives;
 	float		speed;
 	glm::vec3	size;
+	glm::vec3	front;
 	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
 	// Constructors
