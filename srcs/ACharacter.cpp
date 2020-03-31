@@ -342,8 +342,8 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 		// move only one one direction (UP | DOWN | LEFT | RIGHT & movement impossible)
 		if (direction.x == 0) {  // up | down
 			glm::vec3 tmpPos = position + movement;
-			tmpPos.x = static_cast<int>(position.x);
-			if (position.x - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
+			tmpPos.x = static_cast<int>(position.x + size.x - 1);
+			if ((position.x + size.x - 1) - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
 				reloadMovement = true;
 				direction.x = -1;
 				direction.z = 0;
@@ -358,8 +358,8 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 		}
 		else {  // left | right
 			glm::vec3 tmpPos = position + movement;
-			tmpPos.z = static_cast<int>(position.z);
-			if (position.z - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
+			tmpPos.z = static_cast<int>(position.z + size.z - 1);
+			if ((position.z + size.z - 1) - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
 				reloadMovement = true;
 				direction.x = 0;
 				direction.z = -1;
