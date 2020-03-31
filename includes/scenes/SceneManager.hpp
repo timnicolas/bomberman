@@ -18,7 +18,8 @@ namespace SceneNames {
 	static std::string const VICTORY = "victory";
 	static std::string const EXIT = "exit";
 	static std::string const SETTINGS = "settings";
-}
+	static std::string const LOADGAME = "loadGame";
+}  // namespace SceneNames
 
 /**
  * @brief this object can manage all scenes (AScene objects)

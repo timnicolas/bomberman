@@ -1,22 +1,22 @@
-#include "SceneGameOver.hpp"
+#include "SceneLoadGame.hpp"
 #include "SceneGame.hpp"
 
-SceneGameOver::SceneGameOver(Gui * gui, float const &dtTime)
+SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
 {}
 
-SceneGameOver::SceneGameOver(SceneGameOver const & src)
+SceneLoadGame::SceneLoadGame(SceneLoadGame const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
-SceneGameOver::~SceneGameOver() {}
+SceneLoadGame::~SceneLoadGame() {}
 
-SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {
+SceneLoadGame & SceneLoadGame::operator=(SceneLoadGame const & rhs) {
 	if (this != &rhs) {
-		logWarn("you are copying SceneGameOver")
+		logWarn("you are copying SceneLoadGame")
 	}
 	return *this;
 }
@@ -24,10 +24,10 @@ SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
-bool			SceneGameOver::init() {
+bool			SceneLoadGame::init() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -39,7 +39,7 @@ bool			SceneGameOver::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Game Over").setTextFont("title");
+		addText(tmpPos, tmpSize, "Load Game").setTextFont("title");
 
 		tmpPos.y -= menuHeight * 1.2;
 		addButton(tmpPos, tmpSize, "RESTART")
@@ -72,12 +72,22 @@ bool			SceneGameOver::init() {
 }
 
 /**
+ * @brief called when the scene is loaded
+ */
+void SceneLoadGame::load() {
+	ASceneMenu::load();
+	if (SceneManager::getSceneName() != SceneNames::EXIT) {
+		_lastSceneName = SceneManager::getSceneName();
+	}
+}
+
+/**
  * @brief this is the update function (called every frames)
  *
  * @return true if the update is a success
  * @return false if there are an error in update
  */
-bool	SceneGameOver::update() {
+bool	SceneLoadGame::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
@@ -95,14 +105,4 @@ bool	SceneGameOver::update() {
 		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
-}
-
-/**
- * @brief called when the scene is loaded
- */
-void SceneGameOver::load() {
-	ASceneMenu::load();
-	if (SceneManager::getSceneName() != SceneNames::EXIT) {
-		_lastSceneName = SceneManager::getSceneName();
-	}
 }

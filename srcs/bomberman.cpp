@@ -88,10 +88,25 @@ bool	initSettings(std::string const & filename) {
 	s.add<SettingsJson>("colors");
 	// buttons
 	s.j("colors").add<SettingsJson>("buttons");
-		s.j("colors").j("buttons").add<double>("r", 0.07).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("g", 0.37).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("b", 0.8).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("a", 1.0).setMin(0).setMax(1);
+		s.j("colors").j("buttons").add<uint64_t>("color", 0x2AB859).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("buttons-border");
+		s.j("colors").j("buttons-border").add<uint64_t>("color", 0x2CBC5C).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	// font color
+	s.j("colors").add<SettingsJson>("font");
+		s.j("colors").j("font").add<uint64_t>("color", 0xFFFFFF).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("font").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	// background color
+	s.j("colors").add<SettingsJson>("background");
+		s.j("colors").j("background").add<uint64_t>("color", 0x181818).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("background").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("background-line");
+		s.j("colors").j("background-line").add<uint64_t>("color", 0x000000).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("background-line").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("background-box");
+		s.j("colors").j("background-box").add<uint64_t>("color", 0xff0000).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("background-box").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
 	/* Audio */
 	s.add<SettingsJson>("audio");
@@ -224,4 +239,23 @@ std::string					timeToString(float time) {
 	std::stringstream ss;
 	ss << std::setw(2) << std::setfill('0') << seconds;
 	return std::to_string(minutes) + ":" + ss.str();
+}
+
+/**
+ * @brief Transform color between hexadecimal mode to float vec4.
+ *
+ * @param color
+ * @param alpha
+ * @return glm::vec4
+ */
+glm::vec4					colorise(uint32_t color, uint8_t alpha) {
+	float	red = static_cast<float>((color & 0xFF0000) >> 16) / 255.0;
+	float	green = static_cast<float>((color & 0x00FF00) >> 8) / 255.0;
+	float	blue = static_cast<float>(color & 0x0000FF) / 255.0;
+	if (color > 0xffffff) {
+		red = 1.0;
+		green = 1.0;
+		blue = 1.0;
+	}
+	return (glm::vec4({red, green, blue, (alpha / 255.0)}));
 }
