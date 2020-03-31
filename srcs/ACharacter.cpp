@@ -320,6 +320,8 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
 	return position;
 }
 
+#define MOVE_STEP 0.05
+
 /**
  * @brief Move to direction if possible.
  *
@@ -332,44 +334,110 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 	glm::vec3 	pos = getPos();
 
 	direction = glm::normalize(direction);
+	if (glm::length(direction) == 0)
+		return position;
 
-	pos += direction * speed * dTime;
+	glm::vec3 movement = direction * speed * dTime;
 
+	/* move step by step */
+	bool xPositive = (movement.x < 0) ? 0 : 1;
+	bool zPositive = (movement.z < 0) ? 0 : 1;
+	float xAdd = (xPositive) ? MOVE_STEP : -MOVE_STEP;
+	float zAdd = (zPositive) ? MOVE_STEP : -MOVE_STEP;
+	float x = xAdd;
+	float z = zAdd;
+	bool xEnd = false;
+	bool zEnd = false;
+	while (!xEnd || !zEnd) {
+		if (!xEnd) {
+			if ((xPositive && x > movement.x) || (!xPositive && x < movement.x)) {
+				xEnd = true;
+				x = movement.x - (x - xAdd);
+			}
+			if (!xEnd) {
+				glm::vec3 lastPos = position;
+				if (lastPos == _miniMove({xAdd, 0, 0})) {
+					xEnd = true;
+					x = 0;
+				}
+			}
+			if (!xEnd)
+				x += xAdd;
+		}
+
+		if (!zEnd) {
+			if ((zPositive && z > movement.z) || (!zPositive && z < movement.z)) {
+				zEnd = true;
+				z = movement.z - (z - zAdd);
+			}
+			if (!zEnd) {
+				glm::vec3 lastPos = position;
+				if (lastPos == _miniMove({0, 0, zAdd})) {
+					zEnd = true;
+					z = 0;
+				}
+			}
+			if (!zEnd)
+				z += zAdd;
+		}
+	}
+	if (x != 0) {
+		_miniMove({x, 0, 0});
+	}
+	if (z != 0) {
+		_miniMove({0, 0, z});
+	}
+
+	// pos += movement;
+
+	// if (position == pos)
+	// 	return position;
+	// if (game.positionInGame(pos, size)) {
+	// 	if (_canMoveOnFromTo(position, pos)) {  // if we can move
+	// 		front = direction;
+	// 		position = pos;
+	// 	}
+	// 	// else if (offset > 0) {  // if we cannot move
+	// 	// 	if (direction == Direction::UP || direction == Direction::DOWN) {
+	// 	// 		glm::vec3 tmpPos = pos;
+	// 	// 		tmpPos.x = static_cast<int>(pos.x);
+	// 	// 		if (pos.x - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
+	// 	// 			// can move up or down
+	// 	// 			return _moveTo(Direction::LEFT, dTime, -1);
+	// 	// 		}
+	// 	// 		tmpPos.x = static_cast<int>(pos.x + 1);
+	// 	// 		if (pos.x - tmpPos.x - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
+	// 	// 			// can move up or down
+	// 	// 			return _moveTo(Direction::RIGHT, dTime, -1);
+	// 	// 		}
+	// 	// 	}
+	// 	// 	else {  // left | right
+	// 	// 		glm::vec3 tmpPos = pos;
+	// 	// 		tmpPos.z = static_cast<int>(pos.z);
+	// 	// 		if (pos.z - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
+	// 	// 			// can move left or right
+	// 	// 			return _moveTo(Direction::UP, dTime, -1);
+	// 	// 		}
+	// 	// 		tmpPos.z = static_cast<int>(pos.z + 1);
+	// 	// 		if (pos.z - tmpPos.z - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
+	// 	// 			// can move left or right
+	// 	// 			return _moveTo(Direction::DOWN, dTime, -1);
+	// 	// 		}
+	// 	// 	}
+	// 	// }
+	// }
+	return position;
+}
+
+glm::vec3	ACharacter::_miniMove(glm::vec3 movement) {
+	glm::vec3 pos = getPos() + movement;
 	if (position == pos)
 		return position;
 	if (game.positionInGame(pos, size)) {
 		if (_canMoveOnFromTo(position, pos)) {  // if we can move
-			front = direction;
 			position = pos;
+			return position;
 		}
-		// else if (offset > 0) {  // if we cannot move
-		// 	if (direction == Direction::UP || direction == Direction::DOWN) {
-		// 		glm::vec3 tmpPos = pos;
-		// 		tmpPos.x = static_cast<int>(pos.x);
-		// 		if (pos.x - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
-		// 			// can move up or down
-		// 			return _moveTo(Direction::LEFT, dTime, -1);
-		// 		}
-		// 		tmpPos.x = static_cast<int>(pos.x + 1);
-		// 		if (pos.x - tmpPos.x - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
-		// 			// can move up or down
-		// 			return _moveTo(Direction::RIGHT, dTime, -1);
-		// 		}
-		// 	}
-		// 	else {  // left | right
-		// 		glm::vec3 tmpPos = pos;
-		// 		tmpPos.z = static_cast<int>(pos.z);
-		// 		if (pos.z - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
-		// 			// can move left or right
-		// 			return _moveTo(Direction::UP, dTime, -1);
-		// 		}
-		// 		tmpPos.z = static_cast<int>(pos.z + 1);
-		// 		if (pos.z - tmpPos.z - 1 < offset && _canMoveOnFromTo(position, tmpPos)) {
-		// 			// can move left or right
-		// 			return _moveTo(Direction::DOWN, dTime, -1);
-		// 		}
-		// 	}
-		// }
 	}
 	return position;
 }

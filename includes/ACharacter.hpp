@@ -27,6 +27,7 @@ namespace Direction {
 class ACharacter : public AEntity {
 private:
 	ACharacter();
+	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
 	// Methods
