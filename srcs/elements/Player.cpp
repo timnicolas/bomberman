@@ -186,20 +186,21 @@ void	Player::addBomb() {
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
-	std::unordered_set<AEntity *>	collisions;
+	glm::vec3	dir = glm::vec3(0, 0, 0);
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Direction::UP, dTime);
+		dir.z -= 1;
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Direction::RIGHT, dTime);
+		dir.x += 1;
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Direction::DOWN, dTime);
+		dir.z += 1;
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Direction::LEFT, dTime);
+		dir.x -= 1;
 	}
+	_moveTo(dir, dTime);
 }
 
 void	Player::_putBomb() {
