@@ -85,6 +85,10 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
 	// set default color
 	glm::vec4 color = colorise(s.j("colors").j("buttons").u("color"), s.j("colors").j("buttons").u("alpha"));
 	ui->setColor(color);
+	ui->setBorderColor(colorise(
+		s.j("colors").j("buttons-border").u("color"),
+		s.j("colors").j("buttons-border").u("alpha")
+	));
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -122,6 +126,15 @@ SliderUI & ASceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float
 	// set default color
 	glm::vec4 color = colorise(s.j("colors").j("buttons").u("color"), s.j("colors").j("buttons").u("alpha"));
 	ui->setColor(color);
+	ui->setBorderColor(colorise(
+		s.j("colors").j("buttons-border").u("color"),
+		s.j("colors").j("buttons-border").u("alpha")
+	));
+	ui->setTextColor(colorise(
+		s.j("colors").j("font").u("color"),
+		s.j("colors").j("font").u("alpha")
+	));
+
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -139,10 +152,10 @@ TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & 
 	ui->setText(text);
 	if (size == VOID_SIZE)
 		ui->setCalculatedSize();
+	ui->setTextColor(colorise(s.j("colors").j("font").u("color")));
 	_buttons.push_back(ui);
 	return *ui;
 }
-
 
 /**
  * @brief add a Title in the menu with menu settings
@@ -225,22 +238,6 @@ bool ASceneMenu::_initBG() {
 		s.j("colors").j("background").u("color"),
 		s.j("colors").j("background").u("alpha")
 	));
-	// glm::vec2 tmpSize = glm::vec2(200, 0);
-	// int i = 0;
-	// while (tmpPos.y < winSz.y) {
-	// 	tmpPos.x = 0;
-	// 	int j = 0;
-	// 	while (tmpPos.x < winSz.x) {
-	// 		std::string name;
-	// 		if ((i + j) & 1) name = "bomberman-assets/textures/bomb/004-bombBott.png";
-	// 		else name = "bomberman-assets/textures/player/010-playerSide.png";
-	// 		addImage(tmpPos, tmpSize, name).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
-	// 		tmpPos.x += tmpSize.x;
-	// 		j++;
-	// 	}
-	// 	tmpPos.y += getUIElement(getNbUIElements() - 1).getSize().y;
-	// 	i++;
-	// }
 	return true;
 }
 

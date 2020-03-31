@@ -69,7 +69,7 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = menuHeight * 0.8;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "MAIN MENU")
+		addButton(tmpPos, tmpSize, "main   menu")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
