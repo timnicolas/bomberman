@@ -296,7 +296,7 @@ bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) {
  * @return glm::vec3 finale position
  */
 glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, float const offset) {
-	glm::vec3 	dir = glm::vec3(0, 0, 0);
+	glm::vec3 	dir = glm::vec3(0, front.y, 0);
 
 	switch (direction) {
 		case Direction::UP:

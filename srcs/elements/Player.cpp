@@ -192,7 +192,7 @@ void	Player::addBomb() {
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
-	glm::vec3	dir = glm::vec3(0, 0, 0);
+	glm::vec3	dir = glm::vec3(0, front.y, 0);
 
 	if (Inputs::getKey(InputType::UP)) {
 		dir.z -= 1;
