@@ -10,7 +10,10 @@ Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform
 	loopAnimation = false;
 	_animationId = 0;
 	_animationTime = 0;
+	_animationTimeTick = 0;
 	animationSpeed = 1.0;
+	_animEndCbFunc = nullptr;
+	_animEndCbClass = nullptr;
 
 	_curAnimation = nullptr;
 	_ticksPerSecond = 0.0;
@@ -40,6 +43,7 @@ Model &Model::operator=(Model const &rhs) {
 		_animationTime = rhs._animationTime;
 		_animationTimeTick = rhs._animationTimeTick;
 		animationSpeed = rhs.animationSpeed;
+		_animEndCbFunc = rhs._animEndCbFunc;
 	}
 	return *this;
 }
@@ -72,13 +76,19 @@ void	Model::draw() {
  * @brief change the animation by id
  *
  * @param id the animation id
+ * @param animEndCb called on animation end
+ * @param animEndCbClass member func of animEndCb
  */
-void	Model::setAnimation(uint32_t id) {
+void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
+	AEntity *animEndCbClass)
+{
 	if (_openGLModel.setAnimation(id)) {
 		_animationId = id;
 		_curAnimation = _openGLModel.getAiAnimation(_animationId);
 		_updateTicksPerSecond();
 		_animationTime = 0;  // reset animation time
+		_animEndCbFunc = animEndCbFunc;
+		_animEndCbClass = animEndCbClass;
 	}
 }
 
@@ -87,12 +97,18 @@ void	Model::setAnimation(uint32_t id) {
  * @brief change the animation by name
  *
  * @param name the animation name
+ * @param animEndCb member func called on animation end
+ * @param animEndCbClass member func of animEndCb
  */
-void	Model::setAnimation(std::string name) {
+void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
+	AEntity *animEndCbClass)
+{
 	_openGLModel.getAnimationId(name, _animationId);
 	_curAnimation = _openGLModel.getAiAnimation(_animationId);
 	_updateTicksPerSecond();
 	_animationTime = 0;  // reset animation time
+	_animEndCbFunc = animEndCbFunc;
+	_animEndCbClass = animEndCbClass;
 }
 
 // -- setNextAnimation ---------------------------------------------------------
@@ -100,14 +116,16 @@ void	Model::setAnimation(std::string name) {
  * @brief change the animation to the next one
  *
  */
-void	Model::setNextAnimation() {
+void	Model::setNextAnimation(AnimEndCb animEndCbFunc, AEntity *animEndCbClass) {
 	uint32_t nextId = _animationId + 1;
 
 	if (nextId >= _openGLModel.getNbAnimations()) {
 		nextId = 0;
 	}
-
 	setAnimation(nextId);
+
+	_animEndCbFunc = animEndCbFunc;
+	_animEndCbClass = animEndCbClass;
 }
 
 // -- setAnimProgress ----------------------------------------------------------
@@ -197,6 +215,8 @@ float	Model::getAnimDuration() const {
 
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
+	float	lastAnimTimeTick = _animationTimeTick;
+
 	_animationTime += 1000 * _dtTime * animationSpeed;
 
 	if (loopAnimation) {
@@ -207,6 +227,14 @@ void	Model::_updateAnimationTime() {
 	}
 
 	_animationTimeTick = (_animationTime / 1000.0) * _ticksPerSecond;
+
+	// call member func cb on animation end
+	if (((_animationTimeTick != lastAnimTimeTick && _animationTimeTick ==
+		_curAnimation->mDuration) || lastAnimTimeTick > _animationTimeTick) &&
+		_animEndCbFunc && _animEndCbClass)
+	{
+		(_animEndCbClass->*_animEndCbFunc)(std::string(_curAnimation->mName.C_Str()));
+	}
 }
 
 // -- _updateTicksPerSecond ----------------------------------------------------

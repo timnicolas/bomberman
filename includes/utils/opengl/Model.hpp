@@ -3,6 +3,7 @@
 
 #include "OpenGLModel.hpp"
 #include "ETransform.hpp"
+#include "AEntity.hpp"
 
 /**
  * @brief class to easy manage OpenGLModel,
@@ -17,9 +18,16 @@ class Model {
 		Model &operator=(Model const &rhs);
 
 		void	draw();
-		void	setAnimation(uint32_t id);
-		void	setAnimation(std::string name);
-		void	setNextAnimation();
+
+		// anim end callback
+		typedef void (AEntity::*AnimEndCb)(std::string animName);
+
+		void	setAnimation(uint32_t id, AnimEndCb animEndCbFunc = nullptr,
+			AEntity *animEndCbClass = nullptr);
+		void	setAnimation(std::string name, AnimEndCb animEndCbFunc = nullptr,
+			AEntity *animEndCbClass = nullptr);
+		void	setNextAnimation(AnimEndCb animEndCbFunc = nullptr,
+			AEntity *animEndCbClass = nullptr);
 		void	setAnimProgress(float progress);
 		void	setAnimCurrentTime(float animTime);
 
@@ -44,6 +52,8 @@ class Model {
 		float		_ticksPerSecond;
 		float		_animationTime;  // in ms
 		float		_animationTimeTick;
+		AnimEndCb	_animEndCbFunc;  // cb function called on animation end
+		AEntity		*_animEndCbClass;  // cb class called on animation end
 };
 
 #endif  // MODEL_HPP_
