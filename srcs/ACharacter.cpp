@@ -340,17 +340,21 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 	glm::vec3 movement = direction * speed * dTime;
 
 	/* move step by step */
-	bool xPositive = (movement.x < 0) ? 0 : 1;
-	bool zPositive = (movement.z < 0) ? 0 : 1;
-	float xAdd = (xPositive) ? MOVE_STEP : -MOVE_STEP;
-	float zAdd = (zPositive) ? MOVE_STEP : -MOVE_STEP;
+	float xDir = (movement.x < 0) ? -1 : ((movement.x > 0) ? 1 : 0);
+	float zDir = (movement.z < 0) ? -1 : ((movement.z > 0) ? 1 : 0);
+	float xAdd = MOVE_STEP * xDir;
+	float zAdd = MOVE_STEP * zDir;
 	float x = xAdd;
 	float z = zAdd;
-	bool xEnd = false;
-	bool zEnd = false;
-	while (!xEnd || !zEnd) {
+	bool xEnd = (xDir == 0) ? true : false;
+	bool zEnd = (zDir == 0) ? true : false;
+	while (!xEnd || !zEnd || x != 0 || z != 0) {
+		if (xEnd && x != 0) {
+			_miniMove({x, 0, 0});
+			x = 0;
+		}
 		if (!xEnd) {
-			if ((xPositive && x > movement.x) || (!xPositive && x < movement.x)) {
+			if ((xDir > 0 && x > movement.x) || (xDir < 0 && x < movement.x)) {
 				xEnd = true;
 				x = movement.x - (x - xAdd);
 			}
@@ -365,8 +369,12 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 				x += xAdd;
 		}
 
+		if (zEnd && z != 0) {
+			_miniMove({0, 0, z});
+			z = 0;
+		}
 		if (!zEnd) {
-			if ((zPositive && z > movement.z) || (!zPositive && z < movement.z)) {
+			if ((zDir > 0 && z > movement.z) || (zDir < 0 && z < movement.z)) {
 				zEnd = true;
 				z = movement.z - (z - zAdd);
 			}
@@ -380,12 +388,6 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 			if (!zEnd)
 				z += zAdd;
 		}
-	}
-	if (x != 0) {
-		_miniMove({x, 0, 0});
-	}
-	if (z != 0) {
-		_miniMove({0, 0, z});
 	}
 
 	// pos += movement;
