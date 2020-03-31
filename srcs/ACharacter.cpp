@@ -329,6 +329,7 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const dTime, floa
  * @return glm::vec3 finale position
  */
 glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float const offset) {
+	glm::vec3 beforePosition = position;
 	direction = glm::normalize(direction);
 	if (glm::length(direction) == 0)
 		return position;
@@ -429,6 +430,11 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 			if (!zEnd)
 				z += zAdd;
 		}
+	}
+
+	if (beforePosition != position) {
+		// if moving, update front vector
+		front = glm::normalize(position - beforePosition);
 	}
 
 	return position;
