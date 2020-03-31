@@ -4,7 +4,9 @@
 SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
-{}
+{
+	_states.restart = false;
+}
 
 SceneLoadGame::SceneLoadGame(SceneLoadGame const & src)
 : ASceneMenu(src)
@@ -40,11 +42,43 @@ bool			SceneLoadGame::init() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Load   game");
-
 		tmpPos.y -= menuHeight * 1.8;
-		addButton(tmpPos, tmpSize, "restart")
-			.setKeyLeftClickInput(InputType::CONFIRM)
-			.addButtonLeftListener(&_states.restart);
+
+		// Screen Saved Games
+		glm::vec2		savedGamesSize = {menuWidth * (2.0/5.0), menuHeight * 1.3 * 5};
+		glm::vec2		savedGamesPos = {tmpPos.x + 0, tmpPos.y - savedGamesSize.y};
+		ABaseMasterUI	*savedGames = reinterpret_cast<ABaseMasterUI*>(
+			&addScrollbar(savedGamesPos, savedGamesSize).enableVertScroll(true).setEnabled(true)
+		);
+		// savedGames->setEnabled(false);
+		// savedGames->setColor(colorise(0x91BD55));
+
+		for (int i = 0; i <= 10; i++) {
+			addButton(
+				{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
+				{savedGamesSize.x * 0.8, tmpSize.y},
+				"saved  " + std::to_string(i)
+			).setMaster(savedGames);
+		}
+
+		// Screen Game Preview
+		glm::vec2		previewSize = {menuWidth * (3.0/5.0), menuHeight * 1.3 * 5};
+		glm::vec2		previewPos = {tmpPos.x + savedGamesSize.x, tmpPos.y - previewSize.y};
+		ABaseMasterUI	*previewGame = &addScrollbar(previewPos, previewSize);
+		// previewGame->setColor(colorise(0xEF9224));
+
+		addButton(
+			{5 * 1.3, 0},
+			tmpSize,
+			"load   game"
+		).setMaster(previewGame);
+
+		tmpPos.y -= savedGamesSize.y;
+
+
+		// addButton(tmpPos, tmpSize, "restart")
+		// 	.setKeyLeftClickInput(InputType::CONFIRM)
+		// 	.addButtonLeftListener(&_states.restart).setMaster(savedGames);
 
 		tmpPos.y -= menuHeight * 1.3;
 		addButton(tmpPos, tmpSize, "main menu")
