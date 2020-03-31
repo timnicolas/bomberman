@@ -374,6 +374,32 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 		}
 	}
 
+	/* diagonal on a wall */
+	/*
+	*    |
+	*   p|
+	*    |
+	*
+	* if right & up -> only UP (because there is a wall on the right)
+	*/
+	if (direction.x != 0 && direction.z != 0) {
+		// try x moving
+		glm::vec3 tmpPos = position;
+		tmpPos.x += MOVE_STEP * ((direction.x < 0) ? -1 : 1);
+		if (!_canMoveOnFromTo(position, tmpPos)) {  // if can't move on x Direction
+			reloadMovement = true;
+			direction.x = 0;
+		}
+		// try z moving
+		tmpPos = position;
+		tmpPos.z += MOVE_STEP * ((direction.z < 0) ? -1 : 1);
+		if (!_canMoveOnFromTo(position, tmpPos)) {  // if can't move on x Direction
+			reloadMovement = true;
+			direction.z = 0;
+		}
+	}
+
+	/* reload direction vector */
 	if (reloadMovement) {  // direction vector has changed so reload final movement
 		direction = glm::normalize(direction);
 		if (glm::length(direction) == 0)
