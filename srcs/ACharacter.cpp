@@ -335,6 +335,51 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const dTime, float cons
 
 	glm::vec3 movement = direction * speed * dTime;
 
+	/* moving help */
+	bool reloadMovement = false;
+	if (offset > 0 && (direction.x == 0 || direction.z == 0) && !_canMoveOnFromTo(position, position + movement)) {
+		// move only one one direction (UP | DOWN | LEFT | RIGHT & movement impossible)
+		if (direction.x == 0) {  // up | down
+			glm::vec3 tmpPos = position + movement;
+			tmpPos.x = static_cast<int>(position.x);
+			if (position.x - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
+				reloadMovement = true;
+				direction.x = -1;
+				direction.z = 0;
+			}
+			tmpPos = position + movement;
+			tmpPos.x = static_cast<int>(position.x + 1);
+			if (position.x - tmpPos.x > -offset && _canMoveOnFromTo(position, tmpPos)) {
+				reloadMovement = true;
+				direction.x = 1;
+				direction.z = 0;
+			}
+		}
+		else {  // left | right
+			glm::vec3 tmpPos = position + movement;
+			tmpPos.z = static_cast<int>(position.z);
+			if (position.z - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
+				reloadMovement = true;
+				direction.x = 0;
+				direction.z = -1;
+			}
+			tmpPos = position + movement;
+			tmpPos.z = static_cast<int>(position.z + 1);
+			if (position.z - tmpPos.z > -offset && _canMoveOnFromTo(position, tmpPos)) {
+				reloadMovement = true;
+				direction.x = 0;
+				direction.z = 1;
+			}
+		}
+	}
+
+	if (reloadMovement) {  // direction vector has changed so reload final movement
+		direction = glm::normalize(direction);
+		if (glm::length(direction) == 0)
+			return position;
+		movement = direction * speed * dTime;
+	}
+
 	/* move step by step */
 	float xDir = (movement.x < 0) ? -1 : ((movement.x > 0) ? 1 : 0);
 	float zDir = (movement.z < 0) ? -1 : ((movement.z > 0) ? 1 : 0);
