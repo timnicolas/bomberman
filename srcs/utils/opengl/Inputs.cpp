@@ -12,6 +12,7 @@ const std::string	Inputs::input_type_name[] = {
 	"cancel",
 	"goto_menu",
 	"show_help",
+	"cheat_code",
 };
 const std::string	Inputs::_conf_file = "configs/controls.json";
 
@@ -45,6 +46,8 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
 	_controls.j("keys").add<int64_t>("show_help", SDL_SCANCODE_F1) \
 		.setMin(4).setMax(286).setDescription("show shortcuts fo buttons");
+	_controls.j("keys").add<int64_t>("cheat_code", SDL_SCANCODE_SLASH) \
+		.setMin(4).setMax(286).setDescription("open cheat code command line");
 	try {
 		if (!_controls.loadFile(Inputs::_conf_file)) {
 			logWarn("Invalid value in " << Inputs::_conf_file << ".");
@@ -64,6 +67,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::CANCEL },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::GOTO_MENU },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show_help")), InputType::SHOW_HELP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cheat_code")), InputType::CHEAT_CODE },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -76,6 +80,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		_controls.j("keys").i("cancel"),
 		_controls.j("keys").i("goto_menu"),
 		_controls.j("keys").i("show_help"),
+		_controls.j("keys").i("cheat_code"),
 	};
 	_controls.saveToFile(Inputs::_conf_file);
 }

@@ -27,6 +27,7 @@ namespace InputType {
 		CANCEL,
 		GOTO_MENU,
 		SHOW_HELP,
+		CHEAT_CODE,
 		NB_INPUTS  // need to be the last element
 	};
 }  // namespace InputType
