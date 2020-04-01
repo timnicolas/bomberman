@@ -8,6 +8,7 @@ EnemyFly::EnemyFly(SceneGame &game)
   _dir(Direction::UP)
 {
 	name = "EnemyFly";
+	size = glm::vec3(0.5, 0.5, 0.3);
 }
 
 EnemyFly::~EnemyFly() {
@@ -66,6 +67,6 @@ bool	EnemyFly::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyFly::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
+	gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }

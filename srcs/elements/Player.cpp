@@ -49,6 +49,13 @@ bool	Player::init() {
 }
 
 /**
+ * @brief Set the Entity that the Character can cross
+ */
+void Player::resetCrossable() {
+	ACharacter::resetCrossable();
+}
+
+/**
  * @brief Reset values for player.
  *
  */
@@ -105,7 +112,7 @@ bool	Player::draw(Gui &gui) {
 		if (_toDraw > 5)
 			return true;
 	}
-	gui.drawCube(Block::PLAYER, getPos());
+	gui.drawCube(Block::PLAYER, getPos(), size);
 	return true;
 }
 
@@ -150,6 +157,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 				speed = MAX_SPEED;
 			break;
 		case BonusType::WALLPASS:
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
+				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
 			break;
 		case BonusType::DETONATOR:
@@ -157,6 +166,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
+				crossableTypes.push_back(Type::BOMB);
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
@@ -182,42 +193,24 @@ void	Player::addBomb() {
 		bombs = totalBombs;
 }
 
-// -- Protected Methods --------------------------------------------------------
-bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
-	for (auto &&entity : collisions) {
-		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
-			continue;
-		if (entity->crossable == Type::ALL || entity->crossable == type)
-			continue;
-		if (passWall && entity->type == Type::CRISPY)
-			continue;
-		if (passBomb && entity->type == Type::BOMB)
-			continue;
-		return false;
-	}
-	return true;
-}
-
-
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move(float const dTime) {
-	std::unordered_set<AEntity *>	collisions;
+	glm::vec3	dir = glm::vec3(0, front.y, 0);
 
 	if (Inputs::getKey(InputType::UP)) {
-		_moveTo(Direction::UP, dTime);
+		dir.z -= 1;
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
-		_moveTo(Direction::RIGHT, dTime);
+		dir.x += 1;
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
-		_moveTo(Direction::DOWN, dTime);
+		dir.z += 1;
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
-		_moveTo(Direction::LEFT, dTime);
+		dir.x -= 1;
 	}
-	collisions = getCollision(position);
-	_clearCollisionObjects(collisions);
+	_moveTo(dir, dTime);
 }
 
 void	Player::_putBomb() {
@@ -227,9 +220,7 @@ void	Player::_putBomb() {
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
 		bomb->setPropagation(bombProgation);
-		// game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		game.board[intPos.x][intPos.y].push_back(bomb);
-		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
 	}
 }
