@@ -22,6 +22,10 @@ AScene & AScene::operator=(AScene const & rhs) {
 	return *this;
 }
 
+// -- getters --------------------------------------------------------
+float const	&AScene::getDtTime() const { return _dtTime; }
+
+
 // -- Exceptions errors --------------------------------------------------------
 
 AScene::SceneException::SceneException()

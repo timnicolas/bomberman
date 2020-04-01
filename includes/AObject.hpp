@@ -22,7 +22,7 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
-	virtual bool	update(float const dTime) = 0;
+	virtual bool	update() = 0;
 	virtual bool	draw(Gui &gui) = 0;
 	void			setPos(glm::vec3 pos = VOID_POS3);
 	glm::vec3		getPos();

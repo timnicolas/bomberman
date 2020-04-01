@@ -30,6 +30,22 @@ namespace Type {
 	};
 }  // namespace Type
 
+namespace EntityState {
+	enum Enum {
+		IDLE,
+		DYING,
+		RUNNING,
+		DROP_BOMB,
+		LOOSE_EMOTE,
+		VICTORY_EMOTE,
+	};
+
+	struct	Struct {
+		EntityState::Enum	state;
+		bool				updated;
+	};
+}  // namespace EntityState
+
 /**
  * @brief This is the base class for entity (Charactere, Objects, ...)
  */
@@ -38,7 +54,8 @@ private:
 	AEntity();
 
 protected:
-	float			_timeToDie;
+	float				_timeToDie;
+	EntityState::Struct	_entityState;
 
 public:
 	// Members
@@ -61,13 +78,15 @@ public:
 	AEntity			&operator=(const AEntity &rhs);
 
 	// Methods
-	virtual bool		update(const float dTime) = 0;
+	virtual bool		update() = 0;
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
 	virtual glm::vec3	getPos() = 0;
 	virtual bool		takeDamage(const int damage) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
+	virtual void	animEndCb(std::string animName);
+	void			setstate(EntityState::Enum state);
 };
 
 #endif  // ENTITY_HPP_

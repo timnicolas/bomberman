@@ -6,6 +6,8 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "Bonus.hpp"
+#include "ModelsManager.hpp"
+#include "Model.hpp"
 
 /**
  * @brief This is the player object
@@ -14,10 +16,11 @@ class Player : public ACharacter {
 private:
 	Player();
 	// Members
-	int		_toDraw;
+	int			_toDraw;
+	Model		*_model;
 
 	// Methods
-	void	_move(float const dTime);
+	void	_move();
 	void	_putBomb();
 
 public:
@@ -40,14 +43,16 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool							init();
-	bool							update(float const dTime);
-	bool							draw(Gui &gui);
-	virtual void					resetCrossable();
-	void							resetParams();
-	bool							takeDamage(const int damage);
-	bool							takeBonus(BonusType::Enum bonus);
-	void							addBomb();
+	bool			init();
+	bool			update();
+	bool			draw(Gui &gui);
+	virtual void	resetCrossable();
+	void			resetParams();
+	bool			takeDamage(const int damage);
+	bool			takeBonus(BonusType::Enum bonus);
+	void			addBomb();
+
+	virtual void	animEndCb(std::string animName);
 
 	// Exceptions
 	class PlayerException : public std::runtime_error {

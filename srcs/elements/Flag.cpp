@@ -35,12 +35,10 @@ Flag &Flag::operator=(Flag const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Flag::update(float const dTime) {
-	(void)dTime;
+bool	Flag::update() {
 	return true;
 }
 
