@@ -118,6 +118,7 @@ SRC =	main.cpp \
 		elements/End.cpp \
 		elements/Flag.cpp \
 		elements/Score.cpp \
+		elements/Save.cpp \
 \
 		scenes/SceneManager.cpp \
 		scenes/AScene.cpp \
@@ -195,6 +196,7 @@ HEAD =	bomberman.hpp \
 		elements/End.hpp \
 		elements/Flag.hpp \
 		elements/Score.hpp \
+		elements/Save.hpp \
 \
 		scenes/SceneManager.hpp \
 		scenes/AScene.hpp \

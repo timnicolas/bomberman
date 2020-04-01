@@ -133,6 +133,7 @@ public:
 	virtual void	load();
 	virtual void	unload();
 	bool			loadLevel(int32_t levelId);
+	bool			save();
 
 	// getter
 	uint32_t		getNbLevel() const;
