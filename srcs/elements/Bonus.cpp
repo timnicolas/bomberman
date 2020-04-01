@@ -39,7 +39,6 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	name = "Bonus";
 	blockPropagation = false;
 	destructible = false;
-	crossable = Type::ALL;
 	_timeToDie = 10.0f;
 	_typeBonus = _pickBonus();
 }
@@ -79,7 +78,7 @@ bool	Bonus::update() {
 		alive = false;
 	}
 	getPos();
-	if (game.player->hasCollision(position, 0.2f)) {
+	if (game.player->hasCollision(position)) {
 		game.player->takeBonus(_typeBonus);
 		active = false;
 	}

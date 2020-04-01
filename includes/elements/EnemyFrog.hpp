@@ -36,4 +36,7 @@ public:
 
 	// Operators
 	EnemyFrog &operator=(EnemyFrog const &rhs);
+
+	// Methods
+	virtual void	resetCrossable();
 };

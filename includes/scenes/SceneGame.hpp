@@ -123,7 +123,7 @@ public:
 	// Methods
 	std::string		print() const;
 	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
-	bool			positionInGame(glm::vec2 pos);
+	bool			positionInGame(glm::vec3 pos, glm::vec3 sz = glm::vec3(1, 1, 1));
 
 	// SceneGame methods
 	virtual bool	init();

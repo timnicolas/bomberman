@@ -94,10 +94,9 @@ bool	EnemyCrispy::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyCrispy::_draw(Gui &gui) {
-	Block::Enum blockType = Block::IA;
-	if (_isWall) {
-		blockType = Block::DESTRUCTIBLE_WALL;
-	}
-	gui.drawCube(blockType, getPos());
+	if (_isWall)
+		gui.drawCube(Block::DESTRUCTIBLE_WALL, getPos());
+	else
+		gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }

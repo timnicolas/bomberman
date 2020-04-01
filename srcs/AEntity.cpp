@@ -9,7 +9,6 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	position = VOID_POS3;
 	category = Category::STATIC;
 	name = "Entity";
-	crossable = Type::NONE;
 	_timeToDie = 0.5f;
 	_entityStatus.status = EntityStatus::IDLE;
 	_entityStatus.updated = false;
@@ -62,7 +61,6 @@ AEntity &AEntity::operator=(AEntity const &rhs) {
 		game = rhs.game;
 		destructible = rhs.destructible;
 		blockPropagation = rhs.blockPropagation;
-		crossable = rhs.crossable;
 		position = rhs.position;
 		_timeToDie = rhs._timeToDie;
 		_entityStatus.status = rhs._entityStatus.status;

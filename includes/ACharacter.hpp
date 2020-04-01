@@ -9,6 +9,7 @@
 
 #define MAX_SPEED 6.0
 #define OFFSET_TURN_CORRECTION 0.7
+#define MOVE_STEP 0.05
 
 // class SceneGame;
 namespace Direction {
@@ -27,21 +28,25 @@ namespace Direction {
 class ACharacter : public AEntity {
 private:
 	ACharacter();
+	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
-	// Members
-	std::unordered_set<AEntity *>	_noCollisionObjects;
-
 	// Methods
-	void	_clearCollisionObjects(std::unordered_set<AEntity *> collisions);
-	bool	_canMove(std::unordered_set<AEntity *> collisions);
-	glm::vec3	_moveTo(Direction::Enum direction, float const offset =
-		OFFSET_TURN_CORRECTION, float ignoreColisions = false);
+	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest);
+	bool		_canWalkOnBlock(glm::ivec2 pos) const;
+	bool		_canWalkOnEntity(AEntity * entity) const;
+	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to);
+	bool		_canMoveOn(glm::vec3 dest);
+	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
 	int			lives;
 	float		speed;
+	glm::vec3	size;
+	glm::vec3	front;
+	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);
@@ -52,6 +57,7 @@ public:
 	ACharacter &operator=(ACharacter const &rhs);
 
 	// Methods
+	virtual void					resetCrossable();
 	virtual bool					update() = 0;
 	virtual bool					draw(Gui &gui) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
@@ -61,9 +67,8 @@ public:
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
-	std::unordered_set<AEntity *>	getCollision(glm::vec3 pos, float offset = 0.05f);
-	bool							clearNoCollisionObjects(AEntity *entity);
-	bool							hasCollision(glm::vec3 pos, float offset = 0.2f);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest);
+	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

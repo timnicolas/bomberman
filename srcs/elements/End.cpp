@@ -38,8 +38,12 @@ End &End::operator=(End const &rhs) {
 bool	End::update() {
 	if (game.flags <= 0) {
 		_texture = Block::END_OPEN;
-		crossable = Type::PLAYER;
-		std::unordered_set<AEntity *> collisions = _getCollision(0.2f);
+		if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
+		== game.player->crossableTypes.end())
+		{
+			game.player->crossableTypes.push_back(Type::END);
+		}
+		std::unordered_set<AEntity *> collisions = _getCollision();
 		for (auto &&entity : collisions) {
 			if (entity->type == Type::PLAYER) {
 				game.state = GameState::WIN;
@@ -65,13 +69,12 @@ bool	End::draw(Gui &gui) {
 /**
  * @brief get a list of entity in collision with the End.
  *
- * @param offset default offset = 0.05f. need to be a positive value.
  * @return std::unordered_set<AEntity *> collisions
  */
-std::unordered_set<AEntity *>	End::_getCollision(float offset) {
+std::unordered_set<AEntity *>	End::_getCollision() {
 	getPos();
 	std::unordered_set<AEntity *> collisions;
-	if (game.player->hasCollision(position, offset))
+	if (game.player->hasCollision(position))
 		collisions.insert(game.player);
 	return collisions;
 }

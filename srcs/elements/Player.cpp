@@ -68,6 +68,13 @@ bool	Player::init() {
 }
 
 /**
+ * @brief Set the Entity that the Character can cross
+ */
+void Player::resetCrossable() {
+	ACharacter::resetCrossable();
+}
+
+/**
  * @brief Reset values for player.
  *
  */
@@ -105,7 +112,7 @@ bool	Player::update() {
 
 		// move player
 		_move();
-		_model->transform.setPos(position);
+		_model->transform.setPos(position + glm::vec3(.5, 0, .5));
 
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
@@ -228,6 +235,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 				speed = MAX_SPEED;
 			break;
 		case BonusType::WALLPASS:
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
+				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
 			break;
 		case BonusType::DETONATOR:
@@ -235,6 +244,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
+			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
+				crossableTypes.push_back(Type::BOMB);
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
@@ -281,54 +292,36 @@ void	Player::animEndCb(std::string animName) {
 	}
 }
 
-
-// -- Protected Methods --------------------------------------------------------
-bool	Player::_canMove(std::unordered_set<AEntity *> collisions) {
-	for (auto &&entity : collisions) {
-		if (_noCollisionObjects.find(entity) != _noCollisionObjects.end())
-			continue;
-		if (entity->crossable == Type::ALL || entity->crossable == type)
-			continue;
-		if (passWall && entity->type == Type::CRISPY)
-			continue;
-		if (passBomb && entity->type == Type::BOMB)
-			continue;
-		return false;
-	}
-	return true;
-}
-
-
 // -- Private Methods ----------------------------------------------------------
 
 void	Player::_move() {
-	bool	moved = false;
-	std::unordered_set<AEntity *>	collisions;
+	bool		moved = false;
+	glm::vec3	dir = glm::vec3(0, front.y, 0);
 
 	if (Inputs::getKey(InputType::UP)) {
 		moved = true;
-		_moveTo(Direction::UP);
+		dir.z -= 1;
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
 		moved = true;
-		_moveTo(Direction::RIGHT);
+		dir.x += 1;
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
 		moved = true;
-		_moveTo(Direction::DOWN);
+		dir.z += 1;
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
 		moved = true;
-		_moveTo(Direction::LEFT);
+		dir.x -= 1;
 	}
-	collisions = getCollision(position);
-	_clearCollisionObjects(collisions);
+	_moveTo(dir);
 
 	// update status on end move
 	if (!moved && _entityStatus.status == EntityStatus::RUNNING) {
 		setStatus(EntityStatus::IDLE);
 	}
 }
+
 
 void	Player::_putBomb() {
 	if (bombs <= 0)
@@ -338,9 +331,7 @@ void	Player::_putBomb() {
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);
 		bomb->setPropagation(bombProgation);
-		// game.board[position.x + 0.5][position.z + 0.5].push_back(bomb);
 		game.board[intPos.x][intPos.y].push_back(bomb);
-		_noCollisionObjects.insert(bomb);
 		bombs -= 1;
 	}
 }
