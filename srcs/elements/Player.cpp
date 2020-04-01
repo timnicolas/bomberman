@@ -320,7 +320,7 @@ void	Player::_move() {
 		moved = true;
 		dir.x -= 1;
 	}
-	_moveTo(dir, .85);
+	_moveTo(dir);
 
 	// update status on end move
 	if (!moved && _entityStatus.status == EntityStatus::RUNNING) {
