@@ -319,7 +319,7 @@ void	Player::_move() {
 		moved = true;
 		dir.x -= 1;
 	}
-	_moveTo(dir);
+	_moveTo(dir, 1);
 
 	// update status on end move
 	if (!moved && _entityStatus.status == EntityStatus::RUNNING) {
