@@ -14,6 +14,7 @@
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
 #include "SceneSettings.hpp"
+#include "SceneCheatCode.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -84,6 +85,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::VICTORY, new SceneVictory(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::CHEAT_CODE, new SceneCheatCode(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
@@ -173,7 +175,9 @@ bool SceneManager::_update() {
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
 	if (_isInCheatCode) {
-		// cheat code update
+		if (_sceneMap[SceneNames::CHEAT_CODE]->update() == false) {
+			openCheatCode(false);  // close cheat code
+		}
 	}
 	else {
 		// update the scene
@@ -195,7 +199,8 @@ bool SceneManager::_draw() {
 	_gui->preDraw();
 	// draw the scene
 	if (_isInCheatCode) {
-		// cheat code draw
+		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
+			return false;
 	}
 	if (_sceneMap[_scene]->draw() == false) {
 		return false;
