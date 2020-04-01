@@ -20,6 +20,7 @@ SceneManager::SceneManager()
   _gui(nullptr),
   _dtTime(0.0f),
   _scene(SceneNames::MAIN_MENU),
+  _isInCheatCode(false),
   _sceneLoadedCurrentFrame(false)
 {}
 
@@ -171,9 +172,14 @@ bool SceneManager::_update() {
 	/* update */
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
-	// update the scene
-	if (_sceneMap[_scene]->update() == false) {
-		return false;
+	if (_isInCheatCode) {
+		// cheat code update
+	}
+	else {
+		// update the scene
+		if (_sceneMap[_scene]->update() == false) {
+			return false;
+		}
 	}
 	_gui->postUpdate(_dtTime);
 	return true;
@@ -188,6 +194,9 @@ bool SceneManager::_draw() {
 	/* draw */
 	_gui->preDraw();
 	// draw the scene
+	if (_isInCheatCode) {
+		// cheat code draw
+	}
 	if (_sceneMap[_scene]->draw() == false) {
 		return false;
 	}
@@ -264,6 +273,32 @@ bool SceneManager::isSceneChangedInCurFrame() {
 }
 bool SceneManager::_isSceneChangedInCurFrame() const {
 	return _sceneLoadedCurrentFrame;;
+}
+
+/**
+ * @brief Open or force close cheat code command line
+ *
+ * @param open True to open cheat code command line
+ */
+void SceneManager::openCheatCode(bool open) {
+	SceneManager::get()._openCheatCode(open);
+}
+void SceneManager::_openCheatCode(bool open) {
+	if (_isInCheatCode == open)  // if state didn't changed
+		return;
+	_isInCheatCode = open;
+}
+
+/**
+ * @brief Know if we are in cheat code mode
+ *
+ * @return true If cheat code command line is open
+ */
+bool SceneManager::isCheatCodeOpen() {
+	return SceneManager::get()._isCheatCodeOpen();
+}
+bool SceneManager::_isCheatCodeOpen() const {
+	return _isInCheatCode;
 }
 
 /**

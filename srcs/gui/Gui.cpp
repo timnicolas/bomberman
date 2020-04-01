@@ -60,6 +60,11 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
+	/* open cheat code */
+	if (Inputs::getKeyUp(InputType::CHEAT_CODE)) {
+		SceneManager::openCheatCode(true);
+	}
+
 	// -- camera movement ------------------------------------------------------
 	// toggle camera movement
 	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
@@ -105,13 +110,19 @@ void Gui::postUpdate(float const dtTime) {
 	if (Inputs::shouldQuit()
 	|| (Inputs::getKeyUp(InputType::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
 	{
-		#if ASK_BEFORE_QUIT
-			if (SceneManager::getSceneName() != SceneNames::EXIT) {
-				SceneManager::loadScene(SceneNames::EXIT);
-			}
-		#else
-			SceneManager::quit();
-		#endif
+		bool cheatCodeState = SceneManager::isCheatCodeOpen();
+		if (cheatCodeState) {
+			SceneManager::openCheatCode(false);  // force quit cheat code
+		}
+		if (Inputs::shouldQuit() || cheatCodeState == false) {
+			#if ASK_BEFORE_QUIT
+				if (SceneManager::getSceneName() != SceneNames::EXIT) {
+					SceneManager::loadScene(SceneNames::EXIT);
+				}
+			#else
+				SceneManager::quit();
+			#endif
+		}
 	}
 }
 
