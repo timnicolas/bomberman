@@ -39,3 +39,5 @@
 libs/*
 configs/*
 bomberman
+/save/*
+!/save/.gitkeep
