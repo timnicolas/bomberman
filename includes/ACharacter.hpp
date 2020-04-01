@@ -31,6 +31,8 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
+	glm::vec3	size;
+
 	// Methods
 	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest);
 	bool		_canWalkOnBlock(glm::ivec2 pos) const;
@@ -44,7 +46,6 @@ public:
 	// Members
 	int			lives;
 	float		speed;
-	glm::vec3	size;
 	glm::vec3	front;
 	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 

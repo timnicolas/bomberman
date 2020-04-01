@@ -7,6 +7,7 @@
 Player::Player(SceneGame &game)
 : ACharacter(game),
   _model(nullptr) {
+	size = glm::vec3(0.7, 1.5, 0.7);
 	type = Type::PLAYER;
 	name = "Player";
 	resetParams();
@@ -15,7 +16,7 @@ Player::Player(SceneGame &game)
 Player::~Player() {
 }
 
-Player::Player(Player const &src) : ACharacter(src) {
+Player::Player(Player const &src) : Player(src.game) {
 	*this = src;
 }
 
@@ -113,7 +114,7 @@ bool	Player::update() {
 
 		// move player
 		_move();
-		_model->transform.setPos(position + glm::vec3(.5, 0, .5));
+		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
 
 		// set model orientation
 		float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
