@@ -17,13 +17,13 @@ class TextInputUI : public ABaseUI {
 
 		TextInputUI & operator=(TextInputUI const & rhs);
 
-		TextInputUI &	setDefText(std::string const & defText);
-		TextInputUI &	setDefTextColor(glm::vec4 color);
-		TextInputUI &	inputInsertText(std::string const & txt);
-		TextInputUI &	inputMoveCursor(int move);
-		TextInputUI &	inputDelete();
-		TextInputUI &	inputSuppr();
-		TextInputUI &	inputReset();
+		TextInputUI &		setDefText(std::string const & defText);
+		TextInputUI &		setDefTextColor(glm::vec4 color);
+		TextInputUI &		inputInsertText(std::string const & txt);
+		TextInputUI &		inputMoveCursor(int move);
+		TextInputUI &		inputDelete();
+		TextInputUI &		inputSuppr();
+		TextInputUI &		inputReset();
 		virtual ABaseUI &	setText(std::string const & text);
 
 	protected:
