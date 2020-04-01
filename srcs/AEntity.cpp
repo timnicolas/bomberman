@@ -10,8 +10,8 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	category = Category::STATIC;
 	name = "Entity";
 	_timeToDie = 0.5f;
-	_entityStatus.status = EntityStatus::IDLE;
-	_entityStatus.updated = false;
+	_entityState.state = EntityState::IDLE;
+	_entityState.updated = false;
 }
 
 AEntity::~AEntity() {
@@ -39,13 +39,13 @@ void	AEntity::animEndCb(std::string animName) {
 }
 
 /**
- * @brief update the entity status
+ * @brief update the entity state
  *
- * @param status the new status
+ * @param state the new state
  */
-void	AEntity::setStatus(EntityStatus::Enum status) {
-	_entityStatus.status = status;
-	_entityStatus.updated = true;
+void	AEntity::setstate(EntityState::Enum state) {
+	_entityState.state = state;
+	_entityState.updated = true;
 }
 
 
@@ -63,8 +63,8 @@ AEntity &AEntity::operator=(AEntity const &rhs) {
 		blockPropagation = rhs.blockPropagation;
 		position = rhs.position;
 		_timeToDie = rhs._timeToDie;
-		_entityStatus.status = rhs._entityStatus.status;
-		_entityStatus.updated = rhs._entityStatus.updated;
+		_entityState.state = rhs._entityState.state;
+		_entityState.updated = rhs._entityState.updated;
 	}
 	return *this;
 }
