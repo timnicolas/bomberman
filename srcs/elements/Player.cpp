@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include <glm/gtx/vector_angle.hpp>
 
 // -- Constructors -------------------------------------------------------------
 
@@ -113,6 +114,10 @@ bool	Player::update() {
 		// move player
 		_move();
 		_model->transform.setPos(position + glm::vec3(.5, 0, .5));
+
+		// set model orientation
+		float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+		_model->transform.setRot(angle);
 
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
