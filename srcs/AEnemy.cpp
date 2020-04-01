@@ -44,19 +44,18 @@ AEnemy &AEnemy::operator=(AEnemy const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	AEnemy::update(float const dTime) {
+bool	AEnemy::update() {
 	if (!active)
 		return true;
 	if (!alive)
 		active = false;
-	if (strength != 0 && game.player->hasCollision(position, size)) {
+	if (strength != 0 && game.player->active && game.player->hasCollision(position, size)) {
 		game.player->takeDamage(strength);
 	}
-	return _update(dTime);
+	return _update();
 }
 
 /**
@@ -86,14 +85,13 @@ bool	AEnemy::draw(Gui &gui) {
 /**
  * @brief Base moving function for enemy
  *
- * @param dTime Delta time
  * @param dir The actual direction of the enemy
  * @return false If the enemy is blocked
  */
-bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
+bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
 	// try to move forward
 	glm::vec3 startPos = position;
-	if (startPos != _moveTo(dir, dTime, -1)) {
+	if (startPos != _moveTo(dir, -1)) {
 		return true;
 	}
 
@@ -125,7 +123,7 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
 		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
 		if (_canWalkOnBlock(tmpPos)) {
 			glm::vec3 startPos = position;
-			if (startPos != _moveTo(tryDirOrder[i], dTime)) {
+			if (startPos != _moveTo(tryDirOrder[i])) {
 				dir = tryDirOrder[i];
 				break;
 			}
@@ -143,25 +141,24 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
  * start at directionOrder[startDirID] and try to move.
  * If cannot move, try all the next direction until one direction is valid.
  *
- * @param dTime Delta Time
  * @param directionOrder A vector with all direction in the right order
  * @param dirIdx The direction used (index in directionOrder)
  * @return false If the enemy is blocked
  */
-bool AEnemy::_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx) {
+bool AEnemy::_movePatternBasic(std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx) {
 	if (dirIdx >= directionOrder.size()) {
 		logWarn("invalid index for AEnemy::_movePatternBasic(): " << dirIdx << " auto set index to 0");
 		dirIdx = 0;
 	}
 	glm::vec3 pos = getPos();
 	for (uint32_t i = dirIdx; i < directionOrder.size(); i++) {
-		if (pos != _moveTo(directionOrder[i], dTime)) {
+		if (pos != _moveTo(directionOrder[i])) {
 			dirIdx = i;
 			return true;
 		}
 	}
 	for (uint32_t i = 0; i < dirIdx; i++) {
-		if (pos != _moveTo(directionOrder[i], dTime)) {
+		if (pos != _moveTo(directionOrder[i])) {
 			dirIdx = i;
 			return true;
 		}
@@ -172,11 +169,10 @@ bool AEnemy::_movePatternBasic(float const dTime, std::vector<Direction::Enum> d
 /**
  * @brief Follow the given path
  *
- * @param dTime Delta Time
  * @param path The path to follow
  * @return false If the Entity is blocked
  */
-bool AEnemy::_followPath(float const dTime, std::deque<PathNode> & path) {
+bool AEnemy::_followPath(std::deque<PathNode> & path) {
 	// if the path is finished
 	if (path.size() == 0)
 		return true;
@@ -200,7 +196,7 @@ bool AEnemy::_followPath(float const dTime, std::deque<PathNode> & path) {
 
 	// move
 	glm::vec3 pos = getPos();
-	if (pos == _moveTo(path.front().dir, dTime))
+	if (pos == _moveTo(path.front().dir))
 		return false;
 
 	return true;

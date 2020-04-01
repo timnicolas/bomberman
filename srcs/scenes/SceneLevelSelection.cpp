@@ -123,7 +123,9 @@ bool	SceneLevelSelection::update() {
 		_states.loadLevel = false;
 		if (_transition == 0) {  // load only if the transition is over
 			try {
-				scGame.loadLevel(_currentLvl);
+				if (!scGame.loadLevel(_currentLvl)) {
+					return false;
+				}
 			} catch (std::exception const &e) {
 				logErr("Error: " << e.what());
 				return false;

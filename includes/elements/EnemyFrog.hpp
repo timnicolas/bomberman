@@ -23,7 +23,7 @@ private:
 	uint64_t		_nextJumpTime;
 
 protected:
-	virtual bool	_update(float const dTime);
+	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 	void			_findJumpGoal();

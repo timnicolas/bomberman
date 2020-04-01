@@ -22,7 +22,7 @@ private:
 	int64_t			_lastPayerSeenMs;  // last time that a player has been seen
 
 protected:
-	virtual bool	_update(float const dTime);
+	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 

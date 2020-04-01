@@ -28,7 +28,7 @@ public:
 	End &operator=(End const &rhs);
 
 	// Methods
-	bool	update(float const dTime);
+	bool	update();
 	bool	draw(Gui &gui);
 
 	// Exceptions

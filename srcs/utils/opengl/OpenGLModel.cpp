@@ -63,8 +63,6 @@ OpenGLModel::~OpenGLModel() {
 	for (Mesh *mesh : _meshes) {
 		delete(mesh);
 	}
-
-	delete _scene;
 }
 
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
@@ -132,7 +130,7 @@ void	OpenGLModel::_loadModel() {
 		aiProcess_GlobalScale);
 
 	// take owneship of the scene
-	_scene = _importer.GetOrphanedScene();
+	_scene = _importer.GetScene();
 
 	// if assimp failed to load the model
 	if (!_scene || (_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !_scene->mRootNode) {
@@ -574,6 +572,18 @@ aiAnimation	*OpenGLModel::getAiAnimation(uint32_t id) const {
  * @return false if not animated
  */
 bool	OpenGLModel::isAnimated() const { return _isAnimated; }
+
+/**
+ * @brief return number of animations
+ *
+ * @return uint32_t the number of animations
+ */
+uint32_t	OpenGLModel::getNbAnimations() const {
+	if (_scene) {
+		return _scene->mNumAnimations;
+	}
+	return 0;
+}
 
 
 /**
