@@ -458,12 +458,12 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 // cube faces
 std::array<float, C_FACE_A_SIZE> const	Gui::_cubeFaces = {{
 	// bot left corner,		faceId
-	-0.5f, -0.5f, 0.5f,		0,
-	0.5f, -0.5f, 0.5f,		1,
-	0.5f, -0.5f, -0.5f,		2,
-	-0.5f, -0.5f, -0.5f,	3,
-	-0.5f, 0.5f, 0.5f,		4,
-	-0.5f, -0.5f, -0.5f,	5,
+	0, 0, 1,	0,
+	1, 0, 1,	1,
+	1, 0, 0,	2,
+	0, 0, 0,	3,
+	0, 1, 1,	4,
+	0, 0, 0,	5,
 }};
 
 // -- GameInfo struct ----------------------------------------------------------

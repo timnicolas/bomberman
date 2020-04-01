@@ -16,7 +16,6 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 Bomb::~Bomb() {
 	getPos();
 	game.clearFromBoard(this, {position.x, position.z});
-	game.player->clearNoCollisionObjects(this);
 }
 
 Bomb::Bomb(Bomb const &src) : AObject(src) {
@@ -150,7 +149,7 @@ bool	Bomb::draw(Gui &gui) {
 // -- Private Methods ----------------------------------------------------------
 
 bool	Bomb::_propagationExplosion(glm::vec2 const place) {
-	if (!game.positionInGame(place))
+	if (!game.positionInGame(glm::vec3(place.x, 0, place.y)))
 		return false;
 	std::vector<AEntity *>	&box = game.board[place.x][place.y];
 	bool					continuePropagation = true;
