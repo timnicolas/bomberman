@@ -291,6 +291,10 @@ void SceneManager::openCheatCode(bool open) {
 void SceneManager::_openCheatCode(bool open) {
 	if (_isInCheatCode == open)  // if state didn't changed
 		return;
+	if (open)
+		_sceneMap[SceneNames::CHEAT_CODE]->load();
+	else
+		_sceneMap[SceneNames::CHEAT_CODE]->unload();
 	_isInCheatCode = open;
 }
 

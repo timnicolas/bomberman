@@ -70,6 +70,9 @@ public:
 	static bool								getLeftClickDown();
 	static void								update();
 	static bool								isConfiguring();
+	static void								setTextInputMode(bool enable);
+	static SDL_Scancode						getTextInputScancode();
+	static std::string						getTextInputString();
 
 private:
 	Inputs();
@@ -98,6 +101,8 @@ private:
 	bool									_getLeftClickDown() const;
 	void									_update();
 	bool									_isConfiguring();
+	void									_setTextInputMode(bool enable);
+	SDL_Scancode							_getTextInputScancode() const;
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;
@@ -116,6 +121,8 @@ private:
 	SettingsJson							_controls;
 	std::vector<SDL_Scancode>				_scancodes_previous;
 	std::vector<SDL_Scancode>				_scancodes_pressed;
+	bool									_isTextInputMode;
+	std::vector<SDL_Scancode>				_textInputIgnore;
 };
 
 #endif
