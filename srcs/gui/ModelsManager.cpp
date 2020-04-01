@@ -56,7 +56,7 @@ bool	ModelsManager::_init(Camera const &cam) {
 
 		try {
 			_models["white"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
-				"white/white_with_anims.fbx", {0, -0.5, 0});
+				"white/white_with_anims.fbx", {0, -0.4, 0});
 		}
 		catch(OpenGLModel::ModelException const & e) {
 			logErr(e.what());

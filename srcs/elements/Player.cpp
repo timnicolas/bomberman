@@ -50,7 +50,7 @@ bool	Player::init() {
 
 	try {
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}, {1.3, 1.3, 1.3}));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
@@ -96,7 +96,7 @@ bool	Player::update() {
 	if (!active)
 		return true;
 
-	if (alive) {
+	if (alive && _entityStatus.status != EntityStatus::DROP_BOMB) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();
