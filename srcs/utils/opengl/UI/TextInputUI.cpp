@@ -7,17 +7,8 @@ TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _defText(""),
   _defTextColor(0.3, 0.3, 0.3, 1),
-  _ignoredKeys{
-	  SDL_SCANCODE_LSHIFT,
-	  SDL_SCANCODE_RSHIFT,
-	  SDL_SCANCODE_LCTRL,
-	  SDL_SCANCODE_RCTRL,
-	  SDL_SCANCODE_UP,
-	  SDL_SCANCODE_RIGHT,
-	  SDL_SCANCODE_DOWN,
-	  SDL_SCANCODE_LEFT,
-  },
-  _lastShowCursorMs(0)
+  _lastShowCursorMs(0),
+  _cursorPos(0)
 {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderSize(0);
@@ -40,13 +31,20 @@ TextInputUI & TextInputUI::operator=(TextInputUI const & rhs) {
  */
 void TextInputUI::_update() {
 	if (Inputs::getTextInputString() != "") {
-		_text += Inputs::getTextInputString();
+		inputInsertText(Inputs::getTextInputString());
 	}
 	switch (Inputs::getTextInputKeycode()) {
 		case SDLK_BACKSPACE:
-			if (_text.size() > 0) {
-				_text.pop_back();
-			}
+			inputDelete();
+			break;
+		case SDLK_DELETE:
+			inputSuppr();
+			break;
+		case SDLK_LEFT:
+			inputMoveCursor(-1);
+			break;
+		case SDLK_RIGHT:
+			inputMoveCursor(1);
 			break;
 		default:
 			break;
@@ -84,7 +82,7 @@ void TextInputUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	_drawText(tmpPos, tmpSize, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
 	if (_showCursor) {
-		tmpPos.x += _textRender->strWidth(_textFont, textToPrint, _textScale);
+		tmpPos.x += _getCursorOffset();
 		_drawText(tmpPos, tmpSize, _textFont, _textScale, "|", textColor, _textAlign, _textPadding);
 	}
 
@@ -101,5 +99,87 @@ void TextInputUI::_draw() {
 	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }
 
+/**
+ * @brief Set default text in TextInput (help text when input is empty)
+ *
+ * @param defText The text
+ * @return TextInputUI& A reference to the UI object
+ */
 TextInputUI & TextInputUI::setDefText(std::string const & defText) { _defText = defText; return *this; }
+/**
+ * @brief Set the color of the default text for textInput (see TextInputUI::setDefText)
+ *
+ * @param color The text color
+ * @return TextInputUI& A reference to the UI object
+ */
 TextInputUI & TextInputUI::setDefTextColor(glm::vec4 color) { _defTextColor = color; return *this; }
+
+/**
+ * @brief Insert text in TextInput (at cursor position)
+ *
+ * @param txt The text to insert
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::inputInsertText(std::string const & txt) {
+	if (_cursorPos == 0) {
+		_text = txt + _text;
+	}
+	else if (_cursorPos == _text.size()) {
+		_text = _text + txt;
+	}
+	else {
+		_text = _text.substr(0, _cursorPos) + txt + _text.substr(_cursorPos, _text.size() - _cursorPos);
+	}
+	inputMoveCursor(txt.size());
+	return *this;
+}
+/**
+ * @brief Move the cursor for TextInput
+ *
+ * @param move The moving (negative to move left)
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::inputMoveCursor(int move) {
+	if (move < 0) {
+		if (static_cast<uint32_t>(-move) >= _cursorPos)
+			_cursorPos = 0;
+		else
+			_cursorPos += move;
+	}
+	else {
+		_cursorPos += move;
+		if (_cursorPos > _text.size()) {
+			_cursorPos = _text.size();
+		}
+	}
+	return *this;
+}
+/**
+ * @brief Delete the char before cursor in TextInput
+ *
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::inputDelete() {
+	if (_cursorPos > 0) {
+		_text = _text.substr(0, _cursorPos - 1) + _text.substr(_cursorPos, _text.size() - _cursorPos);
+		inputMoveCursor(-1);
+	}
+	return *this;
+}
+/**
+ * @brief Delete the char after cursor in TextInput
+ *
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::inputSuppr() {
+	if (_cursorPos < _text.size()) {
+		_text = _text.substr(0, _cursorPos) + _text.substr(_cursorPos + 1, _text.size() - _cursorPos);
+	}
+	return *this;
+}
+uint32_t TextInputUI::_getCursorOffset() const {
+	if (_text.size() == 0)
+		return 0;
+	return _textRender->strWidth(_textFont, _text.substr(0, _cursorPos), _textScale)
+		- (_textRender->strWidth(_textFont, "|", _textScale) / 2);
+}
