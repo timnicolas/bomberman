@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ASceneMenu.hpp"
+#include "TextInputUI.hpp"
 
 /**
  * @brief this is the cheat code command line
@@ -19,7 +20,11 @@ class SceneCheatCode : public ASceneMenu {
 		// Methods
 		virtual bool		init();
 		virtual bool		update();
+		virtual void		load();
+		virtual void		unload();
 
 	private:
 		SceneCheatCode();
+
+		TextInputUI *	commandLine;
 };

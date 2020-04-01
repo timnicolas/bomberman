@@ -18,7 +18,7 @@ const std::string	Inputs::_conf_file = "configs/controls.json";
 
 Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	_left_click(false), _right_click(false),
-	_left_click_previous(false), _right_click_previous(false)
+	_left_click_previous(false), _right_click_previous(false), _isTextInputMode(false)
 {
 	for (int i = 0; i < Inputs::nb_input; i++) {
 		_key_status[i] = false;
@@ -154,6 +154,8 @@ std::string			Inputs::getKeyName(InputType::Enum type) {
 std::string			Inputs::_getKeyName(InputType::Enum type) const {
 	for (auto it = _input_key_map.begin(); it != _input_key_map.end(); it++) {
 		if (it->second == type) {
+			if (it->first == NO_SCANCODE)
+				return "no_scancode";
 			return SDL_GetScancodeName(it->first);
 		}
 	}
@@ -248,6 +250,8 @@ std::string			Inputs::getScancodeName(SDL_Scancode scancode) {
 }
 
 std::string			Inputs::_getScancodeName(SDL_Scancode scancode) const {
+	if (scancode == NO_SCANCODE)
+		return "no_scancode";
 	return SDL_GetScancodeName(scancode);
 }
 
@@ -504,4 +508,42 @@ bool									Inputs::isConfiguring() {
 }
 bool									Inputs::_isConfiguring() {
 	return _configuring;
+}
+
+/**
+ * @brief Enable / disable the TextInput mode
+ *
+ * @param enable Enable / disable
+ */
+void				Inputs::setTextInputMode(bool enable) {
+	Inputs::get()._setTextInputMode(enable);
+}
+void				Inputs::_setTextInputMode(bool enable) {
+	_isTextInputMode = enable;
+}
+
+/**
+ * @brief Get the last scancode pressed
+ *
+ * @return SDL_Scancode The scancode
+ */
+SDL_Scancode				Inputs::getTextInputScancode() {
+	return Inputs::get()._getTextInputScancode();
+}
+SDL_Scancode				Inputs::_getTextInputScancode() const {
+	for (auto && pressed : _scancodes_pressed) {
+		if (std::find(_scancodes_previous.begin(), _scancodes_previous.end(), pressed) == _scancodes_previous.end()) {
+			return pressed;
+		}
+	}
+	return NO_SCANCODE;
+}
+
+/**
+ * @brief The the last key name pressed
+ *
+ * @return std::string The key name
+ */
+std::string				Inputs::getTextInputString() {
+	return Inputs::get()._getScancodeName(Inputs::getTextInputScancode());
 }

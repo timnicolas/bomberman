@@ -36,8 +36,8 @@ bool			SceneCheatCode::init() {
 		tmpSize.x = winSz.x;
 		tmpSize.y = 30;
 		tmpPos.y = tmpSize.y;
-		addTextInput(tmpPos, tmpSize, "'help' to get help")
-			.setTextFont("cheatcode")
+		commandLine = &addTextInput(tmpPos, tmpSize, "'help' to get help");
+		commandLine->setTextFont("cheatcode")
 			.setColor(glm::vec4(0.1, 0.1, 0.1, 1));
 	}
 	catch (ABaseUI::UIException const & e) {
@@ -61,4 +61,19 @@ bool	SceneCheatCode::update() {
 	}
 
 	return true;
+}
+
+/**
+ * @brief called when the scene is loaded
+ */
+void SceneCheatCode::load() {
+	ASceneMenu::load();
+}
+
+/**
+ * @brief called when the scene is unloaded
+ */
+void SceneCheatCode::unload() {
+	ASceneMenu::unload();
+	commandLine->setText("");
 }

@@ -22,6 +22,9 @@ class TextInputUI : public ABaseUI {
 		virtual void	_draw();
 		TextInputUI();
 
-		std::string		_defText;
-		glm::vec4		_defTextColor;
+		/* text */
+		std::string					_defText;
+		glm::vec4					_defTextColor;
+		/* list of keys to ignore */
+		std::vector<SDL_Scancode>	_ignoredKeys;
 };

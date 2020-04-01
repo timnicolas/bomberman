@@ -1,3 +1,4 @@
+#include <cctype>
 #include "TextInputUI.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
@@ -5,7 +6,13 @@
 TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _defText(""),
-  _defTextColor(0.3, 0.3, 0.3, 1)
+  _defTextColor(0.3, 0.3, 0.3, 1),
+  _ignoredKeys{
+	  SDL_SCANCODE_LSHIFT,
+	  SDL_SCANCODE_RSHIFT,
+	  SDL_SCANCODE_LCTRL,
+	  SDL_SCANCODE_RCTRL,
+  }
 {
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderSize(0);
@@ -27,6 +34,39 @@ TextInputUI & TextInputUI::operator=(TextInputUI const & rhs) {
  * @brief this is the base update function of UI objects
  */
 void TextInputUI::_update() {
+	SDL_Scancode scan = Inputs::getTextInputScancode();
+	bool ingoreScan = (std::find(_ignoredKeys.begin(), _ignoredKeys.end(), scan) != _ignoredKeys.end());
+	if (scan != NO_SCANCODE && !ingoreScan) {  // if a valid key was pressed
+		std::string scanStr = "";
+		bool uppercase = false;
+		if (Inputs::getKeyByScancode(SDL_SCANCODE_LSHIFT) || Inputs::getKeyByScancode(SDL_SCANCODE_RSHIFT)) {
+			uppercase = true;
+		}
+		switch (scan)
+		{
+			case SDL_SCANCODE_SPACE:
+				scanStr = " ";
+				break;
+			case SDL_SCANCODE_TAB:
+				scanStr = "\t";
+				break;
+			case SDL_SCANCODE_BACKSPACE:
+				if (_text.size() > 0) {
+					_text.pop_back();
+				}
+				break;
+			default:
+				scanStr = Inputs::getScancodeName(scan);
+				break;
+		}
+		if (scanStr.size() == 1 && isalpha(scanStr[0])) {
+			if (uppercase)
+				scanStr = toupper(scanStr[0]);
+			else
+				scanStr = tolower(scanStr[0]);
+		}
+		_text += scanStr;
+	}
 }
 
 /**
