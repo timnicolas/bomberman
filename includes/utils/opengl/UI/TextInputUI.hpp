@@ -17,21 +17,26 @@ class TextInputUI : public ABaseUI {
 
 		TextInputUI & operator=(TextInputUI const & rhs);
 
-		TextInputUI & setDefText(std::string const & defText);
-		TextInputUI & setDefTextColor(glm::vec4 color);
+		TextInputUI &	setDefText(std::string const & defText);
+		TextInputUI &	setDefTextColor(glm::vec4 color);
+		TextInputUI &	inputInsertText(std::string const & txt);
+		TextInputUI &	inputMoveCursor(int move);
+		TextInputUI &	inputDelete();
+		TextInputUI &	inputSuppr();
 
 	protected:
 		virtual void	_update();
 		virtual void	_draw();
 		TextInputUI();
 
+		uint32_t		_getCursorOffset() const;
+
 		/* text */
 		std::string					_defText;
 		glm::vec4					_defTextColor;
-		/* list of keys to ignore */
-		std::vector<SDL_Scancode>	_ignoredKeys;
 
 		/* cursor */
 		bool						_showCursor;
 		std::chrono::milliseconds	_lastShowCursorMs;
+		uint32_t					_cursorPos;
 };

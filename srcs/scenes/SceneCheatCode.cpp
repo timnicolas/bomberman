@@ -36,7 +36,7 @@ bool			SceneCheatCode::init() {
 		tmpSize.x = winSz.x;
 		tmpSize.y = 30;
 		tmpPos.y = tmpSize.y;
-		commandLine = &addTextInput(tmpPos, tmpSize, "'help' to get help");
+		commandLine = &addTextInput(tmpPos, tmpSize, "/help to get help");
 		commandLine->setTextFont("cheatcode")
 			.setColor(glm::vec4(0.1, 0.1, 0.1, 1));
 	}
