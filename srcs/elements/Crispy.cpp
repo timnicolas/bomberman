@@ -34,12 +34,10 @@ Crispy &Crispy::operator=(Crispy const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Crispy::update(float const dTime) {
-	(void)dTime;
+bool	Crispy::update() {
 	if (!alive)
 		active = false;
 	return true;

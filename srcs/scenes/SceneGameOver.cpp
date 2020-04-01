@@ -83,7 +83,10 @@ bool	SceneGameOver::update() {
 
 	if (_states.restart) {
 		_states.restart = false;
-		scGame.loadLevel(scGame.level);  // reload the current level
+		// reload the current level
+		if (!scGame.loadLevel(scGame.level)) {
+			return false;
+		}
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {

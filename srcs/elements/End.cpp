@@ -32,12 +32,10 @@ End &End::operator=(End const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	End::update(float const dTime) {
-	(void)dTime;
+bool	End::update() {
 	if (game.flags <= 0) {
 		_texture = Block::END_OPEN;
 		if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
