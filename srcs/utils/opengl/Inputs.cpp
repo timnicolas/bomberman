@@ -406,10 +406,16 @@ void				Inputs::_update() {
 		_key_previous_status[i] = _key_status[i];
 	}
 	_scancodes_previous = _scancodes_pressed;
+	_currentText = "";
+	_lastKeycode = NO_KEYCODE;
 	std::vector<SDL_Scancode>::iterator elemScan;
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
+		case SDL_TEXTINPUT:
+			_currentText = std::string(event.text.text);
+			break;
 		case SDL_KEYDOWN:
+			_lastKeycode = event.key.keysym.sym;
 			scan = event.key.keysym.scancode;
 			elemScan = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scan);
 			if (elemScan == _scancodes_pressed.end()) {  // if doesn't exist for now
@@ -501,6 +507,8 @@ void				Inputs::_update() {
 			break;
 		}
 	}
+	// if (_currentKeycode != NO_KEYCODE)
+	// 	std::cout << SDL_GetKeyName(_currentKeycode) << std::flush;
 }
 
 bool									Inputs::isConfiguring() {
@@ -523,20 +531,15 @@ void				Inputs::_setTextInputMode(bool enable) {
 }
 
 /**
- * @brief Get the last scancode pressed
+ * @brief Get the last keycode pressed
  *
- * @return SDL_Scancode The scancode
+ * @return SDL_Keycode The keycode
  */
-SDL_Scancode				Inputs::getTextInputScancode() {
-	return Inputs::get()._getTextInputScancode();
+SDL_Keycode				Inputs::getTextInputKeycode() {
+	return Inputs::get()._getTextInputKeycode();
 }
-SDL_Scancode				Inputs::_getTextInputScancode() const {
-	for (auto && pressed : _scancodes_pressed) {
-		if (std::find(_scancodes_previous.begin(), _scancodes_previous.end(), pressed) == _scancodes_previous.end()) {
-			return pressed;
-		}
-	}
-	return NO_SCANCODE;
+SDL_Keycode				Inputs::_getTextInputKeycode() const {
+	return _lastKeycode;
 }
 
 /**
@@ -545,5 +548,8 @@ SDL_Scancode				Inputs::_getTextInputScancode() const {
  * @return std::string The key name
  */
 std::string				Inputs::getTextInputString() {
-	return Inputs::get()._getScancodeName(Inputs::getTextInputScancode());
+	return Inputs::get()._getTextInputString();
+}
+std::string				Inputs::_getTextInputString() const {
+	return _currentText;
 }

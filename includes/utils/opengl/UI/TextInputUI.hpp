@@ -1,7 +1,10 @@
 #pragma once
 
+#include <chrono>
 #include "includesOpengl.hpp"
 #include "ABaseUI.hpp"
+
+#define CURSOR_SPEED_MS	300
 
 /**
  * @brief this is the UI for text input
@@ -27,4 +30,8 @@ class TextInputUI : public ABaseUI {
 		glm::vec4					_defTextColor;
 		/* list of keys to ignore */
 		std::vector<SDL_Scancode>	_ignoredKeys;
+
+		/* cursor */
+		bool						_showCursor;
+		std::chrono::milliseconds	_lastShowCursorMs;
 };
