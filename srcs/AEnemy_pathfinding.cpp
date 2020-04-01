@@ -68,18 +68,7 @@ void AEnemy::_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec
 	};
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(pos.x + nexts[i][0], pos.y + nexts[i][1]);
-		if (tmpPos.x < 0 || tmpPos.x >= static_cast<int>(game.size.x)
-		|| tmpPos.y < 0 || tmpPos.y >= static_cast<int>(game.size.y))
-		{
-			continue;
-		}
-		std::vector<AEntity *> nextBlocks = game.board[tmpPos.x][tmpPos.y];
-		bool canMove = true;
-		for (auto &&entity : nextBlocks) {
-			if (entity->crossable != Type::ALL && entity->crossable != type)
-				canMove = false;
-		}
-		if (canMove && boardDFS[tmpPos.x][tmpPos.y].dist > boardDFS[pos.x][pos.y].dist + 1) {
+		if (_canWalkOnBlock(tmpPos) && boardDFS[tmpPos.x][tmpPos.y].dist > boardDFS[pos.x][pos.y].dist + 1) {
 			boardDFS[tmpPos.x][tmpPos.y].last = pos;
 			boardDFS[tmpPos.x][tmpPos.y].dist = boardDFS[pos.x][pos.y].dist + 1;
 			_dfsExplore(boardDFS, tmpPos, dest, find);

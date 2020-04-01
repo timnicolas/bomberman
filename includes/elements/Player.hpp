@@ -20,9 +20,6 @@ private:
 	void	_move(float const dTime);
 	void	_putBomb();
 
-protected:
-	bool	_canMove(std::unordered_set<AEntity *> collisions);
-
 public:
 	// Members
 	int			totalBombs;
@@ -46,6 +43,7 @@ public:
 	bool							init();
 	bool							update(float const dTime);
 	bool							draw(Gui &gui);
+	virtual void					resetCrossable();
 	void							resetParams();
 	bool							takeDamage(const int damage);
 	bool							takeBonus(BonusType::Enum bonus);

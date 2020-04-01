@@ -53,7 +53,7 @@ bool	AEnemy::update(float const dTime) {
 		return true;
 	if (!alive)
 		active = false;
-	if (strength != 0 && game.player->hasCollision(position)) {
+	if (strength != 0 && game.player->hasCollision(position, size)) {
 		game.player->takeDamage(strength);
 	}
 	return _update(dTime);
@@ -123,17 +123,7 @@ bool AEnemy::_baseEnemyMove(float const dTime, Direction::Enum & dir) {
 
 	for (int i = 0; i < 3; i++) {
 		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
-		bool canMove = true;
-		if (game.positionInGame(tmpPos) == false) {
-			canMove = false;
-			continue;
-		}
-		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			if (entity->crossable == Type::ALL || entity->crossable == type)
-				continue;
-			canMove = false;
-		}
-		if (canMove) {
+		if (_canWalkOnBlock(tmpPos)) {
 			glm::vec3 startPos = position;
 			if (startPos != _moveTo(tryDirOrder[i], dTime)) {
 				dir = tryDirOrder[i];
@@ -276,7 +266,7 @@ bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
  *
  * @return true If the enemy is blocked
  */
-bool AEnemy::_isBlocked() const {
+bool AEnemy::_isBlocked() {
 	glm::ivec2 ipos = getIntPos();
 
 	int nbColisions = 0;  // nb of walls around enemy
@@ -289,22 +279,15 @@ bool AEnemy::_isBlocked() const {
 	};
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
-		if (game.positionInGame(tmpPos) == false)
+		if (game.positionInGame(glm::vec3(tmpPos.x, position.y, tmpPos.y), size) == false) {
 			continue;
-		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			// don't go into fire if a bomb remove a wall and the enemy was blocked before
-			if (entity->type == Type::FIRE) {
+		}
+		std::unordered_set<AEntity *> colisions = getCollision({tmpPos.x, position.y, tmpPos.y});
+		for (auto && entity : getBoard()[tmpPos.x][tmpPos.y]) {
+			if (entity->type == Type::FIRE || _canWalkOnEntity(entity) == false)
 				nbColisions++;
-				break;
-			}
-			if (entity->crossable == Type::ALL || entity->crossable == type)
-				continue;
-
-			nbColisions++;
-			break;
 		}
 	}
-	// il walls all around entity
 	if (nbColisions == 4)
 		return true;
 	return false;
