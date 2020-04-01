@@ -12,7 +12,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _borderSize(5.0),
   _mouseHoverColor(0.0, 0.0, 0.0, 0.2),
   _mouseClickColor(0.0, 0.0, 0.0, 0.5),
-  _text("default text"),
+  _text(""),
   _textColor(0.0, 0.0, 0.0, 1.0),
   _textFont(_defFont),
   _textScale(1.0),
