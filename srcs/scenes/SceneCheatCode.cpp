@@ -38,6 +38,7 @@ bool			SceneCheatCode::init() {
 		tmpPos.y = tmpSize.y;
 		commandLine = &addTextInput(tmpPos, tmpSize, "/help to get help");
 		commandLine->setTextFont("cheatcode")
+			.setText("/")
 			.setColor(glm::vec4(0.1, 0.1, 0.1, 1));
 	}
 	catch (ABaseUI::UIException const & e) {
@@ -75,5 +76,5 @@ void SceneCheatCode::load() {
  */
 void SceneCheatCode::unload() {
 	ASceneMenu::unload();
-	commandLine->setText("");
+	commandLine->setText("/");
 }

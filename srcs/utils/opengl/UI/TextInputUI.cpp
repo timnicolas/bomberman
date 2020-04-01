@@ -177,8 +177,30 @@ TextInputUI & TextInputUI::inputSuppr() {
 	}
 	return *this;
 }
+/**
+ * @brief Reset the text input
+ *
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::inputReset() {
+	_text = "";
+	_cursorPos = 0;
+	return *this;
+}
+/**
+ * @brief Redefinition of ABaseUI::setText function
+ *
+ * @param txt The new text
+ * @return ABaseUI& A reference to the UI object
+ */
+ABaseUI & TextInputUI::setText(std::string const & txt) {
+	inputReset();
+	inputInsertText(txt);
+	return *this;
+}
+
 uint32_t TextInputUI::_getCursorOffset() const {
-	if (_text.size() == 0)
+	if (_text.size() == 0 || _cursorPos == 0)
 		return 0;
 	return _textRender->strWidth(_textFont, _text.substr(0, _cursorPos), _textScale)
 		- (_textRender->strWidth(_textFont, "|", _textScale) / 2);
