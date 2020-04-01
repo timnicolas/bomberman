@@ -23,6 +23,8 @@ class TextInputUI : public ABaseUI {
 		TextInputUI &	inputMoveCursor(int move);
 		TextInputUI &	inputDelete();
 		TextInputUI &	inputSuppr();
+		TextInputUI &	inputReset();
+		virtual ABaseUI &	setText(std::string const & text);
 
 	protected:
 		virtual void	_update();
