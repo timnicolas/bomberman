@@ -69,6 +69,6 @@ bool	EnemyWithEye::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyWithEye::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
+	gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }

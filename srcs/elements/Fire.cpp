@@ -10,7 +10,6 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	name = "Fire";
 	blockPropagation = false;
 	destructible = true;
-	crossable = Type::ALL;
 	_timeToDie = 1.0f;
 }
 
@@ -48,11 +47,11 @@ bool	Fire::update(float const dTime) {
 	}
 	getPos();
 	for (auto &&enemy : game.enemies) {
-		if (enemy->hasCollision(position, 0.2f)) {
+		if (enemy->hasCollision(position)) {
 			enemy->takeDamage(1);
 		}
 	}
-	if (game.player->hasCollision(position, 0.2f)) {
+	if (game.player->hasCollision(position)) {
 		if (!game.player->passFire)
 			game.player->takeDamage(1);
 	}

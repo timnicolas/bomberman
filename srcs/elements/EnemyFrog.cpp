@@ -10,7 +10,9 @@ EnemyFrog::EnemyFrog(SceneGame &game)
   _nextJumpTime(0)
 {
 	name = "EnemyFrog";
+	size = glm::vec3(0.7, 0.5, 0.7);
 	strength = 0;  // remove auto damage
+	resetCrossable();
 }
 
 EnemyFrog::~EnemyFrog() {
@@ -37,6 +39,15 @@ EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Set the Entity that the Character can cross
+ */
+void EnemyFrog::resetCrossable() {
+	ACharacter::resetCrossable();
+	crossableTypes.clear();
+	crossableTypes.push_back(Type::ALL);
+}
 
 /**
  * @brief update is called each frame.
@@ -73,10 +84,10 @@ bool	EnemyFrog::_update(float const dTime) {
 			else
 				_nextJumpTime = getMs().count() + WAIT_JUMP_TIME_MS;
 		}
-		_moveTo(_dir, dTime, -1, true);  // move and ignore colisisons
+		_moveTo(_dir, dTime, -1);
 	}
 	else {  // if stay in a position
-		if (game.player->hasCollision(position)) {
+		if (game.player->hasCollision(position, size)) {
 			game.player->takeDamage(1);
 		}
 	}
@@ -107,17 +118,7 @@ void	EnemyFrog::_findJumpGoal() {
 	// try all directions
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(ipos.x + nextPos[tryDirOrder[i]].x, ipos.y + nextPos[tryDirOrder[i]].y);
-		bool canMove = true;
-		if (game.positionInGame(tmpPos) == false) {
-			canMove = false;
-			continue;
-		}
-		for (auto &&entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			if (entity->crossable == Type::ALL || entity->crossable == type)
-				continue;
-			canMove = false;
-		}
-		if (canMove) {
+		if (_canWalkOnBlock(tmpPos)) {
 			// start a jump
 			_dir = tryDirOrder[i];
 			_jumpGoal = tmpPos;
@@ -143,6 +144,6 @@ bool	EnemyFrog::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyFrog::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
+	gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }

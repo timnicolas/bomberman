@@ -8,6 +8,7 @@ EnemyBasic::EnemyBasic(SceneGame &game)
   _dir(Direction::UP)
 {
 	name = "EnemyBasic";
+	size = glm::vec3(0.7, 0.7, 0.7);
 }
 
 EnemyBasic::~EnemyBasic() {
@@ -59,6 +60,6 @@ bool	EnemyBasic::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyBasic::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos());
+	gui.drawCube(Block::IA, getPos(), size);
 	return true;
 }
