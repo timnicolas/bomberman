@@ -198,6 +198,25 @@ ScrollbarUI & ASceneMenu::addScrollbar(glm::vec2 pos, glm::vec2 size) {
 }
 
 /**
+ * @brief add a textInput in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param defText the default text
+ * @return TextInputUI& a reference to the element created
+ */
+TextInputUI & ASceneMenu::addTextInput(glm::vec2 pos, glm::vec2 size, std::string const & defText) {
+	TextInputUI * ui = new TextInputUI(pos, size);
+	ui->setDefText(defText);
+	ui->setTextColor({1, 1, 1, 1});
+	ui->setTextAlign(TextAlign::LEFT);
+	if (size == VOID_SIZE)
+		ui->setCalculatedSize();
+	_buttons.push_back(ui);
+	return *ui;
+}
+
+/**
  * @brief init the basic background of the menu
  *
  * @return true if success

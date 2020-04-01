@@ -36,7 +36,9 @@ bool			SceneCheatCode::init() {
 		tmpSize.x = winSz.x;
 		tmpSize.y = 30;
 		tmpPos.y = tmpSize.y;
-		addRect(tmpPos, tmpSize, glm::vec4(0.1, 0.1, 0.1, 1)).setBorderSize(0);
+		addTextInput(tmpPos, tmpSize, "'help' to get help")
+			.setTextFont("cheatcode")
+			.setColor(glm::vec4(0.1, 0.1, 0.1, 1));
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());

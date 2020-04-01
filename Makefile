@@ -169,6 +169,7 @@ SRC =	main.cpp \
 		utils/opengl/UI/RectUI.cpp \
 		utils/opengl/UI/ImageUI.cpp \
 		utils/opengl/UI/ScrollbarUI.cpp \
+		utils/opengl/UI/TextInputUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -244,6 +245,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/UI/RectUI.hpp \
 		utils/opengl/UI/ImageUI.hpp \
 		utils/opengl/UI/ScrollbarUI.hpp \
+		utils/opengl/UI/TextInputUI.hpp \
 
 
 ################################################################################
