@@ -85,7 +85,7 @@ bool	Save::initJson() {
 
 	// Save json definition
 	save->add<std::string>("name");
-	save->add<int64_t>("date", 0).setMin(-1).setMax(86400);
+	save->add<int64_t>("date", 0);
 
 	SettingsJson	*levelPattern = new SettingsJson();
 	levelPattern->add<int64_t>("id", 0).setMin(0);  // Todo(ebaudet): add setMax to nb levels.
