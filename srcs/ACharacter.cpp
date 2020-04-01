@@ -330,9 +330,9 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 	glm::vec3 beforePosition = position;
 	direction = glm::normalize(direction);
 
-	// update status on first move
-	if (_entityStatus.status != EntityStatus::RUNNING) {
-		setStatus(EntityStatus::RUNNING);
+	// update state on first move
+	if (_entityState.state != EntityState::RUNNING) {
+		setstate(EntityState::RUNNING);
 	}
 
 	if (glm::length(direction) == 0)

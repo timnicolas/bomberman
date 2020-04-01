@@ -30,7 +30,7 @@ namespace Type {
 	};
 }  // namespace Type
 
-namespace EntityStatus {
+namespace EntityState {
 	enum Enum {
 		IDLE,
 		DYING,
@@ -41,10 +41,10 @@ namespace EntityStatus {
 	};
 
 	struct	Struct {
-		EntityStatus::Enum	status;
+		EntityState::Enum	state;
 		bool				updated;
 	};
-}  // namespace EntityStatus
+}  // namespace EntityState
 
 /**
  * @brief This is the base class for entity (Charactere, Objects, ...)
@@ -54,8 +54,8 @@ private:
 	AEntity();
 
 protected:
-	float					_timeToDie;
-	EntityStatus::Struct	_entityStatus;
+	float				_timeToDie;
+	EntityState::Struct	_entityState;
 
 public:
 	// Members
@@ -86,7 +86,7 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
 	virtual void	animEndCb(std::string animName);
-	void			setStatus(EntityStatus::Enum status);
+	void			setstate(EntityState::Enum state);
 };
 
 #endif  // ENTITY_HPP_

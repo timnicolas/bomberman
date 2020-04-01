@@ -105,7 +105,7 @@ bool	Player::update() {
 	if (!active)
 		return true;
 
-	if (alive && _entityStatus.status != EntityStatus::DROP_BOMB) {
+	if (alive && _entityState.state != EntityState::DROP_BOMB) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();
@@ -123,36 +123,36 @@ bool	Player::update() {
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
-				setStatus(EntityStatus::DROP_BOMB);
+				setstate(EntityState::DROP_BOMB);
 			}
 		}
 	}
 
-	// update animation on status change
-	if (_entityStatus.updated) {
-		_entityStatus.updated = false;
-		switch (_entityStatus.status) {
-			case EntityStatus::IDLE:
+	// update animation on state change
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
 				break;
-			case EntityStatus::DYING:
+			case EntityState::DYING:
 				_model->animationSpeed = 1;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
 				break;
-			case EntityStatus::RUNNING:
+			case EntityState::RUNNING:
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
 				break;
-			case EntityStatus::DROP_BOMB:
+			case EntityState::DROP_BOMB:
 				_model->animationSpeed = 10;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
 				break;
-			case EntityStatus::VICTORY_EMOTE:
+			case EntityState::VICTORY_EMOTE:
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
@@ -209,7 +209,7 @@ bool	Player::takeDamage(const int damage) {
 				invulnerable = 3.0f;
 			}
 			else if (wasAlive) {
-				setStatus(EntityStatus::DYING);
+				setstate(EntityState::DYING);
 			}
 		}
 	}
@@ -290,7 +290,7 @@ void	Player::animEndCb(std::string animName) {
 	// logDebug("animEndCb -> " << animName);
 	if (animName == "Armature|drop") {
 		_putBomb();
-		setStatus(EntityStatus::IDLE);
+		setstate(EntityState::IDLE);
 	}
 	else if (animName == "Armature|death") {
 		logInfo("Player is dead.")
@@ -322,9 +322,9 @@ void	Player::_move() {
 	}
 	_moveTo(dir);
 
-	// update status on end move
-	if (!moved && _entityStatus.status == EntityStatus::RUNNING) {
-		setStatus(EntityStatus::IDLE);
+	// update state on end move
+	if (!moved && _entityState.state == EntityState::RUNNING) {
+		setstate(EntityState::IDLE);
 	}
 }
 
