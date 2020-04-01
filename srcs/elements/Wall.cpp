@@ -32,12 +32,10 @@ Wall &Wall::operator=(Wall const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Wall::update(float const dTime) {
-	(void)dTime;
+bool	Wall::update() {
 	return true;
 }
 

@@ -1,9 +1,13 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include <glm/gtx/vector_angle.hpp>
 
 // -- Constructors -------------------------------------------------------------
 
-Player::Player(SceneGame &game) : ACharacter(game) {
+Player::Player(SceneGame &game)
+: ACharacter(game),
+  _model(nullptr) {
+	size = glm::vec3(0.7, 1.5, 0.7);
 	type = Type::PLAYER;
 	name = "Player";
 	resetParams();
@@ -12,7 +16,7 @@ Player::Player(SceneGame &game) : ACharacter(game) {
 Player::~Player() {
 }
 
-Player::Player(Player const &src) : ACharacter(src) {
+Player::Player(Player const &src) : Player(src.game) {
 	*this = src;
 }
 
@@ -45,6 +49,23 @@ Player &Player::operator=(Player const &rhs) {
 bool	Player::init() {
 	invulnerable = 3.0f;
 	bombs = totalBombs;
+
+	try {
+		OpenGLModel	&openglModel = ModelsManager::getModel("white");
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}, {1.3, 1.3, 1.3}));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -77,26 +98,70 @@ void	Player::resetParams() {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Player::update(float const dTime) {
+bool	Player::update() {
 	if (!active)
 		return true;
-	if (alive) {
+
+	if (alive && _entityState.state != EntityState::DROP_BOMB) {
+		// update invulnerability time
 		if (invulnerable > 0.0f)
-			invulnerable -= dTime;
+			invulnerable -= game.getDtTime();
 		if (invulnerable < 0.0f)
 			invulnerable = 0.0f;
-		_move(dTime);
+
+		// move player
+		_move();
+		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+
+		// set model orientation
+		float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+		_model->transform.setRot(angle);
+
+		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
-			_putBomb();
+			if (bombs > 0) {
+				setstate(EntityState::DROP_BOMB);
+			}
 		}
-	} else {
-		logInfo("Player is dead.")
-		game.state = GameState::GAME_OVER;
 	}
+
+	// update animation on state change
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DYING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityState::RUNNING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DROP_BOMB:
+				_model->animationSpeed = 10;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
+				break;
+			case EntityState::VICTORY_EMOTE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+
 	return true;
 }
 
@@ -107,12 +172,24 @@ bool	Player::update(float const dTime) {
  * @return false if failure
  */
 bool	Player::draw(Gui &gui) {
+	(void)gui;
+
+	// blink if invulnerable
 	if (invulnerable > 0) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
 	}
-	gui.drawCube(Block::PLAYER, getPos(), size);
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -124,9 +201,16 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
+	bool wasAlive = alive;
+
 	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
-			invulnerable = 3.0f;
+			if (alive) {
+				invulnerable = 3.0f;
+			}
+			else if (wasAlive) {
+				setstate(EntityState::DYING);
+			}
 		}
 	}
 	return false;
@@ -187,35 +271,68 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 	return true;
 }
 
+/**
+ * @brief increment bomb, clamp to totalBombs
+ *
+ */
 void	Player::addBomb() {
 	bombs++;
 	if (bombs > totalBombs)
 		bombs = totalBombs;
 }
 
+/**
+ * @brief called on animation end if passed to Model
+ *
+ * @param animName the current animation name
+ */
+void	Player::animEndCb(std::string animName) {
+	// logDebug("animEndCb -> " << animName);
+	if (animName == "Armature|drop") {
+		_putBomb();
+		setstate(EntityState::IDLE);
+	}
+	else if (animName == "Armature|death") {
+		logInfo("Player is dead.")
+		game.state = GameState::GAME_OVER;
+	}
+}
+
 // -- Private Methods ----------------------------------------------------------
 
-void	Player::_move(float const dTime) {
+void	Player::_move() {
+	bool		moved = false;
 	glm::vec3	dir = glm::vec3(0, front.y, 0);
 
 	if (Inputs::getKey(InputType::UP)) {
+		moved = true;
 		dir.z -= 1;
 	}
 	if (Inputs::getKey(InputType::RIGHT)) {
+		moved = true;
 		dir.x += 1;
 	}
 	if (Inputs::getKey(InputType::DOWN)) {
+		moved = true;
 		dir.z += 1;
 	}
 	if (Inputs::getKey(InputType::LEFT)) {
+		moved = true;
 		dir.x -= 1;
 	}
-	_moveTo(dir, dTime);
+	_moveTo(dir);
+
+	// update state on end move
+	if (!moved && _entityState.state == EntityState::RUNNING) {
+		setstate(EntityState::IDLE);
+	}
 }
+
 
 void	Player::_putBomb() {
 	if (bombs <= 0)
 		return;
+
 	glm::ivec2 intPos = getIntPos();
 	if (game.board[intPos.x][intPos.y].size() == 0) {
 		Bomb	*bomb = new Bomb(game);

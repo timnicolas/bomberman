@@ -17,7 +17,7 @@ private:
 	Direction::Enum	_dir;
 
 protected:
-	virtual bool	_update(float const dTime);
+	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 

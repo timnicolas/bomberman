@@ -35,11 +35,10 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyFollow::_update(float const dTime) {
+bool	EnemyFollow::_update() {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
 	// try to find a path to the player
@@ -53,7 +52,7 @@ bool	EnemyFollow::_update(float const dTime) {
 		// arrived to destination
 		_findPlayer = false;
 	}
-	else if (_followPath(dTime, _path) == false) {
+	else if (_followPath(_path) == false) {
 		// blocked by a wall
 		_findPlayer = false;
 		_path.clear();
@@ -61,7 +60,7 @@ bool	EnemyFollow::_update(float const dTime) {
 
 	if (lastPos == position) {
 		// if the enemy doesn't move
-		_baseEnemyMove(dTime, _dir);
+		_baseEnemyMove(_dir);
 	}
 
 	return true;
