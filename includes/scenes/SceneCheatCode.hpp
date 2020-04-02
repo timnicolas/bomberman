@@ -34,17 +34,33 @@ class SceneCheatCode : public ASceneMenu {
 	private:
 		SceneCheatCode();
 		/* for parser */
-		std::vector<std::string>	_splitCommand(std::string const & command);
+		std::vector<std::string>	_splitCommand(std::string const & command) const;
 		bool						_isSpace(char c) const;
+		bool						_isValidCommand(std::string const & name) const;
+
+		/* commands definition */
+		typedef bool (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
+		struct Command {
+			std::string	prototype;
+			std::string	description;
+			execFnPtr	exec;
+		};
+
+		/* commands functions */
+		// bool _exec<cmd name>(std::vector<std::string> const & args);
+		bool	_execHelp(std::vector<std::string> const & args);
+		bool	_execClear(std::vector<std::string> const & args);
 
 		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
 		void				_removeLastLine();
-
 		struct TextLine {
 			ABaseUI *	ui;
 		};
 
+		/* variables */
 		TextInputUI *			_commandLine;
 		std::deque<TextLine>	_textLines;
+
+		std::map<std::string, Command>	_commandsList;
 };
