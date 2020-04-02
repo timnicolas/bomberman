@@ -12,7 +12,7 @@
  * @param color2 the rect secondary color (to make a mix)
  * @param factor the factor of second color on master color
  */
-void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor, float z) {
+void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, float z, glm::vec4 color1, glm::vec4 color2, float factor) {
 	_rectShader->use();
 
 	// set color
@@ -45,7 +45,7 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::ve
  * @param borderSize the size of the border of the rect
  * @param color the rect color
  */
-void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color) {
+void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float z, float borderSize, glm::vec4 color) {
 	if (borderSize == 0)
 		return;
 	glm::vec2 tmpPos;
@@ -53,19 +53,19 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, g
 	tmpSize.y = borderSize;
 
 	tmpPos = pos;
-	_drawRect(tmpPos, tmpSize, color);
+	_drawRect(tmpPos, tmpSize, z, color);
 	tmpPos = pos;
 	tmpPos.y += size.y - borderSize;
-	_drawRect(tmpPos, tmpSize, color);
+	_drawRect(tmpPos, tmpSize, z, color);
 
 	tmpSize = size;
 	tmpSize.x = borderSize;
 
 	tmpPos = pos;
-	_drawRect(tmpPos, tmpSize, color);
+	_drawRect(tmpPos, tmpSize, z, color);
 	tmpPos = pos;
 	tmpPos.x += size.x - borderSize;
-	_drawRect(tmpPos, tmpSize, color);
+	_drawRect(tmpPos, tmpSize, z, color);
 }
 
 /**
@@ -80,8 +80,8 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, g
  * @param align the text alignment (LEFT | CENTER | RIGHT)
  * @param padding the text padding (left & right)
  */
-void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
-glm::vec4 color, TextAlign::Enum align, float padding) {
+void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
+std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding) {
 	(void)align;
 	uint32_t width = _textRender->strWidth(font, text, scale);
 	uint32_t height = _textRender->strHeight(font, scale);
@@ -96,7 +96,7 @@ glm::vec4 color, TextAlign::Enum align, float padding) {
 	else if (align == TextAlign::RIGHT)
 		tmpPos.x = pos.x + size.x - width - padding;
 	tmpPos.y = (pos.y + size.y / 2) - height / 2;
-	_textRender->write(font, text, tmpPos.x, tmpPos.y, scale, glm::vec3(color.x, color.y, color.z));
+	_textRender->write(font, text, {tmpPos.x, tmpPos.y, z}, scale, glm::vec3(color.x, color.y, color.z));
 }
 
 /**
@@ -149,7 +149,7 @@ void ABaseUI::_unloadImg() {
  * @param textureID the texture ID (get with _loadImg)
  * @param color an image filter color
  */
-void ABaseUI::_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color) {
+void ABaseUI::_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color) {
 	_imgShader->use();
 
 	// send color
@@ -157,7 +157,7 @@ void ABaseUI::_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec
 
 	// set model matrix
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(pos.x, pos.y, 0));
+	model = glm::translate(model, glm::vec3(pos.x, pos.y, z));
 	model = glm::scale(model, glm::vec3(size.x, size.y, 0));
 	_imgShader->setMat4("model", model);
 

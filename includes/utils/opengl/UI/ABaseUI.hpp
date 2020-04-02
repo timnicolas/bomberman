@@ -82,6 +82,7 @@ class ABaseUI {
 
 		virtual ABaseUI &			setEnabled(bool enabled);
 		virtual ABaseUI &			setPos(glm::vec2 pos);
+		virtual ABaseUI &			setZ(float z);
 		virtual ABaseUI &			setPosOffset(glm::vec2 offset);
 		virtual ABaseUI &			addPosOffset(glm::vec2 offset);
 		virtual ABaseUI &			setSize(glm::vec2 size);
@@ -135,16 +136,16 @@ class ABaseUI {
 		ABaseUI();
 		/* draw base function */
 		// rect
-		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
-			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1, float z = 0);
-		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color);
+		void			_drawRect(glm::vec2 pos, glm::vec2 size, float z, glm::vec4 color1,
+			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
+		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float z, float borderSize, glm::vec4 color);
 		// text
-		void			_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
-			glm::vec4 color, TextAlign::Enum align, float padding);
+		void			_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
+			std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
 		void			_loadImg(std::string const & filename, bool updateSize = true);
 		void			_unloadImg();
-		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
+		void			_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
 		virtual void	_update() = 0;
@@ -157,6 +158,7 @@ class ABaseUI {
 		bool			_enabled;
 		// basics
 		glm::vec2		_pos;
+		float			_z;
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
 		glm::vec4		_color;

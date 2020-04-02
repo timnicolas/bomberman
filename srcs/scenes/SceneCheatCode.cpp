@@ -42,7 +42,8 @@ bool			SceneCheatCode::init() {
 			.setTextScale(CHEATCODE_FONT_SCALE)
 			.setTextColor(CHEATCODE_TEXT_COlOR)
 			.setText(CHEATCODE_DEF_TXT)
-			.setColor(CHEATCODE_COLOR);
+			.setColor(CHEATCODE_COLOR)
+			.setZ(1);
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -112,7 +113,8 @@ void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 		.setTextFont(CHEATCODE_FONT)
 		.setTextScale(CHEATCODE_FONT_SCALE)
 		.setTextColor(txtColor)
-		.setColor(CHEATCODE_COLOR);
+		.setColor(CHEATCODE_COLOR)
+		.setZ(1);
 
 	for (auto && ln : _textLines) {
 		ln.ui->addPosOffset({0, ln.ui->getSize().y});
