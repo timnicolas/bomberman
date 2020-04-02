@@ -98,17 +98,58 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 
 	if (command.size() > 0) {
 		if (command[0] == '/') {
-			_addLine("invalid command: " + command, glm::vec4(1, 0, 0, 1));
-			ret = false;
-			_commandLine->setText(CHEATCODE_DEF_TXT);
+			std::vector<std::string> splittedCmd = _splitCommand(command);
+			if (splittedCmd.empty()) {
+				ret = false;
+				_commandLine->inputReset();
+			}
+			else {  // if there is a command
+				_addLine("invalid command: " + splittedCmd[0], glm::vec4(1, 0, 0, 1));
+				ret = false;
+				_commandLine->setText(CHEATCODE_DEF_TXT);
+			}
 		}
-		else {
+		else {  // not a command
 			_addLine(command);
 			ret = false;
 			_commandLine->inputReset();
 		}
 	}
 	return ret;
+}
+
+std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) {
+	std::vector<std::string> splitted;
+	if (command.size() == 0)
+		return splitted;
+
+	uint32_t start = 0;
+	uint32_t size = 0;
+
+	if (command[0] == '/')
+		start = 1;
+
+	while (start + size < command.size()) {
+		while (start + size < command.size() && _isSpace(command[start])) {
+			start += 1;
+		}
+		while (start + size < command.size() && !_isSpace(command[start + size])) {
+			size += 1;
+		}
+		if (size > 0) {
+			splitted.push_back(command.substr(start, size));
+			start += size;
+		}
+		size = 0;
+	}
+
+	return splitted;
+}
+
+bool SceneCheatCode::_isSpace(char c) const {
+	if (c == ' ' || c == '\t')
+		return true;
+	return false;
 }
 
 /**
