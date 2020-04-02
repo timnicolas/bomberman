@@ -120,10 +120,10 @@ void TextInputUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	if (_showCursor) {
 		tmpPos.x += _getCursorOffset();
-		_drawText(tmpPos, tmpSize, _textFont, _textScale, "|", _textColor, _textAlign, _textPadding);
+		_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, "|", _textColor, _textAlign, _textPadding);
 		tmpPos.x -= _getCursorOffset();
 	}
-	_drawText(tmpPos, tmpSize, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = getRealPos();
@@ -133,10 +133,10 @@ void TextInputUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 	_color = glm::vec4(0, 0, 0, 0.5);
-	_drawRect(tmpPos, tmpSize, _color, glm::vec4(1.0, 1.0, 1.0, 1.0), 1, 1);
+	_drawRect(tmpPos, tmpSize, _z, _color, glm::vec4(1.0, 1.0, 1.0, 1.0), 1);
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 }
 
 /**

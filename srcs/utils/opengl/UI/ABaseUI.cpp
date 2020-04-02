@@ -5,6 +5,7 @@
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
   _pos(pos),
+  _z(0),
   _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(1.0, 1.0, 1.0, 1.0),
@@ -172,10 +173,10 @@ void ABaseUI::draw() {
 			tmpPos.x = getRealPos().x + _size.x - tmpSize.x - _borderSize - _helpPadding;
 			tmpPos.y = getRealPos().y + _borderSize + _helpPadding;
 
-			_drawText(tmpPos, tmpSize, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
+			_drawText(tmpPos, tmpSize, _z, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
 
-			_drawBorderRect(tmpPos, tmpSize, _helpBorderSize, _borderColor);
-			_drawRect(tmpPos, tmpSize, _color);
+			_drawBorderRect(tmpPos, tmpSize, _z, _helpBorderSize, _borderColor);
+			_drawRect(tmpPos, tmpSize, _z, _color);
 		}
 	}
 
@@ -300,6 +301,7 @@ bool	ABaseUI::isTotallyOutOfMaster() const {
 
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
+ABaseUI &	ABaseUI::setZ(float z) { _z = z; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
