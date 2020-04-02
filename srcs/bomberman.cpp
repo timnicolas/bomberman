@@ -138,6 +138,8 @@ bool	initSettings(std::string const & filename) {
 	/* cheatcode */
 	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
 		s.j("cheatcode").add<uint64_t>("maxLinesShow", 10).setMin(5).setMax(50).setDescription("number of lines to show");
+		s.j("cheatcode").add<uint64_t>("timeLineShow", 1000).setMin(0).setMax(10000)
+			.setDescription("Time to show lines before quit");
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");

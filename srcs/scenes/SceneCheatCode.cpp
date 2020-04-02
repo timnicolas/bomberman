@@ -112,24 +112,30 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 	if (command.size() > 0) {
 		if (command[0] == '/') {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
-			if (splittedCmd.empty()) {
-				ret = false;
+			if (splittedCmd.empty()) {  // command is empty
+				ret = false;  // keep command line open
 				_commandLine->inputReset();
 			}
 			else {  // if there is a command
-				if (_isValidCommand(splittedCmd[0])) {
+				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
 					ret = (*this.*_commandsList[splittedCmd[0]].exec)(splittedCmd);
+					if (ret) {  // if command line close after command
+						_commandLine->inputReset();
+					}
+					else {  // if command line keep open
+						_commandLine->setText(CHEATCODE_DEF_TXT);
+					}
 				}
-				else {
+				else {  // if the command is invalid
 					_addLine("invalid command: " + splittedCmd[0], glm::vec4(1, 0, 0, 1));
-					ret = false;
+					ret = false;  // keep command line open
+					_commandLine->setText(CHEATCODE_DEF_TXT);
 				}
-				_commandLine->setText(CHEATCODE_DEF_TXT);
 			}
 		}
 		else {  // not a command
 			_addLine(command);
-			ret = false;
+			ret = false;  // keep command line open
 			_commandLine->inputReset();
 		}
 	}
