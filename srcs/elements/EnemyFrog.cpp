@@ -52,11 +52,10 @@ void EnemyFrog::resetCrossable() {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyFrog::_update(float const dTime) {
+bool	EnemyFrog::_update() {
 	/* try jumping */
 	if (_jumpGoal == VOID_POS && static_cast<uint64_t>(getMs().count()) >= _nextJumpTime) {
 		// try to find a new destination
@@ -72,7 +71,7 @@ bool	EnemyFrog::_update(float const dTime) {
 	/* moving */
 	// if jumping
 	if (_jumpGoal != VOID_POS) {
-		if (_isOn(_jumpGoal, dTime * speed * 3)) {  // end of the jump
+		if (_isOn(_jumpGoal, game.getDtTime() * speed * 3)) {  // end of the jump
 			// set position with precision
 			position.x = _jumpGoal.x;
 			position.z = _jumpGoal.y;
@@ -84,7 +83,7 @@ bool	EnemyFrog::_update(float const dTime) {
 			else
 				_nextJumpTime = getMs().count() + WAIT_JUMP_TIME_MS;
 		}
-		_moveTo(_dir, dTime, -1);
+		_moveTo(_dir, -1);
 	}
 	else {  // if stay in a position
 		if (game.player->hasCollision(position, size)) {

@@ -138,6 +138,7 @@ SRC =	main.cpp \
 \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
+		gui/ModelsManager.cpp \
 \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
@@ -215,6 +216,7 @@ HEAD =	bomberman.hpp \
 \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
+		gui/ModelsManager.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
@@ -364,7 +366,7 @@ export CONFIGURE_LINTER
 # set command to launch linter on LINTER
 # add rules for linter in LINTER_RULES
 LINTER = $(CPPLINT)
-LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn,-whitespace/braces \
+LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn,-whitespace/braces,-runtime/indentation_namespace \
 				--linelength=120 --quiet
 
 ################################################################################

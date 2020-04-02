@@ -19,6 +19,8 @@ class AScene {
 		virtual void load() = 0;
 		virtual void unload() = 0;
 
+		float const	&getDtTime() const;
+
 		AScene & operator=(AScene const & rhs);
 
 		// Exceptions
