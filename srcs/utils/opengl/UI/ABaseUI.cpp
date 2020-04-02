@@ -166,7 +166,7 @@ void ABaseUI::draw() {
 
 			/* get text informations */
 			uint32_t width = _textRender->strWidth(_helpFont, helpText, _helpTextScale);
-			uint32_t height = _textRender->strHeight(_helpFont, helpText, _helpTextScale);
+			uint32_t height = _textRender->strHeight(_helpFont, _helpTextScale);
 
 			tmpSize = glm::vec2(width + _helpPadding, height + _helpPadding);
 			tmpPos.x = getRealPos().x + _size.x - tmpSize.x - _borderSize - _helpPadding;
@@ -305,7 +305,7 @@ ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
 ABaseUI &	ABaseUI::setCalculatedSize() {
 	uint32_t width = _textRender->strWidth(_textFont, _text, _textScale);
-	uint32_t height = _textRender->strHeight(_textFont, _text, _textScale);
+	uint32_t height = _textRender->strHeight(_textFont, _textScale);
 	_size = glm::vec2(width + _textPadding * 2, height + _textPadding * 2);;
 	return *this;
 }

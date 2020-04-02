@@ -84,7 +84,7 @@ void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font,
 glm::vec4 color, TextAlign::Enum align, float padding) {
 	(void)align;
 	uint32_t width = _textRender->strWidth(font, text, scale);
-	uint32_t height = _textRender->strHeight(font, text, scale);
+	uint32_t height = _textRender->strHeight(font, scale);
 
 	// get position of the text
 	glm::vec2 tmpPos;

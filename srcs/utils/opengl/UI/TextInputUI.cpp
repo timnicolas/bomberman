@@ -7,6 +7,7 @@ TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _defText(""),
   _defTextColor(0.3, 0.3, 0.3, 1),
+  _showCursor(false),
   _lastShowCursorMs(0),
   _cursorPos(0)
 {
@@ -52,16 +53,11 @@ void TextInputUI::_update() {
 
 
 	/* cursor blink */
-	if (_text != "") {
-		std::chrono::milliseconds curMs = std::chrono::duration_cast<std::chrono::milliseconds>(
-											std::chrono::system_clock::now().time_since_epoch());
-		if ((curMs - _lastShowCursorMs).count() > CURSOR_SPEED_MS) {
-			_lastShowCursorMs = curMs;
-			_showCursor = !_showCursor;
-		}
-	}
-	else {
-		_showCursor = false;
+	std::chrono::milliseconds curMs = std::chrono::duration_cast<std::chrono::milliseconds>(
+										std::chrono::system_clock::now().time_since_epoch());
+	if ((curMs - _lastShowCursorMs).count() > CURSOR_SPEED_MS) {
+		_lastShowCursorMs = curMs;
+		_showCursor = !_showCursor;
 	}
 }
 
@@ -83,7 +79,7 @@ void TextInputUI::_draw() {
 	_drawText(tmpPos, tmpSize, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
 	if (_showCursor) {
 		tmpPos.x += _getCursorOffset();
-		_drawText(tmpPos, tmpSize, _textFont, _textScale, "|", textColor, _textAlign, _textPadding);
+		_drawText(tmpPos, tmpSize, _textFont, _textScale, "|", _textColor, _textAlign, _textPadding);
 	}
 
 	// get center size and position
