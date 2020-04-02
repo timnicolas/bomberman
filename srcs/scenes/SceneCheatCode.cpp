@@ -62,17 +62,8 @@ bool	SceneCheatCode::update() {
 	ASceneMenu::update();
 
 	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_RETURN)) {
-		std::string command = _commandLine->getText();
-		if (command.size() > 0) {
-			if (command[0] == '/')
-				_addLine("invalid command: " + command, glm::vec4(1, 0, 0, 1));
-			else
-				_addLine(command);
-			_commandLine->setText(CHEATCODE_DEF_TXT);
-		}
-		else {
-			return false;
-		}
+		if (evalCommand(_commandLine->getText()))
+			return false;  // close command line
 	}
 
 	return true;
@@ -93,6 +84,31 @@ void SceneCheatCode::unload() {
 	ASceneMenu::unload();
 	_commandLine->setText(CHEATCODE_DEF_TXT);
 	_commandLine->setFocus(false);
+}
+
+/**
+ * @brief Parse & execute a command
+ *
+ * @param command The command
+ * @return true If the command is a success
+ * @return false If we need to keep the command line open (command fail for example)
+ */
+bool SceneCheatCode::evalCommand(std::string const & command) {
+	bool ret = true;
+
+	if (command.size() > 0) {
+		if (command[0] == '/') {
+			_addLine("invalid command: " + command, glm::vec4(1, 0, 0, 1));
+			ret = false;
+			_commandLine->setText(CHEATCODE_DEF_TXT);
+		}
+		else {
+			_addLine(command);
+			ret = false;
+			_commandLine->inputReset();
+		}
+	}
+	return ret;
 }
 
 /**
