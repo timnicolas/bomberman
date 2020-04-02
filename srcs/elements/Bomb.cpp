@@ -99,11 +99,10 @@ bool	Bomb::takeDamage(const int damage) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	Bomb::update(float const dTime) {
+bool	Bomb::update() {
 	if (!active)
 		return true;
 	if (game.player->detonator) {
@@ -112,7 +111,7 @@ bool	Bomb::update(float const dTime) {
 			explode({position.x, position.z});
 		}
 	} else {
-		_countdown -= dTime;
+		_countdown -= game.getDtTime();
 		if (_countdown <= 0.0) {
 			getPos();
 			explode({position.x, position.z});

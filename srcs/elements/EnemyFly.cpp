@@ -39,14 +39,13 @@ EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyFly::_update(float const dTime) {
+bool	EnemyFly::_update() {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
-	_baseEnemyMove(dTime, _dir);
+	_baseEnemyMove(_dir);
 	return true;
 }
 

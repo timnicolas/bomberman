@@ -41,16 +41,17 @@ EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyCrispy::_update(float const dTime) {
+bool	EnemyCrispy::_update() {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
 
 	/* retransform to a wall */
-	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL && _isOn(getIntPos(), dTime * speed * 3)) {
+	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL &&
+		_isOn(getIntPos(), game.getDtTime() * speed * 3))
+	{
 		position.x = getIntPos().x;
 		position.z = getIntPos().y;
 		_isWall = true;
@@ -68,9 +69,9 @@ bool	EnemyCrispy::_update(float const dTime) {
 	/* move */
 	if (!_isWall) {
 		glm::vec3 tmpPos = position;
-		if (tmpPos == _moveTo(_playerDir, dTime)) {
+		if (tmpPos == _moveTo(_playerDir)) {
 			_playerDir = Direction::NO_DIRECTION;
-			_baseEnemyMove(dTime, _dir);
+			_baseEnemyMove(_dir);
 		}
 	}
 	return true;

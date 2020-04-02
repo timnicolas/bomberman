@@ -382,8 +382,17 @@ void Gui::enableCursor(bool enable) {
 
 // -- drawCube -----------------------------------------------------------------
 void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
-	glm::mat4 model(1.0);
+	glm::mat4	model(1.0);
 	cubeShader->use();
+
+	// set uniform and activate textures
+	glm::mat4	view = cam->getViewMatrix();
+	cubeShader->setMat4("view", view);
+	cubeShader->setVec3("viewPos", cam->pos);
+	glBindVertexArray(cubeShVao);
+	textureManager->activateTextures();
+
+	// set block size
 	cubeShader->setVec3("blockSize", scale);
 	// set block type
 	cubeShader->setInt("blockId", typeBlock);
@@ -391,6 +400,8 @@ void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
 	model = glm::translate(glm::mat4(1.0), pos);
 	cubeShader->setMat4("model", model);
 	glDrawArrays(GL_POINTS, 0, C_NB_FACES);  // draw
+
+	textureManager->disableTextures();
 	cubeShader->unuse();
 }
 

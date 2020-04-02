@@ -8,7 +8,7 @@
 #include "AEntity.hpp"
 
 #define MAX_SPEED 6.0
-#define OFFSET_TURN_CORRECTION 0.7
+#define OFFSET_TURN_CORRECTION 0.85
 #define MOVE_STEP 0.05
 
 // class SceneGame;
@@ -31,20 +31,21 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
+	glm::vec3	size;
+
 	// Methods
 	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest);
 	bool		_canWalkOnBlock(glm::ivec2 pos) const;
 	bool		_canWalkOnEntity(AEntity * entity) const;
 	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to);
 	bool		_canMoveOn(glm::vec3 dest);
-	glm::vec3	_moveTo(Direction::Enum direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
-	glm::vec3	_moveTo(glm::vec3 direction, float const dTime, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
+	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
 
 public:
 	// Members
 	int			lives;
 	float		speed;
-	glm::vec3	size;
 	glm::vec3	front;
 	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
@@ -58,7 +59,7 @@ public:
 
 	// Methods
 	virtual void					resetCrossable();
-	virtual bool					update(float const dTime) = 0;
+	virtual bool					update() = 0;
 	virtual bool					draw(Gui &gui) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();

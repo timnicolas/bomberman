@@ -31,7 +31,7 @@ public:
 	Bomb*	setPropagation(const int propagation);
 
 	// Methods
-	bool	update(float const dTime);
+	bool	update();
 	bool	postUpdate();
 	void	explode(glm::vec2 const pos);
 	bool	draw(Gui &gui);

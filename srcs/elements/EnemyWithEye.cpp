@@ -32,11 +32,10 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
 /**
  * @brief update is called each frame.
  *
- * @param dTime Delta Time
  * @return true if success
  * @return false if failure
  */
-bool	EnemyWithEye::_update(float const dTime) {
+bool	EnemyWithEye::_update() {
 	if (_isBlocked())  // do nothing if blocked
 		return true;
 	Direction::Enum viewPlayerDir = _isPlayerVisible();
@@ -45,9 +44,9 @@ bool	EnemyWithEye::_update(float const dTime) {
 		_dir = viewPlayerDir;
 	}
 	glm::vec3 tmpPos = position;
-	if (tmpPos == _moveTo(_playerDir, dTime)) {
+	if (tmpPos == _moveTo(_playerDir)) {
 		_playerDir = Direction::NO_DIRECTION;
-		_baseEnemyMove(dTime, _dir);
+		_baseEnemyMove(_dir);
 	}
 	return true;
 }

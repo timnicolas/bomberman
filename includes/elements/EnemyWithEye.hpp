@@ -18,7 +18,7 @@ private:
 	Direction::Enum	_playerDir;  // direction of the player (if view it)
 
 protected:
-	virtual bool	_update(float const dTime);
+	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 

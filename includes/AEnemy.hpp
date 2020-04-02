@@ -28,18 +28,20 @@ private:
 
 		DFSNode() : dist(INF_DIST), last{-1, -1} {}
 	};
-	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec2 pos, glm::ivec2 dest, bool & find);
+	void			_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS,
+		glm::ivec2 pos, glm::ivec2 dest, bool & find);
 	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
 protected:
-	virtual bool	_update(float const dTime) = 0;
+	virtual bool	_update() = 0;
 	virtual bool	_postUpdate() = 0;
 	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
-	bool			_baseEnemyMove(float const dTime, Direction::Enum & dir);
-	bool			_movePatternBasic(float const dTime, std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx);
-	bool			_followPath(float const dTime, std::deque<PathNode> & path);
+	bool			_baseEnemyMove(Direction::Enum & dir);
+	bool			_movePatternBasic(std::vector<Direction::Enum> directionOrder,
+		uint32_t & dirIdx);
+	bool			_followPath(std::deque<PathNode> & path);
 
 	/* check and calculation functions */
 	Direction::Enum	_isPlayerVisible() const;
@@ -62,7 +64,7 @@ public:
 	AEnemy &operator=(AEnemy const &rhs);
 
 	// Methods
-	bool			update(float const dTime);
+	bool			update();
 	bool			postUpdate();
 	bool			draw(Gui &gui);
 

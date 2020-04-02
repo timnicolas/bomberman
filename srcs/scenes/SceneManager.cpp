@@ -4,6 +4,7 @@
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
 #include "ABaseUI.hpp"
+#include "ModelsManager.hpp"
 
 /* import all scenes */
 #include "SceneMainMenu.hpp"
@@ -72,6 +73,11 @@ bool SceneManager::_init() {
 	// create and init first gui
 	_gui = new Gui(_gameInfo);
 	if (!_gui->init()) {
+		return false;
+	}
+
+	// load and init 3d models
+	if (!ModelsManager::init(*(_gui->cam))) {
 		return false;
 	}
 
