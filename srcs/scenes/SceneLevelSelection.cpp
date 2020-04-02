@@ -25,7 +25,7 @@ SceneLevelSelection & SceneLevelSelection::operator=(SceneLevelSelection const &
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneLevelSelection::init() {
@@ -69,9 +69,15 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = menuHeight * 0.8;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "MAIN MENU")
+		addButton(tmpPos, tmpSize, "main   menu")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
+
+		tmpSize.x = tmpSize.x * 1.2;
+		tmpSize.y = winSz.y - tmpPos.y;
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+		tmpPos.y -= menuHeight * 0.5;
+		addRect(tmpPos, tmpSize);
 
 		_initBG();
 	}

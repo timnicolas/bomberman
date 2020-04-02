@@ -23,7 +23,7 @@ SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool			SceneExit::init() {
@@ -31,30 +31,31 @@ bool			SceneExit::init() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 	float menuWidth = winSz.x / 2;
-	float menuHeight = menuWidth / 8;
+	float menuHeight = winSz.y / 14;
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		// tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "Do you want to exit ?").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Do   you   want   to   exit ?");
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT")
+		tmpPos.y -= menuHeight * 1.8;
+		addButton(tmpPos, tmpSize, "exit")
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.exit);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "CANCEL")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "cancel")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.cancel);
 
-		tmpSize.x = tmpSize.x * 1.2;
+		tmpSize.x = tmpSize.x * 1.3;
 		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
+		addRect(tmpPos, tmpSize);
 
 		_initBG();
 	}

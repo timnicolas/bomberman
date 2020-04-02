@@ -83,13 +83,12 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
 	ButtonUI * ui = new ButtonUI(pos, size);
 	ui->setText(text);
 	// set default color
-	glm::vec4 color = glm::vec4(
-		s.j("colors").j("buttons").d("r"),
-		s.j("colors").j("buttons").d("g"),
-		s.j("colors").j("buttons").d("b"),
-		s.j("colors").j("buttons").d("a")
-	);
+	glm::vec4 color = colorise(s.j("colors").j("buttons").u("color"), s.j("colors").j("buttons").u("alpha"));
 	ui->setColor(color);
+	ui->setBorderColor(colorise(
+		s.j("colors").j("buttons-border").u("color"),
+		s.j("colors").j("buttons-border").u("alpha")
+	));
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -125,13 +124,17 @@ SliderUI & ASceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float
 	SliderUI * ui = new SliderUI(pos, size);
 	ui->setValues(min, max, val, step);
 	// set default color
-	glm::vec4 color = glm::vec4(
-		s.j("colors").j("buttons").d("r"),
-		s.j("colors").j("buttons").d("g"),
-		s.j("colors").j("buttons").d("b"),
-		s.j("colors").j("buttons").d("a")
-	);
+	glm::vec4 color = colorise(s.j("colors").j("buttons").u("color"), s.j("colors").j("buttons").u("alpha"));
 	ui->setColor(color);
+	ui->setBorderColor(colorise(
+		s.j("colors").j("buttons-border").u("color"),
+		s.j("colors").j("buttons-border").u("alpha")
+	));
+	ui->setTextColor(colorise(
+		s.j("colors").j("font").u("color"),
+		s.j("colors").j("font").u("alpha")
+	));
+
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -149,6 +152,26 @@ TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & 
 	ui->setText(text);
 	if (size == VOID_SIZE)
 		ui->setCalculatedSize();
+	ui->setTextColor(colorise(s.j("colors").j("font").u("color")));
+	_buttons.push_back(ui);
+	return *ui;
+}
+
+/**
+ * @brief add a Title in the menu with menu settings
+ *
+ * @param pos the position
+ * @param size the size
+ * @param text the text
+ * @return TextUI& a reference to the element created
+ */
+TextUI & ASceneMenu::addTitle(glm::vec2 pos, glm::vec2 size, std::string const & text) {
+	TextUI * ui = new TextUI(pos, size);
+	ui->setText(text);
+	ui->setTextFont("title");
+	if (size == VOID_SIZE)
+		ui->setCalculatedSize();
+	ui->setTextColor(colorise(s.j("colors").j("font").u("color")));
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -164,6 +187,10 @@ TextUI & ASceneMenu::addText(glm::vec2 pos, glm::vec2 size, std::string const & 
  */
 RectUI & ASceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm::vec4 borderColor) {
 	RectUI * ui = new RectUI(pos, size);
+	if (color == VOID_COLOR)
+		color = colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha"));
+	if (borderColor == VOID_COLOR)
+		borderColor = colorise(s.j("colors").j("bg-rect-border").u("color"), s.j("colors").j("bg-rect-border").u("alpha"));
 	ui->setColor(color);
 	ui->setBorderColor(borderColor);
 	_buttons.push_back(ui);
@@ -206,22 +233,11 @@ ScrollbarUI & ASceneMenu::addScrollbar(glm::vec2 pos, glm::vec2 size) {
 bool ASceneMenu::_initBG() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos = glm::vec2(0, 0);
-	glm::vec2 tmpSize = glm::vec2(200, 0);
-	int i = 0;
-	while (tmpPos.y < winSz.y) {
-		tmpPos.x = 0;
-		int j = 0;
-		while (tmpPos.x < winSz.x) {
-			std::string name;
-			if ((i + j) & 1) name = "bomberman-assets/textures/bomb/004-bombBott.png";
-			else name = "bomberman-assets/textures/player/010-playerSide.png";
-			addImage(tmpPos, tmpSize, name).setColor(glm::vec4(1.0, 1.0, 1.0, 0.5));
-			tmpPos.x += tmpSize.x;
-			j++;
-		}
-		tmpPos.y += getUIElement(getNbUIElements() - 1).getSize().y;
-		i++;
-	}
+
+	addRect(tmpPos, winSz, colorise(
+		s.j("colors").j("background").u("color"),
+		s.j("colors").j("background").u("alpha")
+	));
 	return true;
 }
 
