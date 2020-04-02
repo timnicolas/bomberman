@@ -22,7 +22,8 @@ class SceneMainMenu : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
-			bool	play;
+			bool	newGame;
+			bool	loadGame;
 			bool	loadSettings;
 			bool	exit;
 		};

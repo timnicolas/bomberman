@@ -1,22 +1,24 @@
-#include "ScenePause.hpp"
+#include "SceneLoadGame.hpp"
 #include "SceneGame.hpp"
 
-ScenePause::ScenePause(Gui * gui, float const &dtTime)
+SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
-{}
+{
+	_states.restart = false;
+}
 
-ScenePause::ScenePause(ScenePause const & src)
+SceneLoadGame::SceneLoadGame(SceneLoadGame const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
-ScenePause::~ScenePause() {}
+SceneLoadGame::~SceneLoadGame() {}
 
-ScenePause & ScenePause::operator=(ScenePause const & rhs) {
+SceneLoadGame & SceneLoadGame::operator=(SceneLoadGame const & rhs) {
 	if (this != &rhs) {
-		logWarn("you are copying ScenePause")
+		logWarn("you are copying SceneLoadGame")
 	}
 	return *this;
 }
@@ -27,7 +29,7 @@ ScenePause & ScenePause::operator=(ScenePause const & rhs) {
  * @return true if the init succeed
  * @return false if the init failed
  */
-bool			ScenePause::init() {
+bool			SceneLoadGame::init() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -39,19 +41,44 @@ bool			ScenePause::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Paused");
-
+		addTitle(tmpPos, tmpSize, "Load   game");
 		tmpPos.y -= menuHeight * 1.8;
-		addButton(tmpPos, tmpSize, "resume")
-			.setKeyLeftClickInput(InputType::CONFIRM)
-			.addButtonLeftListener(&_states.resume);
+
+		// Screen Saved Games
+		glm::vec2		savedGamesSize = {menuWidth * (2.0/5.0), menuHeight * 1.3 * 5};
+		glm::vec2		savedGamesPos = {tmpPos.x + 0, tmpPos.y - savedGamesSize.y};
+		ABaseMasterUI	*savedGames = reinterpret_cast<ABaseMasterUI*>(
+			&addScrollbar(savedGamesPos, savedGamesSize).enableVertScroll(true).setEnabled(true)
+		);
+
+		for (int i = 0; i <= 10; i++) {
+			addButton(
+				{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
+				{savedGamesSize.x * 0.8, tmpSize.y},
+				"saved  " + std::to_string(i)
+			).setMaster(savedGames);
+		}
+
+		// Screen Game Preview
+		glm::vec2		previewSize = {menuWidth * (3.0/5.0), menuHeight * 1.3 * 5};
+		glm::vec2		previewPos = {tmpPos.x + savedGamesSize.x, tmpPos.y - previewSize.y};
+		ABaseMasterUI	*previewGame = &addScrollbar(previewPos, previewSize);
+
+		addButton(
+			{5 * 1.3, 0},
+			tmpSize,
+			"load   game"
+		).setMaster(previewGame);
+
+		tmpPos.y -= savedGamesSize.y;
+
+
+		// addButton(tmpPos, tmpSize, "restart")
+		// 	.setKeyLeftClickInput(InputType::CONFIRM)
+		// 	.addButtonLeftListener(&_states.restart).setMaster(savedGames);
 
 		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "restart")
-			.addButtonLeftListener(&_states.restart);
-
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "main   menu")
+		addButton(tmpPos, tmpSize, "main menu")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
@@ -76,20 +103,26 @@ bool			ScenePause::init() {
 }
 
 /**
+ * @brief called when the scene is loaded
+ */
+void SceneLoadGame::load() {
+	ASceneMenu::load();
+	if (SceneManager::getSceneName() != SceneNames::EXIT) {
+		_lastSceneName = SceneManager::getSceneName();
+	}
+}
+
+/**
  * @brief this is the update function (called every frames)
  *
  * @return true if the update is a success
  * @return false if there are an error in update
  */
-bool	ScenePause::update() {
+bool	SceneLoadGame::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
-	if (_states.resume) {
-		_states.resume = false;
-		SceneManager::loadScene(_lastSceneName);
-	}
-	else if (_states.restart) {
+	if (_states.restart) {
 		_states.restart = false;
 		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
@@ -103,14 +136,4 @@ bool	ScenePause::update() {
 		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
-}
-
-/**
- * @brief called when the scene is loaded
- */
-void ScenePause::load() {
-	ASceneMenu::load();
-	if (SceneManager::getSceneName() != SceneNames::EXIT) {
-		_lastSceneName = SceneManager::getSceneName();
-	}
 }
