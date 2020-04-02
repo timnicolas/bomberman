@@ -19,6 +19,7 @@ namespace SceneNames {
 	static std::string const EXIT = "exit";
 	static std::string const SETTINGS = "settings";
 	static std::string const LOADGAME = "loadGame";
+	static std::string const CHEAT_CODE = "cheatCode";
 }  // namespace SceneNames
 
 /**
@@ -38,6 +39,8 @@ class SceneManager {
 		static AScene *				getScene(std::string const & name);
 		static std::string const &	getSceneName();
 		static bool					isSceneChangedInCurFrame();
+		static void					openCheatCode(bool open);
+		static bool					isCheatCodeOpen();
 		static void					quit();
 
 		/* Exceptions */
@@ -53,6 +56,7 @@ class SceneManager {
 		float		_dtTime;
 		std::string	_scene;  // the name of the current scene
 		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
+		bool		_isInCheatCode;
 
 		bool		_sceneLoadedCurrentFrame;  // true if a scene was loaded in the current frame
 
@@ -64,6 +68,8 @@ class SceneManager {
 		AScene *			_getScene(std::string const & name);
 		std::string const &	_getSceneName() const;
 		bool				_isSceneChangedInCurFrame() const;
+		void				_openCheatCode(bool open);
+		bool				_isCheatCodeOpen() const;
 		void				_quit();
 
 	private:

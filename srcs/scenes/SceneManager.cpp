@@ -4,10 +4,10 @@
 #include "SceneManager.hpp"
 #include "bomberman.hpp"
 #include "ABaseUI.hpp"
+#include "ModelsManager.hpp"
 
 /* import all scenes */
 #include "SceneMainMenu.hpp"
-#include "SceneLoadGame.hpp"
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
 #include "ScenePause.hpp"
@@ -15,13 +15,15 @@
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
 #include "SceneSettings.hpp"
-#include "ModelsManager.hpp"
+#include "SceneLoadGame.hpp"
+#include "SceneCheatCode.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
   _scene(SceneNames::MAIN_MENU),
+  _isInCheatCode(false),
   _sceneLoadedCurrentFrame(false)
 {}
 
@@ -91,6 +93,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LOADGAME, new SceneLoadGame(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::CHEAT_CODE, new SceneCheatCode(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
@@ -179,10 +182,19 @@ bool SceneManager::_update() {
 	/* update */
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
-	// update the scene
-	if (_sceneMap[_scene]->update() == false) {
-		return false;
+	if (_isInCheatCode) {
+		if (_sceneMap[SceneNames::CHEAT_CODE]->update() == false) {
+			openCheatCode(false);  // close cheat code
+		}
 	}
+	else {
+		// update the scene
+		if (_sceneMap[_scene]->update() == false) {
+			return false;
+		}
+	}
+	if (isSceneChangedInCurFrame())
+		_gui->disableExitForThisFrame();
 	_gui->postUpdate(_dtTime);
 	return true;
 }
@@ -199,6 +211,12 @@ bool SceneManager::_draw() {
 	if (_sceneMap[_scene]->draw() == false) {
 		return false;
 	}
+
+	if (_isInCheatCode) {
+		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
+			return false;
+	}
+
 	_gui->postDraw();
 
 	return true;
@@ -272,6 +290,36 @@ bool SceneManager::isSceneChangedInCurFrame() {
 }
 bool SceneManager::_isSceneChangedInCurFrame() const {
 	return _sceneLoadedCurrentFrame;
+}
+
+/**
+ * @brief Open or force close cheat code command line
+ *
+ * @param open True to open cheat code command line
+ */
+void SceneManager::openCheatCode(bool open) {
+	SceneManager::get()._openCheatCode(open);
+}
+void SceneManager::_openCheatCode(bool open) {
+	if (_isInCheatCode == open)  // if state didn't changed
+		return;
+	if (open)
+		_sceneMap[SceneNames::CHEAT_CODE]->load();
+	else
+		_sceneMap[SceneNames::CHEAT_CODE]->unload();
+	_isInCheatCode = open;
+}
+
+/**
+ * @brief Know if we are in cheat code mode
+ *
+ * @return true If cheat code command line is open
+ */
+bool SceneManager::isCheatCodeOpen() {
+	return SceneManager::get()._isCheatCodeOpen();
+}
+bool SceneManager::_isCheatCodeOpen() const {
+	return _isInCheatCode;
 }
 
 /**

@@ -40,8 +40,8 @@ void RectUI::_draw() {
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
-	_drawRect(tmpPos, tmpSize, _color);
+	_drawRect(tmpPos, tmpSize, _z, _color);
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 }

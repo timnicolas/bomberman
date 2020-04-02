@@ -201,6 +201,49 @@ void ABaseUI::loadFont(std::string const & fontName, std::string const & filenam
 }
 
 /**
+ * @brief Get width of string with a given font at a given scale
+ *
+ * @param fontName The font
+ * @param txt The text
+ * @param scale The scale
+ * @return uint32_t The width of the text
+ */
+uint32_t ABaseUI::strWidth(std::string const & fontName, std::string const & txt, float scale) {
+	return _textRender->strWidth(fontName, txt, scale);
+}
+/**
+ * @brief Get width of string with the default font at a given scale
+ *
+ * @param txt The text
+ * @param scale The scale
+ * @return uint32_t The width of the text
+ */
+uint32_t ABaseUI::strWidth(std::string const & txt, float scale) {
+	return strWidth(_defFont, txt, scale);
+}
+/**
+ * @brief Get height of string with a given font at a given scale
+ *
+ * @param fontName The font
+ * @param scale The scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
+ * @return uint32_t The width of the text
+ */
+uint32_t ABaseUI::strHeight(std::string const & fontName, float scale, bool fullHeight) {
+	return _textRender->strHeight(fontName, scale, fullHeight);
+}
+/**
+ * @brief Get height of string with the default font at a given scale
+ *
+ * @param scale The scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
+ * @return uint32_t The width of the text
+ */
+uint32_t ABaseUI::strHeight(float scale, bool fullHeight) {
+	return strHeight(_defFont, scale, fullHeight);
+}
+
+/**
  * @brief call this function on every window resize to update projection matrix
  *
  * @param winSize the size of the window

@@ -44,7 +44,7 @@ void ButtonImageUI::_draw() {
 	glm::vec2 tmpSize;
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 
 	// get color (if mouse hover or mouse click)
 	glm::vec4 color = _color;
@@ -63,5 +63,5 @@ void ButtonImageUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 	// draw image
-	_drawImg(tmpPos, tmpSize, _imgTextureID, color);
+	_drawImg(tmpPos, tmpSize, _z, _imgTextureID, color);
 }

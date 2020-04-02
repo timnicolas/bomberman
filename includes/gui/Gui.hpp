@@ -52,6 +52,7 @@ class Gui {
 		void	drawCube(Block::Enum typeBlock, glm::vec3 pos = {0, 0, 0}, glm::vec3 scale = {1, 1, 1});
 		void	updateFullscreen();
 		void	udpateDimension();
+		void	disableExitForThisFrame(bool disable = true);
 
 		GameInfo		&gameInfo;
 		TextureManager	*textureManager;
@@ -70,6 +71,8 @@ class Gui {
 
 		glm::mat4		_projection;
 		bool			_canMove;
+
+		bool			_exitMenuDisabled;
 
 		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;
 
