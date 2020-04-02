@@ -118,11 +118,12 @@ void TextInputUI::_draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
 	if (_showCursor) {
 		tmpPos.x += _getCursorOffset();
 		_drawText(tmpPos, tmpSize, _textFont, _textScale, "|", _textColor, _textAlign, _textPadding);
+		tmpPos.x -= _getCursorOffset();
 	}
+	_drawText(tmpPos, tmpSize, _textFont, _textScale, textToPrint, textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = getRealPos();
