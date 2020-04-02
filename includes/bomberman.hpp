@@ -16,6 +16,7 @@
 #include <chrono>
 #include "SettingsJson.hpp"
 #include "Logging.hpp"
+#include "useGlm.hpp"
 
 void						initLogs();
 bool						checkPrgm();
@@ -26,6 +27,7 @@ bool						argparse(int nbArgs, char const ** args);
 
 std::chrono::milliseconds	getMs();
 std::string					timeToString(float time);
+glm::vec4					colorise(uint32_t color, uint8_t alpha = 0xff);
 
 /**
  * @brief global variable for general settings

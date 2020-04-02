@@ -119,7 +119,7 @@ bool					SceneSettings::init() {
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-		addText(tmp_pos, tmp_size, "SETTINGS").setTextFont("title");
+		addTitle(tmp_pos, tmp_size, "Settings");
 		tmp_size.y = menu_height * 0.1;
 		tmp_size.x = menu_width / 3 * 0.9;
 		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
@@ -140,6 +140,8 @@ bool					SceneSettings::init() {
 		/* controls */
 		_init_control_pane(tmp_pos, menu_width, menu_height);
 		AudioManager::loadSound("sounds/bell.ogg");
+
+		_initBG();
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -212,7 +214,8 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 		tmp_size.x *= 2;
-		tmp_pos.x += (menu_width / 3);
+		tmp_size.x -= 10 * 2;
+		tmp_pos.x += (menu_width / 3) + 10;
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
 		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
 			.addButtonLeftListener(&_save_audio[i]).setTextScale(_text_scale).setEnabled(false);
