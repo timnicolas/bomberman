@@ -24,6 +24,7 @@ SceneManager::SceneManager()
   _dtTime(0.0f),
   _scene(SceneNames::MAIN_MENU),
   _isInCheatCode(false),
+  _showCheatCodeTextTime(0),
   _sceneLoadedCurrentFrame(false)
 {}
 
@@ -212,7 +213,12 @@ bool SceneManager::_draw() {
 		return false;
 	}
 
-	if (_isInCheatCode) {
+	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
+		if (_showCheatCodeTextTime > 0) {
+			_showCheatCodeTextTime -= _dtTime * 1000;
+			if (_showCheatCodeTextTime < 0)
+				_showCheatCodeTextTime = 0;
+		}
 		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
 			return false;
 	}
@@ -308,6 +314,15 @@ void SceneManager::_openCheatCode(bool open) {
 	else
 		_sceneMap[SceneNames::CHEAT_CODE]->unload();
 	_isInCheatCode = open;
+}
+
+void SceneManager::openCheatCodeForTime(uint64_t ms) {
+	SceneManager::get()._openCheatCodeForTime(ms);
+}
+void SceneManager::_openCheatCodeForTime(uint64_t ms) {
+	if (ms == 0 || static_cast<int64_t>(ms) > _showCheatCodeTextTime) {
+		_showCheatCodeTextTime = ms;
+	}
 }
 
 /**

@@ -4,10 +4,13 @@
 bool SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	(void)args;
 	_addLine("help");
-	return true;
+	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));
+	return true;  // exit command line after this
 }
 
 bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	(void)args;
-	return true;
+	_addLine("clear");
+	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));
+	return true;  // exit command line after this
 }
