@@ -116,9 +116,13 @@ bool	initSettings(std::string const & filename) {
 	s.j("graphics").add<int64_t>("width", 1200).setMin(800).setMax(2560).setDescription("The resolution's width.");
 	s.j("graphics").add<int64_t>("height", 800).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
-	// mouse sensitivity
+	/* mouse sensitivity */
 	s.add<double>("mouse_sensitivity", 0.1).setMin(0.0).setMax(3.0) \
 		.setDescription("Camera mouse sensitivity.");
+
+	/* cheatcode */
+	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
+		s.j("cheatcode").add<uint64_t>("maxLinesShow", 10).setMin(5).setMax(50).setDescription("number of lines to show");
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");
