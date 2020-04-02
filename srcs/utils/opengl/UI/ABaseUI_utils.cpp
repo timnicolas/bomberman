@@ -12,7 +12,7 @@
  * @param color2 the rect secondary color (to make a mix)
  * @param factor the factor of second color on master color
  */
-void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor) {
+void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::vec4 color2, float factor, float z) {
 	_rectShader->use();
 
 	// set color
@@ -22,7 +22,7 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1, glm::ve
 
 	// set model matrix
 	glm::mat4 model = glm::mat4(1.0);
-	model = glm::translate(model, glm::vec3(pos.x, pos.y, 0));
+	model = glm::translate(model, glm::vec3(pos.x, pos.y, z));
 	model = glm::scale(model, glm::vec3(size.x, size.y, 0));
 	_rectShader->setMat4("model", model);
 
