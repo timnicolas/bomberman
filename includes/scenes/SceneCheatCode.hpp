@@ -29,6 +29,7 @@ class SceneCheatCode : public ASceneMenu {
 		virtual bool		update();
 		virtual void		load();
 		virtual void		unload();
+		bool				evalCommand(std::string const & command);
 
 	private:
 		SceneCheatCode();
