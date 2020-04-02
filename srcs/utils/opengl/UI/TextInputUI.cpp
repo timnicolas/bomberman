@@ -8,7 +8,7 @@ TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
   _isAlwaysFocus(false),
   _looseFocusNextTime(false),
   _defText(""),
-  _defTextColor(0.3, 0.3, 0.3, 1),
+  _defTextColor(0.7, 0.7, 0.7, 1),
   _showCursor(false),
   _lastShowCursorMs(0),
   _cursorPos(0)
