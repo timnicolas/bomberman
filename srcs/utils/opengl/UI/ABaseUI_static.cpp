@@ -226,19 +226,21 @@ uint32_t ABaseUI::strWidth(std::string const & txt, float scale) {
  *
  * @param fontName The font
  * @param scale The scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
  * @return uint32_t The width of the text
  */
-uint32_t ABaseUI::strHeight(std::string const & fontName, float scale) {
-	return _textRender->strHeight(fontName, scale);
+uint32_t ABaseUI::strHeight(std::string const & fontName, float scale, bool fullHeight) {
+	return _textRender->strHeight(fontName, scale, fullHeight);
 }
 /**
  * @brief Get height of string with the default font at a given scale
  *
  * @param scale The scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
  * @return uint32_t The width of the text
  */
-uint32_t ABaseUI::strHeight(float scale) {
-	return strHeight(_defFont, scale);
+uint32_t ABaseUI::strHeight(float scale, bool fullHeight) {
+	return strHeight(_defFont, scale, fullHeight);
 }
 
 /**

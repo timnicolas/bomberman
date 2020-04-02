@@ -202,12 +202,15 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
  *
  * @param fontName The name of the font (choose name when load font)
  * @param scale The text scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
  * @return uint32_t The text height
  */
-uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale) {
+uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool fullHeight) {
 	std::string text;  // This if the text to check (L to have only positive heigth, jL to have full height)
-	// text = "jL";
-	text = "L";
+	if (fullHeight)
+		 text = "jL";
+	else
+		text = "L";
 	uint32_t	height = 0;
 	if (font.find(fontName) == font.end()) {
 		logErr("invalid font name " << fontName);

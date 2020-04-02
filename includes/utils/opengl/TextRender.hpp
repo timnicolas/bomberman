@@ -25,9 +25,7 @@ class TextRender {
 		void write(std::string const &fontName, std::string text, GLfloat x = 0, GLfloat y = 0, GLfloat scale = 1, \
 			glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f));
 		uint32_t	strWidth(std::string const &fontName, std::string text, GLfloat scale = 1);
-		uint32_t	strWidth(std::string text, GLfloat scale = 1);
-		uint32_t	strHeight(std::string const &fontName, GLfloat scale = 1);
-		uint32_t	strHeight(GLfloat scale = 1);
+		uint32_t	strHeight(std::string const &fontName, GLfloat scale = 1, bool fullHeight = false);
 
 		void	setWinSize(glm::vec2 winSize);
 
