@@ -55,6 +55,11 @@ bool			SceneMainMenu::init() {
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
+		tmpPos.y -= menuHeight * 1.2;
+		addTextInput(tmpPos, tmpSize, "name")
+			.setTextFont("cheatcode")
+			.setColor(glm::vec4(0.1, 0.1, 0.1, 1));
+
 		tmpSize.x = tmpSize.x * 1.2;
 		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);

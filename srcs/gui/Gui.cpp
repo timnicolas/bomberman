@@ -15,7 +15,8 @@ Gui::Gui(GameInfo &gameInfo)
   _event(new SDL_Event()),
   _context(0),
   _skybox(nullptr),
-  _canMove(false) {}
+  _canMove(false),
+  _exitMenuDisabled(false) {}
 
 Gui::~Gui() {
 	logInfo("exit SDL");
@@ -108,7 +109,7 @@ void Gui::postUpdate(float const dtTime) {
 	(void)dtTime;
 	/* quit if needed */
 	if (Inputs::shouldQuit()
-	|| (Inputs::getKeyUp(InputType::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
+	|| (Inputs::getKeyUp(InputType::CANCEL) && _exitMenuDisabled == false))
 	{
 		bool cheatCodeState = SceneManager::isCheatCodeOpen();
 		if (cheatCodeState) {
@@ -124,6 +125,7 @@ void Gui::postUpdate(float const dtTime) {
 			#endif
 		}
 	}
+	_exitMenuDisabled = false;
 }
 
 // -- init ---------------------------------------------------------------------
@@ -453,6 +455,10 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->getShader().unuse();
 	_skybox->draw(0.5);
 	_skybox->getShader().unuse();
+}
+
+void	Gui::disableExitForThisFrame(bool disable) {
+	_exitMenuDisabled = disable;
 }
 
 // -- statics const ------------------------------------------------------------

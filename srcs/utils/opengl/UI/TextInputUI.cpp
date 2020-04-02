@@ -5,12 +5,15 @@
 
 TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
+  _isAlwaysFocus(false),
+  _looseFocusNextTime(false),
   _defText(""),
   _defTextColor(0.3, 0.3, 0.3, 1),
   _showCursor(false),
   _lastShowCursorMs(0),
   _cursorPos(0)
 {
+	_setFocus(false);
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderSize(0);
 }
@@ -31,6 +34,40 @@ TextInputUI & TextInputUI::operator=(TextInputUI const & rhs) {
  * @brief this is the base update function of UI objects
  */
 void TextInputUI::_update() {
+	/* update focus */
+	if (!_isAlwaysFocus) {
+		if (_looseFocusNextTime) {
+			_looseFocusNextTime = false;
+			_setFocus(false);
+		}
+		if (_hasFocus) {
+			if (!_leftClick && Inputs::getLeftClickDown()) {
+				_setFocus(false);
+			}
+		}
+		else {
+			if (_leftClick) {
+				_setFocus(true);
+			}
+		}
+	}
+
+	/* don't update if has ot focus */
+	if (!_hasFocus) {
+		_showCursor = false;
+		return;
+	}
+
+	_setFocus(false);
+	if (Inputs::getKeyUp(InputType::CANCEL)) {
+		_looseFocusNextTime = true;
+	}
+	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
+		return;  // loose focus
+	}
+	_setFocus(true);
+
+	/* update text */
 	if (Inputs::getTextInputString() != "") {
 		inputInsertText(Inputs::getTextInputString());
 	}
@@ -95,6 +132,17 @@ void TextInputUI::_draw() {
 	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
 }
 
+/**
+ * @brief TO set if the textInput has always focus or only when clicking
+ *
+ * @param isAlwaysFocus Has always focus ?
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::setAlwaysFocus(bool isAlwaysFocus) {
+	_isAlwaysFocus = isAlwaysFocus;
+	_setFocus(isAlwaysFocus);
+	return *this;
+}
 /**
  * @brief Set default text in TextInput (help text when input is empty)
  *
@@ -200,4 +248,11 @@ uint32_t TextInputUI::_getCursorOffset() const {
 		return 0;
 	return _textRender->strWidth(_textFont, _text.substr(0, _cursorPos), _textScale)
 		- (_textRender->strWidth(_textFont, "|", _textScale) / 2);
+}
+
+void TextInputUI::_setFocus(bool focus) {
+	if (focus == _hasFocus)
+		return;
+	_hasFocus = focus;
+	Inputs::setTextInputMode(_hasFocus);
 }

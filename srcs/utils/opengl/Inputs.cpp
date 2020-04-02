@@ -83,6 +83,11 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		_controls.j("keys").i("cheat_code"),
 	};
 	_controls.saveToFile(Inputs::_conf_file);
+
+	_textInputIgnore = {  // list of keys that can be used out of textInput
+		SDL_SCANCODE_RETURN,
+		SDL_SCANCODE_TAB,
+	};
 }
 
 Inputs::~Inputs() {}
@@ -108,6 +113,8 @@ bool				Inputs::getKey(InputType::Enum type) {
 }
 
 bool				Inputs::_getKey(InputType::Enum type) const {
+	if (_ignoreInputType(type))
+		return false;
 	return _key_status[static_cast<int>(type)];
 }
 
@@ -122,6 +129,8 @@ bool				Inputs::getKeyUp(InputType::Enum type) {
 }
 
 bool				Inputs::_getKeyUp(InputType::Enum type) const {
+	if (_ignoreInputType(type))
+		return false;
 	int		index = static_cast<int>(type);
 	return (!_key_status[index] && _key_previous_status[index]);
 }
@@ -137,6 +146,8 @@ bool				Inputs::getKeyDown(InputType::Enum type) {
 }
 
 bool				Inputs::_getKeyDown(InputType::Enum type) const {
+	if (_ignoreInputType(type))
+		return false;
 	int		index = static_cast<int>(type);
 	return (_key_status[index] && !_key_previous_status[index]);
 }
@@ -204,6 +215,8 @@ bool				Inputs::getKeyByScancode(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancode(scancode);
 }
 bool				Inputs::_getKeyByScancode(SDL_Scancode scancode) const {
+	if (_ingoreScancode(scancode))
+		return false;
 	return std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
 }
 
@@ -218,6 +231,8 @@ bool				Inputs::getKeyByScancodeUp(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancodeUp(scancode);
 }
 bool				Inputs::_getKeyByScancodeUp(SDL_Scancode scancode) const {
+	if (_ingoreScancode(scancode))
+		return false;
 	auto before = std::find(_scancodes_previous.begin(), _scancodes_previous.end(), scancode) != _scancodes_previous.end();
 	auto now = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
 	return !now && before;
@@ -234,6 +249,8 @@ bool				Inputs::getKeyByScancodeDown(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancodeDown(scancode);
 }
 bool				Inputs::_getKeyByScancodeDown(SDL_Scancode scancode) const {
+	if (_ingoreScancode(scancode))
+		return false;
 	auto before = std::find(_scancodes_previous.begin(), _scancodes_previous.end(), scancode) != _scancodes_previous.end();
 	auto now = std::find(_scancodes_pressed.begin(), _scancodes_pressed.end(), scancode) != _scancodes_pressed.end();
 	return now && !before;
@@ -507,8 +524,6 @@ void				Inputs::_update() {
 			break;
 		}
 	}
-	// if (_currentKeycode != NO_KEYCODE)
-	// 	std::cout << SDL_GetKeyName(_currentKeycode) << std::flush;
 }
 
 bool									Inputs::isConfiguring() {
@@ -552,4 +567,33 @@ std::string				Inputs::getTextInputString() {
 }
 std::string				Inputs::_getTextInputString() const {
 	return _currentText;
+}
+
+/**
+ * @brief Know if we ignore the state of the key (for example in TextInput mode)
+ *
+ * @param type The InputType
+ * @return true If we ignore the key
+ */
+bool Inputs::_ignoreInputType(InputType::Enum type) const {
+	if (!_isTextInputMode)
+		return false;
+	for (auto && it : _input_key_map) {
+		if (it.second == type)
+			return _ingoreScancode(it.first);
+	}
+	return true;
+}
+/**
+ * @brief Know if we ignore the state of the key (for example in TextInput mode)
+ *
+ * @param scan The scancode
+ * @return true If we ignore the key
+ */
+bool Inputs::_ingoreScancode(SDL_Scancode scan) const {
+	if (!_isTextInputMode)
+		return false;
+	if (std::find(_textInputIgnore.begin(), _textInputIgnore.end(), scan) != _textInputIgnore.end())
+		return false;
+	return true;
 }
