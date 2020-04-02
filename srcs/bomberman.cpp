@@ -44,7 +44,8 @@ bool	checkPrgm() {
 
 	/* list of required files */
 	std::vector<std::string> requiredFiles = {
-		s.j("font").s("file"),
+		s.j("fonts").j("base").s("file"),
+		s.j("fonts").j("cheatcode").s("file"),
 	};
 
 	for (auto && it : requiredDirs) {
@@ -78,11 +79,17 @@ bool	initSettings(std::string const & filename) {
 		s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
 
 	/* font */
-	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/snakebold.ttf")
-			.setDescription("this is the main font");
-		s.j("font").add<uint64_t>("size", 20).setMin(10).setMax(50)
-			.setDescription("default size for the text");
+	s.add<SettingsJson>("fonts");
+		s.j("fonts").add<SettingsJson>("base");
+			s.j("fonts").j("base").add<std::string>("file", "bomberman-assets/fonts/snakebold.ttf")
+				.setDescription("this is the main font");
+			s.j("fonts").j("base").add<uint64_t>("size", 20).setMin(5).setMax(50)
+				.setDescription("default size for the text");
+		s.j("fonts").add<SettingsJson>("cheatcode");
+			s.j("fonts").j("cheatcode").add<std::string>("file", "bomberman-assets/fonts/Roboto-Regular.ttf")
+				.setDescription("this is the font for cheatcode");
+			s.j("fonts").j("cheatcode").add<uint64_t>("size", 7).setMin(5).setMax(50)
+				.setDescription("default size for the text (cheatcode)");
 
 	/* colors */
 	s.add<SettingsJson>("colors");
@@ -124,9 +131,13 @@ bool	initSettings(std::string const & filename) {
 	s.j("graphics").add<int64_t>("width", 1200).setMin(800).setMax(2560).setDescription("The resolution's width.");
 	s.j("graphics").add<int64_t>("height", 800).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
-	// mouse sensitivity
+	/* mouse sensitivity */
 	s.add<double>("mouse_sensitivity", 0.1).setMin(0.0).setMax(3.0) \
 		.setDescription("Camera mouse sensitivity.");
+
+	/* cheatcode */
+	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
+		s.j("cheatcode").add<uint64_t>("maxLinesShow", 10).setMin(5).setMax(50).setDescription("number of lines to show");
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");

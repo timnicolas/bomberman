@@ -15,7 +15,8 @@ Gui::Gui(GameInfo &gameInfo)
   _event(new SDL_Event()),
   _context(0),
   _skybox(nullptr),
-  _canMove(false) {}
+  _canMove(false),
+  _exitMenuDisabled(false) {}
 
 Gui::~Gui() {
 	logInfo("exit SDL");
@@ -60,6 +61,11 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
+	/* open cheat code */
+	if (Inputs::getKeyUp(InputType::CHEAT_CODE)) {
+		SceneManager::openCheatCode(true);
+	}
+
 	// -- camera movement ------------------------------------------------------
 	// toggle camera movement
 	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
@@ -103,16 +109,23 @@ void Gui::postUpdate(float const dtTime) {
 	(void)dtTime;
 	/* quit if needed */
 	if (Inputs::shouldQuit()
-	|| (Inputs::getKeyUp(InputType::CANCEL) && SceneManager::isSceneChangedInCurFrame() == false))
+	|| (Inputs::getKeyUp(InputType::CANCEL) && _exitMenuDisabled == false))
 	{
-		#if ASK_BEFORE_QUIT
-			if (SceneManager::getSceneName() != SceneNames::EXIT) {
-				SceneManager::loadScene(SceneNames::EXIT);
-			}
-		#else
-			SceneManager::quit();
-		#endif
+		bool cheatCodeState = SceneManager::isCheatCodeOpen();
+		if (cheatCodeState) {
+			SceneManager::openCheatCode(false);  // force quit cheat code
+		}
+		if (Inputs::shouldQuit() || cheatCodeState == false) {
+			#if ASK_BEFORE_QUIT
+				if (SceneManager::getSceneName() != SceneNames::EXIT) {
+					SceneManager::loadScene(SceneNames::EXIT);
+				}
+			#else
+				SceneManager::quit();
+			#endif
+		}
 	}
+	_exitMenuDisabled = false;
 }
 
 // -- init ---------------------------------------------------------------------
@@ -147,8 +160,9 @@ bool	Gui::init() {
 
 	/* init UI interface */
 	try {
-		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
-		ABaseUI::loadFont("title", s.j("font").s("file"), s.j("font").u("size") * 2);
+		ABaseUI::init(gameInfo.windowSize, s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size"));
+		ABaseUI::loadFont("title", s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size") * 2);
+		ABaseUI::loadFont("cheatcode", s.j("fonts").j("cheatcode").s("file"), s.j("fonts").j("cheatcode").u("size") * 3);
 		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);
 		ABaseUI::showHelp(DEBUG_SHOW_HELP);
 	}
@@ -452,6 +466,10 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->getShader().unuse();
 	_skybox->draw(0.5);
 	_skybox->getShader().unuse();
+}
+
+void	Gui::disableExitForThisFrame(bool disable) {
+	_exitMenuDisabled = disable;
 }
 
 // -- statics const ------------------------------------------------------------

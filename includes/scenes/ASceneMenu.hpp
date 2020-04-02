@@ -15,6 +15,7 @@
 #include "RectUI.hpp"
 #include "ImageUI.hpp"
 #include "ScrollbarUI.hpp"
+#include "TextInputUI.hpp"
 
 #define VOID_COLOR glm::vec4 {-1 , -1, -1, -1}
 
@@ -53,6 +54,7 @@ class ASceneMenu : public AScene {
 			glm::vec4 borderColor = VOID_COLOR);
 		ImageUI &			addImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
 		ScrollbarUI &		addScrollbar(glm::vec2 pos, glm::vec2 size);
+		TextInputUI &		addTextInput(glm::vec2 pos, glm::vec2 size, std::string const & defText);
 
 		/* getter */
 		ABaseUI &			getUIElement(uint32_t id);

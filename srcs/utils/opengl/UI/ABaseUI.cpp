@@ -5,6 +5,7 @@
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
   _pos(pos),
+  _z(0),
   _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(0.0, 0.0, 0.0, 1.0),
@@ -12,7 +13,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _borderSize(2.0),
   _mouseHoverColor(0.0, 0.0, 0.0, 0.2),
   _mouseClickColor(0.0, 0.0, 0.0, 0.5),
-  _text("default text"),
+  _text(""),
   _textColor(0.0, 0.0, 0.0, 1.0),
   _textFont(_defFont),
   _textScale(1.0),
@@ -166,16 +167,16 @@ void ABaseUI::draw() {
 
 			/* get text informations */
 			uint32_t width = _textRender->strWidth(_helpFont, helpText, _helpTextScale);
-			uint32_t height = _textRender->strHeight(_helpFont, helpText, _helpTextScale);
+			uint32_t height = _textRender->strHeight(_helpFont, _helpTextScale);
 
 			tmpSize = glm::vec2(width + _helpPadding, height + _helpPadding);
 			tmpPos.x = getRealPos().x + _size.x - tmpSize.x - _borderSize - _helpPadding;
 			tmpPos.y = getRealPos().y + _borderSize + _helpPadding;
 
-			_drawText(tmpPos, tmpSize, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
+			_drawText(tmpPos, tmpSize, _z, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
 
-			_drawBorderRect(tmpPos, tmpSize, _helpBorderSize, _borderColor);
-			_drawRect(tmpPos, tmpSize, _color);
+			_drawBorderRect(tmpPos, tmpSize, _z, _helpBorderSize, _borderColor);
+			_drawRect(tmpPos, tmpSize, _z, _color);
 		}
 	}
 
@@ -300,12 +301,13 @@ bool	ABaseUI::isTotallyOutOfMaster() const {
 
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
+ABaseUI &	ABaseUI::setZ(float z) { _z = z; return *this; }
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
 ABaseUI &	ABaseUI::setCalculatedSize() {
 	uint32_t width = _textRender->strWidth(_textFont, _text, _textScale);
-	uint32_t height = _textRender->strHeight(_textFont, _text, _textScale);
+	uint32_t height = _textRender->strHeight(_textFont, _textScale);
 	_size = glm::vec2(width + _textPadding * 2, height + _textPadding * 2);;
 	return *this;
 }
@@ -351,6 +353,7 @@ Shader &			ABaseUI::getRectShader() { return *_rectShader; }
 uint32_t			ABaseUI::getTextWidth() const {
 	return _textRender->strWidth(_textFont, _text, _textScale) + _textPadding * 2;
 }
+std::string			ABaseUI::getText() const { return _text; }
 
 // -- exception ----------------------------------------------------------------
 ABaseUI::UIException::UIException()

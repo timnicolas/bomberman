@@ -252,6 +252,8 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	tmp_size.x = (keyMenuWidth - keyMenuPadding) / 2;
 	tmp_size.y = keyMenuHeight;
 	for (auto i = 0; i < Inputs::nb_input; i++) {
+		if (Inputs::input_type_name[i] == "cancel")
+			continue;
 		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
 		tmp_pos.x = 0;
 		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :")
