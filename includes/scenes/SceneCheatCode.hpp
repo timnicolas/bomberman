@@ -33,6 +33,11 @@ class SceneCheatCode : public ASceneMenu {
 
 	private:
 		SceneCheatCode();
+		/* for parser */
+		std::vector<std::string>	_splitCommand(std::string const & command);
+		bool						_isSpace(char c) const;
+
+		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
 		void				_removeLastLine();
 
