@@ -136,7 +136,7 @@ class ABaseUI {
 		/* draw base function */
 		// rect
 		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
-			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
+			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1, float z = 0);
 		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color);
 		// text
 		void			_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,

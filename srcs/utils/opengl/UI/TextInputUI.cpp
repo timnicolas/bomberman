@@ -132,7 +132,8 @@ void TextInputUI::_draw() {
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
-	_drawRect(tmpPos, tmpSize, _color);
+	_color = glm::vec4(0, 0, 0, 0.5);
+	_drawRect(tmpPos, tmpSize, _color, glm::vec4(1.0, 1.0, 1.0, 1.0), 1, 1);
 
 	// draw border
 	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);

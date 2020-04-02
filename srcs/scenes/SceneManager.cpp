@@ -206,13 +206,15 @@ bool SceneManager::_draw() {
 	/* draw */
 	_gui->preDraw();
 	// draw the scene
+	if (_sceneMap[_scene]->draw() == false) {
+		return false;
+	}
+
 	if (_isInCheatCode) {
 		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
 			return false;
 	}
-	if (_sceneMap[_scene]->draw() == false) {
-		return false;
-	}
+
 	_gui->postDraw();
 
 	return true;
