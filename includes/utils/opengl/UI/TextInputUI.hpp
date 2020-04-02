@@ -25,6 +25,7 @@ class TextInputUI : public ABaseUI {
 		TextInputUI &		inputDelete();
 		TextInputUI &		inputSuppr();
 		TextInputUI &		inputReset();
+		TextInputUI &		setFocus(bool focus);
 		virtual ABaseUI &	setText(std::string const & text);
 
 	protected:
@@ -33,7 +34,6 @@ class TextInputUI : public ABaseUI {
 		TextInputUI();
 
 		uint32_t		_getCursorOffset() const;
-		void			_setFocus(bool focus);
 
 		/* general */
 		bool						_isAlwaysFocus;
