@@ -2,7 +2,8 @@
 #include "SceneGame.hpp"
 
 SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
-: ASceneMenu(gui, dtTime)
+: ASceneMenu(gui, dtTime),
+  isCmdLnEnabled(true)
 {
 	_commandsList = {
 		{"help", {
@@ -74,10 +75,18 @@ bool			SceneCheatCode::init() {
 bool	SceneCheatCode::update() {
 	ASceneMenu::update();
 
-	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_RETURN)) {
-		if (evalCommand(_commandLine->getText()))
-			return false;  // close command line
+	if (isCmdLnEnabled) {
+		_commandLine->setFocus(true);
+		if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_RETURN)) {
+			if (evalCommand(_commandLine->getText()))
+				return false;  // close command line
+		}
 	}
+	else {
+		_commandLine->setFocus(false);
+	}
+
+	_commandLine->setEnabled(isCmdLnEnabled);
 
 	return true;
 }
