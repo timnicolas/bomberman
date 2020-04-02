@@ -3,7 +3,20 @@
 
 SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
-{}
+{
+	_commandsList = {
+		{"help", {
+			"[command]",
+			"get general help or help on a command",
+			&SceneCheatCode::_execHelp,
+		}},
+		{"clear", {
+			"",
+			"clear the history",
+			&SceneCheatCode::_execClear,
+		}},
+	};
+}
 
 SceneCheatCode::SceneCheatCode(SceneCheatCode const & src)
 : ASceneMenu(src)
@@ -104,8 +117,13 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 				_commandLine->inputReset();
 			}
 			else {  // if there is a command
-				_addLine("invalid command: " + splittedCmd[0], glm::vec4(1, 0, 0, 1));
-				ret = false;
+				if (_isValidCommand(splittedCmd[0])) {
+					ret = (*this.*_commandsList[splittedCmd[0]].exec)(splittedCmd);
+				}
+				else {
+					_addLine("invalid command: " + splittedCmd[0], glm::vec4(1, 0, 0, 1));
+					ret = false;
+				}
 				_commandLine->setText(CHEATCODE_DEF_TXT);
 			}
 		}
@@ -118,7 +136,7 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 	return ret;
 }
 
-std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) {
+std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) const {
 	std::vector<std::string> splitted;
 	if (command.size() == 0)
 		return splitted;
@@ -148,6 +166,18 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 
 bool SceneCheatCode::_isSpace(char c) const {
 	if (c == ' ' || c == '\t')
+		return true;
+	return false;
+}
+
+/**
+ * @brief Check if a command name is valid
+ *
+ * @param name The command name
+ * @return true If it's a valid name
+ */
+bool SceneCheatCode::_isValidCommand(std::string const & name) const {
+	if (_commandsList.find(name) != _commandsList.end())
 		return true;
 	return false;
 }
