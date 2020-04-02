@@ -13,7 +13,7 @@ TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
   _lastShowCursorMs(0),
   _cursorPos(0)
 {
-	_setFocus(false);
+	setFocus(false);
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 	setBorderSize(0);
 }
@@ -38,21 +38,21 @@ void TextInputUI::_update() {
 	if (!_isAlwaysFocus) {
 		if (_looseFocusNextTime) {
 			_looseFocusNextTime = false;
-			_setFocus(false);
+			setFocus(false);
 		}
 		if (_hasFocus) {
 			if (!_leftClick && Inputs::getLeftClickDown()) {
-				_setFocus(false);
+				setFocus(false);
 			}
 		}
 		else {
 			if (_leftClick) {
-				_setFocus(true);
+				setFocus(true);
 			}
 		}
 	}
-	else if (!_hasFocus) {
-		_setFocus(true);
+	else {
+		setFocus(true);
 	}
 
 	/* don't update if has ot focus */
@@ -61,7 +61,7 @@ void TextInputUI::_update() {
 		return;
 	}
 
-	_setFocus(false);
+	setFocus(false);
 	if (Inputs::getKeyUp(InputType::CANCEL)) {
 		if (_isAlwaysFocus)  // loose focus for a frame only
 			return;
@@ -70,7 +70,7 @@ void TextInputUI::_update() {
 	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 		return;  // loose focus (for one frame if _isAlwaysFocus)
 	}
-	_setFocus(true);
+	setFocus(true);
 
 	/* update text */
 	if (Inputs::getTextInputString() != "") {
@@ -145,7 +145,6 @@ void TextInputUI::_draw() {
  */
 TextInputUI & TextInputUI::setAlwaysFocus(bool isAlwaysFocus) {
 	_isAlwaysFocus = isAlwaysFocus;
-	_setFocus(isAlwaysFocus);
 	return *this;
 }
 /**
@@ -236,6 +235,20 @@ TextInputUI & TextInputUI::inputReset() {
 	_cursorPos = 0;
 	return *this;
 }
+
+/**
+ * @brief Enable/disable focus for TextInput
+ *
+ * @param focus Enable / disable
+ * @return TextInputUI& A reference to the UI object
+ */
+TextInputUI & TextInputUI::setFocus(bool focus) {
+	if (focus == _hasFocus)
+		return *this;
+	_hasFocus = focus;
+	Inputs::setTextInputMode(_hasFocus);
+	return *this;
+}
 /**
  * @brief Redefinition of ABaseUI::setText function
  *
@@ -253,11 +266,4 @@ uint32_t TextInputUI::_getCursorOffset() const {
 		return 0;
 	return _textRender->strWidth(_textFont, _text.substr(0, _cursorPos), _textScale)
 		- (_textRender->strWidth(_textFont, "|", _textScale) / 2);
-}
-
-void TextInputUI::_setFocus(bool focus) {
-	if (focus == _hasFocus)
-		return;
-	_hasFocus = focus;
-	Inputs::setTextInputMode(_hasFocus);
 }

@@ -70,6 +70,7 @@ bool	SceneCheatCode::update() {
  */
 void SceneCheatCode::load() {
 	ASceneMenu::load();
+	commandLine->setFocus(true);
 }
 
 /**
@@ -78,4 +79,5 @@ void SceneCheatCode::load() {
 void SceneCheatCode::unload() {
 	ASceneMenu::unload();
 	commandLine->setText("/");
+	commandLine->setFocus(false);
 }
