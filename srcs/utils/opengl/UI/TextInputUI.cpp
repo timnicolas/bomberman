@@ -51,6 +51,9 @@ void TextInputUI::_update() {
 			}
 		}
 	}
+	else if (!_hasFocus) {
+		_setFocus(true);
+	}
 
 	/* don't update if has ot focus */
 	if (!_hasFocus) {
@@ -60,10 +63,12 @@ void TextInputUI::_update() {
 
 	_setFocus(false);
 	if (Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_isAlwaysFocus)  // loose focus for a frame only
+			return;
 		_looseFocusNextTime = true;
 	}
 	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
-		return;  // loose focus
+		return;  // loose focus (for one frame if _isAlwaysFocus)
 	}
 	_setFocus(true);
 
