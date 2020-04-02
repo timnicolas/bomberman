@@ -15,6 +15,7 @@
 #include "SceneVictory.hpp"
 #include "SceneExit.hpp"
 #include "SceneSettings.hpp"
+#include "SceneLoadGame.hpp"
 #include "SceneCheatCode.hpp"
 
 SceneManager::SceneManager()
@@ -91,6 +92,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::VICTORY, new SceneVictory(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::EXIT, new SceneExit(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LOADGAME, new SceneLoadGame(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::CHEAT_CODE, new SceneCheatCode(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
@@ -287,7 +289,7 @@ bool SceneManager::isSceneChangedInCurFrame() {
 	return SceneManager::get()._isSceneChangedInCurFrame();
 }
 bool SceneManager::_isSceneChangedInCurFrame() const {
-	return _sceneLoadedCurrentFrame;;
+	return _sceneLoadedCurrentFrame;
 }
 
 /**
