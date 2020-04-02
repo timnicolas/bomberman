@@ -31,6 +31,8 @@ class SceneCheatCode : public ASceneMenu {
 		virtual void		unload();
 		bool				evalCommand(std::string const & command);
 
+		bool				isCmdLnEnabled;
+
 	private:
 		SceneCheatCode();
 		/* for parser */
