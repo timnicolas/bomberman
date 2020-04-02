@@ -185,6 +185,8 @@ bool SceneManager::_update() {
 			return false;
 		}
 	}
+	if (isSceneChangedInCurFrame())
+		_gui->disableExitForThisFrame();
 	_gui->postUpdate(_dtTime);
 	return true;
 }

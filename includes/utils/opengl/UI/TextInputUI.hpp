@@ -17,6 +17,7 @@ class TextInputUI : public ABaseUI {
 
 		TextInputUI & operator=(TextInputUI const & rhs);
 
+		TextInputUI &		setAlwaysFocus(bool isAlwaysFocus);
 		TextInputUI &		setDefText(std::string const & defText);
 		TextInputUI &		setDefTextColor(glm::vec4 color);
 		TextInputUI &		inputInsertText(std::string const & txt);
@@ -32,6 +33,12 @@ class TextInputUI : public ABaseUI {
 		TextInputUI();
 
 		uint32_t		_getCursorOffset() const;
+		void			_setFocus(bool focus);
+
+		/* general */
+		bool						_isAlwaysFocus;
+		bool						_hasFocus;
+		bool						_looseFocusNextTime;
 
 		/* text */
 		std::string					_defText;

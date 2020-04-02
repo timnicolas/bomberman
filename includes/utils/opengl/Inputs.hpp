@@ -105,6 +105,8 @@ private:
 	void									_setTextInputMode(bool enable);
 	SDL_Keycode								_getTextInputKeycode() const;
 	std::string								_getTextInputString() const;
+	bool									_ingoreScancode(SDL_Scancode scan) const;
+	bool									_ignoreInputType(InputType::Enum type) const;
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;
