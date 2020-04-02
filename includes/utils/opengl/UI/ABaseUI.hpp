@@ -47,6 +47,10 @@ class ABaseUI {
 		static void staticUpdate();
 		static void	setWinSize(glm::vec2 winSize);
 		static void loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize);
+		static uint32_t strWidth(std::string const & fontName, std::string const & txt, float scale = 1);
+		static uint32_t strWidth(std::string const & txt, float scale = 1);
+		static uint32_t strHeight(std::string const & fontName, float scale = 1);
+		static uint32_t strHeight(float scale = 1);
 		/* help */
 		static void showHelp(bool show);
 		static void setHelpFont(std::string fontName);
@@ -117,6 +121,7 @@ class ABaseUI {
 		virtual glm::vec2 &			getSize();
 		virtual glm::vec2 const &	getSize() const;
 		virtual	uint32_t			getTextWidth() const;
+		virtual std::string			getText() const;
 		static Shader &				getRectShader();
 
 		/* Exceptions */

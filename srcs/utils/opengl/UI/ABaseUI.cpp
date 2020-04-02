@@ -351,6 +351,7 @@ Shader &			ABaseUI::getRectShader() { return *_rectShader; }
 uint32_t			ABaseUI::getTextWidth() const {
 	return _textRender->strWidth(_textFont, _text, _textScale) + _textPadding * 2;
 }
+std::string			ABaseUI::getText() const { return _text; }
 
 // -- exception ----------------------------------------------------------------
 ABaseUI::UIException::UIException()
