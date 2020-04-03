@@ -284,6 +284,10 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 					break;
 			}
 			else {
+				if (command[start + size] == '"' && (size == 0 || command[start + size - 1] != '\\')) {
+					this->logerr("invalid quote matching: to in sert quote in a word, use \\\"", false, true);
+					return std::vector<std::string>();
+				}
 				if (_isSpace(command[start + size]))
 					break;
 			}
