@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <regex>
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
 #include "FileUtils.hpp"
@@ -204,7 +205,6 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
 				ret = false;  // keep command line open
-				_commandLine->inputReset();
 			}
 			else {  // if there is a command
 				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
@@ -248,7 +248,13 @@ void SceneCheatCode::clearAllLn() {
 	}
 }
 
-std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) const {
+/**
+ * @brief Split a command in separate words (you can use quote `"`)
+ *
+ * @param command The command to split
+ * @return std::vector<std::string> a vector with all strings
+ */
+std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) {
 	std::vector<std::string> splitted;
 	if (command.size() == 0)
 		return splitted;
@@ -259,18 +265,52 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 	if (command[0] == '/')
 		start = 1;
 
+	bool isQuoted;
 	while (start + size < command.size()) {
+		/* get a word */
+		isQuoted = false;
+
+		// remove spaces
 		while (start + size < command.size() && _isSpace(command[start])) {
 			start += 1;
 		}
-		while (start + size < command.size() && !_isSpace(command[start + size])) {
+		if (command[start] == '"') {
+			isQuoted = true;
+			start++;
+		}
+		while (start + size < command.size()) {
+			if (isQuoted) {
+				if (command[start + size] == '"' && (size == 0 || command[start + size - 1] != '\\'))
+					break;
+			}
+			else {
+				if (_isSpace(command[start + size]))
+					break;
+			}
 			size += 1;
 		}
 		if (size > 0) {
-			splitted.push_back(command.substr(start, size));
-			start += size;
+			if (isQuoted && command[start + size] != '"') {
+				this->logerr("invalid quote matching", false, true);
+				return std::vector<std::string>();
+			}
+			std::string word = command.substr(start, size);
+			// "\\" to "\"
+			word = std::regex_replace(word, std::regex("\\\\\\\\"), "\\");
+			// \" to "
+			word = std::regex_replace(word, std::regex("\\\\\""), "\"");
+			// \t to tab
+			word = std::regex_replace(word, std::regex("\\\\t"), CHEATCODE_TAB);
+			// "\n" to '\n'
+			word = std::regex_replace(word, std::regex("\\\\n"), "\n");
+			splitted.push_back(word);
+			start += size + (isQuoted ? 1 : 0);
 		}
 		size = 0;
+	}
+
+	if (splitted.empty()) {
+		_commandLine->inputReset();
 	}
 
 	return splitted;

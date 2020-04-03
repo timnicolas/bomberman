@@ -68,7 +68,7 @@ class SceneCheatCode : public ASceneMenu {
 	private:
 		SceneCheatCode();
 		/* for parser */
-		std::vector<std::string>	_splitCommand(std::string const & command) const;
+		std::vector<std::string>	_splitCommand(std::string const & command);
 		bool						_isSpace(char c) const;
 		bool						_isValidCommand(std::string const & name) const;
 
@@ -94,13 +94,13 @@ class SceneCheatCode : public ASceneMenu {
 		};
 
 		/* general variables */
-		TextInputUI *			_commandLine;
-		std::deque<TextLine>	_textLines;
+		TextInputUI *					_commandLine;
+		std::deque<TextLine>			_textLines;
 
 		/* history */
-		std::deque<std::string>	_cmdHistory;  // first elem is last in history
-		std::string				_historySavedLine;
-		int						_historyActID;
+		std::deque<std::string>			_cmdHistory;  // first elem is last in history
+		std::string						_historySavedLine;
+		int								_historyActID;
 
 		/* list of commands */
 		std::map<std::string, Command>	_commandsList;
