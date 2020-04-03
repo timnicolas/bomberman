@@ -80,6 +80,16 @@ void TextInputUI::_update() {
 	{
 		inputMoveCursor(_text.size() - _cursorPos);  // cursor to last position
 	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_V))) {  // ctrl v
+		inputInsertText(SDL_GetClipboardText());
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_C))) {  // ctrl c
+		if (_text.size() > 0) {
+			SDL_SetClipboardText(_text.c_str());
+		}
+	}
 	setFocus(true);
 
 	/* update text */
