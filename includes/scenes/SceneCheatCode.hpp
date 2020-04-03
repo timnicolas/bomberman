@@ -4,11 +4,13 @@
 #include "ASceneMenu.hpp"
 #include "TextInputUI.hpp"
 
-#define CHEATCODE_FONT			"cheatcode"
-#define CHEATCODE_FONT_SCALE	1
-#define CHEATCODE_COLOR			glm::vec4(0, 0, 0, 0.5)
-#define CHEATCODE_TEXT_COlOR	glm::vec4(1, 1, 1, 1)
-#define CHEATCODE_DEF_TXT		"/"
+#define CHEATCODE_FONT				"cheatcode"
+#define CHEATCODE_FONT_SCALE		1
+#define CHEATCODE_COLOR				glm::vec4(0, 0, 0, 0.5)
+#define CHEATCODE_TEXT_COlOR		glm::vec4(1, 1, 1, 1)
+#define CHEATCODE_TEXT_ERR_COlOR	glm::vec4(1, 0, 0, 1)
+#define CHEATCODE_DEF_TXT			"/"
+#define CHEATCODE_TAB				"    "
 
 /**
  * @brief this is the cheat code command line

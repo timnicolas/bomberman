@@ -7,7 +7,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 {
 	_commandsList = {
 		{"help", {
-			"[command]",
+			"[command, ...]",
 			"get general help or help on a command",
 			&SceneCheatCode::_execHelp,
 		}},
@@ -77,7 +77,7 @@ bool	SceneCheatCode::update() {
 
 	if (isCmdLnEnabled) {
 		_commandLine->setFocus(true);
-		if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_RETURN)) {
+		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 			if (evalCommand(_commandLine->getText()))
 				return false;  // close command line
 		}
@@ -87,6 +87,15 @@ bool	SceneCheatCode::update() {
 	}
 
 	_commandLine->setEnabled(isCmdLnEnabled);
+
+	if (isCmdLnEnabled) {
+		_commandLine->setFocus(false);
+		if (Inputs::getKeyUp(InputType::CANCEL)) {
+			_gui->disableExitForThisFrame(true);
+			return false;
+		}
+		_commandLine->setFocus(true);
+	}
 
 	return true;
 }
@@ -136,7 +145,7 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 					}
 				}
 				else {  // if the command is invalid
-					_addLine("invalid command: " + splittedCmd[0], glm::vec4(1, 0, 0, 1));
+					_addLine("invalid command: " + splittedCmd[0], CHEATCODE_TEXT_ERR_COlOR);
 					ret = false;  // keep command line open
 					_commandLine->setText(CHEATCODE_DEF_TXT);
 				}
