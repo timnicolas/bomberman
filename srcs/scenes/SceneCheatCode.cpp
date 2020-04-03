@@ -28,6 +28,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Log a message. Type: debug, info, success, warn, err, fatal",
 			&SceneCheatCode::_execLog,
 		}},
+		{"tp", {
+			"<x> <y>",
+			"Teleport to a given position (if possible)",
+			&SceneCheatCode::_execTp,
+		}},
 	};
 }
 
@@ -178,8 +183,6 @@ void SceneCheatCode::load() {
 	_historySavedLine = "";
 	_historyActID = -1;
 	_commandLine->setFocus(true);
-	if (_commandLine->getText().size() == 0)
-		_commandLine->setText(CHEATCODE_DEF_TXT);
 }
 
 /**
@@ -198,36 +201,29 @@ void SceneCheatCode::unload() {
  * @return false If we need to keep the command line open (command fail for example)
  */
 bool SceneCheatCode::evalCommand(std::string const & command) {
-	bool ret = true;
+	CheatcodeAction::Enum ret = CheatcodeAction::KEEP_OPEN;
 
 	if (command.size() > 0) {
 		if (command[0] == '/') {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
-				ret = false;  // keep command line open
+				ret = CheatcodeAction::KEEP_OPEN_DEF_TXT;  // keep command line open
 			}
 			else {  // if there is a command
 				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
 					ret = (*this.*_commandsList[splittedCmd[0]].exec)(splittedCmd);
-					if (ret) {  // if command line close after command
-						_commandLine->inputReset();
-					}
-					else {  // if command line keep open
-						_commandLine->setText(CHEATCODE_DEF_TXT);
-					}
 				}
 				else {  // if the command is invalid
-					this->logerr("invalid command: " + splittedCmd[0], false, true);
-					ret = false;  // keep command line open
-					_commandLine->setText(CHEATCODE_DEF_TXT);
+					this->logerr("Invalid command: " + splittedCmd[0] + " (try /help)", false, true);
+					ret = CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
 				}
 			}
 		}
 		else {  // not a command
 			_addLine(command);
-			ret = false;  // keep command line open
-			_commandLine->inputReset();
+			ret = CheatcodeAction::KEEP_OPEN_RESET;  // keep command line open
 		}
+
 		/* add in history */
 		if (command != "/" && command[0] != ' ') {  // don't save `/` only or line that start with space
 			_cmdHistory.push_back(command);
@@ -236,7 +232,33 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 			}
 		}
 	}
-	return ret;
+
+	switch (ret) {
+		case CheatcodeAction::KEEP_OPEN:
+			break;
+		case CheatcodeAction::KEEP_OPEN_RESET:
+			_commandLine->inputReset();
+			break;
+		case CheatcodeAction::KEEP_OPEN_DEF_TXT:
+			_commandLine->setText(CHEATCODE_DEF_TXT);
+			break;
+		case CheatcodeAction::KEEP_OPEN_KEEP_TXT:
+			break;
+		case CheatcodeAction::CLOSE:
+			break;
+		case CheatcodeAction::CLOSE_RESET:
+			_commandLine->inputReset();
+			break;
+		case CheatcodeAction::CLOSE_DEF_TXT:
+			_commandLine->setText(CHEATCODE_DEF_TXT);
+			break;
+		case CheatcodeAction::CLOSE_KEEP_TXT:
+			break;
+	}
+
+	if (ret >= CheatcodeAction::CLOSE)
+		return true;
+	return false;
 }
 
 /**
@@ -246,6 +268,24 @@ void SceneCheatCode::clearAllLn() {
 	while (_textLines.size() > 0) {
 		_removeLastLine();
 	}
+}
+
+/**
+ * @brief Set the command line text
+ *
+ * @param txt The text
+ */
+void SceneCheatCode::setText(std::string const & txt) {
+	_commandLine->setText(txt);
+}
+
+/**
+ * @brief Get the text in command line
+ *
+ * @return std::string The text in command line
+ */
+std::string SceneCheatCode::getText() const {
+	return _commandLine->getText();
 }
 
 /**
@@ -336,6 +376,21 @@ bool SceneCheatCode::_isValidCommand(std::string const & name) const {
 	if (_commandsList.find(name) != _commandsList.end())
 		return true;
 	return false;
+}
+
+int64_t SceneCheatCode::_toInt(std::string const & arg, bool & error) const {
+	error = false;
+	if (std::regex_match(arg, REGEX_INT) == false) {
+		error = true;
+		return 0;
+	}
+	int64_t val = static_cast<int64_t>(std::atoi(arg.c_str()));
+	if (std::atof(arg.c_str()) > static_cast<double>(std::numeric_limits<int64_t>::max())
+	|| std::atof(arg.c_str()) < static_cast<double>(std::numeric_limits<int64_t>::min())) {
+		error = true;
+		return 0;
+	}
+	return val;
 }
 
 /**

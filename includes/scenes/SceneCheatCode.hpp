@@ -35,6 +35,21 @@
 #define logFatalScreen(msg) { std::stringstream ss; ss << msg; \
 								_CHEATCODE_OBJECT->logfatal(ss.str(), CHEATCODE_CLEAR_ON_LOG); }
 
+#define REGEX_INT std::regex("^[ \n\t\r]*[-+]?\\d+[ \n\t\r]*$")
+
+namespace CheatcodeAction {
+	enum Enum {
+		KEEP_OPEN,
+		KEEP_OPEN_RESET,
+		KEEP_OPEN_DEF_TXT,
+		KEEP_OPEN_KEEP_TXT,
+		CLOSE,
+		CLOSE_RESET,
+		CLOSE_DEF_TXT,
+		CLOSE_KEEP_TXT,
+	};
+};
+
 /**
  * @brief this is the cheat code command line
  */
@@ -56,6 +71,10 @@ class SceneCheatCode : public ASceneMenu {
 		virtual void		unload();
 		bool				evalCommand(std::string const & command);
 		void				clearAllLn();
+		void				setText(std::string const & txt);
+		std::string			getText() const;
+
+		/* log */
 		void				logdebug(std::string const & msg, bool clear = false, bool logOnly = false);
 		void				loginfo(std::string const & msg, bool clear = false, bool logOnly = false);
 		void				logsuccess(std::string const & msg, bool clear = false, bool logOnly = false);
@@ -71,9 +90,12 @@ class SceneCheatCode : public ASceneMenu {
 		std::vector<std::string>	_splitCommand(std::string const & command);
 		bool						_isSpace(char c) const;
 		bool						_isValidCommand(std::string const & name) const;
+		int64_t						_toInt(std::string const & arg, bool & error) const;
+		uint64_t					_toUint(std::string const & arg, bool & error) const;
+		float						_toFloat(std::string const & arg, bool & error) const;
 
 		/* commands definition */
-		typedef bool (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
+		typedef CheatcodeAction::Enum (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
 		struct Command {
 			std::string	prototype;
 			std::string	description;
@@ -81,10 +103,11 @@ class SceneCheatCode : public ASceneMenu {
 		};
 
 		/* commands functions */
-		// bool _exec<cmd name>(std::vector<std::string> const & args);
-		bool	_execHelp(std::vector<std::string> const & args);
-		bool	_execClear(std::vector<std::string> const & args);
-		bool	_execLog(std::vector<std::string> const & args);
+		// CheatcodeAction::Enum _exec<cmd name>(std::vector<std::string> const & args);
+		CheatcodeAction::Enum	_execHelp(std::vector<std::string> const & args);
+		CheatcodeAction::Enum	_execClear(std::vector<std::string> const & args);
+		CheatcodeAction::Enum	_execLog(std::vector<std::string> const & args);
+		CheatcodeAction::Enum	_execTp(std::vector<std::string> const & args);
 
 		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
