@@ -65,10 +65,20 @@ void TextInputUI::_update() {
 	if (Inputs::getKeyUp(InputType::CANCEL)) {
 		if (_isAlwaysFocus)  // loose focus for a frame only
 			return;
-		_looseFocusNextTime = true;
+		_looseFocusNextTime = true;  // loose focus
 	}
 	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 		return;  // loose focus (for one frame if _isAlwaysFocus)
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_A)) || Inputs::getKeyByScancodeDown(SDL_SCANCODE_HOME))  // ctrl a | home
+	{
+		inputMoveCursor(-_cursorPos);  // cursor to first position
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_E)) || Inputs::getKeyByScancodeDown(SDL_SCANCODE_END))  // ctrl e | end
+	{
+		inputMoveCursor(_text.size() - _cursorPos);  // cursor to last position
 	}
 	setFocus(true);
 
