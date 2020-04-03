@@ -84,6 +84,7 @@ class SceneCheatCode : public ASceneMenu {
 		// bool _exec<cmd name>(std::vector<std::string> const & args);
 		bool	_execHelp(std::vector<std::string> const & args);
 		bool	_execClear(std::vector<std::string> const & args);
+		bool	_execLog(std::vector<std::string> const & args);
 
 		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);

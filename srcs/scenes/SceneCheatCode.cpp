@@ -22,6 +22,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"clear the lines / history / ...",
 			&SceneCheatCode::_execClear,
 		}},
+		{"log", {
+			"<type> <message>",
+			"Log a message. Type: debug, info, success, warn, err, fatal",
+			&SceneCheatCode::_execLog,
+		}},
 	};
 }
 
@@ -172,6 +177,8 @@ void SceneCheatCode::load() {
 	_historySavedLine = "";
 	_historyActID = -1;
 	_commandLine->setFocus(true);
+	if (_commandLine->getText().size() == 0)
+		_commandLine->setText(CHEATCODE_DEF_TXT);
 }
 
 /**
