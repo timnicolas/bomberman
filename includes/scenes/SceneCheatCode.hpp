@@ -40,16 +40,16 @@
 #define REGEX_FLOAT	std::regex("^[ \n\t\r]*[-+]?\\d+\\.?\\d*f?[ \n\t\r]*$")
 
 namespace CheatcodeAction {
-	enum Enum {
-		KEEP_OPEN,
-		KEEP_OPEN_RESET,
-		KEEP_OPEN_DEF_TXT,
-		KEEP_OPEN_KEEP_TXT,
-		CLOSE,
-		CLOSE_RESET,
-		CLOSE_DEF_TXT,
-		CLOSE_KEEP_TXT,
-	};
+	// open or close cheatcode
+	int const KEEP_OPEN =			0b00000000001;  // keep command line open
+	int const CLOSE =				0b00000000010;  // close command line
+	// setup txt in cheatcode
+	int const TXT_RESET =			0b00000000100;  // reset commadn line text
+	int const TXT_DEF =				0b00000001000;  // set command line text to default
+	int const TXT_KEEP =			0b00000010000;  // keep the same command line text
+	// if close, open text only mode
+	int const CHEAT_NO_TXT_ONLY =	0b00000100000;  // don't open text only mode
+	int const CHEAT_TXT_ONLY =		0b00001000000;  // open text only mode (only if CLOSE)
 };  // namespace CheatcodeAction
 
 /**
@@ -97,7 +97,7 @@ class SceneCheatCode : public ASceneMenu {
 		double						_toFloat(std::string const & arg, bool & error) const;
 
 		/* commands definition */
-		typedef CheatcodeAction::Enum (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
+		typedef int (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
 		struct Command {
 			std::string	prototype;
 			std::string	description;
@@ -105,11 +105,11 @@ class SceneCheatCode : public ASceneMenu {
 		};
 
 		/* commands functions */
-		// CheatcodeAction::Enum _exec<cmd name>(std::vector<std::string> const & args);
-		CheatcodeAction::Enum	_execHelp(std::vector<std::string> const & args);
-		CheatcodeAction::Enum	_execClear(std::vector<std::string> const & args);
-		CheatcodeAction::Enum	_execLog(std::vector<std::string> const & args);
-		CheatcodeAction::Enum	_execTp(std::vector<std::string> const & args);
+		// int _exec<cmd name>(std::vector<std::string> const & args);
+		int					_execHelp(std::vector<std::string> const & args);
+		int					_execClear(std::vector<std::string> const & args);
+		int					_execLog(std::vector<std::string> const & args);
+		int					_execTp(std::vector<std::string> const & args);
 
 		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);

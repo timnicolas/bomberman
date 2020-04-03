@@ -201,13 +201,13 @@ void SceneCheatCode::unload() {
  * @return false If we need to keep the command line open (command fail for example)
  */
 bool SceneCheatCode::evalCommand(std::string const & command) {
-	CheatcodeAction::Enum ret = CheatcodeAction::KEEP_OPEN;
+	int ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF | CheatcodeAction::CHEAT_NO_TXT_ONLY;
 
 	if (command.size() > 0) {
 		if (command[0] == '/') {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
-				ret = CheatcodeAction::KEEP_OPEN_DEF_TXT;  // keep command line open
+				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF;  // keep command line open
 			}
 			else {  // if there is a command
 				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
@@ -215,13 +215,13 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 				}
 				else {  // if the command is invalid
 					this->logerr("Invalid command: " + splittedCmd[0] + " (try /help)", false, true);
-					ret = CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+					ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
 				}
 			}
 		}
 		else {  // not a command
 			_addLine(command);
-			ret = CheatcodeAction::KEEP_OPEN_RESET;  // keep command line open
+			ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_RESET;  // keep command line open
 		}
 
 		/* add in history */
@@ -233,32 +233,28 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 		}
 	}
 
-	switch (ret) {
-		case CheatcodeAction::KEEP_OPEN:
-			break;
-		case CheatcodeAction::KEEP_OPEN_RESET:
-			_commandLine->inputReset();
-			break;
-		case CheatcodeAction::KEEP_OPEN_DEF_TXT:
-			_commandLine->setText(CHEATCODE_DEF_TXT);
-			break;
-		case CheatcodeAction::KEEP_OPEN_KEEP_TXT:
-			break;
-		case CheatcodeAction::CLOSE:
-			break;
-		case CheatcodeAction::CLOSE_RESET:
-			_commandLine->inputReset();
-			break;
-		case CheatcodeAction::CLOSE_DEF_TXT:
-			_commandLine->setText(CHEATCODE_DEF_TXT);
-			break;
-		case CheatcodeAction::CLOSE_KEEP_TXT:
-			break;
+	/* txt actions */
+	if (ret & CheatcodeAction::TXT_DEF) {
+		_commandLine->setText(CHEATCODE_DEF_TXT);
+	}
+	else if (ret & CheatcodeAction::TXT_KEEP) {
+	}
+	else if (ret & CheatcodeAction::TXT_RESET) {
+		_commandLine->inputReset();
 	}
 
-	if (ret >= CheatcodeAction::CLOSE)
-		return true;
-	return false;
+	/* text only option action */
+	if (ret & CheatcodeAction::CHEAT_NO_TXT_ONLY) {
+		SceneManager::openCheatCodeForTime(0);  // disable only text option
+	}
+	else if (ret & CheatcodeAction::CHEAT_TXT_ONLY && ret & CheatcodeAction::CLOSE) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
+
+	/* close after update */
+	if (ret & CheatcodeAction::KEEP_OPEN)
+		return false;
+	return true;
 }
 
 /**

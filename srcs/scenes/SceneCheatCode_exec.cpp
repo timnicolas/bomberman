@@ -2,7 +2,7 @@
 #include "SceneGame.hpp"
 #include "Player.hpp"
 
-CheatcodeAction::Enum SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
+int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	if (args.size() == 1) {  // only /help
 		_addLine("List of all commands:");
 		std::string commands = CHEATCODE_TAB;
@@ -30,11 +30,10 @@ CheatcodeAction::Enum SceneCheatCode::_execHelp(std::vector<std::string> const &
 			}
 		}
 	}
-	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
 }
 
-CheatcodeAction::Enum SceneCheatCode::_execClear(std::vector<std::string> const & args) {
+int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	if (args.size() > 1) {
 		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
 			if (*arg == "history") {
@@ -52,10 +51,10 @@ CheatcodeAction::Enum SceneCheatCode::_execClear(std::vector<std::string> const 
 	else {
 		clearAllLn();
 	}
-	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET;
 }
 
-CheatcodeAction::Enum SceneCheatCode::_execLog(std::vector<std::string> const & args) {
+int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
 		if (args[1] == "debug") {
 			this->logdebug(args[2], false, true);
@@ -77,36 +76,34 @@ CheatcodeAction::Enum SceneCheatCode::_execLog(std::vector<std::string> const & 
 		}
 		else {
 			this->logerr("Invalid log type: " + args[1] + " (/help " + args[0] + ")", false, true);
-			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
 		}
 	}
 	else {
 		_execHelp({"help", "log"});
 		SceneManager::openCheatCodeForTime(0);
-		return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 	}
-	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
 }
 
-CheatcodeAction::Enum SceneCheatCode::_execTp(std::vector<std::string> const & args) {
+int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
 		if (SceneManager::getSceneName() != SceneNames::GAME) {
-			this->logwarn("Cannot use tp outside the game", false, true);
-			SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-			return CheatcodeAction::CLOSE_RESET;
+			this->logwarn("You need to be in game to tp", false, true);
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
 		}
 
 		bool error;
 		double x = _toFloat(args[1], error);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
-			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 		}
 		double y = _toFloat(args[2], error);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
-			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 		}
 
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
@@ -119,9 +116,7 @@ CheatcodeAction::Enum SceneCheatCode::_execTp(std::vector<std::string> const & a
 	}
 	else {
 		_execHelp({"help", "tp"});
-		SceneManager::openCheatCodeForTime(0);
-		return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 	}
-	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
 }
