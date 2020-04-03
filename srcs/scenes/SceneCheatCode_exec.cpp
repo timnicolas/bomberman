@@ -56,24 +56,32 @@ bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 
 bool SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
-		if (args[1] == "debug")
+		if (args[1] == "debug") {
 			this->logdebug(args[2], false, true);
-		else if (args[1] == "info")
+		}
+		else if (args[1] == "info") {
 			this->loginfo(args[2], false, true);
-		else if (args[1] == "success")
+		}
+		else if (args[1] == "success") {
 			this->logsuccess(args[2], false, true);
-		else if (args[1] == "warn")
+		}
+		else if (args[1] == "warn") {
 			this->logwarn(args[2], false, true);
-		else if (args[1] == "err")
+		}
+		else if (args[1] == "err") {
 			this->logerr(args[2], false, true);
-		else if (args[1] == "fatal")
+		}
+		else if (args[1] == "fatal") {
 			this->logfatal(args[2], false, true);
-		else
+		}
+		else {
 			this->logerr("invalid log type: " + args[1] + " (/help " + args[0] + ")", false, true);
+			return false;  // keep command line open
+		}
 	}
 	else {
 		_execHelp({"help", "log"});
-		return false;
+		return false;  // keep command line open
 	}
 	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
 	return true;  // exit command line after this
