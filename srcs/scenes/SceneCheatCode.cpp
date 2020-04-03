@@ -210,7 +210,7 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 					}
 				}
 				else {  // if the command is invalid
-					_addLine("invalid command: " + splittedCmd[0], CHEATCODE_TEXT_ERR_COlOR);
+					this->logerr("invalid command: " + splittedCmd[0], false, true);
 					ret = false;  // keep command line open
 					_commandLine->setText(CHEATCODE_DEF_TXT);
 				}
@@ -333,4 +333,111 @@ void SceneCheatCode::_removeLastLine() {
 	}
 
 	_textLines.pop_back();
+}
+
+/**
+ * Logging
+ */
+
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::logdebug(std::string const & msg, bool clear, bool logOnly) {
+	#if DEBUG
+		if (clear)
+			clearAllLn();
+		_addLine(msg, CHEATCODE_TEXT_COlOR_DEBUG);
+		logDebug(msg);
+		if (!logOnly) {
+			SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+		}
+	#else
+		(void)msg;
+		(void)clear;
+		(void)logOnly;
+	#endif
+}
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::loginfo(std::string const & msg, bool clear, bool logOnly) {
+	if (clear)
+		clearAllLn();
+	_addLine(msg, CHEATCODE_TEXT_COlOR_INFO);
+	logInfo(msg);
+	if (!logOnly) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
+}
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::logsuccess(std::string const & msg, bool clear, bool logOnly) {
+	if (clear)
+		clearAllLn();
+	_addLine(msg, CHEATCODE_TEXT_COlOR_SUCCESS);
+	logSuccess(msg);
+	if (!logOnly) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
+}
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::logwarn(std::string const & msg, bool clear, bool logOnly) {
+	if (clear)
+		clearAllLn();
+	_addLine(msg, CHEATCODE_TEXT_COlOR_WARN);
+	logWarn(msg);
+	if (!logOnly) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
+}
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::logerr(std::string const & msg, bool clear, bool logOnly) {
+	if (clear)
+		clearAllLn();
+	_addLine(msg, CHEATCODE_TEXT_COlOR_ERR);
+	logErr(msg);
+	if (!logOnly) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
+}
+/**
+ * @brief Log a message on the screen
+ *
+ * @param msg The message
+ * @param clear Clear lines before log
+ * @param logOnly Log only (false if called internally)
+ */
+void SceneCheatCode::logfatal(std::string const & msg, bool clear, bool logOnly) {
+	if (clear)
+		clearAllLn();
+	_addLine(msg, CHEATCODE_TEXT_COlOR_FATAL);
+	logFatal(msg);
+	if (!logOnly) {
+		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	}
 }

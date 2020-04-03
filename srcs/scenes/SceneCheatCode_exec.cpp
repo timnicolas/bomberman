@@ -26,7 +26,7 @@ bool SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 				_addLine(ln);
 			}
 			else {
-				_addLine(*cmdName + " is not a valid command", CHEATCODE_TEXT_ERR_COlOR);
+				this->logerr(*cmdName + " is not a valid command", false, true);
 			}
 		}
 	}
@@ -45,7 +45,7 @@ bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 				clearAllLn();
 			}
 			else {
-				_addLine("invalid command argument: " + *arg, CHEATCODE_TEXT_ERR_COlOR);
+				this->logerr("invalid command argument: " + *arg, false, true);
 			}
 		}
 	}

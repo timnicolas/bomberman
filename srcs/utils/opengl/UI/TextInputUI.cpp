@@ -263,6 +263,8 @@ ABaseUI & TextInputUI::setText(std::string const & txt) {
 	return *this;
 }
 
+bool TextInputUI::hasFocus() const { return _hasFocus; }
+
 uint32_t TextInputUI::_getCursorOffset() const {
 	if (_text.size() == 0 || _cursorPos == 0)
 		return 0;

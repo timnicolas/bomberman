@@ -10,8 +10,9 @@
 /* show help (shortcuts in buttons) */
 #define DEBUG_SHOW_HELP	DEBUG & true  // always false in normal mode
 
-#define CONFIG_DIR		"configs/"
-#define SETTINGS_FILE	CONFIG_DIR"settings.json"
+#define CONFIG_DIR				"configs/"
+#define SETTINGS_FILE			CONFIG_DIR"settings.json"
+#define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
 
 #include <chrono>
 #include "SettingsJson.hpp"
