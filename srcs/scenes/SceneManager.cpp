@@ -321,6 +321,8 @@ void SceneManager::_openCheatCode(bool open) {
 		return;
 	if (open) {
 		_showCheatCodeTextTime = 0;
+		if (reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->getText().size() == 0)
+			reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->setText(CHEATCODE_DEF_TXT);
 		_sceneMap[SceneNames::CHEAT_CODE]->load();
 	}
 	else {

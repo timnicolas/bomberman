@@ -1,7 +1,7 @@
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
 
-bool SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
+CheatcodeAction::Enum SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	if (args.size() == 1) {  // only /help
 		_addLine("List of all commands:");
 		std::string commands = CHEATCODE_TAB;
@@ -30,10 +30,10 @@ bool SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 		}
 	}
 	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-	return true;  // exit command line after this
+	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
 }
 
-bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
+CheatcodeAction::Enum SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	if (args.size() > 1) {
 		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
 			if (*arg == "history") {
@@ -44,17 +44,17 @@ bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 				clearAllLn();
 			}
 			else {
-				this->logerr("invalid command argument: " + *arg, false, true);
+				this->logerr("Invalid command argument: " + *arg, false, true);
 			}
 		}
 	}
 	else {
 		clearAllLn();
 	}
-	return true;  // exit command line after this
+	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
 }
 
-bool SceneCheatCode::_execLog(std::vector<std::string> const & args) {
+CheatcodeAction::Enum SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
 		if (args[1] == "debug") {
 			this->logdebug(args[2], false, true);
@@ -75,14 +75,33 @@ bool SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 			this->logfatal(args[2], false, true);
 		}
 		else {
-			this->logerr("invalid log type: " + args[1] + " (/help " + args[0] + ")", false, true);
-			return false;  // keep command line open
+			this->logerr("Invalid log type: " + args[1] + " (/help " + args[0] + ")", false, true);
+			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
 		}
 	}
 	else {
 		_execHelp({"help", "log"});
-		return false;  // keep command line open
+		SceneManager::openCheatCodeForTime(0);
+		return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
 	}
 	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
-	return true;  // exit command line after this
+	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
+}
+
+CheatcodeAction::Enum SceneCheatCode::_execTp(std::vector<std::string> const & args) {
+	if (args.size() == 3) {
+		// bool error;
+		// int64_t x = _toInt(args[1], error);
+		// if (error) {
+		// 	this->logerr("Cannot convert '" + args[1] + "' to integer", false, true);
+		// 	return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+		// }
+	}
+	else {
+		_execHelp({"help", "tp"});
+		SceneManager::openCheatCodeForTime(0);
+		return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+	}
+	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+	return CheatcodeAction::CLOSE_RESET;  // exit command line after this
 }
