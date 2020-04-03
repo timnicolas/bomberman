@@ -347,19 +347,24 @@ void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 	tmpPos.y += _commandLine->getSize().y * 1.3;
 	TextLine newLine;
 
-	newLine.ui = &addText(tmpPos, _commandLine->getSize(), txt);
-	newLine.ui->setTextAlign(TextAlign::LEFT)
-		.setTextFont(CHEATCODE_FONT)
-		.setTextScale(CHEATCODE_FONT_SCALE)
-		.setTextColor(txtColor)
-		.setColor(CHEATCODE_COLOR)
-		.setZ(1);
+	std::stringstream ss(txt);
+	std::string line;
 
-	for (auto && ln : _textLines) {
-		ln.ui->addPosOffset({0, ln.ui->getSize().y});
+	while (std::getline(ss, line, '\n')) {
+		newLine.ui = &addText(tmpPos, _commandLine->getSize(), line);
+		newLine.ui->setTextAlign(TextAlign::LEFT)
+			.setTextFont(CHEATCODE_FONT)
+			.setTextScale(CHEATCODE_FONT_SCALE)
+			.setTextColor(txtColor)
+			.setColor(CHEATCODE_COLOR)
+			.setZ(1);
+
+		for (auto && ln : _textLines) {
+			ln.ui->addPosOffset({0, ln.ui->getSize().y});
+		}
+
+		_textLines.push_front(newLine);
 	}
-
-	_textLines.push_front(newLine);
 
 	while (_textLines.size() > s.j("cheatcode").u("maxLinesShow")) {
 		_removeLastLine();
