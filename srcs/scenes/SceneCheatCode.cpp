@@ -392,6 +392,33 @@ int64_t SceneCheatCode::_toInt(std::string const & arg, bool & error) const {
 	}
 	return val;
 }
+uint64_t SceneCheatCode::_toUint(std::string const & arg, bool & error) const {
+	error = false;
+	if (std::regex_match(arg, REGEX_UINT) == false) {
+		error = true;
+		return 0;
+	}
+	uint64_t val = static_cast<uint64_t>(std::atoi(arg.c_str()));
+	if (std::atof(arg.c_str()) > static_cast<double>(std::numeric_limits<uint64_t>::max())
+	|| std::atof(arg.c_str()) < static_cast<double>(std::numeric_limits<uint64_t>::min())) {
+		error = true;
+		return 0;
+	}
+	return val;
+}
+double SceneCheatCode::_toFloat(std::string const & arg, bool & error) const {
+	error = false;
+	if (std::regex_match(arg, REGEX_FLOAT) == false) {
+		error = true;
+		return 0;
+	}
+	double val = static_cast<double>(std::atof(arg.c_str()));
+	if (!isfinite(val)) {
+		error = true;
+		return 0;
+	}
+	return val;
+}
 
 /**
  * @brief Add a line in cheatcode

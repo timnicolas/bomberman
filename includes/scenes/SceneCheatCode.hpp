@@ -35,7 +35,9 @@
 #define logFatalScreen(msg) { std::stringstream ss; ss << msg; \
 								_CHEATCODE_OBJECT->logfatal(ss.str(), CHEATCODE_CLEAR_ON_LOG); }
 
-#define REGEX_INT std::regex("^[ \n\t\r]*[-+]?\\d+[ \n\t\r]*$")
+#define REGEX_INT	std::regex("^[ \n\t\r]*[-+]?\\d+[ \n\t\r]*$")
+#define REGEX_UINT	std::regex("^[ \n\t\r]*+?\\d+[ \n\t\r]*$")
+#define REGEX_FLOAT	std::regex("^[ \n\t\r]*[-+]?\\d+\\.?\\d*f?[ \n\t\r]*$")
 
 namespace CheatcodeAction {
 	enum Enum {
@@ -48,7 +50,7 @@ namespace CheatcodeAction {
 		CLOSE_DEF_TXT,
 		CLOSE_KEEP_TXT,
 	};
-};
+};  // namespace CheatcodeAction
 
 /**
  * @brief this is the cheat code command line
@@ -92,7 +94,7 @@ class SceneCheatCode : public ASceneMenu {
 		bool						_isValidCommand(std::string const & name) const;
 		int64_t						_toInt(std::string const & arg, bool & error) const;
 		uint64_t					_toUint(std::string const & arg, bool & error) const;
-		float						_toFloat(std::string const & arg, bool & error) const;
+		double						_toFloat(std::string const & arg, bool & error) const;
 
 		/* commands definition */
 		typedef CheatcodeAction::Enum (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);

@@ -1,5 +1,6 @@
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
+#include "Player.hpp"
 
 CheatcodeAction::Enum SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	if (args.size() == 1) {  // only /help
@@ -90,12 +91,31 @@ CheatcodeAction::Enum SceneCheatCode::_execLog(std::vector<std::string> const & 
 
 CheatcodeAction::Enum SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
-		// bool error;
-		// int64_t x = _toInt(args[1], error);
-		// if (error) {
-		// 	this->logerr("Cannot convert '" + args[1] + "' to integer", false, true);
-		// 	return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
-		// }
+		if (SceneManager::getSceneName() != SceneNames::GAME) {
+			this->logwarn("Cannot use tp outside the game", false, true);
+			SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
+			return CheatcodeAction::CLOSE_RESET;
+		}
+
+		bool error;
+		double x = _toFloat(args[1], error);
+		if (error) {
+			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
+			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+		}
+		double y = _toFloat(args[2], error);
+		if (error) {
+			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
+			return CheatcodeAction::KEEP_OPEN_KEEP_TXT;  // keep command line open
+		}
+
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		if (scGame.player != nullptr && scGame.player->tp({x, 0, y})) {
+			_addLine("tp to " + std::to_string(x) + " " + std::to_string(y));
+		}
+		else {
+			this->logwarn("Cannot tp at " + std::to_string(x) + " " + std::to_string(y), false, true);
+		}
 	}
 	else {
 		_execHelp({"help", "tp"});
