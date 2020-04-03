@@ -222,7 +222,7 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 			_commandLine->inputReset();
 		}
 		/* add in history */
-		if (command != "/") {
+		if (command != "/" && command[0] != ' ') {  // don't save `/` only or line that start with space
 			_cmdHistory.push_back(command);
 			while (_cmdHistory.size() > s.j("cheatcode").u("historySize")) {
 				_cmdHistory.pop_front();
