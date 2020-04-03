@@ -4,28 +4,40 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "SettingsJson.hpp"
+#include "SceneGame.hpp"
+
 class Save {
 private:
 	// Members
-	int		_member;
+	std::time_t		_time;
+	std::string		_filename;
+	SettingsJson	*_save;
+	std::string		_fileNameRegex;
+	// Methods
+	void			_init();
 
 public:
 	// Constructors
 	Save();
-	explicit Save(int member);
+	explicit Save(std::string filename);
 	~Save();
 	Save(Save const &src);
 
 	// Operators
-	Save &operator=(Save const &rhs);
+	Save &				operator=(Save const &rhs);
 	friend std::ostream& operator<<(std::ostream& os, const Save& my_class);
 
-	// Accessors
-	int		getMember() const;
-	void	setMember(int member);
+	// Getters & Setters
+	std::string			getFileName(bool temporary);
 
 	// Methods
-	bool	initJson();
+	static std::string	addRegexSlashes(std::string str);
+	bool				initJson();
+	bool				updateSavedFile(SceneGame &game);
+	bool				loadStatesSaved(SceneGame &game);
+	bool				isLevelDone(int32_t levelId);
+	bool				save(bool temporary);
 
 	// Exceptions
 	class SaveException : public std::runtime_error {
