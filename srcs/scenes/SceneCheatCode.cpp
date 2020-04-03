@@ -12,8 +12,8 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execHelp,
 		}},
 		{"clear", {
-			"",
-			"clear the history",
+			"[history] [all]",
+			"clear the lines / history / ...",
 			&SceneCheatCode::_execClear,
 		}},
 	};
@@ -158,6 +158,15 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 		}
 	}
 	return ret;
+}
+
+/**
+ * @brief Clear all lines
+ */
+void SceneCheatCode::clearAllLn() {
+	while (_textLines.size() > 0) {
+		_removeLastLine();
+	}
 }
 
 std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & command) const {

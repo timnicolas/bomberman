@@ -30,13 +30,27 @@ bool SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 			}
 		}
 	}
-	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));
+	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
 	return true;  // exit command line after this
 }
 
 bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
-	(void)args;
-	_addLine("clear");
-	SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));
+	if (args.size() > 1) {
+		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
+			if (*arg == "history") {
+				_addLine("/clear history to do");  // TODO(tnicolas42) clear history command
+			}
+			else if (*arg == "all") {
+				_addLine("/clear history to do");  // TODO(tnicolas42) clear history command
+				clearAllLn();
+			}
+			else {
+				_addLine("invalid command argument: " + *arg, CHEATCODE_TEXT_ERR_COlOR);
+			}
+		}
+	}
+	else {
+		clearAllLn();
+	}
 	return true;  // exit command line after this
 }
