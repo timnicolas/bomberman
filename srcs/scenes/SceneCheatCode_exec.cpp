@@ -38,10 +38,10 @@ bool SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	if (args.size() > 1) {
 		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
 			if (*arg == "history") {
-				_addLine("/clear history to do");  // TODO(tnicolas42) clear history command
+				_cmdHistory.clear();
 			}
 			else if (*arg == "all") {
-				_addLine("/clear history to do");  // TODO(tnicolas42) clear history command
+				_cmdHistory.clear();
 				clearAllLn();
 			}
 			else {

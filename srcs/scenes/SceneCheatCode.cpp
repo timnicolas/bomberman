@@ -1,9 +1,15 @@
+#include <unistd.h>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
+#include "FileUtils.hpp"
 
 SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
-  isCmdLnEnabled(true)
+  isCmdLnEnabled(true),
+  _historyActID(-1)
 {
 	_commandsList = {
 		{"help", {
@@ -25,7 +31,21 @@ SceneCheatCode::SceneCheatCode(SceneCheatCode const & src)
 	*this = src;
 }
 
-SceneCheatCode::~SceneCheatCode() {}
+SceneCheatCode::~SceneCheatCode() {
+	/* save history */
+	file::rm(CHEATCODE_HIST_FILE);
+	std::ofstream	file(CHEATCODE_HIST_FILE);
+
+	if (file.is_open()) {
+		for (auto && line : _cmdHistory) {
+			file << line << "\n";
+		}
+		file.close();
+	}
+	else {
+		logWarn("unable to save cheatcode history");
+	}
+}
 
 SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
 	if (this != &rhs) {
@@ -41,6 +61,21 @@ SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
  * @return false if the init failed
  */
 bool			SceneCheatCode::init() {
+	/* load history */
+	std::ifstream	file(CHEATCODE_HIST_FILE);
+	std::string		line;
+
+	if (file.is_open()) {
+		for (std::string line; std::getline(file, line); ) {
+			_cmdHistory.push_back(line);
+		}
+		file.close();
+	}
+	else {
+		logDebug("unable to load cheatcode history");
+	}
+
+	/* create UI */
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -76,8 +111,36 @@ bool	SceneCheatCode::update() {
 	ASceneMenu::update();
 
 	if (isCmdLnEnabled) {
+		_commandLine->setFocus(false);
+		/* go to history */
+		if (_cmdHistory.size() > 0) {
+			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_UP)) {
+				if (_historyActID < static_cast<int>(_cmdHistory.size() - 1)) {
+					if (_historyActID == -1) {
+						_historySavedLine = _commandLine->getText();  // save line
+					}
+					_historyActID += 1;
+					_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
+				}
+			}
+			else if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_DOWN)) {
+				if (_historyActID > -1) {
+					_historyActID -= 1;
+					if (_historyActID < 0) {
+						_commandLine->setText(_historySavedLine);
+					}
+					else {
+						_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
+					}
+				}
+			}
+		}
+
+		/* exec command */
 		_commandLine->setFocus(true);
 		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
+			_historyActID = -1;
+			_historySavedLine = "";
 			if (evalCommand(_commandLine->getText()))
 				return false;  // close command line
 		}
@@ -88,6 +151,7 @@ bool	SceneCheatCode::update() {
 
 	_commandLine->setEnabled(isCmdLnEnabled);
 
+	/* exit command line */
 	if (isCmdLnEnabled) {
 		_commandLine->setFocus(false);
 		if (Inputs::getKeyUp(InputType::CANCEL)) {
@@ -105,6 +169,8 @@ bool	SceneCheatCode::update() {
  */
 void SceneCheatCode::load() {
 	ASceneMenu::load();
+	_historySavedLine = "";
+	_historyActID = -1;
 	_commandLine->setFocus(true);
 }
 
@@ -113,7 +179,6 @@ void SceneCheatCode::load() {
  */
 void SceneCheatCode::unload() {
 	ASceneMenu::unload();
-	_commandLine->setText(CHEATCODE_DEF_TXT);
 	_commandLine->setFocus(false);
 }
 
@@ -155,6 +220,13 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 			_addLine(command);
 			ret = false;  // keep command line open
 			_commandLine->inputReset();
+		}
+		/* add in history */
+		if (command != "/") {
+			_cmdHistory.push_back(command);
+			while (_cmdHistory.size() > s.j("cheatcode").u("historySize")) {
+				_cmdHistory.pop_front();
+			}
 		}
 	}
 	return ret;

@@ -4,6 +4,7 @@
 #include "ASceneMenu.hpp"
 #include "TextInputUI.hpp"
 
+#define CHEATCODE_HIST_FILE			"configs/history.cheatcode"
 #define CHEATCODE_FONT				"cheatcode"
 #define CHEATCODE_FONT_SCALE		1
 #define CHEATCODE_COLOR				glm::vec4(0, 0, 0, 0.5)
@@ -63,9 +64,15 @@ class SceneCheatCode : public ASceneMenu {
 			ABaseUI *	ui;
 		};
 
-		/* variables */
+		/* general variables */
 		TextInputUI *			_commandLine;
 		std::deque<TextLine>	_textLines;
 
+		/* history */
+		std::deque<std::string>	_cmdHistory;  // first elem is last in history
+		std::string				_historySavedLine;
+		int						_historyActID;
+
+		/* list of commands */
 		std::map<std::string, Command>	_commandsList;
 };
