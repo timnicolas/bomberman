@@ -89,11 +89,6 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 
 int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	if (args.size() == 3) {
-		if (SceneManager::getSceneName() != SceneNames::GAME) {
-			this->logwarn("You need to be in game to tp", false, true);
-			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
-		}
-
 		bool error;
 		double x = _toFloat(args[1], error);
 		if (error) {
@@ -104,6 +99,11 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+		}
+
+		if (SceneManager::getSceneName() != SceneNames::GAME) {
+			this->logwarn("You need to be in game to tp", false, true);
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
 		}
 
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
