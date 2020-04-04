@@ -85,6 +85,10 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 	}
+	else if (args.size() == 2 && args[1] == "list") {
+		_addLine(std::string("List of all possible logs:\n") + CHEATCODE_TAB + "debug, info, success, warn, err, fatal");
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_SUCCESS;
+	}
 	else {
 		_execHelp({"help", args[0]});
 		SceneManager::openCheatCodeForTime(0);
