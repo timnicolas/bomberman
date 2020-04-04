@@ -74,7 +74,7 @@ class SceneCheatCode : public ASceneMenu {
 		virtual bool		update();
 		virtual void		load();
 		virtual void		unload();
-		int					evalCommand(std::string const & command);
+		int					evalCommand(std::string const & command, bool ignoreHistory = false);
 		void				clearAllLn();
 		void				setText(std::string const & txt);
 		std::string			getText() const;
