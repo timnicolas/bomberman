@@ -29,14 +29,19 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execLog,
 		}},
 		{"tp", {
-			"<x> <y>",
-			"Teleport to a given position (if possible)",
+			"<x> <y> ['relative'|'absolute']",
+			"Teleport to a given position (if possible). You can set relative or absolute position",
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
 			"<bonus, ...> ['list']",
 			"Get a bonus effect (list to get the list of bonus)",
 			&SceneCheatCode::_execGetbonus,
+		}},
+		{"loop", {
+			"<iter> <commands ...>",
+			"Exec commands multiples times (ex: /loop 3 \"/clear\" \"/getbonus life\")",
+			&SceneCheatCode::_execLoop,
 		}},
 	};
 }
@@ -159,7 +164,7 @@ bool	SceneCheatCode::update() {
 		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 			_historyActID = -1;
 			_historySavedLine = "";
-			if (evalCommand(_commandLine->getText()))
+			if (evalCommand(_commandLine->getText()) & CheatcodeAction::CLOSE)
 				return false;  // close command line
 		}
 	}
@@ -207,14 +212,14 @@ void SceneCheatCode::unload() {
  * @return true If the command is a success
  * @return false If we need to keep the command line open (command fail for example)
  */
-bool SceneCheatCode::evalCommand(std::string const & command) {
+int SceneCheatCode::evalCommand(std::string const & command) {
 	int ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF | CheatcodeAction::CHEAT_NO_TXT_ONLY;
 
 	if (command.size() > 0) {
 		if (command[0] == '/') {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
-				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF;  // keep command line open
+				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
 			}
 			else {  // if there is a command
 				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
@@ -258,10 +263,15 @@ bool SceneCheatCode::evalCommand(std::string const & command) {
 		SceneManager::openCheatCodeForTime(s.j("cheatcode").u("timeLineShow"));  // show lines for x seconds
 	}
 
-	/* close after update */
-	if (ret & CheatcodeAction::KEEP_OPEN)
-		return false;
-	return true;
+	/* command result */
+	if (ret & CheatcodeAction::RESULT_ERROR) {
+		// error
+	}
+	else if (ret & CheatcodeAction::RESULT_SUCCESS) {
+		// success
+	}
+
+	return ret;
 }
 
 /**

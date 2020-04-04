@@ -4,6 +4,7 @@
 #include "Bonus.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 1) {  // only /help
 		_addLine("List of all commands:");
 		std::string commands = CHEATCODE_TAB;
@@ -28,13 +29,15 @@ int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 			}
 			else {
 				this->logerr(*cmdName + " is not a valid command", false, true);
+				success = CheatcodeAction::RESULT_ERROR;
 			}
 		}
 	}
-	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
 int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() > 1) {
 		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
 			if (*arg == "history") {
@@ -46,16 +49,18 @@ int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 			}
 			else {
 				this->logerr("Invalid command argument: " + *arg, false, true);
+				success = CheatcodeAction::RESULT_ERROR;
 			}
 		}
 	}
 	else {
 		clearAllLn();
 	}
-	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET;
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | success;
 }
 
 int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 3) {
 		if (args[1] == "debug") {
 			this->logdebug(args[2], false, true);
@@ -77,34 +82,36 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 		}
 		else {
 			this->logerr("Invalid log type: " + args[1] + " (/help " + args[0] + ")", false, true);
-			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 	}
 	else {
 		_execHelp({"help", args[0]});
 		SceneManager::openCheatCodeForTime(0);
-		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
-	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
 int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 3) {
 		bool error;
 		double x = _toFloat(args[1], error);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
-			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 		double y = _toFloat(args[2], error);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
-			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 
 		if (SceneManager::getSceneName() != SceneNames::GAME) {
 			this->logwarn("You need to be in game to tp", false, true);
-			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+				| CheatcodeAction::RESULT_ERROR;
 		}
 
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
@@ -113,23 +120,26 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 		}
 		else {
 			this->logwarn("Cannot tp at " + std::to_string(x) + " " + std::to_string(y), false, true);
+			success = CheatcodeAction::RESULT_ERROR;
 		}
 	}
 	else {
 		_execHelp({"help", args[0]});
-		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
-	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
 int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
 	bool oneSuccess = false;
 	if (args.size() >= 2) {
 		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
 			if (Bonus::bonus.find(*arg) != Bonus::bonus.end()) {
 				if (SceneManager::getSceneName() != SceneNames::GAME) {
 					this->logwarn("You need to be in game to get bonus effect", false, true);
-					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+						| CheatcodeAction::RESULT_ERROR;
 				}
 				SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 				if (scGame.player != nullptr) {
@@ -139,7 +149,8 @@ int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 				}
 				else {
 					this->logerr("Unexpected error, player doesnt exist", false, true);
-					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+						| CheatcodeAction::RESULT_ERROR;
 				}
 			}
 			else if (*arg == "list") {
@@ -159,15 +170,51 @@ int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 					names += b.first;
 				}
 				this->logerr("Invalid bonus name.\n" + names);
+				success = CheatcodeAction::RESULT_ERROR;
 			}
 		}
 	}
 	else {
 		_execHelp({"help", args[0]});
-		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
 	if (oneSuccess == false) {
-		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
-	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET;
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	if (args.size() >= 3) {
+		bool error;
+		uint32_t iter = _toUint(args[1], error);
+		if (error) {
+			this->logerr("Cannot convert '" + args[1] + "' to int", false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+		if (iter > 10000) {
+			this->logerr("You can't have more than 10000 iterations in a loop");
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+		for (uint32_t i = 0; i < iter; i++) {
+			for (auto arg = args.begin() + 2; arg != args.end(); arg++) {
+				int res = evalCommand(*arg);
+				if (res & CheatcodeAction::RESULT_ERROR) {
+					success = CheatcodeAction::RESULT_ERROR;
+					this->logerr("Loop exec error. Stoped at iteration " + std::to_string(i)
+						+ " on command '" + *arg + "'");
+					break;
+				}
+			}
+			if (success & CheatcodeAction::RESULT_ERROR) {
+				break;
+			}
+		}
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
