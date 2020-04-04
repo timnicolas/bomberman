@@ -140,6 +140,7 @@ public:
 	std::string		getLevelName(int32_t levelId) const;
 	std::string		getLevelImg(int32_t levelId) const;
 	SettingsJson	&getSettingsLevel() const;
+	static std::vector<std::string>	getAllEntityNames();
 
 	// Exceptions
 	class SceneGameException : public std::runtime_error {
