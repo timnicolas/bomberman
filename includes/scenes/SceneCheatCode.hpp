@@ -36,7 +36,7 @@
 								_CHEATCODE_OBJECT->logfatal(ss.str(), CHEATCODE_CLEAR_ON_LOG); }
 
 #define REGEX_INT	std::regex("^[ \n\t\r]*[-+]?\\d+[ \n\t\r]*$")
-#define REGEX_UINT	std::regex("^[ \n\t\r]*+?\\d+[ \n\t\r]*$")
+#define REGEX_UINT	std::regex("^[ \n\t\r]*\\+?\\d+[ \n\t\r]*$")
 #define REGEX_FLOAT	std::regex("^[ \n\t\r]*[-+]?\\d+\\.?\\d*f?[ \n\t\r]*$")
 
 namespace CheatcodeAction {
@@ -50,6 +50,9 @@ namespace CheatcodeAction {
 	// if close, open text only mode
 	int const CHEAT_NO_TXT_ONLY =	0b00000100000;  // don't open text only mode
 	int const CHEAT_TXT_ONLY =		0b00001000000;  // open text only mode (only if CLOSE)
+	// result of a command
+	int const RESULT_SUCCESS =		0b00001000000;  // result of the command: success
+	int const RESULT_ERROR =		0b00010000000;  // result of the command: error
 };  // namespace CheatcodeAction
 
 /**
@@ -71,7 +74,7 @@ class SceneCheatCode : public ASceneMenu {
 		virtual bool		update();
 		virtual void		load();
 		virtual void		unload();
-		bool				evalCommand(std::string const & command);
+		int					evalCommand(std::string const & command);
 		void				clearAllLn();
 		void				setText(std::string const & txt);
 		std::string			getText() const;
@@ -111,6 +114,7 @@ class SceneCheatCode : public ASceneMenu {
 		int					_execLog(std::vector<std::string> const & args);
 		int					_execTp(std::vector<std::string> const & args);
 		int					_execGetbonus(std::vector<std::string> const & args);
+		int					_execLoop(std::vector<std::string> const & args);
 
 		/* for lines */
 		void				_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
