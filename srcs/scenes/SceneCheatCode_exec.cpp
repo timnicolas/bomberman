@@ -98,12 +98,15 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	if (args.size() == 3 || args.size() == 4) {
 		bool error;
 
+		/* get x */
 		bool xrelative;
 		double x = _toFloat(args[1], error, &xrelative);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
+
+		/* get y */
 		bool yrelative;
 		double y = _toFloat(args[2], error, &yrelative);
 		if (error) {
@@ -111,18 +114,22 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 
+		/* check if we are in game */
 		if (SceneManager::getSceneName() != SceneNames::GAME) {
 			this->logwarn("You need to be in game to tp", false, true);
 			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
 				| CheatcodeAction::RESULT_ERROR;
 		}
 
+		/* get real x & y */
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 		glm::vec3 tpPos = glm::vec3(x, 0, y);
 		if (xrelative && scGame.player != nullptr)
 			tpPos.x += scGame.player->getPos().x;
 		if (yrelative && scGame.player != nullptr)
 			tpPos.z += scGame.player->getPos().z;
+
+		/* tp */
 		if (scGame.player != nullptr && scGame.player->tp(tpPos)) {
 			_addLine("tp to " + std::to_string(tpPos.x) + " " + std::to_string(tpPos.z));
 		}
@@ -207,7 +214,7 @@ int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
 		}
 		for (uint32_t i = 0; i < iter; i++) {
 			for (auto arg = args.begin() + 2; arg != args.end(); arg++) {
-				int res = evalCommand(*arg);
+				int res = evalCommand(*arg, true);  // don't add in history
 				if (res & CheatcodeAction::RESULT_ERROR) {
 					success = CheatcodeAction::RESULT_ERROR;
 					this->logerr("Loop exec error. Stoped at iteration " + std::to_string(i)

@@ -214,10 +214,11 @@ void SceneCheatCode::unload() {
  * @brief Parse & execute a command
  *
  * @param command The command
+ * @param ignoreHistory If true, don't add the command to history
  * @return true If the command is a success
  * @return false If we need to keep the command line open (command fail for example)
  */
-int SceneCheatCode::evalCommand(std::string const & command) {
+int SceneCheatCode::evalCommand(std::string const & command, bool ignoreHistory) {
 	int ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF | CheatcodeAction::CHEAT_NO_TXT_ONLY
 		| CheatcodeAction::RESULT_SUCCESS;
 
@@ -243,7 +244,7 @@ int SceneCheatCode::evalCommand(std::string const & command) {
 		}
 
 		/* add in history */
-		if (command != "/" && command[0] != ' ') {  // don't save `/` only or line that start with space
+		if (!ignoreHistory && command != "/" && command[0] != ' ') {  // don't save `/` only or line that start with space
 			_cmdHistory.push_back(command);
 			while (_cmdHistory.size() > s.j("cheatcode").u("historySize")) {
 				_cmdHistory.pop_front();
