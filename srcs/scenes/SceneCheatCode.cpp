@@ -29,8 +29,8 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execLog,
 		}},
 		{"tp", {
-			"<x> <y> ['relative'|'absolute']",
-			"Teleport to a given position (if possible). You can set relative or absolute position",
+			"<x> <y>",
+			"Teleport to a given position (if possible). You can set relative position with ~ (~-1, ~3, ...)",
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
@@ -392,41 +392,95 @@ bool SceneCheatCode::_isValidCommand(std::string const & name) const {
 	return false;
 }
 
-int64_t SceneCheatCode::_toInt(std::string const & arg, bool & error) const {
+int64_t SceneCheatCode::_toInt(std::string const & arg, bool & error, bool * isRelative) {
 	error = false;
-	if (std::regex_match(arg, REGEX_INT) == false) {
+	if (isRelative != nullptr)
+		*isRelative = false;
+
+	std::string tmpNb = arg;
+	if (arg.size() > 0 && arg[0] == '~') {
+		if (isRelative != nullptr) {
+			*isRelative = true;
+			tmpNb = arg.substr(1, arg.size() - 1);
+			if (arg.size() == 1) {  // only "~"
+				return 0;  // result if pos relative + 0
+			}
+		}
+		else {
+			this->logerr("Cannot use relative number for this function", false, true);
+			error = true;
+			return 0;
+		}
+	}
+	if (std::regex_match(tmpNb, REGEX_INT) == false) {
 		error = true;
 		return 0;
 	}
-	int64_t val = static_cast<int64_t>(std::atoi(arg.c_str()));
-	if (std::atof(arg.c_str()) > static_cast<double>(std::numeric_limits<int64_t>::max())
-	|| std::atof(arg.c_str()) < static_cast<double>(std::numeric_limits<int64_t>::min())) {
+	int64_t val = static_cast<int64_t>(std::atoi(tmpNb.c_str()));
+	if (std::atof(tmpNb.c_str()) > static_cast<double>(std::numeric_limits<int64_t>::max())
+	|| std::atof(tmpNb.c_str()) < static_cast<double>(std::numeric_limits<int64_t>::min())) {
 		error = true;
 		return 0;
 	}
 	return val;
 }
-uint64_t SceneCheatCode::_toUint(std::string const & arg, bool & error) const {
+uint64_t SceneCheatCode::_toUint(std::string const & arg, bool & error, bool * isRelative) {
 	error = false;
-	if (std::regex_match(arg, REGEX_UINT) == false) {
+	if (isRelative != nullptr)
+		*isRelative = false;
+
+	std::string tmpNb = arg;
+	if (arg.size() > 0 && arg[0] == '~') {
+		if (isRelative != nullptr) {
+			*isRelative = true;
+			tmpNb = arg.substr(1, arg.size() - 1);
+			if (arg.size() == 1) {  // only "~"
+				return 0;  // result if pos relative + 0
+			}
+		}
+		else {
+			this->logerr("Cannot use relative number for this function", false, true);
+			error = true;
+			return 0;
+		}
+	}
+	if (std::regex_match(tmpNb, REGEX_UINT) == false) {
 		error = true;
 		return 0;
 	}
-	uint64_t val = static_cast<uint64_t>(std::atoi(arg.c_str()));
-	if (std::atof(arg.c_str()) > static_cast<double>(std::numeric_limits<uint64_t>::max())
-	|| std::atof(arg.c_str()) < static_cast<double>(std::numeric_limits<uint64_t>::min())) {
+	uint64_t val = static_cast<uint64_t>(std::atoi(tmpNb.c_str()));
+	if (std::atof(tmpNb.c_str()) > static_cast<double>(std::numeric_limits<uint64_t>::max())
+	|| std::atof(tmpNb.c_str()) < static_cast<double>(std::numeric_limits<uint64_t>::min())) {
 		error = true;
 		return 0;
 	}
 	return val;
 }
-double SceneCheatCode::_toFloat(std::string const & arg, bool & error) const {
+double SceneCheatCode::_toFloat(std::string const & arg, bool & error, bool * isRelative) {
 	error = false;
-	if (std::regex_match(arg, REGEX_FLOAT) == false) {
+	if (isRelative != nullptr)
+		*isRelative = false;
+
+	std::string tmpNb = arg;
+	if (arg.size() > 0 && arg[0] == '~') {
+		if (isRelative != nullptr) {
+			*isRelative = true;
+			tmpNb = arg.substr(1, arg.size() - 1);
+			if (arg.size() == 1) {  // only "~"
+				return 0;  // result if pos relative + 0
+			}
+		}
+		else {
+			this->logerr("Cannot use relative number for this function", false, true);
+			error = true;
+			return 0;
+		}
+	}
+	if (std::regex_match(tmpNb, REGEX_FLOAT) == false) {
 		error = true;
 		return 0;
 	}
-	double val = static_cast<double>(std::atof(arg.c_str()));
+	double val = static_cast<double>(std::atof(tmpNb.c_str()));
 	if (!isfinite(val)) {
 		error = true;
 		return 0;
