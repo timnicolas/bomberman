@@ -115,6 +115,7 @@ class SceneCheatCode : public ASceneMenu {
 		int					_execTp(std::vector<std::string> const & args);
 		int					_execGetbonus(std::vector<std::string> const & args);
 		int					_execLoop(std::vector<std::string> const & args);
+		int					_execExec(std::vector<std::string> const & args);
 		int					_execSummon(std::vector<std::string> const & args);
 
 		/* for lines */

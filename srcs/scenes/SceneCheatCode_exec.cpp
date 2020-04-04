@@ -238,6 +238,25 @@ int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+int SceneCheatCode::_execExec(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	if (args.size() >= 2) {
+		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
+			int res = evalCommand(*arg, true);  // don't add in history
+			if (res & CheatcodeAction::RESULT_ERROR) {
+				success = CheatcodeAction::RESULT_ERROR;
+				this->logerr("Exec error. Stoped on command '" + *arg + "'");
+				break;
+			}
+		}
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
 int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 
