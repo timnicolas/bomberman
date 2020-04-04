@@ -15,12 +15,12 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 	_commandsList = {
 		{"help", {
 			"[command, ...]",
-			"get general help or help on a command",
+			"Get general help or help on a command.",
 			&SceneCheatCode::_execHelp,
 		}},
 		{"clear", {
-			"[history] [all]",
-			"clear the lines / history / ...",
+			"['history'] ['all']",
+			"Clear the lines / history / ...",
 			&SceneCheatCode::_execClear,
 		}},
 		{"log", {
@@ -32,6 +32,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"<x> <y>",
 			"Teleport to a given position (if possible)",
 			&SceneCheatCode::_execTp,
+		}},
+		{"getbonus", {
+			"<bonus, ...> ['list']",
+			"Get a bonus effect (list to get the list of bonus)",
+			&SceneCheatCode::_execGetbonus,
 		}},
 	};
 }

@@ -1,6 +1,7 @@
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "Bonus.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	if (args.size() == 1) {  // only /help
@@ -80,7 +81,7 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 		}
 	}
 	else {
-		_execHelp({"help", "log"});
+		_execHelp({"help", args[0]});
 		SceneManager::openCheatCodeForTime(0);
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 	}
@@ -115,8 +116,58 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 		}
 	}
 	else {
-		_execHelp({"help", "tp"});
+		_execHelp({"help", args[0]});
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
 	}
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+}
+
+int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
+	bool oneSuccess = false;
+	if (args.size() >= 2) {
+		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
+			if (Bonus::bonus.find(*arg) != Bonus::bonus.end()) {
+				if (SceneManager::getSceneName() != SceneNames::GAME) {
+					this->logwarn("You need to be in game to get bonus effect", false, true);
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+				}
+				SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+				if (scGame.player != nullptr) {
+					scGame.player->takeBonus(Bonus::bonus[*arg]);
+					_addLine("Get " + *arg + " bonus effect");
+					oneSuccess = true;
+				}
+				else {
+					this->logerr("Unexpected error, player doesnt exist", false, true);
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY;
+				}
+			}
+			else if (*arg == "list") {
+				std::string names = CHEATCODE_TAB;
+				for (auto && b : Bonus::bonus) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += b.first;
+				}
+				_addLine("Bonus list:\n" + names);
+			}
+			else {
+				std::string names = CHEATCODE_TAB;
+				for (auto && b : Bonus::bonus) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += b.first;
+				}
+				this->logerr("Invalid bonus name.\n" + names);
+			}
+		}
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+	}
+	if (oneSuccess == false) {
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET;
 }
