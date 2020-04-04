@@ -5,7 +5,7 @@
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
-	if (args.size() == 1) {  // only /help
+	if (args.size() == 1 || (args.size() == 2 && args[1] == "list")) {  // only /help
 		_addLine("List of all commands:");
 		std::string commands = CHEATCODE_TAB;
 		for (auto && it : _commandsList) {
@@ -219,6 +219,82 @@ int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
 				break;
 			}
 		}
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+
+	std::vector<std::string> names = SceneGame::getAllEntityNames();
+	if (args.size() == 4) {
+		bool error = true;
+
+		/* check name */
+		for (auto && name : names) {
+			if (args[1] == name)
+				error = false;
+		}
+		if (error) {
+			this->logerr("Invalid entity type: " + args[1], false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* get x */
+		bool xrelative;
+		int64_t x = _toInt(args[2], error, &xrelative);
+		if (error) {
+			this->logerr("Cannot convert '" + args[2] + "' to int", false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* get y */
+		bool yrelative;
+		int64_t y = _toInt(args[3], error, &yrelative);
+		if (error) {
+			this->logerr("Cannot convert '" + args[3] + "' to int", false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* check if we are in game */
+		if (SceneManager::getSceneName() != SceneNames::GAME) {
+			this->logwarn("You need to be in game to summon entity", false, true);
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+				| CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* get real x & y */
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		glm::ivec2 summonPos = glm::ivec2(x, y);
+		if (xrelative && scGame.player != nullptr)
+			summonPos.x += scGame.player->getIntPos().x;
+		if (yrelative && scGame.player != nullptr)
+			summonPos.y += scGame.player->getIntPos().y;
+
+		/* summon */
+		bool isFly = (args[1] == "enemyFly") ? 1 : 0;
+		if (scGame.player != nullptr && scGame.insertEntity(args[1], summonPos, isFly)) {
+			_addLine("summon " + args[1] + " at " + std::to_string(summonPos.x) + " " + std::to_string(summonPos.y));
+		}
+		else {
+			this->logwarn("Cannot summon " + args[1] + " at "
+				+ std::to_string(summonPos.x) + " " + std::to_string(summonPos.y), false, true);
+			success = CheatcodeAction::RESULT_ERROR;
+		}
+	}
+	else if (args.size() == 2 && args[1] == "list") {
+		std::string res = CHEATCODE_TAB;
+		for (auto && name : names) {
+			if (res != CHEATCODE_TAB)
+				res += ", ";
+			res += name;
+		}
+		_addLine("List of all entity name:\n" + res);
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_SUCCESS;
 	}
 	else {
 		_execHelp({"help", args[0]});

@@ -917,6 +917,19 @@ SettingsJson	&SceneGame::getSettingsLevel() const {
 	return *(_mapsList[level]);
 }
 
+/**
+ * @brief Get the name of all entity
+ *
+ * @return std::vector<std::string> The names
+ */
+std::vector<std::string> SceneGame::getAllEntityNames() {
+	std::vector<std::string> res;
+	for (auto && it : _entitiesCall) {
+		res.push_back(it.first);
+	}
+	return res;
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 SceneGame::SceneGameException::SceneGameException()

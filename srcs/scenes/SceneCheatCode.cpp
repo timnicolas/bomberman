@@ -43,6 +43,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Exec commands multiples times (ex: /loop 3 \"/clear\" \"/getbonus life\")",
 			&SceneCheatCode::_execLoop,
 		}},
+		{"summon", {
+			"<typename> <x> <y>",
+			"Summon a block, entity, ... ('/summon list' to show the full list of entity)",
+			&SceneCheatCode::_execSummon,
+		}},
 	};
 }
 
