@@ -575,7 +575,6 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	levelTime = lvl.i("time");
 
 	flags = 0;
-	AEntity *entity;
 	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
 		// base board creation
@@ -587,42 +586,18 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 		// loop through line to create the entities
 		for (uint32_t i = 0; i < size.x; i++) {
+			std::string name;
 			for (auto &&entitYCall : _entitiesCall) {
-				// if the curent line char match the entity char
-				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
-					// if it's empty, generate crispy wall with a certain probability
-					if (entitYCall.first == "empty")
-						entity = Crispy::generateCrispy(*this, lvl.u("wallGenPercent"));
-					else
-						entity = _entitiesCall[entitYCall.first].entity(*this);
-
-					// continue on empty block
-					if (entity == nullptr)
-						continue;
-
-					switch (_entitiesCall[entitYCall.first].entityType) {
-						case EntityType::PLAYER:
-							if (player == nullptr)
-								player = reinterpret_cast<Player *>(entity);
-							else
-								delete entity;
-							player->setPosition({i, 0, j});
-							break;
-						case EntityType::BOARD_FLAG:
-							flags++;
-							board[i][j].push_back(entity);
-							break;
-						case EntityType::BOARD:
-							board[i][j].push_back(entity);
-							break;
-						case EntityType::ENEMY:
-							enemies.push_back(reinterpret_cast<AEnemy *>(entity));
-							enemies.back()->setPosition({i, 0, j});
-							break;
-						default:
-							delete entity;
-					}
-				}
+				if (line[i] == lvl.j("objects").s(entitYCall.first)[0])
+					name = entitYCall.first;
+			}
+			if (name != "") {
+				if (insertEntity(name, {i, j}, false, lvl.u("wallGenPercent")) == false)
+					throw SceneException("Unexpected error in map loading");
+			}
+			else {
+				throw SceneException(("Invalid element in map (" + std::to_string(i) + ", "
+					+ std::to_string(j) + "): " + line[i]).c_str());
 			}
 		}
 		/* fly board creation */
@@ -630,23 +605,18 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		if (line.length() != size.x)
 			throw SceneException(("Map fly width error on line "+std::to_string(j)).c_str());
 		for (uint32_t i = 0; i < size.x; i++) {
+			std::string name;
 			for (auto &&entitYCall : _entitiesCall) {
-				if (line[i] == lvl.j("objects").s(entitYCall.first)[0]) {
-					entity = _entitiesCall[entitYCall.first].entity(*this);
-					if (entity == nullptr)
-						continue;
-					if (entity->type == Type::WALL) {
-						reinterpret_cast<AObject *>(entity)->isInFlyBoard = true;
-						boardFly[i][j].push_back(entity);
-					}
-					else if (_entitiesCall[entitYCall.first].entityType == EntityType::ENEMY) {
-						enemies.push_back(reinterpret_cast<AEnemy *>(entity));
-						enemies.back()->setPosition({i, 1, j});
-					}
-					else {
-						logWarn("board fly can only contains walls and enemy");
-					}
-				}
+				if (line[i] == lvl.j("objects").s(entitYCall.first)[0])
+					name = entitYCall.first;
+			}
+			if (name != "") {
+				if (insertEntity(name, {i, j}, true, lvl.u("wallGenPercent")) == false)
+					throw SceneException("Unexpected error in map loading");
+			}
+			else {
+				throw SceneException(("Invalid element in map (" + std::to_string(i) + ", "
+					+ std::to_string(j) + "): " + line[i]).c_str());
 			}
 		}
 	}
@@ -671,6 +641,65 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	// set camera
 	_gui->cam->lookAt(glm::vec3(size.x / 2 + 0.5f, 1.0f, size.y * 0.7f));
 
+	return true;
+}
+
+bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFly, uint64_t wallGenPercent) {
+	AEntity * entity;
+	if (!positionInGame({pos.x, 0, pos.y})) {
+		return false;
+	}
+	if (_entitiesCall.find(name) == _entitiesCall.end()) {
+		logErr("invalid entity name " << name << " in SceneGame::insertEntity");
+		return false;
+	}
+	// if it's empty, generate crispy wall with a certain probability
+	if (name == "empty" && !isFly)
+		entity = Crispy::generateCrispy(*this, wallGenPercent);
+	else
+		entity = _entitiesCall[name].entity(*this);
+
+	// do nothing on empty block
+	if (entity == nullptr)
+		return true;
+
+	if (isFly) {
+		if (entity->type == Type::WALL) {
+			reinterpret_cast<AObject *>(entity)->isInFlyBoard = true;
+			boardFly[pos.x][pos.y].push_back(entity);
+		}
+		else if (_entitiesCall[name].entityType == EntityType::ENEMY) {
+			enemies.push_back(reinterpret_cast<AEnemy *>(entity));
+			enemies.back()->setPosition({pos.x, 1, pos.y});
+		}
+		else {
+			logWarn("board fly can only contains walls and enemy");
+		}
+	}
+	else {  // if not fly
+		switch (_entitiesCall[name].entityType) {
+			case EntityType::PLAYER:
+				if (player == nullptr)
+					player = reinterpret_cast<Player *>(entity);
+				else
+					delete entity;
+				player->setPosition({pos.x, 0, pos.y});
+				break;
+			case EntityType::BOARD_FLAG:
+				flags++;
+				board[pos.x][pos.y].push_back(entity);
+				break;
+			case EntityType::BOARD:
+				board[pos.x][pos.y].push_back(entity);
+				break;
+			case EntityType::ENEMY:
+				enemies.push_back(reinterpret_cast<AEnemy *>(entity));
+				enemies.back()->setPosition({pos.x, 0, pos.y});
+				break;
+			default:
+				delete entity;
+		}
+	}
 	return true;
 }
 
