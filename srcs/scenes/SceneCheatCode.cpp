@@ -213,13 +213,14 @@ void SceneCheatCode::unload() {
  * @return false If we need to keep the command line open (command fail for example)
  */
 int SceneCheatCode::evalCommand(std::string const & command) {
-	int ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF | CheatcodeAction::CHEAT_NO_TXT_ONLY;
+	int ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_DEF | CheatcodeAction::CHEAT_NO_TXT_ONLY
+		| CheatcodeAction::RESULT_SUCCESS;
 
 	if (command.size() > 0) {
 		if (command[0] == '/') {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
-				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
+				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
 			else {  // if there is a command
 				if (_isValidCommand(splittedCmd[0])) {  // if the command is valid
@@ -227,13 +228,13 @@ int SceneCheatCode::evalCommand(std::string const & command) {
 				}
 				else {  // if the command is invalid
 					this->logerr("Invalid command: " + splittedCmd[0] + " (try /help)", false, true);
-					ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP;  // keep command line open
+					ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 				}
 			}
 		}
 		else {  // not a command
 			_addLine(command);
-			ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_RESET;  // keep command line open
+			ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_RESET | CheatcodeAction::RESULT_SUCCESS;
 		}
 
 		/* add in history */
@@ -338,7 +339,7 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 			}
 			else {
 				if (command[start + size] == '"' && (size == 0 || command[start + size - 1] != '\\')) {
-					this->logerr("invalid quote matching: to in sert quote in a word, use \\\"", false, true);
+					this->logerr("invalid quote matching: to insert quote in a word, use \\\"", false, true);
 					return std::vector<std::string>();
 				}
 				if (_isSpace(command[start + size]))
