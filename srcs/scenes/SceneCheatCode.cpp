@@ -130,25 +130,27 @@ bool	SceneCheatCode::update() {
 		_commandLine->setFocus(false);
 		/* go to history */
 		if (_cmdHistory.size() > 0) {
-			if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_UP)) {
-				if (_historyActID < static_cast<int>(_cmdHistory.size() - 1)) {
-					if (_historyActID == -1) {
-						_historySavedLine = _commandLine->getText();  // save line
-					}
-					_historyActID += 1;
-					_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
-				}
-			}
-			else if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_DOWN)) {
-				if (_historyActID > -1) {
-					_historyActID -= 1;
-					if (_historyActID < 0) {
-						_commandLine->setText(_historySavedLine);
-					}
-					else {
+			switch (Inputs::getTextInputKeycode()) {
+				case SDLK_UP:
+					if (_historyActID < static_cast<int>(_cmdHistory.size() - 1)) {
+						if (_historyActID == -1) {
+							_historySavedLine = _commandLine->getText();  // save line
+						}
+						_historyActID += 1;
 						_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
 					}
-				}
+					break;
+				case SDLK_DOWN:
+					if (_historyActID > -1) {
+						_historyActID -= 1;
+						if (_historyActID < 0) {
+							_commandLine->setText(_historySavedLine);
+						}
+						else {
+							_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
+						}
+					}
+					break;
 			}
 		}
 
