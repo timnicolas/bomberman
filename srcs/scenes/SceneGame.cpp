@@ -690,9 +690,23 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 				board[pos.x][pos.y].push_back(entity);
 				break;
 			case EntityType::BOARD:
+				if (entity->type == Type::BOMB) {
+					if (player != nullptr) {
+						reinterpret_cast<Bomb*>(entity)->setPropagation(player->bombProgation);
+					}
+					if (board[pos.x][pos.y].size() > 0) {
+						delete entity;
+						return false;
+					}
+				}
 				board[pos.x][pos.y].push_back(entity);
 				break;
 			case EntityType::ENEMY:
+				if (board[pos.x][pos.y].size() > 0) {
+					logWarn("Cannot insert enemy on a block");
+					delete entity;
+					return false;
+				}
 				enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 				enemies.back()->setPosition({pos.x, 0, pos.y});
 				break;
