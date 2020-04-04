@@ -95,9 +95,9 @@ class SceneCheatCode : public ASceneMenu {
 		std::vector<std::string>	_splitCommand(std::string const & command);
 		bool						_isSpace(char c) const;
 		bool						_isValidCommand(std::string const & name) const;
-		int64_t						_toInt(std::string const & arg, bool & error) const;
-		uint64_t					_toUint(std::string const & arg, bool & error) const;
-		double						_toFloat(std::string const & arg, bool & error) const;
+		int64_t						_toInt(std::string const & arg, bool & error, bool * isRelative = nullptr);
+		uint64_t					_toUint(std::string const & arg, bool & error, bool * isRelative = nullptr);
+		double						_toFloat(std::string const & arg, bool & error, bool * isRelative = nullptr);
 
 		/* commands definition */
 		typedef int (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);

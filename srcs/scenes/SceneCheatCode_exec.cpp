@@ -95,16 +95,19 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 
 int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
-	if (args.size() == 3) {
+	if (args.size() == 3 || args.size() == 4) {
 		bool error;
-		double x = _toFloat(args[1], error);
+
+		bool xrelative;
+		double x = _toFloat(args[1], error, &xrelative);
 		if (error) {
 			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
-		double y = _toFloat(args[2], error);
+		bool yrelative;
+		double y = _toFloat(args[2], error, &yrelative);
 		if (error) {
-			this->logerr("Cannot convert '" + args[1] + "' to float", false, true);
+			this->logerr("Cannot convert '" + args[2] + "' to float", false, true);
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 
@@ -115,11 +118,16 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 		}
 
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
-		if (scGame.player != nullptr && scGame.player->tp({x, 0, y})) {
-			_addLine("tp to " + std::to_string(x) + " " + std::to_string(y));
+		glm::vec3 tpPos = glm::vec3(x, 0, y);
+		if (xrelative && scGame.player != nullptr)
+			tpPos.x += scGame.player->getPos().x;
+		if (yrelative && scGame.player != nullptr)
+			tpPos.z += scGame.player->getPos().z;
+		if (scGame.player != nullptr && scGame.player->tp(tpPos)) {
+			_addLine("tp to " + std::to_string(tpPos.x) + " " + std::to_string(tpPos.z));
 		}
 		else {
-			this->logwarn("Cannot tp at " + std::to_string(x) + " " + std::to_string(y), false, true);
+			this->logwarn("Cannot tp at " + std::to_string(tpPos.x) + " " + std::to_string(tpPos.z), false, true);
 			success = CheatcodeAction::RESULT_ERROR;
 		}
 	}
