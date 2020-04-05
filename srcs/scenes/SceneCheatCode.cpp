@@ -96,7 +96,7 @@ SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
  * @return true if the init succed
  * @return false if the init failed
  */
-bool			SceneCheatCode::init() {
+bool SceneCheatCode::init() {
 	/* load history */
 	std::ifstream	file(CHEATCODE_HIST_FILE);
 	std::string		line;
@@ -120,7 +120,19 @@ bool			SceneCheatCode::init() {
 		tmpPos.x = 5;
 		tmpSize.x = winSz.x - (tmpPos.x * 2);
 		tmpSize.y = ABaseUI::strHeight(CHEATCODE_FONT, CHEATCODE_FONT_SCALE) * 1.4;
-		tmpPos.y = tmpSize.y;
+
+		tmpPos.y = tmpSize.y / 2;
+		_infoCommandLine = &addText(tmpPos, tmpSize, "");
+		_infoCommandLine->setEnabled(false)
+			.setTextFont(CHEATCODE_FONT)
+			.setTextScale(CHEATCODE_FONT_SCALE)
+			.setTextColor(CHEATCODE_TEXT_COlOR)
+			.setText(CHEATCODE_DEF_TXT)
+			.setColor(CHEATCODE_COLOR)
+			.setTextAlign(TextAlign::LEFT)
+			.setZ(1);
+
+		tmpPos.y += tmpSize.y;
 		_commandLine = &addTextInput(tmpPos, tmpSize, "/help to get help");
 		_commandLine->setAlwaysFocus(true)
 			.setTextFont(CHEATCODE_FONT)
@@ -143,7 +155,7 @@ bool			SceneCheatCode::init() {
  * @return true if the update is a success
  * @return false if we need to quit the command line
  */
-bool	SceneCheatCode::update() {
+bool SceneCheatCode::update() {
 	ASceneMenu::update();
 
 	if (isCmdLnEnabled) {
@@ -174,8 +186,66 @@ bool	SceneCheatCode::update() {
 			}
 		}
 
-		/* exec command */
+		/* autocompletion */
+		std::vector<std::string> args = _splitCommand(_commandLine->getText());
+		bool disableInfoCmdLn = true;
+		std::vector<std::string> possibility;
+		if (_commandLine->getText().size() > 0 && _commandLine->getText()[0] == '/') {
+			if (_commandLine->getText() == "/") {  // "/"
+				args.push_back("");
+			}
+			if (_commandLine->getText()[0] == '/' && args.size() == 1) {  // only one arg (start of the command name)
+				for (auto && cmd : _commandsList) {
+					if (cmd.first.rfind(args[0], 0) == 0) {
+						possibility.push_back(cmd.first);
+					}
+				}
+				if (possibility.size() >= 1) {
+					std::string txt;
+					for (auto && it : possibility) {
+						txt += CHEATCODE_TAB + it;
+					}
+					_infoCommandLine->setText(txt).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
+					disableInfoCmdLn = false;
+				}
+				if (_isValidCommand(args[0])) {
+					std::string ln;
+					ln = "/" + args[0];
+					if (_commandsList[args[0]].prototype.size() > 0)
+						ln += " " + _commandsList[args[0]].prototype;
+					_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
+					disableInfoCmdLn = false;
+				}
+				else if (possibility.size() == 0) {
+					std::string ln = "Invalid command /" + args[0];
+					_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_ERR).setEnabled(true);
+					disableInfoCmdLn = false;
+				}
+			}
+		}
+		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_TAB)) {
+			if (_commandLine->getText().size() == 0) {  // ""
+				_commandLine->setText(CHEATCODE_DEF_TXT);
+			}
+			else if (possibility.size() == 1) {
+				_commandLine->setText("/" + possibility[0] + " ");
+				args[0] = possibility[0];
+				possibility.clear();
+				std::string ln;
+				ln = "/" + args[0];
+				if (_commandsList[args[0]].prototype.size() > 0)
+					ln += " " + _commandsList[args[0]].prototype;
+				_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
+				disableInfoCmdLn = false;
+			}
+		}
+		if (disableInfoCmdLn) {
+			_infoCommandLine->setEnabled(false);
+		}
+
 		_commandLine->setFocus(true);
+
+		/* exec command */
 		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 			_historyActID = -1;
 			_historySavedLine = "";
@@ -184,6 +254,7 @@ bool	SceneCheatCode::update() {
 		}
 	}
 	else {
+		_infoCommandLine->setEnabled(false);
 		_commandLine->setFocus(false);
 	}
 
@@ -383,10 +454,6 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 		size = 0;
 	}
 
-	if (splitted.empty()) {
-		_commandLine->inputReset();
-	}
-
 	return splitted;
 }
 
@@ -509,8 +576,11 @@ double SceneCheatCode::_toFloat(std::string const & arg, bool & error, bool * is
  *
  * @param txt The line text
  * @param txtColor The line text color
+ *
+ * @return The number of lines created
  */
-void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
+int SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
+	int nbLines = 0;
 	glm::ivec2 tmpPos;
 
 	tmpPos = _commandLine->getPos();
@@ -546,6 +616,7 @@ void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 			}
 		}
 		for (auto && lineText : allLines) {
+			nbLines += 1;
 			newLine.ui = &addText(tmpPos, _commandLine->getSize(), lineText);
 			newLine.ui->setTextAlign(TextAlign::LEFT)
 				.setTextFont(CHEATCODE_FONT)
@@ -565,6 +636,7 @@ void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 	while (_textLines.size() > s.j("cheatcode").u("maxLinesShow")) {
 		_removeLastLine();
 	}
+	return nbLines;
 }
 
 /**
