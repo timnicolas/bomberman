@@ -8,7 +8,7 @@
 #define CHEATCODE_FONT_SCALE			1
 #define CHEATCODE_COLOR					glm::vec4(0, 0, 0, 0.5)
 #define CHEATCODE_DEF_TXT				"/"
-#define CHEATCODE_TAB					"    "
+#define CHEATCODE_TAB					"  "
 
 /* logging */
 #define CHEATCODE_TEXT_COlOR			glm::vec4(1, 1, 1, 1)

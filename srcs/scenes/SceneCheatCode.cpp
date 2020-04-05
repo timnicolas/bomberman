@@ -368,7 +368,9 @@ void SceneCheatCode::_autocompletion() {
 		if (possibility.size() >= 1) {
 			std::string txt;
 			for (auto && it : possibility) {
-				txt += CHEATCODE_TAB + it;
+				if (txt.size() > 0)
+					txt += CHEATCODE_TAB;
+				txt += it;
 			}
 			_infoCommandLine->setText(txt).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
 			disableInfoCmdLn = false;
@@ -400,7 +402,8 @@ void SceneCheatCode::_autocompletion() {
 		}
 		/* if we can complete command name */
 		else if (possibility.size() == 1) {
-			_commandLine->setText("/" + possibility[0] + " ");
+			cmdName = possibility[0];
+			_commandLine->setText("/" + cmdName + " ");
 			std::string ln;
 			ln = "/" + cmdName;
 			if (_commandsList[cmdName].prototype.size() > 0)
