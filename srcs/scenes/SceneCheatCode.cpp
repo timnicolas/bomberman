@@ -119,7 +119,7 @@ bool SceneCheatCode::init() {
 	try {
 		tmpPos.x = 5;
 		tmpSize.x = winSz.x - (tmpPos.x * 2);
-		tmpSize.y = ABaseUI::strHeight(CHEATCODE_FONT, CHEATCODE_FONT_SCALE) * 1.4;
+		tmpSize.y = ABaseUI::strHeight(CHEATCODE_FONT, CHEATCODE_FONT_SCALE) * 1.6;
 
 		tmpPos.y = tmpSize.y / 2;
 		_infoCommandLine = &addText(tmpPos, tmpSize, "");
