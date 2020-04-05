@@ -61,8 +61,11 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
+	if (Inputs::isConfiguring())
+		return;
+
 	/* open cheat code */
-	if (SceneManager::getSceneName() != SceneNames::SETTINGS && Inputs::getKeyUp(InputType::CHEAT_CODE)) {
+	if (Inputs::getKeyUp(InputType::CHEAT_CODE)) {
 		SceneManager::openCheatCode(true);
 	}
 
@@ -109,7 +112,7 @@ void Gui::postUpdate(float const dtTime) {
 	(void)dtTime;
 	/* quit if needed */
 	if (Inputs::shouldQuit()
-	|| (Inputs::getKeyUp(InputType::CANCEL) && _exitMenuDisabled == false))
+	|| (!Inputs::isConfiguring() && Inputs::getKeyUp(InputType::CANCEL) && _exitMenuDisabled == false))
 	{
 		bool cheatCodeState = SceneManager::isCheatCodeOpen();
 		if (cheatCodeState) {
