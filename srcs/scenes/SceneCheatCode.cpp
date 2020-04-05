@@ -226,7 +226,9 @@ int SceneCheatCode::evalCommand(std::string const & command, bool ignoreHistory)
 		| CheatcodeAction::RESULT_SUCCESS;
 
 	if (command.size() > 0) {
-		if (command[0] == '/') {
+		bool isCommand;
+		_getCommandName(command, isCommand);  // get if it's a command
+		if (isCommand) {
 			std::vector<std::string> splittedCmd = _splitCommand(command);
 			if (splittedCmd.empty()) {  // command is empty
 				ret = CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
@@ -345,27 +347,21 @@ void SceneCheatCode::_history() {
  * @brief Compute the autocompletion if needed -> need to call _commandLine->setFocus(false); before
  */
 void SceneCheatCode::_autocompletion() {
-	/* if it's not a command */
-	if (_commandLine->getText().size() == 0
-	|| (_commandLine->getText().size() > 0 && _commandLine->getText()[0] != '/')) {
+	bool						isCommand;
+	std::string					cmdName = _getCommandName(_commandLine->getText(), isCommand);
+	std::vector<std::string>	possibility;
+	bool						disableInfoCmdLn = true;
+
+	if (!isCommand) {
 		_infoCommandLine->setEnabled(false);
 		return;
 	}
 
-	std::vector<std::string> args = _splitCommand(_commandLine->getText());
-	std::vector<std::string> possibility;
-	bool disableInfoCmdLn = true;
-
-	/* if command line is "/" */
-	if (_commandLine->getText() == "/") {  // "/"
-		args.push_back("");
-	}
-
 	/* if command line is /text (with invalid or incomplete command) */
 	// check what we can complete
-	if (args.size() == 1 && !_isValidCommand(args[0])) {  // only one arg (start of the command name)
+	if (!_isValidCommand(cmdName)) {  // only one arg (start of the command name)
 		for (auto && cmd : _commandsList) {
-			if (cmd.first.rfind(args[0], 0) == 0) {
+			if (cmd.first.rfind(cmdName, 0) == 0) {
 				possibility.push_back(cmd.first);
 			}
 		}
@@ -381,16 +377,16 @@ void SceneCheatCode::_autocompletion() {
 
 	/* if it's a command (valid or invalid) */
 	if (disableInfoCmdLn) {
-		if (_isValidCommand(args[0])) {  // valid command
+		if (_isValidCommand(cmdName)) {  // valid command
 			std::string ln;
-			ln = "/" + args[0];
-			if (_commandsList[args[0]].prototype.size() > 0)
-				ln += " " + _commandsList[args[0]].prototype;
+			ln = "/" + cmdName;
+			if (_commandsList[cmdName].prototype.size() > 0)
+				ln += " " + _commandsList[cmdName].prototype;
 			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
 			disableInfoCmdLn = false;
 		}
 		else {  // invalid command
-			std::string ln = "Invalid command /" + args[0] + " (try /help)";
+			std::string ln = "Invalid command /" + cmdName + " (try /help)";
 			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_ERR).setEnabled(true);
 			disableInfoCmdLn = false;
 		}
@@ -405,12 +401,10 @@ void SceneCheatCode::_autocompletion() {
 		/* if we can complete command name */
 		else if (possibility.size() == 1) {
 			_commandLine->setText("/" + possibility[0] + " ");
-			args[0] = possibility[0];
-			possibility.clear();
 			std::string ln;
-			ln = "/" + args[0];
-			if (_commandsList[args[0]].prototype.size() > 0)
-				ln += " " + _commandsList[args[0]].prototype;
+			ln = "/" + cmdName;
+			if (_commandsList[cmdName].prototype.size() > 0)
+				ln += " " + _commandsList[cmdName].prototype;
 			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
 			disableInfoCmdLn = false;
 		}
@@ -434,8 +428,16 @@ std::vector<std::string> SceneCheatCode::_splitCommand(std::string const & comma
 	uint32_t start = 0;
 	uint32_t size = 0;
 
-	if (command[0] == '/')
-		start = 1;
+
+	while (start < command.size() && _isSpace(command[start])) {
+		start += 1;
+	}
+	if (start < command.size() && command[start] == '/') {
+		start += 1;
+	}
+
+	if (start >= command.size())
+		return splitted;
 
 	bool isQuoted;
 	while (start + size < command.size()) {
@@ -600,6 +602,43 @@ double SceneCheatCode::_toFloat(std::string const & arg, bool & error, bool * is
 		return 0;
 	}
 	return val;
+}
+
+std::string SceneCheatCode::_getCommandName(std::string const & command, bool & isCommand) {
+	isCommand = false;
+	if (command.size() == 0)
+		return "";
+
+	uint32_t start = 0;
+	uint32_t size = 0;
+
+	while (start < command.size() && _isSpace(command[start])) {
+		start += 1;
+	}
+	if (start < command.size() && command[start] == '/') {
+		isCommand = true;
+		start += 1;
+	}
+	else {
+		return "";
+	}
+	if (start >= command.size())
+		return "";
+
+	// remove spaces
+	while (start + size < command.size() && _isSpace(command[start])) {
+		start += 1;
+	}
+	while (start + size < command.size()) {
+		if (_isSpace(command[start + size]))
+			break;
+		size += 1;
+	}
+	if (size > 0) {
+		std::string word = command.substr(start, size);
+		return word;
+	}
+	return "";
 }
 
 /**

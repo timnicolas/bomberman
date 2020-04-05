@@ -100,6 +100,7 @@ class SceneCheatCode : public ASceneMenu {
 		int64_t						_toInt(std::string const & arg, bool & error, bool * isRelative = nullptr);
 		uint64_t					_toUint(std::string const & arg, bool & error, bool * isRelative = nullptr);
 		double						_toFloat(std::string const & arg, bool & error, bool * isRelative = nullptr);
+		std::string					_getCommandName(std::string const & command, bool & isCommand);
 
 		/* commands definition */
 		typedef int (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
