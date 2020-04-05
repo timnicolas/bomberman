@@ -86,9 +86,9 @@ bool	initSettings(std::string const & filename) {
 			s.j("fonts").j("base").add<uint64_t>("size", 20).setMin(5).setMax(50)
 				.setDescription("default size for the text");
 		s.j("fonts").add<SettingsJson>("cheatcode");
-			s.j("fonts").j("cheatcode").add<std::string>("file", "bomberman-assets/fonts/Roboto-Regular.ttf")
+			s.j("fonts").j("cheatcode").add<std::string>("file", "bomberman-assets/fonts/monaco.ttf")
 				.setDescription("this is the font for cheatcode");
-			s.j("fonts").j("cheatcode").add<uint64_t>("size", 7).setMin(5).setMax(50)
+			s.j("fonts").j("cheatcode").add<uint64_t>("size", 6).setMin(5).setMax(50)
 				.setDescription("default size for the text (cheatcode)");
 
 	/* colors */
