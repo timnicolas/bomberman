@@ -20,37 +20,42 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 		}},
 		{"clear", {
 			"['history'] ['all']",
-			"Clear the lines / history / ...",
+			"Clear the lines / history / ... (/clear list to have more informations).",
 			&SceneCheatCode::_execClear,
 		}},
 		{"log", {
 			"<type> <message>",
-			"Log a message. Type: debug, info, success, warn, err, fatal",
+			"Log a message (/log list to get the list of logs types).\n"
+				CHEATCODE_TAB"/log info \"info message\"",
 			&SceneCheatCode::_execLog,
 		}},
 		{"tp", {
 			"<x> <y>",
-			"Teleport to a given position (if possible). You can set relative position with ~ (~-1, ~3, ...)",
+			"Teleport to a given position (if possible). You can set relative position with ~ (~-1, ~3, ...)\n"
+				CHEATCODE_TAB"/tp 3 ~ -> tp 3 block right to you",
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
 			"<bonus, ...> ['list']",
-			"Get a bonus effect (list to get the list of bonus)",
+			"Get a bonus effect ('/getbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execGetbonus,
 		}},
 		{"loop", {
 			"<iter> <commands ...>",
-			"Exec commands multiples times (ex: /loop 3 \"/clear\" \"/getbonus life\")",
+			"Exec commands multiples times\n"
+				CHEATCODE_TAB"/loop 3 \"/clear\" \"/getbonus life\"",
 			&SceneCheatCode::_execLoop,
 		}},
 		{"exec", {
 			"<commands ...>",
-			"Execute multiples commands (ex: /exec \"/clear\" \"/log info \\\"cleared\\\"\"",
+			"Execute multiples commands\n"
+				CHEATCODE_TAB"/exec \"/clear\" \"/log info \\\"cleared\\\"\"",
 			&SceneCheatCode::_execExec,
 		}},
 		{"summon", {
 			"<typename> <x> <y>",
-			"Summon a block, entity, ... ('/summon list' to show the full list of entity)",
+			"Summon a block, entity, ... ('/summon list' to show the full list of entity)\n"
+				CHEATCODE_TAB"/summon enemyBasic ~3 5",
 			&SceneCheatCode::_execSummon,
 		}},
 	};
@@ -112,8 +117,8 @@ bool			SceneCheatCode::init() {
 	glm::vec2 tmpSize;
 
 	try {
-		tmpPos.x = 0;
-		tmpSize.x = winSz.x;
+		tmpPos.x = 5;
+		tmpSize.x = winSz.x - (tmpPos.x * 2);
 		tmpSize.y = ABaseUI::strHeight(CHEATCODE_FONT, CHEATCODE_FONT_SCALE) * 1.4;
 		tmpPos.y = tmpSize.y;
 		_commandLine = &addTextInput(tmpPos, tmpSize, "/help to get help");
@@ -516,19 +521,45 @@ void SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 	std::string line;
 
 	while (std::getline(ss, line, '\n')) {
-		newLine.ui = &addText(tmpPos, _commandLine->getSize(), line);
-		newLine.ui->setTextAlign(TextAlign::LEFT)
-			.setTextFont(CHEATCODE_FONT)
-			.setTextScale(CHEATCODE_FONT_SCALE)
-			.setTextColor(txtColor)
-			.setColor(CHEATCODE_COLOR)
-			.setZ(1);
-
-		for (auto && ln : _textLines) {
-			ln.ui->addPosOffset({0, ln.ui->getSize().y});
+		std::vector<std::string> allLines;
+		if (ABaseUI::strWidth(CHEATCODE_FONT, line, CHEATCODE_FONT_SCALE)
+		< _commandLine->getSize().x - UI_DEF_TEXT_PADDING)
+		{
+			allLines.push_back(line);
 		}
+		else {
+			// split in multiples lines
+			std::string ln;
+			uint32_t start = 0;
+			while (start < line.size()) {
+				uint32_t size = 1;
+				while (start + size < line.size()
+				&& ABaseUI::strWidth(CHEATCODE_FONT, line.substr(start, size), CHEATCODE_FONT_SCALE)
+				< _commandLine->getSize().x - UI_DEF_TEXT_PADDING)
+				{
+					size += 1;
+				}
+				if (start + size < line.size())
+					size -= 1;
+				allLines.push_back(line.substr(start, size));
+				start += size;
+			}
+		}
+		for (auto && lineText : allLines) {
+			newLine.ui = &addText(tmpPos, _commandLine->getSize(), lineText);
+			newLine.ui->setTextAlign(TextAlign::LEFT)
+				.setTextFont(CHEATCODE_FONT)
+				.setTextScale(CHEATCODE_FONT_SCALE)
+				.setTextColor(txtColor)
+				.setColor(CHEATCODE_COLOR)
+				.setZ(1);
 
-		_textLines.push_front(newLine);
+			for (auto && ln : _textLines) {
+				ln.ui->addPosOffset({0, ln.ui->getSize().y});
+			}
+
+			_textLines.push_front(newLine);
+		}
 	}
 
 	while (_textLines.size() > s.j("cheatcode").u("maxLinesShow")) {

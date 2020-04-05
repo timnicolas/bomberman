@@ -28,7 +28,6 @@ const float				ABaseUI::_rectVertices[] = {
 };
 /* text */
 TextRender *			ABaseUI::_textRender = nullptr;
-std::string				ABaseUI::_defFont = "default";
 /* img */
 Shader *				ABaseUI::_imgShader = nullptr;
 GLuint					ABaseUI::_imgVao = 0;
@@ -45,7 +44,7 @@ const float				ABaseUI::_imgVertices[] = {
 };
 /* help */
 bool					ABaseUI::_showHelp = false;
-std::string				ABaseUI::_helpFont = ABaseUI::_defFont;
+std::string				ABaseUI::_helpFont = UI_DEF_TEXT_FOND;
 float					ABaseUI::_helpTextScale = 0.8;
 float					ABaseUI::_helpBorderSize = 1;
 float					ABaseUI::_helpPadding = 8;
@@ -100,7 +99,7 @@ void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t 
 	/* create text render */
 	_textRender = new TextRender(0, 0);
 	try {
-		_textRender->loadFont(_defFont, defFontName, defFontSize);
+		_textRender->loadFont(UI_DEF_TEXT_FOND, defFontName, defFontSize);
 	}
 	catch (TextRender::TextRenderError const & e) {
 		throw UIException(e.what());
@@ -219,7 +218,7 @@ uint32_t ABaseUI::strWidth(std::string const & fontName, std::string const & txt
  * @return uint32_t The width of the text
  */
 uint32_t ABaseUI::strWidth(std::string const & txt, float scale) {
-	return strWidth(_defFont, txt, scale);
+	return strWidth(UI_DEF_TEXT_FOND, txt, scale);
 }
 /**
  * @brief Get height of string with a given font at a given scale
@@ -240,7 +239,7 @@ uint32_t ABaseUI::strHeight(std::string const & fontName, float scale, bool full
  * @return uint32_t The width of the text
  */
 uint32_t ABaseUI::strHeight(float scale, bool fullHeight) {
-	return strHeight(_defFont, scale, fullHeight);
+	return strHeight(UI_DEF_TEXT_FOND, scale, fullHeight);
 }
 
 /**
