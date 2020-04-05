@@ -62,7 +62,7 @@ Gui &Gui::operator=(Gui const &rhs) {
  */
 void Gui::preUpdate(float const dtTime) {
 	/* open cheat code */
-	if (Inputs::getKeyUp(InputType::CHEAT_CODE)) {
+	if (SceneManager::getSceneName() != SceneNames::SETTINGS && Inputs::getKeyUp(InputType::CHEAT_CODE)) {
 		SceneManager::openCheatCode(true);
 	}
 
