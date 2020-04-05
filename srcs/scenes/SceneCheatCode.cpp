@@ -126,7 +126,7 @@ bool SceneCheatCode::init() {
 		_infoCommandLine->setEnabled(false)
 			.setTextFont(CHEATCODE_FONT)
 			.setTextScale(CHEATCODE_FONT_SCALE)
-			.setTextColor(CHEATCODE_TEXT_COlOR)
+			.setTextColor(CHEATCODE_TEXT_COlOR_DEBUG)
 			.setText(CHEATCODE_DEF_TXT)
 			.setColor(CHEATCODE_COLOR)
 			.setTextAlign(TextAlign::LEFT)
@@ -161,88 +161,10 @@ bool SceneCheatCode::update() {
 	if (isCmdLnEnabled) {
 		_commandLine->setFocus(false);
 		/* go to history */
-		if (_cmdHistory.size() > 0) {
-			switch (Inputs::getTextInputKeycode()) {
-				case SDLK_UP:
-					if (_historyActID < static_cast<int>(_cmdHistory.size() - 1)) {
-						if (_historyActID == -1) {
-							_historySavedLine = _commandLine->getText();  // save line
-						}
-						_historyActID += 1;
-						_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
-					}
-					break;
-				case SDLK_DOWN:
-					if (_historyActID > -1) {
-						_historyActID -= 1;
-						if (_historyActID < 0) {
-							_commandLine->setText(_historySavedLine);
-						}
-						else {
-							_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
-						}
-					}
-					break;
-			}
-		}
+		_history();  // to be called with _commandLine->setFocus(false);
 
 		/* autocompletion */
-		std::vector<std::string> args = _splitCommand(_commandLine->getText());
-		bool disableInfoCmdLn = true;
-		std::vector<std::string> possibility;
-		if (_commandLine->getText().size() > 0 && _commandLine->getText()[0] == '/') {
-			if (_commandLine->getText() == "/") {  // "/"
-				args.push_back("");
-			}
-			if (_commandLine->getText()[0] == '/' && args.size() == 1) {  // only one arg (start of the command name)
-				for (auto && cmd : _commandsList) {
-					if (cmd.first.rfind(args[0], 0) == 0) {
-						possibility.push_back(cmd.first);
-					}
-				}
-				if (possibility.size() >= 1) {
-					std::string txt;
-					for (auto && it : possibility) {
-						txt += CHEATCODE_TAB + it;
-					}
-					_infoCommandLine->setText(txt).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
-					disableInfoCmdLn = false;
-				}
-				if (_isValidCommand(args[0])) {
-					std::string ln;
-					ln = "/" + args[0];
-					if (_commandsList[args[0]].prototype.size() > 0)
-						ln += " " + _commandsList[args[0]].prototype;
-					_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
-					disableInfoCmdLn = false;
-				}
-				else if (possibility.size() == 0) {
-					std::string ln = "Invalid command /" + args[0];
-					_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_ERR).setEnabled(true);
-					disableInfoCmdLn = false;
-				}
-			}
-		}
-		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_TAB)) {
-			if (_commandLine->getText().size() == 0) {  // ""
-				_commandLine->setText(CHEATCODE_DEF_TXT);
-			}
-			else if (possibility.size() == 1) {
-				_commandLine->setText("/" + possibility[0] + " ");
-				args[0] = possibility[0];
-				possibility.clear();
-				std::string ln;
-				ln = "/" + args[0];
-				if (_commandsList[args[0]].prototype.size() > 0)
-					ln += " " + _commandsList[args[0]].prototype;
-				_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR).setEnabled(true);
-				disableInfoCmdLn = false;
-			}
-		}
-		if (disableInfoCmdLn) {
-			_infoCommandLine->setEnabled(false);
-		}
-
+		_autocompletion();  // to be called with _commandLine->setFocus(false);
 		_commandLine->setFocus(true);
 
 		/* exec command */
@@ -387,6 +309,115 @@ void SceneCheatCode::setText(std::string const & txt) {
  */
 std::string SceneCheatCode::getText() const {
 	return _commandLine->getText();
+}
+
+/**
+ * @brief Go to the history if needed -> need to call _commandLine->setFocus(false); before
+ */
+void SceneCheatCode::_history() {
+	if (_cmdHistory.size() > 0) {
+		switch (Inputs::getTextInputKeycode()) {
+			case SDLK_UP:
+				if (_historyActID < static_cast<int>(_cmdHistory.size() - 1)) {
+					if (_historyActID == -1) {
+						_historySavedLine = _commandLine->getText();  // save line
+					}
+					_historyActID += 1;
+					_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
+				}
+				break;
+			case SDLK_DOWN:
+				if (_historyActID > -1) {
+					_historyActID -= 1;
+					if (_historyActID < 0) {
+						_commandLine->setText(_historySavedLine);
+					}
+					else {
+						_commandLine->setText(_cmdHistory[_cmdHistory.size() - 1 - _historyActID]);
+					}
+				}
+				break;
+		}
+	}
+}
+
+/**
+ * @brief Compute the autocompletion if needed -> need to call _commandLine->setFocus(false); before
+ */
+void SceneCheatCode::_autocompletion() {
+	/* if it's not a command */
+	if (_commandLine->getText().size() == 0
+	|| (_commandLine->getText().size() > 0 && _commandLine->getText()[0] != '/')) {
+		_infoCommandLine->setEnabled(false);
+		return;
+	}
+
+	std::vector<std::string> args = _splitCommand(_commandLine->getText());
+	std::vector<std::string> possibility;
+	bool disableInfoCmdLn = true;
+
+	/* if command line is "/" */
+	if (_commandLine->getText() == "/") {  // "/"
+		args.push_back("");
+	}
+
+	/* if command line is /text (with invalid or incomplete command) */
+	// check what we can complete
+	if (args.size() == 1 && !_isValidCommand(args[0])) {  // only one arg (start of the command name)
+		for (auto && cmd : _commandsList) {
+			if (cmd.first.rfind(args[0], 0) == 0) {
+				possibility.push_back(cmd.first);
+			}
+		}
+		if (possibility.size() >= 1) {
+			std::string txt;
+			for (auto && it : possibility) {
+				txt += CHEATCODE_TAB + it;
+			}
+			_infoCommandLine->setText(txt).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
+			disableInfoCmdLn = false;
+		}
+	}
+
+	/* if it's a command (valid or invalid) */
+	if (disableInfoCmdLn) {
+		if (_isValidCommand(args[0])) {  // valid command
+			std::string ln;
+			ln = "/" + args[0];
+			if (_commandsList[args[0]].prototype.size() > 0)
+				ln += " " + _commandsList[args[0]].prototype;
+			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
+			disableInfoCmdLn = false;
+		}
+		else {  // invalid command
+			std::string ln = "Invalid command /" + args[0] + " (try /help)";
+			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_ERR).setEnabled(true);
+			disableInfoCmdLn = false;
+		}
+	}
+
+	/* process tab */
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_TAB)) {
+		/* if text is empty */
+		if (_commandLine->getText().size() == 0) {  // ""
+			_commandLine->setText(CHEATCODE_DEF_TXT);
+		}
+		/* if we can complete command name */
+		else if (possibility.size() == 1) {
+			_commandLine->setText("/" + possibility[0] + " ");
+			args[0] = possibility[0];
+			possibility.clear();
+			std::string ln;
+			ln = "/" + args[0];
+			if (_commandsList[args[0]].prototype.size() > 0)
+				ln += " " + _commandsList[args[0]].prototype;
+			_infoCommandLine->setText(ln).setTextColor(CHEATCODE_TEXT_COlOR_DEBUG).setEnabled(true);
+			disableInfoCmdLn = false;
+		}
+	}
+	if (disableInfoCmdLn) {
+		_infoCommandLine->setEnabled(false);
+	}
 }
 
 /**

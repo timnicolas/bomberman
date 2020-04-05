@@ -92,6 +92,8 @@ class SceneCheatCode : public ASceneMenu {
 	private:
 		SceneCheatCode();
 		/* for parser */
+		void						_history();
+		void						_autocompletion();
 		std::vector<std::string>	_splitCommand(std::string const & command);
 		bool						_isSpace(char c) const;
 		bool						_isValidCommand(std::string const & name) const;
