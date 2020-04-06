@@ -5,6 +5,21 @@
 #include "TextRender.hpp"
 #include "Inputs.hpp"
 
+/* def values */
+#define UI_DEF_Z					0
+#define UI_DEF_POS_OFFSET			glm::vec2(0, 0)
+#define UI_DEF_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_SIZE			2.0
+#define UI_DEF_MOUSE_HOVER_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.2)
+#define UI_DEF_MOUSE_CLICK_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.5)
+#define UI_DEF_TEXT					""
+#define UI_DEF_TEXT_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT_FOND			"default"
+#define UI_DEF_TEXT_SCALE			1.0
+#define UI_DEF_TEXT_PADDING			5
+#define UI_DEF_TEXT_ALIGN			TextAlign::CENTER
+
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
@@ -47,6 +62,10 @@ class ABaseUI {
 		static void staticUpdate();
 		static void	setWinSize(glm::vec2 winSize);
 		static void loadFont(std::string const & fontName, std::string const & filename, uint32_t fontSize);
+		static uint32_t strWidth(std::string const & fontName, std::string const & txt, float scale = 1);
+		static uint32_t strWidth(std::string const & txt, float scale = 1);
+		static uint32_t strHeight(std::string const & fontName, float scale = 1, bool fullHeight = false);
+		static uint32_t strHeight(float scale = 1, bool fullHeight = false);
 		/* help */
 		static void showHelp(bool show);
 		static void setHelpFont(std::string fontName);
@@ -67,57 +86,59 @@ class ABaseUI {
 		void			draw();
 
 		/* listener */
-		ABaseUI &	addButtonRightListener(bool * listener);
-		ABaseUI &	addButtonLeftListener(bool * listener);
+		virtual ABaseUI &			addButtonRightListener(bool * listener);
+		virtual ABaseUI &			addButtonLeftListener(bool * listener);
 
 		/* setter */
-		ABaseUI &	setKeyRightClickScancode(SDL_Scancode scancode);
-		ABaseUI &	setKeyLeftClickScancode(SDL_Scancode scancode);
-		ABaseUI &	setKeyRightClickInput(InputType::Enum input);
-		ABaseUI &	setKeyLeftClickInput(InputType::Enum input);
+		virtual ABaseUI &			setKeyRightClickScancode(SDL_Scancode scancode);
+		virtual ABaseUI &			setKeyLeftClickScancode(SDL_Scancode scancode);
+		virtual ABaseUI &			setKeyRightClickInput(InputType::Enum input);
+		virtual ABaseUI &			setKeyLeftClickInput(InputType::Enum input);
 
-		ABaseUI &	setEnabled(bool enabled);
-		ABaseUI &	setPos(glm::vec2 pos);
-		ABaseUI &	setPosOffset(glm::vec2 offset);
-		ABaseUI &	addPosOffset(glm::vec2 offset);
-		ABaseUI &	setSize(glm::vec2 size);
-		ABaseUI &	setCalculatedSize();
-		ABaseUI &	setColor(glm::vec4 color);
+		virtual ABaseUI &			setEnabled(bool enabled);
+		virtual ABaseUI &			setPos(glm::vec2 pos);
+		virtual ABaseUI &			setZ(float z);
+		virtual ABaseUI &			setPosOffset(glm::vec2 offset);
+		virtual ABaseUI &			addPosOffset(glm::vec2 offset);
+		virtual ABaseUI &			setSize(glm::vec2 size);
+		virtual ABaseUI &			setCalculatedSize();
+		virtual ABaseUI &			setColor(glm::vec4 color);
 
-		ABaseUI &	setBorderColor(glm::vec4 color);
-		ABaseUI &	setBorderSize(float size);
+		virtual ABaseUI &			setBorderColor(glm::vec4 color);
+		virtual ABaseUI &			setBorderSize(float size);
 
-		ABaseUI &	setMouseHoverColor(glm::vec4 color);
-		ABaseUI &	setMouseClickColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseHoverColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseClickColor(glm::vec4 color);
 
-		ABaseUI &	setText(std::string const & text);
-		ABaseUI &	setTextColor(glm::vec4 color);
-		ABaseUI &	setTextFont(std::string const & font);
-		ABaseUI &	setTextScale(float scale);
-		ABaseUI &	setTextPadding(float padding);
-		ABaseUI &	setTextAlign(TextAlign::Enum align);
+		virtual ABaseUI &			setText(std::string const & text);
+		virtual ABaseUI &			setTextColor(glm::vec4 color);
+		virtual ABaseUI &			setTextFont(std::string const & font);
+		virtual ABaseUI &			setTextScale(float scale);
+		virtual ABaseUI &			setTextPadding(float padding);
+		virtual ABaseUI &			setTextAlign(TextAlign::Enum align);
 
 		/* master */
-		ABaseUI &	setMaster(ABaseMasterUI * master);
+		virtual ABaseUI &			setMaster(ABaseMasterUI * master);
 
 		/* check */
-		bool					isPartiallyOutOfScreen() const;  // ret true if partially out of the screen
-		bool					isTotallyOutOfScreen() const;  // ret true if totally out of the screen
-		bool					isPartiallyOutOfMaster() const;  // ret true if partially out of the master element
-		bool					isTotallyOutOfMaster() const;  // ret true if totally out of the screen element
+		virtual bool				isPartiallyOutOfScreen() const;  // ret true if partially out of the screen
+		virtual bool				isTotallyOutOfScreen() const;  // ret true if totally out of the screen
+		virtual bool				isPartiallyOutOfMaster() const;  // ret true if partially out of the master element
+		virtual bool				isTotallyOutOfMaster() const;  // ret true if totally out of the screen element
 
 		/* getter */
-		bool					getMouseHover() const;
-		bool					getMouseRightClick() const;
-		bool					getMouseLeftClick() const;
-		bool					isEnabled() const;
-		glm::vec2 &				getPos();
-		glm::vec2 const &		getPos() const;
-		glm::vec2				getRealPos() const;  // get master + pos + offset
-		glm::vec2 &				getSize();
-		glm::vec2 const &		getSize() const;
-		static Shader &			getRectShader();
-		uint32_t				getTextWidth() const;
+		virtual bool				getMouseHover() const;
+		virtual bool				getMouseRightClick() const;
+		virtual bool				getMouseLeftClick() const;
+		virtual bool				isEnabled() const;
+		virtual glm::vec2 &			getPos();
+		virtual glm::vec2 const &	getPos() const;
+		virtual glm::vec2			getRealPos() const;  // get master + pos + offset
+		virtual glm::vec2 &			getSize();
+		virtual glm::vec2 const &	getSize() const;
+		virtual	uint32_t			getTextWidth() const;
+		virtual std::string			getText() const;
+		static Shader &				getRectShader();
 
 		/* Exceptions */
 	class UIException : public std::runtime_error {
@@ -130,16 +151,16 @@ class ABaseUI {
 		ABaseUI();
 		/* draw base function */
 		// rect
-		void			_drawRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color1,
+		void			_drawRect(glm::vec2 pos, glm::vec2 size, float z, glm::vec4 color1,
 			glm::vec4 color2 = glm::vec4(1.0, 1.0, 1.0, 1.0), float factor = 1);
-		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float borderSize, glm::vec4 color);
+		void			_drawBorderRect(glm::vec2 pos, glm::vec2 size, float z, float borderSize, glm::vec4 color);
 		// text
-		void			_drawText(glm::vec2 pos, glm::vec2 size, std::string const & font, float scale, std::string const & text,
-			glm::vec4 color, TextAlign::Enum align, float padding);
+		void			_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
+			std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
 		void			_loadImg(std::string const & filename, bool updateSize = true);
 		void			_unloadImg();
-		void			_drawImg(glm::vec2 pos, glm::vec2 size, GLuint textureID, glm::vec4 color);
+		void			_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
 		virtual void	_update() = 0;
@@ -152,6 +173,7 @@ class ABaseUI {
 		bool			_enabled;
 		// basics
 		glm::vec2		_pos;
+		float			_z;
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
 		glm::vec4		_color;
@@ -203,7 +225,6 @@ class ABaseUI {
 		static const float				_rectVertices[];
 		/* text */
 		static TextRender *				_textRender;
-		static std::string				_defFont;
 		/* image 2D */
 		static Shader *					_imgShader;
 		static GLuint					_imgVao;

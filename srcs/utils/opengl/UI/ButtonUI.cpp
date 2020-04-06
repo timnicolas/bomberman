@@ -36,7 +36,7 @@ void ButtonUI::_draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = getRealPos();
@@ -61,8 +61,8 @@ void ButtonUI::_draw() {
 		factor = 1 - secColor.a;
 		secColor.a = 1;
 	}
-	_drawRect(tmpPos, tmpSize, _color, secColor, factor);
+	_drawRect(tmpPos, tmpSize, _z, _color, secColor, factor);
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 }
