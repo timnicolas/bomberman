@@ -27,9 +27,6 @@ protected:
 	virtual bool	_draw(Gui &gui);
 
 public:
-	// Members
-	int			bombs;
-
 	// Constructors
 	explicit EnemyFollow(SceneGame &game);
 	~EnemyFollow();
