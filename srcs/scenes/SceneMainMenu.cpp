@@ -41,31 +41,20 @@ bool			SceneMainMenu::init() {
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Bomberman");
 
-		tmpPos.y -= menuHeight * 1.8;
-		addButton(tmpPos, tmpSize, "new   game")
-			.setKeyLeftClickInput(InputType::CONFIRM)
+		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "continue")
+			.addButtonLeftListener(&_states.continueGame);
+		allUI.newGame = &addButton(VOID_SIZE, VOID_SIZE, "new   game")
 			.addButtonLeftListener(&_states.newGame);
-
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "load   saved   game")
+		allUI.loadGame = &addButton(VOID_SIZE, VOID_SIZE, "load   saved   game")
 			.setKeyLeftClickInput(InputType::ACTION)
 			.addButtonLeftListener(&_states.loadGame);
-
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "settings")
+		allUI.loadSettings = &addButton(VOID_SIZE, VOID_SIZE, "settings")
 			.setKeyLeftClickScancode(SDL_SCANCODE_COMMA)
 			.addButtonLeftListener(&_states.loadSettings);
-
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "exit")
+		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
-
-		tmpSize.x = tmpSize.x * 1.3;
-		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
-		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize);
+		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
 		AudioManager::loadMusic("sounds/puzzle.ogg");
 		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
@@ -86,8 +75,41 @@ bool			SceneMainMenu::init() {
  * @return false if there are an error in update
  */
 bool	SceneMainMenu::update() {
-	ASceneMenu::update();
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	float menuWidth = winSz.x / 2;
+	float menuHeight = winSz.y / 14;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+	tmpPos.y -= menuHeight * 1.8;
+	if (Save::isInstantiate()) {
+		allUI.continueGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
+		tmpPos.y -= menuHeight * 1.3;
+		allUI.newGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::NO_KEY);
+	} else {
+		allUI.continueGame->setPos(VOID_SIZE).setSize(VOID_SIZE).setKeyLeftClickInput(InputType::NO_KEY);
+		allUI.newGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
+	}
+	tmpPos.y -= menuHeight * 1.3;
+	allUI.loadGame->setPos(tmpPos).setSize(tmpSize);
+	tmpPos.y -= menuHeight * 1.3;
+	allUI.loadSettings->setPos(tmpPos).setSize(tmpSize);
+	tmpPos.y -= menuHeight * 1.3;
+	allUI.exit->setPos(tmpPos).setSize(tmpSize);
+	tmpSize.x = tmpSize.x * 1.3;
+	tmpSize.y = winSz.y - tmpPos.y;
+	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
+	tmpPos.y -= menuHeight * 0.5;
+	allUI.border->setPos(tmpPos).setSize(tmpSize);
 
+	ASceneMenu::update();
+	if (_states.continueGame) {
+		_states.continueGame = false;
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
 	if (_states.newGame) {
 		_states.newGame = false;
 		Save::newGame();
