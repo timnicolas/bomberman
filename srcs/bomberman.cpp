@@ -44,7 +44,8 @@ bool	checkPrgm() {
 
 	/* list of required files */
 	std::vector<std::string> requiredFiles = {
-		s.j("font").s("file"),
+		s.j("fonts").j("base").s("file"),
+		s.j("fonts").j("cheatcode").s("file"),
 	};
 
 	for (auto && it : requiredDirs) {
@@ -78,20 +79,41 @@ bool	initSettings(std::string const & filename) {
 		s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
 
 	/* font */
-	s.add<SettingsJson>("font");
-		s.j("font").add<std::string>("file", "bomberman-assets/fonts/snakebold.ttf")
-			.setDescription("this is the main font");
-		s.j("font").add<uint64_t>("size", 20).setMin(10).setMax(50)
-			.setDescription("default size for the text");
+	s.add<SettingsJson>("fonts");
+		s.j("fonts").add<SettingsJson>("base");
+			s.j("fonts").j("base").add<std::string>("file", "bomberman-assets/fonts/snakebold.ttf")
+				.setDescription("this is the main font");
+			s.j("fonts").j("base").add<uint64_t>("size", 20).setMin(5).setMax(50)
+				.setDescription("default size for the text");
+		s.j("fonts").add<SettingsJson>("cheatcode");
+			s.j("fonts").j("cheatcode").add<std::string>("file", "bomberman-assets/fonts/monaco.ttf")
+				.setDescription("this is the font for cheatcode");
+			s.j("fonts").j("cheatcode").add<uint64_t>("size", 6).setMin(5).setMax(50)
+				.setDescription("default size for the text (cheatcode)");
 
 	/* colors */
 	s.add<SettingsJson>("colors");
 	// buttons
 	s.j("colors").add<SettingsJson>("buttons");
-		s.j("colors").j("buttons").add<double>("r", 0.07).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("g", 0.37).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("b", 0.8).setMin(0).setMax(1);
-		s.j("colors").j("buttons").add<double>("a", 1.0).setMin(0).setMax(1);
+		s.j("colors").j("buttons").add<uint64_t>("color", 0x2AB859).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("buttons-border");
+		s.j("colors").j("buttons-border").add<uint64_t>("color", 0x2CBC5C).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	// font color
+	s.j("colors").add<SettingsJson>("font");
+		s.j("colors").j("font").add<uint64_t>("color", 0xFFFFFF).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("font").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	// background color
+	s.j("colors").add<SettingsJson>("background");
+		s.j("colors").j("background").add<uint64_t>("color", 0x181818).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("background").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("bg-rect");
+		s.j("colors").j("bg-rect").add<uint64_t>("color", 0x121212).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("bg-rect-border");
+		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x000000).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
 	/* Audio */
 	s.add<SettingsJson>("audio");
@@ -109,9 +131,17 @@ bool	initSettings(std::string const & filename) {
 	s.j("graphics").add<int64_t>("width", 1200).setMin(800).setMax(2560).setDescription("The resolution's width.");
 	s.j("graphics").add<int64_t>("height", 800).setMin(600).setMax(1440).setDescription("The resolution's height.");
 
-	// mouse sensitivity
+	/* mouse sensitivity */
 	s.add<double>("mouse_sensitivity", 0.1).setMin(0.0).setMax(3.0) \
 		.setDescription("Camera mouse sensitivity.");
+
+	/* cheatcode */
+	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
+		s.j("cheatcode").add<uint64_t>("maxLinesShow", 25).setMin(5).setMax(50).setDescription("number of lines to show");
+		s.j("cheatcode").add<uint64_t>("timeLineShow", 3000).setMin(0).setMax(10000)
+			.setDescription("Time to show lines before quit");
+		s.j("cheatcode").add<uint64_t>("historySize", 1000).setMin(0).setMax(10000)
+			.setDescription("size of the history");
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");
@@ -224,4 +254,23 @@ std::string					timeToString(float time) {
 	std::stringstream ss;
 	ss << std::setw(2) << std::setfill('0') << seconds;
 	return std::to_string(minutes) + ":" + ss.str();
+}
+
+/**
+ * @brief Transform color between hexadecimal mode to float vec4.
+ *
+ * @param color
+ * @param alpha
+ * @return glm::vec4
+ */
+glm::vec4					colorise(uint32_t color, uint8_t alpha) {
+	float	red = static_cast<float>((color & 0xFF0000) >> 16) / 255.0;
+	float	green = static_cast<float>((color & 0x00FF00) >> 8) / 255.0;
+	float	blue = static_cast<float>(color & 0x0000FF) / 255.0;
+	if (color > 0xffffff) {
+		red = 1.0;
+		green = 1.0;
+		blue = 1.0;
+	}
+	return (glm::vec4({red, green, blue, (alpha / 255.0)}));
 }

@@ -70,6 +70,7 @@ public:
 	bool							takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest);
 	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
+	bool							tp(glm::vec3 tpPos);
 
 	// Exceptions
 	class ACharacterException : public std::runtime_error {

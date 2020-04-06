@@ -8,8 +8,9 @@
 #include "useGlm.hpp"
 #include "SettingsJson.hpp"
 
-// equivalent of NULL for scancode
-#define NO_SCANCODE SDL_SCANCODE_F24
+// equivalent of NULL for scancode & keycode
+#define NO_SCANCODE	SDL_SCANCODE_F24
+#define NO_KEYCODE	SDLK_F24
 
 /**
  * @brief this is the list of all user-defined inputs
@@ -27,6 +28,7 @@ namespace InputType {
 		CANCEL,
 		GOTO_MENU,
 		SHOW_HELP,
+		CHEAT_CODE,
 		NB_INPUTS  // need to be the last element
 	};
 }  // namespace InputType
@@ -69,6 +71,9 @@ public:
 	static bool								getLeftClickDown();
 	static void								update();
 	static bool								isConfiguring();
+	static void								setTextInputMode(bool enable);
+	static SDL_Keycode						getTextInputKeycode();
+	static std::string						getTextInputString();
 
 private:
 	Inputs();
@@ -97,6 +102,11 @@ private:
 	bool									_getLeftClickDown() const;
 	void									_update();
 	bool									_isConfiguring();
+	void									_setTextInputMode(bool enable);
+	SDL_Keycode								_getTextInputKeycode() const;
+	std::string								_getTextInputString() const;
+	bool									_ingoreScancode(SDL_Scancode scan) const;
+	bool									_ignoreInputType(InputType::Enum type) const;
 
 	bool									_configuring;
 	InputType::Enum							_next_action_type;
@@ -115,6 +125,11 @@ private:
 	SettingsJson							_controls;
 	std::vector<SDL_Scancode>				_scancodes_previous;
 	std::vector<SDL_Scancode>				_scancodes_pressed;
+
+	bool									_isTextInputMode;
+	SDL_Keycode								_lastKeycode;
+	std::string								_currentText;
+	std::vector<SDL_Scancode>				_textInputIgnore;
 };
 
 #endif

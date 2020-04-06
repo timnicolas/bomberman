@@ -31,35 +31,40 @@ bool			SceneMainMenu::init() {
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 	float menuWidth = winSz.x / 2;
-	float menuHeight = menuWidth / 8;
+	float menuHeight = winSz.y / 14;
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addText(tmpPos, tmpSize, "MENU").setTextFont("title");
+		addTitle(tmpPos, tmpSize, "Bomberman");
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "PLAY")
+		tmpPos.y -= menuHeight * 1.8;
+		addButton(tmpPos, tmpSize, "new   game")
 			.setKeyLeftClickInput(InputType::CONFIRM)
-			.addButtonLeftListener(&_states.play);
+			.addButtonLeftListener(&_states.newGame);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "SETTINGS")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "load   saved   game")
+			.setKeyLeftClickInput(InputType::ACTION)
+			.addButtonLeftListener(&_states.loadGame);
+
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "settings")
 			.setKeyLeftClickScancode(SDL_SCANCODE_COMMA)
 			.addButtonLeftListener(&_states.loadSettings);
 
-		tmpPos.y -= menuHeight * 1.2;
-		addButton(tmpPos, tmpSize, "EXIT")
+		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
 
-		tmpSize.x = tmpSize.x * 1.2;
+		tmpSize.x = tmpSize.x * 1.3;
 		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize, glm::vec4(0.0, 0.0, 0.0, 0.0));
+		addRect(tmpPos, tmpSize);
 
 		AudioManager::loadMusic("sounds/puzzle.ogg");
 		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
@@ -82,9 +87,13 @@ bool			SceneMainMenu::init() {
 bool	SceneMainMenu::update() {
 	ASceneMenu::update();
 
-	if (_states.play) {
-		_states.play = false;
+	if (_states.newGame) {
+		_states.newGame = false;
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	else if (_states.loadGame) {
+		_states.loadGame = false;
+		SceneManager::loadScene(SceneNames::LOADGAME);
 	}
 	else if (_states.loadSettings) {
 		_states.loadSettings = false;

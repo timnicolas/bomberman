@@ -81,7 +81,7 @@ void SliderUI::_draw() {
 	std::string valStr = std::to_string(_val);
 	if (_val - static_cast<int>(_val) < 0.1 || _val - static_cast<int>(_val) > 0.9)
 		valStr = std::to_string(static_cast<int>(_val));
-	_drawText(tmpPos, tmpSize, _textFont, _textScale, valStr, _textColor, _textAlign, _textPadding);
+	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, valStr, _textColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = getRealPos();
@@ -95,10 +95,10 @@ void SliderUI::_draw() {
 	tmpSize.x = width;
 
     // draw center
-	_drawRect(tmpPos, tmpSize, _color);
+	_drawRect(tmpPos, tmpSize, _z, _color);
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 }
 
 /* listener */

@@ -14,8 +14,13 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 }
 
 Bomb::~Bomb() {
-	getPos();
-	game.clearFromBoard(this, {position.x, position.z});
+	try {
+		getPos();
+		game.clearFromBoard(this, {position.x, position.z});
+	}
+	catch (AObject::AObjectException const & e) {
+		// the object was never placed on the board
+	}
 }
 
 Bomb::Bomb(Bomb const &src) : AObject(src) {
@@ -52,6 +57,7 @@ void	Bomb::explode(glm::vec2 const pos) {
 	std::vector<AEntity *>	box;
 
 	active = false;
+	_propagationExplosion({pos.x, pos.y});
 	// top
 	i = 0;
 	while (++i < _propagation) {

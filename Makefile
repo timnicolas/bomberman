@@ -123,6 +123,7 @@ SRC =	main.cpp \
 		scenes/AScene.cpp \
 		scenes/ASceneMenu.cpp \
 		scenes/SceneMainMenu.cpp \
+		scenes/SceneLoadGame.cpp \
 		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
 		scenes/ScenePause.cpp \
@@ -130,6 +131,8 @@ SRC =	main.cpp \
 		scenes/SceneVictory.cpp \
 		scenes/SceneExit.cpp \
 		scenes/SceneSettings.cpp \
+		scenes/SceneCheatCode.cpp \
+		scenes/SceneCheatCode_exec.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -169,6 +172,7 @@ SRC =	main.cpp \
 		utils/opengl/UI/RectUI.cpp \
 		utils/opengl/UI/ImageUI.cpp \
 		utils/opengl/UI/ScrollbarUI.cpp \
+		utils/opengl/UI/TextInputUI.cpp \
 
 # INC_DIR/HEAD
 HEAD =	bomberman.hpp \
@@ -199,6 +203,7 @@ HEAD =	bomberman.hpp \
 		scenes/AScene.hpp \
 		scenes/ASceneMenu.hpp \
 		scenes/SceneMainMenu.hpp \
+		scenes/SceneLoadGame.hpp \
 		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
 		scenes/ScenePause.hpp \
@@ -206,6 +211,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneVictory.hpp \
 		scenes/SceneExit.hpp \
 		scenes/SceneSettings.hpp \
+		scenes/SceneCheatCode.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
@@ -244,6 +250,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/UI/RectUI.hpp \
 		utils/opengl/UI/ImageUI.hpp \
 		utils/opengl/UI/ScrollbarUI.hpp \
+		utils/opengl/UI/TextInputUI.hpp \
 
 
 ################################################################################
@@ -362,7 +369,7 @@ export CONFIGURE_LINTER
 # set command to launch linter on LINTER
 # add rules for linter in LINTER_RULES
 LINTER = $(CPPLINT)
-LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn,-whitespace/braces,-runtime/indentation_namespace \
+LINTER_RULES =	--filter=-whitespace/tab,-legal/copyright,-build/c++11,-whitespace/newline,-readability/braces,-whitespace/indent,-build/include_what_you_use,-build/header_guard,-runtime/references,-runtime/threadsafe_fn,-whitespace/braces,-whitespace/parens,-runtime/indentation_namespace \
 				--linelength=120 --quiet
 
 ################################################################################
