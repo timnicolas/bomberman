@@ -21,7 +21,6 @@ EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
 
 EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
 	if (this != &rhs) {
-		logWarn("EnemyBasic operator= called (not implemented)");
 		AEnemy::operator=(rhs);
 	}
 	return *this;
