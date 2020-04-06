@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ASceneMenu.hpp"
+#include "ABaseUI.hpp"
 
 /**
  * @brief main menu (opened at the game startup)
@@ -22,12 +23,23 @@ class SceneMainMenu : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
+			bool	continueGame;
 			bool	newGame;
 			bool	loadGame;
 			bool	loadSettings;
 			bool	exit;
 		};
 		ButtonsStates	_states;
+		struct AllUI {
+			ABaseUI	*continueGame;
+			ABaseUI	*newGame;
+			ABaseUI	*loadGame;
+			ABaseUI	*loadSettings;
+			ABaseUI	*exit;
+			ABaseUI	*border;
+		};
+		AllUI		allUI;
+
 
 	private:
 		SceneMainMenu();
