@@ -26,11 +26,12 @@ public:
 	// Getters & Setters
 	static std::string	getFileName(bool temporary);
 	static bool			isInstantiate();
+	static bool			isSaved();
 	// Methods
-	static bool			updateSavedFile(SceneGame &game);
+	static bool			updateSavedFile(SceneGame &game, bool succeedLevel);
 	static bool			loadStatesSaved(SceneGame &game);
 	static bool			isLevelDone(int32_t levelId);
-	static bool			save(bool temporary);
+	static bool			save(bool temporary = false);
 
 	// Exceptions
 	class SaveException : public std::runtime_error {
@@ -41,6 +42,7 @@ public:
 
 private:
 	// Members
+	bool			_saved;
 	bool			_instantiate;
 	std::time_t		_time;
 	std::string		_filename;
@@ -54,12 +56,12 @@ private:
 	// Methods
 	Save			&_loadGame(std::string filename);
 	Save			&_newGame();
-	bool			_initJson();
+	bool			_initJson(bool newFile = false);
 	std::string		_getFileName(bool temporary) const;
 	void			_init();
 	bool			_isLevelDone(int32_t levelId);
 	bool			_save(bool temporary);
-	bool			_updateSavedFile(SceneGame &game);
+	bool			_updateSavedFile(SceneGame &game, bool succeedLevel);
 	bool			_loadStatesSaved(SceneGame &game);
 	static std::string	_addRegexSlashes(std::string str);
 };

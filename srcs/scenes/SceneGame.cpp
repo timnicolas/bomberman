@@ -5,6 +5,7 @@
 #include "SceneGame.hpp"
 #include "bomberman.hpp"
 #include "FileUtils.hpp"
+#include "Save.hpp"
 
 #include "Player.hpp"
 #include "Wall.hpp"
@@ -234,6 +235,8 @@ bool	SceneGame::update() {
 		}
 		score.addBonusTime(levelTime, time);
 		score.addBonusEnemies(levelEnemies, enemies.size(), levelCrispies, crispiesLast);
+		Save::updateSavedFile(*this, true);
+		Save::save(true);
 		SceneManager::loadScene(SceneNames::VICTORY);
 		*_playerSaved = *player;
 		return true;
@@ -242,6 +245,8 @@ bool	SceneGame::update() {
 		// clear game infos.
 		player->resetParams();
 		*_playerSaved = *player;
+		Save::updateSavedFile(*this, false);
+		Save::save(true);
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}

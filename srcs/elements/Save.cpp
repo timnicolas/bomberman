@@ -11,6 +11,7 @@
 
 Save::Save() {
 	_instantiate = false;
+	_saved = false;
 }
 
 Save::~Save() {
@@ -66,6 +67,7 @@ Save	&Save::_loadGame(std::string filename) {
 	}
 	if (_initJson())
 		_instantiate = true;
+	_saved = true;
 	return *this;
 }
 
@@ -75,7 +77,7 @@ Save	&Save::newGame() {
 Save	&Save::_newGame() {
 	_init();
 	_saveJs = new SettingsJson();
-	_initJson();
+	_initJson(true);
 	_instantiate = true;
 	return *this;
 }
@@ -109,6 +111,9 @@ std::string	Save::_getFileName(bool temporary) const {
 bool		Save::isInstantiate() {
 	return get()._instantiate;
 }
+bool		Save::isSaved() {
+	return get()._saved;
+}
 // -- Private methods ----------------------------------------------------------
 
 void	Save::_init() {
@@ -139,7 +144,7 @@ std::string	Save::_addRegexSlashes(std::string str) {
  * @return true
  * @return false
  */
-bool	Save::_initJson() {
+bool	Save::_initJson(bool newFile) {
 	try {
 		std::string		saveName = std::to_string(_time);
 		_filename = _getFileName(false);
@@ -153,7 +158,7 @@ bool	Save::_initJson() {
 		_saveJs->add<int64_t>("date_lastmodified", t);
 
 		SettingsJson	*levelPattern = new SettingsJson();
-		levelPattern->add<int64_t>("id", 0).setMin(0);  // Todo(ebaudet): add setMax to nb levels.
+		levelPattern->add<int64_t>("id", 0).setMin(0);
 		levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
 		_saveJs->addList<SettingsJson>("levels", levelPattern);
 
@@ -167,9 +172,11 @@ bool	Save::_initJson() {
 			_saveJs->j("state").add<uint64_t>("bombpass", 0).setMin(0).setMax(1);
 			_saveJs->j("state").add<uint64_t>("flampass", 0).setMin(0).setMax(1);
 
-		if (_saveJs->loadFile(_filename) == false) {
-			logErr("Fail loading " << _filename);
-			return false;
+		if (!newFile) {
+			if (_saveJs->loadFile(_filename) == false) {
+				logErr("Fail loading " << _filename);
+				return false;
+			}
 		}
 	} catch (SettingsJson::SettingsException const & e) {
 		logErr(e.what());
@@ -192,41 +199,46 @@ bool	Save::_initJson() {
  * @return true
  * @return false
  */
-bool	Save::updateSavedFile(SceneGame &game) {
-	return get()._updateSavedFile(game);
+bool	Save::updateSavedFile(SceneGame &game, bool succeedLevel) {
+	return get()._updateSavedFile(game, succeedLevel);
 }
-bool	Save::_updateSavedFile(SceneGame &game) {
-	std::cout << "LevelID: " << game.level << std::endl;
-	std::cout << "LevelID: " << game.score << std::endl;
+bool	Save::_updateSavedFile(SceneGame &game, bool succeedLevel) {
+	logInfo("Save: LevelID: " << game.level);
+	logInfo("Save: Score: " << game.score);
 
+	_saved = false;
+	std::time_t		t = std::time(nullptr);
+	_saveJs->i("date_lastmodified") = t;
 	_saveJs->j("state").u("life") = game.player->lives;
 	_saveJs->j("state").u("bombs") = game.player->totalBombs;
 	_saveJs->j("state").u("flame") = game.player->bombProgation;
-	_saveJs->j("state").u("speed") = game.player->speed;
+	_saveJs->j("state").d("speed") = game.player->speed;
 	_saveJs->j("state").u("wallpass") = game.player->passWall == true ? 1 : 0;
 	_saveJs->j("state").u("detonator") = game.player->detonator == true ? 1 : 0;
 	_saveJs->j("state").u("bombpass") = game.player->passBomb == true ? 1 : 0;
 	_saveJs->j("state").u("flampass") = game.player->passFire == true ? 1 : 0;
 
-	bool	levelAlreadyDone = false;
-	for (SettingsJson *level : _saveJs->lj("levels").list) {
-		if (level->i("id") != game.level)
-			continue;
-		else {
-			if (level->i("score") < game.score.getScore())
-				level->i("score") = game.score.getScore();
-			levelAlreadyDone = true;
-			break;
+	if (succeedLevel) {
+		bool	levelAlreadyDone = false;
+		for (SettingsJson *level : _saveJs->lj("levels").list) {
+			if (level->i("id") != game.level)
+				continue;
+			else {
+				if (level->i("score") < game.score.getScore())
+					level->i("score") = game.score.getScore();
+				levelAlreadyDone = true;
+				break;
+			}
 		}
-	}
-	if (!levelAlreadyDone) {
-		SettingsJson	*levelPattern = new SettingsJson();
-		levelPattern->add<int64_t>("id", 0).setMin(0);
-		levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
-		levelPattern->i("id") = game.level;
-		levelPattern->i("score") = game.score.getScore();
+		if (!levelAlreadyDone) {
+			SettingsJson	*levelPattern = new SettingsJson();
+			levelPattern->add<int64_t>("id", 0).setMin(0);
+			levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
+			levelPattern->i("id") = game.level;
+			levelPattern->i("score") = game.score.getScore();
 
-		_saveJs->lj("levels").add(levelPattern);
+			_saveJs->lj("levels").add(levelPattern);
+		}
 	}
 
 	return true;
@@ -246,7 +258,7 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
 	game.player->lives = _saveJs->j("state").u("life");
 	game.player->totalBombs = _saveJs->j("state").u("bombs");
 	game.player->bombProgation = _saveJs->j("state").u("flame");
-	game.player->speed = _saveJs->j("state").u("speed");
+	game.player->speed = _saveJs->j("state").d("speed");
 	game.player->passWall = _saveJs->j("state").u("wallpass") == 0 ? false : true;
 	game.player->detonator = _saveJs->j("state").u("detonator") == 0 ? false : true;
 	game.player->passBomb = _saveJs->j("state").u("bombpass") == 0 ? false : true;
@@ -262,6 +274,9 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
  * @return true
  * @return false
  */
+bool	Save::isLevelDone(int32_t levelId) {
+	return get()._isLevelDone(levelId);
+}
 bool	Save::_isLevelDone(int32_t levelId) {
 	for (SettingsJson *level : _saveJs->lj("levels").list) {
 		if (level->i("id") == levelId) {
@@ -278,6 +293,9 @@ bool	Save::_isLevelDone(int32_t levelId) {
  * @return true
  * @return false
  */
+bool	Save::save(bool temporary) {
+	return get()._save(temporary);
+}
 bool	Save::_save(bool temporary) {
 	try {
 		_saveJs->saveToFile(_getFileName(temporary));
@@ -287,17 +305,10 @@ bool	Save::_save(bool temporary) {
 	}
 	if (temporary == false) {
 		file::rm(_getFileName(true), true);
+		_saved = true;
 	}
 	return true;
 }
-
-bool	Save::save(bool temporary) {
-	return get()._save(temporary);
-}
-bool	Save::isLevelDone(int32_t levelId) {
-	return get()._isLevelDone(levelId);
-}
-
 
 // -- Exceptions errors --------------------------------------------------------
 
