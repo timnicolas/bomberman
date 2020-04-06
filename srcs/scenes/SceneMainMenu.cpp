@@ -1,5 +1,6 @@
 #include "SceneMainMenu.hpp"
 #include "AudioManager.hpp"
+#include "Save.hpp"
 
 SceneMainMenu::SceneMainMenu(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
@@ -89,6 +90,7 @@ bool	SceneMainMenu::update() {
 
 	if (_states.newGame) {
 		_states.newGame = false;
+		Save::newGame();
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 	}
 	else if (_states.loadGame) {
