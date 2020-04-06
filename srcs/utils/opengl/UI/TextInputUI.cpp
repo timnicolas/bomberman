@@ -65,10 +65,32 @@ void TextInputUI::_update() {
 	if (Inputs::getKeyUp(InputType::CANCEL)) {
 		if (_isAlwaysFocus)  // loose focus for a frame only
 			return;
-		_looseFocusNextTime = true;
+		_looseFocusNextTime = true;  // loose focus
 	}
 	else if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_RETURN)) {
 		return;  // loose focus (for one frame if _isAlwaysFocus)
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_A)) || Inputs::getKeyByScancodeDown(SDL_SCANCODE_HOME))  // ctrl a | home
+	{
+		inputMoveCursor(-_cursorPos);  // cursor to first position
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_E)) || Inputs::getKeyByScancodeDown(SDL_SCANCODE_END))  // ctrl e | end
+	{
+		inputMoveCursor(_text.size() - _cursorPos);  // cursor to last position
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL)
+	|| Inputs::getKeyByScancode(SDL_SCANCODE_LGUI) || Inputs::getKeyByScancode(SDL_SCANCODE_RGUI))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_V))) {  // ctrl v | cmd v
+		inputInsertText(SDL_GetClipboardText());
+	}
+	else if (((Inputs::getKeyByScancode(SDL_SCANCODE_LCTRL) || Inputs::getKeyByScancode(SDL_SCANCODE_RCTRL)
+	|| Inputs::getKeyByScancode(SDL_SCANCODE_LGUI) || Inputs::getKeyByScancode(SDL_SCANCODE_RGUI))
+	&& Inputs::getKeyByScancodeDown(SDL_SCANCODE_C))) {  // ctrl c | cmd v
+		if (_text.size() > 0) {
+			SDL_SetClipboardText(_text.c_str());
+		}
 	}
 	setFocus(true);
 
@@ -262,6 +284,8 @@ ABaseUI & TextInputUI::setText(std::string const & txt) {
 	inputInsertText(txt);
 	return *this;
 }
+
+bool TextInputUI::hasFocus() const { return _hasFocus; }
 
 uint32_t TextInputUI::_getCursorOffset() const {
 	if (_text.size() == 0 || _cursorPos == 0)

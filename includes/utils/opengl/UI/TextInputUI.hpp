@@ -28,6 +28,8 @@ class TextInputUI : public ABaseUI {
 		TextInputUI &		setFocus(bool focus);
 		virtual ABaseUI &	setText(std::string const & text);
 
+		bool				hasFocus() const;
+
 	protected:
 		virtual void	_update();
 		virtual void	_draw();

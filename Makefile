@@ -132,6 +132,7 @@ SRC =	main.cpp \
 		scenes/SceneExit.cpp \
 		scenes/SceneSettings.cpp \
 		scenes/SceneCheatCode.cpp \
+		scenes/SceneCheatCode_exec.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \

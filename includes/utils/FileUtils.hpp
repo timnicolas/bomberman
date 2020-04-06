@@ -7,5 +7,5 @@ namespace file {
 	bool	isDir(std::string const & path);
 
 	bool	mkdir(std::string const & path, bool silent = false);
-	bool rm(std::string const & path, bool silent = false);
+	bool 	rm(std::string const & path, bool silent = false);
 }
