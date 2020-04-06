@@ -5,6 +5,21 @@
 #include "TextRender.hpp"
 #include "Inputs.hpp"
 
+/* def values */
+#define UI_DEF_Z					0
+#define UI_DEF_POS_OFFSET			glm::vec2(0, 0)
+#define UI_DEF_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_SIZE			2.0
+#define UI_DEF_MOUSE_HOVER_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.2)
+#define UI_DEF_MOUSE_CLICK_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.5)
+#define UI_DEF_TEXT					""
+#define UI_DEF_TEXT_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT_FOND			"default"
+#define UI_DEF_TEXT_SCALE			1.0
+#define UI_DEF_TEXT_PADDING			5
+#define UI_DEF_TEXT_ALIGN			TextAlign::CENTER
+
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
 #define SHADER_RECT_2D_FS "./shaders/rect_2D_fs.glsl"
@@ -210,7 +225,6 @@ class ABaseUI {
 		static const float				_rectVertices[];
 		/* text */
 		static TextRender *				_textRender;
-		static std::string				_defFont;
 		/* image 2D */
 		static Shader *					_imgShader;
 		static GLuint					_imgVao;

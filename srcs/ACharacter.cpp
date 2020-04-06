@@ -177,6 +177,20 @@ bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
 	return false;
 }
 
+/**
+ * @brief Teleport a character on a position (tp check colision)
+ *
+ * @param tpPos The position to teleport
+ * @return true If the tp is a success
+ */
+bool	ACharacter::tp(glm::vec3 tpPos) {
+	if (_canMoveOn(tpPos)) {
+		position = tpPos;
+		return true;
+	}
+	return false;
+}
+
 // -- Protected Methods --------------------------------------------------------
 
 /**

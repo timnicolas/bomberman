@@ -24,6 +24,7 @@ SceneManager::SceneManager()
   _dtTime(0.0f),
   _scene(SceneNames::MAIN_MENU),
   _isInCheatCode(false),
+  _showCheatCodeTextTime(0),
   _sceneLoadedCurrentFrame(false)
 {}
 
@@ -182,12 +183,27 @@ bool SceneManager::_update() {
 	/* update */
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
-	if (_isInCheatCode) {
+	bool cheatCodeClosed = false;
+	/* cheatcode */
+	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
+		// text only mode
+		if (_showCheatCodeTextTime > 0) {
+			reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->isCmdLnEnabled = false;
+			_showCheatCodeTextTime -= _dtTime * 1000;
+			if (_showCheatCodeTextTime < 0)
+				_showCheatCodeTextTime = 0;
+		}
+		else {
+			reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->isCmdLnEnabled = true;
+		}
+		// update scene
 		if (_sceneMap[SceneNames::CHEAT_CODE]->update() == false) {
 			openCheatCode(false);  // close cheat code
+			cheatCodeClosed = true;
 		}
 	}
-	else {
+	/* scene */
+	if (!_isInCheatCode && !cheatCodeClosed) {
 		// update the scene
 		if (_sceneMap[_scene]->update() == false) {
 			return false;
@@ -212,7 +228,7 @@ bool SceneManager::_draw() {
 		return false;
 	}
 
-	if (_isInCheatCode) {
+	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
 		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
 			return false;
 	}
@@ -303,11 +319,25 @@ void SceneManager::openCheatCode(bool open) {
 void SceneManager::_openCheatCode(bool open) {
 	if (_isInCheatCode == open)  // if state didn't changed
 		return;
-	if (open)
+	if (open) {
+		_showCheatCodeTextTime = 0;
+		if (reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->getText().size() == 0)
+			reinterpret_cast<SceneCheatCode *>(_sceneMap[SceneNames::CHEAT_CODE])->setText(CHEATCODE_DEF_TXT);
 		_sceneMap[SceneNames::CHEAT_CODE]->load();
-	else
+	}
+	else {
 		_sceneMap[SceneNames::CHEAT_CODE]->unload();
+	}
 	_isInCheatCode = open;
+}
+
+void SceneManager::openCheatCodeForTime(uint64_t ms) {
+	SceneManager::get()._openCheatCodeForTime(ms);
+}
+void SceneManager::_openCheatCodeForTime(uint64_t ms) {
+	if (ms == 0 || static_cast<int64_t>(ms) > _showCheatCodeTextTime) {
+		_showCheatCodeTextTime = ms;
+	}
 }
 
 /**
