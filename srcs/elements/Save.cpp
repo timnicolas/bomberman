@@ -10,14 +10,47 @@
 // -- Constructors -------------------------------------------------------------
 
 Save::Save() {
-	_init();
-	_save = new SettingsJson();
-	initJson();
+	_instantiate = false;
 }
 
-Save::Save(std::string filename) {
+Save::~Save() {
+	delete _saveJs;
+}
+
+Save::Save(Save const &src) {
+	_saveJs = new SettingsJson();
+	*this = src;
+}
+
+// -- get ----------------------------------------------------------------------
+/**
+ * @brief Return a reference to the singleton Save.
+ *
+ * @return Save& the reference to the singleton.
+ */
+Save	&Save::get() {
+	static Save	instance;
+	return (instance);
+}
+
+/**
+ * @brief Load filename.
+ *
+ * @param filename
+ * @return Save&
+ */
+Save	&Save::loadGame(std::string filename) {
+	return get()._loadGame(filename);
+}
+
+Save	&Save::_loadGame(std::string filename) {
+	_instantiate = false;
 	_init();
-	_save = new SettingsJson();
+	_saveJs = new SettingsJson();
+	if (file::isFile(filename) == false) {
+		logErr(filename << " not exist");
+		return *this;
+	}
 	std::regex	regex(_fileNameRegex);
 	std::smatch	match;
 	std::regex_match(filename, match, regex);
@@ -25,21 +58,26 @@ Save::Save(std::string filename) {
 		_time = static_cast<time_t>(std::stoi(match[1]));
 		if (file::isFile(filename) == false) {
 			logInfo(filename << " not exist and will be created.");
+			return *this;
 		}
 	} else {
 		logErr("FileNameError: " << filename);
-		logInfo("New file name: " << getFileName(false));
+		return *this;
 	}
-	initJson();
+	if (_initJson())
+		_instantiate = true;
+	return *this;
 }
 
-Save::~Save() {
-	delete _save;
+Save	&Save::newGame() {
+	return get()._newGame();
 }
-
-Save::Save(Save const &src) {
-	_save = new SettingsJson();
-	*this = src;
+Save	&Save::_newGame() {
+	_init();
+	_saveJs = new SettingsJson();
+	_initJson();
+	_instantiate = true;
+	return *this;
 }
 
 // -- Operators ----------------------------------------------------------------
@@ -47,33 +85,40 @@ Save::Save(Save const &src) {
 Save &Save::operator=(Save const &rhs) {
 	if ( this != &rhs ) {
 		_time = rhs._time;
-		*_save = *(rhs._save);
+		*_saveJs = *(rhs._saveJs);
 		_fileNameRegex = rhs._fileNameRegex;
 	}
 	return *this;
 }
 
 std::ostream &	operator<<(std::ostream & os, const Save& my_class) {
-	os << "Save: " << my_class._save;
+	os << "Save: " << my_class._saveJs;
 	return (os);
 }
 
 // -- Getters & Setters --------------------------------------------------------
 
 std::string	Save::getFileName(bool temporary) {
+	return get()._getFileName(temporary);
+}
+
+std::string	Save::_getFileName(bool temporary) const {
 	return s.s("savePath") + std::to_string(_time) + (temporary ? "_temp" : "") + ".save";
 }
 
+bool		Save::isInstantiate() {
+	return get()._instantiate;
+}
 // -- Private methods ----------------------------------------------------------
 
 void	Save::_init() {
 	_time = std::time(nullptr);
-	_fileNameRegex = "^" + Save::addRegexSlashes(s.s("savePath")) + "(\\d{10,})(_temp)?\\.save$";
+	_fileNameRegex = "^" + Save::_addRegexSlashes(s.s("savePath")) + "(\\d{10,})(_temp)?\\.save$";
 }
 
 // -- Methods ------------------------------------------------------------------
 
-std::string	Save::addRegexSlashes(std::string str) {
+std::string	Save::_addRegexSlashes(std::string str) {
 	char	specialChar[] = {'\'', '"', '?', '\\', '/', '.'};
 	std::string::iterator	it = str.begin();
 	while (it != str.end()) {
@@ -94,42 +139,48 @@ std::string	Save::addRegexSlashes(std::string str) {
  * @return true
  * @return false
  */
-bool	Save::initJson() {
+bool	Save::_initJson() {
 	try {
 		std::string		saveName = std::to_string(_time);
-		_filename = getFileName(false);
-		_save->name(saveName).description("Save file");
-		_save->add<std::string>("Filename", _filename);
+		_filename = _getFileName(false);
+		_saveJs->name(saveName).description("Save file");
+		_saveJs->add<std::string>("Filename", _filename);
 
 		// Save json definition
-		_save->add<std::string>("name");
-		_save->add<int64_t>("date_creation", _time);
+		_saveJs->add<std::string>("name");
+		_saveJs->add<int64_t>("date_creation", _time);
 		std::time_t		t = std::time(nullptr);
-		_save->add<int64_t>("date_lastmodified", t);
+		_saveJs->add<int64_t>("date_lastmodified", t);
 
 		SettingsJson	*levelPattern = new SettingsJson();
 		levelPattern->add<int64_t>("id", 0).setMin(0);  // Todo(ebaudet): add setMax to nb levels.
 		levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
-		_save->addList<SettingsJson>("levels", levelPattern);
+		_saveJs->addList<SettingsJson>("levels", levelPattern);
 
-		_save->add<SettingsJson>("state");
-			_save->j("state").add<uint64_t>("life", 2).setMin(1).setMax(999);
-			_save->j("state").add<uint64_t>("bombs", 1).setMin(1).setMax(999);
-			_save->j("state").add<uint64_t>("flame", 1).setMin(1).setMax(999);
-			_save->j("state").add<double>("speed", 3.0).setMin(3.0).setMax(MAX_SPEED);
-			_save->j("state").add<uint64_t>("wallpass", 0).setMin(0).setMax(1);
-			_save->j("state").add<uint64_t>("detonator", 0).setMin(0).setMax(1);
-			_save->j("state").add<uint64_t>("bombpass", 0).setMin(0).setMax(1);
-			_save->j("state").add<uint64_t>("flampass", 0).setMin(0).setMax(1);
+		_saveJs->add<SettingsJson>("state");
+			_saveJs->j("state").add<uint64_t>("life", 2).setMin(1).setMax(999);
+			_saveJs->j("state").add<uint64_t>("bombs", 1).setMin(1).setMax(999);
+			_saveJs->j("state").add<uint64_t>("flame", 1).setMin(1).setMax(999);
+			_saveJs->j("state").add<double>("speed", 3.0).setMin(3.0).setMax(MAX_SPEED);
+			_saveJs->j("state").add<uint64_t>("wallpass", 0).setMin(0).setMax(1);
+			_saveJs->j("state").add<uint64_t>("detonator", 0).setMin(0).setMax(1);
+			_saveJs->j("state").add<uint64_t>("bombpass", 0).setMin(0).setMax(1);
+			_saveJs->j("state").add<uint64_t>("flampass", 0).setMin(0).setMax(1);
 
-		if (_save->loadFile(_filename) == false) {
+		if (_saveJs->loadFile(_filename) == false) {
 			logErr("Fail loading " << _filename);
+			return false;
 		}
 	} catch (SettingsJson::SettingsException const & e) {
 		logErr(e.what());
+		return false;
 	}
-
-	_save->saveToFile(getFileName(true));
+	try {
+		_saveJs->saveToFile(_getFileName(true));
+	} catch (SettingsJson::SettingsException &e) {
+		logErr(e.what());
+		return false;
+	}
 
 	return true;
 }
@@ -142,20 +193,23 @@ bool	Save::initJson() {
  * @return false
  */
 bool	Save::updateSavedFile(SceneGame &game) {
+	return get()._updateSavedFile(game);
+}
+bool	Save::_updateSavedFile(SceneGame &game) {
 	std::cout << "LevelID: " << game.level << std::endl;
 	std::cout << "LevelID: " << game.score << std::endl;
 
-	_save->j("state").u("life") = game.player->lives;
-	_save->j("state").u("bombs") = game.player->totalBombs;
-	_save->j("state").u("flame") = game.player->bombProgation;
-	_save->j("state").u("speed") = game.player->speed;
-	_save->j("state").u("wallpass") = game.player->passWall == true ? 1 : 0;
-	_save->j("state").u("detonator") = game.player->detonator == true ? 1 : 0;
-	_save->j("state").u("bombpass") = game.player->passBomb == true ? 1 : 0;
-	_save->j("state").u("flampass") = game.player->passFire == true ? 1 : 0;
+	_saveJs->j("state").u("life") = game.player->lives;
+	_saveJs->j("state").u("bombs") = game.player->totalBombs;
+	_saveJs->j("state").u("flame") = game.player->bombProgation;
+	_saveJs->j("state").u("speed") = game.player->speed;
+	_saveJs->j("state").u("wallpass") = game.player->passWall == true ? 1 : 0;
+	_saveJs->j("state").u("detonator") = game.player->detonator == true ? 1 : 0;
+	_saveJs->j("state").u("bombpass") = game.player->passBomb == true ? 1 : 0;
+	_saveJs->j("state").u("flampass") = game.player->passFire == true ? 1 : 0;
 
 	bool	levelAlreadyDone = false;
-	for (SettingsJson *level : _save->lj("levels").list) {
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
 		if (level->i("id") != game.level)
 			continue;
 		else {
@@ -172,7 +226,7 @@ bool	Save::updateSavedFile(SceneGame &game) {
 		levelPattern->i("id") = game.level;
 		levelPattern->i("score") = game.score.getScore();
 
-		_save->lj("levels").add(levelPattern);
+		_saveJs->lj("levels").add(levelPattern);
 	}
 
 	return true;
@@ -186,14 +240,17 @@ bool	Save::updateSavedFile(SceneGame &game) {
  * @return false
  */
 bool	Save::loadStatesSaved(SceneGame &game) {
-	game.player->lives = _save->j("state").u("life");
-	game.player->totalBombs = _save->j("state").u("bombs");
-	game.player->bombProgation = _save->j("state").u("flame");
-	game.player->speed = _save->j("state").u("speed");
-	game.player->passWall = _save->j("state").u("wallpass") == 0 ? false : true;
-	game.player->detonator = _save->j("state").u("detonator") == 0 ? false : true;
-	game.player->passBomb = _save->j("state").u("bombpass") == 0 ? false : true;
-	game.player->passFire = _save->j("state").u("flampass") == 0 ? false : true;
+	return get()._loadStatesSaved(game);
+}
+bool	Save::_loadStatesSaved(SceneGame &game) {
+	game.player->lives = _saveJs->j("state").u("life");
+	game.player->totalBombs = _saveJs->j("state").u("bombs");
+	game.player->bombProgation = _saveJs->j("state").u("flame");
+	game.player->speed = _saveJs->j("state").u("speed");
+	game.player->passWall = _saveJs->j("state").u("wallpass") == 0 ? false : true;
+	game.player->detonator = _saveJs->j("state").u("detonator") == 0 ? false : true;
+	game.player->passBomb = _saveJs->j("state").u("bombpass") == 0 ? false : true;
+	game.player->passFire = _saveJs->j("state").u("flampass") == 0 ? false : true;
 
 	return true;
 }
@@ -205,8 +262,8 @@ bool	Save::loadStatesSaved(SceneGame &game) {
  * @return true
  * @return false
  */
-bool	Save::isLevelDone(int32_t levelId) {
-	for (SettingsJson *level : _save->lj("levels").list) {
+bool	Save::_isLevelDone(int32_t levelId) {
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
 		if (level->i("id") == levelId) {
 			return true;
 		}
@@ -221,18 +278,26 @@ bool	Save::isLevelDone(int32_t levelId) {
  * @return true
  * @return false
  */
-bool	Save::save(bool temporary) {
+bool	Save::_save(bool temporary) {
 	try {
-		_save->saveToFile(getFileName(temporary));
+		_saveJs->saveToFile(_getFileName(temporary));
 	} catch (SettingsJson::SettingsException &e) {
 		logErr(e.what());
 		return false;
 	}
 	if (temporary == false) {
-		file::rm(getFileName(true), true);
+		file::rm(_getFileName(true), true);
 	}
 	return true;
 }
+
+bool	Save::save(bool temporary) {
+	return get()._save(temporary);
+}
+bool	Save::isLevelDone(int32_t levelId) {
+	return get()._isLevelDone(levelId);
+}
+
 
 // -- Exceptions errors --------------------------------------------------------
 

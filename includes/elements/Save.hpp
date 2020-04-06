@@ -7,37 +7,30 @@
 #include "SettingsJson.hpp"
 #include "SceneGame.hpp"
 
+/**
+ * @brief class to manage saved games.
+ *
+ */
 class Save {
-private:
-	// Members
-	std::time_t		_time;
-	std::string		_filename;
-	SettingsJson	*_save;
-	std::string		_fileNameRegex;
-	// Methods
-	void			_init();
-
 public:
 	// Constructors
-	Save();
-	explicit Save(std::string filename);
-	~Save();
-	Save(Save const &src);
+	virtual			~Save();
+	static Save		&get();
+
+	static Save		&loadGame(std::string filename);
+	static Save		&newGame();
 
 	// Operators
-	Save &				operator=(Save const &rhs);
 	friend std::ostream& operator<<(std::ostream& os, const Save& my_class);
 
 	// Getters & Setters
-	std::string			getFileName(bool temporary);
-
+	static std::string	getFileName(bool temporary);
+	static bool			isInstantiate();
 	// Methods
-	static std::string	addRegexSlashes(std::string str);
-	bool				initJson();
-	bool				updateSavedFile(SceneGame &game);
-	bool				loadStatesSaved(SceneGame &game);
-	bool				isLevelDone(int32_t levelId);
-	bool				save(bool temporary);
+	static bool			updateSavedFile(SceneGame &game);
+	static bool			loadStatesSaved(SceneGame &game);
+	static bool			isLevelDone(int32_t levelId);
+	static bool			save(bool temporary);
 
 	// Exceptions
 	class SaveException : public std::runtime_error {
@@ -45,6 +38,30 @@ public:
 		SaveException();
 		explicit SaveException(const char* what_arg);
 	};
+
+private:
+	// Members
+	bool			_instantiate;
+	std::time_t		_time;
+	std::string		_filename;
+	SettingsJson	*_saveJs;
+	std::string		_fileNameRegex;
+	// Constructors
+	Save();
+	Save(Save const &src);
+	// Operators
+	Save &			operator=(Save const &rhs);
+	// Methods
+	Save			&_loadGame(std::string filename);
+	Save			&_newGame();
+	bool			_initJson();
+	std::string		_getFileName(bool temporary) const;
+	void			_init();
+	bool			_isLevelDone(int32_t levelId);
+	bool			_save(bool temporary);
+	bool			_updateSavedFile(SceneGame &game);
+	bool			_loadStatesSaved(SceneGame &game);
+	static std::string	_addRegexSlashes(std::string str);
 };
 
 #endif  // SAVE_HPP_
