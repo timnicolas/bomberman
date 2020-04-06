@@ -6,6 +6,9 @@
 #include "useGlm.hpp"
 #include "Logging.hpp"
 #include "Gui.hpp"
+#include "ModelsManager.hpp"
+
+class Model;
 class SceneGame;
 
 namespace Category {
@@ -34,6 +37,7 @@ namespace EntityState {
 	enum Enum {
 		IDLE,
 		DYING,
+		ATTACK,
 		RUNNING,
 		DROP_BOMB,
 		LOOSE_EMOTE,
@@ -56,6 +60,8 @@ private:
 protected:
 	float				_timeToDie;
 	EntityState::Struct	_entityState;
+	Model				*_model;
+	bool				_animDeathEnd;
 
 public:
 	// Members
@@ -78,6 +84,7 @@ public:
 	AEntity			&operator=(const AEntity &rhs);
 
 	// Methods
+	virtual bool		init();
 	virtual bool		update() = 0;
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;

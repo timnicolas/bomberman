@@ -6,6 +6,7 @@
 
 AEnemy::AEnemy(SceneGame &game)
 : ACharacter(game),
+  _dir(Direction::UP),
   strength(1)
 {
 	name = "AEnemy";
@@ -35,6 +36,7 @@ AEnemy &AEnemy::operator=(AEnemy const &rhs) {
 		ACharacter::operator=(rhs);
 		bombs = rhs.bombs;
 		points = rhs.points;
+		_dir = rhs._dir;
 	}
 	return *this;
 }
@@ -52,9 +54,17 @@ bool	AEnemy::update() {
 		return true;
 	if (!alive)
 		active = false;
-	if (strength != 0 && game.player->active && game.player->hasCollision(position, size)) {
+
+	// attack logic
+	if (strength != 0 && game.player->active && game.player->alive &&
+		game.player->invulnerable <= 0.0f &&
+		game.player->hasCollision(position, size) &&
+		_entityState.state != EntityState::ATTACK)
+	{
 		game.player->takeDamage(strength);
+		setstate(EntityState::ATTACK);
 	}
+
 	return _update();
 }
 
@@ -65,10 +75,11 @@ bool	AEnemy::update() {
  * @return false if failure
  */
 bool	AEnemy::postUpdate() {
-	if (!active) {
+	if (!active && (_animDeathEnd || !_model)) {
 		delete this;
 		return false;
 	}
+
 	return _postUpdate();
 }
 
@@ -80,6 +91,20 @@ bool	AEnemy::postUpdate() {
  */
 bool	AEnemy::draw(Gui &gui) {
 	return _draw(gui);
+}
+
+/**
+ * @brief called on animation end if passed to Model
+ *
+ * @param animName the current animation name
+ */
+void	AEnemy::animEndCb(std::string animName) {
+	if (animName == "Armature|death") {
+		_animDeathEnd = true;
+	}
+	else if (animName == "Armature|attack") {
+		setstate(EntityState::IDLE);
+	}
 }
 
 /**
@@ -210,6 +235,12 @@ bool AEnemy::_followPath(std::deque<PathNode> & path) {
 Direction::Enum AEnemy::_isPlayerVisible() const {
 	glm::ivec2 playerPos = game.player->getIntPos();
 	glm::ivec2 thisPos = getIntPos();
+
+	// return last direction when they are on the same square
+	if (playerPos == thisPos) {
+		return _dir;
+	}
+
 	if (playerPos.y == thisPos.y) {
 		for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
 			if (x == playerPos.x)
@@ -273,6 +304,7 @@ bool AEnemy::_isBlocked() {
 		{ 0, -1},
 		{ 0,  1},
 	};
+
 	for (int i = 0; i < 4; i++) {
 		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
 		if (game.positionInGame(glm::vec3(tmpPos.x, position.y, tmpPos.y), size) == false) {
@@ -284,8 +316,11 @@ bool AEnemy::_isBlocked() {
 				nbColisions++;
 		}
 	}
+
+	// block on colision or on player attack
 	if (nbColisions == 4)
 		return true;
+
 	return false;
 }
 

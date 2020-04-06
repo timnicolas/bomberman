@@ -97,6 +97,8 @@ bool	ACharacter::isAlive() {
  * @return false if damage not taken
  */
 bool	ACharacter::takeDamage(const int damage) {
+	bool wasAlive = alive;
+
 	if (!active || !destructible)
 		return false;
 	lives -= damage;
@@ -104,6 +106,11 @@ bool	ACharacter::takeDamage(const int damage) {
 		lives = 0;
 		alive = false;
 	}
+
+	if (wasAlive && !alive) {
+		setstate(EntityState::DYING);
+	}
+
 	return true;
 }
 
@@ -168,13 +175,15 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
  * @return false if no collision
  */
 bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
-	getPos();
-	if (position.x < atPosition.x + atSize.x
-	&& position.x + size.x > atPosition.x
-	&& position.z < atPosition.z + atSize.z
-	&& position.z + size.z > atPosition.z)
-		return true;
-	return false;
+	// check if there is no colision (easier)
+	if ((position.x >= atPosition.x + atSize.x) ||  // too much right
+		(position.x + size.x <= atPosition.x) ||  // too much left
+		(position.z >= atPosition.z + atSize.z) ||  // too much down
+		(position.z + size.z <= atPosition.z)) {  // too much up
+		return false;
+	}
+
+	return true;
 }
 
 // -- Protected Methods --------------------------------------------------------

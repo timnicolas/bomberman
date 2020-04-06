@@ -5,7 +5,6 @@
 
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
-  _dir(Direction::UP),
   _findPlayer(false),
   _path()
 {
@@ -25,6 +24,7 @@ EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
 
 EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
 	if ( this != &rhs ) {
+		logWarn("EnemyFollow operator= called (not implemented)");
 		AEnemy::operator=(rhs);
 	}
 	return *this;

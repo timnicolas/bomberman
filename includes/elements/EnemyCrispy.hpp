@@ -16,8 +16,8 @@
 class EnemyCrispy : public AEnemy {
 private:
 	EnemyCrispy();
+
 	bool			_isWall;
-	Direction::Enum	_dir;
 	Direction::Enum	_playerDir;  // direction of the player (if view it)
 	int64_t			_lastPayerSeenMs;  // last time that a player has been seen
 
