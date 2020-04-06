@@ -602,10 +602,13 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 					switch (_entitiesCall[entitYCall.first].entityType) {
 						case EntityType::PLAYER:
-							if (player == nullptr)
+							if (player == nullptr) {
 								player = reinterpret_cast<Player *>(entity);
-							else
+							}
+							else {
 								delete entity;
+								entity = nullptr;
+							}
 							player->setPosition({i, 0, j});
 							break;
 						case EntityType::BOARD_FLAG:
@@ -621,6 +624,11 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 							break;
 						default:
 							delete entity;
+					}
+
+					// init entity
+					if (entity && !entity->init()) {
+						return false;
 					}
 				}
 			}

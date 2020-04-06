@@ -14,7 +14,7 @@
 class EnemyFollow : public AEnemy {
 private:
 	EnemyFollow();
-	Direction::Enum	_dir;
+
 	// player pathfinding info
 	bool							_findPlayer;
 	std::deque<PathNode>			_path;

@@ -18,7 +18,7 @@
 class EnemyFrog : public AEnemy {
 private:
 	EnemyFrog();
-	Direction::Enum	_dir;
+
 	glm::ivec2		_jumpGoal;
 	uint64_t		_nextJumpTime;
 

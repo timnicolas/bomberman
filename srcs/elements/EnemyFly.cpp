@@ -4,8 +4,7 @@
 // -- Constructors -------------------------------------------------------------
 
 EnemyFly::EnemyFly(SceneGame &game)
-: AEnemy(game),
-  _dir(Direction::UP)
+: AEnemy(game)
 {
 	name = "EnemyFly";
 	size = glm::vec3(0.5, 0.5, 0.3);
@@ -29,6 +28,7 @@ EnemyFly::EnemyFly(EnemyFly const &src) : AEnemy(src) {
 
 EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 	if ( this != &rhs ) {
+		logWarn("EnemyFly operator= called (not implemented)");
 		AEnemy::operator=(rhs);
 	}
 	return *this;

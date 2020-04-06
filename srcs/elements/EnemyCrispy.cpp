@@ -6,7 +6,6 @@
 EnemyCrispy::EnemyCrispy(SceneGame &game)
 : AEnemy(game),
   _isWall(true),
-  _dir(Direction::UP),
   _playerDir(Direction::NO_DIRECTION),
   _lastPayerSeenMs(0)
 {
@@ -31,6 +30,7 @@ EnemyCrispy::EnemyCrispy(EnemyCrispy const &src) : AEnemy(src) {
 
 EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {
 	if ( this != &rhs ) {
+		logWarn("EnemyCrispy operator= called (not implemented)");
 		AEnemy::operator=(rhs);
 	}
 	return *this;
