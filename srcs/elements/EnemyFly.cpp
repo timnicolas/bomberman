@@ -28,7 +28,6 @@ EnemyFly::EnemyFly(EnemyFly const &src) : AEnemy(src) {
 
 EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 	if ( this != &rhs ) {
-		logWarn("EnemyFly operator= called (not implemented)");
 		AEnemy::operator=(rhs);
 	}
 	return *this;

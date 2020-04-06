@@ -24,7 +24,9 @@ EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
 
 EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
 	if ( this != &rhs ) {
-		logWarn("EnemyFollow operator= called (not implemented)");
+		_findPlayer = rhs._findPlayer;
+		_path = rhs._path;
+		_lastFindMs = rhs._lastFindMs;
 		AEnemy::operator=(rhs);
 	}
 	return *this;

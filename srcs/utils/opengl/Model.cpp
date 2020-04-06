@@ -37,6 +37,7 @@ Model::Model(Model const &src)
 
 Model &Model::operator=(Model const &rhs) {
 	if (this != &rhs) {
+		transform = rhs.transform;
 		play = rhs.play;
 		loopAnimation = rhs.loopAnimation;
 		_animationId = rhs._animationId;
@@ -46,6 +47,7 @@ Model &Model::operator=(Model const &rhs) {
 		_animationTimeTick = rhs._animationTimeTick;
 		animationSpeed = rhs.animationSpeed;
 		_animEndCbFunc = rhs._animEndCbFunc;
+		_animEndCbClass = rhs._animEndCbClass;
 	}
 	return *this;
 }

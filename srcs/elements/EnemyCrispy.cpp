@@ -30,8 +30,10 @@ EnemyCrispy::EnemyCrispy(EnemyCrispy const &src) : AEnemy(src) {
 
 EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {
 	if ( this != &rhs ) {
-		logWarn("EnemyCrispy operator= called (not implemented)");
 		AEnemy::operator=(rhs);
+		_isWall = rhs._isWall;
+		_playerDir = rhs._playerDir;
+		_lastPayerSeenMs = rhs._lastPayerSeenMs;
 	}
 	return *this;
 }

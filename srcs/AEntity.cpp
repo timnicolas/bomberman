@@ -81,6 +81,12 @@ AEntity &AEntity::operator=(AEntity const &rhs) {
 		_entityState.updated = rhs._entityState.updated;
 		_model = nullptr;
 		_animDeathEnd = false;
+
+		// if exist, copy the model
+		if (rhs._model) {
+			init();  // create new model
+			*_model = *rhs._model;  // restore model settings
+		}
 	}
 	return *this;
 }

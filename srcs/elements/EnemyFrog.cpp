@@ -32,8 +32,9 @@ EnemyFrog::EnemyFrog(EnemyFrog const &src) : AEnemy(src) {
 
 EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {
 	if ( this != &rhs ) {
-		logWarn("EnemyFrog operator= called (not implemented)");
 		AEnemy::operator=(rhs);
+		_jumpGoal = rhs._jumpGoal;
+		_nextJumpTime = rhs._nextJumpTime;
 	}
 	return *this;
 }

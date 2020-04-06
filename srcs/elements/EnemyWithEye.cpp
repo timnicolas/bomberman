@@ -21,8 +21,8 @@ EnemyWithEye::EnemyWithEye(EnemyWithEye const &src) : AEnemy(src) {
 
 EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
 	if ( this != &rhs ) {
-		logWarn("EnemyWithEye operator= called (not implemented)");
 		AEnemy::operator=(rhs);
+		_playerDir = rhs._playerDir;
 	}
 	return *this;
 }
@@ -37,6 +37,10 @@ EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
  */
 bool	EnemyWithEye::init() {
 	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
 		OpenGLModel	&openglModel = ModelsManager::getModel("flower");
 		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
 			{1.5, 1.5, 1.5}));

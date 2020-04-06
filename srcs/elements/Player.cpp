@@ -49,6 +49,10 @@ bool	Player::init() {
 	bombs = totalBombs;
 
 	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
 		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1},
 			{1.3, 1.3, 1.3}));
