@@ -1,5 +1,8 @@
+#include <dirent.h>
+#include <regex>
 #include "SceneLoadGame.hpp"
 #include "SceneGame.hpp"
+#include "Save.hpp"
 
 SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -36,6 +39,8 @@ bool			SceneLoadGame::init() {
 	float menuWidth = winSz.x / 2;
 	float menuHeight = winSz.y / 14;
 
+
+
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
@@ -51,12 +56,28 @@ bool			SceneLoadGame::init() {
 			&addScrollbar(savedGamesPos, savedGamesSize).enableVertScroll(true).setEnabled(true)
 		);
 
-		for (int i = 0; i <= 10; i++) {
-			addButton(
-				{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
-				{savedGamesSize.x * 0.8, tmpSize.y},
-				"saved  " + std::to_string(i)
-			).setMaster(savedGames);
+		DIR *dir;
+		struct dirent *ent;
+		if ((dir = opendir("save/")) != NULL) {
+			int i = 1;
+			while ((ent = readdir(dir)) != NULL) {
+				logDebug("Entry: " << ent->d_name << "$");
+				try {
+					std::string filename = "save/" + std::string(ent->d_name);
+					SettingsJson	*tempJson = Save::initJson(filename, false);
+					addButton(
+						{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
+						{savedGamesSize.x * 0.8, tmpSize.y},
+						tempJson->s("Filename")
+					).setMaster(savedGames).setTextScale(0.5);
+					i++;
+				} catch (Save::SaveException &e) {
+					logDebug(">>> does not corespond to expected filename.");
+				}
+			}
+			closedir (dir);
+		} else {
+			logErr("Cannot open save/");
 		}
 
 		// Screen Game Preview

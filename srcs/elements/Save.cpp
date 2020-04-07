@@ -35,53 +35,53 @@ Save	&Save::get() {
 }
 
 /**
- * @brief Load filename.
+ * @brief Load filename to actual save.
  *
  * @param filename
- * @return Save&
+ * @return Save& this
  */
 Save	&Save::loadGame(std::string filename) {
 	return get()._loadGame(filename);
 }
-
 Save	&Save::_loadGame(std::string filename) {
 	_instantiate = false;
 	_init();
-	_saveJs = new SettingsJson();
-	if (file::isFile(filename) == false) {
-		logErr(filename << " not exist");
-		return *this;
-	}
-	std::regex	regex(_fileNameRegex);
-	std::smatch	match;
-	std::regex_match(filename, match, regex);
-	if (match.size() >= 2) {
-		_time = static_cast<time_t>(std::stoi(match[1]));
-		if (file::isFile(filename) == false) {
-			logInfo(filename << " not exist and will be created.");
-			return *this;
-		}
-	} else {
-		logErr("FileNameError: " << filename);
-		return *this;
-	}
-	if (_initJson())
+	try {
+		_saveJs = initJson(filename, false);
+		_filename = filename;
 		_instantiate = true;
+	} catch (SaveException &e) {
+		logErr(e.what());
+		_instantiate = false;
+	}
 	_saved = true;
 	return *this;
 }
 
+/**
+ * @brief New Game create a new file with the current _time.
+ *
+ * @return Save& this
+ */
 Save	&Save::newGame() {
 	return get()._newGame();
 }
 Save	&Save::_newGame() {
 	if (isInstantiate())
 		deleteTemp();
+	_instantiate = false;
 	_init();
-	_saveJs = new SettingsJson();
-	_initJson(true);
-	_instantiate = true;
-	_saved = false;
+	_filename = _getFileName(false);
+	try {
+		_saveJs = initJson(_filename, true);
+		_saveJs->saveToFile(_getFileName(true));
+		_instantiate = true;
+		_saved = false;
+	} catch (SaveException &e) {
+		logErr(e.what());
+	} catch (SettingsJson::SettingsException &e) {
+		logErr(e.what());
+	}
 	return *this;
 }
 
@@ -121,11 +121,45 @@ bool		Save::isSaved() {
 
 void	Save::_init() {
 	_time = std::time(nullptr);
-	_fileNameRegex = "^" + Save::_addRegexSlashes(s.s("savePath")) + "(\\d{10,})(_temp)?\\.save$";
+	_fileNameRegex = getFileNameRegex(true);
 }
 
 // -- Methods ------------------------------------------------------------------
 
+/**
+ * @brief Get Regex to certificate a correct name file.
+ *
+ * @param temporary true if we want to include temporary filename.
+ * @return std::string regex
+ */
+std::string		Save::getFileNameRegex(bool temporary) {
+	std::string regex = "^" + Save::_addRegexSlashes(s.s("savePath")) + "(\\d{10,})";
+	if (temporary)
+		regex += "(_temp)?";
+	regex += "\\.save$";
+	return regex;
+}
+
+/**
+ * @brief Return smatch to given filename.
+ *
+ * @param filename
+ * @param temporary true if we want to include temporary filename.
+ * @return std::smatch matching. If empty, no match. matching[1] contain the name.
+ */
+std::smatch		Save::getMatchFileName(std::string filename, bool temporary) {
+	std::regex	regex(getFileNameRegex(temporary));
+	std::smatch	match;
+	std::regex_match(filename, match, regex);
+	return match;
+}
+
+/**
+ * @brief Add slashes to special regex char.
+ *
+ * @param str original string.
+ * @return std::string corrected string
+ */
 std::string	Save::_addRegexSlashes(std::string str) {
 	char	specialChar[] = {'\'', '"', '?', '\\', '/', '.'};
 	std::string::iterator	it = str.begin();
@@ -140,59 +174,58 @@ std::string	Save::_addRegexSlashes(std::string str) {
 	return str;
 }
 
-
 /**
  * @brief Define Json format to saved file.
  *
+ * @param newFile true if we don't want to check the given file.
  * @return true
  * @return false
  */
-bool	Save::_initJson(bool newFile) {
+SettingsJson	*Save::initJson(std::string filename, bool newFile) {
+	SettingsJson	*jsFile = new SettingsJson();
 	try {
-		std::string		saveName = std::to_string(_time);
-		_filename = _getFileName(false);
-		_saveJs->name(saveName).description("Save file");
-		_saveJs->add<std::string>("Filename", _filename);
+		if (!newFile && file::isFile(filename) == false)
+			throw SaveException((filename + " is not a file").c_str());
+		std::smatch match = getMatchFileName(filename, true);
+		if (!match.size())
+			throw SaveException(("incorrect filename: " + filename).c_str());
+		std::time_t time = static_cast<time_t>(std::stoi(match[1]));
+		jsFile->name(std::to_string(time)).description("Save file");
+		jsFile->add<std::string>("Filename", filename);
 
 		// Save json definition
-		_saveJs->add<std::string>("name");
-		_saveJs->add<int64_t>("date_creation", _time);
+		jsFile->add<std::string>("name");
+		jsFile->add<int64_t>("date_creation", time);
 		std::time_t		t = std::time(nullptr);
-		_saveJs->add<int64_t>("date_lastmodified", t);
+		jsFile->add<int64_t>("date_lastmodified", t);
 
 		SettingsJson	*levelPattern = new SettingsJson();
 		levelPattern->add<int64_t>("id", 0).setMin(0);
 		levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
-		_saveJs->addList<SettingsJson>("levels", levelPattern);
+		jsFile->addList<SettingsJson>("levels", levelPattern);
 
-		_saveJs->add<SettingsJson>("state");
-			_saveJs->j("state").add<uint64_t>("life", 2).setMin(1).setMax(999);
-			_saveJs->j("state").add<uint64_t>("bombs", 1).setMin(1).setMax(999);
-			_saveJs->j("state").add<uint64_t>("flame", 2).setMin(1).setMax(999);
-			_saveJs->j("state").add<double>("speed", 3.0).setMin(3.0).setMax(MAX_SPEED);
-			_saveJs->j("state").add<uint64_t>("wallpass", 0).setMin(0).setMax(1);
-			_saveJs->j("state").add<uint64_t>("detonator", 0).setMin(0).setMax(1);
-			_saveJs->j("state").add<uint64_t>("bombpass", 0).setMin(0).setMax(1);
-			_saveJs->j("state").add<uint64_t>("flampass", 0).setMin(0).setMax(1);
+		jsFile->add<SettingsJson>("state");
+			jsFile->j("state").add<uint64_t>("life", 2).setMin(1).setMax(999);
+			jsFile->j("state").add<uint64_t>("bombs", 1).setMin(1).setMax(999);
+			jsFile->j("state").add<uint64_t>("flame", 2).setMin(1).setMax(999);
+			jsFile->j("state").add<double>("speed", 3.0).setMin(3.0).setMax(MAX_SPEED);
+			jsFile->j("state").add<uint64_t>("wallpass", 0).setMin(0).setMax(1);
+			jsFile->j("state").add<uint64_t>("detonator", 0).setMin(0).setMax(1);
+			jsFile->j("state").add<uint64_t>("bombpass", 0).setMin(0).setMax(1);
+			jsFile->j("state").add<uint64_t>("flampass", 0).setMin(0).setMax(1);
 
 		if (!newFile) {
-			if (_saveJs->loadFile(_filename) == false) {
-				logErr("Fail loading " << _filename);
-				return false;
+			if (jsFile->loadFile(filename) == false) {
+				delete jsFile;
+				throw SaveException(("Fail loading " + filename).c_str());
 			}
 		}
 	} catch (SettingsJson::SettingsException const & e) {
-		logErr(e.what());
-		return false;
-	}
-	try {
-		_saveJs->saveToFile(_getFileName(true));
-	} catch (SettingsJson::SettingsException &e) {
-		logErr(e.what());
-		return false;
+		delete jsFile;
+		throw SaveException(e.what());
 	}
 
-	return true;
+	return jsFile;
 }
 
 /**

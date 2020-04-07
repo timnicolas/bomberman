@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <regex>
 
 #include "SettingsJson.hpp"
 #include "SceneGame.hpp"
@@ -25,14 +26,17 @@ public:
 
 	// Getters & Setters
 	static std::string	getFileName(bool temporary);
+	static std::string	getFileNameRegex(bool temporary);
+	static std::smatch	getMatchFileName(std::string filename, bool temporary);
+
 	static bool			isInstantiate();
 	static bool			isSaved();
 	// Methods
+	static SettingsJson	*initJson(std::string filename, bool newFile = false);
 	static bool			updateSavedFile(SceneGame &game, bool succeedLevel);
 	static bool			loadStatesSaved(SceneGame &game);
 	static bool			isLevelDone(int32_t levelId);
 	static int			getLevelScore(int32_t levelId);
-	int			_getLevelScore(int32_t levelId);
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
 
@@ -59,13 +63,13 @@ private:
 	// Methods
 	Save			&_loadGame(std::string filename);
 	Save			&_newGame();
-	bool			_initJson(bool newFile = false);
 	std::string		_getFileName(bool temporary) const;
 	void			_init();
 	bool			_isLevelDone(int32_t levelId);
 	bool			_save(bool temporary);
 	bool			_updateSavedFile(SceneGame &game, bool succeedLevel);
 	bool			_loadStatesSaved(SceneGame &game);
+	int				_getLevelScore(int32_t levelId);
 	static std::string	_addRegexSlashes(std::string str);
 };
 

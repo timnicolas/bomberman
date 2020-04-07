@@ -199,7 +199,7 @@ void			SceneLevelSelection::_setLevel(int32_t level) {
 	}
 
 	_currentLvl = level;
-	if (_currentLvl == 0 || _currentLvl == 1 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)) {
+	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)) {
 		getUIElement(_states.firstLevelID + _currentLvl)
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.loadLevel)
