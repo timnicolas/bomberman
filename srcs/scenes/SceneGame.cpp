@@ -85,9 +85,6 @@ SceneGame::~SceneGame() {
 	if (player != nullptr) {
 		delete player;
 	}
-	if (_playerSaved != nullptr) {
-		delete _playerSaved;
-	}
 	std::vector<AEnemy *>::iterator it = enemies.begin();
 	AEnemy *enemy;
 	while (it != enemies.end()) {
@@ -161,8 +158,6 @@ bool			SceneGame::init() {
 		}
 		i++;
 	}
-
-	_playerSaved = new Player(*this);
 
 	_initGameInfos();
 
@@ -238,13 +233,11 @@ bool	SceneGame::update() {
 		Save::updateSavedFile(*this, true);
 		Save::save(true);
 		SceneManager::loadScene(SceneNames::VICTORY);
-		*_playerSaved = *player;
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
 		// clear game infos.
 		player->resetParams();
-		*_playerSaved = *player;
 		Save::updateSavedFile(*this, false);
 		Save::save(true);
 		SceneManager::loadScene(SceneNames::GAME_OVER);
@@ -402,10 +395,8 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.y / 1.9
 	));
 
-	_playerSaved->setPosition(player->getPos());
 	// get saved values
-	*player = *_playerSaved;
-
+	Save::loadStatesSaved(*this);
 	if (!player->init()) {
 		return false;
 	}
