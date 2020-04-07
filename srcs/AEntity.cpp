@@ -57,7 +57,7 @@ void	AEntity::animEndCb(std::string animName) {
  *
  * @param state the new state
  */
-void	AEntity::setstate(EntityState::Enum state) {
+void	AEntity::setState(EntityState::Enum state) {
 	_entityState.state = state;
 	_entityState.updated = true;
 }

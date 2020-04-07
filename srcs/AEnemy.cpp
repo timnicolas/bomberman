@@ -62,7 +62,7 @@ bool	AEnemy::update() {
 		_entityState.state != EntityState::ATTACK)
 	{
 		game.player->takeDamage(strength);
-		setstate(EntityState::ATTACK);
+		setState(EntityState::ATTACK);
 	}
 
 	return _update();
@@ -103,7 +103,7 @@ void	AEnemy::animEndCb(std::string animName) {
 		_animDeathEnd = true;
 	}
 	else if (animName == "Armature|attack") {
-		setstate(EntityState::IDLE);
+		setState(EntityState::IDLE);
 	}
 }
 
@@ -301,9 +301,9 @@ bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
 bool AEnemy::_isBlocked() {
 	glm::ivec2 ipos = getIntPos();
 
-	int nbColisions = 0;  // nb of walls around enemy
+	int nbCollisions = 0;  // nb of walls around enemy
 	// all blocks around enemy
-	int nexts[4][2] = {
+	int nearby[4][2] = {
 		{-1,  0},
 		{ 1,  0},
 		{ 0, -1},
@@ -311,19 +311,19 @@ bool AEnemy::_isBlocked() {
 	};
 
 	for (int i = 0; i < 4; i++) {
-		glm::ivec2 tmpPos(ipos.x + nexts[i][0], ipos.y + nexts[i][1]);
+		glm::ivec2 tmpPos(ipos.x + nearby[i][0], ipos.y + nearby[i][1]);
 		if (game.positionInGame(glm::vec3(tmpPos.x, position.y, tmpPos.y), size) == false) {
 			continue;
 		}
-		std::unordered_set<AEntity *> colisions = getCollision({tmpPos.x, position.y, tmpPos.y});
+		std::unordered_set<AEntity *> collisions = getCollision({tmpPos.x, position.y, tmpPos.y});
 		for (auto && entity : getBoard()[tmpPos.x][tmpPos.y]) {
 			if (entity->type == Type::FIRE || _canWalkOnEntity(entity) == false)
-				nbColisions++;
+				nbCollisions++;
 		}
 	}
 
 	// block on colision or on player attack
-	if (nbColisions == 4)
+	if (nbCollisions == 4)
 		return true;
 
 	return false;
