@@ -23,12 +23,20 @@ class SceneLoadGame : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
-			bool	restart;
-			bool	menu;
-			bool	exit;
+			int64_t		selectedGame;
+			bool		restart;
+			bool		menu;
+			bool		exit;
 		};
 		ButtonsStates	_states;
-		std::string		_lastSceneName;
+		struct GameSaved {
+			uint32_t		gameID;
+			SettingsJson	*game;
+			std::string		filename;
+			ABaseUI			*ui;
+		};
+		std::vector<GameSaved *>	_gamesSaved;
+		std::string					_lastSceneName;
 
 	private:
 		SceneLoadGame();

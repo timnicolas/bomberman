@@ -9,6 +9,7 @@ SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
   _lastSceneName(SceneNames::MAIN_MENU)
 {
 	_states.restart = false;
+	_states.selectedGame = 0;
 }
 
 SceneLoadGame::SceneLoadGame(SceneLoadGame const & src)
@@ -39,8 +40,6 @@ bool			SceneLoadGame::init() {
 	float menuWidth = winSz.x / 2;
 	float menuHeight = winSz.y / 14;
 
-
-
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
@@ -60,24 +59,31 @@ bool			SceneLoadGame::init() {
 		struct dirent *ent;
 		if ((dir = opendir("save/")) != NULL) {
 			int i = 1;
+			GameSaved *gameSaved = nullptr;
 			while ((ent = readdir(dir)) != NULL) {
+				gameSaved = new GameSaved();
 				logDebug("Entry: " << ent->d_name << "$");
 				try {
+					gameSaved->filename = "save/" + std::string(ent->d_name);
 					std::string filename = "save/" + std::string(ent->d_name);
-					SettingsJson	*tempJson = Save::initJson(filename, false);
-					addButton(
+					gameSaved->game = Save::initJson(gameSaved->filename, false);
+					gameSaved->ui = &addButton(
 						{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
 						{savedGamesSize.x * 0.8, tmpSize.y},
-						tempJson->s("Filename")
-					).setMaster(savedGames).setTextScale(0.5);
+						gameSaved->game->s("Filename")
+					).addButtonLeftValueListener(&_states.selectedGame, i)
+					.setMaster(savedGames).setTextScale(0.5);
+					gameSaved->gameID = i;
+					_gamesSaved.push_back(gameSaved);
 					i++;
 				} catch (Save::SaveException &e) {
+					delete gameSaved;
 					logDebug(">>> does not corespond to expected filename.");
 				}
 			}
 			closedir (dir);
 		} else {
-			logErr("Cannot open save/");
+			logErr("Cannot open 'save/'");
 		}
 
 		// Screen Game Preview
@@ -92,11 +98,6 @@ bool			SceneLoadGame::init() {
 		).setMaster(previewGame);
 
 		tmpPos.y -= savedGamesSize.y;
-
-
-		// addButton(tmpPos, tmpSize, "restart")
-		// 	.setKeyLeftClickInput(InputType::CONFIRM)
-		// 	.addButtonLeftListener(&_states.restart).setMaster(savedGames);
 
 		tmpPos.y -= menuHeight * 1.3;
 		addButton(tmpPos, tmpSize, "main menu")
@@ -143,6 +144,16 @@ bool	SceneLoadGame::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
+	if (_states.selectedGame != 0) {
+		logDebug("selected game: " << _states.selectedGame);
+		for (auto &&gameSaved : _gamesSaved) {
+			if (gameSaved->gameID == _states.selectedGame) {
+				logDebug("name: " << gameSaved->game->s("Filename"));
+			}
+		}
+
+		_states.selectedGame = 0;
+	}
 	if (_states.restart) {
 		_states.restart = false;
 		scGame.loadLevel(scGame.level);  // reload the current level
