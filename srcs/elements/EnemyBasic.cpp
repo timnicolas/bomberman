@@ -4,8 +4,7 @@
 // -- Constructors -------------------------------------------------------------
 
 EnemyBasic::EnemyBasic(SceneGame &game)
-: AEnemy(game),
-  _dir(Direction::UP)
+: AEnemy(game)
 {
 	name = "EnemyBasic";
 	size = glm::vec3(0.7, 0.7, 0.7);
@@ -21,7 +20,7 @@ EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
 // -- Operators ----------------------------------------------------------------
 
 EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
-	if ( this != &rhs ) {
+	if (this != &rhs) {
 		AEnemy::operator=(rhs);
 	}
 	return *this;

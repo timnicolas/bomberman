@@ -12,7 +12,6 @@ Crispy::Crispy(SceneGame &game) : AObject(game) {
 }
 
 Crispy::~Crispy() {
-	getPos();
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
@@ -48,6 +47,7 @@ bool	Crispy::postUpdate() {
 		Bonus	*bonus = Bonus::generateBonus(game, .3f);
 		if (bonus != nullptr) {
 			game.board[position.x][position.z].push_back(bonus);
+			bonus->init();
 		}
 		delete this;
 		return false;

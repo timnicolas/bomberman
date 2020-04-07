@@ -1,5 +1,6 @@
 #include "AEntity.hpp"
 #include "SceneGame.hpp"
+#include "Model.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -12,9 +13,12 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	_timeToDie = 0.5f;
 	_entityState.state = EntityState::IDLE;
 	_entityState.updated = false;
+	_model = nullptr;
+	_animDeathEnd = false;
 }
 
 AEntity::~AEntity() {
+	delete _model;
 }
 
 AEntity::AEntity(AEntity const &src) : AEntity(src.game) {
@@ -22,6 +26,16 @@ AEntity::AEntity(AEntity const &src) : AEntity(src.game) {
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Init method called by loadLevel
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool		AEntity::init() {
+	return true;
+}
 
 bool		AEntity::postUpdate() {
 	return true;
@@ -43,7 +57,7 @@ void	AEntity::animEndCb(std::string animName) {
  *
  * @param state the new state
  */
-void	AEntity::setstate(EntityState::Enum state) {
+void	AEntity::setState(EntityState::Enum state) {
 	_entityState.state = state;
 	_entityState.updated = true;
 }
@@ -65,6 +79,14 @@ AEntity &AEntity::operator=(AEntity const &rhs) {
 		_timeToDie = rhs._timeToDie;
 		_entityState.state = rhs._entityState.state;
 		_entityState.updated = rhs._entityState.updated;
+		_model = nullptr;
+		_animDeathEnd = false;
+
+		// if exist, copy the model
+		if (rhs._model) {
+			init();  // create new model
+			*_model = *rhs._model;  // restore model settings
+		}
 	}
 	return *this;
 }
