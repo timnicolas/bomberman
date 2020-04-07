@@ -90,6 +90,9 @@ bool	initSettings(std::string const & filename) {
 	s.j("colors").add<SettingsJson>("buttons");
 		s.j("colors").j("buttons").add<uint64_t>("color", 0x2AB859).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("buttons").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("buttons-disable");
+		s.j("colors").j("buttons-disable").add<uint64_t>("color", 0x91a196).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons-disable").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("buttons-border");
 		s.j("colors").j("buttons-border").add<uint64_t>("color", 0x2CBC5C).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("buttons-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);

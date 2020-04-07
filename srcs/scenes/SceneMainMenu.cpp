@@ -43,6 +43,8 @@ bool			SceneMainMenu::init() {
 
 		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "continue")
 			.addButtonLeftListener(&_states.continueGame);
+		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save")
+			.addButtonLeftListener(&_states.save);
 		allUI.newGame = &addButton(VOID_SIZE, VOID_SIZE, "new   game")
 			.addButtonLeftListener(&_states.newGame);
 		allUI.loadGame = &addButton(VOID_SIZE, VOID_SIZE, "load   saved   game")
@@ -88,9 +90,17 @@ bool	SceneMainMenu::update() {
 	if (Save::isInstantiate()) {
 		allUI.continueGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
 		tmpPos.y -= menuHeight * 1.3;
+		allUI.save->setPos(tmpPos).setSize(tmpSize);
+		if (Save::isSaved()) {
+			allUI.save->setText("saved").setColor(colorise(s.j("colors").j("buttons-disable").u("color")));
+		} else {
+			allUI.save->setText("save ..").setColor(colorise(s.j("colors").j("buttons").u("color")));
+		}
+		tmpPos.y -= menuHeight * 1.3;
 		allUI.newGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::NO_KEY);
 	} else {
 		allUI.continueGame->setPos(VOID_SIZE).setSize(VOID_SIZE).setKeyLeftClickInput(InputType::NO_KEY);
+		allUI.save->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.newGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
 	}
 	tmpPos.y -= menuHeight * 1.3;
@@ -109,6 +119,10 @@ bool	SceneMainMenu::update() {
 	if (_states.continueGame) {
 		_states.continueGame = false;
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	if (_states.save) {
+		_states.save = false;
+		Save::save();
 	}
 	if (_states.newGame) {
 		_states.newGame = false;

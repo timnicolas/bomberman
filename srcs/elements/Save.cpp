@@ -310,6 +310,10 @@ bool	Save::_save(bool temporary) {
 	return true;
 }
 
+void	Save::deleteTemp() {
+	file::rm(get()._getFileName(true), true);
+}
+
 // -- Exceptions errors --------------------------------------------------------
 
 Save::SaveException::SaveException()

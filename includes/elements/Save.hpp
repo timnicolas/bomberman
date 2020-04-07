@@ -32,6 +32,7 @@ public:
 	static bool			loadStatesSaved(SceneGame &game);
 	static bool			isLevelDone(int32_t levelId);
 	static bool			save(bool temporary = false);
+	static void			deleteTemp();
 
 	// Exceptions
 	class SaveException : public std::runtime_error {

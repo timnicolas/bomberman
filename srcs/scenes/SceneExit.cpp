@@ -106,6 +106,9 @@ bool	SceneExit::update() {
 
 	if (_states.exit) {
 		_states.exit = false;
+		if (Save::isInstantiate()) {
+			Save::deleteTemp();
+		}
 		SceneManager::quit();
 	}
 	else if (_states.cancel) {
