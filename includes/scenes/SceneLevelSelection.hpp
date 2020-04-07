@@ -33,6 +33,11 @@ class SceneLevelSelection : public ASceneMenu {
 			bool		nextLevel;
 		};
 		ButtonsStates	_states;
+		struct AllUI {
+			ABaseUI		*text;
+			ABaseUI		*score;
+		};
+		AllUI			allUI;
 		int32_t			_currentLvl;
 
 		float			_transition;  // used to do a smooth transition
