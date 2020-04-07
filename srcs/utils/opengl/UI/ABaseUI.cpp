@@ -8,6 +8,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _posOffset(glm::vec2(0, 0)),
   _size(size),
   _color(0.0, 0.0, 0.0, 1.0),
+  _value(0),
   _borderColor(0.0, 0.0, 0.0, 1.0),
   _borderSize(2.0),
   _mouseHoverColor(0.0, 0.0, 0.0, 0.2),
@@ -30,6 +31,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _keyLeftClickBindInput(InputType::NO_KEY),
   _rightListener(nullptr),
   _leftListener(nullptr),
+  _leftValueListener(nullptr),
   _master(nullptr)
 {
 	if (!_isInit) {
@@ -135,6 +137,8 @@ void ABaseUI::_updateClick() {
 	if (Inputs::getLeftClickUp() || keyLeftUp) {
 		if ((_mouseHover || keyLeftUp) && _leftClick && _leftListener)
 			*_leftListener = _leftClick;
+		if ((_mouseHover || keyLeftUp) && _leftClick && _leftValueListener)
+			*_leftValueListener = _value;
 		_leftClick = false;
 	}
 	if (Inputs::getRightClickUp() || keyRightUp) {
@@ -224,6 +228,19 @@ ABaseUI &	ABaseUI::addButtonLeftListener(bool * listener) {
 	_leftListener = listener;
 	if (_leftListener)
 		*_leftListener = _leftClick;
+	return *this;
+}
+
+/**
+ * @brief add a listener on the left click who will be modify to value
+ *
+ * @param listener a pointer on te int64_t listener
+ * @param value the value the the listener will take.
+ * @return ABaseUI& a reference to the object
+ */
+ABaseUI &	ABaseUI::addButtonLeftValueListener(int64_t * listener, int64_t value) {
+	_leftValueListener = listener;
+	_value = value;
 	return *this;
 }
 

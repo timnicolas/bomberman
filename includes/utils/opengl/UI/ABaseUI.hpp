@@ -69,6 +69,7 @@ class ABaseUI {
 		/* listener */
 		ABaseUI &	addButtonRightListener(bool * listener);
 		ABaseUI &	addButtonLeftListener(bool * listener);
+		ABaseUI &	addButtonLeftValueListener(int64_t * listener, int64_t value);
 
 		/* setter */
 		ABaseUI &	setKeyRightClickScancode(SDL_Scancode scancode);
@@ -155,6 +156,7 @@ class ABaseUI {
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
 		glm::vec4		_color;
+		int64_t			_value;
 		// border
 		glm::vec4		_borderColor;
 		float			_borderSize;
@@ -185,6 +187,7 @@ class ABaseUI {
 		/* listener */
 		bool *			_rightListener;
 		bool *			_leftListener;
+		int64_t *		_leftValueListener;
 
 		/* master */
 		// master element are an element that contains others
