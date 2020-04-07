@@ -88,7 +88,7 @@ public:
 	virtual bool		update() = 0;
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
-	virtual glm::vec3	getPos() = 0;
+	virtual glm::vec3	getPos() const = 0;
 	virtual bool		takeDamage(const int damage) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
