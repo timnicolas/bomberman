@@ -24,6 +24,7 @@ class SceneMainMenu : public ASceneMenu {
 	protected:
 		struct ButtonsStates {
 			bool	continueGame;
+			bool	save;
 			bool	newGame;
 			bool	loadGame;
 			bool	loadSettings;
@@ -32,6 +33,7 @@ class SceneMainMenu : public ASceneMenu {
 		ButtonsStates	_states;
 		struct AllUI {
 			ABaseUI	*continueGame;
+			ABaseUI	*save;
 			ABaseUI	*newGame;
 			ABaseUI	*loadGame;
 			ABaseUI	*loadSettings;
