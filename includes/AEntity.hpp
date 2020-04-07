@@ -93,7 +93,7 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
 	virtual void	animEndCb(std::string animName);
-	void			setstate(EntityState::Enum state);
+	void			setState(EntityState::Enum state);
 };
 
 #endif  // ENTITY_HPP_

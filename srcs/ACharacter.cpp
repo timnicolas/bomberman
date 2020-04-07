@@ -108,7 +108,7 @@ bool	ACharacter::takeDamage(const int damage) {
 	}
 
 	if (wasAlive && !alive) {
-		setstate(EntityState::DYING);
+		setState(EntityState::DYING);
 	}
 
 	return true;
@@ -209,16 +209,16 @@ bool	ACharacter::tp(glm::vec3 tpPos) {
  */
 std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) const {
 	// all entity on character
-	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);
+	std::unordered_set<AEntity *> allCollisionsEntity = getCollision(dest);
 	// all entity that block character
-	std::unordered_set<AEntity *> allColisionsBlock;
+	std::unordered_set<AEntity *> allCollisionsBlock;
 
-	for (auto && entity : allColisionsEntity) {
+	for (auto && entity : allCollisionsEntity) {
 		if (!_canWalkOnEntity(entity))
-			allColisionsBlock.insert(entity);
+			allCollisionsBlock.insert(entity);
 	}
 
-	return allColisionsBlock;
+	return allCollisionsBlock;
 }
 
 /**
@@ -269,8 +269,8 @@ bool	ACharacter::_canMoveOn(glm::vec3 dest) const {
 	}
 
 	/* check colision with all entities under character */
-	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);
-	for (auto && entity : allColisionsEntity) {
+	std::unordered_set<AEntity *> allCollisionsEntity = getCollision(dest);
+	for (auto && entity : allCollisionsEntity) {
 		if (!_canWalkOnEntity(entity))
 			return false;
 	}
@@ -293,16 +293,16 @@ bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const {
 	}
 
 	/* check colision with all entities under character */
-	std::unordered_set<AEntity *> allColisionsEntityNow = _getAllBlockableEntity(to);
-	if (allColisionsEntityNow.empty())
+	std::unordered_set<AEntity *> allCollisionsEntityNow = _getAllBlockableEntity(to);
+	if (allCollisionsEntityNow.empty())
 		return true;
 	// if there is a collision, check if there was the same collision in last time
-	std::unordered_set<AEntity *> allColisionsEntityLast = _getAllBlockableEntity(from);
-	if (allColisionsEntityNow.empty())
+	std::unordered_set<AEntity *> allCollisionsEntityLast = _getAllBlockableEntity(from);
+	if (allCollisionsEntityNow.empty())
 		return false;
-	for (auto && nowEnt : allColisionsEntityNow) {
+	for (auto && nowEnt : allCollisionsEntityNow) {
 		bool ok = false;
-		for (auto && lastEnt : allColisionsEntityLast) {
+		for (auto && lastEnt : allCollisionsEntityLast) {
 			if (nowEnt == lastEnt) {
 				ok = true;
 				break;
@@ -359,7 +359,7 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 
 	// update state on first move
 	if (_entityState.state != EntityState::RUNNING) {
-		setstate(EntityState::RUNNING);
+		setState(EntityState::RUNNING);
 	}
 
 	if (glm::length(direction) == 0)

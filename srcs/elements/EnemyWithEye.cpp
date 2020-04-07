@@ -76,7 +76,7 @@ bool	EnemyWithEye::_update() {
 		if (_isBlocked()) {
 			// update state on first stop
 			if (_entityState.state != EntityState::IDLE) {
-				setstate(EntityState::IDLE);
+				setState(EntityState::IDLE);
 			}
 			return true;
 		}
@@ -133,7 +133,7 @@ bool	EnemyWithEye::_draw(Gui &gui) {
 }
 
 /**
- * @brief update model positon and rotation
+ * @brief update model position and rotation
  *
  */
 void	EnemyWithEye::_updateModel() {

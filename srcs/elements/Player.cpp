@@ -126,7 +126,7 @@ bool	Player::update() {
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
-				setstate(EntityState::DROP_BOMB);
+				setState(EntityState::DROP_BOMB);
 			}
 		}
 	}
@@ -295,7 +295,7 @@ void	Player::_updateAnimationState() {
 void	Player::animEndCb(std::string animName) {
 	if (animName == "Armature|drop") {
 		_putBomb();
-		setstate(EntityState::IDLE);
+		setState(EntityState::IDLE);
 	}
 	else if (animName == "Armature|death") {
 		_animDeathEnd = true;
@@ -330,7 +330,7 @@ void	Player::_move() {
 
 	// update state on end move
 	if (!moved && _entityState.state == EntityState::RUNNING) {
-		setstate(EntityState::IDLE);
+		setState(EntityState::IDLE);
 	}
 }
 
