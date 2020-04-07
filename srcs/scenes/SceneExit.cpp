@@ -21,6 +21,8 @@ SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 	return *this;
 }
 
+// - AScene Public Methods -----------------------------------------------------
+
 /**
  * @brief init the menu
  *
@@ -59,6 +61,53 @@ bool			SceneExit::init() {
 	}
 	return true;
 }
+
+
+/**
+ * @brief this is the update function (called every frames)
+ *
+ * @return true if the update is a success
+ * @return false if there are an error in update
+ */
+bool	SceneExit::update() {
+	_updateUI();
+	ASceneMenu::update();
+
+	if (_states.exit) {
+		_states.exit = false;
+		if (Save::isInstantiate()) {
+			Save::deleteTemp();
+		}
+		SceneManager::quit();
+	}
+	else if (_states.cancel) {
+		_states.cancel = false;
+		SceneManager::loadScene(_lastSceneName);
+	}
+	else if (_states.save) {
+		_states.save = false;
+		Save::save();
+		SceneManager::quit();
+	}
+	return true;
+}
+
+/**
+ * @brief called when the scene is loaded
+ */
+void SceneExit::load() {
+	ASceneMenu::load();
+	if (SceneManager::getSceneName() != SceneNames::EXIT) {
+		_lastSceneName = SceneManager::getSceneName();
+	}
+}
+
+// -- Private methods ----------------------------------------------------------
+
+/**
+ * @brief Update UI objects.
+ *
+ */
 void	SceneExit::_updateUI() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
@@ -93,44 +142,3 @@ void	SceneExit::_updateUI() {
 	tmpPos.y -= menuHeight * 0.5;
 	allUI.border->setPos(tmpPos).setSize(tmpSize);
 }
-
-/**
- * @brief this is the update function (called every frames)
- *
- * @return true if the update is a success
- * @return false if there are an error in update
- */
-bool	SceneExit::update() {
-	ASceneMenu::update();
-	_updateUI();
-
-	if (_states.exit) {
-		_states.exit = false;
-		if (Save::isInstantiate()) {
-			Save::deleteTemp();
-		}
-		SceneManager::quit();
-	}
-	else if (_states.cancel) {
-		_states.cancel = false;
-		SceneManager::loadScene(_lastSceneName);
-	}
-	else if (_states.save) {
-		_states.save = false;
-		Save::save();
-		SceneManager::quit();
-	}
-	return true;
-}
-
-/**
- * @brief called when the scene is loaded
- */
-void SceneExit::load() {
-	ASceneMenu::load();
-	if (SceneManager::getSceneName() != SceneNames::EXIT) {
-		_lastSceneName = SceneManager::getSceneName();
-	}
-}
-
-

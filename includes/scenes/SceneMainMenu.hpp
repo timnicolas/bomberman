@@ -45,4 +45,5 @@ class SceneMainMenu : public ASceneMenu {
 
 	private:
 		SceneMainMenu();
+		void		_updateUI();
 };

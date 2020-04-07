@@ -75,10 +75,13 @@ Save	&Save::newGame() {
 	return get()._newGame();
 }
 Save	&Save::_newGame() {
+	if (isInstantiate())
+		deleteTemp();
 	_init();
 	_saveJs = new SettingsJson();
 	_initJson(true);
 	_instantiate = true;
+	_saved = false;
 	return *this;
 }
 
@@ -165,7 +168,7 @@ bool	Save::_initJson(bool newFile) {
 		_saveJs->add<SettingsJson>("state");
 			_saveJs->j("state").add<uint64_t>("life", 2).setMin(1).setMax(999);
 			_saveJs->j("state").add<uint64_t>("bombs", 1).setMin(1).setMax(999);
-			_saveJs->j("state").add<uint64_t>("flame", 1).setMin(1).setMax(999);
+			_saveJs->j("state").add<uint64_t>("flame", 2).setMin(1).setMax(999);
 			_saveJs->j("state").add<double>("speed", 3.0).setMin(3.0).setMax(MAX_SPEED);
 			_saveJs->j("state").add<uint64_t>("wallpass", 0).setMin(0).setMax(1);
 			_saveJs->j("state").add<uint64_t>("detonator", 0).setMin(0).setMax(1);

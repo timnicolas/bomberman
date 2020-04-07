@@ -21,6 +21,8 @@ SceneMainMenu & SceneMainMenu::operator=(SceneMainMenu const & rhs) {
 	return *this;
 }
 
+// - AScene Public Methods -----------------------------------------------------
+
 /**
  * @brief init the menu
  *
@@ -77,6 +79,43 @@ bool			SceneMainMenu::init() {
  * @return false if there are an error in update
  */
 bool	SceneMainMenu::update() {
+	_updateUI();
+	ASceneMenu::update();
+	if (_states.continueGame) {
+		_states.continueGame = false;
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	if (_states.save) {
+		_states.save = false;
+		Save::save();
+	}
+	if (_states.newGame) {
+		_states.newGame = false;
+		Save::newGame();
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	else if (_states.loadGame) {
+		_states.loadGame = false;
+		SceneManager::loadScene(SceneNames::LOADGAME);
+	}
+	else if (_states.loadSettings) {
+		_states.loadSettings = false;
+		SceneManager::loadScene(SceneNames::SETTINGS);
+	}
+	else if (_states.exit) {
+		_states.exit = false;
+		SceneManager::loadScene(SceneNames::EXIT);
+	}
+	return true;
+}
+
+// -- Private methods ----------------------------------------------------------
+
+/**
+ * @brief Update UI objects.
+ *
+ */
+void		SceneMainMenu::_updateUI() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
@@ -114,32 +153,4 @@ bool	SceneMainMenu::update() {
 	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 	tmpPos.y -= menuHeight * 0.5;
 	allUI.border->setPos(tmpPos).setSize(tmpSize);
-
-	ASceneMenu::update();
-	if (_states.continueGame) {
-		_states.continueGame = false;
-		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
-	}
-	if (_states.save) {
-		_states.save = false;
-		Save::save();
-	}
-	if (_states.newGame) {
-		_states.newGame = false;
-		Save::newGame();
-		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
-	}
-	else if (_states.loadGame) {
-		_states.loadGame = false;
-		SceneManager::loadScene(SceneNames::LOADGAME);
-	}
-	else if (_states.loadSettings) {
-		_states.loadSettings = false;
-		SceneManager::loadScene(SceneNames::SETTINGS);
-	}
-	else if (_states.exit) {
-		_states.exit = false;
-		SceneManager::loadScene(SceneNames::EXIT);
-	}
-	return true;
 }
