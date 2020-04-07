@@ -241,6 +241,11 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
 		return _dir;
 	}
 
+	// can't see a player inside a wall (with the wallpass for example)
+	if (!_canMoveOn(glm::vec3(playerPos.x, 0, playerPos.y))) {
+		return Direction::NO_DIRECTION;
+	}
+
 	if (playerPos.y == thisPos.y) {
 		for (int x = thisPos.x; x < static_cast<int>(game.size.x); x++) {
 			if (x == playerPos.x)

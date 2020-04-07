@@ -34,11 +34,11 @@ protected:
 	glm::vec3	size;
 
 	// Methods
-	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest);
+	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest) const;
 	bool		_canWalkOnBlock(glm::ivec2 pos) const;
 	bool		_canWalkOnEntity(AEntity * entity) const;
-	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to);
-	bool		_canMoveOn(glm::vec3 dest);
+	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const;
+	bool		_canMoveOn(glm::vec3 dest) const;
 	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
 	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
 
@@ -64,11 +64,11 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	bool							isAlive();
-	glm::vec3						getPos();
+	glm::vec3						getPos() const;
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
-	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 	bool							tp(glm::vec3 tpPos);
 

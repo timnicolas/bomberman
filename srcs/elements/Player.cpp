@@ -344,6 +344,7 @@ void	Player::_putBomb() {
 		Bomb	*bomb = new Bomb(game);
 		bomb->setPropagation(bombProgation);
 		game.board[intPos.x][intPos.y].push_back(bomb);
+		bomb->init();
 		bombs -= 1;
 	}
 }

@@ -600,6 +600,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					+ std::to_string(j) + "): " + line[i]).c_str());
 			}
 		}
+
 		/* fly board creation */
 		line = lvl.lj("map").list[j]->s("1");
 		if (line.length() != size.x)

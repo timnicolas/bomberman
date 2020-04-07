@@ -52,7 +52,7 @@ void ACharacter::resetCrossable() {
  *
  * @return glm::vec2
  */
-glm::vec3		ACharacter::getPos() {
+glm::vec3		ACharacter::getPos() const {
 	return position;
 }
 
@@ -120,7 +120,7 @@ bool	ACharacter::takeDamage(const int damage) {
  * @param pos default VOID_POS3
  * @return std::unordered_set<AEntity *> collisions
  */
-std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
+std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 	if (dest == VOID_POS3) {
 		logWarn("dest is VOID_POS3 in ACharacter::getCollision");
 		dest = getPos();
@@ -207,13 +207,17 @@ bool	ACharacter::tp(glm::vec3 tpPos) {
  *
  * @return std::unordered_set<AEntity *> The list of entity
  */
-std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) {
-	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);  // all entity on character
-	std::unordered_set<AEntity *> allColisionsBlock;  // all entity that block character
+std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) const {
+	// all entity on character
+	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);
+	// all entity that block character
+	std::unordered_set<AEntity *> allColisionsBlock;
+
 	for (auto && entity : allColisionsEntity) {
 		if (!_canWalkOnEntity(entity))
 			allColisionsBlock.insert(entity);
 	}
+
 	return allColisionsBlock;
 }
 
@@ -258,7 +262,7 @@ bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
  * @param dest The position to check
  * @return true If the entity can move
  */
-bool	ACharacter::_canMoveOn(glm::vec3 dest) {
+bool	ACharacter::_canMoveOn(glm::vec3 dest) const {
 	/* check if we are on the game board */
 	if (game.positionInGame(dest, size) == false) {
 		return false;
@@ -282,7 +286,7 @@ bool	ACharacter::_canMoveOn(glm::vec3 dest) {
  * @param to The goal position
  * @return true If the entity can move
  */
-bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) {
+bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const {
 	/* check if we are on the game board */
 	if (game.positionInGame(to, size) == false) {
 		return false;

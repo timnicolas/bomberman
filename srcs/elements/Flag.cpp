@@ -11,7 +11,6 @@ Flag::Flag(SceneGame &game) : AObject(game) {
 }
 
 Flag::~Flag() {
-	getPos();
 	if (game.clearFromBoard(this, {position.x, position.z})) {
 		game.flags--;
 	}
