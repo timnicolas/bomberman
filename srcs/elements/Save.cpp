@@ -290,6 +290,24 @@ bool	Save::_isLevelDone(int32_t levelId) {
 }
 
 /**
+ * @brief Get score for given levelId.
+ *
+ * @param levelId
+ * @return int score. 0 is returned if not score for the given level.
+ */
+int		Save::getLevelScore(int32_t levelId) {
+	return get()._getLevelScore(levelId);
+}
+int		Save::_getLevelScore(int32_t levelId) {
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
+		if (level->i("id") == levelId) {
+			return level->i("score");
+		}
+	}
+	return 0;
+}
+
+/**
  * @brief Save method to file.
  *
  * @param temporary

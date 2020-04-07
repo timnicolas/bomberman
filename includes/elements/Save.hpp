@@ -31,6 +31,8 @@ public:
 	static bool			updateSavedFile(SceneGame &game, bool succeedLevel);
 	static bool			loadStatesSaved(SceneGame &game);
 	static bool			isLevelDone(int32_t levelId);
+	static int			getLevelScore(int32_t levelId);
+	int			_getLevelScore(int32_t levelId);
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
 
