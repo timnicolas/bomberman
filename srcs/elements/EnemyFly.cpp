@@ -4,8 +4,7 @@
 // -- Constructors -------------------------------------------------------------
 
 EnemyFly::EnemyFly(SceneGame &game)
-: AEnemy(game),
-  _dir(Direction::UP)
+: AEnemy(game)
 {
 	name = "EnemyFly";
 	size = glm::vec3(0.5, 0.5, 0.3);

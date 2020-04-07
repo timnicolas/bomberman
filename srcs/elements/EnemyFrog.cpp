@@ -5,7 +5,6 @@
 
 EnemyFrog::EnemyFrog(SceneGame &game)
 : AEnemy(game),
-  _dir(Direction::UP),
   _jumpGoal(VOID_POS),
   _nextJumpTime(0)
 {
@@ -34,6 +33,8 @@ EnemyFrog::EnemyFrog(EnemyFrog const &src) : AEnemy(src) {
 EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);
+		_jumpGoal = rhs._jumpGoal;
+		_nextJumpTime = rhs._nextJumpTime;
 	}
 	return *this;
 }

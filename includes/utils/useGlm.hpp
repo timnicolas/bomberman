@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>  // to print vect/mat with glm::to_string
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 /**
  * @brief to use glm::vec as map key and add lerp function to glm

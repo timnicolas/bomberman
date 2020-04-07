@@ -600,6 +600,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					+ std::to_string(j) + "): " + line[i]).c_str());
 			}
 		}
+
 		/* fly board creation */
 		line = lvl.lj("map").list[j]->s("1");
 		if (line.length() != size.x)
@@ -646,13 +647,16 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFly, uint64_t wallGenPercent) {
 	AEntity * entity;
+
 	if (!positionInGame({pos.x, 0, pos.y})) {
 		return false;
 	}
+
 	if (_entitiesCall.find(name) == _entitiesCall.end()) {
 		logErr("invalid entity name " << name << " in SceneGame::insertEntity");
 		return false;
 	}
+
 	// if it's empty, generate crispy wall with a certain probability
 	if (name == "empty" && !isFly)
 		entity = Crispy::generateCrispy(*this, wallGenPercent);
@@ -679,10 +683,13 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 	else {  // if not fly
 		switch (_entitiesCall[name].entityType) {
 			case EntityType::PLAYER:
-				if (player == nullptr)
+				if (player == nullptr) {
 					player = reinterpret_cast<Player *>(entity);
-				else
+				}
+				else {
 					delete entity;
+					entity = nullptr;
+				}
 				player->setPosition({pos.x, 0, pos.y});
 				break;
 			case EntityType::BOARD_FLAG:
@@ -714,6 +721,12 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 				delete entity;
 		}
 	}
+
+	// init entity
+	if (entity && !entity->init()) {
+		return false;
+	}
+
 	return true;
 }
 

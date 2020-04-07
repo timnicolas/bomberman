@@ -14,13 +14,16 @@
 class EnemyWithEye : public AEnemy {
 private:
 	EnemyWithEye();
-	Direction::Enum	_dir;
+
 	Direction::Enum	_playerDir;  // direction of the player (if view it)
 
 protected:
 	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
+
+	void			_updateModel();
+	void			_updateAnimationState();
 
 public:
 	// Constructors
@@ -30,4 +33,7 @@ public:
 
 	// Operators
 	EnemyWithEye &operator=(EnemyWithEye const &rhs);
+
+	// Methods
+	virtual bool	init();
 };

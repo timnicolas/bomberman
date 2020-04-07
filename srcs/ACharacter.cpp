@@ -52,7 +52,7 @@ void ACharacter::resetCrossable() {
  *
  * @return glm::vec2
  */
-glm::vec3		ACharacter::getPos() {
+glm::vec3		ACharacter::getPos() const {
 	return position;
 }
 
@@ -97,6 +97,8 @@ bool	ACharacter::isAlive() {
  * @return false if damage not taken
  */
 bool	ACharacter::takeDamage(const int damage) {
+	bool wasAlive = alive;
+
 	if (!active || !destructible)
 		return false;
 	lives -= damage;
@@ -104,6 +106,11 @@ bool	ACharacter::takeDamage(const int damage) {
 		lives = 0;
 		alive = false;
 	}
+
+	if (wasAlive && !alive) {
+		setState(EntityState::DYING);
+	}
+
 	return true;
 }
 
@@ -113,7 +120,7 @@ bool	ACharacter::takeDamage(const int damage) {
  * @param pos default VOID_POS3
  * @return std::unordered_set<AEntity *> collisions
  */
-std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
+std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 	if (dest == VOID_POS3) {
 		logWarn("dest is VOID_POS3 in ACharacter::getCollision");
 		dest = getPos();
@@ -168,13 +175,15 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) {
  * @return false if no collision
  */
 bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
-	getPos();
-	if (position.x < atPosition.x + atSize.x
-	&& position.x + size.x > atPosition.x
-	&& position.z < atPosition.z + atSize.z
-	&& position.z + size.z > atPosition.z)
-		return true;
-	return false;
+	// check if there is no colision (easier)
+	if ((position.x >= atPosition.x + atSize.x) ||  // too much right
+		(position.x + size.x <= atPosition.x) ||  // too much left
+		(position.z >= atPosition.z + atSize.z) ||  // too much down
+		(position.z + size.z <= atPosition.z)) {  // too much up
+		return false;
+	}
+
+	return true;
 }
 
 /**
@@ -198,14 +207,18 @@ bool	ACharacter::tp(glm::vec3 tpPos) {
  *
  * @return std::unordered_set<AEntity *> The list of entity
  */
-std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) {
-	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);  // all entity on character
-	std::unordered_set<AEntity *> allColisionsBlock;  // all entity that block character
-	for (auto && entity : allColisionsEntity) {
+std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest) const {
+	// all entity on character
+	std::unordered_set<AEntity *> allCollisionsEntity = getCollision(dest);
+	// all entity that block character
+	std::unordered_set<AEntity *> allCollisionsBlock;
+
+	for (auto && entity : allCollisionsEntity) {
 		if (!_canWalkOnEntity(entity))
-			allColisionsBlock.insert(entity);
+			allCollisionsBlock.insert(entity);
 	}
-	return allColisionsBlock;
+
+	return allCollisionsBlock;
 }
 
 /**
@@ -249,15 +262,15 @@ bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
  * @param dest The position to check
  * @return true If the entity can move
  */
-bool	ACharacter::_canMoveOn(glm::vec3 dest) {
+bool	ACharacter::_canMoveOn(glm::vec3 dest) const {
 	/* check if we are on the game board */
 	if (game.positionInGame(dest, size) == false) {
 		return false;
 	}
 
 	/* check colision with all entities under character */
-	std::unordered_set<AEntity *> allColisionsEntity = getCollision(dest);
-	for (auto && entity : allColisionsEntity) {
+	std::unordered_set<AEntity *> allCollisionsEntity = getCollision(dest);
+	for (auto && entity : allCollisionsEntity) {
 		if (!_canWalkOnEntity(entity))
 			return false;
 	}
@@ -273,23 +286,23 @@ bool	ACharacter::_canMoveOn(glm::vec3 dest) {
  * @param to The goal position
  * @return true If the entity can move
  */
-bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) {
+bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const {
 	/* check if we are on the game board */
 	if (game.positionInGame(to, size) == false) {
 		return false;
 	}
 
 	/* check colision with all entities under character */
-	std::unordered_set<AEntity *> allColisionsEntityNow = _getAllBlockableEntity(to);
-	if (allColisionsEntityNow.empty())
+	std::unordered_set<AEntity *> allCollisionsEntityNow = _getAllBlockableEntity(to);
+	if (allCollisionsEntityNow.empty())
 		return true;
 	// if there is a collision, check if there was the same collision in last time
-	std::unordered_set<AEntity *> allColisionsEntityLast = _getAllBlockableEntity(from);
-	if (allColisionsEntityNow.empty())
+	std::unordered_set<AEntity *> allCollisionsEntityLast = _getAllBlockableEntity(from);
+	if (allCollisionsEntityNow.empty())
 		return false;
-	for (auto && nowEnt : allColisionsEntityNow) {
+	for (auto && nowEnt : allCollisionsEntityNow) {
 		bool ok = false;
-		for (auto && lastEnt : allColisionsEntityLast) {
+		for (auto && lastEnt : allCollisionsEntityLast) {
 			if (nowEnt == lastEnt) {
 				ok = true;
 				break;
@@ -346,7 +359,7 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 
 	// update state on first move
 	if (_entityState.state != EntityState::RUNNING) {
-		setstate(EntityState::RUNNING);
+		setState(EntityState::RUNNING);
 	}
 
 	if (glm::length(direction) == 0)

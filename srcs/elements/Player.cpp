@@ -1,12 +1,10 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
-#include <glm/gtx/vector_angle.hpp>
 
 // -- Constructors -------------------------------------------------------------
 
 Player::Player(SceneGame &game)
-: ACharacter(game),
-  _model(nullptr) {
+: ACharacter(game) {
 	size = glm::vec3(0.7, 1.5, 0.7);
 	type = Type::PLAYER;
 	name = "Player";
@@ -51,8 +49,13 @@ bool	Player::init() {
 	bombs = totalBombs;
 
 	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1}, {1.3, 1.3, 1.3}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1},
+			{1.3, 1.3, 1.3}));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
@@ -123,44 +126,13 @@ bool	Player::update() {
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
-				setstate(EntityState::DROP_BOMB);
+				setState(EntityState::DROP_BOMB);
 			}
 		}
 	}
 
 	// update animation on state change
-	if (_entityState.updated) {
-		_entityState.updated = false;
-		switch (_entityState.state) {
-			case EntityState::IDLE:
-				_model->animationSpeed = 1;
-				_model->loopAnimation = true;
-				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
-				break;
-			case EntityState::DYING:
-				_model->animationSpeed = 1;
-				_model->loopAnimation = false;
-				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
-				break;
-			case EntityState::RUNNING:
-				_model->animationSpeed = 1;
-				_model->loopAnimation = true;
-				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
-				break;
-			case EntityState::DROP_BOMB:
-				_model->animationSpeed = 10;
-				_model->loopAnimation = false;
-				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
-				break;
-			case EntityState::VICTORY_EMOTE:
-				_model->animationSpeed = 1;
-				_model->loopAnimation = true;
-				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
-				break;
-			default:
-				break;
-		}
-	}
+	_updateAnimationState();
 
 	return true;
 }
@@ -201,15 +173,10 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
-	bool wasAlive = alive;
-
 	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
 			if (alive) {
 				invulnerable = 3.0f;
-			}
-			else if (wasAlive) {
-				setstate(EntityState::DYING);
 			}
 		}
 	}
@@ -282,17 +249,56 @@ void	Player::addBomb() {
 }
 
 /**
+ * @brief update animation on state change
+ *
+ */
+void	Player::_updateAnimationState() {
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DYING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityState::RUNNING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DROP_BOMB:
+				_model->animationSpeed = 10;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
+				break;
+			case EntityState::VICTORY_EMOTE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+/**
  * @brief called on animation end if passed to Model
  *
  * @param animName the current animation name
  */
 void	Player::animEndCb(std::string animName) {
-	// logDebug("animEndCb -> " << animName);
 	if (animName == "Armature|drop") {
 		_putBomb();
-		setstate(EntityState::IDLE);
+		setState(EntityState::IDLE);
 	}
 	else if (animName == "Armature|death") {
+		_animDeathEnd = true;
 		logInfo("Player is dead.")
 		game.state = GameState::GAME_OVER;
 	}
@@ -324,7 +330,7 @@ void	Player::_move() {
 
 	// update state on end move
 	if (!moved && _entityState.state == EntityState::RUNNING) {
-		setstate(EntityState::IDLE);
+		setState(EntityState::IDLE);
 	}
 }
 
@@ -338,6 +344,7 @@ void	Player::_putBomb() {
 		Bomb	*bomb = new Bomb(game);
 		bomb->setPropagation(bombProgation);
 		game.board[intPos.x][intPos.y].push_back(bomb);
+		bomb->init();
 		bombs -= 1;
 	}
 }

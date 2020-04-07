@@ -14,7 +14,6 @@
 class EnemyBasic : public AEnemy {
 private:
 	EnemyBasic();
-	Direction::Enum	_dir;
 
 protected:
 	virtual bool	_update();
