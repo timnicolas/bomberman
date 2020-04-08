@@ -149,6 +149,7 @@ bool	Gui::init() {
 	try {
 		ABaseUI::init(gameInfo.windowSize, s.j("font").s("file"), s.j("font").u("size"));
 		ABaseUI::loadFont("title", s.j("font").s("file"), s.j("font").u("size") * 2);
+		ABaseUI::loadFont("text", s.j("font-text").s("file"), s.j("font-text").u("size") * 2);
 		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);
 		ABaseUI::showHelp(DEBUG_SHOW_HELP);
 	}
