@@ -6,7 +6,7 @@
 
 ACharacter::ACharacter(SceneGame &game)
 : AEntity(game),
-  size(0.95, 0.95, 0.95),
+  size(0.95, 1.5, 0.95),
   front(0, 0, 1)
 {
 	category = Category::MOBILE;
