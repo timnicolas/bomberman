@@ -27,6 +27,8 @@ class SceneLoadGame : public ASceneMenu {
 			bool		restart;
 			bool		menu;
 			bool		exit;
+			bool		loadGame;
+			bool		deleteGame;
 		};
 		ButtonsStates	_states;
 		struct GameSaved {
@@ -36,6 +38,15 @@ class SceneLoadGame : public ASceneMenu {
 			ABaseUI			*ui;
 		};
 		std::vector<GameSaved *>	_gamesSaved;
+		struct PreviewGame {
+			ABaseUI *	title;
+			ABaseUI *	date;
+			ABaseUI *	levelsDone;
+			ABaseUI *	loadGame;
+			ABaseUI *	deleteGame;
+		};
+		PreviewGame	previewGameUI;
+		int64_t						_selectedGame;
 		std::string					_lastSceneName;
 
 	private:
