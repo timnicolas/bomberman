@@ -83,10 +83,6 @@ void main() {
 	vec3	result = calcDirLight(dirLight, norm, viewDir);
 
 	fragColor = vec4(result, 1.0);
-	// fragColor = vec4(0.2, 0.9, 0.2, 1.0);
-	// if (material.normalMap.isTexture) {
-	// 	fragColor = vec4(norm, 1.0);
-	// }
 
 	// apply gamma correction
     fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / GAMMA));

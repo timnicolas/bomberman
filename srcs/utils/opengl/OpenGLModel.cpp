@@ -111,7 +111,7 @@ void	OpenGLModel::_setConstUniforms() {
 	// direction light
 	_sh->setVec3("dirLight.direction", -0.2f, -0.8f, 0.6f);
 	_sh->setVec3("dirLight.ambient", 0.4f, 0.4f, 0.4f);
-	_sh->setVec3("dirLight.diffuse", 0.8f, 0.8f, 0.8f);
+	_sh->setVec3("dirLight.diffuse", 0.7f, 0.7f, 0.7f);
 	_sh->setVec3("dirLight.specular", 0.1f, 0.1f, 0.1f);
 
 	_sh->unuse();
