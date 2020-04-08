@@ -63,6 +63,9 @@ bool	AEnemy::update() {
 	{
 		game.player->takeDamage(strength);
 		setState(EntityState::ATTACK);
+
+		// facing player on attack
+		front = glm::normalize(game.player->position - position);
 	}
 
 	return _update();
