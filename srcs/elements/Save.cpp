@@ -70,8 +70,8 @@ Save	&Save::_loadGame(std::string filename) {
 		_saveJs = initJson(filename, false);
 		_filename = filename;
 		_instantiate = true;
-		std::smatch match = getMatchFileName(filename, true);
-		_time = static_cast<time_t>(std::stoi(match[1]));
+		std::string name = getMatchFileName(filename, true);
+		_time = static_cast<time_t>(std::stoi(name));
 	} catch (SaveException &e) {
 		logErr(e.what());
 		_instantiate = false;
@@ -174,14 +174,17 @@ std::string		Save::getFileNameRegex(bool temporary) {
  *
  * @param filename
  * @param temporary true if we want to include temporary filename.
- * @return std::smatch matching. If empty, no match. matching[1] contain the name.
+ * @return std::string name if matching else empty string.
  */
-std::smatch		Save::getMatchFileName(std::string filename, bool temporary) {
+std::string		Save::getMatchFileName(std::string filename, bool temporary) {
 	std::regex	regex(getFileNameRegex(temporary));
 	std::smatch	match;
 	std::regex_match(filename, match, regex);
 
-	return match;
+	if (!match.size())
+		throw SaveException(("incorrect filename: " + filename).c_str());
+
+	return match[1];
 }
 
 /**
@@ -193,13 +196,16 @@ std::smatch		Save::getMatchFileName(std::string filename, bool temporary) {
  */
 SettingsJson	*Save::initJson(std::string filename, bool newFile) {
 	SettingsJson	*jsFile = new SettingsJson();
+
 	try {
+		// file not found and not new file
 		if (!newFile && file::isFile(filename) == false)
 			throw SaveException((filename + " is not a file").c_str());
-		std::smatch match = getMatchFileName(filename, false);
-		if (!match.size())
-			throw SaveException(("incorrect filename: " + filename).c_str());
-		std::time_t time = static_cast<time_t>(std::stoi(match[1]));
+
+		// check filename viability
+		std::string name = getMatchFileName(filename, false);
+
+		std::time_t time = static_cast<time_t>(std::stoi(name));
 		jsFile->name(std::to_string(time)).description("Save file");
 		jsFile->add<std::string>("Filename", filename);
 
