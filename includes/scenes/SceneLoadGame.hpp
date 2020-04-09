@@ -26,7 +26,6 @@ class SceneLoadGame : public ASceneMenu {
 			int64_t		selectedGame;
 			bool		restart;
 			bool		menu;
-			bool		exit;
 			bool		loadGame;
 			bool		deleteGame;
 		};

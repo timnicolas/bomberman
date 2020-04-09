@@ -171,11 +171,6 @@ void SceneLoadGame::load() {
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
 
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "exit")
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.addButtonLeftListener(&_states.exit);
-
 		tmpSize.x = tmpSize.x * 1.3;
 		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
@@ -236,7 +231,6 @@ bool	SceneLoadGame::update() {
 				file::rm(gameSaved->game->s("Filename"));
 				load();
 				return true;
-				// SceneManager::loadScene(SceneNames::LOADGAME);
 			}
 		}
 	}
@@ -248,10 +242,6 @@ bool	SceneLoadGame::update() {
 	else if (_states.menu) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
-	}
-	else if (_states.exit) {
-		_states.exit = false;
-		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
 }
