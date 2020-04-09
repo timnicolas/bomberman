@@ -1,4 +1,5 @@
 #include "SceneExit.hpp"
+#include "Save.hpp"
 
 SceneExit::SceneExit(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -19,6 +20,8 @@ SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 	}
 	return *this;
 }
+
+// - AScene Public Methods -----------------------------------------------------
 
 /**
  * @brief init the menu
@@ -41,21 +44,14 @@ bool			SceneExit::init() {
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Do   you   want   to   exit ?");
 
-		tmpPos.y -= menuHeight * 1.8;
-		addButton(tmpPos, tmpSize, "exit")
-			.setKeyLeftClickInput(InputType::CONFIRM)
+		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.addButtonLeftListener(&_states.exit);
-
-		tmpPos.y -= menuHeight * 1.3;
-		addButton(tmpPos, tmpSize, "cancel")
+		allUI.cancel = &addButton(VOID_SIZE, VOID_SIZE, "cancel")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.cancel);
-
-		tmpSize.x = tmpSize.x * 1.3;
-		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
-		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize);
+		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save   and   exit")
+			.addButtonLeftListener(&_states.save);
+		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
 		_initBG();
 	}
@@ -66,6 +62,7 @@ bool			SceneExit::init() {
 	return true;
 }
 
+
 /**
  * @brief this is the update function (called every frames)
  *
@@ -73,15 +70,24 @@ bool			SceneExit::init() {
  * @return false if there are an error in update
  */
 bool	SceneExit::update() {
+	_updateUI();
 	ASceneMenu::update();
 
 	if (_states.exit) {
 		_states.exit = false;
+		if (Save::isInstantiate()) {
+			Save::deleteTemp();
+		}
 		SceneManager::quit();
 	}
 	else if (_states.cancel) {
 		_states.cancel = false;
 		SceneManager::loadScene(_lastSceneName);
+	}
+	else if (_states.save) {
+		_states.save = false;
+		Save::save();
+		SceneManager::quit();
 	}
 	return true;
 }
@@ -94,4 +100,45 @@ void SceneExit::load() {
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 	}
+}
+
+// -- Private methods ----------------------------------------------------------
+
+/**
+ * @brief Update UI objects.
+ *
+ */
+void	SceneExit::_updateUI() {
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	float menuWidth = winSz.x / 2;
+	float menuHeight = winSz.y / 14;
+
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	// tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
+	tmpPos.y = winSz.y - menuHeight * 2;
+	tmpSize.x = menuWidth;
+	tmpSize.y = menuHeight;
+
+	tmpPos.y -= menuHeight * 1.8;
+	allUI.exit->setPos(tmpPos).setSize(tmpSize);
+	if (!Save::isInstantiate() || (Save::isInstantiate() && Save::isSaved())) {
+		allUI.exit->setKeyLeftClickInput(InputType::CONFIRM);
+	} else {
+		allUI.exit->setKeyLeftClickInput(InputType::ACTION);
+	}
+	tmpPos.y -= menuHeight * 1.3;
+	allUI.cancel->setPos(tmpPos).setSize(tmpSize);
+	if (!Save::isInstantiate() || (Save::isInstantiate() && Save::isSaved())) {
+		allUI.save->setPos(VOID_SIZE).setSize(VOID_SIZE).setKeyLeftClickInput(InputType::NO_KEY);
+	} else {
+		tmpPos.y -= menuHeight * 1.3;
+		allUI.save->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
+	}
+	tmpSize.x = tmpSize.x * 1.3;
+	tmpSize.y = winSz.y - tmpPos.y;
+	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
+	tmpPos.y -= menuHeight * 0.5;
+	allUI.border->setPos(tmpPos).setSize(tmpSize);
 }

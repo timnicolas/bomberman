@@ -90,6 +90,11 @@ bool	initSettings(std::string const & filename) {
 				.setDescription("this is the font for cheatcode");
 			s.j("fonts").j("cheatcode").add<uint64_t>("size", 6).setMin(5).setMax(50)
 				.setDescription("default size for the text (cheatcode)");
+		s.j("fonts").add<SettingsJson>("text");
+			s.j("fonts").j("text").add<std::string>("file", "bomberman-assets/fonts/BalooPaaji2-Regular.ttf")
+				.setDescription("this is the main font");
+			s.j("fonts").j("text").add<uint64_t>("size", 10).setMin(10).setMax(50)
+				.setDescription("default size for the text");
 
 	/* colors */
 	s.add<SettingsJson>("colors");
@@ -97,9 +102,44 @@ bool	initSettings(std::string const & filename) {
 	s.j("colors").add<SettingsJson>("buttons");
 		s.j("colors").j("buttons").add<uint64_t>("color", 0x2AB859).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("buttons").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("buttons-disable");
+		s.j("colors").j("buttons-disable").add<uint64_t>("color", 0x8ebc9e).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("buttons-disable").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("buttons-border");
 		s.j("colors").j("buttons-border").add<uint64_t>("color", 0x2CBC5C).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("buttons-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+
+	s.j("colors").add<SettingsJson>("green");
+		s.j("colors").j("green").add<uint64_t>("color", 0x2ab859).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("green").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("green-light");
+		s.j("colors").j("green-light").add<uint64_t>("color", 0x8ebc9e).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("green-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("red");
+		s.j("colors").j("red").add<uint64_t>("color", 0xa65353).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("red").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("red-light");
+		s.j("colors").j("red-light").add<uint64_t>("color", 0xc46f6f).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("red-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("orange");
+		s.j("colors").j("orange").add<uint64_t>("color", 0xe88504).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("orange").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("orange-light");
+		s.j("colors").j("orange-light").add<uint64_t>("color", 0xe88504).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("orange-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("pink");
+		s.j("colors").j("pink").add<uint64_t>("color", 0xac38c4).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("pink").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("pink-light");
+		s.j("colors").j("pink-light").add<uint64_t>("color", 0xff99f7).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("pink-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("blue");
+		s.j("colors").j("blue").add<uint64_t>("color", 0x418dfe).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("blue").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("blue-light");
+		s.j("colors").j("blue-light").add<uint64_t>("color", 0x7cbcf7).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("blue-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+
 	// font color
 	s.j("colors").add<SettingsJson>("font");
 		s.j("colors").j("font").add<uint64_t>("color", 0xFFFFFF).setMin(0x000000).setMax(0xFFFFFF);
@@ -124,7 +164,10 @@ bool	initSettings(std::string const & filename) {
 	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
+	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
+	s.add<std::string>("savePath", "save/").setDescription("folder with all saved games.");
+
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
 	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");

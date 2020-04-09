@@ -166,6 +166,7 @@ bool	Gui::init() {
 		ABaseUI::init(gameInfo.windowSize, s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size"));
 		ABaseUI::loadFont("title", s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size") * 2);
 		ABaseUI::loadFont("cheatcode", s.j("fonts").j("cheatcode").s("file"), s.j("fonts").j("cheatcode").u("size") * 3);
+		ABaseUI::loadFont("text", s.j("fonts").j("text").s("file"), s.j("fonts").j("text").u("size") * 2);
 		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);
 		ABaseUI::showHelp(DEBUG_SHOW_HELP);
 	}
