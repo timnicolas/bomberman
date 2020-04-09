@@ -16,7 +16,10 @@ _shader(SHADER_TEXT_VS, SHADER_TEXT_FS)
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 6 * SHADER_TEXT_ROW_SIZE, NULL, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, SHADER_TEXT_ROW_SIZE * sizeof(GLfloat), 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, SHADER_TEXT_ROW_SIZE * sizeof(GLfloat), 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, SHADER_TEXT_ROW_SIZE * sizeof(GLfloat),
+		reinterpret_cast<void*>(3 * sizeof(float)));
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	_shader.unuse();
@@ -135,7 +138,7 @@ void TextRender::setWinSize(glm::vec2 winSize) {
  * @param scale The text scale
  * @param color The text color
  */
-void TextRender::write(std::string const &fontName, std::string text, GLfloat x, GLfloat y,
+void TextRender::write(std::string const &fontName, std::string text, glm::vec3 pos,
 GLfloat scale, glm::vec3 color) {
 	if (font.find(fontName) == font.end()) {
 		logErr("invalid font name " << fontName);
@@ -147,18 +150,18 @@ GLfloat scale, glm::vec3 color) {
     glBindVertexArray(_vao);
 	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
         Character ch = font[fontName][*c];
-        GLfloat xpos = x + ch.bearing.x * scale;
-        GLfloat ypos = y - (ch.size.y - ch.bearing.y) * scale;
+        GLfloat xpos = pos.x + ch.bearing.x * scale;
+        GLfloat ypos = pos.y - (ch.size.y - ch.bearing.y) * scale;
         GLfloat w = ch.size.x * scale;
         GLfloat h = ch.size.y * scale;
         // set VBO values
         GLfloat vertices[6][SHADER_TEXT_ROW_SIZE] = {
-            {xpos,     ypos + h,   0.0, 0.0},
-            {xpos,     ypos,       0.0, 1.0},
-            {xpos + w, ypos,       1.0, 1.0},
-            {xpos,     ypos + h,   0.0, 0.0},
-            {xpos + w, ypos,       1.0, 1.0},
-            {xpos + w, ypos + h,   1.0, 0.0},
+            {xpos,     ypos + h, pos.z,   0.0, 0.0},
+            {xpos,     ypos,     pos.z,   0.0, 1.0},
+            {xpos + w, ypos,     pos.z,   1.0, 1.0},
+            {xpos,     ypos + h, pos.z,   0.0, 0.0},
+            {xpos + w, ypos,     pos.z,   1.0, 1.0},
+            {xpos + w, ypos + h, pos.z,   1.0, 0.0},
 		   };
         // bind char texture
         glBindTexture(GL_TEXTURE_2D, ch.textureID);
@@ -170,7 +173,7 @@ GLfloat scale, glm::vec3 color) {
         glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindTexture(GL_TEXTURE_2D, 0);
         // move cursor to the next character
-        x += (ch.advance >> 6) * scale;
+        pos.x += (ch.advance >> 6) * scale;
     }
     glBindVertexArray(0);
     _shader.unuse();
@@ -201,11 +204,16 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
  * @brief Get the height of a text (in pixel) with a given font and size
  *
  * @param fontName The name of the font (choose name when load font)
- * @param text The text to write
  * @param scale The text scale
+ * @param fullHeight True if we need the full height (including the letter under base height like 'j')
  * @return uint32_t The text height
  */
-uint32_t	TextRender::strHeight(std::string const &fontName, std::string text, GLfloat scale) {
+uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool fullHeight) {
+	std::string text;  // This if the text to check (L to have only positive heigth, jL to have full height)
+	if (fullHeight)
+		 text = "j|Ll1";
+	else
+		text = "Ll1";
 	uint32_t	height = 0;
 	if (font.find(fontName) == font.end()) {
 		logErr("invalid font name " << fontName);

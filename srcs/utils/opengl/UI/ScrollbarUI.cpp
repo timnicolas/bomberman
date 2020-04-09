@@ -176,7 +176,7 @@ void ScrollbarUI::_draw() {
 		}
 
 		/* draw scrollbar */
-		_drawRect(tmpPos, tmpSize, _scrollbarColor, secColor, factor);
+		_drawRect(tmpPos, tmpSize, _z, _scrollbarColor, secColor, factor);
 	}
 	if (_horizScroll) {
 		/* size of the scrollbar */
@@ -203,7 +203,7 @@ void ScrollbarUI::_draw() {
 		}
 
 		/* draw scrollbar */
-		_drawRect(tmpPos, tmpSize, _scrollbarColor, secColor, factor);
+		_drawRect(tmpPos, tmpSize, _z, _scrollbarColor, secColor, factor);
 	}
 
 	// get center size and position
@@ -213,10 +213,10 @@ void ScrollbarUI::_draw() {
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
-	_drawRect(tmpPos, tmpSize, _color);
+	_drawRect(tmpPos, tmpSize, _z, _color);
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 }
 
 /* setter */

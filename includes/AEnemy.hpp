@@ -33,6 +33,9 @@ private:
 	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
 protected:
+	// Members
+	Direction::Enum	_dir;
+
 	virtual bool	_update() = 0;
 	virtual bool	_postUpdate() = 0;
 	virtual bool	_draw(Gui &gui) = 0;
@@ -67,6 +70,7 @@ public:
 	bool			update();
 	bool			postUpdate();
 	bool			draw(Gui &gui);
+	virtual void	animEndCb(std::string animName);
 
 	// Exceptions
 	class EnemyException : public std::runtime_error {

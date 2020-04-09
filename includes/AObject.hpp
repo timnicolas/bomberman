@@ -25,10 +25,11 @@ public:
 	virtual bool	update() = 0;
 	virtual bool	draw(Gui &gui) = 0;
 	void			setPos(glm::vec3 pos = VOID_POS3);
-	glm::vec3		getPos();
+	glm::vec3		getPos() const;
 	bool			takeDamage(int damage);
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
+	virtual bool	init();
 
 	bool			isInFlyBoard;
 

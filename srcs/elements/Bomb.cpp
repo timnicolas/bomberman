@@ -14,8 +14,12 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 }
 
 Bomb::~Bomb() {
-	getPos();
-	game.clearFromBoard(this, {position.x, position.z});
+	try {
+		game.clearFromBoard(this, {position.x, position.z});
+	}
+	catch (AObject::AObjectException const & e) {
+		// the object was never placed on the board
+	}
 }
 
 Bomb::Bomb(Bomb const &src) : AObject(src) {
@@ -52,6 +56,7 @@ void	Bomb::explode(glm::vec2 const pos) {
 	std::vector<AEntity *>	box;
 
 	active = false;
+	_propagationExplosion({pos.x, pos.y});
 	// top
 	i = 0;
 	while (++i < _propagation) {
@@ -76,7 +81,10 @@ void	Bomb::explode(glm::vec2 const pos) {
 		if (!_propagationExplosion({pos.x - i, pos.y}))
 			break;
 	}
-	game.board[pos.x][pos.y].push_back(new Fire(game));
+
+	Fire *fire = new Fire(game);
+	game.board[pos.x][pos.y].push_back(fire);
+	fire->init();
 	game.player->addBomb();
 	alive = false;
 }
@@ -91,7 +99,7 @@ void	Bomb::explode(glm::vec2 const pos) {
 bool	Bomb::takeDamage(const int damage) {
 	if (!active || damage <= 0)
 		return false;
-	getPos();
+
 	explode({position.x, position.z});
 	return true;
 }
@@ -107,13 +115,11 @@ bool	Bomb::update() {
 		return true;
 	if (game.player->detonator) {
 		if (Inputs::getKey(InputType::ACTION_2)) {
-			getPos();
 			explode({position.x, position.z});
 		}
 	} else {
 		_countdown -= game.getDtTime();
 		if (_countdown <= 0.0) {
-			getPos();
 			explode({position.x, position.z});
 		}
 	}
@@ -151,6 +157,7 @@ bool	Bomb::draw(Gui &gui) {
 bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 	if (!game.positionInGame(glm::vec3(place.x, 0, place.y)))
 		return false;
+
 	std::vector<AEntity *>	&box = game.board[place.x][place.y];
 	bool					continuePropagation = true;
 	bool					addFire = false;
@@ -165,26 +172,34 @@ bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 				++it;
 				continue;
 			}
+
 			if ((*it)->blockPropagation) {
 				continuePropagation = false;
 			}
+
 			if ((*it)->destructible) {
 				addFire = true;
 			}
+
 			if ((*it)->type == Type::BOMB && (*it)->active) {
 				(*it)->takeDamage(1);
 				it = box.begin();
 				continue;
 			}
+
 			(*it)->takeDamage(1);
+
 			if (it == box.end())
 				continue;
 			++it;
 		}
 	}
 	// add fire
-	if (addFire)
-		box.push_back(new Fire(game));
+	if (addFire) {
+		Fire *fire = new Fire(game);
+		box.push_back(fire);
+		fire->init();
+	}
 
 	return continuePropagation;
 }
