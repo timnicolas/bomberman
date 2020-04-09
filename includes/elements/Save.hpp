@@ -25,7 +25,7 @@ public:
 	friend std::ostream& operator<<(std::ostream& os, const Save& my_class);
 
 	// Getters & Setters
-	static std::string	getFileName(bool temporary);
+	static std::string	getFilename(bool temporary);
 	static std::string	getFileNameRegex(bool temporary);
 	static std::smatch	getMatchFileName(std::string filename, bool temporary);
 
@@ -55,21 +55,24 @@ private:
 	std::string		_filename;
 	SettingsJson	*_saveJs;
 	std::string		_fileNameRegex;
+
 	// Constructors
 	Save();
 	Save(Save const &src);
+
 	// Operators
 	Save &			operator=(Save const &rhs);
+
 	// Methods
-	Save			&_loadGame(std::string filename);
-	Save			&_newGame();
-	std::string		_getFileName(bool temporary) const;
-	void			_init();
-	bool			_isLevelDone(int32_t levelId);
-	bool			_save(bool temporary);
-	bool			_updateSavedFile(SceneGame &game, bool succeedLevel);
-	bool			_loadStatesSaved(SceneGame &game);
-	int				_getLevelScore(int32_t levelId);
+	Save				&_loadGame(std::string filename);
+	Save				&_newGame();
+	std::string			_getFilename(bool temporary) const;
+	void				_init();
+	bool				_isLevelDone(int32_t levelId);
+	bool				_save(bool temporary);
+	bool				_updateSavedFile(SceneGame &game, bool succeedLevel);
+	bool				_loadStatesSaved(SceneGame &game);
+	int					_getLevelScore(int32_t levelId);
 	static std::string	_addRegexSlashes(std::string str);
 };
 

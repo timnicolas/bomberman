@@ -8,22 +8,35 @@
 #include "Player.hpp"
 
 // -- Constructors -------------------------------------------------------------
-
+/**
+ * @brief Private constructor. Construct a new Save:: Save object
+ *
+ */
 Save::Save() {
 	_instantiate = false;
 	_saved = false;
 }
 
+/**
+ * @brief Destroy the Save:: Save object
+ *
+ */
 Save::~Save() {
 	delete _saveJs;
 }
 
+/**
+ * @brief Private copy constructor. Construct a new Save:: Save object
+ *
+ * @param src
+ */
 Save::Save(Save const &src) {
 	_saveJs = new SettingsJson();
 	*this = src;
 }
 
 // -- get ----------------------------------------------------------------------
+
 /**
  * @brief Return a reference to the singleton Save.
  *
@@ -31,8 +44,11 @@ Save::Save(Save const &src) {
  */
 Save	&Save::get() {
 	static Save	instance;
+
 	return (instance);
 }
+
+// -- initiate methods ---------------------------------------------------------
 
 /**
  * @brief Load filename to actual save.
@@ -44,6 +60,10 @@ Save	&Save::loadGame(std::string filename) {
 	return get()._loadGame(filename);
 }
 Save	&Save::_loadGame(std::string filename) {
+	if (isInstantiate()) {
+		delete _saveJs;
+		deleteTemp();
+	}
 	_instantiate = false;
 	_init();
 	try {
@@ -57,6 +77,7 @@ Save	&Save::_loadGame(std::string filename) {
 		_instantiate = false;
 	}
 	_saved = true;
+
 	return *this;
 }
 
@@ -69,14 +90,16 @@ Save	&Save::newGame() {
 	return get()._newGame();
 }
 Save	&Save::_newGame() {
-	if (isInstantiate())
+	if (isInstantiate()) {
+		delete _saveJs;
 		deleteTemp();
+	}
 	_instantiate = false;
 	_init();
-	_filename = _getFileName(false);
+	_filename = _getFilename(false);
 	try {
 		_saveJs = initJson(_filename, true);
-		_saveJs->saveToFile(_getFileName(true));
+		_saveJs->saveToFile(_getFilename(true));
 		_instantiate = true;
 		_saved = false;
 	} catch (SaveException &e) {
@@ -84,6 +107,7 @@ Save	&Save::_newGame() {
 	} catch (SettingsJson::SettingsException &e) {
 		logErr(e.what());
 	}
+
 	return *this;
 }
 
@@ -95,38 +119,40 @@ Save &Save::operator=(Save const &rhs) {
 		*_saveJs = *(rhs._saveJs);
 		_fileNameRegex = rhs._fileNameRegex;
 	}
+
 	return *this;
 }
 
 std::ostream &	operator<<(std::ostream & os, const Save& my_class) {
 	os << "Save: " << my_class._saveJs;
+
 	return (os);
 }
 
 // -- Getters & Setters --------------------------------------------------------
 
-std::string	Save::getFileName(bool temporary) {
-	return get()._getFileName(temporary);
+/**
+ * @brief Get filename
+ *
+ * @param temporary
+ * @return std::string
+ */
+std::string	Save::getFilename(bool temporary) {
+	return get()._getFilename(temporary);
 }
-
-std::string	Save::_getFileName(bool temporary) const {
+std::string	Save::_getFilename(bool temporary) const {
 	return s.s("savePath") + std::to_string(_time) + (temporary ? "_temp" : "") + ".save";
 }
 
 bool		Save::isInstantiate() {
 	return get()._instantiate;
 }
+
 bool		Save::isSaved() {
 	return get()._saved;
 }
-// -- Private methods ----------------------------------------------------------
 
-void	Save::_init() {
-	_time = std::time(nullptr);
-	_fileNameRegex = getFileNameRegex(true);
-}
-
-// -- Methods ------------------------------------------------------------------
+// -- Static Methods -----------------------------------------------------------
 
 /**
  * @brief Get Regex to certificate a correct name file.
@@ -139,6 +165,7 @@ std::string		Save::getFileNameRegex(bool temporary) {
 	if (temporary)
 		regex += "(_temp)?";
 	regex += "\\.save$";
+
 	return regex;
 }
 
@@ -153,27 +180,8 @@ std::smatch		Save::getMatchFileName(std::string filename, bool temporary) {
 	std::regex	regex(getFileNameRegex(temporary));
 	std::smatch	match;
 	std::regex_match(filename, match, regex);
-	return match;
-}
 
-/**
- * @brief Add slashes to special regex char.
- *
- * @param str original string.
- * @return std::string corrected string
- */
-std::string	Save::_addRegexSlashes(std::string str) {
-	char	specialChar[] = {'\'', '"', '?', '\\', '/', '.'};
-	std::string::iterator	it = str.begin();
-	while (it != str.end()) {
-		if (std::find(specialChar, specialChar+5, *it) < specialChar+5) {
-			// insert '\'
-			it = str.insert(it, '\\');
-			it++;
-		}
-		it++;
-	}
-	return str;
+	return match;
 }
 
 /**
@@ -241,9 +249,6 @@ bool	Save::updateSavedFile(SceneGame &game, bool succeedLevel) {
 	return get()._updateSavedFile(game, succeedLevel);
 }
 bool	Save::_updateSavedFile(SceneGame &game, bool succeedLevel) {
-	logInfo("Save: LevelID: " << game.level);
-	logInfo("Save: Score: " << game.score);
-
 	_saved = false;
 	std::time_t		t = std::time(nullptr);
 	_saveJs->i("date_lastmodified") = t;
@@ -326,6 +331,7 @@ bool	Save::_isLevelDone(int32_t levelId) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -344,6 +350,7 @@ int		Save::_getLevelScore(int32_t levelId) {
 			return level->i("score");
 		}
 	}
+
 	return 0;
 }
 
@@ -359,20 +366,53 @@ bool	Save::save(bool temporary) {
 }
 bool	Save::_save(bool temporary) {
 	try {
-		_saveJs->saveToFile(_getFileName(temporary));
+		_saveJs->saveToFile(_getFilename(temporary));
 	} catch (SettingsJson::SettingsException &e) {
 		logErr(e.what());
 		return false;
 	}
 	if (temporary == false) {
-		file::rm(_getFileName(true), true);
+		file::rm(_getFilename(true), true);
 		_saved = true;
 	}
+
 	return true;
 }
 
+/**
+ * @brief Delete temporary file
+ *
+ */
 void	Save::deleteTemp() {
-	file::rm(get()._getFileName(true), true);
+	file::rm(get()._getFilename(true), true);
+}
+
+// -- Private methods ----------------------------------------------------------
+
+void	Save::_init() {
+	_time = std::time(nullptr);
+	_fileNameRegex = getFileNameRegex(true);
+}
+
+/**
+ * @brief Add slashes to special regex char.
+ *
+ * @param str original string.
+ * @return std::string corrected string
+ */
+std::string	Save::_addRegexSlashes(std::string str) {
+	char	specialChar[] = {'\'', '"', '?', '\\', '/', '.'};
+	std::string::iterator	it = str.begin();
+	while (it != str.end()) {
+		if (std::find(specialChar, specialChar+5, *it) < specialChar+5) {
+			// insert '\'
+			it = str.insert(it, '\\');
+			it++;
+		}
+		it++;
+	}
+
+	return str;
 }
 
 // -- Exceptions errors --------------------------------------------------------
