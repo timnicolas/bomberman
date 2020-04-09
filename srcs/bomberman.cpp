@@ -115,6 +115,12 @@ bool	initSettings(std::string const & filename) {
 	s.j("colors").add<SettingsJson>("green-light");
 		s.j("colors").j("green-light").add<uint64_t>("color", 0x8ebc9e).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("green-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("red");
+		s.j("colors").j("red").add<uint64_t>("color", 0xa65353).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("red").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("red-light");
+		s.j("colors").j("red-light").add<uint64_t>("color", 0xc46f6f).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("red-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("orange");
 		s.j("colors").j("orange").add<uint64_t>("color", 0xe88504).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("orange").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
@@ -122,7 +128,7 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("orange-light").add<uint64_t>("color", 0xe88504).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("orange-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("pink");
-		s.j("colors").j("pink").add<uint64_t>("color", 0xdd41fe).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("pink").add<uint64_t>("color", 0xac38c4).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("pink").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("pink-light");
 		s.j("colors").j("pink-light").add<uint64_t>("color", 0xff99f7).setMin(0x000000).setMax(0xFFFFFF);
