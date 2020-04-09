@@ -9,6 +9,7 @@
 #define UI_DEF_Z					0
 #define UI_DEF_POS_OFFSET			glm::vec2(0, 0)
 #define UI_DEF_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_VALUE				0
 #define UI_DEF_BORDER_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
 #define UI_DEF_BORDER_SIZE			2.0
 #define UI_DEF_MOUSE_HOVER_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.2)
@@ -88,6 +89,7 @@ class ABaseUI {
 		/* listener */
 		virtual ABaseUI &			addButtonRightListener(bool * listener);
 		virtual ABaseUI &			addButtonLeftListener(bool * listener);
+		virtual ABaseUI &			addButtonLeftValueListener(int64_t * listener, int64_t value);
 
 		/* setter */
 		virtual ABaseUI &			setKeyRightClickScancode(SDL_Scancode scancode);
@@ -177,6 +179,7 @@ class ABaseUI {
 		glm::vec2		_posOffset;
 		glm::vec2		_size;
 		glm::vec4		_color;
+		int64_t			_value;
 		// border
 		glm::vec4		_borderColor;
 		float			_borderSize;
@@ -207,6 +210,7 @@ class ABaseUI {
 		/* listener */
 		bool *			_rightListener;
 		bool *			_leftListener;
+		int64_t *		_leftValueListener;
 
 		/* master */
 		// master element are an element that contains others

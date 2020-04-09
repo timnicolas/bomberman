@@ -25,10 +25,19 @@ class SceneExit : public ASceneMenu {
 		struct ButtonsStates {
 			bool	exit;
 			bool	cancel;
+			bool	save;
 		};
 		ButtonsStates	_states;
+		struct AllUI {
+			ABaseUI	*exit;
+			ABaseUI	*cancel;
+			ABaseUI	*save;
+			ABaseUI	*border;
+		};
+		AllUI			allUI;
 		std::string		_lastSceneName;
 
 	private:
 		SceneExit();
+		void			_updateUI();
 };

@@ -1,5 +1,6 @@
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
+#include "Save.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -22,6 +23,8 @@ SceneLevelSelection & SceneLevelSelection::operator=(SceneLevelSelection const &
 	return *this;
 }
 
+// - AScene Public Methods -----------------------------------------------------
+
 /**
  * @brief init the menu
  *
@@ -43,6 +46,10 @@ bool			SceneLevelSelection::init() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
 		tmpPos.x = (winSz.x / 2) - (tmpSize.x / 2);
+		tmpPos.y = menuHeight;
+		allUI.score = &addText(tmpPos, tmpSize, "score");
+		tmpPos.y = menuHeight * 0.8 - menuHeight;
+		allUI.text = &addText(tmpPos, tmpSize, "level");
 		tmpPos.y = (winSz.y / 2) - (tmpSize.y / 2);
 		for (uint32_t i = 0; i < _states.nbLevel; i++) {
 			addButtonImage(tmpPos, tmpSize, scGame.getLevelImg(i));
@@ -102,6 +109,15 @@ bool	SceneLevelSelection::update() {
 	// SceneGame reference
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
+	allUI.text->setText("Level " + std::to_string(_currentLvl));
+	if (Save::isLevelDone(_currentLvl)) {
+		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
+	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1)) {
+		allUI.score->setText("play");
+	} else {
+		allUI.score->setText("locked");
+	}
+
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
 		ABaseUI & elem = getUIElement(_states.firstLevelID + i);
 
@@ -157,6 +173,8 @@ void SceneLevelSelection::load() {
 	_transition = 1;
 }
 
+// -- Private methods ----------------------------------------------------------
+
 /**
  * @brief set the current level in selection
  *
@@ -181,8 +199,15 @@ void			SceneLevelSelection::_setLevel(int32_t level) {
 	}
 
 	_currentLvl = level;
-
-	getUIElement(_states.firstLevelID + _currentLvl)
-		.setKeyLeftClickInput(InputType::CONFIRM)
-		.addButtonLeftListener(&_states.loadLevel);
+	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)) {
+		getUIElement(_states.firstLevelID + _currentLvl)
+			.setKeyLeftClickInput(InputType::CONFIRM)
+			.addButtonLeftListener(&_states.loadLevel)
+			.setColor(colorise(0, 0))
+			.setMouseHoverColor(colorise(0x000000, 51));
+	} else {
+		getUIElement(_states.firstLevelID + _currentLvl)
+			.setColor(colorise(0x000000, 200))
+			.setMouseHoverColor(colorise(0x000000, 200));
+	}
 }
