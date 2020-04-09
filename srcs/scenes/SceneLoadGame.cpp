@@ -1,4 +1,6 @@
 #include <dirent.h>
+#include <map>
+#include <boost/filesystem.hpp>
 
 #include "FileUtils.hpp"
 #include "SceneLoadGame.hpp"
@@ -82,44 +84,51 @@ void SceneLoadGame::load() {
 			&addScrollbar(savedGamesPos, savedGamesSize).enableVertScroll(true).setEnabled(true)
 		);
 
-		DIR *dir;
-		struct dirent *ent;
-		if ((dir = opendir("save/")) != NULL) {
-			int i = 1;
-			GameSaved *gameSaved = nullptr;
-			while ((ent = readdir(dir)) != NULL) {
-				gameSaved = new GameSaved();
-				logDebug("Entry: " << ent->d_name << "$");
-				try {
-					gameSaved->filename = "save/" + std::string(ent->d_name);
-					std::string filename = "save/" + std::string(ent->d_name);
-					gameSaved->game = Save::initJson(gameSaved->filename, false);
-					gameSaved->ui = &addButton(
-						{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
-						{savedGamesSize.x * 0.8, tmpSize.y},
-						gameSaved->game->s("Filename")
-					).addButtonLeftValueListener(&_states.selectedGame, i)
-					.setColor(colorise(s.j("colors").j("blue-light").u("color")))
-					.setBorderColor(colorise(s.j("colors").j("blue").u("color")))
-					.setMaster(savedGames).setTextScale(0.5);
-					gameSaved->gameID = i;
-					_gamesSaved.push_back(gameSaved);
-					i++;
-				} catch (Save::SaveException &e) {
-					delete gameSaved;
-					logDebug(">>> does not corespond to expected filename.");
+		// - Get files in savePath by last write time order
+		boost::filesystem::path saveDir(s.s("savePath"));
+		std::multimap<std::time_t, boost::filesystem::path> result_set;
+		if (boost::filesystem::exists(saveDir) && boost::filesystem::is_directory(saveDir)) {
+			boost::filesystem::directory_iterator end_iter;
+			for (boost::filesystem::directory_iterator dir_iter(saveDir) ; dir_iter != end_iter ; ++dir_iter) {
+				if (boost::filesystem::is_regular_file(dir_iter->status())) {
+					// insert by -last_write_time to have the correct order
+					result_set.insert({-boost::filesystem::last_write_time(dir_iter->path()), *dir_iter});
 				}
 			}
-			closedir (dir);
 		} else {
-			logErr("Cannot open 'save/'");
+			logErr("Cannot open '" << s.s("savePath") << "'");
+		}
+
+		// - Add buttons to corrects files to Saved Games
+		int i = 1;
+		GameSaved *gameSaved = nullptr;
+		for (auto file : result_set) {
+			gameSaved = new GameSaved();
+			try {
+				gameSaved->filename = file.second.string();
+				std::string filename = file.second.string();
+				gameSaved->game = Save::initJson(gameSaved->filename, false);
+				gameSaved->ui = &addButton(
+					{0, (savedGamesSize.y) - (menuHeight * i * 1.3)},
+					{savedGamesSize.x * 0.8, tmpSize.y},
+					gameSaved->game->s("Filename")
+				).addButtonLeftValueListener(&_states.selectedGame, i)
+				.setColor(colorise(s.j("colors").j("blue-light").u("color")))
+				.setBorderColor(colorise(s.j("colors").j("blue").u("color")))
+				.setMaster(savedGames).setTextScale(0.5);
+				gameSaved->gameID = i;
+				_gamesSaved.push_back(gameSaved);
+				i++;
+			} catch (Save::SaveException &e) {
+				delete gameSaved;
+			}
 		}
 
 		// Screen Game Preview
 		glm::vec2		previewSize = {menuWidth * (3.0/5.0), menuHeight * 1.3 * 5};
 		glm::vec2		previewPos = {tmpPos.x + savedGamesSize.x, tmpPos.y - previewSize.y};
 		ABaseMasterUI	*previewGame = &addScrollbar(previewPos, previewSize);
-		int i = 2;
+		i = 2;
 		previewGameUI.title = &addText(
 			{0, (previewSize.y) - (menuHeight * i * 0.8)},
 			{previewSize.x * 0.8, tmpSize.y},
@@ -195,10 +204,8 @@ bool	SceneLoadGame::update() {
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	if (_states.selectedGame != _selectedGame) {
-		logDebug("selected game: " << _states.selectedGame);
 		for (auto &&gameSaved : _gamesSaved) {
 			if (gameSaved->gameID == _states.selectedGame) {
-				logDebug("name: " << gameSaved->game->s("Filename"));
 				gameSaved->ui->setColor(colorise(s.j("colors").j("blue").u("color")));
 				previewGameUI.title->setText(gameSaved->game->s("Filename"));
 				std::time_t dateLastmodified = static_cast<std::time_t>(gameSaved->game->i("date_lastmodified"));
