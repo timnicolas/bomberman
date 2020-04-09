@@ -293,14 +293,19 @@ bool	Save::loadStatesSaved(SceneGame &game) {
 	return get()._loadStatesSaved(game);
 }
 bool	Save::_loadStatesSaved(SceneGame &game) {
+	game.player->resetCrossable();
 	game.player->lives = _saveJs->j("state").u("life");
 	game.player->totalBombs = _saveJs->j("state").u("bombs");
 	game.player->bombProgation = _saveJs->j("state").u("flame");
 	game.player->speed = _saveJs->j("state").d("speed");
-	game.player->passWall = _saveJs->j("state").u("wallpass") == 0 ? false : true;
-	game.player->detonator = _saveJs->j("state").u("detonator") == 0 ? false : true;
-	game.player->passBomb = _saveJs->j("state").u("bombpass") == 0 ? false : true;
-	game.player->passFire = _saveJs->j("state").u("flampass") == 0 ? false : true;
+	if (_saveJs->j("state").u("detonator") == 1)
+		game.player->takeBonus(Bonus::bonus["detonator"]);
+	if (_saveJs->j("state").u("wallpass") == 1)
+		game.player->takeBonus(Bonus::bonus["wallpass"]);
+	if (_saveJs->j("state").u("bombpass") == 1)
+		game.player->takeBonus(Bonus::bonus["bombpass"]);
+	if (_saveJs->j("state").u("flampass") == 1)
+		game.player->takeBonus(Bonus::bonus["flampass"]);
 
 	return true;
 }
