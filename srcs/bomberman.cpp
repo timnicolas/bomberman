@@ -158,8 +158,10 @@ bool	initSettings(std::string const & filename) {
 	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
+	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
 	s.add<std::string>("savePath", "save/").setDescription("folder with all saved games.");
+
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
 	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");
