@@ -27,7 +27,7 @@ public:
 	// Getters & Setters
 	static std::string	getFilename(bool temporary);
 	static std::string	getFileNameRegex(bool temporary);
-	static std::smatch	getMatchFileName(std::string filename, bool temporary);
+	static std::string	getMatchFileName(std::string filename, bool temporary);
 
 	static bool			isInstantiate();
 	static bool			isSaved();
