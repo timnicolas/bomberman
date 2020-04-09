@@ -91,11 +91,12 @@ void	Player::resetParams() {
 	lives = 2;
 	invulnerable = 3.0f;
 	_toDraw = 0;
-	bombProgation = 3;
+	bombProgation = 2;
 	passFire = false;
 	passWall = false;
 	detonator = false;
 	passBomb = false;
+	resetCrossable();
 }
 
 /**
