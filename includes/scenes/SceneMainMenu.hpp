@@ -19,6 +19,7 @@ class SceneMainMenu : public ASceneMenu {
 
 		// Methods
 		virtual bool		init();
+		virtual void		load();
 		virtual bool		update();
 
 	protected:

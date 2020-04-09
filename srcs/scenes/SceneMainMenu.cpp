@@ -73,13 +73,20 @@ bool			SceneMainMenu::init() {
 }
 
 /**
+ * @brief called when the scene is loaded
+ */
+void SceneMainMenu::load() {
+	ASceneMenu::load();
+	_updateUI();
+}
+
+/**
  * @brief this is the update function (called every frames)
  *
  * @return true if the update is a success
  * @return false if there are an error in update
  */
 bool	SceneMainMenu::update() {
-	_updateUI();
 	ASceneMenu::update();
 	if (_states.continueGame) {
 		_states.continueGame = false;
@@ -88,6 +95,7 @@ bool	SceneMainMenu::update() {
 	if (_states.save) {
 		_states.save = false;
 		Save::save();
+		load();
 	}
 	if (_states.newGame) {
 		_states.newGame = false;

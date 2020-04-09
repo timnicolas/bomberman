@@ -41,6 +41,7 @@ class SceneLoadGame : public ASceneMenu {
 			ABaseUI *	title;
 			ABaseUI *	date;
 			ABaseUI *	levelsDone;
+			ABaseUI *	scoreTotal;
 			ABaseUI *	loadGame;
 			ABaseUI *	deleteGame;
 		};
