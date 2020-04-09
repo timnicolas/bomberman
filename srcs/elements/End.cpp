@@ -72,10 +72,11 @@ bool	End::draw(Gui &gui) {
  * @return std::unordered_set<AEntity *> collisions
  */
 std::unordered_set<AEntity *>	End::_getCollision() {
-	getPos();
 	std::unordered_set<AEntity *> collisions;
+
 	if (game.player->hasCollision(position))
 		collisions.insert(game.player);
+
 	return collisions;
 }
 

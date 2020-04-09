@@ -65,9 +65,10 @@ void		AObject::setPos(glm::vec3 pos) {
  *
  * @return glm::vec2
  */
-glm::vec3	AObject::getPos() {
+glm::vec3	AObject::getPos() const {
 	if (position == glm::vec3(VOID_POS3)) {
-		setPos();
+		logErr(name << " AObject::getPos: position has not been set"
+			", don't forget to call init");
 	}
 	return position;
 }
@@ -105,6 +106,17 @@ std::vector< std::vector< std::vector<AEntity *> > > & AObject::getBoard() {
 	if (isInFlyBoard)
 		return game.boardFly;
 	return game.board;
+}
+
+/**
+ * @brief Init AObject
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	AObject::init() {
+	setPos();
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------

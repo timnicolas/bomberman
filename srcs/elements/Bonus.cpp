@@ -44,7 +44,6 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 }
 
 Bonus::~Bonus() {
-	getPos();
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
@@ -73,15 +72,17 @@ Bonus &Bonus::operator=(Bonus const &rhs) {
 bool	Bonus::update() {
 	if (!alive || !active)
 		return true;
+
 	_timeToDie -= game.getDtTime();
 	if (_timeToDie <= 0.0) {
 		alive = false;
 	}
-	getPos();
+
 	if (game.player->hasCollision(position)) {
 		game.player->takeBonus(_typeBonus);
 		active = false;
 	}
+
 	return true;
 }
 
@@ -119,18 +120,23 @@ bool	Bonus::draw(Gui &gui) {
 Bonus	*Bonus::generateBonus(SceneGame &game, float rate) {
 	if (rate <= 0.0f)
 		return nullptr;
+
 	int32_t	totalChances = 0;
 	for (auto &&it : game.bonus) {
 		if (it.second.nb > 0 || it.second.nb == -1)
 			totalChances += it.second.chance;
 	}
+
 	if (totalChances == 0)
 		return nullptr;
+
 	if (rate >= 1.0f)
 		return new Bonus(game);
+
 	int		percentRate = rand() % 100;
 	if (percentRate > static_cast<int>(rate * 100))
 		return nullptr;
+
 	return new Bonus(game);
 }
 

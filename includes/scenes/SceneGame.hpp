@@ -132,13 +132,14 @@ public:
 	virtual void	load();
 	virtual void	unload();
 	bool			loadLevel(int32_t levelId);
-	bool			save();
+	bool			insertEntity(std::string const & name, glm::ivec2 pos, bool isFly = false, uint64_t wallGenPercent = 0);
 
 	// getter
 	uint32_t		getNbLevel() const;
 	std::string		getLevelName(int32_t levelId) const;
 	std::string		getLevelImg(int32_t levelId) const;
 	SettingsJson	&getSettingsLevel() const;
+	static std::vector<std::string>	getAllEntityNames();
 
 	// Exceptions
 	class SceneGameException : public std::runtime_error {

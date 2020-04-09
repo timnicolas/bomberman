@@ -6,7 +6,6 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "Bonus.hpp"
-#include "ModelsManager.hpp"
 #include "Model.hpp"
 
 /**
@@ -17,11 +16,11 @@ private:
 	Player();
 	// Members
 	int			_toDraw;
-	Model		*_model;
 
 	// Methods
 	void	_move();
 	void	_putBomb();
+	void	_updateAnimationState();
 
 public:
 	// Members
@@ -43,7 +42,7 @@ public:
 	Player &operator=(Player const &rhs);
 
 	// Methods
-	bool			init();
+	virtual bool	init();
 	bool			update();
 	bool			draw(Gui &gui);
 	virtual void	resetCrossable();

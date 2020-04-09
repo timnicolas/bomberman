@@ -46,7 +46,7 @@ void ImageUI::_draw() {
 	glm::vec2 tmpSize;
 
 	// draw border
-	_drawBorderRect(getRealPos(), _size, _borderSize, _borderColor);
+	_drawBorderRect(getRealPos(), _size, _z, _borderSize, _borderColor);
 
 	// get center size and position
 	tmpPos = getRealPos();
@@ -56,5 +56,5 @@ void ImageUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 	// draw image
-	_drawImg(tmpPos, tmpSize, _imgTextureID, _color);
+	_drawImg(tmpPos, tmpSize, _z, _imgTextureID, _color);
 }

@@ -14,12 +14,14 @@
 class EnemyBasic : public AEnemy {
 private:
 	EnemyBasic();
-	Direction::Enum	_dir;
 
 protected:
 	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
+
+	void			_updateModel();
+	void			_updateAnimationState();
 
 public:
 	// Constructors
@@ -29,4 +31,7 @@ public:
 
 	// Operators
 	EnemyBasic &operator=(EnemyBasic const &rhs);
+
+	// Methods
+	virtual bool	init();
 };

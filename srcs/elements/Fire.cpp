@@ -14,7 +14,6 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 }
 
 Fire::~Fire() {
-	getPos();
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
@@ -44,16 +43,18 @@ bool	Fire::update() {
 	if (_timeToDie <= 0.0) {
 		alive = false;
 	}
-	getPos();
+
 	for (auto &&enemy : game.enemies) {
 		if (enemy->hasCollision(position)) {
 			enemy->takeDamage(1);
 		}
 	}
+
 	if (game.player->hasCollision(position)) {
 		if (!game.player->passFire)
 			game.player->takeDamage(1);
 	}
+
 	return true;
 }
 
