@@ -27,6 +27,7 @@ protected:
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 	void			_findJumpGoal();
+	void			_jumpCrossable();
 
 public:
 	// Constructors
