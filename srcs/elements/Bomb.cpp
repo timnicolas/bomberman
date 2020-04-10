@@ -100,7 +100,7 @@ bool	Bomb::takeDamage(const int damage) {
 	if (!active || damage <= 0)
 		return false;
 
-	explode({position.x, position.z});
+	_countdown = _countdown > 0.1 ? 0.1 : _countdown;
 	return true;
 }
 
@@ -179,12 +179,6 @@ bool	Bomb::_propagationExplosion(glm::vec2 const place) {
 
 			if ((*it)->destructible) {
 				addFire = true;
-			}
-
-			if ((*it)->type == Type::BOMB && (*it)->active) {
-				(*it)->takeDamage(1);
-				it = box.begin();
-				continue;
 			}
 
 			(*it)->takeDamage(1);
