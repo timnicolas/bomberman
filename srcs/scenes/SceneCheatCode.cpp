@@ -58,6 +58,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 				CHEATCODE_TAB"/summon enemyBasic ~3 5",
 			&SceneCheatCode::_execSummon,
 		}},
+		{"unlock", {
+			"<levelId ...>",
+			"Unlock a level by id\n",
+			&SceneCheatCode::_execUnlock,
+		}},
 	};
 }
 
