@@ -63,6 +63,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Unlock a level by id\n",
 			&SceneCheatCode::_execUnlock,
 		}},
+		{"rmbonus", {
+			"<bonus, ...> ['list']",
+			"Remove a bonus effect ('/rmbonus list' to get the list of bonus)",
+			&SceneCheatCode::_execRmbonus,
+		}},
 	};
 }
 
