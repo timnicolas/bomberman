@@ -345,13 +345,16 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 	if (args.size() >=2 ) {
 		for (uint32_t i = 1; i < args.size(); i++) {
 			bool error;
-			uint32_t levelId = _toUint(args[1], error);
+			uint32_t levelId = _toUint(args[i], error);
 			if (error) {
-				this->logerr("Cannot convert '" + args[1] + "' to int", false, true);
+				this->logerr("Cannot convert '" + args[i] + "' to int", false, true);
 				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
-			if (Save::setLevelDone(levelId, 0) == false) {
-				this->logerr("Invalid level id: " + args[1], false, true);
+			if (Save::setLevelDone(levelId, 0)) {
+				_addLine("Level " + std::to_string(levelId) + " unlocked");
+			}
+			else {
+				this->logerr("Invalid level id: " + args[i], false, true);
 				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
 		}
