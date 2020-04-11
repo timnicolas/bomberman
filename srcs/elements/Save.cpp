@@ -360,6 +360,31 @@ int		Save::_getLevelScore(int32_t levelId) {
 	return 0;
 }
 
+
+bool	Save::setLevelDone(int32_t levelId, int32_t score) {
+	return get()._setLevelDone(levelId, score);
+}
+bool	Save::_setLevelDone(int32_t levelId, int32_t score) {
+	bool exist = false;
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
+		if (level->i("id") == levelId) {
+			exist = true;
+			break;
+		}
+	}
+	if (!exist) {
+		SettingsJson	*levelPattern = new SettingsJson();
+		levelPattern->add<int64_t>("id", 0).setMin(0);
+		levelPattern->add<int64_t>("score", 0).setMin(0).setMax(99999999);
+		levelPattern->i("id") = levelId;
+		levelPattern->i("score") = score;
+
+		_saveJs->lj("levels").add(levelPattern);
+	}
+
+	return true;
+}
+
 /**
  * @brief Save method to file.
  *
