@@ -2,6 +2,7 @@
 #include "SceneGame.hpp"
 #include "Player.hpp"
 #include "Bonus.hpp"
+#include "Save.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
@@ -328,6 +329,33 @@ int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 		}
 		_addLine("List of all entity name:\n" + res);
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_SUCCESS;
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+
+int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+
+	std::vector<std::string> names = SceneGame::getAllEntityNames();
+	if (args.size() >=2 ) {
+		for (uint32_t i = 1; i < args.size(); i++) {
+			bool error;
+			uint32_t levelId = _toUint(args[1], error);
+			if (error) {
+				this->logerr("Cannot convert '" + args[1] + "' to int", false, true);
+				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+			}
+			if (Save::setLevelDone(levelId, 0) == false) {
+				this->logerr("Invalid level id: " + args[1], false, true);
+				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+			}
+		}
+		return CheatcodeAction::CLOSE | CheatcodeAction::TXT_DEF | CheatcodeAction::RESULT_SUCCESS;
 	}
 	else {
 		_execHelp({"help", args[0]});
