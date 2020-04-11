@@ -112,16 +112,10 @@ bool	SceneLevelSelection::update() {
 	allUI.text->setText("Level " + std::to_string(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
-		getUIElement(_states.firstLevelID + _currentLvl)
-			.setColor(colorise(0, 0));
 	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1)) {
 		allUI.score->setText("play");
-		getUIElement(_states.firstLevelID + _currentLvl)
-			.setColor(colorise(0, 0));
 	} else {
 		allUI.score->setText("locked");
-		getUIElement(_states.firstLevelID + _currentLvl)
-			.setColor(colorise(0x000000, 200));
 	}
 
 	for (uint32_t i = 0; i < _states.nbLevel; i++) {
