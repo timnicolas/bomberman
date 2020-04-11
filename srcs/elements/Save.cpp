@@ -360,7 +360,13 @@ int		Save::_getLevelScore(int32_t levelId) {
 	return 0;
 }
 
-
+/**
+ * @brief Set a level as done
+ *
+ * @param levelId The level ID
+ * @param score The score
+ * @return false If failed
+ */
 bool	Save::setLevelDone(int32_t levelId, int32_t score) {
 	return get()._setLevelDone(levelId, score);
 }
