@@ -122,6 +122,7 @@ class SceneCheatCode : public ASceneMenu {
 		int					_execSummon(std::vector<std::string> const & args);
 		int					_execUnlock(std::vector<std::string> const & args);
 		int					_execRmbonus(std::vector<std::string> const & args);
+		int					_execRestart(std::vector<std::string> const & args);
 
 		/* for lines */
 		int					_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);

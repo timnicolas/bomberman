@@ -419,3 +419,25 @@ int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
 	}
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
+
+int SceneCheatCode::_execRestart(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	if (args.size() == 1) {
+		/* check if we are in game */
+		if (SceneManager::getSceneName() != SceneNames::GAME) {
+			this->logwarn("You need to be in game to restart level", false, true);
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+				| CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* get scene game */
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		scGame.loadLevel(scGame.level);
+		_addLine("Restart level");
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
