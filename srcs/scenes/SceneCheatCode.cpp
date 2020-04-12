@@ -68,6 +68,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Remove a bonus effect ('/rmbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execRmbonus,
 		}},
+		{"restart", {
+			"",
+			"Restart the level",
+			&SceneCheatCode::_execRestart,
+		}},
 	};
 }
 
