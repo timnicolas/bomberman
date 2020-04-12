@@ -644,13 +644,25 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFly, uint64_t wallGenPercent) {
 	AEntity * entity;
 
+	/* if out of board */
 	if (!positionInGame({pos.x, 0, pos.y})) {
 		return false;
 	}
 
+	/* if invalid entity name */
 	if (_entitiesCall.find(name) == _entitiesCall.end()) {
 		logErr("invalid entity name " << name << " in SceneGame::insertEntity");
 		return false;
+	}
+
+	/* if already an entity */
+	if (isFly) {
+		if (boardFly[pos.x][pos.y].size() > 0)
+			return false;
+	}
+	else {
+		if (board[pos.x][pos.y].size() > 0)
+			return false;
 	}
 
 	// if it's empty, generate crispy wall with a certain probability
