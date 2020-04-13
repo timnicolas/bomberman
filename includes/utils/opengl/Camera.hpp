@@ -17,6 +17,15 @@ enum class CamMovement {
 	Down
 };
 
+namespace CamMode {
+	enum Enum {
+		STATIC_DEFPOS,  // impossible to move, camera is always to the default position
+		STATIC,  // impossible to move
+		FPS,  // moving using keyboard and mouse
+		FOLLOW_PATH,  // moving by follow a path
+	};
+}
+
 /* frustum culling parameter */
 #define FRCL_INSIDE		0b000000  // inside the camera
 #define FRCL_LEFT		0b000001  // outside left to the camera
@@ -77,6 +86,12 @@ class Camera {
 		void	setRatio(float ratio);
 		void	setFovY(float fovY);
 		void	setNearAndFar(float near, float far);
+		void	setMode(CamMode::Enum mode);
+		void	setDefPos(CAMERA_VEC3 defPos, CAMERA_FLOAT defYaw = -90, CAMERA_FLOAT defPitch = 0);
+		void	setDefPos();
+
+		// update
+		void	update(float dtTime);
 
 		// to manage basic camera fly movement
 		void	processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun = false);
@@ -88,8 +103,9 @@ class Camera {
 		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size);  // check for a cube
 
 		// getters
-		CAMERA_MAT4	getViewMatrix() const;
-		CAMERA_MAT4	getProjection() const;
+		CAMERA_MAT4		getViewMatrix() const;
+		CAMERA_MAT4		getProjection() const;
+		CamMode::Enum	getMode() const;
 
 		CAMERA_VEC3		pos;
 		CAMERA_VEC3		front;
@@ -104,15 +120,22 @@ class Camera {
 		CAMERA_FLOAT	mouseSensitivity;
 		CAMERA_FLOAT	runFactor;
 
+
 	private:
 		void	_updateCameraVectors();
 		void	_updateProjection();
 
-		float		_ratio;
-		float		_fovY;
-		float		_near;
-		float		_far;
-		CAMERA_MAT4	_projection;
+		/* update */
+		void	_updateStatic(float dtTime);
+		void	_updateFps(float dtTime);
+		void	_updateFollowPath(float dtTime);
+
+		CamMode::Enum	_mode;  // STATIC, FPS, ...
+		float			_ratio;
+		float			_fovY;
+		float			_near;
+		float			_far;
+		CAMERA_MAT4		_projection;
 
 		/* used to reset position and rotation */
 		CAMERA_VEC3		_startPos;

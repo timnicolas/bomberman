@@ -394,6 +394,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.x / 2, 1.0f,
 		size.y / 1.9
 	));
+	_gui->cam->setDefPos();  // set the default position to the current position
 
 	// get saved values
 	Save::loadStatesSaved(*this);
