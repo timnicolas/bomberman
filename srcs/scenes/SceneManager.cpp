@@ -181,6 +181,7 @@ bool SceneManager::_update() {
 	Inputs::update();
 
 	/* update */
+	_gui->cam->update(_dtTime);
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
 	bool cheatCodeClosed = false;

@@ -61,6 +61,7 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
+	(void)dtTime;
 	if (Inputs::isConfiguring())
 		return;
 
@@ -78,28 +79,10 @@ void Gui::preUpdate(float const dtTime) {
 	if (_canMove) {
 		cam->mouseSensitivity = s.d("mouse_sensitivity");
 
-		// mouse movement
-		cam->processMouseMovement(Inputs::getMouseRel());
-
-		// camera movement
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
-			cam->processKeyboard(CamMovement::Forward, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
-			cam->processKeyboard(CamMovement::Right, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
-			cam->processKeyboard(CamMovement::Backward, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
-			cam->processKeyboard(CamMovement::Left, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
-			cam->processKeyboard(CamMovement::Down, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
-			cam->processKeyboard(CamMovement::Up, dtTime, false);
-		}
+		cam->setMode(CamMode::FPS);
+	}
+	else {
+		cam->setMode(CamMode::STATIC_DEFPOS);
 	}
 }
 

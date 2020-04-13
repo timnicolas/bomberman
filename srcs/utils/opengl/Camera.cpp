@@ -1,5 +1,6 @@
 #include "Camera.hpp"
 #include "Logging.hpp"
+#include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
 Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw,
@@ -12,6 +13,7 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
   movementSpeed(MOVEMENT_SPEED),
   mouseSensitivity(MOUSE_SENSITIVITY),
   runFactor(RUN_FACTOR),
+  _mode(CamMode::FPS),
   _ratio(ratio),
   _startPos(pos),
   _startYaw(yaw),
@@ -95,6 +97,99 @@ void	Camera::setNearAndFar(float near, float far) {
 	_near = near;
 	_far = far;
 	_updateProjection();
+}
+
+/**
+ * @brief Update the current camera mode
+ *
+ * @param mode CamMode element
+ */
+void	Camera::setMode(CamMode::Enum mode) {
+	if (mode == _mode)
+		return;
+	_mode = mode;
+}
+
+/**
+ * @brief Set the default camera position
+ *
+ * @param defPos Default position
+ * @param defYaw Default yaw
+ * @param defPitch Default pitch
+ */
+void	Camera::setDefPos(CAMERA_VEC3 defPos, CAMERA_FLOAT defYaw, CAMERA_FLOAT defPitch) {
+	_startPos = defPos;
+	_startYaw = defYaw;
+	_startPitch = defPitch;
+}
+/**
+ * @brief Set the default camera position to the current position
+ */
+void	Camera::setDefPos() {
+	_startPos = pos;
+	_startYaw = yaw;
+	_startPitch = pitch;
+}
+
+// -- update -------------------------------------------------------------------
+/**
+ * @brief Update function of the camera -> to be called every frames
+ *
+ * @param dtTime The delta time
+ */
+void	Camera::update(float dtTime) {
+	switch (_mode) {
+		case CamMode::STATIC_DEFPOS:
+			resetPosition();
+			_updateStatic(dtTime);
+			break;
+		case CamMode::STATIC:
+			_updateStatic(dtTime);
+			break;
+		case CamMode::FPS:
+			_updateFps(dtTime);
+			break;
+		case CamMode::FOLLOW_PATH:
+			_updateFollowPath(dtTime);
+			break;
+	}
+}
+
+void	Camera::_updateStatic(float dtTime) {
+	(void)dtTime;
+	// nothing to do in static camera update
+}
+void	Camera::_updateFps(float dtTime) {
+	// mouse movement
+	processMouseMovement(Inputs::getMouseRel());
+
+	bool isRun = false;
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_LSHIFT)) {
+		isRun = true;
+	}
+
+	// camera movement
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
+		processKeyboard(CamMovement::Forward, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
+		processKeyboard(CamMovement::Right, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
+		processKeyboard(CamMovement::Backward, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
+		processKeyboard(CamMovement::Left, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
+		processKeyboard(CamMovement::Down, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
+		processKeyboard(CamMovement::Up, dtTime, isRun);
+	}
+}
+void	Camera::_updateFollowPath(float dtTime) {
+	(void)dtTime;
 }
 
 // -- processKeyboard ----------------------------------------------------------
@@ -340,3 +435,5 @@ CAMERA_MAT4 Camera::getViewMatrix() const {
 }
 
 CAMERA_MAT4	Camera::getProjection() const { return _projection; }
+
+CamMode::Enum	Camera::getMode() const { return _mode; }
