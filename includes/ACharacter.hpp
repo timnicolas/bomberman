@@ -41,6 +41,8 @@ protected:
 	bool		_canMoveOn(glm::vec3 dest) const;
 	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
 	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
+	std::vector<glm::ivec2>	_getAllPositions(glm::vec3 dest, glm::vec3 size) const;
+
 
 public:
 	// Members
