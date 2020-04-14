@@ -1,6 +1,7 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "useGlm.hpp"
+#include "AEnemy.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
