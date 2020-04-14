@@ -7,6 +7,7 @@
 #include "useGlm.hpp"
 #include "AEntity.hpp"
 
+#define MIN_SPEED 1.0
 #define MAX_SPEED 6.0
 #define OFFSET_TURN_CORRECTION 0.85
 #define MOVE_STEP 0.05

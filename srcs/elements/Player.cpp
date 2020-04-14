@@ -240,6 +240,75 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 }
 
 /**
+ * @brief Player remove a <bonus>
+ *
+ * @param bonus
+ * @return true
+ * @return false
+ */
+bool	Player::rmBonus(BonusType::Enum bonus) {
+	switch (bonus) {
+		case BonusType::LIFE:
+			invulnerable = 0;
+			takeDamage(1);
+			break;
+		case BonusType::BOMBS:
+			if (totalBombs > 1)
+				totalBombs--;
+			if (bombs > totalBombs)
+				bombs--;
+			break;
+		case BonusType::FLAMES:
+			if (bombProgation > 1)
+				bombProgation--;
+			break;
+		case BonusType::SPEED:
+			speed--;
+			if (speed < MIN_SPEED)
+				speed = MIN_SPEED;
+			break;
+		case BonusType::WALLPASS:
+			while (1) {
+				auto it = std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY);
+				if (it == crossableTypes.end())
+					break;
+				else
+					crossableTypes.erase(it);
+			}
+			passWall = false;
+			break;
+		case BonusType::DETONATOR:
+			detonator = false;
+			break;
+		case BonusType::BOMBPASS:
+			passBomb = false;
+			while (1) {
+				auto it = std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB);
+				if (it == crossableTypes.end())
+					break;
+				else
+					crossableTypes.erase(it);
+			}
+			break;
+		case BonusType::FLAMPASS:
+			passFire = false;
+			break;
+		case BonusType::SHIELD:
+			invulnerable = 0;
+			break;
+		case BonusType::TIME:
+			game.time += 15.0f;
+			break;
+		case BonusType::POINTS:
+			game.score -= 1500;
+			break;
+		default:
+			break;
+	}
+	return true;
+}
+
+/**
  * @brief increment bomb, clamp to totalBombs
  *
  */
