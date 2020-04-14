@@ -349,12 +349,9 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 				this->logerr("Cannot convert '" + args[i] + "' to int", false, true);
 				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
-			if (Save::setLevelDone(levelId, 0)) {
+			if (!_isLevelUnlocked(levelId)) {
+				_levelsUnlocked.push_back(levelId);
 				_addLine("Level " + std::to_string(levelId) + " unlocked");
-			}
-			else {
-				this->logerr("Invalid level id: " + args[i], false, true);
-				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
 		}
 		return CheatcodeAction::CLOSE | CheatcodeAction::TXT_DEF | CheatcodeAction::RESULT_SUCCESS;
