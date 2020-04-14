@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "Bonus.hpp"
 #include "Save.hpp"
+#include "SceneLevelSelection.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
@@ -346,11 +347,28 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 			bool error;
 			uint32_t levelId = _toUint(args[i], error);
 			if (error) {
-				this->logerr("Cannot convert '" + args[i] + "' to int", false, true);
+				this->logerr("Cannot convert '" + args[i] + "' to unsigned int", false, true);
 				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 			}
+			/* get LevelSelection scene */
+			SceneLevelSelection & scLvlSelect = *reinterpret_cast<SceneLevelSelection *>(
+				SceneManager::getScene(SceneNames::LEVEL_SELECTION));
+
+			/* check if the level id is valid */
+			if (scLvlSelect.getNbLevel() <= levelId) {
+				this->logwarn("Invalid level ID: " + args[i], false, true);
+				continue;
+			}
+
+			/* add to unlocked list */
 			if (!_isLevelUnlocked(levelId)) {
 				_levelsUnlocked.push_back(levelId);
+
+				/* reload screen if needed */
+				if (SceneManager::getSceneName() == SceneNames::LEVEL_SELECTION && scLvlSelect.getCurLevel() == levelId) {
+					scLvlSelect.setLevel(0, false);
+					scLvlSelect.setLevel(levelId, false);
+				}
 				_addLine("Level " + std::to_string(levelId) + " unlocked");
 			}
 		}
