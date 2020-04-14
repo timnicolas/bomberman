@@ -280,6 +280,8 @@ LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
 # flags for libs on LINUX only
 LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
 					-lboost_system \
+					-l z -L libs/assimp-5.0.1/build/contrib/irrXML -l IrrXML \
+					-L libs/assimp-5.0.1/build/code \
 
 # includes dir for external libs
 LIBS_INC =	~/.brew/include \
@@ -289,6 +291,8 @@ LIBS_INC =	~/.brew/include \
 			/usr/include/freetype2 \
 			/usr/include/assimp \
 			/usr/include/SDL2 \
+			libs/assimp-5.0.1/include/ \
+			libs/assimp-5.0.1/build/include/ \
 
 # libs created by user
 UNCOMPILED_LIBS =
@@ -317,10 +321,18 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	sudo apt-get -y install libsdl2-dev;
 	# sdl2_mixer
 	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
-	# assimp 5
-	sudo add-apt-repository -y 'deb http://cz.archive.ubuntu.com/ubuntu focal main universe'
-	sudo apt-get -y update
-	sudo apt-get -y install libassimp-dev
+	# assimp 5.0.1
+	#   download assimp
+	sudo apt-get install -y wget tar cmake zlib1g-dev;
+	wget -O $(LIBS_DIR)/v5.0.1.tar.gz https://github.com/assimp/assimp/archive/v5.0.1.tar.gz;
+	tar xzf $(LIBS_DIR)/v5.0.1.tar.gz -C libs;
+	rm $(LIBS_DIR)/v5.0.1.tar.gz;
+	#   build assimp
+	cd libs/assimp-5.0.1;
+	mkdir build; cd build;
+	cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DASSIMP_BUILD_STATIC=ON -DASSIMP_BUILD_STATIC_LIB=ON;
+	make -j4;
+	cd ../../..;
 
 # Mac OSX
 elif [[ "$$OSTYPE" == "darwin"* ]]; then
