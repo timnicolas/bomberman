@@ -71,6 +71,7 @@ public:
 	bool			postUpdate();
 	bool			draw(Gui &gui);
 	virtual void	animEndCb(std::string animName);
+	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 
 	// Exceptions
 	class EnemyException : public std::runtime_error {

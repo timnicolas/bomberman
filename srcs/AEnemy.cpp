@@ -111,6 +111,89 @@ void	AEnemy::animEndCb(std::string animName) {
 }
 
 /**
+ * @brief get a list of entity in collision with the Character at a position.
+ *
+ * @param pos default VOID_POS3
+ * @return std::unordered_set<AEntity *> collisions
+ */
+std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
+	std::unordered_set<AEntity *> collisions = ACharacter::getCollision(dest);
+	if (name == "EnemyFly")
+		return collisions;
+
+	/* get all positions blocks under character on a position */
+	std::vector<glm::ivec2> allPos;
+	glm::ivec2 idest = glm::ivec2(static_cast<int>(dest.x), static_cast<int>(dest.z));
+	glm::ivec2 tmpPos;
+	allPos.push_back(idest);
+	if (static_cast<int>(dest.x + size.x) > idest.x) {
+		tmpPos = idest;
+		tmpPos.x += 1;
+		allPos.push_back(tmpPos);
+
+		if (static_cast<int>(dest.z + size.z) > idest.y) {
+			tmpPos = idest;
+			tmpPos.x += 1;
+			tmpPos.y += 1;
+			allPos.push_back(tmpPos);
+		}
+	}
+	if (static_cast<int>(dest.z + size.z) > idest.y) {
+		tmpPos = idest;
+		tmpPos.y += 1;
+		allPos.push_back(tmpPos);
+	}
+
+	glm::ivec2 ienemyPos;
+	glm::vec3 enemyPos;
+	std::vector<glm::ivec2> allPosEnemy;
+
+	for (auto enemy : game.enemies) {
+		if (enemy == this)
+			continue;
+		if (enemy->name == "EnemyFly")
+			continue;
+		allPosEnemy.clear();
+		enemyPos = enemy->getPos();
+		ienemyPos = enemy->getIntPos();
+		allPosEnemy.push_back(ienemyPos);
+		if (static_cast<int>(enemyPos.x + enemy->size.x) > ienemyPos.x) {
+			tmpPos = ienemyPos;
+			tmpPos.x += 1;
+			allPosEnemy.push_back(tmpPos);
+
+			if (static_cast<int>(enemyPos.z + enemy->size.z) > ienemyPos.y) {
+				tmpPos = ienemyPos;
+				tmpPos.x += 1;
+				tmpPos.y += 1;
+				allPosEnemy.push_back(tmpPos);
+			}
+		}
+		if (static_cast<int>(enemyPos.z + enemy->size.z) > ienemyPos.y) {
+			tmpPos = ienemyPos;
+			tmpPos.y += 1;
+			allPosEnemy.push_back(tmpPos);
+		}
+		bool found = false;
+		for (auto && blockPos : allPos) {
+			for (auto && blockPosEnemy : allPosEnemy) {
+				if (blockPos == blockPosEnemy) {
+					collisions.insert(enemy);
+					found = true;
+				}
+				if (found)
+					break;
+			}
+			if (found)
+				break;
+		}
+	}
+	return collisions;
+}
+
+// -- Protected methods --------------------------------------------------------
+
+/**
  * @brief Base moving function for enemy
  *
  * @param dir The actual direction of the enemy
