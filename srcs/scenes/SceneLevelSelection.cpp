@@ -1,6 +1,7 @@
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
 #include "Save.hpp"
+#include "SceneCheatCode.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -112,7 +113,7 @@ bool	SceneLevelSelection::update() {
 	allUI.text->setText("Level " + std::to_string(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
-	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1)) {
+	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1) || SceneCheatCode::isLevelUnlocked(_currentLvl)) {
 		allUI.score->setText("play");
 	} else {
 		allUI.score->setText("locked");
@@ -199,7 +200,8 @@ void			SceneLevelSelection::_setLevel(int32_t level) {
 	}
 
 	_currentLvl = level;
-	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)) {
+	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)
+	|| SceneCheatCode::isLevelUnlocked(_currentLvl)) {
 		getUIElement(_states.firstLevelID + _currentLvl)
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.loadLevel)
