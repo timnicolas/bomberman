@@ -339,6 +339,7 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	#   build assimp
 	cd libs/assimp-5.0.1;
 	mkdir build; cd build;
+	export CC=`which gcc`;
 	cmake .. -G "Unix Makefiles" -DBUILD_SHARED_LIBS=OFF -DASSIMP_BUILD_STATIC=ON -DASSIMP_BUILD_STATIC_LIB=ON;
 	make -j4;
 	cd ../../..;
