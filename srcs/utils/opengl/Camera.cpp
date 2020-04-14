@@ -67,6 +67,9 @@ Camera	&Camera::operator=(Camera const &rhs) {
  */
 void	Camera::lookAt(CAMERA_VEC3 target) {
 	CAMERA_VEC3	newFront(glm::normalize(target - pos));
+	newFront.x = glm::clamp(newFront.x, -1.0f, 1.0f);
+	newFront.y = glm::clamp(newFront.y, -1.0f, 1.0f);
+	newFront.z = glm::clamp(newFront.z, -1.0f, 1.0f);
 	yaw = glm::degrees(glm::atan(newFront.z, newFront.x));
 	pitch = glm::degrees(glm::asin(newFront.y));
 	_updateCameraVectors();
@@ -116,7 +119,6 @@ void	Camera::setMode(CamMode::Enum mode) {
 	if (_mode == CamMode::FOLLOW_PATH) {
 		_followIsFinished = false;
 		_followCurElem = -1;
-		_followIsFirstMove = true;
 	}
 }
 
@@ -205,32 +207,73 @@ void	Camera::_updateFollowPath(float dtTime) {
 		return;
 	}
 	CamPoint next = _followPath[_followCurElem + 1];
+	// logInfo("pos: " << glm::to_string(pos) << " act point is " << glm::to_string(next.pos));
+
+	/* process speed */
+	float dtTimeSpeed = dtTime;  // up to or less than dtTime if animation speed is not the same
+	if (next.speed > 0) {
+		dtTimeSpeed = dtTime * (next.speed / movementSpeed);
+	}
+
+	/* if we already are on the next pos */
 	if (pos == next.pos) {
-		_followIsFirstMove = true;
 		_followCurElem += 1;
 		_updateFollowPath(dtTime);  // recall with next point
 		return;
 	}
+
+	/* tp if needed */
+	if (next.tpTo) {
+		pos = next.pos;
+		_updateCameraVectors();
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+		return;
+	}
+
+	/* move */
 	lookAt(next.pos);  // look on the next position
 	float tmpYaw = yaw;
 	float tmpPitch = pitch;
 	glm::vec3 tmpPos = pos;
-	processKeyboard(CamMovement::Forward, dtTime, false);
-	lookAt(next.pos);  // look on the next position
-	if (!_followIsFirstMove && (abs(tmpYaw - yaw) > 10 || abs(tmpPitch - pitch) > 10)) {  // if front vector has changed
+	processKeyboard(CamMovement::Forward, dtTimeSpeed, false);
+
+	/* check if we are arrived */
+	if (glm::distance(pos, next.pos) < 0.3) {
 		pos = tmpPos;
 		yaw = tmpYaw;
 		pitch = tmpPitch;
 		_updateCameraVectors();
-		_followIsFirstMove = true;
 		_followCurElem += 1;
 		_updateFollowPath(dtTime);  // recall with next point
 	}
-	_followIsFirstMove = false;
 
-	if (!next.lookForward) {
-		lookAt(next.lookAt);
+	/* set looking position */
+	CAMERA_VEC3 lookPos = pos;
+	switch (next.lookDir) {
+		case CamMovement::Forward:
+			lookPos += front;
+			break;
+		case CamMovement::Backward:
+			lookPos -= front;
+			break;
+		case CamMovement::Right:
+			lookPos += right;
+			break;
+		case CamMovement::Left:
+			lookPos -= right;
+			break;
+		case CamMovement::Up:
+			lookPos += up;
+			break;
+		case CamMovement::Down:
+			lookPos -= up;
+			break;
+		default:
+			lookPos = next.lookAt;
+			break;
 	}
+	lookAt(lookPos);
 }
 
 // -- processKeyboard ----------------------------------------------------------
@@ -242,6 +285,9 @@ void	Camera::_updateFollowPath(float dtTime) {
  * @param isRun Option to know is the player is running or not
  */
 void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun) {
+	if (direction == CamMovement::NoDirection)
+		return;
+
 	CAMERA_FLOAT	velocity;
 
 	velocity = movementSpeed * dtTime * ((isRun) ? runFactor : 1);
@@ -482,5 +528,5 @@ CAMERA_MAT4 Camera::getViewMatrix() const {
 }
 
 CAMERA_MAT4	Camera::getProjection() const { return _projection; }
-
 CamMode::Enum	Camera::getMode() const { return _mode; }
+CAMERA_VEC3		Camera::getDefPos() const { return _startPos; }

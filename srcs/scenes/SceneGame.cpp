@@ -423,13 +423,36 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	_gui->cam->setDefPos();  // set the default position to the current position
 	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
 	_introAnim = {
-		{{-14, -9, 72}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
-		{{10, 3, 22}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
-		{{9, 40, 4}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
-		{{9, 10, 4}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
+		{
+			{-14, -9, 72},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{10, 3, 22},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 2,  // speed
+		},
+		{
+			{9, 40, 4},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{9, 10, 3.8},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
 	};
 	_gui->cam->setFollowPath(_introAnim);  // set the follow path
-	_gui->cam->pos = _introAnim[0].pos;
 	state = GameState::INTRO;
 
 	// get saved values
