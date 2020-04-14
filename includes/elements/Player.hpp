@@ -49,6 +49,7 @@ public:
 	void			resetParams();
 	bool			takeDamage(const int damage);
 	bool			takeBonus(BonusType::Enum bonus);
+	bool			rmBonus(BonusType::Enum bonus);
 	void			addBomb();
 
 	virtual void	animEndCb(std::string animName);

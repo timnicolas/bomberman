@@ -58,6 +58,21 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 				CHEATCODE_TAB"/summon enemyBasic ~3 5",
 			&SceneCheatCode::_execSummon,
 		}},
+		{"unlock", {
+			"<levelId ...>",
+			"Unlock a level by id\n",
+			&SceneCheatCode::_execUnlock,
+		}},
+		{"rmbonus", {
+			"<bonus, ...> ['list']",
+			"Remove a bonus effect ('/rmbonus list' to get the list of bonus)",
+			&SceneCheatCode::_execRmbonus,
+		}},
+		{"restart", {
+			"",
+			"Restart the level",
+			&SceneCheatCode::_execRestart,
+		}},
 	};
 }
 
