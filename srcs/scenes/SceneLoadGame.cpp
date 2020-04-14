@@ -227,7 +227,7 @@ bool	SceneLoadGame::update() {
 		if (_states.selectedGame != 0) {
 			for (auto &&gameSaved : _gamesSaved) {
 				if (gameSaved->gameID == _states.selectedGame) {
-					Save::loadGame(gameSaved->game->s("Filename"));
+					Save::loadGame(gameSaved->filename);
 					SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 				}
 			}
@@ -238,7 +238,7 @@ bool	SceneLoadGame::update() {
 		if (_states.selectedGame != 0) {
 			for (auto &&gameSaved : _gamesSaved) {
 				if (gameSaved->gameID == _states.selectedGame) {
-					file::rm(gameSaved->game->s("Filename"));
+					file::rm(gameSaved->filename);
 					load();
 					return true;
 				}
