@@ -70,8 +70,7 @@ Save	&Save::_loadGame(std::string filename) {
 		_saveJs = initJson(filename, false);
 		_filename = filename;
 		_instantiate = true;
-		std::string name = getMatchFileName(filename, true);
-		_time = static_cast<time_t>(std::stoi(name));
+		_time = filenameToTimestamp(filename, true);
 	} catch (SaveException &e) {
 		logErr(e.what());
 		_instantiate = false;
@@ -141,7 +140,7 @@ std::string	Save::getFilename(bool temporary) {
 	return get()._getFilename(temporary);
 }
 std::string	Save::_getFilename(bool temporary) const {
-	return s.s("savePath") + std::to_string(_time) + (temporary ? "_temp" : "") + ".save";
+	return s.s("savePath") + timestampToFileName(_time) + (temporary ? "_temp" : "") + ".save";
 }
 
 bool		Save::isInstantiate() {
@@ -161,30 +160,13 @@ bool		Save::isSaved() {
  * @return std::string regex
  */
 std::string		Save::getFileNameRegex(bool temporary) {
-	std::string regex = "^" + Save::_addRegexSlashes(s.s("savePath")) + "(\\d{10,})";
+	std::string regex = "^(" + Save::_addRegexSlashes(s.s("savePath")) + "|)";
+	regex += "((\\d{4})-(\\d{2})-(\\d{2})_(\\d{2})-(\\d{2})-(\\d{2}))";
 	if (temporary)
 		regex += "(_temp)?";
 	regex += "\\.save$";
 
 	return regex;
-}
-
-/**
- * @brief Return smatch to given filename.
- *
- * @param filename
- * @param temporary true if we want to include temporary filename.
- * @return std::string name if matching else empty string.
- */
-std::string		Save::getMatchFileName(std::string filename, bool temporary) {
-	std::regex	regex(getFileNameRegex(temporary));
-	std::smatch	match;
-	std::regex_match(filename, match, regex);
-
-	if (!match.size())
-		throw SaveException(("incorrect filename: " + filename).c_str());
-
-	return match[1];
 }
 
 /**
@@ -203,11 +185,9 @@ SettingsJson	*Save::initJson(std::string filename, bool newFile) {
 			throw SaveException((filename + " is not a file").c_str());
 
 		// check filename viability
-		std::string name = getMatchFileName(filename, false);
-
-		std::time_t time = static_cast<time_t>(std::stoi(name));
+		std::time_t time = filenameToTimestamp(filename, false);
 		jsFile->name(std::to_string(time)).description("Save file");
-		jsFile->add<std::string>("Filename", filename);
+		jsFile->add<std::string>("Filename", timestampToFileName(time));
 
 		// Save json definition
 		jsFile->add<std::string>("name");
@@ -391,6 +371,48 @@ bool	Save::_save(bool temporary) {
  */
 void	Save::deleteTemp() {
 	file::rm(get()._getFilename(true), true);
+}
+
+/**
+ * @brief Convert the filename to timestamp
+ *
+ * @param filename
+ * @param temporary true if we want to include temporary filename.
+ * @return time_t time of filename.
+ */
+std::time_t	Save::filenameToTimestamp(std::string filename, bool temporary) {
+	std::regex	regex(getFileNameRegex(temporary));
+	std::smatch match;
+	std::regex_match(filename, match, regex);
+	if (!match.size())
+		throw SaveException(("incorrect filename: " + filename).c_str());
+
+	struct tm *timeInfo;
+	std::time_t rawtime;
+	time ( &rawtime );
+	timeInfo = localtime ( &rawtime );
+
+	timeInfo->tm_year = std::stoi(match[3]) - 1900;
+	timeInfo->tm_mon = std::stoi(match[4]) - 1;
+	timeInfo->tm_mday = std::stoi(match[5]);
+	timeInfo->tm_hour = std::stoi(match[6]);
+	timeInfo->tm_min = std::stoi(match[7]);
+	timeInfo->tm_sec = std::stoi(match[8]);
+
+	return mktime(timeInfo);
+}
+
+/**
+ * @brief Return formated filename from a timestamp
+ *
+ * @param timestamp created time of file
+ * @return std::string filename
+ */
+std::string	Save::timestampToFileName(time_t timestamp) {
+	std::tm localTime = *std::localtime(&timestamp);
+	std::stringstream ss;
+	ss << std::put_time(&localTime, "%Y-%m-%d_%H-%M-%S");
+	return ss.str();
 }
 
 // -- Private methods ----------------------------------------------------------
