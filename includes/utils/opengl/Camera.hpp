@@ -37,7 +37,8 @@ enum class CamMovement {
 	Left,
 	Right,
 	Up,
-	Down
+	Down,
+	NoDirection,
 };
 
 /* camera modes list */
@@ -53,8 +54,10 @@ namespace CamMode {
 /* point on the word (used in FOLLOW_PATH mode) */
 struct CamPoint {
 	CAMERA_VEC3	pos;
-	bool		lookForward;  // if false, look at lookAt direction
+	CamMovement	lookDir;  // looking direction (if NoDirection -> look at CamPoint::lookAt)
 	CAMERA_VEC3	lookAt;  // lookAt position for last point to pos
+	bool		tpTo;  // if true, tp to the position
+	float		speed;  // speed to move to this point (if <= 0 -> default speed)
 };
 
 /**
@@ -126,6 +129,7 @@ class Camera {
 		CAMERA_MAT4		getViewMatrix() const;
 		CAMERA_MAT4		getProjection() const;
 		CamMode::Enum	getMode() const;
+		CAMERA_VEC3		getDefPos() const;
 
 		CAMERA_VEC3		pos;
 		CAMERA_VEC3		front;
@@ -167,7 +171,6 @@ class Camera {
 		bool					_followIsFinished;
 		std::vector<CamPoint>	_followPath;
 		int						_followCurElem;
-		bool					_followIsFirstMove;
 
 		FrustumCulling	_frustumCulling;
 };
