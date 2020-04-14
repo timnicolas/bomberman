@@ -15,7 +15,6 @@ Gui::Gui(GameInfo &gameInfo)
   _event(new SDL_Event()),
   _context(0),
   _skybox(nullptr),
-  _canMove(false),
   _exitMenuDisabled(false) {}
 
 Gui::~Gui() {
@@ -70,20 +69,7 @@ void Gui::preUpdate(float const dtTime) {
 		SceneManager::openCheatCode(true);
 	}
 
-	// -- camera movement ------------------------------------------------------
-	// toggle camera movement
-	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
-		_canMove = !_canMove;
-	}
-
-	if (_canMove) {
-		cam->mouseSensitivity = s.d("mouse_sensitivity");
-
-		cam->setMode(CamMode::FPS);
-	}
-	else {
-		cam->setMode(CamMode::STATIC_DEFPOS);
-	}
+	cam->mouseSensitivity = s.d("mouse_sensitivity");
 }
 
 /**

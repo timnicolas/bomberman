@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include "Camera.hpp"
 #include "Logging.hpp"
 #include "Inputs.hpp"
@@ -17,7 +18,11 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
   _ratio(ratio),
   _startPos(pos),
   _startYaw(yaw),
-  _startPitch(pitch)
+  _startPitch(pitch),
+  _followIsRepeat(false),
+  _followIsFinished(false),
+  _followPath(),
+  _followCurElem(-1)
 {
 	_fovY = 45.0f;
 	_near = 0.1f;
@@ -108,6 +113,11 @@ void	Camera::setMode(CamMode::Enum mode) {
 	if (mode == _mode)
 		return;
 	_mode = mode;
+	if (_mode == CamMode::FOLLOW_PATH) {
+		_followIsFinished = false;
+		_followCurElem = -1;
+		_followIsFirstMove = true;
+	}
 }
 
 /**
@@ -150,6 +160,7 @@ void	Camera::update(float dtTime) {
 			_updateFps(dtTime);
 			break;
 		case CamMode::FOLLOW_PATH:
+			// logInfo("update");
 			_updateFollowPath(dtTime);
 			break;
 	}
@@ -189,7 +200,37 @@ void	Camera::_updateFps(float dtTime) {
 	}
 }
 void	Camera::_updateFollowPath(float dtTime) {
-	(void)dtTime;
+	if (_followCurElem + 1 >= static_cast<int>(_followPath.size())) {
+		_followIsFinished = true;
+		return;
+	}
+	CamPoint next = _followPath[_followCurElem + 1];
+	if (pos == next.pos) {
+		_followIsFirstMove = true;
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+		return;
+	}
+	lookAt(next.pos);  // look on the next position
+	float tmpYaw = yaw;
+	float tmpPitch = pitch;
+	glm::vec3 tmpPos = pos;
+	processKeyboard(CamMovement::Forward, dtTime, false);
+	lookAt(next.pos);  // look on the next position
+	if (!_followIsFirstMove && (abs(tmpYaw - yaw) > 10 || abs(tmpPitch - pitch) > 10)) {  // if front vector has changed
+		pos = tmpPos;
+		yaw = tmpYaw;
+		pitch = tmpPitch;
+		_updateCameraVectors();
+		_followIsFirstMove = true;
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+	}
+	_followIsFirstMove = false;
+
+	if (!next.lookForward) {
+		lookAt(next.lookAt);
+	}
 }
 
 // -- processKeyboard ----------------------------------------------------------
@@ -406,6 +447,12 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 	else
 		return FRCL_INSIDE;
 }
+
+// -- follow path --------------------------------------------------------------
+void	Camera::setFollowPath(std::vector<CamPoint> const & path) { _followPath = path; }
+void	Camera::setFollowRepeat(bool repeat) { _followIsRepeat = repeat; }
+bool	Camera::isFollowFinished() const { return _followIsFinished; }
+bool	Camera::isFollowRepeat() const { return _followIsRepeat; }
 
 // -- _updateCameraVectors -----------------------------------------------------
 /**
