@@ -217,7 +217,7 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished()) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			state = GameState::PLAY;
 		}
@@ -424,28 +424,45 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
 	_introAnim = {
 		{
-			{-14, -9, 72},  // pos
+			{80, 80, 150},  // pos
 			CamMovement::NoDirection,  // lookDir
 			{size.x / 2, 1, size.y / 2},  // lookAt
 			true,  // tpTo
 			-1,  // speed
 		},
 		{
-			{10, 3, 22},  // pos
+			{size.x / 2, 32, size.y / 2},  // pos
 			CamMovement::NoDirection,  // lookDir
 			{size.x / 2, 1, size.y / 2},  // lookAt
 			false,  // tpTo
-			_gui->cam->movementSpeed * 2,  // speed
+			_gui->cam->movementSpeed * 5,  // speed
 		},
 		{
-			{9, 40, 4},  // pos
+			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 3,  // speed
+		},
+
+		{
+			{-15, 20, -15},  // pos
 			CamMovement::NoDirection,  // lookDir
 			{size.x / 2, 1, size.y / 2},  // lookAt
 			true,  // tpTo
 			-1,  // speed
 		},
 		{
-			{9, 10, 3.8},  // pos
+			{-15, 20, size.y + 15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+
+
+		{
+			_gui->cam->getDefPos(),  // pos
 			CamMovement::NoDirection,  // lookDir
 			{size.x / 2, 1, size.y / 2},  // lookAt
 			false,  // tpTo
