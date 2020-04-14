@@ -207,15 +207,20 @@ bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
 
-	time += _dtTime;
-	if ((levelTime - time) < 0)
-		state = GameState::GAME_OVER;
+	_gui->cam->update(_dtTime);
 
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
 	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
+		return true;
+	}
+	else if (state == GameState::INTRO) {
+		if (_gui->cam->isFollowFinished()) {
+			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+			state = GameState::PLAY;
+		}
 		return true;
 	}
 	else if (state == GameState::WIN) {
@@ -242,6 +247,21 @@ bool	SceneGame::update() {
 		Save::save(true);
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
+	}
+
+	time += _dtTime;
+	if ((levelTime - time) < 0) {
+		state = GameState::GAME_OVER;
+		return true;
+	}
+
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
+		if (_gui->cam->getMode() == CamMode::FPS) {
+			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+		}
+		else if (_gui->cam->getMode() == CamMode::STATIC_DEFPOS) {
+			_gui->cam->setMode(CamMode::FPS);
+		}
 	}
 
 	for (auto &&board_it0 : board) {
@@ -335,7 +355,8 @@ bool	SceneGame::draw() {
 			if (!enemy->draw(*_gui))
 				return false;
 		}
-		player->draw(*_gui);
+		if (state == GameState::PLAY)
+			player->draw(*_gui);
 	}
 
 	if (s.j("debug").b("showBaseBoard")) {
@@ -348,7 +369,9 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	ASceneMenu::draw();
+	if (state == GameState::PLAY) {
+		ASceneMenu::draw();
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -361,7 +384,10 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
-	if (state == GameState::PAUSE
+	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
+		state = GameState::INTRO;
+	}
+	else if (state == GameState::PAUSE
 	|| state == GameState::WIN
 	|| state == GameState::GAME_OVER) {
 		state = GameState::PLAY;
@@ -395,6 +421,16 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.y / 1.9
 	));
 	_gui->cam->setDefPos();  // set the default position to the current position
+	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
+	_introAnim = {
+		{{-14, -9, 72}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
+		{{10, 3, 22}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
+		{{9, 40, 4}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
+		{{9, 10, 4}, false, {size.x / 2, 1, size.y / 2}},  // CamPoint
+	};
+	_gui->cam->setFollowPath(_introAnim);  // set the follow path
+	_gui->cam->pos = _introAnim[0].pos;
+	state = GameState::INTRO;
 
 	// get saved values
 	Save::loadStatesSaved(*this);

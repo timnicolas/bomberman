@@ -17,12 +17,14 @@
 #include "TextUI.hpp"
 
 #define NO_LEVEL -1  // value is no level loaded
+#define LEVEL_INTRO_DURATION 2
 
 class Player;
 class AEnemy;
 
 namespace GameState {
 	enum Enum {
+		INTRO,
 		PLAY,
 		PAUSE,
 		GAME_OVER,
@@ -54,6 +56,8 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
+
+	std::vector<CamPoint>	_introAnim;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
