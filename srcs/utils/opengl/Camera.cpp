@@ -173,6 +173,7 @@ void	Camera::_updateStatic(float dtTime) {
 	// nothing to do in static camera update
 }
 void	Camera::_updateFps(float dtTime) {
+	logInfo(glm::to_string(pos));
 	// mouse movement
 	processMouseMovement(Inputs::getMouseRel());
 
@@ -239,7 +240,7 @@ void	Camera::_updateFollowPath(float dtTime) {
 	processKeyboard(CamMovement::Forward, dtTimeSpeed, false);
 
 	/* check if we are arrived */
-	if (glm::distance(pos, next.pos) < 0.3) {
+	if (glm::distance(pos, next.pos) < movementSpeed * dtTime * 3) {
 		pos = tmpPos;
 		yaw = tmpYaw;
 		pitch = tmpPitch;
