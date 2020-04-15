@@ -15,6 +15,7 @@
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
+#include "Model.hpp"
 
 #define NO_LEVEL -1  // value is no level loaded
 #define LEVEL_INTRO_DURATION 2
@@ -58,6 +59,13 @@ private:
 	std::vector<SettingsJson *>	_mapsList;
 
 	std::vector<CamPoint>	_introAnim;
+
+	struct DrawForMenu {
+		Model *	player;
+		Model *	flower;
+		Model *	robot;
+	};
+	DrawForMenu _menuModels;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
