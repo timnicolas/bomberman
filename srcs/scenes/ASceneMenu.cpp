@@ -42,6 +42,10 @@ std::ostream &	operator<<(std::ostream & os, const ASceneMenu& myClass) {
  * @return false if there are an error in update
  */
 bool	ASceneMenu::update() {
+	if (_draw3dMenu && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		scGame.updateForMenu();
+	}
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->update();
 	}

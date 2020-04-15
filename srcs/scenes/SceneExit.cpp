@@ -100,8 +100,40 @@ void SceneExit::load() {
 	ASceneMenu::load();
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
+		if (_lastSceneName == SceneNames::PAUSE) {
+			_draw3dMenu = false;
+		}
 	}
 }
+
+/**
+ * @brief called when the scene is unloaded
+ */
+void SceneExit::unload() {
+	ASceneMenu::unload();
+	if (_lastSceneName == SceneNames::PAUSE) {
+		_draw3dMenu = true;
+	}
+}
+
+/**
+ * @brief this is the draw function (called every frames)
+ *
+ * @return true if the draw is a success
+ * @return false if there are an error in draw
+ */
+bool SceneExit::draw() {
+	bool ret = true;
+
+	/* 3d background */
+	if (_draw3dMenu == false && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ret = scGame.draw();  // draw the game if possible
+	}
+	ret = ASceneMenu::draw();
+	return ret & true;
+}
+
 
 // -- Private methods ----------------------------------------------------------
 

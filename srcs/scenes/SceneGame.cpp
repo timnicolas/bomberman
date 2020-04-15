@@ -215,6 +215,14 @@ bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 
 // -- AScene Methods -----------------------------------------------------------
 
+bool	SceneGame::updateForMenu() {
+	/* set camera position for menu */
+	_gui->cam->setMode(CamMode::STATIC);
+	_gui->cam->pos = glm::vec3(0, 1.2, 2.3);
+	_gui->cam->lookAt(glm::vec3(0, 0.7, 0));
+	return true;
+}
+
 /**
  * @brief update is called each frame.
  *
@@ -224,6 +232,9 @@ bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
+
+	if (_gui->cam->getMode() == CamMode::STATIC)
+		_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 
 	_gui->cam->update(_dtTime);
 
@@ -359,16 +370,13 @@ bool	SceneGame::draw() {
  * @return false If failed
  */
 bool	SceneGame::drawForMenu() {
-	/* set camera position */
-	_gui->cam->setMode(CamMode::STATIC);
-	_gui->cam->pos = glm::vec3(0, 1.2, 2.3);
-	_gui->cam->lookAt(glm::vec3(0, 0.7, 0));
-
 	/* draw models */
 	_menuModels.player->transform.setPos({-1, 0, 0});
+	_menuModels.robot->setAnimation("Armature|idle");
 	_menuModels.player->draw();
 
 	_menuModels.flower->transform.setPos({1, 0, 0});
+	_menuModels.robot->setAnimation("Armature|idle");
 	_menuModels.flower->draw();
 
 	// draw skybox
@@ -423,7 +431,7 @@ bool	SceneGame::drawGame() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	if (state != GameState::INTRO) {
+	if (state != GameState::INTRO && allUI.timeLeftImg->getPos() != VOID_SIZE) {
 		ASceneMenu::draw();
 	}
 
@@ -440,6 +448,11 @@ bool	SceneGame::drawGame() {
  * @return false If failed
  */
 bool	SceneGame::drawVictory() {
+	/* draw models */
+	_menuModels.player->transform.setPos({-1, 0, 0});
+	_menuModels.robot->setAnimation("Armature|dance");
+	_menuModels.player->draw();
+
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
@@ -453,6 +466,11 @@ bool	SceneGame::drawVictory() {
  * @return false If failed
  */
 bool	SceneGame::drawGameOver() {
+	/* draw models */
+	_menuModels.player->transform.setPos({-1, 0, 0});
+	_menuModels.robot->setAnimation("Armature|death");
+	_menuModels.player->draw();
+
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
