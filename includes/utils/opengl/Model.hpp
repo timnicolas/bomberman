@@ -34,6 +34,7 @@ class Model {
 		float	getAnimCurrentTime() const;
 		float	getAnimProgress() const;
 		float	getAnimDuration() const;
+		void	printAnimsNames() const;
 
 		ETransform	transform;  // to move/scale/rotate the model
 		bool		play;
