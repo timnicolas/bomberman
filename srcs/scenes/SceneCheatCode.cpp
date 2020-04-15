@@ -744,6 +744,20 @@ void SceneCheatCode::_removeLastLine() {
 }
 
 /**
+ * @brief Check if a level was unlocked by cheat code
+ *
+ * @param levelId The level id to check
+ * @return true If the level was unlocked
+ */
+bool SceneCheatCode::isLevelUnlocked(uint32_t levelId) {
+	SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(SceneManager::getScene(SceneNames::CHEAT_CODE));
+	return scCheatCode._isLevelUnlocked(levelId);
+}
+bool SceneCheatCode::_isLevelUnlocked(uint32_t levelId) const {
+	return std::find(_levelsUnlocked.begin(), _levelsUnlocked.end(), levelId) != _levelsUnlocked.end();
+}
+
+/**
  * Logging
  */
 
