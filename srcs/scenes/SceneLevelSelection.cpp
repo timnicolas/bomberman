@@ -85,7 +85,8 @@ bool			SceneLevelSelection::init() {
 		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
 		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize);
+		addRect(tmpPos, tmpSize)
+			.setColor(glm::vec4(0, 0, 0, 0));
 
 		_initBG();
 	}

@@ -188,9 +188,10 @@ bool	initSettings(std::string const & filename) {
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");
-	s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
-	s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
-	s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
+		s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
+		s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
+		s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
+		s.j("debug").add<bool>("3d-menu", true).setDescription("Use 3D menu");
 
 	try {
 		if (file::isDir(filename)) {

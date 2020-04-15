@@ -206,6 +206,7 @@ bool SceneManager::_update() {
 	if (!_isInCheatCode && !cheatCodeClosed) {
 		// update the scene
 		if (_sceneMap[_scene]->update() == false) {
+			logErr("Unexpected error when drawing scene");
 			return false;
 		}
 	}
@@ -229,8 +230,10 @@ bool SceneManager::_draw() {
 	}
 
 	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
-		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false)
+		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false) {
+			logErr("Unexpected error when drawing scene");
 			return false;
+		}
 	}
 
 	_gui->postDraw();
