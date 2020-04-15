@@ -6,6 +6,7 @@
 #include "bomberman.hpp"
 #include "FileUtils.hpp"
 #include "Save.hpp"
+#include "ModelsManager.hpp"
 
 #include "Player.hpp"
 #include "Wall.hpp"
@@ -159,6 +160,22 @@ bool			SceneGame::init() {
 		}
 		i++;
 	}
+
+	/* load all models for menu */
+	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime());
+	_menuModels.player->play = true;
+	_menuModels.player->loopAnimation = true;
+	_menuModels.player->setAnimation("Armature|idle");
+
+	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime());
+	_menuModels.flower->play = true;
+	_menuModels.flower->loopAnimation = true;
+	_menuModels.flower->setAnimation("Armature|idle");
+
+	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime());
+	_menuModels.robot->play = true;
+	_menuModels.robot->loopAnimation = true;
+	_menuModels.robot->setAnimation("Armature|idle");
 
 	_initGameInfos();
 
@@ -344,13 +361,15 @@ bool	SceneGame::draw() {
 bool	SceneGame::drawForMenu() {
 	/* set camera position */
 	_gui->cam->setMode(CamMode::STATIC);
-	_gui->cam->pos = glm::vec3(0, 2, 3);
-	_gui->cam->lookAt(glm::vec3(0, 2, 0));
+	_gui->cam->pos = glm::vec3(0, 1.2, 2.3);
+	_gui->cam->lookAt(glm::vec3(0, 0.7, 0));
 
-	if (player != nullptr) {
-		player->setPosition(glm::vec3(0, 0, 0));
-		player->draw(*_gui);
-	}
+	/* draw models */
+	_menuModels.player->transform.setPos({-1, 0, 0});
+	_menuModels.player->draw();
+
+	_menuModels.flower->transform.setPos({1, 0, 0});
+	_menuModels.flower->draw();
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
