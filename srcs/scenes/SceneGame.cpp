@@ -101,6 +101,10 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
+
+	delete _menuModels.player;
+	delete _menuModels.robot;
+	delete _menuModels.flower;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
