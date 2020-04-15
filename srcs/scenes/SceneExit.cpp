@@ -51,8 +51,7 @@ bool			SceneExit::init() {
 			.addButtonLeftListener(&_states.cancel);
 		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save   and   exit")
 			.addButtonLeftListener(&_states.save);
-		allUI.border = &addRect(VOID_SIZE, VOID_SIZE)
-			.setColor(glm::vec4(0, 0, 0, 0));
+		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
 		_initBG();
 	}

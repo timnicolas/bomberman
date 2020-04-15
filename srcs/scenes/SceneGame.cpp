@@ -436,7 +436,7 @@ bool	SceneGame::drawGame() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	if (state != GameState::INTRO && allUI.timeLeftImg->getPos() != VOID_SIZE) {
+	if (state == GameState::PLAY && allUI.timeLeftImg->getPos() != VOID_SIZE) {
 		ASceneMenu::draw();
 	}
 
