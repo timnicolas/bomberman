@@ -419,8 +419,7 @@ bool	SceneGame::drawGame() {
 			if (!enemy->draw(*_gui))
 				return false;
 		}
-		if (state != GameState::INTRO)
-			player->draw(*_gui);
+		player->draw(*_gui);
 	}
 
 	if (s.j("debug").b("showBaseBoard")) {
@@ -872,6 +871,8 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 			case EntityType::PLAYER:
 				if (player == nullptr) {
 					player = reinterpret_cast<Player *>(entity);
+					player->init();
+					entity = nullptr;  // to avoid to call init a second time
 				}
 				else {
 					delete entity;
