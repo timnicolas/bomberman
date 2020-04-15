@@ -76,6 +76,9 @@ glm::ivec2		ACharacter::getIntPos() const {
  */
 ACharacter		*ACharacter::setPosition(glm::vec3 pos) {
 	this->position = pos;
+	if (_model != nullptr) {
+		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+	}
 	return this;
 }
 
