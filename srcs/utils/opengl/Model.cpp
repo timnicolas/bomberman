@@ -219,6 +219,20 @@ float	Model::getAnimDuration() const {
 	return 0;
 }
 
+void	Model::printAnimsNames() const {
+	uint16_t	i = 0;
+
+	if (_openGLModel.isAnimated()) {
+		for (std::string const &name : _openGLModel.getAnimationNames()) {
+			logDebug("anim " << i << ": \"" << name << '"');
+			++i;
+		}
+	}
+	else {
+		logWarn("the model have no animation");
+	}
+}
+
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
 	int	lastAnimTimeTick = _animationTimeTick;
