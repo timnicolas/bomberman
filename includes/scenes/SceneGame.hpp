@@ -132,9 +132,13 @@ public:
 	virtual bool	init();
 	virtual bool	update();
 	virtual bool	postUpdate();
-	virtual bool	draw();
 	virtual void	load();
 	virtual void	unload();
+	virtual bool	draw();
+	bool			drawGame();
+	bool			drawForMenu();
+	bool			drawVictory();
+	bool			drawGameOver();
 	bool			loadLevel(int32_t levelId);
 	bool			insertEntity(std::string const & name, glm::ivec2 pos, bool isFly = false, uint64_t wallGenPercent = 0);
 

@@ -58,7 +58,8 @@ bool			SceneMainMenu::init() {
 		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
-		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
+		allUI.border = &addRect(VOID_SIZE, VOID_SIZE)
+			.setColor(glm::vec4(0, 0, 0, 0));
 
 		AudioManager::loadMusic("sounds/puzzle.ogg");
 		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);

@@ -56,6 +56,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	score.reset();
 	levelEnemies = 0;
 	levelCrispies = 0;
+	_draw3dMenu = false;  // disable drawing 3D menu
 }
 
 SceneGame::~SceneGame() {
@@ -330,6 +331,30 @@ bool	SceneGame::postUpdate() {
  * @return false
  */
 bool	SceneGame::draw() {
+	if (level == NO_LEVEL)
+		return drawForMenu();
+	return drawGame();
+}
+
+/**
+ * @brief Draw function if we are in a menu (no level loaded)
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawForMenu() {
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in a level
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawGame() {
 	if (s.j("debug").b("showBaseBoard")) {
 		for (auto &&board_it0 : board) {
 			for (auto &&board_it1 : board_it0) {
@@ -355,7 +380,7 @@ bool	SceneGame::draw() {
 			if (!enemy->draw(*_gui))
 				return false;
 		}
-		if (state == GameState::PLAY)
+		if (state != GameState::INTRO)
 			player->draw(*_gui);
 	}
 
@@ -369,10 +394,36 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	if (state == GameState::PLAY) {
+	if (state != GameState::INTRO) {
 		ASceneMenu::draw();
 	}
 
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in victory menu
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawVictory() {
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in game over menu
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawGameOver() {
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
