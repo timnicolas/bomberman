@@ -233,6 +233,16 @@ void	Model::printAnimsNames() const {
 	}
 }
 
+std::string Model::getCurrentAnimationName() const {
+	for (auto && name : _openGLModel.getAnimationNames()) {
+		uint32_t id = -1;
+		_openGLModel.getAnimationId(name, id);
+		if (id == _animationId)
+			return name;
+	}
+	return "";
+}
+
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
 	int	lastAnimTimeTick = _animationTimeTick;

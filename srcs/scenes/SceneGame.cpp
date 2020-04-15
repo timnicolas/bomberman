@@ -372,11 +372,13 @@ bool	SceneGame::draw() {
 bool	SceneGame::drawForMenu() {
 	/* draw models */
 	_menuModels.player->transform.setPos({-1, 0, 0});
-	_menuModels.robot->setAnimation("Armature|idle");
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
+		_menuModels.player->setAnimation("Armature|idle");
 	_menuModels.player->draw();
 
 	_menuModels.flower->transform.setPos({1, 0, 0});
-	_menuModels.robot->setAnimation("Armature|idle");
+	if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
+		_menuModels.flower->setAnimation("Armature|idle");
 	_menuModels.flower->draw();
 
 	// draw skybox
@@ -450,7 +452,8 @@ bool	SceneGame::drawGame() {
 bool	SceneGame::drawVictory() {
 	/* draw models */
 	_menuModels.player->transform.setPos({-1, 0, 0});
-	_menuModels.robot->setAnimation("Armature|dance");
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
+		_menuModels.player->setAnimation("Armature|dance");
 	_menuModels.player->draw();
 
 	// draw skybox
@@ -468,7 +471,8 @@ bool	SceneGame::drawVictory() {
 bool	SceneGame::drawGameOver() {
 	/* draw models */
 	_menuModels.player->transform.setPos({-1, 0, 0});
-	_menuModels.robot->setAnimation("Armature|death");
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|death")
+		_menuModels.player->setAnimation("Armature|death");
 	_menuModels.player->draw();
 
 	// draw skybox
