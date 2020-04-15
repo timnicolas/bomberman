@@ -396,10 +396,12 @@ void	Player::_move() {
 		moved = true;
 		dir.x -= 1;
 	}
-	_moveTo(dir);
 
+	if (moved) {
+		_moveTo(dir);
+	}
 	// update state on end move
-	if (!moved && _entityState.state == EntityState::RUNNING) {
+	else if (_entityState.state == EntityState::RUNNING) {
 		setState(EntityState::IDLE);
 	}
 }
