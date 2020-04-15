@@ -78,6 +78,7 @@ class SceneCheatCode : public ASceneMenu {
 		void				clearAllLn();
 		void				setText(std::string const & txt);
 		std::string			getText() const;
+		static bool			isLevelUnlocked(uint32_t levelId);
 
 		/* log */
 		void				logdebug(std::string const & msg, bool clear = false, bool logOnly = false);
@@ -101,6 +102,7 @@ class SceneCheatCode : public ASceneMenu {
 		uint64_t					_toUint(std::string const & arg, bool & error, bool * isRelative = nullptr);
 		double						_toFloat(std::string const & arg, bool & error, bool * isRelative = nullptr);
 		std::string					_getCommandName(std::string const & command, bool & isCommand);
+		bool						_isLevelUnlocked(uint32_t levelId) const;
 
 		/* commands definition */
 		typedef int (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
@@ -120,6 +122,9 @@ class SceneCheatCode : public ASceneMenu {
 		int					_execLoop(std::vector<std::string> const & args);
 		int					_execExec(std::vector<std::string> const & args);
 		int					_execSummon(std::vector<std::string> const & args);
+		int					_execUnlock(std::vector<std::string> const & args);
+		int					_execRmbonus(std::vector<std::string> const & args);
+		int					_execRestart(std::vector<std::string> const & args);
 
 		/* for lines */
 		int					_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
@@ -132,6 +137,7 @@ class SceneCheatCode : public ASceneMenu {
 		TextInputUI *					_commandLine;
 		TextUI *						_infoCommandLine;
 		std::deque<TextLine>			_textLines;
+		std::vector<uint32_t>			_levelsUnlocked;
 
 		/* history */
 		std::deque<std::string>			_cmdHistory;  // first elem is last in history

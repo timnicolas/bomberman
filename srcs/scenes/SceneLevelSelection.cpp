@@ -1,6 +1,7 @@
 #include "SceneLevelSelection.hpp"
 #include "SceneGame.hpp"
 #include "Save.hpp"
+#include "SceneCheatCode.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -92,7 +93,7 @@ bool			SceneLevelSelection::init() {
 		logErr(e.what());
 		return false;
 	}
-	_setLevel(0);
+	setLevel(0);
 	return true;
 }
 
@@ -112,7 +113,7 @@ bool	SceneLevelSelection::update() {
 	allUI.text->setText("Level " + std::to_string(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
-	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1)) {
+	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1) || SceneCheatCode::isLevelUnlocked(_currentLvl)) {
 		allUI.score->setText("play");
 	} else {
 		allUI.score->setText("locked");
@@ -156,11 +157,11 @@ bool	SceneLevelSelection::update() {
 	}
 	else if (_states.lastLevel) {
 		_states.lastLevel = false;
-		_setLevel(_currentLvl - 1);
+		setLevel(_currentLvl - 1);
 	}
 	else if (_states.nextLevel) {
 		_states.nextLevel = false;
-		_setLevel(_currentLvl + 1);
+		setLevel(_currentLvl + 1);
 	}
 	return true;
 }
@@ -179,8 +180,9 @@ void SceneLevelSelection::load() {
  * @brief set the current level in selection
  *
  * @param level the level ID
+ * @param enableTransition If true, enable smooth transition btw levels
  */
-void			SceneLevelSelection::_setLevel(int32_t level) {
+void			SceneLevelSelection::setLevel(int32_t level, bool enableTransition) {
 	// set right level ID
 	if (level < 0) level = 0;
 	if (level >= static_cast<int32_t>(_states.nbLevel)) level = _states.nbLevel - 1;
@@ -188,9 +190,11 @@ void			SceneLevelSelection::_setLevel(int32_t level) {
 		return;
 
 	// set transition
-	if (level == _currentLvl - 1) _transition = -1;
-	else if (level == _currentLvl + 1) _transition = 1;
-	else _transition = 0;
+	if (enableTransition) {
+		if (level == _currentLvl - 1) _transition = -1;
+		else if (level == _currentLvl + 1) _transition = 1;
+		else _transition = 0;
+	}
 
 	if (_currentLvl >= 0 && _currentLvl < static_cast<int32_t>(_states.nbLevel)) {
 		getUIElement(_states.firstLevelID + _currentLvl)
@@ -199,15 +203,31 @@ void			SceneLevelSelection::_setLevel(int32_t level) {
 	}
 
 	_currentLvl = level;
-	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)) {
+	if (_currentLvl == 0 || Save::isLevelDone(_currentLvl) || Save::isLevelDone(_currentLvl - 1)
+	|| SceneCheatCode::isLevelUnlocked(_currentLvl)) {
 		getUIElement(_states.firstLevelID + _currentLvl)
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.addButtonLeftListener(&_states.loadLevel)
 			.setColor(colorise(0, 0))
-			.setMouseHoverColor(colorise(0x000000, 51));
+			.setMouseHoverColor(colorise(0x000000, 51))
+			.setMouseClickColor(UI_DEF_MOUSE_CLICK_COLOR);
 	} else {
 		getUIElement(_states.firstLevelID + _currentLvl)
 			.setColor(colorise(0x000000, 200))
-			.setMouseHoverColor(colorise(0x000000, 200));
+			.setMouseHoverColor(colorise(0x000000, 200))
+			.setMouseClickColor(colorise(0x000000, 200));
 	}
 }
+
+/**
+ * @brief Get the current level ID
+ *
+ * @return uint32_t The current level ID
+ */
+uint32_t SceneLevelSelection::getCurLevel() const { return _currentLvl; }
+/**
+ * @brief Get the total number of levels
+ *
+ * @return uint32_t the total number of levels
+ */
+uint32_t SceneLevelSelection::getNbLevel() const { return _states.nbLevel; }
