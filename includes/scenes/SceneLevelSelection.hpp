@@ -22,6 +22,9 @@ class SceneLevelSelection : public ASceneMenu {
 		virtual bool		init();
 		virtual bool		update();
 		virtual void		load();
+		void				setLevel(int32_t level, bool enableTransition = true);
+		uint32_t			getCurLevel() const;
+		uint32_t			getNbLevel() const;
 
 	protected:
 		struct ButtonsStates {
@@ -41,8 +44,6 @@ class SceneLevelSelection : public ASceneMenu {
 		int32_t			_currentLvl;
 
 		float			_transition;  // used to do a smooth transition
-
-		void			_setLevel(int32_t level);
 
 	private:
 		SceneLevelSelection();

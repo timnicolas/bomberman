@@ -37,6 +37,7 @@ public:
 	static bool			loadStatesSaved(SceneGame &game);
 	static bool			isLevelDone(int32_t levelId);
 	static int			getLevelScore(int32_t levelId);
+	static bool			setLevelDone(int32_t levelId, int32_t score);
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
 
@@ -69,6 +70,7 @@ private:
 	std::string			_getFilename(bool temporary) const;
 	void				_init();
 	bool				_isLevelDone(int32_t levelId);
+	bool				_setLevelDone(int32_t levelId, int32_t score);
 	bool				_save(bool temporary);
 	bool				_updateSavedFile(SceneGame &game, bool succeedLevel);
 	bool				_loadStatesSaved(SceneGame &game);

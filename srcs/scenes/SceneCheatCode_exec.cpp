@@ -2,6 +2,8 @@
 #include "SceneGame.hpp"
 #include "Player.hpp"
 #include "Bonus.hpp"
+#include "Save.hpp"
+#include "SceneLevelSelection.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
@@ -328,6 +330,125 @@ int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 		}
 		_addLine("List of all entity name:\n" + res);
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_SUCCESS;
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+
+	std::vector<std::string> names = SceneGame::getAllEntityNames();
+	if (args.size() >=2 ) {
+		for (uint32_t i = 1; i < args.size(); i++) {
+			bool error;
+			uint32_t levelId = _toUint(args[i], error);
+			if (error) {
+				this->logerr("Cannot convert '" + args[i] + "' to unsigned int", false, true);
+				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+			}
+			/* get LevelSelection scene */
+			SceneLevelSelection & scLvlSelect = *reinterpret_cast<SceneLevelSelection *>(
+				SceneManager::getScene(SceneNames::LEVEL_SELECTION));
+
+			/* check if the level id is valid */
+			if (scLvlSelect.getNbLevel() <= levelId) {
+				this->logwarn("Invalid level ID: " + args[i], false, true);
+				continue;
+			}
+
+			/* add to unlocked list */
+			if (!_isLevelUnlocked(levelId)) {
+				_levelsUnlocked.push_back(levelId);
+
+				/* reload screen if needed */
+				if (SceneManager::getSceneName() == SceneNames::LEVEL_SELECTION && scLvlSelect.getCurLevel() == levelId) {
+					scLvlSelect.setLevel(0, false);
+					scLvlSelect.setLevel(levelId, false);
+				}
+				_addLine("Level " + std::to_string(levelId) + " unlocked");
+			}
+		}
+		return CheatcodeAction::CLOSE | CheatcodeAction::TXT_DEF | CheatcodeAction::RESULT_SUCCESS;
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	bool oneSuccess = false;
+	if (args.size() >= 2) {
+		for (auto arg = args.begin() + 1; arg != args.end(); arg++) {
+			if (Bonus::bonus.find(*arg) != Bonus::bonus.end()) {
+				if (SceneManager::getSceneName() != SceneNames::GAME) {
+					this->logwarn("You need to be in game to remove a bonus effect", false, true);
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+						| CheatcodeAction::RESULT_ERROR;
+				}
+				SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+				if (scGame.player != nullptr) {
+					scGame.player->rmBonus(Bonus::bonus[*arg]);
+					_addLine("Remove " + *arg + " bonus effect");
+					oneSuccess = true;
+				}
+				else {
+					this->logerr("Unexpected error, player doesnt exist", false, true);
+					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+						| CheatcodeAction::RESULT_ERROR;
+				}
+			}
+			else if (*arg == "list") {
+				std::string names = CHEATCODE_TAB;
+				for (auto && b : Bonus::bonus) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += b.first;
+				}
+				_addLine("Bonus list:\n" + names);
+			}
+			else {
+				std::string names = CHEATCODE_TAB;
+				for (auto && b : Bonus::bonus) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += b.first;
+				}
+				this->logerr("Invalid bonus name.\n" + names);
+				success = CheatcodeAction::RESULT_ERROR;
+			}
+		}
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	if (oneSuccess == false) {
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execRestart(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	if (args.size() == 1) {
+		/* check if we are in game */
+		if (SceneManager::getSceneName() != SceneNames::GAME) {
+			this->logwarn("You need to be in game to restart level", false, true);
+			return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
+				| CheatcodeAction::RESULT_ERROR;
+		}
+
+		/* get scene game */
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		scGame.loadLevel(scGame.level);
+		_addLine("Restart level");
 	}
 	else {
 		_execHelp({"help", args[0]});
