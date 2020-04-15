@@ -22,7 +22,7 @@
 #define FRCL_IS_INSIDE(frustumRes) (frustumRes == FRCL_INSIDE)
 #define FRCL_IS_OUTSIDE(frustumRes) (frustumRes > FRCL_INSIDE)
 
-/* camera usgin float or double */
+/* camera using float or double */
 #define CAMERA_VEC3		glm::vec3
 #define CAMERA_MAT4		glm::mat4
 #define CAMERA_FLOAT	float
