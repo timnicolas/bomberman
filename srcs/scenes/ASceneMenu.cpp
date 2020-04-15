@@ -60,7 +60,7 @@ bool	ASceneMenu::draw() {
 	/* 3d background */
 	if (_draw3dMenu && s.j("debug").b("3d-menu")) {
 		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
-		ret = scGame.draw();
+		ret = scGame.drawForMenu();
 	}
 	/* UI elements */
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {

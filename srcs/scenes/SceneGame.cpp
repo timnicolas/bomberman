@@ -342,6 +342,16 @@ bool	SceneGame::draw() {
  * @return false If failed
  */
 bool	SceneGame::drawForMenu() {
+	/* set camera position */
+	_gui->cam->setMode(CamMode::STATIC);
+	_gui->cam->pos = glm::vec3(0, 2, 3);
+	_gui->cam->lookAt(glm::vec3(0, 2, 0));
+
+	if (player != nullptr) {
+		player->setPosition(glm::vec3(0, 0, 0));
+		player->draw(*_gui);
+	}
+
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
