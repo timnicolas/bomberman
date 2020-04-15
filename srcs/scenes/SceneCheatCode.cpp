@@ -12,6 +12,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
   isCmdLnEnabled(true),
   _historyActID(-1)
 {
+	_draw3dMenu = false;
 	_commandsList = {
 		{"help", {
 			"[command, ...]",

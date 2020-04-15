@@ -143,6 +143,7 @@ public:
 	virtual void	load();
 	virtual void	unload();
 	virtual bool	draw();
+	bool			updateForMenu();
 	bool			drawGame();
 	bool			drawForMenu();
 	bool			drawVictory();
