@@ -162,7 +162,6 @@ void	Camera::update(float dtTime) {
 			_updateFps(dtTime);
 			break;
 		case CamMode::FOLLOW_PATH:
-			// logInfo("update");
 			_updateFollowPath(dtTime);
 			break;
 	}
@@ -173,7 +172,6 @@ void	Camera::_updateStatic(float dtTime) {
 	// nothing to do in static camera update
 }
 void	Camera::_updateFps(float dtTime) {
-	logInfo(glm::to_string(pos));
 	// mouse movement
 	processMouseMovement(Inputs::getMouseRel());
 
