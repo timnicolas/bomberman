@@ -44,7 +44,7 @@ class Inputs {
 public:
 	static const int						nb_input = InputType::NB_INPUTS;
 	static const std::string				input_type_name[Inputs::nb_input];
-	static const std::string				_conf_file;
+	static const std::string				configFile;
 
 	~Inputs();
 
