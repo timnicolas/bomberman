@@ -382,11 +382,11 @@ void SceneGame::unload() {
  * @return false if the level loading failed
  */
 bool SceneGame::loadLevel(int32_t levelId) {
-	logInfo("load level " << levelId);
 	if (_unloadLevel() == false) {
 		level = NO_LEVEL;
 		return false;
 	}
+	logDebug("load level " << levelId);
 	bool result = _loadLevel(levelId);
 
 	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
@@ -500,9 +500,9 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 }
 
 bool	SceneGame::_unloadLevel() {
-	logInfo("Unload level");
 	if (level == NO_LEVEL)
 		return true;
+	logDebug("Unload level " << level);
 
 	for (auto &&box : board) {
 		for (auto &&row : box) {

@@ -13,6 +13,7 @@
 #define CONFIG_DIR				"configs/"
 #define SETTINGS_FILE			CONFIG_DIR"settings.json"
 #define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
+#define SAVE_DIR				"saves/"
 
 #include <chrono>
 #include "SettingsJson.hpp"
