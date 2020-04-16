@@ -5,6 +5,7 @@
 
 Player::Player(SceneGame &game)
 : ACharacter(game) {
+	_model = nullptr;
 	size = glm::vec3(0.7, 1.5, 0.7);
 	type = Type::PLAYER;
 	name = "Player";
@@ -50,12 +51,14 @@ bool	Player::init() {
 
 	try {
 		// if exist, delete last model
-		if (_model)
+		glm::vec3 tmpPos = {1, 0, 1};
+		if (_model) {
+			tmpPos = _model->transform.getPos();
 			delete _model;
+		}
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({1, 0, 1},
-			{1.3, 1.3, 1.3}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform(tmpPos, {1.3, 1.3, 1.3}));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
@@ -146,9 +149,10 @@ bool	Player::update() {
  */
 bool	Player::draw(Gui &gui) {
 	(void)gui;
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
 	// blink if invulnerable
-	if (invulnerable > 0) {
+	if (scGame.state == GameState::PLAY && invulnerable > 0) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
