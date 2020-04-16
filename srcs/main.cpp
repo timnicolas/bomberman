@@ -26,6 +26,8 @@ int start(int ac, char const **av) {
 	file::mkdir(CONFIG_DIR);  // create config folder
 	initSettings(SETTINGS_FILE);  // create settings object
 
+	file::mkdir(s.s("savePath"));
+
 	if (!checkPrgm())  // check validity
 		return EXIT_FAILURE;
 

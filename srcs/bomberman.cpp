@@ -40,6 +40,7 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		s.s("savePath"),
 	};
 
 	/* list of required files */
