@@ -42,6 +42,8 @@ protected:
 	bool		_canMoveOn(glm::vec3 dest) const;
 	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
 	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
+	std::vector<glm::ivec2>	_getAllPositions(glm::vec3 dest, glm::vec3 size) const;
+
 
 public:
 	// Members
@@ -69,7 +71,7 @@ public:
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
 	bool							takeDamage(const int damage);
-	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
+	virtual std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 	bool							tp(glm::vec3 tpPos);
 

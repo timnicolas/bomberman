@@ -38,7 +38,7 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	type = Type::BONUS;
 	name = "Bonus";
 	blockPropagation = false;
-	destructible = false;
+	destructible = true;
 	_timeToDie = 10.0f;
 	_typeBonus = _pickBonus();
 }
