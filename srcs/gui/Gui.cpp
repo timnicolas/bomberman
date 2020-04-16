@@ -19,7 +19,7 @@ Gui::Gui(GameInfo &gameInfo)
   _exitMenuDisabled(false) {}
 
 Gui::~Gui() {
-	logInfo("exit SDL");
+	logDebug("exit SDL");
 
 	// free vao / vbo
 	cubeShader->use();
@@ -139,7 +139,7 @@ void Gui::postUpdate(float const dtTime) {
  * @return false if there is an error in init
  */
 bool	Gui::init() {
-	logInfo("create gui");
+	logDebug("create gui");
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		logErr("while loading SDL: " << SDL_GetError());
