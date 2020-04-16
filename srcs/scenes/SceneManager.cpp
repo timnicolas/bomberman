@@ -149,7 +149,7 @@ bool SceneManager::_run() {
 
 		/* quit if it's the end of the game */
 		if (_gameInfo.quit) {
-			logInfo("exit game")
+			logDebug("exit game")
 			break;
 		}
 
