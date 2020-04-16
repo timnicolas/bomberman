@@ -70,7 +70,6 @@ class Gui {
 		Skybox			*_skybox;
 
 		glm::mat4		_projection;
-		bool			_canMove;
 
 		bool			_exitMenuDisabled;
 

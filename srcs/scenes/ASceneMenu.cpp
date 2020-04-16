@@ -1,9 +1,10 @@
 #include "ASceneMenu.hpp"
+#include "SceneGame.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 ASceneMenu::ASceneMenu(Gui * gui, float const &dtTime)
-: AScene(gui, dtTime) {}
+: AScene(gui, dtTime), _draw3dMenu(true) {}
 
 ASceneMenu::~ASceneMenu() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
@@ -41,6 +42,10 @@ std::ostream &	operator<<(std::ostream & os, const ASceneMenu& myClass) {
  * @return false if there are an error in update
  */
 bool	ASceneMenu::update() {
+	if (_draw3dMenu && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		scGame.updateForMenu();
+	}
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->update();
 	}
@@ -54,10 +59,18 @@ bool	ASceneMenu::update() {
  * @return false if there are an error in draw
  */
 bool	ASceneMenu::draw() {
+	bool ret = true;
+
+	/* 3d background */
+	if (_draw3dMenu && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ret = scGame.drawForMenu();
+	}
+	/* UI elements */
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		(*it)->draw();
 	}
-	return true;
+	return ret & true;
 }
 /**
  * @brief called when the scene is loaded
@@ -250,13 +263,15 @@ TextInputUI & ASceneMenu::addTextInput(glm::vec2 pos, glm::vec2 size, std::strin
  * @return false if error
  */
 bool ASceneMenu::_initBG() {
-	glm::vec2 winSz = _gui->gameInfo.windowSize;
-	glm::vec2 tmpPos = glm::vec2(0, 0);
+	if (s.j("debug").b("3d-menu") == false) {
+		glm::vec2 winSz = _gui->gameInfo.windowSize;
+		glm::vec2 tmpPos = glm::vec2(0, 0);
 
-	addRect(tmpPos, winSz, colorise(
-		s.j("colors").j("background").u("color"),
-		s.j("colors").j("background").u("alpha")
-	));
+		addRect(tmpPos, winSz, colorise(
+			s.j("colors").j("background").u("color"),
+			s.j("colors").j("background").u("alpha")
+		));
+	}
 	return true;
 }
 
