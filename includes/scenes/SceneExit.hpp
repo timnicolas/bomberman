@@ -20,6 +20,8 @@ class SceneExit : public ASceneMenu {
 		virtual bool		init();
 		virtual bool		update();
 		virtual void		load();
+		virtual void		unload();
+		virtual bool		draw();
 
 	protected:
 		struct ButtonsStates {

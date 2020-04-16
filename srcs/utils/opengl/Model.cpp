@@ -233,6 +233,14 @@ void	Model::printAnimsNames() const {
 	}
 }
 
+std::string Model::getCurrentAnimationName() const {
+	if (_curAnimation) {
+		return std::string(_curAnimation->mName.C_Str());
+	}
+
+	return "";
+}
+
 // -- _updateAnimationTime -----------------------------------------------------
 void	Model::_updateAnimationTime() {
 	int	lastAnimTimeTick = _animationTimeTick;

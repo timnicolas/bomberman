@@ -6,6 +6,7 @@
 #include "bomberman.hpp"
 #include "FileUtils.hpp"
 #include "Save.hpp"
+#include "ModelsManager.hpp"
 
 #include "Player.hpp"
 #include "Wall.hpp"
@@ -56,6 +57,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	score.reset();
 	levelEnemies = 0;
 	levelCrispies = 0;
+	_draw3dMenu = false;  // disable drawing 3D menu
 }
 
 SceneGame::~SceneGame() {
@@ -99,6 +101,10 @@ SceneGame::~SceneGame() {
 		delete *it;
 	}
 	_mapsList.clear();
+
+	delete _menuModels.player;
+	delete _menuModels.robot;
+	delete _menuModels.flower;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -159,6 +165,22 @@ bool			SceneGame::init() {
 		i++;
 	}
 
+	/* load all models for menu */
+	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime());
+	_menuModels.player->play = true;
+	_menuModels.player->loopAnimation = true;
+	_menuModels.player->setAnimation("Armature|idle");
+
+	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime());
+	_menuModels.flower->play = true;
+	_menuModels.flower->loopAnimation = true;
+	_menuModels.flower->setAnimation("Armature|idle");
+
+	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime());
+	_menuModels.robot->play = true;
+	_menuModels.robot->loopAnimation = true;
+	_menuModels.robot->setAnimation("Armature|idle");
+
 	_initGameInfos();
 
 	return true;
@@ -197,6 +219,14 @@ bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 
 // -- AScene Methods -----------------------------------------------------------
 
+bool	SceneGame::updateForMenu() {
+	/* set camera position for menu */
+	_gui->cam->setMode(CamMode::STATIC);
+	_gui->cam->pos = glm::vec3(0, 1.2, 2.3);
+	_gui->cam->lookAt(glm::vec3(0, 0.7, 0));
+	return true;
+}
+
 /**
  * @brief update is called each frame.
  *
@@ -207,15 +237,23 @@ bool	SceneGame::update() {
 	if (level == NO_LEVEL)
 		return true;
 
-	time += _dtTime;
-	if ((levelTime - time) < 0)
-		state = GameState::GAME_OVER;
+	if (_gui->cam->getMode() == CamMode::STATIC)
+		_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+
+	_gui->cam->update(_dtTime);
 
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
 	if (state == GameState::PAUSE) {
 		SceneManager::loadScene(SceneNames::PAUSE);
+		return true;
+	}
+	else if (state == GameState::INTRO) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+			state = GameState::PLAY;
+		}
 		return true;
 	}
 	else if (state == GameState::WIN) {
@@ -242,6 +280,21 @@ bool	SceneGame::update() {
 		Save::save(true);
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
+	}
+
+	time += _dtTime;
+	if ((levelTime - time) < 0) {
+		state = GameState::GAME_OVER;
+		return true;
+	}
+
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
+		if (_gui->cam->getMode() == CamMode::FPS) {
+			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+		}
+		else if (_gui->cam->getMode() == CamMode::STATIC_DEFPOS) {
+			_gui->cam->setMode(CamMode::FPS);
+		}
 	}
 
 	for (auto &&board_it0 : board) {
@@ -310,6 +363,41 @@ bool	SceneGame::postUpdate() {
  * @return false
  */
 bool	SceneGame::draw() {
+	if (level == NO_LEVEL)
+		return drawForMenu();
+	return drawGame();
+}
+
+/**
+ * @brief Draw function if we are in a menu (no level loaded)
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawForMenu() {
+	/* draw models */
+	_menuModels.player->transform.setPos({-0.9, 0, 0});
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
+		_menuModels.player->setAnimation("Armature|idle");
+	_menuModels.player->draw();
+
+	_menuModels.flower->transform.setPos({0.9, 0, 0});
+	if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
+		_menuModels.flower->setAnimation("Armature|idle");
+	_menuModels.flower->draw();
+
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in a level
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawGame() {
 	if (s.j("debug").b("showBaseBoard")) {
 		for (auto &&board_it0 : board) {
 			for (auto &&board_it1 : board_it0) {
@@ -348,7 +436,57 @@ bool	SceneGame::draw() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	ASceneMenu::draw();
+	if (state == GameState::PLAY && allUI.timeLeftImg->getPos() != VOID_SIZE) {
+		ASceneMenu::draw();
+	}
+
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in victory menu
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawVictory() {
+	/* draw models */
+	_menuModels.player->transform.setPos({-1, 0, 0});
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
+		_menuModels.player->setAnimation("Armature|dance");
+	_menuModels.player->draw();
+
+	_menuModels.flower->transform.setPos({1, 0, 0});
+	if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
+		_menuModels.flower->setAnimation("Armature|loose");
+	_menuModels.flower->draw();
+
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
+ * @brief Draw function if we are in game over menu
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawGameOver() {
+	/* draw models */
+	_menuModels.player->transform.setPos({-1, 0, 0});
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
+		_menuModels.player->setAnimation("Armature|loose");
+	_menuModels.player->draw();
+
+	_menuModels.flower->transform.setPos({1, 0, 0});
+	if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
+		_menuModels.flower->setAnimation("Armature|dance");
+	_menuModels.flower->draw();
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -361,7 +499,10 @@ bool	SceneGame::draw() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
-	if (state == GameState::PAUSE
+	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
+		state = GameState::INTRO;
+	}
+	else if (state == GameState::PAUSE
 	|| state == GameState::WIN
 	|| state == GameState::GAME_OVER) {
 		state = GameState::PLAY;
@@ -394,6 +535,57 @@ bool SceneGame::loadLevel(int32_t levelId) {
 		size.x / 2, 1.0f,
 		size.y / 1.9
 	));
+	_gui->cam->setDefPos();  // set the default position to the current position
+	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
+	_introAnim = {
+		{
+			{80, 80, 150},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{size.x / 2, 32, size.y / 2},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+		{
+			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 3,  // speed
+		},
+
+		{
+			{-15, 20, -15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{-15, 20, size.y + 15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+
+
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+	};
+	_gui->cam->setFollowPath(_introAnim);  // set the follow path
+	state = GameState::INTRO;
 
 	// get saved values
 	player->resetParams();
@@ -694,6 +886,8 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 			case EntityType::PLAYER:
 				if (player == nullptr) {
 					player = reinterpret_cast<Player *>(entity);
+					player->init();
+					entity = nullptr;  // to avoid to call init a second time
 				}
 				else {
 					delete entity;

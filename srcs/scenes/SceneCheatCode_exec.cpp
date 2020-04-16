@@ -420,8 +420,7 @@ int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
 						names += ", ";
 					names += b.first;
 				}
-				this->logerr("Invalid bonus name.\n" + names);
-				success = CheatcodeAction::RESULT_ERROR;
+				this->logerr("Invalid bonus name.\n" CHEATCODE_TAB + names, false, true);
 			}
 		}
 	}
