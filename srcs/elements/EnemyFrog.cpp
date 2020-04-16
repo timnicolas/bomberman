@@ -47,7 +47,8 @@ EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {
 void EnemyFrog::resetCrossable() {
 	ACharacter::resetCrossable();
 	crossableTypes.clear();
-	crossableTypes.push_back(Type::ALL);
+	crossableTypes.push_back(Type::FIRE);
+	crossableTypes.push_back(Type::BONUS);
 }
 
 /**
@@ -72,6 +73,7 @@ bool	EnemyFrog::_update() {
 	/* moving */
 	// if jumping
 	if (_jumpGoal != VOID_POS) {
+		_jumpCrossable();
 		if (_isOn(_jumpGoal, game.getDtTime() * speed * 3)) {  // end of the jump
 			// set position with precision
 			position.x = _jumpGoal.x;
@@ -87,6 +89,7 @@ bool	EnemyFrog::_update() {
 		_moveTo(_dir, -1);
 	}
 	else {  // if stay in a position
+		resetCrossable();
 		if (game.player->hasCollision(position, size)) {
 			game.player->takeDamage(1);
 		}
@@ -146,4 +149,14 @@ bool	EnemyFrog::_postUpdate() {
 bool	EnemyFrog::_draw(Gui &gui) {
 	gui.drawCube(Block::IA, getPos(), size);
 	return true;
+}
+
+/**
+ * @brief Change crossable collision durring jump to allow to Frog to pass throw
+ *
+ */
+void	EnemyFrog::_jumpCrossable() {
+	ACharacter::resetCrossable();
+	crossableTypes.clear();
+	crossableTypes.push_back(Type::ALL);
 }

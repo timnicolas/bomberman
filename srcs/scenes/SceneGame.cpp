@@ -588,6 +588,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	state = GameState::INTRO;
 
 	// get saved values
+	player->resetParams();
 	Save::loadStatesSaved(*this);
 	if (!player->init()) {
 		return false;
