@@ -64,8 +64,10 @@ bool	AEnemy::update() {
 		game.player->takeDamage(strength);
 		setState(EntityState::ATTACK);
 
-		// facing player on attack
-		front = glm::normalize(game.player->position - position);
+		// facing player on attack (except for EnemyFly)
+		if (name != "EnemyFly") {
+			front = glm::normalize(game.player->position - position);
+		}
 	}
 
 	return _update();
