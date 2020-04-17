@@ -6,6 +6,8 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define FLY_HEIGHT 1.0
+
 /**
  * @brief This is an enemy object
  *
@@ -20,6 +22,9 @@ protected:
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 
+	void			_updateModel();
+	void			_updateAnimationState();
+
 public:
 	// Constructors
 	explicit EnemyFly(SceneGame &game);
@@ -28,4 +33,7 @@ public:
 
 	// Operators
 	EnemyFly &operator=(EnemyFly const &rhs);
+
+	// Methods
+	virtual bool	init();
 };

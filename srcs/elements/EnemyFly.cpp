@@ -7,7 +7,7 @@ EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game)
 {
 	name = "EnemyFly";
-	size = glm::vec3(0.5, 0.5, 0.3);
+	size = glm::vec3(.8, .8, .8);
 }
 
 EnemyFly::~EnemyFly() {
@@ -42,9 +42,25 @@ EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
  * @return false if failure
  */
 bool	EnemyFly::_update() {
-	if (_isBlocked())  // do nothing if blocked
-		return true;
-	_baseEnemyMove(_dir);
+	// update animation on state change
+	_updateAnimationState();
+
+	if (alive && _entityState.state != EntityState::ATTACK) {
+		// do nothing if blocked
+		if (_isBlocked()) {
+			// update state on first stop
+			if (_entityState.state != EntityState::IDLE) {
+				setState(EntityState::IDLE);
+			}
+			return true;
+		}
+
+		_baseEnemyMove(_dir);
+	}
+
+	// update model pos/rot
+	_updateModel();
+
 	return true;
 }
 
@@ -65,6 +81,96 @@ bool	EnemyFly::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyFly::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos(), size);
+	(void)gui;
+	// gui.drawCube(Block::IA, getPos(), size);
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * @brief update model position and rotation
+ *
+ */
+void	EnemyFly::_updateModel() {
+	_model->transform.setPos(position + glm::vec3(size.x / 2, FLY_HEIGHT, size.z / 2));
+
+	// set model orientationdebug
+	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+	_model->transform.setRot(angle);
+}
+
+/**
+ * @brief update animation on state change
+ *
+ */
+void	EnemyFly::_updateAnimationState() {
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				// no idle animation, same as run (I Will create one if necessary)
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DYING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityState::RUNNING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityState::ATTACK:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|attack", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+/**
+ * @brief Init enemyBasic
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	EnemyFly::init() {
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		OpenGLModel	&openglModel = ModelsManager::getModel("flyngBot");
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1.5,
+			FLY_HEIGHT, 1.5}, {.7, .7, .7}));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|run");
+		_updateModel();
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
