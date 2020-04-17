@@ -15,11 +15,10 @@ Gui::Gui(GameInfo &gameInfo)
   _event(new SDL_Event()),
   _context(0),
   _skybox(nullptr),
-  _canMove(false),
   _exitMenuDisabled(false) {}
 
 Gui::~Gui() {
-	logInfo("exit SDL");
+	logDebug("exit SDL");
 
 	// free vao / vbo
 	cubeShader->use();
@@ -61,6 +60,7 @@ Gui &Gui::operator=(Gui const &rhs) {
  * @param dtTime The delta time since last call
  */
 void Gui::preUpdate(float const dtTime) {
+	(void)dtTime;
 	if (Inputs::isConfiguring())
 		return;
 
@@ -69,38 +69,7 @@ void Gui::preUpdate(float const dtTime) {
 		SceneManager::openCheatCode(true);
 	}
 
-	// -- camera movement ------------------------------------------------------
-	// toggle camera movement
-	if (Inputs::getKeyByScancodeDown(SDL_SCANCODE_C)) {
-		_canMove = !_canMove;
-	}
-
-	if (_canMove) {
-		cam->mouseSensitivity = s.d("mouse_sensitivity");
-
-		// mouse movement
-		cam->processMouseMovement(Inputs::getMouseRel());
-
-		// camera movement
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
-			cam->processKeyboard(CamMovement::Forward, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
-			cam->processKeyboard(CamMovement::Right, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
-			cam->processKeyboard(CamMovement::Backward, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
-			cam->processKeyboard(CamMovement::Left, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
-			cam->processKeyboard(CamMovement::Down, dtTime, false);
-		}
-		if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
-			cam->processKeyboard(CamMovement::Up, dtTime, false);
-		}
-	}
+	cam->mouseSensitivity = s.d("mouse_sensitivity");
 }
 
 /**
@@ -139,7 +108,7 @@ void Gui::postUpdate(float const dtTime) {
  * @return false if there is an error in init
  */
 bool	Gui::init() {
-	logInfo("create gui");
+	logDebug("create gui");
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		logErr("while loading SDL: " << SDL_GetError());

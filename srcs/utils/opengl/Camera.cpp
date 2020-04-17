@@ -1,5 +1,7 @@
+#include <cstdlib>
 #include "Camera.hpp"
 #include "Logging.hpp"
+#include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
 Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw,
@@ -12,10 +14,15 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
   movementSpeed(MOVEMENT_SPEED),
   mouseSensitivity(MOUSE_SENSITIVITY),
   runFactor(RUN_FACTOR),
+  _mode(CamMode::FPS),
   _ratio(ratio),
   _startPos(pos),
   _startYaw(yaw),
-  _startPitch(pitch)
+  _startPitch(pitch),
+  _followIsRepeat(false),
+  _followIsFinished(false),
+  _followPath(),
+  _followCurElem(-1)
 {
 	_fovY = 45.0f;
 	_near = 0.1f;
@@ -60,6 +67,9 @@ Camera	&Camera::operator=(Camera const &rhs) {
  */
 void	Camera::lookAt(CAMERA_VEC3 target) {
 	CAMERA_VEC3	newFront(glm::normalize(target - pos));
+	newFront.x = glm::clamp(newFront.x, -1.0f, 1.0f);
+	newFront.y = glm::clamp(newFront.y, -1.0f, 1.0f);
+	newFront.z = glm::clamp(newFront.z, -1.0f, 1.0f);
 	yaw = glm::degrees(glm::atan(newFront.z, newFront.x));
 	pitch = glm::degrees(glm::asin(newFront.y));
 	_updateCameraVectors();
@@ -97,6 +107,174 @@ void	Camera::setNearAndFar(float near, float far) {
 	_updateProjection();
 }
 
+/**
+ * @brief Update the current camera mode
+ *
+ * @param mode CamMode element
+ */
+void	Camera::setMode(CamMode::Enum mode) {
+	if (mode == _mode)
+		return;
+	_mode = mode;
+	if (_mode == CamMode::FOLLOW_PATH) {
+		_followIsFinished = false;
+		_followCurElem = -1;
+	}
+}
+
+/**
+ * @brief Set the default camera position
+ *
+ * @param defPos Default position
+ * @param defYaw Default yaw
+ * @param defPitch Default pitch
+ */
+void	Camera::setDefPos(CAMERA_VEC3 defPos, CAMERA_FLOAT defYaw, CAMERA_FLOAT defPitch) {
+	_startPos = defPos;
+	_startYaw = defYaw;
+	_startPitch = defPitch;
+}
+/**
+ * @brief Set the default camera position to the current position
+ */
+void	Camera::setDefPos() {
+	_startPos = pos;
+	_startYaw = yaw;
+	_startPitch = pitch;
+}
+
+// -- update -------------------------------------------------------------------
+/**
+ * @brief Update function of the camera -> to be called every frames
+ *
+ * @param dtTime The delta time
+ */
+void	Camera::update(float dtTime) {
+	switch (_mode) {
+		case CamMode::STATIC_DEFPOS:
+			resetPosition();
+			_updateStatic(dtTime);
+			break;
+		case CamMode::STATIC:
+			_updateStatic(dtTime);
+			break;
+		case CamMode::FPS:
+			_updateFps(dtTime);
+			break;
+		case CamMode::FOLLOW_PATH:
+			_updateFollowPath(dtTime);
+			break;
+	}
+}
+
+void	Camera::_updateStatic(float dtTime) {
+	(void)dtTime;
+	// nothing to do in static camera update
+}
+void	Camera::_updateFps(float dtTime) {
+	// mouse movement
+	processMouseMovement(Inputs::getMouseRel());
+
+	bool isRun = false;
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_LSHIFT)) {
+		isRun = true;
+	}
+
+	// camera movement
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_W)) {
+		processKeyboard(CamMovement::Forward, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_D)) {
+		processKeyboard(CamMovement::Right, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_S)) {
+		processKeyboard(CamMovement::Backward, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_A)) {
+		processKeyboard(CamMovement::Left, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_Q)) {
+		processKeyboard(CamMovement::Down, dtTime, isRun);
+	}
+	if (Inputs::getKeyByScancode(SDL_SCANCODE_E)) {
+		processKeyboard(CamMovement::Up, dtTime, isRun);
+	}
+}
+void	Camera::_updateFollowPath(float dtTime) {
+	if (_followCurElem + 1 >= static_cast<int>(_followPath.size())) {
+		_followIsFinished = true;
+		return;
+	}
+	CamPoint next = _followPath[_followCurElem + 1];
+	// logInfo("pos: " << glm::to_string(pos) << " act point is " << glm::to_string(next.pos));
+
+	/* process speed */
+	float dtTimeSpeed = dtTime;  // up to or less than dtTime if animation speed is not the same
+	if (next.speed > 0) {
+		dtTimeSpeed = dtTime * (next.speed / movementSpeed);
+	}
+
+	/* if we already are on the next pos */
+	if (pos == next.pos) {
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+		return;
+	}
+
+	/* tp if needed */
+	if (next.tpTo) {
+		pos = next.pos;
+		_updateCameraVectors();
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+		return;
+	}
+
+	/* move */
+	lookAt(next.pos);  // look on the next position
+	float tmpYaw = yaw;
+	float tmpPitch = pitch;
+	glm::vec3 tmpPos = pos;
+	processKeyboard(CamMovement::Forward, dtTimeSpeed, false);
+
+	/* check if we are arrived */
+	if (glm::distance(pos, next.pos) < movementSpeed * dtTime * 3) {
+		pos = tmpPos;
+		yaw = tmpYaw;
+		pitch = tmpPitch;
+		_updateCameraVectors();
+		_followCurElem += 1;
+		_updateFollowPath(dtTime);  // recall with next point
+	}
+
+	/* set looking position */
+	CAMERA_VEC3 lookPos = pos;
+	switch (next.lookDir) {
+		case CamMovement::Forward:
+			lookPos += front;
+			break;
+		case CamMovement::Backward:
+			lookPos -= front;
+			break;
+		case CamMovement::Right:
+			lookPos += right;
+			break;
+		case CamMovement::Left:
+			lookPos -= right;
+			break;
+		case CamMovement::Up:
+			lookPos += up;
+			break;
+		case CamMovement::Down:
+			lookPos -= up;
+			break;
+		default:
+			lookPos = next.lookAt;
+			break;
+	}
+	lookAt(lookPos);
+}
+
 // -- processKeyboard ----------------------------------------------------------
 /**
  * @brief Move camera from keyboard interaction
@@ -106,6 +284,9 @@ void	Camera::setNearAndFar(float near, float far) {
  * @param isRun Option to know is the player is running or not
  */
 void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun) {
+	if (direction == CamMovement::NoDirection)
+		return;
+
 	CAMERA_FLOAT	velocity;
 
 	velocity = movementSpeed * dtTime * ((isRun) ? runFactor : 1);
@@ -312,6 +493,12 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 		return FRCL_INSIDE;
 }
 
+// -- follow path --------------------------------------------------------------
+void	Camera::setFollowPath(std::vector<CamPoint> const & path) { _followPath = path; }
+void	Camera::setFollowRepeat(bool repeat) { _followIsRepeat = repeat; }
+bool	Camera::isFollowFinished() const { return _followIsFinished; }
+bool	Camera::isFollowRepeat() const { return _followIsRepeat; }
+
 // -- _updateCameraVectors -----------------------------------------------------
 /**
  * @brief Update the camera after moving or changing orientation
@@ -340,3 +527,5 @@ CAMERA_MAT4 Camera::getViewMatrix() const {
 }
 
 CAMERA_MAT4	Camera::getProjection() const { return _projection; }
+CamMode::Enum	Camera::getMode() const { return _mode; }
+CAMERA_VEC3		Camera::getDefPos() const { return _startPos; }

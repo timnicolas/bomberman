@@ -20,6 +20,7 @@ class SceneVictory : public ASceneMenu {
 		virtual bool		init();
 		virtual bool		update();
 		virtual void		load();
+		virtual bool		draw();
 
 	protected:
 		struct ButtonsStates {

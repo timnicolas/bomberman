@@ -113,6 +113,47 @@ void	AEnemy::animEndCb(std::string animName) {
 }
 
 /**
+ * @brief get a list of entity in collision with the Character at a position.
+ *
+ * @param pos default VOID_POS3
+ * @return std::unordered_set<AEntity *> collisions
+ */
+std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
+	std::unordered_set<AEntity *> collisions = ACharacter::getCollision(dest);
+	if (name == "EnemyFly")
+		return collisions;
+
+	/* get all positions blocks under character on a position */
+	std::vector<glm::ivec2> allPos = _getAllPositions(dest, size);
+
+	std::vector<glm::ivec2> allPosEnemy;
+	for (auto enemy : game.enemies) {
+		if (enemy == this)
+			continue;
+		if (enemy->name == "EnemyFly")
+			continue;
+		allPosEnemy.clear();
+		allPosEnemy = _getAllPositions(enemy->getPos(), enemy->size );
+		bool found = false;
+		for (auto && blockPos : allPos) {
+			for (auto && blockPosEnemy : allPosEnemy) {
+				if (blockPos == blockPosEnemy) {
+					collisions.insert(enemy);
+					found = true;
+				}
+				if (found)
+					break;
+			}
+			if (found)
+				break;
+		}
+	}
+	return collisions;
+}
+
+// -- Protected methods --------------------------------------------------------
+
+/**
  * @brief Base moving function for enemy
  *
  * @param dir The actual direction of the enemy

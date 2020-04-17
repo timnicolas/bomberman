@@ -5,6 +5,7 @@
 #include "bomberman.hpp"
 #include "Logging.hpp"
 #include "FileUtils.hpp"
+#include "Inputs.hpp"
 
 SettingsJson s;
 
@@ -40,6 +41,8 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		CONFIG_DIR,
+		SAVE_DIR,
 	};
 
 	/* list of required files */
@@ -149,10 +152,10 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("background").add<uint64_t>("color", 0x181818).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("background").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("bg-rect");
-		s.j("colors").j("bg-rect").add<uint64_t>("color", 0x121212).setMin(0x000000).setMax(0xFFFFFF);
-		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+		s.j("colors").j("bg-rect").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0x44).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("bg-rect-border");
-		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x000000).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("bg-rect-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
 	/* Audio */
@@ -166,7 +169,6 @@ bool	initSettings(std::string const & filename) {
 
 	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
-	s.add<std::string>("savePath", "save/").setDescription("folder with all saved games.");
 
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
@@ -188,9 +190,10 @@ bool	initSettings(std::string const & filename) {
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");
-	s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
-	s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
-	s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
+		s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
+		s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
+		s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
+		s.j("debug").add<bool>("3d-menu", true).setDescription("Use 3D menu");
 
 	try {
 		if (file::isDir(filename)) {
@@ -236,9 +239,15 @@ bool	saveSettings(std::string const & filename) {
  * @return false Return always false
  */
 bool	usage() {
-	std::cout << "usage: ./bomberman [-u] [--reset-settings]" << std::endl;
+	std::cout << "usage: ./bomberman [-u] [--reset] [--reset-settings] [--reset-history] [--reset-saves]" << std::endl;
+	std::cout << "\t" COLOR_BOLD "--reset --reset-all" COLOR_EOC ": "
+		"reset all users data (settings, history and saves) before starting" << std::endl;
 	std::cout << "\t" COLOR_BOLD "--reset-settings" COLOR_EOC ": "
 		"reset all users settings before starting" << std::endl;
+	std::cout << "\t" COLOR_BOLD "--reset-history" COLOR_EOC ": "
+		"reset commands history before starting" << std::endl;
+	std::cout << "\t" COLOR_BOLD "--reset-saves" COLOR_EOC ": "
+		"reset all users saves before starting" << std::endl;
 	std::cout << "\t" COLOR_BOLD "-u" COLOR_EOC ", " COLOR_BOLD "--usage" COLOR_EOC ": "
 		"show usage" << std::endl;
 	return false;
@@ -253,6 +262,9 @@ bool	usage() {
  */
 bool	argparse(int nbArgs, char const ** args) {
 	bool	reset_settings = false;
+	bool	reset_history = false;
+	bool	reset_save = false;
+	bool	reset_all = false;
 	int		i = 0;
 	while (i < nbArgs) {
 		if (strcmp(args[i], "--usage") == 0 || strcmp(args[i], "-u") == 0) {
@@ -262,6 +274,18 @@ bool	argparse(int nbArgs, char const ** args) {
 			i++;
 			reset_settings = true;
 		}
+		else if (strcmp(args[i], "--reset-history") == 0) {
+			i++;
+			reset_history = true;
+		}
+		else if (strcmp(args[i], "--reset-saves") == 0) {
+			i++;
+			reset_save = true;
+		}
+		else if (strcmp(args[i], "--reset-all") == 0 || strcmp(args[i], "--reset") == 0) {
+			i++;
+			reset_all = true;
+		}
 		else {
 			std::cout << "invalid argument: " << args[i] << std::endl;
 			return usage();
@@ -270,6 +294,20 @@ bool	argparse(int nbArgs, char const ** args) {
 	}
 	if (reset_settings) {
 		logInfo("reset all user settings...");
+		file::rm(SETTINGS_FILE);
+		file::rm(Inputs::configFile);
+	}
+	if (reset_history) {
+		logInfo("reset history...");
+		file::rm(CHEATCODE_HIST_FILE);
+	}
+	if (reset_save) {
+		logInfo("reset all saves...");
+		file::rm(SAVE_DIR);
+	}
+	if (reset_all) {
+		logInfo("reset saves, settings, and history...");
+		file::rm(SAVE_DIR);
 		file::rm(CONFIG_DIR);
 	}
 	return true;

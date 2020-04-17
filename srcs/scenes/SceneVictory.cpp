@@ -4,7 +4,9 @@
 SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
-{}
+{
+	_draw3dMenu = false;
+}
 
 SceneVictory::SceneVictory(SceneVictory const & src)
 : ASceneMenu(src)
@@ -115,6 +117,9 @@ bool			SceneVictory::init() {
 bool	SceneVictory::update() {
 	ASceneMenu::update();
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+	if (s.j("debug").b("3d-menu")) {
+		scGame.updateForMenu();
+	}
 	statistics.level->setText("LVL " + std::to_string(scGame.score.getLevelId()));
 	// statistics.score->setText("Score: " + scGame.score.toString());
 
@@ -186,4 +191,22 @@ void SceneVictory::load() {
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 	}
+}
+
+/**
+ * @brief this is the draw function (called every frames)
+ *
+ * @return true if the draw is a success
+ * @return false if there are an error in draw
+ */
+bool SceneVictory::draw() {
+	bool ret = true;
+
+	/* 3d background */
+	if (s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ret = scGame.drawVictory();  // draw the game if possible
+	}
+	ret = ASceneMenu::draw();
+	return ret & true;
 }

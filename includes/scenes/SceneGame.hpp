@@ -15,14 +15,17 @@
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
+#include "Model.hpp"
 
 #define NO_LEVEL -1  // value is no level loaded
+#define LEVEL_INTRO_DURATION 2
 
 class Player;
 class AEnemy;
 
 namespace GameState {
 	enum Enum {
+		INTRO,
 		PLAY,
 		PAUSE,
 		GAME_OVER,
@@ -54,6 +57,15 @@ private:
 	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
+
+	std::vector<CamPoint>	_introAnim;
+
+	struct DrawForMenu {
+		Model *	player;
+		Model *	flower;
+		Model *	robot;
+	};
+	DrawForMenu _menuModels;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -128,9 +140,14 @@ public:
 	virtual bool	init();
 	virtual bool	update();
 	virtual bool	postUpdate();
-	virtual bool	draw();
 	virtual void	load();
 	virtual void	unload();
+	virtual bool	draw();
+	bool			updateForMenu();
+	bool			drawGame();
+	bool			drawForMenu();
+	bool			drawVictory();
+	bool			drawGameOver();
 	bool			loadLevel(int32_t levelId);
 	bool			insertEntity(std::string const & name, glm::ivec2 pos, bool isFly = false, uint64_t wallGenPercent = 0);
 

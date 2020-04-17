@@ -27,7 +27,6 @@ public:
 	// Getters & Setters
 	static std::string	getFilename(bool temporary);
 	static std::string	getFileNameRegex(bool temporary);
-	static std::string	getMatchFileName(std::string filename, bool temporary);
 
 	static bool			isInstantiate();
 	static bool			isSaved();
@@ -40,7 +39,8 @@ public:
 	static bool			setLevelDone(int32_t levelId, int32_t score);
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
-
+	static std::time_t	filenameToTimestamp(std::string filename, bool temporary);
+	static std::string	timestampToFileName(time_t timestamp);
 	// Exceptions
 	class SaveException : public std::runtime_error {
 	public:
