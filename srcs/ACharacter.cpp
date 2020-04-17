@@ -1,6 +1,7 @@
 #include "ACharacter.hpp"
 #include "SceneGame.hpp"
 #include "useGlm.hpp"
+#include "AEnemy.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -76,6 +77,9 @@ glm::ivec2		ACharacter::getIntPos() const {
  */
 ACharacter		*ACharacter::setPosition(glm::vec3 pos) {
 	this->position = pos;
+	if (_model != nullptr) {
+		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+	}
 	return this;
 }
 
@@ -87,6 +91,27 @@ ACharacter		*ACharacter::setPosition(glm::vec3 pos) {
  */
 bool	ACharacter::isAlive() {
 	return lives;
+}
+
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > const & ACharacter::getBoard() const {
+	if (position.y >= 0.5)
+		return game.boardFly;
+	return game.board;
+}
+/**
+ * @brief Get the board (game.board or game.boardFly)
+ *
+ * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
+ */
+std::vector< std::vector< std::vector<AEntity *> > > & ACharacter::getBoard() {
+	if (position.y >= 0.5)
+		return game.boardFly;
+	return game.board;
 }
 
 /**
@@ -128,29 +153,7 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 	std::unordered_set<AEntity *> collisions;
 
 	/* get all positions blocks under character on a position */
-	std::vector<glm::ivec2> allPos;
-	glm::ivec2 idest = glm::ivec2(static_cast<int>(dest.x), static_cast<int>(dest.z));
-	glm::ivec2 tmpPos;
-
-	allPos.push_back(idest);
-
-	if (static_cast<int>(dest.x + size.x) > idest.x) {
-		tmpPos = idest;
-		tmpPos.x += 1;
-		allPos.push_back(tmpPos);
-
-		if (static_cast<int>(dest.z + size.z) > idest.y) {
-			tmpPos = idest;
-			tmpPos.x += 1;
-			tmpPos.y += 1;
-			allPos.push_back(tmpPos);
-		}
-	}
-	if (static_cast<int>(dest.z + size.z) > idest.y) {
-		tmpPos = idest;
-		tmpPos.y += 1;
-		allPos.push_back(tmpPos);
-	}
+	std::vector<glm::ivec2> allPos = _getAllPositions(dest, size);
 
 	// std::cout << glm::to_string(dest) << " | ";
 	for (auto && blockPos : allPos) {
@@ -347,6 +350,40 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const offset) {
 }
 
 /**
+ * @brief get all positions blocks under character on a position
+ *
+ * @param pos
+ * @param size
+ * @return std::vector<glm::ivec2>
+ */
+std::vector<glm::ivec2>	ACharacter::_getAllPositions(glm::vec3 pos, glm::vec3 size) const {
+	std::vector<glm::ivec2> allPos;
+	glm::ivec2 posInt = glm::ivec2(static_cast<int>(pos.x), static_cast<int>(pos.z));
+	glm::ivec2 tmpPos;
+
+	allPos.push_back(posInt);
+
+	if (static_cast<int>(pos.x + size.x) > posInt.x) {
+		tmpPos = posInt;
+		tmpPos.x += 1;
+		allPos.push_back(tmpPos);
+
+		if (static_cast<int>(pos.z + size.z) > posInt.y) {
+			tmpPos = posInt;
+			tmpPos.x += 1;
+			tmpPos.y += 1;
+			allPos.push_back(tmpPos);
+		}
+	}
+	if (static_cast<int>(pos.z + size.z) > posInt.y) {
+		tmpPos = posInt;
+		tmpPos.y += 1;
+		allPos.push_back(tmpPos);
+	}
+	return allPos;
+}
+
+/**
  * @brief Move to direction if possible.
  *
  * @param direction Direction to move
@@ -497,6 +534,8 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 	return position;
 }
 
+// -- Private methods ----------------------------------------------------------
+
 /**
  * @brief Move in a really short distance -> called by ACharecter::_moveTo
  *
@@ -512,27 +551,6 @@ glm::vec3	ACharacter::_miniMove(glm::vec3 movement) {
 		return position;
 	}
 	return position;
-}
-
-/**
- * @brief Get the board (game.board or game.boardFly)
- *
- * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
- */
-std::vector< std::vector< std::vector<AEntity *> > > const & ACharacter::getBoard() const {
-	if (position.y >= 0.5)
-		return game.boardFly;
-	return game.board;
-}
-/**
- * @brief Get the board (game.board or game.boardFly)
- *
- * @return std::vector< std::vector< std::vector<AEntity *> > >& A reference to the board
- */
-std::vector< std::vector< std::vector<AEntity *> > > & ACharacter::getBoard() {
-	if (position.y >= 0.5)
-		return game.boardFly;
-	return game.board;
 }
 
 // -- Exceptions errors --------------------------------------------------------

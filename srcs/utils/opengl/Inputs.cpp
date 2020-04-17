@@ -14,7 +14,7 @@ const std::string	Inputs::input_type_name[] = {
 	"show_help",
 	"cheat_code",
 };
-const std::string	Inputs::_conf_file = "configs/controls.json";
+const std::string	Inputs::configFile = "configs/controls.json";
 
 Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	_left_click(false), _right_click(false),
@@ -49,12 +49,12 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	_controls.j("keys").add<int64_t>("cheat_code", SDL_SCANCODE_SLASH) \
 		.setMin(4).setMax(286).setDescription("open cheat code command line");
 	try {
-		if (!_controls.loadFile(Inputs::_conf_file)) {
-			logWarn("Invalid value in " << Inputs::_conf_file << ".");
+		if (!_controls.loadFile(Inputs::configFile)) {
+			logWarn("Invalid value in " << Inputs::configFile << ".");
 		}
 	}
 	catch(SettingsJson::SettingsException const & e) {
-		logDebug("the file " << Inputs::_conf_file << " doesn't exist for now.");
+		logDebug("the file " << Inputs::configFile << " doesn't exist for now.");
 	}
 	_input_key_map = {
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::UP },
@@ -82,7 +82,7 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		_controls.j("keys").i("show_help"),
 		_controls.j("keys").i("cheat_code"),
 	};
-	_controls.saveToFile(Inputs::_conf_file);
+	_controls.saveToFile(Inputs::configFile);
 
 	_textInputIgnore = {  // list of keys that can be used out of textInput
 		SDL_SCANCODE_RETURN,
@@ -454,7 +454,7 @@ void				Inputs::_update() {
 					_controls.j("keys").i(input_type_name[_next_action_type]) = scan;
 					_used_scan.insert(scan);
 					_input_key_map[scan] = _next_action_type;
-					_controls.saveToFile(Inputs::_conf_file);
+					_controls.saveToFile(Inputs::configFile);
 					_configuring = false;
 					_key_status[static_cast<int>(_next_action_type)] = true;
 					_key_previous_status[_next_action_type] = true;

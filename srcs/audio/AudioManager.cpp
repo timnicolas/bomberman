@@ -29,7 +29,7 @@ AudioManager::AudioManager(): _music_modifier(1.0) {
 		_volume_music = static_cast<float>(s.j("audio").d("Music volume"));
 		_volume_sound = static_cast<float>(s.j("audio").d("Sound volume"));
 		_enabled = true;
-		logInfo("Audio loaded.");
+		logDebug("Audio loaded.");
 	}
 }
 

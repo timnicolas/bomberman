@@ -35,6 +35,7 @@ class Model {
 		float	getAnimProgress() const;
 		float	getAnimDuration() const;
 		void	printAnimsNames() const;
+		std::string getCurrentAnimationName() const;
 
 		ETransform	transform;  // to move/scale/rotate the model
 		bool		play;

@@ -1,21 +1,13 @@
 #ifndef CAMERA_HPP_
 #define CAMERA_HPP_
 
+#include <vector>
 #include "includesOpengl.hpp"
 
 #define CONSTRAINT_Y		false  // if true, move forward didn't affect Y position
 #define MOVEMENT_SPEED		15.0f
 #define RUN_FACTOR			3.0f
 #define MOUSE_SENSITIVITY	0.1f
-
-enum class CamMovement {
-	Forward,
-	Backward,
-	Left,
-	Right,
-	Up,
-	Down
-};
 
 /* frustum culling parameter */
 #define FRCL_INSIDE		0b000000  // inside the camera
@@ -30,11 +22,43 @@ enum class CamMovement {
 #define FRCL_IS_INSIDE(frustumRes) (frustumRes == FRCL_INSIDE)
 #define FRCL_IS_OUTSIDE(frustumRes) (frustumRes > FRCL_INSIDE)
 
+/* camera using float or double */
 #define CAMERA_VEC3		glm::vec3
 #define CAMERA_MAT4		glm::mat4
 #define CAMERA_FLOAT	float
 
+/* def up vector */
 #define WORD_UP			glm::vec3(0.0f, 1.0f, 0.0f)
+
+/* all camera base movements */
+enum class CamMovement {
+	Forward,
+	Backward,
+	Left,
+	Right,
+	Up,
+	Down,
+	NoDirection,
+};
+
+/* camera modes list */
+namespace CamMode {
+	enum Enum {
+		STATIC_DEFPOS,  // impossible to move, camera is always to the default position
+		STATIC,  // impossible to move
+		FPS,  // moving using keyboard and mouse
+		FOLLOW_PATH,  // moving by follow a path
+	};
+}
+
+/* point on the word (used in FOLLOW_PATH mode) */
+struct CamPoint {
+	CAMERA_VEC3	pos;
+	CamMovement	lookDir;  // looking direction (if NoDirection -> look at CamPoint::lookAt)
+	CAMERA_VEC3	lookAt;  // lookAt position for last point to pos
+	bool		tpTo;  // if true, tp to the position
+	float		speed;  // speed to move to this point (if <= 0 -> default speed)
+};
 
 /**
  * @brief struct to store frustum culling settings
@@ -77,19 +101,35 @@ class Camera {
 		void	setRatio(float ratio);
 		void	setFovY(float fovY);
 		void	setNearAndFar(float near, float far);
+		void	setMode(CamMode::Enum mode);
+		void	setDefPos(CAMERA_VEC3 defPos, CAMERA_FLOAT defYaw = -90, CAMERA_FLOAT defPitch = 0);
+		void	setDefPos();
+
+		// update
+		void	update(float dtTime);
 
 		// to manage basic camera fly movement
 		void	processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool isRun = false);
 		void	processMouseMovement(glm::vec2 offset, bool constrainPitch = true);
 
+		/* frustum culling */
 		// to test if objects are inside or outside of the camera
 		void	frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMERA_FLOAT nearD, CAMERA_FLOAT farD);
 		int		frustumCullingCheckPoint(CAMERA_VEC3 const &point);  // check if a point is inside the camera
 		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size);  // check for a cube
 
+		/* follow path */
+		void	setFollowPath(std::vector<CamPoint> const & path);
+		void	setFollowRepeat(bool repeat);
+		void	setFollowSpeed(float speed_);
+		bool	isFollowFinished() const;
+		bool	isFollowRepeat() const;
+
 		// getters
-		CAMERA_MAT4	getViewMatrix() const;
-		CAMERA_MAT4	getProjection() const;
+		CAMERA_MAT4		getViewMatrix() const;
+		CAMERA_MAT4		getProjection() const;
+		CamMode::Enum	getMode() const;
+		CAMERA_VEC3		getDefPos() const;
 
 		CAMERA_VEC3		pos;
 		CAMERA_VEC3		front;
@@ -104,20 +144,33 @@ class Camera {
 		CAMERA_FLOAT	mouseSensitivity;
 		CAMERA_FLOAT	runFactor;
 
+
 	private:
 		void	_updateCameraVectors();
 		void	_updateProjection();
 
-		float		_ratio;
-		float		_fovY;
-		float		_near;
-		float		_far;
-		CAMERA_MAT4	_projection;
+		/* update */
+		void	_updateStatic(float dtTime);
+		void	_updateFps(float dtTime);
+		void	_updateFollowPath(float dtTime);
+
+		CamMode::Enum	_mode;  // STATIC, FPS, ...
+		float			_ratio;
+		float			_fovY;
+		float			_near;
+		float			_far;
+		CAMERA_MAT4		_projection;
 
 		/* used to reset position and rotation */
 		CAMERA_VEC3		_startPos;
 		CAMERA_FLOAT	_startYaw;
 		CAMERA_FLOAT	_startPitch;
+
+		/* for follow path mode */
+		bool					_followIsRepeat;
+		bool					_followIsFinished;
+		std::vector<CamPoint>	_followPath;
+		int						_followCurElem;
 
 		FrustumCulling	_frustumCulling;
 };
