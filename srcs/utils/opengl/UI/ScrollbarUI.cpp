@@ -52,6 +52,9 @@ void ScrollbarUI::_update() {
 		float scrollSizeFactor = getMasterSize().y / _masterTotalSize.y;
 		if (scrollSizeFactor < 0.1) scrollSizeFactor = 0.1;
 		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
+		_vertScrollHide = false;
+		if (scrollSizeFactor == 1)
+			_vertScrollHide = true;
 		_vertScrollBarDrawSize = (_size.y - _borderSize * 2) * scrollSizeFactor;
 
 		// if click on the scroll zone
@@ -100,6 +103,9 @@ void ScrollbarUI::_update() {
 		if (scrollSizeFactor < 0.1) scrollSizeFactor = 0.1;
 		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
 		_horizScrollBarDrawSize = (_size.x - _borderSize * 2) * scrollSizeFactor;
+		_horizScrollHide = false;
+		if (scrollSizeFactor == 1)
+			_horizScrollHide = true;
 
 		// if click on the scroll zone
 		if (_leftClick) {
@@ -151,7 +157,7 @@ void ScrollbarUI::_draw() {
 	glm::vec2 tmpSize;
 
 	// draw scrollbars
-	if (_vertScroll) {
+	if (_vertScroll && !_vertScrollHide) {
 		/* size of the scrollbar */
 		tmpSize.x = _scrollbarSize;
 		tmpSize.y = _vertScrollBarDrawSize;  // height depend to the total master size
@@ -178,7 +184,7 @@ void ScrollbarUI::_draw() {
 		/* draw scrollbar */
 		_drawRect(tmpPos, tmpSize, _z, _scrollbarColor, secColor, factor);
 	}
-	if (_horizScroll) {
+	if (_horizScroll && !_horizScrollHide) {
 		/* size of the scrollbar */
 		tmpSize.y = _scrollbarSize;
 		tmpSize.x = _horizScrollBarDrawSize;  // height depend to the total master size
