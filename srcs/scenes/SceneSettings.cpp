@@ -177,13 +177,17 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 	tmp_pos.y -= menu_height * 0.2;
-	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :").setTextAlign(TextAlign::RIGHT) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
 	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
 	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
-	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(_text_scale) \
+	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen)
+		.setKeyLeftClickScancode(SDL_SCANCODE_F)
+		.setTextScale(_text_scale)
 		.setTextAlign(TextAlign::CENTER);
 	_updateFullscreenButton();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
@@ -191,23 +195,32 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 	tmp_pos.y -= menu_height * 0.3;
-	ptr = &addText(tmp_pos, tmp_size, "Resolution :").setTextAlign(TextAlign::RIGHT) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addText(tmp_pos, tmp_size, "Resolution :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += (menu_width / 2);
 	_resolution_text = &addText(tmp_pos, tmp_size, "800x600");
-	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_updateResolutionText();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
 	tmp_pos.x -= tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, "<").addButtonLeftListener(&_prev_resolution) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addButton(tmp_pos, tmp_size, "<")
+		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
+		.addButtonLeftListener(&_prev_resolution)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += menu_width / 3 + tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, ">").addButtonLeftListener(&_next_resolution) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addButton(tmp_pos, tmp_size, ">")
+		.setKeyLeftClickScancode(SDL_SCANCODE_RIGHT)
+		.addButtonLeftListener(&_next_resolution)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
