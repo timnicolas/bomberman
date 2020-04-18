@@ -309,6 +309,8 @@ bool	Gui::_protect_resolution() {
 		logWarn("Screen too small.");
 		return false;
 	}
+	gameInfo.maxWindowSize.x = dm.w;
+	gameInfo.maxWindowSize.y = dm.h;
 	logDebug("width max: " << dm.w << " ; height max: " << dm.h);
 	if (dm.w < width) {
 		width = dm.w;

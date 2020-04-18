@@ -27,6 +27,7 @@
 struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
+	glm::ivec2	maxWindowSize;
 	bool		quit;
 
 	GameInfo();

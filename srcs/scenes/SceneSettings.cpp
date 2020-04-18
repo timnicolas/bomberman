@@ -508,6 +508,14 @@ void					SceneSettings::_updateFullscreen() {
 	_fullscreen = !_fullscreen;
 	_updateFullscreenButton();
 	s.j("graphics").b("fullscreen") = _fullscreen;
+	if (_fullscreen) {
+		s.j("graphics").i("width") = _gui->gameInfo.maxWindowSize.x;
+		s.j("graphics").i("height") = _gui->gameInfo.maxWindowSize.y;
+	}
+	else {
+		s.j("graphics").i("width") = _current_resolution.width;
+		s.j("graphics").i("height") = _current_resolution.height;
+	}
 	saveSettings(SETTINGS_FILE);
 	_gui->updateFullscreen();
 }
@@ -526,22 +534,20 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	}
 	_select_res = go_right ? _select_res + 1 : _select_res - 1;
 	if (_select_res < 0) {
-		_select_res = SceneSettings::nb_resolution;
-		if (_custom_res.width == 0 && _custom_res.height == 0) {
-			_select_res--;
-		}
-	}
-	else if (_select_res > SceneSettings::nb_resolution || (_select_res == SceneSettings::nb_resolution \
-			&& _custom_res.width == 0 && _custom_res.height == 0))
-	{
 		_select_res = 0;
 	}
-	if (_select_res == SceneSettings::nb_resolution) {
-		_current_resolution = _custom_res;
+	else if (_select_res > SceneSettings::nb_resolution) {
+		_select_res = SceneSettings::nb_resolution;
 	}
-	else {
-		_current_resolution = SceneSettings::resolutions[_select_res];
+	while (SceneSettings::resolutions[_select_res].width > _gui->gameInfo.maxWindowSize.x
+	|| SceneSettings::resolutions[_select_res].height > _gui->gameInfo.maxWindowSize.y)
+	{
+		if (_select_res > 0)
+			_select_res--;
+		else
+			break;
 	}
+	_current_resolution = SceneSettings::resolutions[_select_res];
 	s.j("graphics").i("width") = _current_resolution.width;
 	s.j("graphics").i("height") = _current_resolution.height;
 	saveSettings(SETTINGS_FILE);
