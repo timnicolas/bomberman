@@ -22,7 +22,7 @@ public:
 		int				height;
 	};
 
-	static const int			nb_resolution = 6;
+	static const int			nb_resolution = 7;
 	static SceneSettings::res	resolutions[SceneSettings::nb_resolution];
 	static const std::string	audio_name[3];
 
@@ -72,6 +72,7 @@ private:
 	ButtonUI					*_paneSelection[SettingsType::nb_types];
 	ButtonUI					*_fullscreen_button;
 	TextUI						*_resolution_text;
+	TextUI						*_reloadWinText;
 
 	/* temporary settings */
 	bool						_fullscreen;
