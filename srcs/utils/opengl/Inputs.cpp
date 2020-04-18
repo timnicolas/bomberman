@@ -468,6 +468,7 @@ void				Inputs::_update() {
 	SDL_Event		event;
 	SDL_Scancode	scan;
 
+	_quit = false;
 	_mouse_rel.x = 0;
 	_mouse_rel.y = 0;
 	_scroll_rel = glm::ivec2(0, 0);
