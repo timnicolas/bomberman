@@ -92,6 +92,9 @@ void Gui::postUpdate(float const dtTime) {
 				if (SceneManager::getSceneName() != SceneNames::EXIT) {
 					SceneManager::loadScene(SceneNames::EXIT);
 				}
+				else if (Inputs::shouldQuit()) {
+					SceneManager::quit();
+				}
 			#else
 				SceneManager::quit();
 			#endif
