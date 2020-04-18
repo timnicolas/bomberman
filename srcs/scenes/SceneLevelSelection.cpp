@@ -151,7 +151,7 @@ bool	SceneLevelSelection::update() {
 			return true;
 		}
 	}
-	if (_states.menu) {
+	if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
