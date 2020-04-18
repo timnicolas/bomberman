@@ -28,6 +28,8 @@ struct GameInfo {
 	std::string	title;
 	glm::ivec2	windowSize;
 	glm::ivec2	maxWindowSize;
+	glm::ivec2	savedWindowSize;
+	bool		isSavedFullscreen;
 	bool		quit;
 
 	GameInfo();

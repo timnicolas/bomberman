@@ -33,6 +33,10 @@ SceneManager::SceneManager(SceneManager const & src) {
 }
 
 SceneManager::~SceneManager() {
+	s.j("graphics").i("width") = _gui->gameInfo.savedWindowSize.x;
+	s.j("graphics").i("height") = _gui->gameInfo.savedWindowSize.y;
+	s.j("graphics").b("fullscreen") = _gui->gameInfo.isSavedFullscreen;
+	saveSettings(SETTINGS_FILE);
 	delete _gui;
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		delete it->second;
