@@ -10,9 +10,22 @@ const std::string	Inputs::input_type_name[] = {
 	"action_2",
 	"confirm",
 	"cancel",
-	"goto_menu",
-	"show_help",
-	"cheat_code",
+	"menu",
+	"show help",
+	"cheatcode",
+};
+const SDL_Scancode	Inputs::default_keys[] = {
+	DEFAULT_UP,
+	DEFAULT_DOWN,
+	DEFAULT_LEFT,
+	DEFAULT_RIGHT,
+	DEFAULT_ACTION,
+	DEFAULT_ACTION_2,
+	DEFAULT_CONFIRM,
+	DEFAULT_CANCEL,
+	DEFAULT_MENU,
+	DEFAULT_HELP,
+	DEFAULT_CHEATCODE,
 };
 const std::string	Inputs::configFile = "configs/controls.json";
 
@@ -26,27 +39,27 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	}
 	_controls.name("controls").description("controls settings");
 	_controls.add<SettingsJson>("keys");
-	_controls.j("keys").add<int64_t>("up", SDL_SCANCODE_UP) \
+	_controls.j("keys").add<int64_t>("up", DEFAULT_UP) \
 		.setMin(4).setMax(286).setDescription("move up.");
-	_controls.j("keys").add<int64_t>("down", SDL_SCANCODE_DOWN) \
+	_controls.j("keys").add<int64_t>("down", DEFAULT_DOWN) \
 		.setMin(4).setMax(286).setDescription("move down.");
-	_controls.j("keys").add<int64_t>("left", SDL_SCANCODE_LEFT) \
+	_controls.j("keys").add<int64_t>("left", DEFAULT_LEFT) \
 		.setMin(4).setMax(286).setDescription("move left.");
-	_controls.j("keys").add<int64_t>("right", SDL_SCANCODE_RIGHT) \
+	_controls.j("keys").add<int64_t>("right", DEFAULT_RIGHT) \
 		.setMin(4).setMax(286).setDescription("move right.");
-	_controls.j("keys").add<int64_t>("action", SDL_SCANCODE_SPACE) \
+	_controls.j("keys").add<int64_t>("action", DEFAULT_ACTION) \
 		.setMin(4).setMax(286).setDescription("action command.");
-	_controls.j("keys").add<int64_t>("action_2", SDL_SCANCODE_B) \
+	_controls.j("keys").add<int64_t>("action_2", DEFAULT_ACTION_2) \
 		.setMin(4).setMax(286).setDescription("action command bonus.");
-	_controls.j("keys").add<int64_t>("confirm", SDL_SCANCODE_RETURN) \
+	_controls.j("keys").add<int64_t>("confirm", DEFAULT_CONFIRM) \
 		.setMin(4).setMax(286).setDescription("confirm choice.");
-	_controls.j("keys").add<int64_t>("cancel", SDL_SCANCODE_ESCAPE) \
+	_controls.j("keys").add<int64_t>("cancel", DEFAULT_CANCEL) \
 		.setMin(4).setMax(286).setDescription("cancel choice.");
-	_controls.j("keys").add<int64_t>("goto_menu", SDL_SCANCODE_TAB) \
+	_controls.j("keys").add<int64_t>("menu", DEFAULT_MENU) \
 		.setMin(4).setMax(286).setDescription("go to menu (buttons).");
-	_controls.j("keys").add<int64_t>("show_help", SDL_SCANCODE_F1) \
+	_controls.j("keys").add<int64_t>("show help", DEFAULT_HELP) \
 		.setMin(4).setMax(286).setDescription("show shortcuts fo buttons");
-	_controls.j("keys").add<int64_t>("cheat_code", SDL_SCANCODE_SLASH) \
+	_controls.j("keys").add<int64_t>("cheatcode", DEFAULT_CHEATCODE) \
 		.setMin(4).setMax(286).setDescription("open cheat code command line");
 	try {
 		if (!_controls.loadFile(Inputs::configFile)) {
@@ -65,9 +78,9 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action_2")), InputType::ACTION_2 },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::CONFIRM },
 		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::CANCEL },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("goto_menu")), InputType::GOTO_MENU },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show_help")), InputType::SHOW_HELP },
-		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cheat_code")), InputType::CHEAT_CODE },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("menu")), InputType::GOTO_MENU },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show help")), InputType::SHOW_HELP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cheatcode")), InputType::CHEAT_CODE },
 	};
 	_used_scan = {
 		_controls.j("keys").i("up"),
@@ -78,9 +91,9 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 		_controls.j("keys").i("action_2"),
 		_controls.j("keys").i("confirm"),
 		_controls.j("keys").i("cancel"),
-		_controls.j("keys").i("goto_menu"),
-		_controls.j("keys").i("show_help"),
-		_controls.j("keys").i("cheat_code"),
+		_controls.j("keys").i("menu"),
+		_controls.j("keys").i("show help"),
+		_controls.j("keys").i("cheatcode"),
 	};
 	_controls.saveToFile(Inputs::configFile);
 
@@ -400,6 +413,47 @@ bool				Inputs::getLeftClickDown() {
 
 bool				Inputs::_getLeftClickDown() const {
 	return (_left_click && !_left_click_previous);
+}
+
+/**
+	Reset all the key to their default value.
+*/
+void				Inputs::resetKeys() {
+	Inputs::get()._resetKeys();
+}
+
+void				Inputs::_resetKeys() {
+	logInfo("reset keys");
+	for (auto i = 0; i < InputType::NB_INPUTS; i++) {
+		_controls.j("keys").i(input_type_name[i]) = default_keys[i];
+	}
+	_input_key_map = {
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("up")), InputType::Enum::UP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("down")), InputType::Enum::DOWN },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("left")), InputType::Enum::LEFT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("right")), InputType::Enum::RIGHT },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action")), InputType::Enum::ACTION },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("action_2")), InputType::Enum::ACTION_2 },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("confirm")), InputType::Enum::CONFIRM },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cancel")), InputType::Enum::CANCEL },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("menu")), InputType::Enum::GOTO_MENU },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("show help")), InputType::Enum::SHOW_HELP },
+		{ static_cast<SDL_Scancode>(_controls.j("keys").i("cheatcode")), InputType::Enum::CHEAT_CODE },
+	};
+	_used_scan = {
+		_controls.j("keys").i("up"),
+		_controls.j("keys").i("down"),
+		_controls.j("keys").i("left"),
+		_controls.j("keys").i("right"),
+		_controls.j("keys").i("action"),
+		_controls.j("keys").i("action_2"),
+		_controls.j("keys").i("confirm"),
+		_controls.j("keys").i("cancel"),
+		_controls.j("keys").i("menu"),
+		_controls.j("keys").i("show help"),
+		_controls.j("keys").i("cheatcode"),
+	};
+	_controls.saveToFile(Inputs::configFile);
 }
 
 /**
