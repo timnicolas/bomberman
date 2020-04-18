@@ -45,6 +45,7 @@ private:
 	void						_updateMouseSensitivity();
 	void						_updateFullscreen();
 	void						_updateResolution(bool go_right);
+	void						_resetKeys();
 	void						_returnQuit();
 	void						_cancelQuit();
 
@@ -68,6 +69,7 @@ private:
 	SettingsType::Enum			_current_pane;
 	std::list<ABaseUI*>			_panes[SettingsType::nb_types];
 	ButtonUI					*_key_buttons[Inputs::nb_input];
+	ButtonUI					*_paneSelection[SettingsType::nb_types];
 	ButtonUI					*_fullscreen_button;
 	TextUI						*_resolution_text;
 
@@ -77,6 +79,7 @@ private:
 
 	/* UI listeners */
 	bool						_return;
+	bool						_reset;
 	bool						_next_resolution;
 	bool						_prev_resolution;
 	bool						_update_fullscreen;
