@@ -399,6 +399,11 @@ bool	SceneGame::drawForMenu() {
  */
 bool	SceneGame::drawGame() {
 	if (s.j("debug").b("showBaseBoard")) {
+		// draw floor
+		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
+	}
+
+	if (s.j("debug").b("showBaseBoard")) {
 		for (auto &&board_it0 : board) {
 			for (auto &&board_it1 : board_it0) {
 				for (AEntity *board_it2 : board_it1) {
@@ -424,11 +429,6 @@ bool	SceneGame::drawGame() {
 				return false;
 		}
 		player->draw(*_gui);
-	}
-
-	if (s.j("debug").b("showBaseBoard")) {
-		// draw floor
-		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
 	}
 
 	// release cubeShader and textures

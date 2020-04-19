@@ -82,7 +82,13 @@ void main() {
 	// Directional lighting
 	vec3	result = calcDirLight(dirLight, norm, viewDir);
 
-	fragColor = vec4(result, 1.0);
+	// use texture alpha
+	float alpha = 1.0f;
+	if (material.diffuse.isTexture) {
+		alpha = texture(material.diffuse.texture, fs_in.TexCoords).a;
+	}
+
+	fragColor = vec4(result, alpha);
 
 	// apply gamma correction
     fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / GAMMA));
