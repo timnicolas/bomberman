@@ -142,6 +142,7 @@ SRC =	main.cpp \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
 		gui/ModelsManager.cpp \
+		gui/BoxCollider.cpp \
 \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
@@ -222,6 +223,7 @@ HEAD =	bomberman.hpp \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
 		gui/ModelsManager.hpp \
+		gui/BoxCollider.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \

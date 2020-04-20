@@ -7,13 +7,13 @@
 
 ACharacter::ACharacter(SceneGame &game)
 : AEntity(game),
-  size(0.95, 1.5, 0.95),
   front(0, 0, 1)
 {
 	category = Category::MOBILE;
 	lives = 1;
 	speed = 1.0;
 	position = {0.0, 0.0, 0.0};
+	size = {0.95, 1.5, 0.95};
 	blockPropagation = false;
 	destructible = true;
 	resetCrossable();
