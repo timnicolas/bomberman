@@ -52,49 +52,55 @@ void ScrollbarUI::_update() {
 		float scrollSizeFactor = getMasterSize().y / _masterTotalSize.y;
 		if (scrollSizeFactor < 0.1) scrollSizeFactor = 0.1;
 		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
-		_vertScrollHide = false;
-		if (scrollSizeFactor == 1)
-			_vertScrollHide = true;
 		_vertScrollBarDrawSize = (_size.y - _borderSize * 2) * scrollSizeFactor;
 
-		// if click on the scroll zone
-		if (_leftClick) {
-			if (mousePos.x >= getRealPos().x + _size.x - _borderSize - _scrollbarSize
-			&& mousePos.x <= getRealPos().x + _size.x - _borderSize
-			&& mousePos.y >= getRealPos().y + _borderSize
-			&& mousePos.y <= getRealPos().y + _size.y - _borderSize)
-			{
-				_isVertScrollClicked = true;
+		/* show or hide scrollbar */
+		float scrollbarHideFactor = getMasterSize().y / (_masterTotalSize.y - _masterPadding.y * 2);
+		if (scrollbarHideFactor > 1) scrollbarHideFactor = 1;
+		_vertScrollHide = false;
+		if (scrollbarHideFactor == 1)
+			_vertScrollHide = true;
+
+		if (!_vertScrollHide) {
+			// if click on the scroll zone
+			if (_leftClick) {
+				if (mousePos.x >= getRealPos().x + _size.x - _borderSize - _scrollbarSize
+				&& mousePos.x <= getRealPos().x + _size.x - _borderSize
+				&& mousePos.y >= getRealPos().y + _borderSize
+				&& mousePos.y <= getRealPos().y + _size.y - _borderSize)
+				{
+					_isVertScrollClicked = true;
+				}
+				if (_isVertScrollClicked) {
+					// float yMin = getRealPos().y + _borderSize;
+					// float yMax = getRealPos().y + _size.y - (_borderSize * 2);
+					float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
+					float yMax = getRealPos().y + _size.y - (_borderSize * 2 + _vertScrollBarDrawSize / 2);
+					if (mousePos.y < yMin)
+						_vertScrollbarPos = 1;
+					else if (mousePos.y > yMax)
+						_vertScrollbarPos = 0;
+					else
+						_vertScrollbarPos = 1 - (mousePos.y - yMin) / (yMax - yMin);
+				}
 			}
-			if (_isVertScrollClicked) {
-				// float yMin = getRealPos().y + _borderSize;
-				// float yMax = getRealPos().y + _size.y - (_borderSize * 2);
-				float yMin = getRealPos().y + _borderSize + _vertScrollBarDrawSize / 2;
-				float yMax = getRealPos().y + _size.y - (_borderSize * 2 + _vertScrollBarDrawSize / 2);
-				if (mousePos.y < yMin)
-					_vertScrollbarPos = 1;
-				else if (mousePos.y > yMax)
-					_vertScrollbarPos = 0;
-				else
-					_vertScrollbarPos = 1 - (mousePos.y - yMin) / (yMax - yMin);
+			else {
+				_isVertScrollClicked = false;
 			}
-		}
-		else {
-			_isVertScrollClicked = false;
-		}
-		if (_mouseHover) {
-			// if scrolling
-			if (mouseScroll.y != 0) {
-				float offset = mouseScroll.y * _mouseScrollSpeed * (1 / _masterTotalSize.y);
-				if (_vertScrollInverted)
-					_vertScrollbarPos += offset;
-				else
-					_vertScrollbarPos -= offset;
-				if (_vertScrollbarPos < 0) _vertScrollbarPos = 0;
-				if (_vertScrollbarPos > 1) _vertScrollbarPos = 1;
+			if (_mouseHover) {
+				// if scrolling
+				if (mouseScroll.y != 0) {
+					float offset = mouseScroll.y * _mouseScrollSpeed * (1 / _masterTotalSize.y);
+					if (_vertScrollInverted)
+						_vertScrollbarPos += offset;
+					else
+						_vertScrollbarPos -= offset;
+					if (_vertScrollbarPos < 0) _vertScrollbarPos = 0;
+					if (_vertScrollbarPos > 1) _vertScrollbarPos = 1;
+				}
 			}
+			_masterOffset.y = (_masterTotalSize.y - (_size.y - _borderSize * 2)) * _vertScrollbarPos;
 		}
-		_masterOffset.y = (_masterTotalSize.y - (_size.y - _borderSize * 2)) * _vertScrollbarPos;
 	}
 
 	if (_horizScroll) {
@@ -103,48 +109,54 @@ void ScrollbarUI::_update() {
 		if (scrollSizeFactor < 0.1) scrollSizeFactor = 0.1;
 		if (scrollSizeFactor > 1) scrollSizeFactor = 1;
 		_horizScrollBarDrawSize = (_size.x - _borderSize * 2) * scrollSizeFactor;
+
+		/* show or hide scrollbar */
+		float scrollbarHideFactor = getMasterSize().x / (_masterTotalSize.x - _masterPadding.x * 2);
+		if (scrollbarHideFactor > 1) scrollbarHideFactor = 1;
 		_horizScrollHide = false;
-		if (scrollSizeFactor == 1)
+		if (scrollbarHideFactor == 1)
 			_horizScrollHide = true;
 
-		// if click on the scroll zone
-		if (_leftClick) {
-			if (mousePos.y >= getRealPos().y + _borderSize
-			&& mousePos.y <= getRealPos().y + _borderSize + _scrollbarSize
-			&& mousePos.x >= getRealPos().x + _borderSize
-			&& mousePos.x <= getRealPos().x + _size.x - _borderSize)
-			{
-				_isHorizScrollClicked = true;
+		if (!_horizScrollHide) {
+			// if click on the scroll zone
+			if (_leftClick) {
+				if (mousePos.y >= getRealPos().y + _borderSize
+				&& mousePos.y <= getRealPos().y + _borderSize + _scrollbarSize
+				&& mousePos.x >= getRealPos().x + _borderSize
+				&& mousePos.x <= getRealPos().x + _size.x - _borderSize)
+				{
+					_isHorizScrollClicked = true;
+				}
+				if (_isHorizScrollClicked) {
+					// float xMin = getRealPos().x + _borderSize;
+					// float xMax = getRealPos().x + _size.x - (_borderSize * 2);
+					float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
+					float xMax = getRealPos().x + _size.x - (_borderSize * 2 + _horizScrollBarDrawSize / 2);
+					if (mousePos.x < xMin)
+						_horizScrollbarPos = 0;
+					else if (mousePos.x > xMax)
+						_horizScrollbarPos = 1;
+					else
+						_horizScrollbarPos = (mousePos.x - xMin) / (xMax - xMin);
+				}
 			}
-			if (_isHorizScrollClicked) {
-				// float xMin = getRealPos().x + _borderSize;
-				// float xMax = getRealPos().x + _size.x - (_borderSize * 2);
-				float xMin = getRealPos().x + _borderSize + _horizScrollBarDrawSize / 2;
-				float xMax = getRealPos().x + _size.x - (_borderSize * 2 + _horizScrollBarDrawSize / 2);
-				if (mousePos.x < xMin)
-					_horizScrollbarPos = 0;
-				else if (mousePos.x > xMax)
-					_horizScrollbarPos = 1;
-				else
-					_horizScrollbarPos = (mousePos.x - xMin) / (xMax - xMin);
+			else {
+				_isHorizScrollClicked = false;
 			}
-		}
-		else {
-			_isHorizScrollClicked = false;
-		}
-		if (_mouseHover) {
-			// if scrolling
-			if (mouseScroll.x != 0) {
-				float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
-				if (_horizScrollInverted)
-					_horizScrollbarPos -= offset;
-				else
-					_horizScrollbarPos += offset;
-				if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
-				if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
+			if (_mouseHover) {
+				// if scrolling
+				if (mouseScroll.x != 0) {
+					float offset = mouseScroll.x * _mouseScrollSpeed * (1 / _masterTotalSize.x);
+					if (_horizScrollInverted)
+						_horizScrollbarPos -= offset;
+					else
+						_horizScrollbarPos += offset;
+					if (_horizScrollbarPos < 0) _horizScrollbarPos = 0;
+					if (_horizScrollbarPos > 1) _horizScrollbarPos = 1;
+				}
 			}
+			_masterOffset.x = -1 * (_masterTotalSize.x - (_size.x - _borderSize * 2)) * _horizScrollbarPos;
 		}
-		_masterOffset.x = -1 * (_masterTotalSize.x - (_size.x - _borderSize * 2)) * _horizScrollbarPos;
 	}
 }
 
