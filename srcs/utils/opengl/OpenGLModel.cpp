@@ -16,8 +16,8 @@ std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
  * @param _cam camera ref to access to view and projection
  * @param path the 3d model file path
  * @param offset an optional offset to shift the model manually
- * @param centerEnabled option to center the model based on the min/max vertices, not recommanded
- * @param scaleEnabled option to scale the model based on the min/max vertices, not recommanded
+ * @param centerEnabled option to center the model based on the min/max vertices, not recommended
+ * @param scaleEnabled option to scale the model based on the min/max vertices, not recommended
  */
 OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 offset,
 	bool centerEnabled, bool scaleEnabled)
@@ -129,7 +129,7 @@ void	OpenGLModel::_loadModel() {
 		aiProcess_CalcTangentSpace |
 		aiProcess_GlobalScale);
 
-	// take owneship of the scene
+	// take ownership of the scene
 	_scene = _importer.GetScene();
 
 	// if assimp failed to load the model

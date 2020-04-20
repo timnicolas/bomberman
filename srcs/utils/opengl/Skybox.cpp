@@ -144,7 +144,7 @@ void Skybox::load(std::vector<std::string> &faces) {
             stbi_image_free(data);
         }
         else {
-            logErr("Skyboox texture failed to load at path: " << faces[i]);
+            logErr("Skybox texture failed to load at path: " << faces[i]);
             stbi_image_free(data);
         }
     }
