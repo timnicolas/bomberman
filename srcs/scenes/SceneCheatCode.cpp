@@ -76,8 +76,8 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 		}},
 		{"debug", {
 			"<type> <element ...> ['list']",
-			"Show or hide debug elements.\n"
-				CHEATCODE_TAB"type: 'show' or 'hide'\n"
+			"Show, hide or reset debug elements.\n"
+				CHEATCODE_TAB"type: show, hide, reset\n"
 				CHEATCODE_TAB"/debug show collider",
 			&SceneCheatCode::_execDebug,
 		}},
