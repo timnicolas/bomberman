@@ -74,6 +74,13 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Restart the level",
 			&SceneCheatCode::_execRestart,
 		}},
+		{"debug", {
+			"<type> <element ...> ['list']",
+			"Show or hide debug elements.\n"
+				CHEATCODE_TAB"type: 'show' or 'hide'\n"
+				CHEATCODE_TAB"/debug show collider",
+			&SceneCheatCode::_execDebug,
+		}},
 	};
 }
 

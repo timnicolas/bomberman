@@ -455,3 +455,69 @@ int SceneCheatCode::_execRestart(std::vector<std::string> const & args) {
 	}
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
+
+int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+	bool oneSuccess = false;
+
+	SettingsJson &								debugJson = s.j("debug").j("show");
+	std::map<std::string, JsonObj<bool> *> &	debugMap = debugJson.boolMap;
+
+	if (args.size() >= 3) {
+		bool value;
+		if (args[1] == "show") {
+			value = true;
+		}
+		else if (args[1] == "hide") {
+			value = false;
+		}
+		else {
+			this->logerr("Invalid debug type.\n" CHEATCODE_TAB "show, hide", false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+
+		for (auto arg = args.begin() + 2; arg != args.end(); arg++) {
+			if (*arg == "list") {
+				std::string names = CHEATCODE_TAB;
+				for (auto && elem : debugMap) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += elem.first;
+				}
+				_addLine("Debug elements list:\n" + names);
+				continue;
+			}
+			try {
+				debugJson.b(*arg) = value;
+				_addLine(std::string(value ? "Show" : "Hide") + " " + *arg);
+				oneSuccess = true;
+			}
+			catch (SettingsJson::SettingsException const & e) {
+				std::string names = CHEATCODE_TAB;
+				for (auto && elem : debugMap) {
+					if (names != CHEATCODE_TAB)
+						names += ", ";
+					names += elem.first;
+				}
+				this->logerr("Invalid debug element name.\n" CHEATCODE_TAB + names, false, true);
+			}
+		}
+	}
+	else if (args.size() == 2 && args[1] == "list") {
+		std::string names = CHEATCODE_TAB;
+		for (auto && elem : debugMap) {
+			if (names != CHEATCODE_TAB)
+				names += ", ";
+			names += elem.first;
+		}
+		_addLine("Debug elements list:\n" + names);
+	}
+	else {
+		_execHelp({"help", args[0]});
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	if (oneSuccess == false) {
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}

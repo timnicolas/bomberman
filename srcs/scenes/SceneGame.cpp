@@ -404,46 +404,43 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
-	if (s.j("debug").b("showBaseBoard")) {
+	if (s.j("debug").j("show").b("baseBoard")) {
 		// draw floor
 		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
 	}
 
-	if (s.j("debug").b("showBaseBoard")) {
-		for (auto &&board_it0 : board) {
-			for (auto &&board_it1 : board_it0) {
-				for (AEntity *board_it2 : board_it1) {
-					if (!board_it2->draw(*_gui))
-						return false;
-					if (s.j("debug").b("showStaticCollider") && !board_it2->drawCollider())
-						return false;
-				}
+	for (auto &&board_it0 : board) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (s.j("debug").j("show").b("baseBoard") && !board_it2->draw(*_gui))
+					return false;
+				if (s.j("debug").j("show").b("staticCollider") && !board_it2->drawCollider())
+					return false;
 			}
 		}
 	}
-	if (s.j("debug").b("showFlyHeight")) {
-		for (auto &&board_it0 : boardFly) {
-			for (auto &&board_it1 : board_it0) {
-				for (AEntity *board_it2 : board_it1) {
-					if (!board_it2->draw(*_gui))
-						return false;
-					if (s.j("debug").b("showStaticCollider") && !board_it2->drawCollider())
-						return false;
-				}
+
+	for (auto &&board_it0 : boardFly) {
+		for (auto &&board_it1 : board_it0) {
+			for (AEntity *board_it2 : board_it1) {
+				if (s.j("debug").j("show").b("flyHeight") && !board_it2->draw(*_gui))
+					return false;
+				if (s.j("debug").j("show").b("staticCollider") && !board_it2->drawCollider())
+					return false;
 			}
 		}
 	}
-	if (s.j("debug").b("showEntity")) {
-		for (auto &&enemy : enemies) {
-			if (!enemy->draw(*_gui))
-				return false;
-			if (s.j("debug").b("showMovingCollider") && !enemy->drawCollider())
-				return false;
-		}
-		player->draw(*_gui);
-		if (s.j("debug").b("showMovingCollider") && !player->drawCollider())
+
+	for (auto &&enemy : enemies) {
+		if (s.j("debug").j("show").b("entity") && !enemy->draw(*_gui))
+			return false;
+		if (s.j("debug").j("show").b("movingCollider") && !enemy->drawCollider())
 			return false;
 	}
+	if (s.j("debug").j("show").b("entity") && !player->draw(*_gui))
+		return false;
+	if (s.j("debug").j("show").b("movingCollider") && !player->drawCollider())
+		return false;
 
 	// release cubeShader and textures
 	_gui->cubeShader->use();
