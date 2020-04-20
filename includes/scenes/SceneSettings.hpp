@@ -62,7 +62,6 @@ private:
 	float						_text_scale = 1.5f;
 	int							_input_configuring;
 	SceneSettings::res			_current_resolution;
-	SceneSettings::res			_custom_res;
 	int							_select_res;
 
 	/* UI object */
