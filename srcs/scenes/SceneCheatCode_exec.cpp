@@ -465,14 +465,18 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 
 	if (args.size() >= 3) {
 		bool value;
+		bool reset = false;
 		if (args[1] == "show") {
 			value = true;
 		}
 		else if (args[1] == "hide") {
 			value = false;
 		}
+		else if (args[1] == "reset") {
+			reset = true;
+		}
 		else {
-			this->logerr("Invalid debug type.\n" CHEATCODE_TAB "show, hide", false, true);
+			this->logerr("Invalid debug type.\n" CHEATCODE_TAB "show, hide, reset", false, true);
 			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 		}
 
@@ -488,8 +492,19 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 				continue;
 			}
 			try {
-				debugJson.b(*arg) = value;
-				_addLine(std::string(value ? "Show" : "Hide") + " " + *arg);
+				if (reset) {
+					if (debugMap.find(*arg) != debugMap.end()) {
+						debugMap[*arg]->reset();
+						_addLine("Reset " + *arg);
+					}
+					else {
+						throw SettingsJson::SettingsException();
+					}
+				}
+				else {
+					debugJson.b(*arg) = value;
+					_addLine(std::string(value ? "Show" : "Hide") + " " + *arg);
+				}
 				oneSuccess = true;
 			}
 			catch (SettingsJson::SettingsException const & e) {
@@ -504,13 +519,14 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 		}
 	}
 	else if (args.size() == 2 && args[1] == "list") {
-		std::string names = CHEATCODE_TAB;
+		_addLine("Debug types list:\n" CHEATCODE_TAB "show, hide, reset");
+	}
+	else if (args.size() == 2 && args[1] == "reset") {
 		for (auto && elem : debugMap) {
-			if (names != CHEATCODE_TAB)
-				names += ", ";
-			names += elem.first;
+			elem.second->reset();
 		}
-		_addLine("Debug elements list:\n" + names);
+		_addLine("Reset all debug elements");
+		oneSuccess = true;
 	}
 	else {
 		_execHelp({"help", args[0]});
