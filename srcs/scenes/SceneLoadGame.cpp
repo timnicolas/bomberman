@@ -250,7 +250,7 @@ bool	SceneLoadGame::update() {
 		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
 	}
-	else if (_states.menu) {
+	else if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
