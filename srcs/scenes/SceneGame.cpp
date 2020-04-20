@@ -267,7 +267,12 @@ bool	SceneGame::update() {
 			}
 		}
 		score.addBonusTime(levelTime, time);
-		score.addBonusEnemies(levelEnemies, enemies.size(), levelCrispies, crispiesLast);
+		uint32_t remainEnemies = 0;
+		for (auto && it : enemies) {
+			if (it->alive)
+				remainEnemies++;
+		}
+		score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
 		Save::updateSavedFile(*this, true);
 		Save::save(true);
 		SceneManager::loadScene(SceneNames::VICTORY);
