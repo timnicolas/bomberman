@@ -4,6 +4,7 @@
 #include "SceneManager.hpp"
 #include "Material.hpp"
 #include "ABaseUI.hpp"
+#include "BoxCollider.hpp"
 
 // -- Gui ---------------------------------------------------------------
 Gui::Gui(GameInfo &gameInfo)
@@ -35,6 +36,7 @@ Gui::~Gui() {
 	delete _skybox;
 
 	ABaseUI::destroy();
+	BoxCollider::destroy();
 
 	// properly quit sdl
 	SDL_GL_DeleteContext(_context);
@@ -149,6 +151,10 @@ bool	Gui::init() {
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
+		return false;
+	}
+
+	if (BoxCollider::init(this) == false) {
 		return false;
 	}
 

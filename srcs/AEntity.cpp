@@ -1,10 +1,12 @@
 #include "AEntity.hpp"
 #include "SceneGame.hpp"
 #include "Model.hpp"
+#include "BoxCollider.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
 AEntity::AEntity(SceneGame &game): game(game) {
+	size = {1, 1, 1};
 	active = true;
 	alive = true;
 	position = VOID_POS3;
@@ -38,6 +40,17 @@ bool		AEntity::init() {
 }
 
 bool		AEntity::postUpdate() {
+	return true;
+}
+
+/**
+ * @brief Draw the collider of the entity
+ *
+ * @return false If failed
+ */
+bool		AEntity::drawCollider() {
+	glm::vec4 color = colorise(s.j("colors").j("collider").u("color"), s.j("colors").j("collider").u("alpha"));
+	BoxCollider::drawBox(position, size, color);
 	return true;
 }
 

@@ -7,6 +7,7 @@
 #include "FileUtils.hpp"
 #include "Save.hpp"
 #include "ModelsManager.hpp"
+#include "BoxCollider.hpp"
 
 #include "Player.hpp"
 #include "Wall.hpp"
@@ -414,6 +415,8 @@ bool	SceneGame::drawGame() {
 				for (AEntity *board_it2 : board_it1) {
 					if (!board_it2->draw(*_gui))
 						return false;
+					if (s.j("debug").b("showStaticCollider") && !board_it2->drawCollider())
+						return false;
 				}
 			}
 		}
@@ -424,6 +427,8 @@ bool	SceneGame::drawGame() {
 				for (AEntity *board_it2 : board_it1) {
 					if (!board_it2->draw(*_gui))
 						return false;
+					if (s.j("debug").b("showStaticCollider") && !board_it2->drawCollider())
+						return false;
 				}
 			}
 		}
@@ -432,8 +437,12 @@ bool	SceneGame::drawGame() {
 		for (auto &&enemy : enemies) {
 			if (!enemy->draw(*_gui))
 				return false;
+			if (s.j("debug").b("showMovingCollider") && !enemy->drawCollider())
+				return false;
 		}
 		player->draw(*_gui);
+		if (s.j("debug").b("showMovingCollider") && !player->drawCollider())
+			return false;
 	}
 
 	// release cubeShader and textures
