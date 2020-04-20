@@ -125,15 +125,6 @@ bool					SceneSettings::init() {
 		return false;
 	}
 
-	for (auto i = 0; i < SceneSettings::nb_resolution; i++) {
-		if (SceneSettings::resolutions[i].width == _custom_res.width \
-			&& SceneSettings::resolutions[i].height == _custom_res.height)
-		{
-			_custom_res = { 0, 0 };
-			_select_res = i;
-			break;
-		}
-	}
 	try {
 		tmp_size.y = menu_height * 0.1;
 		tmp_size.x = tmp_size.y;
@@ -571,8 +562,8 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	if (_select_res < 0) {
 		_select_res = 0;
 	}
-	else if (_select_res > SceneSettings::nb_resolution) {
-		_select_res = SceneSettings::nb_resolution;
+	else if (_select_res >= SceneSettings::nb_resolution) {
+		_select_res = SceneSettings::nb_resolution - 1;
 	}
 	while (SceneSettings::resolutions[_select_res].width > _gui->gameInfo.maxWindowSize.x
 	|| SceneSettings::resolutions[_select_res].height > _gui->gameInfo.maxWindowSize.y)
