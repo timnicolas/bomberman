@@ -54,7 +54,7 @@ void ABaseMasterUI::removeChild(ABaseUI * child) {
 /**
  * @brief Get position of master element (bottom left after border)
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The position
  */
@@ -64,7 +64,7 @@ glm::vec2 ABaseMasterUI::getMasterPos() const {
 /**
  * @brief Get position of master element (bottom left after border) considering offset
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The position
  */
@@ -74,7 +74,7 @@ glm::vec2 ABaseMasterUI::getMasterRealPos() const {
 /**
  * @brief Get size of master element inside the borders
  *
- * !!! This functions can be overwirte in childs class
+ * !!! This functions can be overwrite in childs class
  *
  * @return glm::vec2 The size
  */
@@ -87,7 +87,7 @@ glm::vec2 ABaseMasterUI::getMasterSize() const {
 /**
  * @brief Get the total size of all element in master
  *
- * this fucntion update:
+ * this function update:
  *  - _masterMinPos: The minimum object position in object
  *  - _masterMaxPos: The maximum object position in object
  *  - _masterTotalSize: The total size of master elements

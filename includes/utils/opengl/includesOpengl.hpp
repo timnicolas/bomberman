@@ -1,5 +1,5 @@
-#ifndef INCLUDESOPENGL_HPP_
-#define INCLUDESOPENGL_HPP_
+#ifndef INCLUDESOPENGL_HPP
+#define INCLUDESOPENGL_HPP
 
 // glad
 #include <glad/glad.h>
@@ -9,4 +9,4 @@
 
 #include "debug.hpp"
 
-#endif  // INCLUDESOPENGL_HPP_
+#endif  // INCLUDESOPENGL_HPP

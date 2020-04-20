@@ -209,7 +209,7 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
  * @return uint32_t The text height
  */
 uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool fullHeight) {
-	std::string text;  // This if the text to check (L to have only positive heigth, jL to have full height)
+	std::string text;  // This if the text to check (L to have only positive height, jL to have full height)
 	if (fullHeight)
 		 text = "j|Ll1";
 	else

@@ -44,7 +44,7 @@ namespace CheatcodeAction {
 	int const KEEP_OPEN =			0b00000000001;  // keep command line open
 	int const CLOSE =				0b00000000010;  // close command line
 	// setup txt in cheatcode
-	int const TXT_RESET =			0b00000000100;  // reset commadn line text
+	int const TXT_RESET =			0b00000000100;  // reset command line text
 	int const TXT_DEF =				0b00000001000;  // set command line text to default
 	int const TXT_KEEP =			0b00000010000;  // keep the same command line text
 	// if close, open text only mode
