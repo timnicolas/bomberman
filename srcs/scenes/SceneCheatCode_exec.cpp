@@ -172,7 +172,7 @@ int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 					oneSuccess = true;
 				}
 				else {
-					this->logerr("Unexpected error, player doesnt exist", false, true);
+					this->logerr("Unexpected error, player doesn't exist", false, true);
 					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
 						| CheatcodeAction::RESULT_ERROR;
 				}
@@ -399,7 +399,7 @@ int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
 					oneSuccess = true;
 				}
 				else {
-					this->logerr("Unexpected error, player doesnt exist", false, true);
+					this->logerr("Unexpected error, player doesn't exist", false, true);
 					return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY
 						| CheatcodeAction::RESULT_ERROR;
 				}

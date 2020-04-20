@@ -109,7 +109,7 @@ SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
 /**
  * @brief init the menu
  *
- * @return true if the init succed
+ * @return true if the init succeed
  * @return false if the init failed
  */
 bool SceneCheatCode::init() {
