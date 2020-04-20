@@ -38,8 +38,13 @@ Gui::~Gui() {
 
 	// properly quit sdl
 	SDL_GL_DeleteContext(_context);
-	SDL_DestroyWindow(_win);
-    SDL_Quit();
+	try {
+		SDL_DestroyWindow(_win);
+		SDL_Quit();
+	}
+	catch (std::exception & e) {
+		logWarn("failed to exit proprely SDL window");
+	}
 }
 
 Gui::Gui(Gui const &src)
