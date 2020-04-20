@@ -40,7 +40,7 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 		_gui->gameInfo.maxWindowSize.x,
 		_gui->gameInfo.maxWindowSize.y,
 	};
-	_select_res = SceneSettings::nb_resolution;
+	_select_res = -1;  // setted in init function
 	_text_scale = static_cast<float>(width) * 0.001;
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
@@ -104,6 +104,26 @@ bool					SceneSettings::init() {
 	glm::vec2 tmp_size;
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
+
+	_select_res = -1;
+	for (int i = 0; i < SceneSettings::nb_resolution; i++) {
+		if (resolutions[i].width == s.j("graphics").i("width")
+		&& resolutions[i].height == s.j("graphics").i("height"))
+		{
+			_select_res = i;
+			break;
+		}
+	}
+	if (_select_res == -1) {
+		logErr("Invalid resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+		s.j("graphics").i("width") = resolutions[0].width;
+		s.j("graphics").i("height") = resolutions[0].height;
+		_gui->gameInfo.savedWindowSize.x = s.j("graphics").i("width");
+		_gui->gameInfo.savedWindowSize.y = s.j("graphics").i("height");
+		logInfo("save new resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+		saveSettings(SETTINGS_FILE);
+		return false;
+	}
 
 	for (auto i = 0; i < SceneSettings::nb_resolution; i++) {
 		if (SceneSettings::resolutions[i].width == _custom_res.width \
