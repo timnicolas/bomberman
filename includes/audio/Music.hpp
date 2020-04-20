@@ -7,7 +7,7 @@
 #include <stdexcept>
 
 /**
- * @brief Music class for AutioManager
+ * @brief Music class for AudioManager
  */
 class Music {
 public:

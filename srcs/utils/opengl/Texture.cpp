@@ -21,7 +21,7 @@ uint32_t	textureFromFile(std::string const path, bool inSpaceSRGB, glm::ivec2 *s
 	glm::ivec2	size;
 	u_char		*data;
 
-	// if the caller whant to retrieve the real image size
+	// if the caller want to retrieve the real image size
 	if (sizeOut != nullptr) {
 		// load texture data
 		data = stbi_load(path.c_str(), &(sizeOut->x), &(sizeOut->y), &formatId, 0);

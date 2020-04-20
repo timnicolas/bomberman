@@ -28,7 +28,7 @@ Logging & Logging::operator=(Logging const &rhs) {
 }
 
 /**
- * @brief The the minimum log level to pring
+ * @brief The the minimum log level to print
  *
  * logging.setLoglevel(LOGINFO);  // to discard logDebug
  *

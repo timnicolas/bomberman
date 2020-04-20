@@ -47,7 +47,7 @@ void ButtonUI::_draw() {
 	tmpSize.y -= _borderSize * 2;
 
 
-    // draw center
+	// draw center
 	// set color filter if mouse over or left click
 	float factor = 1;
 	glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);

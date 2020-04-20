@@ -89,7 +89,7 @@ Shader::Shader(std::string const vsPath, std::string const fsPath, std::string c
 	glLinkProgram(id);
 	checkCompileErrors(id, "PROGRAM");
 
-	// delete the shaders as they're linked into our program now and no longer necessery
+	// delete the shaders as they're linked into our program now and no longer necessary
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 	if (!gsPath.empty())
