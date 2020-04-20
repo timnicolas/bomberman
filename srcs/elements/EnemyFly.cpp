@@ -155,7 +155,7 @@ bool	EnemyFly::init() {
 		if (_model)
 			delete _model;
 
-		OpenGLModel	&openglModel = ModelsManager::getModel("flyngBot");
+		OpenGLModel	&openglModel = ModelsManager::getModel("flyingBot");
 		_model = new Model(openglModel, game.getDtTime(), ETransform({1.5,
 			FLY_HEIGHT, 1.5}, {.7, .7, .7}));
 		_model->play = true;
