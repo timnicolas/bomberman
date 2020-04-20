@@ -36,10 +36,6 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 		width,
 		height
 	};
-	_custom_res = {
-		_gui->gameInfo.maxWindowSize.x,
-		_gui->gameInfo.maxWindowSize.y,
-	};
 	_select_res = -1;  // setted in init function
 	_text_scale = static_cast<float>(width) * 0.001;
 }
@@ -74,7 +70,6 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	_update_mouse_sens = rhs._update_mouse_sens;
 	_fullscreen_button = rhs._fullscreen_button;
 	_text_scale = rhs._text_scale;
-	_custom_res = rhs._custom_res;
 	_select_res = rhs._select_res;
 	return *this;
 }
