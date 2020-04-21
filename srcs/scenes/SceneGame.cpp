@@ -58,6 +58,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelEnemies = 0;
 	levelCrispies = 0;
 	_draw3dMenu = false;  // disable drawing 3D menu
+	_terrain = nullptr;
 }
 
 SceneGame::~SceneGame() {
@@ -105,6 +106,7 @@ SceneGame::~SceneGame() {
 	delete _menuModels.player;
 	delete _menuModels.robot;
 	delete _menuModels.flower;
+	delete _terrain;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -165,21 +167,37 @@ bool			SceneGame::init() {
 		i++;
 	}
 
-	/* load all models for menu */
-	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime());
-	_menuModels.player->play = true;
-	_menuModels.player->loopAnimation = true;
-	_menuModels.player->setAnimation("Armature|idle");
+	try {
+		/* load all models for menu */
+		_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime());
+		_menuModels.player->play = true;
+		_menuModels.player->loopAnimation = true;
+		_menuModels.player->setAnimation("Armature|idle");
 
-	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime());
-	_menuModels.flower->play = true;
-	_menuModels.flower->loopAnimation = true;
-	_menuModels.flower->setAnimation("Armature|idle");
+		_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime());
+		_menuModels.flower->play = true;
+		_menuModels.flower->loopAnimation = true;
+		_menuModels.flower->setAnimation("Armature|idle");
 
-	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime());
-	_menuModels.robot->play = true;
-	_menuModels.robot->loopAnimation = true;
-	_menuModels.robot->setAnimation("Armature|idle");
+		_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime());
+		_menuModels.robot->play = true;
+		_menuModels.robot->loopAnimation = true;
+		_menuModels.robot->setAnimation("Armature|idle");
+
+		// init terrain model
+		if (!_terrain) {
+			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
+			ETransform({0, -2, 0}));
+		}
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
 
 	_initGameInfos();
 
@@ -375,15 +393,21 @@ bool	SceneGame::draw() {
  */
 bool	SceneGame::drawForMenu() {
 	/* draw models */
-	_menuModels.player->transform.setPos({-0.9, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
-		_menuModels.player->setAnimation("Armature|idle");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setPos({-0.9, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
+			_menuModels.player->setAnimation("Armature|idle");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setPos({0.9, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
-		_menuModels.flower->setAnimation("Armature|idle");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setPos({0.9, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
+			_menuModels.flower->setAnimation("Armature|idle");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -398,9 +422,17 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
+	try {
+		_terrain->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	if (s.j("debug").b("showBaseBoard")) {
 		// draw floor
-		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
+		_gui->drawCube(Block::FLOOR, {0.0f, -1.5f, 0.0f}, {size.x, 1.5f, size.y});
 	}
 
 	if (s.j("debug").b("showBaseBoard")) {
@@ -454,15 +486,21 @@ bool	SceneGame::drawGame() {
  */
 bool	SceneGame::drawVictory() {
 	/* draw models */
-	_menuModels.player->transform.setPos({-1, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
-		_menuModels.player->setAnimation("Armature|dance");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setPos({-1, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
+			_menuModels.player->setAnimation("Armature|dance");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setPos({1, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
-		_menuModels.flower->setAnimation("Armature|loose");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setPos({1, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
+			_menuModels.flower->setAnimation("Armature|loose");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -478,15 +516,21 @@ bool	SceneGame::drawVictory() {
  */
 bool	SceneGame::drawGameOver() {
 	/* draw models */
-	_menuModels.player->transform.setPos({-1, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
-		_menuModels.player->setAnimation("Armature|loose");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setPos({-1, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
+			_menuModels.player->setAnimation("Armature|loose");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setPos({1, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
-		_menuModels.flower->setAnimation("Armature|dance");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setPos({1, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
+			_menuModels.flower->setAnimation("Armature|dance");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -1143,7 +1187,8 @@ SettingsJson	&SceneGame::getSettingsLevel() const {
 	if (level == NO_LEVEL)
 		throw SceneGameException("no level set");
 	if (level > (int32_t)_mapsList.size())
-		throw SceneGameException(("unable to load level " + std::to_string(level) + ": doesn't exist").c_str());
+		throw SceneGameException(("unable to load level " + std::to_string(level)
+		+ ": doesn't exist").c_str());
 	return *(_mapsList[level]);
 }
 
@@ -1167,3 +1212,10 @@ SceneGame::SceneGameException::SceneGameException()
 
 SceneGame::SceneGameException::SceneGameException(const char* whatArg)
 : std::runtime_error(std::string(std::string("SceneGameError: ") + whatArg).c_str()) {}
+
+// -- DrawForMenu struct -------------------------------------------------------
+SceneGame::DrawForMenu::DrawForMenu() {
+	player = nullptr;
+	flower = nullptr;
+	robot = nullptr;
+}
