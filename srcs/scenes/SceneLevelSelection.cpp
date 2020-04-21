@@ -110,7 +110,6 @@ bool	SceneLevelSelection::update() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	// SceneGame reference
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
-	SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(SceneManager::getScene(SceneNames::CHEAT_CODE));
 
 	allUI.text->setText("Level " + std::to_string(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
@@ -147,6 +146,9 @@ bool	SceneLevelSelection::update() {
 				}
 			} catch (std::exception const &e) {
 				logErr("Error: " << e.what());
+				SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
+					SceneManager::getScene(SceneNames::CHEAT_CODE)
+				);
 				scCheatCode.logerr(e.what());
 				scCheatCode.unlockLevel(_currentLvl + 1);
 				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);

@@ -1,5 +1,6 @@
 #include "SceneVictory.hpp"
 #include "SceneGame.hpp"
+#include "SceneCheatCode.hpp"
 
 SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -155,8 +156,14 @@ bool	SceneVictory::update() {
 					return false;
 				}
 			} catch (std::exception const &e) {
+				SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
+					SceneManager::getScene(SceneNames::CHEAT_CODE)
+				);
 				logErr("Error: " << e.what());
-				return false;
+				scCheatCode.logerr(e.what());
+				scCheatCode.unlockLevel(scGame.level + 1);
+				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+				return true;
 			}
 			SceneManager::loadScene(_lastSceneName);
 		}
