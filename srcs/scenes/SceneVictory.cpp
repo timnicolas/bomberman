@@ -160,7 +160,10 @@ bool	SceneVictory::update() {
 					SceneManager::getScene(SceneNames::CHEAT_CODE)
 				);
 				logErr("Error: " << e.what());
-				scCheatCode.logerr(e.what());
+				scCheatCode.clearAllLn();
+				std::stringstream ss;
+				ss << "Level " << scGame.level << ": " << e.what();
+				scCheatCode.logerr(ss.str());
 				scCheatCode.unlockLevel(scGame.level + 1);
 				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 				return true;
