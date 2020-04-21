@@ -149,7 +149,10 @@ bool	SceneLevelSelection::update() {
 				SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
 					SceneManager::getScene(SceneNames::CHEAT_CODE)
 				);
-				scCheatCode.logerr(e.what());
+				scCheatCode.clearAllLn();
+				std::stringstream ss;
+				ss << "Level " << _currentLvl << ": " << e.what();
+				scCheatCode.logerr(ss.str());
 				scCheatCode.unlockLevel(_currentLvl + 1);
 				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 				return true;
