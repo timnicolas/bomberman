@@ -746,6 +746,10 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		return false;
 	}
 
+	// Delete old player
+	delete player;
+	player = nullptr;
+
 	level = levelId;  // save new level ID
 	SettingsJson & lvl = *(_mapsList[level]);
 
