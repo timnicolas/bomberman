@@ -113,6 +113,25 @@ void	AEnemy::animEndCb(std::string animName) {
 }
 
 /**
+ * @brief AEnemy Take <damage> damages.
+ *
+ * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
+ */
+bool	AEnemy::takeDamage(const int damage) {
+	bool	wasAlive = alive;
+	bool	result = ACharacter::takeDamage(damage);
+	if (result) {
+		if (wasAlive && !alive) {
+			game.enemiesKilled += 1;
+		}
+	}
+
+	return result;
+}
+
+/**
  * @brief get a list of entity in collision with the Character at a position.
  *
  * @param pos default VOID_POS3

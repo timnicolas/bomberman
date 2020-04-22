@@ -37,16 +37,18 @@ End &End::operator=(End const &rhs) {
  */
 bool	End::update() {
 	if (game.flags <= 0) {
-		_texture = Block::END_OPEN;
-		if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
-		== game.player->crossableTypes.end())
-		{
-			game.player->crossableTypes.push_back(Type::END);
-		}
-		std::unordered_set<AEntity *> collisions = _getCollision();
-		for (auto &&entity : collisions) {
-			if (entity->type == Type::PLAYER) {
-				game.state = GameState::WIN;
+		if (game.enemiesToKill <= game.enemiesKilled) {
+			_texture = Block::END_OPEN;
+			if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
+			== game.player->crossableTypes.end())
+			{
+				game.player->crossableTypes.push_back(Type::END);
+			}
+			std::unordered_set<AEntity *> collisions = _getCollision();
+			for (auto &&entity : collisions) {
+				if (entity->type == Type::PLAYER) {
+					game.state = GameState::WIN;
+				}
 			}
 		}
 	}
