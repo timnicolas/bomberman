@@ -464,7 +464,7 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 	std::map<std::string, JsonObj<bool> *> &	debugMap = debugJson.boolMap;
 
 	if (args.size() >= 3) {
-		bool value;
+		bool value = false;
 		bool reset = false;
 		if (args[1] == "show") {
 			value = true;
