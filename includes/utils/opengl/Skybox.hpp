@@ -10,7 +10,7 @@
 
 #define SKYBOX_USING 0
 #if SKYBOX_USING == 0
-	#define SKYBOX_START	"./bomberman-assets/skybox/cartoonSky/"
+	#define SKYBOX_START	"./bomberman-assets/skybox/bomberSky/"
 	#define SKYBOX_EXT		".jpg"
 	#define SKYBOX_NAME_TYPE 2
 #endif
