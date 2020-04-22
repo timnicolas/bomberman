@@ -511,8 +511,8 @@ void				Inputs::_update() {
 					_input_key_map[scan] = _next_action_type;
 					_controls.saveToFile(Inputs::configFile);
 					_configuring = false;
-					_key_status[static_cast<int>(_next_action_type)] = true;
-					_key_previous_status[_next_action_type] = true;
+					// _key_status[static_cast<int>(_next_action_type)] = true;
+					// _key_previous_status[_next_action_type] = true;
 					logInfo("Input '" << input_type_name[_next_action_type] << "' set.")
 				}
 				else {
@@ -553,7 +553,7 @@ void				Inputs::_update() {
                         break;
                 }
                 break;
-		 case SDL_MOUSEBUTTONUP:
+		case SDL_MOUSEBUTTONUP:
                 switch (event.button.button) {
                     case SDL_BUTTON_LEFT:
 						_left_click = false;
