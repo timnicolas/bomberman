@@ -8,6 +8,7 @@ EnemyWithEye::EnemyWithEye(SceneGame &game)
   _playerDir(Direction::NO_DIRECTION)
 {
 	name = "EnemyWithEye";
+	size = glm::vec3(0.7, 1.0, 0.7);
 }
 
 EnemyWithEye::~EnemyWithEye() {
