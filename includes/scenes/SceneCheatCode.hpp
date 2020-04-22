@@ -79,6 +79,7 @@ class SceneCheatCode : public ASceneMenu {
 		void				setText(std::string const & txt);
 		std::string			getText() const;
 		static bool			isLevelUnlocked(uint32_t levelId);
+		int					unlockLevel(uint32_t levelId);
 
 		/* log */
 		void				logdebug(std::string const & msg, bool clear = false, bool logOnly = false);
