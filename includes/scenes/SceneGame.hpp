@@ -81,6 +81,7 @@ protected:
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	enemiesCounterText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
 		ABaseUI *	speedText;  // TextUI
 		ABaseUI *	bonusBombImg;  // ImageUI
@@ -97,6 +98,7 @@ protected:
 	AllUI			allUI;
 
 	void			_initGameInfos();
+	void			_loadGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
 
@@ -121,6 +123,8 @@ public:
 	float						levelTime;
 	float						time;
 	Score						score;
+	int64_t						enemiesToKill;
+	int64_t						enemiesKilled;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);

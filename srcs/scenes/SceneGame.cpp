@@ -58,6 +58,8 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelEnemies = 0;
 	levelCrispies = 0;
 	_draw3dMenu = false;  // disable drawing 3D menu
+	enemiesToKill = 0;
+	enemiesKilled = 0;
 }
 
 SceneGame::~SceneGame() {
@@ -130,6 +132,8 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		score = rhs.score;
 		levelEnemies = rhs.levelEnemies;
 		levelCrispies = rhs.levelCrispies;
+		enemiesToKill = rhs.enemiesToKill;
+		enemiesKilled = rhs.enemiesKilled;
 	}
 	return *this;
 }
@@ -530,6 +534,9 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	logDebug("load level " << levelId);
 	bool result = _loadLevel(levelId);
 
+	// reinit printed values
+	_loadGameInfos();
+
 	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
 	_gui->cam->lookAt(glm::vec3(
 		size.x / 2, 1.0f,
@@ -635,6 +642,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
 	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
 	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
+	lvl->add<int64_t>("enemiesToKill", 0).setMin(0).setMax(9999);
 
 	// foreach empty zone, chance to create a wall
 	lvl->add<uint64_t>("wallGenPercent", 40).setMin(0).setMax(100);
@@ -746,6 +754,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		return false;
 	}
 
+	enemiesToKill = 0;
+	enemiesKilled = 0;
+
 	level = levelId;  // save new level ID
 	SettingsJson & lvl = *(_mapsList[level]);
 
@@ -762,6 +773,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		throw SceneException("Map height error");
 
 	levelTime = lvl.i("time");
+
+	enemiesToKill = lvl.i("enemiesToKill");
 
 	flags = 0;
 	// Get map informations
@@ -944,6 +957,7 @@ void SceneGame::_initGameInfos() {
 		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
 		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
+		allUI.enemiesCounterText = &addText(VOID_SIZE, VOID_SIZE, "nb-enemies").setTextAlign(TextAlign::RIGHT);
 		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
 		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusBombImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb.png");
@@ -956,6 +970,35 @@ void SceneGame::_initGameInfos() {
 		allUI.bonusBombpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bombpass.png");
 		allUI.bonusShieldImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/shield.png");
 		allUI.bonusShieldText = &addText(VOID_SIZE, VOID_SIZE, "invulnerable").setTextAlign(TextAlign::RIGHT);
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
+}
+
+/**
+ * @brief LoadGameInformations
+ */
+void		SceneGame::_loadGameInfos() {
+	try {
+		allUI.timeLeftImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.timeLeftText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.scoreImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.scoreText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.lifeImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.lifeText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.enemiesCounterText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.speedImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.speedText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlameImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlameText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlampassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusWallpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusDetonatorImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusShieldImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusShieldText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 	}
@@ -1006,6 +1049,18 @@ void			SceneGame::_updateGameInfos() {
 		allUI.scoreText->setPos({tmpPos.x, textY}).setText(score.toString())
 			.setSize(VOID_POS).setCalculatedSize();
 		tmpPos.x += allUI.scoreText->getSize().x;
+
+		/* enemies counter */
+		if (enemiesToKill > 0) {
+			tmpPos.x += padding;
+			std::string enemiesStr = std::to_string(enemiesKilled) + "/" + std::to_string(enemiesToKill);
+			glm::vec4 color = enemiesKilled >= enemiesToKill
+												? colorise(s.j("colors").j("green").u("color"))
+												: colorise(s.j("colors").j("red").u("color"));
+			allUI.enemiesCounterText->setPos({tmpPos.x, textY}).setText(enemiesStr)
+				.setSize(VOID_POS).setCalculatedSize().setTextColor(color);
+			tmpPos.x += allUI.enemiesCounterText->getSize().x;
+		}
 
 		// -- Bottom -----------
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
