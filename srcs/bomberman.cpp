@@ -173,6 +173,7 @@ bool	initSettings(std::string const & filename) {
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
 	s.j("graphics").add<bool>("fullscreen", false).setDescription("Display the game on fullscreen or not.");
+	s.j("graphics").add<bool>("fitToScreen", false).setDescription("The resolution fit to the screen size");
 	s.j("graphics").add<int64_t>("width", 1200).setMin(800).setMax(2560).setDescription("The resolution's width.");
 	s.j("graphics").add<int64_t>("height", 800).setMin(600).setMax(1440).setDescription("The resolution's height.");
 

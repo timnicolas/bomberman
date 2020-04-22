@@ -100,6 +100,7 @@ bool					SceneSettings::init() {
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
 
+	_start_fit_to_screen = s.j("graphics").b("fitToScreen");
 	_select_res = -1;
 	for (int i = 0; i < SceneSettings::nb_resolution; i++) {
 		if (resolutions[i].width == s.j("graphics").i("width")
@@ -180,10 +181,11 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	glm::vec2	tmp_size;
 	ABaseUI		*ptr;
 
+	/* fullscreen button */
 	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= menu_height * 0.2;
+	tmp_pos.y -= tmp_size.y * 1.8;
 	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :")
 		.setTextAlign(TextAlign::RIGHT)
 		.setTextScale(_text_scale)
@@ -199,9 +201,29 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_updateFullscreenButton();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
+	/* fit to screen */
+	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= menu_height * 0.3;
+	tmp_pos.y -= tmp_size.y * 1.3;
+	ptr = &addText(tmp_pos, tmp_size, "Fit  to  screen :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_size.x = menu_width / 10;
+	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
+	_fit_to_screen_button = &addButton(tmp_pos, tmp_size, "OFF");
+	ptr = &_fit_to_screen_button->addButtonLeftListener(&_update_fit_to_screen)
+		.setKeyLeftClickScancode(SDL_SCANCODE_O)
+		.setTextScale(_text_scale)
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+
+	/* resolution choice */
+	tmp_size.x = menu_width / 3;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= tmp_size.y * 1.3;
 	ptr = &addText(tmp_pos, tmp_size, "Resolution :")
 		.setTextAlign(TextAlign::RIGHT)
 		.setTextScale(_text_scale)
@@ -425,6 +447,10 @@ bool					SceneSettings::update() {
 		if (_update_fullscreen) {
 			_updateFullscreen();
 		}
+		if (_update_fit_to_screen) {
+			s.j("graphics").b("fitToScreen") = !s.j("graphics").b("fitToScreen");
+			_update_fit_to_screen = false;
+		}
 		if (_prev_resolution) {
 			_updateResolution(false);
 		}
@@ -437,13 +463,25 @@ bool					SceneSettings::update() {
 		if (_current_pane == SettingsType::GRAPHICS) {
 			if (_gui->gameInfo.isSavedFullscreen != s.j("graphics").b("fullscreen")
 			|| _gui->gameInfo.savedWindowSize.x != s.j("graphics").i("width")
-			|| _gui->gameInfo.savedWindowSize.y != s.j("graphics").i("height")) {
+			|| _gui->gameInfo.savedWindowSize.y != s.j("graphics").i("height")
+			|| _start_fit_to_screen != s.j("graphics").b("fitToScreen")) {
 				_reloadWinText->setEnabled(true);
 			}
 			else {
 				_reloadWinText->setEnabled(false);
 			}
 		}
+		std::string symbol;
+		glm::vec4 color;
+		if (s.j("graphics").b("fitToScreen")) {
+			symbol = "ON";
+			color = glm::vec4(0.2, 0.8, 0.2, 1.0);
+		}
+		else {
+			symbol = "OFF";
+			color = glm::vec4(0.8, 0.2, 0.2, 1.0);
+		}
+		_fit_to_screen_button->setText(symbol).setTextColor(color);
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			try {
 				AudioManager::playSound("sounds/bell.ogg");
