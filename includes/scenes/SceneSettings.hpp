@@ -70,12 +70,14 @@ private:
 	ButtonUI					*_key_buttons[Inputs::nb_input];
 	ButtonUI					*_paneSelection[SettingsType::nb_types];
 	ButtonUI					*_fullscreen_button;
+	ButtonUI					*_fit_to_screen_button;
 	TextUI						*_resolution_text;
 	TextUI						*_reloadWinText;
 
 	/* temporary settings */
 	bool						_fullscreen;
 	float						_audio_volume[3];
+	bool						_start_fit_to_screen;
 
 	/* UI listeners */
 	bool						_return;
@@ -83,6 +85,7 @@ private:
 	bool						_next_resolution;
 	bool						_prev_resolution;
 	bool						_update_fullscreen;
+	bool						_update_fit_to_screen;
 	bool						_save_audio[3];
 	float						_update_audio[3];
 	bool						_save_mouse_sens;
