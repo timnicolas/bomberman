@@ -12,6 +12,8 @@ AEnemy::AEnemy(SceneGame &game)
 	name = "AEnemy";
 	type = Type::ENEMY;
 	points = 200;
+	_fisrtCall = true;
+	_moveOnCenter = true;
 }
 
 AEnemy::~AEnemy() {
@@ -70,7 +72,9 @@ bool	AEnemy::update() {
 		}
 	}
 
-	return _update();
+	bool ret = _update();
+	_fisrtCall = false;
+	return ret;
 }
 
 /**
@@ -154,15 +158,45 @@ std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 // -- Protected methods --------------------------------------------------------
 
 /**
+ * @brief Used in enemies move functions. Increase size in moving time to center enemie
+ *
+ * @param enable Call with enable = true before move and with enable = false after move
+ */
+void AEnemy::_setMaxSize(bool enable) {
+	/* call functions with different size */
+	_savedSize = size;
+	if (enable) {
+		if (_moveOnCenter) {
+			size.x = 0.95;
+			size.z = 0.95;
+
+			if (!_fisrtCall) {
+				position.x -= (size.x - _savedSize.x) / 2;
+				position.z -= (size.z - _savedSize.z) / 2;
+			}
+		}
+	}
+	else {
+		if (_moveOnCenter) {
+			position.x += (size.x - _savedSize.x) / 2;
+			position.z += (size.z - _savedSize.z) / 2;
+			size = _savedSize;
+		}
+	}
+}
+
+/**
  * @brief Base moving function for enemy
  *
  * @param dir The actual direction of the enemy
  * @return false If the enemy is blocked
  */
 bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
+	_setMaxSize(true);
 	// try to move forward
 	glm::vec3 startPos = position;
 	if (startPos != _moveTo(dir, -1)) {
+		_setMaxSize(false);
 		return true;
 	}
 
@@ -198,11 +232,14 @@ bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
 				dir = tryDirOrder[i];
 				break;
 			}
-			if (i == 3)
+			if (i == 3) {
+				_setMaxSize(false);
 				return false;  // cannot move
+			}
 		}
 	}
 
+	_setMaxSize(false);
 	return true;
 }
 
@@ -217,6 +254,7 @@ bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
  * @return false If the enemy is blocked
  */
 bool AEnemy::_movePatternBasic(std::vector<Direction::Enum> directionOrder, uint32_t & dirIdx) {
+	_setMaxSize(true);
 	if (dirIdx >= directionOrder.size()) {
 		logWarn("invalid index for AEnemy::_movePatternBasic(): " << dirIdx << " auto set index to 0");
 		dirIdx = 0;
@@ -225,15 +263,18 @@ bool AEnemy::_movePatternBasic(std::vector<Direction::Enum> directionOrder, uint
 	for (uint32_t i = dirIdx; i < directionOrder.size(); i++) {
 		if (pos != _moveTo(directionOrder[i])) {
 			dirIdx = i;
+			_setMaxSize(false);
 			return true;
 		}
 	}
 	for (uint32_t i = 0; i < dirIdx; i++) {
 		if (pos != _moveTo(directionOrder[i])) {
 			dirIdx = i;
+			_setMaxSize(false);
 			return true;
 		}
 	}
+	_setMaxSize(false);
 	return false;
 }
 
@@ -248,6 +289,7 @@ bool AEnemy::_followPath(std::deque<PathNode> & path) {
 	if (path.size() == 0)
 		return true;
 
+	_setMaxSize(true);
 	while (1) {
 		// if the current path node is finished
 		if (_isOn(path.front().goal)) {
@@ -257,19 +299,26 @@ bool AEnemy::_followPath(std::deque<PathNode> & path) {
 			break;
 		}
 		// if the path is finished
-		if (path.size() == 0)
+		if (path.size() == 0) {
+			_setMaxSize(false);
 			return true;
+		}
 	}
 
 	// if the path is finished
-	if (path.size() == 0)
+	if (path.size() == 0) {
+		_setMaxSize(false);
 		return true;
+	}
 
 	// move
 	glm::vec3 pos = getPos();
-	if (pos == _moveTo(path.front().dir))
+	if (pos == _moveTo(path.front().dir)) {
+		_setMaxSize(false);
 		return false;
+	}
 
+	_setMaxSize(false);
 	return true;
 }
 

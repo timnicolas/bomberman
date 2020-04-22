@@ -32,9 +32,14 @@ private:
 		glm::ivec2 pos, glm::ivec2 dest, bool & find);
 	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
+	void			_setMaxSize(bool enable);
+	glm::vec3		_savedSize;
+
 protected:
 	// Members
 	Direction::Enum	_dir;
+	bool			_fisrtCall;  // true until the end of the first update call
+	bool			_moveOnCenter;  // true if the enemy move on center (size < 1)
 
 	virtual bool	_update() = 0;
 	virtual bool	_postUpdate() = 0;
