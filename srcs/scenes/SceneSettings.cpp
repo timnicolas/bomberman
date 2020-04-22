@@ -30,14 +30,8 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 	_update_mouse_sens = s.d("mouse_sensitivity");
 	_fullscreen_button = nullptr;
 	_fullscreen = s.j("graphics").b("fullscreen");
-	int width = s.j("graphics").i("width");
-	int height = s.j("graphics").i("height");
-	_current_resolution = {
-		width,
-		height
-	};
 	_select_res = -1;  // setted in init function
-	_text_scale = static_cast<float>(width) * 0.001;
+	_text_scale = static_cast<float>(s.j("graphics").i("width")) * 0.001;
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
 	*this = src;
@@ -78,7 +72,6 @@ SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
 	{800, 600},
 	{1080, 720},
 	{1200, 800},
-	{1440, 900},
 	{1600, 900},
 	{1920, 1080},
 	{2560, 1440}
@@ -100,26 +93,32 @@ bool					SceneSettings::init() {
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
 
-	_start_fit_to_screen = s.j("graphics").b("fitToScreen");
-	_select_res = -1;
-	for (int i = 0; i < SceneSettings::nb_resolution; i++) {
-		if (resolutions[i].width == s.j("graphics").i("width")
-		&& resolutions[i].height == s.j("graphics").i("height"))
-		{
-			_select_res = i;
-			break;
+	startFitToScreen = s.j("graphics").b("fitToScreen");
+	if (startFitToScreen) {
+		_select_res = 0;
+	}
+	else {
+		_select_res = -1;
+		for (int i = 0; i < SceneSettings::nb_resolution; i++) {
+			if (resolutions[i].width == s.j("graphics").i("width")
+			&& resolutions[i].height == s.j("graphics").i("height"))
+			{
+				_select_res = i;
+				break;
+			}
+		}
+		if (_select_res == -1) {
+			logErr("Invalid resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+			s.j("graphics").i("width") = resolutions[0].width;
+			s.j("graphics").i("height") = resolutions[0].height;
+			_gui->gameInfo.savedWindowSize.x = s.j("graphics").i("width");
+			_gui->gameInfo.savedWindowSize.y = s.j("graphics").i("height");
+			logInfo("save new resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+			saveSettings(SETTINGS_FILE);
+			return false;
 		}
 	}
-	if (_select_res == -1) {
-		logErr("Invalid resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
-		s.j("graphics").i("width") = resolutions[0].width;
-		s.j("graphics").i("height") = resolutions[0].height;
-		_gui->gameInfo.savedWindowSize.x = s.j("graphics").i("width");
-		_gui->gameInfo.savedWindowSize.y = s.j("graphics").i("height");
-		logInfo("save new resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
-		saveSettings(SETTINGS_FILE);
-		return false;
-	}
+	_current_resolution = SceneSettings::resolutions[_select_res];
 
 	try {
 		tmp_size.y = menu_height * 0.1;
@@ -464,7 +463,7 @@ bool					SceneSettings::update() {
 			if (_gui->gameInfo.isSavedFullscreen != s.j("graphics").b("fullscreen")
 			|| _gui->gameInfo.savedWindowSize.x != s.j("graphics").i("width")
 			|| _gui->gameInfo.savedWindowSize.y != s.j("graphics").i("height")
-			|| _start_fit_to_screen != s.j("graphics").b("fitToScreen")) {
+			|| startFitToScreen != s.j("graphics").b("fitToScreen")) {
 				_reloadWinText->setEnabled(true);
 			}
 			else {
@@ -647,4 +646,9 @@ void					SceneSettings::_returnQuit() {
 		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
+}
+
+
+glm::ivec2		SceneSettings::getCurResolution() const {
+	return glm::ivec2(_current_resolution.width, _current_resolution.height);
 }

@@ -26,6 +26,8 @@ public:
 	static SceneSettings::res	resolutions[SceneSettings::nb_resolution];
 	static const std::string	audio_name[3];
 
+	bool					startFitToScreen;
+
 	virtual ~SceneSettings();
 	explicit SceneSettings(Gui * gui, float const &dtTime);
 	SceneSettings(SceneSettings const &src);
@@ -34,6 +36,8 @@ public:
 
 	virtual bool				init();
 	virtual bool				update();
+
+	glm::ivec2					getCurResolution() const;
 
 private:
 	SceneSettings();
@@ -77,7 +81,6 @@ private:
 	/* temporary settings */
 	bool						_fullscreen;
 	float						_audio_volume[3];
-	bool						_start_fit_to_screen;
 
 	/* UI listeners */
 	bool						_return;

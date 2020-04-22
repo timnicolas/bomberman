@@ -319,7 +319,11 @@ bool	Gui::_protect_resolution() {
 	}
 	gameInfo.maxWindowSize.x = dm.w;
 	gameInfo.maxWindowSize.y = dm.h;
-	logDebug("width max: " << dm.w << " ; height max: " << dm.h);
+	if (s.j("graphics").b("fitToScreen")) {
+		s.j("graphics").i("width") = gameInfo.maxWindowSize.x;
+		s.j("graphics").i("height") = gameInfo.maxWindowSize.y;
+		resolution_corrected = true;
+	}
 	if (dm.w < width) {
 		width = dm.w;
 		resolution_corrected = true;
@@ -338,6 +342,7 @@ bool	Gui::_protect_resolution() {
 		height = width * 9.0 / 16.0;
 		resolution_corrected = true;
 	}
+	logDebug("Screen resolution: " << width << "x" << height);
 	if (resolution_corrected) {
 		gameInfo.windowSize.x = width;
 		gameInfo.windowSize.y = height;
