@@ -234,6 +234,9 @@ void SceneCheatCode::load() {
 void SceneCheatCode::unload() {
 	ASceneMenu::unload();
 	_commandLine->setFocus(false);
+	if (SceneManager::getSceneName() == SceneNames::GAME) {
+		_gui->enableCursor(false);
+	}
 }
 
 /**
