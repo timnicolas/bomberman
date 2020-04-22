@@ -15,6 +15,8 @@
 #define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
 #define SAVE_DIR				"saves/"
 
+#define RESTART_TO_UPDATE_RESOLUTION	true  // restart game to reset resolution
+
 #include <chrono>
 #include "SettingsJson.hpp"
 #include "Logging.hpp"

@@ -7,6 +7,8 @@ SceneSettings::~SceneSettings() {}
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dtTime),
 	_input_configuring(-1),
 	_current_pane(SettingsType::GRAPHICS),
+	_return(false),
+	_reset(false),
 	_next_resolution(false),
 	_prev_resolution(false),
 	_update_fullscreen(false)
@@ -28,18 +30,8 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 	_update_mouse_sens = s.d("mouse_sensitivity");
 	_fullscreen_button = nullptr;
 	_fullscreen = s.j("graphics").b("fullscreen");
-	int width = s.j("graphics").i("width");
-	int height = s.j("graphics").i("height");
-	_current_resolution = {
-		width,
-		height
-	};
-	_custom_res = {
-		width,
-		height
-	};
-	_select_res = SceneSettings::nb_resolution;
-	_text_scale = static_cast<float>(width) * 0.001;
+	_select_res = -1;  // setted in init function
+	_text_scale = static_cast<float>(s.j("graphics").i("width")) * 0.001;
 }
 SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
 	*this = src;
@@ -49,6 +41,8 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	ASceneMenu::operator=(rhs);
 	_input_configuring = rhs._input_configuring;
 	_fullscreen = rhs._fullscreen;
+	_return = rhs._return;
+	_reset = rhs._reset;
 	_current_pane = rhs._current_pane;
 	_next_resolution = rhs._next_resolution;
 	_prev_resolution = rhs._prev_resolution;
@@ -70,7 +64,6 @@ SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	_update_mouse_sens = rhs._update_mouse_sens;
 	_fullscreen_button = rhs._fullscreen_button;
 	_text_scale = rhs._text_scale;
-	_custom_res = rhs._custom_res;
 	_select_res = rhs._select_res;
 	return *this;
 }
@@ -100,22 +93,43 @@ bool					SceneSettings::init() {
 	float menu_width = win_size.x * 0.8;
 	float menu_height = win_size.y * 0.9;
 
-	for (auto i = 0; i < SceneSettings::nb_resolution; i++) {
-		if (SceneSettings::resolutions[i].width == _custom_res.width \
-			&& SceneSettings::resolutions[i].height == _custom_res.height)
-		{
-			_custom_res = { 0, 0 };
-			_select_res = i;
-			break;
+	startFitToScreen = s.j("graphics").b("fitToScreen");
+	if (startFitToScreen) {
+		_select_res = 0;
+	}
+	else {
+		_select_res = -1;
+		for (int i = 0; i < SceneSettings::nb_resolution; i++) {
+			if (resolutions[i].width == s.j("graphics").i("width")
+			&& resolutions[i].height == s.j("graphics").i("height"))
+			{
+				_select_res = i;
+				break;
+			}
+		}
+		if (_select_res == -1) {
+			logErr("Invalid resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+			s.j("graphics").i("width") = resolutions[0].width;
+			s.j("graphics").i("height") = resolutions[0].height;
+			_gui->gameInfo.savedWindowSize.x = s.j("graphics").i("width");
+			_gui->gameInfo.savedWindowSize.y = s.j("graphics").i("height");
+			logInfo("save new resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
+			saveSettings(SETTINGS_FILE);
+			return false;
 		}
 	}
+	_current_resolution = SceneSettings::resolutions[_select_res];
+
 	try {
 		tmp_size.y = menu_height * 0.1;
 		tmp_size.x = tmp_size.y;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-		addButton(tmp_pos, tmp_size, "X").addButtonLeftListener(&_return) \
-			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
+		addButton(tmp_pos, tmp_size, "X")
+			.addButtonLeftListener(&_return)
+			.setKeyLeftClickInput(InputType::CANCEL)
+			.setTextScale(_text_scale)
+			.setTextAlign(TextAlign::CENTER);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
@@ -124,14 +138,22 @@ bool					SceneSettings::init() {
 		tmp_size.x = menu_width / 3 * 0.9;
 		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
 		tmp_pos.y -= tmp_size.y;
-		addButton(tmp_pos, tmp_size, "Graphics").addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS]) \
-			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
+		_paneSelection[0] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Graphics")
+			.addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS])
+			.setTextScale(_text_scale)
+			.setTextAlign(TextAlign::CENTER));
 		tmp_pos.x += (menu_width / 3);
-		addButton(tmp_pos, tmp_size, "Audio").addButtonLeftListener(&_select_pane[SettingsType::AUDIO]) \
-			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
+		_paneSelection[1] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Audio")
+			.addButtonLeftListener(&_select_pane[SettingsType::AUDIO])
+			.setKeyLeftClickScancode(SDL_SCANCODE_2)
+			.setTextScale(_text_scale)
+			.setTextAlign(TextAlign::CENTER));
 		tmp_pos.x += (menu_width / 3);
-		addButton(tmp_pos, tmp_size, "Controls").addButtonLeftListener(&_select_pane[SettingsType::CONTROLS]) \
-			.setTextScale(_text_scale).setTextAlign(TextAlign::CENTER);
+		_paneSelection[2] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Controls")
+			.addButtonLeftListener(&_select_pane[SettingsType::CONTROLS])
+			.setKeyLeftClickScancode(SDL_SCANCODE_3)
+			.setTextScale(_text_scale)
+			.setTextAlign(TextAlign::CENTER));
 
 		/* graphics */
 		_init_graphics_pane(tmp_pos, menu_width, menu_height);
@@ -158,41 +180,83 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	glm::vec2	tmp_size;
 	ABaseUI		*ptr;
 
+	/* fullscreen button */
 	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= menu_height * 0.2;
-	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :").setTextAlign(TextAlign::RIGHT) \
-		.setTextScale(_text_scale).setEnabled(true);
+	tmp_pos.y -= tmp_size.y * 1.8;
+	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
 	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
 	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
-	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen).setTextScale(_text_scale) \
+	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen)
+		.setKeyLeftClickScancode(SDL_SCANCODE_F)
+		.setTextScale(_text_scale)
 		.setTextAlign(TextAlign::CENTER);
 	_updateFullscreenButton();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
+	/* fit to screen */
+	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width / 3;
 	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= menu_height * 0.3;
-	ptr = &addText(tmp_pos, tmp_size, "Resolution :").setTextAlign(TextAlign::RIGHT) \
-		.setTextScale(_text_scale).setEnabled(true);
+	tmp_pos.y -= tmp_size.y * 1.3;
+	ptr = &addText(tmp_pos, tmp_size, "Fit  to  screen :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_size.x = menu_width / 10;
+	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
+	_fit_to_screen_button = &addButton(tmp_pos, tmp_size, "OFF");
+	ptr = &_fit_to_screen_button->addButtonLeftListener(&_update_fit_to_screen)
+		.setKeyLeftClickScancode(SDL_SCANCODE_O)
+		.setTextScale(_text_scale)
+		.setTextAlign(TextAlign::CENTER);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+
+	/* resolution choice */
+	tmp_size.x = menu_width / 3;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_pos.y -= tmp_size.y * 1.3;
+	ptr = &addText(tmp_pos, tmp_size, "Resolution :")
+		.setTextAlign(TextAlign::RIGHT)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += (menu_width / 2);
 	_resolution_text = &addText(tmp_pos, tmp_size, "800x600");
-	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_updateResolutionText();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
 	tmp_pos.x -= tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, "<").addButtonLeftListener(&_prev_resolution) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addButton(tmp_pos, tmp_size, "<")
+		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
+		.addButtonLeftListener(&_prev_resolution)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += menu_width / 3 + tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, ">").addButtonLeftListener(&_next_resolution) \
-		.setTextScale(_text_scale).setEnabled(true);
+	ptr = &addButton(tmp_pos, tmp_size, ">")
+		.setKeyLeftClickScancode(SDL_SCANCODE_RIGHT)
+		.addButtonLeftListener(&_next_resolution)
+		.setTextScale(_text_scale)
+		.setEnabled(true);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	tmp_pos.x = (menu_width / 2);
+	tmp_pos.y -= ptr->getSize().y;
+	_reloadWinText = &addText(tmp_pos, tmp_size, "Restart  the  game  to  apply  new  resolution");
+	ptr = &_reloadWinText->setTextAlign(TextAlign::CENTER)
+		.setTextScale(_text_scale)
+		.setTextColor(glm::vec4(1, 0, 0, 1))
+		.setEnabled(false);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
@@ -252,8 +316,10 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	tmp_size.x = (keyMenuWidth - keyMenuPadding) / 2;
 	tmp_size.y = keyMenuHeight;
 	for (auto i = 0; i < Inputs::nb_input; i++) {
-		if (Inputs::input_type_name[i] == "cancel")
+		if (Inputs::input_type_name[i] == "cancel") {
+			_key_buttons[i] = nullptr;
 			continue;
+		}
 		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
 		tmp_pos.x = 0;
 		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :")
@@ -273,6 +339,16 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
+	tmp_size.y = menu_height * 0.1;
+	tmp_size.x = menu_width * 0.15;
+	tmp_pos.x = (win_size.x / 2) + (menu_width / 2) - menu_width * 0.1;
+	tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
+	ptr = &addButton(tmp_pos, tmp_size, "Reset")
+		.addButtonLeftListener(&_reset)
+		.setTextScale(_text_scale)
+		.setTextAlign(TextAlign::CENTER)
+		.setEnabled(false);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
 	// add mouse sensitivity slider
 	tmp_pos.y -= keyMenuHeight + keyMenuPadding;
 	tmp_pos.x = 0;
@@ -325,49 +401,93 @@ void					SceneSettings::_updateFullscreenButton() {
  */
 bool					SceneSettings::update() {
 	ASceneMenu::update();
-	if (_input_configuring >= 0 && !Inputs::isConfiguring()) {
-		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
-		_input_configuring = -1;
+	if (_reset) {
+		_resetKeys();
 	}
-	for (auto i = 0; i < SettingsType::nb_types; i++) {
-		if (_select_pane[i]) {
-			_selectPane(static_cast<SettingsType::Enum>(i));
+	if (_input_configuring >= 0) {
+		_paneSelection[0]->setKeyLeftClickScancode(NO_SCANCODE);
+		_paneSelection[1]->setKeyLeftClickScancode(NO_SCANCODE);
+		_paneSelection[2]->setKeyLeftClickScancode(NO_SCANCODE);
+		if (!Inputs::isConfiguring()) {
+			_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
+			_input_configuring = -1;
+		}
+		else if (Inputs::getKeyByScancodeUp(DEFAULT_CANCEL)) {
+			Inputs::cancelConfiguration();
+			_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
+			_input_configuring = -1;
 		}
 	}
-	for (auto i = 0; i < Inputs::nb_input; i++) {
-		if (_update_key[i]) {
-			_updateKey(static_cast<InputType::Enum>(i));
+	else {
+		_paneSelection[0]->setKeyLeftClickScancode(SDL_SCANCODE_1);
+		_paneSelection[1]->setKeyLeftClickScancode(SDL_SCANCODE_2);
+		_paneSelection[2]->setKeyLeftClickScancode(SDL_SCANCODE_3);
+		for (auto i = 0; i < SettingsType::nb_types; i++) {
+			if (_select_pane[i]) {
+				_selectPane(static_cast<SettingsType::Enum>(i));
+			}
 		}
-	}
-	for (auto i = 0; i < 3; i++) {
-		if (_update_audio[i] != _audio_volume[i]) {
-			_updateAudioVolume(i);
+		for (auto i = 0; i < Inputs::nb_input; i++) {
+			if (_update_key[i]) {
+				_updateKey(static_cast<InputType::Enum>(i));
+			}
 		}
-		if (_save_audio[i]) {
-			_saveAudioVolume(i);
+		for (auto i = 0; i < 3; i++) {
+			if (_update_audio[i] != _audio_volume[i]) {
+				_updateAudioVolume(i);
+			}
+			if (_save_audio[i]) {
+				_saveAudioVolume(i);
+			}
 		}
-	}
-	if (_save_mouse_sens) {
-		_updateMouseSensitivity();
-	}
-	if (_update_fullscreen) {
-		_updateFullscreen();
-	}
-	if (_prev_resolution) {
-		_updateResolution(false);
-	}
-	if (_next_resolution) {
-		_updateResolution(true);
-	}
-	if (_return) {
-		_returnQuit();
-	}
-	if (Inputs::getKeyDown(InputType::ACTION)) {
-		try {
-			AudioManager::playSound("sounds/bell.ogg");
+		if (_save_mouse_sens) {
+			_updateMouseSensitivity();
 		}
-		catch (Sound::SoundException const & e) {
-			logErr(e.what());
+		if (_update_fullscreen) {
+			_updateFullscreen();
+		}
+		if (_update_fit_to_screen) {
+			s.j("graphics").b("fitToScreen") = !s.j("graphics").b("fitToScreen");
+			_update_fit_to_screen = false;
+		}
+		if (_prev_resolution) {
+			_updateResolution(false);
+		}
+		if (_next_resolution) {
+			_updateResolution(true);
+		}
+		if (_return) {
+			_returnQuit();
+		}
+		if (_current_pane == SettingsType::GRAPHICS) {
+			if (_gui->gameInfo.isSavedFullscreen != s.j("graphics").b("fullscreen")
+			|| _gui->gameInfo.savedWindowSize.x != s.j("graphics").i("width")
+			|| _gui->gameInfo.savedWindowSize.y != s.j("graphics").i("height")
+			|| startFitToScreen != s.j("graphics").b("fitToScreen")) {
+				_reloadWinText->setEnabled(true);
+			}
+			else {
+				_reloadWinText->setEnabled(false);
+			}
+		}
+		std::string symbol;
+		glm::vec4 color;
+		if (s.j("graphics").b("fitToScreen")) {
+			symbol = "ON";
+			color = glm::vec4(0.2, 0.8, 0.2, 1.0);
+		}
+		else {
+			symbol = "OFF";
+			color = glm::vec4(0.8, 0.2, 0.2, 1.0);
+		}
+		_fit_to_screen_button->setText(symbol).setTextColor(color);
+		if (Inputs::getKeyDown(InputType::ACTION)) {
+			try {
+				AudioManager::playSound("sounds/bell.ogg");
+			}
+			catch (Sound::SoundException const & e) {
+				logErr(e.what());
+			}
 		}
 	}
 	return true;
@@ -449,9 +569,13 @@ void					SceneSettings::_updateFullscreen() {
 	_update_fullscreen = false;
 	_fullscreen = !_fullscreen;
 	_updateFullscreenButton();
-	s.j("graphics").b("fullscreen") = _fullscreen;
-	saveSettings(SETTINGS_FILE);
-	_gui->updateFullscreen();
+	#if RESTART_TO_UPDATE_RESOLUTION
+		_gui->gameInfo.isSavedFullscreen = _fullscreen;
+	#else
+		s.j("graphics").b("fullscreen") = _fullscreen;
+		saveSettings(SETTINGS_FILE);
+		_gui->updateFullscreen();
+	#endif
 }
 
 /**
@@ -468,28 +592,48 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	}
 	_select_res = go_right ? _select_res + 1 : _select_res - 1;
 	if (_select_res < 0) {
-		_select_res = SceneSettings::nb_resolution;
-		if (_custom_res.width == 0 && _custom_res.height == 0) {
-			_select_res--;
-		}
-	}
-	else if (_select_res > SceneSettings::nb_resolution || (_select_res == SceneSettings::nb_resolution \
-			&& _custom_res.width == 0 && _custom_res.height == 0))
-	{
 		_select_res = 0;
 	}
-	if (_select_res == SceneSettings::nb_resolution) {
-		_current_resolution = _custom_res;
+	else if (_select_res >= SceneSettings::nb_resolution) {
+		_select_res = SceneSettings::nb_resolution - 1;
 	}
-	else {
-		_current_resolution = SceneSettings::resolutions[_select_res];
+	while (SceneSettings::resolutions[_select_res].width > _gui->gameInfo.maxWindowSize.x
+	|| SceneSettings::resolutions[_select_res].height > _gui->gameInfo.maxWindowSize.y)
+	{
+		if (_select_res > 0)
+			_select_res--;
+		else
+			break;
 	}
-	s.j("graphics").i("width") = _current_resolution.width;
-	s.j("graphics").i("height") = _current_resolution.height;
-	saveSettings(SETTINGS_FILE);
+	_current_resolution = SceneSettings::resolutions[_select_res];
 	_updateResolutionText();
-	_text_scale = static_cast<float>(_current_resolution.width) * 0.001;
-	_gui->udpateDimension();
+	#if RESTART_TO_UPDATE_RESOLUTION
+		_gui->gameInfo.savedWindowSize.x = _current_resolution.width;
+		_gui->gameInfo.savedWindowSize.y = _current_resolution.height;
+	#else
+		s.j("graphics").i("width") = _current_resolution.width;
+		s.j("graphics").i("height") = _current_resolution.height;
+		saveSettings(SETTINGS_FILE);
+		_text_scale = static_cast<float>(_current_resolution.width) * 0.001;
+		_gui->udpateDimension();
+	#endif
+}
+
+/**
+ * @brief Reset the keys configurations.
+ */
+void					SceneSettings::_resetKeys() {
+	_reset = false;
+	if (_input_configuring >= 0) {
+		Inputs::cancelConfiguration();
+		if (_key_buttons[_input_configuring] != nullptr)
+			_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
+	}
+	Inputs::resetKeys();
+	for (auto i = 0; i < Inputs::nb_input; i++) {
+		if (_key_buttons[i] != nullptr)
+			_key_buttons[i]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(i)));
+	}
 }
 
 /**
@@ -502,4 +646,9 @@ void					SceneSettings::_returnQuit() {
 		_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 	}
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
+}
+
+
+glm::ivec2		SceneSettings::getCurResolution() const {
+	return glm::ivec2(_current_resolution.width, _current_resolution.height);
 }
