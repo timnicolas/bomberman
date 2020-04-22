@@ -1,5 +1,5 @@
 #ifndef INPUTS_HPP
-# define INPUTS_HPP
+#define INPUTS_HPP
 
 #include <SDL2/SDL.h>
 #include <map>
@@ -11,6 +11,19 @@
 // equivalent of NULL for scancode & keycode
 #define NO_SCANCODE	SDL_SCANCODE_F24
 #define NO_KEYCODE	SDLK_F24
+
+// default input value
+#define DEFAULT_UP			SDL_SCANCODE_UP
+#define DEFAULT_DOWN		SDL_SCANCODE_DOWN
+#define DEFAULT_LEFT		SDL_SCANCODE_LEFT
+#define DEFAULT_RIGHT		SDL_SCANCODE_RIGHT
+#define DEFAULT_ACTION		SDL_SCANCODE_SPACE
+#define DEFAULT_ACTION_2	SDL_SCANCODE_B
+#define DEFAULT_CONFIRM		SDL_SCANCODE_RETURN
+#define DEFAULT_CANCEL		SDL_SCANCODE_ESCAPE
+#define DEFAULT_MENU		SDL_SCANCODE_TAB
+#define DEFAULT_HELP		SDL_SCANCODE_F1
+#define DEFAULT_CHEATCODE	SDL_SCANCODE_SLASH
 
 /**
  * @brief this is the list of all user-defined inputs
@@ -45,6 +58,7 @@ public:
 	static const int						nb_input = InputType::NB_INPUTS;
 	static const std::string				input_type_name[Inputs::nb_input];
 	static const std::string				configFile;
+	static const SDL_Scancode				default_keys[InputType::NB_INPUTS];
 
 	~Inputs();
 
@@ -70,6 +84,7 @@ public:
 	static bool								getRightClickDown();
 	static bool								getLeftClickDown();
 	static void								update();
+	static void								resetKeys();
 	static bool								isConfiguring();
 	static void								setTextInputMode(bool enable);
 	static SDL_Keycode						getTextInputKeycode();
@@ -101,6 +116,7 @@ private:
 	bool									_getRightClickDown() const;
 	bool									_getLeftClickDown() const;
 	void									_update();
+	void									_resetKeys();
 	bool									_isConfiguring();
 	void									_setTextInputMode(bool enable);
 	SDL_Keycode								_getTextInputKeycode() const;

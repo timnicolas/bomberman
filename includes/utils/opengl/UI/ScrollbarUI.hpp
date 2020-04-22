@@ -41,6 +41,7 @@ class ScrollbarUI : public ABaseMasterUI {
 
 		// vertical
 		bool		_vertScroll;
+		bool		_vertScrollHide;  // hide because his size is 100%
 		bool		_vertScrollInverted;
 		float		_vertScrollbarPos;
 		float		_vertScrollBarDrawSize;
@@ -48,6 +49,7 @@ class ScrollbarUI : public ABaseMasterUI {
 
 		// horizontal
 		bool		_horizScroll;
+		bool		_horizScrollHide;  // hide because his size is 100%
 		bool		_horizScrollInverted;
 		float		_horizScrollbarPos;
 		float		_horizScrollBarDrawSize;
