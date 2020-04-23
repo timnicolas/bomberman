@@ -7,7 +7,7 @@ EnemyBasic::EnemyBasic(SceneGame &game)
 : AEnemy(game)
 {
 	size = glm::vec3(0.85, 1.0, 0.85);
-	name = "EnemyBasic";
+	name = ENEMY_BASIC_STR;
 }
 
 EnemyBasic::~EnemyBasic() {

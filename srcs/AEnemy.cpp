@@ -1,6 +1,7 @@
 #include <stack>
 #include "AEnemy.hpp"
 #include "Player.hpp"
+#include "EnemyFly.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -65,7 +66,7 @@ bool	AEnemy::update() {
 		setState(EntityState::ATTACK);
 
 		// facing player on attack (except for EnemyFly)
-		if (name != "EnemyFly") {
+		if (name != ENEMY_FLY_STR) {
 			front = glm::normalize(game.player->position - position);
 		}
 	}
@@ -139,7 +140,7 @@ bool	AEnemy::takeDamage(const int damage) {
  */
 std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 	std::unordered_set<AEntity *> collisions = ACharacter::getCollision(dest);
-	if (name == "EnemyFly")
+	if (name == ENEMY_FLY_STR)
 		return collisions;
 
 	/* get all positions blocks under character on a position */
@@ -149,7 +150,7 @@ std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 	for (auto enemy : game.enemies) {
 		if (enemy == this)
 			continue;
-		if (enemy->name == "EnemyFly")
+		if (enemy->name == ENEMY_FLY_STR)
 			continue;
 		allPosEnemy.clear();
 		allPosEnemy = _getAllPositions(enemy->getPos(), enemy->size );

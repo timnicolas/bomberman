@@ -6,6 +6,8 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define ENEMY_BASIC_STR "enemyBasic"
+
 /**
  * @brief This is an enemy object
  *

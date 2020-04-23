@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+#define CRISPY_STR "crispy"
+
 class Crispy : public AObject {
 private:
 	Crispy();
