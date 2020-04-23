@@ -766,6 +766,10 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		return false;
 	}
 
+	// Delete old player
+	delete player;
+	player = nullptr;
+
 	enemiesToKill = 0;
 	enemiesKilled = 0;
 
