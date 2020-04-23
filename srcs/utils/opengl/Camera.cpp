@@ -30,6 +30,8 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
 	_updateProjection();
 
 	_updateCameraVectors();
+
+	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
 Camera::~Camera() {
@@ -37,6 +39,7 @@ Camera::~Camera() {
 
 Camera::Camera(Camera const &src) {
 	*this = src;
+	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
 Camera	&Camera::operator=(Camera const &rhs) {

@@ -38,6 +38,7 @@ class SceneManager {
 		static AScene *				loadScene(std::string const & name);
 		static AScene *				getScene(std::string const & name);
 		static std::string const &	getSceneName();
+		static uint16_t				getFps();
 		static bool					isSceneChangedInCurFrame();
 		static void					openCheatCode(bool open);
 		static void					openCheatCodeForTime(uint64_t ms);
@@ -58,12 +59,13 @@ class SceneManager {
 		std::string	_scene;  // the name of the current scene
 		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
 		bool		_isInCheatCode;
-		int64_t	_showCheatCodeTextTime;
+		int64_t		_showCheatCodeTextTime;
+		uint16_t	_fps;
 
 		bool		_sceneLoadedCurrentFrame;  // true if a scene was loaded in the current frame
 
 		bool				_init();
-		bool				_run();
+		bool				_run(float maxFrameDuration);
 		bool				_update();
 		bool				_draw();
 		AScene *			_loadScene(std::string const & name);
