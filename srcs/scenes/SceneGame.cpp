@@ -975,6 +975,11 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 					delete entity;
 					return false;
 				}
+				if (reinterpret_cast<AEnemy *>(entity)->getCollision({pos.x, 0, pos.y}).size()) {
+					// don't create if we have a other Enemy at the same place
+					delete entity;
+					return false;
+				}
 				enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 				enemies.back()->setPosition({pos.x, 0, pos.y});
 				break;
