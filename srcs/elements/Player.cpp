@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -10,6 +11,8 @@ Player::Player(SceneGame &game)
 	type = Type::PLAYER;
 	name = "Player";
 	resetParams();
+	AudioManager::loadSound(PLAYER_HURT_SOUND);
+	AudioManager::loadSound(PLAYER_DEATH_SOUND);
 }
 
 Player::~Player() {
@@ -178,12 +181,25 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
+	bool was_alive = alive;
 	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
 			if (alive) {
+				try {
+					AudioManager::playSound(PLAYER_HURT_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 				invulnerable = 3.0f;
+			} else if (was_alive) {
+				try {
+					AudioManager::playSound(PLAYER_DEATH_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 			}
 		}
+		return true;
 	}
 	return false;
 }

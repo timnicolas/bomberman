@@ -32,7 +32,8 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
-	glm::vec3	size;
+	glm::vec3		size;
+	std::string		_soundOfDeath;
 
 	// Methods
 	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest) const;

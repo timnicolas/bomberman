@@ -1,5 +1,6 @@
 #include "EnemyFollow.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -11,6 +12,8 @@ EnemyFollow::EnemyFollow(SceneGame &game)
 	name = "EnemyFollow";
 	size = glm::vec3(0.8, 1.5, 0.8);
 	_lastFindMs = getMs();
+	AudioManager::loadSound(ENEMY_FOLLOW_DEATH_SOUND);
+	_soundOfDeath = ENEMY_FOLLOW_DEATH_SOUND;
 }
 
 EnemyFollow::~EnemyFollow() {
