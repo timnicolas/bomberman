@@ -134,6 +134,7 @@ SRC =	main.cpp \
 		scenes/SceneSettings.cpp \
 		scenes/SceneCheatCode.cpp \
 		scenes/SceneCheatCode_exec.cpp \
+		scenes/SceneDebug.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -214,6 +215,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneExit.hpp \
 		scenes/SceneSettings.hpp \
 		scenes/SceneCheatCode.hpp \
+		scenes/SceneDebug.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \

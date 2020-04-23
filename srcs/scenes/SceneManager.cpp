@@ -17,6 +17,7 @@
 #include "SceneSettings.hpp"
 #include "SceneLoadGame.hpp"
 #include "SceneCheatCode.hpp"
+#include "SceneDebug.hpp"
 
 SceneManager::SceneManager()
 : _gameInfo(),
@@ -96,6 +97,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::SETTINGS, new SceneSettings(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LOADGAME, new SceneLoadGame(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::CHEAT_CODE, new SceneCheatCode(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::DEBUG_MENU, new SceneDebug(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
@@ -138,6 +140,7 @@ bool SceneManager::_run(float maxFrameDuration) {
 		_sceneLoadedCurrentFrame = false;
 		_dtTime = (getMs().count() - lastLoopMs.count()) / 1000.0;
 		lastLoopMs = getMs();
+		_fps = 1 / _dtTime;
 
 		if (_sceneMap.find(_scene) == _sceneMap.end()) {
 			logWarn("invalid scene name: " << _scene);
@@ -159,7 +162,6 @@ bool SceneManager::_run(float maxFrameDuration) {
 		/* fps control */
 		std::chrono::milliseconds loopDuration = getMs() - lastLoopMs;
 		float	frameDuration = loopDuration.count();
-		_fps = 1000 / frameDuration;
 
 		if (frameDuration > maxFrameDuration) {
 			#if DEBUG_FPS_LOW == true
@@ -192,6 +194,12 @@ bool SceneManager::_update() {
 	ABaseUI::staticUpdate();
 	_gui->preUpdate(_dtTime);
 	bool cheatCodeClosed = false;
+
+	/* debug menu */
+	if (_sceneMap[SceneNames::DEBUG_MENU]->update() == false) {
+		return false;
+	}
+
 	/* cheatcode */
 	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
 		// text only mode
@@ -210,6 +218,7 @@ bool SceneManager::_update() {
 			cheatCodeClosed = true;
 		}
 	}
+
 	/* scene */
 	if (!_isInCheatCode && !cheatCodeClosed) {
 		// update the scene
@@ -218,9 +227,12 @@ bool SceneManager::_update() {
 			return false;
 		}
 	}
+
 	if (isSceneChangedInCurFrame())
 		_gui->disableExitForThisFrame();
+
 	_gui->postUpdate(_dtTime);
+
 	return true;
 }
 
@@ -232,11 +244,18 @@ bool SceneManager::_update() {
 bool SceneManager::_draw() {
 	/* draw */
 	_gui->preDraw();
+
+	// draw debug menu scene
+	if (_sceneMap[SceneNames::DEBUG_MENU]->draw() == false) {
+		return false;
+	}
+
 	// draw the scene
 	if (_sceneMap[_scene]->draw() == false) {
 		return false;
 	}
 
+	// draw cheatcode scene
 	if (_isInCheatCode || _showCheatCodeTextTime > 0) {
 		if (_sceneMap[SceneNames::CHEAT_CODE]->draw() == false) {
 			logErr("Unexpected error when drawing scene");
@@ -313,7 +332,10 @@ std::string const & SceneManager::_getSceneName() const {
  * @return uint16_t the current fps count
  */
 uint16_t	SceneManager::getFps() {
-	return SceneManager::get()._fps;
+	uint16_t clampVal = s.j("screen").u("fps");
+	uint16_t clampFps = SceneManager::get()._fps;
+	clampFps = (clampFps < clampVal) ? clampFps : clampVal;
+	return clampFps;
 }
 
 /**
