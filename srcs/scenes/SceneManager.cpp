@@ -25,6 +25,7 @@ SceneManager::SceneManager()
   _scene(SceneNames::MAIN_MENU),
   _isInCheatCode(false),
   _showCheatCodeTextTime(0),
+  _fps(60),
   _sceneLoadedCurrentFrame(false)
 {}
 
@@ -124,10 +125,12 @@ bool SceneManager::_init() {
  * @return false if failure
  */
 bool SceneManager::run() {
-	return SceneManager::get()._run();
+	float		maxFrameDuration = 1000 / s.j("screen").u("fps");
+
+	return SceneManager::get()._run(maxFrameDuration);
 }
-bool SceneManager::_run() {
-	float						fps = 1000 / s.j("screen").u("fps");
+
+bool SceneManager::_run(float maxFrameDuration) {
 	std::chrono::milliseconds	lastLoopMs = getMs();
 
 	while (true) {
@@ -155,14 +158,19 @@ bool SceneManager::_run() {
 
 		/* fps control */
 		std::chrono::milliseconds loopDuration = getMs() - lastLoopMs;
-		if (loopDuration.count() > fps) {
+		float	frameDuration = loopDuration.count();
+		_fps = 1000 / frameDuration;
+
+		if (frameDuration > maxFrameDuration) {
 			#if DEBUG_FPS_LOW == true
-				if (!firstLoop)
-					logDebug("update loop slow -> " << loopDuration.count() << "ms / " << fps << "ms (" << FPS << "fps)");
+				if (!firstLoop) {
+					logDebug("update loop slow -> " << frameDuration << "ms / " <<
+					maxFrameDuration << "ms (" << s.j("screen").u("fps") << "fps)");
+				}
 			#endif
 		}
 		else {
-			usleep((fps - loopDuration.count()) * 1000);
+			usleep((maxFrameDuration - frameDuration) * 1000);
 		}
 		#if DEBUG_FPS_LOW == true
 			firstLoop = false;
@@ -297,6 +305,15 @@ std::string const & SceneManager::getSceneName() {
 }
 std::string const & SceneManager::_getSceneName() const {
 	return _scene;
+}
+
+/**
+ * @brief get the current fps count
+ *
+ * @return uint16_t the current fps count
+ */
+uint16_t	SceneManager::getFps() {
+	return SceneManager::get()._fps;
 }
 
 /**
