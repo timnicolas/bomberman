@@ -6,7 +6,7 @@
 
 End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
-	name = "End";
+	name = END_STR;
 	_texture = Block::END;
 }
 

@@ -6,6 +6,7 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define ENEMY_CRISPY_STR "enemyCrispy"
 #define TIME_BEFORE_TRANSFORM_TO_WALL	8000
 
 /**

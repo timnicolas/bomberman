@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+#define BOMB_STR "bomb"
+
 /**
  * @brief This is the bomb object
  */
