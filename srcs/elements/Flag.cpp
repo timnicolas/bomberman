@@ -1,5 +1,6 @@
 #include "Flag.hpp"
 #include "SceneGame.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -8,6 +9,8 @@ Flag::Flag(SceneGame &game) : AObject(game) {
 	name = "Flag";
 	destructible = true;
 	blockPropagation = true;
+	AudioManager::loadSound(FLAG_DESTROYED_SOUND);
+	_soundOfDeath = FLAG_DESTROYED_SOUND;
 }
 
 Flag::~Flag() {

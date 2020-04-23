@@ -2,6 +2,7 @@
 #include "Fire.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -11,6 +12,7 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 	_countdown = 2.0f;
 	_propagation = 3;
 	blockPropagation = true;
+	AudioManager::loadSound(BOMB_EXPLOSION_SOUND);
 }
 
 Bomb::~Bomb() {
@@ -54,6 +56,12 @@ Bomb*	Bomb::setPropagation(const int propagation) {
 void	Bomb::explode(glm::vec2 const pos) {
 	int						i;
 	std::vector<AEntity *>	box;
+
+	try {
+		AudioManager::playSound(BOMB_EXPLOSION_SOUND);
+	} catch(Sound::SoundException const & e) {
+		logErr(e.what());
+	}
 
 	active = false;
 	_propagationExplosion({pos.x, pos.y});

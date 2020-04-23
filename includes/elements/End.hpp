@@ -14,6 +14,7 @@ private:
 	End();
 	// Members
 	Block::Enum	_texture;
+	bool		_open;
 
 	// Methods
 	std::unordered_set<AEntity *>	_getCollision();
