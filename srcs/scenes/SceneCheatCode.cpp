@@ -759,6 +759,17 @@ bool SceneCheatCode::_isLevelUnlocked(uint32_t levelId) const {
 }
 
 /**
+ * @brief Public method to unlock a level
+ *
+ * @param levelId level to unlock
+ * @return int CheatcodeAction
+ */
+int	SceneCheatCode::unlockLevel(uint32_t levelId) {
+	std::vector<std::string> args = {"unlock", std::to_string(levelId)};
+	return _execUnlock(args);
+}
+
+/**
  * Logging
  */
 
