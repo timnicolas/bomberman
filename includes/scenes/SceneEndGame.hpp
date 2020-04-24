@@ -25,17 +25,10 @@ class SceneEndGame : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
-			bool	mainMenu;
-			bool	save;
 			bool	exit;
 		};
 		ButtonsStates	_states;
 		struct AllUI {
-			ABaseUI	*mainMenu;
-			ABaseUI	*save;
-			ABaseUI	*exit;
-			ABaseUI	*border;
-			ABaseUI	*text;
 		};
 		AllUI		allUI;
 
