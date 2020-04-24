@@ -35,6 +35,7 @@ class SceneEndGame : public ASceneMenu {
 			ABaseUI	*save;
 			ABaseUI	*exit;
 			ABaseUI	*border;
+			ABaseUI	*text;
 		};
 		AllUI		allUI;
 
