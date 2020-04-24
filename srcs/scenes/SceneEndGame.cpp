@@ -51,7 +51,8 @@ bool			SceneEndGame::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Bomberman");
+		addTitle(tmpPos, tmpSize, "Bomberman")
+			.setTextColor(colorise(s.j("colors").j("green").u("color"), s.j("colors").j("green").u("alpha")));
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
 		tmpPos.y -= menuHeight * 1.3;
@@ -61,21 +62,25 @@ bool			SceneEndGame::init() {
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
 		tmpPos.y -= menuHeight * 1.3;
 		addText(tmpPos, {menuWidth, menuHeight}, "Ernest  Marin")
+			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
 		tmpPos.y -= menuHeight;
 		addText(tmpPos, {menuWidth, menuHeight}, "Emilien  Baudet")
+			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
 		tmpPos.y -= menuHeight;
 		addText(tmpPos, {menuWidth, menuHeight}, "Tim  Nicolas")
+			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
 		tmpPos.y -= menuHeight;
 		addText(tmpPos, {menuWidth, menuHeight}, "Guilhem  Smith")
+			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
 		_initBG();
