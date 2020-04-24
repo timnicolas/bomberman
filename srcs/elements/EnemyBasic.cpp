@@ -148,8 +148,7 @@ bool	EnemyBasic::init() {
 			delete _model;
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("robot");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
-			{.7, .7, .7}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle");

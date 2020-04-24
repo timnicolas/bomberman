@@ -43,8 +43,7 @@ bool	EnemyWithEye::init() {
 			delete _model;
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("flower");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
-			{1.5, 1.5, 1.5}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0}, ENEMY_WITH_EYE_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle");

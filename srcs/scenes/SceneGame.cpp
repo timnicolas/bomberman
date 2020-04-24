@@ -167,20 +167,29 @@ bool			SceneGame::init() {
 	}
 
 	/* load all models for menu */
-	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime());
+	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime(),
+		ETransform({0, 0, 0}, PLAYER_SIZE));
 	_menuModels.player->play = true;
 	_menuModels.player->loopAnimation = true;
 	_menuModels.player->setAnimation("Armature|idle");
 
-	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime());
+	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime(),
+		ETransform({0, 0, 0}, ENEMY_WITH_EYE_SIZE));
 	_menuModels.flower->play = true;
 	_menuModels.flower->loopAnimation = true;
 	_menuModels.flower->setAnimation("Armature|idle");
 
-	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime());
+	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime(),
+		ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
 	_menuModels.robot->play = true;
 	_menuModels.robot->loopAnimation = true;
 	_menuModels.robot->setAnimation("Armature|idle");
+
+	_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
+		ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
+	_menuModels.fly->play = true;
+	_menuModels.fly->loopAnimation = true;
+	_menuModels.fly->setAnimation("Armature|run");
 
 	_initGameInfos();
 
@@ -223,7 +232,7 @@ bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 bool	SceneGame::updateForMenu() {
 	/* set camera position for menu */
 	_gui->cam->setMode(CamMode::STATIC);
-	_gui->cam->pos = glm::vec3(0, 1.2, 2.3);
+	_gui->cam->pos = glm::vec3(0, 1.2, 2.5);
 	_gui->cam->lookAt(glm::vec3(0, 0.7, 0));
 	return true;
 }
@@ -381,11 +390,13 @@ bool	SceneGame::draw() {
  */
 bool	SceneGame::drawForMenu() {
 	/* draw models */
+	_menuModels.player->transform.setRot(0);
 	_menuModels.player->transform.setPos({-0.9, 0, 0});
 	if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
 		_menuModels.player->setAnimation("Armature|idle");
 	_menuModels.player->draw();
 
+	_menuModels.flower->transform.setRot(0);
 	_menuModels.flower->transform.setPos({0.9, 0, 0});
 	if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
 		_menuModels.flower->setAnimation("Armature|idle");
@@ -465,11 +476,13 @@ bool	SceneGame::drawGame() {
  */
 bool	SceneGame::drawVictory() {
 	/* draw models */
+	_menuModels.player->transform.setRot(0);
 	_menuModels.player->transform.setPos({-1, 0, 0});
 	if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
 		_menuModels.player->setAnimation("Armature|dance");
 	_menuModels.player->draw();
 
+	_menuModels.flower->transform.setRot(0);
 	_menuModels.flower->transform.setPos({1, 0, 0});
 	if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
 		_menuModels.flower->setAnimation("Armature|loose");
@@ -489,11 +502,13 @@ bool	SceneGame::drawVictory() {
  */
 bool	SceneGame::drawGameOver() {
 	/* draw models */
+	_menuModels.player->transform.setRot(0);
 	_menuModels.player->transform.setPos({-1, 0, 0});
 	if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
 		_menuModels.player->setAnimation("Armature|loose");
 	_menuModels.player->draw();
 
+	_menuModels.flower->transform.setRot(0);
 	_menuModels.flower->transform.setPos({1, 0, 0});
 	if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
 		_menuModels.flower->setAnimation("Armature|dance");
@@ -514,23 +529,37 @@ bool	SceneGame::drawGameOver() {
 bool	SceneGame::drawEndGame() {
 	/* draw models */
 	float tmpX = _menuModels.player->transform.getPos().x;
-	float tmpZ = _menuModels.player->transform.getPos().z;
-	if (tmpX < -3 || tmpX > 3)
+	if (tmpX < -3 || tmpX > 7)
 		tmpX = -3;
-	tmpX += 0.04;
-	tmpX += 0.01;
+	tmpX += 0.03;
 
+	_menuModels.player->animationSpeed = 0.8;
 	_menuModels.player->transform.setPos({tmpX, -1, -2});
 	_menuModels.player->transform.setRot(90);
 	if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
 		_menuModels.player->setAnimation("Armature|run");
 	_menuModels.player->draw();
 
-	_menuModels.robot->transform.setPos({tmpX - 1, -1, -2});
+	tmpX -= 1.3;
+	_menuModels.robot->transform.setPos({tmpX, -1, -2});
 	_menuModels.robot->transform.setRot(90);
 	if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
 		_menuModels.robot->setAnimation("Armature|run");
 	_menuModels.robot->draw();
+
+	tmpX -= 1.3;
+	_menuModels.flower->transform.setPos({tmpX, -1, -2});
+	_menuModels.flower->transform.setRot(90);
+	if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
+		_menuModels.flower->setAnimation("Armature|run");
+	_menuModels.flower->draw();
+
+	tmpX -= 1.3;
+	_menuModels.fly->transform.setPos({tmpX, -0.2, -2});
+	_menuModels.fly->transform.setRot(90);
+	if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
+		_menuModels.fly->setAnimation("Armature|run");
+	_menuModels.fly->draw();
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
