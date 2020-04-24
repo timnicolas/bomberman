@@ -171,7 +171,7 @@ bool	SceneVictory::update() {
 			SceneManager::loadScene(_lastSceneName);
 		}
 		else {
-			SceneManager::loadScene(SceneNames::MAIN_MENU);
+			SceneManager::loadScene(SceneNames::END_GAME);
 		}
 	}
 	else if (_states.restart) {

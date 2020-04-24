@@ -507,6 +507,39 @@ bool	SceneGame::drawGameOver() {
 }
 
 /**
+ * @brief Draw function if we are in endGame menu
+ *
+ * @return false If failed
+ */
+bool	SceneGame::drawEndGame() {
+	/* draw models */
+	float tmpX = _menuModels.player->transform.getPos().x;
+	float tmpZ = _menuModels.player->transform.getPos().z;
+	if (tmpX < -3 || tmpX > 3)
+		tmpX = -3;
+	tmpX += 0.04;
+	tmpX += 0.01;
+
+	_menuModels.player->transform.setPos({tmpX, -1, -2});
+	_menuModels.player->transform.setRot(90);
+	if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
+		_menuModels.player->setAnimation("Armature|run");
+	_menuModels.player->draw();
+
+	_menuModels.robot->transform.setPos({tmpX - 1, -1, -2});
+	_menuModels.robot->transform.setRot(90);
+	if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
+		_menuModels.robot->setAnimation("Armature|run");
+	_menuModels.robot->draw();
+
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	return true;
+}
+
+/**
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
