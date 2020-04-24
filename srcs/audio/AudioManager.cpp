@@ -233,20 +233,20 @@ void						AudioManager::_loadSound(std::string file_name) {
 
 	@throw A SoundException if the sound failed to be played.
 */
-void						AudioManager::playSound(std::string sound_name, float volume) {
+void						AudioManager::playSound(std::string sound_name, float volume, bool loop) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		AudioManager::get()._playSound(sound_name, volume);
+		AudioManager::get()._playSound(sound_name, volume, loop);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_playSound(std::string sound_name, float volume) {
+void						AudioManager::_playSound(std::string sound_name, float volume, bool loop) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
 		volume = volume > 1.0 ? 1.0 : volume;
-		sound->play(volume,  _volume_master * _volume_sound);
+		sound->play(volume,  _volume_master * _volume_sound, loop);
 	}
 	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the sound '" << sound_name << "' but it has not been loaded.");

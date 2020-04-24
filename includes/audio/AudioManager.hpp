@@ -10,6 +10,7 @@
 #define BOMB_EXPLOSION_SOUND "sounds/bomb_explosion.ogg"
 #define PLAYER_HURT_SOUND "sounds/player_hurt.wav"
 #define PLAYER_DEATH_SOUND "sounds/player_death.wav"
+#define PLAYER_RUN_SOUND "sounds/player_run.ogg"
 #define BONUS_SOUND "sounds/bonus.wav"
 #define BONUS_DISAPPEAR_SOUND "sounds/bonus_disappear.wav"
 #define NEW_LIFE_SOUND "sounds/new_life.wav"
@@ -43,7 +44,7 @@ public:
 	static void								unloadMusic(std::string music_name);
 
 	static void								loadSound(std::string file_name);
-	static void								playSound(std::string sound_name, float volume = 1.0);
+	static void								playSound(std::string sound_name, float volume = 1.0, bool loop = false);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
 	static void								stopSound(std::string sound_name);
@@ -69,7 +70,7 @@ private:
 	void									_unloadMusic(std::string music_name);
 
 	void									_loadSound(std::string file_name);
-	void									_playSound(std::string sound_name, float volume);
+	void									_playSound(std::string sound_name, float volume = 1.0, bool loop = false);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
 	void									_stopSound(std::string sound_name);
