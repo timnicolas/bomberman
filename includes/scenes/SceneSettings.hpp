@@ -22,9 +22,11 @@ public:
 		int				height;
 	};
 
-	static const int			nb_resolution = 6;
+	static const int			nb_resolution = 7;
 	static SceneSettings::res	resolutions[SceneSettings::nb_resolution];
 	static const std::string	audio_name[3];
+
+	bool					startFitToScreen;
 
 	virtual ~SceneSettings();
 	explicit SceneSettings(Gui * gui, float const &dtTime);
@@ -34,6 +36,8 @@ public:
 
 	virtual bool				init();
 	virtual bool				update();
+
+	glm::ivec2					getCurResolution() const;
 
 private:
 	SceneSettings();
@@ -45,6 +49,7 @@ private:
 	void						_updateMouseSensitivity();
 	void						_updateFullscreen();
 	void						_updateResolution(bool go_right);
+	void						_resetKeys();
 	void						_returnQuit();
 	void						_cancelQuit();
 
@@ -61,15 +66,17 @@ private:
 	float						_text_scale = 1.5f;
 	int							_input_configuring;
 	SceneSettings::res			_current_resolution;
-	SceneSettings::res			_custom_res;
 	int							_select_res;
 
 	/* UI object */
 	SettingsType::Enum			_current_pane;
 	std::list<ABaseUI*>			_panes[SettingsType::nb_types];
 	ButtonUI					*_key_buttons[Inputs::nb_input];
+	ButtonUI					*_paneSelection[SettingsType::nb_types];
 	ButtonUI					*_fullscreen_button;
+	ButtonUI					*_fit_to_screen_button;
 	TextUI						*_resolution_text;
+	TextUI						*_reloadWinText;
 
 	/* temporary settings */
 	bool						_fullscreen;
@@ -77,9 +84,11 @@ private:
 
 	/* UI listeners */
 	bool						_return;
+	bool						_reset;
 	bool						_next_resolution;
 	bool						_prev_resolution;
 	bool						_update_fullscreen;
+	bool						_update_fit_to_screen;
 	bool						_save_audio[3];
 	float						_update_audio[3];
 	bool						_save_mouse_sens;

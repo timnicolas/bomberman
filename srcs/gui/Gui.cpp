@@ -38,8 +38,13 @@ Gui::~Gui() {
 
 	// properly quit sdl
 	SDL_GL_DeleteContext(_context);
-	SDL_DestroyWindow(_win);
-    SDL_Quit();
+	try {
+		SDL_DestroyWindow(_win);
+		SDL_Quit();
+	}
+	catch (std::exception & e) {
+		logWarn("failed to exit proprely SDL window");
+	}
 }
 
 Gui::Gui(Gui const &src)
@@ -132,6 +137,9 @@ bool	Gui::init() {
 
 	/* init UI interface */
 	try {
+		gameInfo.savedWindowSize.x = s.j("graphics").i("width");
+		gameInfo.savedWindowSize.y = s.j("graphics").i("height");
+		gameInfo.isSavedFullscreen = s.j("graphics").b("fullscreen");
 		ABaseUI::init(gameInfo.windowSize, s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size"));
 		ABaseUI::loadFont("title", s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size") * 2);
 		ABaseUI::loadFont("cheatcode", s.j("fonts").j("cheatcode").s("file"), s.j("fonts").j("cheatcode").u("size") * 3);
@@ -309,7 +317,13 @@ bool	Gui::_protect_resolution() {
 		logWarn("Screen too small.");
 		return false;
 	}
-	logDebug("width max: " << dm.w << " ; height max: " << dm.h);
+	gameInfo.maxWindowSize.x = dm.w;
+	gameInfo.maxWindowSize.y = dm.h;
+	if (s.j("graphics").b("fitToScreen")) {
+		s.j("graphics").i("width") = gameInfo.maxWindowSize.x;
+		s.j("graphics").i("height") = gameInfo.maxWindowSize.y;
+		resolution_corrected = true;
+	}
 	if (dm.w < width) {
 		width = dm.w;
 		resolution_corrected = true;
@@ -328,6 +342,7 @@ bool	Gui::_protect_resolution() {
 		height = width * 9.0 / 16.0;
 		resolution_corrected = true;
 	}
+	logDebug("Screen resolution: " << width << "x" << height);
 	if (resolution_corrected) {
 		gameInfo.windowSize.x = width;
 		gameInfo.windowSize.y = height;

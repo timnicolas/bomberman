@@ -2,6 +2,7 @@
 #include "SceneGame.hpp"
 #include "Save.hpp"
 #include "SceneCheatCode.hpp"
+#include "SceneManager.hpp"
 
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -145,13 +146,22 @@ bool	SceneLevelSelection::update() {
 				}
 			} catch (std::exception const &e) {
 				logErr("Error: " << e.what());
-				return false;
+				SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
+					SceneManager::getScene(SceneNames::CHEAT_CODE)
+				);
+				scCheatCode.clearAllLn();
+				std::stringstream ss;
+				ss << "Level " << _currentLvl << ": " << e.what();
+				scCheatCode.logerr(ss.str());
+				scCheatCode.unlockLevel(_currentLvl + 1);
+				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+				return true;
 			}
 			SceneManager::loadScene(SceneNames::GAME);
 			return true;
 		}
 	}
-	if (_states.menu) {
+	if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
