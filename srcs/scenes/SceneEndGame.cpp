@@ -54,12 +54,12 @@ bool			SceneEndGame::init() {
 		addTitle(tmpPos, tmpSize, "Bomberman");
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight;
-		addText(tmpPos, {menuWidth, menuHeight}, "Thank's you for playing")
+		tmpPos.y -= menuHeight * 1.3;
+		addText(tmpPos, {menuWidth, menuHeight}, "Thank's you for playing !")
 			.setTextAlign(TextAlign::CENTER);
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight;
+		tmpPos.y -= menuHeight * 1.3;
 		addText(tmpPos, {menuWidth, menuHeight}, "Ernest  Marin")
 			.setTextAlign(TextAlign::CENTER);
 
