@@ -4,6 +4,7 @@
 #include "Bonus.hpp"
 #include "Save.hpp"
 #include "SceneLevelSelection.hpp"
+#include "EnemyFly.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
@@ -311,7 +312,7 @@ int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 			summonPos.y += scGame.player->getIntPos().y;
 
 		/* summon */
-		bool isFly = (args[1] == "enemyFly") ? 1 : 0;
+		bool isFly = (args[1] == ENEMY_FLY_STR) ? 1 : 0;
 		if (scGame.player != nullptr && scGame.insertEntity(args[1], summonPos, isFly)) {
 			_addLine("summon " + args[1] + " at " + std::to_string(summonPos.x) + " " + std::to_string(summonPos.y));
 		}

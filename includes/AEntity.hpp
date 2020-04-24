@@ -28,6 +28,7 @@ namespace Type {
 		FLAG,
 		END,
 		BONUS,
+		SPAWNER,
 		ALL,
 		NONE,
 	};

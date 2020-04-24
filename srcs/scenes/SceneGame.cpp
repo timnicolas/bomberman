@@ -26,22 +26,22 @@
 
 // -- Static members initialisation --------------------------------------------
 
-std::map<std::string, SceneGame::Entity> SceneGame::_entitiesCall = {
-	{"player", {EntityType::PLAYER, [](SceneGame &game) -> AEntity* {return new Player(game);}}},
-	{"bomb", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
-	{"wall", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
+std::map<std::string, SceneGame::Entity> SceneGame::entitiesCall = {
+	{PLAYER_STR, {EntityType::PLAYER, [](SceneGame &game) -> AEntity* {return new Player(game);}}},
+	{BOMB_STR, {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Bomb(game);}}},
+	{WALL_STR, {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game);}}},
 	{"block", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Wall(game, Block::BLOCK);}}},
-	{"crispy", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Crispy(game);}}},
-	{"flag", {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
-	{"end", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
+	{CRISPY_STR, {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new Crispy(game);}}},
+	{FLAG_STR, {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
+	{END_STR, {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
 	{"empty", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
-	{"enemyBasic", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyBasic(game);}}},
-	{"enemyWithEye", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
-	{"enemyFollow", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFollow(game);}}},
-	{"enemyFly", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFly(game);}}},
-	{"enemyCrispy", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyCrispy(game);}}},
-	{"enemyFrog", {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFrog(game);}}},
+	{ENEMY_BASIC_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyBasic(game);}}},
+	{ENEMY_WITH_EYE_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
+	{ENEMY_FOLLOW_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFollow(game);}}},
+	{ENEMY_FLY_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFly(game);}}},
+	{ENEMY_CRISPY_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyCrispy(game);}}},
+	{ENEMY_FROG_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFrog(game);}}},
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -59,6 +59,9 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelEnemies = 0;
 	levelCrispies = 0;
 	_draw3dMenu = false;  // disable drawing 3D menu
+	_terrain = nullptr;
+	enemiesToKill = 0;
+	enemiesKilled = 0;
 }
 
 SceneGame::~SceneGame() {
@@ -106,6 +109,7 @@ SceneGame::~SceneGame() {
 	delete _menuModels.player;
 	delete _menuModels.robot;
 	delete _menuModels.flower;
+	delete _terrain;
 }
 
 SceneGame::SceneGame(SceneGame const &src)
@@ -131,6 +135,8 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 		score = rhs.score;
 		levelEnemies = rhs.levelEnemies;
 		levelCrispies = rhs.levelCrispies;
+		enemiesToKill = rhs.enemiesToKill;
+		enemiesKilled = rhs.enemiesKilled;
 	}
 	return *this;
 }
@@ -166,24 +172,40 @@ bool			SceneGame::init() {
 		i++;
 	}
 
-	/* load all models for menu */
-	_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime(),
-		ETransform({0, 0, 0}, PLAYER_SIZE));
-	_menuModels.player->play = true;
-	_menuModels.player->loopAnimation = true;
-	_menuModels.player->setAnimation("Armature|idle");
+	try {
+		/* load all models for menu */
+		_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime(),
+			ETransform({0, 0, 0}, PLAYER_SIZE));
+		_menuModels.player->play = true;
+		_menuModels.player->loopAnimation = true;
+		_menuModels.player->setAnimation("Armature|idle");
 
-	_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime(),
-		ETransform({0, 0, 0}, ENEMY_WITH_EYE_SIZE));
-	_menuModels.flower->play = true;
-	_menuModels.flower->loopAnimation = true;
-	_menuModels.flower->setAnimation("Armature|idle");
+		_menuModels.flower = new Model(ModelsManager::getModel("flower"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_WITH_EYE_SIZE));
+		_menuModels.flower->play = true;
+		_menuModels.flower->loopAnimation = true;
+		_menuModels.flower->setAnimation("Armature|idle");
 
-	_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime(),
-		ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
-	_menuModels.robot->play = true;
-	_menuModels.robot->loopAnimation = true;
-	_menuModels.robot->setAnimation("Armature|idle");
+		_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
+		_menuModels.robot->play = true;
+		_menuModels.robot->loopAnimation = true;
+		_menuModels.robot->setAnimation("Armature|idle");
+
+		// init terrain model
+		if (!_terrain) {
+			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
+			ETransform({0, -2, 0}));
+		}
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
 
 	_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
 		ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
@@ -324,6 +346,10 @@ bool	SceneGame::update() {
 		if (!enemy->update())
 			return false;
 	}
+	for (auto &&spawner : spawners) {
+		if (!spawner->update())
+			return false;
+	}
 	if (!player->update()) {
 		return false;
 	}
@@ -390,17 +416,23 @@ bool	SceneGame::draw() {
  */
 bool	SceneGame::drawForMenu() {
 	/* draw models */
-	_menuModels.player->transform.setRot(0);
-	_menuModels.player->transform.setPos({-0.9, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
-		_menuModels.player->setAnimation("Armature|idle");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setRot(0);
+		_menuModels.player->transform.setPos({-0.9, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
+			_menuModels.player->setAnimation("Armature|idle");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setRot(0);
-	_menuModels.flower->transform.setPos({0.9, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
-		_menuModels.flower->setAnimation("Armature|idle");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setRot(0);
+		_menuModels.flower->transform.setPos({0.9, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
+			_menuModels.flower->setAnimation("Armature|idle");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -415,9 +447,17 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
+	try {
+		_terrain->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	if (s.j("debug").j("show").b("baseBoard")) {
 		// draw floor
-		_gui->drawCube(Block::FLOOR, {0.0f, -0.3f, 0.0f}, {size.x, 0.3f, size.y});
+		_gui->drawCube(Block::FLOOR, {0.0f, -1.5f, 0.0f}, {size.x, 1.5f, size.y});
 	}
 
 	for (auto &&board_it0 : board) {
@@ -476,17 +516,23 @@ bool	SceneGame::drawGame() {
  */
 bool	SceneGame::drawVictory() {
 	/* draw models */
-	_menuModels.player->transform.setRot(0);
-	_menuModels.player->transform.setPos({-1, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
-		_menuModels.player->setAnimation("Armature|dance");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setRot(0);
+		_menuModels.player->transform.setPos({-1, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|dance")
+			_menuModels.player->setAnimation("Armature|dance");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setRot(0);
-	_menuModels.flower->transform.setPos({1, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
-		_menuModels.flower->setAnimation("Armature|loose");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setRot(0);
+		_menuModels.flower->transform.setPos({1, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|loose")
+			_menuModels.flower->setAnimation("Armature|loose");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -502,17 +548,23 @@ bool	SceneGame::drawVictory() {
  */
 bool	SceneGame::drawGameOver() {
 	/* draw models */
-	_menuModels.player->transform.setRot(0);
-	_menuModels.player->transform.setPos({-1, 0, 0});
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
-		_menuModels.player->setAnimation("Armature|loose");
-	_menuModels.player->draw();
+	try {
+		_menuModels.player->transform.setRot(0);
+		_menuModels.player->transform.setPos({-1, 0, 0});
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|loose")
+			_menuModels.player->setAnimation("Armature|loose");
+		_menuModels.player->draw();
 
-	_menuModels.flower->transform.setRot(0);
-	_menuModels.flower->transform.setPos({1, 0, 0});
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
-		_menuModels.flower->setAnimation("Armature|dance");
-	_menuModels.flower->draw();
+		_menuModels.flower->transform.setRot(0);
+		_menuModels.flower->transform.setPos({1, 0, 0});
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|dance")
+			_menuModels.flower->setAnimation("Armature|dance");
+		_menuModels.flower->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -528,38 +580,44 @@ bool	SceneGame::drawGameOver() {
  */
 bool	SceneGame::drawEndGame() {
 	/* draw models */
-	float tmpX = _menuModels.player->transform.getPos().x;
-	if (tmpX < -3 || tmpX > 7)
-		tmpX = -3;
-	tmpX += 0.03;
+	try {
+		float tmpX = _menuModels.player->transform.getPos().x;
+		if (tmpX < -3 || tmpX > 7)
+			tmpX = -3;
+		tmpX += 0.03;
 
-	_menuModels.player->animationSpeed = 0.8;
-	_menuModels.player->transform.setPos({tmpX, -1, -2});
-	_menuModels.player->transform.setRot(90);
-	if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
-		_menuModels.player->setAnimation("Armature|run");
-	_menuModels.player->draw();
+		_menuModels.player->animationSpeed = 0.8;
+		_menuModels.player->transform.setPos({tmpX, -1, -2});
+		_menuModels.player->transform.setRot(90);
+		if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
+			_menuModels.player->setAnimation("Armature|run");
+		_menuModels.player->draw();
 
-	tmpX -= 1.3;
-	_menuModels.robot->transform.setPos({tmpX, -1, -2});
-	_menuModels.robot->transform.setRot(90);
-	if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
-		_menuModels.robot->setAnimation("Armature|run");
-	_menuModels.robot->draw();
+		tmpX -= 1.3;
+		_menuModels.robot->transform.setPos({tmpX, -1, -2});
+		_menuModels.robot->transform.setRot(90);
+		if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
+			_menuModels.robot->setAnimation("Armature|run");
+		_menuModels.robot->draw();
 
-	tmpX -= 1.3;
-	_menuModels.flower->transform.setPos({tmpX, -1, -2});
-	_menuModels.flower->transform.setRot(90);
-	if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
-		_menuModels.flower->setAnimation("Armature|run");
-	_menuModels.flower->draw();
+		tmpX -= 1.3;
+		_menuModels.flower->transform.setPos({tmpX, -1, -2});
+		_menuModels.flower->transform.setRot(90);
+		if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
+			_menuModels.flower->setAnimation("Armature|run");
+		_menuModels.flower->draw();
 
-	tmpX -= 1.3;
-	_menuModels.fly->transform.setPos({tmpX, -0.2, -2});
-	_menuModels.fly->transform.setRot(90);
-	if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
-		_menuModels.fly->setAnimation("Armature|run");
-	_menuModels.fly->draw();
+		tmpX -= 1.3;
+		_menuModels.fly->transform.setPos({tmpX, -0.2, -2});
+		_menuModels.fly->transform.setRot(90);
+		if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
+			_menuModels.fly->setAnimation("Armature|run");
+		_menuModels.fly->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -602,6 +660,9 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	}
 	logDebug("load level " << levelId);
 	bool result = _loadLevel(levelId);
+
+	// reinit printed values
+	_loadGameInfos();
 
 	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
 	_gui->cam->lookAt(glm::vec3(
@@ -708,6 +769,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
 	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
 	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
+	lvl->add<int64_t>("enemiesToKill", 0).setMin(0).setMax(9999);
 
 	// foreach empty zone, chance to create a wall
 	lvl->add<uint64_t>("wallGenPercent", 40).setMin(0).setMax(100);
@@ -715,28 +777,36 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<SettingsJson>("objects");
 		lvl->j("objects").add<std::string>("empty", " ");
 		// unique player on game.
-		lvl->j("objects").add<std::string>("player", "p");
+		lvl->j("objects").add<std::string>(PLAYER_STR, "p");
 		// destructing element dropped by the player.
-		lvl->j("objects").add<std::string>("bomb", "x");
+		lvl->j("objects").add<std::string>(BOMB_STR, "x");
 		// indestructible element outside the board
-		lvl->j("objects").add<std::string>("wall", "w");
+		lvl->j("objects").add<std::string>(WALL_STR, "w");
 		// indestructible element of the board
 		lvl->j("objects").add<std::string>("block", "b");
 		// destructable element, who can give bonuses randomly
-		lvl->j("objects").add<std::string>("crispy", "c");
+		lvl->j("objects").add<std::string>(CRISPY_STR, "c");
 		// flag to get end
-		lvl->j("objects").add<std::string>("flag", "f");
+		lvl->j("objects").add<std::string>(FLAG_STR, "f");
 		// end of level when all flag
-		lvl->j("objects").add<std::string>("end", "e");
+		lvl->j("objects").add<std::string>(END_STR, "e");
 		// no spawn zone
 		lvl->j("objects").add<std::string>("safe", "_");
 		/* enemies */
-		lvl->j("objects").add<std::string>("enemyBasic", "0");
-		lvl->j("objects").add<std::string>("enemyWithEye", "1");
-		lvl->j("objects").add<std::string>("enemyFollow", "2");
-		lvl->j("objects").add<std::string>("enemyFly", "3");
-		lvl->j("objects").add<std::string>("enemyCrispy", "4");
-		lvl->j("objects").add<std::string>("enemyFrog", "5");
+		lvl->j("objects").add<std::string>(ENEMY_BASIC_STR, "0");
+		lvl->j("objects").add<std::string>(ENEMY_WITH_EYE_STR, "1");
+		lvl->j("objects").add<std::string>(ENEMY_FOLLOW_STR, "2");
+		lvl->j("objects").add<std::string>(ENEMY_FLY_STR, "3");
+		lvl->j("objects").add<std::string>(ENEMY_CRISPY_STR, "4");
+		lvl->j("objects").add<std::string>(ENEMY_FROG_STR, "5");
+
+	SettingsJson * spawnerPattern = new SettingsJson();
+	spawnerPattern->add<std::string>("typeEnemy", "");
+	spawnerPattern->add<uint64_t>("frequency", 5);
+	spawnerPattern->add<SettingsJson>("position");
+	spawnerPattern->j("position").add<uint64_t>("x");
+	spawnerPattern->j("position").add<uint64_t>("y");
+	lvl->addList<SettingsJson>("spawner", spawnerPattern);
 
 	SettingsJson * mapPattern = new SettingsJson();
 	mapPattern->add<std::string>("0", "");
@@ -823,6 +893,9 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	delete player;
 	player = nullptr;
 
+	enemiesToKill = 0;
+	enemiesKilled = 0;
+
 	level = levelId;  // save new level ID
 	SettingsJson & lvl = *(_mapsList[level]);
 
@@ -840,6 +913,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	levelTime = lvl.i("time");
 
+	enemiesToKill = lvl.i("enemiesToKill");
+
 	flags = 0;
 	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
@@ -853,7 +928,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		// loop through line to create the entities
 		for (uint32_t i = 0; i < size.x; i++) {
 			std::string name;
-			for (auto &&entitYCall : _entitiesCall) {
+			for (auto &&entitYCall : entitiesCall) {
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0])
 					name = entitYCall.first;
 			}
@@ -873,7 +948,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 			throw SceneException(("Map fly width error on line "+std::to_string(j)).c_str());
 		for (uint32_t i = 0; i < size.x; i++) {
 			std::string name;
-			for (auto &&entitYCall : _entitiesCall) {
+			for (auto &&entitYCall : entitiesCall) {
 				if (line[i] == lvl.j("objects").s(entitYCall.first)[0])
 					name = entitYCall.first;
 			}
@@ -886,6 +961,35 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					+ std::to_string(j) + "): " + line[i]).c_str());
 			}
 		}
+	}
+
+	for (auto spawner : lvl.lj("spawner").list) {
+		std::vector<std::string> typeEnemy;
+		if (spawner->s("typeEnemy").size() == 0)
+			throw SceneException("No type enemies defined in spawner");
+		glm::uvec2 spawnerPos = {spawner->j("position").u("x"), spawner->j("position").u("y")};
+		if (spawnerPos.x >= size.x || spawnerPos.y >= size.y) {
+			throw SceneException("Wrong position for spawner");
+		}
+		bool	found = false;
+		for (auto character : spawner->s("typeEnemy")) {
+			found = false;
+			for (auto &&entityCall : entitiesCall) {
+				if (character == lvl.j("objects").s(entityCall.first)[0]) {
+					if (entityCall.second.entityType != EntityType::ENEMY)
+						throw SceneException("Spawner only for enemies.");
+					typeEnemy.push_back(entityCall.first);
+					found = true;
+				}
+			}
+			if (!found)
+				throw SceneException("Spawner only for enemies.");
+		}
+		Spawner *spawnerEntity = new Spawner(*this);
+		spawnerEntity->setFrequency(spawner->u("frequency"))
+			.setTypeEnemy(typeEnemy)
+			.setPos({spawnerPos.x, 0, spawnerPos.y});
+		spawners.push_back(spawnerEntity);
 	}
 
 	if (player == nullptr)
@@ -920,7 +1024,7 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 	}
 
 	/* if invalid entity name */
-	if (_entitiesCall.find(name) == _entitiesCall.end()) {
+	if (entitiesCall.find(name) == entitiesCall.end()) {
 		logErr("invalid entity name " << name << " in SceneGame::insertEntity");
 		return false;
 	}
@@ -939,7 +1043,7 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 	if (name == "empty" && !isFly)
 		entity = Crispy::generateCrispy(*this, wallGenPercent);
 	else
-		entity = _entitiesCall[name].entity(*this);
+		entity = entitiesCall[name].entity(*this);
 
 	// do nothing on empty block
 	if (entity == nullptr)
@@ -950,7 +1054,7 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 			reinterpret_cast<AObject *>(entity)->isInFlyBoard = true;
 			boardFly[pos.x][pos.y].push_back(entity);
 		}
-		else if (_entitiesCall[name].entityType == EntityType::ENEMY) {
+		else if (entitiesCall[name].entityType == EntityType::ENEMY) {
 			enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 			enemies.back()->setPosition({pos.x, 1, pos.y});
 		}
@@ -959,7 +1063,7 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 		}
 	}
 	else {  // if not fly
-		switch (_entitiesCall[name].entityType) {
+		switch (entitiesCall[name].entityType) {
 			case EntityType::PLAYER:
 				if (player == nullptr) {
 					player = reinterpret_cast<Player *>(entity);
@@ -994,6 +1098,11 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 					delete entity;
 					return false;
 				}
+				if (reinterpret_cast<AEnemy *>(entity)->getCollision({pos.x, 0, pos.y}).size()) {
+					// don't create if we have a other Enemy at the same place
+					delete entity;
+					return false;
+				}
 				enemies.push_back(reinterpret_cast<AEnemy *>(entity));
 				enemies.back()->setPosition({pos.x, 0, pos.y});
 				break;
@@ -1021,6 +1130,7 @@ void SceneGame::_initGameInfos() {
 		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
 		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
+		allUI.enemiesCounterText = &addText(VOID_SIZE, VOID_SIZE, "nb-enemies").setTextAlign(TextAlign::RIGHT);
 		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
 		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusBombImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb.png");
@@ -1033,6 +1143,35 @@ void SceneGame::_initGameInfos() {
 		allUI.bonusBombpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bombpass.png");
 		allUI.bonusShieldImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/shield.png");
 		allUI.bonusShieldText = &addText(VOID_SIZE, VOID_SIZE, "invulnerable").setTextAlign(TextAlign::RIGHT);
+	} catch (ABaseUI::UIException const & e) {
+		logErr(e.what());
+	}
+}
+
+/**
+ * @brief LoadGameInformations
+ */
+void		SceneGame::_loadGameInfos() {
+	try {
+		allUI.timeLeftImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.timeLeftText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.scoreImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.scoreText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.lifeImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.lifeText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.enemiesCounterText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.speedImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.speedText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlameImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlameText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlampassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusWallpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusDetonatorImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusShieldImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusShieldText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 	}
@@ -1083,6 +1222,18 @@ void			SceneGame::_updateGameInfos() {
 		allUI.scoreText->setPos({tmpPos.x, textY}).setText(score.toString())
 			.setSize(VOID_POS).setCalculatedSize();
 		tmpPos.x += allUI.scoreText->getSize().x;
+
+		/* enemies counter */
+		if (enemiesToKill > 0) {
+			tmpPos.x += padding;
+			std::string enemiesStr = std::to_string(enemiesKilled) + "/" + std::to_string(enemiesToKill);
+			glm::vec4 color = enemiesKilled >= enemiesToKill
+												? colorise(s.j("colors").j("green").u("color"))
+												: colorise(s.j("colors").j("red").u("color"));
+			allUI.enemiesCounterText->setPos({tmpPos.x, textY}).setText(enemiesStr)
+				.setSize(VOID_POS).setCalculatedSize().setTextColor(color);
+			tmpPos.x += allUI.enemiesCounterText->getSize().x;
+		}
 
 		// -- Bottom -----------
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
@@ -1220,7 +1371,8 @@ SettingsJson	&SceneGame::getSettingsLevel() const {
 	if (level == NO_LEVEL)
 		throw SceneGameException("no level set");
 	if (level > (int32_t)_mapsList.size())
-		throw SceneGameException(("unable to load level " + std::to_string(level) + ": doesn't exist").c_str());
+		throw SceneGameException(("unable to load level " + std::to_string(level)
+		+ ": doesn't exist").c_str());
 	return *(_mapsList[level]);
 }
 
@@ -1231,7 +1383,7 @@ SettingsJson	&SceneGame::getSettingsLevel() const {
  */
 std::vector<std::string> SceneGame::getAllEntityNames() {
 	std::vector<std::string> res;
-	for (auto && it : _entitiesCall) {
+	for (auto && it : entitiesCall) {
 		res.push_back(it.first);
 	}
 	return res;
@@ -1244,3 +1396,10 @@ SceneGame::SceneGameException::SceneGameException()
 
 SceneGame::SceneGameException::SceneGameException(const char* whatArg)
 : std::runtime_error(std::string(std::string("SceneGameError: ") + whatArg).c_str()) {}
+
+// -- DrawForMenu struct -------------------------------------------------------
+SceneGame::DrawForMenu::DrawForMenu() {
+	player = nullptr;
+	flower = nullptr;
+	robot = nullptr;
+}
