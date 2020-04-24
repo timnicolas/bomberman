@@ -52,7 +52,11 @@ bool			SceneEndGame::init() {
 		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
-		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
+		allUI.border = &addRect(VOID_SIZE, VOID_SIZE)
+			.setTextAlign(TextAlign::CENTER);
+
+		allUI.text = &addText(VOID_SIZE, VOID_SIZE, "Ernest  Marin    Emilien  Baudet    Tim  Nicolas    Guilhem  Smith");
+		allUI.text->setPos({winSz.x / 2 - allUI.text->getSize().x / 2, 30});
 
 		_initBG();
 	}
