@@ -20,6 +20,7 @@ namespace SceneNames {
 	static std::string const SETTINGS = "settings";
 	static std::string const LOADGAME = "loadGame";
 	static std::string const CHEAT_CODE = "cheatCode";
+	static std::string const END_GAME = "endGame";
 }  // namespace SceneNames
 
 /**

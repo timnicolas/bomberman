@@ -148,6 +148,7 @@ public:
 	bool			drawForMenu();
 	bool			drawVictory();
 	bool			drawGameOver();
+	bool			drawEndGame();
 	bool			loadLevel(int32_t levelId);
 	bool			insertEntity(std::string const & name, glm::ivec2 pos, bool isFly = false, uint64_t wallGenPercent = 0);
 
