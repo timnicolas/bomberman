@@ -7,7 +7,7 @@
 
 Crispy::Crispy(SceneGame &game) : AObject(game) {
 	type = Type::CRISPY;
-	name = "Crispy";
+	name = CRISPY_STR;
 	destructible = true;
 }
 

@@ -102,6 +102,7 @@ SRC =	main.cpp \
 		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
 \
+		elements/Spawner.cpp \
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
 		elements/EnemyWithEye.cpp \
@@ -135,6 +136,7 @@ SRC =	main.cpp \
 		scenes/SceneCheatCode.cpp \
 		scenes/SceneCheatCode_exec.cpp \
 		scenes/SceneEndGame.cpp \
+		scenes/SceneDebug.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -185,6 +187,7 @@ HEAD =	bomberman.hpp \
 		AEnemy.hpp \
 		elements/Player.hpp \
 \
+		elements/Spawner.hpp \
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
 		elements/EnemyWithEye.hpp \
@@ -217,6 +220,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneSettings.hpp \
 		scenes/SceneCheatCode.hpp \
 		scenes/SceneEndGame.hpp \
+		scenes/SceneDebug.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \

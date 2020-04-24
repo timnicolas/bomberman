@@ -7,7 +7,7 @@ Wall::Wall(SceneGame &game, Block::Enum blockType)
 : AObject(game), _blockType(blockType)
 {
 	type = Type::WALL;
-	name = "Wall";
+	name = WALL_STR;
 }
 
 Wall::~Wall() {

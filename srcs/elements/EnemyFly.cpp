@@ -6,7 +6,7 @@
 EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game)
 {
-	name = "EnemyFly";
+	name = ENEMY_FLY_STR;
 	size = glm::vec3(.8, .8, .8);
 }
 

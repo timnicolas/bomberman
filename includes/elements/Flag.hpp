@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+#define FLAG_STR "flag"
+
 /**
  * @brief This is the flag object
  */
