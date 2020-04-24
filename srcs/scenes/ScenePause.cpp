@@ -50,6 +50,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.3;
 		addButton(tmpPos, tmpSize, "restart")
+			.setKeyLeftClickScancode(SDL_SCANCODE_R)
 			.addButtonLeftListener(&_states.restart);
 
 		tmpPos.y -= menuHeight * 1.3;

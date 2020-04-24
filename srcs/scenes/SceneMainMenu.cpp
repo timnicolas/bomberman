@@ -46,8 +46,10 @@ bool			SceneMainMenu::init() {
 		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "continue")
 			.addButtonLeftListener(&_states.continueGame);
 		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save")
+			.setKeyLeftClickScancode(SDL_SCANCODE_S)
 			.addButtonLeftListener(&_states.save);
 		allUI.newGame = &addButton(VOID_SIZE, VOID_SIZE, "new   game")
+			.setKeyLeftClickScancode(SDL_SCANCODE_N)
 			.addButtonLeftListener(&_states.newGame);
 		allUI.loadGame = &addButton(VOID_SIZE, VOID_SIZE, "load   saved   game")
 			.setKeyLeftClickInput(InputType::ACTION)

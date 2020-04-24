@@ -47,6 +47,7 @@ bool			SceneEndGame::init() {
 		allUI.mainMenu = &addButton(VOID_SIZE, VOID_SIZE, "main   menu")
 			.addButtonLeftListener(&_states.mainMenu);
 		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save")
+			.setKeyLeftClickScancode(SDL_SCANCODE_S)
 			.addButtonLeftListener(&_states.save);
 		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)

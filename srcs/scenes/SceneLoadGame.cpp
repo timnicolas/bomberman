@@ -157,6 +157,7 @@ void SceneLoadGame::load() {
 			.setColor(colorise(s.j("colors").j("blue").u("color")))
 			.setBorderColor(colorise(s.j("colors").j("blue").u("color")))
 			.addButtonLeftListener(&_states.loadGame)
+			.setKeyLeftClickInput(InputType::CONFIRM)
 			.setMaster(previewGame);
 		tempPrevPos.y -= tmpSize.y * 1.3;
 		previewGameUI.deleteGame = &addButton(tempPrevPos, tempPrevSize, "delete")
@@ -164,6 +165,7 @@ void SceneLoadGame::load() {
 			.setColor(colorise(s.j("colors").j("red").u("color")))
 			.setBorderColor(colorise(s.j("colors").j("red").u("color")))
 			.addButtonLeftListener(&_states.deleteGame)
+			.setKeyLeftClickScancode(SDL_SCANCODE_DELETE)
 			.setMaster(previewGame);
 
 		tmpPos.y -= savedGamesSize.y;
