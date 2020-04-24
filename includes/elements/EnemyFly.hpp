@@ -7,6 +7,7 @@
 #include "SceneGame.hpp"
 
 #define FLY_HEIGHT 1.0
+#define ENEMY_FLY_STR "enemyFly"
 
 /**
  * @brief This is an enemy object
