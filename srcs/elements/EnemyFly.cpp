@@ -157,7 +157,7 @@ bool	EnemyFly::init() {
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("flyingBot");
 		_model = new Model(openglModel, game.getDtTime(), ETransform({1.5,
-			FLY_HEIGHT, 1.5}, {.7, .7, .7}));
+			FLY_HEIGHT, 1.5}, ENEMY_FLY_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|run");

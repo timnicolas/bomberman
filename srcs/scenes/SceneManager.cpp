@@ -23,7 +23,7 @@ SceneManager::SceneManager()
 : _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
-  _scene(SceneNames::END_GAME),
+  _scene(SceneNames::MAIN_MENU),
   _isInCheatCode(false),
   _showCheatCodeTextTime(0),
   _sceneLoadedCurrentFrame(false)

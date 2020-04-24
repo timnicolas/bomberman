@@ -64,6 +64,7 @@ private:
 		Model *	player;
 		Model *	flower;
 		Model *	robot;
+		Model * fly;
 	};
 	DrawForMenu _menuModels;
 

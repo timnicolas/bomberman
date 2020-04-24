@@ -58,7 +58,7 @@ bool	Player::init() {
 		}
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
-		_model = new Model(openglModel, game.getDtTime(), ETransform(tmpPos, {1.3, 1.3, 1.3}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform(tmpPos, PLAYER_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
