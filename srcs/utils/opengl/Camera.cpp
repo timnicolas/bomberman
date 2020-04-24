@@ -30,6 +30,8 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
 	_updateProjection();
 
 	_updateCameraVectors();
+
+	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
 Camera::~Camera() {
@@ -37,6 +39,7 @@ Camera::~Camera() {
 
 Camera::Camera(Camera const &src) {
 	*this = src;
+	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
 Camera	&Camera::operator=(Camera const &rhs) {
@@ -383,7 +386,7 @@ void	Camera::frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio,
  * @param point The 3D point
  * @return int The point position (FRCL_INSIDE == is inside)
  */
-int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) {
+int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) const {
 	CAMERA_FLOAT	pcz, pcx, pcy, aux;
 	int		res = FRCL_INSIDE;
 
@@ -429,7 +432,7 @@ int		Camera::frustumCullingCheckPoint(CAMERA_VEC3 const &point) {
  * @param size The scale in X Y and Z of the cube
  * @return int The point position (FRCL_INSIDE == is inside)
  */
-int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size) {
+int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 const &size) const {
 	int			res;  // point1 & point2 & point3 ...
 	int			tmpRes;
 	CAMERA_VEC3	pos;

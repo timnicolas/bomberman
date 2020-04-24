@@ -115,8 +115,8 @@ class Camera {
 		/* frustum culling */
 		// to test if objects are inside or outside of the camera
 		void	frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMERA_FLOAT nearD, CAMERA_FLOAT farD);
-		int		frustumCullingCheckPoint(CAMERA_VEC3 const &point);  // check if a point is inside the camera
-		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size);  // check for a cube
+		int		frustumCullingCheckPoint(CAMERA_VEC3 const &point) const;  // check if a point is inside the camera
+		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 const &size) const;  // check for a cube
 
 		/* follow path */
 		void	setFollowPath(std::vector<CamPoint> const & path);

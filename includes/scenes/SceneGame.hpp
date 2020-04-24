@@ -65,8 +65,11 @@ private:
 		Model *	player;
 		Model *	flower;
 		Model *	robot;
+
+		DrawForMenu();
 	};
 	DrawForMenu _menuModels;
+	Model	*_terrain;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
