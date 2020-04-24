@@ -32,6 +32,17 @@ namespace AnimKeyType {
 	}};
 }  // namespace AnimKeyType
 
+struct	VerticesLimits {
+	float	xMin;
+	float	xMax;
+	float	yMin;
+	float	yMax;
+	float	zMin;
+	float	zMax;
+
+	VerticesLimits();
+};
+
 /**
  * @brief class to load and draw a 3d model from file
  *
@@ -53,6 +64,7 @@ class OpenGLModel {
 		bool		isAnimated() const;
 		std::vector<std::string>	getAnimationNames() const;
 		uint32_t	getNbAnimations() const;
+		Camera const	&getCam() const;
 
 		// Exceptions
 		class ModelException : public std::runtime_error {
