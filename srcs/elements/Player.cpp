@@ -13,9 +13,20 @@ Player::Player(SceneGame &game)
 	resetParams();
 	AudioManager::loadSound(PLAYER_HURT_SOUND);
 	AudioManager::loadSound(PLAYER_DEATH_SOUND);
+	AudioManager::loadSound(PLAYER_RUN_SOUND);
 }
 
 Player::~Player() {
+	if (_entityState.state == EntityState::RUNNING) {
+		try {
+			AudioManager::pauseSound(PLAYER_RUN_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
+	}
+	AudioManager::unloadSound(PLAYER_HURT_SOUND);
+	AudioManager::unloadSound(PLAYER_DEATH_SOUND);
+	AudioManager::unloadSound(PLAYER_RUN_SOUND);
 }
 
 Player::Player(Player const &src) : Player(src.game) {
@@ -418,11 +429,25 @@ void	Player::_move() {
 	}
 
 	if (moved) {
+		// update state on first move
+		if (_entityState.state != EntityState::RUNNING) {
+			try {
+				AudioManager::playSound(PLAYER_RUN_SOUND, 1.0, true);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		_moveTo(dir);
 	}
 	// update state on end move
 	else if (_entityState.state == EntityState::RUNNING) {
 		setState(EntityState::IDLE);
+		try {
+			// AudioManager::pauseSound(PLAYER_RUN_SOUND);
+			AudioManager::stopSound(PLAYER_RUN_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 	}
 }
 
