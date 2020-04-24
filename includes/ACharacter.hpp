@@ -70,7 +70,7 @@ public:
 	glm::vec3						getPos() const;
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
-	bool							takeDamage(const int damage);
+	virtual bool					takeDamage(const int damage);
 	virtual std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 	bool							tp(glm::vec3 tpPos);

@@ -6,6 +6,8 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define ENEMY_WITH_EYE_STR "enemyWithEye"
+
 /**
  * @brief This is an enemy object
  *

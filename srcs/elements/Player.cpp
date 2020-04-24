@@ -8,7 +8,7 @@ Player::Player(SceneGame &game)
 	_model = nullptr;
 	size = glm::vec3(0.7, 1.5, 0.7);
 	type = Type::PLAYER;
-	name = "Player";
+	name = PLAYER_STR;
 	resetParams();
 }
 

@@ -6,6 +6,7 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define ENEMY_FROG_STR "enemyFrog"
 #define WAIT_JUMP_TIME_MS		1000
 #define LONG_WAIT_JUMP_TIME_MS	5000
 #define CHANCE_LONG_WAIT		5  // one chance on 5 to have a long wait
