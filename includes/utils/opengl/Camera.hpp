@@ -119,6 +119,7 @@ class Camera {
 		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 &size);  // check for a cube
 
 		/* follow path */
+		void	resetFollowPath();
 		void	setFollowPath(std::vector<CamPoint> const & path);
 		void	setFollowRepeat(bool repeat);
 		void	setFollowSpeed(float speed_);
