@@ -207,6 +207,8 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	std::vector<Texture>	specularMaps;
 	std::vector<Texture>	normalMaps;
 
+	VerticesLimits			vLimits;
+
 	// process vertices
 	for (uint32_t i = 0; i < aiMesh->mNumVertices; ++i) {
 		Vertex	vertex;
@@ -230,8 +232,30 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 			vertex.tangents = glm::vec3();
 		}
 
+		// update vertices limits
+		if (vertex.pos.x < vLimits.xMin)
+			vLimits.xMin = vertex.pos.x;
+		if (vertex.pos.x > vLimits.xMax)
+			vLimits.xMax = vertex.pos.x;
+		if (vertex.pos.y < vLimits.yMin)
+			vLimits.yMin = vertex.pos.y;
+		if (vertex.pos.y > vLimits.yMax)
+			vLimits.yMax = vertex.pos.y;
+		if (vertex.pos.z < vLimits.zMin)
+			vLimits.zMin = vertex.pos.z;
+		if (vertex.pos.z > vLimits.zMax)
+			vLimits.zMax = vertex.pos.z;
+
 		vertices.push_back(vertex);
 	}
+
+	// calculate bounding box
+	BoundingBox	boundingBox;
+	boundingBox.startPoint = glm::vec3(vLimits.xMin, vLimits.yMin, vLimits.zMin);
+	boundingBox.size = glm::vec3(
+		vLimits.xMax - vLimits.xMin,
+		vLimits.yMax - vLimits.yMin,
+		vLimits.zMax - vLimits.zMin);
 
 	// process vertIndices
 	for (uint32_t i = 0; i < aiMesh->mNumFaces; ++i) {
@@ -264,8 +288,8 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	Material	mat = _loadMaterial(material);
 
 	// create the mesh
-	Mesh	*mesh = new Mesh(*_sh, aiMesh->mName.C_Str(), vertices, vertIndices,
-		textures, mat);
+	Mesh	*mesh = new Mesh(*this, *_sh, aiMesh->mName.C_Str(), vertices, vertIndices,
+		textures, mat, boundingBox);
 
 	// process mesh bones
 	_processBones(aiMesh, *mesh);
@@ -479,7 +503,7 @@ void	OpenGLModel::draw(float animationTimeTick) {
 
 	// draw all meshs
 	for (auto &mesh : _meshes) {
-		mesh->draw();
+		mesh->draw(_model);
 	}
 
 	glBindVertexArray(0);
@@ -585,7 +609,6 @@ uint32_t	OpenGLModel::getNbAnimations() const {
 	return 0;
 }
 
-
 /**
  * @brief return the availables animations names
  *
@@ -594,6 +617,8 @@ uint32_t	OpenGLModel::getNbAnimations() const {
 std::vector<std::string>	OpenGLModel::getAnimationNames() const {
 	return _animationNames;
 }
+
+Camera const	&OpenGLModel::getCam() const { return _cam; }
 
 // -- _setBonesTransform -------------------------------------------------------
 void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
@@ -794,3 +819,13 @@ OpenGLModel::ModelException::ModelException()
 OpenGLModel::ModelException::ModelException(char const *what_arg)
 : std::runtime_error(
 	std::string(std::string("ModelException: ") + what_arg).c_str()) {}
+
+// -- VerticesLimits -----------------------------------------------------------
+VerticesLimits::VerticesLimits() {
+	xMin = std::numeric_limits<float>::max();
+	xMax = std::numeric_limits<float>::lowest();
+	yMin = std::numeric_limits<float>::max();
+	yMax = std::numeric_limits<float>::lowest();
+	zMin = std::numeric_limits<float>::max();
+	zMax = std::numeric_limits<float>::lowest();
+}

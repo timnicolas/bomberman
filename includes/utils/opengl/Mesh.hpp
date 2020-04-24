@@ -11,6 +11,8 @@
 #include "Shader.hpp"
 #include "Material.hpp"
 
+class OpenGLModel;
+
 namespace TextureType {
 	enum Enum {
 		DIFFUSE,
@@ -34,6 +36,11 @@ struct	Vertex {
 	Vertex();  // default constructor, init bonesId and bonesW
 };
 
+struct	BoundingBox {
+	glm::vec3	startPoint;
+	glm::vec3	size;
+};
+
 struct	Texture {
 	uint32_t			id;
 	TextureType::Enum	type;
@@ -46,14 +53,14 @@ struct	Texture {
  */
 class	Mesh {
 	public:
-		Mesh(Shader &sh, std::string const &name, std::vector<Vertex> vertices,
+		Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name, std::vector<Vertex> vertices,
 			std::vector<uint32_t> vertIndices, std::vector<Texture> textures,
-			Material material);
+			Material material, BoundingBox boundingBox);
 		virtual ~Mesh();
 		Mesh(Mesh const &src);
 		Mesh &operator=(Mesh const &rhs);
 
-		void	draw() const;
+		void	draw(glm::mat4 const &model) const;
 		void	addBoneData(uint32_t boneID, float weight, uint32_t VerticeID);
 		void	sendMesh();
 
@@ -61,12 +68,14 @@ class	Mesh {
 		Mesh();  // private default constructor, should not be called
 		void	_setUniformsTextures() const;
 
+		OpenGLModel				&_openGLModel;
 		Shader					&_sh;
 		std::string				_name;
 		std::vector<Vertex>		_vertices;
 		std::vector<uint32_t>	_vertIndices;  // contain _vertices id
 		std::vector<Texture>	_textures;
 		Material				_material;
+		BoundingBox				_boundingBox;
         uint32_t				_vao;
         uint32_t				_vbo;
         uint32_t				_ebo;
