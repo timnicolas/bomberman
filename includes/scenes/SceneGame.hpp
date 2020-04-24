@@ -12,6 +12,7 @@
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
 #include "Score.hpp"
+#include "Spawner.hpp"
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
@@ -22,6 +23,7 @@
 
 class Player;
 class AEnemy;
+class Spawner;
 
 namespace GameState {
 	enum Enum {
@@ -54,7 +56,6 @@ private:
 		EntityType::Enum	entityType;
 		entityFuncPtr		entity;
 	};
-	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
 
@@ -81,6 +82,7 @@ protected:
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	enemiesCounterText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
 		ABaseUI *	speedText;  // TextUI
 		ABaseUI *	bonusBombImg;  // ImageUI
@@ -97,11 +99,13 @@ protected:
 	AllUI			allUI;
 
 	void			_initGameInfos();
+	void			_loadGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
 
 public:
 	// Members
+	static std::map<std::string, Entity>	entitiesCall;
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
 	Player						*player;
@@ -111,6 +115,7 @@ public:
 		int64_t	nb;
 	};
 	std::unordered_map<std::string, BonusValues>	bonus;
+	std::vector<Spawner *>		spawners;
 
 	int							flags;
 	glm::uvec2					size;
@@ -121,6 +126,8 @@ public:
 	float						levelTime;
 	float						time;
 	Score						score;
+	int64_t						enemiesToKill;
+	int64_t						enemiesKilled;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);
