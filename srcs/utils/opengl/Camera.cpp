@@ -117,8 +117,7 @@ void	Camera::setMode(CamMode::Enum mode) {
 		return;
 	_mode = mode;
 	if (_mode == CamMode::FOLLOW_PATH) {
-		_followIsFinished = false;
-		_followCurElem = -1;
+		resetFollowPath();
 	}
 }
 
@@ -494,7 +493,14 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 }
 
 // -- follow path --------------------------------------------------------------
-void	Camera::setFollowPath(std::vector<CamPoint> const & path) { _followPath = path; }
+void	Camera::resetFollowPath() {
+	_followIsFinished = false;
+	_followCurElem = -1;
+}
+void	Camera::setFollowPath(std::vector<CamPoint> const & path) {
+	resetFollowPath();
+	_followPath = path;
+}
 void	Camera::setFollowRepeat(bool repeat) { _followIsRepeat = repeat; }
 bool	Camera::isFollowFinished() const { return _followIsFinished; }
 bool	Camera::isFollowRepeat() const { return _followIsRepeat; }
