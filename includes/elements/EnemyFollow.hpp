@@ -6,6 +6,8 @@
 #include "AEnemy.hpp"
 #include "SceneGame.hpp"
 
+#define ENEMY_FOLLOW_STR "enemyFollow"
+
 /**
  * @brief This is an enemy object
  *

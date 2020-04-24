@@ -102,6 +102,7 @@ SRC =	main.cpp \
 		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
 \
+		elements/Spawner.cpp \
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
 		elements/EnemyWithEye.cpp \
@@ -184,6 +185,7 @@ HEAD =	bomberman.hpp \
 		AEnemy.hpp \
 		elements/Player.hpp \
 \
+		elements/Spawner.hpp \
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
 		elements/EnemyWithEye.hpp \

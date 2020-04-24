@@ -111,7 +111,7 @@ bool	SceneLevelSelection::update() {
 	// SceneGame reference
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
-	allUI.text->setText("Level " + std::to_string(_currentLvl));
+	allUI.text->setText(scGame.getLevelName(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
 	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1) || SceneCheatCode::isLevelUnlocked(_currentLvl)) {

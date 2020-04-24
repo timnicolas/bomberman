@@ -8,6 +8,8 @@
 #include "Bonus.hpp"
 #include "Model.hpp"
 
+#define PLAYER_STR "player"
+
 /**
  * @brief This is the player object
  */

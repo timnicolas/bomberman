@@ -9,7 +9,7 @@ EnemyCrispy::EnemyCrispy(SceneGame &game)
   _playerDir(Direction::NO_DIRECTION),
   _lastPayerSeenMs(0)
 {
-	name = "EnemyCrispy";
+	name = ENEMY_CRISPY_STR;
 }
 
 EnemyCrispy::~EnemyCrispy() {
