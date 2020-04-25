@@ -21,6 +21,7 @@
 #include "EnemyCrispy.hpp"
 #include "EnemyFrog.hpp"
 
+#include "AudioManager.hpp"
 #include "SceneManager.hpp"
 
 // -- Static members initialisation --------------------------------------------
@@ -246,6 +247,7 @@ bool	SceneGame::update() {
 		state = GameState::PAUSE;
 
 	if (state == GameState::PAUSE) {
+		AudioManager::stopAllSounds();
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
@@ -270,6 +272,8 @@ bool	SceneGame::update() {
 		score.addBonusEnemies(levelEnemies, enemies.size(), levelCrispies, crispiesLast);
 		Save::updateSavedFile(*this, true);
 		Save::save(true);
+		delete player;
+		player = nullptr;
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
@@ -278,6 +282,8 @@ bool	SceneGame::update() {
 		player->resetParams();
 		Save::updateSavedFile(*this, false);
 		Save::save(true);
+		delete player;
+		player = nullptr;
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
