@@ -1,5 +1,6 @@
 #include "SceneGameOver.hpp"
 #include "SceneGame.hpp"
+#include "AudioManager.hpp"
 
 SceneGameOver::SceneGameOver(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -87,6 +88,7 @@ bool	SceneGameOver::update() {
 	}
 
 	if (_states.restart) {
+		AudioManager::stopSound(GAME_OVER_SOUND);
 		_states.restart = false;
 		// reload the current level
 		if (!scGame.loadLevel(scGame.level)) {
@@ -95,10 +97,12 @@ bool	SceneGameOver::update() {
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {
+		AudioManager::stopSound(GAME_OVER_SOUND);
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
+		AudioManager::stopSound(GAME_OVER_SOUND);
 		_states.exit = false;
 		SceneManager::loadScene(SceneNames::EXIT);
 	}
