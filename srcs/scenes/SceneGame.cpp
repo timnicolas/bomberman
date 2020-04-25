@@ -59,6 +59,11 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelEnemies = 0;
 	levelCrispies = 0;
 	_draw3dMenu = false;  // disable drawing 3D menu
+	_alarm = false;
+	AudioManager::loadSound(INTROLEVEL_SOUND);
+	AudioManager::loadSound(WIN_SOUND);
+	AudioManager::loadSound(GAME_OVER_SOUND);
+	AudioManager::loadSound(ALARM_TIME_SOUND);
 }
 
 SceneGame::~SceneGame() {
@@ -248,6 +253,7 @@ bool	SceneGame::update() {
 
 	if (state == GameState::PAUSE) {
 		AudioManager::stopAllSounds();
+		_alarm = false;
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
@@ -259,6 +265,12 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::WIN) {
+		AudioManager::stopAllSounds();
+		try {
+			AudioManager::playSound(WIN_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 		int32_t	crispiesLast = 0;
 		for (auto &&box : board) {
 			for (auto &&row : box) {
@@ -278,6 +290,12 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
+		AudioManager::stopAllSounds();
+		try {
+			AudioManager::playSound(GAME_OVER_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 		// clear game infos.
 		player->resetParams();
 		Save::updateSavedFile(*this, false);
@@ -292,6 +310,16 @@ bool	SceneGame::update() {
 	if ((levelTime - time) < 0) {
 		state = GameState::GAME_OVER;
 		return true;
+	}
+	if ((levelTime - time) < 20) {
+		if (!_alarm) {
+			try {
+				AudioManager::playSound(ALARM_TIME_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			_alarm = true;
+		}
 	}
 
 	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
@@ -505,8 +533,14 @@ bool	SceneGame::drawGameOver() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
+	_alarm = false;
 	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
 		state = GameState::INTRO;
+		try {
+			AudioManager::playSound(INTROLEVEL_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 	}
 	else if (state == GameState::PAUSE
 	|| state == GameState::WIN
@@ -999,6 +1033,10 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos.x += allUI.timeLeftImg->getSize().x;
 		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeToString(levelTime - time))
 			.setSize(VOID_POS).setCalculatedSize();
+		if (!_alarm)
+			allUI.timeLeftText->setTextColor(colorise(s.j("colors").j("font").u("color")));
+		else
+			allUI.timeLeftText->setTextColor(colorise(s.j("colors").j("orange").u("color")));
 		tmpPos.x += allUI.timeLeftText->getSize().x;
 
 		/* life */

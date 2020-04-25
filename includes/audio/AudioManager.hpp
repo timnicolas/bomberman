@@ -11,6 +11,9 @@
 #define PLAYER_HURT_SOUND "sounds/player_hurt.wav"
 #define PLAYER_DEATH_SOUND "sounds/player_death.wav"
 #define PLAYER_RUN_SOUND "sounds/player_run.ogg"
+#define PUT_BOMB_SOUND "sounds/put_bomb.ogg"
+#define PUT_BOMB_EMPTY_SOUND "sounds/put_no_bomb.ogg"
+#define PLAYER_ONE_LIFE_SOUND "sounds/one_life.ogg"
 #define BONUS_SOUND "sounds/bonus.wav"
 #define BONUS_DISAPPEAR_SOUND "sounds/bonus_disappear.wav"
 #define NEW_LIFE_SOUND "sounds/new_life.wav"
@@ -22,6 +25,11 @@
 #define ENEMY_WITH_EYE_DEATH_SOUND "sounds/enemy_with_eye_death.ogg"
 #define ENEMY_FROG_DEATH_SOUND "sounds/enemy_frog_death.wav"
 #define ENEMY_CRISPY_DEATH_SOUND "sounds/enemy_crispy_death.wav"
+#define WIN_SOUND "sounds/win_music.ogg"
+#define GAME_OVER_SOUND "sounds/game_over.ogg"
+#define MONSTERKILL_SOUND "sounds/monster_kill.ogg"
+#define INTROLEVEL_SOUND "sounds/intro_level.ogg"
+#define ALARM_TIME_SOUND "sounds/alarm_time.ogg"
 
 /**
  * @brief This is the audio manager. In this static class, you can play musics and sound

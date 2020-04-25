@@ -66,6 +66,7 @@ private:
 		Model *	robot;
 	};
 	DrawForMenu _menuModels;
+	bool	_alarm;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
