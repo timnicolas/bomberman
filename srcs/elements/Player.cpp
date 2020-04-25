@@ -19,14 +19,11 @@ Player::Player(SceneGame &game)
 Player::~Player() {
 	if (_entityState.state == EntityState::RUNNING) {
 		try {
-			AudioManager::pauseSound(PLAYER_RUN_SOUND);
+			AudioManager::stopSound(PLAYER_RUN_SOUND);
 		} catch(Sound::SoundException const & e) {
 			logErr(e.what());
 		}
 	}
-	AudioManager::unloadSound(PLAYER_HURT_SOUND);
-	AudioManager::unloadSound(PLAYER_DEATH_SOUND);
-	AudioManager::unloadSound(PLAYER_RUN_SOUND);
 }
 
 Player::Player(Player const &src) : Player(src.game) {
@@ -358,26 +355,35 @@ void	Player::_updateAnimationState() {
 		_entityState.updated = false;
 		switch (_entityState.state) {
 			case EntityState::IDLE:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
 				break;
 			case EntityState::DYING:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
 				break;
 			case EntityState::RUNNING:
+				try {
+					AudioManager::playSound(PLAYER_RUN_SOUND, 1.0, true);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
 				break;
 			case EntityState::DROP_BOMB:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 10;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
 				break;
 			case EntityState::VICTORY_EMOTE:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
@@ -429,25 +435,11 @@ void	Player::_move() {
 	}
 
 	if (moved) {
-		// update state on first move
-		if (_entityState.state != EntityState::RUNNING) {
-			try {
-				AudioManager::playSound(PLAYER_RUN_SOUND, 1.0, true);
-			} catch(Sound::SoundException const & e) {
-				logErr(e.what());
-			}
-		}
 		_moveTo(dir);
 	}
 	// update state on end move
 	else if (_entityState.state == EntityState::RUNNING) {
 		setState(EntityState::IDLE);
-		try {
-			// AudioManager::pauseSound(PLAYER_RUN_SOUND);
-			AudioManager::stopSound(PLAYER_RUN_SOUND);
-		} catch(Sound::SoundException const & e) {
-			logErr(e.what());
-		}
 	}
 }
 

@@ -40,7 +40,6 @@ void										Sound::play(float volume, float env_volume, bool loop) {
 		}
 		volume = volume > 1.0f ? 1.0 : volume;
 		Mix_Volume(chan, static_cast<int>(volume * env_volume * MIX_MAX_VOLUME));
-		logDebug("insert sound " << _chunk << " as chan " << chan);
 		_currents_channels.insert(chan);
 		_chan_volume.insert(std::pair<int, float>(chan, volume));
 	}
@@ -68,10 +67,10 @@ void										Sound::resume() {
 	Stop all the channels playing this sound.
 */
 void										Sound::stop() {
-	logDebug("there are " << _currents_channels.size() << " _currents_channels");
-	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
-		logDebug("_currents_channels: " << *it);
-		Mix_HaltChannel(*it);
+	std::unordered_set<int>::iterator it = _currents_channels.begin();
+	while (it != _currents_channels.end()) {
+		Mix_HaltChannel(*it);  // Sound::channelFinished() as callback delete <it>
+		it = _currents_channels.begin();
 	}
 }
 

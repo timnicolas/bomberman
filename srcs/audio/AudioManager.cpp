@@ -38,10 +38,12 @@ AudioManager::~AudioManager() {
 	for (auto it = _musics.begin(); it != _musics.end(); it++) {
 		delete it->second;
 	}
+	_musics.clear();
 	_stopAllSounds();
 	for (auto it = _sounds.begin(); it != _sounds.end(); it++) {
 		delete it->second;
 	}
+	_sounds.clear();
 	Mix_CloseAudio();
 }
 
@@ -381,7 +383,7 @@ void						AudioManager::_unloadSound(std::string sound_name) {
 		_sounds.erase(sound_name);
 	}
 	catch (std::out_of_range const &oor) {
-		logErr("Trying to unload the sound '" << sound_name << "' but it has not been loaded.");
+		logWarn("Trying to unload the sound '" << sound_name << "' but it has not been loaded.");
 		return;
 	}
 }
