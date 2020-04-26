@@ -2,6 +2,7 @@
 #include "AEnemy.hpp"
 #include "Player.hpp"
 #include "AudioManager.hpp"
+#include "EnemyFly.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -13,6 +14,8 @@ AEnemy::AEnemy(SceneGame &game)
 	name = "AEnemy";
 	type = Type::ENEMY;
 	points = 200;
+	_fisrtCall = true;
+	_moveOnCenter = true;
 	AudioManager::loadSound(ENEMY_HIT_1_SOUND);
 	AudioManager::loadSound(ENEMY_HIT_2_SOUND);
 	_soundAttack = {ENEMY_HIT_1_SOUND, ENEMY_HIT_2_SOUND};
@@ -60,9 +63,12 @@ bool	AEnemy::update() {
 		active = false;
 
 	// attack logic
+	glm::vec3 tmpPos = position;
+	tmpPos.x += (movingSize.x - size.x) / 2;
+	tmpPos.z += (movingSize.z - size.z) / 2;
 	if (strength != 0 && game.player->active && game.player->alive &&
 		game.player->invulnerable <= 0.0f &&
-		game.player->hasCollision(position, size) &&
+		game.player->hasCollision(tmpPos, size) &&
 		_entityState.state != EntityState::ATTACK)
 	{
 		if (_soundAttack.size()) {
@@ -77,12 +83,14 @@ bool	AEnemy::update() {
 		game.player->takeDamage(strength);
 
 		// facing player on attack (except for EnemyFly)
-		if (name != "EnemyFly") {
+		if (name != ENEMY_FLY_STR) {
 			front = glm::normalize(game.player->position - position);
 		}
 	}
 
-	return _update();
+	bool ret = _update();
+	_fisrtCall = false;
+	return ret;
 }
 
 /**
@@ -125,6 +133,25 @@ void	AEnemy::animEndCb(std::string animName) {
 }
 
 /**
+ * @brief AEnemy Take <damage> damages.
+ *
+ * @param damage
+ * @return true if damage taken
+ * @return false if damage not taken
+ */
+bool	AEnemy::takeDamage(const int damage) {
+	bool	wasAlive = alive;
+	bool	result = ACharacter::takeDamage(damage);
+	if (result) {
+		if (wasAlive && !alive) {
+			game.enemiesKilled += 1;
+		}
+	}
+
+	return result;
+}
+
+/**
  * @brief get a list of entity in collision with the Character at a position.
  *
  * @param pos default VOID_POS3
@@ -132,7 +159,7 @@ void	AEnemy::animEndCb(std::string animName) {
  */
 std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 	std::unordered_set<AEntity *> collisions = ACharacter::getCollision(dest);
-	if (name == "EnemyFly")
+	if (name == ENEMY_FLY_STR)
 		return collisions;
 
 	/* get all positions blocks under character on a position */
@@ -142,7 +169,7 @@ std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 	for (auto enemy : game.enemies) {
 		if (enemy == this)
 			continue;
-		if (enemy->name == "EnemyFly")
+		if (enemy->name == ENEMY_FLY_STR)
 			continue;
 		allPosEnemy.clear();
 		allPosEnemy = _getAllPositions(enemy->getPos(), enemy->size );
@@ -210,8 +237,9 @@ bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
 				dir = tryDirOrder[i];
 				break;
 			}
-			if (i == 3)
+			if (i == 3) {
 				return false;  // cannot move
+			}
 		}
 	}
 
@@ -269,18 +297,21 @@ bool AEnemy::_followPath(std::deque<PathNode> & path) {
 			break;
 		}
 		// if the path is finished
-		if (path.size() == 0)
+		if (path.size() == 0) {
 			return true;
+		}
 	}
 
 	// if the path is finished
-	if (path.size() == 0)
+	if (path.size() == 0) {
 		return true;
+	}
 
 	// move
 	glm::vec3 pos = getPos();
-	if (pos == _moveTo(path.front().dir))
+	if (pos == _moveTo(path.front().dir)) {
 		return false;
+	}
 
 	return true;
 }

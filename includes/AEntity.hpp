@@ -28,6 +28,7 @@ namespace Type {
 		FLAG,
 		END,
 		BONUS,
+		SPAWNER,
 		ALL,
 		NONE,
 	};
@@ -62,6 +63,7 @@ protected:
 	EntityState::Struct	_entityState;
 	Model				*_model;
 	bool				_animDeathEnd;
+	glm::vec3			size;
 
 public:
 	// Members
@@ -88,6 +90,7 @@ public:
 	virtual bool		update() = 0;
 	virtual bool		postUpdate();
 	virtual bool		draw(Gui &gui) = 0;
+	virtual bool		drawCollider();
 	virtual glm::vec3	getPos() const = 0;
 	virtual bool		takeDamage(const int damage) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;

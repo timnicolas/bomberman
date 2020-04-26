@@ -6,6 +6,8 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+#define END_STR "end"
+
 /**
  * @brief This is the end object
  */

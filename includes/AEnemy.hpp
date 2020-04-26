@@ -36,6 +36,8 @@ protected:
 	// Members
 	Direction::Enum	_dir;
 	std::vector<std::string>	_soundAttack;
+	bool			_fisrtCall;  // true until the end of the first update call
+	bool			_moveOnCenter;  // true if the enemy move on center (size < 1)
 
 	virtual bool	_update() = 0;
 	virtual bool	_postUpdate() = 0;
@@ -72,6 +74,7 @@ public:
 	bool			postUpdate();
 	bool			draw(Gui &gui);
 	virtual void	animEndCb(std::string animName);
+	virtual bool	takeDamage(const int damage);
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 
 	// Exceptions

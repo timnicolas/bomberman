@@ -45,6 +45,16 @@ bool			SceneLevelSelection::init() {
 
 	try {
 		_states.nbLevel = scGame.getNbLevel();
+
+		tmpSize.y = winSz.y * 0.08;
+		tmpSize.x = tmpSize.y;
+		tmpPos.x = tmpSize.x / 2;
+		tmpPos.y = winSz.y - tmpSize.y * 1.5;
+		addButton(tmpPos, tmpSize, "X")
+			.addButtonLeftListener(&_states.menu)
+			.setKeyLeftClickInput(InputType::CANCEL)
+			.setTextAlign(TextAlign::CENTER);
+
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
 		tmpPos.x = (winSz.x / 2) - (tmpSize.x / 2);
@@ -111,7 +121,7 @@ bool	SceneLevelSelection::update() {
 	// SceneGame reference
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
-	allUI.text->setText("Level " + std::to_string(_currentLvl));
+	allUI.text->setText(scGame.getLevelName(_currentLvl));
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
 	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1) || SceneCheatCode::isLevelUnlocked(_currentLvl)) {
@@ -161,7 +171,7 @@ bool	SceneLevelSelection::update() {
 			return true;
 		}
 	}
-	if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
+	if (_states.menu) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}

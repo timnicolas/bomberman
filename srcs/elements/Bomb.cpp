@@ -8,7 +8,7 @@
 
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
-	name = "Bomb";
+	name = BOMB_STR;
 	_countdown = 2.0f;
 	_propagation = 3;
 	blockPropagation = true;

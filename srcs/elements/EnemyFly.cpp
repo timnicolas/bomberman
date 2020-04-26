@@ -7,8 +7,8 @@
 EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game)
 {
-	name = "EnemyFly";
-	size = glm::vec3(.8, .8, .8);
+	name = ENEMY_FLY_STR;
+	size = glm::vec3(.2, .2, .2);
 	AudioManager::loadSound(ENEMY_FLY_DEATH_SOUND);
 	_soundOfDeath = ENEMY_FLY_DEATH_SOUND;
 	_soundAttack.clear();
@@ -107,7 +107,7 @@ bool	EnemyFly::_draw(Gui &gui) {
  *
  */
 void	EnemyFly::_updateModel() {
-	_model->transform.setPos(position + glm::vec3(size.x / 2, FLY_HEIGHT, size.z / 2));
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, FLY_HEIGHT, movingSize.z / 2));
 
 	// set model orientationdebug
 	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
@@ -163,7 +163,7 @@ bool	EnemyFly::init() {
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("flyingBot");
 		_model = new Model(openglModel, game.getDtTime(), ETransform({1.5,
-			FLY_HEIGHT, 1.5}, {.7, .7, .7}));
+			FLY_HEIGHT, 1.5}, ENEMY_FLY_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|run");

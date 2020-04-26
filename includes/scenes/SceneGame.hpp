@@ -12,6 +12,7 @@
 #include "ACharacter.hpp"
 #include "Bomb.hpp"
 #include "Score.hpp"
+#include "Spawner.hpp"
 
 #include "ABaseUI.hpp"
 #include "TextUI.hpp"
@@ -22,6 +23,7 @@
 
 class Player;
 class AEnemy;
+class Spawner;
 
 namespace GameState {
 	enum Enum {
@@ -54,7 +56,6 @@ private:
 		EntityType::Enum	entityType;
 		entityFuncPtr		entity;
 	};
-	static std::map<std::string, Entity> _entitiesCall;
 
 	std::vector<SettingsJson *>	_mapsList;
 
@@ -64,9 +65,13 @@ private:
 		Model *	player;
 		Model *	flower;
 		Model *	robot;
+		Model * fly;
+
+		DrawForMenu();
 	};
 	DrawForMenu _menuModels;
 	bool	_alarm;
+	Model	*_terrain;
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -82,6 +87,7 @@ protected:
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	enemiesCounterText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
 		ABaseUI *	speedText;  // TextUI
 		ABaseUI *	bonusBombImg;  // ImageUI
@@ -98,11 +104,13 @@ protected:
 	AllUI			allUI;
 
 	void			_initGameInfos();
+	void			_loadGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
 
 public:
 	// Members
+	static std::map<std::string, Entity>	entitiesCall;
 	std::vector< std::vector< std::vector<AEntity *> > > board;
 	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
 	Player						*player;
@@ -112,6 +120,7 @@ public:
 		int64_t	nb;
 	};
 	std::unordered_map<std::string, BonusValues>	bonus;
+	std::vector<Spawner *>		spawners;
 
 	int							flags;
 	glm::uvec2					size;
@@ -122,6 +131,8 @@ public:
 	float						levelTime;
 	float						time;
 	Score						score;
+	int64_t						enemiesToKill;
+	int64_t						enemiesKilled;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);
@@ -149,6 +160,7 @@ public:
 	bool			drawForMenu();
 	bool			drawVictory();
 	bool			drawGameOver();
+	bool			drawEndGame();
 	bool			loadLevel(int32_t levelId);
 	bool			insertEntity(std::string const & name, glm::ivec2 pos, bool isFly = false, uint64_t wallGenPercent = 0);
 

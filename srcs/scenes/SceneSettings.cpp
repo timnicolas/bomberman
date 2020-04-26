@@ -121,10 +121,10 @@ bool					SceneSettings::init() {
 	_current_resolution = SceneSettings::resolutions[_select_res];
 
 	try {
-		tmp_size.y = menu_height * 0.1;
+		tmp_size.y = win_size.y * 0.08;
 		tmp_size.x = tmp_size.y;
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
+		tmp_pos.x = tmp_size.x / 2;
+		tmp_pos.y = win_size.y - tmp_size.y * 1.5;
 		addButton(tmp_pos, tmp_size, "X")
 			.addButtonLeftListener(&_return)
 			.setKeyLeftClickInput(InputType::CANCEL)
@@ -132,6 +132,7 @@ bool					SceneSettings::init() {
 			.setTextAlign(TextAlign::CENTER);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
+		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
 		addTitle(tmp_pos, tmp_size, "Settings");
 		tmp_size.y = menu_height * 0.1;
@@ -339,16 +340,6 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
-	tmp_size.y = menu_height * 0.1;
-	tmp_size.x = menu_width * 0.15;
-	tmp_pos.x = (win_size.x / 2) + (menu_width / 2) - menu_width * 0.1;
-	tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-	ptr = &addButton(tmp_pos, tmp_size, "Reset")
-		.addButtonLeftListener(&_reset)
-		.setTextScale(_text_scale)
-		.setTextAlign(TextAlign::CENTER)
-		.setEnabled(false);
-	_panes[SettingsType::CONTROLS].push_front(ptr);
 	// add mouse sensitivity slider
 	tmp_pos.y -= keyMenuHeight + keyMenuPadding;
 	tmp_pos.x = 0;
@@ -364,6 +355,17 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		.addButtonLeftListener(&_save_mouse_sens)
 		.setTextScale(_text_scale)
 		.setMaster(scrollbar)
+		.setEnabled(false);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+	// reset
+	tmp_size.y = menu_height * 0.1;
+	tmp_size.x = menu_width * 0.15;
+	tmp_pos.x = (win_size.x / 2) + (menu_width / 2) - menu_width * 0.1;
+	tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
+	ptr = &addButton(tmp_pos, tmp_size, "Reset")
+		.addButtonLeftListener(&_reset)
+		.setTextScale(_text_scale)
+		.setTextAlign(TextAlign::CENTER)
 		.setEnabled(false);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 }

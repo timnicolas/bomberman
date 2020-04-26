@@ -158,6 +158,11 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("bg-rect-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
+	// collider
+	s.j("colors").add<SettingsJson>("collider");
+		s.j("colors").j("collider").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("collider").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+
 	/* Audio */
 	s.add<SettingsJson>("audio");
 	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
@@ -191,10 +196,13 @@ bool	initSettings(std::string const & filename) {
 
 	/* Debug */
 	s.add<SettingsJson>("debug").setDescription("All debug settings");
-		s.j("debug").add<bool>("showBaseBoard", true).setDescription("Show the base board");
-		s.j("debug").add<bool>("showEntity", true).setDescription("Show the entities (player & enemy)");
-		s.j("debug").add<bool>("showFlyHeight", false).setDescription("Show the fly height");
 		s.j("debug").add<bool>("3d-menu", true).setDescription("Use 3D menu");
+		s.j("debug").add<SettingsJson>("show").setDescription("All showables settings for command /debug");
+			s.j("debug").j("show").add<bool>("baseBoard", true).setDescription("Show the base board");
+			s.j("debug").j("show").add<bool>("entity", true).setDescription("Show the entities (player & enemy)");
+			s.j("debug").j("show").add<bool>("flyHeight", false).setDescription("Show the fly height");
+			s.j("debug").j("show").add<bool>("movingCollider", false).setDescription("Show the collider of moving entities");
+			s.j("debug").j("show").add<bool>("staticCollider", false).setDescription("Show the collider of static entities");
 
 	try {
 		if (file::isDir(filename)) {

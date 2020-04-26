@@ -66,6 +66,9 @@ bool	ModelsManager::_init(Camera const &cam) {
 
 			_models["flyingBot"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"flyingBot/Original/flyingBot.fbx");
+
+			_models["terrain"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"terrain/terrain.fbx");
 		}
 		catch(OpenGLModel::ModelException const & e) {
 			logErr(e.what());

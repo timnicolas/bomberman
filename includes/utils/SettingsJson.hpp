@@ -33,7 +33,7 @@ class JsonObj {
 	public:
 		JsonObj() : _value() { init(); }
 		explicit JsonObj(std::string const & name) : _value() { init(name); }
-		JsonObj(std::string const & name, T const & val) : _value(val) { init(name); }
+		JsonObj(std::string const & name, T const & val) : _value(val), _defVal(val) { init(name); }
 		virtual ~JsonObj() {}
 		JsonObj(JsonObj const & src) { *this = src; }
 		JsonObj & operator=(JsonObj const & rhs) {
@@ -90,6 +90,9 @@ class JsonObj {
 		JsonObj<T> &		setDescription(std::string const & desc) { _description = desc; return *this; }
 		JsonObj<T> &		disableInFile(bool disable = true) { _disableInFile = disable; return *this; }
 		bool				isDisabledInFile() { return _disableInFile; }
+		void				setDefVal(T val) { _defVal = val; }
+		T					getDefVal() const { return _defVal; }
+		void				reset() { _value = _defVal; }
 		void				setName(std::string const & name) { _name = name; }
 		std::string	&		getName() { return _name; }
 		std::string	const &	getName() const { return _name; }
@@ -134,6 +137,7 @@ class JsonObj {
 		bool		_hasMax;
 		T			_max;
 		bool		_disableInFile;
+		T			_defVal;
 };
 
 /**

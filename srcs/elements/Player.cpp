@@ -8,8 +8,9 @@ Player::Player(SceneGame &game)
 : ACharacter(game) {
 	_model = nullptr;
 	size = glm::vec3(0.7, 1.5, 0.7);
+	movingSize = size;
 	type = Type::PLAYER;
-	name = "Player";
+	name = PLAYER_STR;
 	resetParams();
 	AudioManager::loadSound(PLAYER_HURT_SOUND);
 	AudioManager::loadSound(PLAYER_DEATH_SOUND);
@@ -68,7 +69,7 @@ bool	Player::init() {
 		}
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("white");
-		_model = new Model(openglModel, game.getDtTime(), ETransform(tmpPos, {1.3, 1.3, 1.3}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform(tmpPos, PLAYER_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
@@ -131,7 +132,7 @@ bool	Player::update() {
 
 		// move player
 		_move();
-		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+		_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 
 		// set model orientation
 		float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));

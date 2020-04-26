@@ -6,7 +6,7 @@
 
 Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
-	name = "Flag";
+	name = FLAG_STR;
 	destructible = true;
 	blockPropagation = true;
 	AudioManager::loadSound(FLAG_DESTROYED_SOUND);

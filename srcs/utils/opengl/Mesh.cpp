@@ -1,22 +1,27 @@
 #include "Mesh.hpp"
 #include "Logging.hpp"
 #include "debug.hpp"
+#include "OpenGLModel.hpp"
 
 // -- Constructors -------------------------------------------------------------
-Mesh::Mesh(Shader &sh, std::string const &name, std::vector<Vertex> vertices,
-	std::vector<u_int32_t> vertIndices, std::vector<Texture> textures,
-	Material material)
-: _sh(sh),
+Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
+	std::vector<Vertex> vertices, std::vector<u_int32_t> vertIndices,
+	std::vector<Texture> textures, Material material, BoundingBox boundingBox)
+: _openGLModel(openGLModel),
+  _sh(sh),
   _name(name),
   _vertices(vertices),
   _vertIndices(vertIndices),
   _textures(textures),
   _material(material),
+  _boundingBox(boundingBox),
   _vao(0),
   _vbo(0),
   _ebo(0) {}
 
-Mesh::Mesh(Mesh const &src) : _sh(src._sh) {
+Mesh::Mesh(Mesh const &src)
+: _openGLModel(src._openGLModel),
+  _sh(src._sh) {
 	*this = src;
 }
 
@@ -50,7 +55,17 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
  * @brief draw the Mesh
  *
  */
-void	Mesh::draw() const {
+void	Mesh::draw(glm::mat4 const &model) const {
+	// don't draw Mesh outside camera range
+	if (!_openGLModel.isAnimated()) {
+		glm::vec4 newStartPoint = model * glm::vec4(_boundingBox.startPoint, 1.0);
+
+		if (_openGLModel.getCam().frustumCullingCheckCube(
+			glm::vec3(newStartPoint), _boundingBox.size) == FRCL_OUTSIDE) {
+			return;
+		}
+	}
+
 	// send textures
 	_setUniformsTextures();
 

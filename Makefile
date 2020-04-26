@@ -102,6 +102,7 @@ SRC =	main.cpp \
 		AEnemy_pathfinding.cpp \
 		elements/Player.cpp \
 \
+		elements/Spawner.cpp \
 		elements/EnemyBasic.cpp \
 		elements/EnemyFollow.cpp \
 		elements/EnemyWithEye.cpp \
@@ -134,6 +135,8 @@ SRC =	main.cpp \
 		scenes/SceneSettings.cpp \
 		scenes/SceneCheatCode.cpp \
 		scenes/SceneCheatCode_exec.cpp \
+		scenes/SceneEndGame.cpp \
+		scenes/SceneDebug.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -142,6 +145,7 @@ SRC =	main.cpp \
 		gui/Gui.cpp \
 		gui/TextureManager.cpp \
 		gui/ModelsManager.cpp \
+		gui/BoxCollider.cpp \
 \
 		utils/Logging.cpp \
 		utils/SettingsJson.cpp \
@@ -183,6 +187,7 @@ HEAD =	bomberman.hpp \
 		AEnemy.hpp \
 		elements/Player.hpp \
 \
+		elements/Spawner.hpp \
 		elements/EnemyBasic.hpp \
 		elements/EnemyFollow.hpp \
 		elements/EnemyWithEye.hpp \
@@ -214,6 +219,8 @@ HEAD =	bomberman.hpp \
 		scenes/SceneExit.hpp \
 		scenes/SceneSettings.hpp \
 		scenes/SceneCheatCode.hpp \
+		scenes/SceneEndGame.hpp \
+		scenes/SceneDebug.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
@@ -222,6 +229,7 @@ HEAD =	bomberman.hpp \
 		gui/Gui.hpp \
 		gui/TextureManager.hpp \
 		gui/ModelsManager.hpp \
+		gui/BoxCollider.hpp \
 \
 		utils/Logging.hpp \
 		utils/SettingsJson.hpp \
