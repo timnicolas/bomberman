@@ -32,9 +32,6 @@ private:
 		glm::ivec2 pos, glm::ivec2 dest, bool & find);
 	bool			_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path);
 
-	void			_setMaxSize(bool enable);
-	glm::vec3		_savedSize;
-
 protected:
 	// Members
 	Direction::Enum	_dir;
