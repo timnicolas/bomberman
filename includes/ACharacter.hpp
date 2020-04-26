@@ -48,6 +48,7 @@ public:
 	int			lives;
 	float		speed;
 	glm::vec3	front;
+	glm::vec3	movingSize;
 	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
 	// Constructors
@@ -62,6 +63,7 @@ public:
 	virtual void					resetCrossable();
 	virtual bool					update() = 0;
 	virtual bool					draw(Gui &gui) = 0;
+	virtual bool					drawCollider();
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	bool							isAlive();

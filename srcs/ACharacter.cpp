@@ -2,6 +2,7 @@
 #include "SceneGame.hpp"
 #include "useGlm.hpp"
 #include "AEnemy.hpp"
+#include "BoxCollider.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -14,6 +15,7 @@ ACharacter::ACharacter(SceneGame &game)
 	speed = 1.0;
 	position = {0.0, 0.0, 0.0};
 	size = {0.95, 1.5, 0.95};
+	movingSize = {0.95, 0.95, 0.95};
 	blockPropagation = false;
 	destructible = true;
 	resetCrossable();
@@ -38,6 +40,20 @@ ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 }
 
 // -- Methods ------------------------------------------------------------------
+
+/**
+ * @brief Draw the collider of the entity
+ *
+ * @return false If failed
+ */
+bool		ACharacter::drawCollider() {
+	glm::vec4 color = colorise(s.j("colors").j("collider").u("color"), s.j("colors").j("collider").u("alpha"));
+	glm::vec3 tmpPos = position;
+	tmpPos.x += (movingSize.x - size.x) / 2;
+	tmpPos.z += (movingSize.z - size.z) / 2;
+	BoxCollider::drawBox(tmpPos, size, color);
+	return true;
+}
 
 /**
  * @brief Set the Entity that the Character can cross
@@ -78,7 +94,7 @@ glm::ivec2		ACharacter::getIntPos() const {
 ACharacter		*ACharacter::setPosition(glm::vec3 pos) {
 	this->position = pos;
 	if (_model != nullptr) {
-		_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+		_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 	}
 	return this;
 }
@@ -153,12 +169,12 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 	std::unordered_set<AEntity *> collisions;
 
 	/* get all positions blocks under character on a position */
-	std::vector<glm::ivec2> allPos = _getAllPositions(dest, size);
+	std::vector<glm::ivec2> allPos = _getAllPositions(dest, movingSize);
 
 	// std::cout << glm::to_string(dest) << " | ";
 	for (auto && blockPos : allPos) {
 		// std::cout << glm::to_string(blockPos) << " ";
-		if (game.positionInGame(glm::vec3(blockPos.x, position.y, blockPos.y), size) == false) {
+		if (game.positionInGame(glm::vec3(blockPos.x, position.y, blockPos.y), movingSize) == false) {
 			continue;
 		}
 		for (auto &&entity : getBoard()[blockPos.x][blockPos.y]) {
@@ -180,9 +196,9 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 bool	ACharacter::hasCollision(glm::vec3 atPosition, glm::vec3 atSize) {
 	// check if there is no colision (easier)
 	if ((position.x >= atPosition.x + atSize.x) ||  // too much right
-		(position.x + size.x <= atPosition.x) ||  // too much left
+		(position.x + movingSize.x <= atPosition.x) ||  // too much left
 		(position.z >= atPosition.z + atSize.z) ||  // too much down
-		(position.z + size.z <= atPosition.z)) {  // too much up
+		(position.z + movingSize.z <= atPosition.z)) {  // too much up
 		return false;
 	}
 
@@ -232,7 +248,7 @@ std::unordered_set<AEntity *> ACharacter::_getAllBlockableEntity(glm::vec3 dest)
  */
 bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
 	/* check if we are on the game board */
-	if (game.positionInGame(glm::vec3(pos.x, position.y, pos.y), size) == false) {
+	if (game.positionInGame(glm::vec3(pos.x, position.y, pos.y), movingSize) == false) {
 		return false;
 	}
 
@@ -267,7 +283,7 @@ bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
  */
 bool	ACharacter::_canMoveOn(glm::vec3 dest) const {
 	/* check if we are on the game board */
-	if (game.positionInGame(dest, size) == false) {
+	if (game.positionInGame(dest, movingSize) == false) {
 		return false;
 	}
 
@@ -291,7 +307,7 @@ bool	ACharacter::_canMoveOn(glm::vec3 dest) const {
  */
 bool	ACharacter::_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const {
 	/* check if we are on the game board */
-	if (game.positionInGame(to, size) == false) {
+	if (game.positionInGame(to, movingSize) == false) {
 		return false;
 	}
 
@@ -353,29 +369,29 @@ glm::vec3	ACharacter::_moveTo(Direction::Enum direction, float const offset) {
  * @brief get all positions blocks under character on a position
  *
  * @param pos
- * @param size
+ * @param sz
  * @return std::vector<glm::ivec2>
  */
-std::vector<glm::ivec2>	ACharacter::_getAllPositions(glm::vec3 pos, glm::vec3 size) const {
+std::vector<glm::ivec2>	ACharacter::_getAllPositions(glm::vec3 pos, glm::vec3 sz) const {
 	std::vector<glm::ivec2> allPos;
 	glm::ivec2 posInt = glm::ivec2(static_cast<int>(pos.x), static_cast<int>(pos.z));
 	glm::ivec2 tmpPos;
 
 	allPos.push_back(posInt);
 
-	if (static_cast<int>(pos.x + size.x) > posInt.x) {
+	if (static_cast<int>(pos.x + sz.x) > posInt.x) {
 		tmpPos = posInt;
 		tmpPos.x += 1;
 		allPos.push_back(tmpPos);
 
-		if (static_cast<int>(pos.z + size.z) > posInt.y) {
+		if (static_cast<int>(pos.z + sz.z) > posInt.y) {
 			tmpPos = posInt;
 			tmpPos.x += 1;
 			tmpPos.y += 1;
 			allPos.push_back(tmpPos);
 		}
 	}
-	if (static_cast<int>(pos.z + size.z) > posInt.y) {
+	if (static_cast<int>(pos.z + sz.z) > posInt.y) {
 		tmpPos = posInt;
 		tmpPos.y += 1;
 		allPos.push_back(tmpPos);
@@ -410,8 +426,8 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 		// move only one one direction (UP | DOWN | LEFT | RIGHT & movement impossible)
 		if (direction.x == 0) {  // up | down
 			glm::vec3 tmpPos = position + movement;
-			tmpPos.x = static_cast<int>(position.x + size.x - 1);
-			if ((position.x + size.x - 1) - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
+			tmpPos.x = static_cast<int>(position.x + movingSize.x - 1);
+			if ((position.x + movingSize.x - 1) - tmpPos.x < offset && _canMoveOnFromTo(position, tmpPos)) {
 				reloadMovement = true;
 				direction.x = -1;
 				direction.z = 0;
@@ -426,8 +442,8 @@ glm::vec3	ACharacter::_moveTo(glm::vec3 direction, float const offset) {
 		}
 		else {  // left | right
 			glm::vec3 tmpPos = position + movement;
-			tmpPos.z = static_cast<int>(position.z + size.z - 1);
-			if ((position.z + size.z - 1) - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
+			tmpPos.z = static_cast<int>(position.z + movingSize.z - 1);
+			if ((position.z + movingSize.z - 1) - tmpPos.z < offset && _canMoveOnFromTo(position, tmpPos)) {
 				reloadMovement = true;
 				direction.x = 0;
 				direction.z = -1;
