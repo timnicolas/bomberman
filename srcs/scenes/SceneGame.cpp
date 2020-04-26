@@ -252,14 +252,16 @@ bool	SceneGame::update() {
 		state = GameState::PAUSE;
 
 	if (state == GameState::PAUSE) {
-		AudioManager::stopAllSounds();
-		_alarm = false;
+		AudioManager::pauseAllSounds();
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			if (Inputs::getKeyUp(InputType::CONFIRM))
+				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+			AudioManager::resumeMusic();
 			state = GameState::PLAY;
 		}
 		return true;
@@ -626,6 +628,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	};
 	_gui->cam->setFollowPath(_introAnim);  // set the follow path
 	state = GameState::INTRO;
+	AudioManager::pauseMusic();
 
 	// get saved values
 	player->resetParams();

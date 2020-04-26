@@ -124,6 +124,7 @@ bool	Bomb::update() {
 	if (game.player->detonator) {
 		if (Inputs::getKey(InputType::ACTION_2)) {
 			explode({position.x, position.z});
+			AudioManager::stopSound(PUT_BOMB_SOUND);
 		}
 	} else {
 		_countdown -= game.getDtTime();
