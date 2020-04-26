@@ -35,6 +35,7 @@ private:
 protected:
 	// Members
 	Direction::Enum	_dir;
+	std::vector<std::string>	_soundAttack;
 
 	virtual bool	_update() = 0;
 	virtual bool	_postUpdate() = 0;

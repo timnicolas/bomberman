@@ -11,6 +11,9 @@ EnemyFly::EnemyFly(SceneGame &game)
 	size = glm::vec3(.8, .8, .8);
 	AudioManager::loadSound(ENEMY_FLY_DEATH_SOUND);
 	_soundOfDeath = ENEMY_FLY_DEATH_SOUND;
+	_soundAttack.clear();
+	AudioManager::loadSound(ENEMY_SHOT_SOUND);
+	_soundAttack.push_back(ENEMY_SHOT_SOUND);
 }
 
 EnemyFly::~EnemyFly() {

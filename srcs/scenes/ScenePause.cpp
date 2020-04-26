@@ -1,5 +1,6 @@
 #include "ScenePause.hpp"
 #include "SceneGame.hpp"
+#include "AudioManager.hpp"
 
 ScenePause::ScenePause(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -89,19 +90,23 @@ bool	ScenePause::update() {
 
 	if (_states.resume) {
 		_states.resume = false;
+		AudioManager::resumeAllSounds();
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.restart) {
 		_states.restart = false;
+		AudioManager::stopAllSounds();
 		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {
 		_states.menu = false;
+		AudioManager::stopAllSounds();
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
 		_states.exit = false;
+		AudioManager::stopAllSounds();
 		SceneManager::loadScene(SceneNames::EXIT);
 	}
 	return true;
