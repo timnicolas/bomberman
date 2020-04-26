@@ -56,6 +56,7 @@ class SceneManager {
 		};
 
 	protected:
+		bool		_isInit;
 		GameInfo	_gameInfo;
 		Gui *		_gui;
 		float		_dtTime;

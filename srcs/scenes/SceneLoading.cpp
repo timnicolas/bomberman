@@ -1,6 +1,8 @@
+#include <unistd.h>
 #include "SceneLoading.hpp"
 #include "AudioManager.hpp"
 #include "Save.hpp"
+#include "FileUtils.hpp"
 
 SceneLoading::SceneLoading(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
@@ -44,6 +46,57 @@ bool			SceneLoading::init() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Bomberman");
+
+		/* background image */
+		std::vector<std::string> allImgs = file::ls(s.s("loadingImgs"));
+		if (allImgs.empty()) {
+			logWarn("No image available for loading menu");
+		}
+		else {
+			int imgID = rand() % allImgs.size();
+			try {
+				addImage({0, 0}, {winSz.x, 0}, allImgs[imgID]);
+			}
+			catch (ABaseUI::UIException const & e) {
+				logWarn("Invalid image " << allImgs[imgID] << " in loading scene");
+			}
+		}
+
+		/* load sentence */
+		std::ifstream	file(s.s("loadingSentences"));
+		std::string		line;
+		std::vector<std::string> allSentences;
+		if (file.is_open()) {
+			for (std::string line; std::getline(file, line); ) {
+				if (line.size() > 0)
+					allSentences.push_back(line);
+			}
+			file.close();
+		}
+		else {
+			logWarn("unable to load sentences list for loading menu");
+		}
+		if (allSentences.empty()) {
+			logWarn("No sentences in sentences files (" << s.s("loadingSentences") << ")");
+			allSentences.push_back("");
+		}
+		/* loading text */
+		tmpPos.x = winSz.x / 2;
+		tmpPos.y = 70;
+		addText(tmpPos, {0, 0}, "loading...")
+			.setTextAlign(TextAlign::CENTER)
+			.setZ(1);
+		int sentenceID = rand() % allSentences.size();
+
+		/* loading sentence */
+		tmpSize.x = winSz.x;
+		tmpSize.y = tmpPos.y;
+		tmpPos.x = 0;
+		tmpPos.y = 0;
+		addText(tmpPos, tmpSize, allSentences[sentenceID])
+			.setTextAlign(TextAlign::CENTER)
+			.setColor(colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha")))
+			.setZ(1);
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());

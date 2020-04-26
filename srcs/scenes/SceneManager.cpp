@@ -22,7 +22,8 @@
 #include "SceneLoading.hpp"
 
 SceneManager::SceneManager()
-: _gameInfo(),
+: _isInit(false),
+  _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
   _scene(SceneNames::LOADING),
@@ -37,6 +38,8 @@ SceneManager::SceneManager(SceneManager const & src) {
 }
 
 SceneManager::~SceneManager() {
+	if (!_isInit)
+		return;
 	SceneSettings & scSettings = *reinterpret_cast<SceneSettings*>(getScene(SceneNames::SETTINGS));
 	if (scSettings.startFitToScreen && !s.j("graphics").b("fitToScreen")) {
 		_gui->gameInfo.savedWindowSize.x = scSettings.getCurResolution().x;
@@ -153,6 +156,7 @@ bool SceneManager::_init() {
 			return false;
 		}
 	}
+	_isInit = true;
 	return true;
 }
 
