@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+#define WALL_STR "wall"
+
 /**
  * @brief This is the wall object
  */

@@ -7,8 +7,8 @@
 EnemyBasic::EnemyBasic(SceneGame &game)
 : AEnemy(game)
 {
-	size = glm::vec3(0.85, 1.0, 0.85);
-	name = "EnemyBasic";
+	name = ENEMY_BASIC_STR;
+	size = glm::vec3(0.7, 1.0, 0.7);
 	AudioManager::loadSound(ENEMY_BASIC_DEATH_SOUND);
 	_soundOfDeath = ENEMY_BASIC_DEATH_SOUND;
 }
@@ -97,7 +97,7 @@ bool	EnemyBasic::_draw(Gui &gui) {
  *
  */
 void	EnemyBasic::_updateModel() {
-	_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 
 	// set model orientationdebug
 	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
@@ -151,8 +151,7 @@ bool	EnemyBasic::init() {
 			delete _model;
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("robot");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
-			{.7, .7, .7}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle");

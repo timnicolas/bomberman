@@ -32,7 +32,6 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
-	glm::vec3		size;
 	std::string		_soundOfDeath;
 
 	// Methods
@@ -41,8 +40,8 @@ protected:
 	bool		_canWalkOnEntity(AEntity * entity) const;
 	bool		_canMoveOnFromTo(glm::vec3 from, glm::vec3 to) const;
 	bool		_canMoveOn(glm::vec3 dest) const;
-	glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
-	glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
+	virtual glm::vec3	_moveTo(Direction::Enum direction, float const offset = OFFSET_TURN_CORRECTION);
+	virtual glm::vec3	_moveTo(glm::vec3 direction, float const offset = OFFSET_TURN_CORRECTION);
 	std::vector<glm::ivec2>	_getAllPositions(glm::vec3 dest, glm::vec3 size) const;
 
 
@@ -51,6 +50,7 @@ public:
 	int			lives;
 	float		speed;
 	glm::vec3	front;
+	glm::vec3	movingSize;
 	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
 
 	// Constructors
@@ -65,13 +65,14 @@ public:
 	virtual void					resetCrossable();
 	virtual bool					update() = 0;
 	virtual bool					draw(Gui &gui) = 0;
+	virtual bool					drawCollider();
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	bool							isAlive();
 	glm::vec3						getPos() const;
 	glm::ivec2						getIntPos() const;
 	ACharacter						*setPosition(glm::vec3 pos);
-	bool							takeDamage(const int damage);
+	virtual bool					takeDamage(const int damage);
 	virtual std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 	bool							hasCollision(glm::vec3 atPosition, glm::vec3 atSize = glm::vec3(1, 1, 1));
 	bool							tp(glm::vec3 tpPos);

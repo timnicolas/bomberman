@@ -74,6 +74,13 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			"Restart the level",
 			&SceneCheatCode::_execRestart,
 		}},
+		{"debug", {
+			"<type> <element ...> ['list']",
+			"Show, hide or reset debug elements.\n"
+				CHEATCODE_TAB"type: show, hide, reset\n"
+				CHEATCODE_TAB"/debug show collider",
+			&SceneCheatCode::_execDebug,
+		}},
 	};
 }
 
@@ -227,6 +234,9 @@ void SceneCheatCode::load() {
 void SceneCheatCode::unload() {
 	ASceneMenu::unload();
 	_commandLine->setFocus(false);
+	if (SceneManager::getSceneName() == SceneNames::GAME) {
+		_gui->enableCursor(false);
+	}
 }
 
 /**

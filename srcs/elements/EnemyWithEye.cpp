@@ -8,7 +8,8 @@ EnemyWithEye::EnemyWithEye(SceneGame &game)
 : AEnemy(game),
   _playerDir(Direction::NO_DIRECTION)
 {
-	name = "EnemyWithEye";
+	name = ENEMY_WITH_EYE_STR;
+	size = glm::vec3(0.7, 1.0, 0.7);
 	AudioManager::loadSound(ENEMY_WITH_EYE_DEATH_SOUND);
 	_soundOfDeath = ENEMY_WITH_EYE_DEATH_SOUND;
 }
@@ -45,8 +46,7 @@ bool	EnemyWithEye::init() {
 			delete _model;
 
 		OpenGLModel	&openglModel = ModelsManager::getModel("flower");
-		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
-			{1.5, 1.5, 1.5}));
+		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0}, ENEMY_WITH_EYE_SIZE));
 		_model->play = true;
 		_model->loopAnimation = true;
 		_model->setAnimation("Armature|idle");
@@ -140,7 +140,7 @@ bool	EnemyWithEye::_draw(Gui &gui) {
  *
  */
 void	EnemyWithEye::_updateModel() {
-	_model->transform.setPos(position + glm::vec3(size.x / 2, 0, size.z / 2));
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 
 	// set model orientation
 	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
