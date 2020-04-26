@@ -41,6 +41,7 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		s.s("loadingImgs"),
 		CONFIG_DIR,
 		SAVE_DIR,
 	};
@@ -49,6 +50,7 @@ bool	checkPrgm() {
 	std::vector<std::string> requiredFiles = {
 		s.j("fonts").j("base").s("file"),
 		s.j("fonts").j("cheatcode").s("file"),
+		s.s("loadingSentences"),
 	};
 
 	for (auto && it : requiredDirs) {
@@ -173,7 +175,10 @@ bool	initSettings(std::string const & filename) {
 		.setDescription("The volume of the sounds effects.");
 
 	/* Folders */
-	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
+	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("Folder with all maps");
+	s.add<std::string>("loadingImgs", "bomberman-assets/loading/imgs").setDescription("Folder with all loading images");
+	s.add<std::string>("loadingSentences", "bomberman-assets/loading/load-sentences.txt")
+		.setDescription("File with all loading sentences");
 
 	/* Graphics */
 	s.add<SettingsJson>("graphics");

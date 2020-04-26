@@ -79,4 +79,30 @@ namespace file {
 		return true;
 	}
 
+	/**
+	 * @brief List files in a folder
+	 *
+	 * @param path The folder path
+	 * @param silent If true, don't show warning and errors
+	 * @return std::vector<std::string> The list of all filenames
+	 */
+	std::vector<std::string>	ls(std::string const & path, bool silent) {
+		std::vector<std::string> list;
+
+		if (!isDir(path)) {
+			if (!silent)
+				logErr("In file::ls: " << path << " is not a valid directory");
+			return list;
+		}
+
+		boost::filesystem::directory_iterator end_itr;
+		for (boost::filesystem::directory_iterator itr(path); itr != end_itr; ++itr) {
+			if (boost::filesystem::is_regular_file(itr->path())) {
+				std::string currentFile = itr->path().string();
+				list.push_back(currentFile);
+			}
+		}
+		return list;
+	}
+
 }  // namespace file
