@@ -7,7 +7,7 @@ EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game)
 {
 	name = ENEMY_FLY_STR;
-	size = glm::vec3(.8, .8, .8);
+	size = glm::vec3(.2, .2, .2);
 }
 
 EnemyFly::~EnemyFly() {
@@ -101,7 +101,7 @@ bool	EnemyFly::_draw(Gui &gui) {
  *
  */
 void	EnemyFly::_updateModel() {
-	_model->transform.setPos(position + glm::vec3(size.x / 2, FLY_HEIGHT, size.z / 2));
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, FLY_HEIGHT, movingSize.z / 2));
 
 	// set model orientationdebug
 	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
