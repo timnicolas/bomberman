@@ -75,6 +75,9 @@ void SceneLoadGame::load() {
 	float menuHeight = winSz.y / 14;
 
 	try {
+		addExitButton()
+			.addButtonLeftListener(&_states.menu);
+
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
@@ -252,7 +255,7 @@ bool	SceneLoadGame::update() {
 		scGame.loadLevel(scGame.level);  // reload the current level
 		SceneManager::loadScene(_lastSceneName);
 	}
-	else if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
+	else if (_states.menu) {
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
