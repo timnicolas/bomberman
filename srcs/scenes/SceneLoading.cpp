@@ -55,7 +55,16 @@ bool			SceneLoading::init() {
 		else {
 			int imgID = rand() % allImgs.size();
 			try {
-				addImage({0, 0}, {winSz.x, 0}, allImgs[imgID]);
+				ABaseUI * tmp = &addImage({0, 0}, {0, 0}, allImgs[imgID]);
+				if (winSz.x / winSz.y > static_cast<float>(tmp->getImgDefSize().x) / tmp->getImgDefSize().y) {
+					tmpSize.x = winSz.x;
+					tmpSize.y = winSz.x / (static_cast<float>(tmp->getImgDefSize().x) / tmp->getImgDefSize().y);
+				}
+				else {
+					tmpSize.x = winSz.y * (static_cast<float>(tmp->getImgDefSize().x) / tmp->getImgDefSize().y);
+					tmpSize.y = winSz.y;
+				}
+				tmp->setSize(tmpSize);
 			}
 			catch (ABaseUI::UIException const & e) {
 				logWarn("Invalid image " << allImgs[imgID] << " in loading scene");

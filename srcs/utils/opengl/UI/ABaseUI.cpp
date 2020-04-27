@@ -371,6 +371,8 @@ uint32_t			ABaseUI::getTextWidth() const {
 	return _textRender->strWidth(_textFont, _text, _textScale) + _textPadding * 2;
 }
 std::string			ABaseUI::getText() const { return _text; }
+glm::ivec2 &		ABaseUI::getImgDefSize() { return _imgDefSize; }
+glm::ivec2 const &	ABaseUI::getImgDefSize() const { return _imgDefSize; }
 
 // -- exception ----------------------------------------------------------------
 ABaseUI::UIException::UIException()
