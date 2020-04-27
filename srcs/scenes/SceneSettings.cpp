@@ -229,7 +229,7 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 		.setEnabled(true);
 	_updateResolutionText();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_size.x = menu_width / 10;
+	tmp_size.x = menu_width / 14;
 	tmp_pos.x -= tmp_size.x;
 	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/prev.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
