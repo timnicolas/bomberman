@@ -46,7 +46,6 @@ bool			SceneLevelSelection::init() {
 	try {
 		_states.nbLevel = scGame.getNbLevel();
 
-		tmpSize.y = winSz.y * 0.08;
 		addExitButton()
 			.addButtonLeftListener(&_states.menu);
 
