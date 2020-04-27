@@ -1,6 +1,7 @@
 #include "Bonus.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Static members -----------------------------------------------------------
 
@@ -41,6 +42,9 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	destructible = true;
 	_timeToDie = 10.0f;
 	_typeBonus = _pickBonus();
+	AudioManager::loadSound(BONUS_SOUND);
+	AudioManager::loadSound(NEW_LIFE_SOUND);
+	AudioManager::loadSound(BONUS_DISAPPEAR_SOUND);
 }
 
 Bonus::~Bonus() {
@@ -75,11 +79,29 @@ bool	Bonus::update() {
 
 	_timeToDie -= game.getDtTime();
 	if (_timeToDie <= 0.0) {
+		try {
+			AudioManager::playSound(BONUS_DISAPPEAR_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 		alive = false;
 	}
 
 	if (game.player->hasCollision(position)) {
 		game.player->takeBonus(_typeBonus);
+		if (_typeBonus == BonusType::LIFE) {
+			try {
+				AudioManager::playSound(NEW_LIFE_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		} else {
+			try {
+				AudioManager::playSound(BONUS_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		active = false;
 	}
 

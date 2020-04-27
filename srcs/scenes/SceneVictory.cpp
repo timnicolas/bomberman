@@ -1,6 +1,7 @@
 #include "SceneVictory.hpp"
 #include "SceneGame.hpp"
 #include "SceneCheatCode.hpp"
+#include "AudioManager.hpp"
 
 SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
@@ -148,6 +149,7 @@ bool	SceneVictory::update() {
 	}
 
 	if (_states.nextLevel) {
+		AudioManager::stopSound(WIN_SOUND);
 		_states.nextLevel = false;
 		if (scGame.level + 1 < static_cast<int32_t>(scGame.getNbLevel())) {
 			try {
@@ -175,6 +177,7 @@ bool	SceneVictory::update() {
 		}
 	}
 	else if (_states.restart) {
+		AudioManager::stopSound(WIN_SOUND);
 		_states.restart = false;
 		// reload the current level
 		if (!scGame.loadLevel(scGame.level)) {
@@ -183,10 +186,12 @@ bool	SceneVictory::update() {
 		SceneManager::loadScene(_lastSceneName);
 	}
 	else if (_states.menu) {
+		AudioManager::stopSound(WIN_SOUND);
 		_states.menu = false;
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
+		AudioManager::stopSound(WIN_SOUND);
 		_states.exit = false;
 		SceneManager::loadScene(SceneNames::EXIT);
 	}

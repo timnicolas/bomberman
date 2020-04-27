@@ -32,6 +32,8 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
+	std::string		_soundOfDeath;
+
 	// Methods
 	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest) const;
 	bool		_canWalkOnBlock(glm::ivec2 pos) const;

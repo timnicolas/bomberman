@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -11,9 +12,18 @@ Player::Player(SceneGame &game)
 	type = Type::PLAYER;
 	name = PLAYER_STR;
 	resetParams();
+	AudioManager::loadSound(PLAYER_HURT_SOUND);
+	AudioManager::loadSound(PLAYER_DEATH_SOUND);
+	AudioManager::loadSound(PLAYER_RUN_SOUND);
+	AudioManager::loadSound(PLAYER_ONE_LIFE_SOUND);
+	AudioManager::loadSound(PUT_BOMB_SOUND);
+	AudioManager::loadSound(PUT_BOMB_EMPTY_SOUND);
 }
 
 Player::~Player() {
+	if (_entityState.state == EntityState::RUNNING) {
+		AudioManager::stopSound(PLAYER_RUN_SOUND);
+	}
 }
 
 Player::Player(Player const &src) : Player(src.game) {
@@ -132,6 +142,18 @@ bool	Player::update() {
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
 				setState(EntityState::DROP_BOMB);
+				try {
+					AudioManager::stopSound(PUT_BOMB_SOUND);
+					AudioManager::playSound(PUT_BOMB_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
+			} else {
+				try {
+					AudioManager::playSound(PUT_BOMB_EMPTY_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 			}
 		}
 	}
@@ -179,12 +201,32 @@ bool	Player::draw(Gui &gui) {
  * @return false if damage not taken
  */
 bool	Player::takeDamage(const int damage) {
+	bool was_alive = alive;
 	if (invulnerable <= 0.0f) {
 		if (ACharacter::takeDamage(damage)) {
 			if (alive) {
+				try {
+					AudioManager::playSound(PLAYER_HURT_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
+				if (lives == 1) {
+					try {
+						AudioManager::playSound(PLAYER_ONE_LIFE_SOUND);
+					} catch(Sound::SoundException const & e) {
+						logErr(e.what());
+					}
+				}
 				invulnerable = 3.0f;
+			} else if (was_alive) {
+				try {
+					AudioManager::playSound(PLAYER_DEATH_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 			}
 		}
+		return true;
 	}
 	return false;
 }
@@ -332,26 +374,35 @@ void	Player::_updateAnimationState() {
 		_entityState.updated = false;
 		switch (_entityState.state) {
 			case EntityState::IDLE:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
 				break;
 			case EntityState::DYING:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
 				break;
 			case EntityState::RUNNING:
+				try {
+					AudioManager::playSound(PLAYER_RUN_SOUND, 1.0, true);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
 				break;
 			case EntityState::DROP_BOMB:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 10;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|drop", &AEntity::animEndCb, this);
 				break;
 			case EntityState::VICTORY_EMOTE:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
