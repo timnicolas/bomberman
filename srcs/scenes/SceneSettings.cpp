@@ -121,15 +121,8 @@ bool					SceneSettings::init() {
 	_current_resolution = SceneSettings::resolutions[_select_res];
 
 	try {
-		tmp_size.y = win_size.y * 0.08;
-		tmp_size.x = tmp_size.y;
-		tmp_pos.x = tmp_size.x / 2;
-		tmp_pos.y = win_size.y - tmp_size.y * 1.5;
-		addButton(tmp_pos, tmp_size, "X")
-			.addButtonLeftListener(&_return)
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.setTextScale(_text_scale)
-			.setTextAlign(TextAlign::CENTER);
+		addExitButton()
+			.addButtonLeftListener(&_return);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);

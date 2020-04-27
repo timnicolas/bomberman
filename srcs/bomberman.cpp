@@ -41,6 +41,7 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		s.s("imgsUI"),
 		s.s("loadingImgs"),
 		CONFIG_DIR,
 		SAVE_DIR,
@@ -176,6 +177,7 @@ bool	initSettings(std::string const & filename) {
 
 	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("Folder with all maps");
+	s.add<std::string>("imgsUI", "bomberman-assets/imgs/UI/").setDescription("Folder with all UI images");
 	s.add<std::string>("loadingImgs", "bomberman-assets/loading/imgs").setDescription("Folder with all loading images");
 	s.add<std::string>("loadingSentences", "bomberman-assets/loading/load-sentences.txt")
 		.setDescription("File with all loading sentences");
