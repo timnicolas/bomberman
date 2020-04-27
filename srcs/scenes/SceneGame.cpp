@@ -22,6 +22,7 @@
 #include "EnemyCrispy.hpp"
 #include "EnemyFrog.hpp"
 
+#include "AudioManager.hpp"
 #include "SceneManager.hpp"
 
 // -- Static members initialisation --------------------------------------------
@@ -62,6 +63,11 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	_terrain = nullptr;
 	enemiesToKill = 0;
 	enemiesKilled = 0;
+	_alarm = false;
+	AudioManager::loadSound(INTROLEVEL_SOUND);
+	AudioManager::loadSound(WIN_SOUND);
+	AudioManager::loadSound(GAME_OVER_SOUND);
+	AudioManager::loadSound(ALARM_TIME_SOUND);
 }
 
 SceneGame::~SceneGame() {
@@ -278,17 +284,27 @@ bool	SceneGame::update() {
 		state = GameState::PAUSE;
 
 	if (state == GameState::PAUSE) {
+		AudioManager::pauseAllSounds();
 		SceneManager::loadScene(SceneNames::PAUSE);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			if (Inputs::getKeyUp(InputType::CONFIRM))
+				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+			AudioManager::resumeMusic();
 			state = GameState::PLAY;
 		}
 		return true;
 	}
 	else if (state == GameState::WIN) {
+		AudioManager::stopAllSounds();
+		try {
+			AudioManager::playSound(WIN_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 		int32_t	crispiesLast = 0;
 		for (auto &&box : board) {
 			for (auto &&row : box) {
@@ -307,14 +323,24 @@ bool	SceneGame::update() {
 		score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
 		Save::updateSavedFile(*this, true);
 		Save::save(true);
+		delete player;
+		player = nullptr;
 		SceneManager::loadScene(SceneNames::VICTORY);
 		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
+		AudioManager::stopAllSounds();
+		try {
+			AudioManager::playSound(GAME_OVER_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 		// clear game infos.
 		player->resetParams();
 		Save::updateSavedFile(*this, false);
 		Save::save(true);
+		delete player;
+		player = nullptr;
 		SceneManager::loadScene(SceneNames::GAME_OVER);
 		return true;
 	}
@@ -323,6 +349,16 @@ bool	SceneGame::update() {
 	if ((levelTime - time) < 0) {
 		state = GameState::GAME_OVER;
 		return true;
+	}
+	if ((levelTime - time) < 20) {
+		if (!_alarm) {
+			try {
+				AudioManager::playSound(ALARM_TIME_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			_alarm = true;
+		}
 	}
 
 	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
@@ -630,8 +666,14 @@ bool	SceneGame::drawEndGame() {
  * @brief called when the scene is loaded
  */
 void SceneGame::load() {
+	_alarm = false;
 	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
 		state = GameState::INTRO;
+		try {
+			AudioManager::playSound(INTROLEVEL_SOUND);
+		} catch(Sound::SoundException const & e) {
+			logErr(e.what());
+		}
 	}
 	else if (state == GameState::PAUSE
 	|| state == GameState::WIN
@@ -720,6 +762,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	};
 	_gui->cam->setFollowPath(_introAnim);  // set the follow path
 	state = GameState::INTRO;
+	AudioManager::pauseMusic();
 
 	// get saved values
 	player->resetParams();
@@ -1205,6 +1248,10 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos.x += allUI.timeLeftImg->getSize().x;
 		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeToString(levelTime - time))
 			.setSize(VOID_POS).setCalculatedSize();
+		if (!_alarm)
+			allUI.timeLeftText->setTextColor(colorise(s.j("colors").j("font").u("color")));
+		else
+			allUI.timeLeftText->setTextColor(colorise(s.j("colors").j("orange").u("color")));
 		tmpPos.x += allUI.timeLeftText->getSize().x;
 
 		/* life */

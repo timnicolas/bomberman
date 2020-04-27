@@ -35,6 +35,7 @@ private:
 protected:
 	// Members
 	Direction::Enum	_dir;
+	std::vector<std::string>	_soundAttack;
 	bool			_fisrtCall;  // true until the end of the first update call
 	bool			_moveOnCenter;  // true if the enemy move on center (size < 1)
 

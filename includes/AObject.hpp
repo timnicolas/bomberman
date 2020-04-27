@@ -12,6 +12,9 @@ class AObject : public AEntity {
 private:
 	AObject();
 
+protected:
+	std::string		_soundOfDeath;
+
 public:
 	// Constructors
 	explicit AObject(SceneGame &game);
