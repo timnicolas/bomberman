@@ -1,5 +1,6 @@
 #include "EnemyFly.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -8,6 +9,11 @@ EnemyFly::EnemyFly(SceneGame &game)
 {
 	name = ENEMY_FLY_STR;
 	size = glm::vec3(.2, .2, .2);
+	AudioManager::loadSound(ENEMY_FLY_DEATH_SOUND);
+	_soundOfDeath = ENEMY_FLY_DEATH_SOUND;
+	_soundAttack.clear();
+	AudioManager::loadSound(ENEMY_SHOT_SOUND);
+	_soundAttack.push_back(ENEMY_SHOT_SOUND);
 }
 
 EnemyFly::~EnemyFly() {

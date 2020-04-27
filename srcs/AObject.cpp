@@ -1,5 +1,6 @@
 #include "AObject.hpp"
 #include "SceneGame.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -83,7 +84,17 @@ glm::vec3	AObject::getPos() const {
 bool	AObject::takeDamage(const int damage) {
 	if (!active || !destructible || damage <= 0)
 		return false;
+	bool wasAlive = alive;
 	alive = false;
+	if (wasAlive && !alive) {
+		if (_soundOfDeath.size() > 0) {
+			try {
+				AudioManager::playSound(_soundOfDeath);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
+	}
 	return true;
 }
 

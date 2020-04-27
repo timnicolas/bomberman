@@ -1,5 +1,6 @@
 #include "EnemyWithEye.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -9,6 +10,8 @@ EnemyWithEye::EnemyWithEye(SceneGame &game)
 {
 	name = ENEMY_WITH_EYE_STR;
 	size = glm::vec3(0.7, 1.0, 0.7);
+	AudioManager::loadSound(ENEMY_WITH_EYE_DEATH_SOUND);
+	_soundOfDeath = ENEMY_WITH_EYE_DEATH_SOUND;
 }
 
 EnemyWithEye::~EnemyWithEye() {

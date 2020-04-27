@@ -70,6 +70,7 @@ private:
 		DrawForMenu();
 	};
 	DrawForMenu _menuModels;
+	bool	_alarm;
 	Model	*_terrain;
 
 	// Methods

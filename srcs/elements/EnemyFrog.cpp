@@ -1,5 +1,6 @@
 #include "EnemyFrog.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -12,6 +13,8 @@ EnemyFrog::EnemyFrog(SceneGame &game)
 	size = glm::vec3(0.7, 0.5, 0.7);
 	strength = 0;  // remove auto damage
 	resetCrossable();
+	AudioManager::loadSound(ENEMY_FROG_DEATH_SOUND);
+	_soundOfDeath = ENEMY_FROG_DEATH_SOUND;
 }
 
 EnemyFrog::~EnemyFrog() {

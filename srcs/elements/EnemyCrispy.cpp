@@ -1,5 +1,6 @@
 #include "EnemyCrispy.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -10,6 +11,8 @@ EnemyCrispy::EnemyCrispy(SceneGame &game)
   _lastPayerSeenMs(0)
 {
 	name = ENEMY_CRISPY_STR;
+	AudioManager::loadSound(ENEMY_CRISPY_DEATH_SOUND);
+	_soundOfDeath = ENEMY_CRISPY_DEATH_SOUND;
 }
 
 EnemyCrispy::~EnemyCrispy() {
