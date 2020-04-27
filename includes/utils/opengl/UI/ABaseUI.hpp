@@ -140,6 +140,8 @@ class ABaseUI {
 		virtual glm::vec2 const &	getSize() const;
 		virtual	uint32_t			getTextWidth() const;
 		virtual std::string			getText() const;
+		virtual glm::ivec2 &		getImgDefSize();
+		virtual glm::ivec2 const &	getImgDefSize() const;
 		static Shader &				getRectShader();
 
 		/* Exceptions */

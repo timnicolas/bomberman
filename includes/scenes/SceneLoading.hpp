@@ -4,7 +4,7 @@
 #include "ABaseUI.hpp"
 
 /**
- * @brief main menu (opened at the game startup)
+ * @brief loading game scene
  */
 class SceneLoading : public ASceneMenu {
 	public:
