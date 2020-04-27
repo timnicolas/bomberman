@@ -1,5 +1,6 @@
 #include "SceneCheatCode.hpp"
 #include "SceneGame.hpp"
+#include "SceneSettings.hpp"
 #include "Player.hpp"
 #include "Bonus.hpp"
 #include "Save.hpp"
@@ -572,6 +573,8 @@ int SceneCheatCode::_execVolume(std::vector<std::string> const & args) {
 				audioJson.d(args[1]) = val / 100;
 				saveSettings(SETTINGS_FILE);
 				AudioManager::updateSettings();
+				SceneSettings & scSettings = *reinterpret_cast<SceneSettings *>(SceneManager::getScene(SceneNames::SETTINGS));
+				scSettings.updateAudioSliders();
 				_addLine("Set " + args[1] + " volume level to " + std::to_string(val));
 			}
 			else {

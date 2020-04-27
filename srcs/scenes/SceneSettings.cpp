@@ -266,7 +266,7 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 		tmp_size.x = menu_width / 3;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.2;
-		ptr = &addText(tmp_pos, tmp_size,		 SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 		tmp_size.x *= 2;
@@ -275,6 +275,7 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
 		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
 			.addButtonLeftListener(&_save_audio[i]).setTextScale(_text_scale).setEnabled(false);
+		_volSliders[i] = reinterpret_cast<SliderUI*>(ptr);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 }
@@ -484,6 +485,15 @@ bool					SceneSettings::update() {
 		}
 	}
 	return true;
+}
+
+/**
+ * @brief If audio level has changed (/volume master 12), update sliders
+ */
+void					SceneSettings::updateAudioSliders() {
+	for (auto i = 0; i < 3; i++) {
+		_volSliders[i]->setValue(s.j("audio").d(SceneSettings::audio_name[i]) * 100);
+	}
 }
 
 /**
