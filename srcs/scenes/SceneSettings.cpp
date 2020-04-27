@@ -231,17 +231,15 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_size.x = menu_width / 10;
 	tmp_pos.x -= tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, "<")
+	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/prev.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
 		.addButtonLeftListener(&_prev_resolution)
-		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += menu_width / 3 + tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, ">")
+	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/next.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_RIGHT)
 		.addButtonLeftListener(&_next_resolution)
-		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x = (menu_width / 2);
