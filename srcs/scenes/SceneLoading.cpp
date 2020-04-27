@@ -45,7 +45,8 @@ bool			SceneLoading::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Bomberman");
+		addTitle(tmpPos, tmpSize, "Bomberman")
+			.setTextColor(colorise(s.j("colors").j("pink").u("color"), s.j("colors").j("pink").u("alpha")));
 
 		/* background image */
 		std::vector<std::string> allImgs = file::ls(s.s("loadingImgs"));
@@ -91,7 +92,7 @@ bool			SceneLoading::init() {
 		}
 		/* loading text */
 		tmpPos.x = winSz.x / 2;
-		tmpPos.y = 70;
+		tmpPos.y = 100;
 		addText(tmpPos, {0, 0}, "loading...")
 			.setTextAlign(TextAlign::CENTER)
 			.setZ(1);
@@ -99,7 +100,7 @@ bool			SceneLoading::init() {
 
 		/* loading sentence */
 		tmpSize.x = winSz.x;
-		tmpSize.y = tmpPos.y;
+		tmpSize.y = 70;
 		tmpPos.x = 0;
 		tmpPos.y = 0;
 		addText(tmpPos, tmpSize, allSentences[sentenceID])
