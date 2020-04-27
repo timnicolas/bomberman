@@ -74,7 +74,7 @@ bool	AEnemy::update() {
 		if (_soundAttack.size()) {
 			try {
 				std::string soundAttack = _soundAttack[rand() % _soundAttack.size()];
-				AudioManager::playSound(soundAttack);
+				AudioManager::playSound(soundAttack, 0.6f);
 			} catch(Sound::SoundException const & e) {
 				logErr(e.what());
 			}
