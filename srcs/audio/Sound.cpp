@@ -30,11 +30,11 @@ Sound::~Sound() {
 
 	@throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
-void										Sound::play(float volume, float env_volume) {
+void										Sound::play(float volume, float env_volume, bool loop) {
 	int			chan;
 
 	if (_chunk != nullptr) {
-		chan = Mix_PlayChannel(-1, _chunk, 0);
+		chan = Mix_PlayChannel(-1, _chunk, loop ? -1 : 0);
 		if (chan < 0) {
 			throw Sound::SoundException(Mix_GetError());
 		}
@@ -67,8 +67,10 @@ void										Sound::resume() {
 	Stop all the channels playing this sound.
 */
 void										Sound::stop() {
-	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
-		Mix_HaltChannel(*it);
+	std::unordered_set<int>::iterator it = _currents_channels.begin();
+	while (it != _currents_channels.end()) {
+		Mix_HaltChannel(*it);  // Sound::channelFinished() as callback delete <it>
+		it = _currents_channels.begin();
 	}
 }
 

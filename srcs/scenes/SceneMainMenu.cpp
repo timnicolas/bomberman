@@ -63,7 +63,7 @@ bool			SceneMainMenu::init() {
 		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
 		AudioManager::loadMusic("sounds/puzzle.ogg");
-		AudioManager::playMusic("sounds/puzzle.ogg", 1.0f, true);
+		AudioManager::playMusic("sounds/puzzle.ogg", 0.1f, true);
 
 		_initBG();
 	}

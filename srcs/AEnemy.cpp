@@ -1,6 +1,7 @@
 #include <stack>
 #include "AEnemy.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 #include "EnemyFly.hpp"
 
 // -- Constructors -------------------------------------------------------------
@@ -15,6 +16,9 @@ AEnemy::AEnemy(SceneGame &game)
 	points = 200;
 	_fisrtCall = true;
 	_moveOnCenter = true;
+	AudioManager::loadSound(ENEMY_HIT_1_SOUND);
+	AudioManager::loadSound(ENEMY_HIT_2_SOUND);
+	_soundAttack = {ENEMY_HIT_1_SOUND, ENEMY_HIT_2_SOUND};
 }
 
 AEnemy::~AEnemy() {
@@ -67,8 +71,16 @@ bool	AEnemy::update() {
 		game.player->hasCollision(tmpPos, size) &&
 		_entityState.state != EntityState::ATTACK)
 	{
-		game.player->takeDamage(strength);
+		if (_soundAttack.size()) {
+			try {
+				std::string soundAttack = _soundAttack[rand() % _soundAttack.size()];
+				AudioManager::playSound(soundAttack, 0.6f);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		setState(EntityState::ATTACK);
+		game.player->takeDamage(strength);
 
 		// facing player on attack (except for EnemyFly)
 		if (name != ENEMY_FLY_STR) {

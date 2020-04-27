@@ -1,5 +1,6 @@
 #include "EnemyBasic.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -8,6 +9,8 @@ EnemyBasic::EnemyBasic(SceneGame &game)
 {
 	name = ENEMY_BASIC_STR;
 	size = glm::vec3(0.7, 1.0, 0.7);
+	AudioManager::loadSound(ENEMY_BASIC_DEATH_SOUND);
+	_soundOfDeath = ENEMY_BASIC_DEATH_SOUND;
 }
 
 EnemyBasic::~EnemyBasic() {

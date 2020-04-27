@@ -2,6 +2,7 @@
 #include "SceneGame.hpp"
 #include "useGlm.hpp"
 #include "AEnemy.hpp"
+#include "AudioManager.hpp"
 #include "BoxCollider.hpp"
 
 // -- Constructors -------------------------------------------------------------
@@ -149,6 +150,13 @@ bool	ACharacter::takeDamage(const int damage) {
 	}
 
 	if (wasAlive && !alive) {
+		if (_soundOfDeath.size() > 0) {
+			try {
+				AudioManager::playSound(_soundOfDeath);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		setState(EntityState::DYING);
 	}
 

@@ -1,6 +1,7 @@
 #include "End.hpp"
 #include "SceneGame.hpp"
 #include "Player.hpp"
+#include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -8,6 +9,8 @@ End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
 	name = END_STR;
 	_texture = Block::END;
+	AudioManager::loadSound(END_OPEN_SOUND);
+	_open = false;
 }
 
 End::~End() {
@@ -38,7 +41,15 @@ End &End::operator=(End const &rhs) {
 bool	End::update() {
 	if (game.flags <= 0) {
 		if (game.enemiesToKill <= game.enemiesKilled) {
-			_texture = Block::END_OPEN;
+			if (!_open) {
+				_texture = Block::END_OPEN;
+				try {
+					AudioManager::playSound(END_OPEN_SOUND);
+				} catch(Sound::SoundException const & e) {
+					logErr(e.what());
+				}
+				_open = true;
+			}
 			if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
 			== game.player->crossableTypes.end())
 			{
