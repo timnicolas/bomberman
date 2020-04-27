@@ -81,6 +81,11 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 				CHEATCODE_TAB"/debug show collider",
 			&SceneCheatCode::_execDebug,
 		}},
+		{"volume", {
+			"<type> <value> ['list']",
+			"Set music & sound volume.",
+			&SceneCheatCode::_execVolume,
+		}},
 	};
 }
 

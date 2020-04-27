@@ -78,9 +78,9 @@ SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
 };
 
 const std::string		SceneSettings::audio_name[3] = {
-	"Master volume",
-	"Music volume",
-	"Sound volume",
+	"master",
+	"music",
+	"sound",
 };
 
 /**

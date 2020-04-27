@@ -5,6 +5,7 @@
 #include "Save.hpp"
 #include "SceneLevelSelection.hpp"
 #include "EnemyFly.hpp"
+#include "AudioManager.hpp"
 
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
@@ -534,6 +535,72 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
 	if (oneSuccess == false) {
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+	}
+	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
+}
+
+int SceneCheatCode::_execVolume(std::vector<std::string> const & args) {
+	int success = CheatcodeAction::RESULT_SUCCESS;
+
+	SettingsJson &								audioJson = s.j("audio");
+	std::map<std::string, JsonObj<double> *> &	audioMap = audioJson.doubleMap;
+
+	if (args.size() == 3) {
+		if (args[1] == "list") {
+			std::string names = CHEATCODE_TAB;
+			for (auto && elem : audioMap) {
+				if (names != CHEATCODE_TAB)
+					names += ", ";
+				names += elem.first;
+			}
+			_addLine("Audio elements list:\n" + names);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | success;
+		}
+		try {
+			if (audioMap.find(args[1]) != audioMap.end()) {
+				if (args[2] == "list") {
+					_addLine("Audio volume between 0 and 100");
+					return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | success;
+				}
+				bool error;
+				double val = _toFloat(args[2], error);
+				if (error || val < 0 || val > 100) {
+					this->logerr("Cannot convert '" + args[1] + "' to number between 0 & 100", false, true);
+					return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+				}
+				audioJson.d(args[1]) = val / 100;
+				saveSettings(SETTINGS_FILE);
+				AudioManager::updateSettings();
+				_addLine("Set " + args[1] + " volume level to " + std::to_string(val));
+			}
+			else {
+				throw SettingsJson::SettingsException();
+			}
+		}
+		catch (SettingsJson::SettingsException const & e) {
+			std::string names = CHEATCODE_TAB;
+			for (auto && elem : audioMap) {
+				if (names != CHEATCODE_TAB)
+					names += ", ";
+				names += elem.first;
+			}
+			this->logerr("Invalid audio element name.\n" CHEATCODE_TAB + names, false, true);
+			return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+		}
+	}
+	else if (args.size() == 2 && args[1] == "list") {
+		std::string names = CHEATCODE_TAB;
+		for (auto && elem : audioMap) {
+			if (names != CHEATCODE_TAB)
+				names += ", ";
+			names += elem.first;
+		}
+		_addLine("Audio elements list:\n" + names);
+		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | success;
+	}
+	else {
+		_execHelp({"help", args[0]});
 		return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 	}
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
