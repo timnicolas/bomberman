@@ -47,13 +47,8 @@ bool			SceneLevelSelection::init() {
 		_states.nbLevel = scGame.getNbLevel();
 
 		tmpSize.y = winSz.y * 0.08;
-		tmpSize.x = tmpSize.y;
-		tmpPos.x = tmpSize.x / 2;
-		tmpPos.y = winSz.y - tmpSize.y * 1.5;
-		addButton(tmpPos, tmpSize, "X")
-			.addButtonLeftListener(&_states.menu)
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.setTextAlign(TextAlign::CENTER);
+		addExitButton()
+			.addButtonLeftListener(&_states.menu);
 
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
