@@ -15,6 +15,7 @@ class SliderUI : public ABaseUI {
 		SliderUI & operator=(SliderUI const & rhs);
 
 		void			setValues(float min, float max, float val, float step = 0);
+		void			setValue(float val);
 
 		SliderUI &		addSliderListener(float * listener);
 

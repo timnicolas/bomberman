@@ -37,6 +37,8 @@ public:
 	virtual bool				init();
 	virtual bool				update();
 
+	void						updateAudioSliders();
+
 	glm::ivec2					getCurResolution() const;
 
 private:
@@ -81,6 +83,7 @@ private:
 	/* temporary settings */
 	bool						_fullscreen;
 	float						_audio_volume[3];
+	SliderUI*					_volSliders[3];
 
 	/* UI listeners */
 	bool						_return;
