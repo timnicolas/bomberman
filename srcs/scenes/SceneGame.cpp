@@ -483,12 +483,14 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
-	try {
-		_terrain->draw();
-	}
-	catch(OpenGLModel::ModelException const & e) {
-		logErr(e.what());
-		return false;
+	if (s.j("debug").j("show").b("terrain")) {
+		try {
+			_terrain->draw();
+		}
+		catch(OpenGLModel::ModelException const & e) {
+			logErr(e.what());
+			return false;
+		}
 	}
 
 	if (s.j("debug").j("show").b("baseBoard")) {
