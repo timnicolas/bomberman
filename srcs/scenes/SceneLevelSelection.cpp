@@ -68,13 +68,13 @@ bool			SceneLevelSelection::init() {
 		tmpPos.x = 30;
 		tmpPos.y = winSz.y / 2 - menuHeight / 2;
 		tmpSize.x = menuHeight;
-		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "<").setTextFont("title")
+		tmpSize.y = 0;
+		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
 			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.lastLevel);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
-		addButton(tmpPos, tmpSize, ">").setTextFont("title")
+		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.nextLevel);
 
