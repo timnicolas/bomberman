@@ -877,6 +877,12 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	return true;
 }
 
+/**
+ * @brief Unload data of level.
+ *
+ * @return true if succeed
+ * @return false
+ */
 bool	SceneGame::_unloadLevel() {
 	if (level == NO_LEVEL)
 		return true;
@@ -913,6 +919,19 @@ bool	SceneGame::_unloadLevel() {
 	}
 	enemies.clear();
 
+	for (auto spawner : spawners) {
+		delete spawner;
+	}
+	spawners.clear();
+
+	// Delete old player
+	delete player;
+	player = nullptr;
+
+	// spawners
+	enemiesToKill = 0;
+	enemiesKilled = 0;
+
 	level = NO_LEVEL;
 	return true;
 }
@@ -931,13 +950,6 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		logErr("unable to load level " << levelId << ": doesn't exist");
 		return false;
 	}
-
-	// Delete old player
-	delete player;
-	player = nullptr;
-
-	enemiesToKill = 0;
-	enemiesKilled = 0;
 
 	level = levelId;  // save new level ID
 	SettingsJson & lvl = *(_mapsList[level]);
