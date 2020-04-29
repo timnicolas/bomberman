@@ -333,22 +333,24 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
 	// add mouse sensitivity slider
-	tmp_pos.y -= keyMenuHeight + keyMenuPadding;
-	tmp_pos.x = 0;
-	ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
-		.setTextAlign(TextAlign::RIGHT)
-		.setTextScale(_text_scale)
-		.setMaster(scrollbar)
-		.setEnabled(false);
-	_panes[SettingsType::CONTROLS].push_front(ptr);
-	tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
-	ptr = &addSlider(tmp_pos, tmp_size, 0, 3, _update_mouse_sens, 0.05)
-		.addSliderListener(&_update_mouse_sens)
-		.addButtonLeftListener(&_save_mouse_sens)
-		.setTextScale(_text_scale)
-		.setMaster(scrollbar)
-		.setEnabled(false);
-	_panes[SettingsType::CONTROLS].push_front(ptr);
+	#if DEBUG
+		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
+		tmp_pos.x = 0;
+		ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
+			.setTextAlign(TextAlign::RIGHT)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
+		_panes[SettingsType::CONTROLS].push_front(ptr);
+		tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
+		ptr = &addSlider(tmp_pos, tmp_size, 0.1, 3, _update_mouse_sens, 0.05)
+			.addSliderListener(&_update_mouse_sens)
+			.addButtonLeftListener(&_save_mouse_sens)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
+		_panes[SettingsType::CONTROLS].push_front(ptr);
+	#endif
 	// reset
 	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width * 0.15;
