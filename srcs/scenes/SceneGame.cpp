@@ -861,7 +861,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<SettingsJson>("bonus");
 		for (auto &&pair : Bonus::bonus) {
 			lvl->j("bonus").add<SettingsJson>(pair.first);
-			lvl->j("bonus").j(pair.first).add<int64_t>("chance", 0).setMin(0).setMax(25);
+			lvl->j("bonus").j(pair.first).add<int64_t>("chance", 0).setMin(0).setMax(100);
 			lvl->j("bonus").j(pair.first).add<int64_t>("nb", -1).setMin(-1).setMax(100);
 		}
 	try {
