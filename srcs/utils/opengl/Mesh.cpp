@@ -129,7 +129,6 @@ void	Mesh::_setUniformsTextures() const {
 	// set normal color if no texture has been setted
 	if (!hasNormalTex) {
 		_sh.setBool("material.normalMap.isTexture", false);
-		// TODO(zer0nim): need to set other default normal ?
 		_sh.setVec3("material.normalMap.color", glm::vec3(0, 0, 1));
 	}
 	_sh.setFloat("material.shininess", _material.shininess);
