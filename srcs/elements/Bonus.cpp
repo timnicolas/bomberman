@@ -33,6 +33,20 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "points", BonusType::POINTS },
 };
 
+std::map<BonusType::Enum, std::string> Bonus::_description = {
+	{ BonusType::LIFE, "Bonus Life: You earn one more life" },
+	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb at the same time" },
+	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range" },
+	{ BonusType::SPEED, "Bonus Speed: You can now move faster" },
+	{ BonusType::WALLPASS, "Bonus Wall Pass: You can now cross walls" },
+	{ BonusType::DETONATOR, "Bonus Detonator: You can explode bombs when you want" },
+	{ BonusType::BOMBPASS, "Bonus Bomb Pass: You can now walk over bombs" },
+	{ BonusType::FLAMPASS, "Bonus Passe Flame: The bombs doesn't affect you anymore." },
+	{ BonusType::SHIELD, "Bonus Shield: You can't get damage for a while" },
+	{ BonusType::TIME, "Bonus Time: You have more time to do a level" },
+	{ BonusType::POINTS, "Bonus Points: Your total score increase" },
+};
+
 // -- Constructors -------------------------------------------------------------
 
 Bonus::Bonus(SceneGame &game) : AObject(game) {
@@ -130,6 +144,21 @@ bool	Bonus::postUpdate() {
 bool	Bonus::draw(Gui &gui) {
 	gui.drawCube(_textures[_typeBonus], getPos());
 	return true;
+}
+
+/**
+ * @brief Get the description of a given bonus
+ *
+ * @param type The bonus type
+ * @return std::string The description
+ */
+std::string	Bonus::getDescription(BonusType::Enum type) {
+	auto it = _description.find(type);
+	if (it != _description.end()) {
+		return it->second;
+	}
+	logErr("Bonus::getDescription: Invalid bonus type " << type);
+	return "ERROR";
 }
 
 /**
