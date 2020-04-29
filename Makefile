@@ -366,6 +366,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	# assimp
 	brew install assimp;
 	brew upgrade assimp;
+	# freetype2
+	brew install freetype2
 fi
 
 exit 0
