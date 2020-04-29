@@ -174,6 +174,7 @@ bool SceneManager::run() {
 
 bool SceneManager::_run(float maxFrameDuration) {
 	std::chrono::milliseconds	lastLoopMs = getMs();
+	bool firstLoop = true;
 
 	while (true) {
 		/* reset variables */
@@ -214,9 +215,7 @@ bool SceneManager::_run(float maxFrameDuration) {
 		else {
 			usleep((maxFrameDuration - frameDuration) * 1000);
 		}
-		#if DEBUG_FPS_LOW == true
-			firstLoop = false;
-		#endif
+		firstLoop = false;
 	}
 	return true;
 }
