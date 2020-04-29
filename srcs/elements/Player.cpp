@@ -242,13 +242,21 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 	switch (bonus) {
 		case BonusType::LIFE:
 			lives++;
+			if (lives > 3)
+				lives = 3;
 			break;
 		case BonusType::BOMBS:
 			totalBombs++;
 			bombs++;
+			if (totalBombs > 10)
+				totalBombs = 10;
+			if (bombs > 10)
+				bombs = 10;
 			break;
 		case BonusType::FLAMES:
 			bombProgation++;
+			if (bombProgation > 12)
+				bombProgation = 12;
 			break;
 		case BonusType::SPEED:
 			speed++;

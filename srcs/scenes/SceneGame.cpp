@@ -794,7 +794,9 @@ bool SceneGame::loadLevel(int32_t levelId) {
 
 bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	// level$(levelID)
-	std::string		levelName = "level" + std::to_string(levelId);
+	std::stringstream ss;
+	ss << "level" << std::setw(2) << std::setfill('0') << levelId;
+	std::string		levelName = ss.str();
 	// $(mapsPath)/$(levelName).json
 	std::string		filename = s.s("mapsPath") + "/" + levelName + ".json";
 	if (file::isFile(filename) == false) {
