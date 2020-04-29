@@ -1187,6 +1187,7 @@ void SceneGame::_initGameInfos() {
 		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
 		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
+		allUI.levelNameText = &addText(VOID_SIZE, VOID_SIZE, "level-name").setTextAlign(TextAlign::RIGHT);
 		allUI.enemiesCounterText = &addText(VOID_SIZE, VOID_SIZE, "nb-enemies").setTextAlign(TextAlign::RIGHT);
 		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
 		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
@@ -1216,6 +1217,7 @@ void		SceneGame::_loadGameInfos() {
 		allUI.scoreText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.lifeImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.lifeText->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.levelNameText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.enemiesCounterText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.speedImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.speedText->setPos(VOID_SIZE).setSize(VOID_SIZE);
@@ -1256,6 +1258,15 @@ void			SceneGame::_updateGameInfos() {
 		tmpSize.y = menuHeight;
 		tmpSize = {32, 32};
 
+		// -- Title ---------
+		/* level name */
+		allUI.levelNameText->setText(getLevelName(level))
+			.setSize(VOID_POS).setCalculatedSize();
+		allUI.levelNameText->setPos({(winSz.x / 2) - allUI.levelNameText->getSize().x / 2, tmpPos.y + 1.5 * tmpSize.y});
+
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+
 		// -- Top -----------
 		/* time left */
 		allUI.timeLeftImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
@@ -1276,14 +1287,6 @@ void			SceneGame::_updateGameInfos() {
 			.setSize(VOID_SIZE).setCalculatedSize();
 		tmpPos.x += allUI.lifeText->getSize().x;
 
-		/* score */
-		tmpPos.x += padding;
-		allUI.scoreImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-		tmpPos.x += allUI.scoreImg->getSize().x;
-		allUI.scoreText->setPos({tmpPos.x, textY}).setText(score.toString())
-			.setSize(VOID_POS).setCalculatedSize();
-		tmpPos.x += allUI.scoreText->getSize().x;
-
 		/* enemies counter */
 		if (enemiesToKill > 0) {
 			tmpPos.x += padding;
@@ -1295,6 +1298,15 @@ void			SceneGame::_updateGameInfos() {
 				.setSize(VOID_POS).setCalculatedSize().setTextColor(color);
 			tmpPos.x += allUI.enemiesCounterText->getSize().x;
 		}
+
+		/* score */
+		tmpPos.x = (winSz.x / 2) + (menuWidth / 2);
+		allUI.scoreText->setText(score.toString()).setSize(VOID_POS).setCalculatedSize();
+		tmpPos.x -= allUI.scoreText->getSize().x;
+		allUI.scoreText->setPos({tmpPos.x, textY});
+		allUI.scoreImg->setSize(tmpSize);
+		tmpPos.x -= allUI.scoreImg->getSize().x;
+		allUI.scoreImg->setPos({tmpPos.x, imgY});
 
 		// -- Bottom -----------
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
