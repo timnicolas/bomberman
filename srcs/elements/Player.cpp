@@ -303,10 +303,16 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
  * @return false
  */
 bool	Player::rmBonus(BonusType::Enum bonus) {
+	float tmp;
 	switch (bonus) {
 		case BonusType::LIFE:
+			tmp = invulnerable;
 			invulnerable = 0;
 			takeDamage(1);
+			if (!alive)
+				_updateAnimationState();
+			else if (tmp > invulnerable)
+				invulnerable = tmp;
 			break;
 		case BonusType::BOMBS:
 			if (totalBombs > 1)
