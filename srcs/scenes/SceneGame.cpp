@@ -203,6 +203,12 @@ bool			SceneGame::init() {
 			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
 			ETransform({0, -2, 0}));
 		}
+
+		/* loading sentence */
+		allUI.introText = &addText({0, 0}, {_gui->gameInfo.windowSize.x, 70}, "")
+			.setTextAlign(TextAlign::CENTER)
+			.setColor(colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha")))
+			.setZ(1);
 	}
 	catch(ModelsManager::ModelsManagerException const &e) {
 		logErr(e.what());
@@ -279,6 +285,8 @@ bool	SceneGame::update() {
 		_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 
 	_gui->cam->update(_dtTime);
+
+	allUI.introText->setEnabled(state == GameState::INTRO);
 
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
@@ -539,6 +547,9 @@ bool	SceneGame::drawGame() {
 	if (state == GameState::PLAY && allUI.timeLeftImg->getPos() != VOID_SIZE) {
 		ASceneMenu::draw();
 	}
+	else if (state == GameState::INTRO) {
+		allUI.introText->draw();
+	}
 
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
@@ -765,6 +776,28 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	_gui->cam->setFollowPath(_introAnim);  // set the follow path
 	state = GameState::INTRO;
 	AudioManager::pauseMusic();
+
+
+	/* load sentence */
+	std::ifstream	file(s.s("loadingSentences"));
+	std::string		line;
+	std::vector<std::string> allSentences;
+	if (file.is_open()) {
+		for (std::string line; std::getline(file, line); ) {
+			if (line.size() > 0)
+				allSentences.push_back(line);
+		}
+		file.close();
+	}
+	else {
+		logWarn("unable to load sentences list for loading menu");
+	}
+	if (allSentences.empty()) {
+		logWarn("No sentences in sentences files (" << s.s("loadingSentences") << ")");
+		allSentences.push_back("");
+	}
+	int sentenceID = rand() % allSentences.size();
+	allUI.introText->setText(allSentences[sentenceID]);
 
 	// get saved values
 	player->resetParams();
