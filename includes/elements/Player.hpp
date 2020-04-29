@@ -50,7 +50,7 @@ public:
 	virtual void	resetCrossable();
 	void			resetParams();
 	bool			takeDamage(const int damage);
-	bool			takeBonus(BonusType::Enum bonus);
+	bool			takeBonus(BonusType::Enum bonus, bool silent = false);
 	bool			rmBonus(BonusType::Enum bonus);
 	void			addBomb();
 

@@ -236,10 +236,11 @@ bool	Player::takeDamage(const int damage) {
  * @brief Player take a <bonus> which allow to power up.
  *
  * @param bonus
+ * @param silent
  * @return true
  * @return false
  */
-bool	Player::takeBonus(BonusType::Enum bonus) {
+bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 	switch (bonus) {
 		case BonusType::LIFE:
 			lives++;
@@ -284,7 +285,13 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 		default:
 			break;
 	}
-	logInfoScreen(Bonus::getDescription(bonus));
+	if (!silent) {
+		SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
+			SceneManager::getScene(SceneNames::CHEAT_CODE)
+		);
+		scCheatCode.clearAllLn();
+		logInfoScreen(Bonus::getDescription(bonus));
+	}
 	return true;
 }
 

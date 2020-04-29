@@ -170,7 +170,8 @@ int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 				}
 				SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 				if (scGame.player != nullptr) {
-					scGame.player->takeBonus(Bonus::bonus[*arg]);
+					scGame.player->takeBonus(Bonus::bonus[*arg], true);
+					logInfoScreen(Bonus::getDescription(Bonus::bonus[*arg]));
 					oneSuccess = true;
 				}
 				else {
