@@ -208,7 +208,7 @@ bool			SceneGame::init() {
 		allUI.introText = &addText({0, 0}, {_gui->gameInfo.windowSize.x, 70}, "")
 			.setTextAlign(TextAlign::CENTER)
 			.setColor(colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha")))
-			.setZ(1);
+			.setZ(0.5);
 	}
 	catch(ModelsManager::ModelsManagerException const &e) {
 		logErr(e.what());
@@ -286,6 +286,9 @@ bool	SceneGame::update() {
 
 	_gui->cam->update(_dtTime);
 
+	if (player->getState() == EntityState::DYING)
+		state = GameState::GAME_OVER;
+
 	allUI.introText->setEnabled(state == GameState::INTRO);
 
 	if (Inputs::getKeyUp(InputType::CANCEL))
@@ -307,49 +310,61 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::WIN) {
-		AudioManager::stopAllSounds();
-		try {
-			AudioManager::playSound(WIN_SOUND);
-		} catch(Sound::SoundException const & e) {
-			logErr(e.what());
+		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			_gui->cam->setMode(CamMode::FOLLOW_PATH);
+			_gui->cam->setFollowPath(_getGameOverAnim());
 		}
-		int32_t	crispiesLast = 0;
-		for (auto &&box : board) {
-			for (auto &&row : box) {
-				for (auto &&element : row) {
-					if (element->type == Type::CRISPY)
-						crispiesLast++;
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			AudioManager::stopAllSounds();
+			try {
+				AudioManager::playSound(WIN_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			int32_t	crispiesLast = 0;
+			for (auto &&box : board) {
+				for (auto &&row : box) {
+					for (auto &&element : row) {
+						if (element->type == Type::CRISPY)
+							crispiesLast++;
+					}
 				}
 			}
+			score.addBonusTime(levelTime, time);
+			uint32_t remainEnemies = 0;
+			for (auto && it : enemies) {
+				if (it->alive)
+					remainEnemies++;
+			}
+			score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
+			Save::updateSavedFile(*this, true);
+			Save::save(true);
+			delete player;
+			player = nullptr;
+			SceneManager::loadScene(SceneNames::VICTORY);
+			return true;
 		}
-		score.addBonusTime(levelTime, time);
-		uint32_t remainEnemies = 0;
-		for (auto && it : enemies) {
-			if (it->alive)
-				remainEnemies++;
-		}
-		score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
-		Save::updateSavedFile(*this, true);
-		Save::save(true);
-		delete player;
-		player = nullptr;
-		SceneManager::loadScene(SceneNames::VICTORY);
-		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
-		AudioManager::stopAllSounds();
-		try {
-			AudioManager::playSound(GAME_OVER_SOUND);
-		} catch(Sound::SoundException const & e) {
-			logErr(e.what());
+		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			_gui->cam->setMode(CamMode::FOLLOW_PATH);
+			_gui->cam->setFollowPath(_getGameOverAnim());
 		}
-		// clear game infos.
-		player->resetParams();
-		Save::updateSavedFile(*this, false);
-		Save::save(true);
-		delete player;
-		player = nullptr;
-		SceneManager::loadScene(SceneNames::GAME_OVER);
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			AudioManager::stopAllSounds();
+			try {
+				AudioManager::playSound(GAME_OVER_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			// clear game infos.
+			player->resetParams();
+			Save::updateSavedFile(*this, false);
+			Save::save(true);
+			delete player;
+			player = nullptr;
+			SceneManager::loadScene(SceneNames::GAME_OVER);
+		}
 		return true;
 	}
 
@@ -726,54 +741,7 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	));
 	_gui->cam->setDefPos();  // set the default position to the current position
 	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
-	_introAnim = {
-		{
-			{80, 80, 150},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			true,  // tpTo
-			-1,  // speed
-		},
-		{
-			{size.x / 2, 32, size.y / 2},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			_gui->cam->movementSpeed * 5,  // speed
-		},
-		{
-			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			_gui->cam->movementSpeed / 3,  // speed
-		},
-
-		{
-			{-15, 20, -15},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			true,  // tpTo
-			-1,  // speed
-		},
-		{
-			{-15, 20, size.y + 15},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			-1,  // speed
-		},
-
-
-		{
-			_gui->cam->getDefPos(),  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			-1,  // speed
-		},
-	};
-	_gui->cam->setFollowPath(_introAnim);  // set the follow path
+	_gui->cam->setFollowPath(_getIntroAnim());  // set the follow path
 	state = GameState::INTRO;
 	AudioManager::pauseMusic();
 
@@ -1425,6 +1393,121 @@ bool			SceneGame::_initBonus() {
 		return false;
 	}
 	return true;
+}
+
+std::vector<CamPoint>	SceneGame::_getIntroAnim() const {
+	return {
+		{
+			{80, 80, 150},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{size.x / 2, 32, size.y / 2},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+		{
+			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 3,  // speed
+		},
+
+		{
+			{-15, 20, -15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{-15, 20, size.y + 15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+	};
+}
+
+std::vector<CamPoint>	SceneGame::_getGameOverAnim() const {
+	return {
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 7, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 20, player->position.z + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 5,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 1, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+	};
+}
+
+std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
+	return {
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 7, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 20, player->position.z + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 5,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 1, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+	};
 }
 
 // -- getter -------------------------------------------------------------------
