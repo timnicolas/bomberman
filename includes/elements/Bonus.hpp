@@ -30,7 +30,8 @@ private:
 	Bonus();
 	// Member
 	BonusType::Enum		_typeBonus;
-	static std::map<BonusType::Enum, Block::Enum> _textures;
+	static std::map<BonusType::Enum, Block::Enum>	_textures;
+	static std::map<BonusType::Enum, std::string>		_description;
 	// Methods
 	BonusType::Enum		_pickBonus();
 
@@ -45,10 +46,11 @@ public:
 	Bonus &operator=(Bonus const &rhs);
 
 	// Methods
-	bool			update();
-	bool			postUpdate();
-	bool			draw(Gui &gui);
-	static Bonus*	generateBonus(SceneGame &game, float rate = 0.1f);
+	bool				update();
+	bool				postUpdate();
+	bool				draw(Gui &gui);
+	static std::string	getDescription(BonusType::Enum type);
+	static Bonus*		generateBonus(SceneGame &game, float rate = 0.1f);
 
 	// Exceptions
 	class BonusException : public std::runtime_error {

@@ -1,6 +1,7 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
 #include "AudioManager.hpp"
+#include "SceneCheatCode.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -283,6 +284,7 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 		default:
 			break;
 	}
+	logInfoScreen(Bonus::getDescription(bonus));
 	return true;
 }
 
