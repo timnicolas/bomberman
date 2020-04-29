@@ -20,7 +20,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execHelp,
 		}},
 		{"clear", {
-			"['history'] ['all']",
+			"['history' | 'all' | 'lines']",
 			"Clear the lines / history / ... (/clear list to have more informations).",
 			&SceneCheatCode::_execClear,
 		}},
@@ -37,7 +37,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
-			"<bonus, ...> ['list']",
+			"<bonus ...>",
 			"Get a bonus effect ('/getbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execGetbonus,
 		}},
@@ -65,7 +65,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execUnlock,
 		}},
 		{"rmbonus", {
-			"<bonus, ...> ['list']",
+			"<bonus, ...>",
 			"Remove a bonus effect ('/rmbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execRmbonus,
 		}},
@@ -75,14 +75,14 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execRestart,
 		}},
 		{"debug", {
-			"<type> <element ...> ['list']",
+			"<type> <element ...>",
 			"Show, hide or reset debug elements.\n"
 				CHEATCODE_TAB"type: show, hide, reset\n"
 				CHEATCODE_TAB"/debug show collider",
 			&SceneCheatCode::_execDebug,
 		}},
 		{"volume", {
-			"<type> <value> ['list']",
+			"<type> <value>",
 			"Set music & sound volume.",
 			&SceneCheatCode::_execVolume,
 		}},

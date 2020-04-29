@@ -48,12 +48,15 @@ int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 			if (*arg == "history") {
 				_cmdHistory.clear();
 			}
+			else if (*arg == "lines") {
+				clearAllLn();
+			}
 			else if (*arg == "all") {
 				_cmdHistory.clear();
 				clearAllLn();
 			}
 			else if (*arg == "list") {
-				_addLine("Clear arguments list:\n" CHEATCODE_TAB "all, history");
+				_addLine("Clear arguments list:\n" CHEATCODE_TAB "all, lines, history");
 			}
 			else {
 				this->logerr("Invalid command argument: " + *arg, false, true);

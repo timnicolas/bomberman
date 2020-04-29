@@ -6,7 +6,7 @@
 
 #define CHEATCODE_FONT					"cheatcode"
 #define CHEATCODE_FONT_SCALE			1
-#define CHEATCODE_COLOR					glm::vec4(0, 0, 0, 0.5)
+#define CHEATCODE_COLOR					glm::vec4(0, 0, 0, 0.4)
 #define CHEATCODE_DEF_TXT				"/"
 #define CHEATCODE_TAB					"  "
 
