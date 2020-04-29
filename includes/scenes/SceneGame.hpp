@@ -87,6 +87,7 @@ protected:
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
+		ABaseUI *	levelNameText;  // TextUI
 		ABaseUI *	enemiesCounterText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
 		ABaseUI *	speedText;  // TextUI
