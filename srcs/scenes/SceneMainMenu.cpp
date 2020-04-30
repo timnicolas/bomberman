@@ -101,8 +101,7 @@ bool	SceneMainMenu::update() {
 	}
 	if (_states.newGame) {
 		_states.newGame = false;
-		Save::newGame();
-		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+		SceneManager::loadScene(SceneNames::DIFFICULTY);
 	}
 	else if (_states.loadGame) {
 		_states.loadGame = false;
