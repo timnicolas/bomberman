@@ -134,7 +134,7 @@ void		SceneDifficulty::_updateUI() {
 	allUI.medium->setPos(tmpPos).setSize(tmpSize);
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.hardCore->setPos(tmpPos).setSize(tmpSize);
-	tmpPos.y -= menuHeight * 1.3;
+	tmpPos.y -= menuHeight * 1.8;
 	allUI.menu->setPos(tmpPos).setSize(tmpSize);
 	tmpSize.x = tmpSize.x * 1.3;
 	tmpSize.y = winSz.y - tmpPos.y;
