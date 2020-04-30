@@ -4,6 +4,7 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_mixer.h>
 # include <map>
+# include <unordered_set>
 # include "Sound.hpp"
 # include "Music.hpp"
 
@@ -55,7 +56,8 @@ public:
 	static void								unloadMusic(std::string music_name);
 
 	static void								loadSound(std::string file_name);
-	static void								playSound(std::string sound_name, float volume = 1.0, bool loop = false);
+	static void								playSound(std::string sound_name, float volume = 1.0,
+											bool loop = false, bool muteMusic = false);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
 	static void								stopSound(std::string sound_name);
@@ -81,7 +83,8 @@ private:
 	void									_unloadMusic(std::string music_name);
 
 	void									_loadSound(std::string file_name);
-	void									_playSound(std::string sound_name, float volume = 1.0, bool loop = false);
+	void									_playSound(std::string sound_name, float volume = 1.0,
+											bool loop = false, bool muteMusic = false);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
 	void									_stopSound(std::string sound_name);
@@ -99,6 +102,8 @@ private:
 	std::map<std::string, Music *>			_musics;
 	std::map<std::string, Sound *>			_sounds;
 	bool									_enabled;
+	std::unordered_set<int>					_soundsMutesMusic;
+	bool									_musicPaused;
 };
 
 #endif

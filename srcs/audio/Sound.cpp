@@ -23,14 +23,15 @@ Sound::~Sound() {
 }
 
 /**
-	Play the sound at the specified volume.
-
-	@param volume The volume of the sound.
-	@param env_volume The volume settings.
-
-	@throw A SoundException if the sound failed to be played. Not enough channels are allocated.
+ * @brief Play the sound at the specified volume.
+ *
+ * @param volume The volume of the sound.
+ * @param env_volume The volume settings.
+ * @param loop If the sound is on loop.
+ * @return int channel used.
+ * @throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
-void										Sound::play(float volume, float env_volume, bool loop) {
+int										Sound::play(float volume, float env_volume, bool loop) {
 	int			chan;
 
 	if (_chunk != nullptr) {
@@ -42,12 +43,14 @@ void										Sound::play(float volume, float env_volume, bool loop) {
 		Mix_Volume(chan, static_cast<int>(volume * env_volume * MIX_MAX_VOLUME));
 		_currents_channels.insert(chan);
 		_chan_volume.insert(std::pair<int, float>(chan, volume));
+		return chan;
 	}
+	return -2;
 }
 
 /**
-	Pause all the channels playing this sound.
-*/
+ * @brief Pause all the channels playing this sound.
+ */
 void										Sound::pause() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_Pause(*it);
@@ -55,8 +58,8 @@ void										Sound::pause() {
 }
 
 /**
-	Resumes all the channels playing this sound.
-*/
+ * @brief Resumes all the channels playing this sound.
+ */
 void										Sound::resume() {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_Resume(*it);
@@ -64,8 +67,8 @@ void										Sound::resume() {
 }
 
 /**
-	Stop all the channels playing this sound.
-*/
+ * @brief Stop all the channels playing this sound.
+ */
 void										Sound::stop() {
 	std::unordered_set<int>::iterator it = _currents_channels.begin();
 	while (it != _currents_channels.end()) {
@@ -75,11 +78,12 @@ void										Sound::stop() {
 }
 
 /**
-	Update the volume for all the channels playing this sound.
-	If a channel was set with volume modifier below 1.0, the modifier will be conserved.
-
-	@param volume The new global volume value.
-*/
+ * @brief Update the volume for all the channels playing this sound.
+ * If a channel was set with volume modifier below 1.0, the modifier will be
+ * conserved.
+ *
+ * @param volume The new global volume value.
+ */
 void										Sound::updateVolume(float volume) {
 	for (auto it = _currents_channels.begin(); it != _currents_channels.end(); it++) {
 		Mix_Volume(*it, _chan_volume.at(*it) * volume * MIX_MAX_VOLUME);
@@ -87,12 +91,12 @@ void										Sound::updateVolume(float volume) {
 }
 
 /**
-	Remove the specified channel from the list of used channels if found in it.
-
-	@param chan The id of the channel that has just finished playing.
-
-	@return true if the channel was found, false otherwise.
-*/
+ * @brief Remove the specified channel from the list of used channels if found in it.
+ *
+ * @param chan The id of the channel that has just finished playing.
+ * @return true if the channel was found.
+ * @return false otherwise.
+ */
 bool										Sound::channelFinished(int chan) {
 	if (_currents_channels.find(chan) != _currents_channels.end()) {
 		_currents_channels.erase(chan);

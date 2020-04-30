@@ -301,7 +301,7 @@ bool	SceneGame::update() {
 	else if (state == GameState::WIN) {
 		AudioManager::stopAllSounds();
 		try {
-			AudioManager::playSound(WIN_SOUND);
+			AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
 		} catch(Sound::SoundException const & e) {
 			logErr(e.what());
 		}
@@ -331,7 +331,7 @@ bool	SceneGame::update() {
 	else if (state == GameState::GAME_OVER) {
 		AudioManager::stopAllSounds();
 		try {
-			AudioManager::playSound(GAME_OVER_SOUND);
+			AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true);
 		} catch(Sound::SoundException const & e) {
 			logErr(e.what());
 		}
