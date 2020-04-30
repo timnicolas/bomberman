@@ -41,7 +41,7 @@ public:
 	static void			deleteTemp();
 	static std::time_t	filenameToTimestamp(std::string filename, bool temporary);
 	static std::string	timestampToFileName(time_t timestamp);
-	static int			getLastLevel();
+	static int			getLastUnlockedLevel();
 	// Exceptions
 	class SaveException : public std::runtime_error {
 	public:
@@ -72,7 +72,7 @@ private:
 	void				_init();
 	bool				_isLevelDone(int32_t levelId);
 	bool				_setLevelDone(int32_t levelId, int32_t score);
-	int					_getLastLevel();
+	int					_getLastUnlockedLevel();
 	bool				_save(bool temporary);
 	bool				_updateSavedFile(SceneGame &game, bool succeedLevel);
 	bool				_loadStatesSaved(SceneGame &game);
