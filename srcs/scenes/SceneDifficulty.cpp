@@ -90,16 +90,19 @@ bool	SceneDifficulty::update() {
 	if (_states.easy) {
 		_states.easy = false;
 		Save::newGame();
+		Save::setDifficulty(3);
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 	}
 	else if (_states.medium) {
 		_states.medium = false;
 		Save::newGame();
+		Save::setDifficulty(2);
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 	}
 	else if (_states.hardCore) {
 		_states.hardCore = false;
 		Save::newGame();
+		Save::setDifficulty(1);
 		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 	}
 	else if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {

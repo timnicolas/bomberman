@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include "Save.hpp"
 #include "AudioManager.hpp"
 
 // -- Constructors -------------------------------------------------------------
@@ -103,6 +104,8 @@ void	Player::resetParams() {
 	speed = 3;
 	alive = true;
 	lives = 2;
+	if (lives > static_cast<int>(Save::getDifficulty()))
+		lives = Save::getDifficulty();
 	invulnerable = 3.0f;
 	_toDraw = 0;
 	bombProgation = 2;
@@ -242,8 +245,8 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 	switch (bonus) {
 		case BonusType::LIFE:
 			lives++;
-			if (lives > 3)
-				lives = 3;
+			if (lives > static_cast<int>(Save::getDifficulty()))
+				lives = Save::getDifficulty();
 			break;
 		case BonusType::BOMBS:
 			totalBombs++;
