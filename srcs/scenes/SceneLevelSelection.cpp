@@ -196,7 +196,7 @@ bool	SceneLevelSelection::update() {
 void SceneLevelSelection::load() {
 	ASceneMenu::load();
 	_transition = 1;
-	setLevel(Save::getLastLevel());
+	setLevel(Save::getLastUnlockedLevel());
 }
 
 // -- Private methods ----------------------------------------------------------
