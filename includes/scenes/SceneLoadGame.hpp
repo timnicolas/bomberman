@@ -40,6 +40,7 @@ class SceneLoadGame : public ASceneMenu {
 		struct PreviewGame {
 			ABaseUI *	title;
 			ABaseUI *	date;
+			ABaseUI *	gameDifficulty;
 			ABaseUI *	levelsDone;
 			ABaseUI *	scoreTotal;
 			ABaseUI *	loadGame;
