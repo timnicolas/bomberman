@@ -40,6 +40,7 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	name = "Bonus";
 	blockPropagation = false;
 	destructible = true;
+	_toDraw = 0;
 	_timeToDie = 10.0f;
 	_typeBonus = _pickBonus();
 	AudioManager::loadSound(BONUS_SOUND);
@@ -61,6 +62,7 @@ Bonus &Bonus::operator=(Bonus const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
 		_typeBonus = rhs._typeBonus;
+		_toDraw = rhs._toDraw;
 	}
 	return *this;
 }
@@ -128,6 +130,11 @@ bool	Bonus::postUpdate() {
  * @return false if failure
  */
 bool	Bonus::draw(Gui &gui) {
+	if (_timeToDie <= 2) {
+		_toDraw = ((_toDraw + 1) % 10);
+		if (_toDraw > 5)
+			return true;
+	}
 	gui.drawCube(_textures[_typeBonus], getPos());
 	return true;
 }
