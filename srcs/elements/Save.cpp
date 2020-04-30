@@ -302,6 +302,22 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
 }
 
 /**
+ * @brief Get next level to play
+ *
+ * @return int ID of the level.
+ */
+int		Save::getLastLevel() {
+	return get()._getLastLevel();
+}
+int		Save::_getLastLevel() {
+	int	maxLevel = 0;
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
+		maxLevel = level->i("id") >= maxLevel ? level->i("id") + 1 : maxLevel;
+	}
+	return maxLevel;
+}
+
+/**
  * @brief Check if the Level <levelId> has already been done.
  *
  * @param game
