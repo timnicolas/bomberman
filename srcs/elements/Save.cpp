@@ -194,6 +194,7 @@ SettingsJson	*Save::initJson(std::string filename, bool newFile) {
 		jsFile->add<int64_t>("date_creation", time);
 		std::time_t		t = std::time(nullptr);
 		jsFile->add<int64_t>("date_lastmodified", t);
+		jsFile->add<uint64_t>("difficulty", 3);
 
 		SettingsJson	*levelPattern = new SettingsJson();
 		levelPattern->add<int64_t>("id", 0).setMin(0);
@@ -352,7 +353,6 @@ int		Save::_getLevelScore(int32_t levelId) {
 			return level->i("score");
 		}
 	}
-
 	return 0;
 }
 
@@ -383,8 +383,27 @@ bool	Save::_setLevelDone(int32_t levelId, int32_t score) {
 
 		_saveJs->lj("levels").add(levelPattern);
 	}
-
 	return true;
+}
+
+/**
+ * @brief Set difficulty of the game.
+ *
+ * @param difficulty (lower is more difficult)
+ */
+void	Save::setDifficulty(uint difficulty) {
+	get()._saveJs->u("difficulty") = difficulty;
+	if (get()._saveJs->j("state").u("life") > difficulty)
+		get()._saveJs->j("state").u("life") = difficulty;
+}
+
+/**
+ * @brief Get difficulty of the game.
+ *
+ * @return uint difficulty (lower is more difficult)
+ */
+uint	Save::getDifficulty() {
+	return get()._saveJs->u("difficulty");
 }
 
 /**
@@ -408,7 +427,6 @@ bool	Save::_save(bool temporary) {
 		file::rm(_getFilename(true), true);
 		_saved = true;
 	}
-
 	return true;
 }
 

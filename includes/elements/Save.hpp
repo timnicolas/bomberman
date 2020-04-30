@@ -37,6 +37,8 @@ public:
 	static bool			isLevelDone(int32_t levelId);
 	static int			getLevelScore(int32_t levelId);
 	static bool			setLevelDone(int32_t levelId, int32_t score);
+	static void			setDifficulty(uint difficulty);
+	static uint			getDifficulty();
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
 	static std::time_t	filenameToTimestamp(std::string filename, bool temporary);
