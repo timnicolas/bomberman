@@ -1424,6 +1424,8 @@ uint32_t	SceneGame::getNbLevel() const { return _mapsList.size(); }
 std::string	SceneGame::getLevelName(int32_t levelId) const {
 	if (levelId == NO_LEVEL)
 		return "NO_LEVEL";
+	if (static_cast<int32_t>(_mapsList.size()) <= levelId)
+		throw SceneGameException(("Level " + std::to_string(levelId) + " do not exist.").c_str());
 	return _mapsList[levelId]->s("name");
 }
 std::string	SceneGame::getLevelImg(int32_t levelId) const {

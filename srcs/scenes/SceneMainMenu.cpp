@@ -43,7 +43,7 @@ bool			SceneMainMenu::init() {
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Bomberman");
 
-		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "continue")
+		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "play")
 			.addButtonLeftListener(&_states.continueGame);
 		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save")
 			.setKeyLeftClickScancode(SDL_SCANCODE_S)
