@@ -144,7 +144,10 @@ void SceneLoadGame::load() {
 			.setTextAlign(TextAlign::LEFT).setTextFont("text").setMaster(previewGame);
 		tempPrevPos.y -= tmpSize.y * 0.8;
 		previewGameUI.date = &addText(tempPrevPos, tempPrevSize, "")
-			.setTextFont("text") .setTextAlign(TextAlign::LEFT).setMaster(previewGame);
+			.setTextFont("text").setTextAlign(TextAlign::LEFT).setMaster(previewGame);
+		tempPrevPos.y -= tmpSize.y * 0.8;
+		previewGameUI.gameDifficulty = &addText(tempPrevPos, tempPrevSize, "")
+			.setTextFont("text").setTextAlign(TextAlign::LEFT).setMaster(previewGame);
 		tempPrevPos.y -= tmpSize.y * 0.8;
 		previewGameUI.levelsDone = &addText(tempPrevPos, tempPrevSize, "")
 			.setTextFont("text").setTextAlign(TextAlign::LEFT).setMaster(previewGame);
@@ -208,6 +211,14 @@ bool	SceneLoadGame::update() {
 				std::stringstream ss;
 				ss << std::put_time(&localTime, "%d/%m/%Y at %H:%M:%S");
 				previewGameUI.date->setText(ss.str());
+				std::string gameDifficulty = "Difficulty: ";
+				if (gameSaved->game->u("difficulty") == 1)
+					gameDifficulty += "Hard Core";
+				else if (gameSaved->game->u("difficulty") == 2)
+					gameDifficulty += "Medium";
+				else
+					gameDifficulty += "Easy";
+				previewGameUI.gameDifficulty->setText(gameDifficulty);
 				std::string lvlDone = "Levels done: ";
 				lvlDone += std::to_string(gameSaved->game->lj("levels").list.size());
 				previewGameUI.levelsDone->setText(lvlDone);
