@@ -78,9 +78,9 @@ SceneSettings::res		SceneSettings::resolutions[SceneSettings::nb_resolution] = {
 };
 
 const std::string		SceneSettings::audio_name[3] = {
-	"Master volume",
-	"Music volume",
-	"Sound volume",
+	"master",
+	"music",
+	"sound",
 };
 
 /**
@@ -121,15 +121,8 @@ bool					SceneSettings::init() {
 	_current_resolution = SceneSettings::resolutions[_select_res];
 
 	try {
-		tmp_size.y = win_size.y * 0.08;
-		tmp_size.x = tmp_size.y;
-		tmp_pos.x = tmp_size.x / 2;
-		tmp_pos.y = win_size.y - tmp_size.y * 1.5;
-		addButton(tmp_pos, tmp_size, "X")
-			.addButtonLeftListener(&_return)
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.setTextScale(_text_scale)
-			.setTextAlign(TextAlign::CENTER);
+		addExitButton()
+			.addButtonLeftListener(&_return);
 		tmp_size.x = menu_width;
 		tmp_size.y = menu_height * 0.2;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
@@ -236,19 +229,17 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 		.setEnabled(true);
 	_updateResolutionText();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_size.x = menu_width / 10;
+	tmp_size.x = menu_width / 14;
 	tmp_pos.x -= tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, "<")
+	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/prev.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
 		.addButtonLeftListener(&_prev_resolution)
-		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x += menu_width / 3 + tmp_size.x;
-	ptr = &addButton(tmp_pos, tmp_size, ">")
+	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/next.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_RIGHT)
 		.addButtonLeftListener(&_next_resolution)
-		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	tmp_pos.x = (menu_width / 2);
@@ -275,7 +266,7 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 		tmp_size.x = menu_width / 3;
 		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
 		tmp_pos.y -= menu_height * 0.2;
-		ptr = &addText(tmp_pos, tmp_size,		 SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 		tmp_size.x *= 2;
@@ -284,6 +275,7 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
 		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
 			.addButtonLeftListener(&_save_audio[i]).setTextScale(_text_scale).setEnabled(false);
+		_volSliders[i] = reinterpret_cast<SliderUI*>(ptr);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 }
@@ -341,22 +333,24 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_key_buttons[i] = reinterpret_cast<ButtonUI*>(ptr);
 	}
 	// add mouse sensitivity slider
-	tmp_pos.y -= keyMenuHeight + keyMenuPadding;
-	tmp_pos.x = 0;
-	ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
-		.setTextAlign(TextAlign::RIGHT)
-		.setTextScale(_text_scale)
-		.setMaster(scrollbar)
-		.setEnabled(false);
-	_panes[SettingsType::CONTROLS].push_front(ptr);
-	tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
-	ptr = &addSlider(tmp_pos, tmp_size, 0, 3, _update_mouse_sens, 0.05)
-		.addSliderListener(&_update_mouse_sens)
-		.addButtonLeftListener(&_save_mouse_sens)
-		.setTextScale(_text_scale)
-		.setMaster(scrollbar)
-		.setEnabled(false);
-	_panes[SettingsType::CONTROLS].push_front(ptr);
+	#if DEBUG
+		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
+		tmp_pos.x = 0;
+		ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
+			.setTextAlign(TextAlign::RIGHT)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
+		_panes[SettingsType::CONTROLS].push_front(ptr);
+		tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
+		ptr = &addSlider(tmp_pos, tmp_size, 0.1, 3, _update_mouse_sens, 0.05)
+			.addSliderListener(&_update_mouse_sens)
+			.addButtonLeftListener(&_save_mouse_sens)
+			.setTextScale(_text_scale)
+			.setMaster(scrollbar)
+			.setEnabled(false);
+		_panes[SettingsType::CONTROLS].push_front(ptr);
+	#endif
 	// reset
 	tmp_size.y = menu_height * 0.1;
 	tmp_size.x = menu_width * 0.15;
@@ -493,6 +487,15 @@ bool					SceneSettings::update() {
 		}
 	}
 	return true;
+}
+
+/**
+ * @brief If audio level has changed (/volume master 12), update sliders
+ */
+void					SceneSettings::updateAudioSliders() {
+	for (auto i = 0; i < 3; i++) {
+		_volSliders[i]->setValue(s.j("audio").d(SceneSettings::audio_name[i]) * 100);
+	}
 }
 
 /**

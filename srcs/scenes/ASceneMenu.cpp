@@ -257,6 +257,26 @@ TextInputUI & ASceneMenu::addTextInput(glm::vec2 pos, glm::vec2 size, std::strin
 }
 
 /**
+ * @brief Add an exit button on the screen
+ *
+ * @return ButtonImageUI& a reference to the element created
+ */
+ButtonImageUI & ASceneMenu::addExitButton() {
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	std::string filename = s.s("imgsUI") + "/cross.png";
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	tmpSize.x = winSz.y * 0.08;
+	tmpSize.y = 0;
+	tmpPos.x = tmpSize.x * 0.5;
+	tmpPos.y = winSz.y - tmpSize.x * 1.5;
+	ButtonImageUI * ui = new ButtonImageUI(tmpPos, tmpSize, filename);
+	ui->setKeyLeftClickInput(InputType::CANCEL);
+	_buttons.push_back(ui);
+	return *ui;
+}
+
+/**
  * @brief init the basic background of the menu
  *
  * @return true if success
