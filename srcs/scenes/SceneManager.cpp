@@ -175,6 +175,7 @@ bool SceneManager::run() {
 bool SceneManager::_run(float maxFrameDuration) {
 	std::chrono::milliseconds	lastLoopMs = getMs();
 	bool firstLoop = true;
+	(void)firstLoop;
 
 	while (true) {
 		/* reset variables */
