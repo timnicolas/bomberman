@@ -41,6 +41,7 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		s.s("imgsUI"),
 		s.s("loadingImgs"),
 		CONFIG_DIR,
 		SAVE_DIR,
@@ -167,15 +168,16 @@ bool	initSettings(std::string const & filename) {
 
 	/* Audio */
 	s.add<SettingsJson>("audio");
-	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("master", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("Music volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("music", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("sound", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
 	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("Folder with all maps");
+	s.add<std::string>("imgsUI", "bomberman-assets/imgs/UI/").setDescription("Folder with all UI images");
 	s.add<std::string>("loadingImgs", "bomberman-assets/loading/imgs").setDescription("Folder with all loading images");
 	s.add<std::string>("loadingSentences", "bomberman-assets/loading/load-sentences.txt")
 		.setDescription("File with all loading sentences");

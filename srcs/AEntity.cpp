@@ -75,6 +75,15 @@ void	AEntity::setState(EntityState::Enum state) {
 	_entityState.updated = true;
 }
 
+/**
+ * @brief Get the current animation state
+ *
+ * @return EntityState::Enum The state
+ */
+EntityState::Enum	AEntity::getState() const {
+	return _entityState.state;
+}
+
 
 // -- Operators ----------------------------------------------------------------
 
