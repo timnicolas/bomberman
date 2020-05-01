@@ -313,6 +313,10 @@ bool	SceneGame::update() {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
+			for (auto &&enemy : enemies) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
+			}
 		}
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			AudioManager::stopAllSounds();
@@ -349,6 +353,10 @@ bool	SceneGame::update() {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
+			for (auto &&enemy : enemies) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
+			}
 		}
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			AudioManager::stopAllSounds();
