@@ -811,6 +811,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	// File json definition:
 	lvl->add<std::string>("name");
 	lvl->add<std::string>("img", "bomberman-assets/img/icon_level1");
+	lvl->add<std::string>("music", "sounds/puzzle.ogg");
 	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
 	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
 	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
@@ -1308,80 +1309,77 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos.x -= allUI.scoreImg->getSize().x;
 		allUI.scoreImg->setPos({tmpPos.x, imgY});
 
-		// -- Bottom -----------
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = menuHeight;
-		imgY = tmpPos.y;
-		textY = tmpPos.y + 2;
+		// -- Bonus -----------
+		glm::vec2 pos = {winSz.x / 10, winSz.y - menuHeight * 4};
+		tmpPos = pos;
 
 		/* speed */
 		// tmpPos.x += padding;
-		allUI.speedImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		allUI.speedImg->setPos(tmpPos).setSize(tmpSize);
 		tmpPos.x += allUI.speedImg->getSize().x;
 		std::string	speed = std::to_string(player->speed);
 		speed = speed.substr(0, speed.find("."));
-		allUI.speedText->setPos({tmpPos.x, textY}).setText(speed)
+		allUI.speedText->setPos({tmpPos.x, tmpPos.y + 2}).setText(speed)
 			.setSize(VOID_SIZE).setCalculatedSize();
-		tmpPos.x += allUI.speedText->getSize().x;
+		pos.y -= menuHeight * 0.8;
+		tmpPos = pos;
 
 		/* bonus bomb */
-		tmpPos.x += padding;
-		allUI.bonusBombImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		allUI.bonusBombImg->setPos(tmpPos).setSize(tmpSize);
 		tmpPos.x += allUI.bonusBombImg->getSize().x;
-		allUI.bonusBombText->setPos({tmpPos.x, textY}).setText(std::to_string(player->totalBombs))
+		allUI.bonusBombText->setPos({tmpPos.x, tmpPos.y + 2}).setText(std::to_string(player->totalBombs))
 			.setSize(VOID_SIZE).setCalculatedSize();
-		tmpPos.x += allUI.bonusBombText->getSize().x;
+		pos.y -= menuHeight * 0.8;
+		tmpPos = pos;
 
 		/* bonus flame */
-		tmpPos.x += padding;
-		allUI.bonusFlameImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+		allUI.bonusFlameImg->setPos(tmpPos).setSize(tmpSize);
 		tmpPos.x += allUI.bonusFlameImg->getSize().x;
-		allUI.bonusFlameText->setPos({tmpPos.x, textY}).setText(std::to_string(player->bombProgation))
+		allUI.bonusFlameText->setPos({tmpPos.x, tmpPos.y + 2}).setText(std::to_string(player->bombProgation))
 			.setSize(VOID_SIZE).setCalculatedSize();
-		tmpPos.x += allUI.bonusFlameText->getSize().x;
+		pos.y -= menuHeight * 0.8;
+		tmpPos = pos;
 
 		/* bonus flampass */
 		if (player->passFire) {
-			tmpPos.x += padding;
-			allUI.bonusFlampassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-			tmpPos.x += allUI.bonusFlampassImg->getSize().x;
+			allUI.bonusFlampassImg->setPos(tmpPos).setSize(tmpSize);
+			pos.y -= menuHeight * 0.8;
+			tmpPos = pos;
 		} else {
 			allUI.bonusFlampassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus wallpass */
 		if (player->passWall) {
-			tmpPos.x += padding;
-			allUI.bonusWallpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-			tmpPos.x += allUI.bonusWallpassImg->getSize().x;
+			allUI.bonusWallpassImg->setPos(tmpPos).setSize(tmpSize);
+			pos.y -= menuHeight * 0.8;
+			tmpPos = pos;
 		} else {
 			allUI.bonusWallpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus detonator */
 		if (player->detonator) {
-			tmpPos.x += padding;
-			allUI.bonusDetonatorImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-			tmpPos.x += allUI.bonusDetonatorImg->getSize().x;
+			allUI.bonusDetonatorImg->setPos(tmpPos).setSize(tmpSize);
+			pos.y -= menuHeight * 0.8;
+			tmpPos = pos;
 		} else {
 			allUI.bonusDetonatorImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus passBomb */
 		if (player->passBomb) {
-			tmpPos.x += padding;
-			allUI.bonusBombpassImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-			tmpPos.x += allUI.bonusBombpassImg->getSize().x;
+			allUI.bonusBombpassImg->setPos(tmpPos).setSize(tmpSize);
+			pos.y -= menuHeight * 0.8;
+			tmpPos = pos;
 		} else {
 			allUI.bonusBombpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 		}
 		/* bonus invulnerable */
 		if (player->invulnerable) {
-			tmpPos.x += padding;
-			allUI.bonusShieldImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			allUI.bonusShieldImg->setPos(tmpPos).setSize(tmpSize);
 			tmpPos.x += allUI.bonusShieldImg->getSize().x;
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
-			allUI.bonusShieldText->setPos({tmpPos.x, textY}).setText(timeToString(player->invulnerable))
+			allUI.bonusShieldText->setPos({tmpPos.x, tmpPos.y + 2}).setText(timeToString(player->invulnerable))
 				.setSize(VOID_SIZE).setCalculatedSize();
-			tmpPos.x += allUI.bonusShieldText->getSize().x;
 		} else {
 			allUI.bonusShieldImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			allUI.bonusShieldText->setPos(VOID_POS).setSize(VOID_SIZE);
