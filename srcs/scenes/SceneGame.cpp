@@ -115,6 +115,8 @@ SceneGame::~SceneGame() {
 	delete _menuModels.player;
 	delete _menuModels.robot;
 	delete _menuModels.flower;
+	delete _menuModels.fly;
+	delete _menuModels.frog;
 	delete _terrain;
 }
 
@@ -198,6 +200,20 @@ bool			SceneGame::init() {
 		_menuModels.robot->loopAnimation = true;
 		_menuModels.robot->setAnimation("Armature|idle");
 
+		_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
+		_menuModels.fly->play = true;
+		_menuModels.fly->loopAnimation = true;
+		_menuModels.fly->setAnimation("Armature|run");
+
+		_menuModels.frog = new Model(ModelsManager::getModel("frog"), getDtTime(),
+		ETransform({0, 0, 0}, ENEMY_FROG_SIZE));
+		_menuModels.frog->play = true;
+		_menuModels.frog->loopAnimation = true;
+		_menuModels.frog->setAnimation("Armature|idle");
+		_menuModels.frog->transform.setPos({-2, -1, -4});
+		_menuModels.frog->transform.setRot(glm::radians(30.0));
+
 		// init terrain model
 		if (!_terrain) {
 			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
@@ -212,12 +228,6 @@ bool			SceneGame::init() {
 		logErr(e.what());
 		return false;
 	}
-
-	_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
-		ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
-	_menuModels.fly->play = true;
-	_menuModels.fly->loopAnimation = true;
-	_menuModels.fly->setAnimation("Armature|run");
 
 	_initGameInfos();
 
@@ -272,6 +282,8 @@ bool	SceneGame::updateForMenu() {
  * @return false
  */
 bool	SceneGame::update() {
+	SceneManager::loadScene(SceneNames::END_GAME);
+
 	if (level == NO_LEVEL)
 		return true;
 
@@ -617,6 +629,9 @@ bool	SceneGame::drawGameOver() {
  * @return false If failed
  */
 bool	SceneGame::drawEndGame() {
+	/* draw simple floor */
+	_gui->drawCube(Block::FLOOR, {-10.0, -1.5, -5.0}, {20.0, 0.5, 5.0});
+
 	/* draw models */
 	try {
 		float tmpX = _menuModels.player->transform.getPos().x;
@@ -626,31 +641,33 @@ bool	SceneGame::drawEndGame() {
 
 		_menuModels.player->animationSpeed = 0.8;
 		_menuModels.player->transform.setPos({tmpX, -1, -2});
-		_menuModels.player->transform.setRot(90);
+		_menuModels.player->transform.setRot(glm::radians(90.0));
 		if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
 			_menuModels.player->setAnimation("Armature|run");
 		_menuModels.player->draw();
 
 		tmpX -= 1.3;
 		_menuModels.robot->transform.setPos({tmpX, -1, -2});
-		_menuModels.robot->transform.setRot(90);
+		_menuModels.robot->transform.setRot(glm::radians(90.0));
 		if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
 			_menuModels.robot->setAnimation("Armature|run");
 		_menuModels.robot->draw();
 
 		tmpX -= 1.3;
 		_menuModels.flower->transform.setPos({tmpX, -1, -2});
-		_menuModels.flower->transform.setRot(90);
+		_menuModels.flower->transform.setRot(glm::radians(90.0));
 		if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
 			_menuModels.flower->setAnimation("Armature|run");
 		_menuModels.flower->draw();
 
 		tmpX -= 1.3;
-		_menuModels.fly->transform.setPos({tmpX, -0.2, -2});
-		_menuModels.fly->transform.setRot(90);
+		_menuModels.fly->transform.setPos({tmpX, .2, -2});
+		_menuModels.fly->transform.setRot(glm::radians(90.0));
 		if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
 			_menuModels.fly->setAnimation("Armature|run");
 		_menuModels.fly->draw();
+
+		_menuModels.frog->draw();
 	}
 	catch(OpenGLModel::ModelException const & e) {
 		logErr(e.what());
