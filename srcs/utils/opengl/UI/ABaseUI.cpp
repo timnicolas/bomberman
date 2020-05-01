@@ -179,7 +179,7 @@ void ABaseUI::draw() {
 
 			_drawText(tmpPos, tmpSize, _z, _helpFont, _helpTextScale, helpText, _textColor, TextAlign::CENTER, 0);
 
-			_drawBorderRect(tmpPos, tmpSize, _z, _helpBorderSize, _borderColor);
+			_drawBorderRect(tmpPos, tmpSize, _z, _helpBorderSize, _helpBorderColor);
 			_drawRect(tmpPos, tmpSize, _z, _color);
 		}
 	}

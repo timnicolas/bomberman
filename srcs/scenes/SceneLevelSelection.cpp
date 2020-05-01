@@ -46,14 +46,8 @@ bool			SceneLevelSelection::init() {
 	try {
 		_states.nbLevel = scGame.getNbLevel();
 
-		tmpSize.y = winSz.y * 0.08;
-		tmpSize.x = tmpSize.y;
-		tmpPos.x = tmpSize.x / 2;
-		tmpPos.y = winSz.y - tmpSize.y * 1.5;
-		addButton(tmpPos, tmpSize, "X")
-			.addButtonLeftListener(&_states.menu)
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.setTextAlign(TextAlign::CENTER);
+		addExitButton()
+			.addButtonLeftListener(&_states.menu);
 
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
@@ -74,29 +68,15 @@ bool			SceneLevelSelection::init() {
 		tmpPos.x = 30;
 		tmpPos.y = winSz.y / 2 - menuHeight / 2;
 		tmpSize.x = menuHeight;
-		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "<").setTextFont("title")
+		tmpSize.y = 0;
+		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
 			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.lastLevel);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
-		addButton(tmpPos, tmpSize, ">").setTextFont("title")
+		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.nextLevel);
-
-		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		tmpPos.y = menuHeight * 0.8;
-		tmpSize.x = menuWidth;
-		tmpSize.y = menuHeight;
-		addButton(tmpPos, tmpSize, "main   menu")
-			.setKeyLeftClickInput(InputType::GOTO_MENU)
-			.addButtonLeftListener(&_states.menu);
-
-		tmpSize.x = tmpSize.x * 1.2;
-		tmpSize.y = winSz.y - tmpPos.y;
-		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
-		tmpPos.y -= menuHeight * 0.5;
-		addRect(tmpPos, tmpSize);
 
 		_initBG();
 	}
@@ -162,7 +142,7 @@ bool	SceneLevelSelection::update() {
 				scCheatCode.clearAllLn();
 				std::stringstream ss;
 				ss << "Level " << _currentLvl << ": " << e.what();
-				scCheatCode.logerr(ss.str());
+				logErrScreen(ss.str());
 				scCheatCode.unlockLevel(_currentLvl + 1);
 				SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
 				return true;
