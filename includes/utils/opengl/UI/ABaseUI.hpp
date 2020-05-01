@@ -240,6 +240,7 @@ class ABaseUI {
 		static bool						_showHelp;
 		static std::string				_helpFont;
 		static float					_helpTextScale;
+		static glm::vec4				_helpBorderColor;
 		static float					_helpBorderSize;
 		static float					_helpPadding;
 		static SDL_Scancode				_helpKeyBindScancode;

@@ -56,6 +56,8 @@ class ASceneMenu : public AScene {
 		ScrollbarUI &		addScrollbar(glm::vec2 pos, glm::vec2 size);
 		TextInputUI &		addTextInput(glm::vec2 pos, glm::vec2 size, std::string const & defText);
 
+		ButtonImageUI &		addExitButton();
+
 		/* getter */
 		ABaseUI &			getUIElement(uint32_t id);
 		uint32_t			getNbUIElements() const;

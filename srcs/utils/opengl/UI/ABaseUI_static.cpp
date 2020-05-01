@@ -46,6 +46,7 @@ const float				ABaseUI::_imgVertices[] = {
 bool					ABaseUI::_showHelp = false;
 std::string				ABaseUI::_helpFont = UI_DEF_TEXT_FOND;
 float					ABaseUI::_helpTextScale = 0.8;
+glm::vec4				ABaseUI::_helpBorderColor = UI_DEF_TEXT_COLOR;
 float					ABaseUI::_helpBorderSize = 1;
 float					ABaseUI::_helpPadding = 8;
 SDL_Scancode			ABaseUI::_helpKeyBindScancode = NO_SCANCODE;
