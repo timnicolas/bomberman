@@ -282,8 +282,6 @@ bool	SceneGame::updateForMenu() {
  * @return false
  */
 bool	SceneGame::update() {
-	SceneManager::loadScene(SceneNames::END_GAME);
-
 	if (level == NO_LEVEL)
 		return true;
 
