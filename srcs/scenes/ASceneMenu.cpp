@@ -238,6 +238,17 @@ ScrollbarUI & ASceneMenu::addScrollbar(glm::vec2 pos, glm::vec2 size) {
 }
 
 /**
+ * @brief add an empty master object on the total screen in the menu with menu settings
+ *
+ * @return ScrollbarUI& a reference to the element created
+ */
+EmptyMasterUI & ASceneMenu::addEmptyMaster() {
+	EmptyMasterUI * ui = new EmptyMasterUI({0, 0}, {_gui->gameInfo.windowSize.x, _gui->gameInfo.windowSize.y});
+	_buttons.push_back(ui);
+	return *ui;
+}
+
+/**
  * @brief add a textInput in the menu with menu settings
  *
  * @param pos the position
