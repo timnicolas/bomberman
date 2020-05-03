@@ -370,6 +370,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	# assimp
 	brew install assimp;
 	brew upgrade assimp;
+	# icon for .app file
+	brew install fileicon
 fi
 
 exit 0
@@ -531,6 +533,12 @@ install:
 	@$(MAKE) $(MAKE_OPT) install_linter
 	@$(MAKE) $(MAKE_OPT) init
 
+uninstall:
+	@printf $(YELLOW)$(BOLD)"INSTALL $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf $(RED)"-x remove /Application/$(NAME).app\n"$(NORMAL)
+	@rm -rf /Application/$(NAME).app
+	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
+
 install_linter:
 	@printf $(YELLOW)$(BOLD)"INSTALL LINTER\n--------------------\n"$(NORMAL)
 	@printf $(CYAN)"-> install linter\n"$(NORMAL)
@@ -538,6 +546,12 @@ install_linter:
 	@chmod 755 .tmpfile.sh
 	@./.tmpfile.sh
 	@rm -f ./.tmpfile.sh
+	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
+
+create_dmg: all
+	@printf $(YELLOW)$(BOLD)"CREATE INSTALLATION FILE\n--------------------\n"$(NORMAL)
+	@printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL)
+	@./createApp.sh ~/Downloads
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
 init:
@@ -645,6 +659,8 @@ check:
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
 	@printf $(NORMAL)"-> make "$(BOLD)"install"$(NORMAL)": install all depencies + linter & run make init\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"create_dmg"$(NORMAL)": create $(NAME).dmg file for installation\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"uninstall"$(NORMAL)": uninstall app (if installed)\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"install_linter"$(NORMAL)": install the linter\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"init"$(NORMAL)": init the project (add pre-commit & pre-push files)\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"all"$(NORMAL)": build the project and create $(NAME)\n"
@@ -663,4 +679,4 @@ help:
 
 usage: help
 
-.PHONY: install install_linter init all clean fclean re exec-nolint exec lint check help usage
+.PHONY: install uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage
