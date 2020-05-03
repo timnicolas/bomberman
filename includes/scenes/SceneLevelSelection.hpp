@@ -37,8 +37,10 @@ class SceneLevelSelection : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 		struct AllUI {
-			ABaseUI		*text;
-			ABaseUI		*score;
+			ABaseUI *	text;
+			ABaseUI *	score;
+			ABaseUI *	leftArrow;
+			ABaseUI *	rightArrow;
 		};
 		AllUI			allUI;
 		int32_t			_currentLvl;
