@@ -528,6 +528,8 @@ install:
 	done
 	$(eval NEED_MAKE := )
 	@printf $(YELLOW)$(BOLD)"INSTALL $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf $(CYAN)"-> init submodules\n"$(NORMAL)
+	@git submodule update --init
 	@printf $(CYAN)"-> install $(NAME)\n"$(NORMAL)
 	@echo "$$CONFIGURE" > .tmpfile.sh
 	@chmod 755 .tmpfile.sh
@@ -554,12 +556,13 @@ install_linter:
 
 create_dmg: all
 	@printf $(YELLOW)$(BOLD)"CREATE INSTALLATION FILE\n--------------------\n"$(NORMAL)
-	@if [[ "$$OSTYPE" == "linux-gnu" ]]; then \
-		printf $(RED)"-> unable to create a linux installer\n"$(NORMAL) \
-	elif [[ "$$OSTYPE" == "darwin"* ]]; then \
-		printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL) \
-		./createApp.sh ~/Downloads \
-	endif
+ifeq ($(UNAME_S),Linux)
+	@printf $(RED)"-> unable to create a linux installer\n"$(NORMAL)
+endif
+ifeq ($(UNAME_S),Darwin)
+	@printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL)
+	@./createApp.sh ~/Downloads
+endif
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
 init:
