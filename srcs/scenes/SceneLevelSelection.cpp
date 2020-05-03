@@ -69,12 +69,12 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = winSz.y / 2 - menuHeight / 2;
 		tmpSize.x = menuHeight;
 		tmpSize.y = 0;
-		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
+		allUI.leftArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
 			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.lastLevel);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
-		addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
+		allUI.rightArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.nextLevel);
 
@@ -163,6 +163,9 @@ bool	SceneLevelSelection::update() {
 		_states.nextLevel = false;
 		setLevel(_currentLvl + 1);
 	}
+	/* disable arrow buttons if first or last level */
+	allUI.leftArrow->setEnabled(_currentLvl != 0);
+	allUI.rightArrow->setEnabled(_currentLvl < static_cast<int32_t>(_states.nbLevel - 1));
 	return true;
 }
 
