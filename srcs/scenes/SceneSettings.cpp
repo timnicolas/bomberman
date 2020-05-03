@@ -2,6 +2,7 @@
 #include "AudioManager.hpp"
 #include "SceneManager.hpp"
 #include "Gui.hpp"
+#include "Bonus.hpp"
 
 SceneSettings::~SceneSettings() {}
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dtTime),
@@ -293,6 +294,10 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	float			keyMenuHeight = win_size.x / 25;
 	float			keyMenuPadding = win_size.x * 0.01;
 
+
+			Bonus::description[BonusType::DETONATOR] = DETONATOR_DESC \
+				" (" + Inputs::getKeyName(InputType::ACTION_2) + ")";
+
 	// create scrollbar
 	tmp_pos.x = (win_size.x / 2) - ((keyMenuWidth + 2 * keyMenuPadding) / 2);
 	tmp_pos.y = (win_size.y / 20);
@@ -406,6 +411,10 @@ bool					SceneSettings::update() {
 		_paneSelection[2]->setKeyLeftClickScancode(NO_SCANCODE);
 		if (!Inputs::isConfiguring()) {
 			_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
+			if (static_cast<InputType::Enum>(_input_configuring) == InputType::ACTION_2) {
+				Bonus::description[BonusType::DETONATOR] = DETONATOR_DESC \
+					" (" + Inputs::getKeyName(InputType::ACTION_2) + ")";
+			}
 			_input_configuring = -1;
 		}
 		else if (Inputs::getKeyByScancodeUp(DEFAULT_CANCEL)) {
