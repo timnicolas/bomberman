@@ -518,6 +518,10 @@ else
 	@rm -f $(DEBUG_DIR)/DEBUG
 endif
 
+configure:
+	@make install
+	@make create_dmg
+
 install:
 	@for i in $(NEED_MAKE); do \
 		make -C $$i install; \
@@ -550,8 +554,12 @@ install_linter:
 
 create_dmg: all
 	@printf $(YELLOW)$(BOLD)"CREATE INSTALLATION FILE\n--------------------\n"$(NORMAL)
-	@printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL)
-	@./createApp.sh ~/Downloads
+	@if [[ "$$OSTYPE" == "linux-gnu" ]]; then \
+		printf $(RED)"-> unable to create a linux installer\n"$(NORMAL) \
+	elif [[ "$$OSTYPE" == "darwin"* ]]; then \
+		printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL) \
+		./createApp.sh ~/Downloads \
+	endif
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
 init:
@@ -658,6 +666,7 @@ check:
 
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
+	@printf $(NORMAL)"-> make "$(BOLD)"configure"$(NORMAL)": install all, compile & create the .dmg file in ~/Downloads\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"install"$(NORMAL)": install all depencies + linter & run make init\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"create_dmg"$(NORMAL)": create $(NAME).dmg file for installation\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"uninstall"$(NORMAL)": uninstall app (if installed)\n"
@@ -679,4 +688,4 @@ help:
 
 usage: help
 
-.PHONY: install uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage
+.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage
