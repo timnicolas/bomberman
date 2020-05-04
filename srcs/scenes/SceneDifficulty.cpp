@@ -43,6 +43,9 @@ bool			SceneDifficulty::init() {
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Game mode");
 
+		allUI.beginner = &addButton(VOID_SIZE, VOID_SIZE, "beginner")
+			.setKeyLeftClickScancode(SDL_SCANCODE_1)
+			.addButtonLeftListener(&_states.beginner);
 		allUI.easy = &addButton(VOID_SIZE, VOID_SIZE, "easy")
 			.setKeyLeftClickScancode(SDL_SCANCODE_1)
 			.addButtonLeftListener(&_states.easy);
@@ -83,7 +86,13 @@ void SceneDifficulty::load() {
  */
 bool	SceneDifficulty::update() {
 	ASceneMenu::update();
-	if (_states.easy) {
+	if (_states.beginner) {
+		_states.beginner = false;
+		Save::newGame();
+		Save::setDifficulty(10);
+		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+	}
+	else if (_states.easy) {
 		_states.easy = false;
 		Save::newGame();
 		Save::setDifficulty(3);
@@ -125,6 +134,8 @@ void		SceneDifficulty::_updateUI() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
 	tmpPos.y -= menuHeight * 1.8;
+	allUI.beginner->setPos(tmpPos).setSize(tmpSize);
+	tmpPos.y -= menuHeight * 1.3;
 	allUI.easy->setPos(tmpPos).setSize(tmpSize);
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.medium->setPos(tmpPos).setSize(tmpSize);
