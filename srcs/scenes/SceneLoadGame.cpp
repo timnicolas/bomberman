@@ -208,8 +208,10 @@ bool	SceneLoadGame::update() {
 					gameDifficulty += "Hard Core";
 				else if (gameSaved->game->u("difficulty") == 2)
 					gameDifficulty += "Medium";
-				else
+				else if (gameSaved->game->u("difficulty") == 3)
 					gameDifficulty += "Easy";
+				else
+					gameDifficulty += "Beginner";
 				previewGameUI.gameDifficulty->setText(gameDifficulty);
 				std::string lvlDone = "Levels done: ";
 				lvlDone += std::to_string(gameSaved->game->lj("levels").list.size());

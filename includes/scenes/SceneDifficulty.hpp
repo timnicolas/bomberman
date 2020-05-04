@@ -24,6 +24,7 @@ class SceneDifficulty : public ASceneMenu {
 
 	protected:
 		struct ButtonsStates {
+			bool	beginner;
 			bool	easy;
 			bool	medium;
 			bool	hardCore;
@@ -31,6 +32,7 @@ class SceneDifficulty : public ASceneMenu {
 		};
 		ButtonsStates	_states;
 		struct AllUI {
+			ABaseUI	*beginner;
 			ABaseUI	*easy;
 			ABaseUI	*medium;
 			ABaseUI	*hardCore;
