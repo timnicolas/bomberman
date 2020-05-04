@@ -46,6 +46,7 @@ Player &Player::operator=(Player const &rhs) {
 		detonator = rhs.detonator;
 		passBomb = rhs.passBomb;
 		bombProgation = rhs.bombProgation;
+		bonusActifs = rhs.bonusActifs;
 	}
 	return *this;
 }
@@ -114,6 +115,14 @@ void	Player::resetParams() {
 	passWall = false;
 	detonator = false;
 	passBomb = false;
+	bonusActifs.life = 0.0f;
+	bonusActifs.bombs = 0.0f;
+	bonusActifs.flames = 0.0f;
+	bonusActifs.speed = 0.0f;
+	bonusActifs.wallpass = 0.0f;
+	bonusActifs.detonator = 0.0f;
+	bonusActifs.bombpass = 0.0f;
+	bonusActifs.flampass = 0.0f;
 	resetCrossable();
 }
 
@@ -127,6 +136,7 @@ bool	Player::update() {
 	if (!active)
 		return true;
 
+	_updateBonusActifsTime();
 	if (alive && _entityState.state != EntityState::DROP_BOMB) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
@@ -243,6 +253,8 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 			lives++;
 			if (lives > static_cast<int>(Save::getDifficulty()))
 				lives = Save::getDifficulty();
+			if (!silent)
+				bonusActifs.life = 3.0f;
 			break;
 		case BonusType::BOMBS:
 			totalBombs++;
@@ -251,32 +263,46 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 				totalBombs = 10;
 			if (bombs > 10)
 				bombs = 10;
+			if (!silent)
+				bonusActifs.bombs = 3.0f;
 			break;
 		case BonusType::FLAMES:
 			bombProgation++;
 			if (bombProgation > 12)
 				bombProgation = 12;
+			if (!silent)
+				bonusActifs.flames = 3.0f;
 			break;
 		case BonusType::SPEED:
 			speed++;
 			if (speed > MAX_SPEED)
 				speed = MAX_SPEED;
+			if (!silent)
+				bonusActifs.speed = 3.0f;
 			break;
 		case BonusType::WALLPASS:
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
 				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
+			if (!silent)
+				bonusActifs.wallpass = 3.0f;
 			break;
 		case BonusType::DETONATOR:
 			detonator = true;
+			if (!silent)
+				bonusActifs.detonator = 3.0f;
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
 				crossableTypes.push_back(Type::BOMB);
+			if (!silent)
+				bonusActifs.bombpass = 3.0f;
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
+			if (!silent)
+				bonusActifs.flampass = 3.0f;
 			break;
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
@@ -489,7 +515,12 @@ void	Player::_move() {
 	}
 }
 
-
+/**
+ * @brief Put bomb methods.
+ *
+ * @return true if the bomb was put
+ * @return false if the bomb cannot be put
+ */
 bool	Player::_putBomb() {
 	if (bombs <= 0)
 		return false;
@@ -504,6 +535,38 @@ bool	Player::_putBomb() {
 		return true;
 	}
 	return false;
+}
+
+/**
+ * @brief Update time left for bonus actifs.
+ * Bonus actifs is used to indicate last taken bonuses
+ */
+void	Player::_updateBonusActifsTime() {
+	float dtTime = game.getDtTime();
+	if (bonusActifs.life > 0) {
+		bonusActifs.life -= dtTime;
+	}
+	if (bonusActifs.bombs > 0) {
+		bonusActifs.bombs -= dtTime;
+	}
+	if (bonusActifs.flames > 0) {
+		bonusActifs.flames -= dtTime;
+	}
+	if (bonusActifs.speed > 0) {
+		bonusActifs.speed -= dtTime;
+	}
+	if (bonusActifs.wallpass > 0) {
+		bonusActifs.wallpass -= dtTime;
+	}
+	if (bonusActifs.detonator > 0) {
+		bonusActifs.detonator -= dtTime;
+	}
+	if (bonusActifs.bombpass > 0) {
+		bonusActifs.bombpass -= dtTime;
+	}
+	if (bonusActifs.flampass > 0) {
+		bonusActifs.flampass -= dtTime;
+	}
 }
 
 // -- Exceptions errors --------------------------------------------------------
