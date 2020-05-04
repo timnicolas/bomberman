@@ -1,5 +1,5 @@
 install: make install
-script: make lint && make -j8
+script: source ~/.cpplinter/alias.zsh ; make lint && make -j8
 dist: bionic
 language:
   - cpp
