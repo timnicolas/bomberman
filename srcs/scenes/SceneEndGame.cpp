@@ -1,4 +1,5 @@
 #include "SceneEndGame.hpp"
+#include "AudioManager.hpp"
 #include "Save.hpp"
 
 SceneEndGame::SceneEndGame(Gui * gui, float const &dtTime)
@@ -97,6 +98,8 @@ bool			SceneEndGame::init() {
  */
 void SceneEndGame::load() {
 	ASceneMenu::load();
+	AudioManager::loadMusic("sounds/the_offspring-the_kids_arent_alright.ogg");
+	AudioManager::playMusic("sounds/the_offspring-the_kids_arent_alright.ogg", 0.3f, true);
 }
 
 /**
@@ -114,6 +117,7 @@ bool	SceneEndGame::update() {
 
 	if (_states.exit) {
 		_states.exit = false;
+		AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	return true;
