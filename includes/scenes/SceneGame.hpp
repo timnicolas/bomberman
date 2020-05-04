@@ -134,6 +134,7 @@ public:
 	Score						score;
 	int64_t						enemiesToKill;
 	int64_t						enemiesKilled;
+	std::string					musicLevel;
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);

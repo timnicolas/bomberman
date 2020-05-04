@@ -811,7 +811,7 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	// File json definition:
 	lvl->add<std::string>("name");
 	lvl->add<std::string>("img", "bomberman-assets/img/icon_level1");
-	lvl->add<std::string>("music", "sounds/puzzle.ogg");
+	lvl->add<std::string>("music", "");
 	lvl->add<uint64_t>("height", 0).setMin(0).setMax(100);
 	lvl->add<uint64_t>("width", 0).setMin(0).setMax(100);
 	lvl->add<int64_t>("time", 0).setMin(-1).setMax(86400);
@@ -934,6 +934,7 @@ bool	SceneGame::_unloadLevel() {
 	// spawners
 	enemiesToKill = 0;
 	enemiesKilled = 0;
+	musicLevel = "";
 
 	level = NO_LEVEL;
 	return true;
@@ -972,6 +973,14 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	levelTime = lvl.i("time");
 
 	enemiesToKill = lvl.i("enemiesToKill");
+
+	if (lvl.s("music").size()) {
+		musicLevel = lvl.s("music");
+	} else {
+		musicLevel = AudioManager::musics[rand() % AudioManager::musics.size()];
+	}
+
+	AudioManager::loadMusic(musicLevel);
 
 	flags = 0;
 	// Get map informations

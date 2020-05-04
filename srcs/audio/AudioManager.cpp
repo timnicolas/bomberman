@@ -6,7 +6,21 @@
 #include "Logging.hpp"
 #include "bomberman.hpp"
 
+// -- Static members -----------------------------------------------------------
+
 std::string					AudioManager::_assets_path = std::string();
+
+std::vector<std::string> AudioManager::musics = {
+	"sounds/french79-between_the_buttons.ogg",
+	"sounds/french79-naked_city.ogg",
+	"sounds/superpoze-siver_head.ogg",
+	"sounds/the_blaze-territory.ogg",
+	"sounds/eirik_suhrke-a_new_morning.ogg",
+	"sounds/moon-crystals.ogg",
+	"sounds/moon-hydrogen.ogg"
+};
+
+// -- Methods ------------------------------------------------------------------
 
 AudioManager::AudioManager(): _music_modifier(1.0) {
 	char	*path = getcwd(NULL, PATH_MAX);
