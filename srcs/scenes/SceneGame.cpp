@@ -391,7 +391,7 @@ bool	SceneGame::update() {
 		state = GameState::GAME_OVER;
 		return true;
 	}
-	if ((levelTime - time) < 20) {
+	if ((state != GameState::WIN || state != GameState::GAME_OVER) && (levelTime - time) < 20) {
 		if (!_alarm) {
 			try {
 				AudioManager::playSound(ALARM_TIME_SOUND);
