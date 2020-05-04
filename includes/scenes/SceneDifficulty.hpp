@@ -36,7 +36,6 @@ class SceneDifficulty : public ASceneMenu {
 			ABaseUI	*easy;
 			ABaseUI	*medium;
 			ABaseUI	*hardCore;
-			ABaseUI	*menu;
 			ABaseUI	*border;
 		};
 		AllUI		allUI;

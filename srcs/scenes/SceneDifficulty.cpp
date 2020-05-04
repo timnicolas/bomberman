@@ -37,6 +37,9 @@ bool			SceneDifficulty::init() {
 	float menuHeight = winSz.y / 14;
 
 	try {
+		addExitButton()
+			.addButtonLeftListener(&_states.menu);
+
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
@@ -44,7 +47,7 @@ bool			SceneDifficulty::init() {
 		addTitle(tmpPos, tmpSize, "Game mode");
 
 		allUI.beginner = &addButton(VOID_SIZE, VOID_SIZE, "beginner")
-			.setKeyLeftClickScancode(SDL_SCANCODE_1)
+			.setKeyLeftClickScancode(SDL_SCANCODE_0)
 			.addButtonLeftListener(&_states.beginner);
 		allUI.easy = &addButton(VOID_SIZE, VOID_SIZE, "easy")
 			.setKeyLeftClickScancode(SDL_SCANCODE_1)
@@ -55,9 +58,6 @@ bool			SceneDifficulty::init() {
 		allUI.hardCore = &addButton(VOID_SIZE, VOID_SIZE, "hard core")
 			.setKeyLeftClickScancode(SDL_SCANCODE_3)
 			.addButtonLeftListener(&_states.hardCore);
-		allUI.menu = &addButton(VOID_SIZE, VOID_SIZE, "main menu")
-			.setKeyLeftClickInput(InputType::GOTO_MENU)
-			.addButtonLeftListener(&_states.menu);
 
 		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
@@ -141,8 +141,6 @@ void		SceneDifficulty::_updateUI() {
 	allUI.medium->setPos(tmpPos).setSize(tmpSize);
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.hardCore->setPos(tmpPos).setSize(tmpSize);
-	tmpPos.y -= menuHeight * 1.8;
-	allUI.menu->setPos(tmpPos).setSize(tmpSize);
 	tmpSize.x = tmpSize.x * 1.3;
 	tmpSize.y = winSz.y - tmpPos.y;
 	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
