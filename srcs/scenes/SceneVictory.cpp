@@ -39,6 +39,7 @@ bool			SceneVictory::init() {
 	float menuHeight = winSz.y / 14;
 	float statisticHeight = menuHeight * 0.6;
 
+
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
@@ -203,6 +204,7 @@ bool	SceneVictory::update() {
  */
 void SceneVictory::load() {
 	ASceneMenu::load();
+	AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 	}

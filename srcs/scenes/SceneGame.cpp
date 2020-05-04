@@ -293,7 +293,7 @@ bool	SceneGame::update() {
 			if (Inputs::getKeyUp(InputType::CONFIRM))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
-			AudioManager::resumeMusic();
+			AudioManager::playMusic(musicLevel, 0.3f, true);
 			state = GameState::PLAY;
 		}
 		return true;

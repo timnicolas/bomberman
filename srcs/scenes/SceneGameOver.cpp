@@ -114,6 +114,7 @@ bool	SceneGameOver::update() {
  */
 void SceneGameOver::load() {
 	ASceneMenu::load();
+	AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 	}
