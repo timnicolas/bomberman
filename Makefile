@@ -138,6 +138,7 @@ SRC =	main.cpp \
 		scenes/SceneCheatCode_exec.cpp \
 		scenes/SceneEndGame.cpp \
 		scenes/SceneDebug.cpp \
+		scenes/SceneLoading.cpp \
 \
 		audio/AudioManager.cpp \
 		audio/Music.cpp \
@@ -178,6 +179,7 @@ SRC =	main.cpp \
 		utils/opengl/UI/RectUI.cpp \
 		utils/opengl/UI/ImageUI.cpp \
 		utils/opengl/UI/ScrollbarUI.cpp \
+		utils/opengl/UI/EmptyMasterUI.cpp \
 		utils/opengl/UI/TextInputUI.cpp \
 
 # INC_DIR/HEAD
@@ -223,6 +225,7 @@ HEAD =	bomberman.hpp \
 		scenes/SceneCheatCode.hpp \
 		scenes/SceneEndGame.hpp \
 		scenes/SceneDebug.hpp \
+		scenes/SceneLoading.hpp \
 \
 		audio/AudioManager.hpp \
 		audio/Music.hpp \
@@ -262,6 +265,7 @@ HEAD =	bomberman.hpp \
 		utils/opengl/UI/RectUI.hpp \
 		utils/opengl/UI/ImageUI.hpp \
 		utils/opengl/UI/ScrollbarUI.hpp \
+		utils/opengl/UI/EmptyMasterUI.hpp \
 		utils/opengl/UI/TextInputUI.hpp \
 
 

@@ -95,8 +95,9 @@ public:
 	virtual bool		takeDamage(const int damage) = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
-	virtual void	animEndCb(std::string animName);
-	void			setState(EntityState::Enum state);
+	virtual void		animEndCb(std::string animName);
+	void				setState(EntityState::Enum state);
+	EntityState::Enum	getState() const;
 };
 
 #endif  // ENTITY_HPP_

@@ -10,6 +10,7 @@
 #define WAIT_JUMP_TIME_MS		1000
 #define LONG_WAIT_JUMP_TIME_MS	5000
 #define CHANCE_LONG_WAIT		5  // one chance on 5 to have a long wait
+#define FROG_JUMP_DIST			2  // need to edit the 3d model animation if changed
 
 /**
  * @brief This is an enemy object
@@ -30,6 +31,9 @@ protected:
 	void			_findJumpGoal();
 	void			_jumpCrossable();
 
+	void			_updateModel();
+	void			_updateAnimationState();
+
 public:
 	// Constructors
 	explicit EnemyFrog(SceneGame &game);
@@ -40,5 +44,6 @@ public:
 	EnemyFrog &operator=(EnemyFrog const &rhs);
 
 	// Methods
+	virtual bool	init();
 	virtual void	resetCrossable();
 };

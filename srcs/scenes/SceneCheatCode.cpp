@@ -20,7 +20,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execHelp,
 		}},
 		{"clear", {
-			"['history'] ['all']",
+			"['history' | 'all' | 'lines']",
 			"Clear the lines / history / ... (/clear list to have more informations).",
 			&SceneCheatCode::_execClear,
 		}},
@@ -37,7 +37,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
-			"<bonus, ...> ['list']",
+			"<bonus ...>",
 			"Get a bonus effect ('/getbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execGetbonus,
 		}},
@@ -65,7 +65,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execUnlock,
 		}},
 		{"rmbonus", {
-			"<bonus, ...> ['list']",
+			"<bonus, ...>",
 			"Remove a bonus effect ('/rmbonus list' to get the list of bonus)",
 			&SceneCheatCode::_execRmbonus,
 		}},
@@ -75,11 +75,16 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execRestart,
 		}},
 		{"debug", {
-			"<type> <element ...> ['list']",
+			"<type> <element ...>",
 			"Show, hide or reset debug elements.\n"
 				CHEATCODE_TAB"type: show, hide, reset\n"
 				CHEATCODE_TAB"/debug show collider",
 			&SceneCheatCode::_execDebug,
+		}},
+		{"volume", {
+			"<type> <value>",
+			"Set music & sound volume.",
+			&SceneCheatCode::_execVolume,
 		}},
 	};
 }
@@ -164,6 +169,8 @@ bool SceneCheatCode::init() {
 			.setText(CHEATCODE_DEF_TXT)
 			.setColor(CHEATCODE_COLOR)
 			.setZ(1);
+
+		_masterLines = &addEmptyMaster();  // create the master element
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -179,6 +186,10 @@ bool SceneCheatCode::init() {
  * @return false if we need to quit the command line
  */
 bool SceneCheatCode::update() {
+	if (isCmdLnEnabled)
+		_masterLines->setMasterOffset({0, 0});
+	else
+		_masterLines->setMasterOffset({0, -_commandLine->getSize().y * 2.3});
 	ASceneMenu::update();
 
 	if (isCmdLnEnabled) {
@@ -722,7 +733,8 @@ int SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 				.setTextScale(CHEATCODE_FONT_SCALE)
 				.setTextColor(txtColor)
 				.setColor(CHEATCODE_COLOR)
-				.setZ(1);
+				.setZ(1)
+				.setMaster(_masterLines);
 
 			for (auto && ln : _textLines) {
 				ln.ui->addPosOffset({0, ln.ui->getSize().y});

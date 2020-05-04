@@ -41,6 +41,8 @@ bool	checkPrgm() {
 		"bomberman-assets/textures",
 		"bomberman-assets/skybox",
 		s.s("mapsPath"),
+		s.s("imgsUI"),
+		s.s("loadingImgs"),
 		CONFIG_DIR,
 		SAVE_DIR,
 	};
@@ -49,6 +51,7 @@ bool	checkPrgm() {
 	std::vector<std::string> requiredFiles = {
 		s.j("fonts").j("base").s("file"),
 		s.j("fonts").j("cheatcode").s("file"),
+		s.s("loadingSentences"),
 	};
 
 	for (auto && it : requiredDirs) {
@@ -165,15 +168,19 @@ bool	initSettings(std::string const & filename) {
 
 	/* Audio */
 	s.add<SettingsJson>("audio");
-	s.j("audio").add<double>("Master volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("master", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The global volume of the game.");
-	s.j("audio").add<double>("Music volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("music", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the music.");
-	s.j("audio").add<double>("Sound volume", 1.0).setMin(0.0).setMax(1.0) \
+	s.j("audio").add<double>("sound", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
 	/* Folders */
-	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("folder with all maps");
+	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("Folder with all maps");
+	s.add<std::string>("imgsUI", "bomberman-assets/imgs/UI/").setDescription("Folder with all UI images");
+	s.add<std::string>("loadingImgs", "bomberman-assets/loading/imgs").setDescription("Folder with all loading images");
+	s.add<std::string>("loadingSentences", "bomberman-assets/loading/load-sentences.txt")
+		.setDescription("File with all loading sentences");
 
 	/* Graphics */
 	s.add<SettingsJson>("graphics");
@@ -189,7 +196,7 @@ bool	initSettings(std::string const & filename) {
 	/* cheatcode */
 	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
 		s.j("cheatcode").add<uint64_t>("maxLinesShow", 25).setMin(5).setMax(50).setDescription("number of lines to show");
-		s.j("cheatcode").add<uint64_t>("timeLineShow", 3000).setMin(0).setMax(10000)
+		s.j("cheatcode").add<uint64_t>("timeLineShow", 5000).setMin(0).setMax(10000)
 			.setDescription("Time to show lines before quit");
 		s.j("cheatcode").add<uint64_t>("historySize", 1000).setMin(0).setMax(10000)
 			.setDescription("size of the history");
@@ -199,6 +206,7 @@ bool	initSettings(std::string const & filename) {
 		s.j("debug").add<bool>("3d-menu", true).setDescription("Use 3D menu");
 		s.j("debug").add<SettingsJson>("show").setDescription("All showables settings for command /debug");
 			s.j("debug").j("show").add<bool>("baseBoard", true).setDescription("Show the base board");
+			s.j("debug").j("show").add<bool>("terrain", true).setDescription("Show the terrain");
 			s.j("debug").j("show").add<bool>("entity", true).setDescription("Show the entities (player & enemy)");
 			s.j("debug").j("show").add<bool>("flyHeight", false).setDescription("Show the fly height");
 			s.j("debug").j("show").add<bool>("movingCollider", false).setDescription("Show the collider of moving entities");
