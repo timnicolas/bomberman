@@ -71,44 +71,11 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 }
 
 SceneGame::~SceneGame() {
-	for (auto &&box : board) {
-		for (auto &&row : box) {
-			std::vector<AEntity *>::iterator element = row.begin();
-			AEntity *entity;
-			while (element != row.end()) {
-				entity = *element;
-				row.erase(element);
-				delete entity;
-				element = row.begin();
-			}
-		}
-	}
-	board.clear();
-	for (auto &&box : boardFly) {
-		for (auto &&row : box) {
-			std::vector<AEntity *>::iterator element = row.begin();
-			AEntity *entity;
-			while (element != row.end()) {
-				entity = *element;
-				row.erase(element);
-				delete entity;
-				element = row.begin();
-			}
-		}
-	}
-	boardFly.clear();
+	_unloadLevel();  // delete all elements of current level if needed
+
 	if (player != nullptr) {
 		delete player;
 	}
-	std::vector<AEnemy *>::iterator it = enemies.begin();
-	AEnemy *enemy;
-	while (it != enemies.end()) {
-		enemy = *it;
-		enemies.erase(it);
-		delete enemy;
-		it = enemies.begin();
-	}
-	enemies.clear();
 
 	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
 		delete *it;
@@ -998,8 +965,13 @@ bool	SceneGame::_unloadLevel() {
 	board.clear();
 	for (auto &&box : boardFly) {
 		for (auto &&row : box) {
-			for (auto &&element : row) {
-				delete element;
+			std::vector<AEntity *>::iterator element = row.begin();
+			AEntity *entity;
+			while (element != row.end()) {
+				entity = *element;
+				row.erase(element);
+				delete entity;
+				element = row.begin();
 			}
 		}
 	}
