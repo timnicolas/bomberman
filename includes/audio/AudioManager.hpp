@@ -41,6 +41,7 @@
 class AudioManager {
 public:
 	static const int						nb_sound_channels = 42;
+	static std::vector<std::string>			musics;
 
 	~AudioManager();
 
