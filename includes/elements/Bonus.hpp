@@ -8,6 +8,8 @@
 #include "SceneGame.hpp"
 #include "TextureManager.hpp"
 
+#define DETONATOR_DESC "Bonus Detonator: Explode bombs when you want."
+
 namespace BonusType {
 	enum Enum {
 		LIFE,
@@ -31,12 +33,12 @@ private:
 	// Member
 	BonusType::Enum		_typeBonus;
 	static std::map<BonusType::Enum, Block::Enum>	_textures;
-	static std::map<BonusType::Enum, std::string>		_description;
 	// Methods
 	BonusType::Enum		_pickBonus();
 
 public:
 	static std::unordered_map<std::string, BonusType::Enum>	bonus;
+	static std::map<BonusType::Enum, std::string>			description;
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();

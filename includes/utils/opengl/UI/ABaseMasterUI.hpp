@@ -19,11 +19,14 @@ class ABaseMasterUI : public ABaseUI {
 		/* setter */
 		void				addChild(ABaseUI * child);
 		void				removeChild(ABaseUI * child);
+		void				setMasterOffset(glm::vec2 offset);
+		void				addMasterOffset(glm::vec2 offset);
 
 		/* getter */
 		virtual glm::vec2	getMasterPos() const;
 		virtual glm::vec2	getMasterRealPos() const;
 		virtual glm::vec2	getMasterSize() const;
+		virtual glm::vec2	getMasterOffset() const;
 
 	protected:
 		virtual void	_update() = 0;

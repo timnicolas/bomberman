@@ -196,7 +196,7 @@ bool	initSettings(std::string const & filename) {
 	/* cheatcode */
 	s.add<SettingsJson>("cheatcode").setDescription("All cheat code settings");
 		s.j("cheatcode").add<uint64_t>("maxLinesShow", 25).setMin(5).setMax(50).setDescription("number of lines to show");
-		s.j("cheatcode").add<uint64_t>("timeLineShow", 3000).setMin(0).setMax(10000)
+		s.j("cheatcode").add<uint64_t>("timeLineShow", 5000).setMin(0).setMax(10000)
 			.setDescription("Time to show lines before quit");
 		s.j("cheatcode").add<uint64_t>("historySize", 1000).setMin(0).setMax(10000)
 			.setDescription("size of the history");

@@ -33,13 +33,13 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "points", BonusType::POINTS },
 };
 
-std::map<BonusType::Enum, std::string> Bonus::_description = {
+std::map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::LIFE, "Bonus Life: You earn an extra life." },
 	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb simultaneously." },
 	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range." },
 	{ BonusType::SPEED, "Bonus Speed: You move faster." },
 	{ BonusType::WALLPASS, "Bonus Wall Pass: You can pass through cracked walls." },
-	{ BonusType::DETONATOR, "Bonus Detonator: Explode bombs when you want." },
+	{ BonusType::DETONATOR, DETONATOR_DESC },  // updated in settings
 	{ BonusType::BOMBPASS, "Bonus Bomb Pass: You can now walk over bombs" },
 	{ BonusType::FLAMPASS, "Bonus Flame Pass: You are not affected by bomb anymore." },
 	{ BonusType::SHIELD, "Bonus Shield: You can't get damage for a while." },
@@ -153,8 +153,8 @@ bool	Bonus::draw(Gui &gui) {
  * @return std::string The description
  */
 std::string	Bonus::getDescription(BonusType::Enum type) {
-	auto it = _description.find(type);
-	if (it != _description.end()) {
+	auto it = description.find(type);
+	if (it != description.end()) {
 		return it->second;
 	}
 	logErr("Bonus::getDescription: Invalid bonus type " << type);

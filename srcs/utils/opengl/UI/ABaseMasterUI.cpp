@@ -50,6 +50,24 @@ void ABaseMasterUI::removeChild(ABaseUI * child) {
 		logWarn("in ABaseMasterUI::removeChild(), child is not in master");
 }
 
+/**
+ * @brief Set the offset of the master element
+ *
+ * @param offset The new offset
+ */
+void ABaseMasterUI::setMasterOffset(glm::vec2 offset) {
+	_masterOffset = offset;
+}
+
+/**
+ * @brief Add to the offset of the master element (last offset + new offset)
+ *
+ * @param offset The offset adder
+ */
+void ABaseMasterUI::addMasterOffset(glm::vec2 offset) {
+	_masterOffset += offset;
+}
+
 /* getter */
 /**
  * @brief Get position of master element (bottom left after border)
@@ -83,6 +101,14 @@ glm::vec2 ABaseMasterUI::getMasterSize() const {
 	size.x -= 2 * _borderSize;
 	size.y -= 2 * _borderSize;
 	return size;
+}
+/**
+ * @brief Get the master offset
+ *
+ * @return glm::vec2 The offset
+ */
+glm::vec2 ABaseMasterUI::getMasterOffset() const {
+	return _masterOffset;
 }
 /**
  * @brief Get the total size of all element in master
