@@ -58,10 +58,6 @@ bool			SceneDifficulty::init() {
 
 		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
-
-		AudioManager::loadMusic("sounds/menu_loop.ogg");
-		AudioManager::playMusic("sounds/menu_loop.ogg", 0.1f, true);
-
 		_initBG();
 	}
 	catch (ABaseUI::UIException const & e) {

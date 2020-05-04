@@ -34,6 +34,7 @@
 #define MONSTERKILL_SOUND "sounds/monster_kill.ogg"
 #define INTROLEVEL_SOUND "sounds/intro_level.ogg"
 #define ALARM_TIME_SOUND "sounds/alarm_time.ogg"
+#define MUSIC_MENU "sounds/menu_loop.ogg"
 
 /**
  * @brief This is the audio manager. In this static class, you can play musics and sound

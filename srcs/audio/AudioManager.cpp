@@ -26,6 +26,7 @@ AudioManager::AudioManager(): _music_modifier(1.0) {
 	char	*path = getcwd(NULL, PATH_MAX);
 	AudioManager::_assets_path = std::string(path);
 	AudioManager::_assets_path += "/bomberman-assets/";
+	_musicPaused = false;
 	free(path);
 	// logDebug("Assets_path: " << AudioManager::_assets_path);
 	if (SDL_Init(SDL_INIT_AUDIO) < 0) {
@@ -142,8 +143,10 @@ void						AudioManager::_playMusic(std::string music_name, float volume, bool lo
 		volume = volume > 1.0 ? 1.0 : volume;
 		music->play(volume * _volume_master * _volume_music, loop);
 		_music_modifier = volume;
-		_musicPaused = false;
 		_soundsMutesMusic.clear();
+		if (_musicPaused) {
+			_pauseMusic();
+		}
 	}
 	catch (std::out_of_range const &oor) {
 		logErr("Trying to play the music '" << music_name << "' but it has not been loaded.");
