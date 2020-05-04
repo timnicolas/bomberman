@@ -62,8 +62,8 @@ bool			SceneMainMenu::init() {
 			.addButtonLeftListener(&_states.exit);
 		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
-		AudioManager::loadMusic("sounds/puzzle.ogg");
-		AudioManager::playMusic("sounds/puzzle.ogg", 0.1f, true);
+		AudioManager::loadMusic("sounds/menu_loop.ogg");
+		AudioManager::playMusic("sounds/menu_loop.ogg", 0.1f, true);
 
 		_initBG();
 	}
