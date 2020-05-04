@@ -291,13 +291,13 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
 	game.player->bombProgation = _saveJs->j("state").u("flame");
 	game.player->speed = _saveJs->j("state").d("speed");
 	if (_saveJs->j("state").u("detonator") == 1)
-		game.player->takeBonus(Bonus::bonus["detonator"]);
+		game.player->takeBonus(Bonus::bonus["detonator"], true);
 	if (_saveJs->j("state").u("wallpass") == 1)
-		game.player->takeBonus(Bonus::bonus["wallpass"]);
+		game.player->takeBonus(Bonus::bonus["wallpass"], true);
 	if (_saveJs->j("state").u("bombpass") == 1)
-		game.player->takeBonus(Bonus::bonus["bombpass"]);
+		game.player->takeBonus(Bonus::bonus["bombpass"], true);
 	if (_saveJs->j("state").u("flampass") == 1)
-		game.player->takeBonus(Bonus::bonus["flampass"]);
+		game.player->takeBonus(Bonus::bonus["flampass"], true);
 
 	return true;
 }
