@@ -87,8 +87,11 @@ SceneGame::~SceneGame() {
 	for (auto &&box : boardFly) {
 		for (auto &&row : box) {
 			std::vector<AEntity *>::iterator element = row.begin();
+			AEntity *entity;
 			while (element != row.end()) {
+				entity = *element;
 				row.erase(element);
+				delete entity;
 				element = row.begin();
 			}
 		}
