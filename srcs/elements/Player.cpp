@@ -146,12 +146,6 @@ bool	Player::update() {
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
 				setState(EntityState::DROP_BOMB);
-				try {
-					AudioManager::stopSound(PUT_BOMB_SOUND);
-					AudioManager::playSound(PUT_BOMB_SOUND);
-				} catch(Sound::SoundException const & e) {
-					logErr(e.what());
-				}
 			} else {
 				try {
 					AudioManager::playSound(PUT_BOMB_EMPTY_SOUND);
@@ -446,7 +440,14 @@ void	Player::_updateAnimationState() {
  */
 void	Player::animEndCb(std::string animName) {
 	if (animName == "Armature|drop") {
-		_putBomb();
+		if (_putBomb()) {
+			try {
+				AudioManager::stopSound(PUT_BOMB_SOUND);
+				AudioManager::playSound(PUT_BOMB_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		setState(EntityState::IDLE);
 	}
 	else if (animName == "Armature|death") {
@@ -489,9 +490,9 @@ void	Player::_move() {
 }
 
 
-void	Player::_putBomb() {
+bool	Player::_putBomb() {
 	if (bombs <= 0)
-		return;
+		return false;
 
 	glm::ivec2 intPos = getIntPos();
 	if (game.board[intPos.x][intPos.y].size() == 0) {
@@ -500,7 +501,9 @@ void	Player::_putBomb() {
 		game.board[intPos.x][intPos.y].push_back(bomb);
 		bomb->init();
 		bombs -= 1;
+		return true;
 	}
+	return false;
 }
 
 // -- Exceptions errors --------------------------------------------------------

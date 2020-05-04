@@ -21,7 +21,7 @@ private:
 
 	// Methods
 	void	_move();
-	void	_putBomb();
+	bool	_putBomb();
 	void	_updateAnimationState();
 
 public:
