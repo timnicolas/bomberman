@@ -561,7 +561,7 @@ ifeq ($(UNAME_S),Linux)
 endif
 ifeq ($(UNAME_S),Darwin)
 	@printf $(CYAN)"-> create ~/Downloads/$(NAME).dmg\n"$(NORMAL)
-	@./createApp.sh ~/Downloads
+	@./scripts/createApp.sh ~/Downloads
 endif
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
