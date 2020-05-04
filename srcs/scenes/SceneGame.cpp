@@ -321,20 +321,6 @@ bool	SceneGame::update() {
 	}
 	else if (state == GameState::WIN) {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
-			AudioManager::stopAllSounds();
-			try {
-				AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
-			} catch(Sound::SoundException const & e) {
-				logErr(e.what());
-			}
-			_gui->cam->setMode(CamMode::FOLLOW_PATH);
-			_gui->cam->setFollowPath(_getGameOverAnim());
-			for (auto &&enemy : enemies) {
-				enemy->setState(EntityState::IDLE);
-				enemy->update();
-			}
-		}
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			int32_t	crispiesLast = 0;
 			for (auto &&box : board) {
 				for (auto &&row : box) {
@@ -353,6 +339,20 @@ bool	SceneGame::update() {
 			score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
 			Save::updateSavedFile(*this, true);
 			Save::save(true);
+			AudioManager::stopAllSounds();
+			try {
+				AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			_gui->cam->setMode(CamMode::FOLLOW_PATH);
+			_gui->cam->setFollowPath(_getGameOverAnim());
+			for (auto &&enemy : enemies) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
+			}
+		}
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
