@@ -389,7 +389,7 @@ export CONFIGURE
 define CONFIGURE_LINTER
 #!/bin/sh
 
-if [[ ! -d ~/.cpplinter ]]; then
+if [ ! -d ~/.cpplinter ]; then
 	git clone https://github.com/tnicolas42/cpplinter.git ~/.cpplinter
 	echo "source ~/.cpplinter/alias.zsh" >> ~/.zshrc
 else
