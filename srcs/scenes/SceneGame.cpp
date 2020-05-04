@@ -387,7 +387,7 @@ bool	SceneGame::update() {
 	}
 
 	time += _dtTime;
-	if ((levelTime - time) < 0) {
+	if ((state != GameState::WIN || state != GameState::GAME_OVER) && (levelTime - time) < 0) {
 		state = GameState::GAME_OVER;
 		return true;
 	}
