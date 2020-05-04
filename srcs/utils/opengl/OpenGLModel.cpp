@@ -50,6 +50,7 @@ OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 o
 	_model = glm::mat4(1.0f);
 	_boneOffset = {{glm::mat4()}};
 	_bones = {{glm::mat4(1.0f)}};
+	_nextBoneId = 0;
 
 	// load the model from file
 	_loadModel();
@@ -93,6 +94,7 @@ OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 		_boneMap = std::map<std::string, uint32_t>();
 		_boneOffset = {{glm::mat4()}};
 		_bones = {{glm::mat4(1.0f)}};
+		_nextBoneId = 0;
 		_scaleEnabled = rhs._scaleEnabled;
 
 		// reload the model to avoid conflicts in meshes destruction
@@ -405,7 +407,7 @@ void	OpenGLModel::_processBones(aiMesh *aiMesh, Mesh &mesh) {
 			weight = aiMesh->mBones[i]->mWeights[j].mWeight;
 
 			// skip low weight bones
-			if (weight <= 0.1) {  // TODO(zer0nim): maybe set the skip value lower ?
+			if (weight <= 0.01) {
 				continue;
 			}
 

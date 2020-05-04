@@ -140,6 +140,8 @@ class ABaseUI {
 		virtual glm::vec2 const &	getSize() const;
 		virtual	uint32_t			getTextWidth() const;
 		virtual std::string			getText() const;
+		virtual glm::ivec2 &		getImgDefSize();
+		virtual glm::ivec2 const &	getImgDefSize() const;
 		static Shader &				getRectShader();
 
 		/* Exceptions */
@@ -238,6 +240,7 @@ class ABaseUI {
 		static bool						_showHelp;
 		static std::string				_helpFont;
 		static float					_helpTextScale;
+		static glm::vec4				_helpBorderColor;
 		static float					_helpBorderSize;
 		static float					_helpPadding;
 		static SDL_Scancode				_helpKeyBindScancode;

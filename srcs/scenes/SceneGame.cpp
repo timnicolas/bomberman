@@ -115,6 +115,8 @@ SceneGame::~SceneGame() {
 	delete _menuModels.player;
 	delete _menuModels.robot;
 	delete _menuModels.flower;
+	delete _menuModels.fly;
+	delete _menuModels.frog;
 	delete _terrain;
 }
 
@@ -198,11 +200,31 @@ bool			SceneGame::init() {
 		_menuModels.robot->loopAnimation = true;
 		_menuModels.robot->setAnimation("Armature|idle");
 
+		_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
+		_menuModels.fly->play = true;
+		_menuModels.fly->loopAnimation = true;
+		_menuModels.fly->setAnimation("Armature|run");
+
+		_menuModels.frog = new Model(ModelsManager::getModel("frog"), getDtTime(),
+		ETransform({0, 0, 0}, ENEMY_FROG_SIZE));
+		_menuModels.frog->play = true;
+		_menuModels.frog->loopAnimation = true;
+		_menuModels.frog->setAnimation("Armature|idle");
+		_menuModels.frog->transform.setPos({-2, -1, -4});
+		_menuModels.frog->transform.setRot(glm::radians(30.0));
+
 		// init terrain model
 		if (!_terrain) {
 			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
 			ETransform({0, -2, 0}));
 		}
+
+		/* loading sentence */
+		allUI.introText = &addText({0, 0}, {_gui->gameInfo.windowSize.x, 70}, "")
+			.setTextAlign(TextAlign::CENTER)
+			.setColor(colorise(s.j("colors").j("bg-rect").u("color"), s.j("colors").j("bg-rect").u("alpha")))
+			.setZ(0.5);
 	}
 	catch(ModelsManager::ModelsManagerException const &e) {
 		logErr(e.what());
@@ -212,12 +234,6 @@ bool			SceneGame::init() {
 		logErr(e.what());
 		return false;
 	}
-
-	_menuModels.fly = new Model(ModelsManager::getModel("flyingBot"), getDtTime(),
-		ETransform({0, 0, 0}, ENEMY_FLY_SIZE));
-	_menuModels.fly->play = true;
-	_menuModels.fly->loopAnimation = true;
-	_menuModels.fly->setAnimation("Armature|run");
 
 	_initGameInfos();
 
@@ -280,6 +296,11 @@ bool	SceneGame::update() {
 
 	_gui->cam->update(_dtTime);
 
+	if (player->getState() == EntityState::DYING)
+		state = GameState::GAME_OVER;
+
+	allUI.introText->setEnabled(state == GameState::INTRO);
+
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
@@ -299,49 +320,69 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::WIN) {
-		AudioManager::stopAllSounds();
-		try {
-			AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
-		} catch(Sound::SoundException const & e) {
-			logErr(e.what());
-		}
-		int32_t	crispiesLast = 0;
-		for (auto &&box : board) {
-			for (auto &&row : box) {
-				for (auto &&element : row) {
-					if (element->type == Type::CRISPY)
-						crispiesLast++;
-				}
+		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			AudioManager::stopAllSounds();
+			try {
+				AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			_gui->cam->setMode(CamMode::FOLLOW_PATH);
+			_gui->cam->setFollowPath(_getGameOverAnim());
+			for (auto &&enemy : enemies) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
 			}
 		}
-		score.addBonusTime(levelTime, time);
-		uint32_t remainEnemies = 0;
-		for (auto && it : enemies) {
-			if (it->alive)
-				remainEnemies++;
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			int32_t	crispiesLast = 0;
+			for (auto &&box : board) {
+				for (auto &&row : box) {
+					for (auto &&element : row) {
+						if (element->type == Type::CRISPY)
+							crispiesLast++;
+					}
+				}
+			}
+			score.addBonusTime(levelTime, time);
+			uint32_t remainEnemies = 0;
+			for (auto && it : enemies) {
+				if (it->alive)
+					remainEnemies++;
+			}
+			score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
+			Save::updateSavedFile(*this, true);
+			Save::save(true);
+			delete player;
+			player = nullptr;
+			SceneManager::loadScene(SceneNames::VICTORY);
+			return true;
 		}
-		score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
-		Save::updateSavedFile(*this, true);
-		Save::save(true);
-		delete player;
-		player = nullptr;
-		SceneManager::loadScene(SceneNames::VICTORY);
-		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
-		AudioManager::stopAllSounds();
-		try {
-			AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true);
-		} catch(Sound::SoundException const & e) {
-			logErr(e.what());
+		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			AudioManager::stopAllSounds();
+			try {
+				AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+			_gui->cam->setMode(CamMode::FOLLOW_PATH);
+			_gui->cam->setFollowPath(_getGameOverAnim());
+			for (auto &&enemy : enemies) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
+			}
 		}
-		// clear game infos.
-		player->resetParams();
-		Save::updateSavedFile(*this, false);
-		Save::save(true);
-		delete player;
-		player = nullptr;
-		SceneManager::loadScene(SceneNames::GAME_OVER);
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+			// clear game infos.
+			player->resetParams();
+			Save::updateSavedFile(*this, false);
+			Save::save(true);
+			delete player;
+			player = nullptr;
+			SceneManager::loadScene(SceneNames::GAME_OVER);
+		}
 		return true;
 	}
 
@@ -483,12 +524,14 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
-	try {
-		_terrain->draw();
-	}
-	catch(OpenGLModel::ModelException const & e) {
-		logErr(e.what());
-		return false;
+	if (s.j("debug").j("show").b("terrain")) {
+		try {
+			_terrain->draw();
+		}
+		catch(OpenGLModel::ModelException const & e) {
+			logErr(e.what());
+			return false;
+		}
 	}
 
 	if (s.j("debug").j("show").b("baseBoard")) {
@@ -536,6 +579,9 @@ bool	SceneGame::drawGame() {
 
 	if (state == GameState::PLAY && allUI.timeLeftImg->getPos() != VOID_SIZE) {
 		ASceneMenu::draw();
+	}
+	else if (state == GameState::INTRO) {
+		allUI.introText->draw();
 	}
 
 	// draw skybox
@@ -615,6 +661,9 @@ bool	SceneGame::drawGameOver() {
  * @return false If failed
  */
 bool	SceneGame::drawEndGame() {
+	/* draw simple floor */
+	_gui->drawCube(Block::FLOOR, {-10.0, -1.5, -5.0}, {20.0, 0.5, 5.0});
+
 	/* draw models */
 	try {
 		float tmpX = _menuModels.player->transform.getPos().x;
@@ -624,31 +673,33 @@ bool	SceneGame::drawEndGame() {
 
 		_menuModels.player->animationSpeed = 0.8;
 		_menuModels.player->transform.setPos({tmpX, -1, -2});
-		_menuModels.player->transform.setRot(90);
+		_menuModels.player->transform.setRot(glm::radians(90.0));
 		if (_menuModels.player->getCurrentAnimationName() != "Armature|run")
 			_menuModels.player->setAnimation("Armature|run");
 		_menuModels.player->draw();
 
 		tmpX -= 1.3;
 		_menuModels.robot->transform.setPos({tmpX, -1, -2});
-		_menuModels.robot->transform.setRot(90);
+		_menuModels.robot->transform.setRot(glm::radians(90.0));
 		if (_menuModels.robot->getCurrentAnimationName() != "Armature|run")
 			_menuModels.robot->setAnimation("Armature|run");
 		_menuModels.robot->draw();
 
 		tmpX -= 1.3;
 		_menuModels.flower->transform.setPos({tmpX, -1, -2});
-		_menuModels.flower->transform.setRot(90);
+		_menuModels.flower->transform.setRot(glm::radians(90.0));
 		if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
 			_menuModels.flower->setAnimation("Armature|run");
 		_menuModels.flower->draw();
 
 		tmpX -= 1.3;
-		_menuModels.fly->transform.setPos({tmpX, -0.2, -2});
-		_menuModels.fly->transform.setRot(90);
+		_menuModels.fly->transform.setPos({tmpX, .2, -2});
+		_menuModels.fly->transform.setRot(glm::radians(90.0));
 		if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
 			_menuModels.fly->setAnimation("Armature|run");
 		_menuModels.fly->draw();
+
+		_menuModels.frog->draw();
 	}
 	catch(OpenGLModel::ModelException const & e) {
 		logErr(e.what());
@@ -713,56 +764,31 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	));
 	_gui->cam->setDefPos();  // set the default position to the current position
 	_gui->cam->setMode(CamMode::FOLLOW_PATH);  // set the default camera mode
-	_introAnim = {
-		{
-			{80, 80, 150},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			true,  // tpTo
-			-1,  // speed
-		},
-		{
-			{size.x / 2, 32, size.y / 2},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			_gui->cam->movementSpeed * 5,  // speed
-		},
-		{
-			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			_gui->cam->movementSpeed / 3,  // speed
-		},
-
-		{
-			{-15, 20, -15},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			true,  // tpTo
-			-1,  // speed
-		},
-		{
-			{-15, 20, size.y + 15},  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			-1,  // speed
-		},
-
-
-		{
-			_gui->cam->getDefPos(),  // pos
-			CamMovement::NoDirection,  // lookDir
-			{size.x / 2, 1, size.y / 2},  // lookAt
-			false,  // tpTo
-			-1,  // speed
-		},
-	};
-	_gui->cam->setFollowPath(_introAnim);  // set the follow path
+	_gui->cam->setFollowPath(_getIntroAnim());  // set the follow path
 	state = GameState::INTRO;
 	AudioManager::pauseMusic();
+
+
+	/* load sentence */
+	std::ifstream	file(s.s("loadingSentences"));
+	std::string		line;
+	std::vector<std::string> allSentences;
+	if (file.is_open()) {
+		for (std::string line; std::getline(file, line); ) {
+			if (line.size() > 0)
+				allSentences.push_back(line);
+		}
+		file.close();
+	}
+	else {
+		logWarn("unable to load sentences list for loading menu");
+	}
+	if (allSentences.empty()) {
+		logWarn("No sentences in sentences files (" << s.s("loadingSentences") << ")");
+		allSentences.push_back("");
+	}
+	int sentenceID = rand() % allSentences.size();
+	allUI.introText->setText(allSentences[sentenceID]);
 
 	// get saved values
 	player->resetParams();
@@ -1423,6 +1449,121 @@ bool			SceneGame::_initBonus() {
 		return false;
 	}
 	return true;
+}
+
+std::vector<CamPoint>	SceneGame::_getIntroAnim() const {
+	return {
+		{
+			{80, 80, 150},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{size.x / 2, 32, size.y / 2},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+		{
+			{size.x / 2 + 5, 45, size.y / 2 + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 3,  // speed
+		},
+
+		{
+			{-15, 20, -15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{-15, 20, size.y + 15},  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			{size.x / 2, 1, size.y / 2},  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+	};
+}
+
+std::vector<CamPoint>	SceneGame::_getGameOverAnim() const {
+	return {
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 7, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 20, player->position.z + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 5,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 1, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+	};
+}
+
+std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
+	return {
+		{
+			_gui->cam->getDefPos(),  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			true,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 7, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			-1,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 20, player->position.z + 5},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed / 5,  // speed
+		},
+		{
+			{player->position.x, player->position.y + 1, player->position.z},  // pos
+			CamMovement::NoDirection,  // lookDir
+			player->position,  // lookAt
+			false,  // tpTo
+			_gui->cam->movementSpeed * 5,  // speed
+		},
+	};
 }
 
 // -- getter -------------------------------------------------------------------

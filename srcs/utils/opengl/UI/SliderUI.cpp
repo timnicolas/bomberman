@@ -31,6 +31,15 @@ void SliderUI::setValues(float min, float max, float val, float step) {
 	_step = step;
 }
 
+void SliderUI::setValue(float val) {
+	if (val < _min)
+		_val = _min;
+	else if (val > _max)
+		_val = _max;
+	else
+		_val = val;
+}
+
 /**
  * @brief this is the base update function of UI objects
  */

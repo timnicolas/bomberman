@@ -2,6 +2,7 @@
 #include "Inputs.hpp"
 #include "Save.hpp"
 #include "AudioManager.hpp"
+#include "SceneCheatCode.hpp"
 
 // -- Constructors -------------------------------------------------------------
 
@@ -238,10 +239,11 @@ bool	Player::takeDamage(const int damage) {
  * @brief Player take a <bonus> which allow to power up.
  *
  * @param bonus
+ * @param silent
  * @return true
  * @return false
  */
-bool	Player::takeBonus(BonusType::Enum bonus) {
+bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 	switch (bonus) {
 		case BonusType::LIFE:
 			lives++;
@@ -294,6 +296,13 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
 		default:
 			break;
 	}
+	if (!silent) {
+		SceneCheatCode & scCheatCode = *reinterpret_cast<SceneCheatCode *>(
+			SceneManager::getScene(SceneNames::CHEAT_CODE)
+		);
+		scCheatCode.clearAllLn();
+		logInfoScreen(Bonus::getDescription(bonus));
+	}
 	return true;
 }
 
@@ -305,10 +314,16 @@ bool	Player::takeBonus(BonusType::Enum bonus) {
  * @return false
  */
 bool	Player::rmBonus(BonusType::Enum bonus) {
+	float tmp;
 	switch (bonus) {
 		case BonusType::LIFE:
+			tmp = invulnerable;
 			invulnerable = 0;
 			takeDamage(1);
+			if (!alive)
+				_updateAnimationState();
+			else if (tmp > invulnerable)
+				invulnerable = tmp;
 			break;
 		case BonusType::BOMBS:
 			if (totalBombs > 1)

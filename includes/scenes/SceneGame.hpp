@@ -59,13 +59,12 @@ private:
 
 	std::vector<SettingsJson *>	_mapsList;
 
-	std::vector<CamPoint>	_introAnim;
-
 	struct DrawForMenu {
 		Model *	player;
 		Model *	flower;
 		Model *	robot;
 		Model * fly;
+		Model * frog;
 
 		DrawForMenu();
 	};
@@ -81,6 +80,8 @@ private:
 
 protected:
 	struct AllUI {
+		ABaseUI *	introText;  // TextUI
+
 		ABaseUI *	timeLeftImg;  // TextUI
 		ABaseUI *	timeLeftText;  // TextUI
 		ABaseUI *	scoreImg;  // TextUI
@@ -108,6 +109,10 @@ protected:
 	void			_loadGameInfos();
 	void			_updateGameInfos();
 	bool			_initBonus();
+
+	std::vector<CamPoint>	_getIntroAnim() const;
+	std::vector<CamPoint>	_getGameOverAnim() const;
+	std::vector<CamPoint>	_getVictoryAnim() const;
 
 public:
 	// Members

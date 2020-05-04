@@ -2,11 +2,10 @@
 
 #include <deque>
 #include "ASceneMenu.hpp"
-#include "TextInputUI.hpp"
 
 #define CHEATCODE_FONT					"cheatcode"
 #define CHEATCODE_FONT_SCALE			1
-#define CHEATCODE_COLOR					glm::vec4(0, 0, 0, 0.5)
+#define CHEATCODE_COLOR					glm::vec4(0, 0, 0, 0.4)
 #define CHEATCODE_DEF_TXT				"/"
 #define CHEATCODE_TAB					"  "
 
@@ -127,6 +126,7 @@ class SceneCheatCode : public ASceneMenu {
 		int					_execRmbonus(std::vector<std::string> const & args);
 		int					_execRestart(std::vector<std::string> const & args);
 		int					_execDebug(std::vector<std::string> const & args);
+		int					_execVolume(std::vector<std::string> const & args);
 
 		/* for lines */
 		int					_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
@@ -139,6 +139,7 @@ class SceneCheatCode : public ASceneMenu {
 		TextInputUI *					_commandLine;
 		TextUI *						_infoCommandLine;
 		std::deque<TextLine>			_textLines;
+		ABaseMasterUI *					_masterLines;
 		std::vector<uint32_t>			_levelsUnlocked;
 
 		/* history */

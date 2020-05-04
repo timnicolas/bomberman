@@ -8,6 +8,8 @@
 #include "SceneGame.hpp"
 #include "TextureManager.hpp"
 
+#define DETONATOR_DESC "Bonus Detonator: Explode bombs when you want."
+
 namespace BonusType {
 	enum Enum {
 		LIFE,
@@ -30,13 +32,14 @@ private:
 	Bonus();
 	// Member
 	BonusType::Enum		_typeBonus;
-	static std::map<BonusType::Enum, Block::Enum> _textures;
+	static std::map<BonusType::Enum, Block::Enum>	_textures;
 	int					_toDraw;
 	// Methods
 	BonusType::Enum		_pickBonus();
 
 public:
 	static std::unordered_map<std::string, BonusType::Enum>	bonus;
+	static std::map<BonusType::Enum, std::string>			description;
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();
@@ -46,10 +49,11 @@ public:
 	Bonus &operator=(Bonus const &rhs);
 
 	// Methods
-	bool			update();
-	bool			postUpdate();
-	bool			draw(Gui &gui);
-	static Bonus*	generateBonus(SceneGame &game, float rate = 0.1f);
+	bool				update();
+	bool				postUpdate();
+	bool				draw(Gui &gui);
+	static std::string	getDescription(BonusType::Enum type);
+	static Bonus*		generateBonus(SceneGame &game, float rate = 0.1f);
 
 	// Exceptions
 	class BonusException : public std::runtime_error {

@@ -20,12 +20,14 @@
 #include "SceneCheatCode.hpp"
 #include "SceneEndGame.hpp"
 #include "SceneDebug.hpp"
+#include "SceneLoading.hpp"
 
 SceneManager::SceneManager()
-: _gameInfo(),
+: _isInit(false),
+  _gameInfo(),
   _gui(nullptr),
   _dtTime(0.0f),
-  _scene(SceneNames::MAIN_MENU),
+  _scene(SceneNames::LOADING),
   _isInCheatCode(false),
   _showCheatCodeTextTime(0),
   _fps(60),
@@ -37,6 +39,8 @@ SceneManager::SceneManager(SceneManager const & src) {
 }
 
 SceneManager::~SceneManager() {
+	if (!_isInit)
+		return;
 	SceneSettings & scSettings = *reinterpret_cast<SceneSettings*>(getScene(SceneNames::SETTINGS));
 	if (scSettings.startFitToScreen && !s.j("graphics").b("fitToScreen")) {
 		_gui->gameInfo.savedWindowSize.x = scSettings.getCurResolution().x;
@@ -91,6 +95,35 @@ bool SceneManager::_init() {
 		return false;
 	}
 
+	/* create the init scene */
+	_scene = SceneNames::LOADING;
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::LOADING, new SceneLoading(_gui, _dtTime)));
+	try {
+		if (_sceneMap[_scene]->init() == false) {
+			logErr("failed to init scene: loading");
+			return false;
+		}
+	} catch (std::exception const & e) {
+		logErr("Error : " << e.what());
+		return false;
+	}
+
+	try {
+		_sceneMap[_scene]->load();  // load first scene
+	} catch (std::exception const & e) {
+		logErr("Error : " << e.what());
+		return false;
+	}
+
+	/* draw */
+	Inputs::update();
+	_gui->preDraw();
+	// draw debug menu scene
+	if (_sceneMap[_scene]->draw() == false) {
+		return false;
+	}
+	_gui->postDraw();
+
 	// load and init 3d models
 	if (!ModelsManager::init(*(_gui->cam))) {
 		return false;
@@ -115,6 +148,8 @@ bool SceneManager::_init() {
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
+			if (it->first == SceneNames::LOADING)
+				continue;
 			if (it->second->init() == false) {
 				logErr("failed to init scene: " << it->first);
 				return false;
@@ -124,13 +159,7 @@ bool SceneManager::_init() {
 			return false;
 		}
 	}
-
-	try {
-		_sceneMap[_scene]->load();  // load first scene
-	} catch (std::exception const & e) {
-		logErr("Error : " << e.what());
-		return false;
-	}
+	_isInit = true;
 	return true;
 }
 
@@ -148,6 +177,8 @@ bool SceneManager::run() {
 
 bool SceneManager::_run(float maxFrameDuration) {
 	std::chrono::milliseconds	lastLoopMs = getMs();
+	bool firstLoop = true;
+	(void)firstLoop;
 
 	while (true) {
 		/* reset variables */
@@ -188,9 +219,7 @@ bool SceneManager::_run(float maxFrameDuration) {
 		else {
 			usleep((maxFrameDuration - frameDuration) * 1000);
 		}
-		#if DEBUG_FPS_LOW == true
-			firstLoop = false;
-		#endif
+		firstLoop = false;
 	}
 	return true;
 }

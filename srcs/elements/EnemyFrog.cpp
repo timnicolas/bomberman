@@ -61,42 +61,54 @@ void EnemyFrog::resetCrossable() {
  * @return false if failure
  */
 bool	EnemyFrog::_update() {
-	/* try jumping */
-	if (_jumpGoal == VOID_POS && static_cast<uint64_t>(getMs().count()) >= _nextJumpTime) {
-		// try to find a new destination
-		_findJumpGoal();
+	if (alive) {
+		/* try jumping */
+		if (_jumpGoal == VOID_POS && static_cast<uint64_t>(getMs().count()) >= _nextJumpTime) {
+			// try to find a new destination
+			_findJumpGoal();
 
-		// If there is no possible destinations
-		if (_jumpGoal == VOID_POS) {
-			// always reset chrono (don't retry in the next update if there is no move options)
-			_nextJumpTime = getMs().count() + WAIT_JUMP_TIME_MS;
-		}
-	}
-
-	/* moving */
-	// if jumping
-	if (_jumpGoal != VOID_POS) {
-		_jumpCrossable();
-		if (_isOn(_jumpGoal, game.getDtTime() * speed * 3)) {  // end of the jump
-			// set position with precision
-			position.x = _jumpGoal.x;
-			position.z = _jumpGoal.y;
-			_jumpGoal = VOID_POS;
-
-			// long or short wait
-			if (rand() % CHANCE_LONG_WAIT == 0)
-				_nextJumpTime = getMs().count() + LONG_WAIT_JUMP_TIME_MS;
-			else
+			// If there is no possible destinations
+			if (_jumpGoal == VOID_POS) {
+				// always reset chrono (don't retry in the next update if there is no move options)
 				_nextJumpTime = getMs().count() + WAIT_JUMP_TIME_MS;
+			}
 		}
-		_moveTo(_dir, -1);
-	}
-	else {  // if stay in a position
-		resetCrossable();
-		if (game.player->hasCollision(position, size)) {
-			game.player->takeDamage(1);
+
+		/* moving */
+		// if jumping
+		if (_jumpGoal != VOID_POS) {
+			_jumpCrossable();
+			if (_isOn(_jumpGoal, game.getDtTime() * speed * 3)) {  // end of the jump
+				// set position with precision
+				position.x = _jumpGoal.x;
+				position.z = _jumpGoal.y;
+				_jumpGoal = VOID_POS;
+
+				// long or short wait
+				if (rand() % CHANCE_LONG_WAIT == 0)
+					_nextJumpTime = getMs().count() + LONG_WAIT_JUMP_TIME_MS;
+				else
+					_nextJumpTime = getMs().count() + WAIT_JUMP_TIME_MS;
+			}
+			_moveTo(_dir, -1);
+		}
+		else {  // if stay in a position
+			resetCrossable();
+			if (game.player->hasCollision(position, size)) {
+				game.player->takeDamage(1);
+			}
+
+			if (_entityState.state != EntityState::IDLE) {
+				setState(EntityState::IDLE);
+			}
 		}
 	}
+
+	// update animation on state change
+	_updateAnimationState();
+
+	// update model pos/rot
+	_updateModel();
 
 	return true;
 }
@@ -115,10 +127,10 @@ void	EnemyFrog::_findJumpGoal() {
 
 	glm::ivec2 ipos = getIntPos();
 	glm::ivec2 nextPos[4] = {
-		{ 0, -2},  // UP
-		{ 2,  0},  // RIGHT
-		{ 0,  2},  // DOWN
-		{-2,  0},  // LEFT
+		{ 0, -FROG_JUMP_DIST},  // UP
+		{ FROG_JUMP_DIST,  0},  // RIGHT
+		{ 0,  FROG_JUMP_DIST},  // DOWN
+		{-FROG_JUMP_DIST,  0},  // LEFT
 	};
 
 	// try all directions
@@ -150,7 +162,18 @@ bool	EnemyFrog::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyFrog::_draw(Gui &gui) {
-	gui.drawCube(Block::IA, getPos(), size);
+	(void)gui;
+	// gui.drawCube(Block::IA, getPos(), size);
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -162,4 +185,85 @@ void	EnemyFrog::_jumpCrossable() {
 	ACharacter::resetCrossable();
 	crossableTypes.clear();
 	crossableTypes.push_back(Type::ALL);
+}
+
+/**
+ * @brief update model position and rotation
+ *
+ */
+void	EnemyFrog::_updateModel() {
+	if (_entityState.state != EntityState::RUNNING) {
+		_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0.0, movingSize.z / 2));
+	}
+
+	// set model orientationdebug
+	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+	_model->transform.setRot(angle);
+}
+
+/**
+ * @brief update animation on state change
+ *
+ */
+void	EnemyFrog::_updateAnimationState() {
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DYING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityState::RUNNING:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|jump", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+/**
+ * @brief Init enemyBasic
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	EnemyFrog::init() {
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		OpenGLModel	&openglModel = ModelsManager::getModel("frog");
+		_model = new Model(openglModel, game.getDtTime(), ETransform({1.5,
+			0.0, 1.5}, ENEMY_FROG_SIZE));
+		_model->play = true;
+		_model->loopAnimation = true;
+
+		// set speed according to animation duration
+		_model->setAnimation("Armature|jump");
+		speed = _model->getAnimDuration() / 1000 * FROG_JUMP_DIST;
+		logDebug("speed: " << speed);
+
+		_model->setAnimation("Armature|idle");
+		_updateModel();
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
 }

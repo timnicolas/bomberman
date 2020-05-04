@@ -39,14 +39,8 @@ bool			SceneEndGame::init() {
 	float menuHeight = winSz.y / 14;
 
 	try {
-		tmpSize.y = winSz.y * 0.08;
-		tmpSize.x = tmpSize.y;
-		tmpPos.x = tmpSize.x / 2;
-		tmpPos.y = winSz.y - tmpSize.y * 1.5;
-		addButton(tmpPos, tmpSize, "X")
-			.addButtonLeftListener(&_states.exit)
-			.setKeyLeftClickInput(InputType::CANCEL)
-			.setTextAlign(TextAlign::CENTER);
+		addExitButton()
+			.addButtonLeftListener(&_states.exit);
 
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
