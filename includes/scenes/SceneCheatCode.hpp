@@ -2,7 +2,6 @@
 
 #include <deque>
 #include "ASceneMenu.hpp"
-#include "TextInputUI.hpp"
 
 #define CHEATCODE_FONT					"cheatcode"
 #define CHEATCODE_FONT_SCALE			1
@@ -140,6 +139,7 @@ class SceneCheatCode : public ASceneMenu {
 		TextInputUI *					_commandLine;
 		TextUI *						_infoCommandLine;
 		std::deque<TextLine>			_textLines;
+		ABaseMasterUI *					_masterLines;
 		std::vector<uint32_t>			_levelsUnlocked;
 
 		/* history */

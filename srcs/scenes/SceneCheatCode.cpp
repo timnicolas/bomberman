@@ -169,6 +169,8 @@ bool SceneCheatCode::init() {
 			.setText(CHEATCODE_DEF_TXT)
 			.setColor(CHEATCODE_COLOR)
 			.setZ(1);
+
+		_masterLines = &addEmptyMaster();  // create the master element
 	}
 	catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -184,6 +186,10 @@ bool SceneCheatCode::init() {
  * @return false if we need to quit the command line
  */
 bool SceneCheatCode::update() {
+	if (isCmdLnEnabled)
+		_masterLines->setMasterOffset({0, 0});
+	else
+		_masterLines->setMasterOffset({0, -_commandLine->getSize().y * 2.3});
 	ASceneMenu::update();
 
 	if (isCmdLnEnabled) {
@@ -727,7 +733,8 @@ int SceneCheatCode::_addLine(std::string const & txt, glm::vec4 txtColor) {
 				.setTextScale(CHEATCODE_FONT_SCALE)
 				.setTextColor(txtColor)
 				.setColor(CHEATCODE_COLOR)
-				.setZ(1);
+				.setZ(1)
+				.setMaster(_masterLines);
 
 			for (auto && ln : _textLines) {
 				ln.ui->addPosOffset({0, ln.ui->getSize().y});
