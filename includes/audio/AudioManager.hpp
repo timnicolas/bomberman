@@ -4,6 +4,7 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_mixer.h>
 # include <map>
+# include <vector>
 # include <unordered_set>
 # include "Sound.hpp"
 # include "Music.hpp"
