@@ -22,6 +22,7 @@
 #define ENEMY_WITH_EYE_SIZE	glm::vec3(1.5, 1.5, 1.5)
 #define ENEMY_FLY_SIZE		glm::vec3(0.7, 0.7, 0.7)
 #define ENEMY_FROG_SIZE		glm::vec3(1.0, 1.0, 1.0)
+#define ENEMY_CRISPY_SIZE	glm::vec3(1.0, 1.0, 1.0)
 
 #include <chrono>
 #include "SettingsJson.hpp"

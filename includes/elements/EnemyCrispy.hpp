@@ -27,6 +27,9 @@ protected:
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 
+	void			_updateModel();
+	void			_updateAnimationState();
+
 public:
 	// Constructors
 	explicit EnemyCrispy(SceneGame &game);
@@ -35,4 +38,7 @@ public:
 
 	// Operators
 	EnemyCrispy &operator=(EnemyCrispy const &rhs);
+
+	// Methods
+	virtual bool	init();
 };

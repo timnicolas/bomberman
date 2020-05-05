@@ -70,6 +70,9 @@ bool	ModelsManager::_init(Camera const &cam) {
 			_models["frog"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"frog/frog.fbx");
 
+			_models["crispy"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"crispy/crispy.fbx");
+
 			_models["terrain"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"terrain/terrain.fbx");
 		}
