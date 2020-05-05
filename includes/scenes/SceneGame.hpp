@@ -81,26 +81,36 @@ private:
 protected:
 	struct AllUI {
 		ABaseUI *	introText;  // TextUI
-
-		ABaseUI *	timeLeftImg;  // TextUI
+		ABaseUI *	timeLeftImg;  // ImageUI
+		ABaseUI *	timeLeftImgActive;  // ImageUI
 		ABaseUI *	timeLeftText;  // TextUI
-		ABaseUI *	scoreImg;  // TextUI
+		ABaseUI *	scoreImg;  // ImageUI
+		ABaseUI *	scoreImgActive;  // ImageUI
 		ABaseUI *	scoreText;  // TextUI
 		ABaseUI *	lifeImg;  // ImageUI
+		ABaseUI *	lifeImgActive;  // ImageUI
 		ABaseUI *	lifeText;  // TextUI
 		ABaseUI *	levelNameText;  // TextUI
 		ABaseUI *	enemiesCounterText;  // TextUI
 		ABaseUI *	speedImg;  // ImageUI
+		ABaseUI *	speedImgActive;  // ImageUI
 		ABaseUI *	speedText;  // TextUI
 		ABaseUI *	bonusBombImg;  // ImageUI
+		ABaseUI *	bonusBombImgActive;  // ImageUI
 		ABaseUI *	bonusBombText;  // TextUI
 		ABaseUI *	bonusFlameImg;  // ImageUI
+		ABaseUI *	bonusFlameImgActive;  // ImageUI
 		ABaseUI *	bonusFlameText;  // TextUI
 		ABaseUI *	bonusFlampassImg;  // ImageUI
+		ABaseUI *	bonusFlampassImgActive;  // ImageUI
 		ABaseUI *	bonusWallpassImg;  // ImageUI
+		ABaseUI *	bonusWallpassImgActive;  // ImageUI
 		ABaseUI *	bonusDetonatorImg;  // ImageUI
+		ABaseUI *	bonusDetonatorImgActive;  // ImageUI
 		ABaseUI *	bonusBombpassImg;  // ImageUI
+		ABaseUI *	bonusBombpassImgActive;  // ImageUI
 		ABaseUI *	bonusShieldImg;  // ImageUI
+		ABaseUI *	bonusShieldImgActive;  // ImageUI
 		ABaseUI *	bonusShieldText;  // TextUI
 	};
 	AllUI			allUI;

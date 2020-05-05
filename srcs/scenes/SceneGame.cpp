@@ -577,7 +577,9 @@ bool	SceneGame::drawGame() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
-	if (state == GameState::PLAY && allUI.timeLeftImg->getPos() != VOID_SIZE) {
+	if (state == GameState::PLAY
+		&& (allUI.timeLeftImg->getPos() != VOID_SIZE || allUI.timeLeftImgActive->getPos() != VOID_SIZE))
+	{
 		ASceneMenu::draw();
 	}
 	else if (state == GameState::INTRO) {
@@ -1218,24 +1220,40 @@ bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFl
 void SceneGame::_initGameInfos() {
 	try {
 		allUI.timeLeftImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/time.png");
+		allUI.timeLeftImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/time_active.png");
 		allUI.timeLeftText = &addText(VOID_SIZE, VOID_SIZE, "time-left").setTextAlign(TextAlign::RIGHT);
 		allUI.scoreImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/score.png");
+		allUI.scoreImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/score_active.png");
 		allUI.scoreText = &addText(VOID_SIZE, VOID_SIZE, "score").setTextAlign(TextAlign::RIGHT);
 		allUI.lifeImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life.png");
+		allUI.lifeImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/life_active.png");
 		allUI.lifeText = &addText(VOID_SIZE, VOID_SIZE, "nb-player-lives").setTextAlign(TextAlign::RIGHT);
 		allUI.levelNameText = &addText(VOID_SIZE, VOID_SIZE, "level-name").setTextAlign(TextAlign::RIGHT);
 		allUI.enemiesCounterText = &addText(VOID_SIZE, VOID_SIZE, "nb-enemies").setTextAlign(TextAlign::RIGHT);
 		allUI.speedImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed.png");
+		allUI.speedImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/speed_active.png");
 		allUI.speedText = &addText(VOID_SIZE, VOID_SIZE, "speed").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusBombImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb.png");
+		allUI.bonusBombImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bomb_active.png");
 		allUI.bonusBombText = &addText(VOID_SIZE, VOID_SIZE, "total-bombs").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusFlameImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/flame.png");
+		allUI.bonusFlameImgActive = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/flame_active.png");
 		allUI.bonusFlameText = &addText(VOID_SIZE, VOID_SIZE, "bomb-propagation").setTextAlign(TextAlign::RIGHT);
 		allUI.bonusFlampassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/flampass.png");
+		allUI.bonusFlampassImgActive = &addImage(VOID_SIZE, VOID_SIZE,
+			"bomberman-assets/textures/bonus/flampass_active.png");
 		allUI.bonusWallpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/wallpass.png");
+		allUI.bonusWallpassImgActive = &addImage(VOID_SIZE, VOID_SIZE,
+			"bomberman-assets/textures/bonus/wallpass_active.png");
 		allUI.bonusDetonatorImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/detonator.png");
+		allUI.bonusDetonatorImgActive = &addImage(VOID_SIZE, VOID_SIZE,
+			"bomberman-assets/textures/bonus/detonator_active.png");
 		allUI.bonusBombpassImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/bombpass.png");
+		allUI.bonusBombpassImgActive = &addImage(VOID_SIZE, VOID_SIZE,
+			"bomberman-assets/textures/bonus/bombpass_active.png");
 		allUI.bonusShieldImg = &addImage(VOID_SIZE, VOID_SIZE, "bomberman-assets/textures/bonus/shield.png");
+		allUI.bonusShieldImgActive = &addImage(VOID_SIZE, VOID_SIZE,
+			"bomberman-assets/textures/bonus/shield_active.png");
 		allUI.bonusShieldText = &addText(VOID_SIZE, VOID_SIZE, "invulnerable").setTextAlign(TextAlign::RIGHT);
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -1248,24 +1266,35 @@ void SceneGame::_initGameInfos() {
 void		SceneGame::_loadGameInfos() {
 	try {
 		allUI.timeLeftImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.timeLeftImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.timeLeftText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.scoreImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.scoreImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.scoreText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.lifeImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.lifeImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.lifeText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.levelNameText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.enemiesCounterText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.speedImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.speedImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.speedText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusBombImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusBombText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusFlameImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlameImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusFlameText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusFlampassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusFlampassImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusWallpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusWallpassImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusDetonatorImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusDetonatorImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusBombpassImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusBombpassImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusShieldImg->setPos(VOID_SIZE).setSize(VOID_SIZE);
+		allUI.bonusShieldImgActive->setPos(VOID_SIZE).setSize(VOID_SIZE);
 		allUI.bonusShieldText->setPos(VOID_SIZE).setSize(VOID_SIZE);
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
@@ -1305,8 +1334,16 @@ void			SceneGame::_updateGameInfos() {
 
 		// -- Top -----------
 		/* time left */
-		allUI.timeLeftImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-		tmpPos.x += allUI.timeLeftImg->getSize().x;
+		if (player->bonusActifs.time > 0) {
+			allUI.timeLeftImgActive->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			allUI.timeLeftImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.timeLeftImgActive->getSize().x;
+		}
+		else {
+			allUI.timeLeftImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			allUI.timeLeftImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.timeLeftImg->getSize().x;
+		}
 		allUI.timeLeftText->setPos({tmpPos.x, textY}).setText(timeToString(levelTime - time))
 			.setSize(VOID_POS).setCalculatedSize();
 		if (!_alarm)
@@ -1317,8 +1354,16 @@ void			SceneGame::_updateGameInfos() {
 
 		/* life */
 		tmpPos.x += padding;
-		allUI.lifeImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
-		tmpPos.x += allUI.lifeImg->getSize().x;
+		if (player->bonusActifs.life > 0) {
+			allUI.lifeImgActive->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			allUI.lifeImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.lifeImgActive->getSize().x;
+		}
+		else {
+			allUI.lifeImg->setPos({tmpPos.x, imgY}).setSize(tmpSize);
+			allUI.lifeImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.lifeImg->getSize().x;
+		}
 		allUI.lifeText->setPos({tmpPos.x, textY}).setText(std::to_string(player->lives))
 			.setSize(VOID_SIZE).setCalculatedSize();
 		tmpPos.x += allUI.lifeText->getSize().x;
@@ -1340,9 +1385,18 @@ void			SceneGame::_updateGameInfos() {
 		allUI.scoreText->setText(score.toString()).setSize(VOID_POS).setCalculatedSize();
 		tmpPos.x -= allUI.scoreText->getSize().x;
 		allUI.scoreText->setPos({tmpPos.x, textY});
-		allUI.scoreImg->setSize(tmpSize);
-		tmpPos.x -= allUI.scoreImg->getSize().x;
-		allUI.scoreImg->setPos({tmpPos.x, imgY});
+		if (player->bonusActifs.score > 0) {
+			allUI.scoreImgActive->setSize(tmpSize);
+			tmpPos.x -= allUI.scoreImgActive->getSize().x;
+			allUI.scoreImgActive->setPos({tmpPos.x, imgY});
+			allUI.scoreImg->setPos(VOID_POS).setSize(VOID_SIZE);
+		}
+		else {
+			allUI.scoreImg->setSize(tmpSize);
+			tmpPos.x -= allUI.scoreImg->getSize().x;
+			allUI.scoreImg->setPos({tmpPos.x, imgY});
+			allUI.scoreImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+		}
 
 		// -- Bonus -----------
 		glm::vec2 pos = {winSz.x / 10, winSz.y - menuHeight * 4};
@@ -1350,8 +1404,16 @@ void			SceneGame::_updateGameInfos() {
 
 		/* speed */
 		// tmpPos.x += padding;
-		allUI.speedImg->setPos(tmpPos).setSize(tmpSize);
-		tmpPos.x += allUI.speedImg->getSize().x;
+		if (player->bonusActifs.speed > 0) {
+			allUI.speedImgActive->setPos(tmpPos).setSize(tmpSize);
+			allUI.speedImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.speedImgActive->getSize().x;
+		}
+		else {
+			allUI.speedImg->setPos(tmpPos).setSize(tmpSize);
+			allUI.speedImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.speedImg->getSize().x;
+		}
 		std::string	speed = std::to_string(player->speed);
 		speed = speed.substr(0, speed.find("."));
 		allUI.speedText->setPos({tmpPos.x, tmpPos.y + 2}).setText(speed)
@@ -1360,16 +1422,32 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos = pos;
 
 		/* bonus bomb */
-		allUI.bonusBombImg->setPos(tmpPos).setSize(tmpSize);
-		tmpPos.x += allUI.bonusBombImg->getSize().x;
+		if (player->bonusActifs.bombs > 0) {
+			allUI.bonusBombImgActive->setPos(tmpPos).setSize(tmpSize);
+			allUI.bonusBombImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.bonusBombImgActive->getSize().x;
+		}
+		else {
+			allUI.bonusBombImg->setPos(tmpPos).setSize(tmpSize);
+			allUI.bonusBombImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.bonusBombImg->getSize().x;
+		}
 		allUI.bonusBombText->setPos({tmpPos.x, tmpPos.y + 2}).setText(std::to_string(player->totalBombs))
 			.setSize(VOID_SIZE).setCalculatedSize();
 		pos.y -= menuHeight * 0.8;
 		tmpPos = pos;
 
 		/* bonus flame */
-		allUI.bonusFlameImg->setPos(tmpPos).setSize(tmpSize);
-		tmpPos.x += allUI.bonusFlameImg->getSize().x;
+		if (player->bonusActifs.flames > 0) {
+			allUI.bonusFlameImgActive->setPos(tmpPos).setSize(tmpSize);
+			allUI.bonusFlameImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.bonusFlameImgActive->getSize().x;
+		}
+		else {
+			allUI.bonusFlameImg->setPos(tmpPos).setSize(tmpSize);
+			allUI.bonusFlameImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			tmpPos.x += allUI.bonusFlameImg->getSize().x;
+		}
 		allUI.bonusFlameText->setPos({tmpPos.x, tmpPos.y + 2}).setText(std::to_string(player->bombProgation))
 			.setSize(VOID_SIZE).setCalculatedSize();
 		pos.y -= menuHeight * 0.8;
@@ -1377,7 +1455,14 @@ void			SceneGame::_updateGameInfos() {
 
 		/* bonus flampass */
 		if (player->passFire) {
-			allUI.bonusFlampassImg->setPos(tmpPos).setSize(tmpSize);
+			if (player->bonusActifs.flampass > 0) {
+				allUI.bonusFlampassImgActive->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusFlampassImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
+			else {
+				allUI.bonusFlampassImg->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusFlampassImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
 			pos.y -= menuHeight * 0.8;
 			tmpPos = pos;
 		} else {
@@ -1385,7 +1470,14 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus wallpass */
 		if (player->passWall) {
-			allUI.bonusWallpassImg->setPos(tmpPos).setSize(tmpSize);
+			if (player->bonusActifs.wallpass > 0) {
+				allUI.bonusWallpassImgActive->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusWallpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
+			else {
+				allUI.bonusWallpassImg->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusWallpassImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
 			pos.y -= menuHeight * 0.8;
 			tmpPos = pos;
 		} else {
@@ -1393,7 +1485,14 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus detonator */
 		if (player->detonator) {
-			allUI.bonusDetonatorImg->setPos(tmpPos).setSize(tmpSize);
+			if (player->bonusActifs.detonator > 0) {
+				allUI.bonusDetonatorImgActive->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusDetonatorImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
+			else {
+				allUI.bonusDetonatorImg->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusDetonatorImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
 			pos.y -= menuHeight * 0.8;
 			tmpPos = pos;
 		} else {
@@ -1401,7 +1500,14 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus passBomb */
 		if (player->passBomb) {
-			allUI.bonusBombpassImg->setPos(tmpPos).setSize(tmpSize);
+			if (player->bonusActifs.bombpass > 0) {
+				allUI.bonusBombpassImgActive->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusBombpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
+			else {
+				allUI.bonusBombpassImg->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusBombpassImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+			}
 			pos.y -= menuHeight * 0.8;
 			tmpPos = pos;
 		} else {
@@ -1409,8 +1515,16 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus invulnerable */
 		if (player->invulnerable) {
-			allUI.bonusShieldImg->setPos(tmpPos).setSize(tmpSize);
-			tmpPos.x += allUI.bonusShieldImg->getSize().x;
+			if (player->bonusActifs.shield > 0) {
+				allUI.bonusShieldImgActive->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusShieldImg->setPos(VOID_POS).setSize(VOID_SIZE);
+				tmpPos.x += allUI.bonusShieldImgActive->getSize().x;
+			}
+			else {
+				allUI.bonusShieldImg->setPos(tmpPos).setSize(tmpSize);
+				allUI.bonusShieldImgActive->setPos(VOID_POS).setSize(VOID_SIZE);
+				tmpPos.x += allUI.bonusShieldImg->getSize().x;
+			}
 			std::string	invulnerable = std::to_string(player->invulnerable);
 			invulnerable = invulnerable.substr(0, invulnerable.find(".")+2);
 			allUI.bonusShieldText->setPos({tmpPos.x, tmpPos.y + 2}).setText(timeToString(player->invulnerable))
