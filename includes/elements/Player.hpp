@@ -38,6 +38,8 @@ public:
 
 	struct BonusActifs {
 		float	life;
+		float	score;
+		float	time;
 		float	bombs;
 		float	flames;
 		float	speed;
@@ -45,6 +47,7 @@ public:
 		float	detonator;
 		float	bombpass;
 		float	flampass;
+		float	shield;
 	};
 	BonusActifs		bonusActifs;
 

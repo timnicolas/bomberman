@@ -116,6 +116,8 @@ void	Player::resetParams() {
 	detonator = false;
 	passBomb = false;
 	bonusActifs.life = 0.0f;
+	bonusActifs.score = 0.0f;
+	bonusActifs.time = 0.0f;
 	bonusActifs.bombs = 0.0f;
 	bonusActifs.flames = 0.0f;
 	bonusActifs.speed = 0.0f;
@@ -123,6 +125,7 @@ void	Player::resetParams() {
 	bonusActifs.detonator = 0.0f;
 	bonusActifs.bombpass = 0.0f;
 	bonusActifs.flampass = 0.0f;
+	bonusActifs.shield = 0.0f;
 	resetCrossable();
 }
 
@@ -306,12 +309,18 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 			break;
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
+			if (!silent)
+				bonusActifs.shield = 3.0f;
 			break;
 		case BonusType::TIME:
 			game.time -= 15.0f;
+			if (!silent)
+				bonusActifs.time = 3.0f;
 			break;
 		case BonusType::POINTS:
 			game.score += 1500;
+			if (!silent)
+				bonusActifs.score = 3.0f;
 			break;
 		default:
 			break;
@@ -394,6 +403,7 @@ bool	Player::rmBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::POINTS:
 			game.score -= 1500;
+
 			break;
 		default:
 			break;
@@ -546,6 +556,12 @@ void	Player::_updateBonusActifsTime() {
 	if (bonusActifs.life > 0) {
 		bonusActifs.life -= dtTime;
 	}
+	if (bonusActifs.time > 0) {
+		bonusActifs.time -= dtTime;
+	}
+	if (bonusActifs.score > 0) {
+		bonusActifs.score -= dtTime;
+	}
 	if (bonusActifs.bombs > 0) {
 		bonusActifs.bombs -= dtTime;
 	}
@@ -566,6 +582,9 @@ void	Player::_updateBonusActifsTime() {
 	}
 	if (bonusActifs.flampass > 0) {
 		bonusActifs.flampass -= dtTime;
+	}
+	if (bonusActifs.shield > 0) {
+		bonusActifs.shield -= dtTime;
 	}
 }
 
