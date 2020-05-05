@@ -53,7 +53,8 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	type = Type::BONUS;
 	name = "Bonus";
 	blockPropagation = false;
-	destructible = true;
+	destructible = false;
+	_indestructible = 0.5f;
 	_toDraw = 0;
 	_timeToDie = 10.0f;
 	_typeBonus = _pickBonus();
@@ -77,6 +78,7 @@ Bonus &Bonus::operator=(Bonus const &rhs) {
 		AObject::operator=(rhs);
 		_typeBonus = rhs._typeBonus;
 		_toDraw = rhs._toDraw;
+		_indestructible = rhs._indestructible;
 	}
 	return *this;
 }
@@ -92,6 +94,11 @@ Bonus &Bonus::operator=(Bonus const &rhs) {
 bool	Bonus::update() {
 	if (!alive || !active)
 		return true;
+
+	if (_indestructible > 0)
+		_indestructible -= game.getDtTime();
+	else if (!destructible)
+		destructible = true;
 
 	_timeToDie -= game.getDtTime();
 	if (_timeToDie <= 0.0) {

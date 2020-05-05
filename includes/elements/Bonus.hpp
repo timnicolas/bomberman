@@ -34,6 +34,7 @@ private:
 	BonusType::Enum		_typeBonus;
 	static std::map<BonusType::Enum, Block::Enum>	_textures;
 	int					_toDraw;
+	float				_indestructible;
 	// Methods
 	BonusType::Enum		_pickBonus();
 
