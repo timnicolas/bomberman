@@ -126,6 +126,7 @@ SRC =	main.cpp \
 		scenes/ASceneMenu.cpp \
 		scenes/SceneMainMenu.cpp \
 		scenes/SceneLoadGame.cpp \
+		scenes/SceneDifficulty.cpp \
 		scenes/SceneLevelSelection.cpp \
 		scenes/SceneGame.cpp \
 		scenes/ScenePause.cpp \
@@ -213,6 +214,7 @@ HEAD =	bomberman.hpp \
 		scenes/ASceneMenu.hpp \
 		scenes/SceneMainMenu.hpp \
 		scenes/SceneLoadGame.hpp \
+		scenes/SceneDifficulty.hpp \
 		scenes/SceneLevelSelection.hpp \
 		scenes/SceneGame.hpp \
 		scenes/ScenePause.hpp \
@@ -370,6 +372,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	# assimp
 	brew install assimp;
 	brew upgrade assimp;
+	# freetype2
+	brew install freetype2
 	# icon for .app file
 	brew install fileicon
 fi

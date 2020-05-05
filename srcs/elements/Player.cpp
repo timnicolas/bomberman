@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "Inputs.hpp"
+#include "Save.hpp"
 #include "AudioManager.hpp"
 #include "SceneCheatCode.hpp"
 
@@ -45,6 +46,7 @@ Player &Player::operator=(Player const &rhs) {
 		detonator = rhs.detonator;
 		passBomb = rhs.passBomb;
 		bombProgation = rhs.bombProgation;
+		bonusActifs = rhs.bonusActifs;
 	}
 	return *this;
 }
@@ -104,6 +106,8 @@ void	Player::resetParams() {
 	speed = 3;
 	alive = true;
 	lives = 2;
+	if (lives > static_cast<int>(Save::getDifficulty()))
+		lives = Save::getDifficulty();
 	invulnerable = 3.0f;
 	_toDraw = 0;
 	bombProgation = 2;
@@ -111,6 +115,17 @@ void	Player::resetParams() {
 	passWall = false;
 	detonator = false;
 	passBomb = false;
+	bonusActifs.life = 0.0f;
+	bonusActifs.score = 0.0f;
+	bonusActifs.time = 0.0f;
+	bonusActifs.bombs = 0.0f;
+	bonusActifs.flames = 0.0f;
+	bonusActifs.speed = 0.0f;
+	bonusActifs.wallpass = 0.0f;
+	bonusActifs.detonator = 0.0f;
+	bonusActifs.bombpass = 0.0f;
+	bonusActifs.flampass = 0.0f;
+	bonusActifs.shield = 0.0f;
 	resetCrossable();
 }
 
@@ -124,6 +139,7 @@ bool	Player::update() {
 	if (!active)
 		return true;
 
+	_updateBonusActifsTime();
 	if (alive && _entityState.state != EntityState::DROP_BOMB) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
@@ -143,12 +159,6 @@ bool	Player::update() {
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			if (bombs > 0) {
 				setState(EntityState::DROP_BOMB);
-				try {
-					AudioManager::stopSound(PUT_BOMB_SOUND);
-					AudioManager::playSound(PUT_BOMB_SOUND);
-				} catch(Sound::SoundException const & e) {
-					logErr(e.what());
-				}
 			} else {
 				try {
 					AudioManager::playSound(PUT_BOMB_EMPTY_SOUND);
@@ -244,43 +254,73 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 	switch (bonus) {
 		case BonusType::LIFE:
 			lives++;
+			if (lives > static_cast<int>(Save::getDifficulty()))
+				lives = Save::getDifficulty();
+			if (!silent)
+				bonusActifs.life = 3.0f;
 			break;
 		case BonusType::BOMBS:
 			totalBombs++;
 			bombs++;
+			if (totalBombs > 10)
+				totalBombs = 10;
+			if (bombs > 10)
+				bombs = 10;
+			if (!silent)
+				bonusActifs.bombs = 3.0f;
 			break;
 		case BonusType::FLAMES:
 			bombProgation++;
+			if (bombProgation > 12)
+				bombProgation = 12;
+			if (!silent)
+				bonusActifs.flames = 3.0f;
 			break;
 		case BonusType::SPEED:
 			speed++;
 			if (speed > MAX_SPEED)
 				speed = MAX_SPEED;
+			if (!silent)
+				bonusActifs.speed = 3.0f;
 			break;
 		case BonusType::WALLPASS:
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
 				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
+			if (!silent)
+				bonusActifs.wallpass = 3.0f;
 			break;
 		case BonusType::DETONATOR:
 			detonator = true;
+			if (!silent)
+				bonusActifs.detonator = 3.0f;
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
 				crossableTypes.push_back(Type::BOMB);
+			if (!silent)
+				bonusActifs.bombpass = 3.0f;
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
+			if (!silent)
+				bonusActifs.flampass = 3.0f;
 			break;
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
+			if (!silent)
+				bonusActifs.shield = 3.0f;
 			break;
 		case BonusType::TIME:
 			game.time -= 15.0f;
+			if (!silent)
+				bonusActifs.time = 3.0f;
 			break;
 		case BonusType::POINTS:
 			game.score += 1500;
+			if (!silent)
+				bonusActifs.score = 3.0f;
 			break;
 		default:
 			break;
@@ -363,6 +403,7 @@ bool	Player::rmBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::POINTS:
 			game.score -= 1500;
+
 			break;
 		default:
 			break;
@@ -435,7 +476,14 @@ void	Player::_updateAnimationState() {
  */
 void	Player::animEndCb(std::string animName) {
 	if (animName == "Armature|drop") {
-		_putBomb();
+		if (_putBomb()) {
+			try {
+				AudioManager::stopSound(PUT_BOMB_SOUND);
+				AudioManager::playSound(PUT_BOMB_SOUND);
+			} catch(Sound::SoundException const & e) {
+				logErr(e.what());
+			}
+		}
 		setState(EntityState::IDLE);
 	}
 	else if (animName == "Armature|death") {
@@ -477,10 +525,15 @@ void	Player::_move() {
 	}
 }
 
-
-void	Player::_putBomb() {
+/**
+ * @brief Put bomb methods.
+ *
+ * @return true if the bomb was put
+ * @return false if the bomb cannot be put
+ */
+bool	Player::_putBomb() {
 	if (bombs <= 0)
-		return;
+		return false;
 
 	glm::ivec2 intPos = getIntPos();
 	if (game.board[intPos.x][intPos.y].size() == 0) {
@@ -489,6 +542,49 @@ void	Player::_putBomb() {
 		game.board[intPos.x][intPos.y].push_back(bomb);
 		bomb->init();
 		bombs -= 1;
+		return true;
+	}
+	return false;
+}
+
+/**
+ * @brief Update time left for bonus actifs.
+ * Bonus actifs is used to indicate last taken bonuses
+ */
+void	Player::_updateBonusActifsTime() {
+	float dtTime = game.getDtTime();
+	if (bonusActifs.life > 0) {
+		bonusActifs.life -= dtTime;
+	}
+	if (bonusActifs.time > 0) {
+		bonusActifs.time -= dtTime;
+	}
+	if (bonusActifs.score > 0) {
+		bonusActifs.score -= dtTime;
+	}
+	if (bonusActifs.bombs > 0) {
+		bonusActifs.bombs -= dtTime;
+	}
+	if (bonusActifs.flames > 0) {
+		bonusActifs.flames -= dtTime;
+	}
+	if (bonusActifs.speed > 0) {
+		bonusActifs.speed -= dtTime;
+	}
+	if (bonusActifs.wallpass > 0) {
+		bonusActifs.wallpass -= dtTime;
+	}
+	if (bonusActifs.detonator > 0) {
+		bonusActifs.detonator -= dtTime;
+	}
+	if (bonusActifs.bombpass > 0) {
+		bonusActifs.bombpass -= dtTime;
+	}
+	if (bonusActifs.flampass > 0) {
+		bonusActifs.flampass -= dtTime;
+	}
+	if (bonusActifs.shield > 0) {
+		bonusActifs.shield -= dtTime;
 	}
 }
 

@@ -101,7 +101,11 @@ bool	SceneLevelSelection::update() {
 	// SceneGame reference
 	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 
-	allUI.text->setText(scGame.getLevelName(_currentLvl));
+	try {
+		allUI.text->setText(scGame.getLevelName(_currentLvl));
+	} catch (SceneGame::SceneGameException &e) {
+		_currentLvl = 0;
+	}
 	if (Save::isLevelDone(_currentLvl)) {
 		allUI.score->setText("score: " + std::to_string(Save::getLevelScore(_currentLvl)));
 	} else if (_currentLvl == 0 || Save::isLevelDone(_currentLvl - 1) || SceneCheatCode::isLevelUnlocked(_currentLvl)) {
@@ -175,6 +179,7 @@ bool	SceneLevelSelection::update() {
 void SceneLevelSelection::load() {
 	ASceneMenu::load();
 	_transition = 1;
+	setLevel(Save::getLastUnlockedLevel());
 }
 
 // -- Private methods ----------------------------------------------------------

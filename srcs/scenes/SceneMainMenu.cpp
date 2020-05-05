@@ -43,7 +43,7 @@ bool			SceneMainMenu::init() {
 		tmpSize.y = menuHeight;
 		addTitle(tmpPos, tmpSize, "Bomberman");
 
-		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "continue")
+		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "play")
 			.addButtonLeftListener(&_states.continueGame);
 		allUI.save = &addButton(VOID_SIZE, VOID_SIZE, "save")
 			.setKeyLeftClickScancode(SDL_SCANCODE_S)
@@ -62,8 +62,8 @@ bool			SceneMainMenu::init() {
 			.addButtonLeftListener(&_states.exit);
 		allUI.border = &addRect(VOID_SIZE, VOID_SIZE);
 
-		AudioManager::loadMusic("sounds/puzzle.ogg");
-		AudioManager::playMusic("sounds/puzzle.ogg", 0.1f, true);
+		AudioManager::loadMusic(MUSIC_MENU);
+		AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 
 		_initBG();
 	}
@@ -101,8 +101,7 @@ bool	SceneMainMenu::update() {
 	}
 	if (_states.newGame) {
 		_states.newGame = false;
-		Save::newGame();
-		SceneManager::loadScene(SceneNames::LEVEL_SELECTION);
+		SceneManager::loadScene(SceneNames::DIFFICULTY);
 	}
 	else if (_states.loadGame) {
 		_states.loadGame = false;
