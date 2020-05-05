@@ -191,7 +191,9 @@ void	Score::getStats(std::vector<Score::Stat> &vec) {
 	vec.push_back({
 		"TOTAL",
 		std::to_string(getScore()) + " pts",
-		"bomberman-assets/textures/bonus/score.png"
+		getScore() > 15000
+			? "bomberman-assets/textures/bonus/score_active.png"
+			: "bomberman-assets/textures/bonus/score.png"
 	});
 }
 

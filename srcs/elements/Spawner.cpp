@@ -85,6 +85,7 @@ bool	Spawner::update() {
 		int enemyKind = rand() % _typeEnemy.size();
 		bool fly = _typeEnemy[enemyKind] == ENEMY_FLY_STR ? true : false;
 		if (game.insertEntity(_typeEnemy[enemyKind], {position.x, position.z}, fly, 0)) {
+			game.levelEnemies++;
 			// reset for new spawn
 			_waitForSpawn = _frequency;
 		} else {
