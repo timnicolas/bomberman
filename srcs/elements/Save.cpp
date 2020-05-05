@@ -194,6 +194,7 @@ SettingsJson	*Save::initJson(std::string filename, bool newFile) {
 		jsFile->add<int64_t>("date_creation", time);
 		std::time_t		t = std::time(nullptr);
 		jsFile->add<int64_t>("date_lastmodified", t);
+		jsFile->add<uint64_t>("difficulty", 3);
 
 		SettingsJson	*levelPattern = new SettingsJson();
 		levelPattern->add<int64_t>("id", 0).setMin(0);
@@ -290,15 +291,31 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
 	game.player->bombProgation = _saveJs->j("state").u("flame");
 	game.player->speed = _saveJs->j("state").d("speed");
 	if (_saveJs->j("state").u("detonator") == 1)
-		game.player->takeBonus(Bonus::bonus["detonator"]);
+		game.player->takeBonus(Bonus::bonus["detonator"], true);
 	if (_saveJs->j("state").u("wallpass") == 1)
-		game.player->takeBonus(Bonus::bonus["wallpass"]);
+		game.player->takeBonus(Bonus::bonus["wallpass"], true);
 	if (_saveJs->j("state").u("bombpass") == 1)
-		game.player->takeBonus(Bonus::bonus["bombpass"]);
+		game.player->takeBonus(Bonus::bonus["bombpass"], true);
 	if (_saveJs->j("state").u("flampass") == 1)
-		game.player->takeBonus(Bonus::bonus["flampass"]);
+		game.player->takeBonus(Bonus::bonus["flampass"], true);
 
 	return true;
+}
+
+/**
+ * @brief Get last unclocked level.
+ *
+ * @return int ID of the level
+ */
+int		Save::getLastUnlockedLevel() {
+	return get()._getLastUnlockedLevel();
+}
+int		Save::_getLastUnlockedLevel() {
+	int	maxLevel = 0;
+	for (SettingsJson *level : _saveJs->lj("levels").list) {
+		maxLevel = level->i("id") >= maxLevel ? level->i("id") + 1 : maxLevel;
+	}
+	return maxLevel;
 }
 
 /**
@@ -336,7 +353,6 @@ int		Save::_getLevelScore(int32_t levelId) {
 			return level->i("score");
 		}
 	}
-
 	return 0;
 }
 
@@ -367,8 +383,27 @@ bool	Save::_setLevelDone(int32_t levelId, int32_t score) {
 
 		_saveJs->lj("levels").add(levelPattern);
 	}
-
 	return true;
+}
+
+/**
+ * @brief Set difficulty of the game.
+ *
+ * @param difficulty (lower is more difficult)
+ */
+void	Save::setDifficulty(uint difficulty) {
+	get()._saveJs->u("difficulty") = difficulty;
+	if (get()._saveJs->j("state").u("life") > difficulty)
+		get()._saveJs->j("state").u("life") = difficulty;
+}
+
+/**
+ * @brief Get difficulty of the game.
+ *
+ * @return uint difficulty (lower is more difficult)
+ */
+uint	Save::getDifficulty() {
+	return get()._saveJs->u("difficulty");
 }
 
 /**
@@ -392,7 +427,6 @@ bool	Save::_save(bool temporary) {
 		file::rm(_getFilename(true), true);
 		_saved = true;
 	}
-
 	return true;
 }
 
