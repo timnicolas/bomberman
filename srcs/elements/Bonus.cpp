@@ -171,8 +171,8 @@ std::string	Bonus::getDescription(BonusType::Enum type) {
 /**
  * @brief Static class to generate bonus.
  *
- * @param game
- * @param rate Probability to generate an enemy (between 0 and 1). default: 0.1f
+ * @param game SceneGame object.
+ * @param rate Probability to generate an bonus (between 0 and 1). default: 0.1f
  * @return Bonus* or nullptr if nothing has been generated.
  */
 Bonus	*Bonus::generateBonus(SceneGame &game, float rate) {
