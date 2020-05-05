@@ -23,7 +23,7 @@ public:
 	explicit Sound(std::string filename);
 	~Sound();
 
-	int											play(float volume, float env_volume, bool loop = false);
+	int											play(float volume, float env_volume, bool loop = false, int fadeIn = 0);
 	void										pause();
 	void										resume();
 	void										stop();

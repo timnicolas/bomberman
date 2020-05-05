@@ -60,7 +60,7 @@ public:
 
 	static void								loadSound(std::string file_name);
 	static void								playSound(std::string sound_name, float volume = 1.0,
-											bool loop = false, bool muteMusic = false);
+											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
 	static void								stopSound(std::string sound_name);
@@ -87,7 +87,7 @@ private:
 
 	void									_loadSound(std::string file_name);
 	void									_playSound(std::string sound_name, float volume = 1.0,
-											bool loop = false, bool muteMusic = false);
+											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
 	void									_stopSound(std::string sound_name);

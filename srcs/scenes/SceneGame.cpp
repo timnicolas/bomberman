@@ -341,7 +341,7 @@ bool	SceneGame::update() {
 			Save::save(true);
 			AudioManager::stopAllSounds();
 			try {
-				AudioManager::playSound(WIN_SOUND, 1.0f, false, true);
+				AudioManager::playSound(WIN_SOUND, 1.0f, false, true, 2000);
 			} catch(Sound::SoundException const & e) {
 				logErr(e.what());
 			}
@@ -363,7 +363,7 @@ bool	SceneGame::update() {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
 			AudioManager::stopAllSounds();
 			try {
-				AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true);
+				AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true, 2000);
 			} catch(Sound::SoundException const & e) {
 				logErr(e.what());
 			}
@@ -723,7 +723,7 @@ void SceneGame::load() {
 	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
 		state = GameState::INTRO;
 		try {
-			AudioManager::playSound(INTROLEVEL_SOUND);
+			AudioManager::playSound(INTROLEVEL_SOUND, 1.0f, false, false, 2000);
 		} catch(Sound::SoundException const & e) {
 			logErr(e.what());
 		}
