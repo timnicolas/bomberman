@@ -31,11 +31,11 @@ Sound::~Sound() {
  * @return int channel used.
  * @throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
-int										Sound::play(float volume, float env_volume, bool loop) {
+int										Sound::play(float volume, float env_volume, bool loop, int fadeIn) {
 	int			chan;
 
 	if (_chunk != nullptr) {
-		chan = Mix_PlayChannel(-1, _chunk, loop ? -1 : 0);
+		chan = Mix_FadeInChannel(-1, _chunk, loop ? -1 : 0, fadeIn);
 		if (chan < 0) {
 			throw Sound::SoundException(Mix_GetError());
 		}
