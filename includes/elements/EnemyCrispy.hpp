@@ -26,6 +26,7 @@ protected:
 	virtual bool	_update();
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
+	bool			_isPlayerClose(int distance);
 
 	void			_updateModel();
 	void			_updateAnimationState();
