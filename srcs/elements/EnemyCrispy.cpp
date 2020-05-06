@@ -86,6 +86,16 @@ bool	EnemyCrispy::_update() {
 			_lastPayerSeenMs = getMs().count();
 		}
 
+		/* if we cannot see the player, but still close, EnemyCrispy is active */
+		if (_isWall) {
+			if (_isPlayerClose(1)) {
+				_isWall = false;
+				_lastPayerSeenMs = getMs().count();
+				_playerDir = Direction::NO_DIRECTION;
+			}
+		}
+
+		/* transform wall to monster */
 		if (wasWall && !_isWall && _entityState.state != EntityState::TRANSFORM_IN &&
 			_entityState.state != EntityState::RUNNING) {
 			setState(EntityState::TRANSFORM_IN);
@@ -249,4 +259,23 @@ bool	EnemyCrispy::init() {
 	}
 
 	return true;
+}
+
+/**
+ * @brief Return if the player is close.
+ *
+ * @param distance to search the player
+ * @return true if close
+ * @return false otherwise.
+ */
+bool	EnemyCrispy::_isPlayerClose(int distance) {
+	glm::ivec2 playerPos = game.player->getIntPos();
+	glm::ivec2 thisPos = getIntPos();
+
+	if ((playerPos.x >= (thisPos.x - distance)) && (playerPos.x <= (thisPos.x + distance))) {
+		if ((playerPos.y >= (thisPos.y - distance)) && (playerPos.y <= (thisPos.y + distance))) {
+			return true;
+		}
+	}
+	return false;
 }
