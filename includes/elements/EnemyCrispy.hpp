@@ -43,4 +43,5 @@ public:
 	// Methods
 	virtual bool	init();
 	virtual void	animEndCb(std::string animName);
+	void			setIdlePos();
 };
