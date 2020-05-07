@@ -103,6 +103,7 @@ bool	ScenePause::update() {
 	else if (_states.menu) {
 		_states.menu = false;
 		AudioManager::stopAllSounds();
+		AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
 	}
 	else if (_states.exit) {
