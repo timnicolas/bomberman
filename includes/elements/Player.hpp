@@ -21,8 +21,9 @@ private:
 
 	// Methods
 	void	_move();
-	void	_putBomb();
+	bool	_putBomb();
 	void	_updateAnimationState();
+	void	_updateBonusActifsTime();
 
 public:
 	// Members
@@ -34,6 +35,21 @@ public:
 	bool		passBomb;
 	int			bombProgation;
 	float		invulnerable;
+
+	struct BonusActifs {
+		float	life;
+		float	score;
+		float	time;
+		float	bombs;
+		float	flames;
+		float	speed;
+		float	wallpass;
+		float	detonator;
+		float	bombpass;
+		float	flampass;
+		float	shield;
+	};
+	BonusActifs		bonusActifs;
 
 	// Constructors
 	explicit Player(SceneGame &game);

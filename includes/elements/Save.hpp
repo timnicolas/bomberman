@@ -37,10 +37,13 @@ public:
 	static bool			isLevelDone(int32_t levelId);
 	static int			getLevelScore(int32_t levelId);
 	static bool			setLevelDone(int32_t levelId, int32_t score);
+	static void			setDifficulty(uint difficulty);
+	static uint			getDifficulty();
 	static bool			save(bool temporary = false);
 	static void			deleteTemp();
 	static std::time_t	filenameToTimestamp(std::string filename, bool temporary);
 	static std::string	timestampToFileName(time_t timestamp);
+	static int			getLastUnlockedLevel();
 	// Exceptions
 	class SaveException : public std::runtime_error {
 	public:
@@ -71,6 +74,7 @@ private:
 	void				_init();
 	bool				_isLevelDone(int32_t levelId);
 	bool				_setLevelDone(int32_t levelId, int32_t score);
+	int					_getLastUnlockedLevel();
 	bool				_save(bool temporary);
 	bool				_updateSavedFile(SceneGame &game, bool succeedLevel);
 	bool				_loadStatesSaved(SceneGame &game);
