@@ -622,6 +622,8 @@ std::vector<std::string>	OpenGLModel::getAnimationNames() const {
 
 Camera const	&OpenGLModel::getCam() const { return _cam; }
 
+std::string	OpenGLModel::getPath() const { return _path; }
+
 // -- _setBonesTransform -------------------------------------------------------
 void	OpenGLModel::_setBonesTransform(float animationTimeTick, aiNode *node,
 	aiScene const *scene, glm::mat4 parentTransform)

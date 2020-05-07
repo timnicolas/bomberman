@@ -43,6 +43,8 @@ namespace EntityState {
 		DROP_BOMB,
 		LOOSE_EMOTE,
 		VICTORY_EMOTE,
+		TRANSFORM_IN,
+		TRANSFORM_OUT,
 	};
 
 	struct	Struct {

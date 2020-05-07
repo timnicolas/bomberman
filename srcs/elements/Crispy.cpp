@@ -1,4 +1,7 @@
 #include "Crispy.hpp"
+
+#include <cstdlib>
+
 #include "SceneGame.hpp"
 #include "Player.hpp"
 #include "Bonus.hpp"
@@ -62,7 +65,21 @@ bool	Crispy::postUpdate() {
  * @return false if failure
  */
 bool	Crispy::draw(Gui &gui) {
-	gui.drawCube(Block::DESTRUCTIBLE_WALL, getPos());
+	(void)gui;
+	// gui.drawCube(Block::DESTRUCTIBLE_WALL, getPos());
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
+	// TODO(zer0nim): create explode animation
+	// _updateAnimationState();
+
 	return true;
 }
 
@@ -75,6 +92,62 @@ Crispy * Crispy::generateCrispy(SceneGame &game, uint32_t genWallPercent) {
 	if (static_cast<uint32_t>(rand() % 100) > genWallPercent)
 		return nullptr;
 	return new Crispy(game);
+}
+
+/**
+ * @brief update animation on state change
+ *
+ */
+void	Crispy::_updateAnimationState() {
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::DYING:
+				_model->play = true;
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+/**
+ * @brief Init Crispy
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Crispy::init() {
+	AObject::init();
+
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		OpenGLModel	&openglModel = ModelsManager::getModel("crispy");
+		_model = new Model(openglModel, game.getDtTime(), ETransform(
+			(position + glm::vec3(.5, 0, .5)),
+			ENEMY_CRISPY_SIZE));
+
+		// set random orientation
+		float angles[] = {0, 90, 180, 270};
+		float	angle = glm::radians(angles[rand() % 4]);
+		_model->transform.setRot(angle);
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------
