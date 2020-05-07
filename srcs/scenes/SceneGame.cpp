@@ -117,6 +117,7 @@ SceneGame::~SceneGame() {
 	delete _menuModels.flower;
 	delete _menuModels.fly;
 	delete _menuModels.frog;
+	delete _menuModels.crispy;
 	delete _terrain;
 }
 
@@ -197,6 +198,7 @@ bool			SceneGame::init() {
 		_menuModels.robot = new Model(ModelsManager::getModel("robot"), getDtTime(),
 			ETransform({0, 0, 0}, ENEMY_BASIC_SIZE));
 		_menuModels.robot->play = true;
+		_menuModels.robot->animationSpeed = 1.6;
 		_menuModels.robot->loopAnimation = true;
 		_menuModels.robot->setAnimation("Armature|idle");
 
@@ -213,6 +215,13 @@ bool			SceneGame::init() {
 		_menuModels.frog->setAnimation("Armature|idle");
 		_menuModels.frog->transform.setPos({-2, -1, -4});
 		_menuModels.frog->transform.setRot(glm::radians(30.0));
+
+		_menuModels.crispy = new Model(ModelsManager::getModel("crispyEnemy"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_CRISPY_SIZE));
+		_menuModels.crispy->play = true;
+		_menuModels.crispy->animationSpeed = 1.6;
+		_menuModels.crispy->loopAnimation = true;
+		_menuModels.crispy->setAnimation("Armature|run");
 
 		// init terrain model
 		if (!_terrain) {
@@ -723,6 +732,13 @@ bool	SceneGame::drawEndGame() {
 		if (_menuModels.flower->getCurrentAnimationName() != "Armature|run")
 			_menuModels.flower->setAnimation("Armature|run");
 		_menuModels.flower->draw();
+
+		tmpX -= 1.3;
+		_menuModels.crispy->transform.setPos({tmpX, -1, -2});
+		_menuModels.crispy->transform.setRot(glm::radians(90.0));
+		if (_menuModels.crispy->getCurrentAnimationName() != "Armature|run")
+			_menuModels.crispy->setAnimation("Armature|run");
+		_menuModels.crispy->draw();
 
 		tmpX -= 1.3;
 		_menuModels.fly->transform.setPos({tmpX, .2, -2});
