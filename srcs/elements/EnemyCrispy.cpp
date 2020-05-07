@@ -184,7 +184,7 @@ void	EnemyCrispy::_updateAnimationState() {
 				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
 				break;
 			case EntityState::DYING:
-				_model->animationSpeed = 1;
+				_model->animationSpeed = .5;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
 				break;
