@@ -304,6 +304,23 @@ bool	SceneGame::update() {
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
+	// set all enemies to Idle on win/loose
+	if (state == GameState::WIN || state == GameState::GAME_OVER) {
+		for (auto &&enemy : enemies) {
+			enemy->alive = false;
+
+			if (enemy->getState() != EntityState::IDLE) {
+				enemy->setState(EntityState::IDLE);
+				enemy->update();
+
+				// reset EnemyCrispy rot/pos
+				if (enemy->name == ENEMY_CRISPY_STR) {
+					reinterpret_cast<EnemyCrispy *>(enemy)->setIdlePos();
+				}
+			}
+		}
+	}
+
 	if (state == GameState::PAUSE) {
 		AudioManager::pauseAllSounds();
 		SceneManager::loadScene(SceneNames::PAUSE);
@@ -321,6 +338,7 @@ bool	SceneGame::update() {
 	}
 	else if (state == GameState::WIN) {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			// calculate score and save it
 			int32_t	crispiesLast = 0;
 			for (auto &&box : board) {
 				for (auto &&row : box) {
@@ -339,41 +357,46 @@ bool	SceneGame::update() {
 			score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
 			Save::updateSavedFile(*this, true);
 			Save::save(true);
+
+			// manage winning sounds
 			AudioManager::stopAllSounds();
 			try {
 				AudioManager::playSound(WIN_SOUND, 1.0f, false, true, 2000);
 			} catch(Sound::SoundException const & e) {
 				logErr(e.what());
 			}
+
+			// start win camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
-			for (auto &&enemy : enemies) {
-				enemy->setState(EntityState::IDLE);
-				enemy->update();
-			}
 		}
+
+		// load victory menu on camera anim end
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
 			return true;
 		}
+
+		return true;
 	}
 	else if (state == GameState::GAME_OVER) {
 		if (_gui->cam->getMode() != CamMode::FOLLOW_PATH) {
+			// manage loosing sounds
 			AudioManager::stopAllSounds();
 			try {
 				AudioManager::playSound(GAME_OVER_SOUND, 1.0f, false, true, 2000);
 			} catch(Sound::SoundException const & e) {
 				logErr(e.what());
 			}
+
+			// start loose camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
-			for (auto &&enemy : enemies) {
-				enemy->setState(EntityState::IDLE);
-				enemy->update();
-			}
 		}
+
+		// load loosing menu on camera anim end
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
 			// clear game infos.
 			player->resetParams();
@@ -383,15 +406,18 @@ bool	SceneGame::update() {
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::GAME_OVER);
 		}
+
 		return true;
 	}
 
+	// manage level time limit
 	time += _dtTime;
-	if ((state != GameState::WIN || state != GameState::GAME_OVER) && (levelTime - time) < 0) {
+	if ((levelTime - time) < 0) {
 		state = GameState::GAME_OVER;
 		return true;
 	}
-	if ((state != GameState::WIN || state != GameState::GAME_OVER) && (levelTime - time) < 20) {
+	// play alarm_time sound when there is not much time left
+	if ((levelTime - time) < 20) {
 		if (!_alarm) {
 			try {
 				AudioManager::playSound(ALARM_TIME_SOUND);
@@ -402,15 +428,19 @@ bool	SceneGame::update() {
 		}
 	}
 
-	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
-		if (_gui->cam->getMode() == CamMode::FPS) {
-			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+	// switch to fps camera on key press
+	#if DEBUG
+		if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_C)) {
+			if (_gui->cam->getMode() == CamMode::FPS) {
+				_gui->cam->setMode(CamMode::STATIC_DEFPOS);
+			}
+			else if (_gui->cam->getMode() == CamMode::STATIC_DEFPOS) {
+				_gui->cam->setMode(CamMode::FPS);
+			}
 		}
-		else if (_gui->cam->getMode() == CamMode::STATIC_DEFPOS) {
-			_gui->cam->setMode(CamMode::FPS);
-		}
-	}
+	#endif
 
+	// update board entities
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {

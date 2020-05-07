@@ -283,3 +283,13 @@ bool	EnemyCrispy::_isPlayerClose(int distance) {
 	}
 	return false;
 }
+
+/**
+ * @brief reset rotation and center pos for the win/loose animation
+ */
+void	EnemyCrispy::setIdlePos() {
+	position.x = getIntPos().x;
+	position.z = getIntPos().y;
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
+	_model->transform.setRot(0);
+}
