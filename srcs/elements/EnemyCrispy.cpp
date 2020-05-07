@@ -55,6 +55,8 @@ bool	EnemyCrispy::_update() {
 	if (alive && _entityState.state != EntityState::ATTACK) {
 		// do nothing if blocked
 		if (_isBlocked()) {
+			_isWall = true;
+
 			// update state on first stop
 			if (_entityState.state != EntityState::IDLE &&
 				_entityState.state != EntityState::TRANSFORM_OUT)
@@ -72,7 +74,9 @@ bool	EnemyCrispy::_update() {
 			position.z = getIntPos().y;
 			_isWall = true;
 
-			if (_entityState.state != EntityState::TRANSFORM_OUT) {
+			if (_entityState.state != EntityState::IDLE &&
+				_entityState.state != EntityState::TRANSFORM_OUT)
+			{
 				setState(EntityState::TRANSFORM_OUT);
 			}
 		}
@@ -195,12 +199,12 @@ void	EnemyCrispy::_updateAnimationState() {
 				_model->setAnimation("Armature|attack", &AEntity::animEndCb, this);
 				break;
 			case EntityState::TRANSFORM_IN:
-				_model->animationSpeed = 1;
+				_model->animationSpeed = 2;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|transform_in", &AEntity::animEndCb, this);
 				break;
 			case EntityState::TRANSFORM_OUT:
-				_model->animationSpeed = 1;
+				_model->animationSpeed = 2;
 				_model->loopAnimation = false;
 				_model->setAnimation("Armature|transform_out", &AEntity::animEndCb, this);
 				break;
