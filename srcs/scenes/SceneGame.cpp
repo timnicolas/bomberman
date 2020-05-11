@@ -790,7 +790,11 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	// reinit printed values
 	_loadGameInfos();
 
-	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
+	_gui->cam->pos = {
+		size.x / 2,
+		12.0f + (size.x > size.y ? size.x : size.y) * 0.6,
+		size.y * 1.3
+	};
 	_gui->cam->lookAt(glm::vec3(
 		size.x / 2, 1.0f,
 		size.y / 1.9
