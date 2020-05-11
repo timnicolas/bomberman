@@ -49,10 +49,10 @@ import_lib()
             if [ ! -f "$CONT/Frameworks/$libname" ]
             then
                 cp $libpath $CONT/Frameworks
-                chmod +w $CONT/Frameworks/$libname
-                install_name_tool -id @executable_path/Frameworks/$libname $CONT/Frameworks/$libname
-                chmod -w $CONT/Frameworks/$libname
             fi
+            chmod +w $CONT/Frameworks/$libname
+            install_name_tool -id @executable_path/Frameworks/$libname $CONT/Frameworks/$libname
+            chmod -w $CONT/Frameworks/$libname
             chmod +w $1
             install_name_tool -change $libpath @executable_path/Frameworks/$libname $1
             chmod -w $1
@@ -70,14 +70,14 @@ import_sub_lib()
     done
 }
 
+cp ~/.brew/lib/libIrrXML.dylib $CONT/Frameworks
 declare -a arr1=("sdl2/lib/libSDL2" "sdl2_mixer/lib/libSDL2_mixer" "assimp/lib/libassimp" "freetype/lib/libfreetype" "boost/lib/libboost_filesystem")
 import_lib "$CONT/bomberman" ${arr1[@]}
 
-cp ~/.brew/lib/libIrrXML.dylib $CONT/Frameworks
 declare -a arr2=("libIrrXML.dylib" "sdl2/lib/libSDL2" "libmodplug/lib/libmodplug" "libvorbis/lib/libvorbisfile" "libvorbis/lib/libvorbis" "libpng/lib/libpng16")
 import_sub_lib ${arr2[@]}
 
-declare -a arr3=("libogg/lib/libogg" "lib/libvorbis")
+declare -a arr3=("libIrrXML.dylib" "libogg/lib/libogg" "lib/libvorbis")
 import_sub_lib ${arr3[@]}
 
 echo "\x1B[4mCREATE $DMG\x1B[0m"
