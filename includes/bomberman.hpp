@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdlib>
+
 #ifndef DEBUG
 	#define DEBUG false
 #endif
@@ -10,11 +12,26 @@
 /* show help (shortcuts in buttons) */
 #define DEBUG_SHOW_HELP	DEBUG & true  // always false in normal mode
 
-#define CONFIG_DIR				"configs/"
-#define SETTINGS_FILE			CONFIG_DIR"settings.json"
-#define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
-#define SAVE_DIR				"saves/"
 
+/**
+ *  /!\ The config dirs and files have to be called with `homeDir` to have the
+ *  correct path because home path is used.
+ *  ex: homeDir+CONFIG_DIR or homeDir+SETTINGS_FILE
+ */
+#ifdef __APPLE__
+	#define CONFIG_DIR				"/Library/Application Support/bomberman/configs/"
+#elif
+	#define CONFIG_DIR				"configs/"
+#endif
+#define SETTINGS_FILE			CONFIG_DIR"settings.json"
+#define CONTROLS_FILE			CONFIG_DIR"controls.json"
+#define USERDATA_FILE			CONFIG_DIR"userData.json"
+#define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
+#ifdef __APPLE__
+	#define SAVE_DIR				"/Library/Application Support/bomberman/saves/"
+#elif
+	#define CONFIG_DIR				"saves/"
+#endif
 #define RESTART_TO_UPDATE_RESOLUTION	true  // restart game to reset resolution
 
 #define PLAYER_SIZE			glm::vec3(1.3, 1.3, 1.3)
@@ -28,6 +45,11 @@
 #include "Logging.hpp"
 #include "useGlm.hpp"
 
+#ifdef __APPLE__
+	static const std::string	homeDir = getenv("HOME");
+#elif
+	static const std::string	homeDir = "";
+#endif
 void						initLogs();
 bool						checkPrgm();
 bool						initSettings(std::string const & filename);

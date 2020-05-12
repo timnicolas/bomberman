@@ -97,8 +97,8 @@ SceneCheatCode::SceneCheatCode(SceneCheatCode const & src)
 
 SceneCheatCode::~SceneCheatCode() {
 	/* save history */
-	file::rm(CHEATCODE_HIST_FILE);
-	std::ofstream	file(CHEATCODE_HIST_FILE);
+	file::rm(homeDir+CHEATCODE_HIST_FILE);
+	std::ofstream	file(homeDir+CHEATCODE_HIST_FILE);
 
 	if (file.is_open()) {
 		for (auto && line : _cmdHistory) {
@@ -126,7 +126,7 @@ SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
  */
 bool SceneCheatCode::init() {
 	/* load history */
-	std::ifstream	file(CHEATCODE_HIST_FILE);
+	std::ifstream	file(homeDir+CHEATCODE_HIST_FILE);
 	std::string		line;
 
 	if (file.is_open()) {
