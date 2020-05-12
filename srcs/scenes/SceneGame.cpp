@@ -143,7 +143,6 @@ std::string		SceneGame::print() const {
  * init game method.
  */
 bool			SceneGame::init() {
-	_gui->enableCursor(false);
 	int32_t i = 0;
 	while (_initJsonLevel(i)) {
 		if (i >= 100000) {  // max level
