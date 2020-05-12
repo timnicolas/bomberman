@@ -1,5 +1,6 @@
 #include "Inputs.hpp"
 #include "Logging.hpp"
+#include "bomberman.hpp"
 
 const std::string	Inputs::input_type_name[] = {
 	"up",
@@ -27,7 +28,7 @@ const SDL_Scancode	Inputs::default_keys[] = {
 	DEFAULT_HELP,
 	DEFAULT_CHEATCODE,
 };
-const std::string	Inputs::configFile = "configs/controls.json";
+const std::string	Inputs::configFile = homeDir+CONTROLS_FILE;
 
 Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	_left_click(false), _right_click(false),

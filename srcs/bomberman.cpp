@@ -43,8 +43,8 @@ bool	checkPrgm() {
 		s.s("mapsPath"),
 		s.s("imgsUI"),
 		s.s("loadingImgs"),
-		CONFIG_DIR,
-		SAVE_DIR,
+		homeDir+CONFIG_DIR,
+		homeDir+SAVE_DIR,
 	};
 
 	/* list of required files */
@@ -79,7 +79,7 @@ bool	checkPrgm() {
 bool	initSettings(std::string const & filename) {
 	s.name("settings").description("main settings");
 
-	s.add<std::string>("userDataFilename", "configs/userData.json").disableInFile(true);
+	s.add<std::string>("userDataFilename", homeDir+USERDATA_FILE).disableInFile(true);
 
 	s.add<SettingsJson>("screen");
 		s.j("screen").add<uint64_t>("fps", 60).setMin(30).setMax(120).setDescription("framerate");
@@ -311,21 +311,21 @@ bool	argparse(int nbArgs, char const ** args) {
 	}
 	if (reset_settings) {
 		logInfo("reset all user settings...");
-		file::rm(SETTINGS_FILE);
+		file::rm(homeDir+SETTINGS_FILE);
 		file::rm(Inputs::configFile);
 	}
 	if (reset_history) {
 		logInfo("reset history...");
-		file::rm(CHEATCODE_HIST_FILE);
+		file::rm(homeDir+CHEATCODE_HIST_FILE);
 	}
 	if (reset_save) {
 		logInfo("reset all saves...");
-		file::rm(SAVE_DIR);
+		file::rm(homeDir+SAVE_DIR);
 	}
 	if (reset_all) {
 		logInfo("reset saves, settings, and history...");
-		file::rm(SAVE_DIR);
-		file::rm(CONFIG_DIR);
+		file::rm(homeDir+SAVE_DIR);
+		file::rm(homeDir+CONFIG_DIR);
 	}
 	return true;
 }

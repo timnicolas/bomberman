@@ -115,7 +115,7 @@ bool					SceneSettings::init() {
 			_gui->gameInfo.savedWindowSize.x = s.j("graphics").i("width");
 			_gui->gameInfo.savedWindowSize.y = s.j("graphics").i("height");
 			logInfo("save new resolution " << s.j("graphics").i("width") << "x" << s.j("graphics").i("height"));
-			saveSettings(SETTINGS_FILE);
+			saveSettings(homeDir+SETTINGS_FILE);
 			return false;
 		}
 	}
@@ -564,7 +564,7 @@ void					SceneSettings::_updateAudioVolume(int audio_index) {
  */
 void					SceneSettings::_saveAudioVolume(int audio_index) {
 	_save_audio[audio_index] = false;
-	saveSettings(SETTINGS_FILE);
+	saveSettings(homeDir+SETTINGS_FILE);
 }
 
 /**
@@ -573,7 +573,7 @@ void					SceneSettings::_saveAudioVolume(int audio_index) {
 void					SceneSettings::_updateMouseSensitivity() {
 	_save_mouse_sens = false;
 	s.d("mouse_sensitivity") = _update_mouse_sens;
-	saveSettings(SETTINGS_FILE);
+	saveSettings(homeDir+SETTINGS_FILE);
 }
 
 /**
@@ -587,7 +587,7 @@ void					SceneSettings::_updateFullscreen() {
 		_gui->gameInfo.isSavedFullscreen = _fullscreen;
 	#else
 		s.j("graphics").b("fullscreen") = _fullscreen;
-		saveSettings(SETTINGS_FILE);
+		saveSettings(homeDir+SETTINGS_FILE);
 		_gui->updateFullscreen();
 	#endif
 }
@@ -627,7 +627,7 @@ void					SceneSettings::_updateResolution(bool go_right) {
 	#else
 		s.j("graphics").i("width") = _current_resolution.width;
 		s.j("graphics").i("height") = _current_resolution.height;
-		saveSettings(SETTINGS_FILE);
+		saveSettings(homeDir+SETTINGS_FILE);
 		_text_scale = static_cast<float>(_current_resolution.width) * 0.001;
 		_gui->udpateDimension();
 	#endif

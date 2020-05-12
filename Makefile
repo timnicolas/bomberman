@@ -544,9 +544,16 @@ install:
 	@$(MAKE) $(MAKE_OPT) init
 
 uninstall:
-	@printf $(YELLOW)$(BOLD)"INSTALL $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf $(YELLOW)$(BOLD)"DELETE $(PROJECT_NAME) FILES\n--------------------\n"$(NORMAL)
+ifeq ($(UNAME_S),Linux)
+	@printf $(RED)"-> nothing to do in this section for linux.\n"$(NORMAL)
+endif
+ifeq ($(UNAME_S),Darwin)
 	@printf $(RED)"-x remove /Application/$(NAME).app\n"$(NORMAL)
 	@rm -rf /Application/$(NAME).app
+	@printf $(RED)"-x remove settings and saves of the app on $(HOME)/Library/Application\ Support/bomberman\n"$(NORMAL)
+	@rm -rf $(HOME)/Library/Application\ Support/bomberman
+endif
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
 install_linter:

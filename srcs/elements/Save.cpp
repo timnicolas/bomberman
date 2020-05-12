@@ -140,7 +140,7 @@ std::string	Save::getFilename(bool temporary) {
 	return get()._getFilename(temporary);
 }
 std::string	Save::_getFilename(bool temporary) const {
-	return SAVE_DIR + timestampToFileName(_time) + (temporary ? "_temp" : "") + ".save";
+	return homeDir+SAVE_DIR + timestampToFileName(_time) + (temporary ? "_temp" : "") + ".save";
 }
 
 bool		Save::isInstantiate() {
@@ -160,7 +160,7 @@ bool		Save::isSaved() {
  * @return std::string regex
  */
 std::string		Save::getFileNameRegex(bool temporary) {
-	std::string regex = "^(" + Save::_addRegexSlashes(SAVE_DIR) + "|)";
+	std::string regex = "^(" + Save::_addRegexSlashes(homeDir+SAVE_DIR) + "|)";
 	regex += "((\\d{4})-(\\d{2})-(\\d{2})_(\\d{2})-(\\d{2})-(\\d{2}))";
 	if (temporary)
 		regex += "(_temp)?";
