@@ -11,6 +11,8 @@ class Crispy : public AObject {
 private:
 	Crispy();
 
+	void	_updateAnimationState();
+
 public:
 	// Constructors
 	explicit Crispy(SceneGame &game);
@@ -24,6 +26,7 @@ public:
 	bool	update();
 	bool	postUpdate();
 	bool	draw(Gui &gui);
+	bool	init();
 
 	static Crispy *	generateCrispy(SceneGame &game, uint32_t genWallPercent);
 

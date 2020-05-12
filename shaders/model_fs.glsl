@@ -69,6 +69,16 @@ vec3 calcDirLight(DirLight light, vec3 norm, vec3 viewDir) {
 }
 
 void main() {
+	// retrieve alpha
+	float alpha = 1.0f;
+	if (material.diffuse.isTexture) {
+		alpha = texture(material.diffuse.texture, fs_in.TexCoords).a;
+	}
+	// skip pixel if to transparent
+	if (alpha < 0.01)
+		discard;
+
+	// retrieve normal
 	vec3	norm = normalize(fs_in.TangentNormal);
 	if (material.normalMap.isTexture) {
 		// obtain normal from normal map in range [0,1]
@@ -81,12 +91,6 @@ void main() {
 
 	// Directional lighting
 	vec3	result = calcDirLight(dirLight, norm, viewDir);
-
-	// use texture alpha
-	float alpha = 1.0f;
-	if (material.diffuse.isTexture) {
-		alpha = texture(material.diffuse.texture, fs_in.TexCoords).a;
-	}
 
 	fragColor = vec4(result, alpha);
 

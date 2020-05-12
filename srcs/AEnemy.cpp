@@ -64,7 +64,7 @@ bool	AEnemy::update() {
 	glm::vec3 tmpPos = position;
 	tmpPos.x += (movingSize.x - size.x) / 2;
 	tmpPos.z += (movingSize.z - size.z) / 2;
-	if (strength != 0 && game.player->active && game.player->alive &&
+	if (alive && strength != 0 && game.player->active && game.player->alive &&
 		game.player->invulnerable <= 0.0f &&
 		game.player->hasCollision(tmpPos, size) &&
 		_entityState.state != EntityState::ATTACK)
