@@ -44,28 +44,30 @@ EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
  * @return false if failure
  */
 bool	EnemyFollow::_update() {
-	if (_isBlocked())  // do nothing if blocked
-		return true;
-	// try to find a path to the player
-	// after 1sec, 1 chance over 10 to relaunch path calculation
-	if ((getMs() - _lastFindMs).count() > 1000 && (!_findPlayer || rand() % 100 < 10)) {
-		_lastFindMs = getMs();
-		_findPlayer = _getPathTo(game.player->getIntPos(), _path);
-	}
-	glm::vec3 lastPos = position;
-	if (_path.size() == 0) {
-		// arrived to destination
-		_findPlayer = false;
-	}
-	else if (_followPath(_path) == false) {
-		// blocked by a wall
-		_findPlayer = false;
-		_path.clear();
-	}
+	if (alive) {
+		if (_isBlocked())  // do nothing if blocked
+			return true;
+		// try to find a path to the player
+		// after 1sec, 1 chance over 10 to relaunch path calculation
+		if ((getMs() - _lastFindMs).count() > 1000 && (!_findPlayer || rand() % 100 < 10)) {
+			_lastFindMs = getMs();
+			_findPlayer = _getPathTo(game.player->getIntPos(), _path);
+		}
+		glm::vec3 lastPos = position;
+		if (_path.size() == 0) {
+			// arrived to destination
+			_findPlayer = false;
+		}
+		else if (_followPath(_path) == false) {
+			// blocked by a wall
+			_findPlayer = false;
+			_path.clear();
+		}
 
-	if (lastPos == position) {
-		// if the enemy doesn't move
-		_baseEnemyMove(_dir);
+		if (lastPos == position) {
+			// if the enemy doesn't move
+			_baseEnemyMove(_dir);
+		}
 	}
 
 	return true;

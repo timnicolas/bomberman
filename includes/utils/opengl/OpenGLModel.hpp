@@ -65,6 +65,7 @@ class OpenGLModel {
 		std::vector<std::string>	getAnimationNames() const;
 		uint32_t	getNbAnimations() const;
 		Camera const	&getCam() const;
+		std::string	getPath() const;
 
 		// Exceptions
 		class ModelException : public std::runtime_error {

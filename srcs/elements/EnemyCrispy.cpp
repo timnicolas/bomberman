@@ -50,44 +50,76 @@ EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {
  * @return false if failure
  */
 bool	EnemyCrispy::_update() {
-	if (_isBlocked())  // do nothing if blocked
-		return true;
+	bool	wasWall = _isWall;
 
-	/* retransform to a wall */
-	if (getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL &&
-		_isOn(getIntPos(), game.getDtTime() * speed * 3))
-	{
-		position.x = getIntPos().x;
-		position.z = getIntPos().y;
-		_isWall = true;
-	}
+	if (alive && _entityState.state != EntityState::ATTACK) {
+		// do nothing if blocked
+		if (_isBlocked()) {
+			_isWall = true;
 
-	/* try to find player */
-	Direction::Enum viewPlayerDir = _isPlayerVisible();
-	if (viewPlayerDir != Direction::NO_DIRECTION) {
-		_playerDir = viewPlayerDir;
-		_dir = viewPlayerDir;
-		_isWall = false;
-		_lastPayerSeenMs = getMs().count();
-	}
+			// update state on first stop
+			if (_entityState.state != EntityState::IDLE &&
+				_entityState.state != EntityState::TRANSFORM_OUT)
+			{
+				setState(EntityState::TRANSFORM_OUT);
+			}
+			return true;
+		}
 
-	/* if we cannot see the player, but still close, EnemyCrispy is active */
-	if (_isWall) {
-		if (_isPlayerClose(1)) {
+		/* retransform to a wall */
+		if (!_isWall && getMs().count() - _lastPayerSeenMs > TIME_BEFORE_TRANSFORM_TO_WALL &&
+			_isOn(getIntPos(), game.getDtTime() * speed * 3))
+		{
+			position.x = getIntPos().x;
+			position.z = getIntPos().y;
+			_isWall = true;
+
+			if (_entityState.state != EntityState::IDLE &&
+				_entityState.state != EntityState::TRANSFORM_OUT)
+			{
+				setState(EntityState::TRANSFORM_OUT);
+			}
+		}
+
+		/* try to find player */
+		Direction::Enum viewPlayerDir = _isPlayerVisible();
+		if (viewPlayerDir != Direction::NO_DIRECTION) {
+			_playerDir = viewPlayerDir;
+			_dir = viewPlayerDir;
 			_isWall = false;
 			_lastPayerSeenMs = getMs().count();
-			_playerDir = Direction::NO_DIRECTION;
+		}
+
+		/* if we cannot see the player, but still close, EnemyCrispy is active */
+		if (_isWall) {
+			if (_isPlayerClose(1)) {
+				_isWall = false;
+				_lastPayerSeenMs = getMs().count();
+				_playerDir = Direction::NO_DIRECTION;
+			}
+		}
+
+		/* transform wall to monster */
+		if (wasWall && !_isWall && _entityState.state != EntityState::TRANSFORM_IN &&
+			_entityState.state != EntityState::RUNNING) {
+			setState(EntityState::TRANSFORM_IN);
+		}
+
+		/* move */
+		if (!_isWall && _entityState.state == EntityState::RUNNING) {
+			glm::vec3 tmpPos = position;
+			if (tmpPos == _moveTo(_playerDir)) {
+				_playerDir = Direction::NO_DIRECTION;
+				_baseEnemyMove(_dir);
+			}
 		}
 	}
 
-	/* move */
-	if (!_isWall) {
-		glm::vec3 tmpPos = position;
-		if (tmpPos == _moveTo(_playerDir)) {
-			_playerDir = Direction::NO_DIRECTION;
-			_baseEnemyMove(_dir);
-		}
-	}
+	// update animation on state change
+	_updateAnimationState();
+	// update model pos/rot
+	_updateModel();
+
 	return true;
 }
 
@@ -108,10 +140,128 @@ bool	EnemyCrispy::_postUpdate() {
  * @return false if failure
  */
 bool	EnemyCrispy::_draw(Gui &gui) {
-	if (_isWall)
-		gui.drawCube(Block::DESTRUCTIBLE_WALL, getPos());
-	else
-		gui.drawCube(Block::IA, getPos(), size);
+	(void)gui;
+	// if (_isWall)
+	// 	gui.drawCube(Block::DESTRUCTIBLE_WALL, getPos());
+	// else
+	// 	gui.drawCube(Block::IA, getPos(), size);
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * @brief update model position and rotation
+ *
+ */
+void	EnemyCrispy::_updateModel() {
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
+
+	// set model orientationdebug
+	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+	_model->transform.setRot(angle);
+}
+
+/**
+ * @brief update animation on state change
+ *
+ */
+void	EnemyCrispy::_updateAnimationState() {
+	if (_entityState.updated) {
+		_entityState.updated = false;
+		switch (_entityState.state) {
+			case EntityState::IDLE:
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|idle", &AEntity::animEndCb, this);
+				break;
+			case EntityState::DYING:
+				_model->animationSpeed = .5;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|death", &AEntity::animEndCb, this);
+				break;
+			case EntityState::RUNNING:
+				_model->animationSpeed = 1.2;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|run", &AEntity::animEndCb, this);
+				break;
+			case EntityState::ATTACK:
+				_model->animationSpeed = 1.3;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|attack", &AEntity::animEndCb, this);
+				break;
+			case EntityState::TRANSFORM_IN:
+				_model->animationSpeed = 2;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|transform_in", &AEntity::animEndCb, this);
+				break;
+			case EntityState::TRANSFORM_OUT:
+				_model->animationSpeed = 2;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|transform_out", &AEntity::animEndCb, this);
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+/**
+ * @brief called on animation end if passed to Model
+ *
+ * @param animName the current animation name
+ */
+void	EnemyCrispy::animEndCb(std::string animName) {
+	if (animName == "Armature|death") {
+		_animDeathEnd = true;
+	}
+	else if (animName == "Armature|transform_in" ||
+		animName == "Armature|attack")
+	{
+		setState(EntityState::RUNNING);
+	}
+	else if (animName == "Armature|transform_out") {
+		setState(EntityState::IDLE);
+	}
+}
+
+/**
+ * @brief Init EnemyCrispy
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	EnemyCrispy::init() {
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		OpenGLModel	&openglModel = ModelsManager::getModel("crispyEnemy");
+		_model = new Model(openglModel, game.getDtTime(), ETransform({0, 0, 0},
+			ENEMY_CRISPY_SIZE));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle");
+		_updateModel();
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -132,4 +282,14 @@ bool	EnemyCrispy::_isPlayerClose(int distance) {
 		}
 	}
 	return false;
+}
+
+/**
+ * @brief reset rotation and center pos for the win/loose animation
+ */
+void	EnemyCrispy::setIdlePos() {
+	position.x = getIntPos().x;
+	position.z = getIntPos().y;
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
+	_model->transform.setRot(0);
 }

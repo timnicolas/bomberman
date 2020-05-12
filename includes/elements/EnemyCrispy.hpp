@@ -27,6 +27,8 @@ protected:
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 	bool			_isPlayerClose(int distance);
+	void			_updateModel();
+	void			_updateAnimationState();
 
 public:
 	// Constructors
@@ -36,4 +38,9 @@ public:
 
 	// Operators
 	EnemyCrispy &operator=(EnemyCrispy const &rhs);
+
+	// Methods
+	virtual bool	init();
+	virtual void	animEndCb(std::string animName);
+	void			setIdlePos();
 };
