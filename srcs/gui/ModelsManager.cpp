@@ -76,6 +76,9 @@ bool	ModelsManager::_init(Camera const &cam) {
 			_models["crispyEnemy"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"crispyEnemy/crispyEnemy.fbx");
 
+			_models["follow"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"follow/export.fbx");
+
 			_models["terrain"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"terrain/terrain.fbx");
 		}
