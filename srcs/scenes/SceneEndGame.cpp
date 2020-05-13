@@ -6,6 +6,7 @@ SceneEndGame::SceneEndGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
 	_draw3dMenu = false;
+	AudioManager::loadMusic("sounds/the_offspring-the_kids_arent_alright.ogg");
 }
 
 SceneEndGame::SceneEndGame(SceneEndGame const & src)
@@ -92,7 +93,6 @@ bool			SceneEndGame::init() {
  */
 void SceneEndGame::load() {
 	ASceneMenu::load();
-	AudioManager::loadMusic("sounds/the_offspring-the_kids_arent_alright.ogg");
 	AudioManager::playMusic("sounds/the_offspring-the_kids_arent_alright.ogg", 0.3f, true);
 }
 
