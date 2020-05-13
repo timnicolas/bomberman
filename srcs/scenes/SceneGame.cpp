@@ -118,6 +118,7 @@ SceneGame::~SceneGame() {
 	delete _menuModels.fly;
 	delete _menuModels.frog;
 	delete _menuModels.crispy;
+	delete _menuModels.follow;
 	delete _terrain;
 }
 
@@ -222,6 +223,13 @@ bool			SceneGame::init() {
 		_menuModels.crispy->animationSpeed = 1.6;
 		_menuModels.crispy->loopAnimation = true;
 		_menuModels.crispy->setAnimation("Armature|run");
+
+		_menuModels.follow = new Model(ModelsManager::getModel("follow"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_FOLLOW_SIZE));
+		_menuModels.follow->play = true;
+		_menuModels.follow->animationSpeed = 1.4;
+		_menuModels.follow->loopAnimation = true;
+		_menuModels.follow->setAnimation("Armature|idle");
 
 		// init terrain model
 		if (!_terrain) {
@@ -739,6 +747,13 @@ bool	SceneGame::drawEndGame() {
 		if (_menuModels.crispy->getCurrentAnimationName() != "Armature|run")
 			_menuModels.crispy->setAnimation("Armature|run");
 		_menuModels.crispy->draw();
+
+		tmpX -= 1.3;
+		_menuModels.follow->transform.setPos({tmpX, -1, -2});
+		_menuModels.follow->transform.setRot(glm::radians(90.0));
+		if (_menuModels.follow->getCurrentAnimationName() != "Armature|run")
+			_menuModels.follow->setAnimation("Armature|run");
+		_menuModels.follow->draw();
 
 		tmpX -= 1.3;
 		_menuModels.fly->transform.setPos({tmpX, .2, -2});
@@ -1785,4 +1800,8 @@ SceneGame::DrawForMenu::DrawForMenu() {
 	player = nullptr;
 	flower = nullptr;
 	robot = nullptr;
+	fly = nullptr;
+	frog = nullptr;
+	crispy = nullptr;
+	follow = nullptr;
 }
