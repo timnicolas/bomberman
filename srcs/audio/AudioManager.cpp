@@ -106,16 +106,21 @@ void						AudioManager::_updateSettings() {
  *
  * @throw A MusicException if the music failed to be loaded. The path might be incorrect.
  */
-void						AudioManager::loadMusic(std::string file_name) {
+void						AudioManager::loadMusic(std::string file_name, bool silent) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		inst._loadMusic(file_name);
+		inst._loadMusic(file_name, silent);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_loadMusic(std::string file_name) {
+void						AudioManager::_loadMusic(std::string file_name, bool silent) {
+	if (_musics.find(file_name) != _musics.end()) {
+		if (!silent)
+			logWarn("Music " << file_name << " already loaded");
+		return;
+	}
 	_musics[file_name] = new Music(AudioManager::_assets_path + file_name);
 }
 
@@ -236,16 +241,21 @@ void						AudioManager::_unloadMusic(std::string music_name) {
  *
  * @throw A SoundException if the sound failed to be loaded. The path might be incorrect.
  */
-void						AudioManager::loadSound(std::string file_name) {
+void						AudioManager::loadSound(std::string file_name, bool silent) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		AudioManager::get()._loadSound(file_name);
+		AudioManager::get()._loadSound(file_name, silent);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
 	}
 }
-void						AudioManager::_loadSound(std::string file_name) {
+void						AudioManager::_loadSound(std::string file_name, bool silent) {
+	if (_sounds.find(file_name) != _sounds.end()) {
+		if (!silent)
+			logWarn("Sound " << file_name << " already loaded");
+		return;
+	}
 	_sounds[file_name] = new Sound(AudioManager::_assets_path + file_name);
 }
 
