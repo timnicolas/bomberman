@@ -66,6 +66,7 @@ private:
 		Model * fly;
 		Model * frog;
 		Model * crispy;
+		Model * follow;
 
 		DrawForMenu();
 	};
