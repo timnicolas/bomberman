@@ -70,7 +70,7 @@ import_sub_lib()
     done
 }
 
-cp ~/.brew/lib/libIrrXML.dylib $CONT/Frameworks
+cp $(brew --prefix)/lib/libIrrXML.dylib $CONT/Frameworks
 declare -a arr1=("sdl2/lib/libSDL2" "sdl2_mixer/lib/libSDL2_mixer" "assimp/lib/libassimp" "freetype/lib/libfreetype" "boost/lib/libboost_filesystem")
 import_lib "$CONT/bomberman" ${arr1[@]}
 
