@@ -20,7 +20,7 @@
  */
 #ifdef __APPLE__
 	#define CONFIG_DIR				"/Library/Application Support/bomberman/configs/"
-#elif
+#else
 	#define CONFIG_DIR				"configs/"
 #endif
 #define SETTINGS_FILE			CONFIG_DIR"settings.json"
@@ -29,8 +29,8 @@
 #define CHEATCODE_HIST_FILE		CONFIG_DIR"history.cheatcode"
 #ifdef __APPLE__
 	#define SAVE_DIR				"/Library/Application Support/bomberman/saves/"
-#elif
-	#define CONFIG_DIR				"saves/"
+#else
+	#define SAVE_DIR				"saves/"
 #endif
 #define RESTART_TO_UPDATE_RESOLUTION	true  // restart game to reset resolution
 
@@ -48,7 +48,7 @@
 
 #ifdef __APPLE__
 	static const std::string	homeDir = getenv("HOME");
-#elif
+#else
 	static const std::string	homeDir = "";
 #endif
 void						initLogs();
