@@ -54,6 +54,7 @@ void SceneLoadGame::load() {
 
 	for (auto &&gameSaved : _gamesSaved) {
 		delete gameSaved->game;
+		delete gameSaved;
 	}
 	_gamesSaved.clear();
 
