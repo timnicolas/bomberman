@@ -32,10 +32,10 @@
 #define SHADER_IMAGE_2D_ROW_SIZE 4
 #define VOID_SIZE glm::vec2 {-1, -1}
 
-/**
- * @brief this is the text alignment (LEFT RIGHT or CENTER)
- */
 namespace TextAlign {
+	/**
+	 * @brief this is the text alignment (LEFT RIGHT or CENTER)
+	 */
 	enum Enum {
 		LEFT,
 		CENTER,
