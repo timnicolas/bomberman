@@ -344,6 +344,8 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	sudo apt-get -y install libsdl2-dev;
 	# sdl2_mixer
 	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
+	# for docs
+	sudo apt-get -y install doxygen
 	# assimp 5.0.1
 	#   download assimp
 	sudo apt-get install -y wget tar cmake zlib1g-dev;
@@ -376,6 +378,8 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install freetype2
 	# icon for .app file
 	brew install fileicon
+	# for docs
+	brew install doxygen
 fi
 
 exit 0
