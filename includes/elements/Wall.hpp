@@ -34,6 +34,11 @@ public:
 	class WallException : public std::runtime_error {
 	public:
 		WallException();
+		/**
+		 * @brief Construct a new Wall Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit WallException(const char* whatArg);
 	};
 };
