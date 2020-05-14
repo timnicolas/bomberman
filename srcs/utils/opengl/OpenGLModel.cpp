@@ -291,7 +291,12 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 
 	// create the mesh
 	Mesh	*mesh = new Mesh(*this, *_sh, aiMesh->mName.C_Str(), vertices, vertIndices,
-		textures, mat, boundingBox);
+		mat, boundingBox);
+
+	// set mesh textures
+	for (Texture const &tex : textures) {
+		mesh->setTexture(tex);
+	}
 
 	// process mesh bones
 	_processBones(aiMesh, *mesh);
