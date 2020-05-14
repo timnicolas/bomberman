@@ -56,12 +56,6 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
 
 // -- setTexture ---------------------------------------------------------------------
 /**
- * @brief Set the Texture object, the type is retrieve from texture.type
- *
- * @param texture the new texture value
- */
-
-/**
  * @brief set Mesh texture
  *
  * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...

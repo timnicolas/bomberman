@@ -292,7 +292,7 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	// load material
 	Material	mat = _loadMaterial(material);
 
-	/* create uniq Mesh name */
+	/* create uniques Meshes name */
 	std::string	baseName = std::string(aiMesh->mName.C_Str()) + "::" + mat.name;
 	std::string meshName = baseName;
 	// if the name already exist prepend a number
@@ -605,7 +605,7 @@ bool	OpenGLModel::getAnimationId(std::string const name, uint32_t &outId) const 
 void	OpenGLModel::setMeshTexture(TextureType::Enum type, std::string const meshName,
 	std::string const path, bool inSpaceSRGB)
 {
-	loadTexture(type, path, inSpaceSRGB);
+	_loadTexture(type, path, inSpaceSRGB);
 
 	// load only if the texture was not previously loaded
 	auto	it = _texturesLoaded.find(path);
@@ -880,7 +880,7 @@ std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum anim
 	return std::make_pair(lastI, lastI);
 }
 
-// -- loadTexture --------------------------------------------------------------
+// -- _loadTexture --------------------------------------------------------------
 /**
  * @brief load new texture manually
  *
@@ -888,7 +888,7 @@ std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum anim
  * @param path
  * @param inSpaceSRGB
  */
-void	OpenGLModel::loadTexture(TextureType::Enum type, std::string const path,
+void	OpenGLModel::_loadTexture(TextureType::Enum type, std::string const path,
 	bool inSpaceSRGB)
 {
 	// load only if the texture was not previously loaded
