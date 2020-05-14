@@ -68,7 +68,7 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
  * @param texture Texture object
  */
 void	Mesh::setTexture(TextureType::Enum type, Texture const texture) {
-	_textures.insert({type, texture});
+	_textures[type] = texture;
 }
 
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <unordered_map>
 #include <stdexcept>
 #include "AObject.hpp"
 #include "SceneGame.hpp"
@@ -35,12 +36,15 @@ private:
 	static std::map<BonusType::Enum, Block::Enum>	_textures;
 	int					_toDraw;
 	float				_indestructible;
+
 	// Methods
 	BonusType::Enum		_pickBonus();
 
 public:
 	static std::unordered_map<std::string, BonusType::Enum>	bonus;
-	static std::map<BonusType::Enum, std::string>			description;
+	static std::unordered_map<BonusType::Enum, std::string>	description;
+	static std::unordered_map<BonusType::Enum, std::string>	bonusTextures;
+
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();
@@ -50,6 +54,7 @@ public:
 	Bonus &operator=(Bonus const &rhs);
 
 	// Methods
+	bool				init();
 	bool				update();
 	bool				postUpdate();
 	bool				draw(Gui &gui);
