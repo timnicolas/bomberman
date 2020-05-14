@@ -34,7 +34,7 @@ int start(int ac, char const **av) {
 	return EXIT_SUCCESS;
 }
 
-int main(int ac, char const **av) {
+int bomberman(int ac, char const ** av) {
 	/* init program & load settings */
 	int ret = start(ac, av);
 	if (ret != EXIT_SUCCESS) {
@@ -53,5 +53,10 @@ int main(int ac, char const **av) {
 
 	/* save before quit */
 	saveSettings(homeDir+SETTINGS_FILE);
+	return ret;
+}
+
+int main(int ac, char const ** av) {
+	int ret = bomberman(ac, av);
 	return ret;
 }

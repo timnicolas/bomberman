@@ -140,7 +140,7 @@ bool	Player::update() {
 		return true;
 
 	_updateBonusActifsTime();
-	if (alive && _entityState.state != EntityState::DROP_BOMB) {
+	if (alive && _entityState.state != EntityState::DROP_BOMB && _entityState.state != EntityState::VICTORY_EMOTE) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();

@@ -28,6 +28,9 @@ protected:
 	virtual bool	_postUpdate();
 	virtual bool	_draw(Gui &gui);
 
+	void			_updateModel();
+	void			_updateAnimationState();
+
 public:
 	// Constructors
 	explicit EnemyFollow(SceneGame &game);
@@ -36,4 +39,7 @@ public:
 
 	// Operators
 	EnemyFollow &operator=(EnemyFollow const &rhs);
+
+	// Methods
+	virtual bool	init();
 };

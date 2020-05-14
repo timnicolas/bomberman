@@ -71,41 +71,11 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 }
 
 SceneGame::~SceneGame() {
-	for (auto &&box : board) {
-		for (auto &&row : box) {
-			std::vector<AEntity *>::iterator element = row.begin();
-			AEntity *entity;
-			while (element != row.end()) {
-				entity = *element;
-				row.erase(element);
-				delete entity;
-				element = row.begin();
-			}
-		}
-	}
-	board.clear();
-	for (auto &&box : boardFly) {
-		for (auto &&row : box) {
-			std::vector<AEntity *>::iterator element = row.begin();
-			while (element != row.end()) {
-				row.erase(element);
-				element = row.begin();
-			}
-		}
-	}
-	boardFly.clear();
+	_unloadLevel();  // delete all elements of current level if needed
+
 	if (player != nullptr) {
 		delete player;
 	}
-	std::vector<AEnemy *>::iterator it = enemies.begin();
-	AEnemy *enemy;
-	while (it != enemies.end()) {
-		enemy = *it;
-		enemies.erase(it);
-		delete enemy;
-		it = enemies.begin();
-	}
-	enemies.clear();
 
 	for (auto it = _mapsList.begin(); it != _mapsList.end(); it++) {
 		delete *it;
@@ -118,6 +88,7 @@ SceneGame::~SceneGame() {
 	delete _menuModels.fly;
 	delete _menuModels.frog;
 	delete _menuModels.crispy;
+	delete _menuModels.follow;
 	delete _terrain;
 }
 
@@ -172,7 +143,6 @@ std::string		SceneGame::print() const {
  * init game method.
  */
 bool			SceneGame::init() {
-	_gui->enableCursor(false);
 	int32_t i = 0;
 	while (_initJsonLevel(i)) {
 		if (i >= 100000) {  // max level
@@ -222,6 +192,13 @@ bool			SceneGame::init() {
 		_menuModels.crispy->animationSpeed = 1.6;
 		_menuModels.crispy->loopAnimation = true;
 		_menuModels.crispy->setAnimation("Armature|run");
+
+		_menuModels.follow = new Model(ModelsManager::getModel("follow"), getDtTime(),
+			ETransform({0, 0, 0}, ENEMY_FOLLOW_SIZE));
+		_menuModels.follow->play = true;
+		_menuModels.follow->animationSpeed = 1.4;
+		_menuModels.follow->loopAnimation = true;
+		_menuModels.follow->setAnimation("Armature|idle");
 
 		// init terrain model
 		if (!_terrain) {
@@ -370,9 +347,12 @@ bool	SceneGame::update() {
 				logErr(e.what());
 			}
 
+			player->setState(EntityState::VICTORY_EMOTE);
+			player->update();
+
 			// start win camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
-			_gui->cam->setFollowPath(_getGameOverAnim());
+			_gui->cam->setFollowPath(_getVictoryAnim());
 		}
 
 		// load victory menu on camera anim end
@@ -736,6 +716,13 @@ bool	SceneGame::drawEndGame() {
 		_menuModels.crispy->draw();
 
 		tmpX -= 1.3;
+		_menuModels.follow->transform.setPos({tmpX, -1, -2});
+		_menuModels.follow->transform.setRot(glm::radians(90.0));
+		if (_menuModels.follow->getCurrentAnimationName() != "Armature|run")
+			_menuModels.follow->setAnimation("Armature|run");
+		_menuModels.follow->draw();
+
+		tmpX -= 1.3;
 		_menuModels.fly->transform.setPos({tmpX, .2, -2});
 		_menuModels.fly->transform.setRot(glm::radians(90.0));
 		if (_menuModels.fly->getCurrentAnimationName() != "Armature|run")
@@ -800,7 +787,11 @@ bool SceneGame::loadLevel(int32_t levelId) {
 	// reinit printed values
 	_loadGameInfos();
 
-	_gui->cam->pos = {size.x / 2, 25.0f, size.y * 1.3};
+	_gui->cam->pos = {
+		size.x / 2,
+		12.0f + (size.x > size.y ? size.x : size.y) * 0.6,
+		size.y * 1.3
+	};
 	_gui->cam->lookAt(glm::vec3(
 		size.x / 2, 1.0f,
 		size.y / 1.9
@@ -975,8 +966,13 @@ bool	SceneGame::_unloadLevel() {
 	board.clear();
 	for (auto &&box : boardFly) {
 		for (auto &&row : box) {
-			for (auto &&element : row) {
-				delete element;
+			std::vector<AEntity *>::iterator element = row.begin();
+			AEntity *entity;
+			while (element != row.end()) {
+				entity = *element;
+				row.erase(element);
+				delete entity;
+				element = row.begin();
 			}
 		}
 	}
@@ -1780,4 +1776,8 @@ SceneGame::DrawForMenu::DrawForMenu() {
 	player = nullptr;
 	flower = nullptr;
 	robot = nullptr;
+	fly = nullptr;
+	frog = nullptr;
+	crispy = nullptr;
+	follow = nullptr;
 }
