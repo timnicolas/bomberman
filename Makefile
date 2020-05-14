@@ -684,7 +684,7 @@ check:
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
 doc:
-	@doxygen scripts/Doxyfile
+	@./scripts/updateGithubPages.sh
 
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
@@ -702,6 +702,7 @@ help:
 	@printf $(NORMAL)"-> make "$(BOLD)"exec"$(NORMAL)": make lint, make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"exec-nolint"$(NORMAL)": make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"check"$(NORMAL)": make fclean, make lint, make exec-nolint -> stop if there is an error\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"doc"$(NORMAL)": generate the doc on gh-pages branch\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"help | usage"$(NORMAL)": show the help\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"... DEBUG=1"$(NORMAL)": use debug mode\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"... ARGS='...'"$(NORMAL)": add arguments to exec: ./$(NAME) ARGS (for make exec & exec-nolint)\n"
