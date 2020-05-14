@@ -30,6 +30,8 @@ class Model {
 			AEntity *animEndCbClass = nullptr);
 		void	setAnimProgress(float progress);
 		void	setAnimCurrentTime(float animTime);
+		void	setMeshTexture(TextureType::Enum type, std::string const meshName,
+			std::string const path, bool inSpaceSRGB = true);
 
 		float	getAnimCurrentTime() const;
 		float	getAnimProgress() const;

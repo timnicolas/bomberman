@@ -60,8 +60,15 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
  *
  * @param texture the new texture value
  */
-void	Mesh::setTexture(Texture const texture) {
-	_textures.insert({texture.type, texture});
+
+/**
+ * @brief set Mesh texture
+ *
+ * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...
+ * @param texture Texture object
+ */
+void	Mesh::setTexture(TextureType::Enum type, Texture const texture) {
+	_textures.insert({type, texture});
 }
 
 

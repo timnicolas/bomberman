@@ -13,7 +13,7 @@ std::unique_ptr<Shader> OpenGLModel::_sh = nullptr;
 /**
  * @brief Construct a new OpenGLModel object
  *
- * @param _cam camera ref to access to view and projection
+ * @param cam camera ref to access to view and projection
  * @param path the 3d model file path
  * @param offset an optional offset to shift the model manually
  * @param centerEnabled option to center the model based on the min/max vertices, not recommended
@@ -23,6 +23,8 @@ OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 o
 	bool centerEnabled, bool scaleEnabled)
 : _cam(cam),
   _path(path),
+  _meshes({}),
+  _texturesLoaded({}),
   _centerEnabled(centerEnabled),
   _scaleEnabled(scaleEnabled),
   _offset(offset)
@@ -61,14 +63,16 @@ OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 o
 
 OpenGLModel::~OpenGLModel() {
 	// free meshes
-	for (Mesh *mesh : _meshes) {
-		delete(mesh);
+	for (auto &it : _meshes) {
+		delete(it.second);
 	}
 }
 
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
 : _cam(src._cam),
-  _path(src._path) {
+  _path(src._path),
+  _meshes({}),
+  _texturesLoaded({}) {
 	*this = src;
 }
 
@@ -78,7 +82,6 @@ OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 	#endif
 
 	if (this != &rhs) {
-		_meshes = std::vector<Mesh *>();
 		_scene = nullptr;
 		_texturesLoaded = rhs._texturesLoaded;
 		_pathDir = rhs._pathDir;
@@ -280,7 +283,7 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 		_loadMaterialTextures(textures, scene, material, aiTextureType_NORMALS,
 			TextureType::NORMAL);
 	}
-	catch (ModelException const &e) {
+	catch (TextureException const &e) {
 		#if DEBUG
 			logWarn("failed to load texture: " << e.what())
 		#endif
@@ -289,13 +292,23 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	// load material
 	Material	mat = _loadMaterial(material);
 
+	/* create uniq Mesh name */
+	std::string	baseName = std::string(aiMesh->mName.C_Str()) + "::" + mat.name;
+	std::string meshName = baseName;
+	// if the name already exist prepend a number
+	auto	it = _texturesLoaded.find(meshName);
+	for (uint16_t i = 0; it != _texturesLoaded.end(); ++i) {
+		meshName = baseName + std::to_string(i);
+		it = _texturesLoaded.find(meshName);
+	}
+
 	// create the mesh
-	Mesh	*mesh = new Mesh(*this, *_sh, aiMesh->mName.C_Str(), vertices, vertIndices,
+	Mesh	*mesh = new Mesh(*this, *_sh, meshName, vertices, vertIndices,
 		mat, boundingBox);
 
 	// set mesh textures
 	for (Texture const &tex : textures) {
-		mesh->setTexture(tex);
+		mesh->setTexture(tex.type, tex);
 	}
 
 	// process mesh bones
@@ -305,7 +318,7 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 	mesh->sendMesh();
 
 	// save the mesh
-	_meshes.push_back(mesh);
+	_meshes.insert({meshName, mesh});
 }
 
 // -- _loadMaterialTextures ----------------------------------------------------
@@ -323,11 +336,12 @@ void	OpenGLModel::_loadMaterialTextures(std::vector<Texture> &textures,
 	location = texLocation.C_Str();
 
 	// if the texture was previously loaded, return
-	for (uint32_t j = 0; j < _texturesLoaded.size(); ++j) {
-		if (location == _texturesLoaded[j].path) {
-			textures.push_back(_texturesLoaded[j]);
-			return;
-		}
+	auto	it = _texturesLoaded.find(location);
+	if (it != _texturesLoaded.end()) {
+		texture = it->second;
+		texture.type = textType;
+		textures.push_back(texture);
+		return;
 	}
 
 	// load texture
@@ -346,8 +360,9 @@ void	OpenGLModel::_loadMaterialTextures(std::vector<Texture> &textures,
 		texture.type = textType;
 		texture.path = location;
 		textures.push_back(texture);
-		// save to _texturesLoaded array to skip duplicate textures loading later
-		_texturesLoaded.push_back(texture);
+
+		// save to _texturesLoaded to skip duplicate textures loading later
+		_texturesLoaded.insert({texture.path, texture});
 	}
 }
 
@@ -516,7 +531,7 @@ void	OpenGLModel::draw(float animationTimeTick) {
 
 	// draw all meshs
 	for (auto &mesh : _meshes) {
-		mesh->draw(_model);
+		mesh.second->draw(_model);
 	}
 
 	glBindVertexArray(0);
@@ -577,6 +592,44 @@ bool	OpenGLModel::getAnimationId(std::string const name, uint32_t &outId) const 
 
 	logWarn("animation name \"" << name << "\" not found");
 	return false;
+}
+
+/**
+ * @brief manually set the texture of a specified mesh
+ *
+ * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...
+ * @param meshName the name of the desired mesh, find it with printMeshesNames
+ * @param path the texture path
+ * @param inSpaceSRGB is the texture in srgb space ?
+ */
+void	OpenGLModel::setMeshTexture(TextureType::Enum type, std::string const meshName,
+	std::string const path, bool inSpaceSRGB)
+{
+	loadTexture(type, path, inSpaceSRGB);
+
+	// load only if the texture was not previously loaded
+	auto	it = _texturesLoaded.find(path);
+	if (it != _texturesLoaded.end()) {
+		// it->second
+
+		auto	meshIt = _meshes.find(meshName);
+		if (it != _texturesLoaded.end()) {
+			meshIt->second->setTexture(type, it->second);
+			return;
+		}
+
+		logWarn("[setMeshTexture] meshName: \"" << meshName << "\" not found");
+	}
+}
+
+/**
+ * @brief print all meshes names
+ *
+ */
+void	OpenGLModel::printMeshesNames() {
+	for (auto &it : _meshes) {
+		logInfo('"' << it.first << '"');
+	}
 }
 
 // -- getters ------------------------------------------------------------------
@@ -826,6 +879,38 @@ std::pair<uint32_t, uint32_t>	OpenGLModel::_findAnimIndex(AnimKeyType::Enum anim
 	uint32_t	lastI = nbAnimKeys - 1;
 	return std::make_pair(lastI, lastI);
 }
+
+// -- loadTexture --------------------------------------------------------------
+/**
+ * @brief load new texture manually
+ *
+ * @param type
+ * @param path
+ * @param inSpaceSRGB
+ */
+void	OpenGLModel::loadTexture(TextureType::Enum type, std::string const path,
+	bool inSpaceSRGB)
+{
+	// load only if the texture was not previously loaded
+	auto	it = _texturesLoaded.find(path);
+	if (it == _texturesLoaded.end()) {
+		Texture	texture;
+
+		try {
+			texture.id = textureFromFile(path, inSpaceSRGB);
+		}
+		catch (TextureException const &e) {
+			#if DEBUG
+				logWarn("failed to load texture: " << e.what())
+			#endif
+		}
+		texture.type = type;
+		texture.path = path;
+
+		_texturesLoaded.insert({path, texture});
+	}
+}
+
 
 // -- Exceptions errors --------------------------------------------------------
 OpenGLModel::ModelException::ModelException()

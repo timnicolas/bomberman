@@ -60,7 +60,7 @@ class	Mesh {
 		Mesh(Mesh const &src);
 		Mesh &operator=(Mesh const &rhs);
 
-		void	setTexture(Texture const texture);
+		void	setTexture(TextureType::Enum type, Texture const texture);
 		void	draw(glm::mat4 const &model) const;
 		void	addBoneData(uint32_t boneID, float weight, uint32_t VerticeID);
 		void	sendMesh();
