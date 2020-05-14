@@ -275,6 +275,8 @@ bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
  */
 bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
 	bool ok = false;
+	if (!entity->alive)
+		return true;
 	for (auto && crossable : crossableTypes) {
 		if (entity->type == Type::ALL || crossable == Type::ALL || entity->type == crossable) {
 			ok = true;
