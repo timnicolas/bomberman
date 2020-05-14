@@ -5,23 +5,23 @@
 #include "json.hpp"
 #include "Logging.hpp"
 
-/**
- * @brief options list to print SettingsJson object
- *
- * Options:
- *  - NO_OPT -> default value (just print the json)
- *  - DISCARD_DISABLED -> dont print values disard in file (used to print the variable in a file)
- *  - VERBOSE -> verbose mode: print description, min, max, ...
- *  - COLOR -> enable color to print
- */
 namespace JsonOpt {
+	/**
+	 * @brief options list to print SettingsJson object
+	 *
+	 * Options:
+	 *  - NO_OPT -> default value (just print the json)
+	 *  - DISCARD_DISABLED -> dont print values disard in file (used to print the variable in a file)
+	 *  - VERBOSE -> verbose mode: print description, min, max, ...
+	 *  - COLOR -> enable color to print
+	 */
 	enum Enum {
 		NO_OPT = 0,
 		DISCARD_DISABLED = 1,
 		VERBOSE = 2,
 		COLOR = 4,
 	};
-}
+}  // namespace JsonOpt
 
 /**
  * @brief object to save an element in SettingsJson (dont use this)

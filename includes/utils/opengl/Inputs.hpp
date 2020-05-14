@@ -25,10 +25,10 @@
 #define DEFAULT_HELP		SDL_SCANCODE_F1
 #define DEFAULT_CHEATCODE	SDL_SCANCODE_SLASH
 
-/**
- * @brief this is the list of all user-defined inputs
- */
 namespace InputType {
+	/**
+	 * @brief this is the list of all user-defined inputs
+	 */
 	enum Enum {
 		NO_KEY = -1,
 		UP = 0,
