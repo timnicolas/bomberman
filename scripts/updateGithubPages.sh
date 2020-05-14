@@ -28,8 +28,8 @@ git clone -b gh-pages $GIT_REPO_URL $TMP_DIR
 doxygen $DOXYFILE
 cp scripts/index.html $TMP_DIR
 
-git --git-dir $TMP_DIR/.git add -A
-git --git-dir $TMP_DIR/.git commit -m "update docs" --no-verify
-git --git-dir $TMP_DIR/.git push origin gh-pages -f
+git -C $TMP_DIR add -A
+git -C $TMP_DIR commit -m "update docs" --no-verify
+git -C $TMP_DIR push origin gh-pages -f
 
 rm -rf $TMP_DIR
