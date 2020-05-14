@@ -345,7 +345,7 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	# sdl2_mixer
 	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
 	# for docs
-	sudo apt-get -y install doxygen
+	sudo apt-get -y install doxygen graphviz
 	# assimp 5.0.1
 	#   download assimp
 	sudo apt-get install -y wget tar cmake zlib1g-dev;
@@ -380,6 +380,7 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install fileicon
 	# for docs
 	brew install doxygen
+	brew install graphviz
 fi
 
 exit 0
@@ -682,6 +683,9 @@ check:
 	@$(MAKE) $(MAKE_OPT) lint NEED_MAKE=$(NEED_MAKE)
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
+doc:
+	@doxygen scripts/doxygen.config
+
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
 	@printf $(NORMAL)"-> make "$(BOLD)"configure"$(NORMAL)": install all, compile & create the .dmg file in ~/Downloads\n"
@@ -706,4 +710,4 @@ help:
 
 usage: help
 
-.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage
+.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage doc
