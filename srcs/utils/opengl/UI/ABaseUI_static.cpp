@@ -152,9 +152,9 @@ void ABaseUI::destroy() {
 		return;
 	}
 	_isInit = false;
-	/* rect */
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	/* rect */
 	glDeleteVertexArrays(1, &_rectVao);
 	glDeleteBuffers(1, &_rectVbo);
 	delete _rectShader;

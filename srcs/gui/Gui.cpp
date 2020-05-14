@@ -193,9 +193,6 @@ bool	Gui::_initOpengl() {
 		}
 	}
 
-	// disable cursor for fps camera
-	enableCursor(false);
-
 	// create opengl context
 	_context = SDL_GL_CreateContext(_win);
 	if (_context == 0) {
