@@ -51,14 +51,14 @@ public:
 	static bool								isEnabled();
 	static void								updateSettings();
 
-	static void								loadMusic(std::string file_name);
+	static void								loadMusic(std::string file_name, bool silent = true);
 	static void								playMusic(std::string music_name, float volume = 1.0, bool loop = false);
 	static void								pauseMusic();
 	static void								resumeMusic();
 	static void								stopMusic();
 	static void								unloadMusic(std::string music_name);
 
-	static void								loadSound(std::string file_name);
+	static void								loadSound(std::string file_name, bool silent = true);
 	static void								playSound(std::string sound_name, float volume = 1.0,
 											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	static void								pauseSound(std::string sound_name);
@@ -78,14 +78,14 @@ private:
 
 	void									_updateSettings();
 
-	void									_loadMusic(std::string file_name);
+	void									_loadMusic(std::string file_name, bool silent = true);
 	void									_playMusic(std::string music_name, float volume = 1.0, bool loop = false);
 	void									_pauseMusic();
 	void									_resumeMusic();
 	void									_stopMusic();
 	void									_unloadMusic(std::string music_name);
 
-	void									_loadSound(std::string file_name);
+	void									_loadSound(std::string file_name, bool silent = true);
 	void									_playSound(std::string sound_name, float volume = 1.0,
 											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	void									_pauseSound(std::string sound_name);
