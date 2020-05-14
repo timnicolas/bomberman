@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# to reset
+# git branch -D gh-pages && git push -d origin gh-pages
+
 if [ -z "`git rev-parse --verify gh-pages`" ]; then
 	branch="`git rev-parse --abbrev-ref HEAD`"
 	git checkout --orphan gh-pages
