@@ -114,7 +114,7 @@ class OpenGLModel {
 			float animationTimeTick, aiNodeAnim const *nodeAnim);
 
 		// -- utils ------------------------------------------------------------
-		void	loadTexture(TextureType::Enum type, std::string const path,
+		void	_loadTexture(TextureType::Enum type, std::string const path,
 			bool inSpaceSRGB);
 
 		// -- members ----------------------------------------------------------
