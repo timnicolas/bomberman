@@ -351,6 +351,12 @@ Material	OpenGLModel::_loadMaterial(aiMaterial *aiMat) {
 	Material	mat;
 	aiColor3D	color(0.f, 0.f, 0.f);
 	float		shininess;
+	aiString	matName;
+
+	// name
+	if (aiMat->Get(AI_MATKEY_NAME, matName) == AI_SUCCESS) {
+		mat.name = matName.C_Str();
+	}
 
 	// diffuse
 	if (aiMat->Get(AI_MATKEY_COLOR_DIFFUSE, color) == AI_SUCCESS) {
