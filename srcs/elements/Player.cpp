@@ -403,7 +403,6 @@ bool	Player::rmBonus(BonusType::Enum bonus) {
 			break;
 		case BonusType::POINTS:
 			game.score -= 1500;
-
 			break;
 		default:
 			break;

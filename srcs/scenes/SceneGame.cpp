@@ -335,12 +335,7 @@ bool	SceneGame::update() {
 				}
 			}
 			score.addBonusTime(levelTime, time);
-			uint32_t remainEnemies = 0;
-			for (auto && it : enemies) {
-				if (it->alive)
-					remainEnemies++;
-			}
-			score.addBonusEnemies(levelEnemies, remainEnemies, levelCrispies, crispiesLast);
+			score.addBonusEnemies(levelEnemies, levelEnemies - enemiesKilled, levelCrispies, crispiesLast);
 			Save::updateSavedFile(*this, true);
 			Save::save(true);
 

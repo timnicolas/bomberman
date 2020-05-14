@@ -23,10 +23,10 @@ int start(int ac, char const **av) {
 	if (argparse(ac - 1, av + 1) == false)  // parse arguments
 		return EXIT_FAILURE;
 
-	file::mkdir(CONFIG_DIR);  // create config folder
-	initSettings(SETTINGS_FILE);  // create settings object
+	file::mkdir(homeDir+CONFIG_DIR);  // create config folder
+	initSettings(homeDir+SETTINGS_FILE);  // create settings object
 
-	file::mkdir(SAVE_DIR);
+	file::mkdir(homeDir+SAVE_DIR);
 
 	if (!checkPrgm())  // check validity
 		return EXIT_FAILURE;
@@ -52,7 +52,7 @@ int bomberman(int ac, char const ** av) {
 	}
 
 	/* save before quit */
-	saveSettings(SETTINGS_FILE);
+	saveSettings(homeDir+SETTINGS_FILE);
 	return ret;
 }
 
