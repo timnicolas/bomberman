@@ -684,7 +684,7 @@ check:
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
 doc:
-	@doxygen scripts/doxygen.config
+	@doxygen scripts/Doxyfile
 
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
