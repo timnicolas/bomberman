@@ -349,7 +349,7 @@ bool	Gui::_protect_resolution() {
 	if (resolution_corrected) {
 		gameInfo.windowSize.x = width;
 		gameInfo.windowSize.y = height;
-		s.saveToFile("configs/settings.json");
+		s.saveToFile(homeDir+SETTINGS_FILE);
 	}
 	return true;
 }

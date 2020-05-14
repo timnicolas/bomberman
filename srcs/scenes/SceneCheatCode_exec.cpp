@@ -574,7 +574,7 @@ int SceneCheatCode::_execVolume(std::vector<std::string> const & args) {
 					return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
 				}
 				audioJson.d(args[1]) = val / 100;
-				saveSettings(SETTINGS_FILE);
+				saveSettings(homeDir+SETTINGS_FILE);
 				AudioManager::updateSettings();
 				SceneSettings & scSettings = *reinterpret_cast<SceneSettings *>(SceneManager::getScene(SceneNames::SETTINGS));
 				scSettings.updateAudioSliders();

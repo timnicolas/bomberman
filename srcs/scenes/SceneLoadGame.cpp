@@ -93,8 +93,8 @@ void SceneLoadGame::load() {
 			&addScrollbar(savedGamesPos, savedGamesSize).enableVertScroll(true).setEnabled(true)
 		);
 
-		// - Get files in SAVE_DIR by last write time order
-		boost::filesystem::path saveDir(SAVE_DIR);
+		// - Get files in homeDir+SAVE_DIR by last write time order
+		boost::filesystem::path saveDir(homeDir+SAVE_DIR);
 		std::multimap<std::time_t, boost::filesystem::path> result_set;
 		if (boost::filesystem::exists(saveDir) && boost::filesystem::is_directory(saveDir)) {
 			boost::filesystem::directory_iterator end_iter;
@@ -105,7 +105,7 @@ void SceneLoadGame::load() {
 				}
 			}
 		} else {
-			logErr("Cannot open '" << SAVE_DIR << "'");
+			logErr("Cannot open '" << homeDir+SAVE_DIR << "'");
 		}
 
 		// - Add buttons to corrects files to Saved Games

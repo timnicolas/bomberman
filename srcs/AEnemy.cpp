@@ -27,8 +27,6 @@ AEnemy::~AEnemy() {
 	if (find != game.enemies.end()) {
 		game.enemies.erase(find);
 	}
-	if (game.state == GameState::PLAY)
-		game.score += points;
 }
 
 AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
@@ -145,6 +143,8 @@ bool	AEnemy::takeDamage(const int damage) {
 	if (result) {
 		if (wasAlive && !alive) {
 			game.enemiesKilled += 1;
+			game.score += points;
+			game.player->bonusActifs.score = 3.0f;
 		}
 	}
 
