@@ -58,7 +58,11 @@ class OpenGLModel {
 		void		draw(float animationTimeTick = 0.0f);
 		bool		setAnimation(uint32_t id);
 		void		setModel(glm::mat4 const model);
+		void		setMeshTexture(TextureType::Enum type, std::string const meshName,
+			std::string const path, bool inSpaceSRGB = true);
+		void		printMeshesNames();
 
+		// getters
 		bool		getAnimationId(std::string const name, uint32_t &outId) const;
 		aiAnimation	*getAiAnimation(uint32_t id) const;
 		bool		isAnimated() const;
@@ -109,20 +113,25 @@ class OpenGLModel {
 		std::pair<uint32_t, uint32_t>	_findAnimIndex(AnimKeyType::Enum animType,
 			float animationTimeTick, aiNodeAnim const *nodeAnim);
 
+		// -- utils ------------------------------------------------------------
+		void	loadTexture(TextureType::Enum type, std::string const path,
+			bool inSpaceSRGB);
+
 		// -- members ----------------------------------------------------------
 		static std::unique_ptr<Shader>	_sh;
 
 		Camera const		&_cam;
 		std::string const	_path;  // model file path
-		std::vector<Mesh *>	_meshes;  // all model meshes
+		std::unordered_map<std::string, Mesh *>	_meshes;  // all model meshes
 
 		// assimp utility
 		aiScene const		*_scene;
 		Assimp::Importer	_importer;
 
 		// textures
-		std::vector<Texture>	_texturesLoaded;  // keep track of loaded textures
-		std::string				_pathDir;
+		// to keep track of loaded textures
+		std::unordered_map<std::string, Texture>	_texturesLoaded;
+		std::string	_pathDir;
 
 		// model position
 		glm::mat4	_model;  // position in real world

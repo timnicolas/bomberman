@@ -175,6 +175,19 @@ void	Model::setAnimCurrentTime(float animTime) {
 	}
 }
 
+/**
+ * @brief manually set the texture of a specified mesh
+ *
+ * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...
+ * @param meshName the name of the desired mesh, find it with printMeshesNames
+ * @param path the texture path
+ * @param inSpaceSRGB is the texture in srgb space ?
+ */
+void	Model::setMeshTexture(TextureType::Enum type, std::string const meshName,
+	std::string const path, bool inSpaceSRGB) {
+	_openGLModel.setMeshTexture(type, meshName, path, inSpaceSRGB);
+}
+
 // -- getters ------------------------------------------------------------------
 /**
  * @brief get the curent animation time in ms
