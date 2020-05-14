@@ -613,7 +613,7 @@ void	OpenGLModel::setMeshTexture(TextureType::Enum type, std::string const meshN
 		// it->second
 
 		auto	meshIt = _meshes.find(meshName);
-		if (it != _texturesLoaded.end()) {
+		if (meshIt != _meshes.end()) {
 			meshIt->second->setTexture(type, it->second);
 			return;
 		}

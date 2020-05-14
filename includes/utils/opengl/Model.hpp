@@ -49,6 +49,13 @@ class Model {
 		void	_updateAnimationTime();
 		void	_updateTicksPerSecond();
 
+		struct	MeshTexture {
+			TextureType::Enum	type;
+			std::string			meshName;
+			std::string			path;
+			bool				inSpaceSRGB;
+		};
+
 		OpenGLModel &_openGLModel;
 		float const	&_dtTime;
 		uint32_t	_animationId;
@@ -58,6 +65,7 @@ class Model {
 		float		_animationTimeTick;
 		AnimEndCb	_animEndCbFunc;  // cb function called on animation end
 		AEntity		*_animEndCbClass;  // cb class called on animation end
+		std::vector<Model::MeshTexture>	_meshTextures;  // store manually modified mesh textures
 };
 
 #endif  // MODEL_HPP_
