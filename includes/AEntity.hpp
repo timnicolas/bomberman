@@ -12,12 +12,20 @@ class Model;
 class SceneGame;
 
 namespace Category {
+	/**
+	 * @brief This is the entity category.
+	 *
+	 * Entity can be static (wall, bonus, ...) or mobile (enemy, player, ...)
+	 */
 	enum Enum {
 		STATIC,
 		MOBILE,
 	};
-}
+}  // namespace Category
 namespace Type {
+	/**
+	 * @brief Entity type
+	 */
 	enum Enum {
 		PLAYER,
 		ENEMY,
@@ -35,6 +43,9 @@ namespace Type {
 }  // namespace Type
 
 namespace EntityState {
+	/**
+	 * @brief Entity state (used for animation: AEntity::setState)
+	 */
 	enum Enum {
 		IDLE,
 		DYING,
@@ -47,9 +58,12 @@ namespace EntityState {
 		TRANSFORM_OUT,
 	};
 
+	/**
+	 * @brief Used to save the state and a bool to know if the state has been updated
+	 */
 	struct	Struct {
-		EntityState::Enum	state;
-		bool				updated;
+		EntityState::Enum	state;  /**< The entity state */
+		bool				updated;  /**< True if the state was updated */
 	};
 }  // namespace EntityState
 
@@ -61,23 +75,23 @@ private:
 	AEntity();
 
 protected:
-	float				_timeToDie;
-	EntityState::Struct	_entityState;
-	Model				*_model;
-	bool				_animDeathEnd;
-	glm::vec3			size;
+	float				_timeToDie;  /**< The time to die (animation) */
+	EntityState::Struct	_entityState;  /**< The entity state (current animation: run, idle, ...) */
+	Model				*_model;  /**< The 3D model of the entity */
+	bool				_animDeathEnd;  /**< True if the entity has a death animation */
+	glm::vec3			size;  /**< The entity size */
 
 public:
 	// Members
-	bool			active;
-	bool			alive;
-	Category::Enum	category;
-	std::string		name;
-	Type::Enum		type;
-	SceneGame		&game;
-	bool			destructible;
-	bool			blockPropagation;
-	glm::vec3		position;
+	bool			active;  /**< True if the entity is active */
+	bool			alive;  /**< True if the entity is alive */
+	Category::Enum	category;  /**< The entity category (Category::STATIC | Category::MOBILE) */
+	std::string		name;  /**< The entity name */
+	Type::Enum		type;  /**< The entity type */
+	SceneGame		&game;  /**< A reference to the main scene for game */
+	bool			destructible;  /**< True if the entity is destructible (by bombs) */
+	bool			blockPropagation;  /**< Used in bombs for explosion propagation */
+	glm::vec3		position;  /**< The entity position */
 
 	// Constructors
 	explicit AEntity(SceneGame &game);

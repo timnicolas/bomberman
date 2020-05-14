@@ -13,7 +13,7 @@ private:
 	AObject();
 
 protected:
-	std::string		_soundOfDeath;
+	std::string		_soundOfDeath;  /**< The sound whent an enemy die */
 
 public:
 	// Constructors
@@ -34,7 +34,7 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	virtual bool	init();
 
-	bool			isInFlyBoard;
+	bool			isInFlyBoard;  /**< True if the entity fly */
 
 	// Exceptions
 	class AObjectException : public std::runtime_error {
