@@ -1,0 +1,12 @@
+<map id="AObject" name="AObject">
+<area shape="rect" id="node1" title="This is the base class for objects (Bomb, wall, ...)" alt="" coords="519,468,643,721"/>
+<area shape="rect" id="node3" href="$class_bomb.html" title="This is the bomb object." alt="" coords="5,769,135,979"/>
+<area shape="rect" id="node4" href="$class_bonus.html" title=" " alt="" coords="159,769,288,979"/>
+<area shape="rect" id="node5" href="$class_crispy.html" title=" " alt="" coords="313,777,443,971"/>
+<area shape="rect" id="node6" href="$class_end.html" title="This is the end object." alt="" coords="468,799,565,949"/>
+<area shape="rect" id="node7" href="$class_fire.html" title=" " alt="" coords="590,791,699,957"/>
+<area shape="rect" id="node8" href="$class_flag.html" title="This is the flag object." alt="" coords="723,791,833,957"/>
+<area shape="rect" id="node9" href="$class_spawner.html" title=" " alt="" coords="857,769,989,979"/>
+<area shape="rect" id="node10" href="$class_wall.html" title="This is the wall object." alt="" coords="1013,799,1111,949"/>
+<area shape="rect" id="node2" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="513,5,648,420"/>
+</map>

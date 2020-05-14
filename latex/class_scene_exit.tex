@@ -1,0 +1,150 @@
+\hypertarget{class_scene_exit}{}\doxysection{Scene\+Exit Class Reference}
+\label{class_scene_exit}\index{SceneExit@{SceneExit}}
+
+
+menu for exit  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Exit.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Exit\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_exit__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Exit\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_exit__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}}
+\item 
+struct \mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}\label{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}} 
+{\bfseries Scene\+Exit} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}\label{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}} 
+{\bfseries Scene\+Exit} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}\label{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}} 
+\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_exit_ad9168291bb031fee797a7964590e1b73}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_exit_af57945630bc2f2e45cb02db9b4db8140}\label{class_scene_exit_af57945630bc2f2e45cb02db9b4db8140}} 
+virtual void \mbox{\hyperlink{class_scene_exit_af57945630bc2f2e45cb02db9b4db8140}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_exit_a89d28a5876087e291453421545a3c5dc}\label{class_scene_exit_a89d28a5876087e291453421545a3c5dc}} 
+virtual void \mbox{\hyperlink{class_scene_exit_a89d28a5876087e291453421545a3c5dc}{unload}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is unloaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}\label{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}} 
+\mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}\label{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}} 
+\mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\item 
+\mbox{\Hypertarget{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}\label{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}} 
+std\+::string {\bfseries \+\_\+last\+Scene\+Name}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_exit_a60b6f29cad934e85e526ddd6fb997bd8}\label{class_scene_exit_a60b6f29cad934e85e526ddd6fb997bd8}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+menu for exit 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}\label{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}} 
+\index{SceneExit@{SceneExit}!draw@{draw}}
+\index{draw@{draw}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Scene\+Exit\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the draw function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the draw is a success 
+
+false if there are an error in draw 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a5c11f34c83f025e1181219bf25ce4694}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_exit_ad9168291bb031fee797a7964590e1b73}\label{class_scene_exit_ad9168291bb031fee797a7964590e1b73}} 
+\index{SceneExit@{SceneExit}!init@{init}}
+\index{init@{init}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Exit\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}\label{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}} 
+\index{SceneExit@{SceneExit}!update@{update}}
+\index{update@{update}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Exit\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Exit.\+hpp\item 
+srcs/scenes/Scene\+Exit.\+cpp\end{DoxyCompactItemize}

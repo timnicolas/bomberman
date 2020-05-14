@@ -1,0 +1,178 @@
+\hypertarget{class_scene_level_selection}{}\doxysection{Scene\+Level\+Selection Class Reference}
+\label{class_scene_level_selection}\index{SceneLevelSelection@{SceneLevelSelection}}
+
+
+menu for the level selection  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Level\+Selection.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Level\+Selection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_level_selection__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Level\+Selection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_level_selection__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_level_selection_1_1_all_u_i}{All\+UI}}
+\item 
+struct \mbox{\hyperlink{struct_scene_level_selection_1_1_buttons_states}{Buttons\+States}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_ae855a833994439a9f780a0da59dbd3f2}\label{class_scene_level_selection_ae855a833994439a9f780a0da59dbd3f2}} 
+{\bfseries Scene\+Level\+Selection} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_a209ae1ee5432204a65842783208498e3}\label{class_scene_level_selection_a209ae1ee5432204a65842783208498e3}} 
+{\bfseries Scene\+Level\+Selection} (\mbox{\hyperlink{class_scene_level_selection}{Scene\+Level\+Selection}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_aca281d3eb620da5c05951fa128d5aa9f}\label{class_scene_level_selection_aca281d3eb620da5c05951fa128d5aa9f}} 
+\mbox{\hyperlink{class_scene_level_selection}{Scene\+Level\+Selection}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_level_selection}{Scene\+Level\+Selection}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_level_selection_af16ace96ecc0c2bd2cee904de5f5733a}\label{class_scene_level_selection_af16ace96ecc0c2bd2cee904de5f5733a}} 
+virtual void \mbox{\hyperlink{class_scene_level_selection_af16ace96ecc0c2bd2cee904de5f5733a}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_level_selection_afbaae9b76f321067588bee9a63f89d3c}{set\+Level}} (int32\+\_\+t level, bool enable\+Transition=true)
+\begin{DoxyCompactList}\small\item\em set the current level in selection \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{class_scene_level_selection_a2ac8c1a5ac511ec2a048fd794f20f84b}{get\+Cur\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Get the current level ID. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{class_scene_level_selection_aedb8f99f461300aeadd7044c009f53e8}{get\+Nb\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Get the total number of levels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_a3e07eec156666992e39f5c5bef3bcd2a}\label{class_scene_level_selection_a3e07eec156666992e39f5c5bef3bcd2a}} 
+\mbox{\hyperlink{struct_scene_level_selection_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_a99db89c89f3cafb2161cfe5c38ed9fa3}\label{class_scene_level_selection_a99db89c89f3cafb2161cfe5c38ed9fa3}} 
+\mbox{\hyperlink{struct_scene_level_selection_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_afa1ff9c9029dd3226dbdc17c46b88081}\label{class_scene_level_selection_afa1ff9c9029dd3226dbdc17c46b88081}} 
+int32\+\_\+t {\bfseries \+\_\+current\+Lvl}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_a8933e75587039a89a300a7e68296db2d}\label{class_scene_level_selection_a8933e75587039a89a300a7e68296db2d}} 
+float {\bfseries \+\_\+transition}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_level_selection_a4817e31f0d4cbaf945e92bd076756c7e}\label{class_scene_level_selection_a4817e31f0d4cbaf945e92bd076756c7e}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_level_selection}{Scene\+Level\+Selection}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+menu for the level selection 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_level_selection_a2ac8c1a5ac511ec2a048fd794f20f84b}\label{class_scene_level_selection_a2ac8c1a5ac511ec2a048fd794f20f84b}} 
+\index{SceneLevelSelection@{SceneLevelSelection}!getCurLevel@{getCurLevel}}
+\index{getCurLevel@{getCurLevel}!SceneLevelSelection@{SceneLevelSelection}}
+\doxysubsubsection{\texorpdfstring{getCurLevel()}{getCurLevel()}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Level\+Selection\+::get\+Cur\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current level ID. 
+
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The current level ID 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_level_selection_aedb8f99f461300aeadd7044c009f53e8}\label{class_scene_level_selection_aedb8f99f461300aeadd7044c009f53e8}} 
+\index{SceneLevelSelection@{SceneLevelSelection}!getNbLevel@{getNbLevel}}
+\index{getNbLevel@{getNbLevel}!SceneLevelSelection@{SceneLevelSelection}}
+\doxysubsubsection{\texorpdfstring{getNbLevel()}{getNbLevel()}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Level\+Selection\+::get\+Nb\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the total number of levels. 
+
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t the total number of levels 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}\label{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}} 
+\index{SceneLevelSelection@{SceneLevelSelection}!init@{init}}
+\index{init@{init}!SceneLevelSelection@{SceneLevelSelection}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Level\+Selection\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_level_selection_afbaae9b76f321067588bee9a63f89d3c}\label{class_scene_level_selection_afbaae9b76f321067588bee9a63f89d3c}} 
+\index{SceneLevelSelection@{SceneLevelSelection}!setLevel@{setLevel}}
+\index{setLevel@{setLevel}!SceneLevelSelection@{SceneLevelSelection}}
+\doxysubsubsection{\texorpdfstring{setLevel()}{setLevel()}}
+{\footnotesize\ttfamily void Scene\+Level\+Selection\+::set\+Level (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level,  }\item[{bool}]{enable\+Transition = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+set the current level in selection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & the level ID \\
+\hline
+{\em enable\+Transition} & If true, enable smooth transition btw levels \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}\label{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}} 
+\index{SceneLevelSelection@{SceneLevelSelection}!update@{update}}
+\index{update@{update}!SceneLevelSelection@{SceneLevelSelection}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Level\+Selection\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Level\+Selection.\+hpp\item 
+srcs/scenes/Scene\+Level\+Selection.\+cpp\end{DoxyCompactItemize}

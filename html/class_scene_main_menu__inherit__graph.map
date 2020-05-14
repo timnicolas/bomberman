@@ -1,0 +1,5 @@
+<map id="SceneMainMenu" name="SceneMainMenu">
+<area shape="rect" id="node1" title="main menu (opened at the game startup)" alt="" coords="5,593,152,773"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="15,292,143,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="27,5,130,244"/>
+</map>

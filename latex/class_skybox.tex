@@ -1,0 +1,85 @@
+\hypertarget{class_skybox}{}\doxysection{Skybox Class Reference}
+\label{class_skybox}\index{Skybox@{Skybox}}
+
+
+create a skybox for a project  
+
+
+
+
+{\ttfamily \#include $<$Skybox.\+hpp$>$}
+
+
+
+Collaboration diagram for Skybox\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_skybox__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_skybox_a2e839335759ec65f6bc7b0c4d5d294b2}\label{class_skybox_a2e839335759ec65f6bc7b0c4d5d294b2}} 
+{\bfseries Skybox} (\mbox{\hyperlink{class_skybox}{Skybox}} const \&src)
+\item 
+\mbox{\Hypertarget{class_skybox_abf01cb7deeb5d0cee173b50c43f82161}\label{class_skybox_abf01cb7deeb5d0cee173b50c43f82161}} 
+\mbox{\hyperlink{class_skybox}{Skybox}} \& {\bfseries operator=} (\mbox{\hyperlink{class_skybox}{Skybox}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_skybox_a5ee5403ca72532870de608185481c3ba}{load}} (std\+::vector$<$ std\+::string $>$ \&faces)
+\begin{DoxyCompactList}\small\item\em Load a skybox. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_skybox_a103d5448a82178e8abaa0ab5fad2c07f}{draw}} (float night\+Progress=0)
+\begin{DoxyCompactList}\small\item\em Draw the skybox (call this function in every loop at the end) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_skybox_aeeb4151675a4021c3fdfca1e31d33a76}\label{class_skybox_aeeb4151675a4021c3fdfca1e31d33a76}} 
+\mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} ()
+\item 
+\mbox{\Hypertarget{class_skybox_a1df309652975013036b534a9e9e11bc2}\label{class_skybox_a1df309652975013036b534a9e9e11bc2}} 
+\mbox{\hyperlink{class_shader}{Shader}} const  \& {\bfseries get\+Shader} () const
+\item 
+\mbox{\Hypertarget{class_skybox_a4325d2aaa63fafa4b164fd207b185b12}\label{class_skybox_a4325d2aaa63fafa4b164fd207b185b12}} 
+uint32\+\_\+t {\bfseries get\+Texture\+ID} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+create a skybox for a project 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_skybox_a103d5448a82178e8abaa0ab5fad2c07f}\label{class_skybox_a103d5448a82178e8abaa0ab5fad2c07f}} 
+\index{Skybox@{Skybox}!draw@{draw}}
+\index{draw@{draw}!Skybox@{Skybox}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Skybox\+::draw (\begin{DoxyParamCaption}\item[{float}]{night\+Progress = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Draw the skybox (call this function in every loop at the end) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em night\+Progress} & The progress of the night\+: 0 if no night, 1 for full night \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_skybox_a5ee5403ca72532870de608185481c3ba}\label{class_skybox_a5ee5403ca72532870de608185481c3ba}} 
+\index{Skybox@{Skybox}!load@{load}}
+\index{load@{load}!Skybox@{Skybox}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Skybox\+::load (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ \&}]{faces }\end{DoxyParamCaption})}
+
+
+
+Load a skybox. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em faces} & List off all faces images \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Skybox.\+hpp\item 
+srcs/utils/opengl/Skybox.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,169 @@
+\hypertarget{class_enemy_with_eye}{}\doxysection{Enemy\+With\+Eye Class Reference}
+\label{class_enemy_with_eye}\index{EnemyWithEye@{EnemyWithEye}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+With\+Eye.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+With\+Eye\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_with_eye__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+With\+Eye\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_with_eye__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}\label{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}} 
+{\bfseries Enemy\+With\+Eye} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}\label{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}} 
+{\bfseries Enemy\+With\+Eye} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}\label{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}} 
+\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init enemy\+With\+Eye. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_with_eye_a5fb2f458147954a3654d5f11c22f2102}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_with_eye_a1761a06360e2ae00ab3a79b36c42574c}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} will follow a pattern and go to the player if it can view it 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}\label{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}} 
+\index{EnemyWithEye@{EnemyWithEye}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+With\+Eye\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}\label{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}} 
+\index{EnemyWithEye@{EnemyWithEye}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+With\+Eye\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}\label{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}} 
+\index{EnemyWithEye@{EnemyWithEye}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+With\+Eye\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_with_eye_a1761a06360e2ae00ab3a79b36c42574c}\label{class_enemy_with_eye_a1761a06360e2ae00ab3a79b36c42574c}} 
+\index{EnemyWithEye@{EnemyWithEye}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+With\+Eye\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_with_eye_a5fb2f458147954a3654d5f11c22f2102}\label{class_enemy_with_eye_a5fb2f458147954a3654d5f11c22f2102}} 
+\index{EnemyWithEye@{EnemyWithEye}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+With\+Eye\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}\label{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}} 
+\index{EnemyWithEye@{EnemyWithEye}!init@{init}}
+\index{init@{init}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+With\+Eye\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init enemy\+With\+Eye. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+With\+Eye.\+hpp\item 
+srcs/elements/Enemy\+With\+Eye.\+cpp\end{DoxyCompactItemize}

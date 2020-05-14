@@ -1,0 +1,188 @@
+\hypertarget{namespaceglm}{}\doxysection{glm Namespace Reference}
+\label{namespaceglm}\index{glm@{glm}}
+
+
+to use glm\+::vec as map key and add lerp function to glm  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{namespaceglm_ace58b08d9ba2d0b432012e484bd45339}{operator$<$}} (tvec3$<$ T $>$ const \&lhs, tvec3$<$ T $>$ const \&rhs)
+\begin{DoxyCompactList}\small\item\em Overload operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{namespaceglm_a1dac9453b69f23c1ede2c015709682ce}{operator==}} (tvec3$<$ T $>$ const \&lhs, tvec3$<$ T $>$ const \&rhs)
+\begin{DoxyCompactList}\small\item\em Overload operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{namespaceglm_aaf150b012be57b5af82289ee6976cde6}{operator$<$}} (tvec2$<$ T $>$ const \&lhs, tvec2$<$ T $>$ const \&rhs)
+\begin{DoxyCompactList}\small\item\em Overload operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{namespaceglm_a31c7ccd2daf98c24d28a01cd587a0f35}{operator==}} (tvec2$<$ T $>$ const \&lhs, tvec2$<$ T $>$ const \&rhs)
+\begin{DoxyCompactList}\small\item\em Overload operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\tvec3$<$ T $>$ \mbox{\hyperlink{namespaceglm_a83419436f77956f1d0f81fd54a5a5868}{lerp}} (tvec3$<$ T $>$ start, tvec3$<$ T $>$ end, float factor)
+\begin{DoxyCompactList}\small\item\em Lerp (Linear interpolation) on vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\tvec2$<$ T $>$ \mbox{\hyperlink{namespaceglm_a79e735a5bc6da50814842eea2ff08afa}{lerp}} (tvec2$<$ T $>$ start, tvec2$<$ T $>$ end, float factor)
+\begin{DoxyCompactList}\small\item\em Lerp (Linear interpolation) on vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+to use glm\+::vec as map key and add lerp function to glm 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceglm_a79e735a5bc6da50814842eea2ff08afa}\label{namespaceglm_a79e735a5bc6da50814842eea2ff08afa}} 
+\index{glm@{glm}!lerp@{lerp}}
+\index{lerp@{lerp}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{lerp()}{lerp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+tvec2$<$T$>$ glm\+::lerp (\begin{DoxyParamCaption}\item[{tvec2$<$ T $>$}]{start,  }\item[{tvec2$<$ T $>$}]{end,  }\item[{float}]{factor }\end{DoxyParamCaption})}
+
+
+
+Lerp (Linear interpolation) on vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The vector type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The start vector \\
+\hline
+{\em end} & The end vector \\
+\hline
+{\em factor} & The factor (btw 0 \& 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tvec3$<$\+T$>$ The vector after lerp 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceglm_a83419436f77956f1d0f81fd54a5a5868}\label{namespaceglm_a83419436f77956f1d0f81fd54a5a5868}} 
+\index{glm@{glm}!lerp@{lerp}}
+\index{lerp@{lerp}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{lerp()}{lerp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+tvec3$<$T$>$ glm\+::lerp (\begin{DoxyParamCaption}\item[{tvec3$<$ T $>$}]{start,  }\item[{tvec3$<$ T $>$}]{end,  }\item[{float}]{factor }\end{DoxyParamCaption})}
+
+
+
+Lerp (Linear interpolation) on vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The vector type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The start vector \\
+\hline
+{\em end} & The end vector \\
+\hline
+{\em factor} & The factor (btw 0 \& 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tvec3$<$\+T$>$ The vector after lerp 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceglm_aaf150b012be57b5af82289ee6976cde6}\label{namespaceglm_aaf150b012be57b5af82289ee6976cde6}} 
+\index{glm@{glm}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool glm\+::operator$<$ (\begin{DoxyParamCaption}\item[{tvec2$<$ T $>$ const \&}]{lhs,  }\item[{tvec2$<$ T $>$ const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overload operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Is the glm object type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & Is the left element \\
+\hline
+{\em rhs} & Is the right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If comparison is true 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceglm_ace58b08d9ba2d0b432012e484bd45339}\label{namespaceglm_ace58b08d9ba2d0b432012e484bd45339}} 
+\index{glm@{glm}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool glm\+::operator$<$ (\begin{DoxyParamCaption}\item[{tvec3$<$ T $>$ const \&}]{lhs,  }\item[{tvec3$<$ T $>$ const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overload operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Is the glm object type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & Is the left element \\
+\hline
+{\em rhs} & Is the right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If comparison is true 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceglm_a31c7ccd2daf98c24d28a01cd587a0f35}\label{namespaceglm_a31c7ccd2daf98c24d28a01cd587a0f35}} 
+\index{glm@{glm}!operator==@{operator==}}
+\index{operator==@{operator==}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool glm\+::operator== (\begin{DoxyParamCaption}\item[{tvec2$<$ T $>$ const \&}]{lhs,  }\item[{tvec2$<$ T $>$ const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overload operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Is the glm object type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & Is the left element \\
+\hline
+{\em rhs} & Is the right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If comparison is true 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceglm_a1dac9453b69f23c1ede2c015709682ce}\label{namespaceglm_a1dac9453b69f23c1ede2c015709682ce}} 
+\index{glm@{glm}!operator==@{operator==}}
+\index{operator==@{operator==}!glm@{glm}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool glm\+::operator== (\begin{DoxyParamCaption}\item[{tvec3$<$ T $>$ const \&}]{lhs,  }\item[{tvec3$<$ T $>$ const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overload operator. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Is the glm object type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em lhs} & Is the left element \\
+\hline
+{\em rhs} & Is the right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If comparison is true 
+\end{DoxyReturn}

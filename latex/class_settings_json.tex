@@ -1,0 +1,278 @@
+\hypertarget{class_settings_json}{}\doxysection{Settings\+Json Class Reference}
+\label{class_settings_json}\index{SettingsJson@{SettingsJson}}
+
+
+this is the settings master object  
+
+
+
+
+{\ttfamily \#include $<$Settings\+Json.\+hpp$>$}
+
+
+
+Collaboration diagram for Settings\+Json\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_settings_json__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_settings_json_1_1_settings_exception}{Settings\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_settings_json_a449a6c3026583d1ee209e6086f663996}\label{class_settings_json_a449a6c3026583d1ee209e6086f663996}} 
+{\bfseries Settings\+Json} (\mbox{\hyperlink{class_settings_json}{Settings\+Json}} const \&src)
+\item 
+\mbox{\Hypertarget{class_settings_json_aeacbc8e4b3c2ada35b2303d0ae1bf4b9}\label{class_settings_json_aeacbc8e4b3c2ada35b2303d0ae1bf4b9}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries operator=} (\mbox{\hyperlink{class_settings_json}{Settings\+Json}} const \&rhs)
+\item 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& \mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em set the name of this \mbox{\hyperlink{class_settings_json}{Settings\+Json}} (used in \mbox{\hyperlink{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}{to\+String()}}) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& \mbox{\hyperlink{class_settings_json_aed042d48b268ef368bd1b6b0a9e013fd}{description}} (std\+::string const \&description)
+\begin{DoxyCompactList}\small\item\em set the description of this \mbox{\hyperlink{class_settings_json}{Settings\+Json}} (used in \mbox{\hyperlink{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}{to\+String()}}) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_settings_json_ab57c9f2b4353baf2a7668eed3c45e05c}{load\+File}} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em Load a json file in \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_settings_json_aa2379955d326fae834583000cb323d1a}{load\+Json}} (nlohmann\+::json const \&json, \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \&json\+Obj\+Tmp)
+\begin{DoxyCompactList}\small\item\em load a nlohmann\+::json object in current \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_settings_json_a5def57414c2a77c94452447d23a89f8e}{save\+To\+File}} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_save}{Save}} the current \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object in a file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}{to\+String}} (uint32\+\_\+t opt=Json\+Opt\+::\+N\+O\+\_\+\+O\+PT, uint32\+\_\+t tab\+Offset=0, bool term\+With\+Comma=false) const
+\begin{DoxyCompactList}\small\item\em Convert \mbox{\hyperlink{class_settings_json}{Settings\+Json}} to string. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_settings_json_ac889f7a07a5819175f963e1ee85da0d6}\label{class_settings_json_ac889f7a07a5819175f963e1ee85da0d6}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries add} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a1a26fd210c68d89a10996d95e82561e8}\label{class_settings_json_a1a26fd210c68d89a10996d95e82561e8}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries add} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}, T val)
+\item 
+\mbox{\Hypertarget{class_settings_json_a5c95aa5367813289491b4380e2902067}\label{class_settings_json_a5c95aa5367813289491b4380e2902067}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ T $>$ $>$ \& {\bfseries add\+List} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}, T $\ast$val)
+\item 
+\mbox{\Hypertarget{class_settings_json_ae11e812ff606270e59007c1000c7434c}\label{class_settings_json_ae11e812ff606270e59007c1000c7434c}} 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ T $>$ \& {\bfseries update} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a6c600f3c639d8e67cdf3060e16904dcc}\label{class_settings_json_a6c600f3c639d8e67cdf3060e16904dcc}} 
+{\footnotesize template$<$class T $>$ }\\T const  \& {\bfseries get} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a55879571926455d789d0523627408f0c}\label{class_settings_json_a55879571926455d789d0523627408f0c}} 
+{\footnotesize template$<$class T $>$ }\\T \& {\bfseries get} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_af6e26eec97fdd26f1ec720bbfe4df5b9}\label{class_settings_json_af6e26eec97fdd26f1ec720bbfe4df5b9}} 
+std\+::string const  \& {\bfseries s} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a28b88888063d5efe00ef2d8488129f2e}\label{class_settings_json_a28b88888063d5efe00ef2d8488129f2e}} 
+std\+::string \& {\bfseries s} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a79e1d47938088e08a84ac721807c1551}\label{class_settings_json_a79e1d47938088e08a84ac721807c1551}} 
+int64\+\_\+t const  \& {\bfseries i} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a0ccde304adda110610395b3b1f3b6fd0}\label{class_settings_json_a0ccde304adda110610395b3b1f3b6fd0}} 
+int64\+\_\+t \& {\bfseries i} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a94fe906c11e89abf423151c3816ec7d8}\label{class_settings_json_a94fe906c11e89abf423151c3816ec7d8}} 
+uint64\+\_\+t const  \& {\bfseries u} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a70e9ce2aa10aed5d45fda0409b36db64}\label{class_settings_json_a70e9ce2aa10aed5d45fda0409b36db64}} 
+uint64\+\_\+t \& {\bfseries u} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a7105095d0de83e43728f14544a698fc6}\label{class_settings_json_a7105095d0de83e43728f14544a698fc6}} 
+double const  \& {\bfseries d} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a29dcf05e16ab9ecb60c48e7a7e0b4fe5}\label{class_settings_json_a29dcf05e16ab9ecb60c48e7a7e0b4fe5}} 
+double \& {\bfseries d} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a347ec6bd738a36b96b2eccab0bae5a32}\label{class_settings_json_a347ec6bd738a36b96b2eccab0bae5a32}} 
+bool const  \& {\bfseries b} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_aa5ff7200ce8ae660ab3c7c2172040147}\label{class_settings_json_aa5ff7200ce8ae660ab3c7c2172040147}} 
+bool \& {\bfseries b} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_a08a5b1f37b4d3d331d0511804d16d162}\label{class_settings_json_a08a5b1f37b4d3d331d0511804d16d162}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} const  \& {\bfseries j} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_a82fa95fc018937756569c75e6bf6cd83}\label{class_settings_json_a82fa95fc018937756569c75e6bf6cd83}} 
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& {\bfseries j} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\item 
+\mbox{\Hypertarget{class_settings_json_abf1706f5c417b2733c3d0c815d141524}\label{class_settings_json_abf1706f5c417b2733c3d0c815d141524}} 
+\mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ const  \& {\bfseries lj} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}}) const
+\item 
+\mbox{\Hypertarget{class_settings_json_ac2ae204a71639b25c82563eb49d8edcd}\label{class_settings_json_ac2ae204a71639b25c82563eb49d8edcd}} 
+\mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ \& {\bfseries lj} (std\+::string const \&\mbox{\hyperlink{class_settings_json_a301eda8c47d1140298fade3907c723d6}{name}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_settings_json_a84ac99a71e39c546ac5b685acf7d57ec}\label{class_settings_json_a84ac99a71e39c546ac5b685acf7d57ec}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ std\+::string $>$ $\ast$ $>$ {\bfseries string\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a0e4166c9ce03889e5afdec95d14558a4}\label{class_settings_json_a0e4166c9ce03889e5afdec95d14558a4}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ int64\+\_\+t $>$ $\ast$ $>$ {\bfseries int\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a6ccee345ddcbf7f3bf8e8d5095153b35}\label{class_settings_json_a6ccee345ddcbf7f3bf8e8d5095153b35}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ uint64\+\_\+t $>$ $\ast$ $>$ {\bfseries uint\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_adcdcce079145c37461af329511cd1c25}\label{class_settings_json_adcdcce079145c37461af329511cd1c25}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ double $>$ $\ast$ $>$ {\bfseries double\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a34a59bde0b2758c8d9160681cc0e666e}\label{class_settings_json_a34a59bde0b2758c8d9160681cc0e666e}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ bool $>$ $\ast$ $>$ {\bfseries bool\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a53d8eda20a8dc989065225b7064f4211}\label{class_settings_json_a53d8eda20a8dc989065225b7064f4211}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ $\ast$ $>$ {\bfseries json\+Map}
+\item 
+\mbox{\Hypertarget{class_settings_json_a689e48666555a947bbeca14554f2baa9}\label{class_settings_json_a689e48666555a947bbeca14554f2baa9}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_json_obj}{Json\+Obj}}$<$ \mbox{\hyperlink{class_settings_list}{Settings\+List}}$<$ \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $>$ $>$ $\ast$ $>$ {\bfseries json\+List}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this is the settings master object 
+
+With this object, you can create a json pattern, load files, save files, ... 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_settings_json_aed042d48b268ef368bd1b6b0a9e013fd}\label{class_settings_json_aed042d48b268ef368bd1b6b0a9e013fd}} 
+\index{SettingsJson@{SettingsJson}!description@{description}}
+\index{description@{description}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& Settings\+Json\+::description (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{description }\end{DoxyParamCaption})}
+
+
+
+set the description of this \mbox{\hyperlink{class_settings_json}{Settings\+Json}} (used in \mbox{\hyperlink{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}{to\+String()}}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em description} & the new \mbox{\hyperlink{class_settings_json}{Settings\+Json}}\textquotesingle{}s description \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}}\& a reference to \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_settings_json_ab57c9f2b4353baf2a7668eed3c45e05c}\label{class_settings_json_ab57c9f2b4353baf2a7668eed3c45e05c}} 
+\index{SettingsJson@{SettingsJson}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{loadFile()}{loadFile()}}
+{\footnotesize\ttfamily bool Settings\+Json\+::load\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Load a json file in \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The file to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if error
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_settings_json_1_1_settings_exception}{Settings\+Exception}}} & if the loading failed \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_settings_json_aa2379955d326fae834583000cb323d1a}\label{class_settings_json_aa2379955d326fae834583000cb323d1a}} 
+\index{SettingsJson@{SettingsJson}!loadJson@{loadJson}}
+\index{loadJson@{loadJson}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{loadJson()}{loadJson()}}
+{\footnotesize\ttfamily bool Settings\+Json\+::load\+Json (\begin{DoxyParamCaption}\item[{nlohmann\+::json const \&}]{json,  }\item[{\mbox{\hyperlink{class_settings_json}{Settings\+Json}} \&}]{json\+Obj\+Tmp }\end{DoxyParamCaption})}
+
+
+
+load a nlohmann\+::json object in current \mbox{\hyperlink{class_settings_json}{Settings\+Json}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The nlohmann\+::json object \\
+\hline
+{\em json\+Obj\+Tmp} & The current \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_settings_json_a301eda8c47d1140298fade3907c723d6}\label{class_settings_json_a301eda8c47d1140298fade3907c723d6}} 
+\index{SettingsJson@{SettingsJson}!name@{name}}
+\index{name@{name}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& Settings\+Json\+::name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})}
+
+
+
+set the name of this \mbox{\hyperlink{class_settings_json}{Settings\+Json}} (used in \mbox{\hyperlink{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}{to\+String()}}) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the new \mbox{\hyperlink{class_settings_json}{Settings\+Json}}\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}}\& a reference to \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_settings_json_a5def57414c2a77c94452447d23a89f8e}\label{class_settings_json_a5def57414c2a77c94452447d23a89f8e}} 
+\index{SettingsJson@{SettingsJson}!saveToFile@{saveToFile}}
+\index{saveToFile@{saveToFile}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
+{\footnotesize\ttfamily void Settings\+Json\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_save}{Save}} the current \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object in a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The file to save\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_settings_json_1_1_settings_exception}{Settings\+Exception}}} & if the saving failed \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}\label{class_settings_json_adf9b6991ed9896cc90455a016b5a9f29}} 
+\index{SettingsJson@{SettingsJson}!toString@{toString}}
+\index{toString@{toString}!SettingsJson@{SettingsJson}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Settings\+Json\+::to\+String (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{opt = {\ttfamily JsonOpt\+:\+:NO\+\_\+OPT},  }\item[{uint32\+\_\+t}]{tab\+Offset = {\ttfamily 0},  }\item[{bool}]{term\+With\+Comma = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Convert \mbox{\hyperlink{class_settings_json}{Settings\+Json}} to string. 
+
+You can change print options\+:
+\begin{DoxyItemize}
+\item Json\+Opt\+::\+N\+O\+\_\+\+O\+PT -\/$>$ default value (just print the json)
+\item Json\+Opt\+::\+D\+I\+S\+C\+A\+R\+D\+\_\+\+D\+I\+S\+A\+B\+L\+ED -\/$>$ dont print values disard in file (used to print the variable in a file)
+\item Json\+Opt\+::\+V\+E\+R\+B\+O\+SE -\/$>$ verbose mode\+: print description, min, max, ...
+\item Json\+Opt\+::\+C\+O\+L\+OR -\/$>$ enable color to print
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em opt} & All the option, you can use pipe to set multiple options (Json\+Opt\+::\+V\+E\+R\+B\+O\+SE $\vert$ Json\+Opt\+::\+C\+O\+L\+OR) \\
+\hline
+{\em tab\+Offset} & Don\textquotesingle{}t use this option \\
+\hline
+{\em term\+With\+Comma} & Don\textquotesingle{}t use this option \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The \mbox{\hyperlink{class_settings_json}{Settings\+Json}} object as string 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/Settings\+Json.\+hpp\item 
+srcs/utils/Settings\+Json.\+cpp\end{DoxyCompactItemize}

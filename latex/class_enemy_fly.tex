@@ -1,0 +1,169 @@
+\hypertarget{class_enemy_fly}{}\doxysection{Enemy\+Fly Class Reference}
+\label{class_enemy_fly}\index{EnemyFly@{EnemyFly}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+Fly.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+Fly\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_fly__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+Fly\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_fly__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_fly_a72b9e7e8a82679f4406c7825f29907c3}\label{class_enemy_fly_a72b9e7e8a82679f4406c7825f29907c3}} 
+{\bfseries Enemy\+Fly} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_fly_a4bc5d6bc62289f70fe57abe139b053b1}\label{class_enemy_fly_a4bc5d6bc62289f70fe57abe139b053b1}} 
+{\bfseries Enemy\+Fly} (\mbox{\hyperlink{class_enemy_fly}{Enemy\+Fly}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_fly_a396255e79ad4f8419c20d1cc318499d5}\label{class_enemy_fly_a396255e79ad4f8419c20d1cc318499d5}} 
+\mbox{\hyperlink{class_enemy_fly}{Enemy\+Fly}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_fly}{Enemy\+Fly}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init enemy\+Basic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_fly_a9b5577a848bba5d11e1d90cf923973ad}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_fly_a21dc66b578a2d1158b32f103854a84be}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_fly_a405b9f97c6818d2b96056270aeca921f}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_fly_a85466fc4321b07cd7b7dcc585ca5262d}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_fly_a3450fc9ece8f6b402c37a967c30599db}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_fly}{Enemy\+Fly}} will simply follow a pattern in the board\+Sky 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_fly_a405b9f97c6818d2b96056270aeca921f}\label{class_enemy_fly_a405b9f97c6818d2b96056270aeca921f}} 
+\index{EnemyFly@{EnemyFly}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+Fly\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_fly_a21dc66b578a2d1158b32f103854a84be}\label{class_enemy_fly_a21dc66b578a2d1158b32f103854a84be}} 
+\index{EnemyFly@{EnemyFly}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+Fly\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_fly_a9b5577a848bba5d11e1d90cf923973ad}\label{class_enemy_fly_a9b5577a848bba5d11e1d90cf923973ad}} 
+\index{EnemyFly@{EnemyFly}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+Fly\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_fly_a3450fc9ece8f6b402c37a967c30599db}\label{class_enemy_fly_a3450fc9ece8f6b402c37a967c30599db}} 
+\index{EnemyFly@{EnemyFly}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+Fly\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_fly_a85466fc4321b07cd7b7dcc585ca5262d}\label{class_enemy_fly_a85466fc4321b07cd7b7dcc585ca5262d}} 
+\index{EnemyFly@{EnemyFly}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+Fly\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}\label{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}} 
+\index{EnemyFly@{EnemyFly}!init@{init}}
+\index{init@{init}!EnemyFly@{EnemyFly}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+Fly\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init enemy\+Basic. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+Fly.\+hpp\item 
+srcs/elements/Enemy\+Fly.\+cpp\end{DoxyCompactItemize}

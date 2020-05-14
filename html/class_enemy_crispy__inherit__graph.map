@@ -1,0 +1,6 @@
+<map id="EnemyCrispy" name="EnemyCrispy">
+<area shape="rect" id="node1" title="This is an enemy object." alt="" coords="5,1423,181,1676"/>
+<area shape="rect" id="node2" href="$class_a_enemy.html" title="This is the base enemy object." alt="" coords="16,931,171,1375"/>
+<area shape="rect" id="node3" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="7,468,179,883"/>
+<area shape="rect" id="node4" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="26,5,161,420"/>
+</map>

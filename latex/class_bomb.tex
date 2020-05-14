@@ -1,0 +1,170 @@
+\hypertarget{class_bomb}{}\doxysection{Bomb Class Reference}
+\label{class_bomb}\index{Bomb@{Bomb}}
+
+
+This is the bomb object.  
+
+
+
+
+{\ttfamily \#include $<$Bomb.\+hpp$>$}
+
+
+
+Inheritance diagram for Bomb\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_bomb__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Bomb\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_bomb__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_bomb_1_1_bomb_exception}{Bomb\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}\label{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}} 
+{\bfseries Bomb} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}\label{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}} 
+{\bfseries Bomb} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&src)
+\item 
+\mbox{\Hypertarget{class_bomb_a85eb751af149c92278eafdbabced0d3d}\label{class_bomb_a85eb751af149c92278eafdbabced0d3d}} 
+\mbox{\hyperlink{class_bomb}{Bomb}} \& {\bfseries operator=} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}\label{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}} 
+\mbox{\hyperlink{class_bomb}{Bomb}} $\ast$ {\bfseries set\+Propagation} (const int propagation)
+\item 
+bool \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bomb_a443c5d40a92e67ef456c71369e8a111b}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Post\+Update is called each frame, after \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{update()}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bomb_a4d3105c3390626d385bdb5dfd0fa68ff}{explode}} (glm\+::vec2 const pos)
+\begin{DoxyCompactList}\small\item\em The bomb explode in the N.\+E.\+S.\+W. directions at \+\_\+propagation distance. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bomb_ac51b260cdfef0cde903a88003994276e}{take\+Damage}} (const int damage)
+\begin{DoxyCompactList}\small\item\em Take\+Damage make explode the bomb. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is the bomb object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}\label{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}} 
+\index{Bomb@{Bomb}!draw@{draw}}
+\index{draw@{draw}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Bomb\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bomb_a4d3105c3390626d385bdb5dfd0fa68ff}\label{class_bomb_a4d3105c3390626d385bdb5dfd0fa68ff}} 
+\index{Bomb@{Bomb}!explode@{explode}}
+\index{explode@{explode}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{explode()}{explode()}}
+{\footnotesize\ttfamily void Bomb\+::explode (\begin{DoxyParamCaption}\item[{glm\+::vec2 const}]{pos }\end{DoxyParamCaption})}
+
+
+
+The bomb explode in the N.\+E.\+S.\+W. directions at \+\_\+propagation distance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bomb_a443c5d40a92e67ef456c71369e8a111b}\label{class_bomb_a443c5d40a92e67ef456c71369e8a111b}} 
+\index{Bomb@{Bomb}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool Bomb\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Post\+Update is called each frame, after \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{update()}}. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_bomb_ac51b260cdfef0cde903a88003994276e}\label{class_bomb_ac51b260cdfef0cde903a88003994276e}} 
+\index{Bomb@{Bomb}!takeDamage@{takeDamage}}
+\index{takeDamage@{takeDamage}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{takeDamage()}{takeDamage()}}
+{\footnotesize\ttfamily bool Bomb\+::take\+Damage (\begin{DoxyParamCaption}\item[{const int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Take\+Damage make explode the bomb. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if damage taken 
+
+false if damage not taken 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_object_a39b1720ae5a820512ab4db0906f03b15}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}\label{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}} 
+\index{Bomb@{Bomb}!update@{update}}
+\index{update@{update}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Bomb\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Bomb.\+hpp\item 
+srcs/elements/Bomb.\+cpp\end{DoxyCompactItemize}

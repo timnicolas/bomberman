@@ -1,0 +1,144 @@
+\hypertarget{class_scene_end_game}{}\doxysection{Scene\+End\+Game Class Reference}
+\label{class_scene_end_game}\index{SceneEndGame@{SceneEndGame}}
+
+
+\mbox{\hyperlink{class_end}{End}} of the game (after all levels finished)  
+
+
+
+
+{\ttfamily \#include $<$Scene\+End\+Game.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+End\+Game\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_end_game__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+End\+Game\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_end_game__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_end_game_1_1_all_u_i}{All\+UI}}
+\item 
+struct \mbox{\hyperlink{struct_scene_end_game_1_1_buttons_states}{Buttons\+States}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_end_game_ae0c333662c69d5f3699f77c6d9539b3e}\label{class_scene_end_game_ae0c333662c69d5f3699f77c6d9539b3e}} 
+{\bfseries Scene\+End\+Game} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_end_game_a5dd61310665b7dd7d8c521aec22d596f}\label{class_scene_end_game_a5dd61310665b7dd7d8c521aec22d596f}} 
+{\bfseries Scene\+End\+Game} (\mbox{\hyperlink{class_scene_end_game}{Scene\+End\+Game}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_end_game_a0b750f722b6820cf3cfe455b42c9a5d8}\label{class_scene_end_game_a0b750f722b6820cf3cfe455b42c9a5d8}} 
+\mbox{\hyperlink{class_scene_end_game}{Scene\+End\+Game}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_end_game}{Scene\+End\+Game}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_end_game_a8749fe7472fdde738d5cdc95efa9820e}\label{class_scene_end_game_a8749fe7472fdde738d5cdc95efa9820e}} 
+virtual void \mbox{\hyperlink{class_scene_end_game_a8749fe7472fdde738d5cdc95efa9820e}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_end_game_a6623f0b349cebe0722e15a62037e03ab}\label{class_scene_end_game_a6623f0b349cebe0722e15a62037e03ab}} 
+\mbox{\hyperlink{struct_scene_end_game_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_end_game_a1b73f55b0481fd3bb5bd1b0e396f5139}\label{class_scene_end_game_a1b73f55b0481fd3bb5bd1b0e396f5139}} 
+\mbox{\hyperlink{struct_scene_end_game_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_end_game_a58079fdda1250bd529e382d425dfe064}\label{class_scene_end_game_a58079fdda1250bd529e382d425dfe064}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_end_game}{Scene\+End\+Game}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_end}{End}} of the game (after all levels finished) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}\label{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}} 
+\index{SceneEndGame@{SceneEndGame}!draw@{draw}}
+\index{draw@{draw}!SceneEndGame@{SceneEndGame}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Scene\+End\+Game\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the draw function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the draw is a success 
+
+false if there are an error in draw 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a5c11f34c83f025e1181219bf25ce4694}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}\label{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}} 
+\index{SceneEndGame@{SceneEndGame}!init@{init}}
+\index{init@{init}!SceneEndGame@{SceneEndGame}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+End\+Game\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}\label{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}} 
+\index{SceneEndGame@{SceneEndGame}!update@{update}}
+\index{update@{update}!SceneEndGame@{SceneEndGame}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+End\+Game\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+End\+Game.\+hpp\item 
+srcs/scenes/Scene\+End\+Game.\+cpp\end{DoxyCompactItemize}

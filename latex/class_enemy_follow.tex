@@ -1,0 +1,169 @@
+\hypertarget{class_enemy_follow}{}\doxysection{Enemy\+Follow Class Reference}
+\label{class_enemy_follow}\index{EnemyFollow@{EnemyFollow}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+Follow.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+Follow\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_follow__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+Follow\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_follow__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}\label{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}} 
+{\bfseries Enemy\+Follow} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}\label{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}} 
+{\bfseries Enemy\+Follow} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}\label{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}} 
+\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_follow_a056cb50efd0967fddc9975920c927741}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_follow_acc66bbb79a7896dd25b949f96321550c}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_follow_a471c5dc0965bc6eeef9f747af106e731}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} will always try to find the player and follow him 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}\label{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}} 
+\index{EnemyFollow@{EnemyFollow}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+Follow\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}\label{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}} 
+\index{EnemyFollow@{EnemyFollow}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+Follow\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_follow_a056cb50efd0967fddc9975920c927741}\label{class_enemy_follow_a056cb50efd0967fddc9975920c927741}} 
+\index{EnemyFollow@{EnemyFollow}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+Follow\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_follow_a471c5dc0965bc6eeef9f747af106e731}\label{class_enemy_follow_a471c5dc0965bc6eeef9f747af106e731}} 
+\index{EnemyFollow@{EnemyFollow}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+Follow\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_follow_acc66bbb79a7896dd25b949f96321550c}\label{class_enemy_follow_acc66bbb79a7896dd25b949f96321550c}} 
+\index{EnemyFollow@{EnemyFollow}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+Follow\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}\label{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}} 
+\index{EnemyFollow@{EnemyFollow}!init@{init}}
+\index{init@{init}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+Follow\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init \mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}}. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+Follow.\+hpp\item 
+srcs/elements/Enemy\+Follow.\+cpp\end{DoxyCompactItemize}

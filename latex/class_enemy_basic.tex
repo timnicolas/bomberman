@@ -1,0 +1,169 @@
+\hypertarget{class_enemy_basic}{}\doxysection{Enemy\+Basic Class Reference}
+\label{class_enemy_basic}\index{EnemyBasic@{EnemyBasic}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+Basic.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+Basic\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_basic__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+Basic\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_basic__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_basic_a1d39809d74f07903c7f6423487598d72}\label{class_enemy_basic_a1d39809d74f07903c7f6423487598d72}} 
+{\bfseries Enemy\+Basic} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_basic_ab0f4b466ccb12febf4053b05fbb52b54}\label{class_enemy_basic_ab0f4b466ccb12febf4053b05fbb52b54}} 
+{\bfseries Enemy\+Basic} (\mbox{\hyperlink{class_enemy_basic}{Enemy\+Basic}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_basic_ab925c2ecf3e2358c727ba0a0cd751986}\label{class_enemy_basic_ab925c2ecf3e2358c727ba0a0cd751986}} 
+\mbox{\hyperlink{class_enemy_basic}{Enemy\+Basic}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_basic}{Enemy\+Basic}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_basic_a898943e397eb36c80721951a3457178c}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init enemy\+Basic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_basic_a6b4c43308489726b95641ed9591bdb25}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_basic_a8c87a63172fc71e39c821a6d19eb499d}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_basic_a143ec308f913a3eb4a7f47ad839fd049}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_basic_a55f2826ac9ab49503286b02d4f9cf2cb}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_basic_aeb609bc70fb3934dd098de064aa04b77}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_basic}{Enemy\+Basic}} will simply follow a pattern 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_basic_a143ec308f913a3eb4a7f47ad839fd049}\label{class_enemy_basic_a143ec308f913a3eb4a7f47ad839fd049}} 
+\index{EnemyBasic@{EnemyBasic}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+Basic\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_basic_a8c87a63172fc71e39c821a6d19eb499d}\label{class_enemy_basic_a8c87a63172fc71e39c821a6d19eb499d}} 
+\index{EnemyBasic@{EnemyBasic}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+Basic\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_basic_a6b4c43308489726b95641ed9591bdb25}\label{class_enemy_basic_a6b4c43308489726b95641ed9591bdb25}} 
+\index{EnemyBasic@{EnemyBasic}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+Basic\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_basic_aeb609bc70fb3934dd098de064aa04b77}\label{class_enemy_basic_aeb609bc70fb3934dd098de064aa04b77}} 
+\index{EnemyBasic@{EnemyBasic}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+Basic\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_basic_a55f2826ac9ab49503286b02d4f9cf2cb}\label{class_enemy_basic_a55f2826ac9ab49503286b02d4f9cf2cb}} 
+\index{EnemyBasic@{EnemyBasic}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+Basic\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_basic_a898943e397eb36c80721951a3457178c}\label{class_enemy_basic_a898943e397eb36c80721951a3457178c}} 
+\index{EnemyBasic@{EnemyBasic}!init@{init}}
+\index{init@{init}!EnemyBasic@{EnemyBasic}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+Basic\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init enemy\+Basic. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+Basic.\+hpp\item 
+srcs/elements/Enemy\+Basic.\+cpp\end{DoxyCompactItemize}

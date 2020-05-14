@@ -1,0 +1,496 @@
+\hypertarget{class_inputs}{}\doxysection{Inputs Class Reference}
+\label{class_inputs}\index{Inputs@{Inputs}}
+
+
+static class to manage input  
+
+
+
+
+{\ttfamily \#include $<$Inputs.\+hpp$>$}
+
+
+
+Collaboration diagram for Inputs\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{class_inputs__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_inputs}{Inputs}} \& \mbox{\hyperlink{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}{get}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a775b7e5d409834058a8bc067b6f77998}{get\+Key}} (Input\+Type\+::\+Enum type)
+\item 
+static bool \mbox{\hyperlink{class_inputs_a3e6b234f0035948679c8ff831d1efc5a}{get\+Key\+Up}} (Input\+Type\+::\+Enum type)
+\item 
+static bool \mbox{\hyperlink{class_inputs_a212767ed4b6e8e66046fbc0ec04d7137}{get\+Key\+Down}} (Input\+Type\+::\+Enum type)
+\item 
+static std\+::string \mbox{\hyperlink{class_inputs_a868ed87a88ec0c694e5c27effeea2bc9}{get\+Key\+Name}} (Input\+Type\+::\+Enum type)
+\begin{DoxyCompactList}\small\item\em Get the name of a given key. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_inputs_a61cc1d165b796b3be516d2fd083cc646}{configure\+Key}} (Input\+Type\+::\+Enum type)
+\item 
+static void \mbox{\hyperlink{class_inputs_aff002b44212b7ba7ba44adeb17375185}{cancel\+Configuration}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_ab457f91d9083bfa07bdf3f37d950df60}{get\+Key\+By\+Scancode}} (S\+D\+L\+\_\+\+Scancode scancode)
+\begin{DoxyCompactList}\small\item\em get the state of a key \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_inputs_a6617b70e3838546047d5701704276826}{get\+Key\+By\+Scancode\+Up}} (S\+D\+L\+\_\+\+Scancode scancode)
+\begin{DoxyCompactList}\small\item\em know if a key was released \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_inputs_a034e4698e4c0745be637e53c18677fdb}{get\+Key\+By\+Scancode\+Down}} (S\+D\+L\+\_\+\+Scancode scancode)
+\begin{DoxyCompactList}\small\item\em know if a key was pressed \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{class_inputs_a496478c063e551845c3241e4006ffc08}{get\+Scancode\+Name}} (S\+D\+L\+\_\+\+Scancode scancode)
+\begin{DoxyCompactList}\small\item\em Get the name of a given scancode. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_inputs_a3844589a1c88f346f5daae1d2088748f}{should\+Quit}} ()
+\item 
+static const glm\+::ivec2 \& \mbox{\hyperlink{class_inputs_afc7227e1c5cd934309955f8db3c36097}{get\+Mouse\+Pos}} ()
+\item 
+static const glm\+::ivec2 \& \mbox{\hyperlink{class_inputs_abf9d434be64729115891ba206add1c68}{get\+Mouse\+Rel}} ()
+\item 
+static const glm\+::ivec2 \& \mbox{\hyperlink{class_inputs_ab73355bf19a30890703fea6dd27e00cf}{get\+Mouse\+Scroll}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}{get\+Right\+Click}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}{get\+Left\+Click}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a7e931413d84c57ab09b769b787fc60ec}{get\+Right\+Click\+Up}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a458bdc3d408476dfe439dc94047f292e}{get\+Left\+Click\+Up}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_a0bafaac22e7dbfcf15229ba70388f8a9}{get\+Right\+Click\+Down}} ()
+\item 
+static bool \mbox{\hyperlink{class_inputs_aea7e7f3c2cc206616f4355cc6fba23e8}{get\+Left\+Click\+Down}} ()
+\item 
+static void \mbox{\hyperlink{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}{update}} ()
+\item 
+static void \mbox{\hyperlink{class_inputs_aedb25df0e00a0b99b691a57746868393}{reset\+Keys}} ()
+\item 
+\mbox{\Hypertarget{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}\label{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}} 
+static bool {\bfseries is\+Configuring} ()
+\item 
+static void \mbox{\hyperlink{class_inputs_a154c7590c8ad9d4be127fcf5a0a392f1}{set\+Text\+Input\+Mode}} (bool enable)
+\begin{DoxyCompactList}\small\item\em Enable / disable the Text\+Input mode. \end{DoxyCompactList}\item 
+static S\+D\+L\+\_\+\+Keycode \mbox{\hyperlink{class_inputs_a6f07ed05a776562c7bf5e6a011b1ecfb}{get\+Text\+Input\+Keycode}} ()
+\begin{DoxyCompactList}\small\item\em Get the last keycode pressed. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{class_inputs_aa87c9c60ec70181c57e93fa8c671291d}{get\+Text\+Input\+String}} ()
+\begin{DoxyCompactList}\small\item\em The the last key name pressed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}\label{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}} 
+static const int {\bfseries nb\+\_\+input} = Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS
+\item 
+static const std\+::string {\bfseries input\+\_\+type\+\_\+name} \mbox{[}Inputs\+::nb\+\_\+input\mbox{]}
+\item 
+\mbox{\Hypertarget{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}\label{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}} 
+static const std\+::string {\bfseries config\+File} = \char`\"{}configs/controls.\+json\char`\"{}
+\item 
+static const S\+D\+L\+\_\+\+Scancode {\bfseries default\+\_\+keys} \mbox{[}Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+static class to manage input 
+
+With this class, you can\+:
+\begin{DoxyItemize}
+\item set key used for all Input\+Type
+\item get the state of a key $\vert$ the mouse 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_inputs_aff002b44212b7ba7ba44adeb17375185}\label{class_inputs_aff002b44212b7ba7ba44adeb17375185}} 
+\index{Inputs@{Inputs}!cancelConfiguration@{cancelConfiguration}}
+\index{cancelConfiguration@{cancelConfiguration}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{cancelConfiguration()}{cancelConfiguration()}}
+{\footnotesize\ttfamily void Inputs\+::cancel\+Configuration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Cancel the wait for a key to configure an action. This function will reset the execution of the update function to its normal state. \mbox{\Hypertarget{class_inputs_a61cc1d165b796b3be516d2fd083cc646}\label{class_inputs_a61cc1d165b796b3be516d2fd083cc646}} 
+\index{Inputs@{Inputs}!configureKey@{configureKey}}
+\index{configureKey@{configureKey}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{configureKey()}{configureKey()}}
+{\footnotesize\ttfamily void Inputs\+::configure\+Key (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Configure the action passed to be associated to the next key pressed. This function will change the execution of the update function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to configure. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}\label{class_inputs_afd9be7af3b695c51e3f8449e08a5e970}} 
+\index{Inputs@{Inputs}!get@{get}}
+\index{get@{get}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_inputs}{Inputs}} \& Inputs\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return a reference to singleton \mbox{\hyperlink{class_inputs}{Inputs}}.
+
+\begin{DoxyReturn}{Returns}
+the reference to the singleton. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a775b7e5d409834058a8bc067b6f77998}\label{class_inputs_a775b7e5d409834058a8bc067b6f77998}} 
+\index{Inputs@{Inputs}!getKey@{getKey}}
+\index{getKey@{getKey}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKey()}{getKey()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Return the state of the key corresponding to the action passed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to verify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state of the key (true == pressed). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_ab457f91d9083bfa07bdf3f37d950df60}\label{class_inputs_ab457f91d9083bfa07bdf3f37d950df60}} 
+\index{Inputs@{Inputs}!getKeyByScancode@{getKeyByScancode}}
+\index{getKeyByScancode@{getKeyByScancode}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyByScancode()}{getKeyByScancode()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key\+By\+Scancode (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Scancode}]{scancode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+get the state of a key 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scancode} & the scancode of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key is pressed 
+
+false if the key is not pressed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a034e4698e4c0745be637e53c18677fdb}\label{class_inputs_a034e4698e4c0745be637e53c18677fdb}} 
+\index{Inputs@{Inputs}!getKeyByScancodeDown@{getKeyByScancodeDown}}
+\index{getKeyByScancodeDown@{getKeyByScancodeDown}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyByScancodeDown()}{getKeyByScancodeDown()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key\+By\+Scancode\+Down (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Scancode}]{scancode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+know if a key was pressed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scancode} & the scancode of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key was just pressed 
+
+false in other cases 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a6617b70e3838546047d5701704276826}\label{class_inputs_a6617b70e3838546047d5701704276826}} 
+\index{Inputs@{Inputs}!getKeyByScancodeUp@{getKeyByScancodeUp}}
+\index{getKeyByScancodeUp@{getKeyByScancodeUp}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyByScancodeUp()}{getKeyByScancodeUp()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key\+By\+Scancode\+Up (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Scancode}]{scancode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+know if a key was released 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scancode} & the scancode of the key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key was just released 
+
+false in other cases 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a212767ed4b6e8e66046fbc0ec04d7137}\label{class_inputs_a212767ed4b6e8e66046fbc0ec04d7137}} 
+\index{Inputs@{Inputs}!getKeyDown@{getKeyDown}}
+\index{getKeyDown@{getKeyDown}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyDown()}{getKeyDown()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key\+Down (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the key corresponding to the action passed has just been pressed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to verify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key has been pressed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a868ed87a88ec0c694e5c27effeea2bc9}\label{class_inputs_a868ed87a88ec0c694e5c27effeea2bc9}} 
+\index{Inputs@{Inputs}!getKeyName@{getKeyName}}
+\index{getKeyName@{getKeyName}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyName()}{getKeyName()}}
+{\footnotesize\ttfamily std\+::string Inputs\+::get\+Key\+Name (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the name of a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The name of the key 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a3e6b234f0035948679c8ff831d1efc5a}\label{class_inputs_a3e6b234f0035948679c8ff831d1efc5a}} 
+\index{Inputs@{Inputs}!getKeyUp@{getKeyUp}}
+\index{getKeyUp@{getKeyUp}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getKeyUp()}{getKeyUp()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Key\+Up (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the key corresponding to the action passed has just been released.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type defining the action to verify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the key has been released. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}\label{class_inputs_afb5c85d715cac7d16434a71030dc4cfa}} 
+\index{Inputs@{Inputs}!getLeftClick@{getLeftClick}}
+\index{getLeftClick@{getLeftClick}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getLeftClick()}{getLeftClick()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Left\+Click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the left click (true if clicked, else false)
+
+\begin{DoxyReturn}{Returns}
+The mouse state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_aea7e7f3c2cc206616f4355cc6fba23e8}\label{class_inputs_aea7e7f3c2cc206616f4355cc6fba23e8}} 
+\index{Inputs@{Inputs}!getLeftClickDown@{getLeftClickDown}}
+\index{getLeftClickDown@{getLeftClickDown}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getLeftClickDown()}{getLeftClickDown()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Left\+Click\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the left click has just been pressed.
+
+\begin{DoxyReturn}{Returns}
+true if the left click has just been pressed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a458bdc3d408476dfe439dc94047f292e}\label{class_inputs_a458bdc3d408476dfe439dc94047f292e}} 
+\index{Inputs@{Inputs}!getLeftClickUp@{getLeftClickUp}}
+\index{getLeftClickUp@{getLeftClickUp}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getLeftClickUp()}{getLeftClickUp()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Left\+Click\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the left click has just been released.
+
+\begin{DoxyReturn}{Returns}
+true if the left click has just been released. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_afc7227e1c5cd934309955f8db3c36097}\label{class_inputs_afc7227e1c5cd934309955f8db3c36097}} 
+\index{Inputs@{Inputs}!getMousePos@{getMousePos}}
+\index{getMousePos@{getMousePos}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getMousePos()}{getMousePos()}}
+{\footnotesize\ttfamily const glm\+::ivec2 \& Inputs\+::get\+Mouse\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the current coordinates of the mouse.
+
+\begin{DoxyReturn}{Returns}
+A reference to a constant vector containing the mouse position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_abf9d434be64729115891ba206add1c68}\label{class_inputs_abf9d434be64729115891ba206add1c68}} 
+\index{Inputs@{Inputs}!getMouseRel@{getMouseRel}}
+\index{getMouseRel@{getMouseRel}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getMouseRel()}{getMouseRel()}}
+{\footnotesize\ttfamily const glm\+::ivec2 \& Inputs\+::get\+Mouse\+Rel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the offset of the mouse from the last poll of event.
+
+\begin{DoxyReturn}{Returns}
+A reference to a constant vector containing the mouse offset. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_ab73355bf19a30890703fea6dd27e00cf}\label{class_inputs_ab73355bf19a30890703fea6dd27e00cf}} 
+\index{Inputs@{Inputs}!getMouseScroll@{getMouseScroll}}
+\index{getMouseScroll@{getMouseScroll}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getMouseScroll()}{getMouseScroll()}}
+{\footnotesize\ttfamily const glm\+::ivec2 \& Inputs\+::get\+Mouse\+Scroll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the offset of the mouse wheel from the last poll of event.
+
+\begin{DoxyReturn}{Returns}
+A reference to a constant vector containing the mouse wheel offset. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}\label{class_inputs_ad559cf15f96bdb20abeb3bb27ec891f6}} 
+\index{Inputs@{Inputs}!getRightClick@{getRightClick}}
+\index{getRightClick@{getRightClick}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getRightClick()}{getRightClick()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Right\+Click (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Gives the right click (true if clicked, else false)
+
+\begin{DoxyReturn}{Returns}
+The mouse state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a0bafaac22e7dbfcf15229ba70388f8a9}\label{class_inputs_a0bafaac22e7dbfcf15229ba70388f8a9}} 
+\index{Inputs@{Inputs}!getRightClickDown@{getRightClickDown}}
+\index{getRightClickDown@{getRightClickDown}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getRightClickDown()}{getRightClickDown()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Right\+Click\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the right click has just been pressed.
+
+\begin{DoxyReturn}{Returns}
+true if the right click has just been pressed. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a7e931413d84c57ab09b769b787fc60ec}\label{class_inputs_a7e931413d84c57ab09b769b787fc60ec}} 
+\index{Inputs@{Inputs}!getRightClickUp@{getRightClickUp}}
+\index{getRightClickUp@{getRightClickUp}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getRightClickUp()}{getRightClickUp()}}
+{\footnotesize\ttfamily bool Inputs\+::get\+Right\+Click\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the right click has just been released.
+
+\begin{DoxyReturn}{Returns}
+true if the right click has just been released. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a496478c063e551845c3241e4006ffc08}\label{class_inputs_a496478c063e551845c3241e4006ffc08}} 
+\index{Inputs@{Inputs}!getScancodeName@{getScancodeName}}
+\index{getScancodeName@{getScancodeName}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getScancodeName()}{getScancodeName()}}
+{\footnotesize\ttfamily std\+::string Inputs\+::get\+Scancode\+Name (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Scancode}]{scancode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the name of a given scancode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scancode} & The scancode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The name of the scancode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a6f07ed05a776562c7bf5e6a011b1ecfb}\label{class_inputs_a6f07ed05a776562c7bf5e6a011b1ecfb}} 
+\index{Inputs@{Inputs}!getTextInputKeycode@{getTextInputKeycode}}
+\index{getTextInputKeycode@{getTextInputKeycode}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getTextInputKeycode()}{getTextInputKeycode()}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Keycode Inputs\+::get\+Text\+Input\+Keycode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the last keycode pressed. 
+
+\begin{DoxyReturn}{Returns}
+S\+D\+L\+\_\+\+Keycode The keycode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_aa87c9c60ec70181c57e93fa8c671291d}\label{class_inputs_aa87c9c60ec70181c57e93fa8c671291d}} 
+\index{Inputs@{Inputs}!getTextInputString@{getTextInputString}}
+\index{getTextInputString@{getTextInputString}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{getTextInputString()}{getTextInputString()}}
+{\footnotesize\ttfamily std\+::string Inputs\+::get\+Text\+Input\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The the last key name pressed. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string The key name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_aedb25df0e00a0b99b691a57746868393}\label{class_inputs_aedb25df0e00a0b99b691a57746868393}} 
+\index{Inputs@{Inputs}!resetKeys@{resetKeys}}
+\index{resetKeys@{resetKeys}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{resetKeys()}{resetKeys()}}
+{\footnotesize\ttfamily void Inputs\+::reset\+Keys (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Reset all the key to their default value. \mbox{\Hypertarget{class_inputs_a154c7590c8ad9d4be127fcf5a0a392f1}\label{class_inputs_a154c7590c8ad9d4be127fcf5a0a392f1}} 
+\index{Inputs@{Inputs}!setTextInputMode@{setTextInputMode}}
+\index{setTextInputMode@{setTextInputMode}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{setTextInputMode()}{setTextInputMode()}}
+{\footnotesize\ttfamily void Inputs\+::set\+Text\+Input\+Mode (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Enable / disable the Text\+Input mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enable} & Enable / disable \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_inputs_a3844589a1c88f346f5daae1d2088748f}\label{class_inputs_a3844589a1c88f346f5daae1d2088748f}} 
+\index{Inputs@{Inputs}!shouldQuit@{shouldQuit}}
+\index{shouldQuit@{shouldQuit}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{shouldQuit()}{shouldQuit()}}
+{\footnotesize\ttfamily bool Inputs\+::should\+Quit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Indicate if the window should be closed or not.
+
+\begin{DoxyReturn}{Returns}
+true if the user tried to close the window, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}\label{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}} 
+\index{Inputs@{Inputs}!update@{update}}
+\index{update@{update}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Inputs\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Poll all the S\+DL events from the last update call. This function should be called at the start of each frame in order for this class to have valid values. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_inputs_a4b883aab8a890c79347f37897e47af2d}\label{class_inputs_a4b883aab8a890c79347f37897e47af2d}} 
+\index{Inputs@{Inputs}!default\_keys@{default\_keys}}
+\index{default\_keys@{default\_keys}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{default\_keys}{default\_keys}}
+{\footnotesize\ttfamily const S\+D\+L\+\_\+\+Scancode Inputs\+::default\+\_\+keys\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    DEFAULT\_UP,}
+\DoxyCodeLine{    DEFAULT\_DOWN,}
+\DoxyCodeLine{    DEFAULT\_LEFT,}
+\DoxyCodeLine{    DEFAULT\_RIGHT,}
+\DoxyCodeLine{    DEFAULT\_ACTION,}
+\DoxyCodeLine{    DEFAULT\_ACTION\_2,}
+\DoxyCodeLine{    DEFAULT\_CONFIRM,}
+\DoxyCodeLine{    DEFAULT\_CANCEL,}
+\DoxyCodeLine{    DEFAULT\_MENU,}
+\DoxyCodeLine{    DEFAULT\_HELP,}
+\DoxyCodeLine{    DEFAULT\_CHEATCODE,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_inputs_a617379938c0c70b30922928e4fff4052}\label{class_inputs_a617379938c0c70b30922928e4fff4052}} 
+\index{Inputs@{Inputs}!input\_type\_name@{input\_type\_name}}
+\index{input\_type\_name@{input\_type\_name}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{input\_type\_name}{input\_type\_name}}
+{\footnotesize\ttfamily const std\+::string Inputs\+::input\+\_\+type\+\_\+name\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"up"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"down"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"left"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"right"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"action"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"action\_2"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"confirm"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"cancel"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"menu"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"show help"},}
+\DoxyCodeLine{    \textcolor{stringliteral}{"cheatcode"},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Inputs.\+hpp\item 
+srcs/utils/opengl/Inputs.\+cpp\end{DoxyCompactItemize}

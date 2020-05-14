@@ -1,0 +1,945 @@
+\hypertarget{class_a_base_u_i}{}\doxysection{A\+Base\+UI Class Reference}
+\label{class_a_base_u_i}\index{ABaseUI@{ABaseUI}}
+
+
+this is the base UI interface  
+
+
+
+
+{\ttfamily \#include $<$A\+Base\+U\+I.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+Base\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_base_u_i__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+Base\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_base_u_i__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_base_u_i_1_1_u_i_exception}{U\+I\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a643d80d189018a179d2e3a938e3aa539}\label{class_a_base_u_i_a643d80d189018a179d2e3a938e3aa539}} 
+{\bfseries A\+Base\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a43914df26b12e74becb41da8d85448f1}\label{class_a_base_u_i_a43914df26b12e74becb41da8d85448f1}} 
+{\bfseries A\+Base\+UI} (\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_af269cad7ae1f290964cdeeb3f84cdc89}\label{class_a_base_u_i_af269cad7ae1f290964cdeeb3f84cdc89}} 
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aa191d2729152b1b381cb4eba7d2b178e}\label{class_a_base_u_i_aa191d2729152b1b381cb4eba7d2b178e}} 
+void \mbox{\hyperlink{class_a_base_u_i_aa191d2729152b1b381cb4eba7d2b178e}{update}} ()
+\begin{DoxyCompactList}\small\item\em This is the base update function of UI objects. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_ab8be8a69c8d5db4727921869dc942c7f}\label{class_a_base_u_i_ab8be8a69c8d5db4727921869dc942c7f}} 
+void \mbox{\hyperlink{class_a_base_u_i_ab8be8a69c8d5db4727921869dc942c7f}{draw}} ()
+\begin{DoxyCompactList}\small\item\em This is the base draw function of UI objects. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a63ab2419d2aa942726854770a54ca15f}{add\+Button\+Right\+Listener}} (bool $\ast$listener)
+\begin{DoxyCompactList}\small\item\em add a listener on the right click \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a99d5577cc79031a9711196bf4f583a91}{add\+Button\+Left\+Listener}} (bool $\ast$listener)
+\begin{DoxyCompactList}\small\item\em add a listener on the left click \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a9d351ded131d2d5ef546616a166ace59}{add\+Button\+Left\+Value\+Listener}} (int64\+\_\+t $\ast$listener, int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em add a listener on the left click who will be modify to value \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_a2929b4cb63c16464efa957038d523c02}\label{class_a_base_u_i_a2929b4cb63c16464efa957038d523c02}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Key\+Right\+Click\+Scancode} (S\+D\+L\+\_\+\+Scancode scancode)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aba668d6b9c8bf7e1e0b94dfb0b6aaab1}\label{class_a_base_u_i_aba668d6b9c8bf7e1e0b94dfb0b6aaab1}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Key\+Left\+Click\+Scancode} (S\+D\+L\+\_\+\+Scancode scancode)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a28c110e7ad0f77043d5348035bd39f7a}\label{class_a_base_u_i_a28c110e7ad0f77043d5348035bd39f7a}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Key\+Right\+Click\+Input} (Input\+Type\+::\+Enum input)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a2a2b600c735d45f2ea2c14291a5292ba}\label{class_a_base_u_i_a2a2b600c735d45f2ea2c14291a5292ba}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Key\+Left\+Click\+Input} (Input\+Type\+::\+Enum input)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a9b19e675593c03f7d5becbd580bc418b}\label{class_a_base_u_i_a9b19e675593c03f7d5becbd580bc418b}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Enabled} (bool enabled)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a68ad426cc75f6a61fe000c8e92d4df0c}\label{class_a_base_u_i_a68ad426cc75f6a61fe000c8e92d4df0c}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Pos} (glm\+::vec2 pos)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a9b7e138cf37199808f55a4596efe4ac9}\label{class_a_base_u_i_a9b7e138cf37199808f55a4596efe4ac9}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries setZ} (float z)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a6e209b2a871a2a4afa69f5dff2c6d89e}\label{class_a_base_u_i_a6e209b2a871a2a4afa69f5dff2c6d89e}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Pos\+Offset} (glm\+::vec2 offset)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_abdf5aa14ea0b34192142fcbff0348fc0}\label{class_a_base_u_i_abdf5aa14ea0b34192142fcbff0348fc0}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries add\+Pos\+Offset} (glm\+::vec2 offset)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ae50c31f566ad854411d09f75c2190c12}\label{class_a_base_u_i_ae50c31f566ad854411d09f75c2190c12}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Size} (glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aad292aed7bb28a2c8654ddfb54596a2c}\label{class_a_base_u_i_aad292aed7bb28a2c8654ddfb54596a2c}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Calculated\+Size} ()
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a13a7acc1e7ffa2c139c74e841d744753}\label{class_a_base_u_i_a13a7acc1e7ffa2c139c74e841d744753}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Color} (glm\+::vec4 color)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a16d0d5da4f14b3e43a10f64cefbf8290}\label{class_a_base_u_i_a16d0d5da4f14b3e43a10f64cefbf8290}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Border\+Color} (glm\+::vec4 color)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a3028cb83474c9a384dac58d110aa196f}\label{class_a_base_u_i_a3028cb83474c9a384dac58d110aa196f}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Border\+Size} (float size)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a902c194cc52e03a49f52c74bdbe61deb}\label{class_a_base_u_i_a902c194cc52e03a49f52c74bdbe61deb}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Mouse\+Hover\+Color} (glm\+::vec4 color)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ab93705fee3e6dfdc900bea21a42695e0}\label{class_a_base_u_i_ab93705fee3e6dfdc900bea21a42695e0}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Mouse\+Click\+Color} (glm\+::vec4 color)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}\label{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text} (std\+::string const \&text)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a5d22d531f4fd1d59b9cfff0f2f3e4b8d}\label{class_a_base_u_i_a5d22d531f4fd1d59b9cfff0f2f3e4b8d}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text\+Color} (glm\+::vec4 color)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a705188de51bf8387d38dca90740262a0}\label{class_a_base_u_i_a705188de51bf8387d38dca90740262a0}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text\+Font} (std\+::string const \&font)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a980fa680f895fdefb7ee94ba022cd29b}\label{class_a_base_u_i_a980fa680f895fdefb7ee94ba022cd29b}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text\+Scale} (float scale)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ad414a59cf590b50f2d1f37891edf7284}\label{class_a_base_u_i_ad414a59cf590b50f2d1f37891edf7284}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text\+Padding} (float padding)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a4a88d65cb4a5767c280e0849e56a519b}\label{class_a_base_u_i_a4a88d65cb4a5767c280e0849e56a519b}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Text\+Align} (Text\+Align\+::\+Enum align)
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a258f301b41ab8cc9e1b50ca38c27ca78}\label{class_a_base_u_i_a258f301b41ab8cc9e1b50ca38c27ca78}} 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& {\bfseries set\+Master} (\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} $\ast$master)
+\item 
+virtual bool \mbox{\hyperlink{class_a_base_u_i_af83c894a28e16ae8c008da87a617e8fd}{is\+Partially\+Out\+Of\+Screen}} () const
+\begin{DoxyCompactList}\small\item\em Check if the UI element is partially out of the screen. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_base_u_i_a43ccdbcb5f1e7292cd013c2d1ba3704c}{is\+Totally\+Out\+Of\+Screen}} () const
+\begin{DoxyCompactList}\small\item\em Check if the UI element is totally out of the screen. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_base_u_i_a3745c95d49ee0c0fc3495f9125c18dd5}{is\+Partially\+Out\+Of\+Master}} () const
+\begin{DoxyCompactList}\small\item\em Check if the UI element is partially out of the master element. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_base_u_i_af6f2b33f73f32b6fbc02297e439b320a}{is\+Totally\+Out\+Of\+Master}} () const
+\begin{DoxyCompactList}\small\item\em Check if the UI element is totally out of the master element. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0fcf09799934ef6d86a62b266020757a}\label{class_a_base_u_i_a0fcf09799934ef6d86a62b266020757a}} 
+virtual bool {\bfseries get\+Mouse\+Hover} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aaf2a90f2fd6bab0439b5437c7c0b1d27}\label{class_a_base_u_i_aaf2a90f2fd6bab0439b5437c7c0b1d27}} 
+virtual bool {\bfseries get\+Mouse\+Right\+Click} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a551e7a67ca99714da946f23b42ee1e28}\label{class_a_base_u_i_a551e7a67ca99714da946f23b42ee1e28}} 
+virtual bool {\bfseries get\+Mouse\+Left\+Click} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aa90944d0bcf7a97a649c126f8b07aad1}\label{class_a_base_u_i_aa90944d0bcf7a97a649c126f8b07aad1}} 
+virtual bool {\bfseries is\+Enabled} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ad875929db54fdd563cbb037cade3c009}\label{class_a_base_u_i_ad875929db54fdd563cbb037cade3c009}} 
+virtual glm\+::vec2 \& {\bfseries get\+Pos} ()
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a4a8695c227cd33f47536624a55b82381}\label{class_a_base_u_i_a4a8695c227cd33f47536624a55b82381}} 
+virtual glm\+::vec2 const  \& {\bfseries get\+Pos} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0a2e25b071fe59343e2df625482cbb0f}\label{class_a_base_u_i_a0a2e25b071fe59343e2df625482cbb0f}} 
+virtual glm\+::vec2 {\bfseries get\+Real\+Pos} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a37f4e73da2daf08bf977077f3e827689}\label{class_a_base_u_i_a37f4e73da2daf08bf977077f3e827689}} 
+virtual glm\+::vec2 \& {\bfseries get\+Size} ()
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_adccd2d278366f6fe12db1f3a55baafd2}\label{class_a_base_u_i_adccd2d278366f6fe12db1f3a55baafd2}} 
+virtual glm\+::vec2 const  \& {\bfseries get\+Size} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a3f0c35baa16ea53b2d43032e48a792e8}\label{class_a_base_u_i_a3f0c35baa16ea53b2d43032e48a792e8}} 
+virtual uint32\+\_\+t {\bfseries get\+Text\+Width} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_afcf23c37d38d3a9038d8491159029238}\label{class_a_base_u_i_afcf23c37d38d3a9038d8491159029238}} 
+virtual std\+::string {\bfseries get\+Text} () const
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a92534c962d9421fe2a325dd29eed1455}\label{class_a_base_u_i_a92534c962d9421fe2a325dd29eed1455}} 
+virtual glm\+::ivec2 \& {\bfseries get\+Img\+Def\+Size} ()
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aeb6aad01bcd740bf18893cc7d3478cf1}\label{class_a_base_u_i_aeb6aad01bcd740bf18893cc7d3478cf1}} 
+virtual glm\+::ivec2 const  \& {\bfseries get\+Img\+Def\+Size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a6ddd4c5f9808ccf2c76dc1b22f482a09}{init}} (glm\+::vec2 win\+Size, std\+::string const \&font\+Name, uint32\+\_\+t font\+Size)
+\begin{DoxyCompactList}\small\item\em init the UI interface. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_aff73dc314c8cbb5764c27462f0e5e887}\label{class_a_base_u_i_aff73dc314c8cbb5764c27462f0e5e887}} 
+static void \mbox{\hyperlink{class_a_base_u_i_aff73dc314c8cbb5764c27462f0e5e887}{destroy}} ()
+\begin{DoxyCompactList}\small\item\em call this function at the end of the program to free UI interfaces \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_a71134720c986e99b086a257eef3959ed}\label{class_a_base_u_i_a71134720c986e99b086a257eef3959ed}} 
+static void \mbox{\hyperlink{class_a_base_u_i_a71134720c986e99b086a257eef3959ed}{static\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Call this function foreach loop when updating. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a7d1d35a35a1676cc00ffa0b63c0b8a7f}{set\+Win\+Size}} (glm\+::vec2 win\+Size)
+\begin{DoxyCompactList}\small\item\em call this function on every window resize to update projection matrix \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a0f874aa68f35600ea0a5396aedcb73a0}{load\+Font}} (std\+::string const \&font\+Name, std\+::string const \&filename, uint32\+\_\+t font\+Size)
+\begin{DoxyCompactList}\small\item\em load a new font \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_a_base_u_i_a6ed4ed464a3e8992d37c5eb2a386c052}{str\+Width}} (std\+::string const \&font\+Name, std\+::string const \&txt, float scale=1)
+\begin{DoxyCompactList}\small\item\em Get width of string with a given font at a given scale. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_a_base_u_i_a3a2fc2e4050d21c1e5f5c48b5514254e}{str\+Width}} (std\+::string const \&txt, float scale=1)
+\begin{DoxyCompactList}\small\item\em Get width of string with the default font at a given scale. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_a_base_u_i_a13e855c7ec774ca5dda69dc863c28e1b}{str\+Height}} (std\+::string const \&font\+Name, float scale=1, bool full\+Height=false)
+\begin{DoxyCompactList}\small\item\em Get height of string with a given font at a given scale. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{class_a_base_u_i_a3bf03252e330f24fe2fc044e380b4c19}{str\+Height}} (float scale=1, bool full\+Height=false)
+\begin{DoxyCompactList}\small\item\em Get height of string with the default font at a given scale. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a6cee1445e2dcf10626d1d431b4f9d227}{show\+Help}} (bool show)
+\begin{DoxyCompactList}\small\item\em Show or hide help. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a2e638887f2b479e3e6eda17473651a4c}{set\+Help\+Font}} (std\+::string font\+Name)
+\begin{DoxyCompactList}\small\item\em Change font used for help. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_acb9967f11c239efc3b8536866a52cdc5}{set\+Help\+Toogle\+Scancode}} (S\+D\+L\+\_\+\+Scancode scancode)
+\begin{DoxyCompactList}\small\item\em Set a scancode to toogle help on UI. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_ac991af43c13dc7082a7bdfe1f231206d}{set\+Help\+Toogle\+Input}} (Input\+Type\+::\+Enum input)
+\begin{DoxyCompactList}\small\item\em Set an Input\+Type to toogle help on UI. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a426b0f7983ea5942b29c678f9fd1c098}{set\+Help\+Text\+Scale}} (float scale)
+\begin{DoxyCompactList}\small\item\em Set the text size for help. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_a_base_u_i_a7581ff93412a1559479aed8d9aa61bbe}{set\+Help\+Border\+Size}} (float border\+Size)
+\begin{DoxyCompactList}\small\item\em Set the boder size for the help rectangle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_af35bc7778b3d140b8ebf632b9c9ef29b}\label{class_a_base_u_i_af35bc7778b3d140b8ebf632b9c9ef29b}} 
+static \mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Rect\+Shader} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_a_base_u_i_a0bfffb8b6fc12a44ef7ac8ea63a8a866}{\+\_\+draw\+Rect}} (glm\+::vec2 pos, glm\+::vec2 size, float z, glm\+::vec4 color1, glm\+::vec4 color2=glm\+::vec4(1.\+0, 1.\+0, 1.\+0, 1.\+0), float factor=1)
+\begin{DoxyCompactList}\small\item\em draw a rectangle \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_u_i_a5941569c008d51d764db097198bba750}{\+\_\+draw\+Border\+Rect}} (glm\+::vec2 pos, glm\+::vec2 size, float z, float border\+Size, glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em draw the border of a rect \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_u_i_a9cf0a076fd9b8074cf8ffe6a30ec9f90}{\+\_\+draw\+Text}} (glm\+::vec2 pos, glm\+::vec2 size, float z, std\+::string const \&font, float scale, std\+::string const \&text, glm\+::vec4 color, Text\+Align\+::\+Enum align, float padding)
+\begin{DoxyCompactList}\small\item\em draw text \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}{\+\_\+load\+Img}} (std\+::string const \&filename, bool update\+Size=true)
+\begin{DoxyCompactList}\small\item\em load an image (used in constructors) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}\label{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}} 
+void \mbox{\hyperlink{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}{\+\_\+unload\+Img}} ()
+\begin{DoxyCompactList}\small\item\em Unload a previously load image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_u_i_ace787d9cf83b1e659a82c470f5ce953c}{\+\_\+draw\+Img}} (glm\+::vec2 pos, glm\+::vec2 size, float z, G\+Luint texture\+ID, glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em draw a 2D image on the screen \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_ad4526888fd6a37de4086ba2a1e362759}\label{class_a_base_u_i_ad4526888fd6a37de4086ba2a1e362759}} 
+virtual void {\bfseries \+\_\+update} ()=0
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a3331159cbf9926557afa79e4e3eee256}\label{class_a_base_u_i_a3331159cbf9926557afa79e4e3eee256}} 
+virtual void {\bfseries \+\_\+draw} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_a_base_u_i_a1bf435b41e6628dd84633925198e0c8c}{\+\_\+resize\+Win}} (glm\+::vec2 const \&win\+Scale2f, float win\+Scale1f)
+\begin{DoxyCompactList}\small\item\em Called in set\+Win\+Size for all UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a82f9adf5735be7a4ad378b965a8a7125}\label{class_a_base_u_i_a82f9adf5735be7a4ad378b965a8a7125}} 
+bool {\bfseries \+\_\+enabled}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}\label{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}} 
+glm\+::vec2 {\bfseries \+\_\+pos}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a986f2d7749ff6696048a54655d666c43}\label{class_a_base_u_i_a986f2d7749ff6696048a54655d666c43}} 
+float {\bfseries \+\_\+z}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a8e2e3ca870d800e5d51551abf0264d62}\label{class_a_base_u_i_a8e2e3ca870d800e5d51551abf0264d62}} 
+glm\+::vec2 {\bfseries \+\_\+pos\+Offset}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ae0e631b6fae3845ce944e047046ef20f}\label{class_a_base_u_i_ae0e631b6fae3845ce944e047046ef20f}} 
+glm\+::vec2 {\bfseries \+\_\+size}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a9c8d48d8e1f311464af573ce44e61a8c}\label{class_a_base_u_i_a9c8d48d8e1f311464af573ce44e61a8c}} 
+glm\+::vec4 {\bfseries \+\_\+color}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_acaf5cb113d55cb7b2ab58c9834889936}\label{class_a_base_u_i_acaf5cb113d55cb7b2ab58c9834889936}} 
+int64\+\_\+t {\bfseries \+\_\+value}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a27c378b1380fdce4db9fb03d43684b93}\label{class_a_base_u_i_a27c378b1380fdce4db9fb03d43684b93}} 
+glm\+::vec4 {\bfseries \+\_\+border\+Color}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0d7dc2812e933321513551b5c803a100}\label{class_a_base_u_i_a0d7dc2812e933321513551b5c803a100}} 
+float {\bfseries \+\_\+border\+Size}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aebbf27b207374a6430cc7b66299f2846}\label{class_a_base_u_i_aebbf27b207374a6430cc7b66299f2846}} 
+glm\+::vec4 {\bfseries \+\_\+mouse\+Hover\+Color}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a13e2f41345b37ed5998d93f98fba5f88}\label{class_a_base_u_i_a13e2f41345b37ed5998d93f98fba5f88}} 
+glm\+::vec4 {\bfseries \+\_\+mouse\+Click\+Color}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ada813403e994b73c08d1d069a322e712}\label{class_a_base_u_i_ada813403e994b73c08d1d069a322e712}} 
+std\+::string {\bfseries \+\_\+text}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_adf4fa1adf7b9ad2caa1e12b35faa8d43}\label{class_a_base_u_i_adf4fa1adf7b9ad2caa1e12b35faa8d43}} 
+glm\+::vec4 {\bfseries \+\_\+text\+Color}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a14dff508ca40dac0ee7c1b6971f77ffa}\label{class_a_base_u_i_a14dff508ca40dac0ee7c1b6971f77ffa}} 
+std\+::string {\bfseries \+\_\+text\+Font}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a4424a672c8f3692ef6406153cedd586d}\label{class_a_base_u_i_a4424a672c8f3692ef6406153cedd586d}} 
+float {\bfseries \+\_\+text\+Scale}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}\label{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}} 
+float {\bfseries \+\_\+text\+Padding}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a13286189be7e92f8a16e4b386cc55a12}\label{class_a_base_u_i_a13286189be7e92f8a16e4b386cc55a12}} 
+Text\+Align\+::\+Enum {\bfseries \+\_\+text\+Align}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ab49062eddc5e65d0b0492dff5f9ab68c}\label{class_a_base_u_i_ab49062eddc5e65d0b0492dff5f9ab68c}} 
+G\+Luint {\bfseries \+\_\+img\+Texture\+ID}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a14a4484bb3b54794bde4739f8e4ac54e}\label{class_a_base_u_i_a14a4484bb3b54794bde4739f8e4ac54e}} 
+glm\+::ivec2 {\bfseries \+\_\+img\+Def\+Size}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a3aaafd7bbc571b530af4b1307240e578}\label{class_a_base_u_i_a3aaafd7bbc571b530af4b1307240e578}} 
+bool {\bfseries \+\_\+is\+Clickable\+UI}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}\label{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}} 
+bool {\bfseries \+\_\+mouse\+Hover}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a58f9a340b77a03c84b1394a8c0bca1b9}\label{class_a_base_u_i_a58f9a340b77a03c84b1394a8c0bca1b9}} 
+bool {\bfseries \+\_\+right\+Click}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a378aface650a88817661939f7e5ce8ff}\label{class_a_base_u_i_a378aface650a88817661939f7e5ce8ff}} 
+S\+D\+L\+\_\+\+Scancode {\bfseries \+\_\+key\+Right\+Click\+Bind\+Scancode}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a41d363ac36296d11ccb3f1ce29ea2f65}\label{class_a_base_u_i_a41d363ac36296d11ccb3f1ce29ea2f65}} 
+Input\+Type\+::\+Enum {\bfseries \+\_\+key\+Right\+Click\+Bind\+Input}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a1da64e5630b8304490281f98d3b070b9}\label{class_a_base_u_i_a1da64e5630b8304490281f98d3b070b9}} 
+bool {\bfseries \+\_\+left\+Click}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a823b13eedc079d67bd45e6f6ccfc2572}\label{class_a_base_u_i_a823b13eedc079d67bd45e6f6ccfc2572}} 
+S\+D\+L\+\_\+\+Scancode {\bfseries \+\_\+key\+Left\+Click\+Bind\+Scancode}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0639ff21c455115a6f1b49c03af3e48c}\label{class_a_base_u_i_a0639ff21c455115a6f1b49c03af3e48c}} 
+Input\+Type\+::\+Enum {\bfseries \+\_\+key\+Left\+Click\+Bind\+Input}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a4656f0b7d85d6ed7911ab8d97363e6e3}\label{class_a_base_u_i_a4656f0b7d85d6ed7911ab8d97363e6e3}} 
+bool $\ast$ {\bfseries \+\_\+right\+Listener}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a53f3f04ee2ed7efb056d120e7d251678}\label{class_a_base_u_i_a53f3f04ee2ed7efb056d120e7d251678}} 
+bool $\ast$ {\bfseries \+\_\+left\+Listener}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a6ea8c5e21ed3cc9b6b3cce40ebad94a2}\label{class_a_base_u_i_a6ea8c5e21ed3cc9b6b3cce40ebad94a2}} 
+int64\+\_\+t $\ast$ {\bfseries \+\_\+left\+Value\+Listener}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_abad08db5a70df2402e8c4e2c01f98854}\label{class_a_base_u_i_abad08db5a70df2402e8c4e2c01f98854}} 
+\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} $\ast$ {\bfseries \+\_\+master}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a60f7d61797925d09d4e3e887622893e3}\label{class_a_base_u_i_a60f7d61797925d09d4e3e887622893e3}} 
+static bool \mbox{\hyperlink{class_a_base_u_i_a60f7d61797925d09d4e3e887622893e3}{\+\_\+is\+Init}} = false
+\begin{DoxyCompactList}\small\item\em This file contains all static variables and methods for \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_base_u_i_a6393ba47436d10167aff033f28f01980}\label{class_a_base_u_i_a6393ba47436d10167aff033f28f01980}} 
+static std\+::vector$<$ \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$ $>$ {\bfseries \+\_\+all\+UI}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_acbb31dd0822594a71478ed71fdcfa15d}\label{class_a_base_u_i_acbb31dd0822594a71478ed71fdcfa15d}} 
+static glm\+::vec2 {\bfseries \+\_\+win\+Size}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a5af4bdd4c6a973b7028beea966a1efdd}\label{class_a_base_u_i_a5af4bdd4c6a973b7028beea966a1efdd}} 
+static glm\+::mat4 {\bfseries \+\_\+projection}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a6c895ab18caa513c918f08f430eaf113}\label{class_a_base_u_i_a6c895ab18caa513c918f08f430eaf113}} 
+static \mbox{\hyperlink{class_shader}{Shader}} $\ast$ {\bfseries \+\_\+rect\+Shader} = nullptr
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ab3a9a0bded8effc5368922f48ef0005d}\label{class_a_base_u_i_ab3a9a0bded8effc5368922f48ef0005d}} 
+static G\+Luint {\bfseries \+\_\+rect\+Vao} = 0
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aca1fd5861bd63cf8cc433f0b0ea2de7b}\label{class_a_base_u_i_aca1fd5861bd63cf8cc433f0b0ea2de7b}} 
+static G\+Luint {\bfseries \+\_\+rect\+Vbo} = 0
+\item 
+static const float {\bfseries \+\_\+rect\+Vertices} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a80ebb92b19a8a1758bec4a755aaccad9}\label{class_a_base_u_i_a80ebb92b19a8a1758bec4a755aaccad9}} 
+static \mbox{\hyperlink{class_text_render}{Text\+Render}} $\ast$ {\bfseries \+\_\+text\+Render} = nullptr
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}\label{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}} 
+static \mbox{\hyperlink{class_shader}{Shader}} $\ast$ {\bfseries \+\_\+img\+Shader} = nullptr
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a3c80f46c6b5330e066106d44e9585bbb}\label{class_a_base_u_i_a3c80f46c6b5330e066106d44e9585bbb}} 
+static G\+Luint {\bfseries \+\_\+img\+Vao} = 0
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_aa249e0212d0d972526719fa5787d8e0b}\label{class_a_base_u_i_aa249e0212d0d972526719fa5787d8e0b}} 
+static G\+Luint {\bfseries \+\_\+img\+Vbo} = 0
+\item 
+static const float {\bfseries \+\_\+img\+Vertices} \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}\label{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}} 
+static bool {\bfseries \+\_\+show\+Help} = false
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a0949a29cbf0c6ea91325ad2c237cdd57}\label{class_a_base_u_i_a0949a29cbf0c6ea91325ad2c237cdd57}} 
+static std\+::string {\bfseries \+\_\+help\+Font} = U\+I\+\_\+\+D\+E\+F\+\_\+\+T\+E\+X\+T\+\_\+\+F\+O\+ND
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ac4eec981613b63417248df42abaecc62}\label{class_a_base_u_i_ac4eec981613b63417248df42abaecc62}} 
+static float {\bfseries \+\_\+help\+Text\+Scale} = 0.\+8
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ae8dce878e15f755b18abe401da5298fe}\label{class_a_base_u_i_ae8dce878e15f755b18abe401da5298fe}} 
+static glm\+::vec4 {\bfseries \+\_\+help\+Border\+Color} = U\+I\+\_\+\+D\+E\+F\+\_\+\+T\+E\+X\+T\+\_\+\+C\+O\+L\+OR
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ae28d5cb5573923e084c824eaead9aa84}\label{class_a_base_u_i_ae28d5cb5573923e084c824eaead9aa84}} 
+static float {\bfseries \+\_\+help\+Border\+Size} = 1
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_a6628731a3940f1ee86aa8be1cd86698e}\label{class_a_base_u_i_a6628731a3940f1ee86aa8be1cd86698e}} 
+static float {\bfseries \+\_\+help\+Padding} = 8
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ad9ceb29f36012070ae56aa6132a2877e}\label{class_a_base_u_i_ad9ceb29f36012070ae56aa6132a2877e}} 
+static S\+D\+L\+\_\+\+Scancode {\bfseries \+\_\+help\+Key\+Bind\+Scancode} = N\+O\+\_\+\+S\+C\+A\+N\+C\+O\+DE
+\item 
+\mbox{\Hypertarget{class_a_base_u_i_ab038d21ee135ab11202d23ee87a60cab}\label{class_a_base_u_i_ab038d21ee135ab11202d23ee87a60cab}} 
+static Input\+Type\+::\+Enum {\bfseries \+\_\+help\+Key\+Bind\+Input} = Input\+Type\+::\+N\+O\+\_\+\+K\+EY
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this is the base UI interface 
+
+You can re-\/implement this class to create your UI elements. This base class implement functions to draw rectangles, images, text, ... You need to call some static functions to have functional UI
+\begin{DoxyItemize}
+\item A\+Base\+U\+I\+::init(...) once on startup
+\item \mbox{\hyperlink{class_a_base_u_i_a71134720c986e99b086a257eef3959ed}{A\+Base\+U\+I\+::static\+Update()}} in each loop
+\item \mbox{\hyperlink{class_a_base_u_i_aff73dc314c8cbb5764c27462f0e5e887}{A\+Base\+U\+I\+::destroy()}} at the end 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_base_u_i_a5941569c008d51d764db097198bba750}\label{class_a_base_u_i_a5941569c008d51d764db097198bba750}} 
+\index{ABaseUI@{ABaseUI}!\_drawBorderRect@{\_drawBorderRect}}
+\index{\_drawBorderRect@{\_drawBorderRect}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_drawBorderRect()}{\_drawBorderRect()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+draw\+Border\+Rect (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{float}]{z,  }\item[{float}]{border\+Size,  }\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw the border of a rect 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the rect pos \\
+\hline
+{\em size} & the rect size \\
+\hline
+{\em border\+Size} & the size of the border of the rect \\
+\hline
+{\em color} & the rect color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_ace787d9cf83b1e659a82c470f5ce953c}\label{class_a_base_u_i_ace787d9cf83b1e659a82c470f5ce953c}} 
+\index{ABaseUI@{ABaseUI}!\_drawImg@{\_drawImg}}
+\index{\_drawImg@{\_drawImg}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_drawImg()}{\_drawImg()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+draw\+Img (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{float}]{z,  }\item[{G\+Luint}]{texture\+ID,  }\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw a 2D image on the screen 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the text pos \\
+\hline
+{\em size} & the text size \\
+\hline
+{\em texture\+ID} & the texture ID (get with \+\_\+load\+Img) \\
+\hline
+{\em color} & an image filter color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a0bfffb8b6fc12a44ef7ac8ea63a8a866}\label{class_a_base_u_i_a0bfffb8b6fc12a44ef7ac8ea63a8a866}} 
+\index{ABaseUI@{ABaseUI}!\_drawRect@{\_drawRect}}
+\index{\_drawRect@{\_drawRect}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_drawRect()}{\_drawRect()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+draw\+Rect (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{float}]{z,  }\item[{glm\+::vec4}]{color1,  }\item[{glm\+::vec4}]{color2 = {\ttfamily glm\+:\+:vec4(1.0,~1.0,~1.0,~1.0)},  }\item[{float}]{factor = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw a rectangle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the rect pos \\
+\hline
+{\em size} & the rect size \\
+\hline
+{\em color1} & the rect master color \\
+\hline
+{\em color2} & the rect secondary color (to make a mix) \\
+\hline
+{\em factor} & the factor of second color on master color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a9cf0a076fd9b8074cf8ffe6a30ec9f90}\label{class_a_base_u_i_a9cf0a076fd9b8074cf8ffe6a30ec9f90}} 
+\index{ABaseUI@{ABaseUI}!\_drawText@{\_drawText}}
+\index{\_drawText@{\_drawText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_drawText()}{\_drawText()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+draw\+Text (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{float}]{z,  }\item[{std\+::string const \&}]{font,  }\item[{float}]{scale,  }\item[{std\+::string const \&}]{text,  }\item[{glm\+::vec4}]{color,  }\item[{Text\+Align\+::\+Enum}]{align,  }\item[{float}]{padding }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+draw text 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & the text pos \\
+\hline
+{\em size} & the text size \\
+\hline
+{\em font} & the font used (see load\+Font) \\
+\hline
+{\em scale} & the text scale \\
+\hline
+{\em text} & the text str \\
+\hline
+{\em color} & the text color \\
+\hline
+{\em align} & the text alignment (L\+E\+FT $\vert$ C\+E\+N\+T\+ER $\vert$ R\+I\+G\+HT) \\
+\hline
+{\em padding} & the text padding (left \& right) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}\label{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}} 
+\index{ABaseUI@{ABaseUI}!\_loadImg@{\_loadImg}}
+\index{\_loadImg@{\_loadImg}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_loadImg()}{\_loadImg()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+load\+Img (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool}]{update\+Size = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+load an image (used in constructors) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & the image filename \\
+\hline
+{\em update\+Size} & auto update \+\_\+size variable or not (bool)
+\begin{DoxyItemize}
+\item if \+\_\+size.\+x == 0 \&\& \+\_\+size.\+x == 0 -\/$>$ size auto setted (default size for the image)
+\item if \+\_\+size.\+x == 0 -\/$>$ width auto setted
+\item if \+\_\+size.\+y == 0 -\/$>$ height auto setted
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_a_base_u_i_1_1_u_i_exception}{U\+I\+Exception}}} & if the image failed to load \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_a_base_u_i_a1bf435b41e6628dd84633925198e0c8c}\label{class_a_base_u_i_a1bf435b41e6628dd84633925198e0c8c}} 
+\index{ABaseUI@{ABaseUI}!\_resizeWin@{\_resizeWin}}
+\index{\_resizeWin@{\_resizeWin}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_resizeWin()}{\_resizeWin()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+resize\+Win (\begin{DoxyParamCaption}\item[{glm\+::vec2 const \&}]{win\+Scale2f,  }\item[{float}]{win\+Scale1f }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called in set\+Win\+Size for all UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em win\+Scale2f} & Scale for new window size (vec2) \\
+\hline
+{\em win\+Scale1f} & Scale for new window size (float) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a99d5577cc79031a9711196bf4f583a91}\label{class_a_base_u_i_a99d5577cc79031a9711196bf4f583a91}} 
+\index{ABaseUI@{ABaseUI}!addButtonLeftListener@{addButtonLeftListener}}
+\index{addButtonLeftListener@{addButtonLeftListener}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{addButtonLeftListener()}{addButtonLeftListener()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::add\+Button\+Left\+Listener (\begin{DoxyParamCaption}\item[{bool $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+add a listener on the left click 
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & a pointer on the bool listener \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& a reference to the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a9d351ded131d2d5ef546616a166ace59}\label{class_a_base_u_i_a9d351ded131d2d5ef546616a166ace59}} 
+\index{ABaseUI@{ABaseUI}!addButtonLeftValueListener@{addButtonLeftValueListener}}
+\index{addButtonLeftValueListener@{addButtonLeftValueListener}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{addButtonLeftValueListener()}{addButtonLeftValueListener()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::add\+Button\+Left\+Value\+Listener (\begin{DoxyParamCaption}\item[{int64\+\_\+t $\ast$}]{listener,  }\item[{int64\+\_\+t}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+add a listener on the left click who will be modify to value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & a pointer on te int64\+\_\+t listener \\
+\hline
+{\em value} & the value the the listener will take. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& a reference to the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a63ab2419d2aa942726854770a54ca15f}\label{class_a_base_u_i_a63ab2419d2aa942726854770a54ca15f}} 
+\index{ABaseUI@{ABaseUI}!addButtonRightListener@{addButtonRightListener}}
+\index{addButtonRightListener@{addButtonRightListener}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{addButtonRightListener()}{addButtonRightListener()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::add\+Button\+Right\+Listener (\begin{DoxyParamCaption}\item[{bool $\ast$}]{listener }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+add a listener on the right click 
+
+
+\begin{DoxyParams}{Parameters}
+{\em listener} & a pointer on the bool listener \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& a reference to the object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a6ddd4c5f9808ccf2c76dc1b22f482a09}\label{class_a_base_u_i_a6ddd4c5f9808ccf2c76dc1b22f482a09}} 
+\index{ABaseUI@{ABaseUI}!init@{init}}
+\index{init@{init}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::init (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{win\+Size,  }\item[{std\+::string const \&}]{def\+Font\+Name,  }\item[{uint32\+\_\+t}]{def\+Font\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+init the UI interface. 
+
+Call this function at program startup.
+
+
+\begin{DoxyParams}{Parameters}
+{\em win\+Size} & the size of the window \\
+\hline
+{\em def\+Font\+Name} & the defeult font filename \\
+\hline
+{\em def\+Font\+Size} & the default font size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a3745c95d49ee0c0fc3495f9125c18dd5}\label{class_a_base_u_i_a3745c95d49ee0c0fc3495f9125c18dd5}} 
+\index{ABaseUI@{ABaseUI}!isPartiallyOutOfMaster@{isPartiallyOutOfMaster}}
+\index{isPartiallyOutOfMaster@{isPartiallyOutOfMaster}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{isPartiallyOutOfMaster()}{isPartiallyOutOfMaster()}}
+{\footnotesize\ttfamily bool A\+Base\+U\+I\+::is\+Partially\+Out\+Of\+Master (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Check if the UI element is partially out of the master element. 
+
+\begin{DoxyReturn}{Returns}
+true if partially out of the master element 
+
+false if totally on master or if master doesn\textquotesingle{}t exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_af83c894a28e16ae8c008da87a617e8fd}\label{class_a_base_u_i_af83c894a28e16ae8c008da87a617e8fd}} 
+\index{ABaseUI@{ABaseUI}!isPartiallyOutOfScreen@{isPartiallyOutOfScreen}}
+\index{isPartiallyOutOfScreen@{isPartiallyOutOfScreen}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{isPartiallyOutOfScreen()}{isPartiallyOutOfScreen()}}
+{\footnotesize\ttfamily bool A\+Base\+U\+I\+::is\+Partially\+Out\+Of\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Check if the UI element is partially out of the screen. 
+
+\begin{DoxyReturn}{Returns}
+true if partially out of the screen 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_af6f2b33f73f32b6fbc02297e439b320a}\label{class_a_base_u_i_af6f2b33f73f32b6fbc02297e439b320a}} 
+\index{ABaseUI@{ABaseUI}!isTotallyOutOfMaster@{isTotallyOutOfMaster}}
+\index{isTotallyOutOfMaster@{isTotallyOutOfMaster}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{isTotallyOutOfMaster()}{isTotallyOutOfMaster()}}
+{\footnotesize\ttfamily bool A\+Base\+U\+I\+::is\+Totally\+Out\+Of\+Master (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Check if the UI element is totally out of the master element. 
+
+\begin{DoxyReturn}{Returns}
+true if totally out of the master element 
+
+false if partially or totally on master or if master doesn\textquotesingle{}t exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a43ccdbcb5f1e7292cd013c2d1ba3704c}\label{class_a_base_u_i_a43ccdbcb5f1e7292cd013c2d1ba3704c}} 
+\index{ABaseUI@{ABaseUI}!isTotallyOutOfScreen@{isTotallyOutOfScreen}}
+\index{isTotallyOutOfScreen@{isTotallyOutOfScreen}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{isTotallyOutOfScreen()}{isTotallyOutOfScreen()}}
+{\footnotesize\ttfamily bool A\+Base\+U\+I\+::is\+Totally\+Out\+Of\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Check if the UI element is totally out of the screen. 
+
+\begin{DoxyReturn}{Returns}
+true if totally out of the screen 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a0f874aa68f35600ea0a5396aedcb73a0}\label{class_a_base_u_i_a0f874aa68f35600ea0a5396aedcb73a0}} 
+\index{ABaseUI@{ABaseUI}!loadFont@{loadFont}}
+\index{loadFont@{loadFont}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{loadFont()}{loadFont()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::load\+Font (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string const \&}]{filename,  }\item[{uint32\+\_\+t}]{font\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+load a new font 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & the font name \\
+\hline
+{\em filename} & the ttf file to load \\
+\hline
+{\em font\+Size} & the size of the font\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{class_a_base_u_i_1_1_u_i_exception}{U\+I\+Exception}}} & if the font failed to load \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_a_base_u_i_a7581ff93412a1559479aed8d9aa61bbe}\label{class_a_base_u_i_a7581ff93412a1559479aed8d9aa61bbe}} 
+\index{ABaseUI@{ABaseUI}!setHelpBorderSize@{setHelpBorderSize}}
+\index{setHelpBorderSize@{setHelpBorderSize}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setHelpBorderSize()}{setHelpBorderSize()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Help\+Border\+Size (\begin{DoxyParamCaption}\item[{float}]{border\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the boder size for the help rectangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em border\+Size} & The border size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a2e638887f2b479e3e6eda17473651a4c}\label{class_a_base_u_i_a2e638887f2b479e3e6eda17473651a4c}} 
+\index{ABaseUI@{ABaseUI}!setHelpFont@{setHelpFont}}
+\index{setHelpFont@{setHelpFont}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setHelpFont()}{setHelpFont()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Help\+Font (\begin{DoxyParamCaption}\item[{std\+::string}]{font\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Change font used for help. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The name of the font (set name in \mbox{\hyperlink{class_a_base_u_i_a0f874aa68f35600ea0a5396aedcb73a0}{A\+Base\+U\+I\+::load\+Font}}) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a426b0f7983ea5942b29c678f9fd1c098}\label{class_a_base_u_i_a426b0f7983ea5942b29c678f9fd1c098}} 
+\index{ABaseUI@{ABaseUI}!setHelpTextScale@{setHelpTextScale}}
+\index{setHelpTextScale@{setHelpTextScale}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setHelpTextScale()}{setHelpTextScale()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Help\+Text\+Scale (\begin{DoxyParamCaption}\item[{float}]{scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set the text size for help. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The new scale (1 to set default text scale) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_ac991af43c13dc7082a7bdfe1f231206d}\label{class_a_base_u_i_ac991af43c13dc7082a7bdfe1f231206d}} 
+\index{ABaseUI@{ABaseUI}!setHelpToogleInput@{setHelpToogleInput}}
+\index{setHelpToogleInput@{setHelpToogleInput}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setHelpToogleInput()}{setHelpToogleInput()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Help\+Toogle\+Input (\begin{DoxyParamCaption}\item[{Input\+Type\+::\+Enum}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set an Input\+Type to toogle help on UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The Input\+Type \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_acb9967f11c239efc3b8536866a52cdc5}\label{class_a_base_u_i_acb9967f11c239efc3b8536866a52cdc5}} 
+\index{ABaseUI@{ABaseUI}!setHelpToogleScancode@{setHelpToogleScancode}}
+\index{setHelpToogleScancode@{setHelpToogleScancode}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setHelpToogleScancode()}{setHelpToogleScancode()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Help\+Toogle\+Scancode (\begin{DoxyParamCaption}\item[{S\+D\+L\+\_\+\+Scancode}]{scancode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Set a scancode to toogle help on UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scancode} & The scancode \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a7d1d35a35a1676cc00ffa0b63c0b8a7f}\label{class_a_base_u_i_a7d1d35a35a1676cc00ffa0b63c0b8a7f}} 
+\index{ABaseUI@{ABaseUI}!setWinSize@{setWinSize}}
+\index{setWinSize@{setWinSize}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setWinSize()}{setWinSize()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::set\+Win\+Size (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{win\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+call this function on every window resize to update projection matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em win\+Size} & the size of the window \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a6cee1445e2dcf10626d1d431b4f9d227}\label{class_a_base_u_i_a6cee1445e2dcf10626d1d431b4f9d227}} 
+\index{ABaseUI@{ABaseUI}!showHelp@{showHelp}}
+\index{showHelp@{showHelp}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{showHelp()}{showHelp()}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::show\+Help (\begin{DoxyParamCaption}\item[{bool}]{show }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Show or hide help. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em show} & Show if true \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_u_i_a3bf03252e330f24fe2fc044e380b4c19}\label{class_a_base_u_i_a3bf03252e330f24fe2fc044e380b4c19}} 
+\index{ABaseUI@{ABaseUI}!strHeight@{strHeight}}
+\index{strHeight@{strHeight}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{strHeight()}{strHeight()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t A\+Base\+U\+I\+::str\+Height (\begin{DoxyParamCaption}\item[{float}]{scale = {\ttfamily 1},  }\item[{bool}]{full\+Height = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get height of string with the default font at a given scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale} & The scale \\
+\hline
+{\em full\+Height} & True if we need the full height (including the letter under base height like \textquotesingle{}j\textquotesingle{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The width of the text 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a13e855c7ec774ca5dda69dc863c28e1b}\label{class_a_base_u_i_a13e855c7ec774ca5dda69dc863c28e1b}} 
+\index{ABaseUI@{ABaseUI}!strHeight@{strHeight}}
+\index{strHeight@{strHeight}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{strHeight()}{strHeight()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t A\+Base\+U\+I\+::str\+Height (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{float}]{scale = {\ttfamily 1},  }\item[{bool}]{full\+Height = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get height of string with a given font at a given scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The font \\
+\hline
+{\em scale} & The scale \\
+\hline
+{\em full\+Height} & True if we need the full height (including the letter under base height like \textquotesingle{}j\textquotesingle{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The width of the text 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a6ed4ed464a3e8992d37c5eb2a386c052}\label{class_a_base_u_i_a6ed4ed464a3e8992d37c5eb2a386c052}} 
+\index{ABaseUI@{ABaseUI}!strWidth@{strWidth}}
+\index{strWidth@{strWidth}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{strWidth()}{strWidth()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t A\+Base\+U\+I\+::str\+Width (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string const \&}]{txt,  }\item[{float}]{scale = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get width of string with a given font at a given scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The font \\
+\hline
+{\em txt} & The text \\
+\hline
+{\em scale} & The scale \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The width of the text 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a3a2fc2e4050d21c1e5f5c48b5514254e}\label{class_a_base_u_i_a3a2fc2e4050d21c1e5f5c48b5514254e}} 
+\index{ABaseUI@{ABaseUI}!strWidth@{strWidth}}
+\index{strWidth@{strWidth}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{strWidth()}{strWidth()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily uint32\+\_\+t A\+Base\+U\+I\+::str\+Width (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{txt,  }\item[{float}]{scale = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get width of string with the default font at a given scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em txt} & The text \\
+\hline
+{\em scale} & The scale \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The width of the text 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_base_u_i_a7e00b5b45dbd6c6ec1928e548672fb40}\label{class_a_base_u_i_a7e00b5b45dbd6c6ec1928e548672fb40}} 
+\index{ABaseUI@{ABaseUI}!\_imgVertices@{\_imgVertices}}
+\index{\_imgVertices@{\_imgVertices}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_imgVertices}{\_imgVertices}}
+{\footnotesize\ttfamily const float A\+Base\+U\+I\+::\+\_\+img\+Vertices\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    0.0, 1.0,  0.0, 0.0,}
+\DoxyCodeLine{    0.0, 0.0,  0.0, 1.0,}
+\DoxyCodeLine{    1.0, 0.0,  1.0, 1.0,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    0.0, 1.0,  0.0, 0.0,}
+\DoxyCodeLine{    1.0, 0.0,  1.0, 1.0,}
+\DoxyCodeLine{    1.0, 1.0,  1.0, 0.0,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_a_base_u_i_a3fd54dfc3e07eebcfe8ce6608d84625d}\label{class_a_base_u_i_a3fd54dfc3e07eebcfe8ce6608d84625d}} 
+\index{ABaseUI@{ABaseUI}!\_rectVertices@{\_rectVertices}}
+\index{\_rectVertices@{\_rectVertices}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_rectVertices}{\_rectVertices}}
+{\footnotesize\ttfamily const float A\+Base\+U\+I\+::\+\_\+rect\+Vertices\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    0.0, 0.0,}
+\DoxyCodeLine{    1.0, 1.0,}
+\DoxyCodeLine{    0.0, 1.0,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    0.0, 0.0,}
+\DoxyCodeLine{    1.0, 0.0,}
+\DoxyCodeLine{    1.0, 1.0,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/A\+Base\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/A\+Base\+U\+I.\+cpp\item 
+srcs/utils/opengl/\+U\+I/A\+Base\+U\+I\+\_\+static.\+cpp\item 
+srcs/utils/opengl/\+U\+I/A\+Base\+U\+I\+\_\+utils.\+cpp\end{DoxyCompactItemize}

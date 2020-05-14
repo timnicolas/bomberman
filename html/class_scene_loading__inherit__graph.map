@@ -1,0 +1,5 @@
+<map id="SceneLoading" name="SceneLoading">
+<area shape="rect" id="node1" title="loading game scene" alt="" coords="5,593,137,773"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="7,292,135,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="20,5,123,244"/>
+</map>

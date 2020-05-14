@@ -1,0 +1,110 @@
+\hypertarget{class_fire}{}\doxysection{Fire Class Reference}
+\label{class_fire}\index{Fire@{Fire}}
+
+
+Inheritance diagram for Fire\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_fire__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Fire\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_fire__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_fire_1_1_fire_exception}{Fire\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_fire_a04a8fa42a22f0e0adb7cb4bd6e8e678f}\label{class_fire_a04a8fa42a22f0e0adb7cb4bd6e8e678f}} 
+{\bfseries Fire} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_fire_ace320f43896cb0ff375f688e7ee6aea6}\label{class_fire_ace320f43896cb0ff375f688e7ee6aea6}} 
+{\bfseries Fire} (\mbox{\hyperlink{class_fire}{Fire}} const \&src)
+\item 
+\mbox{\Hypertarget{class_fire_a5e11dd81a73d16b09253b17c89b32322}\label{class_fire_a5e11dd81a73d16b09253b17c89b32322}} 
+\mbox{\hyperlink{class_fire}{Fire}} \& {\bfseries operator=} (\mbox{\hyperlink{class_fire}{Fire}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_fire_a86114cf78108a4b202b75e1f383b3e00}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_fire_adba3c7ec49ed7d31fd35250105a35edf}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Called after update. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_fire_a622efdbee6254c463250b6d9033428eb}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_fire_a622efdbee6254c463250b6d9033428eb}\label{class_fire_a622efdbee6254c463250b6d9033428eb}} 
+\index{Fire@{Fire}!draw@{draw}}
+\index{draw@{draw}!Fire@{Fire}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Fire\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_fire_adba3c7ec49ed7d31fd35250105a35edf}\label{class_fire_adba3c7ec49ed7d31fd35250105a35edf}} 
+\index{Fire@{Fire}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!Fire@{Fire}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool Fire\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called after update. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_fire_a86114cf78108a4b202b75e1f383b3e00}\label{class_fire_a86114cf78108a4b202b75e1f383b3e00}} 
+\index{Fire@{Fire}!update@{update}}
+\index{update@{update}!Fire@{Fire}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Fire\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Fire.\+hpp\item 
+srcs/elements/Fire.\+cpp\end{DoxyCompactItemize}

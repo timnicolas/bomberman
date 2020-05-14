@@ -1,0 +1,147 @@
+\hypertarget{class_scene_victory}{}\doxysection{Scene\+Victory Class Reference}
+\label{class_scene_victory}\index{SceneVictory@{SceneVictory}}
+
+
+this is the victory menu  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Victory.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Victory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_victory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Victory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_victory__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}}
+\item 
+struct \mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}\label{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}} 
+{\bfseries Scene\+Victory} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}\label{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}} 
+{\bfseries Scene\+Victory} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_victory_aba45bf336d7183dc043d916caeaad826}\label{class_scene_victory_aba45bf336d7183dc043d916caeaad826}} 
+\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_victory_a8ea4cc53a99f84a5175c97da37967235}\label{class_scene_victory_a8ea4cc53a99f84a5175c97da37967235}} 
+virtual void \mbox{\hyperlink{class_scene_victory_a8ea4cc53a99f84a5175c97da37967235}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}\label{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}} 
+\mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}\label{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}} 
+std\+::string {\bfseries \+\_\+last\+Scene\+Name}
+\item 
+\mbox{\Hypertarget{class_scene_victory_acdbd9784850934363227fc65c87a29c6}\label{class_scene_victory_acdbd9784850934363227fc65c87a29c6}} 
+\mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}} {\bfseries statistics}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_victory_a501965dbfb3f0102cb50d5af3fee8402}\label{class_scene_victory_a501965dbfb3f0102cb50d5af3fee8402}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+this is the victory menu 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}\label{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}} 
+\index{SceneVictory@{SceneVictory}!draw@{draw}}
+\index{draw@{draw}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Scene\+Victory\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the draw function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the draw is a success 
+
+false if there are an error in draw 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a5c11f34c83f025e1181219bf25ce4694}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}\label{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}} 
+\index{SceneVictory@{SceneVictory}!init@{init}}
+\index{init@{init}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Victory\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}\label{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}} 
+\index{SceneVictory@{SceneVictory}!update@{update}}
+\index{update@{update}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Victory\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Victory.\+hpp\item 
+srcs/scenes/Scene\+Victory.\+cpp\end{DoxyCompactItemize}

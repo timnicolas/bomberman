@@ -1,0 +1,103 @@
+\hypertarget{class_wall}{}\doxysection{Wall Class Reference}
+\label{class_wall}\index{Wall@{Wall}}
+
+
+This is the wall object.  
+
+
+
+
+{\ttfamily \#include $<$Wall.\+hpp$>$}
+
+
+
+Inheritance diagram for Wall\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_wall__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Wall\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_wall__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_wall_1_1_wall_exception}{Wall\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_wall_af9013d101f4409022a90b65572758b5a}\label{class_wall_af9013d101f4409022a90b65572758b5a}} 
+{\bfseries Wall} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}}, Block\+::\+Enum block\+Type=Block\+::\+D\+U\+R\+A\+B\+L\+E\+\_\+\+W\+A\+LL)
+\item 
+\mbox{\Hypertarget{class_wall_ac4e3877605a06087babebfecbbb8a458}\label{class_wall_ac4e3877605a06087babebfecbbb8a458}} 
+{\bfseries Wall} (\mbox{\hyperlink{class_wall}{Wall}} const \&src)
+\item 
+\mbox{\Hypertarget{class_wall_ad5639b5bcbe08c8348dac17d2d5e2af3}\label{class_wall_ad5639b5bcbe08c8348dac17d2d5e2af3}} 
+\mbox{\hyperlink{class_wall}{Wall}} \& {\bfseries operator=} (\mbox{\hyperlink{class_wall}{Wall}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_wall_ab3ea42b91f7830d22782901d61be505f}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is the wall object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_wall_ab3ea42b91f7830d22782901d61be505f}\label{class_wall_ab3ea42b91f7830d22782901d61be505f}} 
+\index{Wall@{Wall}!draw@{draw}}
+\index{draw@{draw}!Wall@{Wall}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Wall\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}\label{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}} 
+\index{Wall@{Wall}!update@{update}}
+\index{update@{update}!Wall@{Wall}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Wall\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Wall.\+hpp\item 
+srcs/elements/Wall.\+cpp\end{DoxyCompactItemize}

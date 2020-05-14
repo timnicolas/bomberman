@@ -1,0 +1,5 @@
+<map id="SceneCheatCode" name="SceneCheatCode">
+<area shape="rect" id="node1" title="this is the cheat code command line" alt="" coords="5,593,159,832"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="18,292,146,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="31,5,133,244"/>
+</map>

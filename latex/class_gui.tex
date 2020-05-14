@@ -1,0 +1,179 @@
+\hypertarget{class_gui}{}\doxysection{Gui Class Reference}
+\label{class_gui}\index{Gui@{Gui}}
+
+
+This is the G\+UI class with function to init window, draw, ...  
+
+
+
+
+{\ttfamily \#include $<$Gui.\+hpp$>$}
+
+
+
+Collaboration diagram for Gui\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_gui__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_gui_a470a9b3fdd6f43eb46f11276220013a4}\label{class_gui_a470a9b3fdd6f43eb46f11276220013a4}} 
+{\bfseries Gui} (\mbox{\hyperlink{struct_game_info}{Game\+Info}} \&game\+Info)
+\item 
+\mbox{\Hypertarget{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}\label{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}} 
+{\bfseries Gui} (\mbox{\hyperlink{class_gui}{Gui}} const \&src)
+\item 
+\mbox{\Hypertarget{class_gui_ac260d502b2a5440591c3e4e4520acf94}\label{class_gui_ac260d502b2a5440591c3e4e4520acf94}} 
+\mbox{\hyperlink{class_gui}{Gui}} \& {\bfseries operator=} (\mbox{\hyperlink{class_gui}{Gui}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_gui_a735bdb412232cf6980819e21f1dbdb66}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the gui object \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_gui_a8e51befeff5deda5a8d0283b1af7446e}{pre\+Update}} (float const dt\+Time)
+\begin{DoxyCompactList}\small\item\em Called each frame before others updates functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_gui_a0e365402acdc30d41e31a76124182ded}{post\+Update}} (float const dt\+Time)
+\begin{DoxyCompactList}\small\item\em Called each frame after others updates functions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gui_aac64766fad448534447f50a5d05ceeb3}\label{class_gui_aac64766fad448534447f50a5d05ceeb3}} 
+void \mbox{\hyperlink{class_gui_aac64766fad448534447f50a5d05ceeb3}{pre\+Draw}} ()
+\begin{DoxyCompactList}\small\item\em call this function to do stuff before drawing scene \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gui_aef4dba11a3ab3836f51a09dbfc7c09d1}\label{class_gui_aef4dba11a3ab3836f51a09dbfc7c09d1}} 
+void \mbox{\hyperlink{class_gui_aef4dba11a3ab3836f51a09dbfc7c09d1}{post\+Draw}} ()
+\begin{DoxyCompactList}\small\item\em call this function to do stuff after drawing scene \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_gui_a97349551e251e2dd231ec8c9abc9c659}{draw\+Skybox}} (glm\+::mat4 \&view)
+\begin{DoxyCompactList}\small\item\em draw the skybox \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}{enable\+Cursor}} (bool enable)
+\begin{DoxyCompactList}\small\item\em enable or disable the cursor visibility \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}\label{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}} 
+void {\bfseries draw\+Cube} (Block\+::\+Enum type\+Block, glm\+::vec3 pos=\{0, 0, 0\}, glm\+::vec3 scale=\{1, 1, 1\})
+\item 
+void \mbox{\hyperlink{class_gui_a42148f338094a05cfbe4ac4424ebc127}{update\+Fullscreen}} ()
+\item 
+void \mbox{\hyperlink{class_gui_a4066b5f349a7f94203bd0ac506a47571}{udpate\+Dimension}} ()
+\item 
+\mbox{\Hypertarget{class_gui_a454e08f8d8c19a95c5bb9554b7766723}\label{class_gui_a454e08f8d8c19a95c5bb9554b7766723}} 
+void {\bfseries disable\+Exit\+For\+This\+Frame} (bool disable=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_gui_af562e2e6f0b773511162d1a5171d7475}\label{class_gui_af562e2e6f0b773511162d1a5171d7475}} 
+\mbox{\hyperlink{struct_game_info}{Game\+Info}} \& {\bfseries game\+Info}
+\item 
+\mbox{\Hypertarget{class_gui_a5d8ee3bce3eda71d2223718ef121660c}\label{class_gui_a5d8ee3bce3eda71d2223718ef121660c}} 
+\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} $\ast$ {\bfseries texture\+Manager}
+\item 
+\mbox{\Hypertarget{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}\label{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}} 
+\mbox{\hyperlink{class_shader}{Shader}} $\ast$ {\bfseries cube\+Shader}
+\item 
+\mbox{\Hypertarget{class_gui_ad69615330ffddbdb5e74dd9163434af6}\label{class_gui_ad69615330ffddbdb5e74dd9163434af6}} 
+\mbox{\hyperlink{class_camera}{Camera}} $\ast$ {\bfseries cam}
+\item 
+\mbox{\Hypertarget{class_gui_aad8b6babe608aef719ca0180579d0c54}\label{class_gui_aad8b6babe608aef719ca0180579d0c54}} 
+uint32\+\_\+t {\bfseries cube\+Sh\+Vao}
+\item 
+\mbox{\Hypertarget{class_gui_ab9f1f53daba063532c91590af6a17bdf}\label{class_gui_ab9f1f53daba063532c91590af6a17bdf}} 
+uint32\+\_\+t {\bfseries cube\+Sh\+Vbo}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the G\+UI class with function to init window, draw, ... 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gui_a97349551e251e2dd231ec8c9abc9c659}\label{class_gui_a97349551e251e2dd231ec8c9abc9c659}} 
+\index{Gui@{Gui}!drawSkybox@{drawSkybox}}
+\index{drawSkybox@{drawSkybox}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{drawSkybox()}{drawSkybox()}}
+{\footnotesize\ttfamily void Gui\+::draw\+Skybox (\begin{DoxyParamCaption}\item[{glm\+::mat4 \&}]{view }\end{DoxyParamCaption})}
+
+
+
+draw the skybox 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view} & the view matrix of the camera (Camera\+::get\+View\+Matrix()) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}\label{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}} 
+\index{Gui@{Gui}!enableCursor@{enableCursor}}
+\index{enableCursor@{enableCursor}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{enableCursor()}{enableCursor()}}
+{\footnotesize\ttfamily void Gui\+::enable\+Cursor (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})}
+
+
+
+enable or disable the cursor visibility 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enable} & enable boolean \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_a735bdb412232cf6980819e21f1dbdb66}\label{class_gui_a735bdb412232cf6980819e21f1dbdb66}} 
+\index{Gui@{Gui}!init@{init}}
+\index{init@{init}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Gui\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+init the gui object 
+
+\begin{DoxyReturn}{Returns}
+true if the gui was init successfully 
+
+false if there is an error in init 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gui_a0e365402acdc30d41e31a76124182ded}\label{class_gui_a0e365402acdc30d41e31a76124182ded}} 
+\index{Gui@{Gui}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily void Gui\+::post\+Update (\begin{DoxyParamCaption}\item[{float const}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Called each frame after others updates functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt\+Time} & The delta time since last call \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_a8e51befeff5deda5a8d0283b1af7446e}\label{class_gui_a8e51befeff5deda5a8d0283b1af7446e}} 
+\index{Gui@{Gui}!preUpdate@{preUpdate}}
+\index{preUpdate@{preUpdate}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{preUpdate()}{preUpdate()}}
+{\footnotesize\ttfamily void Gui\+::pre\+Update (\begin{DoxyParamCaption}\item[{float const}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Called each frame before others updates functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt\+Time} & The delta time since last call \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_a4066b5f349a7f94203bd0ac506a47571}\label{class_gui_a4066b5f349a7f94203bd0ac506a47571}} 
+\index{Gui@{Gui}!udpateDimension@{udpateDimension}}
+\index{udpateDimension@{udpateDimension}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{udpateDimension()}{udpateDimension()}}
+{\footnotesize\ttfamily void Gui\+::udpate\+Dimension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Update the dimension of the window from its settings. \mbox{\Hypertarget{class_gui_a42148f338094a05cfbe4ac4424ebc127}\label{class_gui_a42148f338094a05cfbe4ac4424ebc127}} 
+\index{Gui@{Gui}!updateFullscreen@{updateFullscreen}}
+\index{updateFullscreen@{updateFullscreen}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{updateFullscreen()}{updateFullscreen()}}
+{\footnotesize\ttfamily void Gui\+::update\+Fullscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Update the fullscreen mode from its settings. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/gui/Gui.\+hpp\item 
+srcs/gui/Gui.\+cpp\end{DoxyCompactItemize}

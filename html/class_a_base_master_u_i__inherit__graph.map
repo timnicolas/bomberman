@@ -1,0 +1,6 @@
+<map id="ABaseMasterUI" name="ABaseMasterUI">
+<area shape="rect" id="node1" title="this is the UI for all master objects" alt="" coords="78,893,259,1264"/>
+<area shape="rect" id="node3" href="$class_empty_master_u_i.html" title="this is the UI for invisible master object" alt="" coords="5,1481,148,1646"/>
+<area shape="rect" id="node4" href="$class_scrollbar_u_i.html" title="this is the UI for scrollbar" alt="" coords="173,1312,351,1815"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="67,5,270,845"/>
+</map>

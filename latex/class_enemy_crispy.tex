@@ -1,0 +1,215 @@
+\hypertarget{class_enemy_crispy}{}\doxysection{Enemy\+Crispy Class Reference}
+\label{class_enemy_crispy}\index{EnemyCrispy@{EnemyCrispy}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+Crispy.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+Crispy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_crispy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+Crispy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_crispy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}\label{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}} 
+{\bfseries Enemy\+Crispy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}\label{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}} 
+{\bfseries Enemy\+Crispy} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}\label{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}} 
+\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}{anim\+End\+Cb}} (std\+::string anim\+Name)
+\begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_crispy_a2608d3b6432576f897e2811aa1324fa2}\label{class_enemy_crispy_a2608d3b6432576f897e2811aa1324fa2}} 
+void \mbox{\hyperlink{class_enemy_crispy_a2608d3b6432576f897e2811aa1324fa2}{set\+Idle\+Pos}} ()
+\begin{DoxyCompactList}\small\item\em reset rotation and center pos for the win/loose animation \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_crispy_a7493983cc06e648d1ac8fd80dd8c64f3}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_enemy_crispy_a5e3bef4e40dfeb57ec87ea23b7a57e18}{\+\_\+is\+Player\+Close}} (int distance)
+\begin{DoxyCompactList}\small\item\em Return if the player is close. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_crispy_a9531e9669fd3dcbb524f7db88ef68787}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_crispy_adeb54234eea6e5f6b0e9e3704bf3352d}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} is a crispy wall. If the enemy can show the player, it transform to a crispy wall 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}\label{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+Crispy\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_crispy_a5e3bef4e40dfeb57ec87ea23b7a57e18}\label{class_enemy_crispy_a5e3bef4e40dfeb57ec87ea23b7a57e18}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_isPlayerClose@{\_isPlayerClose}}
+\index{\_isPlayerClose@{\_isPlayerClose}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_isPlayerClose()}{\_isPlayerClose()}}
+{\footnotesize\ttfamily bool Enemy\+Crispy\+::\+\_\+is\+Player\+Close (\begin{DoxyParamCaption}\item[{int}]{distance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Return if the player is close. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em distance} & to search the player \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if close 
+
+false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_enemy_crispy_a7493983cc06e648d1ac8fd80dd8c64f3}\label{class_enemy_crispy_a7493983cc06e648d1ac8fd80dd8c64f3}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+Crispy\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}\label{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+Crispy\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_crispy_adeb54234eea6e5f6b0e9e3704bf3352d}\label{class_enemy_crispy_adeb54234eea6e5f6b0e9e3704bf3352d}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+Crispy\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_crispy_a9531e9669fd3dcbb524f7db88ef68787}\label{class_enemy_crispy_a9531e9669fd3dcbb524f7db88ef68787}} 
+\index{EnemyCrispy@{EnemyCrispy}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+Crispy\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}\label{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}} 
+\index{EnemyCrispy@{EnemyCrispy}!animEndCb@{animEndCb}}
+\index{animEndCb@{animEndCb}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{animEndCb()}{animEndCb()}}
+{\footnotesize\ttfamily void Enemy\+Crispy\+::anim\+End\+Cb (\begin{DoxyParamCaption}\item[{std\+::string}]{anim\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anim\+Name} & the current animation name \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}\label{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}} 
+\index{EnemyCrispy@{EnemyCrispy}!init@{init}}
+\index{init@{init}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+Crispy\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init \mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}}. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+Crispy.\+hpp\item 
+srcs/elements/Enemy\+Crispy.\+cpp\end{DoxyCompactItemize}

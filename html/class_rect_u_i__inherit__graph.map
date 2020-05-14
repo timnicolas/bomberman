@@ -1,0 +1,4 @@
+<map id="RectUI" name="RectUI">
+<area shape="rect" id="node1" title="this is the UI for rectangle" alt="" coords="58,893,155,1059"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="5,5,208,845"/>
+</map>

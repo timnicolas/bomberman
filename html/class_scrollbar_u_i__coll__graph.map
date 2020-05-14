@@ -1,0 +1,7 @@
+<map id="ScrollbarUI" name="ScrollbarUI">
+<area shape="rect" id="node1" title="this is the UI for scrollbar" alt="" coords="5,622,184,1125"/>
+<area shape="rect" id="node2" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="51,5,232,376"/>
+<area shape="rect" id="node3" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="208,453,411,1293"/>
+<area shape="rect" id="node4" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="256,79,363,303"/>
+<area shape="rect" id="node5" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="387,79,504,303"/>
+</map>

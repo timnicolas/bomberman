@@ -1,0 +1,84 @@
+\hypertarget{class_a_scene}{}\doxysection{A\+Scene Class Reference}
+\label{class_a_scene}\index{AScene@{AScene}}
+
+
+base object to implement in all scenes  
+
+
+
+
+{\ttfamily \#include $<$A\+Scene.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+Scene\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_scene__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+Scene\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_scene__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_scene_1_1_scene_exception}{Scene\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}\label{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}} 
+{\bfseries A\+Scene} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}\label{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}} 
+{\bfseries A\+Scene} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&src)
+\item 
+\mbox{\Hypertarget{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}\label{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}} 
+virtual bool {\bfseries init} ()=0
+\item 
+\mbox{\Hypertarget{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}\label{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}} 
+virtual bool {\bfseries update} ()=0
+\item 
+\mbox{\Hypertarget{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}\label{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}} 
+virtual bool {\bfseries draw} ()=0
+\item 
+\mbox{\Hypertarget{class_a_scene_a8f6201c6a7ccefdebdc9ecf69d35a1d8}\label{class_a_scene_a8f6201c6a7ccefdebdc9ecf69d35a1d8}} 
+virtual void {\bfseries load} ()=0
+\item 
+\mbox{\Hypertarget{class_a_scene_aeb259110cc48bac42ea05bbe24b5d2a8}\label{class_a_scene_aeb259110cc48bac42ea05bbe24b5d2a8}} 
+virtual void {\bfseries unload} ()=0
+\item 
+\mbox{\Hypertarget{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}\label{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}} 
+float const  \& {\bfseries get\+Dt\+Time} () const
+\item 
+\mbox{\Hypertarget{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}\label{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}} 
+\mbox{\hyperlink{class_a_scene}{A\+Scene}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}\label{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}} 
+\mbox{\hyperlink{class_gui}{Gui}} $\ast$ {\bfseries \+\_\+gui}
+\item 
+\mbox{\Hypertarget{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}\label{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}} 
+float const  \& {\bfseries \+\_\+dt\+Time}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+base object to implement in all scenes 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/A\+Scene.\+hpp\item 
+srcs/scenes/A\+Scene.\+cpp\end{DoxyCompactItemize}

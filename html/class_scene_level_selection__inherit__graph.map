@@ -1,0 +1,5 @@
+<map id="SceneLevelSelection" name="SceneLevelSelection">
+<area shape="rect" id="node1" title="menu for the level selection" alt="" coords="5,593,177,847"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="27,292,155,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="40,5,143,244"/>
+</map>

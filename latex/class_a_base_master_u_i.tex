@@ -1,0 +1,251 @@
+\hypertarget{class_a_base_master_u_i}{}\doxysection{A\+Base\+Master\+UI Class Reference}
+\label{class_a_base_master_u_i}\index{ABaseMasterUI@{ABaseMasterUI}}
+
+
+this is the UI for all master objects  
+
+
+
+
+{\ttfamily \#include $<$A\+Base\+Master\+U\+I.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+Base\+Master\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_base_master_u_i__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+Base\+Master\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_base_master_u_i__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a311ce7af9ba882f3a274f6887c2196dc}\label{class_a_base_master_u_i_a311ce7af9ba882f3a274f6887c2196dc}} 
+{\bfseries A\+Base\+Master\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_aca816b5bc0624de287a3d386215a4c71}\label{class_a_base_master_u_i_aca816b5bc0624de287a3d386215a4c71}} 
+{\bfseries A\+Base\+Master\+UI} (\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a2023324b8f6cd85877c7932d5c46276f}\label{class_a_base_master_u_i_a2023324b8f6cd85877c7932d5c46276f}} 
+\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_a_base_master_u_i_ae6bcaed259182e299cdfc6fabc8e01f1}{add\+Child}} (\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Add a child in master element (called by set\+Master) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_master_u_i_a0965153a5bf1d5a7de71f65c2f8fcc0a}{remove\+Child}} (\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$child)
+\begin{DoxyCompactList}\small\item\em Remove a child in master element (called by set\+Master) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_master_u_i_ad98439ff88bce6f13311f17444aea6f3}{set\+Master\+Offset}} (glm\+::vec2 offset)
+\begin{DoxyCompactList}\small\item\em Set the offset of the master element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_base_master_u_i_a384c412cf0c2fc3265d9dc6bcb7ff57e}{add\+Master\+Offset}} (glm\+::vec2 offset)
+\begin{DoxyCompactList}\small\item\em Add to the offset of the master element (last offset + new offset) \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_a_base_master_u_i_aec1bb7871f82b2bd41de4fe4486e4050}{get\+Master\+Pos}} () const
+\begin{DoxyCompactList}\small\item\em Get position of master element (bottom left after border) \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_a_base_master_u_i_a64cf45d76b377fd59ec19f1f1d53c0be}{get\+Master\+Real\+Pos}} () const
+\begin{DoxyCompactList}\small\item\em Get position of master element (bottom left after border) considering offset. \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_a_base_master_u_i_ad8e2ca2b3f67ca274e5dd0169e454e55}{get\+Master\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get size of master element inside the borders. \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_a_base_master_u_i_aeeea67741ab77e3d03c6a817fc3bb949}{get\+Master\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Get the master offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a6c18f89d96c65d68ee1eabd8d4e1ee19}\label{class_a_base_master_u_i_a6c18f89d96c65d68ee1eabd8d4e1ee19}} 
+virtual void {\bfseries \+\_\+update} ()=0
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_ae92346a217da747e894a8acbe39b4397}\label{class_a_base_master_u_i_ae92346a217da747e894a8acbe39b4397}} 
+virtual void {\bfseries \+\_\+draw} ()=0
+\item 
+void \mbox{\hyperlink{class_a_base_master_u_i_a2bb6ad21838a1a2e1ce0bf7fb24a3330}{\+\_\+update\+Total\+Master\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Get the total size of all element in master. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a381f24b69a5c92d1363fa855ed972e76}\label{class_a_base_master_u_i_a381f24b69a5c92d1363fa855ed972e76}} 
+glm\+::vec2 {\bfseries \+\_\+master\+Padding}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a1f41b39f793a657af383ca420ca2a39b}\label{class_a_base_master_u_i_a1f41b39f793a657af383ca420ca2a39b}} 
+glm\+::vec2 {\bfseries \+\_\+master\+Offset}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a9d907edd4ba081a74108846d1921908a}\label{class_a_base_master_u_i_a9d907edd4ba081a74108846d1921908a}} 
+glm\+::vec2 {\bfseries \+\_\+master\+Min\+Pos}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a2a882142b0df3f748eef03dad099fc9c}\label{class_a_base_master_u_i_a2a882142b0df3f748eef03dad099fc9c}} 
+glm\+::vec2 {\bfseries \+\_\+master\+Max\+Pos}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a1f2c4794773a4a3dcc00bd2871756898}\label{class_a_base_master_u_i_a1f2c4794773a4a3dcc00bd2871756898}} 
+glm\+::vec2 {\bfseries \+\_\+master\+Total\+Size}
+\item 
+\mbox{\Hypertarget{class_a_base_master_u_i_a8e67f5e6780889a29464f301f8d53e9a}\label{class_a_base_master_u_i_a8e67f5e6780889a29464f301f8d53e9a}} 
+std\+::vector$<$ \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$ $>$ {\bfseries \+\_\+child\+UI}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+this is the UI for all master objects 
+
+Master objects are objects that contains others objects (for example the scrollbar is a master object) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_base_master_u_i_a2bb6ad21838a1a2e1ce0bf7fb24a3330}\label{class_a_base_master_u_i_a2bb6ad21838a1a2e1ce0bf7fb24a3330}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!\_updateTotalMasterSize@{\_updateTotalMasterSize}}
+\index{\_updateTotalMasterSize@{\_updateTotalMasterSize}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{\_updateTotalMasterSize()}{\_updateTotalMasterSize()}}
+{\footnotesize\ttfamily void A\+Base\+Master\+U\+I\+::\+\_\+update\+Total\+Master\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Get the total size of all element in master. 
+
+this function update\+:
+\begin{DoxyItemize}
+\item \+\_\+master\+Min\+Pos\+: The minimum object position in object
+\item \+\_\+master\+Max\+Pos\+: The maximum object position in object
+\item \+\_\+master\+Total\+Size\+: The total size of master elements 
+\end{DoxyItemize}\mbox{\Hypertarget{class_a_base_master_u_i_ae6bcaed259182e299cdfc6fabc8e01f1}\label{class_a_base_master_u_i_ae6bcaed259182e299cdfc6fabc8e01f1}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!addChild@{addChild}}
+\index{addChild@{addChild}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{addChild()}{addChild()}}
+{\footnotesize\ttfamily void A\+Base\+Master\+U\+I\+::add\+Child (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$}]{child }\end{DoxyParamCaption})}
+
+
+
+Add a child in master element (called by set\+Master) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The child element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_master_u_i_a384c412cf0c2fc3265d9dc6bcb7ff57e}\label{class_a_base_master_u_i_a384c412cf0c2fc3265d9dc6bcb7ff57e}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!addMasterOffset@{addMasterOffset}}
+\index{addMasterOffset@{addMasterOffset}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{addMasterOffset()}{addMasterOffset()}}
+{\footnotesize\ttfamily void A\+Base\+Master\+U\+I\+::add\+Master\+Offset (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{offset }\end{DoxyParamCaption})}
+
+
+
+Add to the offset of the master element (last offset + new offset) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The offset adder \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_master_u_i_aeeea67741ab77e3d03c6a817fc3bb949}\label{class_a_base_master_u_i_aeeea67741ab77e3d03c6a817fc3bb949}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!getMasterOffset@{getMasterOffset}}
+\index{getMasterOffset@{getMasterOffset}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{getMasterOffset()}{getMasterOffset()}}
+{\footnotesize\ttfamily glm\+::vec2 A\+Base\+Master\+U\+I\+::get\+Master\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the master offset. 
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The offset 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_master_u_i_aec1bb7871f82b2bd41de4fe4486e4050}\label{class_a_base_master_u_i_aec1bb7871f82b2bd41de4fe4486e4050}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!getMasterPos@{getMasterPos}}
+\index{getMasterPos@{getMasterPos}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{getMasterPos()}{getMasterPos()}}
+{\footnotesize\ttfamily glm\+::vec2 A\+Base\+Master\+U\+I\+::get\+Master\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get position of master element (bottom left after border) 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The position 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_scrollbar_u_i_a3a4c39a263f6bf7783b1054f57a26ee7}{Scrollbar\+UI}}.
+
+\mbox{\Hypertarget{class_a_base_master_u_i_a64cf45d76b377fd59ec19f1f1d53c0be}\label{class_a_base_master_u_i_a64cf45d76b377fd59ec19f1f1d53c0be}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!getMasterRealPos@{getMasterRealPos}}
+\index{getMasterRealPos@{getMasterRealPos}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{getMasterRealPos()}{getMasterRealPos()}}
+{\footnotesize\ttfamily glm\+::vec2 A\+Base\+Master\+U\+I\+::get\+Master\+Real\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get position of master element (bottom left after border) considering offset. 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The position 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_scrollbar_u_i_a7dd8afe939f8b8a5f9486eeec1f56d92}{Scrollbar\+UI}}.
+
+\mbox{\Hypertarget{class_a_base_master_u_i_ad8e2ca2b3f67ca274e5dd0169e454e55}\label{class_a_base_master_u_i_ad8e2ca2b3f67ca274e5dd0169e454e55}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!getMasterSize@{getMasterSize}}
+\index{getMasterSize@{getMasterSize}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{getMasterSize()}{getMasterSize()}}
+{\footnotesize\ttfamily glm\+::vec2 A\+Base\+Master\+U\+I\+::get\+Master\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get size of master element inside the borders. 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The size 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_scrollbar_u_i_ad9f2de5f7fbb4acdfe25fc2dbe3eb943}{Scrollbar\+UI}}.
+
+\mbox{\Hypertarget{class_a_base_master_u_i_a0965153a5bf1d5a7de71f65c2f8fcc0a}\label{class_a_base_master_u_i_a0965153a5bf1d5a7de71f65c2f8fcc0a}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!removeChild@{removeChild}}
+\index{removeChild@{removeChild}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{removeChild()}{removeChild()}}
+{\footnotesize\ttfamily void A\+Base\+Master\+U\+I\+::remove\+Child (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$}]{child }\end{DoxyParamCaption})}
+
+
+
+Remove a child in master element (called by set\+Master) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The child element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_base_master_u_i_ad98439ff88bce6f13311f17444aea6f3}\label{class_a_base_master_u_i_ad98439ff88bce6f13311f17444aea6f3}} 
+\index{ABaseMasterUI@{ABaseMasterUI}!setMasterOffset@{setMasterOffset}}
+\index{setMasterOffset@{setMasterOffset}!ABaseMasterUI@{ABaseMasterUI}}
+\doxysubsubsection{\texorpdfstring{setMasterOffset()}{setMasterOffset()}}
+{\footnotesize\ttfamily void A\+Base\+Master\+U\+I\+::set\+Master\+Offset (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{offset }\end{DoxyParamCaption})}
+
+
+
+Set the offset of the master element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The new offset \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/A\+Base\+Master\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/A\+Base\+Master\+U\+I.\+cpp\end{DoxyCompactItemize}

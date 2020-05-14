@@ -1,0 +1,310 @@
+\hypertarget{class_camera}{}\doxysection{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+
+
+this is a camera 3D object  
+
+
+
+
+{\ttfamily \#include $<$Camera.\+hpp$>$}
+
+
+
+Collaboration diagram for Camera\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{class_camera__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}\label{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}} 
+{\bfseries Camera} (float const ratio, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 pos=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0f, 0.\+0f, 0.\+0f), C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 up=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0, 1.\+0, 0.\+0), C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT yaw=-\/90.\+0f, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT pitch=0.\+0f)
+\item 
+\mbox{\Hypertarget{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}\label{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}} 
+{\bfseries Camera} (\mbox{\hyperlink{class_camera}{Camera}} const \&src)
+\item 
+\mbox{\Hypertarget{class_camera_a7df2f4b79b58047d59902a2e8b40855d}\label{class_camera_a7df2f4b79b58047d59902a2e8b40855d}} 
+\mbox{\hyperlink{class_camera}{Camera}} \& {\bfseries operator=} (\mbox{\hyperlink{class_camera}{Camera}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}{look\+At}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 target)
+\begin{DoxyCompactList}\small\item\em Move the camera orientation to look at the target. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}\label{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}} 
+void \mbox{\hyperlink{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}{reset\+Position}} ()
+\begin{DoxyCompactList}\small\item\em Reset the camera position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}\label{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}} 
+void {\bfseries set\+Ratio} (float ratio)
+\item 
+\mbox{\Hypertarget{class_camera_a3138aa2e40815013739ddb71502ca608}\label{class_camera_a3138aa2e40815013739ddb71502ca608}} 
+void {\bfseries set\+FovY} (float fovY)
+\item 
+\mbox{\Hypertarget{class_camera_afcb04b0f02749e07b61e3346d34834da}\label{class_camera_afcb04b0f02749e07b61e3346d34834da}} 
+void {\bfseries set\+Near\+And\+Far} (float near, float far)
+\item 
+void \mbox{\hyperlink{class_camera_a90617e4799a43f0b74ede1d6caca958e}{set\+Mode}} (Cam\+Mode\+::\+Enum mode)
+\begin{DoxyCompactList}\small\item\em Update the current camera mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_aa83a6e3f89b6a1bdd4578d4cd84fdfde}{set\+Def\+Pos}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 def\+Pos, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT def\+Yaw=-\/90, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT def\+Pitch=0)
+\begin{DoxyCompactList}\small\item\em Set the default camera position. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_camera_a1e8d069fff363a0d3504714068000654}\label{class_camera_a1e8d069fff363a0d3504714068000654}} 
+void \mbox{\hyperlink{class_camera_a1e8d069fff363a0d3504714068000654}{set\+Def\+Pos}} ()
+\begin{DoxyCompactList}\small\item\em Set the default camera position to the current position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_ad1272976ffb7a0d535c8977ec063201d}{update}} (float dt\+Time)
+\begin{DoxyCompactList}\small\item\em Update function of the camera -\/$>$ to be called every frames. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_a1f28b91cb62dd318b5acf27296c99242}{process\+Keyboard}} (Cam\+Movement direction, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT dt\+Time, bool is\+Run=false)
+\begin{DoxyCompactList}\small\item\em Move camera from keyboard interaction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_abd790165abfcc82595470328193060de}{process\+Mouse\+Movement}} (glm\+::vec2 offset, bool constrain\+Pitch=true)
+\begin{DoxyCompactList}\small\item\em Move the camera from the mouse movements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_a4287af0eacc2cf50765360a8e1b5db74}{frustum\+Culling\+Init}} (C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT angle\+Deg, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT ratio, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT nearD, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT farD)
+\begin{DoxyCompactList}\small\item\em init the frustum culling (take the same args as projection matrix) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_camera_aa7a544e123a54e98509cfc6050869aca}{frustum\+Culling\+Check\+Point}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&point) const
+\begin{DoxyCompactList}\small\item\em Check if a point is inside or outside the camera. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_camera_a7baca010a22bac712351e4c6adca5acf}{frustum\+Culling\+Check\+Cube}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&start\+Point, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&size) const
+\begin{DoxyCompactList}\small\item\em Check if a cube or rectangle is inside or outside of the camera. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}\label{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}} 
+void {\bfseries reset\+Follow\+Path} ()
+\item 
+\mbox{\Hypertarget{class_camera_a340c9687399742b3c9c1dec3f02d9b32}\label{class_camera_a340c9687399742b3c9c1dec3f02d9b32}} 
+void {\bfseries set\+Follow\+Path} (std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ const \&path)
+\item 
+\mbox{\Hypertarget{class_camera_a9f190ab490492b811ccc3603b68fe70a}\label{class_camera_a9f190ab490492b811ccc3603b68fe70a}} 
+void {\bfseries set\+Follow\+Repeat} (bool repeat)
+\item 
+\mbox{\Hypertarget{class_camera_a56103a197cc727c1d108f5e503e5c6f4}\label{class_camera_a56103a197cc727c1d108f5e503e5c6f4}} 
+void {\bfseries set\+Follow\+Speed} (float speed\+\_\+)
+\item 
+\mbox{\Hypertarget{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}\label{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}} 
+bool {\bfseries is\+Follow\+Finished} () const
+\item 
+\mbox{\Hypertarget{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}\label{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}} 
+bool {\bfseries is\+Follow\+Repeat} () const
+\item 
+\mbox{\Hypertarget{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}\label{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}} 
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 {\bfseries get\+View\+Matrix} () const
+\item 
+\mbox{\Hypertarget{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}\label{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}} 
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 {\bfseries get\+Projection} () const
+\item 
+\mbox{\Hypertarget{class_camera_ab508959139d8555dce6f444e44fc01ed}\label{class_camera_ab508959139d8555dce6f444e44fc01ed}} 
+Cam\+Mode\+::\+Enum {\bfseries get\+Mode} () const
+\item 
+\mbox{\Hypertarget{class_camera_aae10133175e34f9856c48cdb294279df}\label{class_camera_aae10133175e34f9856c48cdb294279df}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries get\+Def\+Pos} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_camera_a645cd9343d8c0160ce2281111240f9fd}\label{class_camera_a645cd9343d8c0160ce2281111240f9fd}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries pos}
+\item 
+\mbox{\Hypertarget{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}\label{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries front}
+\item 
+\mbox{\Hypertarget{class_camera_a02d03a426815c0d64522724fbe2374ca}\label{class_camera_a02d03a426815c0d64522724fbe2374ca}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries up}
+\item 
+\mbox{\Hypertarget{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}\label{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries right}
+\item 
+\mbox{\Hypertarget{class_camera_a9088ff173e443938f31ed4b6c0f75756}\label{class_camera_a9088ff173e443938f31ed4b6c0f75756}} 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries world\+Up}
+\item 
+\mbox{\Hypertarget{class_camera_aa11a0643425580b4115bb9b839542891}\label{class_camera_aa11a0643425580b4115bb9b839542891}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries yaw}
+\item 
+\mbox{\Hypertarget{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}\label{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries pitch}
+\item 
+\mbox{\Hypertarget{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}\label{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries movement\+Speed}
+\item 
+\mbox{\Hypertarget{class_camera_a0fd9adbe4484147947bc1f51452edd6f}\label{class_camera_a0fd9adbe4484147947bc1f51452edd6f}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries mouse\+Sensitivity}
+\item 
+\mbox{\Hypertarget{class_camera_a891d353a14161c6be625f6a52b75375d}\label{class_camera_a891d353a14161c6be625f6a52b75375d}} 
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries run\+Factor}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this is a camera 3D object 
+
+this object implements functions to\+:
+\begin{DoxyItemize}
+\item move with keyboard (process\+Keyboard)
+\item turn camera with mouse (process\+Mouse\+Movement)
+\item look at a point (look\+At)
+\item know if a 3D point or a 3D rectangle is inside the camera angle (frustum\+Culling...) 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_camera_a7baca010a22bac712351e4c6adca5acf}\label{class_camera_a7baca010a22bac712351e4c6adca5acf}} 
+\index{Camera@{Camera}!frustumCullingCheckCube@{frustumCullingCheckCube}}
+\index{frustumCullingCheckCube@{frustumCullingCheckCube}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{frustumCullingCheckCube()}{frustumCullingCheckCube()}}
+{\footnotesize\ttfamily int Camera\+::frustum\+Culling\+Check\+Cube (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&}]{start\+Point,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&}]{size }\end{DoxyParamCaption}) const}
+
+
+
+Check if a cube or rectangle is inside or outside of the camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Point} & The 0$\vert$0$\vert$0 coordinate of the cube \\
+\hline
+{\em size} & The scale in X Y and Z of the cube \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The point position (F\+R\+C\+L\+\_\+\+I\+N\+S\+I\+DE == is inside) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_aa7a544e123a54e98509cfc6050869aca}\label{class_camera_aa7a544e123a54e98509cfc6050869aca}} 
+\index{Camera@{Camera}!frustumCullingCheckPoint@{frustumCullingCheckPoint}}
+\index{frustumCullingCheckPoint@{frustumCullingCheckPoint}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{frustumCullingCheckPoint()}{frustumCullingCheckPoint()}}
+{\footnotesize\ttfamily int Camera\+::frustum\+Culling\+Check\+Point (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&}]{point }\end{DoxyParamCaption}) const}
+
+
+
+Check if a point is inside or outside the camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The 3D point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The point position (F\+R\+C\+L\+\_\+\+I\+N\+S\+I\+DE == is inside) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_a4287af0eacc2cf50765360a8e1b5db74}\label{class_camera_a4287af0eacc2cf50765360a8e1b5db74}} 
+\index{Camera@{Camera}!frustumCullingInit@{frustumCullingInit}}
+\index{frustumCullingInit@{frustumCullingInit}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{frustumCullingInit()}{frustumCullingInit()}}
+{\footnotesize\ttfamily void Camera\+::frustum\+Culling\+Init (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{angle\+Deg,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{ratio,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{nearD,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{farD }\end{DoxyParamCaption})}
+
+
+
+init the frustum culling (take the same args as projection matrix) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle\+Deg} & The projection angle (in degrees) \\
+\hline
+{\em ratio} & The ratio (width / height) \\
+\hline
+{\em nearD} & The near distance (don\textquotesingle{}t show before this distance) \\
+\hline
+{\em farD} & The far distance (don\textquotesingle{}t show after this distance) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}\label{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}} 
+\index{Camera@{Camera}!lookAt@{lookAt}}
+\index{lookAt@{lookAt}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{lookAt()}{lookAt()}}
+{\footnotesize\ttfamily void Camera\+::look\+At (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3}]{target }\end{DoxyParamCaption})}
+
+
+
+Move the camera orientation to look at the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target to look at \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a1f28b91cb62dd318b5acf27296c99242}\label{class_camera_a1f28b91cb62dd318b5acf27296c99242}} 
+\index{Camera@{Camera}!processKeyboard@{processKeyboard}}
+\index{processKeyboard@{processKeyboard}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{processKeyboard()}{processKeyboard()}}
+{\footnotesize\ttfamily void Camera\+::process\+Keyboard (\begin{DoxyParamCaption}\item[{Cam\+Movement}]{direction,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{dt\+Time,  }\item[{bool}]{is\+Run = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Move camera from keyboard interaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction} & The direction to move (Cam\+Movement\+::\+Forward, Cam\+Movement\+::\+Left, ...) \\
+\hline
+{\em dt\+Time} & The delta time since last call \\
+\hline
+{\em is\+Run} & Option to know is the player is running or not \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_abd790165abfcc82595470328193060de}\label{class_camera_abd790165abfcc82595470328193060de}} 
+\index{Camera@{Camera}!processMouseMovement@{processMouseMovement}}
+\index{processMouseMovement@{processMouseMovement}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{processMouseMovement()}{processMouseMovement()}}
+{\footnotesize\ttfamily void Camera\+::process\+Mouse\+Movement (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{offset,  }\item[{bool}]{constrain\+Pitch = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Move the camera from the mouse movements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Offset} & The camera offset in x from last call \\
+\hline
+{\em y\+Offset} & The camera offset in y from last call \\
+\hline
+{\em constrain\+Pitch} & Constrain pitch to block camera up to 90 deg (enable by default) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_aa83a6e3f89b6a1bdd4578d4cd84fdfde}\label{class_camera_aa83a6e3f89b6a1bdd4578d4cd84fdfde}} 
+\index{Camera@{Camera}!setDefPos@{setDefPos}}
+\index{setDefPos@{setDefPos}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setDefPos()}{setDefPos()}}
+{\footnotesize\ttfamily void Camera\+::set\+Def\+Pos (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3}]{def\+Pos,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{def\+Yaw = {\ttfamily -\/90},  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{def\+Pitch = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Set the default camera position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em def\+Pos} & Default position \\
+\hline
+{\em def\+Yaw} & Default yaw \\
+\hline
+{\em def\+Pitch} & Default pitch \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a90617e4799a43f0b74ede1d6caca958e}\label{class_camera_a90617e4799a43f0b74ede1d6caca958e}} 
+\index{Camera@{Camera}!setMode@{setMode}}
+\index{setMode@{setMode}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setMode()}{setMode()}}
+{\footnotesize\ttfamily void Camera\+::set\+Mode (\begin{DoxyParamCaption}\item[{Cam\+Mode\+::\+Enum}]{mode }\end{DoxyParamCaption})}
+
+
+
+Update the current camera mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & Cam\+Mode element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_ad1272976ffb7a0d535c8977ec063201d}\label{class_camera_ad1272976ffb7a0d535c8977ec063201d}} 
+\index{Camera@{Camera}!update@{update}}
+\index{update@{update}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Camera\+::update (\begin{DoxyParamCaption}\item[{float}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Update function of the camera -\/$>$ to be called every frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt\+Time} & The delta time \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Camera.\+hpp\item 
+srcs/utils/opengl/Camera.\+cpp\end{DoxyCompactItemize}

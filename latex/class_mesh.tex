@@ -1,0 +1,92 @@
+\hypertarget{class_mesh}{}\doxysection{Mesh Class Reference}
+\label{class_mesh}\index{Mesh@{Mesh}}
+
+
+Class to store and draw a 3d model \mbox{\hyperlink{class_mesh}{Mesh}}.  
+
+
+
+
+{\ttfamily \#include $<$Mesh.\+hpp$>$}
+
+
+
+Collaboration diagram for Mesh\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{class_mesh__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_mesh_a316035c11ead9be63e3bcac30bb9c1bb}\label{class_mesh_a316035c11ead9be63e3bcac30bb9c1bb}} 
+{\bfseries Mesh} (\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&open\+G\+L\+Model, \mbox{\hyperlink{class_shader}{Shader}} \&sh, std\+::string const \&name, std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ vertices, std\+::vector$<$ uint32\+\_\+t $>$ vert\+Indices, std\+::vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$ textures, \mbox{\hyperlink{class_material}{Material}} material, \mbox{\hyperlink{struct_bounding_box}{Bounding\+Box}} bounding\+Box)
+\item 
+\mbox{\Hypertarget{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}\label{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}} 
+{\bfseries Mesh} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&src)
+\item 
+\mbox{\Hypertarget{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}\label{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}} 
+\mbox{\hyperlink{class_mesh}{Mesh}} \& {\bfseries operator=} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_mesh_a06496712e5436f307076bdd0ef05ea03}{draw}} (glm\+::mat4 const \&model) const
+\begin{DoxyCompactList}\small\item\em draw the \mbox{\hyperlink{class_mesh}{Mesh}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mesh_a103fa942bacc358c9c3a030d62335f7a}{add\+Bone\+Data}} (uint32\+\_\+t bone\+ID, float weight, uint32\+\_\+t Vertice\+ID)
+\begin{DoxyCompactList}\small\item\em store the bone info to the mesh \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}{send\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em send the mesh data to open\+GL \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to store and draw a 3d model \mbox{\hyperlink{class_mesh}{Mesh}}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mesh_a103fa942bacc358c9c3a030d62335f7a}\label{class_mesh_a103fa942bacc358c9c3a030d62335f7a}} 
+\index{Mesh@{Mesh}!addBoneData@{addBoneData}}
+\index{addBoneData@{addBoneData}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{addBoneData()}{addBoneData()}}
+{\footnotesize\ttfamily void Mesh\+::add\+Bone\+Data (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bone\+ID,  }\item[{float}]{weight,  }\item[{uint32\+\_\+t}]{Vertice\+ID }\end{DoxyParamCaption})}
+
+
+
+store the bone info to the mesh 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bone\+ID} & the bone id \\
+\hline
+{\em weight} & the weight of the bone to the vertex \\
+\hline
+{\em vertex\+ID} & the vertex id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_mesh_a06496712e5436f307076bdd0ef05ea03}\label{class_mesh_a06496712e5436f307076bdd0ef05ea03}} 
+\index{Mesh@{Mesh}!draw@{draw}}
+\index{draw@{draw}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Mesh\+::draw (\begin{DoxyParamCaption}\item[{glm\+::mat4 const \&}]{model }\end{DoxyParamCaption}) const}
+
+
+
+draw the \mbox{\hyperlink{class_mesh}{Mesh}} 
+
+\mbox{\Hypertarget{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}\label{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}} 
+\index{Mesh@{Mesh}!sendMesh@{sendMesh}}
+\index{sendMesh@{sendMesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{sendMesh()}{sendMesh()}}
+{\footnotesize\ttfamily void Mesh\+::send\+Mesh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+send the mesh data to open\+GL 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Mesh.\+hpp\item 
+srcs/utils/opengl/Mesh.\+cpp\end{DoxyCompactItemize}

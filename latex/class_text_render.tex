@@ -1,0 +1,179 @@
+\hypertarget{class_text_render}{}\doxysection{Text\+Render Class Reference}
+\label{class_text_render}\index{TextRender@{TextRender}}
+
+
+render 2D text on an open\+GL 3D context  
+
+
+
+
+{\ttfamily \#include $<$Text\+Render.\+hpp$>$}
+
+
+
+Collaboration diagram for Text\+Render\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_text_render__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_text_render_1_1_character}{Character}}
+\item 
+class \mbox{\hyperlink{class_text_render_1_1_load_text_render_exception}{Load\+Text\+Render\+Exception}}
+\item 
+class \mbox{\hyperlink{class_text_render_1_1_text_render_error}{Text\+Render\+Error}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}\label{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}} 
+{\bfseries Text\+Render} (uint32\+\_\+t width, uint32\+\_\+t height)
+\item 
+\mbox{\Hypertarget{class_text_render_a019cb58785504de382da100b05a06a36}\label{class_text_render_a019cb58785504de382da100b05a06a36}} 
+{\bfseries Text\+Render} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&src)
+\item 
+\mbox{\Hypertarget{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}\label{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}} 
+\mbox{\hyperlink{class_text_render}{Text\+Render}} \& {\bfseries operator=} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}{load\+Font}} (std\+::string name, std\+::string const \&filename, uint32\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Load a ttf file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}{write}} (std\+::string const \&font\+Name, std\+::string text, glm\+::vec3 pos, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
+\begin{DoxyCompactList}\small\item\em Write 2D text on screen. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{class_text_render_a26975c1b71e98bf4d60abfebc2942816}{str\+Width}} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
+\begin{DoxyCompactList}\small\item\em Get the width of a text (in pixel) with a given font and size. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}{str\+Height}} (std\+::string const \&font\+Name, G\+Lfloat scale=1, bool full\+Height=false)
+\begin{DoxyCompactList}\small\item\em Get the height of a text (in pixel) with a given font and size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}{set\+Win\+Size}} (glm\+::vec2 win\+Size)
+\begin{DoxyCompactList}\small\item\em Call this function when the window is resized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}\label{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}} 
+\mbox{\hyperlink{class_shader}{Shader}} \& {\bfseries get\+Shader} ()
+\item 
+\mbox{\Hypertarget{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}\label{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}} 
+\mbox{\hyperlink{class_shader}{Shader}} const  \& {\bfseries get\+Shader} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_render_a0c196776d7ad5f5bb52928edd5727144}\label{class_text_render_a0c196776d7ad5f5bb52928edd5727144}} 
+std\+::map$<$ std\+::string, std\+::map$<$ G\+Lchar, \mbox{\hyperlink{struct_text_render_1_1_character}{Character}} $>$ $>$ {\bfseries font}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+render 2D text on an open\+GL 3D context 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}\label{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}} 
+\index{TextRender@{TextRender}!loadFont@{loadFont}}
+\index{loadFont@{loadFont}!TextRender@{TextRender}}
+\doxysubsubsection{\texorpdfstring{loadFont()}{loadFont()}}
+{\footnotesize\ttfamily void Text\+Render\+::load\+Font (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string const \&}]{filename,  }\item[{uint32\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Load a ttf file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the font created (used later to draw) \\
+\hline
+{\em filename} & The ttf filename \\
+\hline
+{\em size} & The text default size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}\label{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}} 
+\index{TextRender@{TextRender}!setWinSize@{setWinSize}}
+\index{setWinSize@{setWinSize}!TextRender@{TextRender}}
+\doxysubsubsection{\texorpdfstring{setWinSize()}{setWinSize()}}
+{\footnotesize\ttfamily void Text\+Render\+::set\+Win\+Size (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{win\+Size }\end{DoxyParamCaption})}
+
+
+
+Call this function when the window is resized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em win\+Size} & The new window size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}\label{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}} 
+\index{TextRender@{TextRender}!strHeight@{strHeight}}
+\index{strHeight@{strHeight}!TextRender@{TextRender}}
+\doxysubsubsection{\texorpdfstring{strHeight()}{strHeight()}}
+{\footnotesize\ttfamily uint32\+\_\+t Text\+Render\+::str\+Height (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{bool}]{full\+Height = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Get the height of a text (in pixel) with a given font and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The name of the font (choose name when load font) \\
+\hline
+{\em scale} & The text scale \\
+\hline
+{\em full\+Height} & True if we need the full height (including the letter under base height like \textquotesingle{}j\textquotesingle{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The text height 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_text_render_a26975c1b71e98bf4d60abfebc2942816}\label{class_text_render_a26975c1b71e98bf4d60abfebc2942816}} 
+\index{TextRender@{TextRender}!strWidth@{strWidth}}
+\index{strWidth@{strWidth}!TextRender@{TextRender}}
+\doxysubsubsection{\texorpdfstring{strWidth()}{strWidth()}}
+{\footnotesize\ttfamily uint32\+\_\+t Text\+Render\+::str\+Width (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Get the width of a text (in pixel) with a given font and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The name of the font (choose name when load font) \\
+\hline
+{\em text} & The text to write \\
+\hline
+{\em scale} & The text scale \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The text width 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}\label{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}} 
+\index{TextRender@{TextRender}!write@{write}}
+\index{write@{write}!TextRender@{TextRender}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void Text\+Render\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{glm\+::vec3}]{pos,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{glm\+::vec3}]{color = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)} }\end{DoxyParamCaption})}
+
+
+
+Write 2D text on screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+Name} & The name of the font (choose name when load font) \\
+\hline
+{\em text} & The text to write \\
+\hline
+{\em x} & The text x position \\
+\hline
+{\em y} & The text y position \\
+\hline
+{\em scale} & The text scale \\
+\hline
+{\em color} & The text color \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/Text\+Render.\+hpp\item 
+srcs/utils/opengl/Text\+Render.\+cpp\end{DoxyCompactItemize}

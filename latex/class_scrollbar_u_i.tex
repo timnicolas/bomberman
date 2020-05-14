@@ -1,0 +1,194 @@
+\hypertarget{class_scrollbar_u_i}{}\doxysection{Scrollbar\+UI Class Reference}
+\label{class_scrollbar_u_i}\index{ScrollbarUI@{ScrollbarUI}}
+
+
+this is the UI for scrollbar  
+
+
+
+
+{\ttfamily \#include $<$Scrollbar\+U\+I.\+hpp$>$}
+
+
+
+Inheritance diagram for Scrollbar\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scrollbar_u_i__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scrollbar\+UI\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scrollbar_u_i__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ab140070030647953a0624b2a55be54b1}\label{class_scrollbar_u_i_ab140070030647953a0624b2a55be54b1}} 
+{\bfseries Scrollbar\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a5fd6496ba9ec34d5e2e5e86dd18d49fd}\label{class_scrollbar_u_i_a5fd6496ba9ec34d5e2e5e86dd18d49fd}} 
+{\bfseries Scrollbar\+UI} (\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a9cff2b43b275058afa3f3ba242c42e41}\label{class_scrollbar_u_i_a9cff2b43b275058afa3f3ba242c42e41}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a3e782056929dbee685c09abfdbcf6473}\label{class_scrollbar_u_i_a3e782056929dbee685c09abfdbcf6473}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries enable\+Vert\+Scroll} (bool enable)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_aa7e2e95bfbbc527f72b7576601d08944}\label{class_scrollbar_u_i_aa7e2e95bfbbc527f72b7576601d08944}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries enable\+Horiz\+Scroll} (bool enable)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ae42a6691cc86a27ffdf5491976cf5eb1}\label{class_scrollbar_u_i_ae42a6691cc86a27ffdf5491976cf5eb1}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries set\+Scrollbar\+Size} (float size)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a4106fe5566d4041d348e14025fc12b4a}\label{class_scrollbar_u_i_a4106fe5566d4041d348e14025fc12b4a}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries set\+Scrollbar\+Speed} (float speed)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a3938a8a583e40efef2996bd76ec0b73e}\label{class_scrollbar_u_i_a3938a8a583e40efef2996bd76ec0b73e}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries invert\+Vert\+Scroll} (bool invert)
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a7af0e6e6a2cde698fe84d516761c47aa}\label{class_scrollbar_u_i_a7af0e6e6a2cde698fe84d516761c47aa}} 
+\mbox{\hyperlink{class_scrollbar_u_i}{Scrollbar\+UI}} \& {\bfseries invert\+Horiz\+Scroll} (bool invert)
+\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_scrollbar_u_i_a3a4c39a263f6bf7783b1054f57a26ee7}{get\+Master\+Pos}} () const
+\begin{DoxyCompactList}\small\item\em Get position of master element (bottom left after border) \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_scrollbar_u_i_a7dd8afe939f8b8a5f9486eeec1f56d92}{get\+Master\+Real\+Pos}} () const
+\begin{DoxyCompactList}\small\item\em Get position of master element (bottom left after border) considering offset. \end{DoxyCompactList}\item 
+virtual glm\+::vec2 \mbox{\hyperlink{class_scrollbar_u_i_ad9f2de5f7fbb4acdfe25fc2dbe3eb943}{get\+Master\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get size of master element inside the borders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a75d909bc72204564034629439f6c0489}\label{class_scrollbar_u_i_a75d909bc72204564034629439f6c0489}} 
+virtual void \mbox{\hyperlink{class_scrollbar_u_i_a75d909bc72204564034629439f6c0489}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em this is the base update function of UI objects \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_adac2d8cc8f17d8db4170abe7ff9d3dad}\label{class_scrollbar_u_i_adac2d8cc8f17d8db4170abe7ff9d3dad}} 
+virtual void \mbox{\hyperlink{class_scrollbar_u_i_adac2d8cc8f17d8db4170abe7ff9d3dad}{\+\_\+draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function for UI /!\textbackslash{} -\/$>$ you need to draw in the reverse order (draw at first the element on the top) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a6125bbe47abf1518e69299967d19b43a}\label{class_scrollbar_u_i_a6125bbe47abf1518e69299967d19b43a}} 
+float {\bfseries \+\_\+scrollbar\+Size}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a532e06e324461641a9cdd2555e21b1d6}\label{class_scrollbar_u_i_a532e06e324461641a9cdd2555e21b1d6}} 
+glm\+::vec4 {\bfseries \+\_\+scrollbar\+Color}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a626bf47cfb0bea04f453029b986341e2}\label{class_scrollbar_u_i_a626bf47cfb0bea04f453029b986341e2}} 
+float {\bfseries \+\_\+mouse\+Scroll\+Speed}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ab40860984252349a22993b2934618bc5}\label{class_scrollbar_u_i_ab40860984252349a22993b2934618bc5}} 
+bool {\bfseries \+\_\+vert\+Scroll}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ab7ce5487caa9ad8b010f800e80685f57}\label{class_scrollbar_u_i_ab7ce5487caa9ad8b010f800e80685f57}} 
+bool {\bfseries \+\_\+vert\+Scroll\+Hide}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_add30aeb1da25f6cd417680ab0e12652e}\label{class_scrollbar_u_i_add30aeb1da25f6cd417680ab0e12652e}} 
+bool {\bfseries \+\_\+vert\+Scroll\+Inverted}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_aaae7fde079436e9b5e4d5e6d821d606d}\label{class_scrollbar_u_i_aaae7fde079436e9b5e4d5e6d821d606d}} 
+float {\bfseries \+\_\+vert\+Scrollbar\+Pos}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a0b00f02fb5b54356c19955b8a8c90691}\label{class_scrollbar_u_i_a0b00f02fb5b54356c19955b8a8c90691}} 
+float {\bfseries \+\_\+vert\+Scroll\+Bar\+Draw\+Size}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_aa691ffc09f3fb8ccce56b152f5d3b2c9}\label{class_scrollbar_u_i_aa691ffc09f3fb8ccce56b152f5d3b2c9}} 
+bool {\bfseries \+\_\+is\+Vert\+Scroll\+Clicked}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a9bd912a08df25133083af2c4564033c7}\label{class_scrollbar_u_i_a9bd912a08df25133083af2c4564033c7}} 
+bool {\bfseries \+\_\+horiz\+Scroll}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ad8171e1bc05ea2490927f224a572f5e0}\label{class_scrollbar_u_i_ad8171e1bc05ea2490927f224a572f5e0}} 
+bool {\bfseries \+\_\+horiz\+Scroll\+Hide}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a8c8b8580f609b0b1c264012c88d818fe}\label{class_scrollbar_u_i_a8c8b8580f609b0b1c264012c88d818fe}} 
+bool {\bfseries \+\_\+horiz\+Scroll\+Inverted}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a32a55fddb165d3c81412d10203fac6c0}\label{class_scrollbar_u_i_a32a55fddb165d3c81412d10203fac6c0}} 
+float {\bfseries \+\_\+horiz\+Scrollbar\+Pos}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_ab73087b87968f26751d80fb6273218d0}\label{class_scrollbar_u_i_ab73087b87968f26751d80fb6273218d0}} 
+float {\bfseries \+\_\+horiz\+Scroll\+Bar\+Draw\+Size}
+\item 
+\mbox{\Hypertarget{class_scrollbar_u_i_a21b11b5b749a1efb3460280ab5250950}\label{class_scrollbar_u_i_a21b11b5b749a1efb3460280ab5250950}} 
+bool {\bfseries \+\_\+is\+Horiz\+Scroll\+Clicked}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+this is the UI for scrollbar 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scrollbar_u_i_a3a4c39a263f6bf7783b1054f57a26ee7}\label{class_scrollbar_u_i_a3a4c39a263f6bf7783b1054f57a26ee7}} 
+\index{ScrollbarUI@{ScrollbarUI}!getMasterPos@{getMasterPos}}
+\index{getMasterPos@{getMasterPos}!ScrollbarUI@{ScrollbarUI}}
+\doxysubsubsection{\texorpdfstring{getMasterPos()}{getMasterPos()}}
+{\footnotesize\ttfamily glm\+::vec2 Scrollbar\+U\+I\+::get\+Master\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get position of master element (bottom left after border) 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The position 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_base_master_u_i_aec1bb7871f82b2bd41de4fe4486e4050}{A\+Base\+Master\+UI}}.
+
+\mbox{\Hypertarget{class_scrollbar_u_i_a7dd8afe939f8b8a5f9486eeec1f56d92}\label{class_scrollbar_u_i_a7dd8afe939f8b8a5f9486eeec1f56d92}} 
+\index{ScrollbarUI@{ScrollbarUI}!getMasterRealPos@{getMasterRealPos}}
+\index{getMasterRealPos@{getMasterRealPos}!ScrollbarUI@{ScrollbarUI}}
+\doxysubsubsection{\texorpdfstring{getMasterRealPos()}{getMasterRealPos()}}
+{\footnotesize\ttfamily glm\+::vec2 Scrollbar\+U\+I\+::get\+Master\+Real\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get position of master element (bottom left after border) considering offset. 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The position 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_base_master_u_i_a64cf45d76b377fd59ec19f1f1d53c0be}{A\+Base\+Master\+UI}}.
+
+\mbox{\Hypertarget{class_scrollbar_u_i_ad9f2de5f7fbb4acdfe25fc2dbe3eb943}\label{class_scrollbar_u_i_ad9f2de5f7fbb4acdfe25fc2dbe3eb943}} 
+\index{ScrollbarUI@{ScrollbarUI}!getMasterSize@{getMasterSize}}
+\index{getMasterSize@{getMasterSize}!ScrollbarUI@{ScrollbarUI}}
+\doxysubsubsection{\texorpdfstring{getMasterSize()}{getMasterSize()}}
+{\footnotesize\ttfamily glm\+::vec2 Scrollbar\+U\+I\+::get\+Master\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get size of master element inside the borders. 
+
+!!! This functions can be overwrite in childs class
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec2 The size 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_base_master_u_i_ad8e2ca2b3f67ca274e5dd0169e454e55}{A\+Base\+Master\+UI}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/opengl/\+U\+I/Scrollbar\+U\+I.\+hpp\item 
+srcs/utils/opengl/\+U\+I/Scrollbar\+U\+I.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,137 @@
+\hypertarget{class_crispy}{}\doxysection{Crispy Class Reference}
+\label{class_crispy}\index{Crispy@{Crispy}}
+
+
+Inheritance diagram for Crispy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_crispy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Crispy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_crispy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_crispy_1_1_crispy_exception}{Crispy\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_crispy_a78109acb28dc9efc1d74cf952a9709d9}\label{class_crispy_a78109acb28dc9efc1d74cf952a9709d9}} 
+{\bfseries Crispy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_crispy_a648bbdda44870a4df05617f50130cb07}\label{class_crispy_a648bbdda44870a4df05617f50130cb07}} 
+{\bfseries Crispy} (\mbox{\hyperlink{class_crispy}{Crispy}} const \&src)
+\item 
+\mbox{\Hypertarget{class_crispy_a7b82eba5a20747f4412510ad7be548af}\label{class_crispy_a7b82eba5a20747f4412510ad7be548af}} 
+\mbox{\hyperlink{class_crispy}{Crispy}} \& {\bfseries operator=} (\mbox{\hyperlink{class_crispy}{Crispy}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Called after update. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_crispy}{Crispy}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_crispy_a30d88975d3874ed4a9d2216abefbf2c0}\label{class_crispy_a30d88975d3874ed4a9d2216abefbf2c0}} 
+static \mbox{\hyperlink{class_crispy}{Crispy}} $\ast$ {\bfseries generate\+Crispy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}}, uint32\+\_\+t gen\+Wall\+Percent)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}\label{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}} 
+\index{Crispy@{Crispy}!draw@{draw}}
+\index{draw@{draw}!Crispy@{Crispy}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Crispy\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_crispy_aef91bfa94d0506d25b4cf78098e57912}\label{class_crispy_aef91bfa94d0506d25b4cf78098e57912}} 
+\index{Crispy@{Crispy}!init@{init}}
+\index{init@{init}!Crispy@{Crispy}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Crispy\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init \mbox{\hyperlink{class_crispy}{Crispy}}. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}.
+
+\mbox{\Hypertarget{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}\label{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}} 
+\index{Crispy@{Crispy}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!Crispy@{Crispy}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool Crispy\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called after update. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}\label{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}} 
+\index{Crispy@{Crispy}!update@{update}}
+\index{update@{update}!Crispy@{Crispy}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Crispy\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Crispy.\+hpp\item 
+srcs/elements/Crispy.\+cpp\end{DoxyCompactItemize}

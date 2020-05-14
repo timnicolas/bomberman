@@ -1,0 +1,159 @@
+\hypertarget{class_logging}{}\doxysection{Logging Class Reference}
+\label{class_logging}\index{Logging@{Logging}}
+
+
+manage logging in all project  
+
+
+
+
+{\ttfamily \#include $<$Logging.\+hpp$>$}
+
+
+
+Collaboration diagram for Logging\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{class_logging__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_logging_a4edcd4fdedc39eaff3bdb62e2d485f8f}\label{class_logging_a4edcd4fdedc39eaff3bdb62e2d485f8f}} 
+{\bfseries Logging} (\mbox{\hyperlink{class_logging}{Logging}} const \&src)
+\item 
+\mbox{\Hypertarget{class_logging_a4cfa3d5bc28693dc9bf36e9eb55fe824}\label{class_logging_a4cfa3d5bc28693dc9bf36e9eb55fe824}} 
+\mbox{\hyperlink{class_logging}{Logging}} \& {\bfseries operator=} (\mbox{\hyperlink{class_logging}{Logging}} const \&rhs)
+\item 
+void \mbox{\hyperlink{class_logging_a5165a7c0ff67c0cd90e651af28e6a65f}{set\+Loglevel}} (e\+Loglevel loglevel)
+\begin{DoxyCompactList}\small\item\em The the minimum log level to print. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logging_a8f4283898adff3dd6cf1653b2f9dd9cb}{set\+Log\+Color}} (e\+Loglevel loglevel, std\+::string const \&color)
+\begin{DoxyCompactList}\small\item\em Set the color for a given log function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logging_a3562c02cd1399d5a2a4c3d74fcabd297}{set\+Print\+File\+Line}} (e\+Loglevel loglevel, bool print\+File\+Line)
+\begin{DoxyCompactList}\small\item\em Enable a given log function to print his file and line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logging_ac1d4bfabbd4cc805c22bf080441a912a}{set\+Print\+File\+Line}} (bool print\+File\+Line)
+\begin{DoxyCompactList}\small\item\em Enable all log function to print his file and line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logging_af5b442a39ab4625efe1473b92e09f677}{log}} (e\+Loglevel level, std\+::string message, std\+::string file=\char`\"{}\char`\"{}, int line=-\/1)
+\begin{DoxyCompactList}\small\item\em Log a mesage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_logging_ab6b777cad3125e46c087e439e8d42e04}\label{class_logging_ab6b777cad3125e46c087e439e8d42e04}} 
+std\+::string const  \& {\bfseries get\+Color} (e\+Loglevel loglevel) const
+\item 
+\mbox{\Hypertarget{class_logging_a79047102294c8446fb8ec27e95835e52}\label{class_logging_a79047102294c8446fb8ec27e95835e52}} 
+e\+Loglevel {\bfseries get\+Loglevel} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+manage logging in all project 
+
+To use \mbox{\hyperlink{class_logging}{Logging}}, you need to call the defines\+:
+\begin{DoxyItemize}
+\item log\+Debug
+\item log\+Info
+\item log\+Success
+\item log\+Warn
+\item log\+Err
+\item log\+Fatal
+\item log\+Err\+Exit
+\item log\+Fatal\+Exit For example \`{}log\+Debug(\char`\"{}fps\+: \char`\"{} $<$$<$ fps); 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_logging_af5b442a39ab4625efe1473b92e09f677}\label{class_logging_af5b442a39ab4625efe1473b92e09f677}} 
+\index{Logging@{Logging}!log@{log}}
+\index{log@{log}!Logging@{Logging}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily void Logging\+::log (\begin{DoxyParamCaption}\item[{e\+Loglevel}]{level,  }\item[{std\+::string}]{message,  }\item[{std\+::string}]{file = {\ttfamily \char`\"{}\char`\"{}},  }\item[{int}]{line = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Log a mesage. 
+
+Normally, this function is called by defines (log\+Debug(...), log\+Warn(...), ...)
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & The log level \\
+\hline
+{\em message} & The message \\
+\hline
+{\em file} & The file of calling function \\
+\hline
+{\em line} & the line of calling function \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_logging_a8f4283898adff3dd6cf1653b2f9dd9cb}\label{class_logging_a8f4283898adff3dd6cf1653b2f9dd9cb}} 
+\index{Logging@{Logging}!setLogColor@{setLogColor}}
+\index{setLogColor@{setLogColor}!Logging@{Logging}}
+\doxysubsubsection{\texorpdfstring{setLogColor()}{setLogColor()}}
+{\footnotesize\ttfamily void Logging\+::set\+Log\+Color (\begin{DoxyParamCaption}\item[{e\+Loglevel}]{loglevel,  }\item[{std\+::string const \&}]{color }\end{DoxyParamCaption})}
+
+
+
+Set the color for a given log function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em loglevel} & The log to update \\
+\hline
+{\em color} & The new color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_logging_a5165a7c0ff67c0cd90e651af28e6a65f}\label{class_logging_a5165a7c0ff67c0cd90e651af28e6a65f}} 
+\index{Logging@{Logging}!setLoglevel@{setLoglevel}}
+\index{setLoglevel@{setLoglevel}!Logging@{Logging}}
+\doxysubsubsection{\texorpdfstring{setLoglevel()}{setLoglevel()}}
+{\footnotesize\ttfamily void Logging\+::set\+Loglevel (\begin{DoxyParamCaption}\item[{e\+Loglevel}]{loglevel }\end{DoxyParamCaption})}
+
+
+
+The the minimum log level to print. 
+
+logging.\+set\+Loglevel(\+L\+O\+G\+I\+N\+F\+O); // to discard log\+Debug
+
+
+\begin{DoxyParams}{Parameters}
+{\em loglevel} & The minimum log to print \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_logging_ac1d4bfabbd4cc805c22bf080441a912a}\label{class_logging_ac1d4bfabbd4cc805c22bf080441a912a}} 
+\index{Logging@{Logging}!setPrintFileLine@{setPrintFileLine}}
+\index{setPrintFileLine@{setPrintFileLine}!Logging@{Logging}}
+\doxysubsubsection{\texorpdfstring{setPrintFileLine()}{setPrintFileLine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Logging\+::set\+Print\+File\+Line (\begin{DoxyParamCaption}\item[{bool}]{print\+File\+Line }\end{DoxyParamCaption})}
+
+
+
+Enable all log function to print his file and line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em print\+File\+Line} & Enable or disable option \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_logging_a3562c02cd1399d5a2a4c3d74fcabd297}\label{class_logging_a3562c02cd1399d5a2a4c3d74fcabd297}} 
+\index{Logging@{Logging}!setPrintFileLine@{setPrintFileLine}}
+\index{setPrintFileLine@{setPrintFileLine}!Logging@{Logging}}
+\doxysubsubsection{\texorpdfstring{setPrintFileLine()}{setPrintFileLine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Logging\+::set\+Print\+File\+Line (\begin{DoxyParamCaption}\item[{e\+Loglevel}]{loglevel,  }\item[{bool}]{print\+File\+Line }\end{DoxyParamCaption})}
+
+
+
+Enable a given log function to print his file and line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em loglevel} & The log to update \\
+\hline
+{\em print\+File\+Line} & Enable or disable option \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/utils/Logging.\+hpp\item 
+srcs/utils/Logging.\+cpp\end{DoxyCompactItemize}

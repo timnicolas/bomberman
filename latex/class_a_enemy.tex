@@ -1,0 +1,374 @@
+\hypertarget{class_a_enemy}{}\doxysection{A\+Enemy Class Reference}
+\label{class_a_enemy}\index{AEnemy@{AEnemy}}
+
+
+This is the base enemy object.  
+
+
+
+
+{\ttfamily \#include $<$A\+Enemy.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_enemy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+Enemy\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_enemy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_a_enemy_1_1_enemy_exception}{Enemy\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}\label{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}} 
+{\bfseries A\+Enemy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}\label{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}} 
+{\bfseries A\+Enemy} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&src)
+\item 
+\mbox{\Hypertarget{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}\label{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}} 
+\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}{anim\+End\+Cb}} (std\+::string anim\+Name)
+\begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_enemy_a17bcf116c42c3d780e243127adf1a947}{take\+Damage}} (const int damage)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$damage$>$ damages. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ \mbox{\hyperlink{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}{get\+Collision}} (glm\+::vec3 dest) const
+\begin{DoxyCompactList}\small\item\em get a list of entity in collision with the Character at a position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}\label{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}} 
+int {\bfseries bombs}
+\item 
+\mbox{\Hypertarget{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}\label{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}} 
+int32\+\_\+t {\bfseries points}
+\item 
+\mbox{\Hypertarget{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}\label{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}} 
+int {\bfseries strength}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}\label{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}} 
+virtual bool {\bfseries \+\_\+update} ()=0
+\item 
+\mbox{\Hypertarget{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}\label{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}} 
+virtual bool {\bfseries \+\_\+post\+Update} ()=0
+\item 
+\mbox{\Hypertarget{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}\label{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}} 
+virtual bool {\bfseries \+\_\+draw} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+\item 
+bool \mbox{\hyperlink{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}{\+\_\+base\+Enemy\+Move}} (Direction\+::\+Enum \&dir)
+\begin{DoxyCompactList}\small\item\em Base moving function for enemy. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a2ddbe01e55094dbbff085ff10b1db957}{\+\_\+move\+Pattern\+Basic}} (std\+::vector$<$ Direction\+::\+Enum $>$ direction\+Order, uint32\+\_\+t \&dir\+Idx)
+\begin{DoxyCompactList}\small\item\em Move and follow a basic pattern (list of direction). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_ae9fafd83ac6040298120c6e3a8656743}{\+\_\+follow\+Path}} (std\+::deque$<$ \mbox{\hyperlink{struct_path_node}{Path\+Node}} $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Follow the given path. \end{DoxyCompactList}\item 
+Direction\+::\+Enum \mbox{\hyperlink{class_a_enemy_a7909b6882d5dba58d147decadc256cba}{\+\_\+is\+Player\+Visible}} () const
+\begin{DoxyCompactList}\small\item\em If the player is visible by the entity, return the direction of the player. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a250a33c7294ac9d6b125eebe8acd51e3}{\+\_\+is\+On}} (glm\+::ivec2 dest, float offset=I\+S\+\_\+\+O\+N\+\_\+\+P\+O\+S\+\_\+\+O\+F\+F\+S\+ET) const
+\begin{DoxyCompactList}\small\item\em Check if the enemy is on dest. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a5ff3b836a7a98499a1a4019f7238b4d0}{\+\_\+get\+Path\+To}} (glm\+::ivec2 dest, std\+::deque$<$ \mbox{\hyperlink{struct_path_node}{Path\+Node}} $>$ \&path)
+\begin{DoxyCompactList}\small\item\em Get the path to a destination. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_a_enemy_a4348865dc5c245e2d88e31296847e1a6}{\+\_\+is\+Blocked}} ()
+\begin{DoxyCompactList}\small\item\em Check if the enemy is blocked btw walls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_a_enemy_af85a958024c72d9c0f522be466c75092}\label{class_a_enemy_af85a958024c72d9c0f522be466c75092}} 
+Direction\+::\+Enum {\bfseries \+\_\+dir}
+\item 
+\mbox{\Hypertarget{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}\label{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries \+\_\+sound\+Attack}
+\item 
+\mbox{\Hypertarget{class_a_enemy_a112cb8a927706e1a563119258239f4b6}\label{class_a_enemy_a112cb8a927706e1a563119258239f4b6}} 
+bool {\bfseries \+\_\+fisrt\+Call}
+\item 
+\mbox{\Hypertarget{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}\label{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}} 
+bool {\bfseries \+\_\+move\+On\+Center}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the base enemy object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}\label{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}} 
+\index{AEnemy@{AEnemy}!\_baseEnemyMove@{\_baseEnemyMove}}
+\index{\_baseEnemyMove@{\_baseEnemyMove}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_baseEnemyMove()}{\_baseEnemyMove()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+base\+Enemy\+Move (\begin{DoxyParamCaption}\item[{Direction\+::\+Enum \&}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Base moving function for enemy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & The actual direction of the enemy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If the enemy is blocked 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_ae9fafd83ac6040298120c6e3a8656743}\label{class_a_enemy_ae9fafd83ac6040298120c6e3a8656743}} 
+\index{AEnemy@{AEnemy}!\_followPath@{\_followPath}}
+\index{\_followPath@{\_followPath}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_followPath()}{\_followPath()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+follow\+Path (\begin{DoxyParamCaption}\item[{std\+::deque$<$ \mbox{\hyperlink{struct_path_node}{Path\+Node}} $>$ \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Follow the given path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to follow \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If the Entity is blocked 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a5ff3b836a7a98499a1a4019f7238b4d0}\label{class_a_enemy_a5ff3b836a7a98499a1a4019f7238b4d0}} 
+\index{AEnemy@{AEnemy}!\_getPathTo@{\_getPathTo}}
+\index{\_getPathTo@{\_getPathTo}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_getPathTo()}{\_getPathTo()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+get\+Path\+To (\begin{DoxyParamCaption}\item[{glm\+::ivec2}]{dest,  }\item[{std\+::deque$<$ \mbox{\hyperlink{struct_path_node}{Path\+Node}} $>$ \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Get the path to a destination. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & The destination \\
+\hline
+{\em path} & The path (empty if there is no path). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if a path is detected 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a4348865dc5c245e2d88e31296847e1a6}\label{class_a_enemy_a4348865dc5c245e2d88e31296847e1a6}} 
+\index{AEnemy@{AEnemy}!\_isBlocked@{\_isBlocked}}
+\index{\_isBlocked@{\_isBlocked}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_isBlocked()}{\_isBlocked()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+is\+Blocked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Check if the enemy is blocked btw walls. 
+
+\begin{DoxyReturn}{Returns}
+true If the enemy is blocked 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a250a33c7294ac9d6b125eebe8acd51e3}\label{class_a_enemy_a250a33c7294ac9d6b125eebe8acd51e3}} 
+\index{AEnemy@{AEnemy}!\_isOn@{\_isOn}}
+\index{\_isOn@{\_isOn}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_isOn()}{\_isOn()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+is\+On (\begin{DoxyParamCaption}\item[{glm\+::ivec2}]{dest,  }\item[{float}]{offset = {\ttfamily IS\+\_\+ON\+\_\+POS\+\_\+OFFSET} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Check if the enemy is on dest. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & The postion to compare with enemy pos \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If is on the destination 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a7909b6882d5dba58d147decadc256cba}\label{class_a_enemy_a7909b6882d5dba58d147decadc256cba}} 
+\index{AEnemy@{AEnemy}!\_isPlayerVisible@{\_isPlayerVisible}}
+\index{\_isPlayerVisible@{\_isPlayerVisible}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_isPlayerVisible()}{\_isPlayerVisible()}}
+{\footnotesize\ttfamily Direction\+::\+Enum A\+Enemy\+::\+\_\+is\+Player\+Visible (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+If the player is visible by the entity, return the direction of the player. 
+
+\begin{DoxyReturn}{Returns}
+Direction\+::\+Enum Return the direction of the player (N\+O\+\_\+\+D\+I\+R\+E\+C\+T\+I\+ON if not visible) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a2ddbe01e55094dbbff085ff10b1db957}\label{class_a_enemy_a2ddbe01e55094dbbff085ff10b1db957}} 
+\index{AEnemy@{AEnemy}!\_movePatternBasic@{\_movePatternBasic}}
+\index{\_movePatternBasic@{\_movePatternBasic}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_movePatternBasic()}{\_movePatternBasic()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+move\+Pattern\+Basic (\begin{DoxyParamCaption}\item[{std\+::vector$<$ Direction\+::\+Enum $>$}]{direction\+Order,  }\item[{uint32\+\_\+t \&}]{dir\+Idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Move and follow a basic pattern (list of direction). 
+
+start at direction\+Order\mbox{[}start\+Dir\+ID\mbox{]} and try to move. If cannot move, try all the next direction until one direction is valid.
+
+
+\begin{DoxyParams}{Parameters}
+{\em direction\+Order} & A vector with all direction in the right order \\
+\hline
+{\em dir\+Idx} & The direction used (index in direction\+Order) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If the enemy is blocked 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}\label{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}} 
+\index{AEnemy@{AEnemy}!animEndCb@{animEndCb}}
+\index{animEndCb@{animEndCb}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{animEndCb()}{animEndCb()}}
+{\footnotesize\ttfamily void A\+Enemy\+::anim\+End\+Cb (\begin{DoxyParamCaption}\item[{std\+::string}]{anim\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anim\+Name} & the current animation name \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}{A\+Entity}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}{Enemy\+Crispy}}.
+
+\mbox{\Hypertarget{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}\label{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}} 
+\index{AEnemy@{AEnemy}!draw@{draw}}
+\index{draw@{draw}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+\mbox{\Hypertarget{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}\label{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}} 
+\index{AEnemy@{AEnemy}!getCollision@{getCollision}}
+\index{getCollision@{getCollision}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{getCollision()}{getCollision()}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ A\+Enemy\+::get\+Collision (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{dest }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+get a list of entity in collision with the Character at a position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & default V\+O\+I\+D\+\_\+\+P\+O\+S3 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::unordered\+\_\+set$<$\+A\+Entity $\ast$$>$ collisions 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_character_a39c7111c4b096129d040e22e3b09592d}{A\+Character}}.
+
+\mbox{\Hypertarget{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}\label{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}} 
+\index{AEnemy@{AEnemy}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_a_enemy_a17bcf116c42c3d780e243127adf1a947}\label{class_a_enemy_a17bcf116c42c3d780e243127adf1a947}} 
+\index{AEnemy@{AEnemy}!takeDamage@{takeDamage}}
+\index{takeDamage@{takeDamage}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{takeDamage()}{takeDamage()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::take\+Damage (\begin{DoxyParamCaption}\item[{const int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$damage$>$ damages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if damage taken 
+
+false if damage not taken 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_character_a1ab94580e4db621f79f0bf1d6bcdb600}{A\+Character}}.
+
+\mbox{\Hypertarget{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}\label{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}} 
+\index{AEnemy@{AEnemy}!update@{update}}
+\index{update@{update}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool A\+Enemy\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/A\+Enemy.\+hpp\item 
+srcs/A\+Enemy.\+cpp\item 
+srcs/A\+Enemy\+\_\+pathfinding.\+cpp\end{DoxyCompactItemize}

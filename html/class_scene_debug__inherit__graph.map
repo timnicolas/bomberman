@@ -1,0 +1,5 @@
+<map id="SceneDebug" name="SceneDebug">
+<area shape="rect" id="node1" title="debug menu to show fps at the top of the screen" alt="" coords="7,593,132,759"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="5,292,133,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="18,5,121,244"/>
+</map>

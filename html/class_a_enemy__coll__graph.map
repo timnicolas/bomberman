@@ -1,0 +1,23 @@
+<map id="AEnemy" name="AEnemy">
+<area shape="rect" id="node1" title="This is the base enemy object." alt="" coords="51,2175,206,2619"/>
+<area shape="rect" id="node2" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="123,1488,295,1903"/>
+<area shape="rect" id="node17" href="$class_player.html" title="This is the player object." alt="" coords="563,2211,694,2582"/>
+<area shape="rect" id="node3" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="572,3247,707,3617"/>
+<area shape="rect" id="node4" href="$class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="491,2681,649,3184"/>
+<area shape="rect" id="node5" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="411,2270,539,2523"/>
+<area shape="rect" id="node6" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="319,1583,421,1807"/>
+<area shape="rect" id="node7" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="277,710,463,1007"/>
+<area shape="rect" id="node8" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="503,71,610,295"/>
+<area shape="rect" id="node13" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="514,439,717,1279"/>
+<area shape="rect" id="node9" href="$class_texture_manager.html" title=" " alt="" coords="172,101,315,266"/>
+<area shape="rect" id="node10" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="339,5,473,361"/>
+<area shape="rect" id="node11" href="$struct_game_info.html" title=" " alt="" coords="5,108,148,259"/>
+<area shape="rect" id="node12" href="$struct_scene_game_1_1_all_u_i.html" title=" " alt="" coords="750,1927,905,2151"/>
+<area shape="rect" id="node15" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="446,1510,627,1881"/>
+<area shape="rect" id="node14" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="637,71,754,295"/>
+<area shape="rect" id="node16" href="$class_score.html" title=" " alt="" coords="281,2285,387,2509"/>
+<area shape="rect" id="node18" href="$struct_player_1_1_bonus_actifs.html" title=" " alt="" coords="651,1583,790,1807"/>
+<area shape="rect" id="node19" href="$class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="673,2777,869,3089"/>
+<area shape="rect" id="node20" href="$class_e_transform.html" title="Class to manage model transformation." alt="" coords="805,2255,924,2538"/>
+<area shape="rect" id="node21" href="$struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="894,2887,1025,2979"/>
+</map>

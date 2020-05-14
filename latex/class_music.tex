@@ -1,0 +1,68 @@
+\hypertarget{class_music}{}\doxysection{Music Class Reference}
+\label{class_music}\index{Music@{Music}}
+
+
+\mbox{\hyperlink{class_music}{Music}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}.  
+
+
+
+
+{\ttfamily \#include $<$Music.\+hpp$>$}
+
+
+
+Collaboration diagram for Music\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{class_music__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_music_1_1_music_exception}{Music\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_music_a8169fdac350380994c08fe67062fc99d}\label{class_music_a8169fdac350380994c08fe67062fc99d}} 
+{\bfseries Music} (std\+::string filename)
+\item 
+void \mbox{\hyperlink{class_music_a5ab263243b34b3f84e916b7b15854df5}{play}} (float volume, bool loop)
+\begin{DoxyCompactList}\small\item\em Play the music at the specified volume. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_music}{Music}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_music_a5ab263243b34b3f84e916b7b15854df5}\label{class_music_a5ab263243b34b3f84e916b7b15854df5}} 
+\index{Music@{Music}!play@{play}}
+\index{play@{play}!Music@{Music}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void Music\+::play (\begin{DoxyParamCaption}\item[{float}]{volume,  }\item[{bool}]{loop }\end{DoxyParamCaption})}
+
+
+
+Play the music at the specified volume. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em volume} & The volume of the music. \\
+\hline
+{\em loop} & Specify if the music should loop, false by default.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em A} & \mbox{\hyperlink{class_music_1_1_music_exception}{Music\+Exception}} if the music failed to be played. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/audio/Music.\+hpp\item 
+srcs/audio/Music.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,121 @@
+\hypertarget{class_sound}{}\doxysection{Sound Class Reference}
+\label{class_sound}\index{Sound@{Sound}}
+
+
+\mbox{\hyperlink{class_sound}{Sound}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}.  
+
+
+
+
+{\ttfamily \#include $<$Sound.\+hpp$>$}
+
+
+
+Collaboration diagram for Sound\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{class_sound__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sound_a33747a0bca54f777d0da6f300b8f23f0}\label{class_sound_a33747a0bca54f777d0da6f300b8f23f0}} 
+{\bfseries Sound} (std\+::string filename)
+\item 
+int \mbox{\hyperlink{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}{play}} (float volume, float env\+\_\+volume, bool loop=false, int fade\+In=0)
+\begin{DoxyCompactList}\small\item\em Play the sound at the specified volume. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sound_a65b0f66e9123caed2809da366ac4d377}\label{class_sound_a65b0f66e9123caed2809da366ac4d377}} 
+void \mbox{\hyperlink{class_sound_a65b0f66e9123caed2809da366ac4d377}{pause}} ()
+\begin{DoxyCompactList}\small\item\em Pause all the channels playing this sound. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sound_a6139aff26f5bd3fea27fbef013124afc}\label{class_sound_a6139aff26f5bd3fea27fbef013124afc}} 
+void \mbox{\hyperlink{class_sound_a6139aff26f5bd3fea27fbef013124afc}{resume}} ()
+\begin{DoxyCompactList}\small\item\em Resumes all the channels playing this sound. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}\label{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}} 
+void \mbox{\hyperlink{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}{stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop all the channels playing this sound. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sound_ab992f2602675183484ba78932c1fca3c}{update\+Volume}} (float volume)
+\begin{DoxyCompactList}\small\item\em Update the volume for all the channels playing this sound. If a channel was set with volume modifier below 1.\+0, the modifier will be conserved. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sound_a30c16881e13d91d31553af3b17886a5c}{channel\+Finished}} (int chan)
+\begin{DoxyCompactList}\small\item\em Remove the specified channel from the list of used channels if found in it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_sound}{Sound}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sound_a30c16881e13d91d31553af3b17886a5c}\label{class_sound_a30c16881e13d91d31553af3b17886a5c}} 
+\index{Sound@{Sound}!channelFinished@{channelFinished}}
+\index{channelFinished@{channelFinished}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{channelFinished()}{channelFinished()}}
+{\footnotesize\ttfamily bool Sound\+::channel\+Finished (\begin{DoxyParamCaption}\item[{int}]{chan }\end{DoxyParamCaption})}
+
+
+
+Remove the specified channel from the list of used channels if found in it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chan} & The id of the channel that has just finished playing. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the channel was found. 
+
+false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}\label{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}} 
+\index{Sound@{Sound}!play@{play}}
+\index{play@{play}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily int Sound\+::play (\begin{DoxyParamCaption}\item[{float}]{volume,  }\item[{float}]{env\+\_\+volume,  }\item[{bool}]{loop = {\ttfamily false},  }\item[{int}]{fade\+In = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Play the sound at the specified volume. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em volume} & The volume of the sound. \\
+\hline
+{\em env\+\_\+volume} & The volume settings. \\
+\hline
+{\em loop} & If the sound is on loop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int channel used. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em A} & \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}} if the sound failed to be played. Not enough channels are allocated. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_sound_ab992f2602675183484ba78932c1fca3c}\label{class_sound_ab992f2602675183484ba78932c1fca3c}} 
+\index{Sound@{Sound}!updateVolume@{updateVolume}}
+\index{updateVolume@{updateVolume}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{updateVolume()}{updateVolume()}}
+{\footnotesize\ttfamily void Sound\+::update\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})}
+
+
+
+Update the volume for all the channels playing this sound. If a channel was set with volume modifier below 1.\+0, the modifier will be conserved. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em volume} & The new global volume value. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/audio/Sound.\+hpp\item 
+srcs/audio/Sound.\+cpp\end{DoxyCompactItemize}

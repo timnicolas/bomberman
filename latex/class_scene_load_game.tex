@@ -1,0 +1,134 @@
+\hypertarget{class_scene_load_game}{}\doxysection{Scene\+Load\+Game Class Reference}
+\label{class_scene_load_game}\index{SceneLoadGame@{SceneLoadGame}}
+
+
+menu for game over  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Load\+Game.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Load\+Game\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_load_game__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Load\+Game\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_load_game__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_load_game_1_1_buttons_states}{Buttons\+States}}
+\item 
+struct \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved}{Game\+Saved}}
+\item 
+struct \mbox{\hyperlink{struct_scene_load_game_1_1_preview_game}{Preview\+Game}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_ad70a45aee99f33f244fbfaf71cee3a10}\label{class_scene_load_game_ad70a45aee99f33f244fbfaf71cee3a10}} 
+{\bfseries Scene\+Load\+Game} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_load_game_a6975b7ed837cad31ed3e97b84305e63e}\label{class_scene_load_game_a6975b7ed837cad31ed3e97b84305e63e}} 
+{\bfseries Scene\+Load\+Game} (\mbox{\hyperlink{class_scene_load_game}{Scene\+Load\+Game}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_load_game_a4490f6bcd13404d4960110e06765e9b9}\label{class_scene_load_game_a4490f6bcd13404d4960110e06765e9b9}} 
+\mbox{\hyperlink{class_scene_load_game}{Scene\+Load\+Game}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_load_game}{Scene\+Load\+Game}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_load_game_a9b4d74b6c0c41ea0155639fa0385aa7d}\label{class_scene_load_game_a9b4d74b6c0c41ea0155639fa0385aa7d}} 
+virtual void \mbox{\hyperlink{class_scene_load_game_a9b4d74b6c0c41ea0155639fa0385aa7d}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_a5bb4d0eb575c4dcb4a1202da3cb258e2}\label{class_scene_load_game_a5bb4d0eb575c4dcb4a1202da3cb258e2}} 
+\mbox{\hyperlink{struct_scene_load_game_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_ad5bf77c59b06d6c3b24a62a591667b1e}\label{class_scene_load_game_ad5bf77c59b06d6c3b24a62a591667b1e}} 
+std\+::vector$<$ \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved}{Game\+Saved}} $\ast$ $>$ {\bfseries \+\_\+games\+Saved}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_a8f699898c6745b601e502c647e49fb75}\label{class_scene_load_game_a8f699898c6745b601e502c647e49fb75}} 
+\mbox{\hyperlink{struct_scene_load_game_1_1_preview_game}{Preview\+Game}} {\bfseries preview\+Game\+UI}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_aa07779d67adf894e656b24ada2385aa9}\label{class_scene_load_game_aa07779d67adf894e656b24ada2385aa9}} 
+int64\+\_\+t {\bfseries \+\_\+selected\+Game}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_a4615279dd03f5533862a57b54f251970}\label{class_scene_load_game_a4615279dd03f5533862a57b54f251970}} 
+std\+::string {\bfseries \+\_\+last\+Scene\+Name}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_load_game_ad6d3f35a36801f6c0460ded8ccfd6ff6}\label{class_scene_load_game_ad6d3f35a36801f6c0460ded8ccfd6ff6}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_load_game}{Scene\+Load\+Game}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+menu for game over 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}\label{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}} 
+\index{SceneLoadGame@{SceneLoadGame}!init@{init}}
+\index{init@{init}!SceneLoadGame@{SceneLoadGame}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Load\+Game\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}\label{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}} 
+\index{SceneLoadGame@{SceneLoadGame}!update@{update}}
+\index{update@{update}!SceneLoadGame@{SceneLoadGame}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Load\+Game\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Load\+Game.\+hpp\item 
+srcs/scenes/Scene\+Load\+Game.\+cpp\end{DoxyCompactItemize}

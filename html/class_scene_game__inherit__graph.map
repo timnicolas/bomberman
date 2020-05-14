@@ -1,0 +1,5 @@
+<map id="SceneGame" name="SceneGame">
+<area shape="rect" id="node1" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="5,593,164,1111"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="21,292,149,545"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="33,5,136,244"/>
+</map>

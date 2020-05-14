@@ -1,0 +1,186 @@
+\hypertarget{class_score}{}\doxysection{Score Class Reference}
+\label{class_score}\index{Score@{Score}}
+
+
+Collaboration diagram for Score\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{class_score__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_score_1_1_score_exception}{Score\+Exception}}
+\item 
+struct \mbox{\hyperlink{struct_score_1_1_stat}{Stat}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_score_a5648c0fccf943a657e712874d34fb7f5}\label{class_score_a5648c0fccf943a657e712874d34fb7f5}} 
+{\bfseries Score} (int32\+\_\+t score)
+\item 
+\mbox{\Hypertarget{class_score_ae9cf3eaeba42d057bd3dea4034525164}\label{class_score_ae9cf3eaeba42d057bd3dea4034525164}} 
+{\bfseries Score} (\mbox{\hyperlink{class_score}{Score}} const \&src)
+\item 
+\mbox{\Hypertarget{class_score_a4cb0a45369bf4bdaea93c6f840643329}\label{class_score_a4cb0a45369bf4bdaea93c6f840643329}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries operator=} (\mbox{\hyperlink{class_score}{Score}} const \&rhs)
+\item 
+\mbox{\Hypertarget{class_score_ade5285f719702dec177b23568a6f79e3}\label{class_score_ade5285f719702dec177b23568a6f79e3}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries operator=} (int32\+\_\+t points)
+\item 
+\mbox{\Hypertarget{class_score_a57078d193a0196f8589e9b6ff44043b9}\label{class_score_a57078d193a0196f8589e9b6ff44043b9}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries operator+} (int32\+\_\+t points)
+\item 
+\mbox{\Hypertarget{class_score_ada72aeab821258696786fdac3c6705fb}\label{class_score_ada72aeab821258696786fdac3c6705fb}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries operator-\/} (int32\+\_\+t points)
+\item 
+\mbox{\Hypertarget{class_score_aa09c8d15c82ba3edcd2ae56d8cf413ab}\label{class_score_aa09c8d15c82ba3edcd2ae56d8cf413ab}} 
+void {\bfseries operator+=} (int32\+\_\+t points)
+\item 
+\mbox{\Hypertarget{class_score_a7e3638503831135f9faf77ed7feba03f}\label{class_score_a7e3638503831135f9faf77ed7feba03f}} 
+void {\bfseries operator-\/=} (int32\+\_\+t points)
+\item 
+\mbox{\Hypertarget{class_score_a43eef6c9709196a5901a613519dea473}\label{class_score_a43eef6c9709196a5901a613519dea473}} 
+int32\+\_\+t {\bfseries get\+Score} () const
+\item 
+\mbox{\Hypertarget{class_score_a8dc456d08a9c2b08935ca58f4cf8ba0f}\label{class_score_a8dc456d08a9c2b08935ca58f4cf8ba0f}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries set\+Score} (int32\+\_\+t score)
+\item 
+\mbox{\Hypertarget{class_score_a0a14f2b51f134e97551f4ac57401a0ce}\label{class_score_a0a14f2b51f134e97551f4ac57401a0ce}} 
+int32\+\_\+t {\bfseries get\+Level\+Id} () const
+\item 
+\mbox{\Hypertarget{class_score_a6b5ea89d47e54eb743c7a7795719e171}\label{class_score_a6b5ea89d47e54eb743c7a7795719e171}} 
+\mbox{\hyperlink{class_score}{Score}} \& {\bfseries set\+Level\+Id} (int32\+\_\+t level\+Id)
+\item 
+\mbox{\Hypertarget{class_score_a543e8e801da09051ed563c11ab80ae12}\label{class_score_a543e8e801da09051ed563c11ab80ae12}} 
+std\+::string {\bfseries to\+String} ()
+\item 
+\mbox{\hyperlink{class_score}{Score}} \& \mbox{\hyperlink{class_score_a8ee59cdc6c44f0ad80feb01219d3357d}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset \mbox{\hyperlink{class_score}{Score}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_score}{Score}} \& \mbox{\hyperlink{class_score_abc3dd0d8a5e18ef31c83ad1a97c9f51b}{add\+Points}} (int32\+\_\+t points)
+\begin{DoxyCompactList}\small\item\em Add points to scrore. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_score}{Score}} \& \mbox{\hyperlink{class_score_aec14e494705073af4c32793bd14c6493}{add\+Bonus\+Time}} (float const level\+Time, float const time)
+\begin{DoxyCompactList}\small\item\em Add bonus points for time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_score}{Score}} \& \mbox{\hyperlink{class_score_a8b9bb1db9ddc8144378adfd81c6899aa}{add\+Bonus\+Enemies}} (uint32\+\_\+t level\+Enemies, uint32\+\_\+t enemies\+Last, uint32\+\_\+t level\+Crispies, uint32\+\_\+t crispies\+Last)
+\begin{DoxyCompactList}\small\item\em Add bonus points according to number of killed enemies. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_a7155b0d7742004972bb115a56d734fa6}{get\+Stats}} (std\+::vector$<$ \mbox{\hyperlink{struct_score_1_1_stat}{Stat}} $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Get Statistic \mbox{\hyperlink{class_score}{Score}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_score_ab72dbd7e1916741d6f5d91b38631dcff}\label{class_score_ab72dbd7e1916741d6f5d91b38631dcff}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_score}{Score}} \&my\+\_\+class)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_score_a8b9bb1db9ddc8144378adfd81c6899aa}\label{class_score_a8b9bb1db9ddc8144378adfd81c6899aa}} 
+\index{Score@{Score}!addBonusEnemies@{addBonusEnemies}}
+\index{addBonusEnemies@{addBonusEnemies}!Score@{Score}}
+\doxysubsubsection{\texorpdfstring{addBonusEnemies()}{addBonusEnemies()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score}{Score}} \& Score\+::add\+Bonus\+Enemies (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{level\+Enemies,  }\item[{uint32\+\_\+t}]{enemies\+Last,  }\item[{uint32\+\_\+t}]{level\+Crispies,  }\item[{uint32\+\_\+t}]{crispies\+Last }\end{DoxyParamCaption})}
+
+
+
+Add bonus points according to number of killed enemies. 
+
+
+\begin{DoxyItemize}
+\item 20000 points if destroyed every crispies and no enemy killed
+\item 1000 points if no enemy killed
+\item 500 points if all enemies are dead.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Enemies} & \\
+\hline
+{\em enemies\+Last} & \\
+\hline
+{\em level\+Crispies} & \\
+\hline
+{\em crispies\+Last} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_score}{Score}}\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_score_aec14e494705073af4c32793bd14c6493}\label{class_score_aec14e494705073af4c32793bd14c6493}} 
+\index{Score@{Score}!addBonusTime@{addBonusTime}}
+\index{addBonusTime@{addBonusTime}!Score@{Score}}
+\doxysubsubsection{\texorpdfstring{addBonusTime()}{addBonusTime()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score}{Score}} \& Score\+::add\+Bonus\+Time (\begin{DoxyParamCaption}\item[{float const}]{level\+Time,  }\item[{float const}]{time }\end{DoxyParamCaption})}
+
+
+
+Add bonus points for time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Time} & \\
+\hline
+{\em time} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_score}{Score}}\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_score_abc3dd0d8a5e18ef31c83ad1a97c9f51b}\label{class_score_abc3dd0d8a5e18ef31c83ad1a97c9f51b}} 
+\index{Score@{Score}!addPoints@{addPoints}}
+\index{addPoints@{addPoints}!Score@{Score}}
+\doxysubsubsection{\texorpdfstring{addPoints()}{addPoints()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score}{Score}} \& Score\+::add\+Points (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{points }\end{DoxyParamCaption})}
+
+
+
+Add points to scrore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_score}{Score}}\& this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_score_a7155b0d7742004972bb115a56d734fa6}\label{class_score_a7155b0d7742004972bb115a56d734fa6}} 
+\index{Score@{Score}!getStats@{getStats}}
+\index{getStats@{getStats}!Score@{Score}}
+\doxysubsubsection{\texorpdfstring{getStats()}{getStats()}}
+{\footnotesize\ttfamily void Score\+::get\+Stats (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_score_1_1_stat}{Stat}} $>$ \&}]{vec }\end{DoxyParamCaption})}
+
+
+
+Get Statistic \mbox{\hyperlink{class_score}{Score}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Score\+::\+Stat$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_score_a8ee59cdc6c44f0ad80feb01219d3357d}\label{class_score_a8ee59cdc6c44f0ad80feb01219d3357d}} 
+\index{Score@{Score}!reset@{reset}}
+\index{reset@{reset}!Score@{Score}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score}{Score}} \& Score\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset \mbox{\hyperlink{class_score}{Score}}. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_score}{Score}}\& this 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Score.\+hpp\item 
+srcs/elements/Score.\+cpp\end{DoxyCompactItemize}

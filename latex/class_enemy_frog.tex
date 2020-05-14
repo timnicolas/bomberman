@@ -1,0 +1,187 @@
+\hypertarget{class_enemy_frog}{}\doxysection{Enemy\+Frog Class Reference}
+\label{class_enemy_frog}\index{EnemyFrog@{EnemyFrog}}
+
+
+This is an enemy object.  
+
+
+
+
+{\ttfamily \#include $<$Enemy\+Frog.\+hpp$>$}
+
+
+
+Inheritance diagram for Enemy\+Frog\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_frog__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Enemy\+Frog\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_enemy_frog__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}\label{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}} 
+{\bfseries Enemy\+Frog} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}\label{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}} 
+{\bfseries Enemy\+Frog} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&src)
+\item 
+\mbox{\Hypertarget{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}\label{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}} 
+\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_frog_adb2293192dd66ee46da359833475915b}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init enemy\+Basic. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_frog_a868a3f7f061ecefecc366af0f882b4d2}\label{class_enemy_frog_a868a3f7f061ecefecc366af0f882b4d2}} 
+virtual void \mbox{\hyperlink{class_enemy_frog_a868a3f7f061ecefecc366af0f882b4d2}{reset\+Crossable}} ()
+\begin{DoxyCompactList}\small\item\em Set the Entity that the Character can cross. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}{\+\_\+update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_frog_ab151c31f6cc89cc77830f77b02cf9372}{\+\_\+post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_enemy_frog_a2cf685062369505da75844967e16d344}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_frog_ada6281afe665c1b8a627e6f2792a87e0}\label{class_enemy_frog_ada6281afe665c1b8a627e6f2792a87e0}} 
+void \mbox{\hyperlink{class_enemy_frog_ada6281afe665c1b8a627e6f2792a87e0}{\+\_\+find\+Jump\+Goal}} ()
+\begin{DoxyCompactList}\small\item\em Try to find a goal to jump on (This function can update \+\_\+dir \& \+\_\+jump\+Goal) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_frog_a2e2cef706ab9893d243209b5c5fd28b0}{\+\_\+jump\+Crossable}} ()
+\begin{DoxyCompactList}\small\item\em Change crossable collision durring jump to allow to Frog to pass throw. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_frog_a83404fbd9ccc5eac576668edfef7c7a4}{\+\_\+update\+Model}} ()
+\begin{DoxyCompactList}\small\item\em update model position and rotation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_enemy_frog_ac2fafe0b9788bfa838422efadef0f05c}{\+\_\+update\+Animation\+State}} ()
+\begin{DoxyCompactList}\small\item\em update animation on state change \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is an enemy object. 
+
+\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} can jump across one bloc 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_enemy_frog_a2cf685062369505da75844967e16d344}\label{class_enemy_frog_a2cf685062369505da75844967e16d344}} 
+\index{EnemyFrog@{EnemyFrog}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily bool Enemy\+Frog\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_frog_a2e2cef706ab9893d243209b5c5fd28b0}\label{class_enemy_frog_a2e2cef706ab9893d243209b5c5fd28b0}} 
+\index{EnemyFrog@{EnemyFrog}!\_jumpCrossable@{\_jumpCrossable}}
+\index{\_jumpCrossable@{\_jumpCrossable}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_jumpCrossable()}{\_jumpCrossable()}}
+{\footnotesize\ttfamily void Enemy\+Frog\+::\+\_\+jump\+Crossable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Change crossable collision durring jump to allow to Frog to pass throw. 
+
+\mbox{\Hypertarget{class_enemy_frog_ab151c31f6cc89cc77830f77b02cf9372}\label{class_enemy_frog_ab151c31f6cc89cc77830f77b02cf9372}} 
+\index{EnemyFrog@{EnemyFrog}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily bool Enemy\+Frog\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}\label{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}} 
+\index{EnemyFrog@{EnemyFrog}!\_update@{\_update}}
+\index{\_update@{\_update}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily bool Enemy\+Frog\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+
+\mbox{\Hypertarget{class_enemy_frog_ac2fafe0b9788bfa838422efadef0f05c}\label{class_enemy_frog_ac2fafe0b9788bfa838422efadef0f05c}} 
+\index{EnemyFrog@{EnemyFrog}!\_updateAnimationState@{\_updateAnimationState}}
+\index{\_updateAnimationState@{\_updateAnimationState}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_updateAnimationState()}{\_updateAnimationState()}}
+{\footnotesize\ttfamily void Enemy\+Frog\+::\+\_\+update\+Animation\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update animation on state change 
+
+\mbox{\Hypertarget{class_enemy_frog_a83404fbd9ccc5eac576668edfef7c7a4}\label{class_enemy_frog_a83404fbd9ccc5eac576668edfef7c7a4}} 
+\index{EnemyFrog@{EnemyFrog}!\_updateModel@{\_updateModel}}
+\index{\_updateModel@{\_updateModel}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{\_updateModel()}{\_updateModel()}}
+{\footnotesize\ttfamily void Enemy\+Frog\+::\+\_\+update\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+update model position and rotation 
+
+\mbox{\Hypertarget{class_enemy_frog_adb2293192dd66ee46da359833475915b}\label{class_enemy_frog_adb2293192dd66ee46da359833475915b}} 
+\index{EnemyFrog@{EnemyFrog}!init@{init}}
+\index{init@{init}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Enemy\+Frog\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init enemy\+Basic. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Enemy\+Frog.\+hpp\item 
+srcs/elements/Enemy\+Frog.\+cpp\end{DoxyCompactItemize}

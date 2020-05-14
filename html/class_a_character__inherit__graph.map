@@ -1,0 +1,12 @@
+<map id="ACharacter" name="ACharacter">
+<area shape="rect" id="node1" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="590,468,762,883"/>
+<area shape="rect" id="node3" href="$class_a_enemy.html" title="This is the base enemy object." alt="" coords="516,931,671,1375"/>
+<area shape="rect" id="node10" href="$class_player.html" title="This is the player object." alt="" coords="695,960,825,1345"/>
+<area shape="rect" id="node2" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="609,5,743,420"/>
+<area shape="rect" id="node4" href="$class_enemy_basic.html" title="This is an enemy object." alt="" coords="5,1445,181,1654"/>
+<area shape="rect" id="node5" href="$class_enemy_crispy.html" title="This is an enemy object." alt="" coords="205,1423,381,1676"/>
+<area shape="rect" id="node6" href="$class_enemy_fly.html" title="This is an enemy object." alt="" coords="405,1445,581,1654"/>
+<area shape="rect" id="node7" href="$class_enemy_follow.html" title="This is an enemy object." alt="" coords="605,1445,781,1654"/>
+<area shape="rect" id="node8" href="$class_enemy_frog.html" title="This is an enemy object." alt="" coords="805,1423,981,1676"/>
+<area shape="rect" id="node9" href="$class_enemy_with_eye.html" title="This is an enemy object." alt="" coords="1005,1445,1181,1654"/>
+</map>

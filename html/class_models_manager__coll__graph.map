@@ -1,0 +1,3 @@
+<map id="ModelsManager" name="ModelsManager">
+<area shape="rect" id="node1" title="class to manage OpenGLModel store all OpenGLModel inside to avoid multiples loadings" alt="" coords="5,5,148,127"/>
+</map>

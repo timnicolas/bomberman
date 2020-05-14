@@ -1,0 +1,276 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+
+
+This is the player object.  
+
+
+
+
+{\ttfamily \#include $<$Player.\+hpp$>$}
+
+
+
+Inheritance diagram for Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_player__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_player__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_player_1_1_bonus_actifs}{Bonus\+Actifs}}
+\item 
+class \mbox{\hyperlink{class_player_1_1_player_exception}{Player\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a290433592841cca95046b8c9dac7be86}\label{class_player_a290433592841cca95046b8c9dac7be86}} 
+{\bfseries Player} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}\label{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}} 
+{\bfseries Player} (\mbox{\hyperlink{class_player}{Player}} const \&src)
+\item 
+\mbox{\Hypertarget{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}\label{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}} 
+\mbox{\hyperlink{class_player}{Player}} \& {\bfseries operator=} (\mbox{\hyperlink{class_player}{Player}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_player_afcf86538719baa2f5c81d0b90263c41a}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init player for new levels. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a1194c157df144e864d0328d267dfa75c}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_afc1d1e3a654e241e3ed948aed72ef8a7}\label{class_player_afc1d1e3a654e241e3ed948aed72ef8a7}} 
+virtual void \mbox{\hyperlink{class_player_afc1d1e3a654e241e3ed948aed72ef8a7}{reset\+Crossable}} ()
+\begin{DoxyCompactList}\small\item\em Set the Entity that the Character can cross. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}{reset\+Params}} ()
+\begin{DoxyCompactList}\small\item\em Reset values for player. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a029b1d511340697d8ccfb7bfa604435b}{take\+Damage}} (const int damage)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} Take $<$damage$>$ damages. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}{take\+Bonus}} (Bonus\+Type\+::\+Enum bonus, bool silent=false)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} take a $<$bonus$>$ which allow to power up. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_abf6efda3ab13411d806493e043c895bf}{rm\+Bonus}} (Bonus\+Type\+::\+Enum bonus)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} remove a $<$bonus$>$ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_ab01e550627a1b778e1fa09b29fd89a1a}{add\+Bomb}} ()
+\begin{DoxyCompactList}\small\item\em increment bomb, clamp to total\+Bombs \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{anim\+End\+Cb}} (std\+::string anim\+Name)
+\begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_ab7d65b25086c7d78b7caef025deb087f}\label{class_player_ab7d65b25086c7d78b7caef025deb087f}} 
+int {\bfseries total\+Bombs}
+\item 
+\mbox{\Hypertarget{class_player_a948d5a3b282419b995dcc32f66bf6b54}\label{class_player_a948d5a3b282419b995dcc32f66bf6b54}} 
+int {\bfseries bombs}
+\item 
+\mbox{\Hypertarget{class_player_a91fb928013bca6ca637afe447027de8f}\label{class_player_a91fb928013bca6ca637afe447027de8f}} 
+bool {\bfseries pass\+Fire}
+\item 
+\mbox{\Hypertarget{class_player_a82630036d62dbc37a2518be049a974cc}\label{class_player_a82630036d62dbc37a2518be049a974cc}} 
+bool {\bfseries pass\+Wall}
+\item 
+\mbox{\Hypertarget{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}\label{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}} 
+bool {\bfseries detonator}
+\item 
+\mbox{\Hypertarget{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}\label{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}} 
+bool {\bfseries pass\+Bomb}
+\item 
+\mbox{\Hypertarget{class_player_a51ec1da9050f53921825a472b39b9977}\label{class_player_a51ec1da9050f53921825a472b39b9977}} 
+int {\bfseries bomb\+Progation}
+\item 
+\mbox{\Hypertarget{class_player_a6629cf50b360b714f0593146e2e058b6}\label{class_player_a6629cf50b360b714f0593146e2e058b6}} 
+float {\bfseries invulnerable}
+\item 
+\mbox{\Hypertarget{class_player_a1c0c44c8dc33ec05674c4a47bd8c2a03}\label{class_player_a1c0c44c8dc33ec05674c4a47bd8c2a03}} 
+\mbox{\hyperlink{struct_player_1_1_bonus_actifs}{Bonus\+Actifs}} {\bfseries bonus\+Actifs}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+This is the player object. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_ab01e550627a1b778e1fa09b29fd89a1a}\label{class_player_ab01e550627a1b778e1fa09b29fd89a1a}} 
+\index{Player@{Player}!addBomb@{addBomb}}
+\index{addBomb@{addBomb}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{addBomb()}{addBomb()}}
+{\footnotesize\ttfamily void Player\+::add\+Bomb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+increment bomb, clamp to total\+Bombs 
+
+\mbox{\Hypertarget{class_player_a26c511cf5a62d7de26347cdc15df609b}\label{class_player_a26c511cf5a62d7de26347cdc15df609b}} 
+\index{Player@{Player}!animEndCb@{animEndCb}}
+\index{animEndCb@{animEndCb}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{animEndCb()}{animEndCb()}}
+{\footnotesize\ttfamily void Player\+::anim\+End\+Cb (\begin{DoxyParamCaption}\item[{std\+::string}]{anim\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anim\+Name} & the current animation name \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_player_a1194c157df144e864d0328d267dfa75c}\label{class_player_a1194c157df144e864d0328d267dfa75c}} 
+\index{Player@{Player}!draw@{draw}}
+\index{draw@{draw}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Player\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+\mbox{\Hypertarget{class_player_afcf86538719baa2f5c81d0b90263c41a}\label{class_player_afcf86538719baa2f5c81d0b90263c41a}} 
+\index{Player@{Player}!init@{init}}
+\index{init@{init}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Player\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init player for new levels. 
+
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}\label{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}} 
+\index{Player@{Player}!resetParams@{resetParams}}
+\index{resetParams@{resetParams}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{resetParams()}{resetParams()}}
+{\footnotesize\ttfamily void Player\+::reset\+Params (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset values for player. 
+
+\mbox{\Hypertarget{class_player_abf6efda3ab13411d806493e043c895bf}\label{class_player_abf6efda3ab13411d806493e043c895bf}} 
+\index{Player@{Player}!rmBonus@{rmBonus}}
+\index{rmBonus@{rmBonus}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{rmBonus()}{rmBonus()}}
+{\footnotesize\ttfamily bool Player\+::rm\+Bonus (\begin{DoxyParamCaption}\item[{Bonus\+Type\+::\+Enum}]{bonus }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_player}{Player}} remove a $<$bonus$>$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bonus} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}\label{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}} 
+\index{Player@{Player}!takeBonus@{takeBonus}}
+\index{takeBonus@{takeBonus}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{takeBonus()}{takeBonus()}}
+{\footnotesize\ttfamily bool Player\+::take\+Bonus (\begin{DoxyParamCaption}\item[{Bonus\+Type\+::\+Enum}]{bonus,  }\item[{bool}]{silent = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_player}{Player}} take a $<$bonus$>$ which allow to power up. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bonus} & \\
+\hline
+{\em silent} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a029b1d511340697d8ccfb7bfa604435b}\label{class_player_a029b1d511340697d8ccfb7bfa604435b}} 
+\index{Player@{Player}!takeDamage@{takeDamage}}
+\index{takeDamage@{takeDamage}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{takeDamage()}{takeDamage()}}
+{\footnotesize\ttfamily bool Player\+::take\+Damage (\begin{DoxyParamCaption}\item[{const int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{class_player}{Player}} Take $<$damage$>$ damages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if damage taken 
+
+false if damage not taken 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_character_a1ab94580e4db621f79f0bf1d6bcdb600}{A\+Character}}.
+
+\mbox{\Hypertarget{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}\label{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}} 
+\index{Player@{Player}!update@{update}}
+\index{update@{update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Player\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Player.\+hpp\item 
+srcs/elements/Player.\+cpp\end{DoxyCompactItemize}

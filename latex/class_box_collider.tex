@@ -1,0 +1,135 @@
+\hypertarget{class_box_collider}{}\doxysection{Box\+Collider Class Reference}
+\label{class_box_collider}\index{BoxCollider@{BoxCollider}}
+
+
+Collaboration diagram for Box\+Collider\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_box_collider__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_box_collider_a79511f75725470715ff72c4b4622de21}\label{class_box_collider_a79511f75725470715ff72c4b4622de21}} 
+{\bfseries Box\+Collider} (\mbox{\hyperlink{class_box_collider}{Box\+Collider}} const \&src)
+\item 
+\mbox{\Hypertarget{class_box_collider_a785e2defc2d9deab26589149262ff114}\label{class_box_collider_a785e2defc2d9deab26589149262ff114}} 
+\mbox{\hyperlink{class_box_collider}{Box\+Collider}} \& {\bfseries operator=} (\mbox{\hyperlink{class_box_collider}{Box\+Collider}} const \&rhs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_box_collider_a6f8b8b22f9845496c422236140818209}{init}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui)
+\begin{DoxyCompactList}\small\item\em Init the \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object (call only once) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_box_collider_a3fd8069de8cba507e4b3ac66b995d632}{destroy}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object (call only once) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_box_collider}{Box\+Collider}} \& \mbox{\hyperlink{class_box_collider_a830532bce2aa57c773c8d7617cc8fe2b}{get}} ()
+\begin{DoxyCompactList}\small\item\em Get the instance of \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_box_collider_a4a5eccd572ec94bf11fab22fa24765ac}{draw\+Box}} (glm\+::vec3 pos, glm\+::vec3 size, glm\+::vec4 color=\{0, 0, 0, 1\})
+\begin{DoxyCompactList}\small\item\em Draw a box collider on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_box_collider_a5782997a36f86f46a83d4f528c7ae391}\label{class_box_collider_a5782997a36f86f46a83d4f528c7ae391}} 
+bool {\bfseries \+\_\+init} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui)
+\item 
+\mbox{\Hypertarget{class_box_collider_a447744df9a4567cab18eb6aabc8fd1c6}\label{class_box_collider_a447744df9a4567cab18eb6aabc8fd1c6}} 
+bool {\bfseries \+\_\+destroy} ()
+\item 
+\mbox{\Hypertarget{class_box_collider_af71d692699a39ea2bc5ee61384d533e9}\label{class_box_collider_af71d692699a39ea2bc5ee61384d533e9}} 
+bool {\bfseries \+\_\+draw\+Box} (glm\+::vec3 pos, glm\+::vec3 size, glm\+::vec4 color)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_box_collider_a79878a3379cc1710aec75057373dc3d1}\label{class_box_collider_a79878a3379cc1710aec75057373dc3d1}} 
+\mbox{\hyperlink{class_gui}{Gui}} $\ast$ {\bfseries \+\_\+gui}
+\item 
+\mbox{\Hypertarget{class_box_collider_a1eb52f9eec4a732c48b12c074ce23c29}\label{class_box_collider_a1eb52f9eec4a732c48b12c074ce23c29}} 
+glm\+::mat4 {\bfseries \+\_\+projection}
+\item 
+\mbox{\Hypertarget{class_box_collider_ab8642b5f05444676fb3ef9bccda8ce34}\label{class_box_collider_ab8642b5f05444676fb3ef9bccda8ce34}} 
+\mbox{\hyperlink{class_shader}{Shader}} $\ast$ {\bfseries \+\_\+box\+Shader}
+\item 
+\mbox{\Hypertarget{class_box_collider_ab57de816c107545459f5b920688f9cc6}\label{class_box_collider_ab57de816c107545459f5b920688f9cc6}} 
+uint32\+\_\+t {\bfseries \+\_\+box\+Shader\+V\+AO}
+\item 
+\mbox{\Hypertarget{class_box_collider_af2ac832bfc806b578a9b9be7d39c7946}\label{class_box_collider_af2ac832bfc806b578a9b9be7d39c7946}} 
+uint32\+\_\+t {\bfseries \+\_\+box\+Shader\+V\+BO}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_box_collider_a8fc69f37cbd732dfc24a2e97f92f161e}\label{class_box_collider_a8fc69f37cbd732dfc24a2e97f92f161e}} 
+static const float {\bfseries \+\_\+box\+Vertices} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_box_collider_a3fd8069de8cba507e4b3ac66b995d632}\label{class_box_collider_a3fd8069de8cba507e4b3ac66b995d632}} 
+\index{BoxCollider@{BoxCollider}!destroy@{destroy}}
+\index{destroy@{destroy}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{destroy()}{destroy()}}
+{\footnotesize\ttfamily bool Box\+Collider\+::destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Destroy the \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object (call only once) 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_box_collider_a4a5eccd572ec94bf11fab22fa24765ac}\label{class_box_collider_a4a5eccd572ec94bf11fab22fa24765ac}} 
+\index{BoxCollider@{BoxCollider}!drawBox@{drawBox}}
+\index{drawBox@{drawBox}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{drawBox()}{drawBox()}}
+{\footnotesize\ttfamily bool Box\+Collider\+::draw\+Box (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{pos,  }\item[{glm\+::vec3}]{size,  }\item[{glm\+::vec4}]{color = {\ttfamily \{0,~0,~0,~1\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Draw a box collider on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position \\
+\hline
+{\em size} & The size \\
+\hline
+{\em color} & The color \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_box_collider_a830532bce2aa57c773c8d7617cc8fe2b}\label{class_box_collider_a830532bce2aa57c773c8d7617cc8fe2b}} 
+\index{BoxCollider@{BoxCollider}!get@{get}}
+\index{get@{get}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_box_collider}{Box\+Collider}} \& Box\+Collider\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the instance of \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_box_collider}{Box\+Collider}}\& The instance 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_box_collider_a6f8b8b22f9845496c422236140818209}\label{class_box_collider_a6f8b8b22f9845496c422236140818209}} 
+\index{BoxCollider@{BoxCollider}!init@{init}}
+\index{init@{init}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Box\+Collider\+::init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Init the \mbox{\hyperlink{class_box_collider}{Box\+Collider}} object (call only once) 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/gui/Box\+Collider.\+hpp\item 
+srcs/gui/Box\+Collider.\+cpp\end{DoxyCompactItemize}

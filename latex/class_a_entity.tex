@@ -1,0 +1,357 @@
+\hypertarget{class_a_entity}{}\doxysection{A\+Entity Class Reference}
+\label{class_a_entity}\index{AEntity@{AEntity}}
+
+
+This is the base class for entity (Charactere, Objects, ...)  
+
+
+
+
+{\ttfamily \#include $<$A\+Entity.\+hpp$>$}
+
+
+
+Inheritance diagram for A\+Entity\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_a_entity__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for A\+Entity\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_a_entity__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_entity_ac2e458e7b02ccd083b2e57c0bb27ea24}{A\+Entity}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Entity\+::\+A\+Entity object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_entity_a1680c558ae2cb0d2d65f19147ac857c8}\label{class_a_entity_a1680c558ae2cb0d2d65f19147ac857c8}} 
+virtual \mbox{\hyperlink{class_a_entity_a1680c558ae2cb0d2d65f19147ac857c8}{$\sim$\+A\+Entity}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the A\+Entity\+::\+A\+Entity object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_entity_ad1f884ccc47d377efe359e4fc2ce0592}{A\+Entity}} (const \mbox{\hyperlink{class_a_entity}{A\+Entity}} \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Entity\+::\+A\+Entity object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_entity}{A\+Entity}} \& \mbox{\hyperlink{class_a_entity_a6eddf1d64b54976fbb9286b477fe19d7}{operator=}} (const \mbox{\hyperlink{class_a_entity}{A\+Entity}} \&rhs)
+\begin{DoxyCompactList}\small\item\em Overloaded operator. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init method called by load\+Level. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}\label{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}} 
+virtual bool {\bfseries update} ()=0
+\item 
+virtual bool \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Called after update. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}\label{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}} 
+virtual bool {\bfseries draw} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+\item 
+virtual bool \mbox{\hyperlink{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}{draw\+Collider}} ()
+\begin{DoxyCompactList}\small\item\em Draw the collider of the entity. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}\label{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}} 
+virtual glm\+::vec3 {\bfseries get\+Pos} () const =0
+\item 
+\mbox{\Hypertarget{class_a_entity_ac01e24195a8ba249c855120ac017770e}\label{class_a_entity_ac01e24195a8ba249c855120ac017770e}} 
+virtual bool {\bfseries take\+Damage} (const int damage)=0
+\item 
+\mbox{\Hypertarget{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}\label{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}} 
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& {\bfseries get\+Board} () const =0
+\item 
+\mbox{\Hypertarget{class_a_entity_a44aa82958386de50cd9a6c836461114a}\label{class_a_entity_a44aa82958386de50cd9a6c836461114a}} 
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \& {\bfseries get\+Board} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}{anim\+End\+Cb}} (std\+::string anim\+Name)
+\begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} need to be redefined by children \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}{set\+State}} (Entity\+State\+::\+Enum state)
+\begin{DoxyCompactList}\small\item\em update the entity state \end{DoxyCompactList}\item 
+Entity\+State\+::\+Enum \mbox{\hyperlink{class_a_entity_a135cbfb08a2204ff396de4de2d645b5f}{get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Get the current animation state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_a_entity_a38851d630b58ed997d6c47bc7f2ee58c}{active}}
+\item 
+bool \mbox{\hyperlink{class_a_entity_a668a6a3428c53d0fd2936a5d59ef52ef}{alive}}
+\item 
+Category\+::\+Enum \mbox{\hyperlink{class_a_entity_abc6c4a36aeafe9d30a435fbdac516347}{category}}
+\item 
+std\+::string \mbox{\hyperlink{class_a_entity_a9ebdf8322a0017ff6063f180ef9f037a}{name}}
+\item 
+Type\+::\+Enum \mbox{\hyperlink{class_a_entity_a4cddb4c9fbae86691e73940edc3731c3}{type}}
+\item 
+\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \& \mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}}
+\item 
+bool \mbox{\hyperlink{class_a_entity_a09a8ea3c31791230fb95f8c52a12d0b3}{destructible}}
+\item 
+bool \mbox{\hyperlink{class_a_entity_a0fc8661a7cb58534524e5671e78e7ba1}{block\+Propagation}}
+\item 
+glm\+::vec3 \mbox{\hyperlink{class_a_entity_acc4f7ad8936089f64c706aa15e86bcea}{position}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_a_entity_a771c85ac38a97b2d0772d5bbfa3d8776}{\+\_\+time\+To\+Die}}
+\item 
+\mbox{\hyperlink{struct_entity_state_1_1_struct}{Entity\+State\+::\+Struct}} \mbox{\hyperlink{class_a_entity_a261052ce4fac95fdba699e7ca48d2dd3}{\+\_\+entity\+State}}
+\item 
+\mbox{\hyperlink{class_model}{Model}} $\ast$ \mbox{\hyperlink{class_a_entity_abd634d5c2a0be6a6627cade7e4e109d0}{\+\_\+model}}
+\item 
+bool \mbox{\hyperlink{class_a_entity_a465977aaabcdb73a1b48742897348127}{\+\_\+anim\+Death\+End}}
+\item 
+glm\+::vec3 \mbox{\hyperlink{class_a_entity_a47f976f25e6214669d64fb2bbb2c455a}{size}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the base class for entity (Charactere, Objects, ...) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_entity_ac2e458e7b02ccd083b2e57c0bb27ea24}\label{class_a_entity_ac2e458e7b02ccd083b2e57c0bb27ea24}} 
+\index{AEntity@{AEntity}!AEntity@{AEntity}}
+\index{AEntity@{AEntity}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{AEntity()}{AEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily A\+Entity\+::\+A\+Entity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new A\+Entity\+::\+A\+Entity object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_entity_ad1f884ccc47d377efe359e4fc2ce0592}\label{class_a_entity_ad1f884ccc47d377efe359e4fc2ce0592}} 
+\index{AEntity@{AEntity}!AEntity@{AEntity}}
+\index{AEntity@{AEntity}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{AEntity()}{AEntity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily A\+Entity\+::\+A\+Entity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_a_entity}{A\+Entity}} \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new A\+Entity\+::\+A\+Entity object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & A \mbox{\hyperlink{class_a_entity}{A\+Entity}} element to copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}\label{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}} 
+\index{AEntity@{AEntity}!animEndCb@{animEndCb}}
+\index{animEndCb@{animEndCb}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{animEndCb()}{animEndCb()}}
+{\footnotesize\ttfamily void A\+Entity\+::anim\+End\+Cb (\begin{DoxyParamCaption}\item[{std\+::string}]{anim\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} need to be redefined by children 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anim\+Name} & the current animation name \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}{A\+Enemy}}, \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{Player}}, and \mbox{\hyperlink{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}{Enemy\+Crispy}}.
+
+\mbox{\Hypertarget{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}\label{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}} 
+\index{AEntity@{AEntity}!drawCollider@{drawCollider}}
+\index{drawCollider@{drawCollider}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{drawCollider()}{drawCollider()}}
+{\footnotesize\ttfamily bool A\+Entity\+::draw\+Collider (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Draw the collider of the entity. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_a_character_a2cc5faf1d9047d9e51154d5663fa6c67}{A\+Character}}.
+
+\mbox{\Hypertarget{class_a_entity_a135cbfb08a2204ff396de4de2d645b5f}\label{class_a_entity_a135cbfb08a2204ff396de4de2d645b5f}} 
+\index{AEntity@{AEntity}!getState@{getState}}
+\index{getState@{getState}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily Entity\+State\+::\+Enum A\+Entity\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current animation state. 
+
+\begin{DoxyReturn}{Returns}
+Entity\+State\+::\+Enum The state 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}\label{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}} 
+\index{AEntity@{AEntity}!init@{init}}
+\index{init@{init}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool A\+Entity\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init method called by load\+Level. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_player_afcf86538719baa2f5c81d0b90263c41a}{Player}}, \mbox{\hyperlink{class_enemy_frog_adb2293192dd66ee46da359833475915b}{Enemy\+Frog}}, \mbox{\hyperlink{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}{Enemy\+Fly}}, \mbox{\hyperlink{class_enemy_basic_a898943e397eb36c80721951a3457178c}{Enemy\+Basic}}, \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}, and \mbox{\hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{Crispy}}.
+
+\mbox{\Hypertarget{class_a_entity_a6eddf1d64b54976fbb9286b477fe19d7}\label{class_a_entity_a6eddf1d64b54976fbb9286b477fe19d7}} 
+\index{AEntity@{AEntity}!operator=@{operator=}}
+\index{operator=@{operator=}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_entity}{A\+Entity}} \& A\+Entity\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_a_entity}{A\+Entity}} \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overloaded operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_entity}{A\+Entity}}\& A ref to a new object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}\label{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}} 
+\index{AEntity@{AEntity}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool A\+Entity\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called after update. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}{A\+Enemy}}, \mbox{\hyperlink{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}{Bonus}}, \mbox{\hyperlink{class_bomb_a443c5d40a92e67ef456c71369e8a111b}{Bomb}}, \mbox{\hyperlink{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}{Spawner}}, \mbox{\hyperlink{class_flag_a1840a0949762e3e62bf156be6e173d1e}{Flag}}, \mbox{\hyperlink{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}{Crispy}}, and \mbox{\hyperlink{class_fire_adba3c7ec49ed7d31fd35250105a35edf}{Fire}}.
+
+\mbox{\Hypertarget{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}\label{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}} 
+\index{AEntity@{AEntity}!setState@{setState}}
+\index{setState@{setState}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void A\+Entity\+::set\+State (\begin{DoxyParamCaption}\item[{Entity\+State\+::\+Enum}]{state }\end{DoxyParamCaption})}
+
+
+
+update the entity state 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & the new state \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_entity_a465977aaabcdb73a1b48742897348127}\label{class_a_entity_a465977aaabcdb73a1b48742897348127}} 
+\index{AEntity@{AEntity}!\_animDeathEnd@{\_animDeathEnd}}
+\index{\_animDeathEnd@{\_animDeathEnd}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{\_animDeathEnd}{\_animDeathEnd}}
+{\footnotesize\ttfamily bool A\+Entity\+::\+\_\+anim\+Death\+End\hspace{0.3cm}{\ttfamily [protected]}}
+
+True if the entity has a death animation \mbox{\Hypertarget{class_a_entity_a261052ce4fac95fdba699e7ca48d2dd3}\label{class_a_entity_a261052ce4fac95fdba699e7ca48d2dd3}} 
+\index{AEntity@{AEntity}!\_entityState@{\_entityState}}
+\index{\_entityState@{\_entityState}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{\_entityState}{\_entityState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_entity_state_1_1_struct}{Entity\+State\+::\+Struct}} A\+Entity\+::\+\_\+entity\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+The entity state (current animation\+: run, idle, ...) \mbox{\Hypertarget{class_a_entity_abd634d5c2a0be6a6627cade7e4e109d0}\label{class_a_entity_abd634d5c2a0be6a6627cade7e4e109d0}} 
+\index{AEntity@{AEntity}!\_model@{\_model}}
+\index{\_model@{\_model}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{\_model}{\_model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_model}{Model}}$\ast$ A\+Entity\+::\+\_\+model\hspace{0.3cm}{\ttfamily [protected]}}
+
+The 3D model of the entity \mbox{\Hypertarget{class_a_entity_a771c85ac38a97b2d0772d5bbfa3d8776}\label{class_a_entity_a771c85ac38a97b2d0772d5bbfa3d8776}} 
+\index{AEntity@{AEntity}!\_timeToDie@{\_timeToDie}}
+\index{\_timeToDie@{\_timeToDie}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{\_timeToDie}{\_timeToDie}}
+{\footnotesize\ttfamily float A\+Entity\+::\+\_\+time\+To\+Die\hspace{0.3cm}{\ttfamily [protected]}}
+
+The time to die (animation) \mbox{\Hypertarget{class_a_entity_a38851d630b58ed997d6c47bc7f2ee58c}\label{class_a_entity_a38851d630b58ed997d6c47bc7f2ee58c}} 
+\index{AEntity@{AEntity}!active@{active}}
+\index{active@{active}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{active}{active}}
+{\footnotesize\ttfamily bool A\+Entity\+::active}
+
+True if the entity is active \mbox{\Hypertarget{class_a_entity_a668a6a3428c53d0fd2936a5d59ef52ef}\label{class_a_entity_a668a6a3428c53d0fd2936a5d59ef52ef}} 
+\index{AEntity@{AEntity}!alive@{alive}}
+\index{alive@{alive}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{alive}{alive}}
+{\footnotesize\ttfamily bool A\+Entity\+::alive}
+
+True if the entity is alive \mbox{\Hypertarget{class_a_entity_a0fc8661a7cb58534524e5671e78e7ba1}\label{class_a_entity_a0fc8661a7cb58534524e5671e78e7ba1}} 
+\index{AEntity@{AEntity}!blockPropagation@{blockPropagation}}
+\index{blockPropagation@{blockPropagation}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{blockPropagation}{blockPropagation}}
+{\footnotesize\ttfamily bool A\+Entity\+::block\+Propagation}
+
+Used in bombs for explosion propagation \mbox{\Hypertarget{class_a_entity_abc6c4a36aeafe9d30a435fbdac516347}\label{class_a_entity_abc6c4a36aeafe9d30a435fbdac516347}} 
+\index{AEntity@{AEntity}!category@{category}}
+\index{category@{category}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{category}{category}}
+{\footnotesize\ttfamily Category\+::\+Enum A\+Entity\+::category}
+
+The entity category (Category\+::\+S\+T\+A\+T\+IC $\vert$ Category\+::\+M\+O\+B\+I\+LE) \mbox{\Hypertarget{class_a_entity_a09a8ea3c31791230fb95f8c52a12d0b3}\label{class_a_entity_a09a8ea3c31791230fb95f8c52a12d0b3}} 
+\index{AEntity@{AEntity}!destructible@{destructible}}
+\index{destructible@{destructible}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{destructible}{destructible}}
+{\footnotesize\ttfamily bool A\+Entity\+::destructible}
+
+True if the entity is destructible (by bombs) \mbox{\Hypertarget{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}\label{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}} 
+\index{AEntity@{AEntity}!game@{game}}
+\index{game@{game}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_game}{Scene\+Game}}\& A\+Entity\+::game}
+
+A reference to the main scene for game \mbox{\Hypertarget{class_a_entity_a9ebdf8322a0017ff6063f180ef9f037a}\label{class_a_entity_a9ebdf8322a0017ff6063f180ef9f037a}} 
+\index{AEntity@{AEntity}!name@{name}}
+\index{name@{name}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string A\+Entity\+::name}
+
+The entity name \mbox{\Hypertarget{class_a_entity_acc4f7ad8936089f64c706aa15e86bcea}\label{class_a_entity_acc4f7ad8936089f64c706aa15e86bcea}} 
+\index{AEntity@{AEntity}!position@{position}}
+\index{position@{position}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily glm\+::vec3 A\+Entity\+::position}
+
+The entity position \mbox{\Hypertarget{class_a_entity_a47f976f25e6214669d64fb2bbb2c455a}\label{class_a_entity_a47f976f25e6214669d64fb2bbb2c455a}} 
+\index{AEntity@{AEntity}!size@{size}}
+\index{size@{size}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily glm\+::vec3 A\+Entity\+::size\hspace{0.3cm}{\ttfamily [protected]}}
+
+The entity size \mbox{\Hypertarget{class_a_entity_a4cddb4c9fbae86691e73940edc3731c3}\label{class_a_entity_a4cddb4c9fbae86691e73940edc3731c3}} 
+\index{AEntity@{AEntity}!type@{type}}
+\index{type@{type}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily Type\+::\+Enum A\+Entity\+::type}
+
+The entity type 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/A\+Entity.\+hpp\item 
+srcs/A\+Entity.\+cpp\end{DoxyCompactItemize}

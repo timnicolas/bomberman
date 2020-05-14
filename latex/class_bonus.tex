@@ -1,0 +1,213 @@
+\hypertarget{class_bonus}{}\doxysection{Bonus Class Reference}
+\label{class_bonus}\index{Bonus@{Bonus}}
+
+
+Inheritance diagram for Bonus\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_bonus__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Bonus\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_bonus__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_bonus_1_1_bonus_exception}{Bonus\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_bonus_a35c21e394ed7467d9bf1038cffc77047}\label{class_bonus_a35c21e394ed7467d9bf1038cffc77047}} 
+{\bfseries Bonus} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\item 
+\mbox{\Hypertarget{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}\label{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}} 
+{\bfseries Bonus} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&src)
+\item 
+\mbox{\Hypertarget{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}\label{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}} 
+\mbox{\hyperlink{class_bonus}{Bonus}} \& {\bfseries operator=} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&rhs)
+\item 
+bool \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{update}} ()
+\begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}{post\+Update}} ()
+\begin{DoxyCompactList}\small\item\em post\+Update is called each frame. After \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{update()}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bonus_acdb40deca7be37984084fb3d4fef85ed}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)
+\begin{DoxyCompactList}\small\item\em draw is called each frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{class_bonus_a1d044965859366e57fbe7fcb1eb8a458}{get\+Description}} (Bonus\+Type\+::\+Enum \mbox{\hyperlink{class_a_entity_a4cddb4c9fbae86691e73940edc3731c3}{type}})
+\begin{DoxyCompactList}\small\item\em Get the description of a given bonus. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_bonus}{Bonus}} $\ast$ \mbox{\hyperlink{class_bonus_a69c5cd0fdef8eef925b5d295696b19a9}{generate\+Bonus}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}}, float rate=0.\+1f)
+\begin{DoxyCompactList}\small\item\em Static class to generate bonus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, Bonus\+Type\+::\+Enum $>$ {\bfseries bonus}
+\item 
+static std\+::map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ {\bfseries description}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_bonus_acdb40deca7be37984084fb3d4fef85ed}\label{class_bonus_acdb40deca7be37984084fb3d4fef85ed}} 
+\index{Bonus@{Bonus}!draw@{draw}}
+\index{draw@{draw}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Bonus\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bonus_a69c5cd0fdef8eef925b5d295696b19a9}\label{class_bonus_a69c5cd0fdef8eef925b5d295696b19a9}} 
+\index{Bonus@{Bonus}!generateBonus@{generateBonus}}
+\index{generateBonus@{generateBonus}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{generateBonus()}{generateBonus()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_bonus}{Bonus}} $\ast$ Bonus\+::generate\+Bonus (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game,  }\item[{float}]{rate = {\ttfamily 0.1f} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Static class to generate bonus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & \mbox{\hyperlink{class_scene_game}{Scene\+Game}} object. \\
+\hline
+{\em rate} & Probability to generate an bonus (between 0 and 1). default\+: 0.\+1f \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bonus$\ast$ or nullptr if nothing has been generated. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bonus_a1d044965859366e57fbe7fcb1eb8a458}\label{class_bonus_a1d044965859366e57fbe7fcb1eb8a458}} 
+\index{Bonus@{Bonus}!getDescription@{getDescription}}
+\index{getDescription@{getDescription}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{getDescription()}{getDescription()}}
+{\footnotesize\ttfamily std\+::string Bonus\+::get\+Description (\begin{DoxyParamCaption}\item[{Bonus\+Type\+::\+Enum}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the description of a given bonus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The bonus type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The description 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}\label{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}} 
+\index{Bonus@{Bonus}!postUpdate@{postUpdate}}
+\index{postUpdate@{postUpdate}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{postUpdate()}{postUpdate()}}
+{\footnotesize\ttfamily bool Bonus\+::post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+post\+Update is called each frame. After \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{update()}} 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
+
+\mbox{\Hypertarget{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}\label{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}} 
+\index{Bonus@{Bonus}!update@{update}}
+\index{update@{update}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Bonus\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+update is called each frame. 
+
+\begin{DoxyReturn}{Returns}
+true if success 
+
+false if failure 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_bonus_a6738b5cd2f41a4174a721bc51f495ea9}\label{class_bonus_a6738b5cd2f41a4174a721bc51f495ea9}} 
+\index{Bonus@{Bonus}!bonus@{bonus}}
+\index{bonus@{bonus}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{bonus}{bonus}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ std\+::string, Bonus\+Type\+::\+Enum $>$ Bonus\+::bonus\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"life"}, BonusType::LIFE \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"bombs"}, BonusType::BOMBS \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"flames"}, BonusType::FLAMES \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"speed"}, BonusType::SPEED \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"wallpass"}, BonusType::WALLPASS \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"detonator"}, BonusType::DETONATOR \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"bombpass"}, BonusType::BOMBPASS \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"flampass"}, BonusType::FLAMPASS \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"shield"}, BonusType::SHIELD \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"time"}, BonusType::TIME \},}
+\DoxyCodeLine{    \{ \textcolor{stringliteral}{"points"}, BonusType::POINTS \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_bonus_a4d328bd69b4cbae25312758d68991e26}\label{class_bonus_a4d328bd69b4cbae25312758d68991e26}} 
+\index{Bonus@{Bonus}!description@{description}}
+\index{description@{description}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily std\+::map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ Bonus\+::description\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{ BonusType::LIFE, \textcolor{stringliteral}{"Bonus Life: You earn an extra life."} \},}
+\DoxyCodeLine{    \{ BonusType::BOMBS, \textcolor{stringliteral}{"Bonus Bombs: You can put one more bomb simultaneously."} \},}
+\DoxyCodeLine{    \{ BonusType::FLAMES, \textcolor{stringliteral}{"Bonus Flames: The bombs explode at a greater range."} \},}
+\DoxyCodeLine{    \{ BonusType::SPEED, \textcolor{stringliteral}{"Bonus Speed: You move faster."} \},}
+\DoxyCodeLine{    \{ BonusType::WALLPASS, \textcolor{stringliteral}{"Bonus Wall Pass: You can pass through cracked walls."} \},}
+\DoxyCodeLine{    \{ BonusType::DETONATOR, DETONATOR\_DESC \},  }
+\DoxyCodeLine{    \{ BonusType::BOMBPASS, \textcolor{stringliteral}{"Bonus Bomb Pass: You can now walk over bombs"} \},}
+\DoxyCodeLine{    \{ BonusType::FLAMPASS, \textcolor{stringliteral}{"Bonus Flame Pass: You are not affected by bomb anymore."} \},}
+\DoxyCodeLine{    \{ BonusType::SHIELD, \textcolor{stringliteral}{"Bonus Shield: You can't get damage for a while."} \},}
+\DoxyCodeLine{    \{ BonusType::TIME, \textcolor{stringliteral}{"Bonus Time: Extra time to finish the level."} \},}
+\DoxyCodeLine{    \{ BonusType::POINTS, \textcolor{stringliteral}{"Bonus Points: Your total score increase."} \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/elements/Bonus.\+hpp\item 
+srcs/elements/Bonus.\+cpp\end{DoxyCompactItemize}

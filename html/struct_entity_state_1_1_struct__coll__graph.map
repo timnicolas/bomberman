@@ -1,0 +1,3 @@
+<map id="EntityState::Struct" name="EntityState::Struct">
+<area shape="rect" id="node1" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="5,5,136,97"/>
+</map>

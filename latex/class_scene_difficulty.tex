@@ -1,0 +1,123 @@
+\hypertarget{class_scene_difficulty}{}\doxysection{Scene\+Difficulty Class Reference}
+\label{class_scene_difficulty}\index{SceneDifficulty@{SceneDifficulty}}
+
+
+main menu (opened at the game startup)  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Difficulty.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Difficulty\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_difficulty__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Difficulty\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_difficulty__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_difficulty_1_1_all_u_i}{All\+UI}}
+\item 
+struct \mbox{\hyperlink{struct_scene_difficulty_1_1_buttons_states}{Buttons\+States}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_a15de9e867dd52a66a55c8e80e50e8e82}\label{class_scene_difficulty_a15de9e867dd52a66a55c8e80e50e8e82}} 
+{\bfseries Scene\+Difficulty} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_acdc2735a42657e7c6f2b905d59f3d743}\label{class_scene_difficulty_acdc2735a42657e7c6f2b905d59f3d743}} 
+{\bfseries Scene\+Difficulty} (\mbox{\hyperlink{class_scene_difficulty}{Scene\+Difficulty}} const \&src)
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_a89872867aa3b6ae5d58e2b3f1f373a66}\label{class_scene_difficulty_a89872867aa3b6ae5d58e2b3f1f373a66}} 
+\mbox{\hyperlink{class_scene_difficulty}{Scene\+Difficulty}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_difficulty}{Scene\+Difficulty}} const \&rhs)
+\item 
+virtual bool \mbox{\hyperlink{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_difficulty_a98d9e4aa50d9092575b343cf0d445f36}\label{class_scene_difficulty_a98d9e4aa50d9092575b343cf0d445f36}} 
+virtual void \mbox{\hyperlink{class_scene_difficulty_a98d9e4aa50d9092575b343cf0d445f36}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_a183823618eb968594b8432f9e0dfe53c}\label{class_scene_difficulty_a183823618eb968594b8432f9e0dfe53c}} 
+\mbox{\hyperlink{struct_scene_difficulty_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_ad54978b6604447154051380bcd0ce404}\label{class_scene_difficulty_ad54978b6604447154051380bcd0ce404}} 
+\mbox{\hyperlink{struct_scene_difficulty_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_difficulty_a8e13adc9980b3c7c7fa42a56fb5bb9fd}\label{class_scene_difficulty_a8e13adc9980b3c7c7fa42a56fb5bb9fd}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_difficulty}{Scene\+Difficulty}} \&my\+Class)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+main menu (opened at the game startup) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}\label{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}} 
+\index{SceneDifficulty@{SceneDifficulty}!init@{init}}
+\index{init@{init}!SceneDifficulty@{SceneDifficulty}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Difficulty\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}\label{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}} 
+\index{SceneDifficulty@{SceneDifficulty}!update@{update}}
+\index{update@{update}!SceneDifficulty@{SceneDifficulty}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Difficulty\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Difficulty.\+hpp\item 
+srcs/scenes/Scene\+Difficulty.\+cpp\end{DoxyCompactItemize}
