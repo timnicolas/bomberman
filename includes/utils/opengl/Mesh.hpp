@@ -4,7 +4,7 @@
 #define NB_BONES_PER_VERTEX 4
 
 #include <vector>
-#include <map>
+#include <unordered_map>
 #include <array>
 
 #include "includesOpengl.hpp"
@@ -53,13 +53,14 @@ struct	Texture {
  */
 class	Mesh {
 	public:
-		Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name, std::vector<Vertex> vertices,
-			std::vector<uint32_t> vertIndices, std::vector<Texture> textures,
+		Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
+			std::vector<Vertex> vertices, std::vector<uint32_t> vertIndices,
 			Material material, BoundingBox boundingBox);
 		virtual ~Mesh();
 		Mesh(Mesh const &src);
 		Mesh &operator=(Mesh const &rhs);
 
+		void	setTexture(Texture const texture);
 		void	draw(glm::mat4 const &model) const;
 		void	addBoneData(uint32_t boneID, float weight, uint32_t VerticeID);
 		void	sendMesh();
@@ -73,7 +74,7 @@ class	Mesh {
 		std::string				_name;
 		std::vector<Vertex>		_vertices;
 		std::vector<uint32_t>	_vertIndices;  // contain _vertices id
-		std::vector<Texture>	_textures;
+		std::unordered_map<TextureType::Enum, Texture>	_textures;
 		Material				_material;
 		BoundingBox				_boundingBox;
         uint32_t				_vao;
