@@ -38,10 +38,10 @@ class ETransform {
 	private:
 		void	_updateModel();
 
-		glm::vec3	_pos;
-		glm::quat	_rot;
-		glm::vec3	_scale;
-		glm::mat4	_model;  // contain the final transformation matrix
+		glm::vec3	_pos;  /**< Position */
+		glm::quat	_rot;  /**< Rotation */
+		glm::vec3	_scale;  /**< Scale */
+		glm::mat4	_model;  /**< Contain the final transformation matrix */
 };
 
 #endif  // ETRANSFORM_HPP_
