@@ -33,6 +33,6 @@ class AScene {
 	protected:
 		AScene();
 
-		Gui *	_gui;
-		float const &_dtTime;
+		Gui *	_gui;  /**< A reference to the gui object */
+		float const &_dtTime;  /**< A reference to the delta time */
 };

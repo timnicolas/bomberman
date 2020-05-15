@@ -65,8 +65,8 @@ class ASceneMenu : public AScene {
 		uint32_t			getNbUIElements() const;
 
 	protected:
-		std::vector<ABaseUI *>	_buttons;
-		bool					_draw3dMenu;
+		std::vector<ABaseUI *>	_buttons;  /**< All UI elements (auto added with addXXX functions) */
+		bool					_draw3dMenu;  /**< True if the menu background is in 3D */
 
 		bool			_initBG();
 };
