@@ -30,7 +30,9 @@
 /* def up vector */
 #define WORD_UP			glm::vec3(0.0f, 1.0f, 0.0f)
 
-/* all camera base movements */
+/**
+ * @brief All camera base movements
+ */
 enum class CamMovement {
 	Forward,
 	Backward,
@@ -41,37 +43,40 @@ enum class CamMovement {
 	NoDirection,
 };
 
-/* camera modes list */
+/**
+ * @brief Camera modes list
+ */
 namespace CamMode {
 	enum Enum {
-		STATIC_DEFPOS,  // impossible to move, camera is always to the default position
-		STATIC,  // impossible to move
-		FPS,  // moving using keyboard and mouse
-		FOLLOW_PATH,  // moving by follow a path
+		STATIC_DEFPOS,  /**< impossible to move, camera is always to the default position */
+		STATIC,  /**< impossible to move */
+		FPS,  /**< moving using keyboard and mouse */
+		FOLLOW_PATH,  /**< moving by follow a path */
 	};
 }
 
-/* point on the word (used in FOLLOW_PATH mode) */
+/**
+ * @brief Point on the word (used in FOLLOW_PATH mode)
+ */
 struct CamPoint {
-	CAMERA_VEC3	pos;
-	CamMovement	lookDir;  // looking direction (if NoDirection -> look at CamPoint::lookAt)
-	CAMERA_VEC3	lookAt;  // lookAt position for last point to pos
-	bool		tpTo;  // if true, tp to the position
-	float		speed;  // speed to move to this point (if <= 0 -> default speed)
+	CAMERA_VEC3	pos;  /**< position */
+	CamMovement	lookDir;  /**< looking direction (if NoDirection -> look at CamPoint::lookAt) */
+	CAMERA_VEC3	lookAt;  /**< lookAt position for last point to pos */
+	bool		tpTo;  /**< if true, tp to the position */
+	float		speed;  /**< speed to move to this point (if <= 0 -> default speed) */
 };
 
 /**
  * @brief struct to store frustum culling settings
- *
  */
 struct FrustumCulling {
-	bool	enabled;
-	CAMERA_FLOAT	nearD;
-	CAMERA_FLOAT	farD;
-	CAMERA_FLOAT	width;
-	CAMERA_FLOAT	height;
-	CAMERA_FLOAT	tang;
-	CAMERA_FLOAT	ratio;
+	bool	enabled;  /**< frustum culling enabled or disabled */
+	CAMERA_FLOAT	nearD;  /**< frustum culling near */
+	CAMERA_FLOAT	farD;  /**< frustum culling far */
+	CAMERA_FLOAT	width;  /**< frustum culling width */
+	CAMERA_FLOAT	height;  /**< frustum culling height */
+	CAMERA_FLOAT	tang;  /**< frustum culling tangeant */
+	CAMERA_FLOAT	ratio;  /**< frustum culling ratio */
 
 	FrustumCulling() : enabled(false) {}
 };
@@ -132,18 +137,18 @@ class Camera {
 		CamMode::Enum	getMode() const;
 		CAMERA_VEC3		getDefPos() const;
 
-		CAMERA_VEC3		pos;
-		CAMERA_VEC3		front;
-		CAMERA_VEC3		up;
-		CAMERA_VEC3		right;
-		CAMERA_VEC3		worldUp;
+		CAMERA_VEC3		pos;  /**< Camera position */
+		CAMERA_VEC3		front;  /**< Camera front vector */
+		CAMERA_VEC3		up;  /**< Camera up vector */
+		CAMERA_VEC3		right;  /**< Camera right vector */
+		CAMERA_VEC3		worldUp;  /**< Global world up vector (0, 1, 0) */
 
-		CAMERA_FLOAT	yaw;
-		CAMERA_FLOAT	pitch;
+		CAMERA_FLOAT	yaw;  /**< Camera yaw */
+		CAMERA_FLOAT	pitch;  /**< Camera pitch */
 
-		CAMERA_FLOAT	movementSpeed;
-		CAMERA_FLOAT	mouseSensitivity;
-		CAMERA_FLOAT	runFactor;
+		CAMERA_FLOAT	movementSpeed;  /**< Camera speed */
+		CAMERA_FLOAT	mouseSensitivity;  /**< Camera moving sentitivity */
+		CAMERA_FLOAT	runFactor;  /**< Running factor (movementSpeed * runFactor) */
 
 
 	private:
@@ -155,25 +160,25 @@ class Camera {
 		void	_updateFps(float dtTime);
 		void	_updateFollowPath(float dtTime);
 
-		CamMode::Enum	_mode;  // STATIC, FPS, ...
-		float			_ratio;
-		float			_fovY;
-		float			_near;
-		float			_far;
-		CAMERA_MAT4		_projection;
+		CamMode::Enum	_mode;  /**< Camera mode (STATIC, FPS, ...) */
+		float			_ratio;  /**< Camera ratio */
+		float			_fovY;  /**< Camera fov */
+		float			_near;  /**< Camera near (cannot see before near) */
+		float			_far;  /**< Camera far (cannot see after far) */
+		CAMERA_MAT4		_projection;  /**< Camera projection matrix */
 
 		/* used to reset position and rotation */
-		CAMERA_VEC3		_startPos;
-		CAMERA_FLOAT	_startYaw;
-		CAMERA_FLOAT	_startPitch;
+		CAMERA_VEC3		_startPos;  /**< Starting position */
+		CAMERA_FLOAT	_startYaw;  /**< Starting yaw */
+		CAMERA_FLOAT	_startPitch;  /**< Starting pitch */
 
 		/* for follow path mode */
-		bool					_followIsRepeat;
-		bool					_followIsFinished;
-		std::vector<CamPoint>	_followPath;
-		int						_followCurElem;
+		bool					_followIsRepeat;  /**< For follow mode, repeat after follow */
+		bool					_followIsFinished;  /**< For follow mode, true when follow is finished */
+		std::vector<CamPoint>	_followPath;  /**< For follow mode, the path to follow */
+		int						_followCurElem;  /**< For follow mode, the current following element */
 
-		FrustumCulling	_frustumCulling;
+		FrustumCulling	_frustumCulling;  /**< The frustum culling object */
 };
 
 #endif  // CAMERA_HPP_
