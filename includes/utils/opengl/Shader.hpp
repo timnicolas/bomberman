@@ -67,7 +67,7 @@ class Shader {
 				}
 		};
 
-		uint32_t	id;
+		uint32_t	id;  /**< shader ID */
 
 	private:
 		void	checkCompileErrors(uint32_t shader, std::string type);
