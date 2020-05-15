@@ -6,13 +6,13 @@
 // -- Constructors -------------------------------------------------------------
 Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
 	std::vector<Vertex> vertices, std::vector<u_int32_t> vertIndices,
-	std::vector<Texture> textures, Material material, BoundingBox boundingBox)
+	Material material, BoundingBox boundingBox)
 : _openGLModel(openGLModel),
   _sh(sh),
   _name(name),
   _vertices(vertices),
   _vertIndices(vertIndices),
-  _textures(textures),
+  _textures({}),
   _material(material),
   _boundingBox(boundingBox),
   _vao(0),
@@ -21,7 +21,9 @@ Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
 
 Mesh::Mesh(Mesh const &src)
 : _openGLModel(src._openGLModel),
-  _sh(src._sh) {
+  _sh(src._sh),
+  _textures({})
+{
 	*this = src;
 }
 
@@ -39,6 +41,8 @@ Mesh::~Mesh() {
 
 Mesh &Mesh::operator=(Mesh const &rhs) {
 	if (this != &rhs) {
+		logWarn("Mesh is copied");
+
 		_vertices = rhs._vertices;
 		_vertIndices = rhs._vertIndices;
 		_textures = rhs._textures;
@@ -49,6 +53,18 @@ Mesh &Mesh::operator=(Mesh const &rhs) {
 	}
 	return *this;
 }
+
+// -- setTexture ---------------------------------------------------------------------
+/**
+ * @brief set Mesh texture
+ *
+ * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...
+ * @param texture Texture object
+ */
+void	Mesh::setTexture(TextureType::Enum type, Texture const texture) {
+	_textures[type] = texture;
+}
+
 
 // -- draw ---------------------------------------------------------------------
 /**
@@ -86,34 +102,42 @@ void	Mesh::_setUniformsTextures() const {
 	bool	hasNormalTex = false;
 
 	_sh.use();
-	// set textures uniforms
+	/* set textures uniforms */
 	uint32_t	i = 0;
-	for (Texture const &tex : _textures) {
-		glActiveTexture(GL_TEXTURE0 + i);
 
-		// diffuse texture
-		if (tex.type == TextureType::DIFFUSE && !hasDiffuseTex) {
-			hasDiffuseTex = true;
-			_sh.setBool("material.diffuse.isTexture", true);
-			_sh.setInt("material.diffuse.texture", i);
-			glBindTexture(GL_TEXTURE_2D, tex.id);
-		}
-		// specular texture
-		else if (tex.type == TextureType::SPECULAR && !hasSpecularTex) {
-			hasSpecularTex = true;
-			_sh.setBool("material.specular.isTexture", true);
-			_sh.setInt("material.specular.texture", i);
-			glBindTexture(GL_TEXTURE_2D, tex.id);
-		}
-		// normal texture
-		else if (tex.type == TextureType::NORMAL && !hasNormalTex) {
-			hasNormalTex = true;
-			_sh.setBool("material.normalMap.isTexture", true);
-			_sh.setInt("material.normalMap.texture", i);
-			glBindTexture(GL_TEXTURE_2D, tex.id);
-		}
+	// diffuse texture
+	auto	it = _textures.find(TextureType::DIFFUSE);
+	if (it != _textures.end()) {
+		glActiveTexture(GL_TEXTURE0 + i);
+		hasDiffuseTex = true;
+		_sh.setBool("material.diffuse.isTexture", true);
+		_sh.setInt("material.diffuse.texture", i);
+		glBindTexture(GL_TEXTURE_2D, it->second.id);
 		++i;
 	}
+
+	// specular texture
+	it = _textures.find(TextureType::SPECULAR);
+	if (it != _textures.end()) {
+		glActiveTexture(GL_TEXTURE0 + i);
+		hasSpecularTex = true;
+		_sh.setBool("material.specular.isTexture", true);
+		_sh.setInt("material.specular.texture", i);
+		glBindTexture(GL_TEXTURE_2D, it->second.id);
+		++i;
+	}
+
+	// normal texture
+	it = _textures.find(TextureType::NORMAL);
+	if (it != _textures.end()) {
+		glActiveTexture(GL_TEXTURE0 + i);
+		hasNormalTex = true;
+		_sh.setBool("material.normalMap.isTexture", true);
+		_sh.setInt("material.normalMap.texture", i);
+		glBindTexture(GL_TEXTURE_2D, it->second.id);
+		++i;
+	}
+
 	glActiveTexture(GL_TEXTURE0);
 
 	// set diffuse color if no texture has been setted
