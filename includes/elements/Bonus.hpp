@@ -12,6 +12,9 @@
 #define DETONATOR_DESC "Bonus Detonator: Explode bombs when you want."
 
 namespace BonusType {
+	/**
+	 * @brief All types of bonus
+	 */
 	enum Enum {
 		LIFE,
 		BOMBS,
@@ -32,19 +35,17 @@ class Bonus : public AObject {
 private:
 	Bonus();
 	// Member
-	BonusType::Enum		_typeBonus;
-	static std::map<BonusType::Enum, Block::Enum>	_textures;
-	int					_toDraw;
+	BonusType::Enum		_typeBonus;  /**< Bonus type */
+	static std::map<BonusType::Enum, Block::Enum>	_textures;  /**< Bonus texture */
+	int					_toDraw;  /**< To draw */
 	float				_indestructible;
-
 	// Methods
 	BonusType::Enum		_pickBonus();
 
 public:
-	static std::unordered_map<std::string, BonusType::Enum>	bonus;
-	static std::unordered_map<BonusType::Enum, std::string>	description;
-	static std::unordered_map<BonusType::Enum, std::string>	bonusTextures;
-
+	static std::unordered_map<std::string, BonusType::Enum>	bonus;  /**< All bonus (link btw str & enum) */
+	static std::map<BonusType::Enum, std::string>			description;  /**< All bonus description */
+	static std::unordered_map<BonusType::Enum, std::string>	bonusTextures;  /**< All bonus textures */
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();
@@ -65,6 +66,11 @@ public:
 	class BonusException : public std::runtime_error {
 	public:
 		BonusException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit BonusException(const char* whatArg);
 	};
 };

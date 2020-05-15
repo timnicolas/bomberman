@@ -15,8 +15,8 @@ class End : public AObject {
 private:
 	End();
 	// Members
-	Block::Enum	_texture;
-	bool		_open;
+	Block::Enum	_texture;  /**< Object texture */
+	bool		_open;  /**< Is open ? (when all flags are destroyed) */
 
 	// Methods
 	std::unordered_set<AEntity *>	_getCollision();
@@ -38,6 +38,11 @@ public:
 	class EndException : public std::runtime_error {
 	public:
 		EndException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit EndException(const char* whatArg);
 	};
 };

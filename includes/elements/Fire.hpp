@@ -27,6 +27,11 @@ public:
 	class FireException : public std::runtime_error {
 	public:
 		FireException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit FireException(const char* whatArg);
 	};
 };

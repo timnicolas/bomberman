@@ -1371,7 +1371,7 @@ void			SceneGame::_updateGameInfos() {
 
 		// -- Top -----------
 		/* time left */
-		if (player->bonusActifs.time > 0) {
+		if (player->activeBonus.time > 0) {
 			allUI.timeLeftImgActive->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			allUI.timeLeftImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			tmpPos.x += allUI.timeLeftImgActive->getSize().x;
@@ -1391,7 +1391,7 @@ void			SceneGame::_updateGameInfos() {
 
 		/* life */
 		tmpPos.x += padding;
-		if (player->bonusActifs.life > 0) {
+		if (player->activeBonus.life > 0) {
 			allUI.lifeImgActive->setPos({tmpPos.x, imgY}).setSize(tmpSize);
 			allUI.lifeImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			tmpPos.x += allUI.lifeImgActive->getSize().x;
@@ -1422,7 +1422,7 @@ void			SceneGame::_updateGameInfos() {
 		allUI.scoreText->setText(score.toString()).setSize(VOID_POS).setCalculatedSize();
 		tmpPos.x -= allUI.scoreText->getSize().x;
 		allUI.scoreText->setPos({tmpPos.x, textY});
-		if (player->bonusActifs.score > 0) {
+		if (player->activeBonus.score > 0) {
 			allUI.scoreImgActive->setSize(tmpSize);
 			tmpPos.x -= allUI.scoreImgActive->getSize().x;
 			allUI.scoreImgActive->setPos({tmpPos.x, imgY});
@@ -1441,7 +1441,7 @@ void			SceneGame::_updateGameInfos() {
 
 		/* speed */
 		// tmpPos.x += padding;
-		if (player->bonusActifs.speed > 0) {
+		if (player->activeBonus.speed > 0) {
 			allUI.speedImgActive->setPos(tmpPos).setSize(tmpSize);
 			allUI.speedImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			tmpPos.x += allUI.speedImgActive->getSize().x;
@@ -1459,7 +1459,7 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos = pos;
 
 		/* bonus bomb */
-		if (player->bonusActifs.bombs > 0) {
+		if (player->activeBonus.bombs > 0) {
 			allUI.bonusBombImgActive->setPos(tmpPos).setSize(tmpSize);
 			allUI.bonusBombImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			tmpPos.x += allUI.bonusBombImgActive->getSize().x;
@@ -1475,7 +1475,7 @@ void			SceneGame::_updateGameInfos() {
 		tmpPos = pos;
 
 		/* bonus flame */
-		if (player->bonusActifs.flames > 0) {
+		if (player->activeBonus.flames > 0) {
 			allUI.bonusFlameImgActive->setPos(tmpPos).setSize(tmpSize);
 			allUI.bonusFlameImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			tmpPos.x += allUI.bonusFlameImgActive->getSize().x;
@@ -1492,7 +1492,7 @@ void			SceneGame::_updateGameInfos() {
 
 		/* bonus flampass */
 		if (player->passFire) {
-			if (player->bonusActifs.flampass > 0) {
+			if (player->activeBonus.flampass > 0) {
 				allUI.bonusFlampassImgActive->setPos(tmpPos).setSize(tmpSize);
 				allUI.bonusFlampassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			}
@@ -1507,7 +1507,7 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus wallpass */
 		if (player->passWall) {
-			if (player->bonusActifs.wallpass > 0) {
+			if (player->activeBonus.wallpass > 0) {
 				allUI.bonusWallpassImgActive->setPos(tmpPos).setSize(tmpSize);
 				allUI.bonusWallpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			}
@@ -1522,7 +1522,7 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus detonator */
 		if (player->detonator) {
-			if (player->bonusActifs.detonator > 0) {
+			if (player->activeBonus.detonator > 0) {
 				allUI.bonusDetonatorImgActive->setPos(tmpPos).setSize(tmpSize);
 				allUI.bonusDetonatorImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			}
@@ -1537,7 +1537,7 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus passBomb */
 		if (player->passBomb) {
-			if (player->bonusActifs.bombpass > 0) {
+			if (player->activeBonus.bombpass > 0) {
 				allUI.bonusBombpassImgActive->setPos(tmpPos).setSize(tmpSize);
 				allUI.bonusBombpassImg->setPos(VOID_POS).setSize(VOID_SIZE);
 			}
@@ -1552,7 +1552,7 @@ void			SceneGame::_updateGameInfos() {
 		}
 		/* bonus invulnerable */
 		if (player->invulnerable) {
-			if (player->bonusActifs.shield > 0) {
+			if (player->activeBonus.shield > 0) {
 				allUI.bonusShieldImgActive->setPos(tmpPos).setSize(tmpSize);
 				allUI.bonusShieldImg->setPos(VOID_POS).setSize(VOID_SIZE);
 				tmpPos.x += allUI.bonusShieldImgActive->getSize().x;
