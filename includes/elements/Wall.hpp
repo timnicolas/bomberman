@@ -15,7 +15,7 @@ private:
 	Wall();
 	// Members
 	// graphic information.
-	Block::Enum		_blockType;
+	Block::Enum		_blockType;  /**< The type of the block */
 
 public:
 	// Constructors
