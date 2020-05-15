@@ -6,6 +6,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Bomb:: Bomb object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Bomb::Bomb(SceneGame &game) : AObject(game) {
 	type = Type::BOMB;
 	name = BOMB_STR;
@@ -15,6 +20,9 @@ Bomb::Bomb(SceneGame &game) : AObject(game) {
 	AudioManager::loadSound(BOMB_EXPLOSION_SOUND);
 }
 
+/**
+ * @brief Destroy the Bomb:: Bomb object
+ */
 Bomb::~Bomb() {
 	try {
 		game.clearFromBoard(this, {position.x, position.z});
@@ -24,12 +32,23 @@ Bomb::~Bomb() {
 	}
 }
 
+/**
+ * @brief Construct a new Bomb:: Bomb object
+ *
+ * @param src The object to do the copy
+ */
 Bomb::Bomb(Bomb const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Bomb& A reference to the copied object
+ */
 Bomb &Bomb::operator=(Bomb const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
@@ -41,6 +60,12 @@ Bomb &Bomb::operator=(Bomb const &rhs) {
 
 // -- Getters / Setters --------------------------------------------------------
 
+/**
+ * @brief Set the bomb propagation
+ *
+ * @param propagation The new propagation
+ * @return Bomb* A pointer on this object
+ */
 Bomb*	Bomb::setPropagation(const int propagation) {
 	_propagation = propagation;
 	return this;

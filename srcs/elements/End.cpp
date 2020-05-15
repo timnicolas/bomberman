@@ -5,6 +5,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new End:: End object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 End::End(SceneGame &game) : AObject(game) {
 	type = Type::END;
 	name = END_STR;
@@ -13,15 +18,29 @@ End::End(SceneGame &game) : AObject(game) {
 	_open = false;
 }
 
+/**
+ * @brief Destroy the End:: End object
+ */
 End::~End() {
 }
 
+/**
+ * @brief Construct a new End:: End object
+ *
+ * @param src The object to do the copy
+ */
 End::End(End const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return End& A reference to the copied object
+ */
 End &End::operator=(End const &rhs) {
 	if (this != &rhs) {
 		AObject::operator=(rhs);

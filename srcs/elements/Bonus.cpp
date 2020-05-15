@@ -63,6 +63,11 @@ std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Bonus:: Bonus object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Bonus::Bonus(SceneGame &game) : AObject(game) {
 	type = Type::BONUS;
 	name = "Bonus";
@@ -77,16 +82,31 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	AudioManager::loadSound(BONUS_DISAPPEAR_SOUND);
 }
 
+/**
+ * @brief Destroy the Bonus:: Bonus object
+ *
+ */
 Bonus::~Bonus() {
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
+/**
+ * @brief Construct a new Bonus:: Bonus object
+ *
+ * @param src The object to do the copy
+ */
 Bonus::Bonus(Bonus const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Bonus& A reference to the copied object
+ */
 Bonus &Bonus::operator=(Bonus const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);

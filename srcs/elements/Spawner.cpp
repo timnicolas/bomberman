@@ -12,6 +12,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Spawner:: Spawner object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Spawner::Spawner(SceneGame &game) : AObject(game) {
 	type = Type::SPAWNER;
 	name = "Spawner";
@@ -22,15 +27,29 @@ Spawner::Spawner(SceneGame &game) : AObject(game) {
 	_waitForSpawn = 0;
 }
 
+/**
+ * @brief Destroy the Spawner:: Spawner object
+ */
 Spawner::~Spawner() {
 }
 
+/**
+ * @brief Construct a new Spawner:: Spawner object
+ *
+ * @param src The object to do the copy
+ */
 Spawner::Spawner(Spawner const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Spawner& A reference to the copied object
+ */
 Spawner &Spawner::operator=(Spawner const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);

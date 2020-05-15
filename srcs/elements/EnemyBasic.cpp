@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy Basic:: Enemy Basic object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyBasic::EnemyBasic(SceneGame &game)
 : AEnemy(game)
 {
@@ -13,15 +18,29 @@ EnemyBasic::EnemyBasic(SceneGame &game)
 	_soundOfDeath = ENEMY_BASIC_DEATH_SOUND;
 }
 
+/**
+ * @brief Destroy the Enemy Basic:: Enemy Basic object
+ */
 EnemyBasic::~EnemyBasic() {
 }
 
+/**
+ * @brief Construct a new Enemy Basic:: Enemy Basic object
+ *
+ * @param src The object to do the copy
+ */
 EnemyBasic::EnemyBasic(EnemyBasic const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return EnemyBasic& A reference to the copied object
+ */
 EnemyBasic &EnemyBasic::operator=(EnemyBasic const &rhs) {
 	if (this != &rhs) {
 		AEnemy::operator=(rhs);
