@@ -74,7 +74,7 @@ class	Mesh {
 		std::string				_name;  /**< The mesh name */
 		std::vector<Vertex>		_vertices;  /**< All mesh vertices */
 		std::vector<uint32_t>	_vertIndices;  /**< Contains _vertices id */
-		std::vector<Texture>	_textures;  /**< Contains all textures */
+		std::unordered_map<TextureType::Enum, Texture>	_textures;  /**< Contains all textures */
 		Material				_material;  /**< The material */
 		BoundingBox				_boundingBox;  /**< The boundingBox */
         uint32_t				_vao;  /**< Vertex Array Objects */

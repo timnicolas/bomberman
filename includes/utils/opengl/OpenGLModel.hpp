@@ -122,7 +122,7 @@ class OpenGLModel {
 
 		Camera const		&_cam;  /**< A reference to the camera */
 		std::string const	_path;  /**< model file path */
-		std::vector<Mesh *>	_meshes;  /**< all model meshes */
+		std::unordered_map<std::string, Mesh *>	_meshes;  /**< all model meshes */
 
 		// assimp utility
 		aiScene const		*_scene;  /**< The assimp scene */
