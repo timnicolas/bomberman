@@ -5,22 +5,44 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Score:: Score object
+ */
 Score::Score() {
 	reset();
 }
 
+/**
+ * @brief Construct a new Score:: Score object
+ *
+ * @param score A starting score
+ */
 Score::Score(int32_t score): _score(score) {
 }
 
+/**
+ * @brief Destroy the Score:: Score object
+ */
 Score::~Score() {
 }
 
+/**
+ * @brief Construct a new Score:: Score object
+ *
+ * @param src The object to do the copy
+ */
 Score::Score(Score const &src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Score& A reference to the copied object
+ */
 Score &Score::operator=(Score const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("Score object copied");
@@ -39,12 +61,49 @@ Score &Score::operator=(Score const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Create a score with a given points
+ *
+ * @param points The points
+ * @return Score& The score created
+ */
 Score	&Score::operator=(int32_t points) { return setScore(points); }
+/**
+ * @brief Add to score
+ *
+ * @param points Points to add
+ * @return Score& A reference to the score object
+ */
 Score	&Score::operator+(int32_t points) { _score += points; return *this; }
+/**
+ * @brief Sub to score
+ *
+ * @param points Points to add
+ * @return Score& A reference to the score object
+ */
 Score	&Score::operator-(int32_t points) { _score -= points; return *this; }
+/**
+ * @brief Add to score
+ *
+ * @param points Points to add
+ * @return Score& A reference to the score object
+ */
 void	Score::operator+=(int32_t points) { _score += points; }
+/**
+ * @brief Sub to score
+ *
+ * @param points Points to add
+ * @return Score& A reference to the score object
+ */
 void	Score::operator-=(int32_t points) { _score -= points; }
 
+/**
+ * @brief Display score object
+ *
+ * @param os The ostream object
+ * @param my_class A reference to 'this' object
+ * @return std::ostream& A reference to the ostream object
+ */
 std::ostream &	operator<<(std::ostream & os, const Score& my_class) {
 	os << std::setw(6) << std::setfill('0') << my_class.getScore();
 	return (os);

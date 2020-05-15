@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Flag:: Flag object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Flag::Flag(SceneGame &game) : AObject(game) {
 	type = Type::FLAG;
 	name = FLAG_STR;
@@ -13,18 +18,32 @@ Flag::Flag(SceneGame &game) : AObject(game) {
 	_soundOfDeath = FLAG_DESTROYED_SOUND;
 }
 
+/**
+ * @brief Destroy the Flag:: Flag object
+ */
 Flag::~Flag() {
 	if (game.clearFromBoard(this, {position.x, position.z})) {
 		game.flags--;
 	}
 }
 
+/**
+ * @brief Construct a new Flag:: Flag object
+ *
+ * @param src The object to do the copy
+ */
 Flag::Flag(Flag const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Flag& A reference to the copied object
+ */
 Flag &Flag::operator=(Flag const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);

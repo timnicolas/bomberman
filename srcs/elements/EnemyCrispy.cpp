@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy Crispy:: Enemy Crispy object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyCrispy::EnemyCrispy(SceneGame &game)
 : AEnemy(game),
   _isWall(true),
@@ -15,6 +20,9 @@ EnemyCrispy::EnemyCrispy(SceneGame &game)
 	_soundOfDeath = ENEMY_CRISPY_DEATH_SOUND;
 }
 
+/**
+ * @brief Destroy the Enemy Crispy:: Enemy Crispy object
+ */
 EnemyCrispy::~EnemyCrispy() {
 	auto it = game.enemies.begin();
 	while (it != game.enemies.end()) {
@@ -25,12 +33,23 @@ EnemyCrispy::~EnemyCrispy() {
 	}
 }
 
+/**
+ * @brief Construct a new Enemy Crispy:: Enemy Crispy object
+ *
+ * @param src The object to do the copy
+ */
 EnemyCrispy::EnemyCrispy(EnemyCrispy const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return EnemyCrispy& A reference to the copied object
+ */
 EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);

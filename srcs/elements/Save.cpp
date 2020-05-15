@@ -10,7 +10,6 @@
 // -- Constructors -------------------------------------------------------------
 /**
  * @brief Private constructor. Construct a new Save:: Save object
- *
  */
 Save::Save() {
 	_instantiate = false;
@@ -19,7 +18,6 @@ Save::Save() {
 
 /**
  * @brief Destroy the Save:: Save object
- *
  */
 Save::~Save() {
 	delete _saveJs;
@@ -28,7 +26,7 @@ Save::~Save() {
 /**
  * @brief Private copy constructor. Construct a new Save:: Save object
  *
- * @param src
+ * @param src The object to do the copy
  */
 Save::Save(Save const &src) {
 	_saveJs = new SettingsJson();
@@ -112,6 +110,12 @@ Save	&Save::_newGame() {
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Save& A reference to the copied object
+ */
 Save &Save::operator=(Save const &rhs) {
 	if ( this != &rhs ) {
 		_time = rhs._time;
@@ -122,6 +126,13 @@ Save &Save::operator=(Save const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Operator to display object
+ *
+ * @param os The ostream object
+ * @param my_class Reference to 'this' object
+ * @return std::ostream& A reference to the ostream object
+ */
 std::ostream &	operator<<(std::ostream & os, const Save& my_class) {
 	os << "Save: " << my_class._saveJs;
 

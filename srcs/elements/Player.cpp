@@ -6,6 +6,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Player:: Player object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Player::Player(SceneGame &game)
 : ACharacter(game) {
 	_model = nullptr;
@@ -22,18 +27,32 @@ Player::Player(SceneGame &game)
 	AudioManager::loadSound(PUT_BOMB_EMPTY_SOUND);
 }
 
+/**
+ * @brief Destroy the Player:: Player object
+ */
 Player::~Player() {
 	if (_entityState.state == EntityState::RUNNING) {
 		AudioManager::stopSound(PLAYER_RUN_SOUND);
 	}
 }
 
+/**
+ * @brief Construct a new Player:: Player object
+ *
+ * @param src The object to do the copy
+ */
 Player::Player(Player const &src) : Player(src.game) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Player& A reference to the copied object
+ */
 Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);

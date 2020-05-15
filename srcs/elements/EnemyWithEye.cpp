@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy With Eye:: Enemy With Eye object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyWithEye::EnemyWithEye(SceneGame &game)
 : AEnemy(game),
   _playerDir(Direction::NO_DIRECTION)
@@ -14,15 +19,29 @@ EnemyWithEye::EnemyWithEye(SceneGame &game)
 	_soundOfDeath = ENEMY_WITH_EYE_DEATH_SOUND;
 }
 
+/**
+ * @brief Destroy the Enemy With Eye:: Enemy With Eye object
+ */
 EnemyWithEye::~EnemyWithEye() {
 }
 
+/**
+ * @brief Construct a new Enemy With Eye:: Enemy With Eye object
+ *
+ * @param src The object to do the copy
+ */
 EnemyWithEye::EnemyWithEye(EnemyWithEye const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return EnemyWithEye& A reference to the copied object
+ */
 EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);

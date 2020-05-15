@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy Fly:: Enemy Fly object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyFly::EnemyFly(SceneGame &game)
 : AEnemy(game)
 {
@@ -16,6 +21,9 @@ EnemyFly::EnemyFly(SceneGame &game)
 	_soundAttack.push_back(ENEMY_SHOT_SOUND);
 }
 
+/**
+ * @brief Destroy the Enemy Fly:: Enemy Fly object
+ */
 EnemyFly::~EnemyFly() {
 	auto it = game.enemies.begin();
 	while (it != game.enemies.end()) {
@@ -26,12 +34,23 @@ EnemyFly::~EnemyFly() {
 	}
 }
 
+/**
+ * @brief Construct a new Enemy Fly:: Enemy Fly object
+ *
+ * @param src The object to do the copy
+ */
 EnemyFly::EnemyFly(EnemyFly const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return EnemyFly& A reference to the copied object
+ */
 EnemyFly &EnemyFly::operator=(EnemyFly const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);
