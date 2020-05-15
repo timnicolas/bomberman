@@ -129,15 +129,15 @@ class JsonObj {
 		}
 
 	protected:
-		std::string _name;
-		std::string _description;
-		T			_value;
-		bool		_hasMin;
-		T			_min;
-		bool		_hasMax;
-		T			_max;
-		bool		_disableInFile;
-		T			_defVal;
+		std::string _name;  /**< The name of the object */
+		std::string _description;  /**< The description of the object */
+		T			_value;  /**< The object value */
+		bool		_hasMin;  /**< If the object has a minimum value */
+		T			_min;  /**< The minimum value (if _hasMin) */
+		bool		_hasMax;  /**< If the object has a maximum value */
+		T			_max;  /**< The maximum value (if _hasMax) */
+		bool		_disableInFile;  /**< An option to disable this parameter in json files */
+		T			_defVal;  /**< The default value */
 };
 
 /**
@@ -195,8 +195,8 @@ class SettingsList {
 			return out;
 		}
 
-		T *					pattern;
-		std::vector<T *>	list;
+		T *					pattern;  /**< The default SettingsJson object for list */
+		std::vector<T *>	list;  /**< A list of pattern */
 
 	private:
 };
@@ -300,17 +300,24 @@ class SettingsJson {
 				explicit SettingsException(const std::string what_arg);
 		};
 
-		std::map<std::string, JsonObj<std::string> *>	stringMap;  // s
-		std::map<std::string, JsonObj<int64_t> *>		intMap;  // i
-		std::map<std::string, JsonObj<uint64_t> *>		uintMap;  // u
-		std::map<std::string, JsonObj<double> *>		doubleMap;  // f
-		std::map<std::string, JsonObj<bool> *>			boolMap;  // b
-		std::map<std::string, JsonObj<SettingsJson> *>	jsonMap;  // j
-		std::map<std::string, JsonObj<SettingsList<SettingsJson> > *>	jsonList;  // j
+		/**< A map with all string objects (fn s) */
+		std::map<std::string, JsonObj<std::string> *>	stringMap;
+		/**< A map with all int64_t objects (fn i) */
+		std::map<std::string, JsonObj<int64_t> *>		intMap;
+		/**< A map with all uint64_t objects (fn u) */
+		std::map<std::string, JsonObj<uint64_t> *>		uintMap;
+		/**< A map with all double objects (fn f) */
+		std::map<std::string, JsonObj<double> *>		doubleMap;
+		/**< A map with all bool objects (fn b) */
+		std::map<std::string, JsonObj<bool> *>			boolMap;
+		/**< A map with all SettingsJson objects (fn j) */
+		std::map<std::string, JsonObj<SettingsJson> *>	jsonMap;
+		/**< A map with all SettingsList objects (fn j) */
+		std::map<std::string, JsonObj<SettingsList<SettingsJson> > *>	jsonList;
 
 	private:
-		std::string _name;
-		std::string _description;
+		std::string _name;  /**< The json name */
+		std::string _description;  /**< The json description */
 
 		template<class T>
 		std::map<std::string, JsonObj<T> *> const & _getMap() const {
