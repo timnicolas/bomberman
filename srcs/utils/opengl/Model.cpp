@@ -68,6 +68,11 @@ void	Model::draw() {
 		}
 	}
 
+	// set manually modified mesh textures if specified
+	for (MeshTexture &mT : _meshTextures) {
+		_openGLModel.setMeshTexture(mT.type, mT.meshName, mT.path, mT.inSpaceSRGB);
+	}
+
 	// update openGLModel model matrix
 	_openGLModel.setModel(transform.getModel());
 
@@ -173,6 +178,28 @@ void	Model::setAnimCurrentTime(float animTime) {
 	else {
 		logWarn("the model have no animation");
 	}
+}
+
+/**
+ * @brief manually set the texture of a specified mesh
+ * Warning: others Model that use the same OpenglModel will also have their mesh
+ * texture modified if they not replace it
+ *
+ * @param type the texture type DIFFUSE/SPECULAR/NORMAL/...
+ * @param meshName the name of the desired mesh, find it with printMeshesNames
+ * @param path the texture path
+ * @param inSpaceSRGB is the texture in srgb space ?
+ */
+void	Model::setMeshTexture(TextureType::Enum type, std::string const meshName,
+	std::string const path, bool inSpaceSRGB)
+{
+	MeshTexture	meshTexture;
+	meshTexture.type = type;
+	meshTexture.meshName = meshName;
+	meshTexture.path = path;
+	meshTexture.inSpaceSRGB = inSpaceSRGB;
+
+	_meshTextures.push_back(meshTexture);
 }
 
 // -- getters ------------------------------------------------------------------

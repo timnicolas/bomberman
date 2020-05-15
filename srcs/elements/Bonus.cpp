@@ -33,7 +33,7 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "points", BonusType::POINTS },
 };
 
-std::map<BonusType::Enum, std::string> Bonus::description = {
+std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::LIFE, "Bonus Life: You earn an extra life." },
 	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb simultaneously." },
 	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range." },
@@ -45,6 +45,20 @@ std::map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::SHIELD, "Bonus Shield: You can't get damage for a while." },
 	{ BonusType::TIME, "Bonus Time: Extra time to finish the level." },
 	{ BonusType::POINTS, "Bonus Points: Your total score increase." },
+};
+
+std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
+	{ BonusType::LIFE, "bomberman-assets/3dModels/bonus/textures/life.png" },
+	{ BonusType::BOMBS, "bomberman-assets/3dModels/bonus/textures/bomb.png" },
+	{ BonusType::FLAMES, "bomberman-assets/3dModels/bonus/textures/flamme.png" },
+	{ BonusType::SPEED, "bomberman-assets/3dModels/bonus/textures/speed.png" },
+	{ BonusType::WALLPASS, "bomberman-assets/3dModels/bonus/textures/wallpass.png" },
+	{ BonusType::DETONATOR, "bomberman-assets/3dModels/bonus/textures/detonator.png" },
+	{ BonusType::BOMBPASS, "bomberman-assets/3dModels/bonus/textures/bombpass.png" },
+	{ BonusType::FLAMPASS, "bomberman-assets/3dModels/bonus/textures/flampass.png" },
+	{ BonusType::SHIELD, "bomberman-assets/3dModels/bonus/textures/shield.png" },
+	{ BonusType::TIME, "bomberman-assets/3dModels/bonus/textures/time.png" },
+	{ BonusType::POINTS, "bomberman-assets/3dModels/bonus/textures/score.png" },
 };
 
 // -- Constructors -------------------------------------------------------------
@@ -151,12 +165,26 @@ bool	Bonus::postUpdate() {
  * @return false if failure
  */
 bool	Bonus::draw(Gui &gui) {
+	(void)gui;
+
+	// flash before dying
 	if (_timeToDie <= 2) {
 		_toDraw = ((_toDraw + 1) % 10);
 		if (_toDraw > 5)
 			return true;
 	}
-	gui.drawCube(_textures[_typeBonus], getPos());
+
+	// gui.drawCube(_textures[_typeBonus], getPos());
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
@@ -232,6 +260,40 @@ BonusType::Enum		Bonus::_pickBonus() {
 			}
 		}
 	}
+}
+
+/**
+ * @brief Init Bonus
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Bonus::init() {
+	AObject::init();
+
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		_model = new Model(ModelsManager::getModel("bonus"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle");
+		_model->setMeshTexture(TextureType::DIFFUSE, "Bonus_Mesh::Bonus",
+			bonusTextures[_typeBonus]);
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
 }
 
 // -- Exceptions errors --------------------------------------------------------
