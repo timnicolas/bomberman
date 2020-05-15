@@ -148,6 +148,11 @@ class ABaseUI {
 	class UIException : public std::runtime_error {
 		public:
 			UIException();
+			/**
+			 * @brief Construct a new UIException object
+			 *
+			 * @param what_arg Error message
+			 */
 			explicit UIException(const char* what_arg);
 		};
 
@@ -174,77 +179,77 @@ class ABaseUI {
 		virtual void	_resizeWin(glm::vec2 const & winScale2f, float winScale1f);
 
 		// enable functionalities
-		bool			_enabled;
+		bool			_enabled;  /**< Enable / disable UI */
 		// basics
-		glm::vec2		_pos;
-		float			_z;
-		glm::vec2		_posOffset;
-		glm::vec2		_size;
-		glm::vec4		_color;
-		int64_t			_value;
+		glm::vec2		_pos;  /**< Position */
+		float			_z;  /**< Z position (to transparency) */
+		glm::vec2		_posOffset;  /**< Offset (to move obj & keep same _pos) */
+		glm::vec2		_size;  /**< Size */
+		glm::vec4		_color;  /**< Color */
+		int64_t			_value;  /**< Value */
 		// border
-		glm::vec4		_borderColor;
-		float			_borderSize;
+		glm::vec4		_borderColor;  /**< Border color */
+		float			_borderSize;  /**< Border size */
 		// mouse effect
-		glm::vec4		_mouseHoverColor;
-		glm::vec4		_mouseClickColor;
+		glm::vec4		_mouseHoverColor;  /**< Color when mouse hover */
+		glm::vec4		_mouseClickColor;  /**< Color when mouse click */
 		// text
-		std::string		_text;
-		glm::vec4		_textColor;
-		std::string 	_textFont;
-		float			_textScale;
-		float			_textPadding;
-		TextAlign::Enum	_textAlign;
+		std::string		_text;  /**< Text */
+		glm::vec4		_textColor;  /**< Text color */
+		std::string 	_textFont;  /**< Text font */
+		float			_textScale;  /**< Text scale */
+		float			_textPadding;  /**< Text padding */
+		TextAlign::Enum	_textAlign;  /**< Text align (LEFT, RIGHT, CENTER) */
 		// image
-		GLuint			_imgTextureID;
-		glm::ivec2		_imgDefSize;
+		GLuint			_imgTextureID;  /**< Image texture ID */
+		glm::ivec2		_imgDefSize;  /**< Image default size */
 
 		/* info about mouse */
-		bool			_isClickableUI;  // set to false for no buttons UI
-		bool			_mouseHover;
-		bool			_rightClick;
-		SDL_Scancode	_keyRightClickBindScancode;
-		InputType::Enum	_keyRightClickBindInput;
-		bool			_leftClick;
-		SDL_Scancode	_keyLeftClickBindScancode;
-		InputType::Enum	_keyLeftClickBindInput;
+		bool			_isClickableUI;  /**< Set to false for no buttons UI to optimize calculation */
+		bool			_mouseHover;  /**< True if mouse hover */
+		bool			_rightClick;  /**< True if right click */
+		SDL_Scancode	_keyRightClickBindScancode;  /**< Shortcut scancode (rigth click) */
+		InputType::Enum	_keyRightClickBindInput;  /**< Shortcut input (rigth click) */
+		bool			_leftClick;  /**< True if left click */
+		SDL_Scancode	_keyLeftClickBindScancode;  /**< Shortcut scancode (left click) */
+		InputType::Enum	_keyLeftClickBindInput;  /**< Shortcut input (left click) */
 
 		/* listener */
-		bool *			_rightListener;
-		bool *			_leftListener;
-		int64_t *		_leftValueListener;
+		bool *			_rightListener;  /**< Right click listener (the bool pointed can automatically set to true) */
+		bool *			_leftListener;  /**< Left click listener (the bool pointed can automatically set to true) */
+		int64_t *		_leftValueListener;  /**< Value listener (the int pointed can be automatically updated) */
 
 		/* master */
 		// master element are an element that contains others
-		ABaseMasterUI *	_master;
+		ABaseMasterUI *	_master;  /**< Master object (if exist) */
 
 		/* global */
-		static bool						_isInit;
-		static std::vector<ABaseUI *>	_allUI;
+		static bool						_isInit;  /**< True if ABaseUI::init() was called */
+		static std::vector<ABaseUI *>	_allUI;  /**< Pointer on all UI */
 		/* shaders */
-		static glm::vec2				_winSize;
-		static glm::mat4				_projection;  // projection matrix (orthogonal)
+		static glm::vec2				_winSize;  /**< Window size */
+		static glm::mat4				_projection;  /**< Projection matrix (orthogonal) */
 		/* rectangle */
-		static Shader *					_rectShader;
-		static GLuint					_rectVao;
-		static GLuint					_rectVbo;
-		static const float				_rectVertices[];
+		static Shader *					_rectShader;  /**< Rectangle shader */
+		static GLuint					_rectVao;  /**< Rectangle Vertex Array Objects */
+		static GLuint					_rectVbo;  /**< Rectangle Vertex Buffer Objects */
+		static const float				_rectVertices[];  /**< Rectangle vertices */
 		/* text */
-		static TextRender *				_textRender;
+		static TextRender *				_textRender;  /**< TextRender object */
 		/* image 2D */
-		static Shader *					_imgShader;
-		static GLuint					_imgVao;
-		static GLuint					_imgVbo;
-		static const float				_imgVertices[];
+		static Shader *					_imgShader;  /**< Image shader */
+		static GLuint					_imgVao;  /**< Image Vertex Array Objects */
+		static GLuint					_imgVbo;  /**< Image Vertex Buffer Objects */
+		static const float				_imgVertices[];  /**< Image vertices */
 		/* help */
-		static bool						_showHelp;
-		static std::string				_helpFont;
-		static float					_helpTextScale;
-		static glm::vec4				_helpBorderColor;
-		static float					_helpBorderSize;
-		static float					_helpPadding;
-		static SDL_Scancode				_helpKeyBindScancode;
-		static InputType::Enum			_helpKeyBindInput;
+		static bool						_showHelp;  /**< If true, show shortcuts in buttons */
+		static std::string				_helpFont;  /**< Help font */
+		static float					_helpTextScale;  /**< Help text scale */
+		static glm::vec4				_helpBorderColor;  /**< Help border color */
+		static float					_helpBorderSize;  /**< Help border size */
+		static float					_helpPadding;  /**< Help padding */
+		static SDL_Scancode				_helpKeyBindScancode;  /**< Enable help shortcut (scancode) */
+		static InputType::Enum			_helpKeyBindInput;  /**< Enable help shortcut (InputType) */
 
 	private:
 		void			_updateClick();

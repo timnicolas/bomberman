@@ -24,9 +24,9 @@ class SliderUI : public ABaseUI {
 		virtual void	_draw();
 		SliderUI();
 
-		float	_min;
-		float	_max;
-		float	_val;
-		float	_step;
-		float *	_sliderListener;
+		float	_min;  /**< Minimum value */
+		float	_max;  /**< Maximum value */
+		float	_val;  /**< Actual value */
+		float	_step;  /**< Step btw 2 values */
+		float *	_sliderListener;  /**< slider element value */
 };
