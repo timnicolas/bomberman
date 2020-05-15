@@ -113,6 +113,38 @@ bool	Bomb::takeDamage(const int damage) {
 }
 
 /**
+ * @brief Init Bomb
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Bomb::init() {
+	AObject::init();
+
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		_model = new Model(ModelsManager::getModel("bomb"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle");
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * @brief update is called each frame.
  *
  * @return true if success
@@ -155,8 +187,19 @@ bool	Bomb::postUpdate() {
  * @return false if failure
  */
 bool	Bomb::draw(Gui &gui) {
+	(void)gui;
+
 	if (active) {
-		gui.drawCube(Block::BOMB, getPos());
+		// gui.drawCube(Block::BOMB, getPos());(void)gui;
+
+		// draw model
+		try {
+			_model->draw();
+		}
+		catch(OpenGLModel::ModelException const & e) {
+			logErr(e.what());
+			return false;
+		}
 	}
 	return true;
 }
