@@ -42,8 +42,8 @@
  */
 class AudioManager {
 public:
-	static const int						nb_sound_channels = 42;
-	static std::vector<std::string>			musics;
+	static const int						nb_sound_channels = 42;  /**< Number of sounds channel */
+	static std::vector<std::string>			musics;  /**< Al musics */
 
 	~AudioManager();
 
@@ -70,7 +70,7 @@ public:
 	static void								stopAllSounds();
 
 private:
-	static std::string						_assets_path;
+	static std::string						_assets_path;  /**< Path of projects assets */
 
 	AudioManager();
 	AudioManager(const AudioManager &src);
@@ -98,15 +98,15 @@ private:
 
 	static void								_channelHalted(int chan);
 
-	float									_volume_master;
-	float									_volume_music;
-	float									_volume_sound;
-	float									_music_modifier;
-	std::map<std::string, Music *>			_musics;
-	std::map<std::string, Sound *>			_sounds;
-	bool									_enabled;
-	std::unordered_set<int>					_soundsMutesMusic;
-	bool									_musicPaused;
+	float									_volume_master;  /**< Master volume */
+	float									_volume_music;  /**< Music volume */
+	float									_volume_sound;  /**< Sound volume */
+	float									_music_modifier;  /**< Music modifier */
+	std::map<std::string, Music *>			_musics;  /**< All musics */
+	std::map<std::string, Sound *>			_sounds;  /**< All sounds */
+	bool									_enabled;  /**< Object enabled or disabled */
+	std::unordered_set<int>					_soundsMutesMusic;  /**< Sound mute music */
+	bool									_musicPaused;  /**< Is music paused */
 };
 
 #endif

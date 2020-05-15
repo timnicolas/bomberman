@@ -35,9 +35,9 @@ private:
 	Sound(const Sound &src);
 	Sound										&operator=(const Sound &src);
 
-	Mix_Chunk *									_chunk;
-	std::unordered_set<int>						_currents_channels;
-	std::map<int, float>						_chan_volume;
+	Mix_Chunk *									_chunk;  /**< Sound object */
+	std::unordered_set<int>						_currents_channels;  /**< Current sound channel */
+	std::map<int, float>						_chan_volume;  /**< Channel volume */
 };
 
 #endif
