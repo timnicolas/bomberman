@@ -2,18 +2,38 @@
 #include "AudioManager.hpp"
 #include "Save.hpp"
 
+/**
+ * @brief Construct a new Scene Difficulty:: Scene Difficulty object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneDifficulty::SceneDifficulty(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {}
 
+/**
+ * @brief Construct a new Scene Difficulty:: Scene Difficulty object
+ *
+ * @param src The object to do the copy
+ */
 SceneDifficulty::SceneDifficulty(SceneDifficulty const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Difficulty:: Scene Difficulty object
+ */
 SceneDifficulty::~SceneDifficulty() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneDifficulty& A reference to the copied object
+ */
 SceneDifficulty & SceneDifficulty::operator=(SceneDifficulty const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneDifficulty")

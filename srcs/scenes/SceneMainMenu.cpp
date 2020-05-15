@@ -2,18 +2,38 @@
 #include "AudioManager.hpp"
 #include "Save.hpp"
 
+/**
+ * @brief Construct a new Scene Main Menu:: Scene Main Menu object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneMainMenu::SceneMainMenu(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {}
 
+/**
+ * @brief Construct a new Scene Main Menu:: Scene Main Menu object
+ *
+ * @param src The object to do the copy
+ */
 SceneMainMenu::SceneMainMenu(SceneMainMenu const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Main Menu:: Scene Main Menu object
+ */
 SceneMainMenu::~SceneMainMenu() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneMainMenu& A reference to the copied object
+ */
 SceneMainMenu & SceneMainMenu::operator=(SceneMainMenu const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneMainMenu")

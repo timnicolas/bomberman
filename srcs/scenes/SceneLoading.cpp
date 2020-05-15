@@ -4,20 +4,40 @@
 #include "Save.hpp"
 #include "FileUtils.hpp"
 
+/**
+ * @brief Construct a new Scene Loading:: Scene Loading object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneLoading::SceneLoading(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
 	_draw3dMenu = false;
 }
 
+/**
+ * @brief Construct a new Scene Loading:: Scene Loading object
+ *
+ * @param src The object to do the copy
+ */
 SceneLoading::SceneLoading(SceneLoading const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Loading:: Scene Loading object
+ */
 SceneLoading::~SceneLoading() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneLoading& A reference to the copied object
+ */
 SceneLoading & SceneLoading::operator=(SceneLoading const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneLoading")

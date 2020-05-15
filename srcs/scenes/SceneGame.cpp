@@ -47,6 +47,12 @@ std::map<std::string, SceneGame::Entity> SceneGame::entitiesCall = {
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Scene Game:: Scene Game object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	player = nullptr;
 	enemies = std::vector<AEnemy *>();
@@ -70,6 +76,9 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	AudioManager::loadSound(ALARM_TIME_SOUND);
 }
 
+/**
+ * @brief Destroy the Scene Game:: Scene Game object
+ */
 SceneGame::~SceneGame() {
 	_unloadLevel();  // delete all elements of current level if needed
 
@@ -92,6 +101,11 @@ SceneGame::~SceneGame() {
 	delete _terrain;
 }
 
+/**
+ * @brief Construct a new Scene Game:: Scene Game object
+ *
+ * @param src The object to do the copy
+ */
 SceneGame::SceneGame(SceneGame const &src)
 : ASceneMenu(src) {
 	*this = src;
@@ -99,6 +113,12 @@ SceneGame::SceneGame(SceneGame const &src)
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneGame& A reference to the copied object
+ */
 SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("SceneGame object copied");
