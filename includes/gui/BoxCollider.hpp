@@ -25,10 +25,10 @@ class BoxCollider {
 		bool					_destroy();
 		bool					_drawBox(glm::vec3 pos, glm::vec3 size, glm::vec4 color);
 
-		Gui *				_gui;
-		glm::mat4			_projection;
-		Shader *			_boxShader;
-		uint32_t			_boxShaderVAO;
-		uint32_t			_boxShaderVBO;
-		static const float	_boxVertices[];
+		Gui *				_gui;  /**< Ref to GUI object */
+		glm::mat4			_projection;  /**< projection matrix */
+		Shader *			_boxShader;  /**< Shader */
+		uint32_t			_boxShaderVAO;  /**< Vertex Array Objects */
+		uint32_t			_boxShaderVBO;  /**< Vertex Buffer Objects */
+		static const float	_boxVertices[];  /**< Collider vertices */
 };

@@ -24,13 +24,16 @@
 
 #define TITLE	"bomberman"
 
+/**
+ * @brief General information about the game
+ */
 struct GameInfo {
-	std::string	title;
-	glm::ivec2	windowSize;
-	glm::ivec2	maxWindowSize;
-	glm::ivec2	savedWindowSize;
-	bool		isSavedFullscreen;
-	bool		quit;
+	std::string	title;  /**< Win title */
+	glm::ivec2	windowSize;  /**< Win size */
+	glm::ivec2	maxWindowSize;  /**< Max win size (screen size) */
+	glm::ivec2	savedWindowSize;  /**< Saved win size (for next program opening) */
+	bool		isSavedFullscreen;  /**< True if we want fullscreen in next program opening */
+	bool		quit;  /**< True if we want to quit game */
 
 	GameInfo();
 };
@@ -57,31 +60,31 @@ class Gui {
 		void	udpateDimension();
 		void	disableExitForThisFrame(bool disable = true);
 
-		GameInfo		&gameInfo;
-		TextureManager	*textureManager;
-		Shader			*cubeShader;
-		Camera			*cam;
+		GameInfo		&gameInfo;  /**< GameInfo object */
+		TextureManager	*textureManager;  /**< TextureManager object */
+		Shader			*cubeShader;  /**< CubeShader object */
+		Camera			*cam;  /**< Camera object */
 
-		uint32_t		cubeShVao;
-		uint32_t		cubeShVbo;
+		uint32_t		cubeShVao;  /**< Vertex Array Objects */
+		uint32_t		cubeShVbo;  /**< Vertex Buffer Objects */
 
 	private:
-		SDL_Window		*_win;
-		SDL_Event		*_event;
-		SDL_GLContext	_context;
+		SDL_Window		*_win;  /**< SDL window object */
+		SDL_Event		*_event;  /**< SDL event object */
+		SDL_GLContext	_context;  /**< SDL gl context object */
 
-		Skybox			*_skybox;
+		Skybox			*_skybox;  /**< Project skybox */
 
-		bool			_exitMenuDisabled;
+		bool			_exitMenuDisabled;  /**< True if exit menu is disabled */
 
-		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;
+		static std::array<float, C_FACE_A_SIZE> const		_cubeFaces;  /**< All cubes faces */
 
 		Gui();  // private, should not be called
 		bool	_init();
 		bool	_initOpengl();
 		bool	_initShaders();
 
-		static const int									_min_width = 800;
-		static const int									_min_height = 600;
+		static const int									_min_width = 800;  /**< Min screen width */
+		static const int									_min_height = 600;  /**< Min screen height */
 		bool	_protect_resolution();
 };

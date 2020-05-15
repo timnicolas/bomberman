@@ -34,8 +34,8 @@ class ModelsManager {
 		bool		_init(Camera const &cam);
 		OpenGLModel	&_getModel(std::string const &name);
 
-		std::unordered_map<std::string, OpenGLModel *>	_models;
-		bool	_initDone;
+		std::unordered_map<std::string, OpenGLModel *>	_models;  /**< All models */
+		bool	_initDone;  /**< True if init is done */
 };
 
 #endif  // MODELSMANAGER_HPP_

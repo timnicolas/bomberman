@@ -65,8 +65,8 @@ class TextureManager {
 		};
 
 	private:
-		uint32_t	_textureAtlas;
-		static std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	_blocks;
+		uint32_t	_textureAtlas;  /**< Texture atlas */
+		static std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	_blocks;  /**< All blocks */
 };
 
 #endif  // TEXTUREMANAGER_HPP_
