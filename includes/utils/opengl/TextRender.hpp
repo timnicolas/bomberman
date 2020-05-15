@@ -42,19 +42,22 @@ class TextRender {
 					return ("Fail to load text");
 				}
 		};
+		/**
+		 * @brief All information about char (foreach characters)
+		 */
 		struct Character {
-			GLuint		textureID;
-			glm::ivec2	size;
-			glm::ivec2	bearing;
-			int64_t		advance;
+			GLuint		textureID;  /**< Texture ID */
+			glm::ivec2	size;  /**< Char size */
+			glm::ivec2	bearing;  /**< Char bearing */
+			int64_t		advance;  /**< Char advance */
 		};
-		std::map<std::string, std::map<GLchar, Character> > font;
+		std::map<std::string, std::map<GLchar, Character> > font;  /**< All character info foreach fonts */
 
 	private:
 		TextRender();
 
-		Shader		_shader;
-		glm::mat4	_projection;
-		GLuint		_vao;
-		GLuint		_vbo;
+		Shader		_shader;  /**< TextRender shader */
+		glm::mat4	_projection;  /**< Projection matrix */
+		GLuint		_vao;  /**< Vertex Array Objects */
+		GLuint		_vbo;  /**< Vertex Buffer Objects */
 };
