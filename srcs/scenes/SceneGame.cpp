@@ -683,7 +683,7 @@ bool	SceneGame::drawEndGame() {
 	/* draw models */
 	try {
 		float tmpX = _menuModels.player->transform.getPos().x;
-		if (tmpX < -3 || tmpX > 7)
+		if (tmpX < -3 || tmpX > 10)
 			tmpX = -3;
 		tmpX += 0.03;
 
