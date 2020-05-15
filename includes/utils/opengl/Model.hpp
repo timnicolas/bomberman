@@ -39,10 +39,10 @@ class Model {
 		void	printAnimsNames() const;
 		std::string getCurrentAnimationName() const;
 
-		ETransform	transform;  // to move/scale/rotate the model
-		bool		play;
-		bool		loopAnimation;
-		float		animationSpeed;
+		ETransform	transform;  /**< To move/scale/rotate the model */
+		bool		play;  /**< Play animation */
+		bool		loopAnimation;  /**< If animation repeat */
+		float		animationSpeed;  /**< Animation speed */
 
 	private:
 		Model();  // private constructor, should not be called
@@ -56,16 +56,16 @@ class Model {
 			bool				inSpaceSRGB;
 		};
 
-		OpenGLModel &_openGLModel;
-		float const	&_dtTime;
-		uint32_t	_animationId;
-		aiAnimation	*_curAnimation;
-		float		_ticksPerSecond;
-		float		_animationTime;  // in ms
-		float		_animationTimeTick;
-		AnimEndCb	_animEndCbFunc;  // cb function called on animation end
-		AEntity		*_animEndCbClass;  // cb class called on animation end
-		std::vector<Model::MeshTexture>	_meshTextures;  // store manually modified mesh textures
+		OpenGLModel &_openGLModel;  /**< A ref to openGLModel object */
+		float const	&_dtTime;  /**< A ref to the delta time (ms) */
+		uint32_t	_animationId;  /**< Current animation ID */
+		aiAnimation	*_curAnimation;  /**< Current animation */
+		float		_ticksPerSecond;  /**< Tick per second */
+		float		_animationTime;  /**< Animation time in ms */
+		float		_animationTimeTick;  /**< Cur animation time in tick */
+		AnimEndCb	_animEndCbFunc;  /**< cb function called on animation end */
+		AEntity		*_animEndCbClass;  /**< cb class called on animation end */
+		std::vector<Model::MeshTexture>	_meshTextures;  /**< store manually modified mesh textures */
 };
 
 #endif  // MODEL_HPP_
