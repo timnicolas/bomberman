@@ -3,9 +3,18 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new ASceneMenu::ASceneMenu object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 ASceneMenu::ASceneMenu(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime), _draw3dMenu(true) {}
 
+/**
+ * @brief Destroy the ASceneMenu::ASceneMenu object
+ */
 ASceneMenu::~ASceneMenu() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		delete *it;
@@ -13,6 +22,11 @@ ASceneMenu::~ASceneMenu() {
 	_buttons.clear();
 }
 
+/**
+ * @brief Construct a new ASceneMenu::ASceneMenu object
+ *
+ * @param src The object to do the copy
+ */
 ASceneMenu::ASceneMenu(ASceneMenu const &src)
 : AScene(src) {
 	*this = src;
@@ -20,6 +34,12 @@ ASceneMenu::ASceneMenu(ASceneMenu const &src)
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ASceneMenu& A reference to the copied object
+ */
 ASceneMenu &ASceneMenu::operator=(ASceneMenu const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("ASceneMenu object copied");

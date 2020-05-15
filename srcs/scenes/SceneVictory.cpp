@@ -3,6 +3,12 @@
 #include "SceneCheatCode.hpp"
 #include "AudioManager.hpp"
 
+/**
+ * @brief Construct a new Scene Victory:: Scene Victory object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
@@ -10,14 +16,28 @@ SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 	_draw3dMenu = false;
 }
 
+/**
+ * @brief Construct a new Scene Victory:: Scene Victory object
+ *
+ * @param src The object to do the copy
+ */
 SceneVictory::SceneVictory(SceneVictory const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Victory:: Scene Victory object
+ */
 SceneVictory::~SceneVictory() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneVictory& A reference to the copied object
+ */
 SceneVictory & SceneVictory::operator=(SceneVictory const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneVictory")

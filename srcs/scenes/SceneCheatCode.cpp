@@ -7,6 +7,12 @@
 #include "SceneGame.hpp"
 #include "FileUtils.hpp"
 
+/**
+ * @brief Construct a new Scene Cheat Code:: Scene Cheat Code object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   isCmdLnEnabled(true),
@@ -89,12 +95,20 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 	};
 }
 
+/**
+ * @brief Construct a new Scene Cheat Code:: Scene Cheat Code object
+ *
+ * @param src The object to do the copy
+ */
 SceneCheatCode::SceneCheatCode(SceneCheatCode const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Cheat Code:: Scene Cheat Code object
+ */
 SceneCheatCode::~SceneCheatCode() {
 	/* save history */
 	file::rm(homeDir+CHEATCODE_HIST_FILE);
@@ -111,6 +125,12 @@ SceneCheatCode::~SceneCheatCode() {
 	}
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneCheatCode& A reference to the copied object
+ */
 SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneCheatCode")

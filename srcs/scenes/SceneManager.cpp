@@ -22,6 +22,9 @@
 #include "SceneDebug.hpp"
 #include "SceneLoading.hpp"
 
+/**
+ * @brief Construct a new Scene Manager:: Scene Manager object
+ */
 SceneManager::SceneManager()
 : _isInit(false),
   _gameInfo(),
@@ -34,10 +37,18 @@ SceneManager::SceneManager()
   _sceneLoadedCurrentFrame(false)
 {}
 
+/**
+ * @brief Construct a new Scene Manager:: Scene Manager object
+ *
+ * @param src The object to do the copy
+ */
 SceneManager::SceneManager(SceneManager const & src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Manager:: Scene Manager object
+ */
 SceneManager::~SceneManager() {
 	if (!_isInit)
 		return;
@@ -57,7 +68,12 @@ SceneManager::~SceneManager() {
 	_sceneMap.clear();
 }
 
-
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneManager& A reference to the copied object
+ */
 SceneManager & SceneManager::operator=(SceneManager const & rhs) {
 	(void)rhs;
 	logErr("You should never call copy operator for SceneManager");

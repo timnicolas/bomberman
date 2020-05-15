@@ -4,20 +4,40 @@
 #include "SceneCheatCode.hpp"
 #include "SceneManager.hpp"
 
+/**
+ * @brief Construct a new Scene Level Selection:: Scene Level Selection object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneLevelSelection::SceneLevelSelection(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _currentLvl(-1),
   _transition(0)
 {}
 
+/**
+ * @brief Construct a new Scene Level Selection:: Scene Level Selection object
+ *
+ * @param src The object to do the copy
+ */
 SceneLevelSelection::SceneLevelSelection(SceneLevelSelection const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Level Selection:: Scene Level Selection object
+ */
 SceneLevelSelection::~SceneLevelSelection() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SceneLevelSelection& A reference to the copied object
+ */
 SceneLevelSelection & SceneLevelSelection::operator=(SceneLevelSelection const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneLevelSelection")
