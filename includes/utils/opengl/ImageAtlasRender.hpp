@@ -41,9 +41,9 @@ class ImageAtlasRender {
 	private:
 		ImageAtlasRender();
 
-		TextureManager const	&_textureManager;
-		Shader		_shader;
-		glm::mat4	_projection;
-		GLuint		_vao;
-		GLuint		_vbo;
+		TextureManager const	&_textureManager;  /**< A ref to the TextureManager object */
+		Shader		_shader;  /**< Shader */
+		glm::mat4	_projection;  /**< Projection matrix */
+		GLuint		_vao;  /**< Vertex Array Objects */
+		GLuint		_vbo;  /**< Vertex buffer Objects */
 };
