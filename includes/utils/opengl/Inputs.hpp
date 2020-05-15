@@ -55,10 +55,10 @@ namespace InputType {
  */
 class Inputs {
 public:
-	static const int						nb_input = InputType::NB_INPUTS;
-	static const std::string				input_type_name[Inputs::nb_input];
-	static const std::string				configFile;
-	static const SDL_Scancode				default_keys[InputType::NB_INPUTS];
+	static const int						nb_input = InputType::NB_INPUTS;  /**< Number of inputs */
+	static const std::string				input_type_name[Inputs::nb_input];  /**< Inputs names */
+	static const std::string				configFile;  /**< File with inputs keys */
+	static const SDL_Scancode				default_keys[InputType::NB_INPUTS];  /**< Inputs default keys */
 
 	~Inputs();
 
@@ -124,28 +124,28 @@ private:
 	bool									_ingoreScancode(SDL_Scancode scan) const;
 	bool									_ignoreInputType(InputType::Enum type) const;
 
-	bool									_configuring;
-	InputType::Enum							_next_action_type;
-	bool									_quit;
-	glm::ivec2								_mouse_pos;
-	glm::ivec2								_mouse_rel;
-	glm::ivec2								_scroll_rel;
-	bool									_left_click;
-	bool									_right_click;
-	bool									_left_click_previous;
-	bool									_right_click_previous;
-	std::map<SDL_Scancode, InputType::Enum>	_input_key_map;
-	std::unordered_set<int64_t>				_used_scan;
-	bool									_key_status[Inputs::nb_input];
-	bool									_key_previous_status[Inputs::nb_input];
-	SettingsJson							_controls;
-	std::vector<SDL_Scancode>				_scancodes_previous;
-	std::vector<SDL_Scancode>				_scancodes_pressed;
+	bool									_configuring;  /**< If an inputs is configuring */
+	InputType::Enum							_next_action_type;  /**< Used in key configuration */
+	bool									_quit;  /**< Quit game */
+	glm::ivec2								_mouse_pos;  /**< Mouse position */
+	glm::ivec2								_mouse_rel;  /**< Mouse movement (relative to last position) */
+	glm::ivec2								_scroll_rel;  /**< Mouse scroll (relative to last scroll position) */
+	bool									_left_click;  /**< If left click pressed */
+	bool									_right_click;  /**< If right click released */
+	bool									_left_click_previous;  /**< Used to know if we are in the first click frame */
+	bool									_right_click_previous;  /**< Used to know if we are in the first click frame */
+	std::map<SDL_Scancode, InputType::Enum>	_input_key_map;  /**< scancode associated to inputs */
+	std::unordered_set<int64_t>				_used_scan;  /**< All scancodes used for inputs */
+	bool									_key_status[Inputs::nb_input];  /**< All inputs status (pressed or released) */
+	bool									_key_previous_status[Inputs::nb_input];  /**< To know if it's the press frame */
+	SettingsJson							_controls;  /**< All controls (to save in file) */
+	std::vector<SDL_Scancode>				_scancodes_pressed;  /**< All scancodes pressed */
+	std::vector<SDL_Scancode>				_scancodes_previous;  /**< To know if it's the press frame */
 
-	bool									_isTextInputMode;
-	SDL_Keycode								_lastKeycode;
-	std::string								_currentText;
-	std::vector<SDL_Scancode>				_textInputIgnore;
+	bool									_isTextInputMode;  /**< True if we are in "textInput" mode */
+	SDL_Keycode								_lastKeycode;  /**< The last keycode pressed */
+	std::string								_currentText;  /**< The current text ("tab", "e", " ", ...) */
+	std::vector<SDL_Scancode>				_textInputIgnore;  /**< Scancodes ignored by textInput */
 };
 
 #endif
