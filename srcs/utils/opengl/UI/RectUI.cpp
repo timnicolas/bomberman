@@ -2,17 +2,37 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new Rect U I:: Rect U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 RectUI::RectUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 	// set the UI to non clickable
 	_isClickableUI = false;
 }
 
+/**
+ * @brief Construct a new Rect U I:: Rect U I object
+ *
+ * @param src The object to do the copy
+ */
 RectUI::RectUI(RectUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Rect U I:: Rect U I object
+ */
 RectUI::~RectUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return RectUI& A reference to the copied object
+ */
 RectUI & RectUI::operator=(RectUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

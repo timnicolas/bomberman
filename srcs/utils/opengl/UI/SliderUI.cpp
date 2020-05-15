@@ -3,6 +3,12 @@
 #include "debug.hpp"
 #include "Inputs.hpp"
 
+/**
+ * @brief Construct a new Slider U I:: Slider U I object
+ *
+ * @param pos The position
+ * @param size The size
+ */
 SliderUI::SliderUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _min(0),
@@ -12,18 +18,40 @@ SliderUI::SliderUI(glm::vec2 pos, glm::vec2 size)
   _sliderListener(nullptr)
 {}
 
+/**
+ * @brief Construct a new Slider U I:: Slider U I object
+ *
+ * @param src The object to do the copy
+ */
 SliderUI::SliderUI(SliderUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Slider U I:: Slider U I object
+ */
 SliderUI::~SliderUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SliderUI& A reference to the copied object
+ */
 SliderUI & SliderUI::operator=(SliderUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
 	return *this;
 }
 
+/**
+ * @brief Set Slider values
+ *
+ * @param min Min value
+ * @param max Max value
+ * @param val Start value
+ * @param step Step btw 2 values
+ */
 void SliderUI::setValues(float min, float max, float val, float step) {
 	_min = min;
 	_max = max;
@@ -31,6 +59,11 @@ void SliderUI::setValues(float min, float max, float val, float step) {
 	_step = step;
 }
 
+/**
+ * @brief Set the current value
+ *
+ * @param val Value
+ */
 void SliderUI::setValue(float val) {
 	if (val < _min)
 		_val = _min;
