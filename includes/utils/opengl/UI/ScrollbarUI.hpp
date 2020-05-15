@@ -35,23 +35,23 @@ class ScrollbarUI : public ABaseMasterUI {
 		ScrollbarUI();
 
 		/* scrollbar info */
-		float		_scrollbarSize;
-		glm::vec4	_scrollbarColor;
-		float		_mouseScrollSpeed;
+		float		_scrollbarSize;  /**< Scrollbar size */
+		glm::vec4	_scrollbarColor;  /**< Scrollbar color */
+		float		_mouseScrollSpeed;  /**< Speed with mouse scrolling */
 
-		// vertical
-		bool		_vertScroll;
-		bool		_vertScrollHide;  // hide because his size is 100%
-		bool		_vertScrollInverted;
-		float		_vertScrollbarPos;
-		float		_vertScrollBarDrawSize;
-		bool		_isVertScrollClicked;
+		/* vertical */
+		bool		_vertScroll;  /**< Enable / disable vertical scroll */
+		bool		_vertScrollHide;  /**< Hide because his size is 100% */
+		bool		_vertScrollInverted;  /**< Invert scroll */
+		float		_vertScrollbarPos;  /**< Scrollbar position */
+		float		_vertScrollBarDrawSize;  /**< Scrollbar drawing size */
+		bool		_isVertScrollClicked;  /**< Scrollbar clicked */
 
-		// horizontal
-		bool		_horizScroll;
-		bool		_horizScrollHide;  // hide because his size is 100%
-		bool		_horizScrollInverted;
-		float		_horizScrollbarPos;
-		float		_horizScrollBarDrawSize;
-		bool		_isHorizScrollClicked;
+		/* horizontal */
+		bool		_horizScroll;  /**< Enable / disable horizontal scroll */
+		bool		_horizScrollHide;  /**< Hide because his size is 100% */
+		bool		_horizScrollInverted;  /**< Invert scroll */
+		float		_horizScrollbarPos;  /**< Scrollbar position */
+		float		_horizScrollBarDrawSize;  /**< Scrollbar drawing size */
+		bool		_isHorizScrollClicked;  /**< Scrollbar clicked */
 };
