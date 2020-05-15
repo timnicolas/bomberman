@@ -2,6 +2,12 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new Scrollbar U I:: Scrollbar U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
 : ABaseMasterUI(pos, size),
   _scrollbarSize(20),
@@ -23,12 +29,26 @@ ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
 
+/**
+ * @brief Construct a new Scrollbar U I:: Scrollbar U I object
+ *
+ * @param src The object to do the copy
+ */
 ScrollbarUI::ScrollbarUI(ScrollbarUI const & src): ABaseMasterUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scrollbar U I:: Scrollbar U I object
+ */
 ScrollbarUI::~ScrollbarUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ScrollbarUI& A reference to the copied object
+ */
 ScrollbarUI & ScrollbarUI::operator=(ScrollbarUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

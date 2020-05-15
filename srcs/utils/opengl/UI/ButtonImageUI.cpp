@@ -3,6 +3,13 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
+/**
+ * @brief Construct a new Button Image U I:: Button Image U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ * @param filename The image file
+ */
 ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
 	std::string const & filename)
 : ABaseUI(pos, size)
@@ -15,14 +22,28 @@ ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
 	_loadImg(filename, true);
 }
 
+/**
+ * @brief Construct a new Button Image U I:: Button Image U I object
+ *
+ * @param src The object to do the copy
+ */
 ButtonImageUI::ButtonImageUI(ButtonImageUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Button Image U I:: Button Image U I object
+ */
 ButtonImageUI::~ButtonImageUI() {
 	_unloadImg();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ButtonImageUI& A reference to the copied object
+ */
 ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

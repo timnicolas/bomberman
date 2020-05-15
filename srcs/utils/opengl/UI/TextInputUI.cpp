@@ -3,6 +3,12 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new Text Input U I:: Text Input U I object
+ *
+ * @param pos The position
+ * @param size The size
+ */
 TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _isAlwaysFocus(false),
@@ -18,12 +24,26 @@ TextInputUI::TextInputUI(glm::vec2 pos, glm::vec2 size)
 	setBorderSize(0);
 }
 
+/**
+ * @brief Construct a new Text Input U I:: Text Input U I object
+ *
+ * @param src The object to do the copy
+ */
 TextInputUI::TextInputUI(TextInputUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Text Input U I:: Text Input U I object
+ */
 TextInputUI::~TextInputUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return TextInputUI& A reference to the copied object
+ */
 TextInputUI & TextInputUI::operator=(TextInputUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
