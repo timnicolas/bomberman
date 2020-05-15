@@ -8,17 +8,17 @@
 class Score {
 private:
 	// Members
-	int32_t		_score;
-	int32_t		_bonusDestruction;
-	int32_t		_bonusEnemies;
-	int32_t		_bonusTime;
-	int32_t		_levelId;
-	int32_t		_levelEnemies;
-	int32_t		_killedEnemies;
-	int32_t		_levelCrispies;
-	int32_t		_crispiesDestroyed;
-	float		_levelTime;
-	float		_timeDone;
+	int32_t		_score;  /**< Score */
+	int32_t		_bonusDestruction;  /**< Bonus for blocks destruction */
+	int32_t		_bonusEnemies;  /**< Bonus for enemy killed */
+	int32_t		_bonusTime;  /**< Bonus for time left in level */
+	int32_t		_levelId;  /**< Level ID */
+	int32_t		_levelEnemies;  /**< Nb of eneny in level */
+	int32_t		_killedEnemies;  /**< Nb of killed enemy in level */
+	int32_t		_levelCrispies;  /**< Nb of crispy walls in level */
+	int32_t		_crispiesDestroyed;  /**< Nb of crispy walls destroyed in level */
+	float		_levelTime;  /**< Total time to do the level */
+	float		_timeDone;  /**< Time for doing level */
 
 public:
 	// Constructors
@@ -49,10 +49,13 @@ public:
 	Score	&addBonusTime(float const levelTime, float const time);
 	Score	&addBonusEnemies(uint32_t levelEnemies, uint32_t enemiesLast,
 			uint32_t levelCrispies, uint32_t crispiesLast);
+	/**
+	 * @brief Stats about score
+	 */
 	struct Stat {
-		std::string		label;
-		std::string		points;
-		std::string		image;
+		std::string		label;  /**< Label */
+		std::string		points;  /**< Points */
+		std::string		image;  /**< Img */
 	};
 	void	getStats(std::vector<Stat> &vec);
 
@@ -60,6 +63,11 @@ public:
 	class ScoreException : public std::runtime_error {
 	public:
 		ScoreException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit ScoreException(const char* what_arg);
 	};
 };

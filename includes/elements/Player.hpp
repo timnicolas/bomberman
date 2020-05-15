@@ -17,7 +17,7 @@ class Player : public ACharacter {
 private:
 	Player();
 	// Members
-	int			_toDraw;
+	int			_toDraw;  /**< To draw */
 
 	// Methods
 	void	_move();
@@ -27,29 +27,32 @@ private:
 
 public:
 	// Members
-	int			totalBombs;
-	int			bombs;
-	bool		passFire;
-	bool		passWall;
-	bool		detonator;
-	bool		passBomb;
-	int			bombProgation;
-	float		invulnerable;
+	int			totalBombs;  /**< Total bombs */
+	int			bombs;  /**< Remain bombs */
+	bool		passFire;  /**< Has passfire */
+	bool		passWall;  /**< Has wallpass */
+	bool		detonator;  /**< Has detonator */
+	bool		passBomb;  /**< Has bombpass */
+	int			bombProgation;  /**< Bomb propagation distance */
+	float		invulnerable;  /**< Is invulnerable (for x time) */
 
-	struct BonusActifs {
-		float	life;
-		float	score;
-		float	time;
-		float	bombs;
-		float	flames;
-		float	speed;
-		float	wallpass;
-		float	detonator;
-		float	bombpass;
-		float	flampass;
-		float	shield;
+	/**
+	 * @brief All active bonus for the player
+	 */
+	struct ActiveBonus {
+		float	life;  /**< Player life */
+		float	score;  /**< Player score */
+		float	time;  /**< Player time left to do level */
+		float	bombs;  /**< Player bombs */
+		float	flames;  /**< Player bomb propagation */
+		float	speed;  /**< Player speed */
+		float	wallpass;  /**< Player wallpass */
+		float	detonator;  /**< Player detonator */
+		float	bombpass;  /**< Player bombpass */
+		float	flampass;  /**< Player flampass */
+		float	shield;  /**< Player shield */
 	};
-	BonusActifs		bonusActifs;
+	ActiveBonus		activeBonus;  /**< All active bonus for the player */
 
 	// Constructors
 	explicit Player(SceneGame &game);
@@ -76,6 +79,11 @@ public:
 	class PlayerException : public std::runtime_error {
 	public:
 		PlayerException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit PlayerException(const char* whatArg);
 	};
 };

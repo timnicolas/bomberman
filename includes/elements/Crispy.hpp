@@ -34,6 +34,11 @@ public:
 	class CrispyException : public std::runtime_error {
 	public:
 		CrispyException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit CrispyException(const char* whatArg);
 	};
 };
