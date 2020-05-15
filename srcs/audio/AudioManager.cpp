@@ -22,6 +22,9 @@ std::vector<std::string> AudioManager::musics = {
 
 // -- Methods ------------------------------------------------------------------
 
+/**
+ * @brief Construct a new Audio Manager:: Audio Manager object
+ */
 AudioManager::AudioManager(): _music_modifier(1.0) {
 	char	*path = getcwd(NULL, PATH_MAX);
 	AudioManager::_assets_path = std::string(path);
@@ -48,6 +51,9 @@ AudioManager::AudioManager(): _music_modifier(1.0) {
 	}
 }
 
+/**
+ * @brief Destroy the Audio Manager:: Audio Manager object
+ */
 AudioManager::~AudioManager() {
 	_stopMusic();
 	for (auto it = _musics.begin(); it != _musics.end(); it++) {

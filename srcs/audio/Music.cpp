@@ -2,6 +2,11 @@
 #include "AudioManager.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Music:: Music object
+ *
+ * @param filename Music filename
+ */
 Music::Music(std::string filename): _mix_mus(nullptr) {
 	if (AudioManager::isEnabled()) {
 		_mix_mus = Mix_LoadMUS(filename.c_str());
@@ -14,6 +19,9 @@ Music::Music(std::string filename): _mix_mus(nullptr) {
 	}
 }
 
+/**
+ * @brief Destroy the Music:: Music object
+ */
 Music::~Music() {
 	if (_mix_mus != nullptr) {
 		Mix_FreeMusic(_mix_mus);
