@@ -3,6 +3,11 @@
 #include "AudioManager.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Sound:: Sound object
+ *
+ * @param filename Sound filename
+ */
 Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan_volume() {
 	if (AudioManager::isEnabled()) {
 		_chunk = Mix_LoadWAV(filename.c_str());
@@ -15,6 +20,9 @@ Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan
 	}
 }
 
+/**
+ * @brief Destroy the Sound:: Sound object
+ */
 Sound::~Sound() {
 	stop();
 	if (_chunk != nullptr) {
@@ -106,6 +114,9 @@ bool										Sound::channelFinished(int chan) {
 	return false;
 }
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ */
 Sound::SoundException::SoundException(): std::runtime_error("[SoundException]") {}
 
 Sound::SoundException::SoundException(const char* what_arg) \
