@@ -2,7 +2,12 @@
 
 // -- Constructors -------------------------------------------------------------
 
-
+/**
+ * @brief Construct a new Wall:: Wall object
+ *
+ * @param game A reference to the main SceneGame
+ * @param blockType The type of block to create
+ */
 Wall::Wall(SceneGame &game, Block::Enum blockType)
 : AObject(game), _blockType(blockType)
 {
@@ -10,17 +15,31 @@ Wall::Wall(SceneGame &game, Block::Enum blockType)
 	name = WALL_STR;
 }
 
+/**
+ * @brief Destroy the Wall:: Wall object
+ */
 Wall::~Wall() {
 }
 
+/**
+ * @brief Construct a new Wall:: Wall object
+ *
+ * @param src A Wall object (to copy)
+ */
 Wall::Wall(Wall const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy operator
+ *
+ * @param rhs The object to copy
+ * @return Wall& A reference to the new object
+ */
 Wall &Wall::operator=(Wall const &rhs) {
-	if ( this != &rhs ) {
+	if (this != &rhs) {
 		AObject::operator=(rhs);
 		_blockType = rhs._blockType;
 	}

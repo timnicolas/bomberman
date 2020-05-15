@@ -26,25 +26,25 @@ namespace TextureType {
  *
  */
 struct	Vertex {
-	glm::vec3	pos;
-	glm::vec3	norm;
-	glm::vec2	texCoords;
-	glm::vec3	tangents;
-	std::array<int, NB_BONES_PER_VERTEX>	bonesId;
-	std::array<float, NB_BONES_PER_VERTEX>	bonesW;
+	glm::vec3	pos;  /**< The position */
+	glm::vec3	norm;  /**< The normal */
+	glm::vec2	texCoords;  /**< The texture coordinate */
+	glm::vec3	tangents;  /**< The tangents */
+	std::array<int, NB_BONES_PER_VERTEX>	bonesId;  /**< The IDs of the related bones */
+	std::array<float, NB_BONES_PER_VERTEX>	bonesW;  /**< The weight of the related bones */
 
 	Vertex();  // default constructor, init bonesId and bonesW
 };
 
 struct	BoundingBox {
-	glm::vec3	startPoint;
-	glm::vec3	size;
+	glm::vec3	startPoint;  /**< The starting point */
+	glm::vec3	size;  /**< The size */
 };
 
 struct	Texture {
-	uint32_t			id;
-	TextureType::Enum	type;
-	std::string			path;
+	uint32_t			id;  /**< The texture ID */
+	TextureType::Enum	type;  /**< The texture type (DIFFUSE, SPECULAT, NORMAL) */
+	std::string			path;  /**< The texture path */
 };
 
 /**
@@ -69,17 +69,17 @@ class	Mesh {
 		Mesh();  // private default constructor, should not be called
 		void	_setUniformsTextures() const;
 
-		OpenGLModel				&_openGLModel;
-		Shader					&_sh;
-		std::string				_name;
-		std::vector<Vertex>		_vertices;
-		std::vector<uint32_t>	_vertIndices;  // contain _vertices id
-		std::unordered_map<TextureType::Enum, Texture>	_textures;
-		Material				_material;
-		BoundingBox				_boundingBox;
-        uint32_t				_vao;
-        uint32_t				_vbo;
-        uint32_t				_ebo;
+		OpenGLModel				&_openGLModel;  /**< A reference to the model */
+		Shader					&_sh;  /**< A reference to the shader */
+		std::string				_name;  /**< The mesh name */
+		std::vector<Vertex>		_vertices;  /**< All mesh vertices */
+		std::vector<uint32_t>	_vertIndices;  /**< Contains _vertices id */
+		std::vector<Texture>	_textures;  /**< Contains all textures */
+		Material				_material;  /**< The material */
+		BoundingBox				_boundingBox;  /**< The boundingBox */
+        uint32_t				_vao;  /**< Vertex Array Objects */
+        uint32_t				_vbo;  /**< Vertex Buffer Objects */
+        uint32_t				_ebo;  /**< Element Buffer Objects */
 };
 
 #endif  // MESH_HPP_
