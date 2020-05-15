@@ -27,25 +27,31 @@ class SceneLevelSelection : public ASceneMenu {
 		uint32_t			getNbLevel() const;
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			uint32_t	firstLevelID;
-			uint32_t	nbLevel;
-			bool		loadLevel;
-			bool		menu;
-			bool		lastLevel;
-			bool		nextLevel;
+			uint32_t	firstLevelID;  /**< Id of UI for the first level */
+			uint32_t	nbLevel;  /**< Number of levels */
+			bool		loadLevel;  /**< True if we clicked on the button loadLevel */
+			bool		menu;  /**< True if we clicked on the button menu */
+			bool		lastLevel;  /**< True if we clicked on the button lastLevel */
+			bool		nextLevel;  /**< True if we clicked on the button nextLevel */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
-			ABaseUI *	text;
-			ABaseUI *	score;
-			ABaseUI *	leftArrow;
-			ABaseUI *	rightArrow;
+			ABaseUI *	text;  /**< UI for text element */
+			ABaseUI *	score;  /**< UI for score element */
+			ABaseUI *	leftArrow;  /**< UI for leftArrow element */
+			ABaseUI *	rightArrow;  /**< UI for rightArrow element */
 		};
-		AllUI			allUI;
-		int32_t			_currentLvl;
+		AllUI			allUI;  /**< All UI elements */
+		int32_t			_currentLvl;  /**< Current level ID */
 
-		float			_transition;  // used to do a smooth transition
+		float			_transition;  /**< Used to do a smooth transition */
 
 	private:
 		SceneLevelSelection();

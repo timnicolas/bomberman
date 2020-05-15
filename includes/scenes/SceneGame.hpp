@@ -26,6 +26,9 @@ class AEnemy;
 class Spawner;
 
 namespace GameState {
+	/**
+	 * @brief All possible game states (INTRO, PLAY, PAUSE, GAME_OVER, ...)
+	 */
 	enum Enum {
 		INTRO,
 		PLAY,
@@ -33,16 +36,19 @@ namespace GameState {
 		GAME_OVER,
 		WIN,
 	};
-}
+}  // namespace GameState
 
 namespace EntityType {
+	/**
+	 * @brief All possible entity states
+	 */
 	enum Enum {
 		PLAYER,
 		BOARD,
 		BOARD_FLAG,
 		ENEMY,
 	};
-}
+}  // namespace EntityType
 
 /**
  * @brief This is the game Scene. In this scene, you can play to the game and load levels
@@ -52,27 +58,33 @@ private:
 	SceneGame();
 	// Members
 	typedef AEntity*(*entityFuncPtr)(SceneGame &);
+	/**
+	 * @brief Contains a type of entity and a function to create it
+	 */
 	struct Entity {
-		EntityType::Enum	entityType;
-		entityFuncPtr		entity;
+		EntityType::Enum	entityType;  /**< The type of the entity */
+		entityFuncPtr		entity;  /**< The function to create the entity */
 	};
 
-	std::vector<SettingsJson *>	_mapsList;
+	std::vector<SettingsJson *>	_mapsList;  /**<  */
 
+	/**
+	 * @brief All 3D models of enemies that can be drawed on differents menu
+	 */
 	struct DrawForMenu {
-		Model *	player;
-		Model *	flower;
-		Model *	robot;
-		Model * fly;
-		Model * frog;
-		Model * crispy;
-		Model * follow;
+		Model *	player;  /**< 3D model to draw player */
+		Model *	flower;  /**< 3D model to draw flower */
+		Model *	robot;  /**< 3D model to draw robot */
+		Model * fly;  /**< 3D model to draw fly */
+		Model * frog;  /**< 3D model to draw frog */
+		Model * crispy;  /**< 3D model to draw crispy */
+		Model * follow;  /**< 3D model to draw follow */
 
 		DrawForMenu();
 	};
-	DrawForMenu _menuModels;
-	bool	_alarm;
-	Model	*_terrain;
+	DrawForMenu _menuModels;  /**< All 3D elements to draw */
+	bool	_alarm;  /**< If we want to ring alarm */
+	Model	*_terrain;  /**< The terrain element */
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -81,41 +93,44 @@ private:
 	void	_drawBoard();
 
 protected:
+	/**
+	 * @brief All UI elements (bonus, text, ...)
+	 */
 	struct AllUI {
-		ABaseUI *	introText;  // TextUI
-		ABaseUI *	timeLeftImg;  // ImageUI
-		ABaseUI *	timeLeftImgActive;  // ImageUI
-		ABaseUI *	timeLeftText;  // TextUI
-		ABaseUI *	scoreImg;  // ImageUI
-		ABaseUI *	scoreImgActive;  // ImageUI
-		ABaseUI *	scoreText;  // TextUI
-		ABaseUI *	lifeImg;  // ImageUI
-		ABaseUI *	lifeImgActive;  // ImageUI
-		ABaseUI *	lifeText;  // TextUI
-		ABaseUI *	levelNameText;  // TextUI
-		ABaseUI *	enemiesCounterText;  // TextUI
-		ABaseUI *	speedImg;  // ImageUI
-		ABaseUI *	speedImgActive;  // ImageUI
-		ABaseUI *	speedText;  // TextUI
-		ABaseUI *	bonusBombImg;  // ImageUI
-		ABaseUI *	bonusBombImgActive;  // ImageUI
-		ABaseUI *	bonusBombText;  // TextUI
-		ABaseUI *	bonusFlameImg;  // ImageUI
-		ABaseUI *	bonusFlameImgActive;  // ImageUI
-		ABaseUI *	bonusFlameText;  // TextUI
-		ABaseUI *	bonusFlampassImg;  // ImageUI
-		ABaseUI *	bonusFlampassImgActive;  // ImageUI
-		ABaseUI *	bonusWallpassImg;  // ImageUI
-		ABaseUI *	bonusWallpassImgActive;  // ImageUI
-		ABaseUI *	bonusDetonatorImg;  // ImageUI
-		ABaseUI *	bonusDetonatorImgActive;  // ImageUI
-		ABaseUI *	bonusBombpassImg;  // ImageUI
-		ABaseUI *	bonusBombpassImgActive;  // ImageUI
-		ABaseUI *	bonusShieldImg;  // ImageUI
-		ABaseUI *	bonusShieldImgActive;  // ImageUI
-		ABaseUI *	bonusShieldText;  // TextUI
+		ABaseUI *	introText;  /**< TextUI for introText */
+		ABaseUI *	timeLeftImg;  /**< ImageUI for timeLeftImg */
+		ABaseUI *	timeLeftImgActive;  /**< ImageUI for timeLeftImgActive */
+		ABaseUI *	timeLeftText;  /**< TextUI for timeLeftText */
+		ABaseUI *	scoreImg;  /**< ImageUI for scoreImg */
+		ABaseUI *	scoreImgActive;  /**< ImageUI for scoreImgActive */
+		ABaseUI *	scoreText;  /**< TextUI for scoreText */
+		ABaseUI *	lifeImg;  /**< ImageUI for lifeImg */
+		ABaseUI *	lifeImgActive;  /**< ImageUI for lifeImgActive */
+		ABaseUI *	lifeText;  /**< TextUI for lifeText */
+		ABaseUI *	levelNameText;  /**< TextUI for levelNameText */
+		ABaseUI *	enemiesCounterText;  /**< TextUI for enemiesCounterText */
+		ABaseUI *	speedImg;  /**< ImageUI for speedImg */
+		ABaseUI *	speedImgActive;  /**< ImageUI for speedImgActive */
+		ABaseUI *	speedText;  /**< TextUI for speedText */
+		ABaseUI *	bonusBombImg;  /**< ImageUI for bonusBombImg */
+		ABaseUI *	bonusBombImgActive;  /**< ImageUI for bonusBombImgActive */
+		ABaseUI *	bonusBombText;  /**< TextUI for bonusBombText */
+		ABaseUI *	bonusFlameImg;  /**< ImageUI for bonusFlameImg */
+		ABaseUI *	bonusFlameImgActive;  /**< ImageUI for bonusFlameImgActive */
+		ABaseUI *	bonusFlameText;  /**< TextUI for bonusFlameText */
+		ABaseUI *	bonusFlampassImg;  /**< ImageUI for bonusFlampassImg */
+		ABaseUI *	bonusFlampassImgActive;  /**< ImageUI for bonusFlampassImgActive */
+		ABaseUI *	bonusWallpassImg;  /**< ImageUI for bonusWallpassImg */
+		ABaseUI *	bonusWallpassImgActive;  /**< ImageUI for bonusWallpassImgActive */
+		ABaseUI *	bonusDetonatorImg;  /**< ImageUI for bonusDetonatorImg */
+		ABaseUI *	bonusDetonatorImgActive;  /**< ImageUI for bonusDetonatorImgActive */
+		ABaseUI *	bonusBombpassImg;  /**< ImageUI for bonusBombpassImg */
+		ABaseUI *	bonusBombpassImgActive;  /**< ImageUI for bonusBombpassImgActive */
+		ABaseUI *	bonusShieldImg;  /**< ImageUI for bonusShieldImg */
+		ABaseUI *	bonusShieldImgActive;  /**< ImageUI for bonusShieldImgActive */
+		ABaseUI *	bonusShieldText;  /**< TextUI for bonusShieldText */
 	};
-	AllUI			allUI;
+	AllUI		allUI;  /**< All UI elements */
 
 	void			_initGameInfos();
 	void			_loadGameInfos();
@@ -128,30 +143,33 @@ protected:
 
 public:
 	// Members
-	static std::map<std::string, Entity>	entitiesCall;
-	std::vector< std::vector< std::vector<AEntity *> > > board;
-	std::vector< std::vector< std::vector<AEntity *> > > boardFly;
-	Player						*player;
-	std::vector<AEnemy *>		enemies;
+	static std::map<std::string, Entity>	entitiesCall;  /**< All entity type & functions */
+	std::vector< std::vector< std::vector<AEntity *> > > board;  /**< The base board with all static elements */
+	std::vector< std::vector< std::vector<AEntity *> > > boardFly;  /**< The fly board with all static flying elements */
+	Player						*player;  /**< The player */
+	std::vector<AEnemy *>		enemies;  /**< All enemies */
+	/**
+	 * @brief Bonus Information about spawn (nomber of bonus & chance to spawn)
+	 */
 	struct BonusValues {
-		int64_t	chance;
-		int64_t	nb;
+		int64_t	chance;  /**< Chance to have a bonus */
+		int64_t	nb;  /**< Number of bonus on the level */
 	};
-	std::unordered_map<std::string, BonusValues>	bonus;
-	std::vector<Spawner *>		spawners;
+	std::unordered_map<std::string, BonusValues>	bonus;  /**< All bonus information about spawn */
+	std::vector<Spawner *>		spawners;  /**< All spawners */
 
-	int							flags;
-	glm::uvec2					size;
-	int32_t						level;  // the current level ID (-1 for no level)
-	GameState::Enum				state;
-	uint32_t					levelEnemies;
-	uint32_t					levelCrispies;
-	float						levelTime;
-	float						time;
-	Score						score;
-	int64_t						enemiesToKill;
-	int64_t						enemiesKilled;
-	std::string					musicLevel;
+	int							flags;  /**< Number of flags on the level */
+	glm::uvec2					size;  /**< Level size */
+	int32_t						level;  /**< The current level ID (-1 for no level) */
+	GameState::Enum				state;  /**< Actual game state (PLAY, PAUSE, GAME_OVER, ...) */
+	uint32_t					levelEnemies;  /**< Number of enemies in the level */
+	uint32_t					levelCrispies;  /**< Number of cripy wall in the level */
+	float						levelTime;  /**< Time to do the level */
+	float						time;  /**< Time remaining to do the level */
+	Score						score;  /**< Score object */
+	int64_t						enemiesToKill;  /**< Enemy to kill to enable end element & finish the level */
+	int64_t						enemiesKilled;  /**< Number of enemies killed */
+	std::string					musicLevel;  /**< The level music */
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);
@@ -194,6 +212,11 @@ public:
 	class SceneGameException : public std::runtime_error {
 	public:
 		SceneGameException();
+		/**
+		 * @brief Construct a new Scene Game Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit SceneGameException(const char* whatArg);
 	};
 };

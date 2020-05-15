@@ -4,7 +4,7 @@
 #include "ABaseUI.hpp"
 
 /**
- * @brief main menu (opened at the game startup)
+ * @brief Menu to choose dificulty (when starting a new game)
  */
 class SceneDifficulty : public ASceneMenu {
 	public:
@@ -23,22 +23,28 @@ class SceneDifficulty : public ASceneMenu {
 		virtual bool		update();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	beginner;
-			bool	easy;
-			bool	medium;
-			bool	hardCore;
-			bool	menu;
+			bool	beginner;  /**< True if we clicked on the button beginner */
+			bool	easy;  /**< True if we clicked on the button easy */
+			bool	medium;  /**< True if we clicked on the button medium */
+			bool	hardCore;  /**< True if we clicked on the button hardCore */
+			bool	menu;  /**< True if we clicked on the menu button */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
-			ABaseUI	*beginner;
-			ABaseUI	*easy;
-			ABaseUI	*medium;
-			ABaseUI	*hardCore;
-			ABaseUI	*border;
+			ABaseUI	*beginner;  /**< UI for beginner element */
+			ABaseUI	*easy;  /**< UI for easy element */
+			ABaseUI	*medium;  /**< UI for medium element */
+			ABaseUI	*hardCore;  /**< UI for hardCore element */
+			ABaseUI	*border;  /**< UI for border element */
 		};
-		AllUI		allUI;
+		AllUI		allUI;  /**< All UI elements */
 
 
 	private:
