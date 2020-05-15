@@ -144,7 +144,7 @@ bool	AEnemy::takeDamage(const int damage) {
 		if (wasAlive && !alive) {
 			game.enemiesKilled += 1;
 			game.score += points;
-			game.player->bonusActifs.score = 3.0f;
+			game.player->activeBonus.score = 3.0f;
 		}
 	}
 
