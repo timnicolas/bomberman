@@ -39,14 +39,25 @@ const float	BoxCollider::_boxVertices[] = {
 	1, 1, 1,
 };
 
+/**
+ * @brief Construct a new Box Collider:: Box Collider object
+ */
 BoxCollider::BoxCollider()
 : _gui(nullptr),
   _boxShader(nullptr) {}
 
+/**
+ * @brief Construct a new Box Collider:: Box Collider object
+ *
+ * @param src The object to do the copy
+ */
 BoxCollider::BoxCollider(BoxCollider const & src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Box Collider:: Box Collider object
+ */
 BoxCollider::~BoxCollider() {
 }
 
@@ -100,6 +111,12 @@ bool BoxCollider::_destroy() {
 	return true;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return BoxCollider& A reference to the copied object
+ */
 BoxCollider & BoxCollider::operator=(BoxCollider const & rhs) {
 	if (this != &rhs) {
 		logWarn("BoxCollider object copied");

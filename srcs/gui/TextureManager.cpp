@@ -5,6 +5,9 @@
 #include "utils/opengl/Texture.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Texture Manager:: Texture Manager object
+ */
 TextureManager::TextureManager()
 : _textureAtlas(0) {
 	// load texture atlas
@@ -18,6 +21,9 @@ TextureManager::TextureManager()
 	}
 }
 
+/**
+ * @brief Destroy the Texture Manager:: Texture Manager object
+ */
 TextureManager::~TextureManager() {
 	// release openGl texture
 	if (_textureAtlas != 0) {
@@ -25,11 +31,22 @@ TextureManager::~TextureManager() {
 	}
 }
 
+/**
+ * @brief Construct a new Texture Manager:: Texture Manager object
+ *
+ * @param src The object to do the copy
+ */
 TextureManager::TextureManager(TextureManager const &src)
 : _textureAtlas(0) {
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return TextureManager& A reference to the copied object
+ */
 TextureManager &TextureManager::operator=(TextureManager const &rhs) {
 	(void)rhs;
 	return *this;
