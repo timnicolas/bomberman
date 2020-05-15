@@ -1,8 +1,9 @@
 #include "Material.hpp"
 
-Material::Material(glm::vec3 const diffuse, glm::vec3 const specular, \
-glm::vec3 const ambient, float const shininess)
-: diffuse(diffuse),
+Material::Material(std::string const name, glm::vec3 const diffuse,
+	glm::vec3 const specular, glm::vec3 const ambient, float const shininess)
+: name(name),
+  diffuse(diffuse),
   specular(specular),
   ambient(ambient),
   shininess(shininess) {
@@ -17,6 +18,7 @@ Material::~Material() {
 
 Material &Material::operator=(Material const &rhs) {
 	if (this != &rhs) {
+		name = rhs.name;
 		diffuse = rhs.diffuse;
 		specular = rhs.specular;
 		ambient = rhs.ambient;
@@ -27,7 +29,7 @@ Material &Material::operator=(Material const &rhs) {
 
 
 std::ostream & operator << (std::ostream &out, Material const &m) {
-	out << "{" << std::endl;
+	out << m.name << ": {" << std::endl;
 	out << "  diffuse: " << glm::to_string(m.diffuse) << "," << std::endl;
 	out << "  specular: " << glm::to_string(m.specular) << "," << std::endl;
 	out << "  ambient: " << glm::to_string(m.ambient) << "," << std::endl;
