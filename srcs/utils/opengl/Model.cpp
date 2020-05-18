@@ -260,6 +260,10 @@ void	Model::printAnimsNames() const {
 	}
 }
 
+void	Model::printMeshesNames() const {
+	_openGLModel.printMeshesNames();
+}
+
 std::string Model::getCurrentAnimationName() const {
 	if (_curAnimation) {
 		return std::string(_curAnimation->mName.C_Str());
