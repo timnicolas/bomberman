@@ -19,6 +19,7 @@ public:
 	Fire &operator=(Fire const &rhs);
 
 	// Methods
+	bool	init();
 	bool	update();
 	bool	postUpdate();
 	bool	draw(Gui &gui);

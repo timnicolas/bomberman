@@ -51,6 +51,40 @@ Fire &Fire::operator=(Fire const &rhs) {
 
 // -- Methods ------------------------------------------------------------------
 
+
+/**
+ * @brief Init Fire
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Fire::init() {
+	AObject::init();
+
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		_model = new Model(ModelsManager::getModel("fire"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+		_model->play = true;
+		_model->loopAnimation = true;
+		_model->setAnimation("Armature|idle");
+		_model->animationSpeed = 2.8;
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
 /**
  * @brief update is called each frame.
  *
@@ -91,7 +125,18 @@ bool	Fire::postUpdate() {
  * @return false if failure
  */
 bool	Fire::draw(Gui &gui) {
-	gui.drawCube(Block::FIRE, getPos());
+	(void)gui;
+	// gui.drawCube(Block::FIRE, getPos());
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
