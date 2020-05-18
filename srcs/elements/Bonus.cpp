@@ -10,13 +10,13 @@ std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
 	{ BonusType::BOMBS, Block::BONUS_BOMBS },
 	{ BonusType::FLAMES, Block::BONUS_FLAMES },
 	{ BonusType::SPEED, Block::BONUS_SPEED },
-	{ BonusType::WALLPASS, Block::BONUS_WALLPASS },
-	{ BonusType::DETONATOR, Block::BONUS_DETONATOR },
-	{ BonusType::BOMBPASS, Block::BONUS_BOMBPASS },
-	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
 	{ BonusType::SHIELD, Block::BONUS_SHIELD },
 	{ BonusType::TIME, Block::BONUS_TIME },
 	{ BonusType::POINTS, Block::BONUS_POINTS },
+	{ BonusType::DETONATOR, Block::BONUS_DETONATOR },
+	{ BonusType::BOMBPASS, Block::BONUS_BOMBPASS },
+	{ BonusType::WALLPASS, Block::BONUS_WALLPASS },
+	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
 };
 
 std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
@@ -24,13 +24,13 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "bombs", BonusType::BOMBS },
 	{ "flames", BonusType::FLAMES },
 	{ "speed", BonusType::SPEED },
-	{ "wallpass", BonusType::WALLPASS },
-	{ "detonator", BonusType::DETONATOR },
-	{ "bombpass", BonusType::BOMBPASS },
-	{ "flampass", BonusType::FLAMPASS },
 	{ "shield", BonusType::SHIELD },
 	{ "time", BonusType::TIME },
 	{ "points", BonusType::POINTS },
+	{ "detonator", BonusType::DETONATOR },
+	{ "bombpass", BonusType::BOMBPASS },
+	{ "flampass", BonusType::FLAMPASS },
+	{ "wallpass", BonusType::WALLPASS },
 };
 
 std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
@@ -38,13 +38,13 @@ std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb simultaneously." },
 	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range." },
 	{ BonusType::SPEED, "Bonus Speed: You move faster." },
-	{ BonusType::WALLPASS, "Bonus Wall Pass: You can pass through cracked walls." },
-	{ BonusType::DETONATOR, DETONATOR_DESC },  // updated in settings
-	{ BonusType::BOMBPASS, "Bonus Bomb Pass: You can now walk over bombs" },
-	{ BonusType::FLAMPASS, "Bonus Flame Pass: You are not affected by bomb anymore." },
 	{ BonusType::SHIELD, "Bonus Shield: You can't get damage for a while." },
 	{ BonusType::TIME, "Bonus Time: Extra time to finish the level." },
 	{ BonusType::POINTS, "Bonus Points: Your total score increase." },
+	{ BonusType::DETONATOR, DETONATOR_DESC },  // updated in settings
+	{ BonusType::BOMBPASS, "Bonus Bomb Pass: You can now walk over bombs" },
+	{ BonusType::WALLPASS, "Bonus Wall Pass: You can pass through cracked walls." },
+	{ BonusType::FLAMPASS, "Bonus Flame Pass: You are not affected by bomb anymore." },
 };
 
 std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
@@ -52,13 +52,13 @@ std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
 	{ BonusType::BOMBS, "bomberman-assets/3dModels/bonus/textures/bomb.png" },
 	{ BonusType::FLAMES, "bomberman-assets/3dModels/bonus/textures/flamme.png" },
 	{ BonusType::SPEED, "bomberman-assets/3dModels/bonus/textures/speed.png" },
-	{ BonusType::WALLPASS, "bomberman-assets/3dModels/bonus/textures/wallpass.png" },
-	{ BonusType::DETONATOR, "bomberman-assets/3dModels/bonus/textures/detonator.png" },
-	{ BonusType::BOMBPASS, "bomberman-assets/3dModels/bonus/textures/bombpass.png" },
-	{ BonusType::FLAMPASS, "bomberman-assets/3dModels/bonus/textures/flampass.png" },
 	{ BonusType::SHIELD, "bomberman-assets/3dModels/bonus/textures/shield.png" },
 	{ BonusType::TIME, "bomberman-assets/3dModels/bonus/textures/time.png" },
 	{ BonusType::POINTS, "bomberman-assets/3dModels/bonus/textures/score.png" },
+	{ BonusType::DETONATOR, "bomberman-assets/3dModels/bonus/textures/detonator.png" },
+	{ BonusType::BOMBPASS, "bomberman-assets/3dModels/bonus/textures/bombpass.png" },
+	{ BonusType::WALLPASS, "bomberman-assets/3dModels/bonus/textures/wallpass.png" },
+	{ BonusType::FLAMPASS, "bomberman-assets/3dModels/bonus/textures/flampass.png" },
 };
 
 // -- Constructors -------------------------------------------------------------

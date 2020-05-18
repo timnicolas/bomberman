@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <map>
-#include <unordered_map>
 #include <stdexcept>
 #include "AObject.hpp"
 #include "SceneGame.hpp"
@@ -20,13 +19,13 @@ namespace BonusType {
 		BOMBS,
 		FLAMES,
 		SPEED,
-		WALLPASS,
-		DETONATOR,
-		BOMBPASS,
-		FLAMPASS,
 		SHIELD,
 		TIME,
 		POINTS,
+		DETONATOR,
+		BOMBPASS,
+		WALLPASS,
+		FLAMPASS,
 		NB_BONUS,  // need to stay at last position
 	};
 }  // namespace BonusType

@@ -31,6 +31,7 @@ class SceneMainMenu : public ASceneMenu {
 			bool	newGame;  /**< True if we clicked on the button newGame */
 			bool	loadGame;  /**< True if we clicked on the button loadGame */
 			bool	loadSettings;  /**< True if we clicked on the button loadSettings */
+			bool	help;  /**< True if we clicked on the help button */
 			bool	exit;  /**< True if we clicked on the button exit */
 		};
 		ButtonsStates	_states;  /**< All buttons states */
@@ -43,6 +44,7 @@ class SceneMainMenu : public ASceneMenu {
 			ABaseUI	*newGame;  /**< UI for newGame element */
 			ABaseUI	*loadGame;  /**< UI for loadGame element */
 			ABaseUI	*loadSettings;  /**< UI for loadSettings element */
+			ABaseUI	*help;  /**< UI for help element */
 			ABaseUI	*exit;  /**< UI for exit element */
 			ABaseUI	*border;  /**< UI for border element */
 		};

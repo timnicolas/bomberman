@@ -66,7 +66,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.8;
 		addButton(tmpPos, tmpSize, "resume")
-			.setKeyLeftClickInput(InputType::CONFIRM)
+			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.resume);
 
 		tmpPos.y -= menuHeight * 1.3;
@@ -81,7 +81,7 @@ bool			ScenePause::init() {
 
 		tmpPos.y -= menuHeight * 1.3;
 		addButton(tmpPos, tmpSize, "exit")
-			.setKeyLeftClickInput(InputType::CANCEL)
+			.setKeyLeftClickScancode(SDL_SCANCODE_Q)
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.3;
