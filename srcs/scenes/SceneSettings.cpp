@@ -294,9 +294,8 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	float			keyMenuHeight = win_size.x / 25;
 	float			keyMenuPadding = win_size.x * 0.01;
 
-
-			Bonus::description[BonusType::DETONATOR] = DETONATOR_DESC \
-				" (" + Inputs::getKeyName(InputType::ACTION_2) + ")";
+	Bonus::description[BonusType::DETONATOR] = DETONATOR_DESC \
+		" (" + Inputs::getKeyName(InputType::ACTION_2) + ")";
 
 	// create scrollbar
 	tmp_pos.x = (win_size.x / 2) - ((keyMenuWidth + 2 * keyMenuPadding) / 2);

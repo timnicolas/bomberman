@@ -29,6 +29,7 @@ class SceneMainMenu : public ASceneMenu {
 			bool	newGame;
 			bool	loadGame;
 			bool	loadSettings;
+			bool	help;  /**< True if we clicked on the help button */
 			bool	exit;
 		};
 		ButtonsStates	_states;
@@ -38,6 +39,7 @@ class SceneMainMenu : public ASceneMenu {
 			ABaseUI	*newGame;
 			ABaseUI	*loadGame;
 			ABaseUI	*loadSettings;
+			ABaseUI	*help;  /**< UI for help element */
 			ABaseUI	*exit;
 			ABaseUI	*border;
 		};
