@@ -24,6 +24,7 @@ public:
 	Flag &operator=(Flag const &rhs);
 
 	// Methods
+	bool	init();
 	bool	update();
 	bool	postUpdate();
 	bool	draw(Gui &gui);
