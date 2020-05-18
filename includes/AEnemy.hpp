@@ -10,9 +10,12 @@
 
 #define INF_DIST 9999999
 
+/**
+ * @brief Path node element (to create auto path for enemy)
+ */
 struct PathNode {
-	Direction::Enum	dir;
-	glm::ivec2		goal;
+	Direction::Enum	dir;  /**< Direction to move */
+	glm::ivec2		goal;  /**< Goal to reach */
 };
 
 /**
@@ -22,9 +25,12 @@ class AEnemy : public ACharacter {
 private:
 	AEnemy();
 
+	/**
+	 * @brief A node for DFS algorithm
+	 */
 	struct DFSNode {
-		uint32_t	dist;
-		glm::ivec2	last;
+		uint32_t	dist;  /**< Distance from start */
+		glm::ivec2	last;  /**< Last position in path */
 
 		DFSNode() : dist(INF_DIST), last{-1, -1} {}
 	};
@@ -34,13 +40,29 @@ private:
 
 protected:
 	// Members
-	Direction::Enum	_dir;
-	std::vector<std::string>	_soundAttack;
-	bool			_fisrtCall;  // true until the end of the first update call
-	bool			_moveOnCenter;  // true if the enemy move on center (size < 1)
+	Direction::Enum	_dir;  /**< The direction */
+	std::vector<std::string>	_soundAttack;  /**< The sound on attacks */
+	bool			_fisrtCall;  /**< true until the end of the first update call */
+	bool			_moveOnCenter;  /**< true if the enemy move on center (size < 1) */
 
+	/**
+	 * @brief Update entity. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	_update() = 0;
+	/**
+	 * @brief Update entity. Called on every frames after update
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	_postUpdate() = 0;
+	/**
+	 * @brief Draw entity. Called on every frames
+	 *
+	 * @param gui A reference to the gui object
+	 * @return false If failed
+	 */
 	virtual bool	_draw(Gui &gui) = 0;
 
 	/* movements functions */
@@ -57,9 +79,9 @@ protected:
 
 public:
 	// Members
-	int			bombs;
-	int32_t		points;
-	int			strength;  // number of damage if hit player
+	int			bombs;  /**< number of bombs */
+	int32_t		points;  /**< number of points */
+	int			strength;  /**< number of damage if hit player */
 
 	// Constructors
 	explicit AEnemy(SceneGame &game);
@@ -78,6 +100,9 @@ public:
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 
 	// Exceptions
+	/**
+	 * @brief Enemy Exception
+	 */
 	class EnemyException : public std::runtime_error {
 	public:
 		EnemyException();

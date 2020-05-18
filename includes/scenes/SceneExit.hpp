@@ -14,7 +14,6 @@ class SceneExit : public ASceneMenu {
 
 		// Operators
 		SceneExit &operator=(SceneExit const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneExit& myClass);
 
 		// Methods
 		virtual bool		init();
@@ -24,20 +23,26 @@ class SceneExit : public ASceneMenu {
 		virtual bool		draw();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	exit;
-			bool	cancel;
-			bool	save;
+			bool	exit;  /**< True if we clicked on exit button */
+			bool	cancel;  /**< True if we clicked on cancel button */
+			bool	save;  /**< True if we clicked on save button */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
-			ABaseUI	*exit;
-			ABaseUI	*cancel;
-			ABaseUI	*save;
-			ABaseUI	*border;
+			ABaseUI	*exit;  /**< UI for exit element */
+			ABaseUI	*cancel;  /**< UI for cancel element */
+			ABaseUI	*save;  /**< UI for save element */
+			ABaseUI	*border;  /**< UI for border element */
 		};
-		AllUI			allUI;
-		std::string		_lastSceneName;
+		AllUI			allUI;  /**< All UI elements */
+		std::string		_lastSceneName;  /**< The last scene name (used if we cancel) */
 
 	private:
 		SceneExit();

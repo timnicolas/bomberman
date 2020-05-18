@@ -21,8 +21,8 @@ class EnemyFrog : public AEnemy {
 private:
 	EnemyFrog();
 
-	glm::ivec2		_jumpGoal;
-	uint64_t		_nextJumpTime;
+	glm::ivec2		_jumpGoal;  /**< The jump goal position */
+	uint64_t		_nextJumpTime;  /**< Next time when the frog will jump */
 
 protected:
 	virtual bool	_update();

@@ -51,24 +51,32 @@ class SceneManager {
 		static void					quit();
 
 		/* Exceptions */
+		/**
+		 * @brief SceneManager exception
+		 */
 		class SceneManagerException : public std::runtime_error {
 		public:
 			SceneManagerException();
+			/**
+			 * @brief Construct a new Scene Manager Exception object
+			 *
+			 * @param whatArg Error message
+			 */
 			explicit SceneManagerException(const char* whatArg);
 		};
 
 	protected:
-		bool		_isInit;
-		GameInfo	_gameInfo;
-		Gui *		_gui;
-		float		_dtTime;
-		std::string	_scene;  // the name of the current scene
-		std::map<std::string, AScene *>	_sceneMap;  // all scene (in a map)
-		bool		_isInCheatCode;
-		int64_t		_showCheatCodeTextTime;
-		uint16_t	_fps;
+		bool		_isInit;  /**< True if SceneManager was init */
+		GameInfo	_gameInfo;  /**< Game global informations */
+		Gui *		_gui;  /**< Gui object */
+		float		_dtTime;  /**< Delta time btw 2 loop calls */
+		std::string	_scene;  /**< The name of the current scene */
+		std::map<std::string, AScene *>	_sceneMap;  /**< All scenes (in a map) */
+		bool		_isInCheatCode;  /**< True if we are in cheatcode */
+		int64_t		_showCheatCodeTextTime;  /**< If > 0 -> number of ms to show the text information of cheatcode */
+		uint16_t	_fps;  /**< Max FPS of the game */
 
-		bool		_sceneLoadedCurrentFrame;  // true if a scene was loaded in the current frame
+		bool		_sceneLoadedCurrentFrame;  /**< True if a scene was loaded in the current frame */
 
 		bool				_init();
 		bool				_run(float maxFrameDuration);

@@ -19,6 +19,9 @@
 #include "Gui.hpp"
 
 namespace AnimKeyType {
+	/**
+	 * @brief Animation key type
+	 */
 	enum Enum {
 		SCALE,
 		ROTATION,
@@ -32,13 +35,16 @@ namespace AnimKeyType {
 	}};
 }  // namespace AnimKeyType
 
+/**
+ * @brief Vertices limits
+ */
 struct	VerticesLimits {
-	float	xMin;
-	float	xMax;
-	float	yMin;
-	float	yMax;
-	float	zMin;
-	float	zMax;
+	float	xMin;  /**< The x min */
+	float	xMax;  /**< The x max */
+	float	yMin;  /**< The y min */
+	float	yMax;  /**< The y max */
+	float	zMin;  /**< The z min */
+	float	zMax;  /**< The z max */
 
 	VerticesLimits();
 };
@@ -72,6 +78,9 @@ class OpenGLModel {
 		std::string	getPath() const;
 
 		// Exceptions
+		/**
+		 * @brief Model exception
+		 */
 		class ModelException : public std::runtime_error {
 			public:
 				ModelException();
@@ -118,44 +127,43 @@ class OpenGLModel {
 			bool inSpaceSRGB);
 
 		// -- members ----------------------------------------------------------
-		static std::unique_ptr<Shader>	_sh;
+		static std::unique_ptr<Shader>	_sh;  /**< Shader */
 
-		Camera const		&_cam;
-		std::string const	_path;  // model file path
-		std::unordered_map<std::string, Mesh *>	_meshes;  // all model meshes
+		Camera const		&_cam;  /**< A reference to the camera */
+		std::string const	_path;  /**< model file path */
+		std::unordered_map<std::string, Mesh *>	_meshes;  /**< all model meshes */
 
 		// assimp utility
-		aiScene const		*_scene;
-		Assimp::Importer	_importer;
+		aiScene const		*_scene;  /**< The assimp scene */
+		Assimp::Importer	_importer;  /**< The assimp importer */
 
 		// textures
-		// to keep track of loaded textures
-		std::unordered_map<std::string, Texture>	_texturesLoaded;
-		std::string	_pathDir;
+		std::unordered_map<std::string, Texture>	_texturesLoaded;  /**< to keep track of loaded textures */
+		std::string									_pathDir;  /**< The path with textures */
 
 		// model position
-		glm::mat4	_model;  // position in real world
-		bool		_centerEnabled;  // center the model on loading
-		bool		_scaleEnabled;  // scale the model on loading
-		glm::vec3	_minPos, _maxPos;  // to scale the model
-		glm::mat4	_modelScale;
-		glm::vec3	_offset;  // offset to shift the model manually
+		glm::mat4	_model;  /**< position in real world */
+		bool		_centerEnabled;  /**< center the model on loading */
+		bool		_scaleEnabled;  /**< scale the model on loading */
+		glm::vec3	_minPos, _maxPos;  /**< to scale the model */
+		glm::mat4	_modelScale;  /**< The model scale */
+		glm::vec3	_offset;  /**< offset to shift the model manually */
 
 		// global transform matrix
-		glm::mat4	_globalTransform;
+		glm::mat4	_globalTransform;  /**< Global transform matrix */
 
 		// -- animation related ------------------------------------------------
-		bool	_isAnimated;
+		bool	_isAnimated;  /**< Is the model animated */
 
 		// bones
-		std::array<glm::mat4, MAX_BONES>	_boneOffset;
-		std::array<glm::mat4, MAX_BONES>	_bones;  // final bone transformation
-		std::map<std::string, uint32_t>		_boneMap;  // link bone name to index
-		uint32_t	_nextBoneId;  // to keep track of the bones id
+		std::array<glm::mat4, MAX_BONES>	_boneOffset;  /**< The offset with last bone */
+		std::array<glm::mat4, MAX_BONES>	_bones;  /**< final bone transformation */
+		std::map<std::string, uint32_t>		_boneMap;  /**< link bone name to index */
+		uint32_t	_nextBoneId;  /**< to keep track of the bones id */
 
 		// animation settings
-		aiAnimation					*_curAnimation;
-		std::vector<std::string>	_animationNames;
+		aiAnimation					*_curAnimation;  /**< The current animation used */
+		std::vector<std::string>	_animationNames;  /**< All animations names */
 };
 
 #endif  // OPENGLMODEL_HPP_

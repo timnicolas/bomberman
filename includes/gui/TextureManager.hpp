@@ -9,6 +9,9 @@
 #define NB_BLOCK_TYPES 22
 
 namespace Block {
+	/**
+	 * @brief All blocks types
+	 */
 	enum Enum {
 		FLOOR,
 		PLAYER,
@@ -35,7 +38,9 @@ namespace Block {
 	};
 }  // namespace Block
 
-// TODO(tnicolas42) docs -> class description @zer0nim
+/**
+ * @brief This is the main class to manage textures
+ */
 class TextureManager {
 	public:
 		TextureManager();
@@ -48,15 +53,23 @@ class TextureManager {
 		void	disableTextures() const;
 
 		// -- exceptions -------------------------------------------------------
+		/**
+		 * @brief TextureManager exception
+		 */
 		class TextureManagerException : public std::runtime_error {
 			public:
 				TextureManagerException();
+				/**
+				 * @brief Construct a new Texture Manager Exception object
+				 *
+				 * @param what_arg The error message
+				 */
 				explicit TextureManagerException(const char* what_arg);
 		};
 
 	private:
-		uint32_t	_textureAtlas;
-		static std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	_blocks;
+		uint32_t	_textureAtlas;  /**< Texture atlas */
+		static std::array<std::array<int8_t, 6>, NB_BLOCK_TYPES> const	_blocks;  /**< All blocks */
 };
 
 #endif  // TEXTUREMANAGER_HPP_

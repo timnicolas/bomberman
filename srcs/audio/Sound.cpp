@@ -3,6 +3,11 @@
 #include "AudioManager.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Sound:: Sound object
+ *
+ * @param filename Sound filename
+ */
 Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan_volume() {
 	if (AudioManager::isEnabled()) {
 		_chunk = Mix_LoadWAV(filename.c_str());
@@ -15,6 +20,9 @@ Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan
 	}
 }
 
+/**
+ * @brief Destroy the Sound:: Sound object
+ */
 Sound::~Sound() {
 	stop();
 	if (_chunk != nullptr) {
@@ -28,6 +36,7 @@ Sound::~Sound() {
  * @param volume The volume of the sound.
  * @param env_volume The volume settings.
  * @param loop If the sound is on loop.
+ * @param fadeIn FadeIn
  * @return int channel used.
  * @throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
@@ -108,10 +117,23 @@ bool										Sound::channelFinished(int chan) {
 	return false;
 }
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ */
 Sound::SoundException::SoundException(): std::runtime_error("[SoundException]") {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const char* what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const std::string what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}

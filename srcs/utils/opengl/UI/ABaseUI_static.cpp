@@ -58,7 +58,7 @@ InputType::Enum			ABaseUI::_helpKeyBindInput = InputType::NO_KEY;
  * Call this function at program startup.
  *
  * @param winSize the size of the window
- * @param defFontName the defeult font filename
+ * @param defFontName the default font filename
  * @param defFontSize the default font size
  */
 void ABaseUI::init(glm::vec2 winSize, std::string const & defFontName, uint32_t defFontSize) {
@@ -288,13 +288,13 @@ void ABaseUI::showHelp(bool show) { _showHelp = show; }
  */
 void ABaseUI::setHelpFont(std::string fontName) { _helpFont = fontName; }
 /**
- * @brief Set a scancode to toogle help on UI
+ * @brief Set a scancode to toggle help on UI
  *
  * @param scancode The scancode
  */
 void ABaseUI::setHelpToogleScancode(SDL_Scancode scancode) { _helpKeyBindScancode = scancode; }
 /**
- * @brief Set an InputType to toogle help on UI
+ * @brief Set an InputType to toggle help on UI
  *
  * @param input The InputType
  */
@@ -306,7 +306,7 @@ void ABaseUI::setHelpToogleInput(InputType::Enum input) { _helpKeyBindInput = in
  */
 void ABaseUI::setHelpTextScale(float scale) { _helpTextScale = scale; }
 /**
- * @brief Set the boder size for the help rectangle
+ * @brief Set the border size for the help rectangle
  *
  * @param borderSize The border size
  */

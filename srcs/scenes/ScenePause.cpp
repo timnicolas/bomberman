@@ -2,6 +2,12 @@
 #include "SceneGame.hpp"
 #include "AudioManager.hpp"
 
+/**
+ * @brief Construct a new Scene Pause:: Scene Pause object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 ScenePause::ScenePause(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
@@ -9,14 +15,28 @@ ScenePause::ScenePause(Gui * gui, float const &dtTime)
 	_draw3dMenu = false;
 }
 
+/**
+ * @brief Construct a new Scene Pause:: Scene Pause object
+ *
+ * @param src The object to do the copy
+ */
 ScenePause::ScenePause(ScenePause const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Pause:: Scene Pause object
+ */
 ScenePause::~ScenePause() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ScenePause& A reference to the copied object
+ */
 ScenePause & ScenePause::operator=(ScenePause const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying ScenePause")

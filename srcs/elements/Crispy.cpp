@@ -8,22 +8,41 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Crispy:: Crispy object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Crispy::Crispy(SceneGame &game) : AObject(game) {
 	type = Type::CRISPY;
 	name = CRISPY_STR;
 	destructible = true;
 }
 
+/**
+ * @brief Destroy the Crispy:: Crispy object
+ */
 Crispy::~Crispy() {
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
+/**
+ * @brief Construct a new Crispy:: Crispy object
+ *
+ * @param src The object to do the copy
+ */
 Crispy::Crispy(Crispy const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Crispy& A reference to the copied object
+ */
 Crispy &Crispy::operator=(Crispy const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);
@@ -83,6 +102,13 @@ bool	Crispy::draw(Gui &gui) {
 	return true;
 }
 
+/**
+ * @brief Generate a crispy wall with a certain chance
+ *
+ * @param game A reference to the main game object
+ * @param genWallPercent chance to generate a wall [0:100]
+ * @return Crispy* The new crispy wall or a nullptr
+ */
 Crispy * Crispy::generateCrispy(SceneGame &game, uint32_t genWallPercent) {
 	if (genWallPercent <= 0)
 		return nullptr;

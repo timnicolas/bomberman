@@ -4,7 +4,17 @@
 #include "Gui.hpp"
 #include "Bonus.hpp"
 
+/**
+ * @brief Destroy the Scene Settings:: Scene Settings object
+ */
 SceneSettings::~SceneSettings() {}
+
+/**
+ * @brief Construct a new Scene Settings:: Scene Settings object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dtTime),
 	_input_configuring(-1),
 	_current_pane(SettingsType::GRAPHICS),
@@ -34,10 +44,22 @@ SceneSettings::SceneSettings(Gui *gui, float const &dtTime) : ASceneMenu(gui, dt
 	_select_res = -1;  // setted in init function
 	_text_scale = static_cast<float>(s.j("graphics").i("width")) * 0.001;
 }
+
+/**
+ * @brief Construct a new Scene Settings:: Scene Settings object
+ *
+ * @param src The object to do the copy
+ */
 SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneSettings& A reference to the copied object
+ */
 SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {
 	ASceneMenu::operator=(rhs);
 	_input_configuring = rhs._input_configuring;
@@ -661,7 +683,11 @@ void					SceneSettings::_returnQuit() {
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }
 
-
+/**
+ * @brief Get the current resolution
+ *
+ * @return glm::ivec2 the current resolution
+ */
 glm::ivec2		SceneSettings::getCurResolution() const {
 	return glm::ivec2(_current_resolution.width, _current_resolution.height);
 }

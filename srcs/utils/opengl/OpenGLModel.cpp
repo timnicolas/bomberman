@@ -61,6 +61,9 @@ OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 o
 	_setConstUniforms();
 }
 
+/**
+ * @brief Destroy the Open G L Model:: Open G L Model object
+ */
 OpenGLModel::~OpenGLModel() {
 	// free meshes
 	for (auto &it : _meshes) {
@@ -68,6 +71,11 @@ OpenGLModel::~OpenGLModel() {
 	}
 }
 
+/**
+ * @brief Construct a new Open G L Model:: Open G L Model object
+ *
+ * @param src The object to do the copy
+ */
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
 : _cam(src._cam),
   _path(src._path),
@@ -76,6 +84,12 @@ OpenGLModel::OpenGLModel(OpenGLModel const &src)
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return OpenGLModel& A reference to the copied object
+ */
 OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 	#if DEBUG
 		logWarn("OpenGLModel::operator= called, remove if it's desired")
@@ -146,7 +160,7 @@ void	OpenGLModel::_loadModel() {
 	// get global transform
 	_globalTransform = AiUtils::aiToGlmMat(_scene->mRootNode->mTransformation);
 
-	// load all meshs
+	// load all meshes
 	_processNode(_scene->mRootNode, _scene);
 
 	// -- animations -----------------------------------------------------------
@@ -529,7 +543,7 @@ void	OpenGLModel::draw(float animationTimeTick) {
 	_sh->setBool("isAnimated", _isAnimated);
 	_sh->setVec3("viewPos", _cam.pos);
 
-	// draw all meshs
+	// draw all meshes
 	for (auto &mesh : _meshes) {
 		mesh.second->draw(_model);
 	}
@@ -684,8 +698,18 @@ std::vector<std::string>	OpenGLModel::getAnimationNames() const {
 	return _animationNames;
 }
 
+/**
+ * @brief Get the camera
+ *
+ * @return Camera const& The camera
+ */
 Camera const	&OpenGLModel::getCam() const { return _cam; }
 
+/**
+ * @brief Get the path
+ *
+ * @return std::string Path
+ */
 std::string	OpenGLModel::getPath() const { return _path; }
 
 // -- _setBonesTransform -------------------------------------------------------
@@ -913,14 +937,25 @@ void	OpenGLModel::_loadTexture(TextureType::Enum type, std::string const path,
 
 
 // -- Exceptions errors --------------------------------------------------------
+/**
+ * @brief Construct a new Open G L Model:: Model Exception:: Model Exception object
+ */
 OpenGLModel::ModelException::ModelException()
 : std::runtime_error("ModelException") {}
 
+/**
+ * @brief Construct a new Open G L Model:: Model Exception:: Model Exception object
+ *
+ * @param what_arg Error message
+ */
 OpenGLModel::ModelException::ModelException(char const *what_arg)
 : std::runtime_error(
 	std::string(std::string("ModelException: ") + what_arg).c_str()) {}
 
 // -- VerticesLimits -----------------------------------------------------------
+/**
+ * @brief Construct a new Vertices Limits:: Vertices Limits object
+ */
 VerticesLimits::VerticesLimits() {
 	xMin = std::numeric_limits<float>::max();
 	xMax = std::numeric_limits<float>::lowest();
