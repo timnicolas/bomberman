@@ -1,5 +1,14 @@
 #include "Material.hpp"
 
+/**
+ * @brief Construct a new Material:: Material object
+ *
+ * @param name Name
+ * @param diffuse Diffuse
+ * @param specular Specular
+ * @param ambient Ambient
+ * @param shininess Shininess
+ */
 Material::Material(std::string const name, glm::vec3 const diffuse,
 	glm::vec3 const specular, glm::vec3 const ambient, float const shininess)
 : name(name),
@@ -9,13 +18,27 @@ Material::Material(std::string const name, glm::vec3 const diffuse,
   shininess(shininess) {
 }
 
+/**
+ * @brief Construct a new Material:: Material object
+ *
+ * @param src The object to do the copy
+ */
 Material::Material(Material const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Material:: Material object
+ */
 Material::~Material() {
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Material& A reference to the copied object
+ */
 Material &Material::operator=(Material const &rhs) {
 	if (this != &rhs) {
 		name = rhs.name;

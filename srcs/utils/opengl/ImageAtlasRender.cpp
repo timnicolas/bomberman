@@ -2,6 +2,13 @@
 #include "debug.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Image Atlas Render:: Image Atlas Render object
+ *
+ * @param textureManager TextureManager object
+ * @param width Image width
+ * @param height Image Height
+ */
 ImageAtlasRender::ImageAtlasRender(TextureManager const &textureManager, uint32_t width, uint32_t height) :
 _textureManager(textureManager), _shader(SHADER_IMAGE_VS, SHADER_IMAGE_FS),
 _projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfloat>(height))) {
@@ -29,12 +36,19 @@ _projection(glm::ortho(0.0f, static_cast<GLfloat>(width), 0.0f, static_cast<GLfl
 	_shader.unuse();
 }
 
-
+/**
+ * @brief Construct a new Image Atlas Render:: Image Atlas Render object
+ *
+ * @param src The object to do the copy
+ */
 ImageAtlasRender::ImageAtlasRender(ImageAtlasRender const &src) :
 _textureManager(src._textureManager), _shader(src.getShader()) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Image Atlas Render:: Image Atlas Render object
+ */
 ImageAtlasRender::~ImageAtlasRender() {
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -42,6 +56,12 @@ ImageAtlasRender::~ImageAtlasRender() {
 	glDeleteBuffers(1, &_vbo);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ImageAtlasRender& A reference to the copied object
+ */
 ImageAtlasRender &ImageAtlasRender::operator=(ImageAtlasRender const &rhs) {
 	(void)rhs;
 	if (this != &rhs) {

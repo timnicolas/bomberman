@@ -4,6 +4,17 @@
 #include "OpenGLModel.hpp"
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new Mesh:: Mesh object
+ *
+ * @param openGLModel OpenGLModel master object
+ * @param sh Shader
+ * @param name Name
+ * @param vertices Vertices
+ * @param vertIndices Vertices indices
+ * @param material Material
+ * @param boundingBox Bounding box
+ */
 Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
 	std::vector<Vertex> vertices, std::vector<u_int32_t> vertIndices,
 	Material material, BoundingBox boundingBox)
@@ -19,6 +30,11 @@ Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
   _vbo(0),
   _ebo(0) {}
 
+/**
+ * @brief Construct a new Mesh:: Mesh object
+ *
+ * @param src The object to do the copy
+ */
 Mesh::Mesh(Mesh const &src)
 : _openGLModel(src._openGLModel),
   _sh(src._sh),
@@ -27,6 +43,9 @@ Mesh::Mesh(Mesh const &src)
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Mesh:: Mesh object
+ */
 Mesh::~Mesh() {
 	// free vao / vbo
 	_sh.use();
@@ -39,6 +58,12 @@ Mesh::~Mesh() {
 	_sh.unuse();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Mesh& A reference to the copied object
+ */
 Mesh &Mesh::operator=(Mesh const &rhs) {
 	if (this != &rhs) {
 		logWarn("Mesh is copied");

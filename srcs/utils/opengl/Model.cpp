@@ -3,6 +3,13 @@
 #include <cmath>
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new Model:: Model object
+ *
+ * @param openGLModel OpenGLModel master object
+ * @param dtTime Reference to delta time
+ * @param transform Transform
+ */
 Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform)
 : transform(transform),
   _openGLModel(openGLModel),
@@ -25,9 +32,17 @@ Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform
 	}
 }
 
+/**
+ * @brief Destroy the Model:: Model object
+ */
 Model::~Model() {
 }
 
+/**
+ * @brief Construct a new Model:: Model object
+ *
+ * @param src The object to do the copy
+ */
 Model::Model(Model const &src)
 : transform(src.transform),
   _openGLModel(src._openGLModel),
@@ -35,6 +50,12 @@ Model::Model(Model const &src)
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Model& A reference to the copied object
+ */
 Model &Model::operator=(Model const &rhs) {
 	if (this != &rhs) {
 		transform = rhs.transform;
