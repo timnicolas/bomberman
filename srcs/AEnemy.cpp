@@ -150,7 +150,7 @@ void	AEnemy::animEndCb(std::string animName) {
 }
 
 /**
- * @brief AEnemy Take <damage> damages.
+ * @brief AEnemy Take < damage > damages.
  *
  * @param damage
  * @return true if damage taken
@@ -173,7 +173,7 @@ bool	AEnemy::takeDamage(const int damage) {
 /**
  * @brief get a list of entity in collision with the Character at a position.
  *
- * @param pos default VOID_POS3
+ * @param dest default VOID_POS3
  * @return std::unordered_set<AEntity *> collisions
  */
 std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
@@ -390,6 +390,7 @@ Direction::Enum AEnemy::_isPlayerVisible() const {
  * @brief Check if the enemy is on dest
  *
  * @param dest The postion to compare with enemy pos
+ * @param offset Offset
  * @return true If is on the destination
  */
 bool AEnemy::_isOn(glm::ivec2 dest, float offset) const {
@@ -439,8 +440,16 @@ bool AEnemy::_isBlocked() {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new AEnemy::EnemyException::EnemyException object
+ */
 AEnemy::EnemyException::EnemyException()
 : std::runtime_error("AEnemy Exception") {}
 
+/**
+ * @brief Construct a new AEnemy::EnemyException::EnemyException object
+ *
+ * @param whatArg Error message
+ */
 AEnemy::EnemyException::EnemyException(const char* whatArg)
 : std::runtime_error(std::string(std::string("EnemyError: ") + whatArg).c_str()) {}

@@ -151,7 +151,7 @@ std::vector< std::vector< std::vector<AEntity *> > > & ACharacter::getBoard() {
 }
 
 /**
- * @brief Character Take <damage> damages.
+ * @brief Character Take < damage > damages.
  *
  * @param damage
  * @return true if damage taken
@@ -600,8 +600,16 @@ glm::vec3	ACharacter::_miniMove(glm::vec3 movement) {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new ACharacter::ACharacterException::ACharacterException object
+ */
 ACharacter::ACharacterException::ACharacterException()
 : std::runtime_error("ACharacter Exception") {}
 
+/**
+ * @brief Construct a new ACharacter::ACharacterException::ACharacterException object
+ *
+ * @param whatArg Error message
+ */
 ACharacter::ACharacterException::ACharacterException(const char* whatArg)
 : std::runtime_error(std::string(std::string("ACharacterError: ") + whatArg).c_str()) {}

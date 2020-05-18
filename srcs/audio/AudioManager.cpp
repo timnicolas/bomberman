@@ -109,6 +109,7 @@ void						AudioManager::_updateSettings() {
  * @brief Load a new music from its file name.
  *
  * @param file_name The path to the music file, starting from the asset directory.
+ * @param silent Don't show warning if enabled
  *
  * @throw A MusicException if the music failed to be loaded. The path might be incorrect.
  */
@@ -121,6 +122,14 @@ void						AudioManager::loadMusic(std::string file_name, bool silent) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Load a new music from its file name.
+ *
+ * @param file_name The path to the music file, starting from the asset directory.
+ * @param silent Don't show warning if enabled
+ *
+ * @throw A MusicException if the music failed to be loaded. The path might be incorrect.
+ */
 void						AudioManager::_loadMusic(std::string file_name, bool silent) {
 	if (_musics.find(file_name) != _musics.end()) {
 		if (!silent)
@@ -148,6 +157,15 @@ void						AudioManager::playMusic(std::string music_name, float volume, bool loo
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Play a music with a volume modifier.
+ *
+ * @param music_name The name of the file of the music we want to play.
+ * @param volume The volume modifier apply on top of the audio setting. Set to 1.0 by default.
+ * @param loop Indicate if the music should loop. false by default.
+ *
+ * @throw A MusicException if the music failed to be played.
+ */
 void						AudioManager::_playMusic(std::string music_name, float volume, bool loop) {
 	try {
 		Music	*music = _musics.at(music_name);
@@ -177,6 +195,9 @@ void						AudioManager::pauseMusic() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Pause the music currently played.
+ */
 void						AudioManager::_pauseMusic() {
 	Mix_PauseMusic();
 	_musicPaused = true;
@@ -194,6 +215,9 @@ void						AudioManager::resumeMusic() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Resume the music currently played.
+ */
 void						AudioManager::_resumeMusic() {
 	Mix_ResumeMusic();
 	_musicPaused = false;
@@ -211,6 +235,9 @@ void						AudioManager::stopMusic() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Stop the music currently played.
+ */
 void						AudioManager::_stopMusic() {
 	Mix_FadeOutMusic(2000);
 }
@@ -229,6 +256,11 @@ void						AudioManager::unloadMusic(std::string music_name) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Unload the music from the audio manager.
+ *
+ * @param music_name The path to the music file, starting from the asset directory.
+ */
 void						AudioManager::_unloadMusic(std::string music_name) {
 	try {
 		delete _musics.at(music_name);
@@ -244,6 +276,7 @@ void						AudioManager::_unloadMusic(std::string music_name) {
  * @brief Load a new sound from its file name.
  *
  * @param file_name The path to the sound file, starting from the asset directory.
+ * @param silent Don't show warning if enabled
  *
  * @throw A SoundException if the sound failed to be loaded. The path might be incorrect.
  */
@@ -256,6 +289,14 @@ void						AudioManager::loadSound(std::string file_name, bool silent) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Load a new sound from its file name.
+ *
+ * @param file_name The path to the sound file, starting from the asset directory.
+ * @param silent Don't show warning if enabled
+ *
+ * @throw A SoundException if the sound failed to be loaded. The path might be incorrect.
+ */
 void						AudioManager::_loadSound(std::string file_name, bool silent) {
 	if (_sounds.find(file_name) != _sounds.end()) {
 		if (!silent)
@@ -272,6 +313,7 @@ void						AudioManager::_loadSound(std::string file_name, bool silent) {
  * @param volume The volume modifier apply on top of the audio setting. Set to 1.0 by default.
  * @param loop If the sound is played on loop.
  * @param muteMusic If we need to mute the music during the sound.
+ * @param fadeIn FadeIn
  *
  * @throw A SoundException if the sound failed to be played.
  */
@@ -284,6 +326,17 @@ void						AudioManager::playSound(std::string sound_name, float volume, bool loo
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Play a sound identified by file name with a volume modifier.
+ *
+ * @param sound_name the file name of the sound.
+ * @param volume The volume modifier apply on top of the audio setting. Set to 1.0 by default.
+ * @param loop If the sound is played on loop.
+ * @param muteMusic If we need to mute the music during the sound.
+ * @param fadeIn FadeIn
+ *
+ * @throw A SoundException if the sound failed to be played.
+ */
 void						AudioManager::_playSound(std::string sound_name, float volume, bool loop, bool muteMusic, int fadeIn) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
@@ -314,6 +367,11 @@ void						AudioManager::pauseSound(std::string sound_name) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Pause all the channels of the sound identified by file name.
+ *
+ * @param sound_name the file name of the sound.
+ */
 void						AudioManager::_pauseSound(std::string sound_name) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
@@ -339,6 +397,11 @@ void						AudioManager::resumeSound(std::string sound_name) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+	Resume all the channels of the sound identified by file name.
+
+	@param sound_name the file name of the sound.
+*/
 void						AudioManager::_resumeSound(std::string sound_name) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
@@ -364,6 +427,11 @@ void						AudioManager::stopSound(std::string sound_name) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Stop all the channels of the sound identified by file name.
+ *
+ * @param sound_name the file name of the sound.
+ */
 void						AudioManager::_stopSound(std::string sound_name) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
@@ -387,6 +455,9 @@ void						AudioManager::pauseAllSounds() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Pause all the channels.
+ */
 void						AudioManager::_pauseAllSounds() {
 	Mix_Pause(-1);
 }
@@ -403,6 +474,9 @@ void						AudioManager::resumeAllSounds() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Resume all the channels.
+ */
 void						AudioManager::_resumeAllSounds() {
 	Mix_Resume(-1);
 }
@@ -421,6 +495,11 @@ void						AudioManager::unloadSound(std::string sound_name) {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Unload the sound identified by file name.
+ *
+ * @param sound_name the file name of the sound.
+ */
 void						AudioManager::_unloadSound(std::string sound_name) {
 	try {
 		delete _sounds.at(sound_name);
@@ -444,6 +523,9 @@ void						AudioManager::stopAllSounds() {
 		logWarn("AudioManager is not enabled.");
 	}
 }
+/**
+ * @brief Stop all the channels.
+ */
 void						AudioManager::_stopAllSounds() {
 	Mix_HaltChannel(-1);
 }

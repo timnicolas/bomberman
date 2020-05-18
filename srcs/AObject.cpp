@@ -151,8 +151,16 @@ bool	AObject::init() {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new AObject::AObjectException::AObjectException object
+ */
 AObject::AObjectException::AObjectException()
 : std::runtime_error("AObject Exception") {}
 
+/**
+ * @brief Construct a new AObject::AObjectException::AObjectException object
+ *
+ * @param whatArg Error message
+ */
 AObject::AObjectException::AObjectException(const char* whatArg)
 : std::runtime_error(std::string(std::string("AObjectError: ") + whatArg).c_str()) {}

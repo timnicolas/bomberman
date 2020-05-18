@@ -69,6 +69,11 @@ BoxCollider::~BoxCollider() {
 bool BoxCollider::init(Gui * gui) {
 	return BoxCollider::get()._init(gui);
 }
+/**
+ * @brief Init the BoxCollider object (call only once)
+ *
+ * @return false If failed
+ */
 bool BoxCollider::_init(Gui * gui) {
 	_gui = gui;
 	_boxShader = new Shader(BOX_SHADER_VS, BOX_SHADER_FS);
@@ -97,6 +102,11 @@ bool BoxCollider::_init(Gui * gui) {
 bool BoxCollider::destroy() {
 	return BoxCollider::get()._destroy();
 }
+/**
+ * @brief Destroy the BoxCollider object (call only once)
+ *
+ * @return false If failed
+ */
 bool BoxCollider::_destroy() {
 	if (_boxShader == nullptr) {
 		logErr("you need to init BoxCollider before destroy it");
@@ -144,6 +154,13 @@ BoxCollider &	BoxCollider::get() {
 bool BoxCollider::drawBox(glm::vec3 pos, glm::vec3 size, glm::vec4 color) {
 	return BoxCollider::get()._drawBox(pos, size, color);
 }
+/**
+ * @brief Draw a box collider on the screen
+ *
+ * @param pos The position
+ * @param size The size
+ * @param color The color
+ */
 bool BoxCollider::_drawBox(glm::vec3 pos, glm::vec3 size, glm::vec4 color) {
 	if (_boxShader == nullptr) {
 		logErr("You need to init BoxCollider before draw (BoxCollider::init)");

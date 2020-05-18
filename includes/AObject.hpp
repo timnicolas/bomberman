@@ -25,7 +25,17 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
+	/**
+	 * @brief Update object. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	update() = 0;
+	/**
+	 * @brief Draw object. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	draw(Gui &gui) = 0;
 	void			setPos(glm::vec3 pos = VOID_POS3);
 	glm::vec3		getPos() const;
