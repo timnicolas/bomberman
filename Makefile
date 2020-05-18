@@ -681,6 +681,7 @@ check:
 	$(eval NEED_MAKE := )
 	@$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE)
 	@$(MAKE) $(MAKE_OPT) lint NEED_MAKE=$(NEED_MAKE)
+	@$(MAKE) $(MAKE_OPT) doc NEED_MAKE=$(NEED_MAKE)
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
 doc:
@@ -688,6 +689,9 @@ doc:
 	@Doxygen scripts/Doxyfile > /dev/null 2>&1
 	@cat /tmp/doxygen_warn.log
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
+	@if [ ! "`cat /tmp/doxygen_warn.log`" = "" ]; then \
+		exit 1; \
+	fi
 
 ghpages:
 	@printf $(YELLOW)$(BOLD)"UPDATE DOC ON GITHUB PAGES FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
