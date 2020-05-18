@@ -14,7 +14,6 @@ class SceneGameOver : public ASceneMenu {
 
 		// Operators
 		SceneGameOver &operator=(SceneGameOver const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneGameOver& myClass);
 
 		// Methods
 		virtual bool		init();

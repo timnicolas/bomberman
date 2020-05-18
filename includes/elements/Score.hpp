@@ -60,6 +60,9 @@ public:
 	void	getStats(std::vector<Stat> &vec);
 
 	// Exceptions
+	/**
+	 * @brief Score Exception
+	 */
 	class ScoreException : public std::runtime_error {
 	public:
 		ScoreException();

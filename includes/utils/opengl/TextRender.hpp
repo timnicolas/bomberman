@@ -32,6 +32,9 @@ class TextRender {
 		Shader			&getShader();
 		Shader const	&getShader() const;
 
+		/**
+		 * @brief Text render exception
+		 */
 		class TextRenderError : public std::exception {
 			public:
 				/**
@@ -41,6 +44,9 @@ class TextRender {
 				 */
 				virtual const char* what() const throw() = 0;
 		};
+		/**
+		 * @brief Exception when loading text (TextRender)
+		 */
 		class LoadTextRenderException : public TextRenderError {
 			public:
 				/**

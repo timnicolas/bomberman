@@ -24,6 +24,9 @@ class AScene {
 		AScene & operator=(AScene const & rhs);
 
 		// Exceptions
+		/**
+		 * @brief Scene exception
+		 */
 		class SceneException : public std::runtime_error {
 		public:
 			SceneException();

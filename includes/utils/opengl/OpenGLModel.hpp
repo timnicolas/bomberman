@@ -19,6 +19,9 @@
 #include "Gui.hpp"
 
 namespace AnimKeyType {
+	/**
+	 * @brief Animation key type
+	 */
 	enum Enum {
 		SCALE,
 		ROTATION,
@@ -32,6 +35,9 @@ namespace AnimKeyType {
 	}};
 }  // namespace AnimKeyType
 
+/**
+ * @brief Vertices limits
+ */
 struct	VerticesLimits {
 	float	xMin;  /**< The x min */
 	float	xMax;  /**< The x max */
@@ -72,6 +78,9 @@ class OpenGLModel {
 		std::string	getPath() const;
 
 		// Exceptions
+		/**
+		 * @brief Model execption
+		 */
 		class ModelException : public std::runtime_error {
 			public:
 				ModelException();
@@ -118,7 +127,7 @@ class OpenGLModel {
 			bool inSpaceSRGB);
 
 		// -- members ----------------------------------------------------------
-		static std::unique_ptr<Shader>	_sh;
+		static std::unique_ptr<Shader>	_sh;  /**< Shader */
 
 		Camera const		&_cam;  /**< A reference to the camera */
 		std::string const	_path;  /**< model file path */

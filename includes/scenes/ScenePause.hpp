@@ -14,7 +14,6 @@ class ScenePause : public ASceneMenu {
 
 		// Operators
 		ScenePause &operator=(ScenePause const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const ScenePause& myClass);
 
 		// Methods
 		virtual bool		init();

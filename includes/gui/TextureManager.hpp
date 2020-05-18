@@ -53,6 +53,9 @@ class TextureManager {
 		void	disableTextures() const;
 
 		// -- exceptions -------------------------------------------------------
+		/**
+		 * @brief TextureManager exception
+		 */
 		class TextureManagerException : public std::runtime_error {
 			public:
 				TextureManagerException();

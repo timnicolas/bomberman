@@ -15,7 +15,6 @@ class SceneLoading : public ASceneMenu {
 
 		// Operators
 		SceneLoading &operator=(SceneLoading const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneLoading& myClass);
 
 		// Methods
 		virtual bool		init();

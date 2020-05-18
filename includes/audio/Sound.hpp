@@ -13,6 +13,9 @@
  */
 class Sound {
 public:
+	/**
+	 * @brief Sound exception
+	 */
 	class SoundException: public std::runtime_error {
 		public:
 			SoundException();

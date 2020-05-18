@@ -37,6 +37,9 @@ public:
 	bool			isInFlyBoard;  /**< True if the entity fly */
 
 	// Exceptions
+	/**
+	 * @brief AObject Exception
+	 */
 	class AObjectException : public std::runtime_error {
 	public:
 		AObjectException();

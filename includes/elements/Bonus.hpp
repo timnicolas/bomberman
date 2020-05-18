@@ -63,6 +63,9 @@ public:
 	static Bonus*		generateBonus(SceneGame &game, float rate = 0.1f);
 
 	// Exceptions
+	/**
+	 * @brief Bonus Exception
+	 */
 	class BonusException : public std::runtime_error {
 	public:
 		BonusException();

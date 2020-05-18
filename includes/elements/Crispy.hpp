@@ -31,6 +31,9 @@ public:
 	static Crispy *	generateCrispy(SceneGame &game, uint32_t genWallPercent);
 
 	// Exceptions
+	/**
+	 * @brief Crispy Exception
+	 */
 	class CrispyException : public std::runtime_error {
 	public:
 		CrispyException();

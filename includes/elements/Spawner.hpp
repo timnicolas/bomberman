@@ -36,6 +36,9 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Spawner Exception
+	 */
 	class SpawnerException : public std::runtime_error {
 	public:
 		SpawnerException();

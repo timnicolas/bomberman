@@ -78,6 +78,9 @@ public:
 	bool							tp(glm::vec3 tpPos);
 
 	// Exceptions
+	/**
+	 * @brief ACharacter Exceptions
+	 */
 	class ACharacterException : public std::runtime_error {
 	public:
 		ACharacterException();
