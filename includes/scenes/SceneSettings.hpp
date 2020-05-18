@@ -18,6 +18,9 @@ namespace SettingsType {
 	const int	nb_types = 3;  /**< number of settings categories */
 }  // namespace SettingsType
 
+/**
+ * @brief Scene for settings
+ */
 class SceneSettings: public ASceneMenu {
 public:
 	/**

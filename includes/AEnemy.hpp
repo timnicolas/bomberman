@@ -10,6 +10,9 @@
 
 #define INF_DIST 9999999
 
+/**
+ * @brief Path node element (to create auto path for enemy)
+ */
 struct PathNode {
 	Direction::Enum	dir;
 	glm::ivec2		goal;

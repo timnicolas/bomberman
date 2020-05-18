@@ -31,6 +31,9 @@ namespace BonusType {
 	};
 }  // namespace BonusType
 
+/**
+ * @brief Bonus object
+ */
 class Bonus : public AObject {
 private:
 	Bonus();

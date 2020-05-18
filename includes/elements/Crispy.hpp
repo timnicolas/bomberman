@@ -7,6 +7,9 @@
 
 #define CRISPY_STR "crispy"
 
+/**
+ * @brief Crispy wall object
+ */
 class Crispy : public AObject {
 private:
 	Crispy();

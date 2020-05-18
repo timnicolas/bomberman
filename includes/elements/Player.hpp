@@ -76,6 +76,9 @@ public:
 	virtual void	animEndCb(std::string animName);
 
 	// Exceptions
+	/**
+	 * @brief Player exception
+	 */
 	class PlayerException : public std::runtime_error {
 	public:
 		PlayerException();

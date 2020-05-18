@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include <vector>
 
+/**
+ * @brief Score calculation object
+ */
 class Score {
 private:
 	// Members

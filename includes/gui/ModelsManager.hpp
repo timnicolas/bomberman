@@ -9,7 +9,6 @@
 /**
  * @brief class to manage OpenGLModel
  * store all OpenGLModel inside to avoid multiples loadings
- *
  */
 class ModelsManager {
 	public:
@@ -20,6 +19,9 @@ class ModelsManager {
 		static OpenGLModel	&getModel(std::string const &name);
 
 		// -- exceptions -------------------------------------------------------
+		/**
+		 * @brief Model manager exception
+		 */
 		class ModelsManagerException : public std::runtime_error {
 			public:
 				ModelsManagerException();
