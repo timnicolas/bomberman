@@ -20,7 +20,7 @@ class Model {
 		void	draw();
 
 		// anim end callback
-		typedef void (AEntity::*AnimEndCb)(std::string animName);
+		typedef void (AEntity::*AnimEndCb)(std::string animName);  /**< animation name */
 
 		void	setAnimation(uint32_t id, AnimEndCb animEndCbFunc = nullptr,
 			AEntity *animEndCbClass = nullptr);
@@ -49,11 +49,14 @@ class Model {
 		void	_updateAnimationTime();
 		void	_updateTicksPerSecond();
 
+		/**
+		 * @brief Mesh texture
+		 */
 		struct	MeshTexture {
-			TextureType::Enum	type;
-			std::string			meshName;
-			std::string			path;
-			bool				inSpaceSRGB;
+			TextureType::Enum	type;  /**< Texture type */
+			std::string			meshName;  /**< Mesh name */
+			std::string			path;  /**< Texture path */
+			bool				inSpaceSRGB;  /**< If is in space SRGB */
 		};
 
 		OpenGLModel &_openGLModel;  /**< A ref to openGLModel object */

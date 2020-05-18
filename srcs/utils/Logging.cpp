@@ -116,5 +116,16 @@ void	Logging::log(eLoglevel level, std::string message, std::string file, int li
 	std::cout << ss.str();
 }
 
+/**
+ * @brief Get the color of a log level
+ *
+ * @param loglevel The log level
+ * @return std::string const& The color
+ */
 std::string const &	Logging::getColor(eLoglevel loglevel) const { return _colors[loglevel]; }
+/**
+ * @brief Get the first log level printed (all loglevel under are skipped)
+ *
+ * @return eLoglevel The first skipped log level
+ */
 eLoglevel			Logging::getLoglevel() const { return _loglevel; }
