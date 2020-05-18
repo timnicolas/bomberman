@@ -34,10 +34,20 @@ class TextRender {
 
 		class TextRenderError : public std::exception {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() = 0;
 		};
 		class LoadTextRenderException : public TextRenderError {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Fail to load text");
 				}

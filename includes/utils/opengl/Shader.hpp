@@ -52,16 +52,31 @@ class Shader {
 
 		class ShaderError : public std::exception {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() = 0;
 		};
 		class ShaderCompileException : public ShaderError {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Shader failed to compile!");
 				}
 		};
 		class ShaderLinkingException : public ShaderError {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Shader program failed to link!");
 				}
