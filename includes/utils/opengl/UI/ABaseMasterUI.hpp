@@ -29,7 +29,17 @@ class ABaseMasterUI : public ABaseUI {
 		virtual glm::vec2	getMasterOffset() const;
 
 	protected:
+		/**
+		 * @brief Update object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_update() = 0;
+		/**
+		 * @brief Draw object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_draw() = 0;
 		void			_updateTotalMasterSize();
 		ABaseMasterUI();

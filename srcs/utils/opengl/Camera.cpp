@@ -370,7 +370,7 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
 /**
  * @brief Move the camera from the mouse movements
  *
- * @param Offset The camera offset in x from last call
+ * @param offset The camera offset in x from last call
  * @param constrainPitch Constrain pitch to block camera up to 90 deg (enable by default)
  */
 void	Camera::processMouseMovement(glm::vec2 offset, bool constrainPitch) {

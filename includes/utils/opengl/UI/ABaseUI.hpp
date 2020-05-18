@@ -175,7 +175,17 @@ class ABaseUI {
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color);
 
 		// update function (redefined in child class)
+		/**
+		 * @brief Update object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_update() = 0;
+		/**
+		 * @brief Draw object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_draw() = 0;
 
 		// called by setWinSize

@@ -185,7 +185,7 @@ bool	ACharacter::takeDamage(const int damage) {
 /**
  * @brief get a list of entity in collision with the Character at a position.
  *
- * @param pos default VOID_POS3
+ * @param dest default VOID_POS3
  * @return std::unordered_set<AEntity *> collisions
  */
 std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
@@ -289,7 +289,7 @@ bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
 /**
  * @brief Check if we can walk on an entity
  *
- * @param pos The block pos
+ * @param entity The entity
  * @return true If we can walk on this block
  */
 bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
