@@ -30,6 +30,9 @@ const SDL_Scancode	Inputs::default_keys[] = {
 };
 const std::string	Inputs::configFile = homeDir+CONTROLS_FILE;
 
+/**
+ * @brief Construct a new Inputs:: Inputs object
+ */
 Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	_left_click(false), _right_click(false),
 	_left_click_previous(false), _right_click_previous(false), _isTextInputMode(false)
@@ -104,6 +107,9 @@ Inputs::Inputs(): _configuring(false), _quit(false), _scroll_rel(0, 0),
 	};
 }
 
+/**
+ * @brief Destroy the Inputs:: Inputs object
+ */
 Inputs::~Inputs() {}
 
 /**

@@ -1,8 +1,15 @@
 #include "Shader.hpp"
 #include "Logging.hpp"
 
-/*
-	Load shader source code to string
+/**
+ * @brief Load shader source code to string
+ *
+ * @param vsPath Vertex shader
+ * @param fsPath Fragment shader
+ * @param gsPath Geometry shader
+ * @param vsCode Vertex code (in str)
+ * @param fsCode Fragment code (in str)
+ * @param gsCode Geometry code (in str)
  */
 static void	fillShaderStr(std::string const vsPath, std::string const fsPath, std::string const gsPath,
 std::string *vsCode, std::string *fsCode, std::string *gsCode
@@ -43,6 +50,13 @@ std::string *vsCode, std::string *fsCode, std::string *gsCode
 	}
 }
 
+/**
+ * @brief Construct a new Shader:: Shader object
+ *
+ * @param vsPath Vertex shader
+ * @param fsPath Fragment shader
+ * @param gsPath Geometry shader
+ */
 Shader::Shader(std::string const vsPath, std::string const fsPath, std::string const gsPath) {
 	std::string	vsCode;
 	std::string	fsCode;
@@ -96,14 +110,28 @@ Shader::Shader(std::string const vsPath, std::string const fsPath, std::string c
 		glDeleteShader(geometry);
 }
 
+/**
+ * @brief Construct a new Shader:: Shader object
+ *
+ * @param src The object to do the copy
+ */
 Shader::Shader(Shader const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Shader:: Shader object
+ */
 Shader::~Shader() {
 	glDeleteProgram(id);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Shader& A reference to the copied object
+ */
 Shader &Shader::operator=(Shader const &rhs) {
 	if (this != &rhs) {
 		this->id = rhs.id;
@@ -123,64 +151,190 @@ void	Shader::use() {
 void	Shader::unuse() {
 	glUseProgram(0);
 }
+/**
+ * @brief Set boolean in shader
+ *
+ * @param name Variable name
+ * @param value Value
+ */
 void	Shader::setBool(const std::string &name, bool value) const {
 	glUniform1i(glGetUniformLocation(id, name.c_str()), static_cast<int>(value));
 }
+/**
+ * @brief Set int in shader
+ *
+ * @param name Variable name
+ * @param value Value
+ */
 void	Shader::setInt(const std::string &name, int value) const {
 	glUniform1i(glGetUniformLocation(id, name.c_str()), value);
 }
+/**
+ * @brief Set float in shader
+ *
+ * @param name Variable name
+ * @param value Value
+ */
 void	Shader::setFloat(const std::string &name, float value) const {
 	glUniform1f(glGetUniformLocation(id, name.c_str()), value);
 }
+/**
+ * @brief Set double in shader
+ *
+ * @param name Variable name
+ * @param value Value
+ */
 void	Shader::setDouble(const std::string &name, double value) const {
 	glUniform1d(glGetUniformLocation(id, name.c_str()), value);
 }
 // ------------------------------------------------------------------------
+/**
+ * @brief Set vec2 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ */
 void	Shader::setVec2(const std::string &name, float x, float y) const {
 	glUniform2f(glGetUniformLocation(id, name.c_str()), x, y);
 }
+/**
+ * @brief Set vec2 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec2(const std::string &name, const glm::vec2 &vec) const {
 	glUniform2fv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
+/**
+ * @brief Set vec2 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ */
 void	Shader::setVec2Double(const std::string &name, double x, double y) const {
 	glUniform2d(glGetUniformLocation(id, name.c_str()), x, y);
 }
+/**
+ * @brief Set vec2 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec2Double(const std::string &name, const glm::tvec2<double> &vec) const {
 	glUniform2dv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
 // ------------------------------------------------------------------------
+/**
+ * @brief Set vec3 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ * @param z z value
+ */
 void	Shader::setVec3(const std::string &name, float x, float y, float z) const {
 	glUniform3f(glGetUniformLocation(id, name.c_str()), x, y, z);
 }
+/**
+ * @brief Set vec3 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec3(const std::string &name, const glm::vec3 &vec) const {
 	glUniform3fv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
+/**
+ * @brief Set vec3 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ * @param z z value
+ */
 void	Shader::setVec3Double(const std::string &name, double x, double y, double z) const {
 	glUniform3d(glGetUniformLocation(id, name.c_str()), x, y, z);
 }
+/**
+ * @brief Set vec3 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec3Double(const std::string &name, const glm::tvec3<double> &vec) const {
 	glUniform3dv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
 // ------------------------------------------------------------------------
+/**
+ * @brief Set vec4 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ * @param z z value
+ * @param z w value
+ */
 void	Shader::setVec4(const std::string &name, float x, float y, float z, float w) const {
 	glUniform4f(glGetUniformLocation(id, name.c_str()), x, y, z, w);
 }
+/**
+ * @brief Set vec4 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec4(const std::string &name, const glm::vec4 &vec) const {
 	glUniform4fv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
+/**
+ * @brief Set vec4 in shader
+ *
+ * @param name Variable name
+ * @param x x value
+ * @param y y value
+ * @param z z value
+ * @param z w value
+ */
 void	Shader::setVec4Double(const std::string &name, double x, double y, double z, double w) const {
 	glUniform4d(glGetUniformLocation(id, name.c_str()), x, y, z, w);
 }
+/**
+ * @brief Set vec4 in shader
+ *
+ * @param name Variable name
+ * @param vec vector
+ */
 void	Shader::setVec4Double(const std::string &name, const glm::tvec4<double> &vec) const {
 	glUniform4dv(glGetUniformLocation(id, name.c_str()), 1, &vec[0]);
 }
 // ------------------------------------------------------------------------
+/**
+ * @brief Set mat2 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
 void	Shader::setMat2(const std::string &name, const glm::mat2 &mat) const {
 	glUniformMatrix2fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
+/**
+ * @brief Set mat3 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
 void	Shader::setMat3(const std::string &name, const glm::mat3 &mat) const {
 	glUniformMatrix3fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
+/**
+ * @brief Set mat4 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
 void	Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 	glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }

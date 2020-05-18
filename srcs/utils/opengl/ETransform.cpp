@@ -2,6 +2,13 @@
 #include "Logging.hpp"
 
 // -- constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new ETransform::ETransform object
+ *
+ * @param pos Position
+ * @param scale Scale
+ * @param rotQ Rotation quaternion
+ */
 ETransform::ETransform(glm::vec3 pos, glm::vec3 scale, glm::quat rotQ)
 : _pos(pos),
   _rot(rotQ),
@@ -10,20 +17,49 @@ ETransform::ETransform(glm::vec3 pos, glm::vec3 scale, glm::quat rotQ)
 	_updateModel();
 }
 
+/**
+ * @brief Construct a new ETransform::ETransform object
+ *
+ * @param pos Position
+ * @param scale Scale
+ * @param rotM Rotation matrix
+ */
 ETransform::ETransform(glm::vec3 pos, glm::vec3 scale, glm::mat4 rotM)
 : ETransform(pos, scale, glm::toQuat(rotM)) {}
 
+/**
+ * @brief Construct a new ETransform::ETransform object
+ *
+ * @param pos Position
+ * @param scale Scale
+ * @param rotAngle Rotation angle
+ * @param rotAxis Rotation axis
+ */
 ETransform::ETransform(glm::vec3 pos, glm::vec3 scale, float rotAngle,
 glm::vec3 rotAxis)
 : ETransform(pos, scale, glm::rotate(glm::mat4(1.0), rotAngle, rotAxis)) {}
 
+/**
+ * @brief Destroy the ETransform::ETransform object
+ */
 ETransform::~ETransform() {
 }
 
+/**
+ * @brief Construct a new ETransform::ETransform object
+ *
+ * @param src The object to do the copy
+ */
 ETransform::ETransform(ETransform const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ETransform& A reference to the copied object
+ */
 ETransform &ETransform::operator=(ETransform const &rhs) {
 	if (this != &rhs) {
 		_pos = rhs._pos;

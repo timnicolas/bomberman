@@ -99,6 +99,21 @@ uint32_t	textureFromFbx(aiScene const *scene, int locationId, bool inSpaceSRGB,
 }
 
 // -- _createTexture -----------------------------------------------------------
+/**
+ * @brief Create a texture
+ *
+ * @param data The loaded data
+ * @param name Name
+ * @param inSpaceSRGB True if is in space RGB
+ * @param formatId Format ID
+ * @param size Size
+ * @param glTexMinFilter Enable TexMinFilter
+ * @param glTexMagFilter Enable TexMagFilter
+ * @param isAtlas Is texture atlas
+ * @param tileSize Tile size
+ * @param layerCount Layer count
+ * @return uint32_t The texture ID
+ */
 uint32_t	_createTexture(uint8_t *data, std::string const name, bool inSpaceSRGB,
 	int formatId, glm::ivec2 size, GLint glTexMinFilter, GLint glTexMagFilter,
 	bool isAtlas, int tileSize, int layerCount)

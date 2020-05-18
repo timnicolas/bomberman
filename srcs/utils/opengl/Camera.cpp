@@ -4,6 +4,15 @@
 #include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new Camera:: Camera object
+ *
+ * @param ratio Ratio (width / height)
+ * @param pos Position
+ * @param up Up vector
+ * @param yaw Yaw
+ * @param pitch Pitch
+ */
 Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw,
 	CAMERA_FLOAT pitch)
 : pos(pos),
@@ -34,14 +43,28 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
 	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
+/**
+ * @brief Destroy the Camera:: Camera object
+ */
 Camera::~Camera() {
 }
 
+/**
+ * @brief Construct a new Camera:: Camera object
+ *
+ * @param src The object to do the copy
+ */
 Camera::Camera(Camera const &src) {
 	*this = src;
 	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Camera& A reference to the copied object
+ */
 Camera	&Camera::operator=(Camera const &rhs) {
 	if (this != &rhs) {
 		pos = rhs.pos;

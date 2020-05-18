@@ -61,6 +61,9 @@ OpenGLModel::OpenGLModel(Camera const &cam, std::string const &path, glm::vec3 o
 	_setConstUniforms();
 }
 
+/**
+ * @brief Destroy the Open G L Model:: Open G L Model object
+ */
 OpenGLModel::~OpenGLModel() {
 	// free meshes
 	for (auto &it : _meshes) {
@@ -68,6 +71,11 @@ OpenGLModel::~OpenGLModel() {
 	}
 }
 
+/**
+ * @brief Construct a new Open G L Model:: Open G L Model object
+ *
+ * @param src The object to do the copy
+ */
 OpenGLModel::OpenGLModel(OpenGLModel const &src)
 : _cam(src._cam),
   _path(src._path),
@@ -76,6 +84,12 @@ OpenGLModel::OpenGLModel(OpenGLModel const &src)
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return OpenGLModel& A reference to the copied object
+ */
 OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
 	#if DEBUG
 		logWarn("OpenGLModel::operator= called, remove if it's desired")
