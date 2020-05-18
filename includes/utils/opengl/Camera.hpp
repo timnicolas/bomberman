@@ -127,7 +127,6 @@ class Camera {
 		void	resetFollowPath();
 		void	setFollowPath(std::vector<CamPoint> const & path);
 		void	setFollowRepeat(bool repeat);
-		void	setFollowSpeed(float speed_);
 		bool	isFollowFinished() const;
 		bool	isFollowRepeat() const;
 

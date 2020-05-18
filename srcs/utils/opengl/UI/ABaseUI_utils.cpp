@@ -4,13 +4,14 @@
 #include "Texture.hpp"
 
 /**
- * @brief draw a rectangle
+ * @brief Draw a rectangle
  *
- * @param pos the rect pos
- * @param size the rect size
- * @param color1 the rect master color
- * @param color2 the rect secondary color (to make a mix)
- * @param factor the factor of second color on master color
+ * @param pos The rect pos
+ * @param size The rect size
+ * @param z The z height (for transparency)
+ * @param color1 The rect master color
+ * @param color2 The rect secondary color (to make a mix)
+ * @param factor The factor of second color on master color
  */
 void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, float z, glm::vec4 color1, glm::vec4 color2, float factor) {
 	_rectShader->use();
@@ -38,12 +39,13 @@ void ABaseUI::_drawRect(glm::vec2 pos, glm::vec2 size, float z, glm::vec4 color1
 */
 
 /**
- * @brief draw the border of a rect
+ * @brief Draw the border of a rect
  *
- * @param pos the rect pos
- * @param size the rect size
- * @param borderSize the size of the border of the rect
- * @param color the rect color
+ * @param pos The rect pos
+ * @param size The rect size
+ * @param z The z height (for transparency)
+ * @param borderSize The size of the border of the rect
+ * @param color The rect color
  */
 void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float z, float borderSize, glm::vec4 color) {
 	if (borderSize == 0)
@@ -69,16 +71,17 @@ void ABaseUI::_drawBorderRect(glm::vec2 pos, glm::vec2 size, float z, float bord
 }
 
 /**
- * @brief draw text
+ * @brief Draw text
  *
- * @param pos the text pos
- * @param size the text size
- * @param font the font used (see loadFont)
- * @param scale the text scale
- * @param text the text str
- * @param color the text color
- * @param align the text alignment (LEFT | CENTER | RIGHT)
- * @param padding the text padding (left & right)
+ * @param pos The text pos
+ * @param size The text size
+ * @param z The z height (for transparency)
+ * @param font The font used (see loadFont)
+ * @param scale The text scale
+ * @param text The text str
+ * @param color The text color
+ * @param align The text alignment (LEFT | CENTER | RIGHT)
+ * @param padding The text padding (left & right)
  */
 void ABaseUI::_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
 std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding) {
@@ -142,12 +145,13 @@ void ABaseUI::_unloadImg() {
 }
 
 /**
- * @brief draw a 2D image on the screen
+ * @brief Draw a 2D image on the screen
  *
- * @param pos the text pos
- * @param size the text size
- * @param textureID the texture ID (get with _loadImg)
- * @param color an image filter color
+ * @param pos The text pos
+ * @param size The text size
+ * @param z The z height (for transparency)
+ * @param textureID The texture ID (get with _loadImg)
+ * @param color An image filter color
  */
 void ABaseUI::_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color) {
 	_imgShader->use();
