@@ -33,6 +33,7 @@ public:
 	Bomb*	setPropagation(const int propagation);
 
 	// Methods
+	bool	init();
 	bool	update();
 	bool	postUpdate();
 	void	explode(glm::vec2 const pos);
