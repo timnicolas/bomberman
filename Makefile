@@ -686,7 +686,7 @@ check:
 
 doc:
 	@printf $(BLUE)$(BOLD)"CHECKING DOCUMENTATION FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
-	@doxygen scripts/Doxyfile > /dev/null 2>&1
+	@doxygen scripts/Doxyfile
 	@cat /tmp/doxygen_warn.log
 	@printf $(BLUE)$(BOLD)"--------------------\n"$(NORMAL)
 	@if [ ! "`cat /tmp/doxygen_warn.log`" = "" ]; then \

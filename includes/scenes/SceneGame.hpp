@@ -80,7 +80,7 @@ private:
 		Model * crispy;  /**< 3D model to draw crispy */
 		Model * follow;  /**< 3D model to draw follow */
 
-		DrawForMenu()
+		DrawForMenu();
 	};
 	DrawForMenu _menuModels;  /**< All 3D elements to draw */
 	bool	_alarm;  /**< If we want to ring alarm */
