@@ -41,6 +41,9 @@ public:
 	bool	takeDamage(const int damage);
 
 	// Exceptions
+	/**
+	 * @brief Bomb exception
+	 */
 	class BombException : public std::runtime_error {
 	public:
 		BombException();

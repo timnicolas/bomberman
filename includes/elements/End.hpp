@@ -35,6 +35,9 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief End Exception
+	 */
 	class EndException : public std::runtime_error {
 	public:
 		EndException();

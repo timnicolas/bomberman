@@ -7,6 +7,9 @@
 #define BOX_SHADER_VS	"shaders/box_collider_vs.glsl"
 #define BOX_SHADER_FS	"shaders/box_collider_fs.glsl"
 
+/**
+ * @brief This is the box collider object
+ */
 class BoxCollider {
 	public:
 		BoxCollider();

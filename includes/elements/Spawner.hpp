@@ -8,6 +8,9 @@
 #include "AObject.hpp"
 #include "AEnemy.hpp"
 
+/**
+ * @brief spawner objects
+ */
 class Spawner : public AObject {
 private:
 	std::vector<std::string>	_typeEnemy;  /**< Spawner enemy type */

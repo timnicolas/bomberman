@@ -16,7 +16,7 @@
  * @param boundingBox Bounding box
  */
 Mesh::Mesh(OpenGLModel &openGLModel, Shader &sh, std::string const &name,
-	std::vector<Vertex> vertices, std::vector<u_int32_t> vertIndices,
+	std::vector<Vertex> vertices, std::vector<uint32_t> vertIndices,
 	Material material, BoundingBox boundingBox)
 : _openGLModel(openGLModel),
   _sh(sh),

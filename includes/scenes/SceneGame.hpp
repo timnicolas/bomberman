@@ -209,6 +209,9 @@ public:
 	static std::vector<std::string>	getAllEntityNames();
 
 	// Exceptions
+	/**
+	 * @brief SceneGame exception
+	 */
 	class SceneGameException : public std::runtime_error {
 	public:
 		SceneGameException();
