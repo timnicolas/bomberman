@@ -684,7 +684,13 @@ check:
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
 doc:
-	@printf $(YELLOW)$(BOLD)"UPDATE DOC FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf $(YELLOW)$(BOLD)"CHECKING DOC WARN $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@Doxygen scripts/Doxyfile > /dev/null 2>&1
+	@cat /tmp/doxygen_warn.log
+	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
+
+ghpages:
+	@printf $(YELLOW)$(BOLD)"UPDATE DOC ON GITHUB PAGES FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
 	@printf $(CYAN)"-> update github pages\n"$(NORMAL)
 	@./scripts/updateGithubPages.sh
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
@@ -717,7 +723,8 @@ help:
 	@printf $(NORMAL)"-> make "$(BOLD)"exec"$(NORMAL)": make lint, make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"exec-nolint"$(NORMAL)": make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"check"$(NORMAL)": make fclean, make lint, make exec-nolint -> stop if there is an error\n"
-	@printf $(NORMAL)"-> make "$(BOLD)"doc"$(NORMAL)": generate the doc on gh-pages branch\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"doc"$(NORMAL)": check all warnings on documentation\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"ghpages"$(NORMAL)": generate the doc on gh-pages branch\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"info"$(NORMAL)": display informations about the program\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"help | usage"$(NORMAL)": show the help\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"... DEBUG=1"$(NORMAL)": use debug mode\n"
@@ -727,4 +734,4 @@ help:
 
 usage: help
 
-.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check doc info help usage
+.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check doc ghpages info help usage
