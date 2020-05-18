@@ -188,6 +188,21 @@ void Skybox::draw(float nightProgress) {
 	_shader.unuse();
 }
 
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader			&Skybox::getShader() { return _shader; }
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader const	&Skybox::getShader() const { return _shader; }
+/**
+ * @brief Get the texture ID
+ *
+ * @return uint32_t The texture ID
+ */
 uint32_t		Skybox::getTextureID() const { return _textureID; }

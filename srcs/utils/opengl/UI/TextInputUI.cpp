@@ -304,8 +304,18 @@ ABaseUI & TextInputUI::setText(std::string const & txt) {
 	return *this;
 }
 
+/**
+ * @brief Check if the TextInput has focus
+ *
+ * @return true If has focus
+ */
 bool TextInputUI::hasFocus() const { return _hasFocus; }
 
+/**
+ * @brief Get the cursor offset on th screen
+ *
+ * @return uint32_t The cursor offset in pixel
+ */
 uint32_t TextInputUI::_getCursorOffset() const {
 	if (_text.size() == 0 || _cursorPos == 0)
 		return 0;

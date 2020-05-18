@@ -275,7 +275,7 @@ void	Shader::setVec3Double(const std::string &name, const glm::tvec3<double> &ve
  * @param x x value
  * @param y y value
  * @param z z value
- * @param z w value
+ * @param w w value
  */
 void	Shader::setVec4(const std::string &name, float x, float y, float z, float w) const {
 	glUniform4f(glGetUniformLocation(id, name.c_str()), x, y, z, w);
@@ -296,7 +296,7 @@ void	Shader::setVec4(const std::string &name, const glm::vec4 &vec) const {
  * @param x x value
  * @param y y value
  * @param z z value
- * @param z w value
+ * @param w w value
  */
 void	Shader::setVec4Double(const std::string &name, double x, double y, double z, double w) const {
 	glUniform4d(glGetUniformLocation(id, name.c_str()), x, y, z, w);
@@ -321,6 +321,15 @@ void	Shader::setMat2(const std::string &name, const glm::mat2 &mat) const {
 	glUniformMatrix2fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 /**
+ * @brief Set mat2 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
+void	Shader::setMat2Double(const std::string &name, const glm::dmat2 &mat) const {
+	glUniformMatrix2dv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+/**
  * @brief Set mat3 in shader
  *
  * @param name Variable name
@@ -330,6 +339,15 @@ void	Shader::setMat3(const std::string &name, const glm::mat3 &mat) const {
 	glUniformMatrix3fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 /**
+ * @brief Set mat3 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
+void	Shader::setMat3Double(const std::string &name, const glm::dmat3 &mat) const {
+	glUniformMatrix3dv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+/**
  * @brief Set mat4 in shader
  *
  * @param name Variable name
@@ -337,6 +355,15 @@ void	Shader::setMat3(const std::string &name, const glm::mat3 &mat) const {
  */
 void	Shader::setMat4(const std::string &name, const glm::mat4 &mat) const {
 	glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+}
+/**
+ * @brief Set mat4 in shader
+ *
+ * @param name Variable name
+ * @param mat Value
+ */
+void	Shader::setMat4Double(const std::string &name, const glm::dmat4 &mat) const {
+	glUniformMatrix4dv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
 /**

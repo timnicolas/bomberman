@@ -153,8 +153,7 @@ void TextRender::setWinSize(glm::vec2 winSize) {
  *
  * @param fontName The name of the font (choose name when load font)
  * @param text The text to write
- * @param x The text x position
- * @param y The text y position
+ * @param pos The text position
  * @param scale The text scale
  * @param color The text color
  */
@@ -249,5 +248,15 @@ uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool 
 	return height;
 }
 
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& Shader reference
+ */
 Shader			&TextRender::getShader() { return _shader; }
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& Shader reference
+ */
 Shader const	&TextRender::getShader() const { return _shader; }

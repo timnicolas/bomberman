@@ -43,17 +43,17 @@ enum class CamMovement {
 	NoDirection,
 };
 
-/**
- * @brief Camera modes list
- */
 namespace CamMode {
+	/**
+	 * @brief Camera modes list
+	 */
 	enum Enum {
 		STATIC_DEFPOS,  /**< impossible to move, camera is always to the default position */
 		STATIC,  /**< impossible to move */
 		FPS,  /**< moving using keyboard and mouse */
 		FOLLOW_PATH,  /**< moving by follow a path */
 	};
-}
+}  // namespace CamMode
 
 /**
  * @brief Point on the word (used in FOLLOW_PATH mode)

@@ -36,6 +36,7 @@ Sound::~Sound() {
  * @param volume The volume of the sound.
  * @param env_volume The volume settings.
  * @param loop If the sound is on loop.
+ * @param fadeIn FadeIn
  * @return int channel used.
  * @throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
@@ -119,8 +120,18 @@ bool										Sound::channelFinished(int chan) {
  */
 Sound::SoundException::SoundException(): std::runtime_error("[SoundException]") {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const char* what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const std::string what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
