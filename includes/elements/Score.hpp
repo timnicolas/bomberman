@@ -63,11 +63,6 @@ public:
 	class ScoreException : public std::runtime_error {
 	public:
 		ScoreException();
-		/**
-		 * @brief Construct a new Spawner Exception object
-		 *
-		 * @param whatArg Error message
-		 */
 		explicit ScoreException(const char* what_arg);
 	};
 };

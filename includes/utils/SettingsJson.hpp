@@ -612,20 +612,20 @@ class SettingsJson {
 				explicit SettingsException(const std::string what_arg);
 		};
 
-		/**< A map with all string objects (fn s) */
 		std::map<std::string, JsonObj<std::string> *>	stringMap;
-		/**< A map with all int64_t objects (fn i) */
+		/**< A map with all string objects (fn s) */
 		std::map<std::string, JsonObj<int64_t> *>		intMap;
-		/**< A map with all uint64_t objects (fn u) */
+		/**< A map with all int64_t objects (fn i) */
 		std::map<std::string, JsonObj<uint64_t> *>		uintMap;
-		/**< A map with all double objects (fn f) */
+		/**< A map with all uint64_t objects (fn u) */
 		std::map<std::string, JsonObj<double> *>		doubleMap;
-		/**< A map with all bool objects (fn b) */
+		/**< A map with all double objects (fn f) */
 		std::map<std::string, JsonObj<bool> *>			boolMap;
-		/**< A map with all SettingsJson objects (fn j) */
+		/**< A map with all bool objects (fn b) */
 		std::map<std::string, JsonObj<SettingsJson> *>	jsonMap;
-		/**< A map with all SettingsList objects (fn j) */
+		/**< A map with all SettingsJson objects (fn j) */
 		std::map<std::string, JsonObj<SettingsList<SettingsJson> > *>	jsonList;
+		/**< A map with all SettingsList objects (fn j) */
 
 	private:
 		std::string _name;  /**< The json name */
