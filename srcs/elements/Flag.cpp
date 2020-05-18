@@ -35,6 +35,36 @@ Flag &Flag::operator=(Flag const &rhs) {
 // -- Methods ------------------------------------------------------------------
 
 /**
+ * @brief Init Flag
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Flag::init() {
+	AObject::init();
+
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		_model = new Model(ModelsManager::getModel("server"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
+
+/**
  * @brief update is called each frame.
  *
  * @return true if success
@@ -63,7 +93,18 @@ bool	Flag::postUpdate() {
  * @return false if failure
  */
 bool	Flag::draw(Gui &gui) {
-	gui.drawCube(Block::FLAG, getPos());
+	(void)gui;
+	// gui.drawCube(Block::FLAG, getPos());
+
+	// draw model
+	try {
+		_model->draw();
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 
