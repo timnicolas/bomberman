@@ -14,7 +14,6 @@ class ScenePause : public ASceneMenu {
 
 		// Operators
 		ScenePause &operator=(ScenePause const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const ScenePause& myClass);
 
 		// Methods
 		virtual bool		init();
@@ -23,14 +22,17 @@ class ScenePause : public ASceneMenu {
 		virtual bool		draw();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	resume;
-			bool	restart;
-			bool	menu;
-			bool	exit;
+			bool	resume;  /**< True if we clicked on the button resume */
+			bool	restart;  /**< True if we clicked on the button restart */
+			bool	menu;  /**< True if we clicked on the button menu */
+			bool	exit;  /**< True if we clicked on the button exit */
 		};
-		ButtonsStates	_states;
-		std::string		_lastSceneName;
+		ButtonsStates	_states;  /**< All buttons states */
+		std::string		_lastSceneName;  /**< The last scene loaded (if we resume) */
 
 	private:
 		ScenePause();

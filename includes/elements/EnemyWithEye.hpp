@@ -17,7 +17,7 @@ class EnemyWithEye : public AEnemy {
 private:
 	EnemyWithEye();
 
-	Direction::Enum	_playerDir;  // direction of the player (if view it)
+	Direction::Enum	_playerDir;  /**< direction of the player (if view it) */
 
 protected:
 	virtual bool	_update();

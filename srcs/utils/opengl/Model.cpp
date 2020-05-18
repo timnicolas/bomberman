@@ -3,6 +3,13 @@
 #include <cmath>
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new Model:: Model object
+ *
+ * @param openGLModel OpenGLModel master object
+ * @param dtTime Reference to delta time
+ * @param transform Transform
+ */
 Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform)
 : transform(transform),
   _openGLModel(openGLModel),
@@ -25,9 +32,17 @@ Model::Model(OpenGLModel &openGLModel, float const &dtTime, ETransform transform
 	}
 }
 
+/**
+ * @brief Destroy the Model:: Model object
+ */
 Model::~Model() {
 }
 
+/**
+ * @brief Construct a new Model:: Model object
+ *
+ * @param src The object to do the copy
+ */
 Model::Model(Model const &src)
 : transform(src.transform),
   _openGLModel(src._openGLModel),
@@ -35,6 +50,12 @@ Model::Model(Model const &src)
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Model& A reference to the copied object
+ */
 Model &Model::operator=(Model const &rhs) {
 	if (this != &rhs) {
 		transform = rhs.transform;
@@ -85,7 +106,7 @@ void	Model::draw() {
  * @brief change the animation by id
  *
  * @param id the animation id
- * @param animEndCb called on animation end
+ * @param animEndCbFunc called on animation end
  * @param animEndCbClass member func of animEndCb
  */
 void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
@@ -107,7 +128,7 @@ void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
  * @brief change the animation by name
  *
  * @param name the animation name
- * @param animEndCb member func called on animation end
+ * @param animEndCbFunc member func called on animation end
  * @param animEndCbClass member func of animEndCb
  */
 void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
@@ -126,6 +147,8 @@ void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
 /**
  * @brief change the animation to the next one
  *
+ * @param animEndCbFunc member func called on animation end
+ * @param animEndCbClass member func of animEndCb
  */
 void	Model::setNextAnimation(AnimEndCb animEndCbFunc, AEntity *animEndCbClass) {
 	uint32_t nextId = _animationId + 1;
@@ -246,6 +269,9 @@ float	Model::getAnimDuration() const {
 	return 0;
 }
 
+/**
+ * @brief Print all animations names
+ */
 void	Model::printAnimsNames() const {
 	uint16_t	i = 0;
 
@@ -260,6 +286,11 @@ void	Model::printAnimsNames() const {
 	}
 }
 
+/**
+ * @brief Get the current animation name
+ *
+ * @return std::string The animation name
+ */
 std::string Model::getCurrentAnimationName() const {
 	if (_curAnimation) {
 		return std::string(_curAnimation->mName.C_Str());
@@ -269,6 +300,9 @@ std::string Model::getCurrentAnimationName() const {
 }
 
 // -- _updateAnimationTime -----------------------------------------------------
+/**
+ * @brief Update animation time
+ */
 void	Model::_updateAnimationTime() {
 	int	lastAnimTimeTick = _animationTimeTick;
 
@@ -293,6 +327,9 @@ void	Model::_updateAnimationTime() {
 }
 
 // -- _updateTicksPerSecond ----------------------------------------------------
+/**
+ * @brief Update ticks per second
+ */
 void	Model::_updateTicksPerSecond() {
 	if (_openGLModel.isAnimated()) {
 		_ticksPerSecond = _curAnimation->mTicksPerSecond;

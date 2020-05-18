@@ -57,10 +57,10 @@ class Skybox {
 		uint32_t		getTextureID() const;
 	protected:
 	private:
-		Shader		_shader;
-		uint32_t	_textureID;
-		uint32_t	_vao;
-		uint32_t	_vbo;
+		Shader		_shader;  /**< Skybox shader */
+		uint32_t	_textureID;  /**< Skybox texture ID */
+		uint32_t	_vao;  /**< Vertex Array Objects */
+		uint32_t	_vbo;  /**< Vertex Buffer Objects */
 
 		static const float _vertices[];
 };

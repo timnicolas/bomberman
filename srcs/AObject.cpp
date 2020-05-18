@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new AObject::AObject object
+ *
+ * @param game A reference to the SceneGame object
+ */
 AObject::AObject(SceneGame &game)
 : AEntity(game),
   isInFlyBoard(false)
@@ -13,15 +18,29 @@ AObject::AObject(SceneGame &game)
 	destructible = false;
 }
 
+/**
+ * @brief Destroy the AObject::AObject object
+ */
 AObject::~AObject() {
 }
 
+/**
+ * @brief Construct a new AObject::AObject object
+ *
+ * @param src A AObject element to copy
+ */
 AObject::AObject(AObject const &src) : AEntity(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Overloaded operator
+ *
+ * @param rhs Right element
+ * @return AEntity& A ref to a new object
+ */
 AObject &AObject::operator=(AObject const &rhs) {
 	if ( this != &rhs ) {
 		AEntity::operator=(rhs);
@@ -132,8 +151,16 @@ bool	AObject::init() {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new AObject::AObjectException::AObjectException object
+ */
 AObject::AObjectException::AObjectException()
 : std::runtime_error("AObject Exception") {}
 
+/**
+ * @brief Construct a new AObject::AObjectException::AObjectException object
+ *
+ * @param whatArg Error message
+ */
 AObject::AObjectException::AObjectException(const char* whatArg)
 : std::runtime_error(std::string(std::string("AObjectError: ") + whatArg).c_str()) {}

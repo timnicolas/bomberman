@@ -47,6 +47,9 @@ const float Skybox::_vertices[] = {
 	1.0f, -1.0f,  1.0f
 };
 
+/**
+ * @brief Construct a new Skybox:: Skybox object
+ */
 Skybox::Skybox() :
 _shader(SHADER_SKYBOX_VS, SHADER_SKYBOX_FS) {
 	std::vector<std::string> skyboxFaces = {
@@ -77,11 +80,19 @@ _shader(SHADER_SKYBOX_VS, SHADER_SKYBOX_FS) {
 	_shader.unuse();
 }
 
+/**
+ * @brief Construct a new Skybox:: Skybox object
+ *
+ * @param src The object to do the copy
+ */
 Skybox::Skybox(Skybox const &src) :
 _shader(src.getShader()) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Skybox:: Skybox object
+ */
 Skybox::~Skybox() {
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -93,6 +104,12 @@ Skybox::~Skybox() {
 	_shader.unuse();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Skybox& A reference to the copied object
+ */
 Skybox &Skybox::operator=(Skybox const &rhs) {
 	if (this != &rhs) {
 		_textureID = getTextureID();
@@ -171,6 +188,21 @@ void Skybox::draw(float nightProgress) {
 	_shader.unuse();
 }
 
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader			&Skybox::getShader() { return _shader; }
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader const	&Skybox::getShader() const { return _shader; }
+/**
+ * @brief Get the texture ID
+ *
+ * @return uint32_t The texture ID
+ */
 uint32_t		Skybox::getTextureID() const { return _textureID; }

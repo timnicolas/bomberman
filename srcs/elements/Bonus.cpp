@@ -19,7 +19,7 @@ std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
 	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
 };
 
-std::map<std::string, BonusType::Enum> Bonus::bonus = {
+std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "life", BonusType::LIFE },
 	{ "bombs", BonusType::BOMBS },
 	{ "flames", BonusType::FLAMES },
@@ -33,7 +33,7 @@ std::map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "wallpass", BonusType::WALLPASS },
 };
 
-std::map<BonusType::Enum, std::string> Bonus::description = {
+std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::LIFE, "Bonus Life: You earn an extra life." },
 	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb simultaneously." },
 	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range." },
@@ -47,7 +47,7 @@ std::map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::FLAMPASS, "Bonus Flame Pass: You are not affected by bomb anymore." },
 };
 
-std::map<BonusType::Enum, std::string> Bonus::bonusTextures = {
+std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
 	{ BonusType::LIFE, "bomberman-assets/3dModels/bonus/textures/life.png" },
 	{ BonusType::BOMBS, "bomberman-assets/3dModels/bonus/textures/bomb.png" },
 	{ BonusType::FLAMES, "bomberman-assets/3dModels/bonus/textures/flamme.png" },
@@ -63,6 +63,11 @@ std::map<BonusType::Enum, std::string> Bonus::bonusTextures = {
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Bonus:: Bonus object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Bonus::Bonus(SceneGame &game) : AObject(game) {
 	type = Type::BONUS;
 	name = "Bonus";
@@ -77,16 +82,31 @@ Bonus::Bonus(SceneGame &game) : AObject(game) {
 	AudioManager::loadSound(BONUS_DISAPPEAR_SOUND);
 }
 
+/**
+ * @brief Destroy the Bonus:: Bonus object
+ *
+ */
 Bonus::~Bonus() {
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
+/**
+ * @brief Construct a new Bonus:: Bonus object
+ *
+ * @param src The object to do the copy
+ */
 Bonus::Bonus(Bonus const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Bonus& A reference to the copied object
+ */
 Bonus &Bonus::operator=(Bonus const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);

@@ -2,6 +2,12 @@
 #include "ABaseMasterUI.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new ABaseUI::ABaseUI object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
   _pos(pos),
@@ -42,10 +48,18 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 	_allUI.push_back(this);  // add pointer to the new UI in _allUI
 }
 
+/**
+ * @brief Construct a new ABaseUI::ABaseUI object
+ *
+ * @param src The object to do the copy
+ */
 ABaseUI::ABaseUI(ABaseUI const & src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the ABaseUI::ABaseUI object
+ */
 ABaseUI::~ABaseUI() {
 	// remove reference in master
 	setMaster(nullptr);
@@ -59,6 +73,12 @@ ABaseUI::~ABaseUI() {
 	}
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ABaseUI& A reference to the copied object
+ */
 ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
 	if (this != &rhs) {
 		logWarn("UI object copied");
@@ -246,15 +266,39 @@ ABaseUI &	ABaseUI::addButtonLeftValueListener(int64_t * listener, int64_t value)
 }
 
 // -- setter -------------------------------------------------------------------
+/**
+ * @brief Set the right click shortcut
+ *
+ * @param scancode The shortcut scancode
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setKeyRightClickScancode(SDL_Scancode scancode) {
 	_keyRightClickBindScancode = scancode; return *this;
 }
+/**
+ * @brief Set the left click shortcut
+ *
+ * @param scancode The shortcut scancode
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setKeyLeftClickScancode(SDL_Scancode scancode) {
 	_keyLeftClickBindScancode = scancode; return *this;
 }
+/**
+ * @brief Set the right click shortcut
+ *
+ * @param input The shortcut InputType
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setKeyRightClickInput(InputType::Enum input) {
 	_keyRightClickBindInput = input; return *this;
 }
+/**
+ * @brief Set the left click shortcut
+ *
+ * @param input The shortcut InputType
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setKeyLeftClickInput(InputType::Enum input) {
 	_keyLeftClickBindInput = input; return *this;
 }
@@ -316,33 +360,146 @@ bool	ABaseUI::isTotallyOutOfMaster() const {
 	return false;
 }
 
+/**
+ * @brief Enable / disable UI
+ *
+ * @param enabled enable
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
+/**
+ * @brief Set position
+ *
+ * @param pos Position
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setPos(glm::vec2 pos) { _pos = pos; return *this; }
+/**
+ * @brief Set Z (used for transparency)
+ *
+ * @param z z
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setZ(float z) { _z = z; return *this; }
+/**
+ * @brief Set position offset (to move object whitout change position)
+ *
+ * @param offset The offset
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setPosOffset(glm::vec2 offset) { _posOffset = offset; return *this; }
+/**
+ * @brief Add to position offset (to move object whitout change position)
+ *
+ * @param offset The offset
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::addPosOffset(glm::vec2 offset) { _posOffset += offset; return *this; }
+/**
+ * @brief Set the object size
+ *
+ * @param size The new size
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setSize(glm::vec2 size) { _size = size; return *this; }
+/**
+ * @brief Auto calculate size from the text size
+ *
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setCalculatedSize() {
 	uint32_t width = _textRender->strWidth(_textFont, _text, _textScale);
 	uint32_t height = _textRender->strHeight(_textFont, _textScale);
 	_size = glm::vec2(width + _textPadding * 2, height + _textPadding * 2);;
 	return *this;
 }
+/**
+ * @brief Set the color
+ *
+ * @param color Color
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
 
+/**
+ * @brief Set the border color
+ *
+ * @param color The border color
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setBorderColor(glm::vec4 color) { _borderColor = color; return *this; }
+/**
+ * @brief Set the border size
+ *
+ * @param size The border size
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setBorderSize(float size) { _borderSize = size; return *this; }
 
+/**
+ * @brief Set the mouse hover color
+ *
+ * @param color Mouse hover color
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setMouseHoverColor(glm::vec4 color) { _mouseHoverColor = color; return *this; }
+/**
+ * @brief Set the mouse click color
+ *
+ * @param color mouse click color
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = color; return *this; }
 
+/**
+ * @brief Set the text
+ *
+ * @param text The text
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setText(std::string const & text) { _text = text; return *this; }
+/**
+ * @brief Set the text color
+ *
+ * @param color Text color
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setTextColor(glm::vec4 color) { _textColor = color; return *this; }
+/**
+ * @brief Set the text font
+ *
+ * @param font The text font
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setTextFont(std::string const & font) { _textFont = font; return *this; }
+/**
+ * @brief Set the text scale
+ *
+ * @param scale The text scale
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this; }
+/**
+ * @brief Set the text padding
+ *
+ * @param padding the text padding
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
+/**
+ * @brief Set the text alignment
+ *
+ * @param align The text alignment
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
 
+/**
+ * @brief Set the master object
+ *
+ * @param master The master object
+ * @return ABaseUI& A reference to this UI element
+ */
 ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) {
 	if (_master != nullptr)
 		_master->removeChild(this);
@@ -353,25 +510,95 @@ ABaseUI &	ABaseUI::setMaster(ABaseMasterUI * master) {
 }
 
 /* getter */
+/**
+ * @brief Get mouse hover state
+ *
+ * @return true If mouse hover
+ */
 bool				ABaseUI::getMouseHover() const { return _mouseHover; }
+/**
+ * @brief Get mouse right click
+ *
+ * @return true If mouse right is clicked
+ */
 bool				ABaseUI::getMouseRightClick() const { return _rightClick; }
+/**
+ * @brief Get mouse left click
+ *
+ * @return true If mouse left clicked
+ */
 bool				ABaseUI::getMouseLeftClick() const { return _leftClick; }
 
+/**
+ * @brief Know if the element is enabled
+ *
+ * @return true If enabled
+ */
 bool				ABaseUI::isEnabled() const { return _enabled; }
+/**
+ * @brief Get the position
+ *
+ * @return glm::vec2& The position
+ */
 glm::vec2 &			ABaseUI::getPos() { return _pos; }
+/**
+ * @brief Get tje position
+ *
+ * @return glm::vec2 const& The position
+ */
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
+/**
+ * @brief Get the real position (position + master position + offset)
+ *
+ * @return glm::vec2 The real position
+ */
 glm::vec2			ABaseUI::getRealPos() const {
 	glm::vec2 masterPos = (_master) ? _master->getMasterRealPos() : glm::vec2(0, 0);
 	return masterPos + _pos + _posOffset;
 }
+/**
+ * @brief Get the size
+ *
+ * @return glm::vec2& The size
+ */
 glm::vec2 &			ABaseUI::getSize() { return _size; }
+/**
+ * @brief Get the size
+ *
+ * @return glm::vec2 const& The size
+ */
 glm::vec2 const &	ABaseUI::getSize() const { return _size; }
+/**
+ * @brief Get the rectangle Shader
+ *
+ * @return Shader& The rectangle shader
+ */
 Shader &			ABaseUI::getRectShader() { return *_rectShader; }
+/**
+ * @brief Get the text width
+ *
+ * @return uint32_t The text width
+ */
 uint32_t			ABaseUI::getTextWidth() const {
 	return _textRender->strWidth(_textFont, _text, _textScale) + _textPadding * 2;
 }
+/**
+ * @brief Get the text
+ *
+ * @return std::string The text
+ */
 std::string			ABaseUI::getText() const { return _text; }
+/**
+ * @brief Get the default image size
+ *
+ * @return glm::ivec2& The def image size
+ */
 glm::ivec2 &		ABaseUI::getImgDefSize() { return _imgDefSize; }
+/**
+ * @brief Get the default image size
+ *
+ * @return glm::ivec2 const& The def image size
+ */
 glm::ivec2 const &	ABaseUI::getImgDefSize() const { return _imgDefSize; }
 
 // -- exception ----------------------------------------------------------------

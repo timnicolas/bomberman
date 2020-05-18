@@ -3,7 +3,12 @@
 #include <iostream>
 #include <string>
 
-
+/**
+ * @brief Construct a new Scene Debug:: Scene Debug object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneDebug::SceneDebug(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
@@ -12,14 +17,28 @@ SceneDebug::SceneDebug(Gui * gui, float const &dtTime)
 	_fps = SceneManager::getFps();
 }
 
+/**
+ * @brief Destroy the Scene Debug:: Scene Debug object
+ */
 SceneDebug::~SceneDebug() {
 }
 
+/**
+ * @brief Construct a new Scene Debug:: Scene Debug object
+ *
+ * @param src The object to do the copy
+ */
 SceneDebug::SceneDebug(SceneDebug const &src)
 : ASceneMenu(src) {
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneDebug& A reference to the copied object
+ */
 SceneDebug &SceneDebug::operator=(SceneDebug const &rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneDebug")
@@ -88,6 +107,11 @@ bool SceneDebug::update() {
 }
 
 // -- Setters ------------------------------------------------------------------
+/**
+ * @brief Set the menu visible or invisible
+ *
+ * @param visible If is visible
+ */
 void	SceneDebug::setVisible(bool visible) {
 	_visible = visible;
 	_fpsText->setEnabled(_visible);

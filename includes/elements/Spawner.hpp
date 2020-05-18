@@ -8,11 +8,14 @@
 #include "AObject.hpp"
 #include "AEnemy.hpp"
 
+/**
+ * @brief spawner objects
+ */
 class Spawner : public AObject {
 private:
-	std::vector<std::string>	_typeEnemy;
-	int64_t						_frequency;
-	float						_waitForSpawn;
+	std::vector<std::string>	_typeEnemy;  /**< Spawner enemy type */
+	int64_t						_frequency;  /**< Frequency to spawn */
+	float						_waitForSpawn;  /**< Wait time before first spawn */
 
 	Spawner();
 
@@ -36,9 +39,17 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Spawner Exception
+	 */
 	class SpawnerException : public std::runtime_error {
 	public:
 		SpawnerException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit SpawnerException(const char* whatArg);
 	};
 };

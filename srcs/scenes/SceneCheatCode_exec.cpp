@@ -8,6 +8,12 @@
 #include "EnemyFly.hpp"
 #include "AudioManager.hpp"
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 1 || (args.size() == 2 && args[1] == "list")) {  // only /help
@@ -41,6 +47,12 @@ int SceneCheatCode::_execHelp(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() > 1) {
@@ -70,6 +82,12 @@ int SceneCheatCode::_execClear(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 3) {
@@ -108,6 +126,12 @@ int SceneCheatCode::_execLog(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 3 || args.size() == 4) {
@@ -160,6 +184,12 @@ int SceneCheatCode::_execTp(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	bool oneSuccess = false;
@@ -214,6 +244,12 @@ int SceneCheatCode::_execGetbonus(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() >= 3) {
@@ -249,6 +285,12 @@ int SceneCheatCode::_execLoop(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execExec(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() >= 2) {
@@ -268,6 +310,12 @@ int SceneCheatCode::_execExec(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 
@@ -344,6 +392,12 @@ int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 
@@ -387,6 +441,12 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	bool oneSuccess = false;
@@ -440,6 +500,12 @@ int SceneCheatCode::_execRmbonus(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execRestart(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	if (args.size() == 1) {
@@ -462,6 +528,12 @@ int SceneCheatCode::_execRestart(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 	bool oneSuccess = false;
@@ -544,6 +616,12 @@ int SceneCheatCode::_execDebug(std::vector<std::string> const & args) {
 	return CheatcodeAction::CLOSE | CheatcodeAction::TXT_RESET | CheatcodeAction::CHEAT_TXT_ONLY | success;
 }
 
+/**
+ * @brief Execute a command
+ *
+ * @param args all command args (args[0] is the command name)
+ * @return int The command result (CheatCodeAction elements)
+ */
 int SceneCheatCode::_execVolume(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
 

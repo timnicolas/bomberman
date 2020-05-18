@@ -38,16 +38,16 @@ class TextInputUI : public ABaseUI {
 		uint32_t		_getCursorOffset() const;
 
 		/* general */
-		bool						_isAlwaysFocus;
-		bool						_hasFocus;
-		bool						_looseFocusNextTime;
+		bool						_isAlwaysFocus;  /**< TextInput has always focus or only on click */
+		bool						_hasFocus;  /**< Has focus now ? */
+		bool						_looseFocusNextTime;  /**< True if focus will be lost in next loop */
 
 		/* text */
-		std::string					_defText;
-		glm::vec4					_defTextColor;
+		std::string					_defText;  /**< Default text */
+		glm::vec4					_defTextColor;  /**< Default text color */
 
 		/* cursor */
-		bool						_showCursor;
-		std::chrono::milliseconds	_lastShowCursorMs;
-		uint32_t					_cursorPos;
+		bool						_showCursor;  /**< Show cursor when typing text */
+		std::chrono::milliseconds	_lastShowCursorMs;  /**< Last time cursor showed (to blink it) */
+		uint32_t					_cursorPos;  /**< Cursor position */
 };

@@ -27,12 +27,28 @@ class ImageAtlasRender {
 		Shader			&getShader();
 		Shader const	&getShader() const;
 
+		/**
+		 * @brief Image render exception
+		 */
 		class ImageRenderError : public std::exception {
 			public:
+				/**
+				 * @brief Auto called if error
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() = 0;
 		};
+		/**
+		 * @brief Load image exception
+		 */
 		class LoadImageException : public ImageRenderError {
 			public:
+				/**
+				 * @brief Auto called if error
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Fail to load image");
 				}
@@ -41,9 +57,9 @@ class ImageAtlasRender {
 	private:
 		ImageAtlasRender();
 
-		TextureManager const	&_textureManager;
-		Shader		_shader;
-		glm::mat4	_projection;
-		GLuint		_vao;
-		GLuint		_vbo;
+		TextureManager const	&_textureManager;  /**< A ref to the TextureManager object */
+		Shader		_shader;  /**< Shader */
+		glm::mat4	_projection;  /**< Projection matrix */
+		GLuint		_vao;  /**< Vertex Array Objects */
+		GLuint		_vbo;  /**< Vertex buffer Objects */
 };

@@ -14,8 +14,8 @@ class Bomb : public AObject {
 private:
 	Bomb();
 	// Members
-	float	_countdown;
-	int		_propagation;
+	float	_countdown;  /**< Bomb countdown */
+	int		_propagation;  /**< Bomb propagation */
 
 	// Methods
 	bool	_propagationExplosion(glm::vec2 const pos);
@@ -41,9 +41,17 @@ public:
 	bool	takeDamage(const int damage);
 
 	// Exceptions
+	/**
+	 * @brief Bomb exception
+	 */
 	class BombException : public std::runtime_error {
 	public:
 		BombException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit BombException(const char* whatArg);
 	};
 };

@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy Frog:: Enemy Frog object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyFrog::EnemyFrog(SceneGame &game)
 : AEnemy(game),
   _jumpGoal(VOID_POS),
@@ -17,6 +22,9 @@ EnemyFrog::EnemyFrog(SceneGame &game)
 	_soundOfDeath = ENEMY_FROG_DEATH_SOUND;
 }
 
+/**
+ * @brief Destroy the Enemy Frog:: Enemy Frog object
+ */
 EnemyFrog::~EnemyFrog() {
 	auto it = game.enemies.begin();
 	while (it != game.enemies.end()) {
@@ -27,12 +35,23 @@ EnemyFrog::~EnemyFrog() {
 	}
 }
 
+/**
+ * @brief Construct a new Enemy Frog:: Enemy Frog object
+ *
+ * @param src The object to do the copy
+ */
 EnemyFrog::EnemyFrog(EnemyFrog const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return EnemyFrog& A reference to the copied object
+ */
 EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {
 	if ( this != &rhs ) {
 		AEnemy::operator=(rhs);

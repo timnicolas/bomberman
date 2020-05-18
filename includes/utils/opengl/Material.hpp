@@ -19,11 +19,11 @@ class Material {
 
 		Material &operator=(Material const &rhs);
 
-		std::string	name;
-		glm::vec3	diffuse;
-		glm::vec3	specular;
-		glm::vec3	ambient;
-		float		shininess;
+		std::string	name;  /**< Material name */
+		glm::vec3	diffuse;  /**< Material diffuse */
+		glm::vec3	specular;  /**< Material specular */
+		glm::vec3	ambient;  /**< Material ambient */
+		float		shininess;  /**< Material shininess */
 
 	private:
 };

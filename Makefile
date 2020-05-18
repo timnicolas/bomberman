@@ -346,6 +346,8 @@ if [[ "$$OSTYPE" == "linux-gnu" ]]; then
 	sudo apt-get -y install libsdl2-dev;
 	# sdl2_mixer
 	sudo apt-get -y install libmikmod-dev libfishsound1-dev libsmpeg-dev liboggz2-dev libflac-dev libfluidsynth-dev libsdl2-mixer-dev
+	# for docs
+	sudo apt-get -y install doxygen graphviz
 	# assimp 5.0.1
 	#   download assimp
 	sudo apt-get install -y wget tar cmake zlib1g-dev;
@@ -378,6 +380,9 @@ elif [[ "$$OSTYPE" == "darwin"* ]]; then
 	brew install freetype2
 	# icon for .app file
 	brew install fileicon
+	# for docs
+	brew install doxygen
+	brew install graphviz
 fi
 
 exit 0
@@ -678,7 +683,36 @@ check:
 	$(eval NEED_MAKE := )
 	@$(MAKE) $(MAKE_OPT) fclean NEED_MAKE=$(NEED_MAKE)
 	@$(MAKE) $(MAKE_OPT) lint NEED_MAKE=$(NEED_MAKE)
+	@$(MAKE) $(MAKE_OPT) doc NEED_MAKE=$(NEED_MAKE)
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
+
+doc:
+	@printf $(BLUE)$(BOLD)"CHECKING DOCUMENTATION FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@doxygen scripts/Doxyfile
+	@printf $(YELLOW)"all warnings:\n"$(NORMAL)
+	@cat /tmp/doxygen_warn.log
+	@printf $(BLUE)$(BOLD)"--------------------\n"$(NORMAL)
+	@if [ ! "`cat /tmp/doxygen_warn.log`" = "" ]; then \
+		exit 1; \
+	fi
+
+ghpages:
+	@printf $(YELLOW)$(BOLD)"UPDATE DOC ON GITHUB PAGES FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf $(CYAN)"-> update github pages\n"$(NORMAL)
+	@./scripts/updateGithubPages.sh
+	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
+
+info:
+	@printf $(YELLOW)$(BOLD)"INFO FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@printf "`ls -1 srcs/**/*.cpp includes/**/*.hpp shaders/**/*.glsl | wc -l | sed 's/ //g'` code files:\n"
+	@printf "\t`ls -1 srcs/**/*.cpp | wc -l | sed 's/ //g'` cpp in srcs/\n"
+	@printf "\t`ls -1 includes/**/*.hpp | wc -l | sed 's/ //g'` hpp in includes/\n"
+	@printf "\t`ls -1 shaders/**/*.glsl | wc -l | sed 's/ //g'` glsl in shaders/\n"
+	@printf "`cat srcs/**/*.cpp includes/**/*.hpp shaders/**/*.glsl | wc -l | sed 's/ //g'` code lines:\n"
+	@printf "\t`cat srcs/**/*.cpp | wc -l | sed 's/ //g'` cpp lines in srcs/\n"
+	@printf "\t`cat includes/**/*.hpp | wc -l | sed 's/ //g'` hpp lines in includes/\n"
+	@printf "\t`cat shaders/**/*.glsl | wc -l | sed 's/ //g'` glsl lines in shaders/\n"
+	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 
 help:
 	@printf $(YELLOW)$(BOLD)"HELP\n--------------------\n"$(NORMAL)
@@ -696,6 +730,9 @@ help:
 	@printf $(NORMAL)"-> make "$(BOLD)"exec"$(NORMAL)": make lint, make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"exec-nolint"$(NORMAL)": make all and exec the program: ./$(NAME) ARGS('$(ARGS)')\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"check"$(NORMAL)": make fclean, make lint, make exec-nolint -> stop if there is an error\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"doc"$(NORMAL)": check all warnings on documentation\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"ghpages"$(NORMAL)": generate the doc on gh-pages branch\n"
+	@printf $(NORMAL)"-> make "$(BOLD)"info"$(NORMAL)": display informations about the program\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"help | usage"$(NORMAL)": show the help\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"... DEBUG=1"$(NORMAL)": use debug mode\n"
 	@printf $(NORMAL)"-> make "$(BOLD)"... ARGS='...'"$(NORMAL)": add arguments to exec: ./$(NAME) ARGS (for make exec & exec-nolint)\n"
@@ -704,4 +741,4 @@ help:
 
 usage: help
 
-.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check help usage
+.PHONY: configure install create_dmg uinstall install_linter init all clean fclean re exec-nolint exec lint check doc ghpages info help usage

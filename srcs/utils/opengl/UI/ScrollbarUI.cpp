@@ -2,6 +2,12 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new Scrollbar U I:: Scrollbar U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
 : ABaseMasterUI(pos, size),
   _scrollbarSize(20),
@@ -23,12 +29,26 @@ ScrollbarUI::ScrollbarUI(glm::vec2 pos, glm::vec2 size)
 	setColor(glm::vec4(0.0, 0.0, 0.0, 0.0));
 }
 
+/**
+ * @brief Construct a new Scrollbar U I:: Scrollbar U I object
+ *
+ * @param src The object to do the copy
+ */
 ScrollbarUI::ScrollbarUI(ScrollbarUI const & src): ABaseMasterUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scrollbar U I:: Scrollbar U I object
+ */
 ScrollbarUI::~ScrollbarUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ScrollbarUI& A reference to the copied object
+ */
 ScrollbarUI & ScrollbarUI::operator=(ScrollbarUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}
@@ -238,11 +258,47 @@ void ScrollbarUI::_draw() {
 }
 
 /* setter */
+/**
+ * @brief Enable vertical scrolling
+ *
+ * @param enable Enable / disable
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::enableVertScroll(bool enable) { _vertScroll = enable; return *this; }
+/**
+ * @brief Enable horizontal scrolling
+ *
+ * @param enable Enable / disable
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::enableHorizScroll(bool enable) { _horizScroll = enable; return *this; }
+/**
+ * @brief Set the scrollbar size (width)
+ *
+ * @param size The scrollbar size
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::setScrollbarSize(float size) { _scrollbarSize = size; return *this; }
+/**
+ * @brief Set the scrolling speed
+ *
+ * @param speed The scrolling speed
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::setScrollbarSpeed(float speed) { _mouseScrollSpeed = speed; return *this; }
+/**
+ * @brief Invert vertical scroll
+ *
+ * @param invert Invert
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::invertVertScroll(bool invert) { _vertScrollInverted = invert; return *this; }
+/**
+ * @brief Invert horizontal scroll
+ *
+ * @param invert Invert
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::invertHorizScroll(bool invert) { _horizScrollInverted = invert; return *this; }
 
 /**
