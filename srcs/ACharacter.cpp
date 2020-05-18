@@ -7,6 +7,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new ACharacter::ACharacter object
+ *
+ * @param game A reference to the main SceneGame object
+ */
 ACharacter::ACharacter(SceneGame &game)
 : AEntity(game),
   front(0, 0, 1)
@@ -22,15 +27,29 @@ ACharacter::ACharacter(SceneGame &game)
 	resetCrossable();
 }
 
+/**
+ * @brief Destroy the ACharacter::ACharacter object
+ */
 ACharacter::~ACharacter() {
 }
 
+/**
+ * @brief Construct a new ACharacter::ACharacter object
+ *
+ * @param src The object to do the copy
+ */
 ACharacter::ACharacter(ACharacter const &src) : AEntity(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return ACharacter& A reference to the copied object
+ */
 ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 	if ( this != &rhs ) {
 		AEntity::operator=(rhs);
