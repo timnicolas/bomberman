@@ -1,0 +1,183 @@
+\hypertarget{class_scene_help}{}\doxysection{Scene\+Help Class Reference}
+\label{class_scene_help}\index{SceneHelp@{SceneHelp}}
+
+
+main menu (opened at the game startup)  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Help.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Help\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_help__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Scene\+Help\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_scene_help__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_scene_help_1_1_all_u_i}{All\+UI}}
+\begin{DoxyCompactList}\small\item\em All UI elements. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_scene_help_1_1_buttons_states}{Buttons\+States}}
+\begin{DoxyCompactList}\small\item\em All buttons states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scene_help_aaae713d2e50fed0d067b5647697a8967}{Scene\+Help}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Help\+:\+: Scene Help object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_help_a0fc4785d25509d5d81ddb7b1e04a8ea8}\label{class_scene_help_a0fc4785d25509d5d81ddb7b1e04a8ea8}} 
+virtual \mbox{\hyperlink{class_scene_help_a0fc4785d25509d5d81ddb7b1e04a8ea8}{$\sim$\+Scene\+Help}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Help\+:\+: Scene Help object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_help_a5ace5269e4c0405184568ff206a456b6}{Scene\+Help}} (\mbox{\hyperlink{class_scene_help}{Scene\+Help}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Help\+:\+: Scene Help object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_help}{Scene\+Help}} \& \mbox{\hyperlink{class_scene_help_a760a6a537ff90f4e403b06536a837286}{operator=}} (\mbox{\hyperlink{class_scene_help}{Scene\+Help}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Overload operator =. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_help_adabf402b245092d311b08ec1139aa3c5}{init}} ()
+\begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}\label{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}} 
+virtual void \mbox{\hyperlink{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}{load}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}{update}} ()
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_scene_help_1_1_buttons_states}{Buttons\+States}} \mbox{\hyperlink{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}{\+\_\+states}}
+\item 
+\mbox{\hyperlink{struct_scene_help_1_1_all_u_i}{All\+UI}} \mbox{\hyperlink{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}{all\+UI}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+main menu (opened at the game startup) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_help_aaae713d2e50fed0d067b5647697a8967}\label{class_scene_help_aaae713d2e50fed0d067b5647697a8967}} 
+\index{SceneHelp@{SceneHelp}!SceneHelp@{SceneHelp}}
+\index{SceneHelp@{SceneHelp}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{SceneHelp()}{SceneHelp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Help\+::\+Scene\+Help (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Help\+:\+: Scene Help object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_help_a5ace5269e4c0405184568ff206a456b6}\label{class_scene_help_a5ace5269e4c0405184568ff206a456b6}} 
+\index{SceneHelp@{SceneHelp}!SceneHelp@{SceneHelp}}
+\index{SceneHelp@{SceneHelp}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{SceneHelp()}{SceneHelp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Help\+::\+Scene\+Help (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_help}{Scene\+Help}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Help\+:\+: Scene Help object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & A \mbox{\hyperlink{class_scene_help}{Scene\+Help}} element to copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_help_adabf402b245092d311b08ec1139aa3c5}\label{class_scene_help_adabf402b245092d311b08ec1139aa3c5}} 
+\index{SceneHelp@{SceneHelp}!init@{init}}
+\index{init@{init}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Scene\+Help\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+init the menu 
+
+\begin{DoxyReturn}{Returns}
+true if the init succeed 
+
+false if the init failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}.
+
+\mbox{\Hypertarget{class_scene_help_a760a6a537ff90f4e403b06536a837286}\label{class_scene_help_a760a6a537ff90f4e403b06536a837286}} 
+\index{SceneHelp@{SceneHelp}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_help}{Scene\+Help}} \& Scene\+Help\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_help}{Scene\+Help}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Overload operator =. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Right element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_help}{Scene\+Help}}\& 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}\label{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}} 
+\index{SceneHelp@{SceneHelp}!update@{update}}
+\index{update@{update}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily bool Scene\+Help\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the update function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the update is a success 
+
+false if there are an error in update 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}\label{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}} 
+\index{SceneHelp@{SceneHelp}!\_states@{\_states}}
+\index{\_states@{\_states}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{\_states}{\_states}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_help_1_1_buttons_states}{Buttons\+States}} Scene\+Help\+::\+\_\+states\hspace{0.3cm}{\ttfamily [protected]}}
+
+All buttons states \mbox{\Hypertarget{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}\label{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}} 
+\index{SceneHelp@{SceneHelp}!allUI@{allUI}}
+\index{allUI@{allUI}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{allUI}{allUI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_help_1_1_all_u_i}{All\+UI}} Scene\+Help\+::all\+UI\hspace{0.3cm}{\ttfamily [protected]}}
+
+All UI elements 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/scenes/Scene\+Help.\+hpp\item 
+srcs/scenes/Scene\+Help.\+cpp\end{DoxyCompactItemize}

@@ -74,83 +74,82 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AObject.hpp&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;SceneGame.hpp&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;TextureManager.hpp&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define DETONATOR_DESC &quot;Bonus Detonator: Explode bombs when you want.&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>BonusType {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">enum</span> Enum {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        LIFE,</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        BOMBS,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        FLAMES,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        SPEED,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        WALLPASS,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        DETONATOR,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        BOMBPASS,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        FLAMPASS,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        SHIELD,</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        TIME,</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        POINTS,</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        NB_BONUS,  <span class="comment">// need to stay at last position</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}  <span class="comment">// namespace BonusType</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_bonus.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_bonus.html">Bonus</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a>();</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// Member</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    BonusType::Enum     _typeBonus;  </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">static</span> std::map&lt;BonusType::Enum, Block::Enum&gt;   _textures;  </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">int</span>                 _toDraw;  </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">float</span>               _indestructible;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Methods</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    BonusType::Enum     _pickBonus();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">   49</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;std::string, BonusType::Enum&gt; <a class="code" href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">bonus</a>;  </div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">   50</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;BonusType::Enum, std::string&gt; <a class="code" href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">description</a>;  </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">   51</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;BonusType::Enum, std::string&gt; <a class="code" href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">bonusTextures</a>;  </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Constructors</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_bonus.html">Bonus</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_bonus.html#ace96cd91925b1f65b2c8596930fed6f5">~Bonus</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a>(<a class="code" href="class_bonus.html">Bonus</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">// Operators</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a> &amp;<a class="code" href="class_bonus.html#a739b5ec5b1e7214fd0398e4a7970529e">operator=</a>(<a class="code" href="class_bonus.html">Bonus</a> <span class="keyword">const</span> &amp;rhs);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">// Methods</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a976414b70e76b18dadeae3f316a22547">init</a>();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a0dd8aa4474c3d1ef494ed8a916cc16cd">update</a>();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a6524cf732f98dfc3baa7f41bbdf13b11">postUpdate</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#acdb40deca7be37984084fb3d4fef85ed">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">static</span> std::string  <a class="code" href="class_bonus.html#a1d044965859366e57fbe7fcb1eb8a458">getDescription</a>(BonusType::Enum <a class="code" href="class_a_entity.html#a4cddb4c9fbae86691e73940edc3731c3">type</a>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_bonus.html">Bonus</a>*       <a class="code" href="class_bonus.html#a69c5cd0fdef8eef925b5d295696b19a9">generateBonus</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>, <span class="keywordtype">float</span> rate = 0.1f);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// Exceptions</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_bonus_1_1_bonus_exception.html">   72</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    };</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif  // BONUS_HPP_</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;AObject.hpp&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;SceneGame.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;TextureManager.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define DETONATOR_DESC &quot;Bonus Detonator: Explode bombs when you want.&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>BonusType {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">enum</span> Enum {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        LIFE,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        BOMBS,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        FLAMES,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        SPEED,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        SHIELD,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        TIME,</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        POINTS,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        DETONATOR,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        BOMBPASS,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        WALLPASS,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        FLAMPASS,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        NB_BONUS,  <span class="comment">// need to stay at last position</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    };</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}  <span class="comment">// namespace BonusType</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_bonus.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_bonus.html">Bonus</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Member</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    BonusType::Enum     _typeBonus;  </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> std::map&lt;BonusType::Enum, Block::Enum&gt;   _textures;  </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span>                 _toDraw;  </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">float</span>               _indestructible;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// Methods</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    BonusType::Enum     _pickBonus();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">   48</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;std::string, BonusType::Enum&gt; <a class="code" href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">bonus</a>;  </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">   49</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;BonusType::Enum, std::string&gt; <a class="code" href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">description</a>;  </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">   50</a></span>&#160;    <span class="keyword">static</span> std::unordered_map&lt;BonusType::Enum, std::string&gt; <a class="code" href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">bonusTextures</a>;  </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// Constructors</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_bonus.html">Bonus</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_bonus.html#ace96cd91925b1f65b2c8596930fed6f5">~Bonus</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a>(<a class="code" href="class_bonus.html">Bonus</a> <span class="keyword">const</span> &amp;src);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Operators</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="class_bonus.html">Bonus</a> &amp;<a class="code" href="class_bonus.html#a739b5ec5b1e7214fd0398e4a7970529e">operator=</a>(<a class="code" href="class_bonus.html">Bonus</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Methods</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a976414b70e76b18dadeae3f316a22547">init</a>();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a0dd8aa4474c3d1ef494ed8a916cc16cd">update</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#a6524cf732f98dfc3baa7f41bbdf13b11">postUpdate</a>();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span>                <a class="code" href="class_bonus.html#acdb40deca7be37984084fb3d4fef85ed">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">static</span> std::string  <a class="code" href="class_bonus.html#a1d044965859366e57fbe7fcb1eb8a458">getDescription</a>(BonusType::Enum <a class="code" href="class_a_entity.html#a4cddb4c9fbae86691e73940edc3731c3">type</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_bonus.html">Bonus</a>*       <a class="code" href="class_bonus.html#a69c5cd0fdef8eef925b5d295696b19a9">generateBonus</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>, <span class="keywordtype">float</span> rate = 0.1f);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Exceptions</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_bonus_1_1_bonus_exception.html">   71</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a>();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_bonus_1_1_bonus_exception.html">BonusException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    };</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif  // BONUS_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_bonus_html_a976414b70e76b18dadeae3f316a22547"><div class="ttname"><a href="class_bonus.html#a976414b70e76b18dadeae3f316a22547">Bonus::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Init Bonus.</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:291</div></div>
 <div class="ttc" id="aclass_bonus_html_acdb40deca7be37984084fb3d4fef85ed"><div class="ttname"><a href="class_bonus.html#acdb40deca7be37984084fb3d4fef85ed">Bonus::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:187</div></div>
 <div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:56</div></div>
 <div class="ttc" id="aclass_bonus_html_a6524cf732f98dfc3baa7f41bbdf13b11"><div class="ttname"><a href="class_bonus.html#a6524cf732f98dfc3baa7f41bbdf13b11">Bonus::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">postUpdate is called each frame. After update()</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:174</div></div>
 <div class="ttc" id="aclass_a_entity_html_aa2c05db944a8b7487eb8470dd20211ab"><div class="ttname"><a href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">AEntity::game</a></div><div class="ttdeci">SceneGame &amp; game</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:91</div></div>
-<div class="ttc" id="aclass_bonus_html_a87700fdcb79541aa990d15927da2c905"><div class="ttname"><a href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">Bonus::bonusTextures</a></div><div class="ttdeci">static std::unordered_map&lt; BonusType::Enum, std::string &gt; bonusTextures</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:51</div></div>
-<div class="ttc" id="aclass_bonus_html_a49a478d9b31b6d9bf2daf5d27af7ef9c"><div class="ttname"><a href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">Bonus::description</a></div><div class="ttdeci">static std::unordered_map&lt; BonusType::Enum, std::string &gt; description</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:50</div></div>
-<div class="ttc" id="aclass_bonus_1_1_bonus_exception_html"><div class="ttname"><a href="class_bonus_1_1_bonus_exception.html">Bonus::BonusException</a></div><div class="ttdoc">Bonus Exception.</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:72</div></div>
-<div class="ttc" id="aclass_bonus_html"><div class="ttname"><a href="class_bonus.html">Bonus</a></div><div class="ttdoc">Bonus object.</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:37</div></div>
+<div class="ttc" id="aclass_bonus_html_a87700fdcb79541aa990d15927da2c905"><div class="ttname"><a href="class_bonus.html#a87700fdcb79541aa990d15927da2c905">Bonus::bonusTextures</a></div><div class="ttdeci">static std::unordered_map&lt; BonusType::Enum, std::string &gt; bonusTextures</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:50</div></div>
+<div class="ttc" id="aclass_bonus_html_a49a478d9b31b6d9bf2daf5d27af7ef9c"><div class="ttname"><a href="class_bonus.html#a49a478d9b31b6d9bf2daf5d27af7ef9c">Bonus::description</a></div><div class="ttdeci">static std::unordered_map&lt; BonusType::Enum, std::string &gt; description</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:49</div></div>
+<div class="ttc" id="aclass_bonus_1_1_bonus_exception_html"><div class="ttname"><a href="class_bonus_1_1_bonus_exception.html">Bonus::BonusException</a></div><div class="ttdoc">Bonus Exception.</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:71</div></div>
+<div class="ttc" id="aclass_bonus_html"><div class="ttname"><a href="class_bonus.html">Bonus</a></div><div class="ttdoc">Bonus object.</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:36</div></div>
 <div class="ttc" id="aclass_bonus_html_ace96cd91925b1f65b2c8596930fed6f5"><div class="ttname"><a href="class_bonus.html#ace96cd91925b1f65b2c8596930fed6f5">Bonus::~Bonus</a></div><div class="ttdeci">~Bonus()</div><div class="ttdoc">Destroy the Bonus:: Bonus object.</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:89</div></div>
-<div class="ttc" id="aclass_bonus_html_a6738b5cd2f41a4174a721bc51f495ea9"><div class="ttname"><a href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">Bonus::bonus</a></div><div class="ttdeci">static std::unordered_map&lt; std::string, BonusType::Enum &gt; bonus</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:49</div></div>
+<div class="ttc" id="aclass_bonus_html_a6738b5cd2f41a4174a721bc51f495ea9"><div class="ttname"><a href="class_bonus.html#a6738b5cd2f41a4174a721bc51f495ea9">Bonus::bonus</a></div><div class="ttdeci">static std::unordered_map&lt; std::string, BonusType::Enum &gt; bonus</div><div class="ttdef"><b>Definition:</b> Bonus.hpp:48</div></div>
 <div class="ttc" id="aclass_bonus_html_a69c5cd0fdef8eef925b5d295696b19a9"><div class="ttname"><a href="class_bonus.html#a69c5cd0fdef8eef925b5d295696b19a9">Bonus::generateBonus</a></div><div class="ttdeci">static Bonus * generateBonus(SceneGame &amp;game, float rate=0.1f)</div><div class="ttdoc">Static class to generate bonus.</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:233</div></div>
 <div class="ttc" id="aclass_bonus_html_a739b5ec5b1e7214fd0398e4a7970529e"><div class="ttname"><a href="class_bonus.html#a739b5ec5b1e7214fd0398e4a7970529e">Bonus::operator=</a></div><div class="ttdeci">Bonus &amp; operator=(Bonus const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Bonus.cpp:110</div></div>
 <div class="ttc" id="aclass_a_entity_html_a4cddb4c9fbae86691e73940edc3731c3"><div class="ttname"><a href="class_a_entity.html#a4cddb4c9fbae86691e73940edc3731c3">AEntity::type</a></div><div class="ttdeci">Type::Enum type</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:90</div></div>
