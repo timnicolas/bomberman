@@ -14,7 +14,7 @@
  *
  * @param ac argc from main
  * @param av argv from main
- * @return int exit value
+ * @return int Main exit value
  */
 int start(int ac, char const **av) {
 	initLogs();  // init logs functions
@@ -34,6 +34,13 @@ int start(int ac, char const **av) {
 	return EXIT_SUCCESS;
 }
 
+/**
+ * @brief This is the main game function, this function execute all the game
+ *
+ * @param ac argc from main
+ * @param av argv from main
+ * @return int Main exit value
+ */
 int bomberman(int ac, char const ** av) {
 	/* init program & load settings */
 	int ret = start(ac, av);

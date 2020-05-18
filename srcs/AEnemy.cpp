@@ -6,6 +6,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new AEnemy::AEnemy object
+ *
+ * @param game A reference to the main SceneGame object
+ */
 AEnemy::AEnemy(SceneGame &game)
 : ACharacter(game),
   _dir(Direction::UP),
@@ -21,6 +26,9 @@ AEnemy::AEnemy(SceneGame &game)
 	_soundAttack = {ENEMY_HIT_1_SOUND, ENEMY_HIT_2_SOUND};
 }
 
+/**
+ * @brief Destroy the AEnemy::AEnemy object
+ */
 AEnemy::~AEnemy() {
 	std::vector<AEnemy *>::iterator find;
 	find = std::find(game.enemies.begin(), game.enemies.end(), this);
@@ -29,12 +37,23 @@ AEnemy::~AEnemy() {
 	}
 }
 
+/**
+ * @brief Construct a new AEnemy::AEnemy object
+ *
+ * @param src The object to do the copy
+ */
 AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return AEnemy& A reference to the copied object
+ */
 AEnemy &AEnemy::operator=(AEnemy const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("Enemy object copied");

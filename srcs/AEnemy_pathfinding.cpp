@@ -54,6 +54,14 @@ bool AEnemy::_getPathToDFS(glm::ivec2 dest, std::deque<PathNode> & path) {
 	}
 	return find;
 }
+/**
+ * @brief Used in AEnemy::_getPathToDFS
+ *
+ * @param boardDFS boardDFS
+ * @param pos pos
+ * @param dest dest
+ * @param find find
+ */
 void AEnemy::_dfsExplore(std::vector<std::vector<DFSNode>> & boardDFS, glm::ivec2 pos, glm::ivec2 dest, bool & find) {
 	if (pos == dest)
 		find = true;
