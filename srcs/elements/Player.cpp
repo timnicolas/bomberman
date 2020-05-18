@@ -50,7 +50,7 @@ Player::Player(Player const &src) : Player(src.game) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Player& A reference to the copied object
  */
 Player &Player::operator=(Player const &rhs) {

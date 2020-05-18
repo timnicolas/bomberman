@@ -31,7 +31,7 @@ AScene::~AScene() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return AScene& A reference to the copied object
  */
 AScene & AScene::operator=(AScene const & rhs) {

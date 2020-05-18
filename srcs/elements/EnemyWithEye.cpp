@@ -39,7 +39,7 @@ EnemyWithEye::EnemyWithEye(EnemyWithEye const &src) : AEnemy(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return EnemyWithEye& A reference to the copied object
  */
 EnemyWithEye &EnemyWithEye::operator=(EnemyWithEye const &rhs) {

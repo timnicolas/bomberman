@@ -34,7 +34,7 @@ ScenePause::~ScenePause() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ScenePause& A reference to the copied object
  */
 ScenePause & ScenePause::operator=(ScenePause const & rhs) {

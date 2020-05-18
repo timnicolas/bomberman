@@ -87,7 +87,7 @@ OpenGLModel::OpenGLModel(OpenGLModel const &src)
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return OpenGLModel& A reference to the copied object
  */
 OpenGLModel &OpenGLModel::operator=(OpenGLModel const &rhs) {
@@ -160,7 +160,7 @@ void	OpenGLModel::_loadModel() {
 	// get global transform
 	_globalTransform = AiUtils::aiToGlmMat(_scene->mRootNode->mTransformation);
 
-	// load all meshs
+	// load all meshes
 	_processNode(_scene->mRootNode, _scene);
 
 	// -- animations -----------------------------------------------------------
@@ -543,7 +543,7 @@ void	OpenGLModel::draw(float animationTimeTick) {
 	_sh->setBool("isAnimated", _isAnimated);
 	_sh->setVec3("viewPos", _cam.pos);
 
-	// draw all meshs
+	// draw all meshes
 	for (auto &mesh : _meshes) {
 		mesh.second->draw(_model);
 	}

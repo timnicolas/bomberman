@@ -39,7 +39,7 @@ ABaseMasterUI::~ABaseMasterUI() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ABaseMasterUI& A reference to the copied object
  */
 ABaseMasterUI & ABaseMasterUI::operator=(ABaseMasterUI const & rhs) {

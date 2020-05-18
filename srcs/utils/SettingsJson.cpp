@@ -31,7 +31,7 @@ SettingsJson::~SettingsJson() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SettingsJson& A reference to the copied object
  */
 SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {

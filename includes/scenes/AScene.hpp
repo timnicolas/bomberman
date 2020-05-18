@@ -26,7 +26,7 @@ class AScene {
 		 */
 		virtual bool update() = 0;
 		/**
-		 * @brief Draw the scene (called evey frames)
+		 * @brief Draw the scene (called every frames)
 		 *
 		 * @return false If failed
 		 */

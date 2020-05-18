@@ -41,7 +41,7 @@ ButtonImageUI::~ButtonImageUI() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ButtonImageUI& A reference to the copied object
  */
 ButtonImageUI & ButtonImageUI::operator=(ButtonImageUI const & rhs) {

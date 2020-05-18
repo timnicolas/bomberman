@@ -40,7 +40,7 @@ Crispy::Crispy(Crispy const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Crispy& A reference to the copied object
  */
 Crispy &Crispy::operator=(Crispy const &rhs) {

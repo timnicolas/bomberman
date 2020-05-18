@@ -35,7 +35,7 @@ SceneLevelSelection::~SceneLevelSelection() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneLevelSelection& A reference to the copied object
  */
 SceneLevelSelection & SceneLevelSelection::operator=(SceneLevelSelection const & rhs) {

@@ -61,7 +61,7 @@ Mesh::~Mesh() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Mesh& A reference to the copied object
  */
 Mesh &Mesh::operator=(Mesh const &rhs) {

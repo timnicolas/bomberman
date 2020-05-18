@@ -51,7 +51,7 @@ AEnemy::AEnemy(AEnemy const &src) : ACharacter(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return AEnemy& A reference to the copied object
  */
 AEnemy &AEnemy::operator=(AEnemy const &rhs) {

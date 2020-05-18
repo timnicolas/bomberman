@@ -125,7 +125,7 @@ public:
 	 */
 	virtual glm::vec3	getPos() const = 0;
 	/**
-	 * @brief Call this function to take damame
+	 * @brief Call this function to take damage
 	 *
 	 * @param damage Number of damage taken
 	 * @return false If not active or indestructible

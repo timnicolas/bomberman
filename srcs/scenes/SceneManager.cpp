@@ -71,7 +71,7 @@ SceneManager::~SceneManager() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneManager& A reference to the copied object
  */
 SceneManager & SceneManager::operator=(SceneManager const & rhs) {

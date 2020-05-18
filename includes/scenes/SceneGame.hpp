@@ -69,7 +69,7 @@ private:
 	std::vector<SettingsJson *>	_mapsList;  /**<  */
 
 	/**
-	 * @brief All 3D models of enemies that can be drawed on differents menu
+	 * @brief All 3D models of enemies that can be drew on different menus
 	 */
 	struct DrawForMenu {
 		Model *	player;  /**< 3D model to draw player */
@@ -80,7 +80,7 @@ private:
 		Model * crispy;  /**< 3D model to draw crispy */
 		Model * follow;  /**< 3D model to draw follow */
 
-		DrawForMenu();
+		DrawForMenu()
 	};
 	DrawForMenu _menuModels;  /**< All 3D elements to draw */
 	bool	_alarm;  /**< If we want to ring alarm */
@@ -149,7 +149,7 @@ public:
 	Player						*player;  /**< The player */
 	std::vector<AEnemy *>		enemies;  /**< All enemies */
 	/**
-	 * @brief Bonus Information about spawn (nomber of bonus & chance to spawn)
+	 * @brief Bonus Information about spawn (number of bonus & chance to spawn)
 	 */
 	struct BonusValues {
 		int64_t	chance;  /**< Chance to have a bonus */
@@ -163,7 +163,7 @@ public:
 	int32_t						level;  /**< The current level ID (-1 for no level) */
 	GameState::Enum				state;  /**< Actual game state (PLAY, PAUSE, GAME_OVER, ...) */
 	uint32_t					levelEnemies;  /**< Number of enemies in the level */
-	uint32_t					levelCrispies;  /**< Number of cripy wall in the level */
+	uint32_t					levelCrispies;  /**< Number of crispies wall in the level */
 	float						levelTime;  /**< Time to do the level */
 	float						time;  /**< Time remaining to do the level */
 	Score						score;  /**< Score object */

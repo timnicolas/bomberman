@@ -61,7 +61,7 @@ class JsonObj {
 		/**
 		 * @brief Copy this object
 		 *
-		 * @param rhs The opjet to copy
+		 * @param rhs The object to copy
 		 * @return JsonObj& A reference to the copied object
 		 */
 		JsonObj & operator=(JsonObj const & rhs) {
@@ -318,7 +318,7 @@ class SettingsList {
 		/**
 		 * @brief Copy this object
 		 *
-		 * @param rhs The opjet to copy
+		 * @param rhs The object to copy
 		 * @return SettingsList& A reference to the copied object
 		 */
 		SettingsList & operator=(SettingsList const & rhs) {

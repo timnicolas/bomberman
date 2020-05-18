@@ -34,7 +34,7 @@ SceneGameOver::~SceneGameOver() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneGameOver& A reference to the copied object
  */
 SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {

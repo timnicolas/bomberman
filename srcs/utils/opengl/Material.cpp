@@ -36,7 +36,7 @@ Material::~Material() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Material& A reference to the copied object
  */
 Material &Material::operator=(Material const &rhs) {

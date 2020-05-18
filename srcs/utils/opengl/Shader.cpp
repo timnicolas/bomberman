@@ -129,7 +129,7 @@ Shader::~Shader() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Shader& A reference to the copied object
  */
 Shader &Shader::operator=(Shader const &rhs) {

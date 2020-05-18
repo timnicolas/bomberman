@@ -35,7 +35,7 @@ Logging::~Logging() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Logging& A reference to the copied object
  */
 Logging & Logging::operator=(Logging const &rhs) {

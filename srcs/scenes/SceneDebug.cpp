@@ -36,7 +36,7 @@ SceneDebug::SceneDebug(SceneDebug const &src)
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneDebug& A reference to the copied object
  */
 SceneDebug &SceneDebug::operator=(SceneDebug const &rhs) {

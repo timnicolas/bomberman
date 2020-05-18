@@ -221,8 +221,8 @@ class ABaseUI {
 		bool			_isClickableUI;  /**< Set to false for no buttons UI to optimize calculation */
 		bool			_mouseHover;  /**< True if mouse hover */
 		bool			_rightClick;  /**< True if right click */
-		SDL_Scancode	_keyRightClickBindScancode;  /**< Shortcut scancode (rigth click) */
-		InputType::Enum	_keyRightClickBindInput;  /**< Shortcut input (rigth click) */
+		SDL_Scancode	_keyRightClickBindScancode;  /**< Shortcut scancode (right click) */
+		InputType::Enum	_keyRightClickBindInput;  /**< Shortcut input (right click) */
 		bool			_leftClick;  /**< True if left click */
 		SDL_Scancode	_keyLeftClickBindScancode;  /**< Shortcut scancode (left click) */
 		InputType::Enum	_keyLeftClickBindInput;  /**< Shortcut input (left click) */

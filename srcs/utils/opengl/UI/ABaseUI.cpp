@@ -76,7 +76,7 @@ ABaseUI::~ABaseUI() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ABaseUI& A reference to the copied object
  */
 ABaseUI & ABaseUI::operator=(ABaseUI const & rhs) {
@@ -487,9 +487,9 @@ ABaseUI &	ABaseUI::setTextScale(float scale) { _textScale = scale; return *this;
  */
 ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; return *this; }
 /**
- * @brief Set the text alignement
+ * @brief Set the text alignment
  *
- * @param align The text alignement
+ * @param align The text alignment
  * @return ABaseUI& A reference to this UI element
  */
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }

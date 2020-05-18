@@ -16,7 +16,7 @@ private:
 	int32_t		_bonusEnemies;  /**< Bonus for enemy killed */
 	int32_t		_bonusTime;  /**< Bonus for time left in level */
 	int32_t		_levelId;  /**< Level ID */
-	int32_t		_levelEnemies;  /**< Nb of eneny in level */
+	int32_t		_levelEnemies;  /**< Nb of enemy in level */
 	int32_t		_killedEnemies;  /**< Nb of killed enemy in level */
 	int32_t		_levelCrispies;  /**< Nb of crispy walls in level */
 	int32_t		_crispiesDestroyed;  /**< Nb of crispy walls destroyed in level */

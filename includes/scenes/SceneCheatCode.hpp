@@ -149,7 +149,7 @@ class SceneCheatCode : public ASceneMenu {
 
 		/* history */
 		std::deque<std::string>			_cmdHistory;  /**< History, first elem is last in history */
-		std::string						_historySavedLine;  /**< The line writed before go in history */
+		std::string						_historySavedLine;  /**< The line wrote before go in history */
 		int								_historyActID;  /**< Actual history ID */
 
 		/* list of commands */

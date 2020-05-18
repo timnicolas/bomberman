@@ -13,7 +13,7 @@ private:
 	AObject();
 
 protected:
-	std::string		_soundOfDeath;  /**< The sound whent an enemy die */
+	std::string		_soundOfDeath;  /**< The sound when an enemy die */
 
 public:
 	// Constructors

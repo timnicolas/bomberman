@@ -49,7 +49,7 @@ EnemyFrog::EnemyFrog(EnemyFrog const &src) : AEnemy(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return EnemyFrog& A reference to the copied object
  */
 EnemyFrog &EnemyFrog::operator=(EnemyFrog const &rhs) {

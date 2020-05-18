@@ -46,7 +46,7 @@ ScrollbarUI::~ScrollbarUI() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ScrollbarUI& A reference to the copied object
  */
 ScrollbarUI & ScrollbarUI::operator=(ScrollbarUI const & rhs) {

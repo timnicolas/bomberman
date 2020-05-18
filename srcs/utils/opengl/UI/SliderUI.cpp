@@ -35,7 +35,7 @@ SliderUI::~SliderUI() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SliderUI& A reference to the copied object
  */
 SliderUI & SliderUI::operator=(SliderUI const & rhs) {

@@ -104,7 +104,7 @@ Bonus::Bonus(Bonus const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Bonus& A reference to the copied object
  */
 Bonus &Bonus::operator=(Bonus const &rhs) {

@@ -30,7 +30,7 @@ TextUI::~TextUI() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return TextUI& A reference to the copied object
  */
 TextUI & TextUI::operator=(TextUI const & rhs) {

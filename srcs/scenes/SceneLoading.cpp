@@ -35,7 +35,7 @@ SceneLoading::~SceneLoading() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneLoading& A reference to the copied object
  */
 SceneLoading & SceneLoading::operator=(SceneLoading const & rhs) {

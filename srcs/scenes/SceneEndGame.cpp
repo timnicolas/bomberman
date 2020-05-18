@@ -34,7 +34,7 @@ SceneEndGame::~SceneEndGame() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneEndGame& A reference to the copied object
  */
 SceneEndGame & SceneEndGame::operator=(SceneEndGame const & rhs) {

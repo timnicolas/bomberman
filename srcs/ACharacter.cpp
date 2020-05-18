@@ -47,7 +47,7 @@ ACharacter::ACharacter(ACharacter const &src) : AEntity(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ACharacter& A reference to the copied object
  */
 ACharacter &ACharacter::operator=(ACharacter const &rhs) {

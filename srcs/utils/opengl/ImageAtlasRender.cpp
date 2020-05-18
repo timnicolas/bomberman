@@ -59,7 +59,7 @@ ImageAtlasRender::~ImageAtlasRender() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ImageAtlasRender& A reference to the copied object
  */
 ImageAtlasRender &ImageAtlasRender::operator=(ImageAtlasRender const &rhs) {

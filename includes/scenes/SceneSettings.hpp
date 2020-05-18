@@ -33,7 +33,7 @@ public:
 
 	static const int			nb_resolution = 7;  /**< Number of default resolutions */
 	static SceneSettings::res	resolutions[SceneSettings::nb_resolution];  /**< Description of all resolutions */
-	static const std::string	audio_name[3];  /**< All autio names (master, music, sound) */
+	static const std::string	audio_name[3];  /**< All audio names (master, music, sound) */
 
 	bool					startFitToScreen;  /**< Launch program with 'fit to screen' option */
 
@@ -80,10 +80,10 @@ private:
 	int							_select_res;  /**< Selected res */
 
 	/* UI object */
-	SettingsType::Enum			_current_pane;  /**< Current settings categorie displayed */
+	SettingsType::Enum			_current_pane;  /**< Current settings category displayed */
 	std::list<ABaseUI*>			_panes[SettingsType::nb_types];  /**< All categories */
 	ButtonUI					*_key_buttons[Inputs::nb_input];  /**< All inputs buttons to setting keys */
-	ButtonUI					*_paneSelection[SettingsType::nb_types];  /**< All buttons at the top to choose categorie */
+	ButtonUI					*_paneSelection[SettingsType::nb_types];  /**< All buttons at the top to choose category */
 	ButtonUI					*_fullscreen_button;  /**< Button to set fullscreen option */
 	ButtonUI					*_fit_to_screen_button;  /**< Button to set fit to screen option */
 	TextUI						*_resolution_text;  /**< Resolution text (show current resolution) */

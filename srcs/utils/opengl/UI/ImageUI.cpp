@@ -43,7 +43,7 @@ ImageUI::~ImageUI() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ImageUI& A reference to the copied object
  */
 ImageUI & ImageUI::operator=(ImageUI const & rhs) {
