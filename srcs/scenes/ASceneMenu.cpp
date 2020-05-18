@@ -47,6 +47,13 @@ ASceneMenu &ASceneMenu::operator=(ASceneMenu const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Cout operator
+ *
+ * @param os The ostream object
+ * @param myClass The class to cout
+ * @return std::ostream& the ostream object
+ */
 std::ostream &	operator<<(std::ostream & os, const ASceneMenu& myClass) {
 	(void)myClass;
 	os << "<ASceneMenu object>";
@@ -327,7 +334,16 @@ bool ASceneMenu::_initBG() {
 }
 
 /* getter */
-// get an UI element (button, slider, ...)
+/**
+ * @brief Get an UI element (button, slider, ...)
+ *
+ * @param id The element ID
+ * @return ABaseUI& A ref to the UI
+ */
 ABaseUI &		ASceneMenu::getUIElement(uint32_t id) { return *_buttons[id]; }
-// get the total number of UI elements
+/**
+ * @brief Get the total number of UI elements
+ *
+ * @return uint32_t The number of UI elements on the menu
+ */
 uint32_t		ASceneMenu::getNbUIElements() const { return _buttons.size(); }

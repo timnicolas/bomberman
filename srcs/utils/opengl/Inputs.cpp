@@ -131,7 +131,12 @@ Inputs				&Inputs::get() {
 bool				Inputs::getKey(InputType::Enum type) {
 	return (Inputs::get()._getKey(type));
 }
+/**
+	Return the state of the key corresponding to the action passed.
 
+	@param type The type defining the action to verify.
+	@return The state of the key (true == pressed).
+*/
 bool				Inputs::_getKey(InputType::Enum type) const {
 	if (_ignoreInputType(type))
 		return false;
@@ -147,7 +152,12 @@ bool				Inputs::_getKey(InputType::Enum type) const {
 bool				Inputs::getKeyUp(InputType::Enum type) {
 	return (Inputs::get()._getKeyUp(type));
 }
+/**
+	Indicate if the key corresponding to the action passed has just been released.
 
+	@param type The type defining the action to verify.
+	@return true if the key has been released.
+*/
 bool				Inputs::_getKeyUp(InputType::Enum type) const {
 	if (_ignoreInputType(type))
 		return false;
@@ -164,7 +174,12 @@ bool				Inputs::_getKeyUp(InputType::Enum type) const {
 bool				Inputs::getKeyDown(InputType::Enum type) {
 	return (Inputs::get()._getKeyDown(type));
 }
+/**
+	Indicate if the key corresponding to the action passed has just been pressed.
 
+	@param type The type defining the action to verify.
+	@return true if the key has been pressed.
+*/
 bool				Inputs::_getKeyDown(InputType::Enum type) const {
 	if (_ignoreInputType(type))
 		return false;
@@ -181,7 +196,12 @@ bool				Inputs::_getKeyDown(InputType::Enum type) const {
 std::string			Inputs::getKeyName(InputType::Enum type) {
 	return (Inputs::get()._getKeyName(type));
 }
-
+/**
+ * @brief Get the name of a given key
+ *
+ * @param type The key
+ * @return std::string The name of the key
+ */
 std::string			Inputs::_getKeyName(InputType::Enum type) const {
 	for (auto it = _input_key_map.begin(); it != _input_key_map.end(); it++) {
 		if (it->second == type) {
@@ -202,7 +222,12 @@ std::string			Inputs::_getKeyName(InputType::Enum type) const {
 void				Inputs::configureKey(InputType::Enum type) {
 	Inputs::get()._configureKey(type);
 }
+/**
+	Configure the action passed to be associated to the next key pressed.
+	This function will change the execution of the update function.
 
+	@param type The type defining the action to configure.
+*/
 void				Inputs::_configureKey(InputType::Enum type) {
 	_configuring = true;
 	_next_action_type = type;
@@ -216,7 +241,10 @@ void				Inputs::_configureKey(InputType::Enum type) {
 void				Inputs::cancelConfiguration() {
 	Inputs::get()._cancelConfiguration();
 }
-
+/**
+	Cancel the wait for a key to configure an action.
+	This function will reset the execution of the update function to its normal state.
+*/
 void				Inputs::_cancelConfiguration() {
 	if (_configuring) {
 		_configuring = false;
@@ -234,6 +262,13 @@ void				Inputs::_cancelConfiguration() {
 bool				Inputs::getKeyByScancode(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancode(scancode);
 }
+/**
+ * @brief get the state of a key
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key is pressed
+ * @return false if the key is not pressed
+ */
 bool				Inputs::_getKeyByScancode(SDL_Scancode scancode) const {
 	if (_ingoreScancode(scancode))
 		return false;
@@ -250,6 +285,13 @@ bool				Inputs::_getKeyByScancode(SDL_Scancode scancode) const {
 bool				Inputs::getKeyByScancodeUp(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancodeUp(scancode);
 }
+/**
+ * @brief know if a key was released
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key was just released
+ * @return false in other cases
+ */
 bool				Inputs::_getKeyByScancodeUp(SDL_Scancode scancode) const {
 	if (_ingoreScancode(scancode))
 		return false;
@@ -268,6 +310,13 @@ bool				Inputs::_getKeyByScancodeUp(SDL_Scancode scancode) const {
 bool				Inputs::getKeyByScancodeDown(SDL_Scancode scancode) {
 	return Inputs::get()._getKeyByScancodeDown(scancode);
 }
+/**
+ * @brief know if a key was pressed
+ *
+ * @param scancode the scancode of the key
+ * @return true if the key was just pressed
+ * @return false in other cases
+ */
 bool				Inputs::_getKeyByScancodeDown(SDL_Scancode scancode) const {
 	if (_ingoreScancode(scancode))
 		return false;
@@ -285,7 +334,12 @@ bool				Inputs::_getKeyByScancodeDown(SDL_Scancode scancode) const {
 std::string			Inputs::getScancodeName(SDL_Scancode scancode) {
 	return (Inputs::get()._getScancodeName(scancode));
 }
-
+/**
+ * @brief Get the name of a given scancode
+ *
+ * @param scancode The scancode
+ * @return std::string The name of the scancode
+ */
 std::string			Inputs::_getScancodeName(SDL_Scancode scancode) const {
 	if (scancode == NO_SCANCODE)
 		return "no_scancode";
@@ -300,7 +354,11 @@ std::string			Inputs::_getScancodeName(SDL_Scancode scancode) const {
 bool				Inputs::shouldQuit() {
 	return (Inputs::get()._shouldQuit());
 }
+/**
+	Indicate if the window should be closed or not.
 
+	@return true if the user tried to close the window, false otherwise.
+*/
 bool				Inputs::_shouldQuit() const {
 	return (_quit);
 }
@@ -313,7 +371,11 @@ bool				Inputs::_shouldQuit() const {
 const glm::ivec2	&Inputs::getMousePos() {
 	return (Inputs::get()._getMousePos());
 }
+/**
+	Gives the current coordinates of the mouse.
 
+	@return A reference to a constant vector containing the mouse position.
+*/
 const glm::ivec2	&Inputs::_getMousePos() const {
 	return (_mouse_pos);
 }
@@ -326,7 +388,11 @@ const glm::ivec2	&Inputs::_getMousePos() const {
 const glm::ivec2	&Inputs::getMouseRel() {
 	return (Inputs::get()._getMouseRel());
 }
+/**
+	Gives the offset of the mouse from the last poll of event.
 
+	@return A reference to a constant vector containing the mouse offset.
+*/
 const glm::ivec2	&Inputs::_getMouseRel() const {
 	return (_mouse_rel);
 }
@@ -339,7 +405,11 @@ const glm::ivec2	&Inputs::_getMouseRel() const {
 const glm::ivec2	&Inputs::getMouseScroll() {
 	return (Inputs::get()._getMouseScroll());
 }
+/**
+	Gives the offset of the mouse wheel from the last poll of event.
 
+	@return A reference to a constant vector containing the mouse wheel offset.
+*/
 const glm::ivec2	&Inputs::_getMouseScroll() const {
 	return _scroll_rel;
 }
@@ -352,7 +422,11 @@ const glm::ivec2	&Inputs::_getMouseScroll() const {
 bool				Inputs::getRightClick() {
 	return (Inputs::get()._getRightClick());
 }
+/**
+	Gives the right click (true if clicked, else false)
 
+	@return The mouse state
+*/
 bool				Inputs::_getRightClick() const {
 	return (_right_click);
 }
@@ -365,7 +439,11 @@ bool				Inputs::_getRightClick() const {
 bool				Inputs::getLeftClick() {
 	return (Inputs::get()._getLeftClick());
 }
+/**
+	Gives the left click (true if clicked, else false)
 
+	@return The mouse state
+*/
 bool				Inputs::_getLeftClick() const {
 	return (_left_click);
 }
@@ -378,7 +456,11 @@ bool				Inputs::_getLeftClick() const {
 bool				Inputs::getRightClickUp() {
 	return (Inputs::get()._getRightClickUp());
 }
+/**
+	Indicate if the right click has just been released.
 
+	@return true if the right click has just been released.
+*/
 bool				Inputs::_getRightClickUp() const {
 	return (!_right_click && _right_click_previous);
 }
@@ -391,7 +473,11 @@ bool				Inputs::_getRightClickUp() const {
 bool				Inputs::getLeftClickUp() {
 	return (Inputs::get()._getLeftClickUp());
 }
+/**
+	Indicate if the left click has just been released.
 
+	@return true if the left click has just been released.
+*/
 bool				Inputs::_getLeftClickUp() const {
 	return (!_left_click && _left_click_previous);
 }
@@ -404,7 +490,11 @@ bool				Inputs::_getLeftClickUp() const {
 bool				Inputs::getRightClickDown() {
 	return (Inputs::get()._getRightClickDown());
 }
+/**
+	Indicate if the right click has just been pressed.
 
+	@return true if the right click has just been pressed.
+*/
 bool				Inputs::_getRightClickDown() const {
 	return (_right_click && !_right_click_previous);
 }
@@ -417,7 +507,11 @@ bool				Inputs::_getRightClickDown() const {
 bool				Inputs::getLeftClickDown() {
 	return (Inputs::get()._getLeftClickDown());
 }
+/**
+	Indicate if the left click has just been pressed.
 
+	@return true if the left click has just been pressed.
+*/
 bool				Inputs::_getLeftClickDown() const {
 	return (_left_click && !_left_click_previous);
 }
@@ -428,7 +522,9 @@ bool				Inputs::_getLeftClickDown() const {
 void				Inputs::resetKeys() {
 	Inputs::get()._resetKeys();
 }
-
+/**
+	Reset all the key to their default value.
+*/
 void				Inputs::_resetKeys() {
 	logInfo("reset keys");
 	for (auto i = 0; i < InputType::NB_INPUTS; i++) {
@@ -470,7 +566,10 @@ void				Inputs::_resetKeys() {
 void				Inputs::update() {
 	Inputs::get()._update();
 }
-
+/**
+	Poll all the SDL events from the last update call.
+	This function should be called at the start of each frame in order for this class to have valid values.
+*/
 void				Inputs::_update() {
 	SDL_Event		event;
 	SDL_Scancode	scan;
@@ -588,9 +687,19 @@ void				Inputs::_update() {
 	}
 }
 
+/**
+ * @brief Know if an input is currently configuring
+ *
+ * @return true If an input is configuring
+ */
 bool									Inputs::isConfiguring() {
 	return Inputs::get()._isConfiguring();
 }
+/**
+ * @brief Know if an input is currently configuring
+ *
+ * @return true If an input is configuring
+ */
 bool									Inputs::_isConfiguring() {
 	return _configuring;
 }
@@ -603,6 +712,11 @@ bool									Inputs::_isConfiguring() {
 void				Inputs::setTextInputMode(bool enable) {
 	Inputs::get()._setTextInputMode(enable);
 }
+/**
+ * @brief Enable / disable the TextInput mode
+ *
+ * @param enable Enable / disable
+ */
 void				Inputs::_setTextInputMode(bool enable) {
 	_isTextInputMode = enable;
 }
@@ -615,6 +729,11 @@ void				Inputs::_setTextInputMode(bool enable) {
 SDL_Keycode				Inputs::getTextInputKeycode() {
 	return Inputs::get()._getTextInputKeycode();
 }
+/**
+ * @brief Get the last keycode pressed
+ *
+ * @return SDL_Keycode The keycode
+ */
 SDL_Keycode				Inputs::_getTextInputKeycode() const {
 	return _lastKeycode;
 }
@@ -627,6 +746,11 @@ SDL_Keycode				Inputs::_getTextInputKeycode() const {
 std::string				Inputs::getTextInputString() {
 	return Inputs::get()._getTextInputString();
 }
+/**
+ * @brief The the last key name pressed
+ *
+ * @return std::string The key name
+ */
 std::string				Inputs::_getTextInputString() const {
 	return _currentText;
 }

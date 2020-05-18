@@ -43,13 +43,25 @@ AScene & AScene::operator=(AScene const & rhs) {
 }
 
 // -- getters --------------------------------------------------------
+/**
+ * @brief Get the delta time
+ *
+ * @return float const& The delta time
+ */
 float const	&AScene::getDtTime() const { return _dtTime; }
 
 
 // -- Exceptions errors --------------------------------------------------------
-
+/**
+ * @brief Construct a new AScene::SceneException::SceneException object
+ */
 AScene::SceneException::SceneException()
 : std::runtime_error("SceneException") {}
 
+/**
+ * @brief Construct a new AScene::SceneException::SceneException object
+ *
+ * @param whatArg Error message
+ */
 AScene::SceneException::SceneException(const char* whatArg)
 : std::runtime_error(std::string(std::string("SceneError: ") + whatArg).c_str()) {}

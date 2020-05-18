@@ -684,7 +684,11 @@ void					SceneSettings::_returnQuit() {
 	SceneManager::loadScene(SceneNames::MAIN_MENU);
 }
 
-
+/**
+ * @brief Get the current resolution
+ *
+ * @return glm::ivec2 the current resolution
+ */
 glm::ivec2		SceneSettings::getCurResolution() const {
 	return glm::ivec2(_current_resolution.width, _current_resolution.height);
 }

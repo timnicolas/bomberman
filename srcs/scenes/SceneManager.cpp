@@ -93,12 +93,16 @@ SceneManager & SceneManager::get() {
 /**
  * @brief init the SceneManager (load the first scene& load gui)
  *
- * @return true if success
  * @return false if failure
  */
 bool SceneManager::init() {
 	return SceneManager::get()._init();
 }
+/**
+ * @brief init the SceneManager (load the first scene& load gui)
+ *
+ * @return false if failure
+ */
 bool SceneManager::_init() {
 	if (_sceneMap.find(SceneNames::MAIN_MENU) != _sceneMap.end()) {
 		logWarn("SceneManager::init already called");
@@ -182,7 +186,6 @@ bool SceneManager::_init() {
 /**
  * @brief this is the main game loop to update & draw everythings
  *
- * @return true if success
  * @return false if failure
  */
 bool SceneManager::run() {
@@ -190,7 +193,11 @@ bool SceneManager::run() {
 
 	return SceneManager::get()._run(maxFrameDuration);
 }
-
+/**
+ * @brief this is the main game loop to update & draw everythings
+ *
+ * @return false if failure
+ */
 bool SceneManager::_run(float maxFrameDuration) {
 	std::chrono::milliseconds	lastLoopMs = getMs();
 	bool firstLoop = true;
@@ -336,6 +343,12 @@ bool SceneManager::_draw() {
 AScene * SceneManager::loadScene(std::string const & name) {
 	return SceneManager::get()._loadScene(name);
 }
+/**
+ * @brief load a scene from his name
+ *
+ * @param name the scene name
+ * @return AScene* a pointer to the scene loaded
+ */
 AScene * SceneManager::_loadScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
 		logErr("invalid scene name: " << name << " in loadScene");
@@ -365,6 +378,12 @@ AScene * SceneManager::_loadScene(std::string const & name) {
 AScene * SceneManager::getScene(std::string const & name) {
 	return SceneManager::get()._getScene(name);
 }
+/**
+ * @brief get a scene
+ *
+ * @param name the name of the scene to get
+ * @return AScene* a pointer to the scene
+ */
 AScene * SceneManager::_getScene(std::string const & name) {
 	if (get()._sceneMap.find(name) == get()._sceneMap.end()) {
 		logErr("invalid scene name: " << name << " in getScene");
@@ -381,6 +400,11 @@ AScene * SceneManager::_getScene(std::string const & name) {
 std::string const & SceneManager::getSceneName() {
 	return SceneManager::get()._getSceneName();
 }
+/**
+ * @brief get the current scene name
+ *
+ * @return std::string const& the current scene name
+ */
 std::string const & SceneManager::_getSceneName() const {
 	return _scene;
 }
@@ -405,6 +429,11 @@ uint16_t	SceneManager::getFps() {
 bool SceneManager::isSceneChangedInCurFrame() {
 	return SceneManager::get()._isSceneChangedInCurFrame();
 }
+/**
+ * @brief Return if the scene has changed in the current frame
+ *
+ * @return true If the scene changed in the current frame
+ */
 bool SceneManager::_isSceneChangedInCurFrame() const {
 	return _sceneLoadedCurrentFrame;
 }
@@ -417,6 +446,11 @@ bool SceneManager::_isSceneChangedInCurFrame() const {
 void SceneManager::openCheatCode(bool open) {
 	SceneManager::get()._openCheatCode(open);
 }
+/**
+ * @brief Open or force close cheat code command line
+ *
+ * @param open True to open cheat code command line
+ */
 void SceneManager::_openCheatCode(bool open) {
 	if (_isInCheatCode == open)  // if state didn't changed
 		return;
@@ -432,9 +466,19 @@ void SceneManager::_openCheatCode(bool open) {
 	_isInCheatCode = open;
 }
 
+/**
+ * @brief Open cheatcode text for a certain time
+ *
+ * @param ms The time to open cheatcode text
+ */
 void SceneManager::openCheatCodeForTime(uint64_t ms) {
 	SceneManager::get()._openCheatCodeForTime(ms);
 }
+/**
+ * @brief Open cheatcode text for a certain time
+ *
+ * @param ms The time to open cheatcode text
+ */
 void SceneManager::_openCheatCodeForTime(uint64_t ms) {
 	if (ms == 0 || static_cast<int64_t>(ms) > _showCheatCodeTextTime) {
 		_showCheatCodeTextTime = ms;
@@ -449,6 +493,11 @@ void SceneManager::_openCheatCodeForTime(uint64_t ms) {
 bool SceneManager::isCheatCodeOpen() {
 	return SceneManager::get()._isCheatCodeOpen();
 }
+/**
+ * @brief Know if we are in cheat code mode
+ *
+ * @return true If cheat code command line is open
+ */
 bool SceneManager::_isCheatCodeOpen() const {
 	return _isInCheatCode;
 }
@@ -459,13 +508,24 @@ bool SceneManager::_isCheatCodeOpen() const {
 void SceneManager::quit() {
 	SceneManager::get()._quit();
 }
+/**
+ * @brief quit the game
+ */
 void SceneManager::_quit() {
 	_gameInfo.quit = true;
 }
 
 /* exception */
+/**
+ * @brief Construct a new Scene Manager:: Scene Manager Exception:: Scene Manager Exception object
+ */
 SceneManager::SceneManagerException::SceneManagerException()
 : std::runtime_error("SceneManager Exception") {}
 
+/**
+ * @brief Construct a new Scene Manager:: Scene Manager Exception:: Scene Manager Exception object
+ *
+ * @param whatArg Error message
+ */
 SceneManager::SceneManagerException::SceneManagerException(const char* whatArg)
 : std::runtime_error(std::string(std::string("SceneManagerException: ") + whatArg).c_str()) {}
