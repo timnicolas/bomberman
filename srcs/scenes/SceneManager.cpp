@@ -21,6 +21,7 @@
 #include "SceneEndGame.hpp"
 #include "SceneDebug.hpp"
 #include "SceneLoading.hpp"
+#include "SceneHelp.hpp"
 
 SceneManager::SceneManager()
 : _isInit(false),
@@ -145,6 +146,7 @@ bool SceneManager::_init() {
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::CHEAT_CODE, new SceneCheatCode(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::END_GAME, new SceneEndGame(_gui, _dtTime)));
 	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::DEBUG_MENU, new SceneDebug(_gui, _dtTime)));
+	_sceneMap.insert(std::pair<std::string, AScene *>(SceneNames::HELP, new SceneHelp(_gui, _dtTime)));
 
 	for (auto it = _sceneMap.begin(); it != _sceneMap.end(); it++) {
 		try {
