@@ -1,18 +1,38 @@
 #include "SceneHelp.hpp"
 #include "Bonus.hpp"
 
+/**
+ * @brief Construct a new Scene Help:: Scene Help object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneHelp::SceneHelp(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {}
 
+/**
+ * @brief Construct a new Scene Help:: Scene Help object
+ *
+ * @param src A SceneHelp element to copy
+ */
 SceneHelp::SceneHelp(SceneHelp const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Help:: Scene Help object
+ */
 SceneHelp::~SceneHelp() {}
 
+/**
+ * @brief Overload operator =
+ *
+ * @param rhs Right element
+ * @return SceneHelp&
+ */
 SceneHelp & SceneHelp::operator=(SceneHelp const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneHelp")
