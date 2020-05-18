@@ -80,7 +80,11 @@ bool			SceneVictory::init() {
 			for (auto &&stat : scoreStat) {
 				tmpPos.y -= statisticHeight;
 				if (stat.image.size()) {
-					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y}, {32, 32}, stat.image));
+					statistics.stats.push_back(&addImage(
+						{tmpPos.x, tmpPos.y},
+						{statisticHeight, statisticHeight},
+						stat.image
+					));
 					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
 						.setTextAlign(TextAlign::LEFT));
 				} else {

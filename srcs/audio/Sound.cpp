@@ -44,12 +44,14 @@ int										Sound::play(float volume, float env_volume, bool loop, int fadeIn) 
 	int			chan;
 
 	if (_chunk != nullptr) {
-		chan = Mix_FadeInChannel(-1, _chunk, loop ? -1 : 0, fadeIn);
+		chan = Mix_PlayChannel(-1, _chunk, loop ? -1 : 0);
 		if (chan < 0) {
 			throw Sound::SoundException(Mix_GetError());
 		}
 		volume = volume > 1.0f ? 1.0 : volume;
 		Mix_Volume(chan, static_cast<int>(volume * env_volume * MIX_MAX_VOLUME));
+		if (fadeIn > 0)
+			Mix_FadeInChannel(chan, _chunk, loop ? -1 : 0, fadeIn);
 		_currents_channels.insert(chan);
 		_chan_volume.insert(std::pair<int, float>(chan, volume));
 		return chan;

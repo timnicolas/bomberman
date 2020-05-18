@@ -129,7 +129,7 @@ bool	SceneEndGame::update() {
 		scGame.updateForMenu();
 	}
 
-	if (_states.exit || Inputs::getKeyUp(InputType::CONFIRM)) {
+	if (_states.exit || Inputs::getKeyUp(InputType::ACTION)) {
 		_states.exit = false;
 		AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 		SceneManager::loadScene(SceneNames::MAIN_MENU);
