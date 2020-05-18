@@ -213,7 +213,7 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 }
 
 /**
- * @brief Test if Character have a collision at position <atPosition>.
+ * @brief Test if Character have a collision at position < atPosition >.
  *
  * @param atPosition
  * @param atSize

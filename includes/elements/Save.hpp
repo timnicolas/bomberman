@@ -51,11 +51,6 @@ public:
 	class SaveException : public std::runtime_error {
 	public:
 		SaveException();
-		/**
-		 * @brief Construct a new Spawner Exception object
-		 *
-		 * @param whatArg Error message
-		 */
 		explicit SaveException(const char* what_arg);
 	};
 

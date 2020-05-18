@@ -66,7 +66,6 @@ class SceneCheatCode : public ASceneMenu {
 
 		// Operators
 		SceneCheatCode &operator=(SceneCheatCode const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneCheatCode& myClass);
 
 		// Methods
 		virtual bool		init();

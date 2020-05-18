@@ -15,7 +15,6 @@ class SceneDifficulty : public ASceneMenu {
 
 		// Operators
 		SceneDifficulty &operator=(SceneDifficulty const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneDifficulty& myClass);
 
 		// Methods
 		virtual bool		init();

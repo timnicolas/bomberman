@@ -14,8 +14,8 @@
  * @brief Path node element (to create auto path for enemy)
  */
 struct PathNode {
-	Direction::Enum	dir;
-	glm::ivec2		goal;
+	Direction::Enum	dir;  /**< Direction to move */
+	glm::ivec2		goal;  /**< Goal to reach */
 };
 
 /**

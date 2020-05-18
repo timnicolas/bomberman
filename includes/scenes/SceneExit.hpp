@@ -14,7 +14,6 @@ class SceneExit : public ASceneMenu {
 
 		// Operators
 		SceneExit &operator=(SceneExit const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneExit& myClass);
 
 		// Methods
 		virtual bool		init();

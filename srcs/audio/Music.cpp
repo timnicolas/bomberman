@@ -45,10 +45,23 @@ void						Music::play(float volume, bool loop) {
 	}
 }
 
+/**
+ * @brief Construct a new Music:: Music Exception:: Music Exception object
+ */
 Music::MusicException::MusicException(): std::runtime_error("[MusicException]") {}
 
+/**
+ * @brief Construct a new Music:: Music Exception:: Music Exception object
+ *
+ * @param what_arg Error message
+ */
 Music::MusicException::MusicException(const char* what_arg) \
 	: std::runtime_error(std::string(std::string("[MusicException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Music:: Music Exception:: Music Exception object
+ *
+ * @param what_arg Error message
+ */
 Music::MusicException::MusicException(const std::string what_arg) \
 	: std::runtime_error(std::string(std::string("[MusicException] ") + what_arg).c_str()) {}

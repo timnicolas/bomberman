@@ -106,7 +106,7 @@ void	Model::draw() {
  * @brief change the animation by id
  *
  * @param id the animation id
- * @param animEndCb called on animation end
+ * @param animEndCbFunc called on animation end
  * @param animEndCbClass member func of animEndCb
  */
 void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
@@ -314,6 +314,9 @@ void	Model::_updateAnimationTime() {
 }
 
 // -- _updateTicksPerSecond ----------------------------------------------------
+/**
+ * @brief Update ticks per second
+ */
 void	Model::_updateTicksPerSecond() {
 	if (_openGLModel.isAnimated()) {
 		_ticksPerSecond = _curAnimation->mTicksPerSecond;
