@@ -103,13 +103,45 @@ public:
 
 	// Methods
 	virtual bool		init();
+	/**
+	 * @brief Update entity. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool		update() = 0;
 	virtual bool		postUpdate();
+	/**
+	 * @brief Draw entity. Called on every frames
+	 *
+	 * @param gui A reference to the gui object
+	 * @return false If failed
+	 */
 	virtual bool		draw(Gui &gui) = 0;
 	virtual bool		drawCollider();
+	/**
+	 * @brief Get the Pos object
+	 *
+	 * @return glm::vec3 The position
+	 */
 	virtual glm::vec3	getPos() const = 0;
+	/**
+	 * @brief Call this function to take damame
+	 *
+	 * @param damage Number of damage taken
+	 * @return false If not active or indestructible
+	 */
 	virtual bool		takeDamage(const int damage) = 0;
+	/**
+	 * @brief Get the Board object
+	 *
+	 * @return std::vector< std::vector< std::vector<AEntity *> > > const& The board object
+	 */
 	virtual std::vector< std::vector< std::vector<AEntity *> > > const &	getBoard() const = 0;
+	/**
+	 * @brief Get the Board object
+	 *
+	 * @return std::vector< std::vector< std::vector<AEntity *> > > const& The board object
+	 */
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard() = 0;
 	virtual void		animEndCb(std::string animName);
 	void				setState(EntityState::Enum state);

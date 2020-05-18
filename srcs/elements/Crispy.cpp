@@ -102,6 +102,13 @@ bool	Crispy::draw(Gui &gui) {
 	return true;
 }
 
+/**
+ * @brief Generate a crispy wall with a certain chance
+ *
+ * @param game A reference to the main game object
+ * @param genWallPercent chance to generate a wall [0:100]
+ * @return Crispy* The new crispy wall or a nullptr
+ */
 Crispy * Crispy::generateCrispy(SceneGame &game, uint32_t genWallPercent) {
 	if (genWallPercent <= 0)
 		return nullptr;

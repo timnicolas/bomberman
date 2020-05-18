@@ -13,10 +13,31 @@ class AScene {
 		AScene(AScene const & src);
 		virtual ~AScene();
 
+		/**
+		 * @brief Init the scene
+		 *
+		 * @return false If failed
+		 */
 		virtual bool init() = 0;
+		/**
+		 * @brief Update the scene (called every frames)
+		 *
+		 * @return false If failed
+		 */
 		virtual bool update() = 0;
+		/**
+		 * @brief Draw the scene (called evey frames)
+		 *
+		 * @return false If failed
+		 */
 		virtual bool draw() = 0;
+		/**
+		 * @brief Load the scene (called on every scene loading)
+		 */
 		virtual void load() = 0;
+		/**
+		 * @brief Unload the scene (called on every scene unloading)
+		 */
 		virtual void unload() = 0;
 
 		float const	&getDtTime() const;
