@@ -364,17 +364,37 @@ std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset, bool termWi
 }
 
 // -- cout --------------------------------------------------------
+/**
+ * @brief Cout operator
+ *
+ * @param out The ostream object
+ * @param s the SettingsJson to cout
+ * @return std::ostream& The ostream object
+ */
 std::ostream & operator<<(std::ostream & out, SettingsJson const & s) {
 	out << s.toString();
 	return out;
 }
 
 // -- Exceptions errors --------------------------------------------------------
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ */
 SettingsJson::SettingsException::SettingsException()
 : std::runtime_error("[SettingsException]") {}
 
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ *
+ * @param what_arg Error message
+ */
 SettingsJson::SettingsException::SettingsException(const char* what_arg)
 : std::runtime_error(std::string(std::string("[SettingsException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ *
+ * @param what_arg Error message
+ */
 SettingsJson::SettingsException::SettingsException(const std::string what_arg)
 : std::runtime_error(std::string(std::string("[SettingsException] ") + what_arg).c_str()) {}

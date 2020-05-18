@@ -31,11 +31,39 @@ namespace JsonOpt {
 template<class T>
 class JsonObj {
 	public:
+		/**
+		 * @brief Construct a new Json Obj object
+		 */
 		JsonObj() : _value() { init(); }
+		/**
+		 * @brief Construct a new Json Obj object
+		 *
+		 * @param name The json object name
+		 */
 		explicit JsonObj(std::string const & name) : _value() { init(name); }
+		/**
+		 * @brief Construct a new Json Obj object
+		 *
+		 * @param name The json object name
+		 * @param val The json object value
+		 */
 		JsonObj(std::string const & name, T const & val) : _value(val), _defVal(val) { init(name); }
+		/**
+		 * @brief Destroy the Json Obj object
+		 */
 		virtual ~JsonObj() {}
+		/**
+		 * @brief Construct a new Json Obj object
+		 *
+		 * @param src The object to do the copy
+		 */
 		JsonObj(JsonObj const & src) { *this = src; }
+		/**
+		 * @brief Copy this object
+		 *
+		 * @param rhs The opjet to copy
+		 * @return JsonObj& A reference to the copied object
+		 */
 		JsonObj & operator=(JsonObj const & rhs) {
 			if (this != &rhs) {
 				// logDebug("WARNING -> JsonObj object copied");
@@ -50,6 +78,11 @@ class JsonObj {
 			}
 			return *this;
 		}
+		/**
+		 * @brief Init a json object
+		 *
+		 * @param name The json object name
+		 */
 		void init(std::string const & name = "") {
 			_name = name;
 			_description = "";
@@ -58,8 +91,24 @@ class JsonObj {
 			_disableInFile = false;
 		}
 
+		/**
+		 * @brief Get json object value
+		 *
+		 * @return T const& The value
+		 */
 		T const &		get() const { return _value; }
+		/**
+		 * @brief Get json object value
+		 *
+		 * @return T const& The value
+		 */
 		T &				get() { return _value; }
+		/**
+		 * @brief Set the Value object
+		 *
+		 * @param value The new value
+		 * @return JsonObj<T>& A reference to 'this' object
+		 */
 		JsonObj<T> &	setValue(T value) {
 			if (_hasMin && value < _min) {
 				logWarn("unable to set arg " << _name << ": " << value << " is less than min value (" << _min << ")");
@@ -72,6 +121,12 @@ class JsonObj {
 			_value = value;
 			return *this;
 		}
+		/**
+		 * @brief Check is a value is in min < value < max
+		 *
+		 * @param value The value
+		 * @return true If min < value < max
+		 */
 		bool			checkValue(T value) const {
 			if (_hasMin && value < _min) {
 				return false;
@@ -81,21 +136,103 @@ class JsonObj {
 			}
 			return true;
 		}
+		/**
+		 * @brief Set the Min object
+		 *
+		 * @param value The min value
+		 * @return JsonObj<T>& A reference to 'this' object
+		 */
 		JsonObj<T> &		setMin(T value) { _hasMin = true; _min = value; return *this; }
+		/**
+		 * @brief Set the Max object
+		 *
+		 * @param value The max value
+		 * @return JsonObj<T>& A reference to 'this' object
+		 */
 		JsonObj<T> &		setMax(T value) { _hasMax = true; _max = value; return *this; }
+		/**
+		 * @brief Get the Max object
+		 *
+		 * @return T& The max value
+		 */
 		T &					getMax() { return _max; }
+		/**
+		 * @brief Get the Max object
+		 *
+		 * @return T& The max value
+		 */
 		T const &			getMax() const { return _max; }
+		/**
+		 * @brief Get the Min object
+		 *
+		 * @return T& The min value
+		 */
 		T &					getMin() { return _min; }
+		/**
+		 * @brief Get the Min object
+		 *
+		 * @return T& The min value
+		 */
 		T const &			getMin() const { return _min; }
+		/**
+		 * @brief Set the Description object
+		 *
+		 * @param desc The description
+		 * @return JsonObj<T>& A reference to 'this' object
+		 */
 		JsonObj<T> &		setDescription(std::string const & desc) { _description = desc; return *this; }
+		/**
+		 * @brief Disable modification of this value on json files
+		 *
+		 * @param disable Disable option
+		 * @return JsonObj<T>& A reference to 'this' object
+		 */
 		JsonObj<T> &		disableInFile(bool disable = true) { _disableInFile = disable; return *this; }
+		/**
+		 * @brief Know if this value is disabled in file
+		 *
+		 * @return true If value is disabled in file
+		 */
 		bool				isDisabledInFile() { return _disableInFile; }
+		/**
+		 * @brief Set the Def Val object
+		 *
+		 * @param val The default value
+		 */
 		void				setDefVal(T val) { _defVal = val; }
+		/**
+		 * @brief Get the Def Val object
+		 *
+		 * @return T The default value
+		 */
 		T					getDefVal() const { return _defVal; }
+		/**
+		 * @brief Reset value
+		 */
 		void				reset() { _value = _defVal; }
+		/**
+		 * @brief Set the Name object
+		 *
+		 * @param name The name
+		 */
 		void				setName(std::string const & name) { _name = name; }
+		/**
+		 * @brief Get the Name object
+		 *
+		 * @return std::string& The name
+		 */
 		std::string	&		getName() { return _name; }
+		/**
+		 * @brief Get the Name object
+		 *
+		 * @return std::string& The name
+		 */
 		std::string	const &	getName() const { return _name; }
+		/**
+		 * @brief Get informations about object
+		 *
+		 * @return std::string The info
+		 */
 		std::string			getInfo() const {
 			std::ostringstream out;
 			out << "  // ";
@@ -123,6 +260,13 @@ class JsonObj {
 			return out.str();
 		}
 
+		/**
+		 * @brief Cout operator
+		 *
+		 * @param out The ostream object
+		 * @param jsonObj The jsonObj to cout
+		 * @return std::ostream& The ostream obj
+		 */
 		friend std::ostream & operator<<(std::ostream & out, const JsonObj & jsonObj) {
 			out << std::boolalpha << jsonObj.get();
 			return out;
@@ -148,13 +292,35 @@ class JsonObj {
 template<class T>
 class SettingsList {
 	public:
+		/**
+		 * @brief Construct a new Settings List object
+		 */
 		SettingsList() : pattern(nullptr) {}
+		/**
+		 * @brief Construct a new Settings List object
+		 *
+		 * @param pattern_ The base pattern for list
+		 */
 		explicit SettingsList(T * pattern_) : pattern(pattern_) {}
+		/**
+		 * @brief Destroy the Settings List object
+		 */
 		virtual ~SettingsList() {
 			resetList();
 			delete pattern;
 		}
+		/**
+		 * @brief Construct a new Settings List object
+		 *
+		 * @param src The object to do the copy
+		 */
 		SettingsList(SettingsList const & src) { *this = src; }
+		/**
+		 * @brief Copy this object
+		 *
+		 * @param rhs The opjet to copy
+		 * @return SettingsList& A reference to the copied object
+		 */
 		SettingsList & operator=(SettingsList const & rhs) {
 			if (this != &rhs) {
 				// logDebug("WARNING -> SettingsList object copied");
@@ -166,15 +332,28 @@ class SettingsList {
 			}
 			return *this;
 		}
+		/**
+		 * @brief Set the Pattern object
+		 *
+		 * @param pattern_ The new pattern
+		 */
 		void setPattern(T * pattern_) {
 			if (pattern != nullptr) {
 				logFatal("unable to add pattern in list -> there is already a pattern");
 			}
 			pattern = pattern_;
 		}
+		/**
+		 * @brief Add a new object in list
+		 *
+		 * @param newObj The new object
+		 */
 		void add(T * newObj) {
 			list.push_back(newObj);
 		}
+		/**
+		 * @brief Reset the list (delete all elements)
+		 */
 		void resetList() {
 			for (auto it = list.begin(); it != list.end(); it++) {
 				delete *it;
@@ -182,6 +361,13 @@ class SettingsList {
 			list.clear();
 		}
 
+		/**
+		 * @brief Cout operator
+		 *
+		 * @param out The ostream object
+		 * @param settingsList The settingsList to cout
+		 * @return std::ostream& The ostream obj
+		 */
 		friend std::ostream & operator<<(std::ostream & out, const SettingsList & settingsList) {
 			out << "[" << std::endl;
 			for (auto it = settingsList.list.begin(); it != settingsList.list.end(); it++) {
@@ -197,8 +383,6 @@ class SettingsList {
 
 		T *					pattern;  /**< The default SettingsJson object for list */
 		std::vector<T *>	list;  /**< A list of pattern */
-
-	private:
 };
 
 /**
@@ -222,6 +406,13 @@ class SettingsJson {
 		void		saveToFile(std::string const & filename);
 		std::string	toString(uint32_t opt = JsonOpt::NO_OPT, uint32_t tabOffset = 0, bool termWithComma = false) const;
 
+		/**
+		 * @brief Add new object
+		 *
+		 * @tparam T The object type
+		 * @param name The object name
+		 * @return JsonObj<T>& A reference to the created object
+		 */
 		template<class T>
 		JsonObj<T> &	add(std::string const & name) {
 			std::map<std::string, JsonObj<T> *> & tmpMap = _getMap<T>();
@@ -232,6 +423,14 @@ class SettingsJson {
 			tmpMap.insert(std::pair<std::string, JsonObj<T> *>(name, new JsonObj<T>(name)));
 			return *(tmpMap[name]);
 		}
+		/**
+		 * @brief Add new object
+		 *
+		 * @tparam T The object type
+		 * @param name The object name
+		 * @param val The object value
+		 * @return JsonObj<T>& A reference to the created object
+		 */
 		template<class T>
 		JsonObj<T> &	add(std::string const & name, T val) {
 			std::map<std::string, JsonObj<T> *> & tmpMap = _getMap<T>();
@@ -242,6 +441,14 @@ class SettingsJson {
 			tmpMap.insert(std::pair<std::string, JsonObj<T> *>(name, new JsonObj<T>(name, val)));
 			return *(tmpMap[name]);
 		}
+		/**
+		 * @brief Add a new list
+		 *
+		 * @tparam T The list type (generally SettingsJson)
+		 * @param name The list name
+		 * @param val The list pattern
+		 * @return JsonObj<SettingsList<T> >& A reference to the created list
+		 */
 		template<class T>
 		JsonObj<SettingsList<T> > &	addList(std::string const & name, T * val) {
 			std::map<std::string, JsonObj<SettingsList<T> > *> & tmpMap = _getMap<SettingsList<T> >();
@@ -254,6 +461,13 @@ class SettingsJson {
 			tmpMap[name]->get().setPattern(val);
 			return *(tmpMap[name]);
 		}
+		/**
+		 * @brief Update a value
+		 *
+		 * @tparam T The value type
+		 * @param name The value name
+		 * @return JsonObj<T>& A reference to the object (to update)
+		 */
 		template<class T>
 		JsonObj<T> &	update(std::string const & name)  {
 			std::map<std::string, JsonObj<T> *> & tmpMap = _getMap<T>();
@@ -262,6 +476,13 @@ class SettingsJson {
 			}
 			throw SettingsException("undefined setting " + name);
 		}
+		/**
+		 * @brief Get a value
+		 *
+		 * @tparam T The value type
+		 * @param name The value name
+		 * @return T const& The value
+		 */
 		template<class T>
 		T const &		get(std::string const & name) const {
 			std::map<std::string, JsonObj<T> *> const & tmpMap = _getMap<T>();
@@ -269,6 +490,13 @@ class SettingsJson {
 				return tmpMap.at(name)->get();
 			throw SettingsException("undefined setting " + name);
 		}
+		/**
+		 * @brief Get a value
+		 *
+		 * @tparam T The value type
+		 * @param name The value name
+		 * @return T & The value
+		 */
 		template<class T>
 		T &				get(std::string const & name) {
 			std::map<std::string, JsonObj<T> *> & tmpMap = _getMap<T>();
@@ -276,21 +504,105 @@ class SettingsJson {
 				return tmpMap.at(name)->get();
 			throw SettingsException("undefined setting " + name);
 		}
+		/**
+		 * @brief Get a string value
+		 *
+		 * @param name The name
+		 * @return std::string const& The value
+		 */
 		std::string const &		s(std::string const & name) const { return get<std::string>(name); }
+		/**
+		 * @brief Get a string value
+		 *
+		 * @param name The name
+		 * @return std::string & The value
+		 */
 		std::string &			s(std::string const & name)  { return get<std::string>(name); }
+		/**
+		 * @brief Get a int value
+		 *
+		 * @param name The name
+		 * @return int64_t const& The value
+		 */
 		int64_t const &			i(std::string const & name) const { return get<int64_t>(name); }
+		/**
+		 * @brief Get a int value
+		 *
+		 * @param name The name
+		 * @return int64_t & The value
+		 */
 		int64_t &				i(std::string const & name)  { return get<int64_t>(name); }
+		/**
+		 * @brief Get a uint value
+		 *
+		 * @param name The name
+		 * @return uint64_t const& The value
+		 */
 		uint64_t const &		u(std::string const & name) const { return get<uint64_t>(name); }
+		/**
+		 * @brief Get a uint value
+		 *
+		 * @param name The name
+		 * @return uint64_t & The value
+		 */
 		uint64_t &				u(std::string const & name)  { return get<uint64_t>(name); }
+		/**
+		 * @brief Get a double value
+		 *
+		 * @param name The name
+		 * @return double const& The value
+		 */
 		double const &			d(std::string const & name) const { return get<double>(name); }
+		/**
+		 * @brief Get a double value
+		 *
+		 * @param name The name
+		 * @return double & The value
+		 */
 		double &				d(std::string const & name)  { return get<double>(name); }
+		/**
+		 * @brief Get a bool value
+		 *
+		 * @param name The name
+		 * @return bool const& The value
+		 */
 		bool const &			b(std::string const & name) const { return get<bool>(name); }
+		/**
+		 * @brief Get a bool value
+		 *
+		 * @param name The name
+		 * @return bool & The value
+		 */
 		bool &					b(std::string const & name)  { return get<bool>(name); }
+		/**
+		 * @brief Get a json value
+		 *
+		 * @param name The name
+		 * @return SettingsJson const& The value
+		 */
 		SettingsJson const &	j(std::string const & name) const { return get<SettingsJson>(name); }
+		/**
+		 * @brief Get a json value
+		 *
+		 * @param name The name
+		 * @return SettingsJson & The value
+		 */
 		SettingsJson &			j(std::string const & name)  { return get<SettingsJson>(name); }
+		/**
+		 * @brief Get a json list value
+		 *
+		 * @param name The name
+		 * @return SettingsList<SettingsJson> const& The value
+		 */
 		SettingsList<SettingsJson> const &	lj(std::string const & name) const {
 			return get<SettingsList<SettingsJson>>(name);
 		}
+		/**
+		 * @brief Get a json list value
+		 *
+		 * @param name The name
+		 * @return SettingsList<SettingsJson> & The value
+		 */
 		SettingsList<SettingsJson> &		lj(std::string const & name)  { return get<SettingsList<SettingsJson>>(name); }
 
 		class SettingsException : public std::runtime_error {
@@ -319,6 +631,12 @@ class SettingsJson {
 		std::string _name;  /**< The json name */
 		std::string _description;  /**< The json description */
 
+		/**
+		 * @brief Get the right map for a type
+		 *
+		 * @tparam T The map type
+		 * @return std::map<std::string, JsonObj<T> *> const& The map
+		 */
 		template<class T>
 		std::map<std::string, JsonObj<T> *> const & _getMap() const {
 			if (typeid(T) == typeid(int64_t)) {
@@ -358,6 +676,12 @@ class SettingsJson {
 			}
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
 		}
+		/**
+		 * @brief Get the right map for a type
+		 *
+		 * @tparam T The map type
+		 * @return std::map<std::string, JsonObj<T> *> const& The map
+		 */
 		template<class T>
 		std::map<std::string, JsonObj<T> *> & _getMap() {
 			if (typeid(T) == typeid(int64_t)) {
@@ -398,7 +722,12 @@ class SettingsJson {
 			throw SettingsException(std::string("invalid type ") + typeid(T).name());
 		}
 
-
+		/**
+		 * @brief Delete a map
+		 *
+		 * @tparam T The type
+		 * @param map The map
+		 */
 		template<class T>
 		void _deleteMap(std::map<std::string, JsonObj<T> *> & map) {
 			for (auto it = map.begin(); it != map.end(); it++) {
@@ -407,6 +736,14 @@ class SettingsJson {
 			map.erase(map.begin(), map.end());
 		}
 
+		/**
+		 * @brief Copy a map
+		 *
+		 * @tparam T The type
+		 * @param dest The destination
+		 * @param src The src map
+		 * @return std::map<std::string, JsonObj<T> *>& The created map (reference)
+		 */
 		template<class T>
 		std::map<std::string, JsonObj<T> *> & _copyMap(std::map<std::string, JsonObj<T> *> & dest,
 			std::map<std::string, JsonObj<T> *> const & src)
