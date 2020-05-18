@@ -25,6 +25,9 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Fire Exception
+	 */
 	class FireException : public std::runtime_error {
 	public:
 		FireException();

@@ -145,15 +145,18 @@ class ABaseUI {
 		static Shader &				getRectShader();
 
 		/* Exceptions */
-	class UIException : public std::runtime_error {
-		public:
-			UIException();
-			/**
-			 * @brief Construct a new UIException object
-			 *
-			 * @param what_arg Error message
-			 */
-			explicit UIException(const char* what_arg);
+		/**
+		 * @brief UI exception
+		 */
+		class UIException : public std::runtime_error {
+			public:
+				UIException();
+				/**
+				 * @brief Construct a new UIException object
+				 *
+				 * @param what_arg Error message
+				 */
+				explicit UIException(const char* what_arg);
 		};
 
 	protected:

@@ -36,11 +36,17 @@ struct	Vertex {
 	Vertex();  // default constructor, init bonesId and bonesW
 };
 
+/**
+ * @brief Bounding box
+ */
 struct	BoundingBox {
 	glm::vec3	startPoint;  /**< The starting point */
 	glm::vec3	size;  /**< The size */
 };
 
+/**
+ * @brief Texture
+ */
 struct	Texture {
 	uint32_t			id;  /**< The texture ID */
 	TextureType::Enum	type;  /**< The texture type (DIFFUSE, SPECULAT, NORMAL) */

@@ -45,6 +45,9 @@ public:
 	static std::string	timestampToFileName(time_t timestamp);
 	static int			getLastUnlockedLevel();
 	// Exceptions
+	/**
+	 * @brief Save exception
+	 */
 	class SaveException : public std::runtime_error {
 	public:
 		SaveException();

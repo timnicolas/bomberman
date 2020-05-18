@@ -50,6 +50,9 @@ class SceneManager {
 		static void					quit();
 
 		/* Exceptions */
+		/**
+		 * @brief SceneManager exception
+		 */
 		class SceneManagerException : public std::runtime_error {
 		public:
 			SceneManagerException();

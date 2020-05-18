@@ -605,6 +605,9 @@ class SettingsJson {
 		 */
 		SettingsList<SettingsJson> &		lj(std::string const & name)  { return get<SettingsList<SettingsJson>>(name); }
 
+		/**
+		 * @brief Settings exception
+		 */
 		class SettingsException : public std::runtime_error {
 			public:
 				SettingsException();

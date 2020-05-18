@@ -11,6 +11,9 @@
  */
 class Music {
 public:
+	/**
+	 * @brief Music exception
+	 */
 	class MusicException: public std::runtime_error {
 		public:
 			MusicException();

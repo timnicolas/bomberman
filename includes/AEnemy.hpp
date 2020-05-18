@@ -78,6 +78,9 @@ public:
 	std::unordered_set<AEntity *>	getCollision(glm::vec3 dest) const;
 
 	// Exceptions
+	/**
+	 * @brief Enemy Exception
+	 */
 	class EnemyException : public std::runtime_error {
 	public:
 		EnemyException();

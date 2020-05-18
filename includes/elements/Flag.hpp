@@ -29,6 +29,9 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Flag exception
+	 */
 	class FlagException : public std::runtime_error {
 	public:
 		FlagException();

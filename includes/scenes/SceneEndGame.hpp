@@ -15,7 +15,6 @@ class SceneEndGame : public ASceneMenu {
 
 		// Operators
 		SceneEndGame &operator=(SceneEndGame const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneEndGame& myClass);
 
 		// Methods
 		virtual bool		init();

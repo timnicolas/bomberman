@@ -31,6 +31,9 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Wall Exception
+	 */
 	class WallException : public std::runtime_error {
 	public:
 		WallException();

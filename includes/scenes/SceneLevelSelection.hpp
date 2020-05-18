@@ -16,7 +16,6 @@ class SceneLevelSelection : public ASceneMenu {
 
 		// Operators
 		SceneLevelSelection &operator=(SceneLevelSelection const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneLevelSelection& myClass);
 
 		// Methods
 		virtual bool		init();
