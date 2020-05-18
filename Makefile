@@ -685,8 +685,8 @@ check:
 	@$(MAKE) $(MAKE_OPT) NEED_MAKE=$(NEED_MAKE)
 
 doc:
-	@printf $(YELLOW)$(BOLD)"CHECKING DOC WARN $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
-	@Doxygen scripts/Doxyfile > /dev/null 2>&1
+	@printf $(YELLOW)$(BOLD)"CHECKING DOCUMENTATION FOR $(PROJECT_NAME)\n--------------------\n"$(NORMAL)
+	@doxygen scripts/Doxyfile > /dev/null 2>&1
 	@cat /tmp/doxygen_warn.log
 	@printf $(YELLOW)$(BOLD)"--------------------\n"$(NORMAL)
 	@if [ ! "`cat /tmp/doxygen_warn.log`" = "" ]; then \
