@@ -2,6 +2,9 @@
 
 Logging		logging;
 
+/**
+ * @brief Construct a new Logging:: Logging object
+ */
 Logging::Logging()
 : _loglevel(LOGDEBUG) {
 	setLogColor(LOGDEBUG, COLOR_WHITE);
@@ -14,13 +17,27 @@ Logging::Logging()
 	setPrintFileLine(false);
 }
 
+/**
+ * @brief Construct a new Logging:: Logging object
+ *
+ * @param src The object to do the copy
+ */
 Logging::Logging(Logging const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Logging:: Logging object
+ */
 Logging::~Logging() {
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return Logging& A reference to the copied object
+ */
 Logging & Logging::operator=(Logging const &rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

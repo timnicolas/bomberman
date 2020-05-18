@@ -1,12 +1,23 @@
 #include "SettingsJson.hpp"
 
+/**
+ * @brief Construct a new Settings Json:: Settings Json object
+ */
 SettingsJson::SettingsJson() {
 }
 
+/**
+ * @brief Construct a new Settings Json:: Settings Json object
+ *
+ * @param src The object to do the copy
+ */
 SettingsJson::SettingsJson(SettingsJson const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Settings Json:: Settings Json object
+ */
 SettingsJson::~SettingsJson() {
 	_deleteMap<std::string>(stringMap);
 	_deleteMap<int64_t>(intMap);
@@ -17,6 +28,12 @@ SettingsJson::~SettingsJson() {
 	_deleteMap<SettingsList<SettingsJson> >(jsonList);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The opjet to copy
+ * @return SettingsJson& A reference to the copied object
+ */
 SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {
 	if (this != &rhs) {
 		// logDebug("WARNING -> SettingsJson object copied");
