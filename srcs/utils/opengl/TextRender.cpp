@@ -120,7 +120,7 @@ TextRender::~TextRender() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return TextRender& A reference to the copied object
  */
 TextRender &TextRender::operator=(TextRender const &rhs) {

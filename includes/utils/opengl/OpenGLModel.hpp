@@ -79,7 +79,7 @@ class OpenGLModel {
 
 		// Exceptions
 		/**
-		 * @brief Model execption
+		 * @brief Model exception
 		 */
 		class ModelException : public std::runtime_error {
 			public:

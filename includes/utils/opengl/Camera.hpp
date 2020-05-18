@@ -75,7 +75,7 @@ struct FrustumCulling {
 	CAMERA_FLOAT	farD;  /**< frustum culling far */
 	CAMERA_FLOAT	width;  /**< frustum culling width */
 	CAMERA_FLOAT	height;  /**< frustum culling height */
-	CAMERA_FLOAT	tang;  /**< frustum culling tangeant */
+	CAMERA_FLOAT	tang;  /**< frustum culling tangent */
 	CAMERA_FLOAT	ratio;  /**< frustum culling ratio */
 
 	FrustumCulling() : enabled(false) {}
@@ -146,7 +146,7 @@ class Camera {
 		CAMERA_FLOAT	pitch;  /**< Camera pitch */
 
 		CAMERA_FLOAT	movementSpeed;  /**< Camera speed */
-		CAMERA_FLOAT	mouseSensitivity;  /**< Camera moving sentitivity */
+		CAMERA_FLOAT	mouseSensitivity;  /**< Camera moving sensitivity */
 		CAMERA_FLOAT	runFactor;  /**< Running factor (movementSpeed * runFactor) */
 
 

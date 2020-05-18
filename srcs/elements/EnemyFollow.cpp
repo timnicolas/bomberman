@@ -41,7 +41,7 @@ EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return EnemyFollow& A reference to the copied object
  */
 EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {

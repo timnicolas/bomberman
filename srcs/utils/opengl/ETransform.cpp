@@ -57,7 +57,7 @@ ETransform::ETransform(ETransform const &src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ETransform& A reference to the copied object
  */
 ETransform &ETransform::operator=(ETransform const &rhs) {

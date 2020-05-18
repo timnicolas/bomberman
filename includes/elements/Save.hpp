@@ -57,7 +57,7 @@ public:
 private:
 	// Members
 	bool			_saved;  /**< Is saved ? */
-	bool			_instantiate;  /**< Is instanciate */
+	bool			_instantiate;  /**< Is instantiate */
 	std::time_t		_time;  /**< Time */
 	std::string		_filename;  /**< Filename of save */
 	SettingsJson	*_saveJs;  /**< Json save */

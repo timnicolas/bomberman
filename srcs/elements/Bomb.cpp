@@ -46,7 +46,7 @@ Bomb::Bomb(Bomb const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Bomb& A reference to the copied object
  */
 Bomb &Bomb::operator=(Bomb const &rhs) {

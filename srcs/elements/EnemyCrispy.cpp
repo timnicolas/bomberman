@@ -47,7 +47,7 @@ EnemyCrispy::EnemyCrispy(EnemyCrispy const &src) : AEnemy(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return EnemyCrispy& A reference to the copied object
  */
 EnemyCrispy &EnemyCrispy::operator=(EnemyCrispy const &rhs) {

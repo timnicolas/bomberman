@@ -28,7 +28,7 @@ EmptyMasterUI::~EmptyMasterUI() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return EmptyMasterUI& A reference to the copied object
  */
 EmptyMasterUI & EmptyMasterUI::operator=(EmptyMasterUI const & rhs) {

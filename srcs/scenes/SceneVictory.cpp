@@ -35,7 +35,7 @@ SceneVictory::~SceneVictory() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneVictory& A reference to the copied object
  */
 SceneVictory & SceneVictory::operator=(SceneVictory const & rhs) {

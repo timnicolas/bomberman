@@ -53,7 +53,7 @@ Model::Model(Model const &src)
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Model& A reference to the copied object
  */
 Model &Model::operator=(Model const &rhs) {

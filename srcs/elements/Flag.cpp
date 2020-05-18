@@ -41,7 +41,7 @@ Flag::Flag(Flag const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Flag& A reference to the copied object
  */
 Flag &Flag::operator=(Flag const &rhs) {

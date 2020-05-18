@@ -30,7 +30,7 @@ RectUI::~RectUI() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return RectUI& A reference to the copied object
  */
 RectUI & RectUI::operator=(RectUI const & rhs) {

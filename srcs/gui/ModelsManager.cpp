@@ -34,7 +34,7 @@ ModelsManager::ModelsManager(ModelsManager const &src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ModelsManager& A reference to the copied object
  */
 ModelsManager &ModelsManager::operator=(ModelsManager const &rhs) {

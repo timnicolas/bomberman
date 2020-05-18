@@ -57,7 +57,7 @@ SceneSettings::SceneSettings(SceneSettings const &src) : ASceneMenu(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneSettings& A reference to the copied object
  */
 SceneSettings			&SceneSettings::operator=(SceneSettings const &rhs) {

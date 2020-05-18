@@ -128,7 +128,7 @@ SceneCheatCode::~SceneCheatCode() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneCheatCode& A reference to the copied object
  */
 SceneCheatCode & SceneCheatCode::operator=(SceneCheatCode const & rhs) {

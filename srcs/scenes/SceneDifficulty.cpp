@@ -31,7 +31,7 @@ SceneDifficulty::~SceneDifficulty() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneDifficulty& A reference to the copied object
  */
 SceneDifficulty & SceneDifficulty::operator=(SceneDifficulty const & rhs) {

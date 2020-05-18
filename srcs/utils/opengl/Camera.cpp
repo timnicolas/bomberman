@@ -62,7 +62,7 @@ Camera::Camera(Camera const &src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Camera& A reference to the copied object
  */
 Camera	&Camera::operator=(Camera const &rhs) {

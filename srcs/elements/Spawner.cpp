@@ -47,7 +47,7 @@ Spawner::Spawner(Spawner const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Spawner& A reference to the copied object
  */
 Spawner &Spawner::operator=(Spawner const &rhs) {

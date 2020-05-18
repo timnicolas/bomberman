@@ -49,7 +49,7 @@ struct	BoundingBox {
  */
 struct	Texture {
 	uint32_t			id;  /**< The texture ID */
-	TextureType::Enum	type;  /**< The texture type (DIFFUSE, SPECULAT, NORMAL) */
+	TextureType::Enum	type;  /**< The texture type (DIFFUSE, SPECULAR, NORMAL) */
 	std::string			path;  /**< The texture path */
 };
 

@@ -116,7 +116,7 @@ SceneGame::SceneGame(SceneGame const &src)
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneGame& A reference to the copied object
  */
 SceneGame &SceneGame::operator=(SceneGame const &rhs) {

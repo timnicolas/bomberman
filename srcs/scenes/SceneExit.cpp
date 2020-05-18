@@ -31,7 +31,7 @@ SceneExit::~SceneExit() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneExit& A reference to the copied object
  */
 SceneExit & SceneExit::operator=(SceneExit const & rhs) {

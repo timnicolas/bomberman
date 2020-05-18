@@ -39,7 +39,7 @@ Fire::Fire(Fire const &src) : AObject(src) {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Fire& A reference to the copied object
  */
 Fire &Fire::operator=(Fire const &rhs) {

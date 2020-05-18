@@ -37,7 +37,7 @@ ASceneMenu::ASceneMenu(ASceneMenu const &src)
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return ASceneMenu& A reference to the copied object
  */
 ASceneMenu &ASceneMenu::operator=(ASceneMenu const &rhs) {

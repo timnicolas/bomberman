@@ -31,7 +31,7 @@ SceneMainMenu::~SceneMainMenu() {}
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneMainMenu& A reference to the copied object
  */
 SceneMainMenu & SceneMainMenu::operator=(SceneMainMenu const & rhs) {

@@ -124,7 +124,7 @@ bool BoxCollider::_destroy() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return BoxCollider& A reference to the copied object
  */
 BoxCollider & BoxCollider::operator=(BoxCollider const & rhs) {

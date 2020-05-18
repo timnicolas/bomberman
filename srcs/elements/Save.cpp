@@ -113,7 +113,7 @@ Save	&Save::_newGame() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return Save& A reference to the copied object
  */
 Save &Save::operator=(Save const &rhs) {
@@ -161,9 +161,9 @@ std::string	Save::_getFilename(bool temporary) const {
 }
 
 /**
- * @brief Know if is instanciate
+ * @brief Know if is instantiate
  *
- * @return true If instanciate
+ * @return true If instantiate
  */
 bool		Save::isInstantiate() {
 	return get()._instantiate;

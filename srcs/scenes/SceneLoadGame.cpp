@@ -46,7 +46,7 @@ SceneLoadGame::~SceneLoadGame() {
 /**
  * @brief Copy this object
  *
- * @param rhs The opjet to copy
+ * @param rhs The object to copy
  * @return SceneLoadGame& A reference to the copied object
  */
 SceneLoadGame & SceneLoadGame::operator=(SceneLoadGame const & rhs) {
