@@ -141,6 +141,13 @@ SceneGame &SceneGame::operator=(SceneGame const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Cout operator
+ *
+ * @param os The ostream object
+ * @param myClass The class to cout
+ * @return std::ostream& The ostream obj
+ */
 std::ostream &	operator<<(std::ostream & os, const SceneGame& myClass) {
 	os << myClass.print();
 	return (os);
@@ -266,10 +273,9 @@ bool			SceneGame::clearFromBoard(AEntity *entity, glm::vec2 pos) {
 /**
  * @brief Check if the given pos is in the board.
  *
- * @param pos
- * @param size
- * @return true
- * @return false
+ * @param pos position
+ * @param sz size
+ * @return true if the position is in game
  */
 bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 	if (pos.x < 0 || pos.x + sz.x > size.x || pos.z < 0 || pos.z + sz.z > size.y)
@@ -279,6 +285,11 @@ bool	SceneGame::positionInGame(glm::vec3 pos, glm::vec3 sz) {
 
 // -- AScene Methods -----------------------------------------------------------
 
+/**
+ * @brief Update function to be called in menu
+ *
+ * @return false If failed
+ */
 bool	SceneGame::updateForMenu() {
 	/* set camera position for menu */
 	_gui->cam->setMode(CamMode::STATIC);
@@ -1167,6 +1178,15 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 	return true;
 }
 
+/**
+ * @brief Insert an entity in the game
+ *
+ * @param name Entity name
+ * @param pos Entity position
+ * @param isFly If entity is flying
+ * @param wallGenPercent Percentage of wall generation
+ * @return false If failed
+ */
 bool SceneGame::insertEntity(std::string const & name, glm::ivec2 pos, bool isFly, uint64_t wallGenPercent) {
 	AEntity * entity;
 
@@ -1622,6 +1642,11 @@ bool			SceneGame::_initBonus() {
 	return true;
 }
 
+/**
+ * @brief get intro animation
+ *
+ * @return std::vector<CamPoint> Animation
+ */
 std::vector<CamPoint>	SceneGame::_getIntroAnim() const {
 	return {
 		{
@@ -1671,6 +1696,11 @@ std::vector<CamPoint>	SceneGame::_getIntroAnim() const {
 	};
 }
 
+/**
+ * @brief get game over animation
+ *
+ * @return std::vector<CamPoint> Animation
+ */
 std::vector<CamPoint>	SceneGame::_getGameOverAnim() const {
 	return {
 		{
@@ -1704,6 +1734,11 @@ std::vector<CamPoint>	SceneGame::_getGameOverAnim() const {
 	};
 }
 
+/**
+ * @brief get victory animation
+ *
+ * @return std::vector<CamPoint> Animation
+ */
 std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
 	return {
 		{
@@ -1739,7 +1774,18 @@ std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
 
 // -- getter -------------------------------------------------------------------
 
+/**
+ * @brief Get the total number of levels
+ *
+ * @return uint32_t The number of levels
+ */
 uint32_t	SceneGame::getNbLevel() const { return _mapsList.size(); }
+/**
+ * @brief Get a level name
+ *
+ * @param levelId The level ID
+ * @return std::string The level name
+ */
 std::string	SceneGame::getLevelName(int32_t levelId) const {
 	if (levelId == NO_LEVEL)
 		return "NO_LEVEL";
@@ -1747,6 +1793,12 @@ std::string	SceneGame::getLevelName(int32_t levelId) const {
 		throw SceneGameException(("Level " + std::to_string(levelId) + " do not exist.").c_str());
 	return _mapsList[levelId]->s("name");
 }
+/**
+ * @brief Get a level image
+ *
+ * @param levelId The level ID
+ * @return std::string The level image path
+ */
 std::string	SceneGame::getLevelImg(int32_t levelId) const {
 	if (levelId == NO_LEVEL) {
 		logErr("can't get image for level 'NO_LEVEL'");
@@ -1785,13 +1837,24 @@ std::vector<std::string> SceneGame::getAllEntityNames() {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new Scene Game:: Scene Game Exception:: Scene Game Exception object
+ */
 SceneGame::SceneGameException::SceneGameException()
 : std::runtime_error("SceneGame Exception") {}
 
+/**
+ * @brief Construct a new Scene Game:: Scene Game Exception:: Scene Game Exception object
+ *
+ * @param whatArg Error message
+ */
 SceneGame::SceneGameException::SceneGameException(const char* whatArg)
 : std::runtime_error(std::string(std::string("SceneGameError: ") + whatArg).c_str()) {}
 
 // -- DrawForMenu struct -------------------------------------------------------
+/**
+ * @brief Construct a new Scene Game:: Draw For Menu:: Draw For Menu object
+ */
 SceneGame::DrawForMenu::DrawForMenu() {
 	player = nullptr;
 	flower = nullptr;

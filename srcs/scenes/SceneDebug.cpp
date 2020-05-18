@@ -107,6 +107,11 @@ bool SceneDebug::update() {
 }
 
 // -- Setters ------------------------------------------------------------------
+/**
+ * @brief Set the menu visible or invisible
+ *
+ * @param visible If is visible
+ */
 void	SceneDebug::setVisible(bool visible) {
 	_visible = visible;
 	_fpsText->setEnabled(_visible);

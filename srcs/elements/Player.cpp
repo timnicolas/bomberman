@@ -224,7 +224,7 @@ bool	Player::draw(Gui &gui) {
 }
 
 /**
- * @brief Player Take <damage> damages.
+ * @brief Player Take < damage > damages.
  *
  * @param damage
  * @return true if damage taken
@@ -262,7 +262,7 @@ bool	Player::takeDamage(const int damage) {
 }
 
 /**
- * @brief Player take a <bonus> which allow to power up.
+ * @brief Player take a < bonus > which allow to power up.
  *
  * @param bonus
  * @param silent
@@ -355,7 +355,7 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 }
 
 /**
- * @brief Player remove a <bonus>
+ * @brief Player remove a < bonus >
  *
  * @param bonus
  * @return true

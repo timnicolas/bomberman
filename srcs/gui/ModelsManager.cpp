@@ -139,9 +139,17 @@ OpenGLModel	&ModelsManager::_getModel(std::string const &name) {
 }
 
 // -- exceptions ---------------------------------------------------------------
+/**
+ * @brief Construct a new Models Manager:: Models Manager Exception:: Models Manager Exception object
+ */
 ModelsManager::ModelsManagerException::ModelsManagerException()
 : std::runtime_error("[ModelsManagerException]") {}
 
+/**
+ * @brief Construct a new Models Manager:: Models Manager Exception:: Models Manager Exception object
+ *
+ * @param what_arg Error message
+ */
 ModelsManager::ModelsManagerException::ModelsManagerException(const char* what_arg)
 : std::runtime_error(std::string(std::string("[ModelsManagerException] ") +
 	what_arg).c_str()) {}

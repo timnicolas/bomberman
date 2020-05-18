@@ -150,14 +150,30 @@ std::ostream &	operator<<(std::ostream & os, const Save& my_class) {
 std::string	Save::getFilename(bool temporary) {
 	return get()._getFilename(temporary);
 }
+/**
+ * @brief Get filename
+ *
+ * @param temporary
+ * @return std::string
+ */
 std::string	Save::_getFilename(bool temporary) const {
 	return homeDir+SAVE_DIR + timestampToFileName(_time) + (temporary ? "_temp" : "") + ".save";
 }
 
+/**
+ * @brief Know if is instanciate
+ *
+ * @return true If instanciate
+ */
 bool		Save::isInstantiate() {
 	return get()._instantiate;
 }
 
+/**
+ * @brief Know if the game is saved
+ *
+ * @return true If saved
+ */
 bool		Save::isSaved() {
 	return get()._saved;
 }
@@ -183,6 +199,7 @@ std::string		Save::getFileNameRegex(bool temporary) {
 /**
  * @brief Define Json format to saved file.
  *
+ * @param filename The json file
  * @param newFile true if we don't want to check the given file.
  * @return true
  * @return false
@@ -240,12 +257,20 @@ SettingsJson	*Save::initJson(std::string filename, bool newFile) {
  * @brief Update Saved File Informations
  *
  * @param game
+ * @param succeedLevel
  * @return true
  * @return false
  */
 bool	Save::updateSavedFile(SceneGame &game, bool succeedLevel) {
 	return get()._updateSavedFile(game, succeedLevel);
 }
+/**
+ * @brief Update Saved File Informations
+ *
+ * @param game
+ * @return true
+ * @return false
+ */
 bool	Save::_updateSavedFile(SceneGame &game, bool succeedLevel) {
 	_saved = false;
 	std::time_t		t = std::time(nullptr);
@@ -295,6 +320,13 @@ bool	Save::_updateSavedFile(SceneGame &game, bool succeedLevel) {
 bool	Save::loadStatesSaved(SceneGame &game) {
 	return get()._loadStatesSaved(game);
 }
+/**
+ * @brief Load information from saved files.
+ *
+ * @param game
+ * @return true
+ * @return false
+ */
 bool	Save::_loadStatesSaved(SceneGame &game) {
 	game.player->resetCrossable();
 	game.player->lives = _saveJs->j("state").u("life");
@@ -321,6 +353,11 @@ bool	Save::_loadStatesSaved(SceneGame &game) {
 int		Save::getLastUnlockedLevel() {
 	return get()._getLastUnlockedLevel();
 }
+/**
+ * @brief Get last unclocked level.
+ *
+ * @return int ID of the level
+ */
 int		Save::_getLastUnlockedLevel() {
 	int	maxLevel = 0;
 	for (SettingsJson *level : _saveJs->lj("levels").list) {
@@ -330,15 +367,20 @@ int		Save::_getLastUnlockedLevel() {
 }
 
 /**
- * @brief Check if the Level <levelId> has already been done.
+ * @brief Check if the Level < levelId > has already been done.
  *
- * @param game
- * @return true
- * @return false
+ * @param levelId The level ID
+ * @return true If the level is done
  */
 bool	Save::isLevelDone(int32_t levelId) {
 	return get()._isLevelDone(levelId);
 }
+/**
+ * @brief Check if the Level < levelId > has already been done.
+ *
+ * @param levelId The level ID
+ * @return true If the level is done
+ */
 bool	Save::_isLevelDone(int32_t levelId) {
 	for (SettingsJson *level : _saveJs->lj("levels").list) {
 		if (level->i("id") == levelId) {
@@ -358,6 +400,12 @@ bool	Save::_isLevelDone(int32_t levelId) {
 int		Save::getLevelScore(int32_t levelId) {
 	return get()._getLevelScore(levelId);
 }
+/**
+ * @brief Get score for given levelId.
+ *
+ * @param levelId
+ * @return int score. 0 is returned if not score for the given level.
+ */
 int		Save::_getLevelScore(int32_t levelId) {
 	for (SettingsJson *level : _saveJs->lj("levels").list) {
 		if (level->i("id") == levelId) {
@@ -377,6 +425,13 @@ int		Save::_getLevelScore(int32_t levelId) {
 bool	Save::setLevelDone(int32_t levelId, int32_t score) {
 	return get()._setLevelDone(levelId, score);
 }
+/**
+ * @brief Set a level as done
+ *
+ * @param levelId The level ID
+ * @param score The score
+ * @return false If failed
+ */
 bool	Save::_setLevelDone(int32_t levelId, int32_t score) {
 	bool exist = false;
 	for (SettingsJson *level : _saveJs->lj("levels").list) {
@@ -427,6 +482,13 @@ uint	Save::getDifficulty() {
 bool	Save::save(bool temporary) {
 	return get()._save(temporary);
 }
+/**
+ * @brief Save method to file.
+ *
+ * @param temporary
+ * @return true
+ * @return false
+ */
 bool	Save::_save(bool temporary) {
 	try {
 		_saveJs->saveToFile(_getFilename(temporary));
@@ -521,8 +583,16 @@ std::string	Save::_addRegexSlashes(std::string str) {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new Save:: Save Exception:: Save Exception object
+ */
 Save::SaveException::SaveException()
 : std::runtime_error("Save Exception") {}
 
+/**
+ * @brief Construct a new Save:: Save Exception:: Save Exception object
+ *
+ * @param what_arg Error message
+ */
 Save::SaveException::SaveException(const char* what_arg)
 : std::runtime_error(std::string(std::string("SaveError: ") + what_arg).c_str()) {}
