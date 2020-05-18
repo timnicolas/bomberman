@@ -20,7 +20,8 @@ Inheritance diagram for Scene\+Game\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Game\+:\nopagebreak
+Collaboration diagram for Scene\+Game\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,23 +32,23 @@ Collaboration diagram for Scene\+Game\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}}
-\item 
+\begin{DoxyCompactList}\small\item\em All UI elements (bonus, text, ...) \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_scene_game_1_1_bonus_values}{Bonus\+Values}}
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bonus}{Bonus}} Information about spawn (number of bonus \& chance to spawn) \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_scene_game_1_1_scene_game_exception}{Scene\+Game\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_scene_game}{Scene\+Game}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_game_a1657843625d6983e5eb49e7509f88108}\label{class_scene_game_a1657843625d6983e5eb49e7509f88108}} 
-{\bfseries Scene\+Game} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_scene_game_a0fcd21aad79ec54227df066acd260386}\label{class_scene_game_a0fcd21aad79ec54227df066acd260386}} 
-{\bfseries Scene\+Game} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&src)
-\item 
-\mbox{\Hypertarget{class_scene_game_a43a31ea04e25cc4ca0f2bf7e0b082c66}\label{class_scene_game_a43a31ea04e25cc4ca0f2bf7e0b082c66}} 
-\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_scene_game_a1657843625d6983e5eb49e7509f88108}{Scene\+Game}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Game\+:\+: Scene Game object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_game_ae2813101b38f595f7ce11083cb23749b}\label{class_scene_game_ae2813101b38f595f7ce11083cb23749b}} 
+virtual \mbox{\hyperlink{class_scene_game_ae2813101b38f595f7ce11083cb23749b}{$\sim$\+Scene\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Game\+:\+: Scene Game object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_game_a0fcd21aad79ec54227df066acd260386}{Scene\+Game}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Game\+:\+: Scene Game object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \& \mbox{\hyperlink{class_scene_game_a43a31ea04e25cc4ca0f2bf7e0b082c66}{operator=}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{class_scene_game_ade3372481910abd46f43c214ec3b2a27}{print}} () const
 \item 
 bool \mbox{\hyperlink{class_scene_game_a50787dc8e9c4fd8df0c5bd918e48f3f5}{clear\+From\+Board}} (\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$entity, glm\+::vec2 pos)
@@ -68,9 +69,8 @@ virtual void \mbox{\hyperlink{class_scene_game_abca28f01a7f00a09da5e6f9ede80e3f0
 \begin{DoxyCompactList}\small\item\em called when the scene is unloaded \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_game_a0797fee2de442f68aef19cc5c3299ec3}{draw}} ()
 \begin{DoxyCompactList}\small\item\em draw is called each frame to draw the Game Scene. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_game_a31f15b71525e919299f3d410e01a6b51}\label{class_scene_game_a31f15b71525e919299f3d410e01a6b51}} 
-bool {\bfseries update\+For\+Menu} ()
-\item 
+bool \mbox{\hyperlink{class_scene_game_a31f15b71525e919299f3d410e01a6b51}{update\+For\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Update function to be called in menu. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_game_aa5a77510343519b344cda44acc320bcb}{draw\+Game}} ()
 \begin{DoxyCompactList}\small\item\em Draw function if we are in a level. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_game_acf0d5bdff0bc5393f284ae9dc4898152}{draw\+For\+Menu}} ()
@@ -83,18 +83,14 @@ bool \mbox{\hyperlink{class_scene_game_a128672ac2376a82f99b4a22fb759c368}{draw\+
 \begin{DoxyCompactList}\small\item\em Draw function if we are in end\+Game menu. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_game_a1cafe2063efb8abce412fe86888f5c51}{load\+Level}} (int32\+\_\+t level\+Id)
 \begin{DoxyCompactList}\small\item\em load a level by ID \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_game_a51c64858cec30552b4eed160c9296a94}\label{class_scene_game_a51c64858cec30552b4eed160c9296a94}} 
-bool {\bfseries insert\+Entity} (std\+::string const \&name, glm\+::ivec2 pos, bool is\+Fly=false, uint64\+\_\+t wall\+Gen\+Percent=0)
-\item 
-\mbox{\Hypertarget{class_scene_game_a49b0881897a0e7dca907a694ecce8c92}\label{class_scene_game_a49b0881897a0e7dca907a694ecce8c92}} 
-uint32\+\_\+t {\bfseries get\+Nb\+Level} () const
-\item 
-\mbox{\Hypertarget{class_scene_game_a29ee8ee172dcd5b70385f29f39e769bc}\label{class_scene_game_a29ee8ee172dcd5b70385f29f39e769bc}} 
-std\+::string {\bfseries get\+Level\+Name} (int32\+\_\+t level\+Id) const
-\item 
-\mbox{\Hypertarget{class_scene_game_adbaa88f6ec0f3e093474e8d293b65282}\label{class_scene_game_adbaa88f6ec0f3e093474e8d293b65282}} 
-std\+::string {\bfseries get\+Level\+Img} (int32\+\_\+t level\+Id) const
-\item 
+bool \mbox{\hyperlink{class_scene_game_a51c64858cec30552b4eed160c9296a94}{insert\+Entity}} (std\+::string const \&name, glm\+::ivec2 pos, bool is\+Fly=false, uint64\+\_\+t wall\+Gen\+Percent=0)
+\begin{DoxyCompactList}\small\item\em Insert an entity in the game. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{class_scene_game_a49b0881897a0e7dca907a694ecce8c92}{get\+Nb\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Get the total number of levels. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_scene_game_a29ee8ee172dcd5b70385f29f39e769bc}{get\+Level\+Name}} (int32\+\_\+t level\+Id) const
+\begin{DoxyCompactList}\small\item\em Get a level name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_scene_game_adbaa88f6ec0f3e093474e8d293b65282}{get\+Level\+Img}} (int32\+\_\+t level\+Id) const
+\begin{DoxyCompactList}\small\item\em Get a level image. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_settings_json}{Settings\+Json}} \& \mbox{\hyperlink{class_scene_game_aafa85a3148ac0886a2e6dfe1ee5a3d99}{get\+Settings\+Level}} () const
 \begin{DoxyCompactList}\small\item\em Return J\+S\+ON Settings of level. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
@@ -105,64 +101,46 @@ static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_scene_game_a0b6
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}\label{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}} 
-std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ {\bfseries board}
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{board}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a8abb19247e59048f4f151f28934325ac}\label{class_scene_game_a8abb19247e59048f4f151f28934325ac}} 
-std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ {\bfseries board\+Fly}
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{class_scene_game_a8abb19247e59048f4f151f28934325ac}{board\+Fly}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a7343447f840c96da20f2358c035b7ce4}\label{class_scene_game_a7343447f840c96da20f2358c035b7ce4}} 
-\mbox{\hyperlink{class_player}{Player}} $\ast$ {\bfseries player}
+\mbox{\hyperlink{class_player}{Player}} $\ast$ \mbox{\hyperlink{class_scene_game_a7343447f840c96da20f2358c035b7ce4}{player}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a5fd5739b1dc811d2cc70cd73ea177d30}\label{class_scene_game_a5fd5739b1dc811d2cc70cd73ea177d30}} 
-std\+::vector$<$ \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} $\ast$ $>$ {\bfseries enemies}
+std\+::vector$<$ \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} $\ast$ $>$ \mbox{\hyperlink{class_scene_game_a5fd5739b1dc811d2cc70cd73ea177d30}{enemies}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a9d05f8167666796932daca9d06ed62d1}\label{class_scene_game_a9d05f8167666796932daca9d06ed62d1}} 
-std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_scene_game_1_1_bonus_values}{Bonus\+Values}} $>$ {\bfseries bonus}
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{struct_scene_game_1_1_bonus_values}{Bonus\+Values}} $>$ \mbox{\hyperlink{class_scene_game_a9d05f8167666796932daca9d06ed62d1}{bonus}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a97955bb4971b1800da1e15bcb472150d}\label{class_scene_game_a97955bb4971b1800da1e15bcb472150d}} 
-std\+::vector$<$ \mbox{\hyperlink{class_spawner}{Spawner}} $\ast$ $>$ {\bfseries spawners}
+std\+::vector$<$ \mbox{\hyperlink{class_spawner}{Spawner}} $\ast$ $>$ \mbox{\hyperlink{class_scene_game_a97955bb4971b1800da1e15bcb472150d}{spawners}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a53d7732b5968cc22b938451d371592c9}\label{class_scene_game_a53d7732b5968cc22b938451d371592c9}} 
-int {\bfseries flags}
+int \mbox{\hyperlink{class_scene_game_a53d7732b5968cc22b938451d371592c9}{flags}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a3cf109ade202cfa93be0778d9218ef14}\label{class_scene_game_a3cf109ade202cfa93be0778d9218ef14}} 
-glm\+::uvec2 {\bfseries size}
+glm\+::uvec2 \mbox{\hyperlink{class_scene_game_a3cf109ade202cfa93be0778d9218ef14}{size}}
 \item 
-\mbox{\Hypertarget{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}\label{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}} 
-int32\+\_\+t {\bfseries level}
+int32\+\_\+t \mbox{\hyperlink{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}{level}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a148576dff8050dfcf438ff29c0aaf400}\label{class_scene_game_a148576dff8050dfcf438ff29c0aaf400}} 
-Game\+State\+::\+Enum {\bfseries state}
+Game\+State\+::\+Enum \mbox{\hyperlink{class_scene_game_a148576dff8050dfcf438ff29c0aaf400}{state}}
 \item 
-\mbox{\Hypertarget{class_scene_game_aae46344cf5b218d3965836e3a6518296}\label{class_scene_game_aae46344cf5b218d3965836e3a6518296}} 
-uint32\+\_\+t {\bfseries level\+Enemies}
+uint32\+\_\+t \mbox{\hyperlink{class_scene_game_aae46344cf5b218d3965836e3a6518296}{level\+Enemies}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a7d7cc035d462fa565775e0d2d19a64dc}\label{class_scene_game_a7d7cc035d462fa565775e0d2d19a64dc}} 
-uint32\+\_\+t {\bfseries level\+Crispies}
+uint32\+\_\+t \mbox{\hyperlink{class_scene_game_a7d7cc035d462fa565775e0d2d19a64dc}{level\+Crispies}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a0eb866e448133db3365b92c0c60740a7}\label{class_scene_game_a0eb866e448133db3365b92c0c60740a7}} 
-float {\bfseries level\+Time}
+float \mbox{\hyperlink{class_scene_game_a0eb866e448133db3365b92c0c60740a7}{level\+Time}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a7035bc7e8801e4d17cab3128d6d60be0}\label{class_scene_game_a7035bc7e8801e4d17cab3128d6d60be0}} 
-float {\bfseries time}
+float \mbox{\hyperlink{class_scene_game_a7035bc7e8801e4d17cab3128d6d60be0}{time}}
 \item 
-\mbox{\Hypertarget{class_scene_game_ae548cebf05f9ca19eadf0e2c166c8ab4}\label{class_scene_game_ae548cebf05f9ca19eadf0e2c166c8ab4}} 
-\mbox{\hyperlink{class_score}{Score}} {\bfseries score}
+\mbox{\hyperlink{class_score}{Score}} \mbox{\hyperlink{class_scene_game_ae548cebf05f9ca19eadf0e2c166c8ab4}{score}}
 \item 
-\mbox{\Hypertarget{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0}\label{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0}} 
-int64\+\_\+t {\bfseries enemies\+To\+Kill}
+int64\+\_\+t \mbox{\hyperlink{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0}{enemies\+To\+Kill}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a74a292034550a61d53fc19416acc2aaa}\label{class_scene_game_a74a292034550a61d53fc19416acc2aaa}} 
-int64\+\_\+t {\bfseries enemies\+Killed}
+int64\+\_\+t \mbox{\hyperlink{class_scene_game_a74a292034550a61d53fc19416acc2aaa}{enemies\+Killed}}
 \item 
-\mbox{\Hypertarget{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}\label{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}} 
-std\+::string {\bfseries music\+Level}
+std\+::string \mbox{\hyperlink{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}{music\+Level}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::map$<$ std\+::string, Entity $>$ {\bfseries entities\+Call}
+static std\+::map$<$ std\+::string, Entity $>$ \mbox{\hyperlink{class_scene_game_a9e56bd4fd7c24e7097e29b7e4aff1986}{entities\+Call}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -178,33 +156,102 @@ void \mbox{\hyperlink{class_scene_game_a026ec016233b2aa640b5a44f13a4cd02}{\+\_\+
 \begin{DoxyCompactList}\small\item\em Update game informations. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_game_a03235b8b2b34ee0059ebba1e7c0a8ac6}{\+\_\+init\+Bonus}} ()
 \begin{DoxyCompactList}\small\item\em Init the bonus member according to the description in level.\+json. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_game_ac94a0aea8920b1a1dc4324a25c2d102d}\label{class_scene_game_ac94a0aea8920b1a1dc4324a25c2d102d}} 
-std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ {\bfseries \+\_\+get\+Intro\+Anim} () const
-\item 
-\mbox{\Hypertarget{class_scene_game_a02e7d9b9c93aec9665c9235ddfb212f5}\label{class_scene_game_a02e7d9b9c93aec9665c9235ddfb212f5}} 
-std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ {\bfseries \+\_\+get\+Game\+Over\+Anim} () const
-\item 
-\mbox{\Hypertarget{class_scene_game_a39f1c1fd2d9948017b3c7603d2d72d1f}\label{class_scene_game_a39f1c1fd2d9948017b3c7603d2d72d1f}} 
-std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ {\bfseries \+\_\+get\+Victory\+Anim} () const
-\end{DoxyCompactItemize}
+std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ \mbox{\hyperlink{class_scene_game_ac94a0aea8920b1a1dc4324a25c2d102d}{\+\_\+get\+Intro\+Anim}} () const
+\begin{DoxyCompactList}\small\item\em get intro animation \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ \mbox{\hyperlink{class_scene_game_a02e7d9b9c93aec9665c9235ddfb212f5}{\+\_\+get\+Game\+Over\+Anim}} () const
+\begin{DoxyCompactList}\small\item\em get game over animation \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ \mbox{\hyperlink{class_scene_game_a39f1c1fd2d9948017b3c7603d2d72d1f}{\+\_\+get\+Victory\+Anim}} () const
+\begin{DoxyCompactList}\small\item\em get victory animation \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_game_ae6a927879520686d867eee29aa67663f}\label{class_scene_game_ae6a927879520686d867eee29aa67663f}} 
-\mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}} \mbox{\hyperlink{class_scene_game_ae6a927879520686d867eee29aa67663f}{all\+UI}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_game_abc95c7a5340188a5cf8d86243d2369ae}\label{class_scene_game_abc95c7a5340188a5cf8d86243d2369ae}} 
-std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&my\+Class)
-\end{DoxyCompactItemize}
+std\+::ostream \& \mbox{\hyperlink{class_scene_game_abc95c7a5340188a5cf8d86243d2369ae}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&my\+Class)
+\begin{DoxyCompactList}\small\item\em Cout operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This is the game Scene. In this scene, you can play to the game and load levels. 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_game_a1657843625d6983e5eb49e7509f88108}\label{class_scene_game_a1657843625d6983e5eb49e7509f88108}} 
+\index{SceneGame@{SceneGame}!SceneGame@{SceneGame}}
+\index{SceneGame@{SceneGame}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{SceneGame()}{SceneGame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Game\+::\+Scene\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Game\+:\+: Scene Game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_game_a0fcd21aad79ec54227df066acd260386}\label{class_scene_game_a0fcd21aad79ec54227df066acd260386}} 
+\index{SceneGame@{SceneGame}!SceneGame@{SceneGame}}
+\index{SceneGame@{SceneGame}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{SceneGame()}{SceneGame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Game\+::\+Scene\+Game (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Game\+:\+: Scene Game object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_game_a02e7d9b9c93aec9665c9235ddfb212f5}\label{class_scene_game_a02e7d9b9c93aec9665c9235ddfb212f5}} 
+\index{SceneGame@{SceneGame}!\_getGameOverAnim@{\_getGameOverAnim}}
+\index{\_getGameOverAnim@{\_getGameOverAnim}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{\_getGameOverAnim()}{\_getGameOverAnim()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ Scene\+Game\+::\+\_\+get\+Game\+Over\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get game over animation 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Cam\+Point$>$ Animation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_ac94a0aea8920b1a1dc4324a25c2d102d}\label{class_scene_game_ac94a0aea8920b1a1dc4324a25c2d102d}} 
+\index{SceneGame@{SceneGame}!\_getIntroAnim@{\_getIntroAnim}}
+\index{\_getIntroAnim@{\_getIntroAnim}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{\_getIntroAnim()}{\_getIntroAnim()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ Scene\+Game\+::\+\_\+get\+Intro\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get intro animation 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Cam\+Point$>$ Animation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_a39f1c1fd2d9948017b3c7603d2d72d1f}\label{class_scene_game_a39f1c1fd2d9948017b3c7603d2d72d1f}} 
+\index{SceneGame@{SceneGame}!\_getVictoryAnim@{\_getVictoryAnim}}
+\index{\_getVictoryAnim@{\_getVictoryAnim}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{\_getVictoryAnim()}{\_getVictoryAnim()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ Scene\+Game\+::\+\_\+get\+Victory\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get victory animation 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+Cam\+Point$>$ Animation 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_game_a03235b8b2b34ee0059ebba1e7c0a8ac6}\label{class_scene_game_a03235b8b2b34ee0059ebba1e7c0a8ac6}} 
 \index{SceneGame@{SceneGame}!\_initBonus@{\_initBonus}}
 \index{\_initBonus@{\_initBonus}!SceneGame@{SceneGame}}
@@ -339,6 +386,55 @@ Get the name of all entity.
 \begin{DoxyReturn}{Returns}
 std\+::vector$<$std\+::string$>$ The names 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_adbaa88f6ec0f3e093474e8d293b65282}\label{class_scene_game_adbaa88f6ec0f3e093474e8d293b65282}} 
+\index{SceneGame@{SceneGame}!getLevelImg@{getLevelImg}}
+\index{getLevelImg@{getLevelImg}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{getLevelImg()}{getLevelImg()}}
+{\footnotesize\ttfamily std\+::string Scene\+Game\+::get\+Level\+Img (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level\+Id }\end{DoxyParamCaption}) const}
+
+
+
+Get a level image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Id} & The level ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The level image path 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_a29ee8ee172dcd5b70385f29f39e769bc}\label{class_scene_game_a29ee8ee172dcd5b70385f29f39e769bc}} 
+\index{SceneGame@{SceneGame}!getLevelName@{getLevelName}}
+\index{getLevelName@{getLevelName}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{getLevelName()}{getLevelName()}}
+{\footnotesize\ttfamily std\+::string Scene\+Game\+::get\+Level\+Name (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level\+Id }\end{DoxyParamCaption}) const}
+
+
+
+Get a level name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Id} & The level ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::string The level name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_a49b0881897a0e7dca907a694ecce8c92}\label{class_scene_game_a49b0881897a0e7dca907a694ecce8c92}} 
+\index{SceneGame@{SceneGame}!getNbLevel@{getNbLevel}}
+\index{getNbLevel@{getNbLevel}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{getNbLevel()}{getNbLevel()}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Game\+::get\+Nb\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the total number of levels. 
+
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The number of levels 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_game_aafa85a3148ac0886a2e6dfe1ee5a3d99}\label{class_scene_game_aafa85a3148ac0886a2e6dfe1ee5a3d99}} 
 \index{SceneGame@{SceneGame}!getSettingsLevel@{getSettingsLevel}}
 \index{getSettingsLevel@{getSettingsLevel}!SceneGame@{SceneGame}}
@@ -365,8 +461,32 @@ Return J\+S\+ON Settings of level.
 
 init game method. 
 
-Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+Implements \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}.
 
+\mbox{\Hypertarget{class_scene_game_a51c64858cec30552b4eed160c9296a94}\label{class_scene_game_a51c64858cec30552b4eed160c9296a94}} 
+\index{SceneGame@{SceneGame}!insertEntity@{insertEntity}}
+\index{insertEntity@{insertEntity}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{insertEntity()}{insertEntity()}}
+{\footnotesize\ttfamily bool Scene\+Game\+::insert\+Entity (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{glm\+::ivec2}]{pos,  }\item[{bool}]{is\+Fly = {\ttfamily false},  }\item[{uint64\+\_\+t}]{wall\+Gen\+Percent = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Insert an entity in the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Entity name \\
+\hline
+{\em pos} & Entity position \\
+\hline
+{\em is\+Fly} & If entity is flying \\
+\hline
+{\em wall\+Gen\+Percent} & Percentage of wall generation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_game_a1cafe2063efb8abce412fe86888f5c51}\label{class_scene_game_a1cafe2063efb8abce412fe86888f5c51}} 
 \index{SceneGame@{SceneGame}!loadLevel@{loadLevel}}
 \index{loadLevel@{loadLevel}!SceneGame@{SceneGame}}
@@ -387,6 +507,24 @@ true if the level loading is a success
 
 false if the level loading failed 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_game_a43a31ea04e25cc4ca0f2bf7e0b082c66}\label{class_scene_game_a43a31ea04e25cc4ca0f2bf7e0b082c66}} 
+\index{SceneGame@{SceneGame}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_game}{Scene\+Game}} \& Scene\+Game\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_game}{Scene\+Game}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_game_a0d5f3a9ca2d04f3c4fa26813614b555c}\label{class_scene_game_a0d5f3a9ca2d04f3c4fa26813614b555c}} 
 \index{SceneGame@{SceneGame}!positionInGame@{positionInGame}}
 \index{positionInGame@{positionInGame}!SceneGame@{SceneGame}}
@@ -399,15 +537,13 @@ Check if the given pos is in the board.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pos} & \\
+{\em pos} & position \\
 \hline
-{\em size} & \\
+{\em sz} & size \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true 
-
-false 
+true if the position is in game 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_game_a074516c60084a30fea0eb34cbf0b57c9}\label{class_scene_game_a074516c60084a30fea0eb34cbf0b57c9}} 
 \index{SceneGame@{SceneGame}!postUpdate@{postUpdate}}
@@ -449,10 +585,88 @@ false
 
 Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
 
+\mbox{\Hypertarget{class_scene_game_a31f15b71525e919299f3d410e01a6b51}\label{class_scene_game_a31f15b71525e919299f3d410e01a6b51}} 
+\index{SceneGame@{SceneGame}!updateForMenu@{updateForMenu}}
+\index{updateForMenu@{updateForMenu}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{updateForMenu()}{updateForMenu()}}
+{\footnotesize\ttfamily bool Scene\+Game\+::update\+For\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update function to be called in menu. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_scene_game_abc95c7a5340188a5cf8d86243d2369ae}\label{class_scene_game_abc95c7a5340188a5cf8d86243d2369ae}} 
+\index{SceneGame@{SceneGame}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{my\+Class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Cout operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The ostream object \\
+\hline
+{\em my\+Class} & The class to cout \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::ostream\& The ostream obj 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_scene_game_a9e56bd4fd7c24e7097e29b7e4aff1986}\label{class_scene_game_a9e56bd4fd7c24e7097e29b7e4aff1986}} 
+\mbox{\Hypertarget{class_scene_game_ae6a927879520686d867eee29aa67663f}\label{class_scene_game_ae6a927879520686d867eee29aa67663f}} 
+\index{SceneGame@{SceneGame}!allUI@{allUI}}
+\index{allUI@{allUI}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{allUI}{allUI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}} Scene\+Game\+::all\+UI\hspace{0.3cm}{\ttfamily [protected]}}
+
+All UI elements \mbox{\Hypertarget{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}\label{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}} 
+\index{SceneGame@{SceneGame}!board@{board}}
+\index{board@{board}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{board}{board}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$$>$ $>$ $>$ Scene\+Game\+::board}
+
+The base board with all static elements \mbox{\Hypertarget{class_scene_game_a8abb19247e59048f4f151f28934325ac}\label{class_scene_game_a8abb19247e59048f4f151f28934325ac}} 
+\index{SceneGame@{SceneGame}!boardFly@{boardFly}}
+\index{boardFly@{boardFly}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{boardFly}{boardFly}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$$>$ $>$ $>$ Scene\+Game\+::board\+Fly}
+
+The fly board with all static flying elements \mbox{\Hypertarget{class_scene_game_a9d05f8167666796932daca9d06ed62d1}\label{class_scene_game_a9d05f8167666796932daca9d06ed62d1}} 
+\index{SceneGame@{SceneGame}!bonus@{bonus}}
+\index{bonus@{bonus}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{bonus}{bonus}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{struct_scene_game_1_1_bonus_values}{Bonus\+Values}}$>$ Scene\+Game\+::bonus}
+
+All bonus information about spawn \mbox{\Hypertarget{class_scene_game_a5fd5739b1dc811d2cc70cd73ea177d30}\label{class_scene_game_a5fd5739b1dc811d2cc70cd73ea177d30}} 
+\index{SceneGame@{SceneGame}!enemies@{enemies}}
+\index{enemies@{enemies}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{enemies}{enemies}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} $\ast$$>$ Scene\+Game\+::enemies}
+
+All enemies \mbox{\Hypertarget{class_scene_game_a74a292034550a61d53fc19416acc2aaa}\label{class_scene_game_a74a292034550a61d53fc19416acc2aaa}} 
+\index{SceneGame@{SceneGame}!enemiesKilled@{enemiesKilled}}
+\index{enemiesKilled@{enemiesKilled}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{enemiesKilled}{enemiesKilled}}
+{\footnotesize\ttfamily int64\+\_\+t Scene\+Game\+::enemies\+Killed}
+
+Number of enemies killed \mbox{\Hypertarget{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0}\label{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0}} 
+\index{SceneGame@{SceneGame}!enemiesToKill@{enemiesToKill}}
+\index{enemiesToKill@{enemiesToKill}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{enemiesToKill}{enemiesToKill}}
+{\footnotesize\ttfamily int64\+\_\+t Scene\+Game\+::enemies\+To\+Kill}
+
+Enemy to kill to enable end element \& finish the level \mbox{\Hypertarget{class_scene_game_a9e56bd4fd7c24e7097e29b7e4aff1986}\label{class_scene_game_a9e56bd4fd7c24e7097e29b7e4aff1986}} 
 \index{SceneGame@{SceneGame}!entitiesCall@{entitiesCall}}
 \index{entitiesCall@{entitiesCall}!SceneGame@{SceneGame}}
 \doxysubsubsection{\texorpdfstring{entitiesCall}{entitiesCall}}
@@ -479,7 +693,79 @@ Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+All entity type \& functions \mbox{\Hypertarget{class_scene_game_a53d7732b5968cc22b938451d371592c9}\label{class_scene_game_a53d7732b5968cc22b938451d371592c9}} 
+\index{SceneGame@{SceneGame}!flags@{flags}}
+\index{flags@{flags}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{flags}{flags}}
+{\footnotesize\ttfamily int Scene\+Game\+::flags}
 
+Number of flags on the level \mbox{\Hypertarget{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}\label{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}} 
+\index{SceneGame@{SceneGame}!level@{level}}
+\index{level@{level}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily int32\+\_\+t Scene\+Game\+::level}
+
+The current level ID (-\/1 for no level) \mbox{\Hypertarget{class_scene_game_a7d7cc035d462fa565775e0d2d19a64dc}\label{class_scene_game_a7d7cc035d462fa565775e0d2d19a64dc}} 
+\index{SceneGame@{SceneGame}!levelCrispies@{levelCrispies}}
+\index{levelCrispies@{levelCrispies}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{levelCrispies}{levelCrispies}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Game\+::level\+Crispies}
+
+Number of crispies wall in the level \mbox{\Hypertarget{class_scene_game_aae46344cf5b218d3965836e3a6518296}\label{class_scene_game_aae46344cf5b218d3965836e3a6518296}} 
+\index{SceneGame@{SceneGame}!levelEnemies@{levelEnemies}}
+\index{levelEnemies@{levelEnemies}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{levelEnemies}{levelEnemies}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Game\+::level\+Enemies}
+
+Number of enemies in the level \mbox{\Hypertarget{class_scene_game_a0eb866e448133db3365b92c0c60740a7}\label{class_scene_game_a0eb866e448133db3365b92c0c60740a7}} 
+\index{SceneGame@{SceneGame}!levelTime@{levelTime}}
+\index{levelTime@{levelTime}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{levelTime}{levelTime}}
+{\footnotesize\ttfamily float Scene\+Game\+::level\+Time}
+
+Time to do the level \mbox{\Hypertarget{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}\label{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}} 
+\index{SceneGame@{SceneGame}!musicLevel@{musicLevel}}
+\index{musicLevel@{musicLevel}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{musicLevel}{musicLevel}}
+{\footnotesize\ttfamily std\+::string Scene\+Game\+::music\+Level}
+
+The level music \mbox{\Hypertarget{class_scene_game_a7343447f840c96da20f2358c035b7ce4}\label{class_scene_game_a7343447f840c96da20f2358c035b7ce4}} 
+\index{SceneGame@{SceneGame}!player@{player}}
+\index{player@{player}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}}$\ast$ Scene\+Game\+::player}
+
+The player \mbox{\Hypertarget{class_scene_game_ae548cebf05f9ca19eadf0e2c166c8ab4}\label{class_scene_game_ae548cebf05f9ca19eadf0e2c166c8ab4}} 
+\index{SceneGame@{SceneGame}!score@{score}}
+\index{score@{score}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score}{Score}} Scene\+Game\+::score}
+
+\mbox{\hyperlink{class_score}{Score}} object \mbox{\Hypertarget{class_scene_game_a3cf109ade202cfa93be0778d9218ef14}\label{class_scene_game_a3cf109ade202cfa93be0778d9218ef14}} 
+\index{SceneGame@{SceneGame}!size@{size}}
+\index{size@{size}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily glm\+::uvec2 Scene\+Game\+::size}
+
+Level size \mbox{\Hypertarget{class_scene_game_a97955bb4971b1800da1e15bcb472150d}\label{class_scene_game_a97955bb4971b1800da1e15bcb472150d}} 
+\index{SceneGame@{SceneGame}!spawners@{spawners}}
+\index{spawners@{spawners}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{spawners}{spawners}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_spawner}{Spawner}} $\ast$$>$ Scene\+Game\+::spawners}
+
+All spawners \mbox{\Hypertarget{class_scene_game_a148576dff8050dfcf438ff29c0aaf400}\label{class_scene_game_a148576dff8050dfcf438ff29c0aaf400}} 
+\index{SceneGame@{SceneGame}!state@{state}}
+\index{state@{state}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily Game\+State\+::\+Enum Scene\+Game\+::state}
+
+Actual game state (P\+L\+AY, P\+A\+U\+SE, G\+A\+M\+E\+\_\+\+O\+V\+ER, ...) \mbox{\Hypertarget{class_scene_game_a7035bc7e8801e4d17cab3128d6d60be0}\label{class_scene_game_a7035bc7e8801e4d17cab3128d6d60be0}} 
+\index{SceneGame@{SceneGame}!time@{time}}
+\index{time@{time}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily float Scene\+Game\+::time}
+
+Time remaining to do the level 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

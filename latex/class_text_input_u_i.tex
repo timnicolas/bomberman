@@ -30,15 +30,15 @@ Collaboration diagram for Text\+Input\+UI\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a502842551f51b722c7eb437d591b98f1}\label{class_text_input_u_i_a502842551f51b722c7eb437d591b98f1}} 
-{\bfseries Text\+Input\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
-\item 
-\mbox{\Hypertarget{class_text_input_u_i_af8d8c50262fae80a16d80c958dcfc3a0}\label{class_text_input_u_i_af8d8c50262fae80a16d80c958dcfc3a0}} 
-{\bfseries Text\+Input\+UI} (\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&src)
-\item 
-\mbox{\Hypertarget{class_text_input_u_i_a7d1436a384c86575aa7021d89c110964}\label{class_text_input_u_i_a7d1436a384c86575aa7021d89c110964}} 
-\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_text_input_u_i_a502842551f51b722c7eb437d591b98f1}{Text\+Input\+UI}} (glm\+::vec2 pos, glm\+::vec2 size)
+\begin{DoxyCompactList}\small\item\em Construct a new Text Input U I\+:\+: Text Input U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_text_input_u_i_af8d8c50262fae80a16d80c958dcfc3a0}{Text\+Input\+UI}} (\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Text Input U I\+:\+: Text Input U I object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_text_input_u_i_a47b6468d58e1097f2ab0f6eb108c6212}\label{class_text_input_u_i_a47b6468d58e1097f2ab0f6eb108c6212}} 
+virtual \mbox{\hyperlink{class_text_input_u_i_a47b6468d58e1097f2ab0f6eb108c6212}{$\sim$\+Text\+Input\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Text Input U I\+:\+: Text Input U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& \mbox{\hyperlink{class_text_input_u_i_a7d1436a384c86575aa7021d89c110964}{operator=}} (\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& \mbox{\hyperlink{class_text_input_u_i_ada177e3f531c6c8c827344615b64b9cb}{set\+Always\+Focus}} (bool is\+Always\+Focus)
 \begin{DoxyCompactList}\small\item\em TO set if the text\+Input has always focus or only when clicking. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& \mbox{\hyperlink{class_text_input_u_i_a7014056f5805634ed5ab0f107c14d581}{set\+Def\+Text}} (std\+::string const \&def\+Text)
@@ -58,10 +58,9 @@ Collaboration diagram for Text\+Input\+UI\+:\nopagebreak
 \mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& \mbox{\hyperlink{class_text_input_u_i_a9d3e40a9360c1b17394647d23303df66}{set\+Focus}} (bool focus)
 \begin{DoxyCompactList}\small\item\em Enable/disable focus for Text\+Input. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_text_input_u_i_a2897827565bcb1d849cd36d3c9baf7a9}{set\+Text}} (std\+::string const \&text)
-\begin{DoxyCompactList}\small\item\em Redefinition of A\+Base\+U\+I\+::set\+Text function. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_text_input_u_i_a7e514dfb73cea540536ea85260bc55fd}\label{class_text_input_u_i_a7e514dfb73cea540536ea85260bc55fd}} 
-bool {\bfseries has\+Focus} () const
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Redefinition of \mbox{\hyperlink{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}{A\+Base\+U\+I\+::set\+Text}} function. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_text_input_u_i_a7e514dfb73cea540536ea85260bc55fd}{has\+Focus}} () const
+\begin{DoxyCompactList}\small\item\em Check if the Text\+Input has focus. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,35 +70,26 @@ virtual void \mbox{\hyperlink{class_text_input_u_i_a00ae7b0bc39a734d3f3ecdbc2091
 \mbox{\Hypertarget{class_text_input_u_i_ab367a04c577afe7fb08ddca20dbcd94b}\label{class_text_input_u_i_ab367a04c577afe7fb08ddca20dbcd94b}} 
 virtual void \mbox{\hyperlink{class_text_input_u_i_ab367a04c577afe7fb08ddca20dbcd94b}{\+\_\+draw}} ()
 \begin{DoxyCompactList}\small\item\em this is the draw function for UI /!\textbackslash{} -\/$>$ you need to draw in the reverse order (draw at first the element on the top) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_text_input_u_i_a1c4f30cc2118a3820843d6933dcbdaea}\label{class_text_input_u_i_a1c4f30cc2118a3820843d6933dcbdaea}} 
-uint32\+\_\+t {\bfseries \+\_\+get\+Cursor\+Offset} () const
-\end{DoxyCompactItemize}
+uint32\+\_\+t \mbox{\hyperlink{class_text_input_u_i_a1c4f30cc2118a3820843d6933dcbdaea}{\+\_\+get\+Cursor\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Get the cursor offset on th screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_af83c8b47cf12c212961170eaa3ffffc1}\label{class_text_input_u_i_af83c8b47cf12c212961170eaa3ffffc1}} 
-bool {\bfseries \+\_\+is\+Always\+Focus}
+bool \mbox{\hyperlink{class_text_input_u_i_af83c8b47cf12c212961170eaa3ffffc1}{\+\_\+is\+Always\+Focus}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a5cab7b43ee7e9c6a200da88cead92d25}\label{class_text_input_u_i_a5cab7b43ee7e9c6a200da88cead92d25}} 
-bool {\bfseries \+\_\+has\+Focus}
+bool \mbox{\hyperlink{class_text_input_u_i_a5cab7b43ee7e9c6a200da88cead92d25}{\+\_\+has\+Focus}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_ae915ceda6857bcae90f1d065d99743fe}\label{class_text_input_u_i_ae915ceda6857bcae90f1d065d99743fe}} 
-bool {\bfseries \+\_\+loose\+Focus\+Next\+Time}
+bool \mbox{\hyperlink{class_text_input_u_i_ae915ceda6857bcae90f1d065d99743fe}{\+\_\+loose\+Focus\+Next\+Time}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_afe90275d15804770ddca5a77caf0dc49}\label{class_text_input_u_i_afe90275d15804770ddca5a77caf0dc49}} 
-std\+::string {\bfseries \+\_\+def\+Text}
+std\+::string \mbox{\hyperlink{class_text_input_u_i_afe90275d15804770ddca5a77caf0dc49}{\+\_\+def\+Text}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a0be1feabb67078fe74a2adfa7076ee30}\label{class_text_input_u_i_a0be1feabb67078fe74a2adfa7076ee30}} 
-glm\+::vec4 {\bfseries \+\_\+def\+Text\+Color}
+glm\+::vec4 \mbox{\hyperlink{class_text_input_u_i_a0be1feabb67078fe74a2adfa7076ee30}{\+\_\+def\+Text\+Color}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a30be39fd592784bf1e5d044215ec9a76}\label{class_text_input_u_i_a30be39fd592784bf1e5d044215ec9a76}} 
-bool {\bfseries \+\_\+show\+Cursor}
+bool \mbox{\hyperlink{class_text_input_u_i_a30be39fd592784bf1e5d044215ec9a76}{\+\_\+show\+Cursor}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a5d41f55ca586107f43a2b45137076ce1}\label{class_text_input_u_i_a5d41f55ca586107f43a2b45137076ce1}} 
-std\+::chrono\+::milliseconds {\bfseries \+\_\+last\+Show\+Cursor\+Ms}
+std\+::chrono\+::milliseconds \mbox{\hyperlink{class_text_input_u_i_a5d41f55ca586107f43a2b45137076ce1}{\+\_\+last\+Show\+Cursor\+Ms}}
 \item 
-\mbox{\Hypertarget{class_text_input_u_i_a06b223f0059aafca03f51dbe516f7fc7}\label{class_text_input_u_i_a06b223f0059aafca03f51dbe516f7fc7}} 
-uint32\+\_\+t {\bfseries \+\_\+cursor\+Pos}
+uint32\+\_\+t \mbox{\hyperlink{class_text_input_u_i_a06b223f0059aafca03f51dbe516f7fc7}{\+\_\+cursor\+Pos}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -107,7 +97,68 @@ uint32\+\_\+t {\bfseries \+\_\+cursor\+Pos}
 \doxysubsection{Detailed Description}
 this is the UI for text input 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_text_input_u_i_a502842551f51b722c7eb437d591b98f1}\label{class_text_input_u_i_a502842551f51b722c7eb437d591b98f1}} 
+\index{TextInputUI@{TextInputUI}!TextInputUI@{TextInputUI}}
+\index{TextInputUI@{TextInputUI}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{TextInputUI()}{TextInputUI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Text\+Input\+U\+I\+::\+Text\+Input\+UI (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size }\end{DoxyParamCaption})}
+
+
+
+Construct a new Text Input U I\+:\+: Text Input U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position \\
+\hline
+{\em size} & The size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_text_input_u_i_af8d8c50262fae80a16d80c958dcfc3a0}\label{class_text_input_u_i_af8d8c50262fae80a16d80c958dcfc3a0}} 
+\index{TextInputUI@{TextInputUI}!TextInputUI@{TextInputUI}}
+\index{TextInputUI@{TextInputUI}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{TextInputUI()}{TextInputUI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Text\+Input\+U\+I\+::\+Text\+Input\+UI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Text Input U I\+:\+: Text Input U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_input_u_i_a1c4f30cc2118a3820843d6933dcbdaea}\label{class_text_input_u_i_a1c4f30cc2118a3820843d6933dcbdaea}} 
+\index{TextInputUI@{TextInputUI}!\_getCursorOffset@{\_getCursorOffset}}
+\index{\_getCursorOffset@{\_getCursorOffset}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_getCursorOffset()}{\_getCursorOffset()}}
+{\footnotesize\ttfamily uint32\+\_\+t Text\+Input\+U\+I\+::\+\_\+get\+Cursor\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Get the cursor offset on th screen. 
+
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t The cursor offset in pixel 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_text_input_u_i_a7e514dfb73cea540536ea85260bc55fd}\label{class_text_input_u_i_a7e514dfb73cea540536ea85260bc55fd}} 
+\index{TextInputUI@{TextInputUI}!hasFocus@{hasFocus}}
+\index{hasFocus@{hasFocus}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{hasFocus()}{hasFocus()}}
+{\footnotesize\ttfamily bool Text\+Input\+U\+I\+::has\+Focus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Check if the Text\+Input has focus. 
+
+\begin{DoxyReturn}{Returns}
+true If has focus 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_text_input_u_i_ae3a0db51736c336d98655b8384dd78d8}\label{class_text_input_u_i_ae3a0db51736c336d98655b8384dd78d8}} 
 \index{TextInputUI@{TextInputUI}!inputDelete@{inputDelete}}
 \index{inputDelete@{inputDelete}!TextInputUI@{TextInputUI}}
@@ -182,6 +233,24 @@ Delete the char after cursor in Text\+Input.
 
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}}\& A reference to the UI object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_text_input_u_i_a7d1436a384c86575aa7021d89c110964}\label{class_text_input_u_i_a7d1436a384c86575aa7021d89c110964}} 
+\index{TextInputUI@{TextInputUI}!operator=@{operator=}}
+\index{operator=@{operator=}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} \& Text\+Input\+U\+I\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_text_input_u_i}{Text\+Input\+UI}}\& A reference to the copied object 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_input_u_i_ada177e3f531c6c8c827344615b64b9cb}\label{class_text_input_u_i_ada177e3f531c6c8c827344615b64b9cb}} 
 \index{TextInputUI@{TextInputUI}!setAlwaysFocus@{setAlwaysFocus}}
@@ -263,7 +332,7 @@ Enable/disable focus for Text\+Input.
 
 
 
-Redefinition of A\+Base\+U\+I\+::set\+Text function. 
+Redefinition of \mbox{\hyperlink{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}{A\+Base\+U\+I\+::set\+Text}} function. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -275,9 +344,60 @@ Redefinition of A\+Base\+U\+I\+::set\+Text function.
 \end{DoxyReturn}
 
 
-Reimplemented from \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}.
+Reimplemented from \mbox{\hyperlink{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}{A\+Base\+UI}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_text_input_u_i_a06b223f0059aafca03f51dbe516f7fc7}\label{class_text_input_u_i_a06b223f0059aafca03f51dbe516f7fc7}} 
+\index{TextInputUI@{TextInputUI}!\_cursorPos@{\_cursorPos}}
+\index{\_cursorPos@{\_cursorPos}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_cursorPos}{\_cursorPos}}
+{\footnotesize\ttfamily uint32\+\_\+t Text\+Input\+U\+I\+::\+\_\+cursor\+Pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+Cursor position \mbox{\Hypertarget{class_text_input_u_i_afe90275d15804770ddca5a77caf0dc49}\label{class_text_input_u_i_afe90275d15804770ddca5a77caf0dc49}} 
+\index{TextInputUI@{TextInputUI}!\_defText@{\_defText}}
+\index{\_defText@{\_defText}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_defText}{\_defText}}
+{\footnotesize\ttfamily std\+::string Text\+Input\+U\+I\+::\+\_\+def\+Text\hspace{0.3cm}{\ttfamily [protected]}}
+
+Default text \mbox{\Hypertarget{class_text_input_u_i_a0be1feabb67078fe74a2adfa7076ee30}\label{class_text_input_u_i_a0be1feabb67078fe74a2adfa7076ee30}} 
+\index{TextInputUI@{TextInputUI}!\_defTextColor@{\_defTextColor}}
+\index{\_defTextColor@{\_defTextColor}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_defTextColor}{\_defTextColor}}
+{\footnotesize\ttfamily glm\+::vec4 Text\+Input\+U\+I\+::\+\_\+def\+Text\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+Default text color \mbox{\Hypertarget{class_text_input_u_i_a5cab7b43ee7e9c6a200da88cead92d25}\label{class_text_input_u_i_a5cab7b43ee7e9c6a200da88cead92d25}} 
+\index{TextInputUI@{TextInputUI}!\_hasFocus@{\_hasFocus}}
+\index{\_hasFocus@{\_hasFocus}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_hasFocus}{\_hasFocus}}
+{\footnotesize\ttfamily bool Text\+Input\+U\+I\+::\+\_\+has\+Focus\hspace{0.3cm}{\ttfamily [protected]}}
+
+Has focus now ? \mbox{\Hypertarget{class_text_input_u_i_af83c8b47cf12c212961170eaa3ffffc1}\label{class_text_input_u_i_af83c8b47cf12c212961170eaa3ffffc1}} 
+\index{TextInputUI@{TextInputUI}!\_isAlwaysFocus@{\_isAlwaysFocus}}
+\index{\_isAlwaysFocus@{\_isAlwaysFocus}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_isAlwaysFocus}{\_isAlwaysFocus}}
+{\footnotesize\ttfamily bool Text\+Input\+U\+I\+::\+\_\+is\+Always\+Focus\hspace{0.3cm}{\ttfamily [protected]}}
+
+Text\+Input has always focus or only on click \mbox{\Hypertarget{class_text_input_u_i_a5d41f55ca586107f43a2b45137076ce1}\label{class_text_input_u_i_a5d41f55ca586107f43a2b45137076ce1}} 
+\index{TextInputUI@{TextInputUI}!\_lastShowCursorMs@{\_lastShowCursorMs}}
+\index{\_lastShowCursorMs@{\_lastShowCursorMs}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_lastShowCursorMs}{\_lastShowCursorMs}}
+{\footnotesize\ttfamily std\+::chrono\+::milliseconds Text\+Input\+U\+I\+::\+\_\+last\+Show\+Cursor\+Ms\hspace{0.3cm}{\ttfamily [protected]}}
+
+Last time cursor showed (to blink it) \mbox{\Hypertarget{class_text_input_u_i_ae915ceda6857bcae90f1d065d99743fe}\label{class_text_input_u_i_ae915ceda6857bcae90f1d065d99743fe}} 
+\index{TextInputUI@{TextInputUI}!\_looseFocusNextTime@{\_looseFocusNextTime}}
+\index{\_looseFocusNextTime@{\_looseFocusNextTime}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_looseFocusNextTime}{\_looseFocusNextTime}}
+{\footnotesize\ttfamily bool Text\+Input\+U\+I\+::\+\_\+loose\+Focus\+Next\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+True if focus will be lost in next loop \mbox{\Hypertarget{class_text_input_u_i_a30be39fd592784bf1e5d044215ec9a76}\label{class_text_input_u_i_a30be39fd592784bf1e5d044215ec9a76}} 
+\index{TextInputUI@{TextInputUI}!\_showCursor@{\_showCursor}}
+\index{\_showCursor@{\_showCursor}!TextInputUI@{TextInputUI}}
+\doxysubsubsection{\texorpdfstring{\_showCursor}{\_showCursor}}
+{\footnotesize\ttfamily bool Text\+Input\+U\+I\+::\+\_\+show\+Cursor\hspace{0.3cm}{\ttfamily [protected]}}
+
+Show cursor when typing text 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

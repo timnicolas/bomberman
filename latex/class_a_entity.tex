@@ -11,7 +11,8 @@ This is the base class for entity (Charactere, Objects, ...)
 
 
 
-Inheritance diagram for A\+Entity\+:\nopagebreak
+Inheritance diagram for A\+Entity\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for A\+Entity\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Entity\+:\nopagebreak
+Collaboration diagram for A\+Entity\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -41,28 +43,22 @@ virtual \mbox{\hyperlink{class_a_entity_a1680c558ae2cb0d2d65f19147ac857c8}{$\sim
 \begin{DoxyCompactList}\small\item\em Overloaded operator. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init method called by load\+Level. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}\label{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}} 
-virtual bool {\bfseries update} ()=0
-\item 
+virtual bool \mbox{\hyperlink{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}{update}} ()=0
+\begin{DoxyCompactList}\small\item\em Update entity. Called on every frames. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{post\+Update}} ()
 \begin{DoxyCompactList}\small\item\em Called after update. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}\label{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}} 
-virtual bool {\bfseries draw} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
-\item 
+virtual bool \mbox{\hyperlink{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+\begin{DoxyCompactList}\small\item\em Draw entity. Called on every frames. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}{draw\+Collider}} ()
 \begin{DoxyCompactList}\small\item\em Draw the collider of the entity. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}\label{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}} 
-virtual glm\+::vec3 {\bfseries get\+Pos} () const =0
-\item 
-\mbox{\Hypertarget{class_a_entity_ac01e24195a8ba249c855120ac017770e}\label{class_a_entity_ac01e24195a8ba249c855120ac017770e}} 
-virtual bool {\bfseries take\+Damage} (const int damage)=0
-\item 
-\mbox{\Hypertarget{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}\label{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}} 
-virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& {\bfseries get\+Board} () const =0
-\item 
-\mbox{\Hypertarget{class_a_entity_a44aa82958386de50cd9a6c836461114a}\label{class_a_entity_a44aa82958386de50cd9a6c836461114a}} 
-virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \& {\bfseries get\+Board} ()=0
-\item 
+virtual glm\+::vec3 \mbox{\hyperlink{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}{get\+Pos}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the Pos object. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_entity_ac01e24195a8ba249c855120ac017770e}{take\+Damage}} (const int damage)=0
+\begin{DoxyCompactList}\small\item\em Call this function to take damage. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& \mbox{\hyperlink{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}{get\+Board}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the Board object. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \& \mbox{\hyperlink{class_a_entity_a44aa82958386de50cd9a6c836461114a}{get\+Board}} ()=0
+\begin{DoxyCompactList}\small\item\em Get the Board object. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_a_entity_ac1fd0bdb4c01a4767660f03cd06cd2ac}{anim\+End\+Cb}} (std\+::string anim\+Name)
 \begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} need to be redefined by children \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}{set\+State}} (Entity\+State\+::\+Enum state)
@@ -161,6 +157,28 @@ called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} need 
 
 Reimplemented in \mbox{\hyperlink{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}{A\+Enemy}}, \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{Player}}, and \mbox{\hyperlink{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}{Enemy\+Crispy}}.
 
+\mbox{\Hypertarget{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}\label{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}} 
+\index{AEntity@{AEntity}!draw@{draw}}
+\index{draw@{draw}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual bool A\+Entity\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Draw entity. Called on every frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A reference to the gui object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}{A\+Character}}, \mbox{\hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{A\+Object}}, \mbox{\hyperlink{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}{A\+Enemy}}, \mbox{\hyperlink{class_player_a1194c157df144e864d0328d267dfa75c}{Player}}, \mbox{\hyperlink{class_bonus_acdb40deca7be37984084fb3d4fef85ed}{Bonus}}, \mbox{\hyperlink{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}{Bomb}}, \mbox{\hyperlink{class_spawner_a1532fd875b6a3aacb617b1111b818f01}{Spawner}}, \mbox{\hyperlink{class_end_aad5c7ef71927eddfd634e0a0879cb99a}{End}}, \mbox{\hyperlink{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}{Crispy}}, \mbox{\hyperlink{class_wall_ab3ea42b91f7830d22782901d61be505f}{Wall}}, \mbox{\hyperlink{class_flag_ae24cc9c0e3cc3378e12af9f40c0ee93d}{Flag}}, and \mbox{\hyperlink{class_fire_a622efdbee6254c463250b6d9033428eb}{Fire}}.
+
 \mbox{\Hypertarget{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}\label{class_a_entity_aca789d9c82a5fd3da3b196a36e748e8b}} 
 \index{AEntity@{AEntity}!drawCollider@{drawCollider}}
 \index{drawCollider@{drawCollider}!AEntity@{AEntity}}
@@ -177,6 +195,57 @@ false If failed
 
 
 Reimplemented in \mbox{\hyperlink{class_a_character_a2cc5faf1d9047d9e51154d5663fa6c67}{A\+Character}}.
+
+\mbox{\Hypertarget{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}\label{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}} 
+\index{AEntity@{AEntity}!getBoard@{getBoard}}
+\index{getBoard@{getBoard}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{getBoard()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$$>$ $>$ $>$ const\& A\+Entity\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the Board object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$ const\& The board object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_character_adecb8064d5070f15a2d6aa76a151ff33}{A\+Character}}, and \mbox{\hyperlink{class_a_object_ac4a82eef484c0f7bf3547a7f7f6dce7e}{A\+Object}}.
+
+\mbox{\Hypertarget{class_a_entity_a44aa82958386de50cd9a6c836461114a}\label{class_a_entity_a44aa82958386de50cd9a6c836461114a}} 
+\index{AEntity@{AEntity}!getBoard@{getBoard}}
+\index{getBoard@{getBoard}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{getBoard()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$$>$ $>$ $>$\& A\+Entity\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the Board object. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$ const\& The board object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_character_aa8f0b9b557c69eead696870c41c8321b}{A\+Character}}, and \mbox{\hyperlink{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}{A\+Object}}.
+
+\mbox{\Hypertarget{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}\label{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}} 
+\index{AEntity@{AEntity}!getPos@{getPos}}
+\index{getPos@{getPos}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{getPos()}{getPos()}}
+{\footnotesize\ttfamily virtual glm\+::vec3 A\+Entity\+::get\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the Pos object. 
+
+\begin{DoxyReturn}{Returns}
+glm\+::vec3 The position 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_character_a41875fc55beaafd65fbe53ea3abc7f98}{A\+Character}}, and \mbox{\hyperlink{class_a_object_ab5840de6100bba8bf93a186a0a802708}{A\+Object}}.
 
 \mbox{\Hypertarget{class_a_entity_a135cbfb08a2204ff396de4de2d645b5f}\label{class_a_entity_a135cbfb08a2204ff396de4de2d645b5f}} 
 \index{AEntity@{AEntity}!getState@{getState}}
@@ -208,7 +277,7 @@ false on failure
 \end{DoxyReturn}
 
 
-Reimplemented in \mbox{\hyperlink{class_player_afcf86538719baa2f5c81d0b90263c41a}{Player}}, \mbox{\hyperlink{class_enemy_frog_adb2293192dd66ee46da359833475915b}{Enemy\+Frog}}, \mbox{\hyperlink{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}{Enemy\+Fly}}, \mbox{\hyperlink{class_enemy_basic_a898943e397eb36c80721951a3457178c}{Enemy\+Basic}}, \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}, and \mbox{\hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{Crispy}}.
+Reimplemented in \mbox{\hyperlink{class_player_afcf86538719baa2f5c81d0b90263c41a}{Player}}, \mbox{\hyperlink{class_bonus_a976414b70e76b18dadeae3f316a22547}{Bonus}}, \mbox{\hyperlink{class_enemy_frog_adb2293192dd66ee46da359833475915b}{Enemy\+Frog}}, \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}, \mbox{\hyperlink{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a8957442e19b91b06bf1f3bb650d66a8c}{Enemy\+Fly}}, \mbox{\hyperlink{class_enemy_basic_a898943e397eb36c80721951a3457178c}{Enemy\+Basic}}, \mbox{\hyperlink{class_bomb_a4a3f751937f59953f4cf585b07c9684c}{Bomb}}, \mbox{\hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{Crispy}}, and \mbox{\hyperlink{class_fire_ae6456b9911e675ed1fb030f5f9e89cc8}{Fire}}.
 
 \mbox{\Hypertarget{class_a_entity_a6eddf1d64b54976fbb9286b477fe19d7}\label{class_a_entity_a6eddf1d64b54976fbb9286b477fe19d7}} 
 \index{AEntity@{AEntity}!operator=@{operator=}}
@@ -243,7 +312,7 @@ false If failed
 \end{DoxyReturn}
 
 
-Reimplemented in \mbox{\hyperlink{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}{A\+Enemy}}, \mbox{\hyperlink{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}{Bonus}}, \mbox{\hyperlink{class_bomb_a443c5d40a92e67ef456c71369e8a111b}{Bomb}}, \mbox{\hyperlink{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}{Spawner}}, \mbox{\hyperlink{class_flag_a1840a0949762e3e62bf156be6e173d1e}{Flag}}, \mbox{\hyperlink{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}{Crispy}}, and \mbox{\hyperlink{class_fire_adba3c7ec49ed7d31fd35250105a35edf}{Fire}}.
+Reimplemented in \mbox{\hyperlink{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}{A\+Enemy}}, \mbox{\hyperlink{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}{Bonus}}, \mbox{\hyperlink{class_bomb_a443c5d40a92e67ef456c71369e8a111b}{Bomb}}, \mbox{\hyperlink{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}{Spawner}}, \mbox{\hyperlink{class_crispy_aa83ad22c80b962ee0380c1e394ae8610}{Crispy}}, \mbox{\hyperlink{class_flag_a1840a0949762e3e62bf156be6e173d1e}{Flag}}, and \mbox{\hyperlink{class_fire_adba3c7ec49ed7d31fd35250105a35edf}{Fire}}.
 
 \mbox{\Hypertarget{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}\label{class_a_entity_ae68a6ff3f5770215116b6ab99d098ed0}} 
 \index{AEntity@{AEntity}!setState@{setState}}
@@ -260,6 +329,45 @@ update the entity state
 {\em state} & the new state \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_a_entity_ac01e24195a8ba249c855120ac017770e}\label{class_a_entity_ac01e24195a8ba249c855120ac017770e}} 
+\index{AEntity@{AEntity}!takeDamage@{takeDamage}}
+\index{takeDamage@{takeDamage}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{takeDamage()}{takeDamage()}}
+{\footnotesize\ttfamily virtual bool A\+Entity\+::take\+Damage (\begin{DoxyParamCaption}\item[{const int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Call this function to take damage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & Number of damage taken \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If not active or indestructible 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_object_a39b1720ae5a820512ab4db0906f03b15}{A\+Object}}, \mbox{\hyperlink{class_a_enemy_a17bcf116c42c3d780e243127adf1a947}{A\+Enemy}}, \mbox{\hyperlink{class_a_character_a1ab94580e4db621f79f0bf1d6bcdb600}{A\+Character}}, \mbox{\hyperlink{class_player_a029b1d511340697d8ccfb7bfa604435b}{Player}}, and \mbox{\hyperlink{class_bomb_ac51b260cdfef0cde903a88003994276e}{Bomb}}.
+
+\mbox{\Hypertarget{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}\label{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}} 
+\index{AEntity@{AEntity}!update@{update}}
+\index{update@{update}!AEntity@{AEntity}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual bool A\+Entity\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update entity. Called on every frames. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}{A\+Character}}, \mbox{\hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{A\+Object}}, \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{A\+Enemy}}, \mbox{\hyperlink{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}{Player}}, \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{Bonus}}, \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{Bomb}}, \mbox{\hyperlink{class_spawner_a9325e76299405d5d74abfb72f4ea2380}{Spawner}}, \mbox{\hyperlink{class_end_a7154532cce1c86f4f5bfa98eb0c25574}{End}}, \mbox{\hyperlink{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}{Wall}}, \mbox{\hyperlink{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}{Crispy}}, \mbox{\hyperlink{class_flag_adeaab6cd88bbc3284f8b4f1b2f78242b}{Flag}}, and \mbox{\hyperlink{class_fire_a86114cf78108a4b202b75e1f383b3e00}{Fire}}.
+
 
 
 \doxysubsection{Member Data Documentation}

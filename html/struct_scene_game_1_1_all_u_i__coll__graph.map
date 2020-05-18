@@ -1,5 +1,5 @@
 <map id="SceneGame::AllUI" name="SceneGame::AllUI">
-<area shape="rect" id="node1" title=" " alt="" coords="5,1429,160,1653"/>
+<area shape="rect" id="node1" title="All UI elements (bonus, text, ...)" alt="" coords="5,1429,160,1653"/>
 <area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="161,307,364,1147"/>
 <area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="200,1356,381,1727"/>
 <area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="141,5,248,229"/>

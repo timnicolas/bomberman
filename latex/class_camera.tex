@@ -11,7 +11,8 @@ this is a camera 3D object
 
 
 
-Collaboration diagram for Camera\+:\nopagebreak
+Collaboration diagram for Camera\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,29 +22,26 @@ Collaboration diagram for Camera\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}\label{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}} 
-{\bfseries Camera} (float const ratio, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 pos=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0f, 0.\+0f, 0.\+0f), C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 up=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0, 1.\+0, 0.\+0), C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT yaw=-\/90.\+0f, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT pitch=0.\+0f)
-\item 
-\mbox{\Hypertarget{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}\label{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}} 
-{\bfseries Camera} (\mbox{\hyperlink{class_camera}{Camera}} const \&src)
-\item 
-\mbox{\Hypertarget{class_camera_a7df2f4b79b58047d59902a2e8b40855d}\label{class_camera_a7df2f4b79b58047d59902a2e8b40855d}} 
-\mbox{\hyperlink{class_camera}{Camera}} \& {\bfseries operator=} (\mbox{\hyperlink{class_camera}{Camera}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}{Camera}} (float const ratio, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_a645cd9343d8c0160ce2281111240f9fd}{pos}}=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0f, 0.\+0f, 0.\+0f), C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_a02d03a426815c0d64522724fbe2374ca}{up}}=C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3(0.\+0, 1.\+0, 0.\+0), C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_aa11a0643425580b4115bb9b839542891}{yaw}}=-\/90.\+0f, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}{pitch}}=0.\+0f)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_camera}{Camera}}\+:\+: \mbox{\hyperlink{class_camera}{Camera}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_camera_ad1897942d0ccf91052386388a497349f}\label{class_camera_ad1897942d0ccf91052386388a497349f}} 
+virtual \mbox{\hyperlink{class_camera_ad1897942d0ccf91052386388a497349f}{$\sim$\+Camera}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_camera}{Camera}}\+:\+: \mbox{\hyperlink{class_camera}{Camera}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}{Camera}} (\mbox{\hyperlink{class_camera}{Camera}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_camera}{Camera}}\+:\+: \mbox{\hyperlink{class_camera}{Camera}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_camera}{Camera}} \& \mbox{\hyperlink{class_camera_a7df2f4b79b58047d59902a2e8b40855d}{operator=}} (\mbox{\hyperlink{class_camera}{Camera}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}{look\+At}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 target)
 \begin{DoxyCompactList}\small\item\em Move the camera orientation to look at the target. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}\label{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}} 
 void \mbox{\hyperlink{class_camera_ac59fb0da1e1cb188063ce8cf227d3a2f}{reset\+Position}} ()
 \begin{DoxyCompactList}\small\item\em Reset the camera position. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}\label{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}} 
-void {\bfseries set\+Ratio} (float ratio)
-\item 
-\mbox{\Hypertarget{class_camera_a3138aa2e40815013739ddb71502ca608}\label{class_camera_a3138aa2e40815013739ddb71502ca608}} 
-void {\bfseries set\+FovY} (float fovY)
-\item 
-\mbox{\Hypertarget{class_camera_afcb04b0f02749e07b61e3346d34834da}\label{class_camera_afcb04b0f02749e07b61e3346d34834da}} 
-void {\bfseries set\+Near\+And\+Far} (float near, float far)
-\item 
+void \mbox{\hyperlink{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}{set\+Ratio}} (float ratio)
+\begin{DoxyCompactList}\small\item\em Set the camera ratio (width / height) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_a3138aa2e40815013739ddb71502ca608}{set\+FovY}} (float fovY)
+\begin{DoxyCompactList}\small\item\em Set the F\+OV. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_afcb04b0f02749e07b61e3346d34834da}{set\+Near\+And\+Far}} (float near, float far)
+\begin{DoxyCompactList}\small\item\em Set near and far values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_camera_a90617e4799a43f0b74ede1d6caca958e}{set\+Mode}} (Cam\+Mode\+::\+Enum mode)
 \begin{DoxyCompactList}\small\item\em Update the current camera mode. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_camera_aa83a6e3f89b6a1bdd4578d4cd84fdfde}{set\+Def\+Pos}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 def\+Pos, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT def\+Yaw=-\/90, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT def\+Pitch=0)
@@ -64,67 +62,46 @@ int \mbox{\hyperlink{class_camera_aa7a544e123a54e98509cfc6050869aca}{frustum\+Cu
 int \mbox{\hyperlink{class_camera_a7baca010a22bac712351e4c6adca5acf}{frustum\+Culling\+Check\+Cube}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&start\+Point, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&size) const
 \begin{DoxyCompactList}\small\item\em Check if a cube or rectangle is inside or outside of the camera. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}\label{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}} 
-void {\bfseries reset\+Follow\+Path} ()
-\item 
-\mbox{\Hypertarget{class_camera_a340c9687399742b3c9c1dec3f02d9b32}\label{class_camera_a340c9687399742b3c9c1dec3f02d9b32}} 
-void {\bfseries set\+Follow\+Path} (std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ const \&path)
-\item 
-\mbox{\Hypertarget{class_camera_a9f190ab490492b811ccc3603b68fe70a}\label{class_camera_a9f190ab490492b811ccc3603b68fe70a}} 
-void {\bfseries set\+Follow\+Repeat} (bool repeat)
-\item 
-\mbox{\Hypertarget{class_camera_a56103a197cc727c1d108f5e503e5c6f4}\label{class_camera_a56103a197cc727c1d108f5e503e5c6f4}} 
-void {\bfseries set\+Follow\+Speed} (float speed\+\_\+)
-\item 
-\mbox{\Hypertarget{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}\label{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}} 
-bool {\bfseries is\+Follow\+Finished} () const
-\item 
-\mbox{\Hypertarget{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}\label{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}} 
-bool {\bfseries is\+Follow\+Repeat} () const
-\item 
-\mbox{\Hypertarget{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}\label{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}} 
-C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 {\bfseries get\+View\+Matrix} () const
-\item 
-\mbox{\Hypertarget{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}\label{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}} 
-C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 {\bfseries get\+Projection} () const
-\item 
-\mbox{\Hypertarget{class_camera_ab508959139d8555dce6f444e44fc01ed}\label{class_camera_ab508959139d8555dce6f444e44fc01ed}} 
-Cam\+Mode\+::\+Enum {\bfseries get\+Mode} () const
-\item 
-\mbox{\Hypertarget{class_camera_aae10133175e34f9856c48cdb294279df}\label{class_camera_aae10133175e34f9856c48cdb294279df}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries get\+Def\+Pos} () const
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}{reset\+Follow\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Reset the follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_a340c9687399742b3c9c1dec3f02d9b32}{set\+Follow\+Path}} (std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ const \&path)
+\begin{DoxyCompactList}\small\item\em Set the follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_camera_a9f190ab490492b811ccc3603b68fe70a}{set\+Follow\+Repeat}} (bool repeat)
+\begin{DoxyCompactList}\small\item\em Enable / disable repeat follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}{is\+Follow\+Finished}} () const
+\begin{DoxyCompactList}\small\item\em Get if follow path if finished (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}{is\+Follow\+Repeat}} () const
+\begin{DoxyCompactList}\small\item\em Get if follow path if in repeat mode (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 \mbox{\hyperlink{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}{get\+View\+Matrix}} () const
+\begin{DoxyCompactList}\small\item\em Get the view matrix. \end{DoxyCompactList}\item 
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 \mbox{\hyperlink{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}{get\+Projection}} () const
+\begin{DoxyCompactList}\small\item\em Get the projection matrix. \end{DoxyCompactList}\item 
+Cam\+Mode\+::\+Enum \mbox{\hyperlink{class_camera_ab508959139d8555dce6f444e44fc01ed}{get\+Mode}} () const
+\begin{DoxyCompactList}\small\item\em Get the camera mode (F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH, S\+T\+A\+T\+IC, ...) \end{DoxyCompactList}\item 
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_aae10133175e34f9856c48cdb294279df}{get\+Def\+Pos}} () const
+\begin{DoxyCompactList}\small\item\em Get the default position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_camera_a645cd9343d8c0160ce2281111240f9fd}\label{class_camera_a645cd9343d8c0160ce2281111240f9fd}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries pos}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_a645cd9343d8c0160ce2281111240f9fd}{pos}}
 \item 
-\mbox{\Hypertarget{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}\label{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries front}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}{front}}
 \item 
-\mbox{\Hypertarget{class_camera_a02d03a426815c0d64522724fbe2374ca}\label{class_camera_a02d03a426815c0d64522724fbe2374ca}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries up}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_a02d03a426815c0d64522724fbe2374ca}{up}}
 \item 
-\mbox{\Hypertarget{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}\label{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries right}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}{right}}
 \item 
-\mbox{\Hypertarget{class_camera_a9088ff173e443938f31ed4b6c0f75756}\label{class_camera_a9088ff173e443938f31ed4b6c0f75756}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries world\+Up}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{class_camera_a9088ff173e443938f31ed4b6c0f75756}{world\+Up}}
 \item 
-\mbox{\Hypertarget{class_camera_aa11a0643425580b4115bb9b839542891}\label{class_camera_aa11a0643425580b4115bb9b839542891}} 
-C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries yaw}
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_aa11a0643425580b4115bb9b839542891}{yaw}}
 \item 
-\mbox{\Hypertarget{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}\label{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}} 
-C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries pitch}
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}{pitch}}
 \item 
-\mbox{\Hypertarget{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}\label{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}} 
-C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries movement\+Speed}
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}{movement\+Speed}}
 \item 
-\mbox{\Hypertarget{class_camera_a0fd9adbe4484147947bc1f51452edd6f}\label{class_camera_a0fd9adbe4484147947bc1f51452edd6f}} 
-C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries mouse\+Sensitivity}
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_a0fd9adbe4484147947bc1f51452edd6f}{mouse\+Sensitivity}}
 \item 
-\mbox{\Hypertarget{class_camera_a891d353a14161c6be625f6a52b75375d}\label{class_camera_a891d353a14161c6be625f6a52b75375d}} 
-C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT {\bfseries run\+Factor}
+C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT \mbox{\hyperlink{class_camera_a891d353a14161c6be625f6a52b75375d}{run\+Factor}}
 \end{DoxyCompactItemize}
 
 
@@ -138,6 +115,47 @@ this object implements functions to\+:
 \item look at a point (look\+At)
 \item know if a 3D point or a 3D rectangle is inside the camera angle (frustum\+Culling...) 
 \end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}\label{class_camera_a9013f69b8ad8b9f17c23cc9fd4bb25be}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{float const}]{ratio,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3}]{pos = {\ttfamily CAMERA\+\_\+VEC3(0.0f,~0.0f,~0.0f)},  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3}]{up = {\ttfamily CAMERA\+\_\+VEC3(0.0,~1.0,~0.0)},  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{yaw = {\ttfamily -\/90.0f},  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{pitch = {\ttfamily 0.0f} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_camera}{Camera}}\+:\+: \mbox{\hyperlink{class_camera}{Camera}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ratio} & Ratio (width / height) \\
+\hline
+{\em pos} & Position \\
+\hline
+{\em up} & Up vector \\
+\hline
+{\em yaw} & Yaw \\
+\hline
+{\em pitch} & Pitch \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}\label{class_camera_ae436ecbffdf1bb1117a723603f5b9a63}} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_camera}{Camera}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_camera}{Camera}}\+:\+: \mbox{\hyperlink{class_camera}{Camera}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_camera_a7baca010a22bac712351e4c6adca5acf}\label{class_camera_a7baca010a22bac712351e4c6adca5acf}} 
@@ -199,6 +217,86 @@ init the frustum culling (take the same args as projection matrix)
 {\em farD} & The far distance (don\textquotesingle{}t show after this distance) \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_camera_aae10133175e34f9856c48cdb294279df}\label{class_camera_aae10133175e34f9856c48cdb294279df}} 
+\index{Camera@{Camera}!getDefPos@{getDefPos}}
+\index{getDefPos@{getDefPos}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getDefPos()}{getDefPos()}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::get\+Def\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the default position. 
+
+\begin{DoxyReturn}{Returns}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 The default position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_ab508959139d8555dce6f444e44fc01ed}\label{class_camera_ab508959139d8555dce6f444e44fc01ed}} 
+\index{Camera@{Camera}!getMode@{getMode}}
+\index{getMode@{getMode}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getMode()}{getMode()}}
+{\footnotesize\ttfamily Cam\+Mode\+::\+Enum Camera\+::get\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the camera mode (F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH, S\+T\+A\+T\+IC, ...) 
+
+\begin{DoxyReturn}{Returns}
+Cam\+Mode\+::\+Enum The camera mode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}\label{class_camera_ab6bf7c26da92eb1806f0787eb35e540c}} 
+\index{Camera@{Camera}!getProjection@{getProjection}}
+\index{getProjection@{getProjection}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getProjection()}{getProjection()}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 Camera\+::get\+Projection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the projection matrix. 
+
+\begin{DoxyReturn}{Returns}
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 The projection matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}\label{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}} 
+\index{Camera@{Camera}!getViewMatrix@{getViewMatrix}}
+\index{getViewMatrix@{getViewMatrix}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getViewMatrix()}{getViewMatrix()}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 Camera\+::get\+View\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the view matrix. 
+
+\begin{DoxyReturn}{Returns}
+C\+A\+M\+E\+R\+A\+\_\+\+M\+A\+T4 The view matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}\label{class_camera_a3e7c256d5df9a0dd554b845e3ece414e}} 
+\index{Camera@{Camera}!isFollowFinished@{isFollowFinished}}
+\index{isFollowFinished@{isFollowFinished}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{isFollowFinished()}{isFollowFinished()}}
+{\footnotesize\ttfamily bool Camera\+::is\+Follow\+Finished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get if follow path if finished (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) 
+
+\begin{DoxyReturn}{Returns}
+true If finished 
+
+false If not finished or if is in repeat mode 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}\label{class_camera_aadea4e3706e4a1405c7b035c60d6d69e}} 
+\index{Camera@{Camera}!isFollowRepeat@{isFollowRepeat}}
+\index{isFollowRepeat@{isFollowRepeat}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{isFollowRepeat()}{isFollowRepeat()}}
+{\footnotesize\ttfamily bool Camera\+::is\+Follow\+Repeat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get if follow path if in repeat mode (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) 
+
+\begin{DoxyReturn}{Returns}
+true If in repeat mode 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}\label{class_camera_a54c2f4e2c30c1fc0c82499982b59e6e0}} 
 \index{Camera@{Camera}!lookAt@{lookAt}}
 \index{lookAt@{lookAt}!Camera@{Camera}}
@@ -214,6 +312,24 @@ Move the camera orientation to look at the target.
 {\em target} & The target to look at \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a7df2f4b79b58047d59902a2e8b40855d}\label{class_camera_a7df2f4b79b58047d59902a2e8b40855d}} 
+\index{Camera@{Camera}!operator=@{operator=}}
+\index{operator=@{operator=}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_camera}{Camera}} \& Camera\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_camera}{Camera}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_camera}{Camera}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_camera_a1f28b91cb62dd318b5acf27296c99242}\label{class_camera_a1f28b91cb62dd318b5acf27296c99242}} 
 \index{Camera@{Camera}!processKeyboard@{processKeyboard}}
 \index{processKeyboard@{processKeyboard}!Camera@{Camera}}
@@ -245,9 +361,7 @@ Move the camera from the mouse movements.
 
 
 \begin{DoxyParams}{Parameters}
-{\em x\+Offset} & The camera offset in x from last call \\
-\hline
-{\em y\+Offset} & The camera offset in y from last call \\
+{\em offset} & The camera offset in x from last call \\
 \hline
 {\em constrain\+Pitch} & Constrain pitch to block camera up to 90 deg (enable by default) \\
 \hline
@@ -271,6 +385,51 @@ Set the default camera position.
 {\em def\+Pitch} & Default pitch \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a340c9687399742b3c9c1dec3f02d9b32}\label{class_camera_a340c9687399742b3c9c1dec3f02d9b32}} 
+\index{Camera@{Camera}!setFollowPath@{setFollowPath}}
+\index{setFollowPath@{setFollowPath}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setFollowPath()}{setFollowPath()}}
+{\footnotesize\ttfamily void Camera\+::set\+Follow\+Path (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Set the follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The new path \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a9f190ab490492b811ccc3603b68fe70a}\label{class_camera_a9f190ab490492b811ccc3603b68fe70a}} 
+\index{Camera@{Camera}!setFollowRepeat@{setFollowRepeat}}
+\index{setFollowRepeat@{setFollowRepeat}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setFollowRepeat()}{setFollowRepeat()}}
+{\footnotesize\ttfamily void Camera\+::set\+Follow\+Repeat (\begin{DoxyParamCaption}\item[{bool}]{repeat }\end{DoxyParamCaption})}
+
+
+
+Enable / disable repeat follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em repeat} & Enable repeat \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a3138aa2e40815013739ddb71502ca608}\label{class_camera_a3138aa2e40815013739ddb71502ca608}} 
+\index{Camera@{Camera}!setFovY@{setFovY}}
+\index{setFovY@{setFovY}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setFovY()}{setFovY()}}
+{\footnotesize\ttfamily void Camera\+::set\+FovY (\begin{DoxyParamCaption}\item[{float}]{fovY }\end{DoxyParamCaption})}
+
+
+
+Set the F\+OV. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fovY} & F\+OV \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_camera_a90617e4799a43f0b74ede1d6caca958e}\label{class_camera_a90617e4799a43f0b74ede1d6caca958e}} 
 \index{Camera@{Camera}!setMode@{setMode}}
 \index{setMode@{setMode}!Camera@{Camera}}
@@ -284,6 +443,38 @@ Update the current camera mode.
 
 \begin{DoxyParams}{Parameters}
 {\em mode} & Cam\+Mode element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_afcb04b0f02749e07b61e3346d34834da}\label{class_camera_afcb04b0f02749e07b61e3346d34834da}} 
+\index{Camera@{Camera}!setNearAndFar@{setNearAndFar}}
+\index{setNearAndFar@{setNearAndFar}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setNearAndFar()}{setNearAndFar()}}
+{\footnotesize\ttfamily void Camera\+::set\+Near\+And\+Far (\begin{DoxyParamCaption}\item[{float}]{near,  }\item[{float}]{far }\end{DoxyParamCaption})}
+
+
+
+Set near and far values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em near} & Near value (don\textquotesingle{}t show anything before) \\
+\hline
+{\em far} & Far value (don\textquotesingle{}t show anything after) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}\label{class_camera_a2ddcff55d196d1c57a3310d9c6119f95}} 
+\index{Camera@{Camera}!setRatio@{setRatio}}
+\index{setRatio@{setRatio}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setRatio()}{setRatio()}}
+{\footnotesize\ttfamily void Camera\+::set\+Ratio (\begin{DoxyParamCaption}\item[{float}]{ratio }\end{DoxyParamCaption})}
+
+
+
+Set the camera ratio (width / height) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ratio} & The ratio \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_camera_ad1272976ffb7a0d535c8977ec063201d}\label{class_camera_ad1272976ffb7a0d535c8977ec063201d}} 
@@ -302,6 +493,69 @@ Update function of the camera -\/$>$ to be called every frames.
 \hline
 \end{DoxyParams}
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}\label{class_camera_ab4e78bcb515de19fbac48e3079dd7ccc}} 
+\index{Camera@{Camera}!front@{front}}
+\index{front@{front}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{front}{front}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::front}
+
+\mbox{\hyperlink{class_camera}{Camera}} front vector \mbox{\Hypertarget{class_camera_a0fd9adbe4484147947bc1f51452edd6f}\label{class_camera_a0fd9adbe4484147947bc1f51452edd6f}} 
+\index{Camera@{Camera}!mouseSensitivity@{mouseSensitivity}}
+\index{mouseSensitivity@{mouseSensitivity}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{mouseSensitivity}{mouseSensitivity}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT Camera\+::mouse\+Sensitivity}
+
+\mbox{\hyperlink{class_camera}{Camera}} moving sensitivity \mbox{\Hypertarget{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}\label{class_camera_a2e09cc969e7e7733051df9a0bfe9afa0}} 
+\index{Camera@{Camera}!movementSpeed@{movementSpeed}}
+\index{movementSpeed@{movementSpeed}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{movementSpeed}{movementSpeed}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT Camera\+::movement\+Speed}
+
+\mbox{\hyperlink{class_camera}{Camera}} speed \mbox{\Hypertarget{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}\label{class_camera_aaaff48d7638a7e3cc7e141f11cc23293}} 
+\index{Camera@{Camera}!pitch@{pitch}}
+\index{pitch@{pitch}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{pitch}{pitch}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT Camera\+::pitch}
+
+\mbox{\hyperlink{class_camera}{Camera}} pitch \mbox{\Hypertarget{class_camera_a645cd9343d8c0160ce2281111240f9fd}\label{class_camera_a645cd9343d8c0160ce2281111240f9fd}} 
+\index{Camera@{Camera}!pos@{pos}}
+\index{pos@{pos}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::pos}
+
+\mbox{\hyperlink{class_camera}{Camera}} position \mbox{\Hypertarget{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}\label{class_camera_aa242be0f8ab49b72ec65fcdcec807bb5}} 
+\index{Camera@{Camera}!right@{right}}
+\index{right@{right}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{right}{right}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::right}
+
+\mbox{\hyperlink{class_camera}{Camera}} right vector \mbox{\Hypertarget{class_camera_a891d353a14161c6be625f6a52b75375d}\label{class_camera_a891d353a14161c6be625f6a52b75375d}} 
+\index{Camera@{Camera}!runFactor@{runFactor}}
+\index{runFactor@{runFactor}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{runFactor}{runFactor}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT Camera\+::run\+Factor}
+
+Running factor (movement\+Speed $\ast$ run\+Factor) \mbox{\Hypertarget{class_camera_a02d03a426815c0d64522724fbe2374ca}\label{class_camera_a02d03a426815c0d64522724fbe2374ca}} 
+\index{Camera@{Camera}!up@{up}}
+\index{up@{up}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{up}{up}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::up}
+
+\mbox{\hyperlink{class_camera}{Camera}} up vector \mbox{\Hypertarget{class_camera_a9088ff173e443938f31ed4b6c0f75756}\label{class_camera_a9088ff173e443938f31ed4b6c0f75756}} 
+\index{Camera@{Camera}!worldUp@{worldUp}}
+\index{worldUp@{worldUp}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{worldUp}{worldUp}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Camera\+::world\+Up}
+
+Global world up vector (0, 1, 0) \mbox{\Hypertarget{class_camera_aa11a0643425580b4115bb9b839542891}\label{class_camera_aa11a0643425580b4115bb9b839542891}} 
+\index{Camera@{Camera}!yaw@{yaw}}
+\index{yaw@{yaw}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{yaw}{yaw}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT Camera\+::yaw}
+
+\mbox{\hyperlink{class_camera}{Camera}} yaw 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

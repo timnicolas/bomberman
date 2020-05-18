@@ -11,7 +11,8 @@ This is the bomb object.
 
 
 
-Inheritance diagram for Bomb\+:\nopagebreak
+Inheritance diagram for Bomb\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Bomb\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Bomb\+:\nopagebreak
+Collaboration diagram for Bomb\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,22 +33,23 @@ Collaboration diagram for Bomb\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_bomb_1_1_bomb_exception}{Bomb\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bomb}{Bomb}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}\label{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}} 
-{\bfseries Bomb} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}\label{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}} 
-{\bfseries Bomb} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&src)
-\item 
-\mbox{\Hypertarget{class_bomb_a85eb751af149c92278eafdbabced0d3d}\label{class_bomb_a85eb751af149c92278eafdbabced0d3d}} 
-\mbox{\hyperlink{class_bomb}{Bomb}} \& {\bfseries operator=} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&rhs)
-\item 
-\mbox{\Hypertarget{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}\label{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}} 
-\mbox{\hyperlink{class_bomb}{Bomb}} $\ast$ {\bfseries set\+Propagation} (const int propagation)
-\item 
+\mbox{\hyperlink{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}{Bomb}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_bomb}{Bomb}}\+:\+: \mbox{\hyperlink{class_bomb}{Bomb}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_bomb_acbb47327cfb2fa429887774ef3597965}\label{class_bomb_acbb47327cfb2fa429887774ef3597965}} 
+\mbox{\hyperlink{class_bomb_acbb47327cfb2fa429887774ef3597965}{$\sim$\+Bomb}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_bomb}{Bomb}}\+:\+: \mbox{\hyperlink{class_bomb}{Bomb}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}{Bomb}} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_bomb}{Bomb}}\+:\+: \mbox{\hyperlink{class_bomb}{Bomb}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bomb}{Bomb}} \& \mbox{\hyperlink{class_bomb_a85eb751af149c92278eafdbabced0d3d}{operator=}} (\mbox{\hyperlink{class_bomb}{Bomb}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bomb}{Bomb}} $\ast$ \mbox{\hyperlink{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}{set\+Propagation}} (const int propagation)
+\begin{DoxyCompactList}\small\item\em Set the bomb propagation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bomb_a4a3f751937f59953f4cf585b07c9684c}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_bomb}{Bomb}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{update}} ()
 \begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_bomb_a443c5d40a92e67ef456c71369e8a111b}{post\+Update}} ()
@@ -62,6 +65,39 @@ bool \mbox{\hyperlink{class_bomb_ac51b260cdfef0cde903a88003994276e}{take\+Damage
 
 \doxysubsection{Detailed Description}
 This is the bomb object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}\label{class_bomb_aa09b8879ab7aae611b05ad0e73e45696}} 
+\index{Bomb@{Bomb}!Bomb@{Bomb}}
+\index{Bomb@{Bomb}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{Bomb()}{Bomb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bomb\+::\+Bomb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_bomb}{Bomb}}\+:\+: \mbox{\hyperlink{class_bomb}{Bomb}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}\label{class_bomb_ad02ddab443979d610ea5ad04343bd7fa}} 
+\index{Bomb@{Bomb}!Bomb@{Bomb}}
+\index{Bomb@{Bomb}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{Bomb()}{Bomb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bomb\+::\+Bomb (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_bomb}{Bomb}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_bomb}{Bomb}}\+:\+: \mbox{\hyperlink{class_bomb}{Bomb}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}\label{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}} 
@@ -81,7 +117,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{A\+Object}}.
 
 \mbox{\Hypertarget{class_bomb_a4d3105c3390626d385bdb5dfd0fa68ff}\label{class_bomb_a4d3105c3390626d385bdb5dfd0fa68ff}} 
 \index{Bomb@{Bomb}!explode@{explode}}
@@ -98,6 +134,43 @@ The bomb explode in the N.\+E.\+S.\+W. directions at \+\_\+propagation distance.
 {\em pos} & \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_bomb_a4a3f751937f59953f4cf585b07c9684c}\label{class_bomb_a4a3f751937f59953f4cf585b07c9684c}} 
+\index{Bomb@{Bomb}!init@{init}}
+\index{init@{init}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Bomb\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init \mbox{\hyperlink{class_bomb}{Bomb}}. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bomb_a85eb751af149c92278eafdbabced0d3d}\label{class_bomb_a85eb751af149c92278eafdbabced0d3d}} 
+\index{Bomb@{Bomb}!operator=@{operator=}}
+\index{operator=@{operator=}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_bomb}{Bomb}} \& Bomb\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_bomb}{Bomb}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_bomb}{Bomb}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_bomb_a443c5d40a92e67ef456c71369e8a111b}\label{class_bomb_a443c5d40a92e67ef456c71369e8a111b}} 
 \index{Bomb@{Bomb}!postUpdate@{postUpdate}}
 \index{postUpdate@{postUpdate}!Bomb@{Bomb}}
@@ -117,6 +190,24 @@ false if failure
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}\label{class_bomb_a3a3488cb6bd66f3b6d73003814dfb209}} 
+\index{Bomb@{Bomb}!setPropagation@{setPropagation}}
+\index{setPropagation@{setPropagation}!Bomb@{Bomb}}
+\doxysubsubsection{\texorpdfstring{setPropagation()}{setPropagation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_bomb}{Bomb}} $\ast$ Bomb\+::set\+Propagation (\begin{DoxyParamCaption}\item[{const int}]{propagation }\end{DoxyParamCaption})}
+
+
+
+Set the bomb propagation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em propagation} & The new propagation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bomb$\ast$ A pointer on this object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_bomb_ac51b260cdfef0cde903a88003994276e}\label{class_bomb_ac51b260cdfef0cde903a88003994276e}} 
 \index{Bomb@{Bomb}!takeDamage@{takeDamage}}
 \index{takeDamage@{takeDamage}!Bomb@{Bomb}}
@@ -158,7 +249,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{A\+Object}}.
 
 
 

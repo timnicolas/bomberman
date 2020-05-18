@@ -111,32 +111,36 @@ $(function() {
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_skybox.html">   44</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_skybox.html">Skybox</a> {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_skybox.html">Skybox</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_skybox.html">Skybox</a>(<a class="code" href="class_skybox.html">Skybox</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="class_skybox.html">Skybox</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_skybox.html#a77a92db4492ed94ed4bd101b05ffb1f4">Skybox</a>();</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_skybox.html#a77a92db4492ed94ed4bd101b05ffb1f4">Skybox</a>(<a class="code" href="class_skybox.html">Skybox</a> <span class="keyword">const</span> &amp;src);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_skybox.html#a62ad4c6b4b1965a0a6d8536a50d4c090">~Skybox</a>();</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_skybox.html">Skybox</a> &amp;operator=(<a class="code" href="class_skybox.html">Skybox</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_skybox.html">Skybox</a> &amp;<a class="code" href="class_skybox.html#abf01cb7deeb5d0cee173b50c43f82161">operator=</a>(<a class="code" href="class_skybox.html">Skybox</a> <span class="keyword">const</span> &amp;rhs);</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_skybox.html#a5ee5403ca72532870de608185481c3ba">load</a>(std::vector&lt;std::string&gt; &amp;faces);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_skybox.html#a103d5448a82178e8abaa0ab5fad2c07f">draw</a>(<span class="keywordtype">float</span> nightProgress = 0);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="class_shader.html">Shader</a>          &amp;getShader();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="class_shader.html">Shader</a> <span class="keyword">const</span>    &amp;getShader() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        uint32_t        getTextureID() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="class_shader.html">Shader</a>          &amp;<a class="code" href="class_skybox.html#aeeb4151675a4021c3fdfca1e31d33a76">getShader</a>();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="class_shader.html">Shader</a> <span class="keyword">const</span>    &amp;<a class="code" href="class_skybox.html#aeeb4151675a4021c3fdfca1e31d33a76">getShader</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        uint32_t        <a class="code" href="class_skybox.html#a4325d2aaa63fafa4b164fd207b185b12">getTextureID</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_shader.html">Shader</a>      _shader;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        uint32_t    _textureID;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        uint32_t    _vao;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        uint32_t    _vbo;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_shader.html">Shader</a>      _shader;  </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        uint32_t    _textureID;  </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        uint32_t    _vao;  </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        uint32_t    _vbo;  </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">float</span> _vertices[];</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclass_skybox_html_abf01cb7deeb5d0cee173b50c43f82161"><div class="ttname"><a href="class_skybox.html#abf01cb7deeb5d0cee173b50c43f82161">Skybox::operator=</a></div><div class="ttdeci">Skybox &amp; operator=(Skybox const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:113</div></div>
+<div class="ttc" id="aclass_skybox_html_a62ad4c6b4b1965a0a6d8536a50d4c090"><div class="ttname"><a href="class_skybox.html#a62ad4c6b4b1965a0a6d8536a50d4c090">Skybox::~Skybox</a></div><div class="ttdeci">virtual ~Skybox()</div><div class="ttdoc">Destroy the Skybox:: Skybox object.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:96</div></div>
 <div class="ttc" id="aclass_skybox_html"><div class="ttname"><a href="class_skybox.html">Skybox</a></div><div class="ttdoc">create a skybox for a project</div><div class="ttdef"><b>Definition:</b> Skybox.hpp:44</div></div>
-<div class="ttc" id="aclass_skybox_html_a103d5448a82178e8abaa0ab5fad2c07f"><div class="ttname"><a href="class_skybox.html#a103d5448a82178e8abaa0ab5fad2c07f">Skybox::draw</a></div><div class="ttdeci">void draw(float nightProgress=0)</div><div class="ttdoc">Draw the skybox (call this function in every loop at the end)</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:160</div></div>
+<div class="ttc" id="aclass_skybox_html_a103d5448a82178e8abaa0ab5fad2c07f"><div class="ttname"><a href="class_skybox.html#a103d5448a82178e8abaa0ab5fad2c07f">Skybox::draw</a></div><div class="ttdeci">void draw(float nightProgress=0)</div><div class="ttdoc">Draw the skybox (call this function in every loop at the end)</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:177</div></div>
+<div class="ttc" id="aclass_skybox_html_aeeb4151675a4021c3fdfca1e31d33a76"><div class="ttname"><a href="class_skybox.html#aeeb4151675a4021c3fdfca1e31d33a76">Skybox::getShader</a></div><div class="ttdeci">Shader &amp; getShader()</div><div class="ttdoc">Get the shader.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:196</div></div>
+<div class="ttc" id="aclass_skybox_html_a4325d2aaa63fafa4b164fd207b185b12"><div class="ttname"><a href="class_skybox.html#a4325d2aaa63fafa4b164fd207b185b12">Skybox::getTextureID</a></div><div class="ttdeci">uint32_t getTextureID() const</div><div class="ttdoc">Get the texture ID.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:208</div></div>
 <div class="ttc" id="aclass_shader_html"><div class="ttname"><a href="class_shader.html">Shader</a></div><div class="ttdoc">Shader class used to manage shader compilation.</div><div class="ttdef"><b>Definition:</b> Shader.hpp:16</div></div>
-<div class="ttc" id="aclass_skybox_html_a5ee5403ca72532870de608185481c3ba"><div class="ttname"><a href="class_skybox.html#a5ee5403ca72532870de608185481c3ba">Skybox::load</a></div><div class="ttdeci">void load(std::vector&lt; std::string &gt; &amp;faces)</div><div class="ttdoc">Load a skybox.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:110</div></div>
+<div class="ttc" id="aclass_skybox_html_a5ee5403ca72532870de608185481c3ba"><div class="ttname"><a href="class_skybox.html#a5ee5403ca72532870de608185481c3ba">Skybox::load</a></div><div class="ttdeci">void load(std::vector&lt; std::string &gt; &amp;faces)</div><div class="ttdoc">Load a skybox.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:127</div></div>
+<div class="ttc" id="aclass_skybox_html_a77a92db4492ed94ed4bd101b05ffb1f4"><div class="ttname"><a href="class_skybox.html#a77a92db4492ed94ed4bd101b05ffb1f4">Skybox::Skybox</a></div><div class="ttdeci">Skybox()</div><div class="ttdoc">Construct a new Skybox:: Skybox object.</div><div class="ttdef"><b>Definition:</b> Skybox.cpp:53</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

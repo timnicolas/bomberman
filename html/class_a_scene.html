@@ -84,7 +84,7 @@ Inheritance diagram for AScene:</div>
 <area shape="rect" href="class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="1110,292,1238,545"/>
 <area shape="rect" href="class_scene_cheat_code.html" title="this is the cheat code command line" alt="" coords="5,733,159,971"/>
 <area shape="rect" href="class_scene_debug.html" title="debug menu to show fps at the top of the screen" alt="" coords="183,769,309,935"/>
-<area shape="rect" href="class_scene_difficulty.html" title="main menu (opened at the game startup)" alt="" coords="333,762,471,942"/>
+<area shape="rect" href="class_scene_difficulty.html" title="Menu to choose dificulty (when starting a new game)" alt="" coords="333,762,471,942"/>
 <area shape="rect" href="class_scene_end_game.html" title="End of the game (after all levels finished)" alt="" coords="496,755,641,949"/>
 <area shape="rect" href="class_scene_exit.html" title="menu for exit" alt="" coords="666,740,799,964"/>
 <area shape="rect" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="824,593,983,1111"/>
@@ -94,7 +94,7 @@ Inheritance diagram for AScene:</div>
 <area shape="rect" href="class_scene_loading.html" title="loading game scene" alt="" coords="1552,762,1684,942"/>
 <area shape="rect" href="class_scene_main_menu.html" title="main menu (opened at the game startup)" alt="" coords="1709,762,1855,942"/>
 <area shape="rect" href="class_scene_pause.html" title="this is the pause menu" alt="" coords="1879,755,2013,949"/>
-<area shape="rect" href="class_scene_settings.html" title=" " alt="" coords="2037,740,2191,964"/>
+<area shape="rect" href="class_scene_settings.html" title="Scene for settings." alt="" coords="2037,740,2191,964"/>
 <area shape="rect" href="class_scene_victory.html" title="this is the victory menu" alt="" coords="2215,747,2349,957"/>
 </map>
 </div>
@@ -106,59 +106,313 @@ Collaboration diagram for AScene:</div>
 <area shape="rect" title="base object to implement in all scenes" alt="" coords="238,784,341,1008"/>
 <area shape="rect" href="class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="196,424,383,721"/>
 <area shape="rect" href="class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="5,71,112,295"/>
-<area shape="rect" href="class_texture_manager.html" title=" " alt="" coords="137,101,279,266"/>
+<area shape="rect" href="class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="137,101,279,266"/>
 <area shape="rect" href="class_camera.html" title="this is a camera 3D object" alt="" coords="303,5,438,361"/>
-<area shape="rect" href="struct_game_info.html" title=" " alt="" coords="462,108,605,259"/>
+<area shape="rect" href="struct_game_info.html" title="General information about the game." alt="" coords="462,108,605,259"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene_1_1_scene_exception.html">SceneException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scene exception.  <a href="class_a_scene_1_1_scene_exception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a00e7cd759bb0f43141df51c4ab6e6c47"><td class="memItemLeft" align="right" valign="top"><a id="a00e7cd759bb0f43141df51c4ab6e6c47"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AScene</b> (<a class="el" href="class_gui.html">Gui</a> *gui, float const &amp;dtTime)</td></tr>
+<tr class="memitem:a00e7cd759bb0f43141df51c4ab6e6c47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47">AScene</a> (<a class="el" href="class_gui.html">Gui</a> *gui, float const &amp;dtTime)</td></tr>
+<tr class="memdesc:a00e7cd759bb0f43141df51c4ab6e6c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47" title="Construct a new AScene::AScene object.">AScene::AScene</a> object.  <a href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47">More...</a><br /></td></tr>
 <tr class="separator:a00e7cd759bb0f43141df51c4ab6e6c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa204afecf39bdfcbe83dad3ed8cce34f"><td class="memItemLeft" align="right" valign="top"><a id="aa204afecf39bdfcbe83dad3ed8cce34f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AScene</b> (<a class="el" href="class_a_scene.html">AScene</a> const &amp;src)</td></tr>
+<tr class="memitem:aa204afecf39bdfcbe83dad3ed8cce34f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#aa204afecf39bdfcbe83dad3ed8cce34f">AScene</a> (<a class="el" href="class_a_scene.html">AScene</a> const &amp;src)</td></tr>
+<tr class="memdesc:aa204afecf39bdfcbe83dad3ed8cce34f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47" title="Construct a new AScene::AScene object.">AScene::AScene</a> object.  <a href="class_a_scene.html#aa204afecf39bdfcbe83dad3ed8cce34f">More...</a><br /></td></tr>
 <tr class="separator:aa204afecf39bdfcbe83dad3ed8cce34f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad431efa9c183182e8b5abb1bb8437a74"><td class="memItemLeft" align="right" valign="top"><a id="ad431efa9c183182e8b5abb1bb8437a74"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()=0</td></tr>
+<tr class="memitem:a9faf7f1a271327227e83627432d0b210"><td class="memItemLeft" align="right" valign="top"><a id="a9faf7f1a271327227e83627432d0b210"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#a9faf7f1a271327227e83627432d0b210">~AScene</a> ()</td></tr>
+<tr class="memdesc:a9faf7f1a271327227e83627432d0b210"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47" title="Construct a new AScene::AScene object.">AScene::AScene</a> object. <br /></td></tr>
+<tr class="separator:a9faf7f1a271327227e83627432d0b210"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad431efa9c183182e8b5abb1bb8437a74"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#ad431efa9c183182e8b5abb1bb8437a74">init</a> ()=0</td></tr>
+<tr class="memdesc:ad431efa9c183182e8b5abb1bb8437a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init the scene.  <a href="class_a_scene.html#ad431efa9c183182e8b5abb1bb8437a74">More...</a><br /></td></tr>
 <tr class="separator:ad431efa9c183182e8b5abb1bb8437a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3ed61809cc5924b9d5530473576a0c7"><td class="memItemLeft" align="right" valign="top"><a id="af3ed61809cc5924b9d5530473576a0c7"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
+<tr class="memitem:af3ed61809cc5924b9d5530473576a0c7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#af3ed61809cc5924b9d5530473576a0c7">update</a> ()=0</td></tr>
+<tr class="memdesc:af3ed61809cc5924b9d5530473576a0c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the scene (called every frames)  <a href="class_a_scene.html#af3ed61809cc5924b9d5530473576a0c7">More...</a><br /></td></tr>
 <tr class="separator:af3ed61809cc5924b9d5530473576a0c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c303489d4c296482af38aa5deccbd8b"><td class="memItemLeft" align="right" valign="top"><a id="a7c303489d4c296482af38aa5deccbd8b"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> ()=0</td></tr>
+<tr class="memitem:a7c303489d4c296482af38aa5deccbd8b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#a7c303489d4c296482af38aa5deccbd8b">draw</a> ()=0</td></tr>
+<tr class="memdesc:a7c303489d4c296482af38aa5deccbd8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the scene (called every frames)  <a href="class_a_scene.html#a7c303489d4c296482af38aa5deccbd8b">More...</a><br /></td></tr>
 <tr class="separator:a7c303489d4c296482af38aa5deccbd8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f6201c6a7ccefdebdc9ecf69d35a1d8"><td class="memItemLeft" align="right" valign="top"><a id="a8f6201c6a7ccefdebdc9ecf69d35a1d8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#a8f6201c6a7ccefdebdc9ecf69d35a1d8">load</a> ()=0</td></tr>
+<tr class="memdesc:a8f6201c6a7ccefdebdc9ecf69d35a1d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the scene (called on every scene loading) <br /></td></tr>
 <tr class="separator:a8f6201c6a7ccefdebdc9ecf69d35a1d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeb259110cc48bac42ea05bbe24b5d2a8"><td class="memItemLeft" align="right" valign="top"><a id="aeb259110cc48bac42ea05bbe24b5d2a8"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>unload</b> ()=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#aeb259110cc48bac42ea05bbe24b5d2a8">unload</a> ()=0</td></tr>
+<tr class="memdesc:aeb259110cc48bac42ea05bbe24b5d2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unload the scene (called on every scene unloading) <br /></td></tr>
 <tr class="separator:aeb259110cc48bac42ea05bbe24b5d2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad3e0d8810515e904fc315a12a344bc3"><td class="memItemLeft" align="right" valign="top"><a id="aad3e0d8810515e904fc315a12a344bc3"></a>
-float const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getDtTime</b> () const</td></tr>
+<tr class="memitem:aad3e0d8810515e904fc315a12a344bc3"><td class="memItemLeft" align="right" valign="top">float const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#aad3e0d8810515e904fc315a12a344bc3">getDtTime</a> () const</td></tr>
+<tr class="memdesc:aad3e0d8810515e904fc315a12a344bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the delta time.  <a href="class_a_scene.html#aad3e0d8810515e904fc315a12a344bc3">More...</a><br /></td></tr>
 <tr class="separator:aad3e0d8810515e904fc315a12a344bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedf714310c418b3972e2e9c96ac7bff1"><td class="memItemLeft" align="right" valign="top"><a id="aedf714310c418b3972e2e9c96ac7bff1"></a>
-<a class="el" href="class_a_scene.html">AScene</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_a_scene.html">AScene</a> const &amp;rhs)</td></tr>
+<tr class="memitem:aedf714310c418b3972e2e9c96ac7bff1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_scene.html">AScene</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#aedf714310c418b3972e2e9c96ac7bff1">operator=</a> (<a class="el" href="class_a_scene.html">AScene</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:aedf714310c418b3972e2e9c96ac7bff1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy this object.  <a href="class_a_scene.html#aedf714310c418b3972e2e9c96ac7bff1">More...</a><br /></td></tr>
 <tr class="separator:aedf714310c418b3972e2e9c96ac7bff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:afdf549ea35306aecfa7a7976a5594fe1"><td class="memItemLeft" align="right" valign="top"><a id="afdf549ea35306aecfa7a7976a5594fe1"></a>
-<a class="el" href="class_gui.html">Gui</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_gui</b></td></tr>
+<tr class="memitem:afdf549ea35306aecfa7a7976a5594fe1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_gui.html">Gui</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#afdf549ea35306aecfa7a7976a5594fe1">_gui</a></td></tr>
 <tr class="separator:afdf549ea35306aecfa7a7976a5594fe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cbb61bc0c24add293a08d3cc83ac2ea"><td class="memItemLeft" align="right" valign="top"><a id="a8cbb61bc0c24add293a08d3cc83ac2ea"></a>
-float const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>_dtTime</b></td></tr>
+<tr class="memitem:a8cbb61bc0c24add293a08d3cc83ac2ea"><td class="memItemLeft" align="right" valign="top">float const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_scene.html#a8cbb61bc0c24add293a08d3cc83ac2ea">_dtTime</a></td></tr>
 <tr class="separator:a8cbb61bc0c24add293a08d3cc83ac2ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>base object to implement in all scenes </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a00e7cd759bb0f43141df51c4ab6e6c47"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00e7cd759bb0f43141df51c4ab6e6c47">&#9670;&nbsp;</a></span>AScene() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AScene::AScene </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_gui.html">Gui</a> *&#160;</td>
+          <td class="paramname"><em>gui</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float const &amp;&#160;</td>
+          <td class="paramname"><em>dtTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47" title="Construct a new AScene::AScene object.">AScene::AScene</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gui</td><td>A pointer on the gui object </td></tr>
+    <tr><td class="paramname">dtTime</td><td>A reference to the delta time </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa204afecf39bdfcbe83dad3ed8cce34f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa204afecf39bdfcbe83dad3ed8cce34f">&#9670;&nbsp;</a></span>AScene() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AScene::AScene </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_scene.html">AScene</a> const &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_a_scene.html#a00e7cd759bb0f43141df51c4ab6e6c47" title="Construct a new AScene::AScene object.">AScene::AScene</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The object to do the copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7c303489d4c296482af38aa5deccbd8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c303489d4c296482af38aa5deccbd8b">&#9670;&nbsp;</a></span>draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool AScene::draw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw the scene (called every frames) </p>
+<dl class="section return"><dt>Returns</dt><dd>false If failed </dd></dl>
+
+<p>Implemented in <a class="el" href="class_scene_game.html#a0797fee2de442f68aef19cc5c3299ec3">SceneGame</a>, <a class="el" href="class_a_scene_menu.html#a5c11f34c83f025e1181219bf25ce4694">ASceneMenu</a>, <a class="el" href="class_scene_end_game.html#a145614d80f41512a5bcf539278555d0c">SceneEndGame</a>, <a class="el" href="class_scene_exit.html#a3b7110e736f86836568fdb2f8a997877">SceneExit</a>, <a class="el" href="class_scene_loading.html#ae51a1b4d4f738847d50036c174364f9e">SceneLoading</a>, <a class="el" href="class_scene_game_over.html#aa9c4f9d3cabdc89176c0113e2864f3e8">SceneGameOver</a>, <a class="el" href="class_scene_pause.html#aa59d21ea311bab5163574441f3960734">ScenePause</a>, and <a class="el" href="class_scene_victory.html#ac79e3eadfb4bfafa8733888a1e86f57e">SceneVictory</a>.</p>
+
+</div>
+</div>
+<a id="aad3e0d8810515e904fc315a12a344bc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad3e0d8810515e904fc315a12a344bc3">&#9670;&nbsp;</a></span>getDtTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float const  &amp; AScene::getDtTime </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the delta time. </p>
+<dl class="section return"><dt>Returns</dt><dd>float const&amp; The delta time </dd></dl>
+
+</div>
+</div>
+<a id="ad431efa9c183182e8b5abb1bb8437a74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad431efa9c183182e8b5abb1bb8437a74">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool AScene::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Init the scene. </p>
+<dl class="section return"><dt>Returns</dt><dd>false If failed </dd></dl>
+
+<p>Implemented in <a class="el" href="class_a_scene_menu.html#a78bdee98bd7df224524586a060f9bdec">ASceneMenu</a>, <a class="el" href="class_scene_game.html#a841268ba3ea129f7c02cfafcafd32a4f">SceneGame</a>, <a class="el" href="class_scene_cheat_code.html#aa952941065350cdde0390695b32ac31d">SceneCheatCode</a>, <a class="el" href="class_scene_settings.html#a19323950409add2d1b0df92799acf4d2">SceneSettings</a>, <a class="el" href="class_scene_debug.html#a4e413808e3d50dd29f9e1d07df4e6c4c">SceneDebug</a>, <a class="el" href="class_scene_level_selection.html#ab6374f18220f26c22e062bfacc2ff962">SceneLevelSelection</a>, <a class="el" href="class_scene_difficulty.html#a7fb9dd5ee9d623e346d917cd7a5db956">SceneDifficulty</a>, <a class="el" href="class_scene_end_game.html#a9503a63d52d2a11dbc56c97f35ff6eae">SceneEndGame</a>, <a class="el" href="class_scene_loading.html#aa0463a9826f1b50e5980e41d57c80778">SceneLoading</a>, <a class="el" href="class_scene_main_menu.html#a11f68db49f9bf996efb0ce14913e5580">SceneMainMenu</a>, <a class="el" href="class_scene_exit.html#ad9168291bb031fee797a7964590e1b73">SceneExit</a>, <a class="el" href="class_scene_game_over.html#a7ddd370503e10ff64e3d023f0a0acdb8">SceneGameOver</a>, <a class="el" href="class_scene_load_game.html#a4ef89351e679b7f681fa55e5f723dd16">SceneLoadGame</a>, <a class="el" href="class_scene_pause.html#ae5e00c5fcd82e97985d93f918b9e4b35">ScenePause</a>, and <a class="el" href="class_scene_victory.html#ab7dc4308732478fa13c8a3209f63e6b7">SceneVictory</a>.</p>
+
+</div>
+</div>
+<a id="aedf714310c418b3972e2e9c96ac7bff1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedf714310c418b3972e2e9c96ac7bff1">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_a_scene.html">AScene</a> &amp; AScene::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_scene.html">AScene</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy this object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The object to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_a_scene.html" title="base object to implement in all scenes">AScene</a>&amp; A reference to the copied object </dd></dl>
+
+</div>
+</div>
+<a id="af3ed61809cc5924b9d5530473576a0c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ed61809cc5924b9d5530473576a0c7">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool AScene::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Update the scene (called every frames) </p>
+<dl class="section return"><dt>Returns</dt><dd>false If failed </dd></dl>
+
+<p>Implemented in <a class="el" href="class_scene_game.html#a5e23048e3ad8c6fde2d753ed7449e2d5">SceneGame</a>, <a class="el" href="class_scene_cheat_code.html#ab6ae0c8b3adbce736429e61a27966e31">SceneCheatCode</a>, <a class="el" href="class_scene_settings.html#ac32c443d620d0417b301193e87885a91">SceneSettings</a>, <a class="el" href="class_a_scene_menu.html#a1deeb5fd9be97376998cd2af36f29744">ASceneMenu</a>, <a class="el" href="class_scene_debug.html#a97234cec6e43aa3d891e3f6d2ff51528">SceneDebug</a>, <a class="el" href="class_scene_difficulty.html#a2a3d3328b04df7047cc03725a9c5eb3c">SceneDifficulty</a>, <a class="el" href="class_scene_end_game.html#a36b55558e75b9cad9d17a28d8a1ce8d2">SceneEndGame</a>, <a class="el" href="class_scene_level_selection.html#a9784885da4583eaba695812bedf8847c">SceneLevelSelection</a>, <a class="el" href="class_scene_loading.html#a5b4f2b636e55908bb2f29180aa875201">SceneLoading</a>, <a class="el" href="class_scene_main_menu.html#a5d095883d0b1fceb3125ef2689a7a09c">SceneMainMenu</a>, <a class="el" href="class_scene_load_game.html#ad33de3b5d98596754f058a4e096ba1b3">SceneLoadGame</a>, <a class="el" href="class_scene_exit.html#a60fd49ea48551bd3035efa7cabe4d08d">SceneExit</a>, <a class="el" href="class_scene_game_over.html#ac4547b0ed87f3c324e75dafb8f96b5af">SceneGameOver</a>, <a class="el" href="class_scene_pause.html#a376de6952be83718fb19d268d9327ef6">ScenePause</a>, and <a class="el" href="class_scene_victory.html#aea51a7b48a3243175e1759b20f853c16">SceneVictory</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a8cbb61bc0c24add293a08d3cc83ac2ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cbb61bc0c24add293a08d3cc83ac2ea">&#9670;&nbsp;</a></span>_dtTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float const&amp; AScene::_dtTime</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A reference to the delta time </p>
+
+</div>
+</div>
+<a id="afdf549ea35306aecfa7a7976a5594fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdf549ea35306aecfa7a7976a5594fe1">&#9670;&nbsp;</a></span>_gui</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_gui.html">Gui</a>* AScene::_gui</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A reference to the gui object </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>includes/scenes/<a class="el" href="_a_scene_8hpp_source.html">AScene.hpp</a></li>
 <li>srcs/scenes/AScene.cpp</li>
 </ul>

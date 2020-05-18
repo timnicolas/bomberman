@@ -90,46 +90,52 @@ Collaboration diagram for Player:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_player__coll__graph.png" border="0" usemap="#_player_coll__map" alt="Collaboration graph"/></div>
 <map name="_player_coll__map" id="_player_coll__map">
-<area shape="rect" title="This is the player object." alt="" coords="167,2131,297,2501"/>
-<area shape="rect" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="346,2564,505,3067"/>
-<area shape="rect" href="class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="167,3549,339,3964"/>
-<area shape="rect" href="class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="483,3129,618,3500"/>
-<area shape="rect" href="class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="539,2189,667,2443"/>
-<area shape="rect" href="class_a_scene.html" title="base object to implement in all scenes" alt="" coords="551,1561,654,1785"/>
-<area shape="rect" href="class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="509,710,696,1007"/>
-<area shape="rect" href="class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="251,71,357,295"/>
+<area shape="rect" title="This is the player object." alt="" coords="168,2131,299,2501"/>
+<area shape="rect" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="347,2564,506,3067"/>
+<area shape="rect" href="class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="169,3549,341,3964"/>
+<area shape="rect" href="class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="474,3129,609,3500"/>
+<area shape="rect" href="class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="540,2189,668,2443"/>
+<area shape="rect" href="class_a_scene.html" title="base object to implement in all scenes" alt="" coords="553,1561,655,1785"/>
+<area shape="rect" href="class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="511,710,697,1007"/>
+<area shape="rect" href="class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="252,71,359,295"/>
 <area shape="rect" href="class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="73,439,276,1279"/>
-<area shape="rect" href="class_texture_manager.html" title=" " alt="" coords="393,101,535,266"/>
-<area shape="rect" href="class_camera.html" title="this is a camera 3D object" alt="" coords="559,5,694,361"/>
-<area shape="rect" href="struct_game_info.html" title=" " alt="" coords="718,108,861,259"/>
-<area shape="rect" href="struct_scene_game_1_1_all_u_i.html" title=" " alt="" coords="371,1883,525,2107"/>
+<area shape="rect" href="class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="394,101,537,266"/>
+<area shape="rect" href="class_camera.html" title="this is a camera 3D object" alt="" coords="561,5,695,361"/>
+<area shape="rect" href="struct_game_info.html" title="General information about the game." alt="" coords="719,108,862,259"/>
+<area shape="rect" href="struct_scene_game_1_1_all_u_i.html" title="All UI elements (bonus, text, ...)" alt="" coords="375,1883,529,2107"/>
 <area shape="rect" href="class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="5,1488,187,1859"/>
-<area shape="rect" href="class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="83,71,200,295"/>
-<area shape="rect" href="class_score.html" title=" " alt="" coords="321,2204,428,2428"/>
-<area shape="rect" href="class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="529,2659,725,2971"/>
-<area shape="rect" href="class_e_transform.html" title="Class to manage model transformation." alt="" coords="691,2175,810,2457"/>
-<area shape="rect" href="struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="749,2769,880,2861"/>
-<area shape="rect" href="struct_player_1_1_bonus_actifs.html" title=" " alt="" coords="211,1561,349,1785"/>
+<area shape="rect" href="class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="84,71,201,295"/>
+<area shape="rect" href="class_score.html" title="Score calculation object." alt="" coords="323,2204,429,2428"/>
+<area shape="rect" href="class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="531,2689,693,2942"/>
+<area shape="rect" href="class_e_transform.html" title="Class to manage model transformation." alt="" coords="693,2175,811,2457"/>
+<area shape="rect" href="struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="717,2769,848,2861"/>
+<area shape="rect" href="struct_player_1_1_active_bonus.html" title="All active bonus for the player." alt="" coords="211,1561,352,1785"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_player_1_1_bonus_actifs.html">BonusActifs</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_player_1_1_active_bonus.html">ActiveBonus</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">All active bonus for the player.  <a href="struct_player_1_1_active_bonus.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_1_1_player_exception.html">PlayerException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> exception.  <a href="class_player_1_1_player_exception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a290433592841cca95046b8c9dac7be86"><td class="memItemLeft" align="right" valign="top"><a id="a290433592841cca95046b8c9dac7be86"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memitem:a290433592841cca95046b8c9dac7be86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a290433592841cca95046b8c9dac7be86">Player</a> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memdesc:a290433592841cca95046b8c9dac7be86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_player.html" title="This is the player object.">Player</a>:: <a class="el" href="class_player.html" title="This is the player object.">Player</a> object.  <a href="class_player.html#a290433592841cca95046b8c9dac7be86">More...</a><br /></td></tr>
 <tr class="separator:a290433592841cca95046b8c9dac7be86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2cf4315d62d84ddf41d86d76a9bb9294"><td class="memItemLeft" align="right" valign="top"><a id="a2cf4315d62d84ddf41d86d76a9bb9294"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (<a class="el" href="class_player.html">Player</a> const &amp;src)</td></tr>
+<tr class="memitem:a749d2c00e1fe0f5c2746f7505a58c062"><td class="memItemLeft" align="right" valign="top"><a id="a749d2c00e1fe0f5c2746f7505a58c062"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a749d2c00e1fe0f5c2746f7505a58c062">~Player</a> ()</td></tr>
+<tr class="memdesc:a749d2c00e1fe0f5c2746f7505a58c062"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_player.html" title="This is the player object.">Player</a>:: <a class="el" href="class_player.html" title="This is the player object.">Player</a> object. <br /></td></tr>
+<tr class="separator:a749d2c00e1fe0f5c2746f7505a58c062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cf4315d62d84ddf41d86d76a9bb9294"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a2cf4315d62d84ddf41d86d76a9bb9294">Player</a> (<a class="el" href="class_player.html">Player</a> const &amp;src)</td></tr>
+<tr class="memdesc:a2cf4315d62d84ddf41d86d76a9bb9294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_player.html" title="This is the player object.">Player</a>:: <a class="el" href="class_player.html" title="This is the player object.">Player</a> object.  <a href="class_player.html#a2cf4315d62d84ddf41d86d76a9bb9294">More...</a><br /></td></tr>
 <tr class="separator:a2cf4315d62d84ddf41d86d76a9bb9294"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32a02cfee10a8ba8ccfa4cd0244cb42f"><td class="memItemLeft" align="right" valign="top"><a id="a32a02cfee10a8ba8ccfa4cd0244cb42f"></a>
-<a class="el" href="class_player.html">Player</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_player.html">Player</a> const &amp;rhs)</td></tr>
+<tr class="memitem:a32a02cfee10a8ba8ccfa4cd0244cb42f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_player.html">Player</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a32a02cfee10a8ba8ccfa4cd0244cb42f">operator=</a> (<a class="el" href="class_player.html">Player</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a32a02cfee10a8ba8ccfa4cd0244cb42f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy this object.  <a href="class_player.html#a32a02cfee10a8ba8ccfa4cd0244cb42f">More...</a><br /></td></tr>
 <tr class="separator:a32a02cfee10a8ba8ccfa4cd0244cb42f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcf86538719baa2f5c81d0b90263c41a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#afcf86538719baa2f5c81d0b90263c41a">init</a> ()</td></tr>
 <tr class="memdesc:afcf86538719baa2f5c81d0b90263c41a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init player for new levels.  <a href="class_player.html#afcf86538719baa2f5c81d0b90263c41a">More...</a><br /></td></tr>
@@ -148,13 +154,13 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:afdc99f7dc10aa6c2a7c8bb86c7b8beb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset values for player.  <a href="class_player.html#afdc99f7dc10aa6c2a7c8bb86c7b8beb5">More...</a><br /></td></tr>
 <tr class="separator:afdc99f7dc10aa6c2a7c8bb86c7b8beb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a029b1d511340697d8ccfb7bfa604435b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a029b1d511340697d8ccfb7bfa604435b">takeDamage</a> (const int damage)</td></tr>
-<tr class="memdesc:a029b1d511340697d8ccfb7bfa604435b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> Take &lt;damage&gt; damages.  <a href="class_player.html#a029b1d511340697d8ccfb7bfa604435b">More...</a><br /></td></tr>
+<tr class="memdesc:a029b1d511340697d8ccfb7bfa604435b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> Take &lt; damage &gt; damages.  <a href="class_player.html#a029b1d511340697d8ccfb7bfa604435b">More...</a><br /></td></tr>
 <tr class="separator:a029b1d511340697d8ccfb7bfa604435b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d4df2ce6e2dafb5bfeb179462dc02cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a7d4df2ce6e2dafb5bfeb179462dc02cb">takeBonus</a> (BonusType::Enum bonus, bool silent=false)</td></tr>
-<tr class="memdesc:a7d4df2ce6e2dafb5bfeb179462dc02cb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> take a &lt;bonus&gt; which allow to power up.  <a href="class_player.html#a7d4df2ce6e2dafb5bfeb179462dc02cb">More...</a><br /></td></tr>
+<tr class="memdesc:a7d4df2ce6e2dafb5bfeb179462dc02cb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> take a &lt; bonus &gt; which allow to power up.  <a href="class_player.html#a7d4df2ce6e2dafb5bfeb179462dc02cb">More...</a><br /></td></tr>
 <tr class="separator:a7d4df2ce6e2dafb5bfeb179462dc02cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf6efda3ab13411d806493e043c895bf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#abf6efda3ab13411d806493e043c895bf">rmBonus</a> (BonusType::Enum bonus)</td></tr>
-<tr class="memdesc:abf6efda3ab13411d806493e043c895bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> remove a &lt;bonus&gt;  <a href="class_player.html#abf6efda3ab13411d806493e043c895bf">More...</a><br /></td></tr>
+<tr class="memdesc:abf6efda3ab13411d806493e043c895bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_player.html" title="This is the player object.">Player</a> remove a &lt; bonus &gt;  <a href="class_player.html#abf6efda3ab13411d806493e043c895bf">More...</a><br /></td></tr>
 <tr class="separator:abf6efda3ab13411d806493e043c895bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab01e550627a1b778e1fa09b29fd89a1a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#ab01e550627a1b778e1fa09b29fd89a1a">addBomb</a> ()</td></tr>
 <tr class="memdesc:ab01e550627a1b778e1fa09b29fd89a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">increment bomb, clamp to totalBombs  <a href="class_player.html#ab01e550627a1b778e1fa09b29fd89a1a">More...</a><br /></td></tr>
@@ -163,14 +169,18 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a26c511cf5a62d7de26347cdc15df609b"><td class="mdescLeft">&#160;</td><td class="mdescRight">called on animation end if passed to <a class="el" href="class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings">Model</a>  <a href="class_player.html#a26c511cf5a62d7de26347cdc15df609b">More...</a><br /></td></tr>
 <tr class="separator:a26c511cf5a62d7de26347cdc15df609b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_a_character"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_a_character')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_a_character.html">ACharacter</a></td></tr>
-<tr class="memitem:a110d0c6cd4cb1803d749e8638218790a inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a110d0c6cd4cb1803d749e8638218790a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ACharacter</b> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memitem:a110d0c6cd4cb1803d749e8638218790a inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a110d0c6cd4cb1803d749e8638218790a">ACharacter</a> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memdesc:a110d0c6cd4cb1803d749e8638218790a inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new ACharacter::ACharacter object.  <a href="class_a_character.html#a110d0c6cd4cb1803d749e8638218790a">More...</a><br /></td></tr>
 <tr class="separator:a110d0c6cd4cb1803d749e8638218790a inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a157dffb2b05045b84dd3302267696bcd inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a157dffb2b05045b84dd3302267696bcd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ACharacter</b> (<a class="el" href="class_a_character.html">ACharacter</a> const &amp;src)</td></tr>
+<tr class="memitem:a244d7f65a86dea894a603c72453cbcf5 inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a244d7f65a86dea894a603c72453cbcf5"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a244d7f65a86dea894a603c72453cbcf5">~ACharacter</a> ()</td></tr>
+<tr class="memdesc:a244d7f65a86dea894a603c72453cbcf5 inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the ACharacter::ACharacter object. <br /></td></tr>
+<tr class="separator:a244d7f65a86dea894a603c72453cbcf5 inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157dffb2b05045b84dd3302267696bcd inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a157dffb2b05045b84dd3302267696bcd">ACharacter</a> (<a class="el" href="class_a_character.html">ACharacter</a> const &amp;src)</td></tr>
+<tr class="memdesc:a157dffb2b05045b84dd3302267696bcd inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new ACharacter::ACharacter object.  <a href="class_a_character.html#a157dffb2b05045b84dd3302267696bcd">More...</a><br /></td></tr>
 <tr class="separator:a157dffb2b05045b84dd3302267696bcd inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad38be256f14ea4844adbcf4643837994 inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="ad38be256f14ea4844adbcf4643837994"></a>
-<a class="el" href="class_a_character.html">ACharacter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_a_character.html">ACharacter</a> const &amp;rhs)</td></tr>
+<tr class="memitem:ad38be256f14ea4844adbcf4643837994 inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_character.html">ACharacter</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#ad38be256f14ea4844adbcf4643837994">operator=</a> (<a class="el" href="class_a_character.html">ACharacter</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:ad38be256f14ea4844adbcf4643837994 inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy this object.  <a href="class_a_character.html#ad38be256f14ea4844adbcf4643837994">More...</a><br /></td></tr>
 <tr class="separator:ad38be256f14ea4844adbcf4643837994 inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cc5faf1d9047d9e51154d5663fa6c67 inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a2cc5faf1d9047d9e51154d5663fa6c67">drawCollider</a> ()</td></tr>
 <tr class="memdesc:a2cc5faf1d9047d9e51154d5663fa6c67 inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the collider of the entity.  <a href="class_a_character.html#a2cc5faf1d9047d9e51154d5663fa6c67">More...</a><br /></td></tr>
@@ -197,7 +207,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a39c7111c4b096129d040e22e3b09592d inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">get a list of entity in collision with the Character at a position.  <a href="class_a_character.html#a39c7111c4b096129d040e22e3b09592d">More...</a><br /></td></tr>
 <tr class="separator:a39c7111c4b096129d040e22e3b09592d inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf19d9677b90cd53bd3191b37939137d inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#abf19d9677b90cd53bd3191b37939137d">hasCollision</a> (glm::vec3 atPosition, glm::vec3 atSize=glm::vec3(1, 1, 1))</td></tr>
-<tr class="memdesc:abf19d9677b90cd53bd3191b37939137d inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if Character have a collision at position &lt;atPosition&gt;.  <a href="class_a_character.html#abf19d9677b90cd53bd3191b37939137d">More...</a><br /></td></tr>
+<tr class="memdesc:abf19d9677b90cd53bd3191b37939137d inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test if Character have a collision at position &lt; atPosition &gt;.  <a href="class_a_character.html#abf19d9677b90cd53bd3191b37939137d">More...</a><br /></td></tr>
 <tr class="separator:abf19d9677b90cd53bd3191b37939137d inherit pub_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a295783a792eedc09bcd68bc98eacb6d5 inherit pub_methods_class_a_character"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a295783a792eedc09bcd68bc98eacb6d5">tp</a> (glm::vec3 tpPos)</td></tr>
 <tr class="memdesc:a295783a792eedc09bcd68bc98eacb6d5 inherit pub_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teleport a character on a position (tp check colision)  <a href="class_a_character.html#a295783a792eedc09bcd68bc98eacb6d5">More...</a><br /></td></tr>
@@ -228,48 +238,34 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab7d65b25086c7d78b7caef025deb087f"><td class="memItemLeft" align="right" valign="top"><a id="ab7d65b25086c7d78b7caef025deb087f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>totalBombs</b></td></tr>
+<tr class="memitem:ab7d65b25086c7d78b7caef025deb087f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#ab7d65b25086c7d78b7caef025deb087f">totalBombs</a></td></tr>
 <tr class="separator:ab7d65b25086c7d78b7caef025deb087f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a948d5a3b282419b995dcc32f66bf6b54"><td class="memItemLeft" align="right" valign="top"><a id="a948d5a3b282419b995dcc32f66bf6b54"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bombs</b></td></tr>
+<tr class="memitem:a948d5a3b282419b995dcc32f66bf6b54"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a948d5a3b282419b995dcc32f66bf6b54">bombs</a></td></tr>
 <tr class="separator:a948d5a3b282419b995dcc32f66bf6b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91fb928013bca6ca637afe447027de8f"><td class="memItemLeft" align="right" valign="top"><a id="a91fb928013bca6ca637afe447027de8f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>passFire</b></td></tr>
+<tr class="memitem:a91fb928013bca6ca637afe447027de8f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a91fb928013bca6ca637afe447027de8f">passFire</a></td></tr>
 <tr class="separator:a91fb928013bca6ca637afe447027de8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82630036d62dbc37a2518be049a974cc"><td class="memItemLeft" align="right" valign="top"><a id="a82630036d62dbc37a2518be049a974cc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>passWall</b></td></tr>
+<tr class="memitem:a82630036d62dbc37a2518be049a974cc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a82630036d62dbc37a2518be049a974cc">passWall</a></td></tr>
 <tr class="separator:a82630036d62dbc37a2518be049a974cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dfa1c51a817ec617e0dc0191481d4a8"><td class="memItemLeft" align="right" valign="top"><a id="a2dfa1c51a817ec617e0dc0191481d4a8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>detonator</b></td></tr>
+<tr class="memitem:a2dfa1c51a817ec617e0dc0191481d4a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a2dfa1c51a817ec617e0dc0191481d4a8">detonator</a></td></tr>
 <tr class="separator:a2dfa1c51a817ec617e0dc0191481d4a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad02e5cdd124ec622ad4c8ddde93a0906"><td class="memItemLeft" align="right" valign="top"><a id="ad02e5cdd124ec622ad4c8ddde93a0906"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>passBomb</b></td></tr>
+<tr class="memitem:ad02e5cdd124ec622ad4c8ddde93a0906"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#ad02e5cdd124ec622ad4c8ddde93a0906">passBomb</a></td></tr>
 <tr class="separator:ad02e5cdd124ec622ad4c8ddde93a0906"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51ec1da9050f53921825a472b39b9977"><td class="memItemLeft" align="right" valign="top"><a id="a51ec1da9050f53921825a472b39b9977"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>bombProgation</b></td></tr>
+<tr class="memitem:a51ec1da9050f53921825a472b39b9977"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a51ec1da9050f53921825a472b39b9977">bombProgation</a></td></tr>
 <tr class="separator:a51ec1da9050f53921825a472b39b9977"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6629cf50b360b714f0593146e2e058b6"><td class="memItemLeft" align="right" valign="top"><a id="a6629cf50b360b714f0593146e2e058b6"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>invulnerable</b></td></tr>
+<tr class="memitem:a6629cf50b360b714f0593146e2e058b6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a6629cf50b360b714f0593146e2e058b6">invulnerable</a></td></tr>
 <tr class="separator:a6629cf50b360b714f0593146e2e058b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c0c44c8dc33ec05674c4a47bd8c2a03"><td class="memItemLeft" align="right" valign="top"><a id="a1c0c44c8dc33ec05674c4a47bd8c2a03"></a>
-<a class="el" href="struct_player_1_1_bonus_actifs.html">BonusActifs</a>&#160;</td><td class="memItemRight" valign="bottom"><b>bonusActifs</b></td></tr>
-<tr class="separator:a1c0c44c8dc33ec05674c4a47bd8c2a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8221d150947cc7ff0a87bc44a3cb431"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_player_1_1_active_bonus.html">ActiveBonus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#ab8221d150947cc7ff0a87bc44a3cb431">activeBonus</a></td></tr>
+<tr class="separator:ab8221d150947cc7ff0a87bc44a3cb431"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_a_character"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_a_character')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_a_character.html">ACharacter</a></td></tr>
-<tr class="memitem:a46261a6f692a2b826ca0f30ccbdf93da inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a46261a6f692a2b826ca0f30ccbdf93da"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>lives</b></td></tr>
+<tr class="memitem:a46261a6f692a2b826ca0f30ccbdf93da inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a46261a6f692a2b826ca0f30ccbdf93da">lives</a></td></tr>
 <tr class="separator:a46261a6f692a2b826ca0f30ccbdf93da inherit pub_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a078f65a8d5565962c2f17f44f19eef66 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a078f65a8d5565962c2f17f44f19eef66"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>speed</b></td></tr>
+<tr class="memitem:a078f65a8d5565962c2f17f44f19eef66 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a078f65a8d5565962c2f17f44f19eef66">speed</a></td></tr>
 <tr class="separator:a078f65a8d5565962c2f17f44f19eef66 inherit pub_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8466a49b0a5abcc22a785562aed7257 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="af8466a49b0a5abcc22a785562aed7257"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>front</b></td></tr>
+<tr class="memitem:af8466a49b0a5abcc22a785562aed7257 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#af8466a49b0a5abcc22a785562aed7257">front</a></td></tr>
 <tr class="separator:af8466a49b0a5abcc22a785562aed7257 inherit pub_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab91ce66f359d4c3fb605948689f4fd20 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="ab91ce66f359d4c3fb605948689f4fd20"></a>
-glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><b>movingSize</b></td></tr>
+<tr class="memitem:ab91ce66f359d4c3fb605948689f4fd20 inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#ab91ce66f359d4c3fb605948689f4fd20">movingSize</a></td></tr>
 <tr class="separator:ab91ce66f359d4c3fb605948689f4fd20 inherit pub_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a3b42d22279b8c13c6e9eab4f74da7b inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a0a3b42d22279b8c13c6e9eab4f74da7b"></a>
-std::vector&lt; Type::Enum &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>crossableTypes</b></td></tr>
+<tr class="memitem:a0a3b42d22279b8c13c6e9eab4f74da7b inherit pub_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">std::vector&lt; Type::Enum &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a0a3b42d22279b8c13c6e9eab4f74da7b">crossableTypes</a></td></tr>
 <tr class="separator:a0a3b42d22279b8c13c6e9eab4f74da7b inherit pub_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_a_entity"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_a_entity')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_a_entity.html">AEntity</a></td></tr>
 <tr class="memitem:a38851d630b58ed997d6c47bc7f2ee58c inherit pub_attribs_class_a_entity"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_entity.html#a38851d630b58ed997d6c47bc7f2ee58c">active</a></td></tr>
@@ -319,8 +315,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ac90c6aeec198c760cba165860a67f622 inherit pro_methods_class_a_character"><td class="mdescLeft">&#160;</td><td class="mdescRight">get all positions blocks under character on a position  <a href="class_a_character.html#ac90c6aeec198c760cba165860a67f622">More...</a><br /></td></tr>
 <tr class="separator:ac90c6aeec198c760cba165860a67f622 inherit pro_methods_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_a_character"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_a_character')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_a_character.html">ACharacter</a></td></tr>
-<tr class="memitem:a5af6eac92ea7539809748b6f9e4be83b inherit pro_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top"><a id="a5af6eac92ea7539809748b6f9e4be83b"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_soundOfDeath</b></td></tr>
+<tr class="memitem:a5af6eac92ea7539809748b6f9e4be83b inherit pro_attribs_class_a_character"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_character.html#a5af6eac92ea7539809748b6f9e4be83b">_soundOfDeath</a></td></tr>
 <tr class="separator:a5af6eac92ea7539809748b6f9e4be83b inherit pro_attribs_class_a_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_a_entity"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_a_entity')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_a_entity.html">AEntity</a></td></tr>
 <tr class="memitem:a771c85ac38a97b2d0772d5bbfa3d8776 inherit pro_attribs_class_a_entity"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_entity.html#a771c85ac38a97b2d0772d5bbfa3d8776">_timeToDie</a></td></tr>
@@ -336,7 +331,68 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_soundOfDeath<
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is the player object. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a290433592841cca95046b8c9dac7be86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a290433592841cca95046b8c9dac7be86">&#9670;&nbsp;</a></span>Player() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Player::Player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scene_game.html">SceneGame</a> &amp;&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_player.html" title="This is the player object.">Player</a>:: <a class="el" href="class_player.html" title="This is the player object.">Player</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game</td><td>A reference to the <a class="el" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels.">SceneGame</a> master object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2cf4315d62d84ddf41d86d76a9bb9294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cf4315d62d84ddf41d86d76a9bb9294">&#9670;&nbsp;</a></span>Player() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Player::Player </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_player.html">Player</a> const &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_player.html" title="This is the player object.">Player</a>:: <a class="el" href="class_player.html" title="This is the player object.">Player</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The object to do the copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab01e550627a1b778e1fa09b29fd89a1a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab01e550627a1b778e1fa09b29fd89a1a">&#9670;&nbsp;</a></span>addBomb()</h2>
 
@@ -421,7 +477,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>_soundOfDeath<
 <dd>
 false if failure </dd></dl>
 
-<p>Implements <a class="el" href="class_a_character.html">ACharacter</a>.</p>
+<p>Implements <a class="el" href="class_a_character.html#af223d3c9dbd3143daf62e9834bd30e3d">ACharacter</a>.</p>
 
 </div>
 </div>
@@ -454,6 +510,33 @@ false if failure </dd></dl>
 false </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_a_entity.html#a450361b684fa02e4ffe0ba406b8e3b30">AEntity</a>.</p>
+
+</div>
+</div>
+<a id="a32a02cfee10a8ba8ccfa4cd0244cb42f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32a02cfee10a8ba8ccfa4cd0244cb42f">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_player.html">Player</a> &amp; Player::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_player.html">Player</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy this object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The object to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_player.html" title="This is the player object.">Player</a>&amp; A reference to the copied object </dd></dl>
 
 </div>
 </div>
@@ -492,7 +575,7 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> remove a &lt;bonus&gt; </p>
+<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> remove a &lt; bonus &gt; </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bonus</td><td></td></tr>
@@ -531,7 +614,7 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> take a &lt;bonus&gt; which allow to power up. </p>
+<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> take a &lt; bonus &gt; which allow to power up. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bonus</td><td></td></tr>
@@ -569,7 +652,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> Take &lt;damage&gt; damages. </p>
+<p><a class="el" href="class_player.html" title="This is the player object.">Player</a> Take &lt; damage &gt; damages. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">damage</td><td></td></tr>
@@ -612,7 +695,143 @@ false if damage not taken </dd></dl>
 <dd>
 false if failure </dd></dl>
 
-<p>Implements <a class="el" href="class_a_character.html">ACharacter</a>.</p>
+<p>Implements <a class="el" href="class_a_character.html#af5a4d00f6104d45b821a2e88b80936b5">ACharacter</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab8221d150947cc7ff0a87bc44a3cb431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8221d150947cc7ff0a87bc44a3cb431">&#9670;&nbsp;</a></span>activeBonus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_player_1_1_active_bonus.html">ActiveBonus</a> Player::activeBonus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>All active bonus for the player </p>
+
+</div>
+</div>
+<a id="a51ec1da9050f53921825a472b39b9977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ec1da9050f53921825a472b39b9977">&#9670;&nbsp;</a></span>bombProgation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::bombProgation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> propagation distance </p>
+
+</div>
+</div>
+<a id="a948d5a3b282419b995dcc32f66bf6b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a948d5a3b282419b995dcc32f66bf6b54">&#9670;&nbsp;</a></span>bombs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::bombs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Remain bombs </p>
+
+</div>
+</div>
+<a id="a2dfa1c51a817ec617e0dc0191481d4a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dfa1c51a817ec617e0dc0191481d4a8">&#9670;&nbsp;</a></span>detonator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Player::detonator</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Has detonator </p>
+
+</div>
+</div>
+<a id="a6629cf50b360b714f0593146e2e058b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6629cf50b360b714f0593146e2e058b6">&#9670;&nbsp;</a></span>invulnerable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Player::invulnerable</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Is invulnerable (for x time) </p>
+
+</div>
+</div>
+<a id="ad02e5cdd124ec622ad4c8ddde93a0906"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad02e5cdd124ec622ad4c8ddde93a0906">&#9670;&nbsp;</a></span>passBomb</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Player::passBomb</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Has bombpass </p>
+
+</div>
+</div>
+<a id="a91fb928013bca6ca637afe447027de8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91fb928013bca6ca637afe447027de8f">&#9670;&nbsp;</a></span>passFire</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Player::passFire</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Has passfire </p>
+
+</div>
+</div>
+<a id="a82630036d62dbc37a2518be049a974cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82630036d62dbc37a2518be049a974cc">&#9670;&nbsp;</a></span>passWall</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Player::passWall</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Has wallpass </p>
+
+</div>
+</div>
+<a id="ab7d65b25086c7d78b7caef025deb087f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7d65b25086c7d78b7caef025deb087f">&#9670;&nbsp;</a></span>totalBombs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::totalBombs</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Total bombs </p>
 
 </div>
 </div>

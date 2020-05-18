@@ -1,4 +1,4 @@
 <map id="Model" name="Model">
-<area shape="rect" id="node1" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="5,351,201,663"/>
-<area shape="rect" id="node2" href="$class_e_transform.html" title="Class to manage model transformation." alt="" coords="44,5,163,288"/>
+<area shape="rect" id="node1" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="5,351,168,604"/>
+<area shape="rect" id="node2" href="$class_e_transform.html" title="Class to manage model transformation." alt="" coords="27,5,146,288"/>
 </map>

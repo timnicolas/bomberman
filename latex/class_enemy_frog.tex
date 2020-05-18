@@ -20,7 +20,8 @@ Inheritance diagram for Enemy\+Frog\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Enemy\+Frog\+:\nopagebreak
+Collaboration diagram for Enemy\+Frog\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,15 +31,15 @@ Collaboration diagram for Enemy\+Frog\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}\label{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}} 
-{\bfseries Enemy\+Frog} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}\label{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}} 
-{\bfseries Enemy\+Frog} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&src)
-\item 
-\mbox{\Hypertarget{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}\label{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}} 
-\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}{Enemy\+Frog}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy Frog\+:\+: Enemy Frog object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_frog_a3fe9f4ca463167d0bb004dadc9ea8dd2}\label{class_enemy_frog_a3fe9f4ca463167d0bb004dadc9ea8dd2}} 
+\mbox{\hyperlink{class_enemy_frog_a3fe9f4ca463167d0bb004dadc9ea8dd2}{$\sim$\+Enemy\+Frog}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Enemy Frog\+:\+: Enemy Frog object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}{Enemy\+Frog}} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy Frog\+:\+: Enemy Frog object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} \& \mbox{\hyperlink{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}{operator=}} (\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_enemy_frog_adb2293192dd66ee46da359833475915b}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init enemy\+Basic. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_enemy_frog_a868a3f7f061ecefecc366af0f882b4d2}\label{class_enemy_frog_a868a3f7f061ecefecc366af0f882b4d2}} 
@@ -70,6 +71,39 @@ This is an enemy object.
 
 \mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} can jump across one bloc 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}\label{class_enemy_frog_a2aaa60ad2669d8957e2569aa771c8714}} 
+\index{EnemyFrog@{EnemyFrog}!EnemyFrog@{EnemyFrog}}
+\index{EnemyFrog@{EnemyFrog}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{EnemyFrog()}{EnemyFrog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Enemy\+Frog\+::\+Enemy\+Frog (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Enemy Frog\+:\+: Enemy Frog object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}\label{class_enemy_frog_a5d3df45d73db5bcb2320e3a3b2e21d9a}} 
+\index{EnemyFrog@{EnemyFrog}!EnemyFrog@{EnemyFrog}}
+\index{EnemyFrog@{EnemyFrog}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{EnemyFrog()}{EnemyFrog()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Enemy\+Frog\+::\+Enemy\+Frog (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Enemy Frog\+:\+: Enemy Frog object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_enemy_frog_a2cf685062369505da75844967e16d344}\label{class_enemy_frog_a2cf685062369505da75844967e16d344}} 
 \index{EnemyFrog@{EnemyFrog}!\_draw@{\_draw}}
@@ -88,7 +122,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_frog_a2e2cef706ab9893d243209b5c5fd28b0}\label{class_enemy_frog_a2e2cef706ab9893d243209b5c5fd28b0}} 
 \index{EnemyFrog@{EnemyFrog}!\_jumpCrossable@{\_jumpCrossable}}
@@ -117,7 +151,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}\label{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}} 
 \index{EnemyFrog@{EnemyFrog}!\_update@{\_update}}
@@ -136,7 +170,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_frog_ac2fafe0b9788bfa838422efadef0f05c}\label{class_enemy_frog_ac2fafe0b9788bfa838422efadef0f05c}} 
 \index{EnemyFrog@{EnemyFrog}!\_updateAnimationState@{\_updateAnimationState}}
@@ -177,6 +211,24 @@ false on failure
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}\label{class_enemy_frog_aa92a00c282df87e83ab76c33137a6c9d}} 
+\index{EnemyFrog@{EnemyFrog}!operator=@{operator=}}
+\index{operator=@{operator=}!EnemyFrog@{EnemyFrog}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} \& Enemy\+Frog\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_enemy_frog}{Enemy\+Frog}}\& A reference to the copied object 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

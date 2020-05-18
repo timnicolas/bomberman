@@ -11,7 +11,8 @@ basic material for shaders
 
 
 
-Collaboration diagram for Material\+:\nopagebreak
+Collaboration diagram for Material\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,34 +22,127 @@ Collaboration diagram for Material\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_material_ab992f8fb1e76c38e1488007de52917c5}\label{class_material_ab992f8fb1e76c38e1488007de52917c5}} 
-{\bfseries Material} (glm\+::vec3 const diffuse=glm\+::vec3(.\+36f,.\+34f,.\+32f), glm\+::vec3 const specular=glm\+::vec3(.\+3f,.\+3f,.\+3f), glm\+::vec3 const ambient=glm\+::vec3(0.\+2f, 0.\+2f, 0.\+2f), float const shininess=16.\+0f)
-\item 
-\mbox{\Hypertarget{class_material_a611dba609ac416f5f59c325c4611c964}\label{class_material_a611dba609ac416f5f59c325c4611c964}} 
-{\bfseries Material} (\mbox{\hyperlink{class_material}{Material}} const \&src)
-\item 
-\mbox{\Hypertarget{class_material_af2f8251a70528e05331dc8dfac025487}\label{class_material_af2f8251a70528e05331dc8dfac025487}} 
-\mbox{\hyperlink{class_material}{Material}} \& {\bfseries operator=} (\mbox{\hyperlink{class_material}{Material}} const \&rhs)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_material_a49691a0a92cc3e571869f2b494f8cd5d}{Material}} (std\+::string const \mbox{\hyperlink{class_material_affe06990f884293d0fe2f39110f71730}{name}}=\char`\"{}\char`\"{}, glm\+::vec3 const \mbox{\hyperlink{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}{diffuse}}=glm\+::vec3(.\+36f,.\+34f,.\+32f), glm\+::vec3 const \mbox{\hyperlink{class_material_aac1c499923ff99564cdd97a4b5e504a9}{specular}}=glm\+::vec3(.\+3f,.\+3f,.\+3f), glm\+::vec3 const \mbox{\hyperlink{class_material_af99c823542e497c98a35d1aac5fc9012}{ambient}}=glm\+::vec3(0.\+2f, 0.\+2f, 0.\+2f), float const \mbox{\hyperlink{class_material_a9dc184c883ec135ace28c1917af3fe84}{shininess}}=16.\+0f)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_material}{Material}}\+:\+: \mbox{\hyperlink{class_material}{Material}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_material_a611dba609ac416f5f59c325c4611c964}{Material}} (\mbox{\hyperlink{class_material}{Material}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_material}{Material}}\+:\+: \mbox{\hyperlink{class_material}{Material}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_material_a2c19452d71f54075df8f5405b03129f4}\label{class_material_a2c19452d71f54075df8f5405b03129f4}} 
+virtual \mbox{\hyperlink{class_material_a2c19452d71f54075df8f5405b03129f4}{$\sim$\+Material}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_material}{Material}}\+:\+: \mbox{\hyperlink{class_material}{Material}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_material}{Material}} \& \mbox{\hyperlink{class_material_af2f8251a70528e05331dc8dfac025487}{operator=}} (\mbox{\hyperlink{class_material}{Material}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}\label{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}} 
-glm\+::vec3 {\bfseries diffuse}
+std\+::string \mbox{\hyperlink{class_material_affe06990f884293d0fe2f39110f71730}{name}}
 \item 
-\mbox{\Hypertarget{class_material_aac1c499923ff99564cdd97a4b5e504a9}\label{class_material_aac1c499923ff99564cdd97a4b5e504a9}} 
-glm\+::vec3 {\bfseries specular}
+glm\+::vec3 \mbox{\hyperlink{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}{diffuse}}
 \item 
-\mbox{\Hypertarget{class_material_af99c823542e497c98a35d1aac5fc9012}\label{class_material_af99c823542e497c98a35d1aac5fc9012}} 
-glm\+::vec3 {\bfseries ambient}
+glm\+::vec3 \mbox{\hyperlink{class_material_aac1c499923ff99564cdd97a4b5e504a9}{specular}}
 \item 
-\mbox{\Hypertarget{class_material_a9dc184c883ec135ace28c1917af3fe84}\label{class_material_a9dc184c883ec135ace28c1917af3fe84}} 
-float {\bfseries shininess}
+glm\+::vec3 \mbox{\hyperlink{class_material_af99c823542e497c98a35d1aac5fc9012}{ambient}}
+\item 
+float \mbox{\hyperlink{class_material_a9dc184c883ec135ace28c1917af3fe84}{shininess}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 basic material for shaders 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_material_a49691a0a92cc3e571869f2b494f8cd5d}\label{class_material_a49691a0a92cc3e571869f2b494f8cd5d}} 
+\index{Material@{Material}!Material@{Material}}
+\index{Material@{Material}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{Material()}{Material()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Material\+::\+Material (\begin{DoxyParamCaption}\item[{std\+::string const}]{name = {\ttfamily \char`\"{}\char`\"{}},  }\item[{glm\+::vec3 const}]{diffuse = {\ttfamily glm\+:\+:vec3(.36f,~.34f,~.32f)},  }\item[{glm\+::vec3 const}]{specular = {\ttfamily glm\+:\+:vec3(.3f,~.3f,~.3f)},  }\item[{glm\+::vec3 const}]{ambient = {\ttfamily glm\+:\+:vec3(0.2f,~0.2f,~0.2f)},  }\item[{float const}]{shininess = {\ttfamily 16.0f} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_material}{Material}}\+:\+: \mbox{\hyperlink{class_material}{Material}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name \\
+\hline
+{\em diffuse} & Diffuse \\
+\hline
+{\em specular} & Specular \\
+\hline
+{\em ambient} & Ambient \\
+\hline
+{\em shininess} & Shininess \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_material_a611dba609ac416f5f59c325c4611c964}\label{class_material_a611dba609ac416f5f59c325c4611c964}} 
+\index{Material@{Material}!Material@{Material}}
+\index{Material@{Material}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{Material()}{Material()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Material\+::\+Material (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_material}{Material}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_material}{Material}}\+:\+: \mbox{\hyperlink{class_material}{Material}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_material_af2f8251a70528e05331dc8dfac025487}\label{class_material_af2f8251a70528e05331dc8dfac025487}} 
+\index{Material@{Material}!operator=@{operator=}}
+\index{operator=@{operator=}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_material}{Material}} \& Material\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_material}{Material}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_material}{Material}}\& A reference to the copied object 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_material_af99c823542e497c98a35d1aac5fc9012}\label{class_material_af99c823542e497c98a35d1aac5fc9012}} 
+\index{Material@{Material}!ambient@{ambient}}
+\index{ambient@{ambient}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{ambient}{ambient}}
+{\footnotesize\ttfamily glm\+::vec3 Material\+::ambient}
+
+\mbox{\hyperlink{class_material}{Material}} ambient \mbox{\Hypertarget{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}\label{class_material_a099904e2f5a7bbec3cba6bf8ec546b11}} 
+\index{Material@{Material}!diffuse@{diffuse}}
+\index{diffuse@{diffuse}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{diffuse}{diffuse}}
+{\footnotesize\ttfamily glm\+::vec3 Material\+::diffuse}
+
+\mbox{\hyperlink{class_material}{Material}} diffuse \mbox{\Hypertarget{class_material_affe06990f884293d0fe2f39110f71730}\label{class_material_affe06990f884293d0fe2f39110f71730}} 
+\index{Material@{Material}!name@{name}}
+\index{name@{name}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string Material\+::name}
+
+\mbox{\hyperlink{class_material}{Material}} name \mbox{\Hypertarget{class_material_a9dc184c883ec135ace28c1917af3fe84}\label{class_material_a9dc184c883ec135ace28c1917af3fe84}} 
+\index{Material@{Material}!shininess@{shininess}}
+\index{shininess@{shininess}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{shininess}{shininess}}
+{\footnotesize\ttfamily float Material\+::shininess}
+
+\mbox{\hyperlink{class_material}{Material}} shininess \mbox{\Hypertarget{class_material_aac1c499923ff99564cdd97a4b5e504a9}\label{class_material_aac1c499923ff99564cdd97a4b5e504a9}} 
+\index{Material@{Material}!specular@{specular}}
+\index{specular@{specular}!Material@{Material}}
+\doxysubsubsection{\texorpdfstring{specular}{specular}}
+{\footnotesize\ttfamily glm\+::vec3 Material\+::specular}
+
+\mbox{\hyperlink{class_material}{Material}} specular 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

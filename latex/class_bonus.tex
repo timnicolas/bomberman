@@ -2,7 +2,17 @@
 \label{class_bonus}\index{Bonus@{Bonus}}
 
 
-Inheritance diagram for Bonus\+:\nopagebreak
+\mbox{\hyperlink{class_bonus}{Bonus}} object.  
+
+
+
+
+{\ttfamily \#include $<$Bonus.\+hpp$>$}
+
+
+
+Inheritance diagram for Bonus\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +21,8 @@ Inheritance diagram for Bonus\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Bonus\+:\nopagebreak
+Collaboration diagram for Bonus\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,19 +33,20 @@ Collaboration diagram for Bonus\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_bonus_1_1_bonus_exception}{Bonus\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bonus}{Bonus}} Exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_bonus_a35c21e394ed7467d9bf1038cffc77047}\label{class_bonus_a35c21e394ed7467d9bf1038cffc77047}} 
-{\bfseries Bonus} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}\label{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}} 
-{\bfseries Bonus} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&src)
-\item 
-\mbox{\Hypertarget{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}\label{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}} 
-\mbox{\hyperlink{class_bonus}{Bonus}} \& {\bfseries operator=} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_bonus_a35c21e394ed7467d9bf1038cffc77047}{Bonus}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bonus_ace96cd91925b1f65b2c8596930fed6f5}{$\sim$\+Bonus}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}{Bonus}} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bonus}{Bonus}} \& \mbox{\hyperlink{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}{operator=}} (\mbox{\hyperlink{class_bonus}{Bonus}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_bonus_a976414b70e76b18dadeae3f316a22547}{init}} ()
+\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_bonus}{Bonus}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{update}} ()
 \begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}{post\+Update}} ()
@@ -51,11 +63,59 @@ static \mbox{\hyperlink{class_bonus}{Bonus}} $\ast$ \mbox{\hyperlink{class_bonus
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::unordered\+\_\+map$<$ std\+::string, Bonus\+Type\+::\+Enum $>$ {\bfseries bonus}
+static std\+::unordered\+\_\+map$<$ std\+::string, Bonus\+Type\+::\+Enum $>$ \mbox{\hyperlink{class_bonus_a6738b5cd2f41a4174a721bc51f495ea9}{bonus}}
 \item 
-static std\+::map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ {\bfseries description}
+static std\+::unordered\+\_\+map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ \mbox{\hyperlink{class_bonus_a49a478d9b31b6d9bf2daf5d27af7ef9c}{description}}
+\item 
+static std\+::unordered\+\_\+map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ \mbox{\hyperlink{class_bonus_a87700fdcb79541aa990d15927da2c905}{bonus\+Textures}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_bonus}{Bonus}} object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_bonus_a35c21e394ed7467d9bf1038cffc77047}\label{class_bonus_a35c21e394ed7467d9bf1038cffc77047}} 
+\index{Bonus@{Bonus}!Bonus@{Bonus}}
+\index{Bonus@{Bonus}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{Bonus()}{Bonus()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Bonus\+::\+Bonus (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_bonus_ace96cd91925b1f65b2c8596930fed6f5}\label{class_bonus_ace96cd91925b1f65b2c8596930fed6f5}} 
+\index{Bonus@{Bonus}!````~Bonus@{$\sim$Bonus}}
+\index{````~Bonus@{$\sim$Bonus}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{$\sim$Bonus()}{~Bonus()}}
+{\footnotesize\ttfamily Bonus\+::$\sim$\+Bonus (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destroy the \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. 
+
+\mbox{\Hypertarget{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}\label{class_bonus_aedadb1a74a12d5c42f7dc26db1823ebd}} 
+\index{Bonus@{Bonus}!Bonus@{Bonus}}
+\index{Bonus@{Bonus}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{Bonus()}{Bonus()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Bonus\+::\+Bonus (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_bonus}{Bonus}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_bonus}{Bonus}}\+:\+: \mbox{\hyperlink{class_bonus}{Bonus}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -76,7 +136,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{A\+Object}}.
 
 \mbox{\Hypertarget{class_bonus_a69c5cd0fdef8eef925b5d295696b19a9}\label{class_bonus_a69c5cd0fdef8eef925b5d295696b19a9}} 
 \index{Bonus@{Bonus}!generateBonus@{generateBonus}}
@@ -116,6 +176,43 @@ Get the description of a given bonus.
 \begin{DoxyReturn}{Returns}
 std\+::string The description 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_bonus_a976414b70e76b18dadeae3f316a22547}\label{class_bonus_a976414b70e76b18dadeae3f316a22547}} 
+\index{Bonus@{Bonus}!init@{init}}
+\index{init@{init}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily bool Bonus\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Init \mbox{\hyperlink{class_bonus}{Bonus}}. 
+
+\begin{DoxyReturn}{Returns}
+true on success 
+
+false on failure 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{A\+Object}}.
+
+\mbox{\Hypertarget{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}\label{class_bonus_a739b5ec5b1e7214fd0398e4a7970529e}} 
+\index{Bonus@{Bonus}!operator=@{operator=}}
+\index{operator=@{operator=}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_bonus}{Bonus}} \& Bonus\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_bonus}{Bonus}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_bonus}{Bonus}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}\label{class_bonus_a6524cf732f98dfc3baa7f41bbdf13b11}} 
 \index{Bonus@{Bonus}!postUpdate@{postUpdate}}
 \index{postUpdate@{postUpdate}!Bonus@{Bonus}}
@@ -152,7 +249,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{A\+Object}}.
 
 
 
@@ -180,11 +277,34 @@ Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{class_bonus_a4d328bd69b4cbae25312758d68991e26}\label{class_bonus_a4d328bd69b4cbae25312758d68991e26}} 
+All bonus (link btw str \& enum) \mbox{\Hypertarget{class_bonus_a87700fdcb79541aa990d15927da2c905}\label{class_bonus_a87700fdcb79541aa990d15927da2c905}} 
+\index{Bonus@{Bonus}!bonusTextures@{bonusTextures}}
+\index{bonusTextures@{bonusTextures}!Bonus@{Bonus}}
+\doxysubsubsection{\texorpdfstring{bonusTextures}{bonusTextures}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ Bonus\+::bonus\+Textures\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= \{}
+\DoxyCodeLine{    \{ BonusType::LIFE, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/life.png"} \},}
+\DoxyCodeLine{    \{ BonusType::BOMBS, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/bomb.png"} \},}
+\DoxyCodeLine{    \{ BonusType::FLAMES, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/flamme.png"} \},}
+\DoxyCodeLine{    \{ BonusType::SPEED, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/speed.png"} \},}
+\DoxyCodeLine{    \{ BonusType::WALLPASS, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/wallpass.png"} \},}
+\DoxyCodeLine{    \{ BonusType::DETONATOR, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/detonator.png"} \},}
+\DoxyCodeLine{    \{ BonusType::BOMBPASS, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/bombpass.png"} \},}
+\DoxyCodeLine{    \{ BonusType::FLAMPASS, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/flampass.png"} \},}
+\DoxyCodeLine{    \{ BonusType::SHIELD, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/shield.png"} \},}
+\DoxyCodeLine{    \{ BonusType::TIME, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/time.png"} \},}
+\DoxyCodeLine{    \{ BonusType::POINTS, \textcolor{stringliteral}{"bomberman-\/assets/3dModels/bonus/textures/score.png"} \},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+All bonus textures \mbox{\Hypertarget{class_bonus_a49a478d9b31b6d9bf2daf5d27af7ef9c}\label{class_bonus_a49a478d9b31b6d9bf2daf5d27af7ef9c}} 
 \index{Bonus@{Bonus}!description@{description}}
 \index{description@{description}!Bonus@{Bonus}}
 \doxysubsubsection{\texorpdfstring{description}{description}}
-{\footnotesize\ttfamily std\+::map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ Bonus\+::description\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$ Bonus\+Type\+::\+Enum, std\+::string $>$ Bonus\+::description\hspace{0.3cm}{\ttfamily [static]}}
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
@@ -203,7 +323,7 @@ Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-
+All bonus description 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

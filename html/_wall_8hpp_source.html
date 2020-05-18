@@ -83,39 +83,40 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_wall.html">Wall</a>();</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// Members</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">// graphic information.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    Block::Enum     _blockType;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    Block::Enum     _blockType;  </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// Constructors</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_wall.html">Wall</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>, Block::Enum blockType = Block::DURABLE_WALL);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    ~<a class="code" href="class_wall.html">Wall</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_wall.html#a9a2992f2b533e1c160513d1e719f920c">~Wall</a>();</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_wall.html">Wall</a>(<a class="code" href="class_wall.html">Wall</a> <span class="keyword">const</span> &amp;src);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Operators</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_wall.html">Wall</a> &amp;operator=(<a class="code" href="class_wall.html">Wall</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_wall.html">Wall</a> &amp;<a class="code" href="class_wall.html#ad5639b5bcbe08c8348dac17d2d5e2af3">operator=</a>(<a class="code" href="class_wall.html">Wall</a> <span class="keyword">const</span> &amp;rhs);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// Methods</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_wall.html#a29d3c4daa11dbb20d758b1fc285ed7a4">update</a>();</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_wall.html#ab3ea42b91f7830d22782901d61be505f">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Exceptions</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_wall_1_1_wall_exception.html">   34</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_wall_1_1_wall_exception.html">WallException</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_wall_1_1_wall_exception.html">WallException</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_wall_1_1_wall_exception.html">WallException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif  // WALL_HPP_</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_wall_1_1_wall_exception.html">   37</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_wall_1_1_wall_exception.html">WallException</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_wall_1_1_wall_exception.html">WallException</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_wall_1_1_wall_exception.html">WallException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif  // WALL_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_wall_html"><div class="ttname"><a href="class_wall.html">Wall</a></div><div class="ttdoc">This is the wall object.</div><div class="ttdef"><b>Definition:</b> Wall.hpp:13</div></div>
-<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:50</div></div>
+<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:56</div></div>
 <div class="ttc" id="aclass_a_entity_html_aa2c05db944a8b7487eb8470dd20211ab"><div class="ttname"><a href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">AEntity::game</a></div><div class="ttdeci">SceneGame &amp; game</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:91</div></div>
-<div class="ttc" id="aclass_wall_1_1_wall_exception_html"><div class="ttname"><a href="class_wall_1_1_wall_exception.html">Wall::WallException</a></div><div class="ttdef"><b>Definition:</b> Wall.hpp:34</div></div>
-<div class="ttc" id="aclass_wall_html_ab3ea42b91f7830d22782901d61be505f"><div class="ttname"><a href="class_wall.html#ab3ea42b91f7830d22782901d61be505f">Wall::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:48</div></div>
-<div class="ttc" id="aclass_wall_html_a29d3c4daa11dbb20d758b1fc285ed7a4"><div class="ttname"><a href="class_wall.html#a29d3c4daa11dbb20d758b1fc285ed7a4">Wall::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:38</div></div>
+<div class="ttc" id="aclass_wall_1_1_wall_exception_html"><div class="ttname"><a href="class_wall_1_1_wall_exception.html">Wall::WallException</a></div><div class="ttdoc">Wall Exception.</div><div class="ttdef"><b>Definition:</b> Wall.hpp:37</div></div>
+<div class="ttc" id="aclass_wall_html_ab3ea42b91f7830d22782901d61be505f"><div class="ttname"><a href="class_wall.html#ab3ea42b91f7830d22782901d61be505f">Wall::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:67</div></div>
+<div class="ttc" id="aclass_wall_html_a9a2992f2b533e1c160513d1e719f920c"><div class="ttname"><a href="class_wall.html#a9a2992f2b533e1c160513d1e719f920c">Wall::~Wall</a></div><div class="ttdeci">~Wall()</div><div class="ttdoc">Destroy the Wall:: Wall object.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:21</div></div>
+<div class="ttc" id="aclass_wall_html_ad5639b5bcbe08c8348dac17d2d5e2af3"><div class="ttname"><a href="class_wall.html#ad5639b5bcbe08c8348dac17d2d5e2af3">Wall::operator=</a></div><div class="ttdeci">Wall &amp; operator=(Wall const &amp;rhs)</div><div class="ttdoc">Copy operator.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:41</div></div>
+<div class="ttc" id="aclass_wall_html_a29d3c4daa11dbb20d758b1fc285ed7a4"><div class="ttname"><a href="class_wall.html#a29d3c4daa11dbb20d758b1fc285ed7a4">Wall::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Wall.cpp:57</div></div>
 <div class="ttc" id="aclass_a_object_html"><div class="ttname"><a href="class_a_object.html">AObject</a></div><div class="ttdoc">This is the base class for objects (Bomb, wall, ...)</div><div class="ttdef"><b>Definition:</b> AObject.hpp:11</div></div>
-<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:41</div></div>
+<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:44</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

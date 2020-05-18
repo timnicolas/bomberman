@@ -20,7 +20,8 @@ Inheritance diagram for Enemy\+With\+Eye\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Enemy\+With\+Eye\+:\nopagebreak
+Collaboration diagram for Enemy\+With\+Eye\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,15 +31,15 @@ Collaboration diagram for Enemy\+With\+Eye\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}\label{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}} 
-{\bfseries Enemy\+With\+Eye} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}\label{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}} 
-{\bfseries Enemy\+With\+Eye} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&src)
-\item 
-\mbox{\Hypertarget{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}\label{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}} 
-\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}{Enemy\+With\+Eye}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy With Eye\+:\+: Enemy With Eye object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_with_eye_a3827f8f91d9aa7a68e2b1321efa55bb2}\label{class_enemy_with_eye_a3827f8f91d9aa7a68e2b1321efa55bb2}} 
+\mbox{\hyperlink{class_enemy_with_eye_a3827f8f91d9aa7a68e2b1321efa55bb2}{$\sim$\+Enemy\+With\+Eye}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Enemy With Eye\+:\+: Enemy With Eye object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}{Enemy\+With\+Eye}} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy With Eye\+:\+: Enemy With Eye object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} \& \mbox{\hyperlink{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}{operator=}} (\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_enemy_with_eye_afe1006e6d3cdba1365bbc29fcc9f71b0}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init enemy\+With\+Eye. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -62,6 +63,39 @@ This is an enemy object.
 
 \mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} will follow a pattern and go to the player if it can view it 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}\label{class_enemy_with_eye_a552b889b45b9def904bc94451e21467e}} 
+\index{EnemyWithEye@{EnemyWithEye}!EnemyWithEye@{EnemyWithEye}}
+\index{EnemyWithEye@{EnemyWithEye}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{EnemyWithEye()}{EnemyWithEye()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Enemy\+With\+Eye\+::\+Enemy\+With\+Eye (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Enemy With Eye\+:\+: Enemy With Eye object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}\label{class_enemy_with_eye_aa128a0204cd6f03796a00d35d071913b}} 
+\index{EnemyWithEye@{EnemyWithEye}!EnemyWithEye@{EnemyWithEye}}
+\index{EnemyWithEye@{EnemyWithEye}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{EnemyWithEye()}{EnemyWithEye()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Enemy\+With\+Eye\+::\+Enemy\+With\+Eye (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Enemy With Eye\+:\+: Enemy With Eye object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}\label{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}} 
 \index{EnemyWithEye@{EnemyWithEye}!\_draw@{\_draw}}
@@ -80,7 +114,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}\label{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}} 
 \index{EnemyWithEye@{EnemyWithEye}!\_postUpdate@{\_postUpdate}}
@@ -99,7 +133,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}\label{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}} 
 \index{EnemyWithEye@{EnemyWithEye}!\_update@{\_update}}
@@ -118,7 +152,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_with_eye_a1761a06360e2ae00ab3a79b36c42574c}\label{class_enemy_with_eye_a1761a06360e2ae00ab3a79b36c42574c}} 
 \index{EnemyWithEye@{EnemyWithEye}!\_updateAnimationState@{\_updateAnimationState}}
@@ -159,6 +193,24 @@ false on failure
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}\label{class_enemy_with_eye_a6ae7fb8ee61d5c6b0bf5eb3e919ac018}} 
+\index{EnemyWithEye@{EnemyWithEye}!operator=@{operator=}}
+\index{operator=@{operator=}!EnemyWithEye@{EnemyWithEye}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} \& Enemy\+With\+Eye\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_enemy_with_eye}{Enemy\+With\+Eye}}\& A reference to the copied object 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

@@ -20,7 +20,8 @@ Inheritance diagram for Scene\+Debug\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Debug\+:\nopagebreak
+Collaboration diagram for Scene\+Debug\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,27 +31,61 @@ Collaboration diagram for Scene\+Debug\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_debug_a92210a0cef4f3fe86526378a8b27492c}\label{class_scene_debug_a92210a0cef4f3fe86526378a8b27492c}} 
-{\bfseries Scene\+Debug} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_scene_debug_a58950a1b730cea99216ae3c27d1e7d11}\label{class_scene_debug_a58950a1b730cea99216ae3c27d1e7d11}} 
-{\bfseries Scene\+Debug} (\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&src)
-\item 
-\mbox{\Hypertarget{class_scene_debug_a9b6be6294dab5d220243acd2de8763e7}\label{class_scene_debug_a9b6be6294dab5d220243acd2de8763e7}} 
-\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_scene_debug_a92210a0cef4f3fe86526378a8b27492c}{Scene\+Debug}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Debug\+:\+: Scene Debug object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_debug_abd140e9e7681ccad464f08bb473c9a9e}\label{class_scene_debug_abd140e9e7681ccad464f08bb473c9a9e}} 
+virtual \mbox{\hyperlink{class_scene_debug_abd140e9e7681ccad464f08bb473c9a9e}{$\sim$\+Scene\+Debug}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Debug\+:\+: Scene Debug object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_debug_a58950a1b730cea99216ae3c27d1e7d11}{Scene\+Debug}} (\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Debug\+:\+: Scene Debug object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} \& \mbox{\hyperlink{class_scene_debug_a9b6be6294dab5d220243acd2de8763e7}{operator=}} (\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}{init}} ()
 \begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}{update}} ()
 \begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_debug_a09bad98f967dad51ad4cf981010975de}\label{class_scene_debug_a09bad98f967dad51ad4cf981010975de}} 
-void {\bfseries set\+Visible} (bool visible=true)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_scene_debug_a09bad98f967dad51ad4cf981010975de}{set\+Visible}} (bool visible=true)
+\begin{DoxyCompactList}\small\item\em Set the menu visible or invisible. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 debug menu to show fps at the top of the screen 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_debug_a92210a0cef4f3fe86526378a8b27492c}\label{class_scene_debug_a92210a0cef4f3fe86526378a8b27492c}} 
+\index{SceneDebug@{SceneDebug}!SceneDebug@{SceneDebug}}
+\index{SceneDebug@{SceneDebug}!SceneDebug@{SceneDebug}}
+\doxysubsubsection{\texorpdfstring{SceneDebug()}{SceneDebug()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Debug\+::\+Scene\+Debug (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Debug\+:\+: Scene Debug object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_debug_a58950a1b730cea99216ae3c27d1e7d11}\label{class_scene_debug_a58950a1b730cea99216ae3c27d1e7d11}} 
+\index{SceneDebug@{SceneDebug}!SceneDebug@{SceneDebug}}
+\index{SceneDebug@{SceneDebug}!SceneDebug@{SceneDebug}}
+\doxysubsubsection{\texorpdfstring{SceneDebug()}{SceneDebug()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Debug\+::\+Scene\+Debug (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Debug\+:\+: Scene Debug object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}\label{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}} 
@@ -70,8 +105,41 @@ false if the init failed
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+Implements \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}.
 
+\mbox{\Hypertarget{class_scene_debug_a9b6be6294dab5d220243acd2de8763e7}\label{class_scene_debug_a9b6be6294dab5d220243acd2de8763e7}} 
+\index{SceneDebug@{SceneDebug}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneDebug@{SceneDebug}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} \& Scene\+Debug\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_debug}{Scene\+Debug}}\& A reference to the copied object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_debug_a09bad98f967dad51ad4cf981010975de}\label{class_scene_debug_a09bad98f967dad51ad4cf981010975de}} 
+\index{SceneDebug@{SceneDebug}!setVisible@{setVisible}}
+\index{setVisible@{setVisible}!SceneDebug@{SceneDebug}}
+\doxysubsubsection{\texorpdfstring{setVisible()}{setVisible()}}
+{\footnotesize\ttfamily void Scene\+Debug\+::set\+Visible (\begin{DoxyParamCaption}\item[{bool}]{visible = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Set the menu visible or invisible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visible} & If is visible \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}\label{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}} 
 \index{SceneDebug@{SceneDebug}!update@{update}}
 \index{update@{update}!SceneDebug@{SceneDebug}}

@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="1110,292,1238,545"/>
 <area shape="rect" id="node3" href="$class_scene_cheat_code.html" title="this is the cheat code command line" alt="" coords="5,733,159,971"/>
 <area shape="rect" id="node4" href="$class_scene_debug.html" title="debug menu to show fps at the top of the screen" alt="" coords="183,769,309,935"/>
-<area shape="rect" id="node5" href="$class_scene_difficulty.html" title="main menu (opened at the game startup)" alt="" coords="333,762,471,942"/>
+<area shape="rect" id="node5" href="$class_scene_difficulty.html" title="Menu to choose dificulty (when starting a new game)" alt="" coords="333,762,471,942"/>
 <area shape="rect" id="node6" href="$class_scene_end_game.html" title="End of the game (after all levels finished)" alt="" coords="496,755,641,949"/>
 <area shape="rect" id="node7" href="$class_scene_exit.html" title="menu for exit" alt="" coords="666,740,799,964"/>
 <area shape="rect" id="node8" href="$class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="824,593,983,1111"/>
@@ -13,6 +13,6 @@
 <area shape="rect" id="node12" href="$class_scene_loading.html" title="loading game scene" alt="" coords="1552,762,1684,942"/>
 <area shape="rect" id="node13" href="$class_scene_main_menu.html" title="main menu (opened at the game startup)" alt="" coords="1709,762,1855,942"/>
 <area shape="rect" id="node14" href="$class_scene_pause.html" title="this is the pause menu" alt="" coords="1879,755,2013,949"/>
-<area shape="rect" id="node15" href="$class_scene_settings.html" title=" " alt="" coords="2037,740,2191,964"/>
+<area shape="rect" id="node15" href="$class_scene_settings.html" title="Scene for settings." alt="" coords="2037,740,2191,964"/>
 <area shape="rect" id="node16" href="$class_scene_victory.html" title="this is the victory menu" alt="" coords="2215,747,2349,957"/>
 </map>

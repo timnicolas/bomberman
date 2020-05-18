@@ -18,6 +18,12 @@ Collaboration diagram for Inputs\+:\nopagebreak
 \includegraphics[width=223pt]{class_inputs__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_inputs_a721935d4549a704e944c056227214ca5}\label{class_inputs_a721935d4549a704e944c056227214ca5}} 
+\mbox{\hyperlink{class_inputs_a721935d4549a704e944c056227214ca5}{$\sim$\+Inputs}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_inputs}{Inputs}}\+:\+: \mbox{\hyperlink{class_inputs}{Inputs}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -67,9 +73,8 @@ static void \mbox{\hyperlink{class_inputs_a7765edb8008e1c3f7ea67e2aa77eb885}{upd
 \item 
 static void \mbox{\hyperlink{class_inputs_aedb25df0e00a0b99b691a57746868393}{reset\+Keys}} ()
 \item 
-\mbox{\Hypertarget{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}\label{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}} 
-static bool {\bfseries is\+Configuring} ()
-\item 
+static bool \mbox{\hyperlink{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}{is\+Configuring}} ()
+\begin{DoxyCompactList}\small\item\em Know if an input is currently configuring. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{class_inputs_a154c7590c8ad9d4be127fcf5a0a392f1}{set\+Text\+Input\+Mode}} (bool enable)
 \begin{DoxyCompactList}\small\item\em Enable / disable the Text\+Input mode. \end{DoxyCompactList}\item 
 static S\+D\+L\+\_\+\+Keycode \mbox{\hyperlink{class_inputs_a6f07ed05a776562c7bf5e6a011b1ecfb}{get\+Text\+Input\+Keycode}} ()
@@ -79,15 +84,13 @@ static std\+::string \mbox{\hyperlink{class_inputs_aa87c9c60ec70181c57e93fa8c671
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}\label{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}} 
-static const int {\bfseries nb\+\_\+input} = Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS
+static const int \mbox{\hyperlink{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}{nb\+\_\+input}} = Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS
 \item 
-static const std\+::string {\bfseries input\+\_\+type\+\_\+name} \mbox{[}Inputs\+::nb\+\_\+input\mbox{]}
+static const std\+::string \mbox{\hyperlink{class_inputs_a617379938c0c70b30922928e4fff4052}{input\+\_\+type\+\_\+name}} \mbox{[}\mbox{\hyperlink{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}{Inputs\+::nb\+\_\+input}}\mbox{]}
 \item 
-\mbox{\Hypertarget{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}\label{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}} 
-static const std\+::string {\bfseries config\+File} = \char`\"{}configs/controls.\+json\char`\"{}
+static const std\+::string \mbox{\hyperlink{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}{config\+File}} = home\+Dir+C\+O\+N\+T\+R\+O\+L\+S\+\_\+\+F\+I\+LE
 \item 
-static const S\+D\+L\+\_\+\+Scancode {\bfseries default\+\_\+keys} \mbox{[}Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS\mbox{]}
+static const S\+D\+L\+\_\+\+Scancode \mbox{\hyperlink{class_inputs_a4b883aab8a890c79347f37897e47af2d}{default\+\_\+keys}} \mbox{[}Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS\mbox{]}
 \end{DoxyCompactItemize}
 
 
@@ -400,6 +403,19 @@ The the last key name pressed.
 \begin{DoxyReturn}{Returns}
 std\+::string The key name 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}\label{class_inputs_a95f184338486ddfa3a59ff1d993d3e61}} 
+\index{Inputs@{Inputs}!isConfiguring@{isConfiguring}}
+\index{isConfiguring@{isConfiguring}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{isConfiguring()}{isConfiguring()}}
+{\footnotesize\ttfamily bool Inputs\+::is\+Configuring (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Know if an input is currently configuring. 
+
+\begin{DoxyReturn}{Returns}
+true If an input is configuring 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_inputs_aedb25df0e00a0b99b691a57746868393}\label{class_inputs_aedb25df0e00a0b99b691a57746868393}} 
 \index{Inputs@{Inputs}!resetKeys@{resetKeys}}
 \index{resetKeys@{resetKeys}!Inputs@{Inputs}}
@@ -441,7 +457,13 @@ true if the user tried to close the window, false otherwise.
 Poll all the S\+DL events from the last update call. This function should be called at the start of each frame in order for this class to have valid values. 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_inputs_a4b883aab8a890c79347f37897e47af2d}\label{class_inputs_a4b883aab8a890c79347f37897e47af2d}} 
+\mbox{\Hypertarget{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}\label{class_inputs_a22d4d9653fea3d145cbcfc3b91d49b84}} 
+\index{Inputs@{Inputs}!configFile@{configFile}}
+\index{configFile@{configFile}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{configFile}{configFile}}
+{\footnotesize\ttfamily const std\+::string Inputs\+::config\+File = home\+Dir+C\+O\+N\+T\+R\+O\+L\+S\+\_\+\+F\+I\+LE\hspace{0.3cm}{\ttfamily [static]}}
+
+File with inputs keys \mbox{\Hypertarget{class_inputs_a4b883aab8a890c79347f37897e47af2d}\label{class_inputs_a4b883aab8a890c79347f37897e47af2d}} 
 \index{Inputs@{Inputs}!default\_keys@{default\_keys}}
 \index{default\_keys@{default\_keys}!Inputs@{Inputs}}
 \doxysubsubsection{\texorpdfstring{default\_keys}{default\_keys}}
@@ -464,7 +486,7 @@ Poll all the S\+DL events from the last update call. This function should be cal
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{class_inputs_a617379938c0c70b30922928e4fff4052}\label{class_inputs_a617379938c0c70b30922928e4fff4052}} 
+\mbox{\hyperlink{class_inputs}{Inputs}} default keys \mbox{\Hypertarget{class_inputs_a617379938c0c70b30922928e4fff4052}\label{class_inputs_a617379938c0c70b30922928e4fff4052}} 
 \index{Inputs@{Inputs}!input\_type\_name@{input\_type\_name}}
 \index{input\_type\_name@{input\_type\_name}!Inputs@{Inputs}}
 \doxysubsubsection{\texorpdfstring{input\_type\_name}{input\_type\_name}}
@@ -487,7 +509,13 @@ Poll all the S\+DL events from the last update call. This function should be cal
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+\mbox{\hyperlink{class_inputs}{Inputs}} names \mbox{\Hypertarget{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}\label{class_inputs_abcadc39fbb6eee0b5d5b571070bf79ef}} 
+\index{Inputs@{Inputs}!nb\_input@{nb\_input}}
+\index{nb\_input@{nb\_input}!Inputs@{Inputs}}
+\doxysubsubsection{\texorpdfstring{nb\_input}{nb\_input}}
+{\footnotesize\ttfamily const int Inputs\+::nb\+\_\+input = Input\+Type\+::\+N\+B\+\_\+\+I\+N\+P\+U\+TS\hspace{0.3cm}{\ttfamily [static]}}
 
+Number of inputs 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

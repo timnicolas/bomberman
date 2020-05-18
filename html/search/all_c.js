@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['material_244',['Material',['../class_material.html',1,'']]],
-  ['mesh_245',['Mesh',['../class_mesh.html',1,'']]],
-  ['model_246',['Model',['../class_model.html',1,'']]],
-  ['modelexception_247',['ModelException',['../class_open_g_l_model_1_1_model_exception.html',1,'OpenGLModel']]],
-  ['modelsmanager_248',['ModelsManager',['../class_models_manager.html',1,'']]],
-  ['modelsmanagerexception_249',['ModelsManagerException',['../class_models_manager_1_1_models_manager_exception.html',1,'ModelsManager']]],
-  ['music_250',['Music',['../class_music.html',1,'']]],
-  ['musicexception_251',['MusicException',['../class_music_1_1_music_exception.html',1,'Music']]]
+  ['material_534',['Material',['../class_material.html',1,'Material'],['../class_material.html#a49691a0a92cc3e571869f2b494f8cd5d',1,'Material::Material(std::string const name=&quot;&quot;, glm::vec3 const diffuse=glm::vec3(.36f,.34f,.32f), glm::vec3 const specular=glm::vec3(.3f,.3f,.3f), glm::vec3 const ambient=glm::vec3(0.2f, 0.2f, 0.2f), float const shininess=16.0f)'],['../class_material.html#a611dba609ac416f5f59c325c4611c964',1,'Material::Material(Material const &amp;src)']]],
+  ['maxwindowsize_535',['maxWindowSize',['../struct_game_info.html#a3f897911825a01cf4a1c4b89097ac523',1,'GameInfo']]],
+  ['medium_536',['medium',['../struct_scene_difficulty_1_1_buttons_states.html#a65a48af3d63e00b03e32802d7225394e',1,'SceneDifficulty::ButtonsStates::medium()'],['../struct_scene_difficulty_1_1_all_u_i.html#a19bd705042ffd4a8d8bddf7aa4959ae4',1,'SceneDifficulty::AllUI::medium()']]],
+  ['menu_537',['menu',['../struct_scene_difficulty_1_1_buttons_states.html#a407725512ff211f083177c2ea3e4c26f',1,'SceneDifficulty::ButtonsStates::menu()'],['../struct_scene_game_over_1_1_buttons_states.html#a3cec246cce96410ef3860b9af81347b3',1,'SceneGameOver::ButtonsStates::menu()'],['../struct_scene_level_selection_1_1_buttons_states.html#a57363bd7554b83d2233b457c71101aae',1,'SceneLevelSelection::ButtonsStates::menu()'],['../struct_scene_load_game_1_1_buttons_states.html#a366264c459d2d427b8386b0205ee09e5',1,'SceneLoadGame::ButtonsStates::menu()'],['../struct_scene_pause_1_1_buttons_states.html#a507c26169d7ecbe5bd048790044c5e21',1,'ScenePause::ButtonsStates::menu()'],['../struct_scene_victory_1_1_buttons_states.html#ab39d304bde68866c2356b3535fe2c189',1,'SceneVictory::ButtonsStates::menu()']]],
+  ['mesh_538',['Mesh',['../class_mesh.html',1,'Mesh'],['../class_mesh.html#a3acd2a5dec9fade334a7c37cf46a9962',1,'Mesh::Mesh(OpenGLModel &amp;openGLModel, Shader &amp;sh, std::string const &amp;name, std::vector&lt; Vertex &gt; vertices, std::vector&lt; uint32_t &gt; vertIndices, Material material, BoundingBox boundingBox)'],['../class_mesh.html#aa61b77f723d39c1bdaf4ed24ab8dae2c',1,'Mesh::Mesh(Mesh const &amp;src)']]],
+  ['model_539',['Model',['../class_model.html',1,'Model'],['../class_model.html#abd566d0030ea6d854f110498b0c774a2',1,'Model::Model(OpenGLModel &amp;openGLModel, float const &amp;dtTime, ETransform transform=ETransform())'],['../class_model.html#a242adc0075374718143a988c215f5bac',1,'Model::Model(Model const &amp;src)']]],
+  ['modelexception_540',['ModelException',['../class_open_g_l_model_1_1_model_exception.html',1,'OpenGLModel::ModelException'],['../class_open_g_l_model_1_1_model_exception.html#a567efce262d3f104a37f3c8cfa75de84',1,'OpenGLModel::ModelException::ModelException()'],['../class_open_g_l_model_1_1_model_exception.html#ae146c9fc02c939d9572b106283673c6b',1,'OpenGLModel::ModelException::ModelException(char const *what_arg)']]],
+  ['modelsmanager_541',['ModelsManager',['../class_models_manager.html',1,'']]],
+  ['modelsmanagerexception_542',['ModelsManagerException',['../class_models_manager_1_1_models_manager_exception.html',1,'ModelsManager::ModelsManagerException'],['../class_models_manager_1_1_models_manager_exception.html#ae6fcf5fb9f6e7195be00a90354d26f68',1,'ModelsManager::ModelsManagerException::ModelsManagerException()'],['../class_models_manager_1_1_models_manager_exception.html#a3f957231b8234e9bc10877f85e94f20f',1,'ModelsManager::ModelsManagerException::ModelsManagerException(const char *what_arg)']]],
+  ['mousesensitivity_543',['mouseSensitivity',['../class_camera.html#a0fd9adbe4484147947bc1f51452edd6f',1,'Camera']]],
+  ['movementspeed_544',['movementSpeed',['../class_camera.html#a2e09cc969e7e7733051df9a0bfe9afa0',1,'Camera']]],
+  ['movingsize_545',['movingSize',['../class_a_character.html#ab91ce66f359d4c3fb605948689f4fd20',1,'ACharacter']]],
+  ['music_546',['Music',['../class_music.html',1,'Music'],['../class_music.html#a8169fdac350380994c08fe67062fc99d',1,'Music::Music()']]],
+  ['musicexception_547',['MusicException',['../class_music_1_1_music_exception.html',1,'Music::MusicException'],['../class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff',1,'Music::MusicException::MusicException()'],['../class_music_1_1_music_exception.html#aeb2397817b7e416690fb0e5ba6318fd4',1,'Music::MusicException::MusicException(const char *what_arg)'],['../class_music_1_1_music_exception.html#a4bbf9e4a506fcb9d41eb87f0b1c642ba',1,'Music::MusicException::MusicException(const std::string what_arg)']]],
+  ['musiclevel_548',['musicLevel',['../class_scene_game.html#a725aea97a7eb7b1ee4ea7808fff9c948',1,'SceneGame']]],
+  ['musics_549',['musics',['../class_audio_manager.html#ab4f16f2b8df28e812c60769c534644b0',1,'AudioManager']]]
 ];

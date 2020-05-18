@@ -2,7 +2,17 @@
 \label{class_scene_settings}\index{SceneSettings@{SceneSettings}}
 
 
-Inheritance diagram for Scene\+Settings\+:\nopagebreak
+Scene for settings.  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Settings.\+hpp$>$}
+
+
+
+Inheritance diagram for Scene\+Settings\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +21,8 @@ Inheritance diagram for Scene\+Settings\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Settings\+:\nopagebreak
+Collaboration diagram for Scene\+Settings\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,19 +33,19 @@ Collaboration diagram for Scene\+Settings\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_scene_settings_1_1res}{res}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Contain width \& height elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_settings_a92c62a92d2476e1edbd3acaba5855d2e}\label{class_scene_settings_a92c62a92d2476e1edbd3acaba5855d2e}} 
-{\bfseries Scene\+Settings} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_scene_settings_aa7091a9a5c7a797ebdff690a38fcc2ca}\label{class_scene_settings_aa7091a9a5c7a797ebdff690a38fcc2ca}} 
-{\bfseries Scene\+Settings} (\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&src)
-\item 
-\mbox{\Hypertarget{class_scene_settings_ad650f1a581258755fae7b25fee8ddc3f}\label{class_scene_settings_ad650f1a581258755fae7b25fee8ddc3f}} 
-\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&rhs)
-\item 
+\mbox{\Hypertarget{class_scene_settings_a1be1700ae68d0e88f68acd16ea2f10aa}\label{class_scene_settings_a1be1700ae68d0e88f68acd16ea2f10aa}} 
+virtual \mbox{\hyperlink{class_scene_settings_a1be1700ae68d0e88f68acd16ea2f10aa}{$\sim$\+Scene\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Settings\+:\+: Scene Settings object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_settings_a92c62a92d2476e1edbd3acaba5855d2e}{Scene\+Settings}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Settings\+:\+: Scene Settings object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_settings_aa7091a9a5c7a797ebdff690a38fcc2ca}{Scene\+Settings}} (\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Settings\+:\+: Scene Settings object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} \& \mbox{\hyperlink{class_scene_settings_ad650f1a581258755fae7b25fee8ddc3f}{operator=}} (\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_scene_settings_a19323950409add2d1b0df92799acf4d2}\label{class_scene_settings_a19323950409add2d1b0df92799acf4d2}} 
 virtual bool \mbox{\hyperlink{class_scene_settings_a19323950409add2d1b0df92799acf4d2}{init}} ()
 \begin{DoxyCompactList}\small\item\em initialize all the UI section. Should not be called twice. \end{DoxyCompactList}\item 
@@ -44,26 +55,95 @@ virtual bool \mbox{\hyperlink{class_scene_settings_ac32c443d620d0417b301193e8788
 \mbox{\Hypertarget{class_scene_settings_a7f7903e9d7b6c33c9e4472c583d97710}\label{class_scene_settings_a7f7903e9d7b6c33c9e4472c583d97710}} 
 void \mbox{\hyperlink{class_scene_settings_a7f7903e9d7b6c33c9e4472c583d97710}{update\+Audio\+Sliders}} ()
 \begin{DoxyCompactList}\small\item\em If audio level has changed (/volume master 12), update sliders. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_settings_a590dc1227ae74a8af7a3f3cb0ccc45fd}\label{class_scene_settings_a590dc1227ae74a8af7a3f3cb0ccc45fd}} 
-glm\+::ivec2 {\bfseries get\+Cur\+Resolution} () const
-\end{DoxyCompactItemize}
+glm\+::ivec2 \mbox{\hyperlink{class_scene_settings_a590dc1227ae74a8af7a3f3cb0ccc45fd}{get\+Cur\+Resolution}} () const
+\begin{DoxyCompactList}\small\item\em Get the current resolution. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_settings_a39e0fde5848e50be67df1669b83ae384}\label{class_scene_settings_a39e0fde5848e50be67df1669b83ae384}} 
-bool {\bfseries start\+Fit\+To\+Screen}
+bool \mbox{\hyperlink{class_scene_settings_a39e0fde5848e50be67df1669b83ae384}{start\+Fit\+To\+Screen}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_settings_a1562222a4d6383d813923504a0818807}\label{class_scene_settings_a1562222a4d6383d813923504a0818807}} 
-static const int {\bfseries nb\+\_\+resolution} = 7
+static const int \mbox{\hyperlink{class_scene_settings_a1562222a4d6383d813923504a0818807}{nb\+\_\+resolution}} = 7
 \item 
-static \mbox{\hyperlink{struct_scene_settings_1_1res}{Scene\+Settings\+::res}} {\bfseries resolutions} \mbox{[}Scene\+Settings\+::nb\+\_\+resolution\mbox{]}
+static \mbox{\hyperlink{struct_scene_settings_1_1res}{Scene\+Settings\+::res}} \mbox{\hyperlink{class_scene_settings_a2a438f29929e98bc99953b5afc879602}{resolutions}} \mbox{[}\mbox{\hyperlink{class_scene_settings_a1562222a4d6383d813923504a0818807}{Scene\+Settings\+::nb\+\_\+resolution}}\mbox{]}
 \item 
-static const std\+::string {\bfseries audio\+\_\+name} \mbox{[}3\mbox{]}
+static const std\+::string \mbox{\hyperlink{class_scene_settings_a06afc9f52a21fc03e3b6823bcecefdd3}{audio\+\_\+name}} \mbox{[}3\mbox{]}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Scene for settings. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_settings_a92c62a92d2476e1edbd3acaba5855d2e}\label{class_scene_settings_a92c62a92d2476e1edbd3acaba5855d2e}} 
+\index{SceneSettings@{SceneSettings}!SceneSettings@{SceneSettings}}
+\index{SceneSettings@{SceneSettings}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{SceneSettings()}{SceneSettings()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Settings\+::\+Scene\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Scene Settings\+:\+: Scene Settings object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_settings_aa7091a9a5c7a797ebdff690a38fcc2ca}\label{class_scene_settings_aa7091a9a5c7a797ebdff690a38fcc2ca}} 
+\index{SceneSettings@{SceneSettings}!SceneSettings@{SceneSettings}}
+\index{SceneSettings@{SceneSettings}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{SceneSettings()}{SceneSettings()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Settings\+::\+Scene\+Settings (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Settings\+:\+: Scene Settings object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_settings_a590dc1227ae74a8af7a3f3cb0ccc45fd}\label{class_scene_settings_a590dc1227ae74a8af7a3f3cb0ccc45fd}} 
+\index{SceneSettings@{SceneSettings}!getCurResolution@{getCurResolution}}
+\index{getCurResolution@{getCurResolution}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{getCurResolution()}{getCurResolution()}}
+{\footnotesize\ttfamily glm\+::ivec2 Scene\+Settings\+::get\+Cur\+Resolution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current resolution. 
+
+\begin{DoxyReturn}{Returns}
+glm\+::ivec2 the current resolution 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_settings_ad650f1a581258755fae7b25fee8ddc3f}\label{class_scene_settings_ad650f1a581258755fae7b25fee8ddc3f}} 
+\index{SceneSettings@{SceneSettings}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} \& Scene\+Settings\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_settings}{Scene\+Settings}}\& A reference to the copied object 
+\end{DoxyReturn}
 
 
 \doxysubsection{Member Data Documentation}
@@ -82,7 +162,13 @@ static const std\+::string {\bfseries audio\+\_\+name} \mbox{[}3\mbox{]}
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{class_scene_settings_a2a438f29929e98bc99953b5afc879602}\label{class_scene_settings_a2a438f29929e98bc99953b5afc879602}} 
+All audio names (master, music, sound) \mbox{\Hypertarget{class_scene_settings_a1562222a4d6383d813923504a0818807}\label{class_scene_settings_a1562222a4d6383d813923504a0818807}} 
+\index{SceneSettings@{SceneSettings}!nb\_resolution@{nb\_resolution}}
+\index{nb\_resolution@{nb\_resolution}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{nb\_resolution}{nb\_resolution}}
+{\footnotesize\ttfamily const int Scene\+Settings\+::nb\+\_\+resolution = 7\hspace{0.3cm}{\ttfamily [static]}}
+
+Number of default resolutions \mbox{\Hypertarget{class_scene_settings_a2a438f29929e98bc99953b5afc879602}\label{class_scene_settings_a2a438f29929e98bc99953b5afc879602}} 
 \index{SceneSettings@{SceneSettings}!resolutions@{resolutions}}
 \index{resolutions@{resolutions}!SceneSettings@{SceneSettings}}
 \doxysubsubsection{\texorpdfstring{resolutions}{resolutions}}
@@ -100,7 +186,13 @@ static const std\+::string {\bfseries audio\+\_\+name} \mbox{[}3\mbox{]}
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+Description of all resolutions \mbox{\Hypertarget{class_scene_settings_a39e0fde5848e50be67df1669b83ae384}\label{class_scene_settings_a39e0fde5848e50be67df1669b83ae384}} 
+\index{SceneSettings@{SceneSettings}!startFitToScreen@{startFitToScreen}}
+\index{startFitToScreen@{startFitToScreen}!SceneSettings@{SceneSettings}}
+\doxysubsubsection{\texorpdfstring{startFitToScreen}{startFitToScreen}}
+{\footnotesize\ttfamily bool Scene\+Settings\+::start\+Fit\+To\+Screen}
 
+Launch program with \textquotesingle{}fit to screen\textquotesingle{} option 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

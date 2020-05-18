@@ -30,21 +30,19 @@ Collaboration diagram for Slider\+UI\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_a53ec86dc88ad99b9c9d6f3e80c198db4}\label{class_slider_u_i_a53ec86dc88ad99b9c9d6f3e80c198db4}} 
-{\bfseries Slider\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
-\item 
-\mbox{\Hypertarget{class_slider_u_i_ab9d0d8254c52a745fc80ddecb86fdcc8}\label{class_slider_u_i_ab9d0d8254c52a745fc80ddecb86fdcc8}} 
-{\bfseries Slider\+UI} (\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&src)
-\item 
-\mbox{\Hypertarget{class_slider_u_i_a69de2528b6428c341572667a4154e1c9}\label{class_slider_u_i_a69de2528b6428c341572667a4154e1c9}} 
-\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&rhs)
-\item 
-\mbox{\Hypertarget{class_slider_u_i_abacedfdcf71faa74284e7f2566a68eeb}\label{class_slider_u_i_abacedfdcf71faa74284e7f2566a68eeb}} 
-void {\bfseries set\+Values} (float min, float max, float val, float step=0)
-\item 
-\mbox{\Hypertarget{class_slider_u_i_a39355d504aea20ce9b32053eea3e0e97}\label{class_slider_u_i_a39355d504aea20ce9b32053eea3e0e97}} 
-void {\bfseries set\+Value} (float val)
-\item 
+\mbox{\hyperlink{class_slider_u_i_a53ec86dc88ad99b9c9d6f3e80c198db4}{Slider\+UI}} (glm\+::vec2 pos, glm\+::vec2 size)
+\begin{DoxyCompactList}\small\item\em Construct a new Slider U I\+:\+: Slider U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_slider_u_i_ab9d0d8254c52a745fc80ddecb86fdcc8}{Slider\+UI}} (\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Slider U I\+:\+: Slider U I object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_slider_u_i_aa06ae51644f161b566963c022d560d4e}\label{class_slider_u_i_aa06ae51644f161b566963c022d560d4e}} 
+virtual \mbox{\hyperlink{class_slider_u_i_aa06ae51644f161b566963c022d560d4e}{$\sim$\+Slider\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Slider U I\+:\+: Slider U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& \mbox{\hyperlink{class_slider_u_i_a69de2528b6428c341572667a4154e1c9}{operator=}} (\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_slider_u_i_abacedfdcf71faa74284e7f2566a68eeb}{set\+Values}} (float min, float max, float val, float step=0)
+\begin{DoxyCompactList}\small\item\em Set Slider values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_slider_u_i_a39355d504aea20ce9b32053eea3e0e97}{set\+Value}} (float val)
+\begin{DoxyCompactList}\small\item\em Set the current value. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& \mbox{\hyperlink{class_slider_u_i_a10fa6883edf4a3bc6a089738df191183}{add\+Slider\+Listener}} (float $\ast$listener)
 \begin{DoxyCompactList}\small\item\em add a listener on the slider \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -59,26 +57,56 @@ virtual void \mbox{\hyperlink{class_slider_u_i_a62219cde7516ea0e817b7371942ceff3
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_aa27a55d587ee81a67bcfee2b1af6a191}\label{class_slider_u_i_aa27a55d587ee81a67bcfee2b1af6a191}} 
-float {\bfseries \+\_\+min}
+float \mbox{\hyperlink{class_slider_u_i_aa27a55d587ee81a67bcfee2b1af6a191}{\+\_\+min}}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_a85bda1931ca6f470109055be60cb1b65}\label{class_slider_u_i_a85bda1931ca6f470109055be60cb1b65}} 
-float {\bfseries \+\_\+max}
+float \mbox{\hyperlink{class_slider_u_i_a85bda1931ca6f470109055be60cb1b65}{\+\_\+max}}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_a63781e3bef83bf7582229ae881d68317}\label{class_slider_u_i_a63781e3bef83bf7582229ae881d68317}} 
-float {\bfseries \+\_\+val}
+float \mbox{\hyperlink{class_slider_u_i_a63781e3bef83bf7582229ae881d68317}{\+\_\+val}}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_ad69b467ac7d69fffaa53f188db2319f5}\label{class_slider_u_i_ad69b467ac7d69fffaa53f188db2319f5}} 
-float {\bfseries \+\_\+step}
+float \mbox{\hyperlink{class_slider_u_i_ad69b467ac7d69fffaa53f188db2319f5}{\+\_\+step}}
 \item 
-\mbox{\Hypertarget{class_slider_u_i_a35404c20430dc397977de3ae0f8dba2a}\label{class_slider_u_i_a35404c20430dc397977de3ae0f8dba2a}} 
-float $\ast$ {\bfseries \+\_\+slider\+Listener}
+float $\ast$ \mbox{\hyperlink{class_slider_u_i_a35404c20430dc397977de3ae0f8dba2a}{\+\_\+slider\+Listener}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 this is the UI for slider 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_slider_u_i_a53ec86dc88ad99b9c9d6f3e80c198db4}\label{class_slider_u_i_a53ec86dc88ad99b9c9d6f3e80c198db4}} 
+\index{SliderUI@{SliderUI}!SliderUI@{SliderUI}}
+\index{SliderUI@{SliderUI}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{SliderUI()}{SliderUI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Slider\+U\+I\+::\+Slider\+UI (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size }\end{DoxyParamCaption})}
+
+
+
+Construct a new Slider U I\+:\+: Slider U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position \\
+\hline
+{\em size} & The size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_slider_u_i_ab9d0d8254c52a745fc80ddecb86fdcc8}\label{class_slider_u_i_ab9d0d8254c52a745fc80ddecb86fdcc8}} 
+\index{SliderUI@{SliderUI}!SliderUI@{SliderUI}}
+\index{SliderUI@{SliderUI}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{SliderUI()}{SliderUI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Slider\+U\+I\+::\+Slider\+UI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Slider U I\+:\+: Slider U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_slider_u_i_a10fa6883edf4a3bc6a089738df191183}\label{class_slider_u_i_a10fa6883edf4a3bc6a089738df191183}} 
@@ -99,7 +127,94 @@ add a listener on the slider
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_slider_u_i}{Slider\+UI}}\& a reference to the object 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_slider_u_i_a69de2528b6428c341572667a4154e1c9}\label{class_slider_u_i_a69de2528b6428c341572667a4154e1c9}} 
+\index{SliderUI@{SliderUI}!operator=@{operator=}}
+\index{operator=@{operator=}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& Slider\+U\+I\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} const \&}]{rhs }\end{DoxyParamCaption})}
 
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_slider_u_i}{Slider\+UI}}\& A reference to the copied object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_slider_u_i_a39355d504aea20ce9b32053eea3e0e97}\label{class_slider_u_i_a39355d504aea20ce9b32053eea3e0e97}} 
+\index{SliderUI@{SliderUI}!setValue@{setValue}}
+\index{setValue@{setValue}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{setValue()}{setValue()}}
+{\footnotesize\ttfamily void Slider\+U\+I\+::set\+Value (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})}
+
+
+
+Set the current value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & Value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_slider_u_i_abacedfdcf71faa74284e7f2566a68eeb}\label{class_slider_u_i_abacedfdcf71faa74284e7f2566a68eeb}} 
+\index{SliderUI@{SliderUI}!setValues@{setValues}}
+\index{setValues@{setValues}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{setValues()}{setValues()}}
+{\footnotesize\ttfamily void Slider\+U\+I\+::set\+Values (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max,  }\item[{float}]{val,  }\item[{float}]{step = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Set Slider values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min} & Min value \\
+\hline
+{\em max} & Max value \\
+\hline
+{\em val} & Start value \\
+\hline
+{\em step} & Step btw 2 values \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_slider_u_i_a85bda1931ca6f470109055be60cb1b65}\label{class_slider_u_i_a85bda1931ca6f470109055be60cb1b65}} 
+\index{SliderUI@{SliderUI}!\_max@{\_max}}
+\index{\_max@{\_max}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{\_max}{\_max}}
+{\footnotesize\ttfamily float Slider\+U\+I\+::\+\_\+max\hspace{0.3cm}{\ttfamily [protected]}}
+
+Maximum value \mbox{\Hypertarget{class_slider_u_i_aa27a55d587ee81a67bcfee2b1af6a191}\label{class_slider_u_i_aa27a55d587ee81a67bcfee2b1af6a191}} 
+\index{SliderUI@{SliderUI}!\_min@{\_min}}
+\index{\_min@{\_min}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{\_min}{\_min}}
+{\footnotesize\ttfamily float Slider\+U\+I\+::\+\_\+min\hspace{0.3cm}{\ttfamily [protected]}}
+
+Minimum value \mbox{\Hypertarget{class_slider_u_i_a35404c20430dc397977de3ae0f8dba2a}\label{class_slider_u_i_a35404c20430dc397977de3ae0f8dba2a}} 
+\index{SliderUI@{SliderUI}!\_sliderListener@{\_sliderListener}}
+\index{\_sliderListener@{\_sliderListener}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{\_sliderListener}{\_sliderListener}}
+{\footnotesize\ttfamily float$\ast$ Slider\+U\+I\+::\+\_\+slider\+Listener\hspace{0.3cm}{\ttfamily [protected]}}
+
+slider element value \mbox{\Hypertarget{class_slider_u_i_ad69b467ac7d69fffaa53f188db2319f5}\label{class_slider_u_i_ad69b467ac7d69fffaa53f188db2319f5}} 
+\index{SliderUI@{SliderUI}!\_step@{\_step}}
+\index{\_step@{\_step}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{\_step}{\_step}}
+{\footnotesize\ttfamily float Slider\+U\+I\+::\+\_\+step\hspace{0.3cm}{\ttfamily [protected]}}
+
+Step btw 2 values \mbox{\Hypertarget{class_slider_u_i_a63781e3bef83bf7582229ae881d68317}\label{class_slider_u_i_a63781e3bef83bf7582229ae881d68317}} 
+\index{SliderUI@{SliderUI}!\_val@{\_val}}
+\index{\_val@{\_val}!SliderUI@{SliderUI}}
+\doxysubsubsection{\texorpdfstring{\_val}{\_val}}
+{\footnotesize\ttfamily float Slider\+U\+I\+::\+\_\+val\hspace{0.3cm}{\ttfamily [protected]}}
+
+Actual value 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define NB_BONES_PER_VERTEX 4</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;includesOpengl.hpp&quot;</span></div>
@@ -93,69 +93,83 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="struct_vertex.html">   28</a></span>&#160;<span class="keyword">struct  </span><a class="code" href="struct_vertex.html">Vertex</a> {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    glm::vec3   pos;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    glm::vec3   norm;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    glm::vec2   texCoords;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    glm::vec3   tangents;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::array&lt;int, NB_BONES_PER_VERTEX&gt;    bonesId;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::array&lt;float, NB_BONES_PER_VERTEX&gt;  bonesW;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="struct_vertex.html#a858242dc7b40c034c5e13c589b30cfb4">   29</a></span>&#160;    glm::vec3   <a class="code" href="struct_vertex.html#a858242dc7b40c034c5e13c589b30cfb4">pos</a>;  </div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="struct_vertex.html#a70b394b12afe2e15e48535247716c160">   30</a></span>&#160;    glm::vec3   <a class="code" href="struct_vertex.html#a70b394b12afe2e15e48535247716c160">norm</a>;  </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="struct_vertex.html#a8d5babcf0ee1f315dae1207c375759a4">   31</a></span>&#160;    glm::vec2   <a class="code" href="struct_vertex.html#a8d5babcf0ee1f315dae1207c375759a4">texCoords</a>;  </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="struct_vertex.html#a6e4be15c8c306b7dcd3e3d7eb1cd6b48">   32</a></span>&#160;    glm::vec3   <a class="code" href="struct_vertex.html#a6e4be15c8c306b7dcd3e3d7eb1cd6b48">tangents</a>;  </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="struct_vertex.html#a8a84e29c6a4f425c5034586c3c3d209b">   33</a></span>&#160;    std::array&lt;int, NB_BONES_PER_VERTEX&gt;    <a class="code" href="struct_vertex.html#a8a84e29c6a4f425c5034586c3c3d209b">bonesId</a>;  </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="struct_vertex.html#a00b57e82a00d4e139c25ed4ccb8cf757">   34</a></span>&#160;    std::array&lt;float, NB_BONES_PER_VERTEX&gt;  <a class="code" href="struct_vertex.html#a00b57e82a00d4e139c25ed4ccb8cf757">bonesW</a>;  </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="struct_vertex.html">Vertex</a>();  <span class="comment">// default constructor, init bonesId and bonesW</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="struct_bounding_box.html">   39</a></span>&#160;<span class="keyword">struct  </span><a class="code" href="struct_bounding_box.html">BoundingBox</a> {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    glm::vec3   startPoint;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    glm::vec3   size;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="struct_texture.html">   44</a></span>&#160;<span class="keyword">struct  </span><a class="code" href="struct_texture.html">Texture</a> {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    uint32_t            id;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    TextureType::Enum   type;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string         path;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_mesh.html">   54</a></span>&#160;<span class="keyword">class   </span><a class="code" href="class_mesh.html">Mesh</a> {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>(<a class="code" href="class_open_g_l_model.html">OpenGLModel</a> &amp;openGLModel, <a class="code" href="class_shader.html">Shader</a> &amp;sh, std::string <span class="keyword">const</span> &amp;name, std::vector&lt;Vertex&gt; vertices,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            std::vector&lt;uint32_t&gt; vertIndices, std::vector&lt;Texture&gt; textures,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <a class="code" href="class_material.html">Material</a> material, <a class="code" href="struct_bounding_box.html">BoundingBox</a> boundingBox);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="class_mesh.html">Mesh</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>(<a class="code" href="class_mesh.html">Mesh</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a> &amp;operator=(<a class="code" href="class_mesh.html">Mesh</a> <span class="keyword">const</span> &amp;rhs);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#a06496712e5436f307076bdd0ef05ea03">draw</a>(glm::mat4 <span class="keyword">const</span> &amp;model) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#a103fa942bacc358c9c3a030d62335f7a">addBoneData</a>(uint32_t boneID, <span class="keywordtype">float</span> weight, uint32_t VerticeID);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#aa7f62a30fdb6aeca5d74fb01ec0a5c91">sendMesh</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>();  <span class="comment">// private default constructor, should not be called</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span>    _setUniformsTextures() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="class_open_g_l_model.html">OpenGLModel</a>             &amp;_openGLModel;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="class_shader.html">Shader</a>                  &amp;_sh;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        std::string             _name;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        std::vector&lt;Vertex&gt;     _vertices;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        std::vector&lt;uint32_t&gt;   _vertIndices;  <span class="comment">// contain _vertices id</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        std::vector&lt;Texture&gt;    _textures;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="class_material.html">Material</a>                _material;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="struct_bounding_box.html">BoundingBox</a>             _boundingBox;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        uint32_t                _vao;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        uint32_t                _vbo;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        uint32_t                _ebo;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif  // MESH_HPP_</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="struct_bounding_box.html">   42</a></span>&#160;<span class="keyword">struct  </span><a class="code" href="struct_bounding_box.html">BoundingBox</a> {</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="struct_bounding_box.html#aee4ea9e99c4fc60377fd7167e662ab84">   43</a></span>&#160;    glm::vec3   <a class="code" href="struct_bounding_box.html#aee4ea9e99c4fc60377fd7167e662ab84">startPoint</a>;  </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="struct_bounding_box.html#ab3865f2b2c8b7ebe7e75fb0f7d2fc9d5">   44</a></span>&#160;    glm::vec3   <a class="code" href="struct_bounding_box.html#ab3865f2b2c8b7ebe7e75fb0f7d2fc9d5">size</a>;  </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="struct_texture.html">   50</a></span>&#160;<span class="keyword">struct  </span><a class="code" href="struct_texture.html">Texture</a> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="struct_texture.html#ac6a13250a07e635d783cb451c478de9d">   51</a></span>&#160;    uint32_t            <a class="code" href="struct_texture.html#ac6a13250a07e635d783cb451c478de9d">id</a>;  </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="struct_texture.html#a789fcb5f3b658f319b53d66da4005b47">   52</a></span>&#160;    TextureType::Enum   <a class="code" href="struct_texture.html#a789fcb5f3b658f319b53d66da4005b47">type</a>;  </div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="struct_texture.html#aa8ba4ade408b0df1fc9b6f605a4efd22">   53</a></span>&#160;    std::string         <a class="code" href="struct_texture.html#aa8ba4ade408b0df1fc9b6f605a4efd22">path</a>;  </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_mesh.html">   60</a></span>&#160;<span class="keyword">class   </span><a class="code" href="class_mesh.html">Mesh</a> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>(<a class="code" href="class_open_g_l_model.html">OpenGLModel</a> &amp;openGLModel, <a class="code" href="class_shader.html">Shader</a> &amp;sh, std::string <span class="keyword">const</span> &amp;name,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            std::vector&lt;Vertex&gt; vertices, std::vector&lt;uint32_t&gt; vertIndices,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <a class="code" href="class_material.html">Material</a> material, <a class="code" href="struct_bounding_box.html">BoundingBox</a> boundingBox);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_mesh.html#a5efe4da1a4c0971cfb037bd70304c303">~Mesh</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>(<a class="code" href="class_mesh.html">Mesh</a> <span class="keyword">const</span> &amp;src);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a> &amp;<a class="code" href="class_mesh.html#aab3228b39ec8cc452c93eeaf0f4e00c6">operator=</a>(<a class="code" href="class_mesh.html">Mesh</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#af8d667c581d9082760b2bb77cc686aed">setTexture</a>(TextureType::Enum type, <a class="code" href="struct_texture.html">Texture</a> <span class="keyword">const</span> texture);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#a06496712e5436f307076bdd0ef05ea03">draw</a>(glm::mat4 <span class="keyword">const</span> &amp;model) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#a9b6d06fc58f90869b8bf9a4d40177cc9">addBoneData</a>(uint32_t boneID, <span class="keywordtype">float</span> weight, uint32_t vertexID);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordtype">void</span>    <a class="code" href="class_mesh.html#aa7f62a30fdb6aeca5d74fb01ec0a5c91">sendMesh</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="class_mesh.html">Mesh</a>();  <span class="comment">// private default constructor, should not be called</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordtype">void</span>    _setUniformsTextures() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="class_open_g_l_model.html">OpenGLModel</a>             &amp;_openGLModel;  </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="class_shader.html">Shader</a>                  &amp;_sh;  </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        std::string             _name;  </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        std::vector&lt;Vertex&gt;     _vertices;  </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        std::vector&lt;uint32_t&gt;   _vertIndices;  </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        std::unordered_map&lt;TextureType::Enum, Texture&gt;  _textures;  </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="class_material.html">Material</a>                _material;  </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="struct_bounding_box.html">BoundingBox</a>             _boundingBox;  </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        uint32_t                _vao;  </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        uint32_t                _vbo;  </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        uint32_t                _ebo;  </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif  // MESH_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_mesh_html_a103fa942bacc358c9c3a030d62335f7a"><div class="ttname"><a href="class_mesh.html#a103fa942bacc358c9c3a030d62335f7a">Mesh::addBoneData</a></div><div class="ttdeci">void addBoneData(uint32_t boneID, float weight, uint32_t VerticeID)</div><div class="ttdoc">store the bone info to the mesh</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:199</div></div>
-<div class="ttc" id="aclass_mesh_html_a06496712e5436f307076bdd0ef05ea03"><div class="ttname"><a href="class_mesh.html#a06496712e5436f307076bdd0ef05ea03">Mesh::draw</a></div><div class="ttdeci">void draw(glm::mat4 const &amp;model) const</div><div class="ttdoc">draw the Mesh</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:58</div></div>
-<div class="ttc" id="aclass_mesh_html"><div class="ttname"><a href="class_mesh.html">Mesh</a></div><div class="ttdoc">Class to store and draw a 3d model Mesh.</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:54</div></div>
-<div class="ttc" id="aclass_open_g_l_model_html"><div class="ttname"><a href="class_open_g_l_model.html">OpenGLModel</a></div><div class="ttdoc">class to load and draw a 3d model from file</div><div class="ttdef"><b>Definition:</b> OpenGLModel.hpp:50</div></div>
-<div class="ttc" id="astruct_texture_html"><div class="ttname"><a href="struct_texture.html">Texture</a></div><div class="ttdef"><b>Definition:</b> Mesh.hpp:44</div></div>
-<div class="ttc" id="astruct_bounding_box_html"><div class="ttname"><a href="struct_bounding_box.html">BoundingBox</a></div><div class="ttdef"><b>Definition:</b> Mesh.hpp:39</div></div>
+<div class="ttc" id="astruct_vertex_html_a00b57e82a00d4e139c25ed4ccb8cf757"><div class="ttname"><a href="struct_vertex.html#a00b57e82a00d4e139c25ed4ccb8cf757">Vertex::bonesW</a></div><div class="ttdeci">std::array&lt; float, NB_BONES_PER_VERTEX &gt; bonesW</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:34</div></div>
+<div class="ttc" id="astruct_texture_html_ac6a13250a07e635d783cb451c478de9d"><div class="ttname"><a href="struct_texture.html#ac6a13250a07e635d783cb451c478de9d">Texture::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:51</div></div>
+<div class="ttc" id="astruct_bounding_box_html_aee4ea9e99c4fc60377fd7167e662ab84"><div class="ttname"><a href="struct_bounding_box.html#aee4ea9e99c4fc60377fd7167e662ab84">BoundingBox::startPoint</a></div><div class="ttdeci">glm::vec3 startPoint</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:43</div></div>
+<div class="ttc" id="astruct_vertex_html_a8d5babcf0ee1f315dae1207c375759a4"><div class="ttname"><a href="struct_vertex.html#a8d5babcf0ee1f315dae1207c375759a4">Vertex::texCoords</a></div><div class="ttdeci">glm::vec2 texCoords</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:31</div></div>
+<div class="ttc" id="astruct_vertex_html_a8a84e29c6a4f425c5034586c3c3d209b"><div class="ttname"><a href="struct_vertex.html#a8a84e29c6a4f425c5034586c3c3d209b">Vertex::bonesId</a></div><div class="ttdeci">std::array&lt; int, NB_BONES_PER_VERTEX &gt; bonesId</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:33</div></div>
+<div class="ttc" id="aclass_mesh_html_a06496712e5436f307076bdd0ef05ea03"><div class="ttname"><a href="class_mesh.html#a06496712e5436f307076bdd0ef05ea03">Mesh::draw</a></div><div class="ttdeci">void draw(glm::mat4 const &amp;model) const</div><div class="ttdoc">draw the Mesh</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:99</div></div>
+<div class="ttc" id="aclass_mesh_html"><div class="ttname"><a href="class_mesh.html">Mesh</a></div><div class="ttdoc">Class to store and draw a 3d model Mesh.</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:60</div></div>
+<div class="ttc" id="astruct_bounding_box_html_ab3865f2b2c8b7ebe7e75fb0f7d2fc9d5"><div class="ttname"><a href="struct_bounding_box.html#ab3865f2b2c8b7ebe7e75fb0f7d2fc9d5">BoundingBox::size</a></div><div class="ttdeci">glm::vec3 size</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:44</div></div>
+<div class="ttc" id="aclass_open_g_l_model_html"><div class="ttname"><a href="class_open_g_l_model.html">OpenGLModel</a></div><div class="ttdoc">class to load and draw a 3d model from file</div><div class="ttdef"><b>Definition:</b> OpenGLModel.hpp:56</div></div>
+<div class="ttc" id="aclass_mesh_html_aab3228b39ec8cc452c93eeaf0f4e00c6"><div class="ttname"><a href="class_mesh.html#aab3228b39ec8cc452c93eeaf0f4e00c6">Mesh::operator=</a></div><div class="ttdeci">Mesh &amp; operator=(Mesh const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:67</div></div>
+<div class="ttc" id="astruct_texture_html"><div class="ttname"><a href="struct_texture.html">Texture</a></div><div class="ttdoc">Texture.</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:50</div></div>
+<div class="ttc" id="astruct_bounding_box_html"><div class="ttname"><a href="struct_bounding_box.html">BoundingBox</a></div><div class="ttdoc">Bounding box.</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:42</div></div>
+<div class="ttc" id="aclass_mesh_html_af8d667c581d9082760b2bb77cc686aed"><div class="ttname"><a href="class_mesh.html#af8d667c581d9082760b2bb77cc686aed">Mesh::setTexture</a></div><div class="ttdeci">void setTexture(TextureType::Enum type, Texture const texture)</div><div class="ttdoc">set Mesh texture</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:89</div></div>
+<div class="ttc" id="aclass_mesh_html_a5efe4da1a4c0971cfb037bd70304c303"><div class="ttname"><a href="class_mesh.html#a5efe4da1a4c0971cfb037bd70304c303">Mesh::~Mesh</a></div><div class="ttdeci">virtual ~Mesh()</div><div class="ttdoc">Destroy the Mesh:: Mesh object.</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:49</div></div>
 <div class="ttc" id="aclass_material_html"><div class="ttname"><a href="class_material.html">Material</a></div><div class="ttdoc">basic material for shaders</div><div class="ttdef"><b>Definition:</b> Material.hpp:10</div></div>
+<div class="ttc" id="astruct_vertex_html_a70b394b12afe2e15e48535247716c160"><div class="ttname"><a href="struct_vertex.html#a70b394b12afe2e15e48535247716c160">Vertex::norm</a></div><div class="ttdeci">glm::vec3 norm</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:30</div></div>
+<div class="ttc" id="astruct_vertex_html_a858242dc7b40c034c5e13c589b30cfb4"><div class="ttname"><a href="struct_vertex.html#a858242dc7b40c034c5e13c589b30cfb4">Vertex::pos</a></div><div class="ttdeci">glm::vec3 pos</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:29</div></div>
+<div class="ttc" id="astruct_texture_html_aa8ba4ade408b0df1fc9b6f605a4efd22"><div class="ttname"><a href="struct_texture.html#aa8ba4ade408b0df1fc9b6f605a4efd22">Texture::path</a></div><div class="ttdeci">std::string path</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:53</div></div>
 <div class="ttc" id="astruct_vertex_html"><div class="ttname"><a href="struct_vertex.html">Vertex</a></div><div class="ttdoc">Struct to store vertex infos.</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:28</div></div>
-<div class="ttc" id="aclass_mesh_html_aa7f62a30fdb6aeca5d74fb01ec0a5c91"><div class="ttname"><a href="class_mesh.html#aa7f62a30fdb6aeca5d74fb01ec0a5c91">Mesh::sendMesh</a></div><div class="ttdeci">void sendMesh()</div><div class="ttdoc">send the mesh data to openGL</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:144</div></div>
+<div class="ttc" id="aclass_mesh_html_aa7f62a30fdb6aeca5d74fb01ec0a5c91"><div class="ttname"><a href="class_mesh.html#aa7f62a30fdb6aeca5d74fb01ec0a5c91">Mesh::sendMesh</a></div><div class="ttdeci">void sendMesh()</div><div class="ttdoc">send the mesh data to openGL</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:193</div></div>
 <div class="ttc" id="aclass_shader_html"><div class="ttname"><a href="class_shader.html">Shader</a></div><div class="ttdoc">Shader class used to manage shader compilation.</div><div class="ttdef"><b>Definition:</b> Shader.hpp:16</div></div>
+<div class="ttc" id="aclass_mesh_html_a9b6d06fc58f90869b8bf9a4d40177cc9"><div class="ttname"><a href="class_mesh.html#a9b6d06fc58f90869b8bf9a4d40177cc9">Mesh::addBoneData</a></div><div class="ttdeci">void addBoneData(uint32_t boneID, float weight, uint32_t vertexID)</div><div class="ttdoc">store the bone info to the mesh</div><div class="ttdef"><b>Definition:</b> Mesh.cpp:248</div></div>
+<div class="ttc" id="astruct_texture_html_a789fcb5f3b658f319b53d66da4005b47"><div class="ttname"><a href="struct_texture.html#a789fcb5f3b658f319b53d66da4005b47">Texture::type</a></div><div class="ttdeci">TextureType::Enum type</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:52</div></div>
+<div class="ttc" id="astruct_vertex_html_a6e4be15c8c306b7dcd3e3d7eb1cd6b48"><div class="ttname"><a href="struct_vertex.html#a6e4be15c8c306b7dcd3e3d7eb1cd6b48">Vertex::tangents</a></div><div class="ttdeci">glm::vec3 tangents</div><div class="ttdef"><b>Definition:</b> Mesh.hpp:32</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

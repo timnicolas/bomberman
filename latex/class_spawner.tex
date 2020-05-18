@@ -2,7 +2,17 @@
 \label{class_spawner}\index{Spawner@{Spawner}}
 
 
-Inheritance diagram for Spawner\+:\nopagebreak
+spawner objects  
+
+
+
+
+{\ttfamily \#include $<$Spawner.\+hpp$>$}
+
+
+
+Inheritance diagram for Spawner\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +21,8 @@ Inheritance diagram for Spawner\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Spawner\+:\nopagebreak
+Collaboration diagram for Spawner\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,28 +33,25 @@ Collaboration diagram for Spawner\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_spawner_1_1_spawner_exception}{Spawner\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_spawner}{Spawner}} Exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_spawner_a4272f1d8524f6ea13c576d63b2284069}\label{class_spawner_a4272f1d8524f6ea13c576d63b2284069}} 
-{\bfseries Spawner} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_spawner_a5e8a4444dd7d67a0cbafeb361cae9e77}\label{class_spawner_a5e8a4444dd7d67a0cbafeb361cae9e77}} 
-{\bfseries Spawner} (\mbox{\hyperlink{class_spawner}{Spawner}} const \&src)
-\item 
-\mbox{\Hypertarget{class_spawner_aa0930e4611747bff692f0feb2bf06a01}\label{class_spawner_aa0930e4611747bff692f0feb2bf06a01}} 
-\mbox{\hyperlink{class_spawner}{Spawner}} \& {\bfseries operator=} (\mbox{\hyperlink{class_spawner}{Spawner}} const \&rhs)
-\item 
-\mbox{\Hypertarget{class_spawner_a483e98b9d3c20f59332feb500ceb6199}\label{class_spawner_a483e98b9d3c20f59332feb500ceb6199}} 
-\mbox{\hyperlink{class_spawner}{Spawner}} \& {\bfseries set\+Type\+Enemy} (std\+::vector$<$ std\+::string $>$ type\+Enemy)
-\item 
-\mbox{\Hypertarget{class_spawner_a6ecc83d8c8a0c357772b14a720876689}\label{class_spawner_a6ecc83d8c8a0c357772b14a720876689}} 
-\mbox{\hyperlink{class_spawner}{Spawner}} \& {\bfseries add\+Type\+Enemy} (std\+::string type\+Enemy)
-\item 
-\mbox{\Hypertarget{class_spawner_a42aed9baf9f387c892116b7bcacd820a}\label{class_spawner_a42aed9baf9f387c892116b7bcacd820a}} 
-\mbox{\hyperlink{class_spawner}{Spawner}} \& {\bfseries set\+Frequency} (int64\+\_\+t frequency)
-\item 
+\mbox{\hyperlink{class_spawner_a4272f1d8524f6ea13c576d63b2284069}{Spawner}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_spawner}{Spawner}}\+:\+: \mbox{\hyperlink{class_spawner}{Spawner}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_spawner_a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6}\label{class_spawner_a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6}} 
+\mbox{\hyperlink{class_spawner_a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6}{$\sim$\+Spawner}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_spawner}{Spawner}}\+:\+: \mbox{\hyperlink{class_spawner}{Spawner}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_spawner_a5e8a4444dd7d67a0cbafeb361cae9e77}{Spawner}} (\mbox{\hyperlink{class_spawner}{Spawner}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_spawner}{Spawner}}\+:\+: \mbox{\hyperlink{class_spawner}{Spawner}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_spawner}{Spawner}} \& \mbox{\hyperlink{class_spawner_aa0930e4611747bff692f0feb2bf06a01}{operator=}} (\mbox{\hyperlink{class_spawner}{Spawner}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_spawner}{Spawner}} \& \mbox{\hyperlink{class_spawner_a483e98b9d3c20f59332feb500ceb6199}{set\+Type\+Enemy}} (std\+::vector$<$ std\+::string $>$ type\+Enemy)
+\begin{DoxyCompactList}\small\item\em Set the enemy type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_spawner}{Spawner}} \& \mbox{\hyperlink{class_spawner_a6ecc83d8c8a0c357772b14a720876689}{add\+Type\+Enemy}} (std\+::string type\+Enemy)
+\begin{DoxyCompactList}\small\item\em Add new enemy type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_spawner}{Spawner}} \& \mbox{\hyperlink{class_spawner_a42aed9baf9f387c892116b7bcacd820a}{set\+Frequency}} (int64\+\_\+t frequency)
+\begin{DoxyCompactList}\small\item\em Set the spawning frequency. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_spawner_a9325e76299405d5d74abfb72f4ea2380}{update}} ()
 \begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}{post\+Update}} ()
@@ -53,7 +61,61 @@ bool \mbox{\hyperlink{class_spawner_a1532fd875b6a3aacb617b1111b818f01}{draw}} (\
 \doxysubsection*{Additional Inherited Members}
 
 
+\doxysubsection{Detailed Description}
+spawner objects 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_spawner_a4272f1d8524f6ea13c576d63b2284069}\label{class_spawner_a4272f1d8524f6ea13c576d63b2284069}} 
+\index{Spawner@{Spawner}!Spawner@{Spawner}}
+\index{Spawner@{Spawner}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{Spawner()}{Spawner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Spawner\+::\+Spawner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_spawner}{Spawner}}\+:\+: \mbox{\hyperlink{class_spawner}{Spawner}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_spawner_a5e8a4444dd7d67a0cbafeb361cae9e77}\label{class_spawner_a5e8a4444dd7d67a0cbafeb361cae9e77}} 
+\index{Spawner@{Spawner}!Spawner@{Spawner}}
+\index{Spawner@{Spawner}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{Spawner()}{Spawner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Spawner\+::\+Spawner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_spawner}{Spawner}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_spawner}{Spawner}}\+:\+: \mbox{\hyperlink{class_spawner}{Spawner}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_spawner_a6ecc83d8c8a0c357772b14a720876689}\label{class_spawner_a6ecc83d8c8a0c357772b14a720876689}} 
+\index{Spawner@{Spawner}!addTypeEnemy@{addTypeEnemy}}
+\index{addTypeEnemy@{addTypeEnemy}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{addTypeEnemy()}{addTypeEnemy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_spawner}{Spawner}} \& Spawner\+::add\+Type\+Enemy (\begin{DoxyParamCaption}\item[{std\+::string}]{type\+Enemy }\end{DoxyParamCaption})}
+
+
+
+Add new enemy type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Enemy} & The enemy type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_spawner}{Spawner}}\& A ref to the spawner object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_spawner_a1532fd875b6a3aacb617b1111b818f01}\label{class_spawner_a1532fd875b6a3aacb617b1111b818f01}} 
 \index{Spawner@{Spawner}!draw@{draw}}
 \index{draw@{draw}!Spawner@{Spawner}}
@@ -71,8 +133,26 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{A\+Object}}.
 
+\mbox{\Hypertarget{class_spawner_aa0930e4611747bff692f0feb2bf06a01}\label{class_spawner_aa0930e4611747bff692f0feb2bf06a01}} 
+\index{Spawner@{Spawner}!operator=@{operator=}}
+\index{operator=@{operator=}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_spawner}{Spawner}} \& Spawner\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_spawner}{Spawner}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_spawner}{Spawner}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}\label{class_spawner_ab8a55710ca6e122d975f697a9c7643bc}} 
 \index{Spawner@{Spawner}!postUpdate@{postUpdate}}
 \index{postUpdate@{postUpdate}!Spawner@{Spawner}}
@@ -90,6 +170,42 @@ false If failed
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b9338}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_spawner_a42aed9baf9f387c892116b7bcacd820a}\label{class_spawner_a42aed9baf9f387c892116b7bcacd820a}} 
+\index{Spawner@{Spawner}!setFrequency@{setFrequency}}
+\index{setFrequency@{setFrequency}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{setFrequency()}{setFrequency()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_spawner}{Spawner}} \& Spawner\+::set\+Frequency (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{frequency }\end{DoxyParamCaption})}
+
+
+
+Set the spawning frequency. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & The frequency \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_spawner}{Spawner}}\& A ref to the spawner object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_spawner_a483e98b9d3c20f59332feb500ceb6199}\label{class_spawner_a483e98b9d3c20f59332feb500ceb6199}} 
+\index{Spawner@{Spawner}!setTypeEnemy@{setTypeEnemy}}
+\index{setTypeEnemy@{setTypeEnemy}!Spawner@{Spawner}}
+\doxysubsubsection{\texorpdfstring{setTypeEnemy()}{setTypeEnemy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_spawner}{Spawner}} \& Spawner\+::set\+Type\+Enemy (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{type\+Enemy }\end{DoxyParamCaption})}
+
+
+
+Set the enemy type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Enemy} & The enemy type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_spawner}{Spawner}}\& A ref to the spawner object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_spawner_a9325e76299405d5d74abfb72f4ea2380}\label{class_spawner_a9325e76299405d5d74abfb72f4ea2380}} 
 \index{Spawner@{Spawner}!update@{update}}
 \index{update@{update}!Spawner@{Spawner}}
@@ -107,7 +223,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_object}{A\+Object}}.
+Implements \mbox{\hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{A\+Object}}.
 
 
 

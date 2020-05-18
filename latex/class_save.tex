@@ -22,10 +22,11 @@ Collaboration diagram for Save\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_save_1_1_save_exception}{Save\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_save}{Save}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+\mbox{\Hypertarget{class_save_a41dec94fb3d6fcce23117a20507c5d0d}\label{class_save_a41dec94fb3d6fcce23117a20507c5d0d}} 
 virtual \mbox{\hyperlink{class_save_a41dec94fb3d6fcce23117a20507c5d0d}{$\sim$\+Save}} ()
 \begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_save}{Save}}\+:\+: \mbox{\hyperlink{class_save}{Save}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
@@ -41,12 +42,10 @@ static std\+::string \mbox{\hyperlink{class_save_ac33997c07a1209006b6b7edbcc6673
 \begin{DoxyCompactList}\small\item\em Get filename. \end{DoxyCompactList}\item 
 static std\+::string \mbox{\hyperlink{class_save_a63783fbc06b4c10803b4551aacdde2c8}{get\+File\+Name\+Regex}} (bool temporary)
 \begin{DoxyCompactList}\small\item\em Get Regex to certificate a correct name file. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_save_a3427a3913b8a9e724c0a70de39e3799a}\label{class_save_a3427a3913b8a9e724c0a70de39e3799a}} 
-static bool {\bfseries is\+Instantiate} ()
-\item 
-\mbox{\Hypertarget{class_save_a9efc33ad84705535d96b193d06426922}\label{class_save_a9efc33ad84705535d96b193d06426922}} 
-static bool {\bfseries is\+Saved} ()
-\item 
+static bool \mbox{\hyperlink{class_save_a3427a3913b8a9e724c0a70de39e3799a}{is\+Instantiate}} ()
+\begin{DoxyCompactList}\small\item\em Know if is instantiate. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_save_a9efc33ad84705535d96b193d06426922}{is\+Saved}} ()
+\begin{DoxyCompactList}\small\item\em Know if the game is saved. \end{DoxyCompactList}\item 
 static \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $\ast$ \mbox{\hyperlink{class_save_ab3878ea5a5b26b5d1829a98a38d78ffa}{init\+Json}} (std\+::string filename, bool new\+File=false)
 \begin{DoxyCompactList}\small\item\em Define Json format to saved file. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}{update\+Saved\+File}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&game, bool succeed\+Level)
@@ -54,7 +53,7 @@ static bool \mbox{\hyperlink{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}{updat
 static bool \mbox{\hyperlink{class_save_aa9264e3e576763299af4df148700e266}{load\+States\+Saved}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&game)
 \begin{DoxyCompactList}\small\item\em Load information from saved files. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{class_save_a75601bb68eba4ed487d5176acf6f51e9}{is\+Level\+Done}} (int32\+\_\+t level\+Id)
-\begin{DoxyCompactList}\small\item\em Check if the Level $<$level\+Id$>$ has already been done. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Check if the Level $<$ level\+Id $>$ has already been done. \end{DoxyCompactList}\item 
 static int \mbox{\hyperlink{class_save_a802b6d258310bab2945abd9653360fe5}{get\+Level\+Score}} (int32\+\_\+t level\+Id)
 \begin{DoxyCompactList}\small\item\em Get score for given level\+Id. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{class_save_a6423aab69350aaafaad752830e191840}{set\+Level\+Done}} (int32\+\_\+t level\+Id, int32\+\_\+t score)
@@ -76,26 +75,12 @@ static int \mbox{\hyperlink{class_save_aa772c37949dfc374249fdaf4016be3a6}{get\+L
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_save_a3cd403916354948cd0ec21803ec2f78f}\label{class_save_a3cd403916354948cd0ec21803ec2f78f}} 
-std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_save}{Save}} \&my\+\_\+class)
-\end{DoxyCompactItemize}
+std\+::ostream \& \mbox{\hyperlink{class_save_a3cd403916354948cd0ec21803ec2f78f}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{class_save}{Save}} \&my\+\_\+class)
+\begin{DoxyCompactList}\small\item\em Operator to display object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 class to manage saved games. 
-
-
-
-\doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_save_a41dec94fb3d6fcce23117a20507c5d0d}\label{class_save_a41dec94fb3d6fcce23117a20507c5d0d}} 
-\index{Save@{Save}!````~Save@{$\sim$Save}}
-\index{````~Save@{$\sim$Save}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{$\sim$Save()}{~Save()}}
-{\footnotesize\ttfamily Save\+::$\sim$\+Save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Destroy the \mbox{\hyperlink{class_save}{Save}}\+:\+: \mbox{\hyperlink{class_save}{Save}} object. 
 
 
 
@@ -235,6 +220,8 @@ Define Json format to saved file.
 
 
 \begin{DoxyParams}{Parameters}
+{\em filename} & The json file \\
+\hline
 {\em new\+File} & true if we don\textquotesingle{}t want to check the given file. \\
 \hline
 \end{DoxyParams}
@@ -242,6 +229,19 @@ Define Json format to saved file.
 true 
 
 false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_save_a3427a3913b8a9e724c0a70de39e3799a}\label{class_save_a3427a3913b8a9e724c0a70de39e3799a}} 
+\index{Save@{Save}!isInstantiate@{isInstantiate}}
+\index{isInstantiate@{isInstantiate}!Save@{Save}}
+\doxysubsubsection{\texorpdfstring{isInstantiate()}{isInstantiate()}}
+{\footnotesize\ttfamily bool Save\+::is\+Instantiate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Know if is instantiate. 
+
+\begin{DoxyReturn}{Returns}
+true If instantiate 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a75601bb68eba4ed487d5176acf6f51e9}\label{class_save_a75601bb68eba4ed487d5176acf6f51e9}} 
 \index{Save@{Save}!isLevelDone@{isLevelDone}}
@@ -251,17 +251,28 @@ false
 
 
 
-Check if the Level $<$level\+Id$>$ has already been done. 
+Check if the Level $<$ level\+Id $>$ has already been done. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em game} & \\
+{\em level\+Id} & The level ID \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true 
+true If the level is done 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_save_a9efc33ad84705535d96b193d06426922}\label{class_save_a9efc33ad84705535d96b193d06426922}} 
+\index{Save@{Save}!isSaved@{isSaved}}
+\index{isSaved@{isSaved}!Save@{Save}}
+\doxysubsubsection{\texorpdfstring{isSaved()}{isSaved()}}
+{\footnotesize\ttfamily bool Save\+::is\+Saved (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-false 
+
+
+Know if the game is saved. 
+
+\begin{DoxyReturn}{Returns}
+true If saved 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_af278065bd4e223f0681f1e496dc61da6}\label{class_save_af278065bd4e223f0681f1e496dc61da6}} 
 \index{Save@{Save}!loadGame@{loadGame}}
@@ -401,11 +412,36 @@ Update Saved File Informations.
 \begin{DoxyParams}{Parameters}
 {\em game} & \\
 \hline
+{\em succeed\+Level} & \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true 
 
 false 
+\end{DoxyReturn}
+
+
+\doxysubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{class_save_a3cd403916354948cd0ec21803ec2f78f}\label{class_save_a3cd403916354948cd0ec21803ec2f78f}} 
+\index{Save@{Save}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Save@{Save}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{class_save}{Save}} \&}]{my\+\_\+class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Operator to display object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The ostream object \\
+\hline
+{\em my\+\_\+class} & Reference to \textquotesingle{}this\textquotesingle{} object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::ostream\& A reference to the ostream object 
 \end{DoxyReturn}
 
 

@@ -1,6 +1,6 @@
 <map id="Shader::ShaderError" name="Shader::ShaderError">
-<area shape="rect" id="node1" title=" " alt="" coords="163,131,303,208"/>
-<area shape="rect" id="node3" href="$class_shader_1_1_shader_compile_exception.html" title=" " alt="" coords="5,256,224,333"/>
-<area shape="rect" id="node4" href="$class_shader_1_1_shader_linking_exception.html" title=" " alt="" coords="248,256,459,333"/>
+<area shape="rect" id="node1" title="Shader exception." alt="" coords="163,131,303,208"/>
+<area shape="rect" id="node3" href="$class_shader_1_1_shader_compile_exception.html" title="Shader compilation exception." alt="" coords="5,256,224,333"/>
+<area shape="rect" id="node4" href="$class_shader_1_1_shader_linking_exception.html" title="Shader linking exception." alt="" coords="248,256,459,333"/>
 <area shape="rect" id="node2" title=" " alt="" coords="194,5,273,83"/>
 </map>

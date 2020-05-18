@@ -11,43 +11,45 @@ class to easy manage \mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}},
 
 
 
-Collaboration diagram for Model\+:\nopagebreak
+Collaboration diagram for Model\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=550pt]{class_model__coll__graph}
+\includegraphics[width=202pt]{class_model__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_model_a10bbf272d503c30923993e5a5ac45bed}\label{class_model_a10bbf272d503c30923993e5a5ac45bed}} 
-typedef void(A\+Entity\+::$\ast$ {\bfseries Anim\+End\+Cb}) (std\+::string anim\+Name)
+typedef void(A\+Entity\+::$\ast$ \mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}}) (std\+::string anim\+Name)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_model_abd566d0030ea6d854f110498b0c774a2}\label{class_model_abd566d0030ea6d854f110498b0c774a2}} 
-{\bfseries Model} (\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&open\+G\+L\+Model, float const \&dt\+Time, \mbox{\hyperlink{class_e_transform}{E\+Transform}} transform=\mbox{\hyperlink{class_e_transform}{E\+Transform}}())
-\item 
-\mbox{\Hypertarget{class_model_a242adc0075374718143a988c215f5bac}\label{class_model_a242adc0075374718143a988c215f5bac}} 
-{\bfseries Model} (\mbox{\hyperlink{class_model}{Model}} const \&src)
-\item 
-\mbox{\Hypertarget{class_model_a002b25b1a4724e1d67c7f93d2db721e4}\label{class_model_a002b25b1a4724e1d67c7f93d2db721e4}} 
-\mbox{\hyperlink{class_model}{Model}} \& {\bfseries operator=} (\mbox{\hyperlink{class_model}{Model}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_model_abd566d0030ea6d854f110498b0c774a2}{Model}} (\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&open\+G\+L\+Model, float const \&dt\+Time, \mbox{\hyperlink{class_e_transform}{E\+Transform}} \mbox{\hyperlink{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}{transform}}=\mbox{\hyperlink{class_e_transform}{E\+Transform}}())
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_model}{Model}}\+:\+: \mbox{\hyperlink{class_model}{Model}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_model_ad6ebd2062a0b823db841a0b88baac4c0}\label{class_model_ad6ebd2062a0b823db841a0b88baac4c0}} 
+virtual \mbox{\hyperlink{class_model_ad6ebd2062a0b823db841a0b88baac4c0}{$\sim$\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_model}{Model}}\+:\+: \mbox{\hyperlink{class_model}{Model}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_model_a242adc0075374718143a988c215f5bac}{Model}} (\mbox{\hyperlink{class_model}{Model}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_model}{Model}}\+:\+: \mbox{\hyperlink{class_model}{Model}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_model}{Model}} \& \mbox{\hyperlink{class_model_a002b25b1a4724e1d67c7f93d2db721e4}{operator=}} (\mbox{\hyperlink{class_model}{Model}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_model_ac7b168fc3a84f9ac2b558d1019869ca7}{draw}} ()
 \begin{DoxyCompactList}\small\item\em draw a 3d model animated or not \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_model_a7a9a9f18809ed6fb7796a16169eb4ef5}{set\+Animation}} (uint32\+\_\+t id, Anim\+End\+Cb anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
+void \mbox{\hyperlink{class_model_a7a9a9f18809ed6fb7796a16169eb4ef5}{set\+Animation}} (uint32\+\_\+t id, \mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}} anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
 \begin{DoxyCompactList}\small\item\em change the animation by id \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_model_ab87d20db0409bd958fc5bc9d7d2998bd}{set\+Animation}} (std\+::string name, Anim\+End\+Cb anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
+void \mbox{\hyperlink{class_model_ab87d20db0409bd958fc5bc9d7d2998bd}{set\+Animation}} (std\+::string name, \mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}} anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
 \begin{DoxyCompactList}\small\item\em change the animation by name \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_model_a018455b77033e1ff6c4d9a9a9126df1f}{set\+Next\+Animation}} (Anim\+End\+Cb anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
+void \mbox{\hyperlink{class_model_a018455b77033e1ff6c4d9a9a9126df1f}{set\+Next\+Animation}} (\mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}} anim\+End\+Cb\+Func=nullptr, \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$anim\+End\+Cb\+Class=nullptr)
 \begin{DoxyCompactList}\small\item\em change the animation to the next one \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_model_ad31f04ef7a7f4e8ee91bbfb6def4f579}{set\+Anim\+Progress}} (float progress)
 \begin{DoxyCompactList}\small\item\em set the animation current time by percent \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_model_ae088c69e8bd04e5898b4f0261e555fbc}{set\+Anim\+Current\+Time}} (float anim\+Time)
 \begin{DoxyCompactList}\small\item\em set the animation current time by ms \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_model_a5480a7b5f1dc9381eaee747bca2272a9}{set\+Mesh\+Texture}} (Texture\+Type\+::\+Enum type, std\+::string const mesh\+Name, std\+::string const path, bool in\+Space\+S\+R\+GB=true)
+\begin{DoxyCompactList}\small\item\em manually set the texture of a specified mesh Warning\+: others \mbox{\hyperlink{class_model}{Model}} that use the same Opengl\+Model will also have their mesh texture modified if they not replace it \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{class_model_ae580b0f51abec662e2617d25760e7d75}{get\+Anim\+Current\+Time}} () const
 \begin{DoxyCompactList}\small\item\em get the curent animation time in ms \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{class_model_a3bebb9e7811f62ab1b85a5bf02a8a102}{get\+Anim\+Progress}} () const
@@ -55,31 +57,72 @@ float \mbox{\hyperlink{class_model_a3bebb9e7811f62ab1b85a5bf02a8a102}{get\+Anim\
 float \mbox{\hyperlink{class_model_abcb280fcf613565f8381688b73c7645c}{get\+Anim\+Duration}} () const
 \begin{DoxyCompactList}\small\item\em get the animation duration in ms \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_model_a5f53c0235f2c92b75e317db3d878e222}\label{class_model_a5f53c0235f2c92b75e317db3d878e222}} 
-void {\bfseries print\+Anims\+Names} () const
-\item 
-\mbox{\Hypertarget{class_model_aefd911e07fa22f4b397057185b5aba1b}\label{class_model_aefd911e07fa22f4b397057185b5aba1b}} 
-std\+::string {\bfseries get\+Current\+Animation\+Name} () const
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_model_a5f53c0235f2c92b75e317db3d878e222}{print\+Anims\+Names}} () const
+\begin{DoxyCompactList}\small\item\em Print all animations names. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_model_aefd911e07fa22f4b397057185b5aba1b}{get\+Current\+Animation\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get the current animation name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}\label{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}} 
-\mbox{\hyperlink{class_e_transform}{E\+Transform}} {\bfseries transform}
+\mbox{\hyperlink{class_e_transform}{E\+Transform}} \mbox{\hyperlink{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}{transform}}
 \item 
-\mbox{\Hypertarget{class_model_aab41c5353b398ca56cc3e42724b02272}\label{class_model_aab41c5353b398ca56cc3e42724b02272}} 
-bool {\bfseries play}
+bool \mbox{\hyperlink{class_model_aab41c5353b398ca56cc3e42724b02272}{play}}
 \item 
-\mbox{\Hypertarget{class_model_a1c1708f7513a39355120dc7428309e9e}\label{class_model_a1c1708f7513a39355120dc7428309e9e}} 
-bool {\bfseries loop\+Animation}
+bool \mbox{\hyperlink{class_model_a1c1708f7513a39355120dc7428309e9e}{loop\+Animation}}
 \item 
-\mbox{\Hypertarget{class_model_a042a27427c802b5a7a6cee4a6ec07897}\label{class_model_a042a27427c802b5a7a6cee4a6ec07897}} 
-float {\bfseries animation\+Speed}
+float \mbox{\hyperlink{class_model_a042a27427c802b5a7a6cee4a6ec07897}{animation\+Speed}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 class to easy manage \mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}}, pos/rot/scale transformations and animations settings 
 
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_model_a10bbf272d503c30923993e5a5ac45bed}\label{class_model_a10bbf272d503c30923993e5a5ac45bed}} 
+\index{Model@{Model}!AnimEndCb@{AnimEndCb}}
+\index{AnimEndCb@{AnimEndCb}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{AnimEndCb}{AnimEndCb}}
+{\footnotesize\ttfamily typedef void(A\+Entity\+::$\ast$ Model\+::\+Anim\+End\+Cb) (std\+::string anim\+Name)}
+
+animation name 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_model_abd566d0030ea6d854f110498b0c774a2}\label{class_model_abd566d0030ea6d854f110498b0c774a2}} 
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Model\+::\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&}]{open\+G\+L\+Model,  }\item[{float const \&}]{dt\+Time,  }\item[{\mbox{\hyperlink{class_e_transform}{E\+Transform}}}]{transform = {\ttfamily \mbox{\hyperlink{class_e_transform}{E\+Transform}}()} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_model}{Model}}\+:\+: \mbox{\hyperlink{class_model}{Model}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em open\+G\+L\+Model} & \mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} master object \\
+\hline
+{\em dt\+Time} & Reference to delta time \\
+\hline
+{\em transform} & Transform \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_model_a242adc0075374718143a988c215f5bac}\label{class_model_a242adc0075374718143a988c215f5bac}} 
+\index{Model@{Model}!Model@{Model}}
+\index{Model@{Model}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{Model()}{Model()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Model\+::\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model}{Model}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_model}{Model}}\+:\+: \mbox{\hyperlink{class_model}{Model}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -132,11 +175,42 @@ get the curent animation progress in percentage
 \begin{DoxyReturn}{Returns}
 float, a value between 0 and 1 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_model_aefd911e07fa22f4b397057185b5aba1b}\label{class_model_aefd911e07fa22f4b397057185b5aba1b}} 
+\index{Model@{Model}!getCurrentAnimationName@{getCurrentAnimationName}}
+\index{getCurrentAnimationName@{getCurrentAnimationName}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{getCurrentAnimationName()}{getCurrentAnimationName()}}
+{\footnotesize\ttfamily std\+::string Model\+::get\+Current\+Animation\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current animation name. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string The animation name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_model_a002b25b1a4724e1d67c7f93d2db721e4}\label{class_model_a002b25b1a4724e1d67c7f93d2db721e4}} 
+\index{Model@{Model}!operator=@{operator=}}
+\index{operator=@{operator=}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_model}{Model}} \& Model\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model}{Model}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_model}{Model}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_model_ab87d20db0409bd958fc5bc9d7d2998bd}\label{class_model_ab87d20db0409bd958fc5bc9d7d2998bd}} 
 \index{Model@{Model}!setAnimation@{setAnimation}}
 \index{setAnimation@{setAnimation}!Model@{Model}}
 \doxysubsubsection{\texorpdfstring{setAnimation()}{setAnimation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Model\+::set\+Animation (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{Anim\+End\+Cb}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Model\+::set\+Animation (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{\mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}}}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 
 
@@ -146,7 +220,7 @@ change the animation by name
 \begin{DoxyParams}{Parameters}
 {\em name} & the animation name \\
 \hline
-{\em anim\+End\+Cb} & member func called on animation end \\
+{\em anim\+End\+Cb\+Func} & member func called on animation end \\
 \hline
 {\em anim\+End\+Cb\+Class} & member func of anim\+End\+Cb \\
 \hline
@@ -155,7 +229,7 @@ change the animation by name
 \index{Model@{Model}!setAnimation@{setAnimation}}
 \index{setAnimation@{setAnimation}!Model@{Model}}
 \doxysubsubsection{\texorpdfstring{setAnimation()}{setAnimation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Model\+::set\+Animation (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id,  }\item[{Anim\+End\+Cb}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Model\+::set\+Animation (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id,  }\item[{\mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}}}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 
 
@@ -165,7 +239,7 @@ change the animation by id
 \begin{DoxyParams}{Parameters}
 {\em id} & the animation id \\
 \hline
-{\em anim\+End\+Cb} & called on animation end \\
+{\em anim\+End\+Cb\+Func} & called on animation end \\
 \hline
 {\em anim\+End\+Cb\+Class} & member func of anim\+End\+Cb \\
 \hline
@@ -200,17 +274,72 @@ set the animation current time by percent
 {\em progress} & animation progress percent, between 0 and 1 \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_model_a5480a7b5f1dc9381eaee747bca2272a9}\label{class_model_a5480a7b5f1dc9381eaee747bca2272a9}} 
+\index{Model@{Model}!setMeshTexture@{setMeshTexture}}
+\index{setMeshTexture@{setMeshTexture}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{setMeshTexture()}{setMeshTexture()}}
+{\footnotesize\ttfamily void Model\+::set\+Mesh\+Texture (\begin{DoxyParamCaption}\item[{Texture\+Type\+::\+Enum}]{type,  }\item[{std\+::string const}]{mesh\+Name,  }\item[{std\+::string const}]{path,  }\item[{bool}]{in\+Space\+S\+R\+GB = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+manually set the texture of a specified mesh Warning\+: others \mbox{\hyperlink{class_model}{Model}} that use the same Opengl\+Model will also have their mesh texture modified if they not replace it 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the texture type D\+I\+F\+F\+U\+S\+E/\+S\+P\+E\+C\+U\+L\+A\+R/\+N\+O\+R\+M\+A\+L/... \\
+\hline
+{\em mesh\+Name} & the name of the desired mesh, find it with print\+Meshes\+Names \\
+\hline
+{\em path} & the texture path \\
+\hline
+{\em in\+Space\+S\+R\+GB} & is the texture in srgb space ? \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_model_a018455b77033e1ff6c4d9a9a9126df1f}\label{class_model_a018455b77033e1ff6c4d9a9a9126df1f}} 
 \index{Model@{Model}!setNextAnimation@{setNextAnimation}}
 \index{setNextAnimation@{setNextAnimation}!Model@{Model}}
 \doxysubsubsection{\texorpdfstring{setNextAnimation()}{setNextAnimation()}}
-{\footnotesize\ttfamily void Model\+::set\+Next\+Animation (\begin{DoxyParamCaption}\item[{Anim\+End\+Cb}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Model\+::set\+Next\+Animation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_model_a10bbf272d503c30923993e5a5ac45bed}{Anim\+End\+Cb}}}]{anim\+End\+Cb\+Func = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$}]{anim\+End\+Cb\+Class = {\ttfamily nullptr} }\end{DoxyParamCaption})}
 
 
 
 change the animation to the next one 
 
 
+\begin{DoxyParams}{Parameters}
+{\em anim\+End\+Cb\+Func} & member func called on animation end \\
+\hline
+{\em anim\+End\+Cb\+Class} & member func of anim\+End\+Cb \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_model_a042a27427c802b5a7a6cee4a6ec07897}\label{class_model_a042a27427c802b5a7a6cee4a6ec07897}} 
+\index{Model@{Model}!animationSpeed@{animationSpeed}}
+\index{animationSpeed@{animationSpeed}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{animationSpeed}{animationSpeed}}
+{\footnotesize\ttfamily float Model\+::animation\+Speed}
+
+Animation speed \mbox{\Hypertarget{class_model_a1c1708f7513a39355120dc7428309e9e}\label{class_model_a1c1708f7513a39355120dc7428309e9e}} 
+\index{Model@{Model}!loopAnimation@{loopAnimation}}
+\index{loopAnimation@{loopAnimation}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{loopAnimation}{loopAnimation}}
+{\footnotesize\ttfamily bool Model\+::loop\+Animation}
+
+If animation repeat \mbox{\Hypertarget{class_model_aab41c5353b398ca56cc3e42724b02272}\label{class_model_aab41c5353b398ca56cc3e42724b02272}} 
+\index{Model@{Model}!play@{play}}
+\index{play@{play}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{play}{play}}
+{\footnotesize\ttfamily bool Model\+::play}
+
+Play animation \mbox{\Hypertarget{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}\label{class_model_a7b63d1be0afb6c145d1b97ac58a23a3a}} 
+\index{Model@{Model}!transform@{transform}}
+\index{transform@{transform}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{transform}{transform}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_e_transform}{E\+Transform}} Model\+::transform}
+
+To move/scale/rotate the model 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

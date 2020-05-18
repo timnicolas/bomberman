@@ -22,13 +22,15 @@ Collaboration diagram for Sound\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_sound}{Sound}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_sound_a33747a0bca54f777d0da6f300b8f23f0}\label{class_sound_a33747a0bca54f777d0da6f300b8f23f0}} 
-{\bfseries Sound} (std\+::string filename)
-\item 
+\mbox{\hyperlink{class_sound_a33747a0bca54f777d0da6f300b8f23f0}{Sound}} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sound_a0907389078bf740be2a5763366ad3376}\label{class_sound_a0907389078bf740be2a5763366ad3376}} 
+\mbox{\hyperlink{class_sound_a0907389078bf740be2a5763366ad3376}{$\sim$\+Sound}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}{play}} (float volume, float env\+\_\+volume, bool loop=false, int fade\+In=0)
 \begin{DoxyCompactList}\small\item\em Play the sound at the specified volume. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_sound_a65b0f66e9123caed2809da366ac4d377}\label{class_sound_a65b0f66e9123caed2809da366ac4d377}} 
@@ -48,6 +50,24 @@ bool \mbox{\hyperlink{class_sound_a30c16881e13d91d31553af3b17886a5c}{channel\+Fi
 
 \doxysubsection{Detailed Description}
 \mbox{\hyperlink{class_sound}{Sound}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sound_a33747a0bca54f777d0da6f300b8f23f0}\label{class_sound_a33747a0bca54f777d0da6f300b8f23f0}} 
+\index{Sound@{Sound}!Sound@{Sound}}
+\index{Sound@{Sound}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}}
+{\footnotesize\ttfamily Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & \mbox{\hyperlink{class_sound}{Sound}} filename \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_sound_a30c16881e13d91d31553af3b17886a5c}\label{class_sound_a30c16881e13d91d31553af3b17886a5c}} 
@@ -87,6 +107,8 @@ Play the sound at the specified volume.
 {\em env\+\_\+volume} & The volume settings. \\
 \hline
 {\em loop} & If the sound is on loop. \\
+\hline
+{\em fade\+In} & Fade\+In \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

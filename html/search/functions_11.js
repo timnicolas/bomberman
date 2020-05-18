@@ -1,16 +1,18 @@
 var searchData=
 [
-  ['udpatedimension_803',['udpateDimension',['../class_gui.html#a4066b5f349a7f94203bd0ac506a47571',1,'Gui']]],
-  ['unload_804',['unload',['../class_a_scene_menu.html#ad493937ca0d8ec4d710307593c0e77c1',1,'ASceneMenu::unload()'],['../class_scene_cheat_code.html#acb2e2c27b2cfb999815caebb65ab3231',1,'SceneCheatCode::unload()'],['../class_scene_exit.html#a89d28a5876087e291453421545a3c5dc',1,'SceneExit::unload()'],['../class_scene_game.html#abca28f01a7f00a09da5e6f9ede80e3f0',1,'SceneGame::unload()']]],
-  ['unloadmusic_805',['unloadMusic',['../class_audio_manager.html#a6abc50fbd069dae8b38bb8d8aa9476cd',1,'AudioManager']]],
-  ['unloadsound_806',['unloadSound',['../class_audio_manager.html#af492087dd75a160562ef06c6600f54b5',1,'AudioManager']]],
-  ['unlocklevel_807',['unlockLevel',['../class_scene_cheat_code.html#a98b29422b8c75d86ff960737ae05285b',1,'SceneCheatCode']]],
-  ['unuse_808',['unuse',['../class_shader.html#a8eb0c22bd8a71aaf85f4ce7a4102fa34',1,'Shader']]],
-  ['update_809',['update',['../class_a_enemy.html#a01e3b0313d6f29bf2cafe20f711c0550',1,'AEnemy::update()'],['../class_bomb.html#a9808d8efcc57b9ce7b0bd48d95875aad',1,'Bomb::update()'],['../class_bonus.html#a0dd8aa4474c3d1ef494ed8a916cc16cd',1,'Bonus::update()'],['../class_crispy.html#ab33c8c68fa636df5721581e8f68ceae3',1,'Crispy::update()'],['../class_end.html#a7154532cce1c86f4f5bfa98eb0c25574',1,'End::update()'],['../class_fire.html#a86114cf78108a4b202b75e1f383b3e00',1,'Fire::update()'],['../class_flag.html#adeaab6cd88bbc3284f8b4f1b2f78242b',1,'Flag::update()'],['../class_player.html#a1614c89caa50fa1527417ba6a2bbe6ee',1,'Player::update()'],['../class_spawner.html#a9325e76299405d5d74abfb72f4ea2380',1,'Spawner::update()'],['../class_wall.html#a29d3c4daa11dbb20d758b1fc285ed7a4',1,'Wall::update()'],['../class_a_scene_menu.html#a1deeb5fd9be97376998cd2af36f29744',1,'ASceneMenu::update()'],['../class_scene_cheat_code.html#ab6ae0c8b3adbce736429e61a27966e31',1,'SceneCheatCode::update()'],['../class_scene_debug.html#a97234cec6e43aa3d891e3f6d2ff51528',1,'SceneDebug::update()'],['../class_scene_difficulty.html#a2a3d3328b04df7047cc03725a9c5eb3c',1,'SceneDifficulty::update()'],['../class_scene_end_game.html#a36b55558e75b9cad9d17a28d8a1ce8d2',1,'SceneEndGame::update()'],['../class_scene_exit.html#a60fd49ea48551bd3035efa7cabe4d08d',1,'SceneExit::update()'],['../class_scene_game.html#a5e23048e3ad8c6fde2d753ed7449e2d5',1,'SceneGame::update()'],['../class_scene_game_over.html#ac4547b0ed87f3c324e75dafb8f96b5af',1,'SceneGameOver::update()'],['../class_scene_level_selection.html#a9784885da4583eaba695812bedf8847c',1,'SceneLevelSelection::update()'],['../class_scene_load_game.html#ad33de3b5d98596754f058a4e096ba1b3',1,'SceneLoadGame::update()'],['../class_scene_loading.html#a5b4f2b636e55908bb2f29180aa875201',1,'SceneLoading::update()'],['../class_scene_main_menu.html#a5d095883d0b1fceb3125ef2689a7a09c',1,'SceneMainMenu::update()'],['../class_scene_pause.html#a376de6952be83718fb19d268d9327ef6',1,'ScenePause::update()'],['../class_scene_settings.html#ac32c443d620d0417b301193e87885a91',1,'SceneSettings::update()'],['../class_scene_victory.html#aea51a7b48a3243175e1759b20f853c16',1,'SceneVictory::update()'],['../class_camera.html#ad1272976ffb7a0d535c8977ec063201d',1,'Camera::update()'],['../class_inputs.html#a7765edb8008e1c3f7ea67e2aa77eb885',1,'Inputs::update()'],['../class_a_base_u_i.html#aa191d2729152b1b381cb4eba7d2b178e',1,'ABaseUI::update()']]],
-  ['updateaudiosliders_810',['updateAudioSliders',['../class_scene_settings.html#a7f7903e9d7b6c33c9e4472c583d97710',1,'SceneSettings']]],
-  ['updatefullscreen_811',['updateFullscreen',['../class_gui.html#a42148f338094a05cfbe4ac4424ebc127',1,'Gui']]],
-  ['updatesavedfile_812',['updateSavedFile',['../class_save.html#a858a98bf0dd78395f5f7bee7bbdc7f57',1,'Save']]],
-  ['updatesettings_813',['updateSettings',['../class_audio_manager.html#ad690966e6184debfb05c160d2bbda6a8',1,'AudioManager']]],
-  ['updatevolume_814',['updateVolume',['../class_sound.html#ab992f2602675183484ba78932c1fca3c',1,'Sound']]],
-  ['use_815',['use',['../class_shader.html#a870fa9f13d69e558815d6fd351a469dc',1,'Shader']]]
+  ['rectui_1380',['RectUI',['../class_rect_u_i.html#af6d1044dfd341d4f662527c56556a2b2',1,'RectUI::RectUI(glm::vec2 pos, glm::vec2 size)'],['../class_rect_u_i.html#af554331fbba88f4f533c50e91ec2a6f6',1,'RectUI::RectUI(RectUI const &amp;src)']]],
+  ['removechild_1381',['removeChild',['../class_a_base_master_u_i.html#a0965153a5bf1d5a7de71f65c2f8fcc0a',1,'ABaseMasterUI']]],
+  ['reset_1382',['reset',['../class_score.html#a8ee59cdc6c44f0ad80feb01219d3357d',1,'Score::reset()'],['../class_json_obj.html#a39c1a9d98910496e1b4071e1f1f83096',1,'JsonObj::reset()']]],
+  ['resetcrossable_1383',['resetCrossable',['../class_a_character.html#a8c942af7e72f1f0ac5e990e88da3ed4b',1,'ACharacter::resetCrossable()'],['../class_enemy_frog.html#a868a3f7f061ecefecc366af0f882b4d2',1,'EnemyFrog::resetCrossable()'],['../class_player.html#afc1d1e3a654e241e3ed948aed72ef8a7',1,'Player::resetCrossable()']]],
+  ['resetfollowpath_1384',['resetFollowPath',['../class_camera.html#a510c9f3ecf465578002fdd03dadb3f6d',1,'Camera']]],
+  ['resetkeys_1385',['resetKeys',['../class_inputs.html#aedb25df0e00a0b99b691a57746868393',1,'Inputs']]],
+  ['resetlist_1386',['resetList',['../class_settings_list.html#a2ec72ed5472832caff3e1f974cc94f8f',1,'SettingsList']]],
+  ['resetparams_1387',['resetParams',['../class_player.html#afdc99f7dc10aa6c2a7c8bb86c7b8beb5',1,'Player']]],
+  ['resetposition_1388',['resetPosition',['../class_camera.html#ac59fb0da1e1cb188063ce8cf227d3a2f',1,'Camera']]],
+  ['resume_1389',['resume',['../class_sound.html#a6139aff26f5bd3fea27fbef013124afc',1,'Sound']]],
+  ['resumeallsounds_1390',['resumeAllSounds',['../class_audio_manager.html#af7d83968ccbfb2eac4def898630e2624',1,'AudioManager']]],
+  ['resumemusic_1391',['resumeMusic',['../class_audio_manager.html#a213a73d801ac409765010ba6d7a8f4f3',1,'AudioManager']]],
+  ['resumesound_1392',['resumeSound',['../class_audio_manager.html#acb3fab4f831354f04948f835b8a6c51a',1,'AudioManager']]],
+  ['rmbonus_1393',['rmBonus',['../class_player.html#abf6efda3ab13411d806493e043c895bf',1,'Player']]],
+  ['run_1394',['run',['../class_scene_manager.html#a7d88d1c5611d84ca9a08bda535ff46f1',1,'SceneManager']]]
 ];

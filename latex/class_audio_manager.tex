@@ -18,6 +18,12 @@ Collaboration diagram for Audio\+Manager\+:\nopagebreak
 \includegraphics[width=192pt]{class_audio_manager__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_audio_manager_ad94dc46723c6d7cf8c81fc3772a842aa}\label{class_audio_manager_ad94dc46723c6d7cf8c81fc3772a842aa}} 
+\mbox{\hyperlink{class_audio_manager_ad94dc46723c6d7cf8c81fc3772a842aa}{$\sim$\+Audio\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Audio Manager\+:\+: Audio Manager object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -67,10 +73,9 @@ static void \mbox{\hyperlink{class_audio_manager_ac880de40f09c0065c10948ca138cc7
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_audio_manager_abd1cfb41f75592fc90007aad609a11ee}\label{class_audio_manager_abd1cfb41f75592fc90007aad609a11ee}} 
-static const int {\bfseries nb\+\_\+sound\+\_\+channels} = 42
+static const int \mbox{\hyperlink{class_audio_manager_abd1cfb41f75592fc90007aad609a11ee}{nb\+\_\+sound\+\_\+channels}} = 42
 \item 
-static std\+::vector$<$ std\+::string $>$ {\bfseries musics}
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_audio_manager_ab4f16f2b8df28e812c60769c534644b0}{musics}}
 \end{DoxyCompactItemize}
 
 
@@ -118,7 +123,9 @@ Load a new music from its file name.
 
 
 \begin{DoxyParams}{Parameters}
-{\em file\+\_\+name} & The path to the music file, starting from the asset directory.\\
+{\em file\+\_\+name} & The path to the music file, starting from the asset directory. \\
+\hline
+{\em silent} & Don\textquotesingle{}t show warning if enabled\\
 \hline
 \end{DoxyParams}
 
@@ -138,7 +145,9 @@ Load a new sound from its file name.
 
 
 \begin{DoxyParams}{Parameters}
-{\em file\+\_\+name} & The path to the sound file, starting from the asset directory.\\
+{\em file\+\_\+name} & The path to the sound file, starting from the asset directory. \\
+\hline
+{\em silent} & Don\textquotesingle{}t show warning if enabled\\
 \hline
 \end{DoxyParams}
 
@@ -203,7 +212,9 @@ Play a sound identified by file name with a volume modifier.
 \hline
 {\em loop} & If the sound is played on loop. \\
 \hline
-{\em mute\+Music} & If we need to mute the music during the sound.\\
+{\em mute\+Music} & If we need to mute the music during the sound. \\
+\hline
+{\em fade\+In} & Fade\+In\\
 \hline
 \end{DoxyParams}
 
@@ -291,7 +302,13 @@ Unload the sound identified by file name.
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+Al musics \mbox{\Hypertarget{class_audio_manager_abd1cfb41f75592fc90007aad609a11ee}\label{class_audio_manager_abd1cfb41f75592fc90007aad609a11ee}} 
+\index{AudioManager@{AudioManager}!nb\_sound\_channels@{nb\_sound\_channels}}
+\index{nb\_sound\_channels@{nb\_sound\_channels}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{nb\_sound\_channels}{nb\_sound\_channels}}
+{\footnotesize\ttfamily const int Audio\+Manager\+::nb\+\_\+sound\+\_\+channels = 42\hspace{0.3cm}{\ttfamily [static]}}
 
+Number of sounds channel 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

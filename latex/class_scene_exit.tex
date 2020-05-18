@@ -20,7 +20,8 @@ Inheritance diagram for Scene\+Exit\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Exit\+:\nopagebreak
+Collaboration diagram for Scene\+Exit\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,21 +32,21 @@ Collaboration diagram for Scene\+Exit\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}}
-\item 
+\begin{DoxyCompactList}\small\item\em All UI elements. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em All buttons states. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}\label{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}} 
-{\bfseries Scene\+Exit} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}\label{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}} 
-{\bfseries Scene\+Exit} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&src)
-\item 
-\mbox{\Hypertarget{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}\label{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}} 
-\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}{Scene\+Exit}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Exit\+:\+: Scene Exit object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_exit_aa27eccb4dabd1b578c260dd92873e437}\label{class_scene_exit_aa27eccb4dabd1b578c260dd92873e437}} 
+virtual \mbox{\hyperlink{class_scene_exit_aa27eccb4dabd1b578c260dd92873e437}{$\sim$\+Scene\+Exit}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Exit\+:\+: Scene Exit object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}{Scene\+Exit}} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Exit\+:\+: Scene Exit object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \& \mbox{\hyperlink{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}{operator=}} (\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_exit_ad9168291bb031fee797a7964590e1b73}{init}} ()
 \begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}{update}} ()
@@ -61,26 +62,52 @@ virtual bool \mbox{\hyperlink{class_scene_exit_a3b7110e736f86836568fdb2f8a997877
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}\label{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}} 
-\mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}} \mbox{\hyperlink{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}{\+\_\+states}}
 \item 
-\mbox{\Hypertarget{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}\label{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}} 
-\mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}} {\bfseries all\+UI}
+\mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}} \mbox{\hyperlink{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}{all\+UI}}
 \item 
-\mbox{\Hypertarget{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}\label{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}} 
-std\+::string {\bfseries \+\_\+last\+Scene\+Name}
-\end{DoxyCompactItemize}
-\doxysubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_scene_exit_a60b6f29cad934e85e526ddd6fb997bd8}\label{class_scene_exit_a60b6f29cad934e85e526ddd6fb997bd8}} 
-std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \&my\+Class)
+std\+::string \mbox{\hyperlink{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}{\+\_\+last\+Scene\+Name}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 menu for exit 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}\label{class_scene_exit_ac7fd49d030cc70f80bcedd66017f461f}} 
+\index{SceneExit@{SceneExit}!SceneExit@{SceneExit}}
+\index{SceneExit@{SceneExit}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{SceneExit()}{SceneExit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Exit\+::\+Scene\+Exit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Exit\+:\+: Scene Exit object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}\label{class_scene_exit_a12008540e3edf0c1cd49140d5189f918}} 
+\index{SceneExit@{SceneExit}!SceneExit@{SceneExit}}
+\index{SceneExit@{SceneExit}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{SceneExit()}{SceneExit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Exit\+::\+Scene\+Exit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Exit\+:\+: Scene Exit object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}\label{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}} 
@@ -119,8 +146,26 @@ false if the init failed
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+Implements \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}.
 
+\mbox{\Hypertarget{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}\label{class_scene_exit_a5675f92fcd0cd2ca21a310e2a55a8309}} 
+\index{SceneExit@{SceneExit}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} \& Scene\+Exit\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_exit}{Scene\+Exit}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}\label{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}} 
 \index{SceneExit@{SceneExit}!update@{update}}
 \index{update@{update}!SceneExit@{SceneExit}}
@@ -141,6 +186,27 @@ false if there are an error in update
 Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}\label{class_scene_exit_ab79e5e47529f081f0ebe4298b5be4c97}} 
+\index{SceneExit@{SceneExit}!\_lastSceneName@{\_lastSceneName}}
+\index{\_lastSceneName@{\_lastSceneName}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{\_lastSceneName}{\_lastSceneName}}
+{\footnotesize\ttfamily std\+::string Scene\+Exit\+::\+\_\+last\+Scene\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The last scene name (used if we cancel) \mbox{\Hypertarget{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}\label{class_scene_exit_a46626e6689a0ab8eb87a8040e77e7849}} 
+\index{SceneExit@{SceneExit}!\_states@{\_states}}
+\index{\_states@{\_states}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{\_states}{\_states}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_exit_1_1_buttons_states}{Buttons\+States}} Scene\+Exit\+::\+\_\+states\hspace{0.3cm}{\ttfamily [protected]}}
+
+All buttons states \mbox{\Hypertarget{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}\label{class_scene_exit_ac20369aa55f37dff9d8016f3245802e2}} 
+\index{SceneExit@{SceneExit}!allUI@{allUI}}
+\index{allUI@{allUI}!SceneExit@{SceneExit}}
+\doxysubsubsection{\texorpdfstring{allUI}{allUI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_exit_1_1_all_u_i}{All\+UI}} Scene\+Exit\+::all\+UI\hspace{0.3cm}{\ttfamily [protected]}}
+
+All UI elements 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

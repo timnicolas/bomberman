@@ -79,7 +79,7 @@ Inheritance diagram for Bomb:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_bomb__inherit__graph.png" border="0" usemap="#_bomb_inherit__map" alt="Inheritance graph"/></div>
 <map name="_bomb_inherit__map" id="_bomb_inherit__map">
-<area shape="rect" title="This is the bomb object." alt="" coords="8,769,137,979"/>
+<area shape="rect" title="This is the bomb object." alt="" coords="8,769,137,993"/>
 <area shape="rect" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)" alt="" coords="11,468,135,721"/>
 <area shape="rect" href="class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="5,5,140,420"/>
 </map>
@@ -89,50 +89,58 @@ Collaboration diagram for Bomb:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_bomb__coll__graph.png" border="0" usemap="#_bomb_coll__map" alt="Collaboration graph"/></div>
 <map name="_bomb_coll__map" id="_bomb_coll__map">
-<area shape="rect" title="This is the bomb object." alt="" coords="913,2601,1042,2810"/>
-<area shape="rect" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)" alt="" coords="914,1914,1038,2167"/>
-<area shape="rect" href="class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="823,1019,958,1389"/>
-<area shape="rect" href="class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="665,1833,837,2248"/>
-<area shape="rect" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="475,2953,634,3456"/>
-<area shape="rect" href="class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="349,2579,477,2832"/>
-<area shape="rect" href="class_a_scene.html" title="base object to implement in all scenes" alt="" coords="362,1929,465,2153"/>
-<area shape="rect" href="class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="320,1055,507,1353"/>
+<area shape="rect" title="This is the bomb object." alt="" coords="902,2593,1031,2817"/>
+<area shape="rect" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)" alt="" coords="903,1914,1027,2167"/>
+<area shape="rect" href="class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="807,1019,942,1389"/>
+<area shape="rect" href="class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="654,1833,826,2248"/>
+<area shape="rect" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="469,2953,627,3456"/>
+<area shape="rect" href="class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="343,2579,471,2832"/>
+<area shape="rect" href="class_a_scene.html" title="base object to implement in all scenes" alt="" coords="355,1929,458,2153"/>
+<area shape="rect" href="class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="313,1055,500,1353"/>
 <area shape="rect" href="class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="159,417,265,641"/>
 <area shape="rect" href="class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="76,784,279,1624"/>
-<area shape="rect" href="class_texture_manager.html" title=" " alt="" coords="301,446,443,611"/>
+<area shape="rect" href="class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="301,446,443,611"/>
 <area shape="rect" href="class_camera.html" title="this is a camera 3D object" alt="" coords="467,351,602,707"/>
-<area shape="rect" href="struct_game_info.html" title=" " alt="" coords="626,453,769,604"/>
-<area shape="rect" href="struct_scene_game_1_1_all_u_i.html" title=" " alt="" coords="39,2272,193,2496"/>
+<area shape="rect" href="struct_game_info.html" title="General information about the game." alt="" coords="626,453,769,604"/>
+<area shape="rect" href="struct_scene_game_1_1_all_u_i.html" title="All UI elements (bonus, text, ...)" alt="" coords="39,2272,193,2496"/>
 <area shape="rect" href="class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="116,1855,297,2226"/>
 <area shape="rect" href="class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="5,417,123,641"/>
-<area shape="rect" href="class_score.html" title=" " alt="" coords="501,2593,608,2817"/>
-<area shape="rect" href="class_player.html" title="This is the player object." alt="" coords="632,2520,763,2891"/>
-<area shape="rect" href="struct_player_1_1_bonus_actifs.html" title=" " alt="" coords="501,1929,640,2153"/>
-<area shape="rect" href="class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="793,373,989,685"/>
-<area shape="rect" href="class_e_transform.html" title="Class to manage model transformation." alt="" coords="831,5,950,288"/>
-<area shape="rect" href="struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="1013,483,1144,575"/>
+<area shape="rect" href="class_score.html" title="Score calculation object." alt="" coords="495,2593,601,2817"/>
+<area shape="rect" href="class_player.html" title="This is the player object." alt="" coords="625,2520,756,2891"/>
+<area shape="rect" href="struct_player_1_1_active_bonus.html" title="All active bonus for the player." alt="" coords="488,1929,629,2153"/>
+<area shape="rect" href="class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="793,402,956,655"/>
+<area shape="rect" href="class_e_transform.html" title="Class to manage model transformation." alt="" coords="815,5,934,288"/>
+<area shape="rect" href="struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="980,483,1111,575"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb_1_1_bomb_exception.html">BombException</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> exception.  <a href="class_bomb_1_1_bomb_exception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa09b8879ab7aae611b05ad0e73e45696"><td class="memItemLeft" align="right" valign="top"><a id="aa09b8879ab7aae611b05ad0e73e45696"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Bomb</b> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memitem:aa09b8879ab7aae611b05ad0e73e45696"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#aa09b8879ab7aae611b05ad0e73e45696">Bomb</a> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
+<tr class="memdesc:aa09b8879ab7aae611b05ad0e73e45696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>:: <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> object.  <a href="class_bomb.html#aa09b8879ab7aae611b05ad0e73e45696">More...</a><br /></td></tr>
 <tr class="separator:aa09b8879ab7aae611b05ad0e73e45696"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad02ddab443979d610ea5ad04343bd7fa"><td class="memItemLeft" align="right" valign="top"><a id="ad02ddab443979d610ea5ad04343bd7fa"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Bomb</b> (<a class="el" href="class_bomb.html">Bomb</a> const &amp;src)</td></tr>
+<tr class="memitem:acbb47327cfb2fa429887774ef3597965"><td class="memItemLeft" align="right" valign="top"><a id="acbb47327cfb2fa429887774ef3597965"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#acbb47327cfb2fa429887774ef3597965">~Bomb</a> ()</td></tr>
+<tr class="memdesc:acbb47327cfb2fa429887774ef3597965"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>:: <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> object. <br /></td></tr>
+<tr class="separator:acbb47327cfb2fa429887774ef3597965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad02ddab443979d610ea5ad04343bd7fa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#ad02ddab443979d610ea5ad04343bd7fa">Bomb</a> (<a class="el" href="class_bomb.html">Bomb</a> const &amp;src)</td></tr>
+<tr class="memdesc:ad02ddab443979d610ea5ad04343bd7fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>:: <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> object.  <a href="class_bomb.html#ad02ddab443979d610ea5ad04343bd7fa">More...</a><br /></td></tr>
 <tr class="separator:ad02ddab443979d610ea5ad04343bd7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85eb751af149c92278eafdbabced0d3d"><td class="memItemLeft" align="right" valign="top"><a id="a85eb751af149c92278eafdbabced0d3d"></a>
-<a class="el" href="class_bomb.html">Bomb</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="class_bomb.html">Bomb</a> const &amp;rhs)</td></tr>
+<tr class="memitem:a85eb751af149c92278eafdbabced0d3d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_bomb.html">Bomb</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#a85eb751af149c92278eafdbabced0d3d">operator=</a> (<a class="el" href="class_bomb.html">Bomb</a> const &amp;rhs)</td></tr>
+<tr class="memdesc:a85eb751af149c92278eafdbabced0d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy this object.  <a href="class_bomb.html#a85eb751af149c92278eafdbabced0d3d">More...</a><br /></td></tr>
 <tr class="separator:a85eb751af149c92278eafdbabced0d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a3488cb6bd66f3b6d73003814dfb209"><td class="memItemLeft" align="right" valign="top"><a id="a3a3488cb6bd66f3b6d73003814dfb209"></a>
-<a class="el" href="class_bomb.html">Bomb</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>setPropagation</b> (const int propagation)</td></tr>
+<tr class="memitem:a3a3488cb6bd66f3b6d73003814dfb209"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_bomb.html">Bomb</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#a3a3488cb6bd66f3b6d73003814dfb209">setPropagation</a> (const int propagation)</td></tr>
+<tr class="memdesc:a3a3488cb6bd66f3b6d73003814dfb209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the bomb propagation.  <a href="class_bomb.html#a3a3488cb6bd66f3b6d73003814dfb209">More...</a><br /></td></tr>
 <tr class="separator:a3a3488cb6bd66f3b6d73003814dfb209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3f751937f59953f4cf585b07c9684c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#a4a3f751937f59953f4cf585b07c9684c">init</a> ()</td></tr>
+<tr class="memdesc:a4a3f751937f59953f4cf585b07c9684c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>.  <a href="class_bomb.html#a4a3f751937f59953f4cf585b07c9684c">More...</a><br /></td></tr>
+<tr class="separator:a4a3f751937f59953f4cf585b07c9684c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9808d8efcc57b9ce7b0bd48d95875aad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bomb.html#a9808d8efcc57b9ce7b0bd48d95875aad">update</a> ()</td></tr>
 <tr class="memdesc:a9808d8efcc57b9ce7b0bd48d95875aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">update is called each frame.  <a href="class_bomb.html#a9808d8efcc57b9ce7b0bd48d95875aad">More...</a><br /></td></tr>
 <tr class="separator:a9808d8efcc57b9ce7b0bd48d95875aad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,7 +174,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memdesc:ac254ff8c08640e01dd5fbe030b4d89bc inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the position of the object according of his position on the board.  <a href="class_a_object.html#ac254ff8c08640e01dd5fbe030b4d89bc">More...</a><br /></td></tr>
 <tr class="separator:ac254ff8c08640e01dd5fbe030b4d89bc inherit pub_methods_class_a_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5840de6100bba8bf93a186a0a802708 inherit pub_methods_class_a_object"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_object.html#ab5840de6100bba8bf93a186a0a802708">getPos</a> () const</td></tr>
-<tr class="memdesc:ab5840de6100bba8bf93a186a0a802708 inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the position of the current <a class="el" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)">AObject</a> in the SceneGame::board of this-&gt;game.  <a href="class_a_object.html#ab5840de6100bba8bf93a186a0a802708">More...</a><br /></td></tr>
+<tr class="memdesc:ab5840de6100bba8bf93a186a0a802708 inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the position of the current <a class="el" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)">AObject</a> in the <a class="el" href="class_scene_game.html#a2306af8a268c9d476d1060fa3daa1ac5">SceneGame::board</a> of this-&gt;game.  <a href="class_a_object.html#ab5840de6100bba8bf93a186a0a802708">More...</a><br /></td></tr>
 <tr class="separator:ab5840de6100bba8bf93a186a0a802708 inherit pub_methods_class_a_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4a82eef484c0f7bf3547a7f7f6dce7e inherit pub_methods_class_a_object"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::vector&lt; std::vector&lt; <a class="el" href="class_a_entity.html">AEntity</a> * &gt; &gt; &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_object.html#ac4a82eef484c0f7bf3547a7f7f6dce7e">getBoard</a> () const</td></tr>
 <tr class="memdesc:ac4a82eef484c0f7bf3547a7f7f6dce7e inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the board (game.board or game.boardFly)  <a href="class_a_object.html#ac4a82eef484c0f7bf3547a7f7f6dce7e">More...</a><br /></td></tr>
@@ -174,9 +182,6 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:aba4b07c0456b2c3d42a71529ef40f2d5 inherit pub_methods_class_a_object"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; std::vector&lt; std::vector&lt; <a class="el" href="class_a_entity.html">AEntity</a> * &gt; &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_object.html#aba4b07c0456b2c3d42a71529ef40f2d5">getBoard</a> ()</td></tr>
 <tr class="memdesc:aba4b07c0456b2c3d42a71529ef40f2d5 inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the board (game.board or game.boardFly)  <a href="class_a_object.html#aba4b07c0456b2c3d42a71529ef40f2d5">More...</a><br /></td></tr>
 <tr class="separator:aba4b07c0456b2c3d42a71529ef40f2d5 inherit pub_methods_class_a_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa83ef1c900a47453524219788327b86 inherit pub_methods_class_a_object"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_object.html#afa83ef1c900a47453524219788327b86">init</a> ()</td></tr>
-<tr class="memdesc:afa83ef1c900a47453524219788327b86 inherit pub_methods_class_a_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init <a class="el" href="class_a_object.html" title="This is the base class for objects (Bomb, wall, ...)">AObject</a>.  <a href="class_a_object.html#afa83ef1c900a47453524219788327b86">More...</a><br /></td></tr>
-<tr class="separator:afa83ef1c900a47453524219788327b86 inherit pub_methods_class_a_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_a_entity"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_a_entity')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_a_entity.html">AEntity</a></td></tr>
 <tr class="memitem:ac2e458e7b02ccd083b2e57c0bb27ea24 inherit pub_methods_class_a_entity"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_entity.html#ac2e458e7b02ccd083b2e57c0bb27ea24">AEntity</a> (<a class="el" href="class_scene_game.html">SceneGame</a> &amp;<a class="el" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>)</td></tr>
 <tr class="memdesc:ac2e458e7b02ccd083b2e57c0bb27ea24 inherit pub_methods_class_a_entity"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new AEntity::AEntity object.  <a href="class_a_entity.html#ac2e458e7b02ccd083b2e57c0bb27ea24">More...</a><br /></td></tr>
@@ -245,7 +250,68 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This is the bomb object. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa09b8879ab7aae611b05ad0e73e45696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09b8879ab7aae611b05ad0e73e45696">&#9670;&nbsp;</a></span>Bomb() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bomb::Bomb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_scene_game.html">SceneGame</a> &amp;&#160;</td>
+          <td class="paramname"><em>game</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>:: <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">game</td><td>A reference to the <a class="el" href="class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels.">SceneGame</a> master object </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad02ddab443979d610ea5ad04343bd7fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad02ddab443979d610ea5ad04343bd7fa">&#9670;&nbsp;</a></span>Bomb() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bomb::Bomb </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_bomb.html">Bomb</a> const &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>:: <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The object to do the copy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ae0ea4aa0ce14d353ad63c31cccc2a69d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae0ea4aa0ce14d353ad63c31cccc2a69d">&#9670;&nbsp;</a></span>draw()</h2>
 
@@ -275,7 +341,7 @@ Additional Inherited Members</h2></td></tr>
 <dd>
 false if failure </dd></dl>
 
-<p>Implements <a class="el" href="class_a_object.html">AObject</a>.</p>
+<p>Implements <a class="el" href="class_a_object.html#a5e454e13e04ee937c20a465244cf748a">AObject</a>.</p>
 
 </div>
 </div>
@@ -302,6 +368,65 @@ false if failure </dd></dl>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4a3f751937f59953f4cf585b07c9684c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a3f751937f59953f4cf585b07c9684c">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bomb::init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Init <a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>true on success </dd>
+<dd>
+false on failure </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_a_object.html#afa83ef1c900a47453524219788327b86">AObject</a>.</p>
+
+</div>
+</div>
+<a id="a85eb751af149c92278eafdbabced0d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85eb751af149c92278eafdbabced0d3d">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_bomb.html">Bomb</a> &amp; Bomb::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_bomb.html">Bomb</a> const &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy this object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>The object to copy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_bomb.html" title="This is the bomb object.">Bomb</a>&amp; A reference to the copied object </dd></dl>
 
 </div>
 </div>
@@ -334,6 +459,33 @@ false if failure </dd></dl>
 false if failure </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_a_entity.html#ae2faa1d11e21033a223fef2bc03b9338">AEntity</a>.</p>
+
+</div>
+</div>
+<a id="a3a3488cb6bd66f3b6d73003814dfb209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a3488cb6bd66f3b6d73003814dfb209">&#9670;&nbsp;</a></span>setPropagation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_bomb.html">Bomb</a> * Bomb::setPropagation </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>propagation</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the bomb propagation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">propagation</td><td>The new propagation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Bomb* A pointer on this object </dd></dl>
 
 </div>
 </div>
@@ -404,7 +556,7 @@ false if damage not taken </dd></dl>
 <dd>
 false if failure </dd></dl>
 
-<p>Implements <a class="el" href="class_a_object.html">AObject</a>.</p>
+<p>Implements <a class="el" href="class_a_object.html#af35bb4b68af0a11bb1fcf617bde41ecd">AObject</a>.</p>
 
 </div>
 </div>

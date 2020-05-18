@@ -2,7 +2,17 @@
 \label{struct_game_info}\index{GameInfo@{GameInfo}}
 
 
-Collaboration diagram for Game\+Info\+:\nopagebreak
+General information about the game.  
+
+
+
+
+{\ttfamily \#include $<$Gui.\+hpp$>$}
+
+
+
+Collaboration diagram for Game\+Info\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,25 +22,61 @@ Collaboration diagram for Game\+Info\+:\nopagebreak
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_game_info_aa91c7a78dac02194f74190e511641198}\label{struct_game_info_aa91c7a78dac02194f74190e511641198}} 
-std\+::string {\bfseries title}
+std\+::string \mbox{\hyperlink{struct_game_info_aa91c7a78dac02194f74190e511641198}{title}}
 \item 
-\mbox{\Hypertarget{struct_game_info_a8dce192fef699b9f1fddbf02bf3500cd}\label{struct_game_info_a8dce192fef699b9f1fddbf02bf3500cd}} 
-glm\+::ivec2 {\bfseries window\+Size}
+glm\+::ivec2 \mbox{\hyperlink{struct_game_info_a8dce192fef699b9f1fddbf02bf3500cd}{window\+Size}}
 \item 
-\mbox{\Hypertarget{struct_game_info_a3f897911825a01cf4a1c4b89097ac523}\label{struct_game_info_a3f897911825a01cf4a1c4b89097ac523}} 
-glm\+::ivec2 {\bfseries max\+Window\+Size}
+glm\+::ivec2 \mbox{\hyperlink{struct_game_info_a3f897911825a01cf4a1c4b89097ac523}{max\+Window\+Size}}
 \item 
-\mbox{\Hypertarget{struct_game_info_a469e344fc49843ac1ca7816afeb3f99b}\label{struct_game_info_a469e344fc49843ac1ca7816afeb3f99b}} 
-glm\+::ivec2 {\bfseries saved\+Window\+Size}
+glm\+::ivec2 \mbox{\hyperlink{struct_game_info_a469e344fc49843ac1ca7816afeb3f99b}{saved\+Window\+Size}}
 \item 
-\mbox{\Hypertarget{struct_game_info_ad4971e06ad6b5bcb8e489b755a8eb96e}\label{struct_game_info_ad4971e06ad6b5bcb8e489b755a8eb96e}} 
-bool {\bfseries is\+Saved\+Fullscreen}
+bool \mbox{\hyperlink{struct_game_info_ad4971e06ad6b5bcb8e489b755a8eb96e}{is\+Saved\+Fullscreen}}
 \item 
-\mbox{\Hypertarget{struct_game_info_af697697c3da30244af3275062f0a0cdf}\label{struct_game_info_af697697c3da30244af3275062f0a0cdf}} 
-bool {\bfseries quit}
+bool \mbox{\hyperlink{struct_game_info_af697697c3da30244af3275062f0a0cdf}{quit}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+General information about the game. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_game_info_ad4971e06ad6b5bcb8e489b755a8eb96e}\label{struct_game_info_ad4971e06ad6b5bcb8e489b755a8eb96e}} 
+\index{GameInfo@{GameInfo}!isSavedFullscreen@{isSavedFullscreen}}
+\index{isSavedFullscreen@{isSavedFullscreen}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{isSavedFullscreen}{isSavedFullscreen}}
+{\footnotesize\ttfamily bool Game\+Info\+::is\+Saved\+Fullscreen}
+
+True if we want fullscreen in next program opening \mbox{\Hypertarget{struct_game_info_a3f897911825a01cf4a1c4b89097ac523}\label{struct_game_info_a3f897911825a01cf4a1c4b89097ac523}} 
+\index{GameInfo@{GameInfo}!maxWindowSize@{maxWindowSize}}
+\index{maxWindowSize@{maxWindowSize}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{maxWindowSize}{maxWindowSize}}
+{\footnotesize\ttfamily glm\+::ivec2 Game\+Info\+::max\+Window\+Size}
+
+Max win size (screen size) \mbox{\Hypertarget{struct_game_info_af697697c3da30244af3275062f0a0cdf}\label{struct_game_info_af697697c3da30244af3275062f0a0cdf}} 
+\index{GameInfo@{GameInfo}!quit@{quit}}
+\index{quit@{quit}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{quit}{quit}}
+{\footnotesize\ttfamily bool Game\+Info\+::quit}
+
+True if we want to quit game \mbox{\Hypertarget{struct_game_info_a469e344fc49843ac1ca7816afeb3f99b}\label{struct_game_info_a469e344fc49843ac1ca7816afeb3f99b}} 
+\index{GameInfo@{GameInfo}!savedWindowSize@{savedWindowSize}}
+\index{savedWindowSize@{savedWindowSize}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{savedWindowSize}{savedWindowSize}}
+{\footnotesize\ttfamily glm\+::ivec2 Game\+Info\+::saved\+Window\+Size}
+
+Saved win size (for next program opening) \mbox{\Hypertarget{struct_game_info_aa91c7a78dac02194f74190e511641198}\label{struct_game_info_aa91c7a78dac02194f74190e511641198}} 
+\index{GameInfo@{GameInfo}!title@{title}}
+\index{title@{title}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{title}{title}}
+{\footnotesize\ttfamily std\+::string Game\+Info\+::title}
+
+Win title \mbox{\Hypertarget{struct_game_info_a8dce192fef699b9f1fddbf02bf3500cd}\label{struct_game_info_a8dce192fef699b9f1fddbf02bf3500cd}} 
+\index{GameInfo@{GameInfo}!windowSize@{windowSize}}
+\index{windowSize@{windowSize}!GameInfo@{GameInfo}}
+\doxysubsubsection{\texorpdfstring{windowSize}{windowSize}}
+{\footnotesize\ttfamily glm\+::ivec2 Game\+Info\+::window\+Size}
+
+Win size 
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

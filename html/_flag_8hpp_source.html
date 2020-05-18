@@ -85,11 +85,11 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// Constructors</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_flag.html">Flag</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    ~<a class="code" href="class_flag.html">Flag</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_flag.html#a0f8f181d049036f54b5609bc646e2960">~Flag</a>();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_flag.html">Flag</a>(<a class="code" href="class_flag.html">Flag</a> <span class="keyword">const</span> &amp;src);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// Operators</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_flag.html">Flag</a> &amp;operator=(<a class="code" href="class_flag.html">Flag</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_flag.html">Flag</a> &amp;<a class="code" href="class_flag.html#a6834049fb149bb14e35a4f273937c419">operator=</a>(<a class="code" href="class_flag.html">Flag</a> <span class="keyword">const</span> &amp;rhs);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Methods</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_flag.html#adeaab6cd88bbc3284f8b4f1b2f78242b">update</a>();</div>
@@ -97,24 +97,26 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_flag.html#ae24cc9c0e3cc3378e12af9f40c0ee93d">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// Exceptions</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="class_flag_1_1_flag_exception.html">   32</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    };</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;};</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#endif  // FLAG_HPP_</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_flag_1_1_flag_exception.html">   35</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_flag_1_1_flag_exception.html">FlagException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    };</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif  // FLAG_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_flag_1_1_flag_exception_html"><div class="ttname"><a href="class_flag_1_1_flag_exception.html">Flag::FlagException</a></div><div class="ttdef"><b>Definition:</b> Flag.hpp:32</div></div>
-<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:50</div></div>
+<div class="ttc" id="aclass_flag_1_1_flag_exception_html"><div class="ttname"><a href="class_flag_1_1_flag_exception.html">Flag::FlagException</a></div><div class="ttdoc">Flag exception.</div><div class="ttdef"><b>Definition:</b> Flag.hpp:35</div></div>
+<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:56</div></div>
+<div class="ttc" id="aclass_flag_html_a0f8f181d049036f54b5609bc646e2960"><div class="ttname"><a href="class_flag.html#a0f8f181d049036f54b5609bc646e2960">Flag::~Flag</a></div><div class="ttdeci">~Flag()</div><div class="ttdoc">Destroy the Flag:: Flag object.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:24</div></div>
 <div class="ttc" id="aclass_a_entity_html_aa2c05db944a8b7487eb8470dd20211ab"><div class="ttname"><a href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">AEntity::game</a></div><div class="ttdeci">SceneGame &amp; game</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:91</div></div>
-<div class="ttc" id="aclass_flag_html_ae24cc9c0e3cc3378e12af9f40c0ee93d"><div class="ttname"><a href="class_flag.html#ae24cc9c0e3cc3378e12af9f40c0ee93d">Flag::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:65</div></div>
-<div class="ttc" id="aclass_flag_html_a1840a0949762e3e62bf156be6e173d1e"><div class="ttname"><a href="class_flag.html#a1840a0949762e3e62bf156be6e173d1e">Flag::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">postUpdate is called each frame. After update.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:53</div></div>
-<div class="ttc" id="aclass_flag_html_adeaab6cd88bbc3284f8b4f1b2f78242b"><div class="ttname"><a href="class_flag.html#adeaab6cd88bbc3284f8b4f1b2f78242b">Flag::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:43</div></div>
+<div class="ttc" id="aclass_flag_html_ae24cc9c0e3cc3378e12af9f40c0ee93d"><div class="ttname"><a href="class_flag.html#ae24cc9c0e3cc3378e12af9f40c0ee93d">Flag::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:84</div></div>
+<div class="ttc" id="aclass_flag_html_a1840a0949762e3e62bf156be6e173d1e"><div class="ttname"><a href="class_flag.html#a1840a0949762e3e62bf156be6e173d1e">Flag::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">postUpdate is called each frame. After update.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:72</div></div>
+<div class="ttc" id="aclass_flag_html_a6834049fb149bb14e35a4f273937c419"><div class="ttname"><a href="class_flag.html#a6834049fb149bb14e35a4f273937c419">Flag::operator=</a></div><div class="ttdeci">Flag &amp; operator=(Flag const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:47</div></div>
+<div class="ttc" id="aclass_flag_html_adeaab6cd88bbc3284f8b4f1b2f78242b"><div class="ttname"><a href="class_flag.html#adeaab6cd88bbc3284f8b4f1b2f78242b">Flag::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Flag.cpp:62</div></div>
 <div class="ttc" id="aclass_a_object_html"><div class="ttname"><a href="class_a_object.html">AObject</a></div><div class="ttdoc">This is the base class for objects (Bomb, wall, ...)</div><div class="ttdef"><b>Definition:</b> AObject.hpp:11</div></div>
 <div class="ttc" id="aclass_flag_html"><div class="ttname"><a href="class_flag.html">Flag</a></div><div class="ttdoc">This is the flag object.</div><div class="ttdef"><b>Definition:</b> Flag.hpp:13</div></div>
-<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:41</div></div>
+<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:44</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

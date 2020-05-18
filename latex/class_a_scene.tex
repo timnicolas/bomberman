@@ -11,7 +11,8 @@ base object to implement in all scenes
 
 
 
-Inheritance diagram for A\+Scene\+:\nopagebreak
+Inheritance diagram for A\+Scene\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for A\+Scene\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Scene\+:\nopagebreak
+Collaboration diagram for A\+Scene\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,50 +33,179 @@ Collaboration diagram for A\+Scene\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_a_scene_1_1_scene_exception}{Scene\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Scene exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}\label{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}} 
-{\bfseries A\+Scene} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}\label{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}} 
-{\bfseries A\+Scene} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&src)
-\item 
-\mbox{\Hypertarget{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}\label{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}} 
-virtual bool {\bfseries init} ()=0
-\item 
-\mbox{\Hypertarget{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}\label{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}} 
-virtual bool {\bfseries update} ()=0
-\item 
-\mbox{\Hypertarget{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}\label{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}} 
-virtual bool {\bfseries draw} ()=0
-\item 
+\mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene\+::\+A\+Scene}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}{A\+Scene}} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene\+::\+A\+Scene}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_scene_a9faf7f1a271327227e83627432d0b210}\label{class_a_scene_a9faf7f1a271327227e83627432d0b210}} 
+virtual \mbox{\hyperlink{class_a_scene_a9faf7f1a271327227e83627432d0b210}{$\sim$\+A\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene\+::\+A\+Scene}} object. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}{init}} ()=0
+\begin{DoxyCompactList}\small\item\em Init the scene. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}{update}} ()=0
+\begin{DoxyCompactList}\small\item\em Update the scene (called every frames) \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}{draw}} ()=0
+\begin{DoxyCompactList}\small\item\em Draw the scene (called every frames) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_a_scene_a8f6201c6a7ccefdebdc9ecf69d35a1d8}\label{class_a_scene_a8f6201c6a7ccefdebdc9ecf69d35a1d8}} 
-virtual void {\bfseries load} ()=0
-\item 
+virtual void \mbox{\hyperlink{class_a_scene_a8f6201c6a7ccefdebdc9ecf69d35a1d8}{load}} ()=0
+\begin{DoxyCompactList}\small\item\em Load the scene (called on every scene loading) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_a_scene_aeb259110cc48bac42ea05bbe24b5d2a8}\label{class_a_scene_aeb259110cc48bac42ea05bbe24b5d2a8}} 
-virtual void {\bfseries unload} ()=0
-\item 
-\mbox{\Hypertarget{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}\label{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}} 
-float const  \& {\bfseries get\+Dt\+Time} () const
-\item 
-\mbox{\Hypertarget{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}\label{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}} 
-\mbox{\hyperlink{class_a_scene}{A\+Scene}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&rhs)
-\end{DoxyCompactItemize}
+virtual void \mbox{\hyperlink{class_a_scene_aeb259110cc48bac42ea05bbe24b5d2a8}{unload}} ()=0
+\begin{DoxyCompactList}\small\item\em Unload the scene (called on every scene unloading) \end{DoxyCompactList}\item 
+float const  \& \mbox{\hyperlink{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}{get\+Dt\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Get the delta time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_scene}{A\+Scene}} \& \mbox{\hyperlink{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}{operator=}} (\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}\label{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}} 
-\mbox{\hyperlink{class_gui}{Gui}} $\ast$ {\bfseries \+\_\+gui}
+\mbox{\hyperlink{class_gui}{Gui}} $\ast$ \mbox{\hyperlink{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}{\+\_\+gui}}
 \item 
-\mbox{\Hypertarget{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}\label{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}} 
-float const  \& {\bfseries \+\_\+dt\+Time}
+float const  \& \mbox{\hyperlink{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}{\+\_\+dt\+Time}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 base object to implement in all scenes 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}\label{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}} 
+\index{AScene@{AScene}!AScene@{AScene}}
+\index{AScene@{AScene}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{AScene()}{AScene()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily A\+Scene\+::\+A\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene\+::\+A\+Scene}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}\label{class_a_scene_aa204afecf39bdfcbe83dad3ed8cce34f}} 
+\index{AScene@{AScene}!AScene@{AScene}}
+\index{AScene@{AScene}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{AScene()}{AScene()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily A\+Scene\+::\+A\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_a_scene_a00e7cd759bb0f43141df51c4ab6e6c47}{A\+Scene\+::\+A\+Scene}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}\label{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}} 
+\index{AScene@{AScene}!draw@{draw}}
+\index{draw@{draw}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual bool A\+Scene\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Draw the scene (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_scene_game_a0797fee2de442f68aef19cc5c3299ec3}{Scene\+Game}}, \mbox{\hyperlink{class_a_scene_menu_a5c11f34c83f025e1181219bf25ce4694}{A\+Scene\+Menu}}, \mbox{\hyperlink{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_loading_ae51a1b4d4f738847d50036c174364f9e}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_game_over_aa9c4f9d3cabdc89176c0113e2864f3e8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_aa59d21ea311bab5163574441f3960734}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}{Scene\+Victory}}.
+
+\mbox{\Hypertarget{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}\label{class_a_scene_aad3e0d8810515e904fc315a12a344bc3}} 
+\index{AScene@{AScene}!getDtTime@{getDtTime}}
+\index{getDtTime@{getDtTime}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{getDtTime()}{getDtTime()}}
+{\footnotesize\ttfamily float const  \& A\+Scene\+::get\+Dt\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the delta time. 
+
+\begin{DoxyReturn}{Returns}
+float const\& The delta time 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}\label{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}} 
+\index{AScene@{AScene}!init@{init}}
+\index{init@{init}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual bool A\+Scene\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Init the scene. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}, \mbox{\hyperlink{class_scene_game_a841268ba3ea129f7c02cfafcafd32a4f}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_aa952941065350cdde0390695b32ac31d}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_a19323950409add2d1b0df92799acf4d2}{Scene\+Settings}}, \mbox{\hyperlink{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_loading_aa0463a9826f1b50e5980e41d57c80778}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a11f68db49f9bf996efb0ce14913e5580}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_exit_ad9168291bb031fee797a7964590e1b73}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_a7ddd370503e10ff64e3d023f0a0acdb8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_pause_ae5e00c5fcd82e97985d93f918b9e4b35}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}{Scene\+Victory}}.
+
+\mbox{\Hypertarget{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}\label{class_a_scene_aedf714310c418b3972e2e9c96ac7bff1}} 
+\index{AScene@{AScene}!operator=@{operator=}}
+\index{operator=@{operator=}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_scene}{A\+Scene}} \& A\+Scene\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_scene}{A\+Scene}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_scene}{A\+Scene}}\& A reference to the copied object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}\label{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}} 
+\index{AScene@{AScene}!update@{update}}
+\index{update@{update}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual bool A\+Scene\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update the scene (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_scene_game_a5e23048e3ad8c6fde2d753ed7449e2d5}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_ab6ae0c8b3adbce736429e61a27966e31}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_ac32c443d620d0417b301193e87885a91}{Scene\+Settings}}, \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}, \mbox{\hyperlink{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_loading_a5b4f2b636e55908bb2f29180aa875201}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a5d095883d0b1fceb3125ef2689a7a09c}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_ac4547b0ed87f3c324e75dafb8f96b5af}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_a376de6952be83718fb19d268d9327ef6}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}{Scene\+Victory}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}\label{class_a_scene_a8cbb61bc0c24add293a08d3cc83ac2ea}} 
+\index{AScene@{AScene}!\_dtTime@{\_dtTime}}
+\index{\_dtTime@{\_dtTime}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{\_dtTime}{\_dtTime}}
+{\footnotesize\ttfamily float const\& A\+Scene\+::\+\_\+dt\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+A reference to the delta time \mbox{\Hypertarget{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}\label{class_a_scene_afdf549ea35306aecfa7a7976a5594fe1}} 
+\index{AScene@{AScene}!\_gui@{\_gui}}
+\index{\_gui@{\_gui}!AScene@{AScene}}
+\doxysubsubsection{\texorpdfstring{\_gui}{\_gui}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_gui}{Gui}}$\ast$ A\+Scene\+::\+\_\+gui\hspace{0.3cm}{\ttfamily [protected]}}
+
+A reference to the gui object 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

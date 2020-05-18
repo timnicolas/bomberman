@@ -2,7 +2,17 @@
 \label{struct_scene_load_game_1_1_game_saved}\index{SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}}
 
 
-Collaboration diagram for Scene\+Load\+Game\+::Game\+Saved\+:\nopagebreak
+All information \& UI of a saved game (from a json file)  
+
+
+
+
+{\ttfamily \#include $<$Scene\+Load\+Game.\+hpp$>$}
+
+
+
+Collaboration diagram for Scene\+Load\+Game\+::Game\+Saved\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,19 +22,45 @@ Collaboration diagram for Scene\+Load\+Game\+::Game\+Saved\+:\nopagebreak
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_ae8ad0057c09060413b282e4d111fcc4c}\label{struct_scene_load_game_1_1_game_saved_ae8ad0057c09060413b282e4d111fcc4c}} 
-uint32\+\_\+t {\bfseries game\+ID}
+uint32\+\_\+t \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved_ae8ad0057c09060413b282e4d111fcc4c}{game\+ID}}
 \item 
-\mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_a54dfde52a1ed25a1c313f57a4e62125d}\label{struct_scene_load_game_1_1_game_saved_a54dfde52a1ed25a1c313f57a4e62125d}} 
-\mbox{\hyperlink{class_settings_json}{Settings\+Json}} $\ast$ {\bfseries game}
+\mbox{\hyperlink{class_settings_json}{Settings\+Json}} $\ast$ \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved_a54dfde52a1ed25a1c313f57a4e62125d}{game}}
 \item 
-\mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_a7b92026b74f7d52089a2d3cc49dae61f}\label{struct_scene_load_game_1_1_game_saved_a7b92026b74f7d52089a2d3cc49dae61f}} 
-std\+::string {\bfseries filename}
+std\+::string \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved_a7b92026b74f7d52089a2d3cc49dae61f}{filename}}
 \item 
-\mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_aa837cefcef8df2d154023aceddf7d3a3}\label{struct_scene_load_game_1_1_game_saved_aa837cefcef8df2d154023aceddf7d3a3}} 
-\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$ {\bfseries ui}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} $\ast$ \mbox{\hyperlink{struct_scene_load_game_1_1_game_saved_aa837cefcef8df2d154023aceddf7d3a3}{ui}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+All information \& UI of a saved game (from a json file) 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_a7b92026b74f7d52089a2d3cc49dae61f}\label{struct_scene_load_game_1_1_game_saved_a7b92026b74f7d52089a2d3cc49dae61f}} 
+\index{SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}!filename@{filename}}
+\index{filename@{filename}!SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}}
+\doxysubsubsection{\texorpdfstring{filename}{filename}}
+{\footnotesize\ttfamily std\+::string Scene\+Load\+Game\+::\+Game\+Saved\+::filename}
+
+Filename for game \mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_a54dfde52a1ed25a1c313f57a4e62125d}\label{struct_scene_load_game_1_1_game_saved_a54dfde52a1ed25a1c313f57a4e62125d}} 
+\index{SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}!game@{game}}
+\index{game@{game}!SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}}
+\doxysubsubsection{\texorpdfstring{game}{game}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_settings_json}{Settings\+Json}}$\ast$ Scene\+Load\+Game\+::\+Game\+Saved\+::game}
+
+Game informations (json) \mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_ae8ad0057c09060413b282e4d111fcc4c}\label{struct_scene_load_game_1_1_game_saved_ae8ad0057c09060413b282e4d111fcc4c}} 
+\index{SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}!gameID@{gameID}}
+\index{gameID@{gameID}!SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}}
+\doxysubsubsection{\texorpdfstring{gameID}{gameID}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Load\+Game\+::\+Game\+Saved\+::game\+ID}
+
+Game ID \mbox{\Hypertarget{struct_scene_load_game_1_1_game_saved_aa837cefcef8df2d154023aceddf7d3a3}\label{struct_scene_load_game_1_1_game_saved_aa837cefcef8df2d154023aceddf7d3a3}} 
+\index{SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}!ui@{ui}}
+\index{ui@{ui}!SceneLoadGame::GameSaved@{SceneLoadGame::GameSaved}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}$\ast$ Scene\+Load\+Game\+::\+Game\+Saved\+::ui}
+
+UI element for a game 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

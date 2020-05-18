@@ -2,7 +2,17 @@
 \label{struct_cam_point}\index{CamPoint@{CamPoint}}
 
 
-Collaboration diagram for Cam\+Point\+:\nopagebreak
+Point on the word (used in F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode)  
+
+
+
+
+{\ttfamily \#include $<$Camera.\+hpp$>$}
+
+
+
+Collaboration diagram for Cam\+Point\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,22 +22,53 @@ Collaboration diagram for Cam\+Point\+:\nopagebreak
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{struct_cam_point_a838dcf4ad928c2537c504819558b48cf}\label{struct_cam_point_a838dcf4ad928c2537c504819558b48cf}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries pos}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{struct_cam_point_a838dcf4ad928c2537c504819558b48cf}{pos}}
 \item 
-\mbox{\Hypertarget{struct_cam_point_a9adfb35cbba2a45bc92c59af6ef0b829}\label{struct_cam_point_a9adfb35cbba2a45bc92c59af6ef0b829}} 
-Cam\+Movement {\bfseries look\+Dir}
+Cam\+Movement \mbox{\hyperlink{struct_cam_point_a9adfb35cbba2a45bc92c59af6ef0b829}{look\+Dir}}
 \item 
-\mbox{\Hypertarget{struct_cam_point_a5f58524872784b39ec00277775166679}\label{struct_cam_point_a5f58524872784b39ec00277775166679}} 
-C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 {\bfseries look\+At}
+C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 \mbox{\hyperlink{struct_cam_point_a5f58524872784b39ec00277775166679}{look\+At}}
 \item 
-\mbox{\Hypertarget{struct_cam_point_a1a53e869d446d6335370ff477f3776ae}\label{struct_cam_point_a1a53e869d446d6335370ff477f3776ae}} 
-bool {\bfseries tp\+To}
+bool \mbox{\hyperlink{struct_cam_point_a1a53e869d446d6335370ff477f3776ae}{tp\+To}}
 \item 
-\mbox{\Hypertarget{struct_cam_point_af76796aa17e711865e47e737693f6fc5}\label{struct_cam_point_af76796aa17e711865e47e737693f6fc5}} 
-float {\bfseries speed}
+float \mbox{\hyperlink{struct_cam_point_af76796aa17e711865e47e737693f6fc5}{speed}}
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Point on the word (used in F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{struct_cam_point_a5f58524872784b39ec00277775166679}\label{struct_cam_point_a5f58524872784b39ec00277775166679}} 
+\index{CamPoint@{CamPoint}!lookAt@{lookAt}}
+\index{lookAt@{lookAt}!CamPoint@{CamPoint}}
+\doxysubsubsection{\texorpdfstring{lookAt}{lookAt}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Cam\+Point\+::look\+At}
+
+look\+At position for last point to pos \mbox{\Hypertarget{struct_cam_point_a9adfb35cbba2a45bc92c59af6ef0b829}\label{struct_cam_point_a9adfb35cbba2a45bc92c59af6ef0b829}} 
+\index{CamPoint@{CamPoint}!lookDir@{lookDir}}
+\index{lookDir@{lookDir}!CamPoint@{CamPoint}}
+\doxysubsubsection{\texorpdfstring{lookDir}{lookDir}}
+{\footnotesize\ttfamily Cam\+Movement Cam\+Point\+::look\+Dir}
+
+looking direction (if No\+Direction -\/$>$ look at \mbox{\hyperlink{struct_cam_point_a5f58524872784b39ec00277775166679}{Cam\+Point\+::look\+At}}) \mbox{\Hypertarget{struct_cam_point_a838dcf4ad928c2537c504819558b48cf}\label{struct_cam_point_a838dcf4ad928c2537c504819558b48cf}} 
+\index{CamPoint@{CamPoint}!pos@{pos}}
+\index{pos@{pos}!CamPoint@{CamPoint}}
+\doxysubsubsection{\texorpdfstring{pos}{pos}}
+{\footnotesize\ttfamily C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 Cam\+Point\+::pos}
+
+position \mbox{\Hypertarget{struct_cam_point_af76796aa17e711865e47e737693f6fc5}\label{struct_cam_point_af76796aa17e711865e47e737693f6fc5}} 
+\index{CamPoint@{CamPoint}!speed@{speed}}
+\index{speed@{speed}!CamPoint@{CamPoint}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily float Cam\+Point\+::speed}
+
+speed to move to this point (if $<$= 0 -\/$>$ default speed) \mbox{\Hypertarget{struct_cam_point_a1a53e869d446d6335370ff477f3776ae}\label{struct_cam_point_a1a53e869d446d6335370ff477f3776ae}} 
+\index{CamPoint@{CamPoint}!tpTo@{tpTo}}
+\index{tpTo@{tpTo}!CamPoint@{CamPoint}}
+\doxysubsubsection{\texorpdfstring{tpTo}{tpTo}}
+{\footnotesize\ttfamily bool Cam\+Point\+::tp\+To}
+
+if true, tp to the position 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

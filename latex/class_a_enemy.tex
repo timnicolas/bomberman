@@ -20,7 +20,8 @@ Inheritance diagram for A\+Enemy\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Enemy\+:\nopagebreak
+Collaboration diagram for A\+Enemy\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,19 +32,19 @@ Collaboration diagram for A\+Enemy\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_a_enemy_1_1_enemy_exception}{Enemy\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Enemy Exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}\label{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}} 
-{\bfseries A\+Enemy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}\label{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}} 
-{\bfseries A\+Enemy} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&src)
-\item 
-\mbox{\Hypertarget{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}\label{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}} 
-\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}{A\+Enemy}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Enemy\+::\+A\+Enemy object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_enemy_a919ea252218c21ff208181e53771b8ab}\label{class_a_enemy_a919ea252218c21ff208181e53771b8ab}} 
+\mbox{\hyperlink{class_a_enemy_a919ea252218c21ff208181e53771b8ab}{$\sim$\+A\+Enemy}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the A\+Enemy\+::\+A\+Enemy object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}{A\+Enemy}} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Enemy\+::\+A\+Enemy object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} \& \mbox{\hyperlink{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}{operator=}} (\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{update}} ()
 \begin{DoxyCompactList}\small\item\em update is called each frame. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}{post\+Update}} ()
@@ -53,33 +54,27 @@ bool \mbox{\hyperlink{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}{draw}} (\
 virtual void \mbox{\hyperlink{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}{anim\+End\+Cb}} (std\+::string anim\+Name)
 \begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_enemy_a17bcf116c42c3d780e243127adf1a947}{take\+Damage}} (const int damage)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$damage$>$ damages. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$ damage $>$ damages. \end{DoxyCompactList}\item 
 std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ \mbox{\hyperlink{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}{get\+Collision}} (glm\+::vec3 dest) const
 \begin{DoxyCompactList}\small\item\em get a list of entity in collision with the Character at a position. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}\label{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}} 
-int {\bfseries bombs}
+int \mbox{\hyperlink{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}{bombs}}
 \item 
-\mbox{\Hypertarget{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}\label{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}} 
-int32\+\_\+t {\bfseries points}
+int32\+\_\+t \mbox{\hyperlink{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}{points}}
 \item 
-\mbox{\Hypertarget{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}\label{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}} 
-int {\bfseries strength}
+int \mbox{\hyperlink{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}{strength}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}\label{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}} 
-virtual bool {\bfseries \+\_\+update} ()=0
-\item 
-\mbox{\Hypertarget{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}\label{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}} 
-virtual bool {\bfseries \+\_\+post\+Update} ()=0
-\item 
-\mbox{\Hypertarget{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}\label{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}} 
-virtual bool {\bfseries \+\_\+draw} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
-\item 
+virtual bool \mbox{\hyperlink{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}{\+\_\+update}} ()=0
+\begin{DoxyCompactList}\small\item\em Update entity. Called on every frames. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}{\+\_\+post\+Update}} ()=0
+\begin{DoxyCompactList}\small\item\em Update entity. Called on every frames after update. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}{\+\_\+draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+\begin{DoxyCompactList}\small\item\em Draw entity. Called on every frames. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}{\+\_\+base\+Enemy\+Move}} (Direction\+::\+Enum \&dir)
 \begin{DoxyCompactList}\small\item\em Base moving function for enemy. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_enemy_a2ddbe01e55094dbbff085ff10b1db957}{\+\_\+move\+Pattern\+Basic}} (std\+::vector$<$ Direction\+::\+Enum $>$ direction\+Order, uint32\+\_\+t \&dir\+Idx)
@@ -97,22 +92,51 @@ bool \mbox{\hyperlink{class_a_enemy_a4348865dc5c245e2d88e31296847e1a6}{\+\_\+is\
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_enemy_af85a958024c72d9c0f522be466c75092}\label{class_a_enemy_af85a958024c72d9c0f522be466c75092}} 
-Direction\+::\+Enum {\bfseries \+\_\+dir}
+Direction\+::\+Enum \mbox{\hyperlink{class_a_enemy_af85a958024c72d9c0f522be466c75092}{\+\_\+dir}}
 \item 
-\mbox{\Hypertarget{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}\label{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}} 
-std\+::vector$<$ std\+::string $>$ {\bfseries \+\_\+sound\+Attack}
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}{\+\_\+sound\+Attack}}
 \item 
-\mbox{\Hypertarget{class_a_enemy_a112cb8a927706e1a563119258239f4b6}\label{class_a_enemy_a112cb8a927706e1a563119258239f4b6}} 
-bool {\bfseries \+\_\+fisrt\+Call}
+bool \mbox{\hyperlink{class_a_enemy_a112cb8a927706e1a563119258239f4b6}{\+\_\+fisrt\+Call}}
 \item 
-\mbox{\Hypertarget{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}\label{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}} 
-bool {\bfseries \+\_\+move\+On\+Center}
+bool \mbox{\hyperlink{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}{\+\_\+move\+On\+Center}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This is the base enemy object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}\label{class_a_enemy_a951b8e4a3fbd53542740f8ba3f01b79d}} 
+\index{AEnemy@{AEnemy}!AEnemy@{AEnemy}}
+\index{AEnemy@{AEnemy}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{AEnemy()}{AEnemy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily A\+Enemy\+::\+A\+Enemy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new A\+Enemy\+::\+A\+Enemy object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the main \mbox{\hyperlink{class_scene_game}{Scene\+Game}} object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}\label{class_a_enemy_add417acf741a28c3896fce4ffbad2e2a}} 
+\index{AEnemy@{AEnemy}!AEnemy@{AEnemy}}
+\index{AEnemy@{AEnemy}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{AEnemy()}{AEnemy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily A\+Enemy\+::\+A\+Enemy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new A\+Enemy\+::\+A\+Enemy object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}\label{class_a_enemy_aff49d7d4a833983ede184276ebf93b67}} 
@@ -133,6 +157,28 @@ Base moving function for enemy.
 \begin{DoxyReturn}{Returns}
 false If the enemy is blocked 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}\label{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}} 
+\index{AEnemy@{AEnemy}!\_draw@{\_draw}}
+\index{\_draw@{\_draw}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_draw()}{\_draw()}}
+{\footnotesize\ttfamily virtual bool A\+Enemy\+::\+\_\+draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Draw entity. Called on every frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A reference to the gui object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_enemy_frog_a2cf685062369505da75844967e16d344}{Enemy\+Frog}}, \mbox{\hyperlink{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_with_eye_a34caaf4c68b5ad06059fe61d9d1f8026}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a405b9f97c6818d2b96056270aeca921f}{Enemy\+Fly}}, and \mbox{\hyperlink{class_enemy_basic_a143ec308f913a3eb4a7f47ad839fd049}{Enemy\+Basic}}.
+
 \mbox{\Hypertarget{class_a_enemy_ae9fafd83ac6040298120c6e3a8656743}\label{class_a_enemy_ae9fafd83ac6040298120c6e3a8656743}} 
 \index{AEnemy@{AEnemy}!\_followPath@{\_followPath}}
 \index{\_followPath@{\_followPath}!AEnemy@{AEnemy}}
@@ -198,6 +244,8 @@ Check if the enemy is on dest.
 \begin{DoxyParams}{Parameters}
 {\em dest} & The postion to compare with enemy pos \\
 \hline
+{\em offset} & Offset \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 true If is on the destination 
@@ -237,6 +285,40 @@ start at direction\+Order\mbox{[}start\+Dir\+ID\mbox{]} and try to move. If cann
 \begin{DoxyReturn}{Returns}
 false If the enemy is blocked 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}\label{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}} 
+\index{AEnemy@{AEnemy}!\_postUpdate@{\_postUpdate}}
+\index{\_postUpdate@{\_postUpdate}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_postUpdate()}{\_postUpdate()}}
+{\footnotesize\ttfamily virtual bool A\+Enemy\+::\+\_\+post\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Update entity. Called on every frames after update. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_enemy_frog_ab151c31f6cc89cc77830f77b02cf9372}{Enemy\+Frog}}, \mbox{\hyperlink{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_crispy_a7493983cc06e648d1ac8fd80dd8c64f3}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_with_eye_a489d03612e65839940c5f468f3efdbe7}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a21dc66b578a2d1158b32f103854a84be}{Enemy\+Fly}}, and \mbox{\hyperlink{class_enemy_basic_a8c87a63172fc71e39c821a6d19eb499d}{Enemy\+Basic}}.
+
+\mbox{\Hypertarget{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}\label{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}} 
+\index{AEnemy@{AEnemy}!\_update@{\_update}}
+\index{\_update@{\_update}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_update()}{\_update()}}
+{\footnotesize\ttfamily virtual bool A\+Enemy\+::\+\_\+update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Update entity. Called on every frames. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_enemy_frog_a92b77b8686f21b8ef3ee3d1cb078a2d4}{Enemy\+Frog}}, \mbox{\hyperlink{class_enemy_follow_a056cb50efd0967fddc9975920c927741}{Enemy\+Follow}}, \mbox{\hyperlink{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}{Enemy\+Crispy}}, \mbox{\hyperlink{class_enemy_with_eye_a3dff148a3aed8d67434111fd052f71c2}{Enemy\+With\+Eye}}, \mbox{\hyperlink{class_enemy_fly_a9b5577a848bba5d11e1d90cf923973ad}{Enemy\+Fly}}, and \mbox{\hyperlink{class_enemy_basic_a6b4c43308489726b95641ed9591bdb25}{Enemy\+Basic}}.
+
 \mbox{\Hypertarget{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}\label{class_a_enemy_ac946b6cd7d96f99365301450566d3baf}} 
 \index{AEnemy@{AEnemy}!animEndCb@{animEndCb}}
 \index{animEndCb@{animEndCb}!AEnemy@{AEnemy}}
@@ -277,7 +359,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+Implements \mbox{\hyperlink{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}{A\+Character}}.
 
 \mbox{\Hypertarget{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}\label{class_a_enemy_aca840427bf701f3c24b38a4c17a14cfd}} 
 \index{AEnemy@{AEnemy}!getCollision@{getCollision}}
@@ -291,7 +373,7 @@ get a list of entity in collision with the Character at a position.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pos} & default V\+O\+I\+D\+\_\+\+P\+O\+S3 \\
+{\em dest} & default V\+O\+I\+D\+\_\+\+P\+O\+S3 \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -301,6 +383,24 @@ std\+::unordered\+\_\+set$<$\+A\+Entity $\ast$$>$ collisions
 
 Reimplemented from \mbox{\hyperlink{class_a_character_a39c7111c4b096129d040e22e3b09592d}{A\+Character}}.
 
+\mbox{\Hypertarget{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}\label{class_a_enemy_a87e3db110aa11d461768f794bfb48c40}} 
+\index{AEnemy@{AEnemy}!operator=@{operator=}}
+\index{operator=@{operator=}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_enemy}{A\+Enemy}} \& A\+Enemy\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_enemy}{A\+Enemy}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}\label{class_a_enemy_a2d2ff5a126f14294bdbc17475c363d00}} 
 \index{AEnemy@{AEnemy}!postUpdate@{postUpdate}}
 \index{postUpdate@{postUpdate}!AEnemy@{AEnemy}}
@@ -328,7 +428,7 @@ Reimplemented from \mbox{\hyperlink{class_a_entity_ae2faa1d11e21033a223fef2bc03b
 
 
 
-\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$damage$>$ damages. 
+\mbox{\hyperlink{class_a_enemy}{A\+Enemy}} Take $<$ damage $>$ damages. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -361,9 +461,54 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+Implements \mbox{\hyperlink{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}{A\+Character}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_enemy_af85a958024c72d9c0f522be466c75092}\label{class_a_enemy_af85a958024c72d9c0f522be466c75092}} 
+\index{AEnemy@{AEnemy}!\_dir@{\_dir}}
+\index{\_dir@{\_dir}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_dir}{\_dir}}
+{\footnotesize\ttfamily Direction\+::\+Enum A\+Enemy\+::\+\_\+dir\hspace{0.3cm}{\ttfamily [protected]}}
+
+The direction \mbox{\Hypertarget{class_a_enemy_a112cb8a927706e1a563119258239f4b6}\label{class_a_enemy_a112cb8a927706e1a563119258239f4b6}} 
+\index{AEnemy@{AEnemy}!\_fisrtCall@{\_fisrtCall}}
+\index{\_fisrtCall@{\_fisrtCall}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_fisrtCall}{\_fisrtCall}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+fisrt\+Call\hspace{0.3cm}{\ttfamily [protected]}}
+
+true until the end of the first update call \mbox{\Hypertarget{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}\label{class_a_enemy_af05841272b0bfa864dcfffaeb1e29a9b}} 
+\index{AEnemy@{AEnemy}!\_moveOnCenter@{\_moveOnCenter}}
+\index{\_moveOnCenter@{\_moveOnCenter}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_moveOnCenter}{\_moveOnCenter}}
+{\footnotesize\ttfamily bool A\+Enemy\+::\+\_\+move\+On\+Center\hspace{0.3cm}{\ttfamily [protected]}}
+
+true if the enemy move on center (size $<$ 1) \mbox{\Hypertarget{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}\label{class_a_enemy_a4b3d010b8630c401730fbee2bfeb2a6b}} 
+\index{AEnemy@{AEnemy}!\_soundAttack@{\_soundAttack}}
+\index{\_soundAttack@{\_soundAttack}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{\_soundAttack}{\_soundAttack}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ A\+Enemy\+::\+\_\+sound\+Attack\hspace{0.3cm}{\ttfamily [protected]}}
+
+The sound on attacks \mbox{\Hypertarget{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}\label{class_a_enemy_ac306e77e93cd7574766e04d17728d18a}} 
+\index{AEnemy@{AEnemy}!bombs@{bombs}}
+\index{bombs@{bombs}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{bombs}{bombs}}
+{\footnotesize\ttfamily int A\+Enemy\+::bombs}
+
+number of bombs \mbox{\Hypertarget{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}\label{class_a_enemy_a0d6c03c5f76b67b821f2510cc12dfc64}} 
+\index{AEnemy@{AEnemy}!points@{points}}
+\index{points@{points}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{points}{points}}
+{\footnotesize\ttfamily int32\+\_\+t A\+Enemy\+::points}
+
+number of points \mbox{\Hypertarget{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}\label{class_a_enemy_ac1bb9d347e62e478c9c83be27dcf1598}} 
+\index{AEnemy@{AEnemy}!strength@{strength}}
+\index{strength@{strength}!AEnemy@{AEnemy}}
+\doxysubsubsection{\texorpdfstring{strength}{strength}}
+{\footnotesize\ttfamily int A\+Enemy\+::strength}
+
+number of damage if hit player 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -11,7 +11,8 @@ Class to store and draw a 3d model \mbox{\hyperlink{class_mesh}{Mesh}}.
 
 
 
-Collaboration diagram for Mesh\+:\nopagebreak
+Collaboration diagram for Mesh\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,18 +22,20 @@ Collaboration diagram for Mesh\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_mesh_a316035c11ead9be63e3bcac30bb9c1bb}\label{class_mesh_a316035c11ead9be63e3bcac30bb9c1bb}} 
-{\bfseries Mesh} (\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&open\+G\+L\+Model, \mbox{\hyperlink{class_shader}{Shader}} \&sh, std\+::string const \&name, std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ vertices, std\+::vector$<$ uint32\+\_\+t $>$ vert\+Indices, std\+::vector$<$ \mbox{\hyperlink{struct_texture}{Texture}} $>$ textures, \mbox{\hyperlink{class_material}{Material}} material, \mbox{\hyperlink{struct_bounding_box}{Bounding\+Box}} bounding\+Box)
-\item 
-\mbox{\Hypertarget{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}\label{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}} 
-{\bfseries Mesh} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&src)
-\item 
-\mbox{\Hypertarget{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}\label{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}} 
-\mbox{\hyperlink{class_mesh}{Mesh}} \& {\bfseries operator=} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_mesh_a3acd2a5dec9fade334a7c37cf46a9962}{Mesh}} (\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&open\+G\+L\+Model, \mbox{\hyperlink{class_shader}{Shader}} \&sh, std\+::string const \&name, std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ vertices, std\+::vector$<$ uint32\+\_\+t $>$ vert\+Indices, \mbox{\hyperlink{class_material}{Material}} material, \mbox{\hyperlink{struct_bounding_box}{Bounding\+Box}} bounding\+Box)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_mesh}{Mesh}}\+:\+: \mbox{\hyperlink{class_mesh}{Mesh}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}\label{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}} 
+virtual \mbox{\hyperlink{class_mesh_a5efe4da1a4c0971cfb037bd70304c303}{$\sim$\+Mesh}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_mesh}{Mesh}}\+:\+: \mbox{\hyperlink{class_mesh}{Mesh}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}{Mesh}} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_mesh}{Mesh}}\+:\+: \mbox{\hyperlink{class_mesh}{Mesh}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_mesh}{Mesh}} \& \mbox{\hyperlink{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}{operator=}} (\mbox{\hyperlink{class_mesh}{Mesh}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_mesh_af8d667c581d9082760b2bb77cc686aed}{set\+Texture}} (Texture\+Type\+::\+Enum type, \mbox{\hyperlink{struct_texture}{Texture}} const texture)
+\begin{DoxyCompactList}\small\item\em set \mbox{\hyperlink{class_mesh}{Mesh}} texture \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_mesh_a06496712e5436f307076bdd0ef05ea03}{draw}} (glm\+::mat4 const \&model) const
 \begin{DoxyCompactList}\small\item\em draw the \mbox{\hyperlink{class_mesh}{Mesh}} \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_mesh_a103fa942bacc358c9c3a030d62335f7a}{add\+Bone\+Data}} (uint32\+\_\+t bone\+ID, float weight, uint32\+\_\+t Vertice\+ID)
+void \mbox{\hyperlink{class_mesh_a9b6d06fc58f90869b8bf9a4d40177cc9}{add\+Bone\+Data}} (uint32\+\_\+t bone\+ID, float weight, uint32\+\_\+t vertex\+ID)
 \begin{DoxyCompactList}\small\item\em store the bone info to the mesh \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}{send\+Mesh}} ()
 \begin{DoxyCompactList}\small\item\em send the mesh data to open\+GL \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -43,12 +46,57 @@ Class to store and draw a 3d model \mbox{\hyperlink{class_mesh}{Mesh}}.
 
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_mesh_a3acd2a5dec9fade334a7c37cf46a9962}\label{class_mesh_a3acd2a5dec9fade334a7c37cf46a9962}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} \&}]{open\+G\+L\+Model,  }\item[{\mbox{\hyperlink{class_shader}{Shader}} \&}]{sh,  }\item[{std\+::string const \&}]{name,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$}]{vertices,  }\item[{std\+::vector$<$ uint32\+\_\+t $>$}]{vert\+Indices,  }\item[{\mbox{\hyperlink{class_material}{Material}}}]{material,  }\item[{\mbox{\hyperlink{struct_bounding_box}{Bounding\+Box}}}]{bounding\+Box }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_mesh}{Mesh}}\+:\+: \mbox{\hyperlink{class_mesh}{Mesh}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em open\+G\+L\+Model} & \mbox{\hyperlink{class_open_g_l_model}{Open\+G\+L\+Model}} master object \\
+\hline
+{\em sh} & \mbox{\hyperlink{class_shader}{Shader}} \\
+\hline
+{\em name} & Name \\
+\hline
+{\em vertices} & Vertices \\
+\hline
+{\em vert\+Indices} & Vertices indices \\
+\hline
+{\em material} & \mbox{\hyperlink{class_material}{Material}} \\
+\hline
+{\em bounding\+Box} & Bounding box \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}\label{class_mesh_aa61b77f723d39c1bdaf4ed24ab8dae2c}} 
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\index{Mesh@{Mesh}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{Mesh()}{Mesh()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Mesh\+::\+Mesh (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_mesh}{Mesh}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_mesh}{Mesh}}\+:\+: \mbox{\hyperlink{class_mesh}{Mesh}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_mesh_a103fa942bacc358c9c3a030d62335f7a}\label{class_mesh_a103fa942bacc358c9c3a030d62335f7a}} 
+\mbox{\Hypertarget{class_mesh_a9b6d06fc58f90869b8bf9a4d40177cc9}\label{class_mesh_a9b6d06fc58f90869b8bf9a4d40177cc9}} 
 \index{Mesh@{Mesh}!addBoneData@{addBoneData}}
 \index{addBoneData@{addBoneData}!Mesh@{Mesh}}
 \doxysubsubsection{\texorpdfstring{addBoneData()}{addBoneData()}}
-{\footnotesize\ttfamily void Mesh\+::add\+Bone\+Data (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bone\+ID,  }\item[{float}]{weight,  }\item[{uint32\+\_\+t}]{Vertice\+ID }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Mesh\+::add\+Bone\+Data (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{bone\+ID,  }\item[{float}]{weight,  }\item[{uint32\+\_\+t}]{vertex\+ID }\end{DoxyParamCaption})}
 
 
 
@@ -73,6 +121,24 @@ store the bone info to the mesh
 
 draw the \mbox{\hyperlink{class_mesh}{Mesh}} 
 
+\mbox{\Hypertarget{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}\label{class_mesh_aab3228b39ec8cc452c93eeaf0f4e00c6}} 
+\index{Mesh@{Mesh}!operator=@{operator=}}
+\index{operator=@{operator=}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_mesh}{Mesh}} \& Mesh\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_mesh}{Mesh}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_mesh}{Mesh}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}\label{class_mesh_aa7f62a30fdb6aeca5d74fb01ec0a5c91}} 
 \index{Mesh@{Mesh}!sendMesh@{sendMesh}}
 \index{sendMesh@{sendMesh}!Mesh@{Mesh}}
@@ -83,6 +149,23 @@ draw the \mbox{\hyperlink{class_mesh}{Mesh}}
 
 send the mesh data to open\+GL 
 
+\mbox{\Hypertarget{class_mesh_af8d667c581d9082760b2bb77cc686aed}\label{class_mesh_af8d667c581d9082760b2bb77cc686aed}} 
+\index{Mesh@{Mesh}!setTexture@{setTexture}}
+\index{setTexture@{setTexture}!Mesh@{Mesh}}
+\doxysubsubsection{\texorpdfstring{setTexture()}{setTexture()}}
+{\footnotesize\ttfamily void Mesh\+::set\+Texture (\begin{DoxyParamCaption}\item[{Texture\+Type\+::\+Enum}]{type,  }\item[{\mbox{\hyperlink{struct_texture}{Texture}} const}]{texture }\end{DoxyParamCaption})}
+
+
+
+set \mbox{\hyperlink{class_mesh}{Mesh}} texture 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & the texture type D\+I\+F\+F\+U\+S\+E/\+S\+P\+E\+C\+U\+L\+A\+R/\+N\+O\+R\+M\+A\+L/... \\
+\hline
+{\em texture} & \mbox{\hyperlink{struct_texture}{Texture}} object \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

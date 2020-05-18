@@ -1,15 +1,15 @@
 <map id="SceneDifficulty" name="SceneDifficulty">
-<area shape="rect" id="node1" title="main menu (opened at the game startup)" alt="" coords="301,2212,440,2377"/>
+<area shape="rect" id="node1" title="Menu to choose dificulty (when starting a new game)" alt="" coords="301,2212,440,2377"/>
 <area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="307,1896,435,2149"/>
 <area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="345,1473,447,1697"/>
 <area shape="rect" id="node4" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="308,710,495,1007"/>
 <area shape="rect" id="node5" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="175,71,281,295"/>
 <area shape="rect" id="node10" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="76,439,279,1279"/>
-<area shape="rect" id="node6" href="$class_texture_manager.html" title=" " alt="" coords="645,101,787,266"/>
+<area shape="rect" id="node6" href="$class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="645,101,787,266"/>
 <area shape="rect" id="node7" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="319,5,454,361"/>
-<area shape="rect" id="node8" href="$struct_game_info.html" title=" " alt="" coords="478,108,621,259"/>
-<area shape="rect" id="node9" href="$struct_scene_difficulty_1_1_all_u_i.html" title=" " alt="" coords="62,1795,210,1872"/>
+<area shape="rect" id="node8" href="$struct_game_info.html" title="General information about the game." alt="" coords="478,108,621,259"/>
+<area shape="rect" id="node9" href="$struct_scene_difficulty_1_1_all_u_i.html" title="All UI elements." alt="" coords="62,1795,210,1872"/>
 <area shape="rect" id="node12" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="132,1400,313,1771"/>
 <area shape="rect" id="node11" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="5,71,123,295"/>
-<area shape="rect" id="node13" href="$struct_scene_difficulty_1_1_buttons_states.html" title=" " alt="" coords="459,1947,623,2098"/>
+<area shape="rect" id="node13" href="$struct_scene_difficulty_1_1_buttons_states.html" title="All buttons states." alt="" coords="459,1947,623,2098"/>
 </map>

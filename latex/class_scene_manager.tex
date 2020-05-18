@@ -11,7 +11,8 @@ this object can manage all scenes (\mbox{\hyperlink{class_a_scene}{A\+Scene}} ob
 
 
 
-Collaboration diagram for Scene\+Manager\+:\nopagebreak
+Collaboration diagram for Scene\+Manager\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,7 +23,16 @@ Collaboration diagram for Scene\+Manager\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_scene_manager_1_1_scene_manager_exception}{Scene\+Manager\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_manager_a52085e6737c23b491c228e86781af808}\label{class_scene_manager_a52085e6737c23b491c228e86781af808}} 
+\mbox{\hyperlink{class_scene_manager_a52085e6737c23b491c228e86781af808}{Scene\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Manager\+:\+: Scene Manager object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}\label{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}} 
+virtual \mbox{\hyperlink{class_scene_manager_a2bb376a85d29e85f47753e26c7539229}{$\sim$\+Scene\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Manager\+:\+: Scene Manager object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,9 +54,8 @@ static bool \mbox{\hyperlink{class_scene_manager_a7163901c7efca6117be5a8911eb6ad
 \begin{DoxyCompactList}\small\item\em Return if the scene has changed in the current frame. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{class_scene_manager_a391bfd7e765b42a09993977b7371df32}{open\+Cheat\+Code}} (bool open)
 \begin{DoxyCompactList}\small\item\em Open or force close cheat code command line. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_manager_a06344fee3566d4f109307391a1fdf771}\label{class_scene_manager_a06344fee3566d4f109307391a1fdf771}} 
-static void {\bfseries open\+Cheat\+Code\+For\+Time} (uint64\+\_\+t ms)
-\item 
+static void \mbox{\hyperlink{class_scene_manager_a06344fee3566d4f109307391a1fdf771}{open\+Cheat\+Code\+For\+Time}} (uint64\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Open cheatcode text for a certain time. \end{DoxyCompactList}\item 
 static bool \mbox{\hyperlink{class_scene_manager_adf58aea97d9dc2a8a21b15012e40076b}{is\+Cheat\+Code\+Open}} ()
 \begin{DoxyCompactList}\small\item\em Know if we are in cheat code mode. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_scene_manager_a580b0599c8d244f4eaecc6568041580b}\label{class_scene_manager_a580b0599c8d244f4eaecc6568041580b}} 
@@ -55,72 +64,53 @@ static void \mbox{\hyperlink{class_scene_manager_a580b0599c8d244f4eaecc656804158
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a3dd5f5c63c893508ddb701d19533a0c6}\label{class_scene_manager_a3dd5f5c63c893508ddb701d19533a0c6}} 
-bool {\bfseries \+\_\+init} ()
-\item 
-\mbox{\Hypertarget{class_scene_manager_a551147ff34683483b9face928dd24564}\label{class_scene_manager_a551147ff34683483b9face928dd24564}} 
-bool {\bfseries \+\_\+run} (float max\+Frame\+Duration)
-\item 
+bool \mbox{\hyperlink{class_scene_manager_a3dd5f5c63c893508ddb701d19533a0c6}{\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em init the \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} (load the first scene\& load gui) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_scene_manager_a551147ff34683483b9face928dd24564}{\+\_\+run}} (float max\+Frame\+Duration)
+\begin{DoxyCompactList}\small\item\em this is the main game loop to update \& draw everythings \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_manager_af57dd8e436c025bdeb7c2ec751b62ba9}{\+\_\+update}} ()
 \begin{DoxyCompactList}\small\item\em Update the current scene. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_scene_manager_adc10bb1fde4ed648080de309e69331c9}{\+\_\+draw}} ()
 \begin{DoxyCompactList}\small\item\em Draw the current scene. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_scene_manager_a9209f024c89479aab57bf3277c86a584}\label{class_scene_manager_a9209f024c89479aab57bf3277c86a584}} 
-\mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ {\bfseries \+\_\+load\+Scene} (std\+::string const \&name)
-\item 
-\mbox{\Hypertarget{class_scene_manager_ac0599b120f0aa835792d9679e62f8522}\label{class_scene_manager_ac0599b120f0aa835792d9679e62f8522}} 
-\mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ {\bfseries \+\_\+get\+Scene} (std\+::string const \&name)
-\item 
-\mbox{\Hypertarget{class_scene_manager_adfeeb557f7324390b86befdd4bb66daa}\label{class_scene_manager_adfeeb557f7324390b86befdd4bb66daa}} 
-std\+::string const  \& {\bfseries \+\_\+get\+Scene\+Name} () const
-\item 
-\mbox{\Hypertarget{class_scene_manager_a1bcdec59b83d98bce12e8e98649f19c9}\label{class_scene_manager_a1bcdec59b83d98bce12e8e98649f19c9}} 
-bool {\bfseries \+\_\+is\+Scene\+Changed\+In\+Cur\+Frame} () const
-\item 
-\mbox{\Hypertarget{class_scene_manager_acae2f12e491a06191c50e0459b00b910}\label{class_scene_manager_acae2f12e491a06191c50e0459b00b910}} 
-void {\bfseries \+\_\+open\+Cheat\+Code} (bool open)
-\item 
-\mbox{\Hypertarget{class_scene_manager_a5c09e7cb723f941b0fabcf1d97e6808d}\label{class_scene_manager_a5c09e7cb723f941b0fabcf1d97e6808d}} 
-void {\bfseries \+\_\+open\+Cheat\+Code\+For\+Time} (uint64\+\_\+t ms)
-\item 
-\mbox{\Hypertarget{class_scene_manager_a2623c67be48d3a903c1638ff291674a9}\label{class_scene_manager_a2623c67be48d3a903c1638ff291674a9}} 
-bool {\bfseries \+\_\+is\+Cheat\+Code\+Open} () const
-\item 
+\mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ \mbox{\hyperlink{class_scene_manager_a9209f024c89479aab57bf3277c86a584}{\+\_\+load\+Scene}} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em load a scene from his name \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ \mbox{\hyperlink{class_scene_manager_ac0599b120f0aa835792d9679e62f8522}{\+\_\+get\+Scene}} (std\+::string const \&name)
+\begin{DoxyCompactList}\small\item\em get a scene \end{DoxyCompactList}\item 
+std\+::string const  \& \mbox{\hyperlink{class_scene_manager_adfeeb557f7324390b86befdd4bb66daa}{\+\_\+get\+Scene\+Name}} () const
+\begin{DoxyCompactList}\small\item\em get the current scene name \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_scene_manager_a1bcdec59b83d98bce12e8e98649f19c9}{\+\_\+is\+Scene\+Changed\+In\+Cur\+Frame}} () const
+\begin{DoxyCompactList}\small\item\em Return if the scene has changed in the current frame. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_manager_acae2f12e491a06191c50e0459b00b910}{\+\_\+open\+Cheat\+Code}} (bool open)
+\begin{DoxyCompactList}\small\item\em Open or force close cheat code command line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_manager_a5c09e7cb723f941b0fabcf1d97e6808d}{\+\_\+open\+Cheat\+Code\+For\+Time}} (uint64\+\_\+t ms)
+\begin{DoxyCompactList}\small\item\em Open cheatcode text for a certain time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_scene_manager_a2623c67be48d3a903c1638ff291674a9}{\+\_\+is\+Cheat\+Code\+Open}} () const
+\begin{DoxyCompactList}\small\item\em Know if we are in cheat code mode. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_scene_manager_a27cab997337709bba4545c24eaa845b1}\label{class_scene_manager_a27cab997337709bba4545c24eaa845b1}} 
-void {\bfseries \+\_\+quit} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_scene_manager_a27cab997337709bba4545c24eaa845b1}{\+\_\+quit}} ()
+\begin{DoxyCompactList}\small\item\em quit the game \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a7374e033b00588f0b365c96dede8efbc}\label{class_scene_manager_a7374e033b00588f0b365c96dede8efbc}} 
-bool {\bfseries \+\_\+is\+Init}
+bool \mbox{\hyperlink{class_scene_manager_a7374e033b00588f0b365c96dede8efbc}{\+\_\+is\+Init}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}\label{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}} 
-\mbox{\hyperlink{struct_game_info}{Game\+Info}} {\bfseries \+\_\+game\+Info}
+\mbox{\hyperlink{struct_game_info}{Game\+Info}} \mbox{\hyperlink{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}{\+\_\+game\+Info}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}\label{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}} 
-\mbox{\hyperlink{class_gui}{Gui}} $\ast$ {\bfseries \+\_\+gui}
+\mbox{\hyperlink{class_gui}{Gui}} $\ast$ \mbox{\hyperlink{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}{\+\_\+gui}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a977ccde68ecf224d4bd5c973bc56c2d6}\label{class_scene_manager_a977ccde68ecf224d4bd5c973bc56c2d6}} 
-float {\bfseries \+\_\+dt\+Time}
+float \mbox{\hyperlink{class_scene_manager_a977ccde68ecf224d4bd5c973bc56c2d6}{\+\_\+dt\+Time}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a1a296d698bee6221417bf0837d76d8dc}\label{class_scene_manager_a1a296d698bee6221417bf0837d76d8dc}} 
-std\+::string {\bfseries \+\_\+scene}
+std\+::string \mbox{\hyperlink{class_scene_manager_a1a296d698bee6221417bf0837d76d8dc}{\+\_\+scene}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_aa5ff91a38f3de01ce3fb41ac6cc62d40}\label{class_scene_manager_aa5ff91a38f3de01ce3fb41ac6cc62d40}} 
-std\+::map$<$ std\+::string, \mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ $>$ {\bfseries \+\_\+scene\+Map}
+std\+::map$<$ std\+::string, \mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ $>$ \mbox{\hyperlink{class_scene_manager_aa5ff91a38f3de01ce3fb41ac6cc62d40}{\+\_\+scene\+Map}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a63f2feeb37fe4f7be06941dff8ef0652}\label{class_scene_manager_a63f2feeb37fe4f7be06941dff8ef0652}} 
-bool {\bfseries \+\_\+is\+In\+Cheat\+Code}
+bool \mbox{\hyperlink{class_scene_manager_a63f2feeb37fe4f7be06941dff8ef0652}{\+\_\+is\+In\+Cheat\+Code}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_a27e08ee627a10d7b2e1d3ebf2ea7d2bb}\label{class_scene_manager_a27e08ee627a10d7b2e1d3ebf2ea7d2bb}} 
-int64\+\_\+t {\bfseries \+\_\+show\+Cheat\+Code\+Text\+Time}
+int64\+\_\+t \mbox{\hyperlink{class_scene_manager_a27e08ee627a10d7b2e1d3ebf2ea7d2bb}{\+\_\+show\+Cheat\+Code\+Text\+Time}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_abda89dbf5fdc865be659014abfc81ea6}\label{class_scene_manager_abda89dbf5fdc865be659014abfc81ea6}} 
-uint16\+\_\+t {\bfseries \+\_\+fps}
+uint16\+\_\+t \mbox{\hyperlink{class_scene_manager_abda89dbf5fdc865be659014abfc81ea6}{\+\_\+fps}}
 \item 
-\mbox{\Hypertarget{class_scene_manager_af1a54a7d8f6a8fb3f5e392de6d04c3bf}\label{class_scene_manager_af1a54a7d8f6a8fb3f5e392de6d04c3bf}} 
-bool {\bfseries \+\_\+scene\+Loaded\+Current\+Frame}
+bool \mbox{\hyperlink{class_scene_manager_af1a54a7d8f6a8fb3f5e392de6d04c3bf}{\+\_\+scene\+Loaded\+Current\+Frame}}
 \end{DoxyCompactItemize}
 
 
@@ -142,6 +132,137 @@ Draw the current scene.
 
 \begin{DoxyReturn}{Returns}
 false if error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_ac0599b120f0aa835792d9679e62f8522}\label{class_scene_manager_ac0599b120f0aa835792d9679e62f8522}} 
+\index{SceneManager@{SceneManager}!\_getScene@{\_getScene}}
+\index{\_getScene@{\_getScene}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_getScene()}{\_getScene()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ Scene\+Manager\+::\+\_\+get\+Scene (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get a scene 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the scene to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A\+Scene$\ast$ a pointer to the scene 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_adfeeb557f7324390b86befdd4bb66daa}\label{class_scene_manager_adfeeb557f7324390b86befdd4bb66daa}} 
+\index{SceneManager@{SceneManager}!\_getSceneName@{\_getSceneName}}
+\index{\_getSceneName@{\_getSceneName}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_getSceneName()}{\_getSceneName()}}
+{\footnotesize\ttfamily std\+::string const  \& Scene\+Manager\+::\+\_\+get\+Scene\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+get the current scene name 
+
+\begin{DoxyReturn}{Returns}
+std\+::string const\& the current scene name 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_a3dd5f5c63c893508ddb701d19533a0c6}\label{class_scene_manager_a3dd5f5c63c893508ddb701d19533a0c6}} 
+\index{SceneManager@{SceneManager}!\_init@{\_init}}
+\index{\_init@{\_init}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_init()}{\_init()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+init the \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} (load the first scene\& load gui) 
+
+\begin{DoxyReturn}{Returns}
+false if failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_a2623c67be48d3a903c1638ff291674a9}\label{class_scene_manager_a2623c67be48d3a903c1638ff291674a9}} 
+\index{SceneManager@{SceneManager}!\_isCheatCodeOpen@{\_isCheatCodeOpen}}
+\index{\_isCheatCodeOpen@{\_isCheatCodeOpen}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_isCheatCodeOpen()}{\_isCheatCodeOpen()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+is\+Cheat\+Code\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Know if we are in cheat code mode. 
+
+\begin{DoxyReturn}{Returns}
+true If cheat code command line is open 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_a1bcdec59b83d98bce12e8e98649f19c9}\label{class_scene_manager_a1bcdec59b83d98bce12e8e98649f19c9}} 
+\index{SceneManager@{SceneManager}!\_isSceneChangedInCurFrame@{\_isSceneChangedInCurFrame}}
+\index{\_isSceneChangedInCurFrame@{\_isSceneChangedInCurFrame}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_isSceneChangedInCurFrame()}{\_isSceneChangedInCurFrame()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+is\+Scene\+Changed\+In\+Cur\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Return if the scene has changed in the current frame. 
+
+\begin{DoxyReturn}{Returns}
+true If the scene changed in the current frame 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_a9209f024c89479aab57bf3277c86a584}\label{class_scene_manager_a9209f024c89479aab57bf3277c86a584}} 
+\index{SceneManager@{SceneManager}!\_loadScene@{\_loadScene}}
+\index{\_loadScene@{\_loadScene}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_loadScene()}{\_loadScene()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$ Scene\+Manager\+::\+\_\+load\+Scene (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+load a scene from his name 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the scene name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A\+Scene$\ast$ a pointer to the scene loaded 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_manager_acae2f12e491a06191c50e0459b00b910}\label{class_scene_manager_acae2f12e491a06191c50e0459b00b910}} 
+\index{SceneManager@{SceneManager}!\_openCheatCode@{\_openCheatCode}}
+\index{\_openCheatCode@{\_openCheatCode}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_openCheatCode()}{\_openCheatCode()}}
+{\footnotesize\ttfamily void Scene\+Manager\+::\+\_\+open\+Cheat\+Code (\begin{DoxyParamCaption}\item[{bool}]{open }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Open or force close cheat code command line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em open} & True to open cheat code command line \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_manager_a5c09e7cb723f941b0fabcf1d97e6808d}\label{class_scene_manager_a5c09e7cb723f941b0fabcf1d97e6808d}} 
+\index{SceneManager@{SceneManager}!\_openCheatCodeForTime@{\_openCheatCodeForTime}}
+\index{\_openCheatCodeForTime@{\_openCheatCodeForTime}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_openCheatCodeForTime()}{\_openCheatCodeForTime()}}
+{\footnotesize\ttfamily void Scene\+Manager\+::\+\_\+open\+Cheat\+Code\+For\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{ms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Open cheatcode text for a certain time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ms} & The time to open cheatcode text \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_manager_a551147ff34683483b9face928dd24564}\label{class_scene_manager_a551147ff34683483b9face928dd24564}} 
+\index{SceneManager@{SceneManager}!\_run@{\_run}}
+\index{\_run@{\_run}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_run()}{\_run()}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+run (\begin{DoxyParamCaption}\item[{float}]{max\+Frame\+Duration }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+this is the main game loop to update \& draw everythings 
+
+\begin{DoxyReturn}{Returns}
+false if failure 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_manager_af57dd8e436c025bdeb7c2ec751b62ba9}\label{class_scene_manager_af57dd8e436c025bdeb7c2ec751b62ba9}} 
 \index{SceneManager@{SceneManager}!\_update@{\_update}}
@@ -224,8 +345,6 @@ std\+::string const\& the current scene name
 init the \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} (load the first scene\& load gui) 
 
 \begin{DoxyReturn}{Returns}
-true if success 
-
 false if failure 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_manager_adf58aea97d9dc2a8a21b15012e40076b}\label{class_scene_manager_adf58aea97d9dc2a8a21b15012e40076b}} 
@@ -287,6 +406,21 @@ Open or force close cheat code command line.
 {\em open} & True to open cheat code command line \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_scene_manager_a06344fee3566d4f109307391a1fdf771}\label{class_scene_manager_a06344fee3566d4f109307391a1fdf771}} 
+\index{SceneManager@{SceneManager}!openCheatCodeForTime@{openCheatCodeForTime}}
+\index{openCheatCodeForTime@{openCheatCodeForTime}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{openCheatCodeForTime()}{openCheatCodeForTime()}}
+{\footnotesize\ttfamily void Scene\+Manager\+::open\+Cheat\+Code\+For\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{ms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Open cheatcode text for a certain time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ms} & The time to open cheatcode text \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_scene_manager_a7d88d1c5611d84ca9a08bda535ff46f1}\label{class_scene_manager_a7d88d1c5611d84ca9a08bda535ff46f1}} 
 \index{SceneManager@{SceneManager}!run@{run}}
 \index{run@{run}!SceneManager@{SceneManager}}
@@ -298,11 +432,72 @@ Open or force close cheat code command line.
 this is the main game loop to update \& draw everythings 
 
 \begin{DoxyReturn}{Returns}
-true if success 
-
 false if failure 
 \end{DoxyReturn}
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_scene_manager_a977ccde68ecf224d4bd5c973bc56c2d6}\label{class_scene_manager_a977ccde68ecf224d4bd5c973bc56c2d6}} 
+\index{SceneManager@{SceneManager}!\_dtTime@{\_dtTime}}
+\index{\_dtTime@{\_dtTime}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_dtTime}{\_dtTime}}
+{\footnotesize\ttfamily float Scene\+Manager\+::\+\_\+dt\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+Delta time btw 2 loop calls \mbox{\Hypertarget{class_scene_manager_abda89dbf5fdc865be659014abfc81ea6}\label{class_scene_manager_abda89dbf5fdc865be659014abfc81ea6}} 
+\index{SceneManager@{SceneManager}!\_fps@{\_fps}}
+\index{\_fps@{\_fps}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_fps}{\_fps}}
+{\footnotesize\ttfamily uint16\+\_\+t Scene\+Manager\+::\+\_\+fps\hspace{0.3cm}{\ttfamily [protected]}}
+
+Max F\+PS of the game \mbox{\Hypertarget{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}\label{class_scene_manager_a1d39b03c8e86c12586b5a7739d6eca04}} 
+\index{SceneManager@{SceneManager}!\_gameInfo@{\_gameInfo}}
+\index{\_gameInfo@{\_gameInfo}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_gameInfo}{\_gameInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_game_info}{Game\+Info}} Scene\+Manager\+::\+\_\+game\+Info\hspace{0.3cm}{\ttfamily [protected]}}
+
+Game global informations \mbox{\Hypertarget{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}\label{class_scene_manager_a773af17733045a87c8ffefd5d5bae5be}} 
+\index{SceneManager@{SceneManager}!\_gui@{\_gui}}
+\index{\_gui@{\_gui}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_gui}{\_gui}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_gui}{Gui}}$\ast$ Scene\+Manager\+::\+\_\+gui\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\hyperlink{class_gui}{Gui}} object \mbox{\Hypertarget{class_scene_manager_a63f2feeb37fe4f7be06941dff8ef0652}\label{class_scene_manager_a63f2feeb37fe4f7be06941dff8ef0652}} 
+\index{SceneManager@{SceneManager}!\_isInCheatCode@{\_isInCheatCode}}
+\index{\_isInCheatCode@{\_isInCheatCode}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_isInCheatCode}{\_isInCheatCode}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+is\+In\+Cheat\+Code\hspace{0.3cm}{\ttfamily [protected]}}
+
+True if we are in cheatcode \mbox{\Hypertarget{class_scene_manager_a7374e033b00588f0b365c96dede8efbc}\label{class_scene_manager_a7374e033b00588f0b365c96dede8efbc}} 
+\index{SceneManager@{SceneManager}!\_isInit@{\_isInit}}
+\index{\_isInit@{\_isInit}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_isInit}{\_isInit}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+is\+Init\hspace{0.3cm}{\ttfamily [protected]}}
+
+True if \mbox{\hyperlink{class_scene_manager}{Scene\+Manager}} was init \mbox{\Hypertarget{class_scene_manager_a1a296d698bee6221417bf0837d76d8dc}\label{class_scene_manager_a1a296d698bee6221417bf0837d76d8dc}} 
+\index{SceneManager@{SceneManager}!\_scene@{\_scene}}
+\index{\_scene@{\_scene}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_scene}{\_scene}}
+{\footnotesize\ttfamily std\+::string Scene\+Manager\+::\+\_\+scene\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of the current scene \mbox{\Hypertarget{class_scene_manager_af1a54a7d8f6a8fb3f5e392de6d04c3bf}\label{class_scene_manager_af1a54a7d8f6a8fb3f5e392de6d04c3bf}} 
+\index{SceneManager@{SceneManager}!\_sceneLoadedCurrentFrame@{\_sceneLoadedCurrentFrame}}
+\index{\_sceneLoadedCurrentFrame@{\_sceneLoadedCurrentFrame}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_sceneLoadedCurrentFrame}{\_sceneLoadedCurrentFrame}}
+{\footnotesize\ttfamily bool Scene\+Manager\+::\+\_\+scene\+Loaded\+Current\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+
+True if a scene was loaded in the current frame \mbox{\Hypertarget{class_scene_manager_aa5ff91a38f3de01ce3fb41ac6cc62d40}\label{class_scene_manager_aa5ff91a38f3de01ce3fb41ac6cc62d40}} 
+\index{SceneManager@{SceneManager}!\_sceneMap@{\_sceneMap}}
+\index{\_sceneMap@{\_sceneMap}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_sceneMap}{\_sceneMap}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, \mbox{\hyperlink{class_a_scene}{A\+Scene}} $\ast$$>$ Scene\+Manager\+::\+\_\+scene\+Map\hspace{0.3cm}{\ttfamily [protected]}}
+
+All scenes (in a map) \mbox{\Hypertarget{class_scene_manager_a27e08ee627a10d7b2e1d3ebf2ea7d2bb}\label{class_scene_manager_a27e08ee627a10d7b2e1d3ebf2ea7d2bb}} 
+\index{SceneManager@{SceneManager}!\_showCheatCodeTextTime@{\_showCheatCodeTextTime}}
+\index{\_showCheatCodeTextTime@{\_showCheatCodeTextTime}!SceneManager@{SceneManager}}
+\doxysubsubsection{\texorpdfstring{\_showCheatCodeTextTime}{\_showCheatCodeTextTime}}
+{\footnotesize\ttfamily int64\+\_\+t Scene\+Manager\+::\+\_\+show\+Cheat\+Code\+Text\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+If $>$ 0 -\/$>$ number of ms to show the text information of cheatcode 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

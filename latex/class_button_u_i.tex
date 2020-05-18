@@ -30,15 +30,15 @@ Collaboration diagram for Button\+UI\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}\label{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}} 
-{\bfseries Button\+UI} (glm\+::vec2 pos, glm\+::vec2 size)
-\item 
-\mbox{\Hypertarget{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}\label{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}} 
-{\bfseries Button\+UI} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&src)
-\item 
-\mbox{\Hypertarget{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}\label{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}} 
-\mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&rhs)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}{Button\+UI}} (glm\+::vec2 pos, glm\+::vec2 size)
+\begin{DoxyCompactList}\small\item\em Construct a new Button U I\+:\+: Button U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}{Button\+UI}} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Button U I\+:\+: Button U I object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_button_u_i_aec36b3db802067fa7a2f4bf0d7104284}\label{class_button_u_i_aec36b3db802067fa7a2f4bf0d7104284}} 
+virtual \mbox{\hyperlink{class_button_u_i_aec36b3db802067fa7a2f4bf0d7104284}{$\sim$\+Button\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Button U I\+:\+: Button U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& \mbox{\hyperlink{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}{operator=}} (\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -53,6 +53,62 @@ virtual void \mbox{\hyperlink{class_button_u_i_aa183e89b7efbc8eed5fc91ce16029725
 
 \doxysubsection{Detailed Description}
 this is the UI for button 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}\label{class_button_u_i_a06e5f10c62feee5baf35f88f3af574b2}} 
+\index{ButtonUI@{ButtonUI}!ButtonUI@{ButtonUI}}
+\index{ButtonUI@{ButtonUI}!ButtonUI@{ButtonUI}}
+\doxysubsubsection{\texorpdfstring{ButtonUI()}{ButtonUI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Button\+U\+I\+::\+Button\+UI (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size }\end{DoxyParamCaption})}
+
+
+
+Construct a new Button U I\+:\+: Button U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position of the UI element \\
+\hline
+{\em size} & The size of the UI element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}\label{class_button_u_i_a64d56901e494b8ae4fdd550631135ce0}} 
+\index{ButtonUI@{ButtonUI}!ButtonUI@{ButtonUI}}
+\index{ButtonUI@{ButtonUI}!ButtonUI@{ButtonUI}}
+\doxysubsubsection{\texorpdfstring{ButtonUI()}{ButtonUI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Button\+U\+I\+::\+Button\+UI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Button U I\+:\+: Button U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}\label{class_button_u_i_a17cfc6a63fb650c756d7f0afadad665e}} 
+\index{ButtonUI@{ButtonUI}!operator=@{operator=}}
+\index{operator=@{operator=}!ButtonUI@{ButtonUI}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& Button\+U\+I\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_button_u_i}{Button\+UI}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_button_u_i}{Button\+UI}}\& A reference to the copied object 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

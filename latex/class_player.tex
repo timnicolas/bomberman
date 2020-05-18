@@ -11,7 +11,8 @@ This is the player object.
 
 
 
-Inheritance diagram for Player\+:\nopagebreak
+Inheritance diagram for Player\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Player\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Player\+:\nopagebreak
+Collaboration diagram for Player\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,22 +32,22 @@ Collaboration diagram for Player\+:\nopagebreak
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{struct_player_1_1_bonus_actifs}{Bonus\+Actifs}}
-\item 
+struct \mbox{\hyperlink{struct_player_1_1_active_bonus}{Active\+Bonus}}
+\begin{DoxyCompactList}\small\item\em All active bonus for the player. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_player_1_1_player_exception}{Player\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_player_a290433592841cca95046b8c9dac7be86}\label{class_player_a290433592841cca95046b8c9dac7be86}} 
-{\bfseries Player} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}\label{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}} 
-{\bfseries Player} (\mbox{\hyperlink{class_player}{Player}} const \&src)
-\item 
-\mbox{\Hypertarget{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}\label{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}} 
-\mbox{\hyperlink{class_player}{Player}} \& {\bfseries operator=} (\mbox{\hyperlink{class_player}{Player}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_player_a290433592841cca95046b8c9dac7be86}{Player}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_player}{Player}}\+:\+: \mbox{\hyperlink{class_player}{Player}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\label{class_player_a749d2c00e1fe0f5c2746f7505a58c062}} 
+\mbox{\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{$\sim$\+Player}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_player}{Player}}\+:\+: \mbox{\hyperlink{class_player}{Player}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}{Player}} (\mbox{\hyperlink{class_player}{Player}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_player}{Player}}\+:\+: \mbox{\hyperlink{class_player}{Player}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_player}{Player}} \& \mbox{\hyperlink{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}{operator=}} (\mbox{\hyperlink{class_player}{Player}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_player_afcf86538719baa2f5c81d0b90263c41a}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init player for new levels. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}{update}} ()
@@ -58,11 +60,11 @@ virtual void \mbox{\hyperlink{class_player_afc1d1e3a654e241e3ed948aed72ef8a7}{re
 void \mbox{\hyperlink{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}{reset\+Params}} ()
 \begin{DoxyCompactList}\small\item\em Reset values for player. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_player_a029b1d511340697d8ccfb7bfa604435b}{take\+Damage}} (const int damage)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} Take $<$damage$>$ damages. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} Take $<$ damage $>$ damages. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}{take\+Bonus}} (Bonus\+Type\+::\+Enum bonus, bool silent=false)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} take a $<$bonus$>$ which allow to power up. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} take a $<$ bonus $>$ which allow to power up. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_player_abf6efda3ab13411d806493e043c895bf}{rm\+Bonus}} (Bonus\+Type\+::\+Enum bonus)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} remove a $<$bonus$>$ \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} remove a $<$ bonus $>$ \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_player_ab01e550627a1b778e1fa09b29fd89a1a}{add\+Bomb}} ()
 \begin{DoxyCompactList}\small\item\em increment bomb, clamp to total\+Bombs \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{anim\+End\+Cb}} (std\+::string anim\+Name)
@@ -70,38 +72,62 @@ virtual void \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{an
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_player_ab7d65b25086c7d78b7caef025deb087f}\label{class_player_ab7d65b25086c7d78b7caef025deb087f}} 
-int {\bfseries total\+Bombs}
+int \mbox{\hyperlink{class_player_ab7d65b25086c7d78b7caef025deb087f}{total\+Bombs}}
 \item 
-\mbox{\Hypertarget{class_player_a948d5a3b282419b995dcc32f66bf6b54}\label{class_player_a948d5a3b282419b995dcc32f66bf6b54}} 
-int {\bfseries bombs}
+int \mbox{\hyperlink{class_player_a948d5a3b282419b995dcc32f66bf6b54}{bombs}}
 \item 
-\mbox{\Hypertarget{class_player_a91fb928013bca6ca637afe447027de8f}\label{class_player_a91fb928013bca6ca637afe447027de8f}} 
-bool {\bfseries pass\+Fire}
+bool \mbox{\hyperlink{class_player_a91fb928013bca6ca637afe447027de8f}{pass\+Fire}}
 \item 
-\mbox{\Hypertarget{class_player_a82630036d62dbc37a2518be049a974cc}\label{class_player_a82630036d62dbc37a2518be049a974cc}} 
-bool {\bfseries pass\+Wall}
+bool \mbox{\hyperlink{class_player_a82630036d62dbc37a2518be049a974cc}{pass\+Wall}}
 \item 
-\mbox{\Hypertarget{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}\label{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}} 
-bool {\bfseries detonator}
+bool \mbox{\hyperlink{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}{detonator}}
 \item 
-\mbox{\Hypertarget{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}\label{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}} 
-bool {\bfseries pass\+Bomb}
+bool \mbox{\hyperlink{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}{pass\+Bomb}}
 \item 
-\mbox{\Hypertarget{class_player_a51ec1da9050f53921825a472b39b9977}\label{class_player_a51ec1da9050f53921825a472b39b9977}} 
-int {\bfseries bomb\+Progation}
+int \mbox{\hyperlink{class_player_a51ec1da9050f53921825a472b39b9977}{bomb\+Progation}}
 \item 
-\mbox{\Hypertarget{class_player_a6629cf50b360b714f0593146e2e058b6}\label{class_player_a6629cf50b360b714f0593146e2e058b6}} 
-float {\bfseries invulnerable}
+float \mbox{\hyperlink{class_player_a6629cf50b360b714f0593146e2e058b6}{invulnerable}}
 \item 
-\mbox{\Hypertarget{class_player_a1c0c44c8dc33ec05674c4a47bd8c2a03}\label{class_player_a1c0c44c8dc33ec05674c4a47bd8c2a03}} 
-\mbox{\hyperlink{struct_player_1_1_bonus_actifs}{Bonus\+Actifs}} {\bfseries bonus\+Actifs}
+\mbox{\hyperlink{struct_player_1_1_active_bonus}{Active\+Bonus}} \mbox{\hyperlink{class_player_ab8221d150947cc7ff0a87bc44a3cb431}{active\+Bonus}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 This is the player object. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_player_a290433592841cca95046b8c9dac7be86}\label{class_player_a290433592841cca95046b8c9dac7be86}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_player}{Player}}\+:\+: \mbox{\hyperlink{class_player}{Player}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}\label{class_player_a2cf4315d62d84ddf41d86d76a9bb9294}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_player}{Player}}\+:\+: \mbox{\hyperlink{class_player}{Player}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_player_ab01e550627a1b778e1fa09b29fd89a1a}\label{class_player_ab01e550627a1b778e1fa09b29fd89a1a}} 
@@ -150,7 +176,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+Implements \mbox{\hyperlink{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}{A\+Character}}.
 
 \mbox{\Hypertarget{class_player_afcf86538719baa2f5c81d0b90263c41a}\label{class_player_afcf86538719baa2f5c81d0b90263c41a}} 
 \index{Player@{Player}!init@{init}}
@@ -171,6 +197,24 @@ false
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}\label{class_player_a32a02cfee10a8ba8ccfa4cd0244cb42f}} 
+\index{Player@{Player}!operator=@{operator=}}
+\index{operator=@{operator=}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}} \& Player\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_player}{Player}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}\label{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}} 
 \index{Player@{Player}!resetParams@{resetParams}}
 \index{resetParams@{resetParams}!Player@{Player}}
@@ -189,7 +233,7 @@ Reset values for player.
 
 
 
-\mbox{\hyperlink{class_player}{Player}} remove a $<$bonus$>$ 
+\mbox{\hyperlink{class_player}{Player}} remove a $<$ bonus $>$ 
 
 
 \begin{DoxyParams}{Parameters}
@@ -209,7 +253,7 @@ false
 
 
 
-\mbox{\hyperlink{class_player}{Player}} take a $<$bonus$>$ which allow to power up. 
+\mbox{\hyperlink{class_player}{Player}} take a $<$ bonus $>$ which allow to power up. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -231,7 +275,7 @@ false
 
 
 
-\mbox{\hyperlink{class_player}{Player}} Take $<$damage$>$ damages. 
+\mbox{\hyperlink{class_player}{Player}} Take $<$ damage $>$ damages. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -264,9 +308,66 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_character}{A\+Character}}.
+Implements \mbox{\hyperlink{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}{A\+Character}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_player_ab8221d150947cc7ff0a87bc44a3cb431}\label{class_player_ab8221d150947cc7ff0a87bc44a3cb431}} 
+\index{Player@{Player}!activeBonus@{activeBonus}}
+\index{activeBonus@{activeBonus}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{activeBonus}{activeBonus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_player_1_1_active_bonus}{Active\+Bonus}} Player\+::active\+Bonus}
+
+All active bonus for the player \mbox{\Hypertarget{class_player_a51ec1da9050f53921825a472b39b9977}\label{class_player_a51ec1da9050f53921825a472b39b9977}} 
+\index{Player@{Player}!bombProgation@{bombProgation}}
+\index{bombProgation@{bombProgation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{bombProgation}{bombProgation}}
+{\footnotesize\ttfamily int Player\+::bomb\+Progation}
+
+\mbox{\hyperlink{class_bomb}{Bomb}} propagation distance \mbox{\Hypertarget{class_player_a948d5a3b282419b995dcc32f66bf6b54}\label{class_player_a948d5a3b282419b995dcc32f66bf6b54}} 
+\index{Player@{Player}!bombs@{bombs}}
+\index{bombs@{bombs}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{bombs}{bombs}}
+{\footnotesize\ttfamily int Player\+::bombs}
+
+Remain bombs \mbox{\Hypertarget{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}\label{class_player_a2dfa1c51a817ec617e0dc0191481d4a8}} 
+\index{Player@{Player}!detonator@{detonator}}
+\index{detonator@{detonator}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{detonator}{detonator}}
+{\footnotesize\ttfamily bool Player\+::detonator}
+
+Has detonator \mbox{\Hypertarget{class_player_a6629cf50b360b714f0593146e2e058b6}\label{class_player_a6629cf50b360b714f0593146e2e058b6}} 
+\index{Player@{Player}!invulnerable@{invulnerable}}
+\index{invulnerable@{invulnerable}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{invulnerable}{invulnerable}}
+{\footnotesize\ttfamily float Player\+::invulnerable}
+
+Is invulnerable (for x time) \mbox{\Hypertarget{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}\label{class_player_ad02e5cdd124ec622ad4c8ddde93a0906}} 
+\index{Player@{Player}!passBomb@{passBomb}}
+\index{passBomb@{passBomb}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{passBomb}{passBomb}}
+{\footnotesize\ttfamily bool Player\+::pass\+Bomb}
+
+Has bombpass \mbox{\Hypertarget{class_player_a91fb928013bca6ca637afe447027de8f}\label{class_player_a91fb928013bca6ca637afe447027de8f}} 
+\index{Player@{Player}!passFire@{passFire}}
+\index{passFire@{passFire}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{passFire}{passFire}}
+{\footnotesize\ttfamily bool Player\+::pass\+Fire}
+
+Has passfire \mbox{\Hypertarget{class_player_a82630036d62dbc37a2518be049a974cc}\label{class_player_a82630036d62dbc37a2518be049a974cc}} 
+\index{Player@{Player}!passWall@{passWall}}
+\index{passWall@{passWall}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{passWall}{passWall}}
+{\footnotesize\ttfamily bool Player\+::pass\+Wall}
+
+Has wallpass \mbox{\Hypertarget{class_player_ab7d65b25086c7d78b7caef025deb087f}\label{class_player_ab7d65b25086c7d78b7caef025deb087f}} 
+\index{Player@{Player}!totalBombs@{totalBombs}}
+\index{totalBombs@{totalBombs}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{totalBombs}{totalBombs}}
+{\footnotesize\ttfamily int Player\+::total\+Bombs}
+
+Total bombs 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

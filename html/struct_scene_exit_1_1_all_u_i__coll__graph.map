@@ -1,5 +1,5 @@
 <map id="SceneExit::AllUI" name="SceneExit::AllUI">
-<area shape="rect" id="node1" title=" " alt="" coords="5,1400,124,1477"/>
+<area shape="rect" id="node1" title="All UI elements." alt="" coords="5,1400,124,1477"/>
 <area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="94,307,297,1147"/>
 <area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="149,1253,330,1624"/>
 <area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="74,5,181,229"/>

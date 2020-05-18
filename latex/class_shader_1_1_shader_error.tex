@@ -2,7 +2,17 @@
 \label{class_shader_1_1_shader_error}\index{Shader::ShaderError@{Shader::ShaderError}}
 
 
-Inheritance diagram for Shader\+::Shader\+Error\+:\nopagebreak
+\mbox{\hyperlink{class_shader}{Shader}} exception.  
+
+
+
+
+{\ttfamily \#include $<$Shader.\+hpp$>$}
+
+
+
+Inheritance diagram for Shader\+::Shader\+Error\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +21,8 @@ Inheritance diagram for Shader\+::Shader\+Error\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Shader\+::Shader\+Error\+:\nopagebreak
+Collaboration diagram for Shader\+::Shader\+Error\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,9 +32,31 @@ Collaboration diagram for Shader\+::Shader\+Error\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+virtual const char $\ast$ \mbox{\hyperlink{class_shader_1_1_shader_error_aae7a37e1a4590a9347142d236e62372a}{what}} () const =0  throw ()
+\begin{DoxyCompactList}\small\item\em Function auto called on errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{class_shader}{Shader}} exception. 
+
+\doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_shader_1_1_shader_error_aae7a37e1a4590a9347142d236e62372a}\label{class_shader_1_1_shader_error_aae7a37e1a4590a9347142d236e62372a}} 
-virtual const char $\ast$ {\bfseries what} () const =0  throw ()
-\end{DoxyCompactItemize}
+\index{Shader::ShaderError@{Shader::ShaderError}!what@{what}}
+\index{what@{what}!Shader::ShaderError@{Shader::ShaderError}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily virtual const char$\ast$ Shader\+::\+Shader\+Error\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const throw ( ) \hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Function auto called on errors. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ Error message 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_shader_1_1_shader_linking_exception_a99267f7b7ba184b4ccd2e5e50650cf95}{Shader\+::\+Shader\+Linking\+Exception}}, and \mbox{\hyperlink{class_shader_1_1_shader_compile_exception_a519cca6165fcabbe8bbd269bb4b22153}{Shader\+::\+Shader\+Compile\+Exception}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

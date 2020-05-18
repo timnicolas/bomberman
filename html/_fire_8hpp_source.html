@@ -76,43 +76,47 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;AObject.hpp&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_fire.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_fire.html">Fire</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="class_fire.html">Fire</a>();</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// Constructors</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_fire.html">Fire</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    ~<a class="code" href="class_fire.html">Fire</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_fire.html">Fire</a>(<a class="code" href="class_fire.html">Fire</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// Operators</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_fire.html">Fire</a> &amp;operator=(<a class="code" href="class_fire.html">Fire</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_fire.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_fire.html">Fire</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_fire.html">Fire</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// Constructors</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_fire.html">Fire</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_fire.html#ae5f95523457f6a91cc9df1543a80f824">~Fire</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_fire.html">Fire</a>(<a class="code" href="class_fire.html">Fire</a> <span class="keyword">const</span> &amp;src);</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// Methods</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#a86114cf78108a4b202b75e1f383b3e00">update</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#adba3c7ec49ed7d31fd35250105a35edf">postUpdate</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#a622efdbee6254c463250b6d9033428eb">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Exceptions</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="class_fire_1_1_fire_exception.html">   27</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_fire_1_1_fire_exception.html">FireException</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <a class="code" href="class_fire_1_1_fire_exception.html">FireException</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_fire_1_1_fire_exception.html">FireException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif  // FIRE_HPP_</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// Operators</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_fire.html">Fire</a> &amp;<a class="code" href="class_fire.html#a5e11dd81a73d16b09253b17c89b32322">operator=</a>(<a class="code" href="class_fire.html">Fire</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// Methods</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#ae6456b9911e675ed1fb030f5f9e89cc8">init</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#a86114cf78108a4b202b75e1f383b3e00">update</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#adba3c7ec49ed7d31fd35250105a35edf">postUpdate</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_fire.html#a622efdbee6254c463250b6d9033428eb">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Exceptions</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_fire_1_1_fire_exception.html">   34</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_fire_1_1_fire_exception.html">FireException</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_fire_1_1_fire_exception.html">FireException</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_fire_1_1_fire_exception.html">FireException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif  // FIRE_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:50</div></div>
-<div class="ttc" id="aclass_fire_html_a622efdbee6254c463250b6d9033428eb"><div class="ttname"><a href="class_fire.html#a622efdbee6254c463250b6d9033428eb">Fire::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:74</div></div>
+<div class="ttc" id="aclass_fire_html_ae5f95523457f6a91cc9df1543a80f824"><div class="ttname"><a href="class_fire.html#ae5f95523457f6a91cc9df1543a80f824">Fire::~Fire</a></div><div class="ttdeci">~Fire()</div><div class="ttdoc">Destroy the Fire:: Fire object.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:24</div></div>
+<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:56</div></div>
+<div class="ttc" id="aclass_fire_html_a622efdbee6254c463250b6d9033428eb"><div class="ttname"><a href="class_fire.html#a622efdbee6254c463250b6d9033428eb">Fire::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:127</div></div>
 <div class="ttc" id="aclass_a_entity_html_aa2c05db944a8b7487eb8470dd20211ab"><div class="ttname"><a href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">AEntity::game</a></div><div class="ttdeci">SceneGame &amp; game</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:91</div></div>
-<div class="ttc" id="aclass_fire_html_a86114cf78108a4b202b75e1f383b3e00"><div class="ttname"><a href="class_fire.html#a86114cf78108a4b202b75e1f383b3e00">Fire::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:41</div></div>
-<div class="ttc" id="aclass_fire_1_1_fire_exception_html"><div class="ttname"><a href="class_fire_1_1_fire_exception.html">Fire::FireException</a></div><div class="ttdef"><b>Definition:</b> Fire.hpp:27</div></div>
-<div class="ttc" id="aclass_fire_html_adba3c7ec49ed7d31fd35250105a35edf"><div class="ttname"><a href="class_fire.html#adba3c7ec49ed7d31fd35250105a35edf">Fire::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">Called after update.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:61</div></div>
+<div class="ttc" id="aclass_fire_html_ae6456b9911e675ed1fb030f5f9e89cc8"><div class="ttname"><a href="class_fire.html#ae6456b9911e675ed1fb030f5f9e89cc8">Fire::init</a></div><div class="ttdeci">bool init()</div><div class="ttdoc">Init Fire.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:61</div></div>
+<div class="ttc" id="aclass_fire_html_a86114cf78108a4b202b75e1f383b3e00"><div class="ttname"><a href="class_fire.html#a86114cf78108a4b202b75e1f383b3e00">Fire::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:94</div></div>
+<div class="ttc" id="aclass_fire_1_1_fire_exception_html"><div class="ttname"><a href="class_fire_1_1_fire_exception.html">Fire::FireException</a></div><div class="ttdoc">Fire Exception.</div><div class="ttdef"><b>Definition:</b> Fire.hpp:34</div></div>
+<div class="ttc" id="aclass_fire_html_a5e11dd81a73d16b09253b17c89b32322"><div class="ttname"><a href="class_fire.html#a5e11dd81a73d16b09253b17c89b32322">Fire::operator=</a></div><div class="ttdeci">Fire &amp; operator=(Fire const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:45</div></div>
+<div class="ttc" id="aclass_fire_html_adba3c7ec49ed7d31fd35250105a35edf"><div class="ttname"><a href="class_fire.html#adba3c7ec49ed7d31fd35250105a35edf">Fire::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">Called after update.</div><div class="ttdef"><b>Definition:</b> Fire.cpp:114</div></div>
 <div class="ttc" id="aclass_a_object_html"><div class="ttname"><a href="class_a_object.html">AObject</a></div><div class="ttdoc">This is the base class for objects (Bomb, wall, ...)</div><div class="ttdef"><b>Definition:</b> AObject.hpp:11</div></div>
-<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:41</div></div>
-<div class="ttc" id="aclass_fire_html"><div class="ttname"><a href="class_fire.html">Fire</a></div><div class="ttdef"><b>Definition:</b> Fire.hpp:8</div></div>
+<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:44</div></div>
+<div class="ttc" id="aclass_fire_html"><div class="ttname"><a href="class_fire.html">Fire</a></div><div class="ttdoc">Fire on bombs objects.</div><div class="ttdef"><b>Definition:</b> Fire.hpp:11</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

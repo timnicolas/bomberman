@@ -20,7 +20,8 @@ Inheritance diagram for Enemy\+Follow\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Enemy\+Follow\+:\nopagebreak
+Collaboration diagram for Enemy\+Follow\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,15 +31,15 @@ Collaboration diagram for Enemy\+Follow\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}\label{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}} 
-{\bfseries Enemy\+Follow} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}\label{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}} 
-{\bfseries Enemy\+Follow} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&src)
-\item 
-\mbox{\Hypertarget{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}\label{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}} 
-\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}{Enemy\+Follow}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy Follow\+:\+: Enemy Follow object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_follow_acec4341e928f997cc639811bfeabbb95}\label{class_enemy_follow_acec4341e928f997cc639811bfeabbb95}} 
+\mbox{\hyperlink{class_enemy_follow_acec4341e928f997cc639811bfeabbb95}{$\sim$\+Enemy\+Follow}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Enemy Follow\+:\+: Enemy Follow object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}{Enemy\+Follow}} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy Follow\+:\+: Enemy Follow object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} \& \mbox{\hyperlink{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}{operator=}} (\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_enemy_follow_a09963fbac6d395dbf653b6353412cf2b}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
@@ -62,6 +63,39 @@ This is an enemy object.
 
 \mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} will always try to find the player and follow him 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}\label{class_enemy_follow_a5dac0d66f1ea5a344ea4d73432c42e9d}} 
+\index{EnemyFollow@{EnemyFollow}!EnemyFollow@{EnemyFollow}}
+\index{EnemyFollow@{EnemyFollow}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{EnemyFollow()}{EnemyFollow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Enemy\+Follow\+::\+Enemy\+Follow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Enemy Follow\+:\+: Enemy Follow object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}\label{class_enemy_follow_a69648445aa5c2dbf8479729d05d530d1}} 
+\index{EnemyFollow@{EnemyFollow}!EnemyFollow@{EnemyFollow}}
+\index{EnemyFollow@{EnemyFollow}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{EnemyFollow()}{EnemyFollow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Enemy\+Follow\+::\+Enemy\+Follow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Enemy Follow\+:\+: Enemy Follow object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}\label{class_enemy_follow_a6fefcf7802be9f3a3b7d8e3b9a0b1704}} 
 \index{EnemyFollow@{EnemyFollow}!\_draw@{\_draw}}
@@ -80,7 +114,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}\label{class_enemy_follow_a7a52e753882b9bbf5cab062c606cd8d0}} 
 \index{EnemyFollow@{EnemyFollow}!\_postUpdate@{\_postUpdate}}
@@ -99,7 +133,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_follow_a056cb50efd0967fddc9975920c927741}\label{class_enemy_follow_a056cb50efd0967fddc9975920c927741}} 
 \index{EnemyFollow@{EnemyFollow}!\_update@{\_update}}
@@ -118,7 +152,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_follow_a471c5dc0965bc6eeef9f747af106e731}\label{class_enemy_follow_a471c5dc0965bc6eeef9f747af106e731}} 
 \index{EnemyFollow@{EnemyFollow}!\_updateAnimationState@{\_updateAnimationState}}
@@ -159,6 +193,24 @@ false on failure
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}\label{class_enemy_follow_a3cc6083a7064b33fabe7e0b7a4a69910}} 
+\index{EnemyFollow@{EnemyFollow}!operator=@{operator=}}
+\index{operator=@{operator=}!EnemyFollow@{EnemyFollow}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} \& Enemy\+Follow\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_enemy_follow}{Enemy\+Follow}}\& A reference to the copied object 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

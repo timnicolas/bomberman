@@ -79,52 +79,57 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;AObject.hpp&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;AEnemy.hpp&quot;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_spawner.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_spawner.html">Spawner</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    std::vector&lt;std::string&gt;    _typeEnemy;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    int64_t                     _frequency;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">float</span>                       _waitForSpawn;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Constructors</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_spawner.html">Spawner</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ~<a class="code" href="class_spawner.html">Spawner</a>();</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a>(<a class="code" href="class_spawner.html">Spawner</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// Operators</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;operator=(<a class="code" href="class_spawner.html">Spawner</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_spawner.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_spawner.html">Spawner</a> : <span class="keyword">public</span> <a class="code" href="class_a_object.html">AObject</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::vector&lt;std::string&gt;    _typeEnemy;  </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    int64_t                     _frequency;  </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordtype">float</span>                       _waitForSpawn;  </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// Constructors</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_spawner.html">Spawner</a>(<a class="code" href="class_scene_game.html">SceneGame</a> &amp;<a class="code" href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">game</a>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_spawner.html#a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6">~Spawner</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a>(<a class="code" href="class_spawner.html">Spawner</a> <span class="keyword">const</span> &amp;src);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// Getters &amp; setters</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;setTypeEnemy(std::vector&lt;std::string&gt; typeEnemy);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;addTypeEnemy(std::string typeEnemy);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;setFrequency(int64_t frequency);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Methods</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#a9325e76299405d5d74abfb72f4ea2380">update</a>();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#ab8a55710ca6e122d975f697a9c7643bc">postUpdate</a>();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#a1532fd875b6a3aacb617b1111b818f01">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// Exceptions</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_spawner_1_1_spawner_exception.html">   39</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_spawner_1_1_spawner_exception.html">SpawnerException</a> : <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="class_spawner_1_1_spawner_exception.html">SpawnerException</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_spawner_1_1_spawner_exception.html">SpawnerException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    };</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#endif  // SPAWNER_HPP_</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// Operators</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;<a class="code" href="class_spawner.html#aa0930e4611747bff692f0feb2bf06a01">operator=</a>(<a class="code" href="class_spawner.html">Spawner</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// Getters &amp; setters</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;<a class="code" href="class_spawner.html#a483e98b9d3c20f59332feb500ceb6199">setTypeEnemy</a>(std::vector&lt;std::string&gt; typeEnemy);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;<a class="code" href="class_spawner.html#a6ecc83d8c8a0c357772b14a720876689">addTypeEnemy</a>(std::string typeEnemy);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_spawner.html">Spawner</a> &amp;<a class="code" href="class_spawner.html#a42aed9baf9f387c892116b7bcacd820a">setFrequency</a>(int64_t frequency);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Methods</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#a9325e76299405d5d74abfb72f4ea2380">update</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#ab8a55710ca6e122d975f697a9c7643bc">postUpdate</a>();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span>    <a class="code" href="class_spawner.html#a1532fd875b6a3aacb617b1111b818f01">draw</a>(<a class="code" href="class_gui.html">Gui</a> &amp;gui);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Exceptions</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_spawner_1_1_spawner_exception.html">   45</a></span>&#160;<span class="comment"></span>    <span class="keyword">class </span><a class="code" href="class_spawner_1_1_spawner_exception.html">SpawnerException</a> : <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_spawner_1_1_spawner_exception.html#ae316f8e634adf86867c287e80e40b853">SpawnerException</a>();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">explicit</span> <a class="code" href="class_spawner_1_1_spawner_exception.html#ae316f8e634adf86867c287e80e40b853">SpawnerException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* whatArg);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    };</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif  // SPAWNER_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:50</div></div>
+<div class="ttc" id="aclass_spawner_html_a42aed9baf9f387c892116b7bcacd820a"><div class="ttname"><a href="class_spawner.html#a42aed9baf9f387c892116b7bcacd820a">Spawner::setFrequency</a></div><div class="ttdeci">Spawner &amp; setFrequency(int64_t frequency)</div><div class="ttdoc">Set the spawning frequency.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:97</div></div>
+<div class="ttc" id="aclass_scene_game_html"><div class="ttname"><a href="class_scene_game.html">SceneGame</a></div><div class="ttdoc">This is the game Scene. In this scene, you can play to the game and load levels.</div><div class="ttdef"><b>Definition:</b> SceneGame.hpp:56</div></div>
 <div class="ttc" id="aclass_a_entity_html_aa2c05db944a8b7487eb8470dd20211ab"><div class="ttname"><a href="class_a_entity.html#aa2c05db944a8b7487eb8470dd20211ab">AEntity::game</a></div><div class="ttdeci">SceneGame &amp; game</div><div class="ttdef"><b>Definition:</b> AEntity.hpp:91</div></div>
-<div class="ttc" id="aclass_spawner_html"><div class="ttname"><a href="class_spawner.html">Spawner</a></div><div class="ttdef"><b>Definition:</b> Spawner.hpp:11</div></div>
-<div class="ttc" id="aclass_spawner_html_ab8a55710ca6e122d975f697a9c7643bc"><div class="ttname"><a href="class_spawner.html#ab8a55710ca6e122d975f697a9c7643bc">Spawner::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">Called after update.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:99</div></div>
-<div class="ttc" id="aclass_spawner_1_1_spawner_exception_html"><div class="ttname"><a href="class_spawner_1_1_spawner_exception.html">Spawner::SpawnerException</a></div><div class="ttdef"><b>Definition:</b> Spawner.hpp:39</div></div>
-<div class="ttc" id="aclass_spawner_html_a1532fd875b6a3aacb617b1111b818f01"><div class="ttname"><a href="class_spawner.html#a1532fd875b6a3aacb617b1111b818f01">Spawner::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:109</div></div>
-<div class="ttc" id="aclass_spawner_html_a9325e76299405d5d74abfb72f4ea2380"><div class="ttname"><a href="class_spawner.html#a9325e76299405d5d74abfb72f4ea2380">Spawner::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:73</div></div>
+<div class="ttc" id="aclass_spawner_html"><div class="ttname"><a href="class_spawner.html">Spawner</a></div><div class="ttdoc">spawner objects</div><div class="ttdef"><b>Definition:</b> Spawner.hpp:14</div></div>
+<div class="ttc" id="aclass_spawner_html_ab8a55710ca6e122d975f697a9c7643bc"><div class="ttname"><a href="class_spawner.html#ab8a55710ca6e122d975f697a9c7643bc">Spawner::postUpdate</a></div><div class="ttdeci">bool postUpdate()</div><div class="ttdoc">Called after update.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:142</div></div>
+<div class="ttc" id="aclass_spawner_html_a483e98b9d3c20f59332feb500ceb6199"><div class="ttname"><a href="class_spawner.html#a483e98b9d3c20f59332feb500ceb6199">Spawner::setTypeEnemy</a></div><div class="ttdeci">Spawner &amp; setTypeEnemy(std::vector&lt; std::string &gt; typeEnemy)</div><div class="ttdoc">Set the enemy type.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:71</div></div>
+<div class="ttc" id="aclass_spawner_1_1_spawner_exception_html_ae316f8e634adf86867c287e80e40b853"><div class="ttname"><a href="class_spawner_1_1_spawner_exception.html#ae316f8e634adf86867c287e80e40b853">Spawner::SpawnerException::SpawnerException</a></div><div class="ttdeci">SpawnerException()</div><div class="ttdoc">Construct a new Spawner:: Spawner Exception:: Spawner Exception object.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:163</div></div>
+<div class="ttc" id="aclass_spawner_html_a6ecc83d8c8a0c357772b14a720876689"><div class="ttname"><a href="class_spawner.html#a6ecc83d8c8a0c357772b14a720876689">Spawner::addTypeEnemy</a></div><div class="ttdeci">Spawner &amp; addTypeEnemy(std::string typeEnemy)</div><div class="ttdoc">Add new enemy type.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:83</div></div>
+<div class="ttc" id="aclass_spawner_1_1_spawner_exception_html"><div class="ttname"><a href="class_spawner_1_1_spawner_exception.html">Spawner::SpawnerException</a></div><div class="ttdoc">Spawner Exception.</div><div class="ttdef"><b>Definition:</b> Spawner.hpp:45</div></div>
+<div class="ttc" id="aclass_spawner_html_a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6"><div class="ttname"><a href="class_spawner.html#a59d8e3d4d6dc6c25f38ce5d4fcc5e8e6">Spawner::~Spawner</a></div><div class="ttdeci">~Spawner()</div><div class="ttdoc">Destroy the Spawner:: Spawner object.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:33</div></div>
+<div class="ttc" id="aclass_spawner_html_a1532fd875b6a3aacb617b1111b818f01"><div class="ttname"><a href="class_spawner.html#a1532fd875b6a3aacb617b1111b818f01">Spawner::draw</a></div><div class="ttdeci">bool draw(Gui &amp;gui)</div><div class="ttdoc">draw is called each frame.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:152</div></div>
+<div class="ttc" id="aclass_spawner_html_aa0930e4611747bff692f0feb2bf06a01"><div class="ttname"><a href="class_spawner.html#aa0930e4611747bff692f0feb2bf06a01">Spawner::operator=</a></div><div class="ttdeci">Spawner &amp; operator=(Spawner const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:53</div></div>
+<div class="ttc" id="aclass_spawner_html_a9325e76299405d5d74abfb72f4ea2380"><div class="ttname"><a href="class_spawner.html#a9325e76299405d5d74abfb72f4ea2380">Spawner::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">update is called each frame.</div><div class="ttdef"><b>Definition:</b> Spawner.cpp:110</div></div>
 <div class="ttc" id="aclass_a_object_html"><div class="ttname"><a href="class_a_object.html">AObject</a></div><div class="ttdoc">This is the base class for objects (Bomb, wall, ...)</div><div class="ttdef"><b>Definition:</b> AObject.hpp:11</div></div>
-<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:41</div></div>
+<div class="ttc" id="aclass_gui_html"><div class="ttname"><a href="class_gui.html">Gui</a></div><div class="ttdoc">This is the GUI class with function to init window, draw, ...</div><div class="ttdef"><b>Definition:</b> Gui.hpp:44</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -20,7 +20,8 @@ Inheritance diagram for Enemy\+Crispy\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Enemy\+Crispy\+:\nopagebreak
+Collaboration diagram for Enemy\+Crispy\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,15 +31,15 @@ Collaboration diagram for Enemy\+Crispy\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}\label{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}} 
-{\bfseries Enemy\+Crispy} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}\label{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}} 
-{\bfseries Enemy\+Crispy} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&src)
-\item 
-\mbox{\Hypertarget{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}\label{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}} 
-\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} \& {\bfseries operator=} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}{Enemy\+Crispy}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy \mbox{\hyperlink{class_crispy}{Crispy}}\+:\+: Enemy \mbox{\hyperlink{class_crispy}{Crispy}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_enemy_crispy_a5a864f054ef724182b37e489e2ac2324}\label{class_enemy_crispy_a5a864f054ef724182b37e489e2ac2324}} 
+\mbox{\hyperlink{class_enemy_crispy_a5a864f054ef724182b37e489e2ac2324}{$\sim$\+Enemy\+Crispy}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Enemy \mbox{\hyperlink{class_crispy}{Crispy}}\+:\+: Enemy \mbox{\hyperlink{class_crispy}{Crispy}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}{Enemy\+Crispy}} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Enemy \mbox{\hyperlink{class_crispy}{Crispy}}\+:\+: Enemy \mbox{\hyperlink{class_crispy}{Crispy}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} \& \mbox{\hyperlink{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}{operator=}} (\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_enemy_crispy_a87a926e52fd94e7307baaad8cb1b4977}{init}} ()
 \begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}}. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_enemy_crispy_a32d938b70f4b0f2bd2e1df606c812d13}{anim\+End\+Cb}} (std\+::string anim\+Name)
@@ -69,6 +70,39 @@ This is an enemy object.
 
 \mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} is a crispy wall. If the enemy can show the player, it transform to a crispy wall 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}\label{class_enemy_crispy_a276b17f05168f7300b6f28472448d422}} 
+\index{EnemyCrispy@{EnemyCrispy}!EnemyCrispy@{EnemyCrispy}}
+\index{EnemyCrispy@{EnemyCrispy}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{EnemyCrispy()}{EnemyCrispy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Enemy\+Crispy\+::\+Enemy\+Crispy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Enemy \mbox{\hyperlink{class_crispy}{Crispy}}\+:\+: Enemy \mbox{\hyperlink{class_crispy}{Crispy}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} master object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}\label{class_enemy_crispy_abd24cf23c15fab4323eceabf2b805898}} 
+\index{EnemyCrispy@{EnemyCrispy}!EnemyCrispy@{EnemyCrispy}}
+\index{EnemyCrispy@{EnemyCrispy}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{EnemyCrispy()}{EnemyCrispy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Enemy\+Crispy\+::\+Enemy\+Crispy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Enemy \mbox{\hyperlink{class_crispy}{Crispy}}\+:\+: Enemy \mbox{\hyperlink{class_crispy}{Crispy}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}\label{class_enemy_crispy_a82cd9389ee451c2ca4e71ff86989e870}} 
 \index{EnemyCrispy@{EnemyCrispy}!\_draw@{\_draw}}
@@ -87,7 +121,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a70e3638b5ed8ecea2a087ffe16510dd2}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_crispy_a5e3bef4e40dfeb57ec87ea23b7a57e18}\label{class_enemy_crispy_a5e3bef4e40dfeb57ec87ea23b7a57e18}} 
 \index{EnemyCrispy@{EnemyCrispy}!\_isPlayerClose@{\_isPlayerClose}}
@@ -126,7 +160,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_a78b010638f552c4ab11ff71e7b826b1b}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}\label{class_enemy_crispy_ad48755d398b40e0000806a89025802a1}} 
 \index{EnemyCrispy@{EnemyCrispy}!\_update@{\_update}}
@@ -145,7 +179,7 @@ false if failure
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_enemy}{A\+Enemy}}.
+Implements \mbox{\hyperlink{class_a_enemy_abefc22131eb1c618819c67c3c1415c08}{A\+Enemy}}.
 
 \mbox{\Hypertarget{class_enemy_crispy_adeb54234eea6e5f6b0e9e3704bf3352d}\label{class_enemy_crispy_adeb54234eea6e5f6b0e9e3704bf3352d}} 
 \index{EnemyCrispy@{EnemyCrispy}!\_updateAnimationState@{\_updateAnimationState}}
@@ -205,6 +239,24 @@ false on failure
 
 Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
 
+\mbox{\Hypertarget{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}\label{class_enemy_crispy_ab91c7b22982054521158b56b4bea1d4c}} 
+\index{EnemyCrispy@{EnemyCrispy}!operator=@{operator=}}
+\index{operator=@{operator=}!EnemyCrispy@{EnemyCrispy}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} \& Enemy\+Crispy\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_enemy_crispy}{Enemy\+Crispy}}\& A reference to the copied object 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

@@ -79,30 +79,32 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_music.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_music.html">Music</a> {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_music_1_1_music_exception.html">   14</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_music_1_1_music_exception.html">MusicException</a>: <span class="keyword">public</span> std::runtime_error {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <a class="code" href="class_music_1_1_music_exception.html">MusicException</a>();</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">explicit</span> <a class="code" href="class_music_1_1_music_exception.html">MusicException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* what_arg);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keyword">explicit</span> <a class="code" href="class_music_1_1_music_exception.html">MusicException</a>(<span class="keyword">const</span> std::string what_arg);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_music.html">Music</a>(std::string filename);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    ~<a class="code" href="class_music.html">Music</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_music_1_1_music_exception.html">   17</a></span>&#160;    <span class="keyword">class </span><a class="code" href="class_music_1_1_music_exception.html">MusicException</a>: <span class="keyword">public</span> std::runtime_error {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <a class="code" href="class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff">MusicException</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keyword">explicit</span> <a class="code" href="class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff">MusicException</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* what_arg);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keyword">explicit</span> <a class="code" href="class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff">MusicException</a>(<span class="keyword">const</span> std::string what_arg);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    };</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span>                                    <a class="code" href="class_music.html#a5ab263243b34b3f84e916b7b15854df5">play</a>(<span class="keywordtype">float</span> volume, <span class="keywordtype">bool</span> loop);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_music.html">Music</a>();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_music.html">Music</a>(<span class="keyword">const</span> <a class="code" href="class_music.html">Music</a> &amp;src);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_music.html">Music</a>                                   &amp;operator=(<span class="keyword">const</span> <a class="code" href="class_music.html">Music</a> &amp;src);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    Mix_Music                               *_mix_mus;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_music.html">Music</a>(std::string filename);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_music.html#a0b4f3b9a018207e0c08003505f1f87fe">~Music</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span>                                    <a class="code" href="class_music.html#a5ab263243b34b3f84e916b7b15854df5">play</a>(<span class="keywordtype">float</span> volume, <span class="keywordtype">bool</span> loop);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_music.html">Music</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_music.html">Music</a>(<span class="keyword">const</span> <a class="code" href="class_music.html">Music</a> &amp;src);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_music.html">Music</a>                                   &amp;operator=(<span class="keyword">const</span> <a class="code" href="class_music.html">Music</a> &amp;src);</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    Mix_Music                               *_mix_mus;  </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_music_1_1_music_exception_html"><div class="ttname"><a href="class_music_1_1_music_exception.html">Music::MusicException</a></div><div class="ttdef"><b>Definition:</b> Music.hpp:14</div></div>
-<div class="ttc" id="aclass_music_html_a5ab263243b34b3f84e916b7b15854df5"><div class="ttname"><a href="class_music.html#a5ab263243b34b3f84e916b7b15854df5">Music::play</a></div><div class="ttdeci">void play(float volume, bool loop)</div><div class="ttdoc">Play the music at the specified volume.</div><div class="ttdef"><b>Definition:</b> Music.cpp:31</div></div>
+<div class="ttc" id="aclass_music_1_1_music_exception_html_a2f9eacea3206495d0d9753ae487dd7ff"><div class="ttname"><a href="class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff">Music::MusicException::MusicException</a></div><div class="ttdeci">MusicException()</div><div class="ttdoc">Construct a new Music:: Music Exception:: Music Exception object.</div><div class="ttdef"><b>Definition:</b> Music.cpp:51</div></div>
+<div class="ttc" id="aclass_music_html_a0b4f3b9a018207e0c08003505f1f87fe"><div class="ttname"><a href="class_music.html#a0b4f3b9a018207e0c08003505f1f87fe">Music::~Music</a></div><div class="ttdeci">~Music()</div><div class="ttdoc">Destroy the Music:: Music object.</div><div class="ttdef"><b>Definition:</b> Music.cpp:25</div></div>
+<div class="ttc" id="aclass_music_1_1_music_exception_html"><div class="ttname"><a href="class_music_1_1_music_exception.html">Music::MusicException</a></div><div class="ttdoc">Music exception.</div><div class="ttdef"><b>Definition:</b> Music.hpp:17</div></div>
+<div class="ttc" id="aclass_music_html_a5ab263243b34b3f84e916b7b15854df5"><div class="ttname"><a href="class_music.html#a5ab263243b34b3f84e916b7b15854df5">Music::play</a></div><div class="ttdeci">void play(float volume, bool loop)</div><div class="ttdoc">Play the music at the specified volume.</div><div class="ttdef"><b>Definition:</b> Music.cpp:39</div></div>
 <div class="ttc" id="aclass_music_html"><div class="ttname"><a href="class_music.html">Music</a></div><div class="ttdoc">Music class for AudioManager.</div><div class="ttdef"><b>Definition:</b> Music.hpp:12</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,18 +1,10 @@
 var searchData=
 [
-  ['pause_725',['pause',['../class_sound.html#a65b0f66e9123caed2809da366ac4d377',1,'Sound']]],
-  ['pauseallsounds_726',['pauseAllSounds',['../class_audio_manager.html#aa660fe4ee049d2606471d000c96d50a0',1,'AudioManager']]],
-  ['pausemusic_727',['pauseMusic',['../class_audio_manager.html#a8afd8f3db6787f87aa55436d6c9dadf1',1,'AudioManager']]],
-  ['pausesound_728',['pauseSound',['../class_audio_manager.html#ada650abafa8b74a4a0d23cadccee033f',1,'AudioManager']]],
-  ['play_729',['play',['../class_music.html#a5ab263243b34b3f84e916b7b15854df5',1,'Music::play()'],['../class_sound.html#ad5edcf094481b5b2f5e12451a4c99a13',1,'Sound::play()']]],
-  ['playmusic_730',['playMusic',['../class_audio_manager.html#ae0f9ebfae17ee406df9f2fb3b7701a4c',1,'AudioManager']]],
-  ['playsound_731',['playSound',['../class_audio_manager.html#a54e2edf4bdf4702431e7afae0db8955c',1,'AudioManager']]],
-  ['positioningame_732',['positionInGame',['../class_scene_game.html#a0d5f3a9ca2d04f3c4fa26813614b555c',1,'SceneGame']]],
-  ['postdraw_733',['postDraw',['../class_gui.html#aef4dba11a3ab3836f51a09dbfc7c09d1',1,'Gui']]],
-  ['postupdate_734',['postUpdate',['../class_a_enemy.html#a2d2ff5a126f14294bdbc17475c363d00',1,'AEnemy::postUpdate()'],['../class_a_entity.html#ae2faa1d11e21033a223fef2bc03b9338',1,'AEntity::postUpdate()'],['../class_bomb.html#a443c5d40a92e67ef456c71369e8a111b',1,'Bomb::postUpdate()'],['../class_bonus.html#a6524cf732f98dfc3baa7f41bbdf13b11',1,'Bonus::postUpdate()'],['../class_crispy.html#aa83ad22c80b962ee0380c1e394ae8610',1,'Crispy::postUpdate()'],['../class_fire.html#adba3c7ec49ed7d31fd35250105a35edf',1,'Fire::postUpdate()'],['../class_flag.html#a1840a0949762e3e62bf156be6e173d1e',1,'Flag::postUpdate()'],['../class_spawner.html#ab8a55710ca6e122d975f697a9c7643bc',1,'Spawner::postUpdate()'],['../class_gui.html#a0e365402acdc30d41e31a76124182ded',1,'Gui::postUpdate()'],['../class_scene_game.html#a074516c60084a30fea0eb34cbf0b57c9',1,'SceneGame::postUpdate()']]],
-  ['predraw_735',['preDraw',['../class_gui.html#aac64766fad448534447f50a5d05ceeb3',1,'Gui']]],
-  ['preupdate_736',['preUpdate',['../class_gui.html#a8e51befeff5deda5a8d0283b1af7446e',1,'Gui']]],
-  ['print_737',['print',['../class_scene_game.html#ade3372481910abd46f43c214ec3b2a27',1,'SceneGame']]],
-  ['processkeyboard_738',['processKeyboard',['../class_camera.html#a1f28b91cb62dd318b5acf27296c99242',1,'Camera']]],
-  ['processmousemovement_739',['processMouseMovement',['../class_camera.html#abd790165abfcc82595470328193060de',1,'Camera']]]
+  ['material_1341',['Material',['../class_material.html#a49691a0a92cc3e571869f2b494f8cd5d',1,'Material::Material(std::string const name=&quot;&quot;, glm::vec3 const diffuse=glm::vec3(.36f,.34f,.32f), glm::vec3 const specular=glm::vec3(.3f,.3f,.3f), glm::vec3 const ambient=glm::vec3(0.2f, 0.2f, 0.2f), float const shininess=16.0f)'],['../class_material.html#a611dba609ac416f5f59c325c4611c964',1,'Material::Material(Material const &amp;src)']]],
+  ['mesh_1342',['Mesh',['../class_mesh.html#a3acd2a5dec9fade334a7c37cf46a9962',1,'Mesh::Mesh(OpenGLModel &amp;openGLModel, Shader &amp;sh, std::string const &amp;name, std::vector&lt; Vertex &gt; vertices, std::vector&lt; uint32_t &gt; vertIndices, Material material, BoundingBox boundingBox)'],['../class_mesh.html#aa61b77f723d39c1bdaf4ed24ab8dae2c',1,'Mesh::Mesh(Mesh const &amp;src)']]],
+  ['model_1343',['Model',['../class_model.html#abd566d0030ea6d854f110498b0c774a2',1,'Model::Model(OpenGLModel &amp;openGLModel, float const &amp;dtTime, ETransform transform=ETransform())'],['../class_model.html#a242adc0075374718143a988c215f5bac',1,'Model::Model(Model const &amp;src)']]],
+  ['modelexception_1344',['ModelException',['../class_open_g_l_model_1_1_model_exception.html#a567efce262d3f104a37f3c8cfa75de84',1,'OpenGLModel::ModelException::ModelException()'],['../class_open_g_l_model_1_1_model_exception.html#ae146c9fc02c939d9572b106283673c6b',1,'OpenGLModel::ModelException::ModelException(char const *what_arg)']]],
+  ['modelsmanagerexception_1345',['ModelsManagerException',['../class_models_manager_1_1_models_manager_exception.html#ae6fcf5fb9f6e7195be00a90354d26f68',1,'ModelsManager::ModelsManagerException::ModelsManagerException()'],['../class_models_manager_1_1_models_manager_exception.html#a3f957231b8234e9bc10877f85e94f20f',1,'ModelsManager::ModelsManagerException::ModelsManagerException(const char *what_arg)']]],
+  ['music_1346',['Music',['../class_music.html#a8169fdac350380994c08fe67062fc99d',1,'Music']]],
+  ['musicexception_1347',['MusicException',['../class_music_1_1_music_exception.html#a2f9eacea3206495d0d9753ae487dd7ff',1,'Music::MusicException::MusicException()'],['../class_music_1_1_music_exception.html#aeb2397817b7e416690fb0e5ba6318fd4',1,'Music::MusicException::MusicException(const char *what_arg)'],['../class_music_1_1_music_exception.html#a4bbf9e4a506fcb9d41eb87f0b1c642ba',1,'Music::MusicException::MusicException(const std::string what_arg)']]]
 ];

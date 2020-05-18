@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_838',['type',['../class_a_entity.html#a4cddb4c9fbae86691e73940edc3731c3',1,'AEntity']]]
+  ['jsonlist_1847',['jsonList',['../class_settings_json.html#a689e48666555a947bbeca14554f2baa9',1,'SettingsJson']]],
+  ['jsonmap_1848',['jsonMap',['../class_settings_json.html#a53d8eda20a8dc989065225b7064f4211',1,'SettingsJson']]]
 ];

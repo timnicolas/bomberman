@@ -30,15 +30,15 @@ Collaboration diagram for Image\+UI\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_image_u_i_a6bab778baf2de7b6fa49fbae8cdbcfdd}\label{class_image_u_i_a6bab778baf2de7b6fa49fbae8cdbcfdd}} 
-{\bfseries Image\+UI} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename)
-\item 
-\mbox{\Hypertarget{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}\label{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}} 
-{\bfseries Image\+UI} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&src)
-\item 
-\mbox{\Hypertarget{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}\label{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}} 
-\mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& {\bfseries operator=} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&rhs)
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{class_image_u_i_a6bab778baf2de7b6fa49fbae8cdbcfdd}{Image\+UI}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em Construct a new Image U I\+:\+: Image U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}{Image\+UI}} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Image U I\+:\+: Image U I object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_image_u_i_aef1781e1c1134ce96d7760502f593239}\label{class_image_u_i_aef1781e1c1134ce96d7760502f593239}} 
+virtual \mbox{\hyperlink{class_image_u_i_aef1781e1c1134ce96d7760502f593239}{$\sim$\+Image\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Image U I\+:\+: Image U I object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& \mbox{\hyperlink{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}{operator=}} (\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -53,6 +53,64 @@ virtual void \mbox{\hyperlink{class_image_u_i_a1c5403c96def58c34362022cb178003a}
 
 \doxysubsection{Detailed Description}
 this is the UI for images 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_image_u_i_a6bab778baf2de7b6fa49fbae8cdbcfdd}\label{class_image_u_i_a6bab778baf2de7b6fa49fbae8cdbcfdd}} 
+\index{ImageUI@{ImageUI}!ImageUI@{ImageUI}}
+\index{ImageUI@{ImageUI}!ImageUI@{ImageUI}}
+\doxysubsubsection{\texorpdfstring{ImageUI()}{ImageUI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Image\+U\+I\+::\+Image\+UI (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Construct a new Image U I\+:\+: Image U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position of the UI element \\
+\hline
+{\em size} & The size of the UI element \\
+\hline
+{\em filename} & The image file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}\label{class_image_u_i_a1eeb4f3d689afe519293d0f8a472c05c}} 
+\index{ImageUI@{ImageUI}!ImageUI@{ImageUI}}
+\index{ImageUI@{ImageUI}!ImageUI@{ImageUI}}
+\doxysubsubsection{\texorpdfstring{ImageUI()}{ImageUI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Image\+U\+I\+::\+Image\+UI (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Image U I\+:\+: Image U I object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}\label{class_image_u_i_a4474a34185e782e1a4f6e2c6f8dfd2e2}} 
+\index{ImageUI@{ImageUI}!operator=@{operator=}}
+\index{operator=@{operator=}!ImageUI@{ImageUI}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_image_u_i}{Image\+UI}} \& Image\+U\+I\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_image_u_i}{Image\+UI}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_image_u_i}{Image\+UI}}\& A reference to the copied object 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

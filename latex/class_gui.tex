@@ -11,7 +11,8 @@ This is the G\+UI class with function to init window, draw, ...
 
 
 
-Collaboration diagram for Gui\+:\nopagebreak
+Collaboration diagram for Gui\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,15 +22,15 @@ Collaboration diagram for Gui\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_gui_a470a9b3fdd6f43eb46f11276220013a4}\label{class_gui_a470a9b3fdd6f43eb46f11276220013a4}} 
-{\bfseries Gui} (\mbox{\hyperlink{struct_game_info}{Game\+Info}} \&game\+Info)
-\item 
-\mbox{\Hypertarget{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}\label{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}} 
-{\bfseries Gui} (\mbox{\hyperlink{class_gui}{Gui}} const \&src)
-\item 
-\mbox{\Hypertarget{class_gui_ac260d502b2a5440591c3e4e4520acf94}\label{class_gui_ac260d502b2a5440591c3e4e4520acf94}} 
-\mbox{\hyperlink{class_gui}{Gui}} \& {\bfseries operator=} (\mbox{\hyperlink{class_gui}{Gui}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_gui_a470a9b3fdd6f43eb46f11276220013a4}{Gui}} (\mbox{\hyperlink{struct_game_info}{Game\+Info}} \&\mbox{\hyperlink{class_gui_af562e2e6f0b773511162d1a5171d7475}{game\+Info}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_gui}{Gui}}\+:\+: \mbox{\hyperlink{class_gui}{Gui}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_gui_a4fd8485d226f9b8a2ac2d81d7f0f3598}\label{class_gui_a4fd8485d226f9b8a2ac2d81d7f0f3598}} 
+virtual \mbox{\hyperlink{class_gui_a4fd8485d226f9b8a2ac2d81d7f0f3598}{$\sim$\+Gui}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_gui}{Gui}}\+:\+: \mbox{\hyperlink{class_gui}{Gui}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}{Gui}} (\mbox{\hyperlink{class_gui}{Gui}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_gui}{Gui}}\+:\+: \mbox{\hyperlink{class_gui}{Gui}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_gui}{Gui}} \& \mbox{\hyperlink{class_gui_ac260d502b2a5440591c3e4e4520acf94}{operator=}} (\mbox{\hyperlink{class_gui}{Gui}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_gui_a735bdb412232cf6980819e21f1dbdb66}{init}} ()
 \begin{DoxyCompactList}\small\item\em init the gui object \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_gui_a8e51befeff5deda5a8d0283b1af7446e}{pre\+Update}} (float const dt\+Time)
@@ -46,43 +47,102 @@ void \mbox{\hyperlink{class_gui_a97349551e251e2dd231ec8c9abc9c659}{draw\+Skybox}
 \begin{DoxyCompactList}\small\item\em draw the skybox \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}{enable\+Cursor}} (bool enable)
 \begin{DoxyCompactList}\small\item\em enable or disable the cursor visibility \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}\label{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}} 
-void {\bfseries draw\+Cube} (Block\+::\+Enum type\+Block, glm\+::vec3 pos=\{0, 0, 0\}, glm\+::vec3 scale=\{1, 1, 1\})
-\item 
+void \mbox{\hyperlink{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}{draw\+Cube}} (Block\+::\+Enum type\+Block, glm\+::vec3 pos=\{0, 0, 0\}, glm\+::vec3 scale=\{1, 1, 1\})
+\begin{DoxyCompactList}\small\item\em Draw a cube on the screen. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_gui_a42148f338094a05cfbe4ac4424ebc127}{update\+Fullscreen}} ()
 \item 
 void \mbox{\hyperlink{class_gui_a4066b5f349a7f94203bd0ac506a47571}{udpate\+Dimension}} ()
 \item 
-\mbox{\Hypertarget{class_gui_a454e08f8d8c19a95c5bb9554b7766723}\label{class_gui_a454e08f8d8c19a95c5bb9554b7766723}} 
-void {\bfseries disable\+Exit\+For\+This\+Frame} (bool disable=true)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_gui_a454e08f8d8c19a95c5bb9554b7766723}{disable\+Exit\+For\+This\+Frame}} (bool disable=true)
+\begin{DoxyCompactList}\small\item\em In this frame, the update function cannot exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_gui_af562e2e6f0b773511162d1a5171d7475}\label{class_gui_af562e2e6f0b773511162d1a5171d7475}} 
-\mbox{\hyperlink{struct_game_info}{Game\+Info}} \& {\bfseries game\+Info}
+\mbox{\hyperlink{struct_game_info}{Game\+Info}} \& \mbox{\hyperlink{class_gui_af562e2e6f0b773511162d1a5171d7475}{game\+Info}}
 \item 
-\mbox{\Hypertarget{class_gui_a5d8ee3bce3eda71d2223718ef121660c}\label{class_gui_a5d8ee3bce3eda71d2223718ef121660c}} 
-\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} $\ast$ {\bfseries texture\+Manager}
+\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} $\ast$ \mbox{\hyperlink{class_gui_a5d8ee3bce3eda71d2223718ef121660c}{texture\+Manager}}
 \item 
-\mbox{\Hypertarget{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}\label{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}} 
-\mbox{\hyperlink{class_shader}{Shader}} $\ast$ {\bfseries cube\+Shader}
+\mbox{\hyperlink{class_shader}{Shader}} $\ast$ \mbox{\hyperlink{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}{cube\+Shader}}
 \item 
-\mbox{\Hypertarget{class_gui_ad69615330ffddbdb5e74dd9163434af6}\label{class_gui_ad69615330ffddbdb5e74dd9163434af6}} 
-\mbox{\hyperlink{class_camera}{Camera}} $\ast$ {\bfseries cam}
+\mbox{\hyperlink{class_camera}{Camera}} $\ast$ \mbox{\hyperlink{class_gui_ad69615330ffddbdb5e74dd9163434af6}{cam}}
 \item 
-\mbox{\Hypertarget{class_gui_aad8b6babe608aef719ca0180579d0c54}\label{class_gui_aad8b6babe608aef719ca0180579d0c54}} 
-uint32\+\_\+t {\bfseries cube\+Sh\+Vao}
+uint32\+\_\+t \mbox{\hyperlink{class_gui_aad8b6babe608aef719ca0180579d0c54}{cube\+Sh\+Vao}}
 \item 
-\mbox{\Hypertarget{class_gui_ab9f1f53daba063532c91590af6a17bdf}\label{class_gui_ab9f1f53daba063532c91590af6a17bdf}} 
-uint32\+\_\+t {\bfseries cube\+Sh\+Vbo}
+uint32\+\_\+t \mbox{\hyperlink{class_gui_ab9f1f53daba063532c91590af6a17bdf}{cube\+Sh\+Vbo}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This is the G\+UI class with function to init window, draw, ... 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_gui_a470a9b3fdd6f43eb46f11276220013a4}\label{class_gui_a470a9b3fdd6f43eb46f11276220013a4}} 
+\index{Gui@{Gui}!Gui@{Gui}}
+\index{Gui@{Gui}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{Gui()}{Gui()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Gui\+::\+Gui (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_game_info}{Game\+Info}} \&}]{game\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new \mbox{\hyperlink{class_gui}{Gui}}\+:\+: \mbox{\hyperlink{class_gui}{Gui}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Info} & The gameinfo object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}\label{class_gui_aaaa336f8359cadcbbad3eb204dc7f95b}} 
+\index{Gui@{Gui}!Gui@{Gui}}
+\index{Gui@{Gui}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{Gui()}{Gui()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Gui\+::\+Gui (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{class_gui}{Gui}}\+:\+: \mbox{\hyperlink{class_gui}{Gui}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_gui_a454e08f8d8c19a95c5bb9554b7766723}\label{class_gui_a454e08f8d8c19a95c5bb9554b7766723}} 
+\index{Gui@{Gui}!disableExitForThisFrame@{disableExitForThisFrame}}
+\index{disableExitForThisFrame@{disableExitForThisFrame}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{disableExitForThisFrame()}{disableExitForThisFrame()}}
+{\footnotesize\ttfamily void Gui\+::disable\+Exit\+For\+This\+Frame (\begin{DoxyParamCaption}\item[{bool}]{disable = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+In this frame, the update function cannot exit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disable} & True to enable this functionality \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}\label{class_gui_a814f9d026e56dd0a8053cad3cdd03bec}} 
+\index{Gui@{Gui}!drawCube@{drawCube}}
+\index{drawCube@{drawCube}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{drawCube()}{drawCube()}}
+{\footnotesize\ttfamily void Gui\+::draw\+Cube (\begin{DoxyParamCaption}\item[{Block\+::\+Enum}]{type\+Block,  }\item[{glm\+::vec3}]{pos = {\ttfamily \{0,~0,~0\}},  }\item[{glm\+::vec3}]{scale = {\ttfamily \{1,~1,~1\}} }\end{DoxyParamCaption})}
+
+
+
+Draw a cube on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Block} & The type of cube \\
+\hline
+{\em pos} & The position \\
+\hline
+{\em scale} & The scale \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_gui_a97349551e251e2dd231ec8c9abc9c659}\label{class_gui_a97349551e251e2dd231ec8c9abc9c659}} 
 \index{Gui@{Gui}!drawSkybox@{drawSkybox}}
 \index{drawSkybox@{drawSkybox}!Gui@{Gui}}
@@ -95,7 +155,7 @@ draw the skybox
 
 
 \begin{DoxyParams}{Parameters}
-{\em view} & the view matrix of the camera (Camera\+::get\+View\+Matrix()) \\
+{\em view} & the view matrix of the camera (\mbox{\hyperlink{class_camera_aa2e2289caff32f9ac552f1e5c6c7931f}{Camera\+::get\+View\+Matrix()}}) \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}\label{class_gui_adf3543c8344b6e45aeebd2f2da2bf373}} 
@@ -127,6 +187,24 @@ init the gui object
 true if the gui was init successfully 
 
 false if there is an error in init 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_gui_ac260d502b2a5440591c3e4e4520acf94}\label{class_gui_ac260d502b2a5440591c3e4e4520acf94}} 
+\index{Gui@{Gui}!operator=@{operator=}}
+\index{operator=@{operator=}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_gui}{Gui}} \& Gui\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_gui}{Gui}}\& A reference to the copied object 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_gui_a0e365402acdc30d41e31a76124182ded}\label{class_gui_a0e365402acdc30d41e31a76124182ded}} 
 \index{Gui@{Gui}!postUpdate@{postUpdate}}
@@ -171,6 +249,45 @@ Update the dimension of the window from its settings. \mbox{\Hypertarget{class_g
 {\footnotesize\ttfamily void Gui\+::update\+Fullscreen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 Update the fullscreen mode from its settings. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_gui_ad69615330ffddbdb5e74dd9163434af6}\label{class_gui_ad69615330ffddbdb5e74dd9163434af6}} 
+\index{Gui@{Gui}!cam@{cam}}
+\index{cam@{cam}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{cam}{cam}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_camera}{Camera}}$\ast$ Gui\+::cam}
+
+\mbox{\hyperlink{class_camera}{Camera}} object \mbox{\Hypertarget{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}\label{class_gui_adaa7b6fc050d0e88579dfea30b1d4866}} 
+\index{Gui@{Gui}!cubeShader@{cubeShader}}
+\index{cubeShader@{cubeShader}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{cubeShader}{cubeShader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_shader}{Shader}}$\ast$ Gui\+::cube\+Shader}
+
+Cube\+Shader object \mbox{\Hypertarget{class_gui_aad8b6babe608aef719ca0180579d0c54}\label{class_gui_aad8b6babe608aef719ca0180579d0c54}} 
+\index{Gui@{Gui}!cubeShVao@{cubeShVao}}
+\index{cubeShVao@{cubeShVao}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{cubeShVao}{cubeShVao}}
+{\footnotesize\ttfamily uint32\+\_\+t Gui\+::cube\+Sh\+Vao}
+
+\mbox{\hyperlink{struct_vertex}{Vertex}} Array Objects \mbox{\Hypertarget{class_gui_ab9f1f53daba063532c91590af6a17bdf}\label{class_gui_ab9f1f53daba063532c91590af6a17bdf}} 
+\index{Gui@{Gui}!cubeShVbo@{cubeShVbo}}
+\index{cubeShVbo@{cubeShVbo}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{cubeShVbo}{cubeShVbo}}
+{\footnotesize\ttfamily uint32\+\_\+t Gui\+::cube\+Sh\+Vbo}
+
+\mbox{\hyperlink{struct_vertex}{Vertex}} Buffer Objects \mbox{\Hypertarget{class_gui_af562e2e6f0b773511162d1a5171d7475}\label{class_gui_af562e2e6f0b773511162d1a5171d7475}} 
+\index{Gui@{Gui}!gameInfo@{gameInfo}}
+\index{gameInfo@{gameInfo}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{gameInfo}{gameInfo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_game_info}{Game\+Info}}\& Gui\+::game\+Info}
+
+\mbox{\hyperlink{struct_game_info}{Game\+Info}} object \mbox{\Hypertarget{class_gui_a5d8ee3bce3eda71d2223718ef121660c}\label{class_gui_a5d8ee3bce3eda71d2223718ef121660c}} 
+\index{Gui@{Gui}!textureManager@{textureManager}}
+\index{textureManager@{textureManager}!Gui@{Gui}}
+\doxysubsubsection{\texorpdfstring{textureManager}{textureManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_texture_manager}{Texture\+Manager}}$\ast$ Gui\+::texture\+Manager}
+
+\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} object 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

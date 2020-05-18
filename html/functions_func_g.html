@@ -67,13 +67,18 @@ $(function() {
 <li>generateBonus()
 : <a class="el" href="class_bonus.html#a69c5cd0fdef8eef925b5d295696b19a9">Bonus</a>
 </li>
+<li>generateCrispy()
+: <a class="el" href="class_crispy.html#a30d88975d3874ed4a9d2216abefbf2c0">Crispy</a>
+</li>
 <li>get()
 : <a class="el" href="class_audio_manager.html#ac8e8acadc8bba682bd3835997d379f5c">AudioManager</a>
 , <a class="el" href="class_box_collider.html#a830532bce2aa57c773c8d7617cc8fe2b">BoxCollider</a>
 , <a class="el" href="class_inputs.html#afd9be7af3b695c51e3f8449e08a5e970">Inputs</a>
+, <a class="el" href="class_json_obj.html#af4da480aa1a66ca266c3f91b6f5b9a29">JsonObj&lt; T &gt;</a>
 , <a class="el" href="class_models_manager.html#a124d5bc78204e5bb108d0d4074cda8bf">ModelsManager</a>
 , <a class="el" href="class_save.html#a469d2ef2ac6a27eda2907e69ab033def">Save</a>
 , <a class="el" href="class_scene_manager.html#a8467467ece15e24aebc95cc6141a6200">SceneManager</a>
+, <a class="el" href="class_settings_json.html#a6c600f3c639d8e67cdf3060e16904dcc">SettingsJson</a>
 </li>
 <li>getAiAnimation()
 : <a class="el" href="class_open_g_l_model.html#a48c2e9945d15e917388165bd5fc92dd8">OpenGLModel</a>
@@ -97,21 +102,43 @@ $(function() {
 : <a class="el" href="class_model.html#a3bebb9e7811f62ab1b85a5bf02a8a102">Model</a>
 </li>
 <li>getBoard()
-: <a class="el" href="class_a_character.html#aa8f0b9b557c69eead696870c41c8321b">ACharacter</a>
+: <a class="el" href="class_a_character.html#adecb8064d5070f15a2d6aa76a151ff33">ACharacter</a>
+, <a class="el" href="class_a_entity.html#a9ed84c8f926cf6032be480ebba7d1820">AEntity</a>
 , <a class="el" href="class_a_object.html#ac4a82eef484c0f7bf3547a7f7f6dce7e">AObject</a>
+</li>
+<li>getCam()
+: <a class="el" href="class_open_g_l_model.html#aec911d785c7eab28ab2de3787d331290">OpenGLModel</a>
 </li>
 <li>getCollision()
 : <a class="el" href="class_a_character.html#a39c7111c4b096129d040e22e3b09592d">ACharacter</a>
 , <a class="el" href="class_a_enemy.html#aca840427bf701f3c24b38a4c17a14cfd">AEnemy</a>
 </li>
+<li>getColor()
+: <a class="el" href="class_logging.html#ab6b777cad3125e46c087e439e8d42e04">Logging</a>
+</li>
 <li>getCurLevel()
 : <a class="el" href="class_scene_level_selection.html#a2ac8c1a5ac511ec2a048fd794f20f84b">SceneLevelSelection</a>
+</li>
+<li>getCurrentAnimationName()
+: <a class="el" href="class_model.html#aefd911e07fa22f4b397057185b5aba1b">Model</a>
+</li>
+<li>getCurResolution()
+: <a class="el" href="class_scene_settings.html#a590dc1227ae74a8af7a3f3cb0ccc45fd">SceneSettings</a>
+</li>
+<li>getDefPos()
+: <a class="el" href="class_camera.html#aae10133175e34f9856c48cdb294279df">Camera</a>
+</li>
+<li>getDefVal()
+: <a class="el" href="class_json_obj.html#a3aa6312aed0218066f20870829c2b044">JsonObj&lt; T &gt;</a>
 </li>
 <li>getDescription()
 : <a class="el" href="class_bonus.html#a1d044965859366e57fbe7fcb1eb8a458">Bonus</a>
 </li>
 <li>getDifficulty()
 : <a class="el" href="class_save.html#acc628465cba884e99fea348066c1eec9">Save</a>
+</li>
+<li>getDtTime()
+: <a class="el" href="class_a_scene.html#aad3e0d8810515e904fc315a12a344bc3">AScene</a>
 </li>
 <li>getFilename()
 : <a class="el" href="class_save.html#ac33997c07a1209006b6b7edbcc6673a1">Save</a>
@@ -121,6 +148,12 @@ $(function() {
 </li>
 <li>getFps()
 : <a class="el" href="class_scene_manager.html#a5fcdd1b1f88f235ca33abc94f01d3755">SceneManager</a>
+</li>
+<li>getImgDefSize()
+: <a class="el" href="class_a_base_u_i.html#a92534c962d9421fe2a325dd29eed1455">ABaseUI</a>
+</li>
+<li>getInfo()
+: <a class="el" href="class_json_obj.html#a095b952121c05f145ada6542bd46d532">JsonObj&lt; T &gt;</a>
 </li>
 <li>getIntPos()
 : <a class="el" href="class_a_character.html#aa7562af195e3615c1f90488799687d9c">ACharacter</a>
@@ -158,8 +191,20 @@ $(function() {
 <li>getLeftClickUp()
 : <a class="el" href="class_inputs.html#a458bdc3d408476dfe439dc94047f292e">Inputs</a>
 </li>
+<li>getLevelId()
+: <a class="el" href="class_score.html#a0a14f2b51f134e97551f4ac57401a0ce">Score</a>
+</li>
+<li>getLevelImg()
+: <a class="el" href="class_scene_game.html#adbaa88f6ec0f3e093474e8d293b65282">SceneGame</a>
+</li>
+<li>getLevelName()
+: <a class="el" href="class_scene_game.html#a29ee8ee172dcd5b70385f29f39e769bc">SceneGame</a>
+</li>
 <li>getLevelScore()
 : <a class="el" href="class_save.html#a802b6d258310bab2945abd9653360fe5">Save</a>
+</li>
+<li>getLoglevel()
+: <a class="el" href="class_logging.html#a79047102294c8446fb8ec27e95835e52">Logging</a>
 </li>
 <li>getMasterOffset()
 : <a class="el" href="class_a_base_master_u_i.html#aeeea67741ab77e3d03c6a817fc3bb949">ABaseMasterUI</a>
@@ -176,8 +221,24 @@ $(function() {
 : <a class="el" href="class_a_base_master_u_i.html#ad8e2ca2b3f67ca274e5dd0169e454e55">ABaseMasterUI</a>
 , <a class="el" href="class_scrollbar_u_i.html#ad9f2de5f7fbb4acdfe25fc2dbe3eb943">ScrollbarUI</a>
 </li>
+<li>getMax()
+: <a class="el" href="class_json_obj.html#a177bcc3c169c4fb25f6d5833dc5d1fc6">JsonObj&lt; T &gt;</a>
+</li>
+<li>getMin()
+: <a class="el" href="class_json_obj.html#a789404a7efe25c04646152502efb6eff">JsonObj&lt; T &gt;</a>
+</li>
+<li>getMode()
+: <a class="el" href="class_camera.html#ab508959139d8555dce6f444e44fc01ed">Camera</a>
+</li>
 <li>getModel()
-: <a class="el" href="class_models_manager.html#ab6b2cbeed2e20b4a6af747b782c3d04b">ModelsManager</a>
+: <a class="el" href="class_e_transform.html#a9a1340274193c42a85372c9d511f208f">ETransform</a>
+, <a class="el" href="class_models_manager.html#ab6b2cbeed2e20b4a6af747b782c3d04b">ModelsManager</a>
+</li>
+<li>getMouseHover()
+: <a class="el" href="class_a_base_u_i.html#a0fcf09799934ef6d86a62b266020757a">ABaseUI</a>
+</li>
+<li>getMouseLeftClick()
+: <a class="el" href="class_a_base_u_i.html#a551e7a67ca99714da946f23b42ee1e28">ABaseUI</a>
 </li>
 <li>getMousePos()
 : <a class="el" href="class_inputs.html#afc7227e1c5cd934309955f8db3c36097">Inputs</a>
@@ -185,18 +246,43 @@ $(function() {
 <li>getMouseRel()
 : <a class="el" href="class_inputs.html#abf9d434be64729115891ba206add1c68">Inputs</a>
 </li>
+<li>getMouseRightClick()
+: <a class="el" href="class_a_base_u_i.html#aaf2a90f2fd6bab0439b5437c7c0b1d27">ABaseUI</a>
+</li>
 <li>getMouseScroll()
 : <a class="el" href="class_inputs.html#ab73355bf19a30890703fea6dd27e00cf">Inputs</a>
+</li>
+<li>getName()
+: <a class="el" href="class_json_obj.html#a8111ceed590213968e777380f60e443a">JsonObj&lt; T &gt;</a>
 </li>
 <li>getNbAnimations()
 : <a class="el" href="class_open_g_l_model.html#a0f2a5be64c50e5e5fc680575cd5e710c">OpenGLModel</a>
 </li>
 <li>getNbLevel()
-: <a class="el" href="class_scene_level_selection.html#aedb8f99f461300aeadd7044c009f53e8">SceneLevelSelection</a>
+: <a class="el" href="class_scene_game.html#a49b0881897a0e7dca907a694ecce8c92">SceneGame</a>
+, <a class="el" href="class_scene_level_selection.html#aedb8f99f461300aeadd7044c009f53e8">SceneLevelSelection</a>
+</li>
+<li>getNbUIElements()
+: <a class="el" href="class_a_scene_menu.html#a13b29d13f531109e90428c6f14d50e05">ASceneMenu</a>
+</li>
+<li>getPath()
+: <a class="el" href="class_open_g_l_model.html#ac7acbc5f8890c277e01fbad776ebe368">OpenGLModel</a>
 </li>
 <li>getPos()
-: <a class="el" href="class_a_character.html#a41875fc55beaafd65fbe53ea3abc7f98">ACharacter</a>
+: <a class="el" href="class_a_base_u_i.html#ad875929db54fdd563cbb037cade3c009">ABaseUI</a>
+, <a class="el" href="class_a_character.html#a41875fc55beaafd65fbe53ea3abc7f98">ACharacter</a>
+, <a class="el" href="class_a_entity.html#afbdb591f06debd7e20e0cb98f14717e4">AEntity</a>
 , <a class="el" href="class_a_object.html#ab5840de6100bba8bf93a186a0a802708">AObject</a>
+, <a class="el" href="class_e_transform.html#a5583083e2b1ec969ef86b694e740d043">ETransform</a>
+</li>
+<li>getProjection()
+: <a class="el" href="class_camera.html#ab6bf7c26da92eb1806f0787eb35e540c">Camera</a>
+</li>
+<li>getRealPos()
+: <a class="el" href="class_a_base_u_i.html#a0a2e25b071fe59343e2df625482cbb0f">ABaseUI</a>
+</li>
+<li>getRectShader()
+: <a class="el" href="class_a_base_u_i.html#af35bc7778b3d140b8ebf632b9c9ef29b">ABaseUI</a>
 </li>
 <li>getRightClick()
 : <a class="el" href="class_inputs.html#ad559cf15f96bdb20abeb3bb27ec891f6">Inputs</a>
@@ -207,6 +293,12 @@ $(function() {
 <li>getRightClickUp()
 : <a class="el" href="class_inputs.html#a7e931413d84c57ab09b769b787fc60ec">Inputs</a>
 </li>
+<li>getRot()
+: <a class="el" href="class_e_transform.html#a86b9bd6c0062f35644db55095395bd95">ETransform</a>
+</li>
+<li>getScale()
+: <a class="el" href="class_e_transform.html#addf4879d7d3eaad7448101aa494b3fac">ETransform</a>
+</li>
 <li>getScancodeName()
 : <a class="el" href="class_inputs.html#a496478c063e551845c3241e4006ffc08">Inputs</a>
 </li>
@@ -216,8 +308,19 @@ $(function() {
 <li>getSceneName()
 : <a class="el" href="class_scene_manager.html#afb20a5ed55b7238d1789e33760e63028">SceneManager</a>
 </li>
+<li>getScore()
+: <a class="el" href="class_score.html#a43eef6c9709196a5901a613519dea473">Score</a>
+</li>
 <li>getSettingsLevel()
 : <a class="el" href="class_scene_game.html#aafa85a3148ac0886a2e6dfe1ee5a3d99">SceneGame</a>
+</li>
+<li>getShader()
+: <a class="el" href="class_image_atlas_render.html#aba25059e07e686b04ccbf5840790849d">ImageAtlasRender</a>
+, <a class="el" href="class_skybox.html#aeeb4151675a4021c3fdfca1e31d33a76">Skybox</a>
+, <a class="el" href="class_text_render.html#a2f313ec58b45ca41ec145f898aa35dc5">TextRender</a>
+</li>
+<li>getSize()
+: <a class="el" href="class_a_base_u_i.html#a37f4e73da2daf08bf977077f3e827689">ABaseUI</a>
 </li>
 <li>getState()
 : <a class="el" href="class_a_entity.html#a135cbfb08a2204ff396de4de2d645b5f">AEntity</a>
@@ -226,13 +329,29 @@ $(function() {
 : <a class="el" href="class_score.html#a7155b0d7742004972bb115a56d734fa6">Score</a>
 </li>
 <li>getText()
-: <a class="el" href="class_scene_cheat_code.html#a486c95c6866d50d337ac3f10a0acd631">SceneCheatCode</a>
+: <a class="el" href="class_a_base_u_i.html#afcf23c37d38d3a9038d8491159029238">ABaseUI</a>
+, <a class="el" href="class_scene_cheat_code.html#a486c95c6866d50d337ac3f10a0acd631">SceneCheatCode</a>
 </li>
 <li>getTextInputKeycode()
 : <a class="el" href="class_inputs.html#a6f07ed05a776562c7bf5e6a011b1ecfb">Inputs</a>
 </li>
 <li>getTextInputString()
 : <a class="el" href="class_inputs.html#aa87c9c60ec70181c57e93fa8c671291d">Inputs</a>
+</li>
+<li>getTextureID()
+: <a class="el" href="class_skybox.html#a4325d2aaa63fafa4b164fd207b185b12">Skybox</a>
+</li>
+<li>getTextWidth()
+: <a class="el" href="class_a_base_u_i.html#a3f0c35baa16ea53b2d43032e48a792e8">ABaseUI</a>
+</li>
+<li>getUIElement()
+: <a class="el" href="class_a_scene_menu.html#a251ef83adb546bb22915f52986bc7d84">ASceneMenu</a>
+</li>
+<li>getViewMatrix()
+: <a class="el" href="class_camera.html#aa2e2289caff32f9ac552f1e5c6c7931f">Camera</a>
+</li>
+<li>Gui()
+: <a class="el" href="class_gui.html#aaaa336f8359cadcbbad3eb204dc7f95b">Gui</a>
 </li>
 </ul>
 </div><!-- contents -->

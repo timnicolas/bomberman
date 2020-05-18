@@ -20,7 +20,8 @@ Inheritance diagram for Scene\+Victory\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Victory\+:\nopagebreak
+Collaboration diagram for Scene\+Victory\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,21 +32,21 @@ Collaboration diagram for Scene\+Victory\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}}
-\item 
+\begin{DoxyCompactList}\small\item\em All buttons states. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Stats about game to draw on the screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}\label{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}} 
-{\bfseries Scene\+Victory} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
-\item 
-\mbox{\Hypertarget{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}\label{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}} 
-{\bfseries Scene\+Victory} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&src)
-\item 
-\mbox{\Hypertarget{class_scene_victory_aba45bf336d7183dc043d916caeaad826}\label{class_scene_victory_aba45bf336d7183dc043d916caeaad826}} 
-\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \& {\bfseries operator=} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}{Scene\+Victory}} (\mbox{\hyperlink{class_gui}{Gui}} $\ast$gui, float const \&dt\+Time)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Victory\+:\+: Scene Victory object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_victory_ab625a8980d1f833f51bb1930ebe63dfb}\label{class_scene_victory_ab625a8980d1f833f51bb1930ebe63dfb}} 
+virtual \mbox{\hyperlink{class_scene_victory_ab625a8980d1f833f51bb1930ebe63dfb}{$\sim$\+Scene\+Victory}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the Scene Victory\+:\+: Scene Victory object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}{Scene\+Victory}} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new Scene Victory\+:\+: Scene Victory object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \& \mbox{\hyperlink{class_scene_victory_aba45bf336d7183dc043d916caeaad826}{operator=}} (\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}{init}} ()
 \begin{DoxyCompactList}\small\item\em init the menu \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}{update}} ()
@@ -58,26 +59,52 @@ virtual bool \mbox{\hyperlink{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}\label{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}} 
-\mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}} {\bfseries \+\_\+states}
+\mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}} \mbox{\hyperlink{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}{\+\_\+states}}
 \item 
-\mbox{\Hypertarget{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}\label{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}} 
-std\+::string {\bfseries \+\_\+last\+Scene\+Name}
+std\+::string \mbox{\hyperlink{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}{\+\_\+last\+Scene\+Name}}
 \item 
-\mbox{\Hypertarget{class_scene_victory_acdbd9784850934363227fc65c87a29c6}\label{class_scene_victory_acdbd9784850934363227fc65c87a29c6}} 
-\mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}} {\bfseries statistics}
-\end{DoxyCompactItemize}
-\doxysubsection*{Friends}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_scene_victory_a501965dbfb3f0102cb50d5af3fee8402}\label{class_scene_victory_a501965dbfb3f0102cb50d5af3fee8402}} 
-std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \&my\+Class)
+\mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}} \mbox{\hyperlink{class_scene_victory_acdbd9784850934363227fc65c87a29c6}{statistics}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
 this is the victory menu 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}\label{class_scene_victory_a1317990e7bf48ca588959c5fac2e8f57}} 
+\index{SceneVictory@{SceneVictory}!SceneVictory@{SceneVictory}}
+\index{SceneVictory@{SceneVictory}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{SceneVictory()}{SceneVictory()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Scene\+Victory\+::\+Scene\+Victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} $\ast$}]{gui,  }\item[{float const \&}]{dt\+Time }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Victory\+:\+: Scene Victory object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A pointer on the gui object \\
+\hline
+{\em dt\+Time} & A reference to the delta time \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}\label{class_scene_victory_ad7ae2aaaf4a2a107713ab351aeac9662}} 
+\index{SceneVictory@{SceneVictory}!SceneVictory@{SceneVictory}}
+\index{SceneVictory@{SceneVictory}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{SceneVictory()}{SceneVictory()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Scene\+Victory\+::\+Scene\+Victory (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new Scene Victory\+:\+: Scene Victory object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}\label{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}} 
@@ -116,8 +143,26 @@ false if the init failed
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_scene_menu}{A\+Scene\+Menu}}.
+Implements \mbox{\hyperlink{class_a_scene_menu_a78bdee98bd7df224524586a060f9bdec}{A\+Scene\+Menu}}.
 
+\mbox{\Hypertarget{class_scene_victory_aba45bf336d7183dc043d916caeaad826}\label{class_scene_victory_aba45bf336d7183dc043d916caeaad826}} 
+\index{SceneVictory@{SceneVictory}!operator=@{operator=}}
+\index{operator=@{operator=}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} \& Scene\+Victory\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_scene_victory}{Scene\+Victory}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}\label{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}} 
 \index{SceneVictory@{SceneVictory}!update@{update}}
 \index{update@{update}!SceneVictory@{SceneVictory}}
@@ -138,6 +183,27 @@ false if there are an error in update
 Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af36f29744}{A\+Scene\+Menu}}.
 
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}\label{class_scene_victory_a72a7535197c55d7e16d70d0beb8641e2}} 
+\index{SceneVictory@{SceneVictory}!\_lastSceneName@{\_lastSceneName}}
+\index{\_lastSceneName@{\_lastSceneName}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{\_lastSceneName}{\_lastSceneName}}
+{\footnotesize\ttfamily std\+::string Scene\+Victory\+::\+\_\+last\+Scene\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The last loaded scene name \mbox{\Hypertarget{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}\label{class_scene_victory_ae5a9926553871dad10cbc0d402e59357}} 
+\index{SceneVictory@{SceneVictory}!\_states@{\_states}}
+\index{\_states@{\_states}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{\_states}{\_states}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_victory_1_1_buttons_states}{Buttons\+States}} Scene\+Victory\+::\+\_\+states\hspace{0.3cm}{\ttfamily [protected]}}
+
+All buttons states \mbox{\Hypertarget{class_scene_victory_acdbd9784850934363227fc65c87a29c6}\label{class_scene_victory_acdbd9784850934363227fc65c87a29c6}} 
+\index{SceneVictory@{SceneVictory}!statistics@{statistics}}
+\index{statistics@{statistics}!SceneVictory@{SceneVictory}}
+\doxysubsubsection{\texorpdfstring{statistics}{statistics}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_victory_1_1_stat_u_i}{Stat\+UI}} Scene\+Victory\+::statistics\hspace{0.3cm}{\ttfamily [protected]}}
+
+Master stats 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

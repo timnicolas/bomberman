@@ -77,28 +77,37 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_material.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_material.html">Material</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="class_material.html">Material</a>(glm::vec3 <span class="keyword">const</span> diffuse = glm::vec3(.36f, .34f, .32f), \</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        glm::vec3 <span class="keyword">const</span> specular = glm::vec3(.3f, .3f, .3f), \</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        glm::vec3 <span class="keyword">const</span> ambient = glm::vec3(0.2f, 0.2f, 0.2f), \</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordtype">float</span> <span class="keyword">const</span> shininess = 16.0f);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="class_material.html">Material</a>(<a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;src);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="keyword">virtual</span> ~<a class="code" href="class_material.html">Material</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <a class="code" href="class_material.html">Material</a> &amp;operator=(<a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;rhs);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        glm::vec3   diffuse;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        glm::vec3   specular;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        glm::vec3   ambient;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordtype">float</span>       shininess;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;std::ostream &amp; operator &lt;&lt; (std::ostream &amp;out, <a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;c);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="class_material.html#a49691a0a92cc3e571869f2b494f8cd5d">Material</a>(std::string <span class="keyword">const</span> <a class="code" href="class_material.html#affe06990f884293d0fe2f39110f71730">name</a> = <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            glm::vec3 <span class="keyword">const</span> <a class="code" href="class_material.html#a099904e2f5a7bbec3cba6bf8ec546b11">diffuse</a> = glm::vec3(.36f, .34f, .32f), \</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            glm::vec3 <span class="keyword">const</span> <a class="code" href="class_material.html#aac1c499923ff99564cdd97a4b5e504a9">specular</a> = glm::vec3(.3f, .3f, .3f), \</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            glm::vec3 <span class="keyword">const</span> <a class="code" href="class_material.html#af99c823542e497c98a35d1aac5fc9012">ambient</a> = glm::vec3(0.2f, 0.2f, 0.2f), \</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <span class="keywordtype">float</span> <span class="keyword">const</span> <a class="code" href="class_material.html#a9dc184c883ec135ace28c1917af3fe84">shininess</a> = 16.0f);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="class_material.html#a49691a0a92cc3e571869f2b494f8cd5d">Material</a>(<a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;src);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_material.html#a2c19452d71f54075df8f5405b03129f4">~Material</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="class_material.html">Material</a> &amp;<a class="code" href="class_material.html#af2f8251a70528e05331dc8dfac025487">operator=</a>(<a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;rhs);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_material.html#affe06990f884293d0fe2f39110f71730">   22</a></span>&#160;        std::string <a class="code" href="class_material.html#affe06990f884293d0fe2f39110f71730">name</a>;  </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_material.html#a099904e2f5a7bbec3cba6bf8ec546b11">   23</a></span>&#160;        glm::vec3   <a class="code" href="class_material.html#a099904e2f5a7bbec3cba6bf8ec546b11">diffuse</a>;  </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_material.html#aac1c499923ff99564cdd97a4b5e504a9">   24</a></span>&#160;        glm::vec3   <a class="code" href="class_material.html#aac1c499923ff99564cdd97a4b5e504a9">specular</a>;  </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_material.html#af99c823542e497c98a35d1aac5fc9012">   25</a></span>&#160;        glm::vec3   <a class="code" href="class_material.html#af99c823542e497c98a35d1aac5fc9012">ambient</a>;  </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_material.html#a9dc184c883ec135ace28c1917af3fe84">   26</a></span>&#160;        <span class="keywordtype">float</span>       <a class="code" href="class_material.html#a9dc184c883ec135ace28c1917af3fe84">shininess</a>;  </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif  // MATERIAL_HPP_</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;std::ostream &amp; operator &lt;&lt; (std::ostream &amp;out, <a class="code" href="class_material.html">Material</a> <span class="keyword">const</span> &amp;c);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif  // MATERIAL_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="aclass_material_html_af99c823542e497c98a35d1aac5fc9012"><div class="ttname"><a href="class_material.html#af99c823542e497c98a35d1aac5fc9012">Material::ambient</a></div><div class="ttdeci">glm::vec3 ambient</div><div class="ttdef"><b>Definition:</b> Material.hpp:25</div></div>
+<div class="ttc" id="aclass_material_html_a2c19452d71f54075df8f5405b03129f4"><div class="ttname"><a href="class_material.html#a2c19452d71f54075df8f5405b03129f4">Material::~Material</a></div><div class="ttdeci">virtual ~Material()</div><div class="ttdoc">Destroy the Material:: Material object.</div><div class="ttdef"><b>Definition:</b> Material.cpp:33</div></div>
+<div class="ttc" id="aclass_material_html_a9dc184c883ec135ace28c1917af3fe84"><div class="ttname"><a href="class_material.html#a9dc184c883ec135ace28c1917af3fe84">Material::shininess</a></div><div class="ttdeci">float shininess</div><div class="ttdef"><b>Definition:</b> Material.hpp:26</div></div>
 <div class="ttc" id="aclass_material_html"><div class="ttname"><a href="class_material.html">Material</a></div><div class="ttdoc">basic material for shaders</div><div class="ttdef"><b>Definition:</b> Material.hpp:10</div></div>
+<div class="ttc" id="aclass_material_html_aac1c499923ff99564cdd97a4b5e504a9"><div class="ttname"><a href="class_material.html#aac1c499923ff99564cdd97a4b5e504a9">Material::specular</a></div><div class="ttdeci">glm::vec3 specular</div><div class="ttdef"><b>Definition:</b> Material.hpp:24</div></div>
+<div class="ttc" id="aclass_material_html_a099904e2f5a7bbec3cba6bf8ec546b11"><div class="ttname"><a href="class_material.html#a099904e2f5a7bbec3cba6bf8ec546b11">Material::diffuse</a></div><div class="ttdeci">glm::vec3 diffuse</div><div class="ttdef"><b>Definition:</b> Material.hpp:23</div></div>
+<div class="ttc" id="aclass_material_html_a49691a0a92cc3e571869f2b494f8cd5d"><div class="ttname"><a href="class_material.html#a49691a0a92cc3e571869f2b494f8cd5d">Material::Material</a></div><div class="ttdeci">Material(std::string const name=&quot;&quot;, glm::vec3 const diffuse=glm::vec3(.36f,.34f,.32f), glm::vec3 const specular=glm::vec3(.3f,.3f,.3f), glm::vec3 const ambient=glm::vec3(0.2f, 0.2f, 0.2f), float const shininess=16.0f)</div><div class="ttdoc">Construct a new Material:: Material object.</div><div class="ttdef"><b>Definition:</b> Material.cpp:12</div></div>
+<div class="ttc" id="aclass_material_html_af2f8251a70528e05331dc8dfac025487"><div class="ttname"><a href="class_material.html#af2f8251a70528e05331dc8dfac025487">Material::operator=</a></div><div class="ttdeci">Material &amp; operator=(Material const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> Material.cpp:42</div></div>
+<div class="ttc" id="aclass_material_html_affe06990f884293d0fe2f39110f71730"><div class="ttname"><a href="class_material.html#affe06990f884293d0fe2f39110f71730">Material::name</a></div><div class="ttdeci">std::string name</div><div class="ttdef"><b>Definition:</b> Material.hpp:22</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

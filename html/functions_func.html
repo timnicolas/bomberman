@@ -79,8 +79,14 @@ $(function() {
 <li>_canWalkOnEntity()
 : <a class="el" href="class_a_character.html#afce84f8aaaedb3f889f0d52e5f592ea8">ACharacter</a>
 </li>
+<li>_destroy()
+: <a class="el" href="class_box_collider.html#a447744df9a4567cab18eb6aabc8fd1c6">BoxCollider</a>
+</li>
 <li>_draw()
-: <a class="el" href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">ButtonImageUI</a>
+: <a class="el" href="class_a_base_master_u_i.html#ae92346a217da747e894a8acbe39b4397">ABaseMasterUI</a>
+, <a class="el" href="class_a_base_u_i.html#a3331159cbf9926557afa79e4e3eee256">ABaseUI</a>
+, <a class="el" href="class_a_enemy.html#a70e3638b5ed8ecea2a087ffe16510dd2">AEnemy</a>
+, <a class="el" href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">ButtonImageUI</a>
 , <a class="el" href="class_button_u_i.html#aa183e89b7efbc8eed5fc91ce16029725">ButtonUI</a>
 , <a class="el" href="class_empty_master_u_i.html#a1e2b7cba4b43e28713c7e5d34a80b3a7">EmptyMasterUI</a>
 , <a class="el" href="class_enemy_basic.html#a143ec308f913a3eb4a7f47ad839fd049">EnemyBasic</a>
@@ -99,6 +105,9 @@ $(function() {
 </li>
 <li>_drawBorderRect()
 : <a class="el" href="class_a_base_u_i.html#a5941569c008d51d764db097198bba750">ABaseUI</a>
+</li>
+<li>_drawBox()
+: <a class="el" href="class_box_collider.html#af71d692699a39ea2bc5ee61384d533e9">BoxCollider</a>
 </li>
 <li>_drawImg()
 : <a class="el" href="class_a_base_u_i.html#ace787d9cf83b1e659a82c470f5ce953c">ABaseUI</a>
@@ -121,8 +130,30 @@ $(function() {
 <li>_getAllPositions()
 : <a class="el" href="class_a_character.html#ac90c6aeec198c760cba165860a67f622">ACharacter</a>
 </li>
+<li>_getCursorOffset()
+: <a class="el" href="class_text_input_u_i.html#a1c4f30cc2118a3820843d6933dcbdaea">TextInputUI</a>
+</li>
+<li>_getGameOverAnim()
+: <a class="el" href="class_scene_game.html#a02e7d9b9c93aec9665c9235ddfb212f5">SceneGame</a>
+</li>
+<li>_getIntroAnim()
+: <a class="el" href="class_scene_game.html#ac94a0aea8920b1a1dc4324a25c2d102d">SceneGame</a>
+</li>
 <li>_getPathTo()
 : <a class="el" href="class_a_enemy.html#a5ff3b836a7a98499a1a4019f7238b4d0">AEnemy</a>
+</li>
+<li>_getScene()
+: <a class="el" href="class_scene_manager.html#ac0599b120f0aa835792d9679e62f8522">SceneManager</a>
+</li>
+<li>_getSceneName()
+: <a class="el" href="class_scene_manager.html#adfeeb557f7324390b86befdd4bb66daa">SceneManager</a>
+</li>
+<li>_getVictoryAnim()
+: <a class="el" href="class_scene_game.html#a39f1c1fd2d9948017b3c7603d2d72d1f">SceneGame</a>
+</li>
+<li>_init()
+: <a class="el" href="class_box_collider.html#a5782997a36f86f46a83d4f528c7ae391">BoxCollider</a>
+, <a class="el" href="class_scene_manager.html#a3dd5f5c63c893508ddb701d19533a0c6">SceneManager</a>
 </li>
 <li>_initBG()
 : <a class="el" href="class_a_scene_menu.html#aa54bec80fcc36b1607eeb1bb80ab0142">ASceneMenu</a>
@@ -136,6 +167,9 @@ $(function() {
 <li>_isBlocked()
 : <a class="el" href="class_a_enemy.html#a4348865dc5c245e2d88e31296847e1a6">AEnemy</a>
 </li>
+<li>_isCheatCodeOpen()
+: <a class="el" href="class_scene_manager.html#a2623c67be48d3a903c1638ff291674a9">SceneManager</a>
+</li>
 <li>_isOn()
 : <a class="el" href="class_a_enemy.html#a250a33c7294ac9d6b125eebe8acd51e3">AEnemy</a>
 </li>
@@ -144,6 +178,9 @@ $(function() {
 </li>
 <li>_isPlayerVisible()
 : <a class="el" href="class_a_enemy.html#a7909b6882d5dba58d147decadc256cba">AEnemy</a>
+</li>
+<li>_isSceneChangedInCurFrame()
+: <a class="el" href="class_scene_manager.html#a1bcdec59b83d98bce12e8e98649f19c9">SceneManager</a>
 </li>
 <li>_jumpCrossable()
 : <a class="el" href="class_enemy_frog.html#a2e2cef706ab9893d243209b5c5fd28b0">EnemyFrog</a>
@@ -154,28 +191,47 @@ $(function() {
 <li>_loadImg()
 : <a class="el" href="class_a_base_u_i.html#a844de1b2a7f8ede19b090c3efa4c75da">ABaseUI</a>
 </li>
+<li>_loadScene()
+: <a class="el" href="class_scene_manager.html#a9209f024c89479aab57bf3277c86a584">SceneManager</a>
+</li>
 <li>_movePatternBasic()
 : <a class="el" href="class_a_enemy.html#a2ddbe01e55094dbbff085ff10b1db957">AEnemy</a>
 </li>
 <li>_moveTo()
-: <a class="el" href="class_a_character.html#a4785e1688ede03fe488bfdfd3d2339ee">ACharacter</a>
+: <a class="el" href="class_a_character.html#a1a85eefb6e443e0e8a49ffb8e683659d">ACharacter</a>
+</li>
+<li>_openCheatCode()
+: <a class="el" href="class_scene_manager.html#acae2f12e491a06191c50e0459b00b910">SceneManager</a>
+</li>
+<li>_openCheatCodeForTime()
+: <a class="el" href="class_scene_manager.html#a5c09e7cb723f941b0fabcf1d97e6808d">SceneManager</a>
 </li>
 <li>_postUpdate()
-: <a class="el" href="class_enemy_basic.html#a8c87a63172fc71e39c821a6d19eb499d">EnemyBasic</a>
+: <a class="el" href="class_a_enemy.html#a78b010638f552c4ab11ff71e7b826b1b">AEnemy</a>
+, <a class="el" href="class_enemy_basic.html#a8c87a63172fc71e39c821a6d19eb499d">EnemyBasic</a>
 , <a class="el" href="class_enemy_crispy.html#a7493983cc06e648d1ac8fd80dd8c64f3">EnemyCrispy</a>
 , <a class="el" href="class_enemy_fly.html#a21dc66b578a2d1158b32f103854a84be">EnemyFly</a>
 , <a class="el" href="class_enemy_follow.html#a7a52e753882b9bbf5cab062c606cd8d0">EnemyFollow</a>
 , <a class="el" href="class_enemy_frog.html#ab151c31f6cc89cc77830f77b02cf9372">EnemyFrog</a>
 , <a class="el" href="class_enemy_with_eye.html#a489d03612e65839940c5f468f3efdbe7">EnemyWithEye</a>
 </li>
+<li>_quit()
+: <a class="el" href="class_scene_manager.html#a27cab997337709bba4545c24eaa845b1">SceneManager</a>
+</li>
 <li>_resizeWin()
 : <a class="el" href="class_a_base_u_i.html#a1bf435b41e6628dd84633925198e0c8c">ABaseUI</a>
+</li>
+<li>_run()
+: <a class="el" href="class_scene_manager.html#a551147ff34683483b9face928dd24564">SceneManager</a>
 </li>
 <li>_unloadImg()
 : <a class="el" href="class_a_base_u_i.html#a4483f9f8c5f4f72a185d850ab94e90bb">ABaseUI</a>
 </li>
 <li>_update()
-: <a class="el" href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">ButtonImageUI</a>
+: <a class="el" href="class_a_base_master_u_i.html#a6c18f89d96c65d68ee1eabd8d4e1ee19">ABaseMasterUI</a>
+, <a class="el" href="class_a_base_u_i.html#ad4526888fd6a37de4086ba2a1e362759">ABaseUI</a>
+, <a class="el" href="class_a_enemy.html#abefc22131eb1c618819c67c3c1415c08">AEnemy</a>
+, <a class="el" href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">ButtonImageUI</a>
 , <a class="el" href="class_button_u_i.html#a984a9fd2a19550a1a39a7ab905fe1f14">ButtonUI</a>
 , <a class="el" href="class_empty_master_u_i.html#a1bf9ef11a2fa21e5637939ec6c959010">EmptyMasterUI</a>
 , <a class="el" href="class_enemy_basic.html#a6b4c43308489726b95641ed9591bdb25">EnemyBasic</a>

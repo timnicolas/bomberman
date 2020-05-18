@@ -11,7 +11,8 @@ This is the base for Charactere (\mbox{\hyperlink{class_player}{Player}}, AI, ..
 
 
 
-Inheritance diagram for A\+Character\+:\nopagebreak
+Inheritance diagram for A\+Character\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for A\+Character\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Character\+:\nopagebreak
+Collaboration diagram for A\+Character\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -31,28 +33,26 @@ Collaboration diagram for A\+Character\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{class_a_character_1_1_a_character_exception}{A\+Character\+Exception}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_character}{A\+Character}} Exceptions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_character_a110d0c6cd4cb1803d749e8638218790a}\label{class_a_character_a110d0c6cd4cb1803d749e8638218790a}} 
-{\bfseries A\+Character} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
-\item 
-\mbox{\Hypertarget{class_a_character_a157dffb2b05045b84dd3302267696bcd}\label{class_a_character_a157dffb2b05045b84dd3302267696bcd}} 
-{\bfseries A\+Character} (\mbox{\hyperlink{class_a_character}{A\+Character}} const \&src)
-\item 
-\mbox{\Hypertarget{class_a_character_ad38be256f14ea4844adbcf4643837994}\label{class_a_character_ad38be256f14ea4844adbcf4643837994}} 
-\mbox{\hyperlink{class_a_character}{A\+Character}} \& {\bfseries operator=} (\mbox{\hyperlink{class_a_character}{A\+Character}} const \&rhs)
-\item 
+\mbox{\hyperlink{class_a_character_a110d0c6cd4cb1803d749e8638218790a}{A\+Character}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Character\+::\+A\+Character object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_a_character_a244d7f65a86dea894a603c72453cbcf5}\label{class_a_character_a244d7f65a86dea894a603c72453cbcf5}} 
+virtual \mbox{\hyperlink{class_a_character_a244d7f65a86dea894a603c72453cbcf5}{$\sim$\+A\+Character}} ()
+\begin{DoxyCompactList}\small\item\em Destroy the A\+Character\+::\+A\+Character object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_character_a157dffb2b05045b84dd3302267696bcd}{A\+Character}} (\mbox{\hyperlink{class_a_character}{A\+Character}} const \&src)
+\begin{DoxyCompactList}\small\item\em Construct a new A\+Character\+::\+A\+Character object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_a_character}{A\+Character}} \& \mbox{\hyperlink{class_a_character_ad38be256f14ea4844adbcf4643837994}{operator=}} (\mbox{\hyperlink{class_a_character}{A\+Character}} const \&rhs)
+\begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_a_character_a8c942af7e72f1f0ac5e990e88da3ed4b}\label{class_a_character_a8c942af7e72f1f0ac5e990e88da3ed4b}} 
 virtual void \mbox{\hyperlink{class_a_character_a8c942af7e72f1f0ac5e990e88da3ed4b}{reset\+Crossable}} ()
 \begin{DoxyCompactList}\small\item\em Set the Entity that the Character can cross. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}\label{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}} 
-virtual bool {\bfseries update} ()=0
-\item 
-\mbox{\Hypertarget{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}\label{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}} 
-virtual bool {\bfseries draw} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
-\item 
+virtual bool \mbox{\hyperlink{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}{update}} ()=0
+\begin{DoxyCompactList}\small\item\em Update entity. Called on every frames. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+\begin{DoxyCompactList}\small\item\em Draw entity. Called on every frames. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_character_a2cc5faf1d9047d9e51154d5663fa6c67}{draw\+Collider}} ()
 \begin{DoxyCompactList}\small\item\em Draw the collider of the entity. \end{DoxyCompactList}\item 
 virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& \mbox{\hyperlink{class_a_character_adecb8064d5070f15a2d6aa76a151ff33}{get\+Board}} () const
@@ -68,30 +68,25 @@ glm\+::ivec2 \mbox{\hyperlink{class_a_character_aa7562af195e3615c1f90488799687d9
 \mbox{\hyperlink{class_a_character}{A\+Character}} $\ast$ \mbox{\hyperlink{class_a_character_a7e110857fc1e545a907d1e083431044a}{set\+Position}} (glm\+::vec3 pos)
 \begin{DoxyCompactList}\small\item\em Init the Class. Needed to be called before any usage of the Class. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_character_a1ab94580e4db621f79f0bf1d6bcdb600}{take\+Damage}} (const int damage)
-\begin{DoxyCompactList}\small\item\em Character Take $<$damage$>$ damages. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Character Take $<$ damage $>$ damages. \end{DoxyCompactList}\item 
 virtual std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ \mbox{\hyperlink{class_a_character_a39c7111c4b096129d040e22e3b09592d}{get\+Collision}} (glm\+::vec3 dest) const
 \begin{DoxyCompactList}\small\item\em get a list of entity in collision with the Character at a position. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_character_abf19d9677b90cd53bd3191b37939137d}{has\+Collision}} (glm\+::vec3 at\+Position, glm\+::vec3 at\+Size=glm\+::vec3(1, 1, 1))
-\begin{DoxyCompactList}\small\item\em Test if Character have a collision at position $<$at\+Position$>$. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Test if Character have a collision at position $<$ at\+Position $>$. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_a_character_a295783a792eedc09bcd68bc98eacb6d5}{tp}} (glm\+::vec3 tp\+Pos)
 \begin{DoxyCompactList}\small\item\em Teleport a character on a position (tp check colision) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_character_a46261a6f692a2b826ca0f30ccbdf93da}\label{class_a_character_a46261a6f692a2b826ca0f30ccbdf93da}} 
-int {\bfseries lives}
+int \mbox{\hyperlink{class_a_character_a46261a6f692a2b826ca0f30ccbdf93da}{lives}}
 \item 
-\mbox{\Hypertarget{class_a_character_a078f65a8d5565962c2f17f44f19eef66}\label{class_a_character_a078f65a8d5565962c2f17f44f19eef66}} 
-float {\bfseries speed}
+float \mbox{\hyperlink{class_a_character_a078f65a8d5565962c2f17f44f19eef66}{speed}}
 \item 
-\mbox{\Hypertarget{class_a_character_af8466a49b0a5abcc22a785562aed7257}\label{class_a_character_af8466a49b0a5abcc22a785562aed7257}} 
-glm\+::vec3 {\bfseries front}
+glm\+::vec3 \mbox{\hyperlink{class_a_character_af8466a49b0a5abcc22a785562aed7257}{front}}
 \item 
-\mbox{\Hypertarget{class_a_character_ab91ce66f359d4c3fb605948689f4fd20}\label{class_a_character_ab91ce66f359d4c3fb605948689f4fd20}} 
-glm\+::vec3 {\bfseries moving\+Size}
+glm\+::vec3 \mbox{\hyperlink{class_a_character_ab91ce66f359d4c3fb605948689f4fd20}{moving\+Size}}
 \item 
-\mbox{\Hypertarget{class_a_character_a0a3b42d22279b8c13c6e9eab4f74da7b}\label{class_a_character_a0a3b42d22279b8c13c6e9eab4f74da7b}} 
-std\+::vector$<$ Type\+::\+Enum $>$ {\bfseries crossable\+Types}
+std\+::vector$<$ Type\+::\+Enum $>$ \mbox{\hyperlink{class_a_character_a0a3b42d22279b8c13c6e9eab4f74da7b}{crossable\+Types}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -115,13 +110,45 @@ std\+::vector$<$ glm\+::ivec2 $>$ \mbox{\hyperlink{class_a_character_ac90c6aeec1
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_a_character_a5af6eac92ea7539809748b6f9e4be83b}\label{class_a_character_a5af6eac92ea7539809748b6f9e4be83b}} 
-std\+::string {\bfseries \+\_\+sound\+Of\+Death}
+std\+::string \mbox{\hyperlink{class_a_character_a5af6eac92ea7539809748b6f9e4be83b}{\+\_\+sound\+Of\+Death}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 This is the base for Charactere (\mbox{\hyperlink{class_player}{Player}}, AI, ...) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_a_character_a110d0c6cd4cb1803d749e8638218790a}\label{class_a_character_a110d0c6cd4cb1803d749e8638218790a}} 
+\index{ACharacter@{ACharacter}!ACharacter@{ACharacter}}
+\index{ACharacter@{ACharacter}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{ACharacter()}{ACharacter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily A\+Character\+::\+A\+Character (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new A\+Character\+::\+A\+Character object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game} & A reference to the main \mbox{\hyperlink{class_scene_game}{Scene\+Game}} object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_a_character_a157dffb2b05045b84dd3302267696bcd}\label{class_a_character_a157dffb2b05045b84dd3302267696bcd}} 
+\index{ACharacter@{ACharacter}!ACharacter@{ACharacter}}
+\index{ACharacter@{ACharacter}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{ACharacter()}{ACharacter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily A\+Character\+::\+A\+Character (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_character}{A\+Character}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct a new A\+Character\+::\+A\+Character object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The object to do the copy \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_a_character_afbdeafa3e136320d980db3cf7f1fe7c7}\label{class_a_character_afbdeafa3e136320d980db3cf7f1fe7c7}} 
@@ -194,7 +221,7 @@ Check if we can walk on an entity.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pos} & The block pos \\
+{\em entity} & The entity \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -273,6 +300,32 @@ Move to direction if possible.
 \begin{DoxyReturn}{Returns}
 glm\+::vec3 finale position 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}\label{class_a_character_af223d3c9dbd3143daf62e9834bd30e3d}} 
+\index{ACharacter@{ACharacter}!draw@{draw}}
+\index{draw@{draw}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual bool A\+Character\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Draw entity. Called on every frames. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gui} & A reference to the gui object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}{A\+Entity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_a_enemy_a527fc4b7bb46c04c486fd025a01e16a9}{A\+Enemy}}, and \mbox{\hyperlink{class_player_a1194c157df144e864d0328d267dfa75c}{Player}}.
+
 \mbox{\Hypertarget{class_a_character_a2cc5faf1d9047d9e51154d5663fa6c67}\label{class_a_character_a2cc5faf1d9047d9e51154d5663fa6c67}} 
 \index{ACharacter@{ACharacter}!drawCollider@{drawCollider}}
 \index{drawCollider@{drawCollider}!ACharacter@{ACharacter}}
@@ -305,7 +358,7 @@ std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$\
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity}{A\+Entity}}.
+Implements \mbox{\hyperlink{class_a_entity_a44aa82958386de50cd9a6c836461114a}{A\+Entity}}.
 
 \mbox{\Hypertarget{class_a_character_adecb8064d5070f15a2d6aa76a151ff33}\label{class_a_character_adecb8064d5070f15a2d6aa76a151ff33}} 
 \index{ACharacter@{ACharacter}!getBoard@{getBoard}}
@@ -322,7 +375,7 @@ std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$\
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity}{A\+Entity}}.
+Implements \mbox{\hyperlink{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}{A\+Entity}}.
 
 \mbox{\Hypertarget{class_a_character_a39c7111c4b096129d040e22e3b09592d}\label{class_a_character_a39c7111c4b096129d040e22e3b09592d}} 
 \index{ACharacter@{ACharacter}!getCollision@{getCollision}}
@@ -336,7 +389,7 @@ get a list of entity in collision with the Character at a position.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pos} & default V\+O\+I\+D\+\_\+\+P\+O\+S3 \\
+{\em dest} & default V\+O\+I\+D\+\_\+\+P\+O\+S3 \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -374,7 +427,7 @@ glm\+::vec2
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity}{A\+Entity}}.
+Implements \mbox{\hyperlink{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}{A\+Entity}}.
 
 \mbox{\Hypertarget{class_a_character_abf19d9677b90cd53bd3191b37939137d}\label{class_a_character_abf19d9677b90cd53bd3191b37939137d}} 
 \index{ACharacter@{ACharacter}!hasCollision@{hasCollision}}
@@ -384,7 +437,7 @@ Implements \mbox{\hyperlink{class_a_entity}{A\+Entity}}.
 
 
 
-Test if Character have a collision at position $<$at\+Position$>$. 
+Test if Character have a collision at position $<$ at\+Position $>$. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -413,6 +466,24 @@ true if alive
 
 false if dead 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_character_ad38be256f14ea4844adbcf4643837994}\label{class_a_character_ad38be256f14ea4844adbcf4643837994}} 
+\index{ACharacter@{ACharacter}!operator=@{operator=}}
+\index{operator=@{operator=}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_character}{A\+Character}} \& A\+Character\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_character}{A\+Character}} const \&}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Copy this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The object to copy \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_character}{A\+Character}}\& A reference to the copied object 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_a_character_a7e110857fc1e545a907d1e083431044a}\label{class_a_character_a7e110857fc1e545a907d1e083431044a}} 
 \index{ACharacter@{ACharacter}!setPosition@{setPosition}}
 \index{setPosition@{setPosition}!ACharacter@{ACharacter}}
@@ -439,7 +510,7 @@ A\+Character$\ast$
 
 
 
-Character Take $<$damage$>$ damages. 
+Character Take $<$ damage $>$ damages. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -453,7 +524,7 @@ false if damage not taken
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity}{A\+Entity}}.
+Implements \mbox{\hyperlink{class_a_entity_ac01e24195a8ba249c855120ac017770e}{A\+Entity}}.
 
 
 
@@ -477,7 +548,67 @@ Teleport a character on a position (tp check colision)
 \begin{DoxyReturn}{Returns}
 true If the tp is a success 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}\label{class_a_character_af5a4d00f6104d45b821a2e88b80936b5}} 
+\index{ACharacter@{ACharacter}!update@{update}}
+\index{update@{update}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual bool A\+Character\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
+
+
+Update entity. Called on every frames. 
+
+\begin{DoxyReturn}{Returns}
+false If failed 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}{A\+Entity}}.
+
+
+
+Implemented in \mbox{\hyperlink{class_a_enemy_a01e3b0313d6f29bf2cafe20f711c0550}{A\+Enemy}}, and \mbox{\hyperlink{class_player_a1614c89caa50fa1527417ba6a2bbe6ee}{Player}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_a_character_a5af6eac92ea7539809748b6f9e4be83b}\label{class_a_character_a5af6eac92ea7539809748b6f9e4be83b}} 
+\index{ACharacter@{ACharacter}!\_soundOfDeath@{\_soundOfDeath}}
+\index{\_soundOfDeath@{\_soundOfDeath}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{\_soundOfDeath}{\_soundOfDeath}}
+{\footnotesize\ttfamily std\+::string A\+Character\+::\+\_\+sound\+Of\+Death\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\hyperlink{class_sound}{Sound}} when die \mbox{\Hypertarget{class_a_character_a0a3b42d22279b8c13c6e9eab4f74da7b}\label{class_a_character_a0a3b42d22279b8c13c6e9eab4f74da7b}} 
+\index{ACharacter@{ACharacter}!crossableTypes@{crossableTypes}}
+\index{crossableTypes@{crossableTypes}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{crossableTypes}{crossableTypes}}
+{\footnotesize\ttfamily std\+::vector$<$Type\+::\+Enum$>$ A\+Character\+::crossable\+Types}
+
+all types that the Character can cross \mbox{\Hypertarget{class_a_character_af8466a49b0a5abcc22a785562aed7257}\label{class_a_character_af8466a49b0a5abcc22a785562aed7257}} 
+\index{ACharacter@{ACharacter}!front@{front}}
+\index{front@{front}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{front}{front}}
+{\footnotesize\ttfamily glm\+::vec3 A\+Character\+::front}
+
+Front vector \mbox{\Hypertarget{class_a_character_a46261a6f692a2b826ca0f30ccbdf93da}\label{class_a_character_a46261a6f692a2b826ca0f30ccbdf93da}} 
+\index{ACharacter@{ACharacter}!lives@{lives}}
+\index{lives@{lives}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{lives}{lives}}
+{\footnotesize\ttfamily int A\+Character\+::lives}
+
+number of lives \mbox{\Hypertarget{class_a_character_ab91ce66f359d4c3fb605948689f4fd20}\label{class_a_character_ab91ce66f359d4c3fb605948689f4fd20}} 
+\index{ACharacter@{ACharacter}!movingSize@{movingSize}}
+\index{movingSize@{movingSize}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{movingSize}{movingSize}}
+{\footnotesize\ttfamily glm\+::vec3 A\+Character\+::moving\+Size}
+
+Size when moving (generally \{0.\+95, 0.\+95, 0.\+95\}) \mbox{\Hypertarget{class_a_character_a078f65a8d5565962c2f17f44f19eef66}\label{class_a_character_a078f65a8d5565962c2f17f44f19eef66}} 
+\index{ACharacter@{ACharacter}!speed@{speed}}
+\index{speed@{speed}!ACharacter@{ACharacter}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily float A\+Character\+::speed}
+
+speed 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

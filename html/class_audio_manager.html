@@ -62,6 +62,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="class_audio_manager-members.html">List of all members</a>  </div>
@@ -83,6 +84,13 @@ Collaboration diagram for AudioManager:</div>
 </map>
 </div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="memItemLeft" align="right" valign="top"><a id="ad94dc46723c6d7cf8c81fc3772a842aa"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_manager.html#ad94dc46723c6d7cf8c81fc3772a842aa">~AudioManager</a> ()</td></tr>
+<tr class="memdesc:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the Audio Manager:: Audio Manager object. <br /></td></tr>
+<tr class="separator:ad94dc46723c6d7cf8c81fc3772a842aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac8e8acadc8bba682bd3835997d379f5c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_audio_manager.html">AudioManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_manager.html#ac8e8acadc8bba682bd3835997d379f5c">get</a> ()</td></tr>
@@ -148,10 +156,9 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hre
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:abd1cfb41f75592fc90007aad609a11ee"><td class="memItemLeft" align="right" valign="top"><a id="abd1cfb41f75592fc90007aad609a11ee"></a>
-static const int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_sound_channels</b> = 42</td></tr>
+<tr class="memitem:abd1cfb41f75592fc90007aad609a11ee"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_manager.html#abd1cfb41f75592fc90007aad609a11ee">nb_sound_channels</a> = 42</td></tr>
 <tr class="separator:abd1cfb41f75592fc90007aad609a11ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab4f16f2b8df28e812c60769c534644b0"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>musics</b></td></tr>
+<tr class="memitem:ab4f16f2b8df28e812c60769c534644b0"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_audio_manager.html#ab4f16f2b8df28e812c60769c534644b0">musics</a></td></tr>
 <tr class="separator:ab4f16f2b8df28e812c60769c534644b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -252,7 +259,8 @@ false otherwise. </dd></dl>
 <p>Load a new music from its file name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">file_name</td><td>The path to the music file, starting from the asset directory.</td></tr>
+    <tr><td class="paramname">file_name</td><td>The path to the music file, starting from the asset directory. </td></tr>
+    <tr><td class="paramname">silent</td><td>Don't show warning if enabled</td></tr>
   </table>
   </dd>
 </dl>
@@ -302,7 +310,8 @@ false otherwise. </dd></dl>
 <p>Load a new sound from its file name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">file_name</td><td>The path to the sound file, starting from the asset directory.</td></tr>
+    <tr><td class="paramname">file_name</td><td>The path to the sound file, starting from the asset directory. </td></tr>
+    <tr><td class="paramname">silent</td><td>Don't show warning if enabled</td></tr>
   </table>
   </dd>
 </dl>
@@ -465,7 +474,8 @@ false otherwise. </dd></dl>
     <tr><td class="paramname">sound_name</td><td>the file name of the sound. </td></tr>
     <tr><td class="paramname">volume</td><td>The volume modifier apply on top of the audio setting. Set to 1.0 by default. </td></tr>
     <tr><td class="paramname">loop</td><td>If the sound is played on loop. </td></tr>
-    <tr><td class="paramname">muteMusic</td><td>If we need to mute the music during the sound.</td></tr>
+    <tr><td class="paramname">muteMusic</td><td>If we need to mute the music during the sound. </td></tr>
+    <tr><td class="paramname">fadeIn</td><td>FadeIn</td></tr>
   </table>
   </dd>
 </dl>
@@ -642,7 +652,31 @@ false otherwise. </dd></dl>
 <div class="line">    <span class="stringliteral">&quot;sounds/moon-crystals.ogg&quot;</span>,</div>
 <div class="line">    <span class="stringliteral">&quot;sounds/moon-hydrogen.ogg&quot;</span></div>
 <div class="line">}</div>
-</div><!-- fragment -->
+</div><!-- fragment --><p>Al musics </p>
+
+</div>
+</div>
+<a id="abd1cfb41f75592fc90007aad609a11ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1cfb41f75592fc90007aad609a11ee">&#9670;&nbsp;</a></span>nb_sound_channels</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int AudioManager::nb_sound_channels = 42</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Number of sounds channel </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
