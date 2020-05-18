@@ -60,7 +60,7 @@ class OpenGLModel {
 		void		setModel(glm::mat4 const model);
 		void		setMeshTexture(TextureType::Enum type, std::string const meshName,
 			std::string const path, bool inSpaceSRGB = true);
-		void		printMeshesNames();
+		void		printMeshesNames() const;
 
 		// getters
 		bool		getAnimationId(std::string const name, uint32_t &outId) const;
