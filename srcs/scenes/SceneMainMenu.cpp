@@ -57,6 +57,9 @@ bool			SceneMainMenu::init() {
 		allUI.loadSettings = &addButton(VOID_SIZE, VOID_SIZE, "settings")
 			.setKeyLeftClickScancode(SDL_SCANCODE_COMMA)
 			.addButtonLeftListener(&_states.loadSettings);
+		allUI.help = &addButton(VOID_SIZE, VOID_SIZE, "help")
+			.setKeyLeftClickScancode(SDL_SCANCODE_H)
+			.addButtonLeftListener(&_states.help);
 		allUI.exit = &addButton(VOID_SIZE, VOID_SIZE, "exit")
 			.setKeyLeftClickInput(InputType::CANCEL)
 			.addButtonLeftListener(&_states.exit);
@@ -111,6 +114,10 @@ bool	SceneMainMenu::update() {
 		_states.loadSettings = false;
 		SceneManager::loadScene(SceneNames::SETTINGS);
 	}
+	else if (_states.help) {
+		_states.help = false;
+		SceneManager::loadScene(SceneNames::HELP);
+	}
 	else if (_states.exit) {
 		_states.exit = false;
 		SceneManager::loadScene(SceneNames::EXIT);
@@ -155,6 +162,8 @@ void		SceneMainMenu::_updateUI() {
 	allUI.loadGame->setPos(tmpPos).setSize(tmpSize);
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.loadSettings->setPos(tmpPos).setSize(tmpSize);
+	tmpPos.y -= menuHeight * 1.3;
+	allUI.help->setPos(tmpPos).setSize(tmpSize);
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.exit->setPos(tmpPos).setSize(tmpSize);
 	tmpSize.x = tmpSize.x * 1.3;

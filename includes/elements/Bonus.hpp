@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <map>
-#include <unordered_map>
 #include <stdexcept>
 #include "AObject.hpp"
 #include "SceneGame.hpp"
@@ -17,13 +16,13 @@ namespace BonusType {
 		BOMBS,
 		FLAMES,
 		SPEED,
-		WALLPASS,
-		DETONATOR,
-		BOMBPASS,
-		FLAMPASS,
 		SHIELD,
 		TIME,
 		POINTS,
+		DETONATOR,
+		BOMBPASS,
+		WALLPASS,
+		FLAMPASS,
 		NB_BONUS,  // need to stay at last position
 	};
 }  // namespace BonusType
@@ -41,9 +40,9 @@ private:
 	BonusType::Enum		_pickBonus();
 
 public:
-	static std::unordered_map<std::string, BonusType::Enum>	bonus;
-	static std::unordered_map<BonusType::Enum, std::string>	description;
-	static std::unordered_map<BonusType::Enum, std::string>	bonusTextures;
+	static std::map<std::string, BonusType::Enum>	bonus;
+	static std::map<BonusType::Enum, std::string>	description;
+	static std::map<BonusType::Enum, std::string>	bonusTextures;
 
 	// Constructors
 	explicit Bonus(SceneGame &game);

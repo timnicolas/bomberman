@@ -313,8 +313,8 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
-			if (Inputs::getKeyUp(InputType::CONFIRM))
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
+			if (Inputs::getKeyUp(InputType::ACTION))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			AudioManager::playMusic(musicLevel, 0.3f, true);
@@ -356,7 +356,7 @@ bool	SceneGame::update() {
 		}
 
 		// load victory menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
@@ -381,7 +381,7 @@ bool	SceneGame::update() {
 		}
 
 		// load loosing menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
 			// clear game infos.
 			player->resetParams();
 			Save::updateSavedFile(*this, false);
@@ -683,7 +683,7 @@ bool	SceneGame::drawEndGame() {
 	/* draw models */
 	try {
 		float tmpX = _menuModels.player->transform.getPos().x;
-		if (tmpX < -3 || tmpX > 7)
+		if (tmpX < -3 || tmpX > 10)
 			tmpX = -3;
 		tmpX += 0.03;
 
