@@ -112,12 +112,39 @@ std::ostream &	operator<<(std::ostream & os, const Score& my_class) {
 // -- Accessors ----------------------------------------------------------------
 
 /* _score */
+/**
+ * @brief Get the score
+ *
+ * @return int32_t The score
+ */
 int32_t	Score::getScore() const { return _score + _bonusDestruction + _bonusEnemies + _bonusTime; }
+/**
+ * @brief Set the score
+ *
+ * @param score The new score
+ * @return Score& A reference to 'this' object
+ */
 Score	&Score::setScore(int32_t score) { _score = score; return *this; }
 /* _levelId */
+/**
+ * @brief Get the level ID
+ *
+ * @return int32_t Current level ID
+ */
 int32_t	Score::getLevelId() const { return _levelId; }
+/**
+ * @brief Set the level ID
+ *
+ * @param levelId New level ID
+ * @return Score& A reference to 'this' object
+ */
 Score	&Score::setLevelId(int32_t levelId) { _levelId = levelId; return *this; }
 /* toString */
+/**
+ * @brief Convert object to string
+ *
+ * @return std::string String version of object
+ */
 std::string	Score::toString() {
 	std::stringstream ss;
 	ss << *this;
@@ -258,8 +285,16 @@ void	Score::getStats(std::vector<Score::Stat> &vec) {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new Score:: Score Exception:: Score Exception object
+ */
 Score::ScoreException::ScoreException()
 : std::runtime_error("Score Exception") {}
 
+/**
+ * @brief Construct a new Score:: Score Exception:: Score Exception object
+ *
+ * @param what_arg Error message
+ */
 Score::ScoreException::ScoreException(const char* what_arg)
 : std::runtime_error(std::string(std::string("ScoreError: ") + what_arg).c_str()) {}

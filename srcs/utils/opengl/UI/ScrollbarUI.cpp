@@ -258,11 +258,47 @@ void ScrollbarUI::_draw() {
 }
 
 /* setter */
+/**
+ * @brief Enable vertical scrolling
+ *
+ * @param enable Enable / disable
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::enableVertScroll(bool enable) { _vertScroll = enable; return *this; }
+/**
+ * @brief Enable horizontal scrolling
+ *
+ * @param enable Enable / disable
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::enableHorizScroll(bool enable) { _horizScroll = enable; return *this; }
+/**
+ * @brief Set the scrollbar size (width)
+ *
+ * @param size The scrollbar size
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::setScrollbarSize(float size) { _scrollbarSize = size; return *this; }
+/**
+ * @brief Set the scrolling speed
+ *
+ * @param speed The scrolling speed
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::setScrollbarSpeed(float speed) { _mouseScrollSpeed = speed; return *this; }
+/**
+ * @brief Invert vertical scroll
+ *
+ * @param invert Invert
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::invertVertScroll(bool invert) { _vertScrollInverted = invert; return *this; }
+/**
+ * @brief Invert horizontal scroll
+ *
+ * @param invert Invert
+ * @return ScrollbarUI& A reference to 'this' ScrollbarUI object
+ */
 ScrollbarUI &	ScrollbarUI::invertHorizScroll(bool invert) { _horizScrollInverted = invert; return *this; }
 
 /**
