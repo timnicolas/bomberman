@@ -23,14 +23,20 @@ class SceneHelp : public ASceneMenu {
 		virtual bool		update();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	menu;
+			bool	menu;  /**< True if we clicked on the menu button */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
-			ABaseUI	*detonatorText;
+			ABaseUI	*detonatorText;  /**< UI for text of detonator */
 		};
-		AllUI		allUI;
+		AllUI		allUI;  /**< All UI elements */
 
 	private:
 		SceneHelp();
