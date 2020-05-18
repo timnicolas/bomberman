@@ -68,7 +68,7 @@ class	Mesh {
 
 		void	setTexture(TextureType::Enum type, Texture const texture);
 		void	draw(glm::mat4 const &model) const;
-		void	addBoneData(uint32_t boneID, float weight, uint32_t VerticeID);
+		void	addBoneData(uint32_t boneID, float weight, uint32_t vertexID);
 		void	sendMesh();
 
 	private:

@@ -128,7 +128,7 @@ void	Model::setAnimation(uint32_t id, AnimEndCb animEndCbFunc,
  * @brief change the animation by name
  *
  * @param name the animation name
- * @param animEndCb member func called on animation end
+ * @param animEndCbFunc member func called on animation end
  * @param animEndCbClass member func of animEndCb
  */
 void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
@@ -147,6 +147,8 @@ void	Model::setAnimation(std::string name, AnimEndCb animEndCbFunc,
 /**
  * @brief change the animation to the next one
  *
+ * @param animEndCbFunc member func called on animation end
+ * @param animEndCbClass member func of animEndCb
  */
 void	Model::setNextAnimation(AnimEndCb animEndCbFunc, AEntity *animEndCbClass) {
 	uint32_t nextId = _animationId + 1;
@@ -267,6 +269,9 @@ float	Model::getAnimDuration() const {
 	return 0;
 }
 
+/**
+ * @brief Print all animations names
+ */
 void	Model::printAnimsNames() const {
 	uint16_t	i = 0;
 
@@ -281,6 +286,11 @@ void	Model::printAnimsNames() const {
 	}
 }
 
+/**
+ * @brief Get the current animation name
+ *
+ * @return std::string The animation name
+ */
 std::string Model::getCurrentAnimationName() const {
 	if (_curAnimation) {
 		return std::string(_curAnimation->mName.C_Str());
@@ -290,6 +300,9 @@ std::string Model::getCurrentAnimationName() const {
 }
 
 // -- _updateAnimationTime -----------------------------------------------------
+/**
+ * @brief Update animation time
+ */
 void	Model::_updateAnimationTime() {
 	int	lastAnimTimeTick = _animationTimeTick;
 

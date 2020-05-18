@@ -391,6 +391,13 @@ void Gui::enableCursor(bool enable) {
 }
 
 // -- drawCube -----------------------------------------------------------------
+/**
+ * @brief Draw a cube on the screen
+ *
+ * @param typeBlock The type of cube
+ * @param pos The position
+ * @param scale The scale
+ */
 void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
 	glm::mat4	model(1.0);
 	cubeShader->use();
@@ -478,6 +485,11 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->getShader().unuse();
 }
 
+/**
+ * @brief In this frame, the update function cannot exit
+ *
+ * @param disable True to enable this functionnality
+ */
 void	Gui::disableExitForThisFrame(bool disable) {
 	_exitMenuDisabled = disable;
 }

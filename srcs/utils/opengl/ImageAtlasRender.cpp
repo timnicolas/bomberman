@@ -117,5 +117,15 @@ void ImageAtlasRender::draw(float posx, float posy, float w, float h, int texID,
     _shader.unuse();
 }
 
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader			&ImageAtlasRender::getShader() { return _shader; }
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& The shader
+ */
 Shader const	&ImageAtlasRender::getShader() const { return _shader; }
