@@ -155,7 +155,11 @@ bool			SceneHelp::init() {
 		for (auto bonus : Bonus::description) {
 			tmpUI = &addImage(tmpPos, imgSize, Bonus::bonusTextures[bonus.first]);
 			allUI.allPages[pageID].push_back(tmpUI);
-			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, bonus.second)
+			std::string desc = bonus.second;
+			if (desc.rfind("Bonus ", 0) == 0) {
+				desc.erase(0, strlen("Bonus "));
+			}
+			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, desc)
 				.setTextFont("text")
 				.setTextScale(HELP_MENU_TEXT_SCALE)
 				.setTextAlign(TextAlign::LEFT);
@@ -205,7 +209,13 @@ bool			SceneHelp::init() {
  */
 void SceneHelp::load() {
 	ASceneMenu::load();
+
+	std::string desc = Bonus::description[BonusType::DETONATOR];
+	if (desc.rfind("Bonus ", 0) == 0) {
+		desc.erase(0, strlen("Bonus "));
+	}
 	allUI.detonatorText->setText(Bonus::description[BonusType::DETONATOR]);
+
 	allUI.movingText->setText("Move with: "
 		+ Inputs::getKeyName(InputType::UP) + ", "
 		+ Inputs::getKeyName(InputType::DOWN) + ", "
