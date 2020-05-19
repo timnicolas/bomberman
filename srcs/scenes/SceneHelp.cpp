@@ -224,11 +224,21 @@ void SceneHelp::load() {
 	allUI.bombText->setText("You can drop bombs with " + Inputs::getKeyName(InputType::ACTION));
 	allUI.bombDetonatorText->setText("If you have the detonator bonus, explode bombs with "
 		+ Inputs::getKeyName(InputType::ACTION_2));
-	if (SceneManager::getSceneName() != SceneNames::EXIT) {
+	if (SceneManager::getSceneName() != SceneNames::HELP) {
 		_lastSceneName = SceneManager::getSceneName();
-		if (_lastSceneName == SceneNames::PAUSE) {
+		if (_lastSceneName == SceneNames::PAUSE || _lastSceneName == SceneNames::GAME) {
 			_draw3dMenu = false;
 		}
+	}
+}
+
+/**
+ * @brief called when the scene is unloaded
+ */
+void SceneHelp::unload() {
+	ASceneMenu::unload();
+	if (_lastSceneName == SceneNames::PAUSE || _lastSceneName == SceneNames::GAME) {
+		_draw3dMenu = true;
 	}
 }
 
@@ -281,6 +291,23 @@ bool	SceneHelp::update() {
 	return true;
 }
 
+/**
+ * @brief this is the draw function (called every frames)
+ *
+ * @return true if the draw is a success
+ * @return false if there are an error in draw
+ */
+bool SceneHelp::draw() {
+	bool ret = true;
+
+	/* 3d background */
+	if (_draw3dMenu == false && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ret = scGame.draw();  // draw the game if possible
+	}
+	ret = ASceneMenu::draw();
+	return ret & true;
+}
 
 /**
  * @brief set the current level in selection

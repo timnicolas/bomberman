@@ -156,7 +156,7 @@ bool	initSettings(std::string const & filename) {
 		s.j("colors").j("background").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("bg-rect");
 		s.j("colors").j("bg-rect").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
-		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0x44).setMin(0x00).setMax(0xFF);
+		s.j("colors").j("bg-rect").add<uint64_t>("alpha", 0x60).setMin(0x00).setMax(0xFF);
 	s.j("colors").add<SettingsJson>("bg-rect-border");
 		s.j("colors").j("bg-rect-border").add<uint64_t>("color", 0x155c2c).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("bg-rect-border").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
