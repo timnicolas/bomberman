@@ -3,6 +3,8 @@
 #include "ASceneMenu.hpp"
 #include "ABaseUI.hpp"
 
+#define HELP_MENU_TEXT_SCALE 1.2
+
 /**
  * @brief main menu (opened at the game startup)
  */
@@ -36,7 +38,12 @@ class SceneHelp : public ASceneMenu {
 		 * @brief All UI elements
 		 */
 		struct AllUI {
-			ABaseUI	*								detonatorText;  /**< UI for text of detonator */
+			ABaseUI	*								movingText;  /**< UI for text in page 1 for moving */
+			ABaseUI	*								bombText;  /**< UI for text in page 1 for bomb */
+			ABaseUI	*								bombDetonatorText;  /**< UI for text in page 1 for detonator */
+
+			ABaseUI	*								detonatorText;  /**< UI for text in page 2 of detonator */
+
 			ABaseUI	*								leftPage;  /**< UI for left page button */
 			ABaseUI	*								rightPage;  /**< UI for right page button */
 			std::vector< std::vector< ABaseUI* > >	allPages;  /**< UI for all pages */
