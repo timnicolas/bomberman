@@ -21,7 +21,9 @@ class SceneHelp : public ASceneMenu {
 		// Methods
 		virtual bool		init();
 		virtual void		load();
+		virtual void		unload();
 		virtual bool		update();
+		virtual bool		draw();
 		void				setPage(int32_t page, bool enableTransition = true);
 
 	protected:

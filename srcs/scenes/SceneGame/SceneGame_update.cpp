@@ -61,6 +61,9 @@ bool	SceneGame::update() {
 	if (Inputs::getKeyUp(InputType::CANCEL))
 		state = GameState::PAUSE;
 
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_H))
+		_loadHelp = true;
+
 	// set all enemies to Idle on win/loose
 	if (state == GameState::WIN || state == GameState::GAME_OVER) {
 		for (auto &&enemy : enemies) {
@@ -78,9 +81,18 @@ bool	SceneGame::update() {
 		}
 	}
 
-	if (state == GameState::PAUSE) {
+	if (state == GameState::PAUSE || _loadHelp) {
 		AudioManager::pauseAllSounds();
-		SceneManager::loadScene(SceneNames::PAUSE);
+		if (_loadHelp) {
+			_loadHelp = false;
+			state = GameState::PAUSE;
+			// open help menu
+			SceneManager::loadScene(SceneNames::HELP);
+		}
+		else {
+			// open pause menu
+			SceneManager::loadScene(SceneNames::PAUSE);
+		}
 		return true;
 	}
 	else if (state == GameState::INTRO) {
@@ -90,6 +102,8 @@ bool	SceneGame::update() {
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			AudioManager::playMusic(musicLevel, 0.3f, true);
 			state = GameState::PLAY;
+			if (level == 0)
+				_loadHelp = true;
 		}
 		return true;
 	}

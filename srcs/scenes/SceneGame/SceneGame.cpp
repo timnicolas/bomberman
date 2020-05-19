@@ -70,6 +70,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	enemiesToKill = 0;
 	enemiesKilled = 0;
 	_alarm = false;
+	_loadHelp = false;
 	AudioManager::loadSound(INTROLEVEL_SOUND);
 	AudioManager::loadSound(WIN_SOUND);
 	AudioManager::loadSound(GAME_OVER_SOUND);
