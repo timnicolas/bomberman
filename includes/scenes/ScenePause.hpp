@@ -28,6 +28,7 @@ class ScenePause : public ASceneMenu {
 		struct ButtonsStates {
 			bool	resume;  /**< True if we clicked on the button resume */
 			bool	restart;  /**< True if we clicked on the button restart */
+			bool	help;  /**< True if we clicked on the button help */
 			bool	menu;  /**< True if we clicked on the button menu */
 			bool	exit;  /**< True if we clicked on the button exit */
 		};
