@@ -553,13 +553,20 @@ bool	SceneGame::drawGame() {
 		_gui->drawCube(Block::FLOOR, {0.0f, -1.5f, 0.0f}, {size.x, 1.5f, size.y});
 	}
 
+	std::vector<AEntity *>	endBlocs;
+
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
-				if (s.j("debug").j("show").b("baseBoard") && !board_it2->draw(*_gui))
-					return false;
-				if (s.j("debug").j("show").b("staticCollider") && !board_it2->drawCollider())
-					return false;
+				if (board_it2->type == Type::END) {
+					endBlocs.push_back(board_it2);
+				}
+				else {
+					if (s.j("debug").j("show").b("baseBoard") && !board_it2->draw(*_gui))
+						return false;
+					if (s.j("debug").j("show").b("staticCollider") && !board_it2->drawCollider())
+						return false;
+				}
 			}
 		}
 	}
@@ -586,6 +593,19 @@ bool	SceneGame::drawGame() {
 	if (s.j("debug").j("show").b("movingCollider") && !player->drawCollider())
 		return false;
 
+	// draw skybox
+	glm::mat4	view = _gui->cam->getViewMatrix();
+	_gui->drawSkybox(view);
+
+	// draw end blocks last for transparency issue
+	for (AEntity *end : endBlocs) {
+		if (s.j("debug").j("show").b("baseBoard") && !end->draw(*_gui))
+			return false;
+		if (s.j("debug").j("show").b("staticCollider") && !end->drawCollider())
+			return false;
+	}
+	endBlocs.clear();
+
 	// release cubeShader and textures
 	_gui->cubeShader->use();
 	_gui->textureManager->disableTextures();
@@ -599,10 +619,6 @@ bool	SceneGame::drawGame() {
 	else if (state == GameState::INTRO) {
 		allUI.introText->draw();
 	}
-
-	// draw skybox
-	glm::mat4	view = _gui->cam->getViewMatrix();
-	_gui->drawSkybox(view);
 
 	return true;
 }
