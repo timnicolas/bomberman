@@ -128,7 +128,11 @@ SRC =	main.cpp \
 		scenes/SceneLoadGame.cpp \
 		scenes/SceneDifficulty.cpp \
 		scenes/SceneLevelSelection.cpp \
-		scenes/SceneGame.cpp \
+		scenes/SceneGame/SceneGame.cpp \
+		scenes/SceneGame/SceneGame_init.cpp \
+		scenes/SceneGame/SceneGame_loadlevel.cpp \
+		scenes/SceneGame/SceneGame_update.cpp \
+		scenes/SceneGame/SceneGame_draw.cpp \
 		scenes/ScenePause.cpp \
 		scenes/SceneGameOver.cpp \
 		scenes/SceneVictory.cpp \
