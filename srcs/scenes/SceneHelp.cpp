@@ -77,22 +77,75 @@ bool			SceneHelp::init() {
 		ABaseUI	*tmpUI = nullptr;
 		int pageID = 0;
 		glm::ivec2 startPos = {
-			(winSz.x / 2) - (menuWidth / 2),
+			(winSz.x / 2) - (menuWidth * 1.2 / 2),
 			tmpPos.y
 		};
 
 		/* page 1 -> game goal */
 		tmpPos = startPos;
-		tmpPos.x += pageID * winSz.x;
+		tmpPos.x = winSz.x / 2 + pageID * winSz.x;
 		allUI.allPages.push_back(std::vector< ABaseUI * >());
-		for (auto bonus : Bonus::description) {
-			tmpUI = &addImage(tmpPos, imgSize, Bonus::bonusTextures[bonus.first]);
-			allUI.allPages[pageID].push_back(tmpUI);
-			if (bonus.first == BonusType::DETONATOR) {
-				allUI.detonatorText = tmpUI;
-			}
-			tmpPos.y -= 0.8 * menuHeight;
-		}
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Goal:")
+			.setTextFont("title")
+			.setTextScale(0.7)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 1 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Destroy the computers to unlock the exit door.")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Be careful of enemies who will obstruct your way.")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Gameplay:")
+			.setTextFont("title")
+			.setTextScale(0.7)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 1 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[MOVING]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.movingText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[BOMB]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.bombText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[BOMB-DETONATOR]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.bombDetonatorText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
 		pageID++;
 
 		/* page 2 -> bonus descriptions */
@@ -104,6 +157,7 @@ bool			SceneHelp::init() {
 			allUI.allPages[pageID].push_back(tmpUI);
 			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, bonus.second)
 				.setTextFont("text")
+				.setTextScale(HELP_MENU_TEXT_SCALE)
 				.setTextAlign(TextAlign::LEFT);
 			if (bonus.first == BonusType::DETONATOR) {
 				allUI.detonatorText = tmpUI;
@@ -129,12 +183,13 @@ bool			SceneHelp::init() {
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.rightMenu);
 
-		// /* green bg */
-		// tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
-		// tmpPos.y = menuHeight * 2;
-		// tmpSize.x = winSz.x - 2 * tmpPos.x;
-		// tmpSize.y = winSz.y - 2 * tmpPos.y;
-		// addRect(tmpPos, tmpSize);
+		/* green bg */
+		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
+		tmpPos.y = menuHeight * 2;
+		tmpSize.x = winSz.x - 2 * tmpPos.x;
+		tmpSize.y = winSz.y - tmpPos.y;
+		tmpPos.y -= menuHeight * 0.5;
+		addRect(tmpPos, tmpSize);
 
 		_initBG();
 	}
@@ -151,6 +206,14 @@ bool			SceneHelp::init() {
 void SceneHelp::load() {
 	ASceneMenu::load();
 	allUI.detonatorText->setText(Bonus::description[BonusType::DETONATOR]);
+	allUI.movingText->setText("Move with: "
+		+ Inputs::getKeyName(InputType::UP) + ", "
+		+ Inputs::getKeyName(InputType::DOWN) + ", "
+		+ Inputs::getKeyName(InputType::LEFT) + ", "
+		+ Inputs::getKeyName(InputType::RIGHT));
+	allUI.bombText->setText("You can drop bombs with " + Inputs::getKeyName(InputType::ACTION));
+	allUI.bombDetonatorText->setText("If you have the detonator bonus, explode bombs with "
+		+ Inputs::getKeyName(InputType::ACTION_2));
 	if (SceneManager::getSceneName() != SceneNames::EXIT) {
 		_lastSceneName = SceneManager::getSceneName();
 		if (_lastSceneName == SceneNames::PAUSE) {
