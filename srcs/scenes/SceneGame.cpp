@@ -310,6 +310,7 @@ bool	SceneGame::update() {
 	if (state == GameState::PAUSE) {
 		AudioManager::pauseAllSounds();
 		SceneManager::loadScene(SceneNames::PAUSE);
+		player->playPauseAnimation(false);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
@@ -779,6 +780,7 @@ void SceneGame::load() {
 		state = GameState::PLAY;
 	}
 	_gui->enableCursor(false);
+	player->playPauseAnimation(true);
 }
 /**
  * @brief called when the scene is unloaded
