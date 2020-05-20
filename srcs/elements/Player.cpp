@@ -62,6 +62,9 @@ Player &Player::operator=(Player const &rhs) {
 bool	Player::init() {
 	invulnerable = 3.0f;
 	bombs = totalBombs;
+	_startWinAnim = false;
+	_endPos = VOID_POS3;
+	_endDir = VOID_POS3;
 
 	try {
 		// if exist, delete last model
@@ -136,24 +139,18 @@ void	Player::resetParams() {
  * @return false if failure
  */
 bool	Player::update() {
-	if (!active)
-		return true;
+	if (alive && active)
+		_updateBonusActifsTime();
 
-	_updateBonusActifsTime();
-	if (alive && _entityState.state != EntityState::DROP_BOMB && _entityState.state != EntityState::VICTORY_EMOTE) {
+	// alive in game
+	if (alive && active && _entityState.state != EntityState::DROP_BOMB && !_startWinAnim) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();
 		if (invulnerable < 0.0f)
 			invulnerable = 0.0f;
 
-		// move player
 		_move();
-		_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
-
-		// set model orientation
-		float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
-		_model->transform.setRot(angle);
 
 		// drop bomb action
 		if (Inputs::getKeyDown(InputType::ACTION)) {
@@ -168,7 +165,44 @@ bool	Player::update() {
 			}
 		}
 	}
+	// need to start the win animation
+	else if (_startWinAnim) {
+		// search exit portal position if not set
+		if (_endPos == VOID_POS3) {
+			if (_entityState.state != EntityState::RUNNING) {
+				setState(EntityState::RUNNING);
+			}
 
+			std::unordered_set<AEntity *>	colls = getCollision(position);
+
+			for (AEntity *coll : colls) {
+				if (coll->type == Type::END) {
+					_endPos = coll->position +
+						(glm::vec3(.5, .3, .5) - glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
+				}
+			}
+		}
+
+		// move to the center of the portal
+		_endDir = glm::normalize(_endPos - position);
+		if (glm::distance(position, _endPos) > .015) {
+			glm::vec3 beforePosition = position;
+			position += _endDir * speed * P_WALK_SPEED * game.getDtTime();
+			front = glm::normalize(glm::vec3(position.x, 0, position.z) -
+				glm::vec3(beforePosition.x, 0, beforePosition.z));
+			_model->animationSpeed = .8;
+		}
+		// then start the end animation
+		else {
+			setState(EntityState::TRANSFORM_OUT);
+			position = _endPos;
+			front = {0, 0, 1};
+			_startWinAnim = false;
+		}
+	}
+
+	// update model pos/rot
+	_updateModel();
 	// update animation on state change
 	_updateAnimationState();
 
@@ -421,6 +455,28 @@ void	Player::addBomb() {
 }
 
 /**
+ * @brief start end animation
+ *
+ */
+void	Player::startWinAnim() {
+	_startWinAnim = true;
+	active = false;
+}
+
+/**
+ * @brief update Model rot/pos
+ *
+ */
+void	Player::_updateModel() {
+	// move model
+	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
+
+	// set model orientation
+	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
+	_model->transform.setRot(angle);
+}
+
+/**
  * @brief update animation on state change
  *
  */
@@ -461,6 +517,12 @@ void	Player::_updateAnimationState() {
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
+				break;
+			case EntityState::TRANSFORM_OUT:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
+				_model->animationSpeed = 1;
+				_model->loopAnimation = false;
+				_model->setAnimation("Armature|floating", &AEntity::animEndCb, this);
 				break;
 			default:
 				break;

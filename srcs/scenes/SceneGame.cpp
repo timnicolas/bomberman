@@ -347,13 +347,14 @@ bool	SceneGame::update() {
 				logErr(e.what());
 			}
 
-			player->setState(EntityState::VICTORY_EMOTE);
-			player->update();
+			player->startWinAnim();
 
 			// start win camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getVictoryAnim());
 		}
+
+		player->update();
 
 		// load victory menu on camera anim end
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM)) {

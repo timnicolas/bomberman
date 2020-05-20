@@ -9,6 +9,7 @@
 #include "Model.hpp"
 
 #define PLAYER_STR "player"
+#define P_WALK_SPEED .5f
 
 /**
  * @brief This is the player object
@@ -18,10 +19,14 @@ private:
 	Player();
 	// Members
 	int			_toDraw;
+	bool		_startWinAnim;
+	glm::vec3	_endPos;
+	glm::vec3	_endDir;
 
 	// Methods
 	void	_move();
 	bool	_putBomb();
+	void	_updateModel();
 	void	_updateAnimationState();
 	void	_updateBonusActifsTime();
 
@@ -69,6 +74,7 @@ public:
 	bool			takeBonus(BonusType::Enum bonus, bool silent = false);
 	bool			rmBonus(BonusType::Enum bonus);
 	void			addBomb();
+	void			startWinAnim();
 
 	virtual void	animEndCb(std::string animName);
 
