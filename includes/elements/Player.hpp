@@ -75,6 +75,7 @@ public:
 	bool			rmBonus(BonusType::Enum bonus);
 	void			addBomb();
 	void			startWinAnim();
+	void			playPauseAnimation(bool playVal);
 
 	virtual void	animEndCb(std::string animName);
 

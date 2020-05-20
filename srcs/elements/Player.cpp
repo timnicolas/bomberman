@@ -464,6 +464,13 @@ void	Player::startWinAnim() {
 }
 
 /**
+ * @brief play/pause animation
+ *
+ * @param playVal the new play value
+ */
+void	Player::playPauseAnimation(bool playVal) { _model->play = playVal; }
+
+/**
  * @brief update Model rot/pos
  *
  */
