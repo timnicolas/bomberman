@@ -76,9 +76,9 @@ class Logging {
 		eLoglevel			getLoglevel() const;
 
 	private:
-		std::string		_colors[NBLOG];
-		bool			_printFileLine[NBLOG];
-		eLoglevel		_loglevel;
+		std::string		_colors[NBLOG];  /**< The log colors (debug, info, success, ...) */
+		bool			_printFileLine[NBLOG];  /**< A bool to know if we print the file and line in log */
+		eLoglevel		_loglevel;  /**< The min log level to print */
 };
 
 extern Logging		logging;

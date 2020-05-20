@@ -9,7 +9,6 @@
 /**
  * @brief class to manage OpenGLModel
  * store all OpenGLModel inside to avoid multiples loadings
- *
  */
 class ModelsManager {
 	public:
@@ -20,6 +19,9 @@ class ModelsManager {
 		static OpenGLModel	&getModel(std::string const &name);
 
 		// -- exceptions -------------------------------------------------------
+		/**
+		 * @brief Model manager exception
+		 */
 		class ModelsManagerException : public std::runtime_error {
 			public:
 				ModelsManagerException();
@@ -34,8 +36,8 @@ class ModelsManager {
 		bool		_init(Camera const &cam);
 		OpenGLModel	&_getModel(std::string const &name);
 
-		std::unordered_map<std::string, OpenGLModel *>	_models;
-		bool	_initDone;
+		std::unordered_map<std::string, OpenGLModel *>	_models;  /**< All models */
+		bool	_initDone;  /**< True if init is done */
 };
 
 #endif  // MODELSMANAGER_HPP_

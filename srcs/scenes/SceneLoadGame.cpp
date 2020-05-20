@@ -7,6 +7,12 @@
 #include "SceneGame.hpp"
 #include "Save.hpp"
 
+/**
+ * @brief Construct a new Scene Load Game:: Scene Load Game object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
@@ -16,12 +22,20 @@ SceneLoadGame::SceneLoadGame(Gui * gui, float const &dtTime)
 	_selectedGame = 0;
 }
 
+/**
+ * @brief Construct a new Scene Load Game:: Scene Load Game object
+ *
+ * @param src The object to do the copy
+ */
 SceneLoadGame::SceneLoadGame(SceneLoadGame const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Load Game:: Scene Load Game object
+ */
 SceneLoadGame::~SceneLoadGame() {
 	for (auto &&gameSaved : _gamesSaved) {
 		delete gameSaved->game;
@@ -29,6 +43,12 @@ SceneLoadGame::~SceneLoadGame() {
 	_gamesSaved.clear();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneLoadGame& A reference to the copied object
+ */
 SceneLoadGame & SceneLoadGame::operator=(SceneLoadGame const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneLoadGame")

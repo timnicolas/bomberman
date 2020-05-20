@@ -22,6 +22,9 @@ uint32_t	textureFromFbx(aiScene const *scene, int locationId, bool inSpaceSRGB,
 	GLint glTexMinFilter = GL_NEAREST_MIPMAP_LINEAR, GLint glTexMagFilter = GL_NEAREST);
 
 // Exceptions
+/**
+ * @brief Texture exception
+ */
 class TextureException : public std::runtime_error {
 	public:
 		TextureException();

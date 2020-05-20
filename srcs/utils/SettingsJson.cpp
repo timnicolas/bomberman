@@ -1,12 +1,23 @@
 #include "SettingsJson.hpp"
 
+/**
+ * @brief Construct a new Settings Json:: Settings Json object
+ */
 SettingsJson::SettingsJson() {
 }
 
+/**
+ * @brief Construct a new Settings Json:: Settings Json object
+ *
+ * @param src The object to do the copy
+ */
 SettingsJson::SettingsJson(SettingsJson const &src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Settings Json:: Settings Json object
+ */
 SettingsJson::~SettingsJson() {
 	_deleteMap<std::string>(stringMap);
 	_deleteMap<int64_t>(intMap);
@@ -17,6 +28,12 @@ SettingsJson::~SettingsJson() {
 	_deleteMap<SettingsList<SettingsJson> >(jsonList);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SettingsJson& A reference to the copied object
+ */
 SettingsJson &SettingsJson::operator=(SettingsJson const &rhs) {
 	if (this != &rhs) {
 		// logDebug("WARNING -> SettingsJson object copied");
@@ -347,17 +364,37 @@ std::string SettingsJson::toString(uint32_t opt, uint32_t tabOffset, bool termWi
 }
 
 // -- cout --------------------------------------------------------
+/**
+ * @brief Cout operator
+ *
+ * @param out The ostream object
+ * @param s the SettingsJson to cout
+ * @return std::ostream& The ostream object
+ */
 std::ostream & operator<<(std::ostream & out, SettingsJson const & s) {
 	out << s.toString();
 	return out;
 }
 
 // -- Exceptions errors --------------------------------------------------------
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ */
 SettingsJson::SettingsException::SettingsException()
 : std::runtime_error("[SettingsException]") {}
 
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ *
+ * @param what_arg Error message
+ */
 SettingsJson::SettingsException::SettingsException(const char* what_arg)
 : std::runtime_error(std::string(std::string("[SettingsException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Settings Json:: Settings Exception:: Settings Exception object
+ *
+ * @param what_arg Error message
+ */
 SettingsJson::SettingsException::SettingsException(const std::string what_arg)
 : std::runtime_error(std::string(std::string("[SettingsException] ") + what_arg).c_str()) {}

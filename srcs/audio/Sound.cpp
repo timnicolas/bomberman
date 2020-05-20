@@ -3,6 +3,11 @@
 #include "AudioManager.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Sound:: Sound object
+ *
+ * @param filename Sound filename
+ */
 Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan_volume() {
 	if (AudioManager::isEnabled()) {
 		_chunk = Mix_LoadWAV(filename.c_str());
@@ -15,6 +20,9 @@ Sound::Sound(std::string filename): _chunk(nullptr), _currents_channels(), _chan
 	}
 }
 
+/**
+ * @brief Destroy the Sound:: Sound object
+ */
 Sound::~Sound() {
 	stop();
 	if (_chunk != nullptr) {
@@ -28,6 +36,7 @@ Sound::~Sound() {
  * @param volume The volume of the sound.
  * @param env_volume The volume settings.
  * @param loop If the sound is on loop.
+ * @param fadeIn FadeIn
  * @return int channel used.
  * @throw A SoundException if the sound failed to be played. Not enough channels are allocated.
  */
@@ -35,12 +44,14 @@ int										Sound::play(float volume, float env_volume, bool loop, int fadeIn) 
 	int			chan;
 
 	if (_chunk != nullptr) {
-		chan = Mix_FadeInChannel(-1, _chunk, loop ? -1 : 0, fadeIn);
+		chan = Mix_PlayChannel(-1, _chunk, loop ? -1 : 0);
 		if (chan < 0) {
 			throw Sound::SoundException(Mix_GetError());
 		}
 		volume = volume > 1.0f ? 1.0 : volume;
 		Mix_Volume(chan, static_cast<int>(volume * env_volume * MIX_MAX_VOLUME));
+		if (fadeIn > 0)
+			Mix_FadeInChannel(chan, _chunk, loop ? -1 : 0, fadeIn);
 		_currents_channels.insert(chan);
 		_chan_volume.insert(std::pair<int, float>(chan, volume));
 		return chan;
@@ -106,10 +117,23 @@ bool										Sound::channelFinished(int chan) {
 	return false;
 }
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ */
 Sound::SoundException::SoundException(): std::runtime_error("[SoundException]") {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const char* what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}
 
+/**
+ * @brief Construct a new Sound:: Sound Exception:: Sound Exception object
+ *
+ * @param what_arg Error message
+ */
 Sound::SoundException::SoundException(const std::string what_arg) \
 	: std::runtime_error(std::string(std::string("[SoundException] ") + what_arg).c_str()) {}

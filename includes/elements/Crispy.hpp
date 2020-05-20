@@ -7,6 +7,9 @@
 
 #define CRISPY_STR "crispy"
 
+/**
+ * @brief Crispy wall object
+ */
 class Crispy : public AObject {
 private:
 	Crispy();
@@ -31,9 +34,17 @@ public:
 	static Crispy *	generateCrispy(SceneGame &game, uint32_t genWallPercent);
 
 	// Exceptions
+	/**
+	 * @brief Crispy Exception
+	 */
 	class CrispyException : public std::runtime_error {
 	public:
 		CrispyException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit CrispyException(const char* whatArg);
 	};
 };

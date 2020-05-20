@@ -33,10 +33,10 @@ class SceneDebug : public ASceneMenu {
 	private:
 		SceneDebug();
 
-		std::chrono::milliseconds	_lastUpdateMs;
-		bool		_visible;
-		uint16_t	_fps;
-		TextUI		*_fpsText;
+		std::chrono::milliseconds	_lastUpdateMs;  /**< Last time fps was updated */
+		bool		_visible;  /**< If FPs are visible or invisible */
+		uint16_t	_fps;  /**< Actual FPS */
+		TextUI		*_fpsText;  /**< FPS text element */
 };
 
 #endif  // SCENEDEBUG_HPP_

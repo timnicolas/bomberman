@@ -15,7 +15,6 @@ class SceneMainMenu : public ASceneMenu {
 
 		// Operators
 		SceneMainMenu &operator=(SceneMainMenu const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneMainMenu& myClass);
 
 		// Methods
 		virtual bool		init();
@@ -23,25 +22,33 @@ class SceneMainMenu : public ASceneMenu {
 		virtual bool		update();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	continueGame;
-			bool	save;
-			bool	newGame;
-			bool	loadGame;
-			bool	loadSettings;
-			bool	exit;
+			bool	continueGame;  /**< True if we clicked on the button continueGame */
+			bool	save;  /**< True if we clicked on the button save */
+			bool	newGame;  /**< True if we clicked on the button newGame */
+			bool	loadGame;  /**< True if we clicked on the button loadGame */
+			bool	loadSettings;  /**< True if we clicked on the button loadSettings */
+			bool	help;  /**< True if we clicked on the help button */
+			bool	exit;  /**< True if we clicked on the button exit */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
-			ABaseUI	*continueGame;
-			ABaseUI	*save;
-			ABaseUI	*newGame;
-			ABaseUI	*loadGame;
-			ABaseUI	*loadSettings;
-			ABaseUI	*exit;
-			ABaseUI	*border;
+			ABaseUI	*continueGame;  /**< UI for continueGame element */
+			ABaseUI	*save;  /**< UI for save element */
+			ABaseUI	*newGame;  /**< UI for newGame element */
+			ABaseUI	*loadGame;  /**< UI for loadGame element */
+			ABaseUI	*loadSettings;  /**< UI for loadSettings element */
+			ABaseUI	*help;  /**< UI for help element */
+			ABaseUI	*exit;  /**< UI for exit element */
+			ABaseUI	*border;  /**< UI for border element */
 		};
-		AllUI		allUI;
+		AllUI		allUI;  /**< All UI elements */
 
 
 	private:

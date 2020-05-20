@@ -66,7 +66,6 @@ class SceneCheatCode : public ASceneMenu {
 
 		// Operators
 		SceneCheatCode &operator=(SceneCheatCode const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneCheatCode& myClass);
 
 		// Methods
 		virtual bool		init();
@@ -88,7 +87,7 @@ class SceneCheatCode : public ASceneMenu {
 		void				logerr(std::string const & msg, bool clear = false, bool logOnly = false);
 		void				logfatal(std::string const & msg, bool clear = false, bool logOnly = false);
 
-		bool				isCmdLnEnabled;
+		bool				isCmdLnEnabled;  /**< True when command line is enabled */
 
 	private:
 		SceneCheatCode();
@@ -106,10 +105,13 @@ class SceneCheatCode : public ASceneMenu {
 
 		/* commands definition */
 		typedef int (SceneCheatCode::*execFnPtr)(std::vector<std::string> const &);
+		/**
+		 * @brief Command description
+		 */
 		struct Command {
-			std::string	prototype;
-			std::string	description;
-			execFnPtr	exec;
+			std::string	prototype;  /**< Prototype of the command */
+			std::string	description;  /**< Description of the command */
+			execFnPtr	exec;  /**< Function called by this command */
 		};
 
 		/* commands functions */
@@ -131,22 +133,25 @@ class SceneCheatCode : public ASceneMenu {
 		/* for lines */
 		int					_addLine(std::string const & txt, glm::vec4 txtColor = CHEATCODE_TEXT_COlOR);
 		void				_removeLastLine();
+		/**
+		 * @brief One line of text
+		 */
 		struct TextLine {
-			ABaseUI *	ui;
+			ABaseUI *	ui;  /**< UI element of the line */
 		};
 
 		/* general variables */
-		TextInputUI *					_commandLine;
-		TextUI *						_infoCommandLine;
-		std::deque<TextLine>			_textLines;
-		ABaseMasterUI *					_masterLines;
-		std::vector<uint32_t>			_levelsUnlocked;
+		TextInputUI *					_commandLine;  /**< TextInput element */
+		TextUI *						_infoCommandLine;  /**< Line with info about autocompletion */
+		std::deque<TextLine>			_textLines;  /**< All textLines (add with _addLine & logXXX) */
+		ABaseMasterUI *					_masterLines;  /**< Master element of lines */
+		std::vector<uint32_t>			_levelsUnlocked;  /**< All levels unlocked by command /unlock */
 
 		/* history */
-		std::deque<std::string>			_cmdHistory;  // first elem is last in history
-		std::string						_historySavedLine;
-		int								_historyActID;
+		std::deque<std::string>			_cmdHistory;  /**< History, first elem is last in history */
+		std::string						_historySavedLine;  /**< The line wrote before go in history */
+		int								_historyActID;  /**< Actual history ID */
 
 		/* list of commands */
-		std::map<std::string, Command>	_commandsList;
+		std::map<std::string, Command>	_commandsList;  /**< List of all commands */
 };

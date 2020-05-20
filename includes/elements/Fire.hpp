@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include "AObject.hpp"
 
+/**
+ * @brief Fire on bombs objects
+ */
 class Fire : public AObject {
 private:
 	Fire();
@@ -25,9 +28,17 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Fire Exception
+	 */
 	class FireException : public std::runtime_error {
 	public:
 		FireException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit FireException(const char* whatArg);
 	};
 };

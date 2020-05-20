@@ -3,9 +3,18 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new ASceneMenu::ASceneMenu object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 ASceneMenu::ASceneMenu(Gui * gui, float const &dtTime)
 : AScene(gui, dtTime), _draw3dMenu(true) {}
 
+/**
+ * @brief Destroy the ASceneMenu::ASceneMenu object
+ */
 ASceneMenu::~ASceneMenu() {
 	for (auto it = _buttons.begin(); it != _buttons.end(); it++) {
 		delete *it;
@@ -13,6 +22,11 @@ ASceneMenu::~ASceneMenu() {
 	_buttons.clear();
 }
 
+/**
+ * @brief Construct a new ASceneMenu::ASceneMenu object
+ *
+ * @param src The object to do the copy
+ */
 ASceneMenu::ASceneMenu(ASceneMenu const &src)
 : AScene(src) {
 	*this = src;
@@ -20,6 +34,12 @@ ASceneMenu::ASceneMenu(ASceneMenu const &src)
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ASceneMenu& A reference to the copied object
+ */
 ASceneMenu &ASceneMenu::operator=(ASceneMenu const &rhs) {
 	if ( this != &rhs ) {
 		logWarn("ASceneMenu object copied");
@@ -27,6 +47,13 @@ ASceneMenu &ASceneMenu::operator=(ASceneMenu const &rhs) {
 	return *this;
 }
 
+/**
+ * @brief Cout operator
+ *
+ * @param os The ostream object
+ * @param myClass The class to cout
+ * @return std::ostream& the ostream object
+ */
 std::ostream &	operator<<(std::ostream & os, const ASceneMenu& myClass) {
 	(void)myClass;
 	os << "<ASceneMenu object>";
@@ -307,7 +334,16 @@ bool ASceneMenu::_initBG() {
 }
 
 /* getter */
-// get an UI element (button, slider, ...)
+/**
+ * @brief Get an UI element (button, slider, ...)
+ *
+ * @param id The element ID
+ * @return ABaseUI& A ref to the UI
+ */
 ABaseUI &		ASceneMenu::getUIElement(uint32_t id) { return *_buttons[id]; }
-// get the total number of UI elements
+/**
+ * @brief Get the total number of UI elements
+ *
+ * @return uint32_t The number of UI elements on the menu
+ */
 uint32_t		ASceneMenu::getNbUIElements() const { return _buttons.size(); }

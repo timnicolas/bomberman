@@ -50,24 +50,48 @@ class Shader {
 		void	setMat4(const std::string &name, const glm::mat4 &mat) const;
 		void	setMat4Double(const std::string &name, const glm::dmat4 &mat) const;
 
+		/**
+		 * @brief Shader exception
+		 */
 		class ShaderError : public std::exception {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() = 0;
 		};
+		/**
+		 * @brief Shader compilation exception
+		 */
 		class ShaderCompileException : public ShaderError {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Shader failed to compile!");
 				}
 		};
+		/**
+		 * @brief Shader linking exception
+		 */
 		class ShaderLinkingException : public ShaderError {
 			public:
+				/**
+				 * @brief Function auto called on errors
+				 *
+				 * @return const char* Error message
+				 */
 				virtual const char* what() const throw() {
 					return ("Shader program failed to link!");
 				}
 		};
 
-		uint32_t	id;
+		uint32_t	id;  /**< shader ID */
 
 	private:
 		void	checkCompileErrors(uint32_t shader, std::string type);

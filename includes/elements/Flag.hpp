@@ -30,9 +30,17 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Flag exception
+	 */
 	class FlagException : public std::runtime_error {
 	public:
 		FlagException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit FlagException(const char* whatArg);
 	};
 };

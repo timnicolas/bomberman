@@ -2,15 +2,35 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new Button U I:: Button U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 ButtonUI::ButtonUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 }
 
+/**
+ * @brief Construct a new Button U I:: Button U I object
+ *
+ * @param src The object to do the copy
+ */
 ButtonUI::ButtonUI(ButtonUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Button U I:: Button U I object
+ */
 ButtonUI::~ButtonUI() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ButtonUI& A reference to the copied object
+ */
 ButtonUI & ButtonUI::operator=(ButtonUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

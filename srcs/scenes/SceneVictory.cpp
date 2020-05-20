@@ -3,6 +3,12 @@
 #include "SceneCheatCode.hpp"
 #include "AudioManager.hpp"
 
+/**
+ * @brief Construct a new Scene Victory:: Scene Victory object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
@@ -10,14 +16,28 @@ SceneVictory::SceneVictory(Gui * gui, float const &dtTime)
 	_draw3dMenu = false;
 }
 
+/**
+ * @brief Construct a new Scene Victory:: Scene Victory object
+ *
+ * @param src The object to do the copy
+ */
 SceneVictory::SceneVictory(SceneVictory const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Victory:: Scene Victory object
+ */
 SceneVictory::~SceneVictory() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneVictory& A reference to the copied object
+ */
 SceneVictory & SceneVictory::operator=(SceneVictory const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneVictory")
@@ -60,7 +80,11 @@ bool			SceneVictory::init() {
 			for (auto &&stat : scoreStat) {
 				tmpPos.y -= statisticHeight;
 				if (stat.image.size()) {
-					statistics.stats.push_back(&addImage({tmpPos.x, tmpPos.y}, {32, 32}, stat.image));
+					statistics.stats.push_back(&addImage(
+						{tmpPos.x, tmpPos.y},
+						{statisticHeight, statisticHeight},
+						stat.image
+					));
 					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
 						.setTextAlign(TextAlign::LEFT));
 				} else {

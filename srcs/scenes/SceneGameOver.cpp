@@ -2,6 +2,12 @@
 #include "SceneGame.hpp"
 #include "AudioManager.hpp"
 
+/**
+ * @brief Construct a new Scene Game Over:: Scene Game Over object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneGameOver::SceneGameOver(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
@@ -9,14 +15,28 @@ SceneGameOver::SceneGameOver(Gui * gui, float const &dtTime)
 	_draw3dMenu = false;
 }
 
+/**
+ * @brief Construct a new Scene Game Over:: Scene Game Over object
+ *
+ * @param src The object to do the copy
+ */
 SceneGameOver::SceneGameOver(SceneGameOver const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Game Over:: Scene Game Over object
+ */
 SceneGameOver::~SceneGameOver() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneGameOver& A reference to the copied object
+ */
 SceneGameOver & SceneGameOver::operator=(SceneGameOver const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneGameOver")

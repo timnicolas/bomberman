@@ -2,6 +2,12 @@
 #include "debug.hpp"
 #include "Logging.hpp"
 
+/**
+ * @brief Construct a new Text Render:: Text Render object
+ *
+ * @param width The screen width
+ * @param height The screen height
+ */
 TextRender::TextRender(uint32_t width, uint32_t height) :
 _shader(SHADER_TEXT_VS, SHADER_TEXT_FS)
 {
@@ -84,11 +90,19 @@ void TextRender::loadFont(std::string name, std::string const &filename, uint32_
 	FT_Done_FreeType(ft);
 }
 
+/**
+ * @brief Construct a new Text Render:: Text Render object
+ *
+ * @param src The object to do the copy
+ */
 TextRender::TextRender(TextRender const &src) :
 _shader(src.getShader()) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Text Render:: Text Render object
+ */
 TextRender::~TextRender() {
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -103,6 +117,12 @@ TextRender::~TextRender() {
     _shader.unuse();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return TextRender& A reference to the copied object
+ */
 TextRender &TextRender::operator=(TextRender const &rhs) {
 	(void)rhs;
 	if (this != &rhs) {
@@ -133,8 +153,7 @@ void TextRender::setWinSize(glm::vec2 winSize) {
  *
  * @param fontName The name of the font (choose name when load font)
  * @param text The text to write
- * @param x The text x position
- * @param y The text y position
+ * @param pos The text position
  * @param scale The text scale
  * @param color The text color
  */
@@ -229,5 +248,15 @@ uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool 
 	return height;
 }
 
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& Shader reference
+ */
 Shader			&TextRender::getShader() { return _shader; }
+/**
+ * @brief Get the shader
+ *
+ * @return Shader& Shader reference
+ */
 Shader const	&TextRender::getShader() const { return _shader; }

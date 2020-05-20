@@ -11,6 +11,9 @@
  */
 class Music {
 public:
+	/**
+	 * @brief Music exception
+	 */
 	class MusicException: public std::runtime_error {
 		public:
 			MusicException();
@@ -28,7 +31,7 @@ private:
 	Music(const Music &src);
 	Music									&operator=(const Music &src);
 
-	Mix_Music								*_mix_mus;
+	Mix_Music								*_mix_mus;  /**< Music object */
 };
 
 #endif

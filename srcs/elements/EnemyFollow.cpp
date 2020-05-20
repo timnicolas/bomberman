@@ -4,6 +4,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Enemy Follow:: Enemy Follow object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 EnemyFollow::EnemyFollow(SceneGame &game)
 : AEnemy(game),
   _findPlayer(false),
@@ -16,15 +21,29 @@ EnemyFollow::EnemyFollow(SceneGame &game)
 	_soundOfDeath = ENEMY_FOLLOW_DEATH_SOUND;
 }
 
+/**
+ * @brief Destroy the Enemy Follow:: Enemy Follow object
+ */
 EnemyFollow::~EnemyFollow() {
 }
 
+/**
+ * @brief Construct a new Enemy Follow:: Enemy Follow object
+ *
+ * @param src The object to do the copy
+ */
 EnemyFollow::EnemyFollow(EnemyFollow const &src) : AEnemy(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return EnemyFollow& A reference to the copied object
+ */
 EnemyFollow &EnemyFollow::operator=(EnemyFollow const &rhs) {
 	if ( this != &rhs ) {
 		_findPlayer = rhs._findPlayer;
