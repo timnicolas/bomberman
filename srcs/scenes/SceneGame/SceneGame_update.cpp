@@ -207,6 +207,7 @@ bool	SceneGame::update() {
 				_gui->cam->setMode(CamMode::FPS);
 			}
 		}
+		_gui->enableCursor(_gui->cam->getMode() != CamMode::FPS);  // disable cursor in FPS mode
 	#endif
 
 	// update board entities
