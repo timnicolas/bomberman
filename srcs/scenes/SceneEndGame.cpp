@@ -2,6 +2,12 @@
 #include "AudioManager.hpp"
 #include "Save.hpp"
 
+/**
+ * @brief Construct a new Scene End Game:: Scene End Game object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneEndGame::SceneEndGame(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
@@ -9,14 +15,28 @@ SceneEndGame::SceneEndGame(Gui * gui, float const &dtTime)
 	AudioManager::loadMusic("sounds/the_offspring-the_kids_arent_alright.ogg");
 }
 
+/**
+ * @brief Construct a new Scene End Game:: Scene End Game object
+ *
+ * @param src The object to do the copy
+ */
 SceneEndGame::SceneEndGame(SceneEndGame const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene End Game:: Scene End Game object
+ */
 SceneEndGame::~SceneEndGame() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneEndGame& A reference to the copied object
+ */
 SceneEndGame & SceneEndGame::operator=(SceneEndGame const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneEndGame")
@@ -109,7 +129,7 @@ bool	SceneEndGame::update() {
 		scGame.updateForMenu();
 	}
 
-	if (_states.exit || Inputs::getKeyUp(InputType::CONFIRM)) {
+	if (_states.exit || Inputs::getKeyUp(InputType::ACTION)) {
 		_states.exit = false;
 		AudioManager::playMusic(MUSIC_MENU, 0.1f, true);
 		SceneManager::loadScene(SceneNames::MAIN_MENU);

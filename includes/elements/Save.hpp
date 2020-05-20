@@ -45,6 +45,9 @@ public:
 	static std::string	timestampToFileName(time_t timestamp);
 	static int			getLastUnlockedLevel();
 	// Exceptions
+	/**
+	 * @brief Save exception
+	 */
 	class SaveException : public std::runtime_error {
 	public:
 		SaveException();
@@ -53,12 +56,12 @@ public:
 
 private:
 	// Members
-	bool			_saved;
-	bool			_instantiate;
-	std::time_t		_time;
-	std::string		_filename;
-	SettingsJson	*_saveJs;
-	std::string		_fileNameRegex;
+	bool			_saved;  /**< Is saved ? */
+	bool			_instantiate;  /**< Is instantiate */
+	std::time_t		_time;  /**< Time */
+	std::string		_filename;  /**< Filename of save */
+	SettingsJson	*_saveJs;  /**< Json save */
+	std::string		_fileNameRegex;  /**< Filename regex */
 
 	// Constructors
 	Save();

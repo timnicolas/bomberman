@@ -3,6 +3,13 @@
 #include "debug.hpp"
 #include "Texture.hpp"
 
+/**
+ * @brief Construct a new Image U I:: Image U I object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ * @param filename The image file
+ */
 ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename)
 : ABaseUI(pos, size)
 {
@@ -17,14 +24,28 @@ ImageUI::ImageUI(glm::vec2 pos, glm::vec2 size, std::string const & filename)
 	_loadImg(filename, true);
 }
 
+/**
+ * @brief Construct a new Image U I:: Image U I object
+ *
+ * @param src The object to do the copy
+ */
 ImageUI::ImageUI(ImageUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Image U I:: Image U I object
+ */
 ImageUI::~ImageUI() {
 	_unloadImg();
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ImageUI& A reference to the copied object
+ */
 ImageUI & ImageUI::operator=(ImageUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

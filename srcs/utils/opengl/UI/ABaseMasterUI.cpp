@@ -2,6 +2,12 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 
+/**
+ * @brief Construct a new ABaseMasterUI::ABaseMasterUI object
+ *
+ * @param pos The position of the UI element
+ * @param size The size of the UI element
+ */
 ABaseMasterUI::ABaseMasterUI(glm::vec2 pos, glm::vec2 size)
 : ABaseUI(pos, size),
   _masterPadding(10),
@@ -11,10 +17,18 @@ ABaseMasterUI::ABaseMasterUI(glm::vec2 pos, glm::vec2 size)
   _masterTotalSize(0, 0)
 {}
 
+/**
+ * @brief Construct a new ABaseMasterUI::ABaseMasterUI object
+ *
+ * @param src The object to do the copy
+ */
 ABaseMasterUI::ABaseMasterUI(ABaseMasterUI const & src): ABaseUI(src) {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the ABaseMasterUI::ABaseMasterUI object
+ */
 ABaseMasterUI::~ABaseMasterUI() {
 	// remove master for all childs
 	while (!_childUI.empty()) {
@@ -22,6 +36,12 @@ ABaseMasterUI::~ABaseMasterUI() {
 	}
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ABaseMasterUI& A reference to the copied object
+ */
 ABaseMasterUI & ABaseMasterUI::operator=(ABaseMasterUI const & rhs) {
 	(void)rhs;
 	// if (this != &rhs) {}

@@ -4,6 +4,15 @@
 #include "Inputs.hpp"
 
 // -- Constructors -------------------------------------------------------------
+/**
+ * @brief Construct a new Camera:: Camera object
+ *
+ * @param ratio Ratio (width / height)
+ * @param pos Position
+ * @param up Up vector
+ * @param yaw Yaw
+ * @param pitch Pitch
+ */
 Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT yaw,
 	CAMERA_FLOAT pitch)
 : pos(pos),
@@ -34,14 +43,28 @@ Camera::Camera(float const ratio, CAMERA_VEC3 pos, CAMERA_VEC3 up, CAMERA_FLOAT 
 	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
+/**
+ * @brief Destroy the Camera:: Camera object
+ */
 Camera::~Camera() {
 }
 
+/**
+ * @brief Construct a new Camera:: Camera object
+ *
+ * @param src The object to do the copy
+ */
 Camera::Camera(Camera const &src) {
 	*this = src;
 	frustumCullingInit(_fovY, _ratio, _near, _far);
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Camera& A reference to the copied object
+ */
 Camera	&Camera::operator=(Camera const &rhs) {
 	if (this != &rhs) {
 		pos = rhs.pos;
@@ -90,16 +113,32 @@ void	Camera::resetPosition() {
 	_updateCameraVectors();
 }
 
+/**
+ * @brief Set the camera ratio (width / height)
+ *
+ * @param ratio The ratio
+ */
 void	Camera::setRatio(float ratio) {
 	_ratio = ratio;
 	_updateProjection();
 }
 
+/**
+ * @brief Set the FOV
+ *
+ * @param fovY FOV
+ */
 void	Camera::setFovY(float fovY) {
 	_fovY = fovY;
 	_updateProjection();
 }
 
+/**
+ * @brief Set near and far values
+ *
+ * @param near Near value (don't show anything before)
+ * @param far Far value (don't show anything after)
+ */
 void	Camera::setNearAndFar(float near, float far) {
 	if (near > far) {
 		logErr("near should be < than far");
@@ -331,8 +370,7 @@ void	Camera::processKeyboard(CamMovement direction, CAMERA_FLOAT dtTime, bool is
 /**
  * @brief Move the camera from the mouse movements
  *
- * @param xOffset The camera offset in x from last call
- * @param yOffset The camera offset in y from last call
+ * @param offset The camera offset in x from last call
  * @param constrainPitch Constrain pitch to block camera up to 90 deg (enable by default)
  */
 void	Camera::processMouseMovement(glm::vec2 offset, bool constrainPitch) {
@@ -496,16 +534,40 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 }
 
 // -- follow path --------------------------------------------------------------
+/**
+ * @brief Reset the follow path (for FOLLOW_PATH mode)
+ */
 void	Camera::resetFollowPath() {
 	_followIsFinished = false;
 	_followCurElem = -1;
 }
+/**
+ * @brief Set the follow path (for FOLLOW_PATH mode)
+ *
+ * @param path The new path
+ */
 void	Camera::setFollowPath(std::vector<CamPoint> const & path) {
 	resetFollowPath();
 	_followPath = path;
 }
+/**
+ * @brief Enable / disable repeat follow path (for FOLLOW_PATH mode)
+ *
+ * @param repeat Enable repeat
+ */
 void	Camera::setFollowRepeat(bool repeat) { _followIsRepeat = repeat; }
+/**
+ * @brief Get if follow path if finished (for FOLLOW_PATH mode)
+ *
+ * @return true If finished
+ * @return false If not finished or if is in repeat mode
+ */
 bool	Camera::isFollowFinished() const { return _followIsFinished; }
+/**
+ * @brief Get if follow path if in repeat mode (for FOLLOW_PATH mode)
+ *
+ * @return true If in repeat mode
+ */
 bool	Camera::isFollowRepeat() const { return _followIsRepeat; }
 
 // -- _updateCameraVectors -----------------------------------------------------
@@ -526,15 +588,38 @@ void	Camera::_updateCameraVectors() {
 }
 
 // -- _updateProjection --------------------------------------------------------
+/**
+ * @brief Update projection matrix
+ */
 void	Camera::_updateProjection() {
 	_projection = glm::perspective(glm::radians(_fovY), _ratio, _near, _far);
 }
 
 // -- getters ------------------------------------------------------------------
+/**
+ * @brief Get the view matrix
+ *
+ * @return CAMERA_MAT4 The view matrix
+ */
 CAMERA_MAT4 Camera::getViewMatrix() const {
 	return glm::lookAt(pos, pos + front, up);
 }
 
+/**
+ * @brief Get the projection matrix
+ *
+ * @return CAMERA_MAT4 The projection matrix
+ */
 CAMERA_MAT4	Camera::getProjection() const { return _projection; }
+/**
+ * @brief Get the camera mode (FOLLOW_PATH, STATIC, ...)
+ *
+ * @return CamMode::Enum The camera mode
+ */
 CamMode::Enum	Camera::getMode() const { return _mode; }
+/**
+ * @brief Get the default position
+ *
+ * @return CAMERA_VEC3 The default position
+ */
 CAMERA_VEC3		Camera::getDefPos() const { return _startPos; }

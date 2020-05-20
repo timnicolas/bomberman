@@ -1,19 +1,39 @@
 #include "SceneExit.hpp"
 #include "Save.hpp"
 
+/**
+ * @brief Construct a new Scene Exit:: Scene Exit object
+ *
+ * @param gui A pointer on the gui object
+ * @param dtTime A reference to the delta time
+ */
 SceneExit::SceneExit(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   _lastSceneName(SceneNames::MAIN_MENU)
 {}
 
+/**
+ * @brief Construct a new Scene Exit:: Scene Exit object
+ *
+ * @param src The object to do the copy
+ */
 SceneExit::SceneExit(SceneExit const & src)
 : ASceneMenu(src)
 {
 	*this = src;
 }
 
+/**
+ * @brief Destroy the Scene Exit:: Scene Exit object
+ */
 SceneExit::~SceneExit() {}
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return SceneExit& A reference to the copied object
+ */
 SceneExit & SceneExit::operator=(SceneExit const & rhs) {
 	if (this != &rhs) {
 		logWarn("you are copying SceneExit")

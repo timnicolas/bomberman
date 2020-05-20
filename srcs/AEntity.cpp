@@ -5,6 +5,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new AEntity::AEntity object
+ *
+ * @param game A reference to the SceneGame object
+ */
 AEntity::AEntity(SceneGame &game): game(game) {
 	size = {1, 1, 1};
 	active = true;
@@ -19,10 +24,18 @@ AEntity::AEntity(SceneGame &game): game(game) {
 	_animDeathEnd = false;
 }
 
+/**
+ * @brief Destroy the AEntity::AEntity object
+ */
 AEntity::~AEntity() {
 	delete _model;
 }
 
+/**
+ * @brief Construct a new AEntity::AEntity object
+ *
+ * @param src A AEntity element to copy
+ */
 AEntity::AEntity(AEntity const &src) : AEntity(src.game) {
 	*this = src;
 }
@@ -39,6 +52,11 @@ bool		AEntity::init() {
 	return true;
 }
 
+/**
+ * @brief Called after update
+ *
+ * @return false If failed
+ */
 bool		AEntity::postUpdate() {
 	return true;
 }
@@ -87,6 +105,12 @@ EntityState::Enum	AEntity::getState() const {
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Overloaded operator
+ *
+ * @param rhs Right element
+ * @return AEntity& A ref to a new object
+ */
 AEntity &AEntity::operator=(AEntity const &rhs) {
 	if ( this != &rhs ) {
 		active = rhs.active;

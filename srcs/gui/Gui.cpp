@@ -7,6 +7,11 @@
 #include "BoxCollider.hpp"
 
 // -- Gui ---------------------------------------------------------------
+/**
+ * @brief Construct a new Gui:: Gui object
+ *
+ * @param gameInfo The gameinfo object
+ */
 Gui::Gui(GameInfo &gameInfo)
 : gameInfo(gameInfo),
   textureManager(nullptr),
@@ -18,6 +23,9 @@ Gui::Gui(GameInfo &gameInfo)
   _skybox(nullptr),
   _exitMenuDisabled(false) {}
 
+/**
+ * @brief Destroy the Gui:: Gui object
+ */
 Gui::~Gui() {
 	logDebug("exit SDL");
 
@@ -49,11 +57,22 @@ Gui::~Gui() {
 	}
 }
 
+/**
+ * @brief Construct a new Gui:: Gui object
+ *
+ * @param src The object to do the copy
+ */
 Gui::Gui(Gui const &src)
 : gameInfo(src.gameInfo) {
 	*this = src;
 }
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Gui& A reference to the copied object
+ */
 Gui &Gui::operator=(Gui const &rhs) {
 	if (this != &rhs) {
 		logErr("The copy operator should not be called")
@@ -372,6 +391,13 @@ void Gui::enableCursor(bool enable) {
 }
 
 // -- drawCube -----------------------------------------------------------------
+/**
+ * @brief Draw a cube on the screen
+ *
+ * @param typeBlock The type of cube
+ * @param pos The position
+ * @param scale The scale
+ */
 void	Gui::drawCube(Block::Enum typeBlock, glm::vec3 pos, glm::vec3 scale) {
 	glm::mat4	model(1.0);
 	cubeShader->use();
@@ -459,6 +485,11 @@ void	Gui::drawSkybox(glm::mat4 &view) {
 	_skybox->getShader().unuse();
 }
 
+/**
+ * @brief In this frame, the update function cannot exit
+ *
+ * @param disable True to enable this functionality
+ */
 void	Gui::disableExitForThisFrame(bool disable) {
 	_exitMenuDisabled = disable;
 }

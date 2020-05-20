@@ -13,7 +13,7 @@ private:
 	AObject();
 
 protected:
-	std::string		_soundOfDeath;
+	std::string		_soundOfDeath;  /**< The sound when an enemy die */
 
 public:
 	// Constructors
@@ -25,7 +25,17 @@ public:
 	AObject &operator=(AObject const &rhs);
 
 	// Methods
+	/**
+	 * @brief Update object. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	update() = 0;
+	/**
+	 * @brief Draw object. Called on every frames
+	 *
+	 * @return false If failed
+	 */
 	virtual bool	draw(Gui &gui) = 0;
 	void			setPos(glm::vec3 pos = VOID_POS3);
 	glm::vec3		getPos() const;
@@ -34,9 +44,12 @@ public:
 	virtual std::vector< std::vector< std::vector<AEntity *> > > &			getBoard();
 	virtual bool	init();
 
-	bool			isInFlyBoard;
+	bool			isInFlyBoard;  /**< True if the entity fly */
 
 	// Exceptions
+	/**
+	 * @brief AObject Exception
+	 */
 	class AObjectException : public std::runtime_error {
 	public:
 		AObjectException();

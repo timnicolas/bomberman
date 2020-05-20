@@ -7,6 +7,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new ACharacter::ACharacter object
+ *
+ * @param game A reference to the main SceneGame object
+ */
 ACharacter::ACharacter(SceneGame &game)
 : AEntity(game),
   front(0, 0, 1)
@@ -22,15 +27,29 @@ ACharacter::ACharacter(SceneGame &game)
 	resetCrossable();
 }
 
+/**
+ * @brief Destroy the ACharacter::ACharacter object
+ */
 ACharacter::~ACharacter() {
 }
 
+/**
+ * @brief Construct a new ACharacter::ACharacter object
+ *
+ * @param src The object to do the copy
+ */
 ACharacter::ACharacter(ACharacter const &src) : AEntity(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return ACharacter& A reference to the copied object
+ */
 ACharacter &ACharacter::operator=(ACharacter const &rhs) {
 	if ( this != &rhs ) {
 		AEntity::operator=(rhs);
@@ -132,7 +151,7 @@ std::vector< std::vector< std::vector<AEntity *> > > & ACharacter::getBoard() {
 }
 
 /**
- * @brief Character Take <damage> damages.
+ * @brief Character Take < damage > damages.
  *
  * @param damage
  * @return true if damage taken
@@ -166,7 +185,7 @@ bool	ACharacter::takeDamage(const int damage) {
 /**
  * @brief get a list of entity in collision with the Character at a position.
  *
- * @param pos default VOID_POS3
+ * @param dest default VOID_POS3
  * @return std::unordered_set<AEntity *> collisions
  */
 std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
@@ -194,7 +213,7 @@ std::unordered_set<AEntity *>	ACharacter::getCollision(glm::vec3 dest) const {
 }
 
 /**
- * @brief Test if Character have a collision at position <atPosition>.
+ * @brief Test if Character have a collision at position < atPosition >.
  *
  * @param atPosition
  * @param atSize
@@ -270,11 +289,13 @@ bool ACharacter::_canWalkOnBlock(glm::ivec2 pos) const {
 /**
  * @brief Check if we can walk on an entity
  *
- * @param pos The block pos
+ * @param entity The entity
  * @return true If we can walk on this block
  */
 bool ACharacter::_canWalkOnEntity(AEntity * entity) const {
 	bool ok = false;
+	if (!entity->alive)
+		return true;
 	for (auto && crossable : crossableTypes) {
 		if (entity->type == Type::ALL || crossable == Type::ALL || entity->type == crossable) {
 			ok = true;
@@ -579,8 +600,16 @@ glm::vec3	ACharacter::_miniMove(glm::vec3 movement) {
 
 // -- Exceptions errors --------------------------------------------------------
 
+/**
+ * @brief Construct a new ACharacter::ACharacterException::ACharacterException object
+ */
 ACharacter::ACharacterException::ACharacterException()
 : std::runtime_error("ACharacter Exception") {}
 
+/**
+ * @brief Construct a new ACharacter::ACharacterException::ACharacterException object
+ *
+ * @param whatArg Error message
+ */
 ACharacter::ACharacterException::ACharacterException(const char* whatArg)
 : std::runtime_error(std::string(std::string("ACharacterError: ") + whatArg).c_str()) {}

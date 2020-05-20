@@ -5,6 +5,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Fire:: Fire object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Fire::Fire(SceneGame &game) : AObject(game) {
 	type = Type::FIRE;
 	name = "Fire";
@@ -13,16 +18,30 @@ Fire::Fire(SceneGame &game) : AObject(game) {
 	_timeToDie = 1.0f;
 }
 
+/**
+ * @brief Destroy the Fire:: Fire object
+ */
 Fire::~Fire() {
 	game.clearFromBoard(this, {position.x, position.z});
 }
 
+/**
+ * @brief Construct a new Fire:: Fire object
+ *
+ * @param src The object to do the copy
+ */
 Fire::Fire(Fire const &src) : AObject(src) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Fire& A reference to the copied object
+ */
 Fire &Fire::operator=(Fire const &rhs) {
 	if ( this != &rhs ) {
 		AObject::operator=(rhs);

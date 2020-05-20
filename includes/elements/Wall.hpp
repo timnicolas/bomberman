@@ -15,7 +15,7 @@ private:
 	Wall();
 	// Members
 	// graphic information.
-	Block::Enum		_blockType;
+	Block::Enum		_blockType;  /**< The type of the block */
 
 public:
 	// Constructors
@@ -31,9 +31,17 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief Wall Exception
+	 */
 	class WallException : public std::runtime_error {
 	public:
 		WallException();
+		/**
+		 * @brief Construct a new Wall Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit WallException(const char* whatArg);
 	};
 };

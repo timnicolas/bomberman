@@ -17,9 +17,9 @@ class End : public AObject {
 private:
 	End();
 	// Members
-	Block::Enum	_texture;
-	bool		_open;
-	Model		*_model2;
+	Block::Enum	_texture;  /**< Object texture */
+	bool		_open;  /**< Is open ? (when all flags are destroyed) */
+	Model		*_model2;  /**< second model, used for the transparent tube */
 
 	// Methods
 	std::unordered_set<AEntity *>	_getCollision();
@@ -39,9 +39,17 @@ public:
 	bool	draw(Gui &gui);
 
 	// Exceptions
+	/**
+	 * @brief End Exception
+	 */
 	class EndException : public std::runtime_error {
 	public:
 		EndException();
+		/**
+		 * @brief Construct a new Spawner Exception object
+		 *
+		 * @param whatArg Error message
+		 */
 		explicit EndException(const char* whatArg);
 	};
 };

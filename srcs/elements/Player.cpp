@@ -6,6 +6,11 @@
 
 // -- Constructors -------------------------------------------------------------
 
+/**
+ * @brief Construct a new Player:: Player object
+ *
+ * @param game A reference to the SceneGame master object
+ */
 Player::Player(SceneGame &game)
 : ACharacter(game) {
 	_model = nullptr;
@@ -22,18 +27,32 @@ Player::Player(SceneGame &game)
 	AudioManager::loadSound(PUT_BOMB_EMPTY_SOUND);
 }
 
+/**
+ * @brief Destroy the Player:: Player object
+ */
 Player::~Player() {
 	if (_entityState.state == EntityState::RUNNING) {
 		AudioManager::stopSound(PLAYER_RUN_SOUND);
 	}
 }
 
+/**
+ * @brief Construct a new Player:: Player object
+ *
+ * @param src The object to do the copy
+ */
 Player::Player(Player const &src) : Player(src.game) {
 	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
+/**
+ * @brief Copy this object
+ *
+ * @param rhs The object to copy
+ * @return Player& A reference to the copied object
+ */
 Player &Player::operator=(Player const &rhs) {
 	if ( this != &rhs ) {
 		ACharacter::operator=(rhs);
@@ -46,7 +65,7 @@ Player &Player::operator=(Player const &rhs) {
 		detonator = rhs.detonator;
 		passBomb = rhs.passBomb;
 		bombProgation = rhs.bombProgation;
-		bonusActifs = rhs.bonusActifs;
+		activeBonus = rhs.activeBonus;
 	}
 	return *this;
 }
@@ -118,17 +137,17 @@ void	Player::resetParams() {
 	passWall = false;
 	detonator = false;
 	passBomb = false;
-	bonusActifs.life = 0.0f;
-	bonusActifs.score = 0.0f;
-	bonusActifs.time = 0.0f;
-	bonusActifs.bombs = 0.0f;
-	bonusActifs.flames = 0.0f;
-	bonusActifs.speed = 0.0f;
-	bonusActifs.wallpass = 0.0f;
-	bonusActifs.detonator = 0.0f;
-	bonusActifs.bombpass = 0.0f;
-	bonusActifs.flampass = 0.0f;
-	bonusActifs.shield = 0.0f;
+	activeBonus.life = 0.0f;
+	activeBonus.score = 0.0f;
+	activeBonus.time = 0.0f;
+	activeBonus.bombs = 0.0f;
+	activeBonus.flames = 0.0f;
+	activeBonus.speed = 0.0f;
+	activeBonus.wallpass = 0.0f;
+	activeBonus.detonator = 0.0f;
+	activeBonus.bombpass = 0.0f;
+	activeBonus.flampass = 0.0f;
+	activeBonus.shield = 0.0f;
 	resetCrossable();
 }
 
@@ -239,7 +258,7 @@ bool	Player::draw(Gui &gui) {
 }
 
 /**
- * @brief Player Take <damage> damages.
+ * @brief Player Take < damage > damages.
  *
  * @param damage
  * @return true if damage taken
@@ -277,7 +296,7 @@ bool	Player::takeDamage(const int damage) {
 }
 
 /**
- * @brief Player take a <bonus> which allow to power up.
+ * @brief Player take a < bonus > which allow to power up.
  *
  * @param bonus
  * @param silent
@@ -291,7 +310,7 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 			if (lives > static_cast<int>(Save::getDifficulty()))
 				lives = Save::getDifficulty();
 			if (!silent)
-				bonusActifs.life = 3.0f;
+				activeBonus.life = 3.0f;
 			break;
 		case BonusType::BOMBS:
 			totalBombs++;
@@ -301,60 +320,60 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 			if (bombs > 10)
 				bombs = 10;
 			if (!silent)
-				bonusActifs.bombs = 3.0f;
+				activeBonus.bombs = 3.0f;
 			break;
 		case BonusType::FLAMES:
 			bombProgation++;
 			if (bombProgation > 12)
 				bombProgation = 12;
 			if (!silent)
-				bonusActifs.flames = 3.0f;
+				activeBonus.flames = 3.0f;
 			break;
 		case BonusType::SPEED:
 			speed++;
 			if (speed > MAX_SPEED)
 				speed = MAX_SPEED;
 			if (!silent)
-				bonusActifs.speed = 3.0f;
+				activeBonus.speed = 3.0f;
 			break;
 		case BonusType::WALLPASS:
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::CRISPY) == crossableTypes.end())
 				crossableTypes.push_back(Type::CRISPY);
 			passWall = true;
 			if (!silent)
-				bonusActifs.wallpass = 3.0f;
+				activeBonus.wallpass = 3.0f;
 			break;
 		case BonusType::DETONATOR:
 			detonator = true;
 			if (!silent)
-				bonusActifs.detonator = 3.0f;
+				activeBonus.detonator = 3.0f;
 			break;
 		case BonusType::BOMBPASS:
 			passBomb = true;
 			if (std::find(crossableTypes.begin(), crossableTypes.end(), Type::BOMB) == crossableTypes.end())
 				crossableTypes.push_back(Type::BOMB);
 			if (!silent)
-				bonusActifs.bombpass = 3.0f;
+				activeBonus.bombpass = 3.0f;
 			break;
 		case BonusType::FLAMPASS:
 			passFire = true;
 			if (!silent)
-				bonusActifs.flampass = 3.0f;
+				activeBonus.flampass = 3.0f;
 			break;
 		case BonusType::SHIELD:
 			invulnerable += 10.0f;
 			if (!silent)
-				bonusActifs.shield = 3.0f;
+				activeBonus.shield = 3.0f;
 			break;
 		case BonusType::TIME:
 			game.time -= 15.0f;
 			if (!silent)
-				bonusActifs.time = 3.0f;
+				activeBonus.time = 3.0f;
 			break;
 		case BonusType::POINTS:
 			game.score += 1500;
 			if (!silent)
-				bonusActifs.score = 3.0f;
+				activeBonus.score = 3.0f;
 			break;
 		default:
 			break;
@@ -370,7 +389,7 @@ bool	Player::takeBonus(BonusType::Enum bonus, bool silent) {
 }
 
 /**
- * @brief Player remove a <bonus>
+ * @brief Player remove a < bonus >
  *
  * @param bonus
  * @return true
@@ -621,38 +640,38 @@ bool	Player::_putBomb() {
  */
 void	Player::_updateBonusActifsTime() {
 	float dtTime = game.getDtTime();
-	if (bonusActifs.life > 0) {
-		bonusActifs.life -= dtTime;
+	if (activeBonus.life > 0) {
+		activeBonus.life -= dtTime;
 	}
-	if (bonusActifs.time > 0) {
-		bonusActifs.time -= dtTime;
+	if (activeBonus.time > 0) {
+		activeBonus.time -= dtTime;
 	}
-	if (bonusActifs.score > 0) {
-		bonusActifs.score -= dtTime;
+	if (activeBonus.score > 0) {
+		activeBonus.score -= dtTime;
 	}
-	if (bonusActifs.bombs > 0) {
-		bonusActifs.bombs -= dtTime;
+	if (activeBonus.bombs > 0) {
+		activeBonus.bombs -= dtTime;
 	}
-	if (bonusActifs.flames > 0) {
-		bonusActifs.flames -= dtTime;
+	if (activeBonus.flames > 0) {
+		activeBonus.flames -= dtTime;
 	}
-	if (bonusActifs.speed > 0) {
-		bonusActifs.speed -= dtTime;
+	if (activeBonus.speed > 0) {
+		activeBonus.speed -= dtTime;
 	}
-	if (bonusActifs.wallpass > 0) {
-		bonusActifs.wallpass -= dtTime;
+	if (activeBonus.wallpass > 0) {
+		activeBonus.wallpass -= dtTime;
 	}
-	if (bonusActifs.detonator > 0) {
-		bonusActifs.detonator -= dtTime;
+	if (activeBonus.detonator > 0) {
+		activeBonus.detonator -= dtTime;
 	}
-	if (bonusActifs.bombpass > 0) {
-		bonusActifs.bombpass -= dtTime;
+	if (activeBonus.bombpass > 0) {
+		activeBonus.bombpass -= dtTime;
 	}
-	if (bonusActifs.flampass > 0) {
-		bonusActifs.flampass -= dtTime;
+	if (activeBonus.flampass > 0) {
+		activeBonus.flampass -= dtTime;
 	}
-	if (bonusActifs.shield > 0) {
-		bonusActifs.shield -= dtTime;
+	if (activeBonus.shield > 0) {
+		activeBonus.shield -= dtTime;
 	}
 }
 

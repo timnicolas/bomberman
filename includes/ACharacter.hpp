@@ -32,7 +32,7 @@ private:
 	glm::vec3	_miniMove(glm::vec3 movement);
 
 protected:
-	std::string		_soundOfDeath;
+	std::string		_soundOfDeath;  /**< Sound when die */
 
 	// Methods
 	std::unordered_set<AEntity *>	_getAllBlockableEntity(glm::vec3 dest) const;
@@ -47,11 +47,11 @@ protected:
 
 public:
 	// Members
-	int			lives;
-	float		speed;
-	glm::vec3	front;
-	glm::vec3	movingSize;
-	std::vector<Type::Enum>	crossableTypes;  // all types that the Character can cross
+	int			lives;  /**< number of lives */
+	float		speed;  /**< speed */
+	glm::vec3	front;  /**< Front vector */
+	glm::vec3	movingSize;  /**< Size when moving (generally {0.95, 0.95, 0.95}) */
+	std::vector<Type::Enum>	crossableTypes;  /**< all types that the Character can cross */
 
 	// Constructors
 	explicit ACharacter(SceneGame &game);
@@ -78,6 +78,9 @@ public:
 	bool							tp(glm::vec3 tpPos);
 
 	// Exceptions
+	/**
+	 * @brief ACharacter Exceptions
+	 */
 	class ACharacterException : public std::runtime_error {
 	public:
 		ACharacterException();

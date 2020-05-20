@@ -29,15 +29,25 @@ class ABaseMasterUI : public ABaseUI {
 		virtual glm::vec2	getMasterOffset() const;
 
 	protected:
+		/**
+		 * @brief Update object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_update() = 0;
+		/**
+		 * @brief Draw object. Called on every frames
+		 *
+		 * @return false If failed
+		 */
 		virtual void	_draw() = 0;
 		void			_updateTotalMasterSize();
 		ABaseMasterUI();
 
-		glm::vec2				_masterPadding;
-		glm::vec2				_masterOffset;
-		glm::vec2				_masterMinPos;
-		glm::vec2				_masterMaxPos;
-		glm::vec2				_masterTotalSize;
-		std::vector<ABaseUI *>	_childUI;
+		glm::vec2				_masterPadding;  /**< Master padding */
+		glm::vec2				_masterOffset;  /**< Master offset (used to move childs objects) */
+		glm::vec2				_masterMinPos;  /**< Top position */
+		glm::vec2				_masterMaxPos;  /**< Bottom position */
+		glm::vec2				_masterTotalSize;  /**< Total size (size & pos of all childs) */
+		std::vector<ABaseUI *>	_childUI;  /**< All childs reference */
 };

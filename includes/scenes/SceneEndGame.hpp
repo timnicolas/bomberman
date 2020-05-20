@@ -15,7 +15,6 @@ class SceneEndGame : public ASceneMenu {
 
 		// Operators
 		SceneEndGame &operator=(SceneEndGame const &rhs);
-		friend std::ostream& operator<<(std::ostream& os, const SceneEndGame& myClass);
 
 		// Methods
 		virtual bool		init();
@@ -24,14 +23,19 @@ class SceneEndGame : public ASceneMenu {
 		virtual bool		draw();
 
 	protected:
+		/**
+		 * @brief All buttons states
+		 */
 		struct ButtonsStates {
-			bool	exit;
+			bool	exit;  /**< True if we clicked on the exit button */
 		};
-		ButtonsStates	_states;
+		ButtonsStates	_states;  /**< All buttons states */
+		/**
+		 * @brief All UI elements
+		 */
 		struct AllUI {
 		};
-		AllUI		allUI;
-
+		AllUI		allUI;  /**< All UI elements */
 
 	private:
 		SceneEndGame();
