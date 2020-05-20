@@ -224,6 +224,7 @@ void SceneGame::load() {
 		state = GameState::PLAY;
 	}
 	_gui->enableCursor(false);
+	player->playPauseAnimation(true);
 }
 /**
  * @brief called when the scene is unloaded
