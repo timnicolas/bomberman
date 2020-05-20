@@ -163,9 +163,10 @@ bool	EnemyCrispy::_draw(Gui &gui) {
  *
  */
 void	EnemyCrispy::_updateModel() {
+	// move model
 	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 
-	// set model orientationdebug
+	// set model orientation
 	float	angle = glm::orientedAngle({0, 1}, glm::vec2(-front.x, front.z));
 	_model->transform.setRot(angle);
 }
@@ -290,6 +291,7 @@ bool	EnemyCrispy::_isPlayerClose(int distance) {
 void	EnemyCrispy::setIdlePos() {
 	position.x = getIntPos().x;
 	position.z = getIntPos().y;
+	// move model
 	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 	_model->transform.setRot(0);
 }

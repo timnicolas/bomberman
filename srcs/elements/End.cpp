@@ -86,6 +86,7 @@ bool	End::init() {
 bool	End::update() {
 	if (game.flags <= 0) {
 		if (game.enemiesToKill <= game.enemiesKilled) {
+			// update open status
 			if (!_open) {
 				_texture = Block::END_OPEN;
 				try {
@@ -99,11 +100,15 @@ bool	End::update() {
 				_model2->setMeshTexture(TextureType::DIFFUSE, "Shield.001::Tube",
 					OPEN_PORTAL_TEXTURE);
 			}
+
+			// add the End block to the Player colision list
 			if (std::find(game.player->crossableTypes.begin(), game.player->crossableTypes.end(), Type::END)
 			== game.player->crossableTypes.end())
 			{
 				game.player->crossableTypes.push_back(Type::END);
 			}
+
+			// if we detect a collision with the player set game state to Win
 			std::unordered_set<AEntity *> collisions = _getCollision();
 			for (auto &&entity : collisions) {
 				if (entity->type == Type::PLAYER) {
