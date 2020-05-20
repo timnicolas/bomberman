@@ -287,6 +287,13 @@ void	Model::printAnimsNames() const {
 }
 
 /**
+ * @brief Print all meshes name
+ */
+void	Model::printMeshesNames() const {
+	_openGLModel.printMeshesNames();
+}
+
+/**
  * @brief Get the current animation name
  *
  * @return std::string The animation name

@@ -34,7 +34,7 @@
 #endif
 #define RESTART_TO_UPDATE_RESOLUTION	true  // restart game to reset resolution
 
-#define PLAYER_SIZE			glm::vec3(1.3, 1.3, 1.3)
+#define PLAYER_SIZE			glm::vec3(1.2, 1.2, 1.2)
 #define ENEMY_BASIC_SIZE	glm::vec3(0.7, 0.7, 0.7)
 #define ENEMY_WITH_EYE_SIZE	glm::vec3(1.5, 1.5, 1.5)
 #define ENEMY_FLY_SIZE		glm::vec3(0.7, 0.7, 0.7)

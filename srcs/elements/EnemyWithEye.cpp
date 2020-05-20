@@ -159,6 +159,7 @@ bool	EnemyWithEye::_draw(Gui &gui) {
  *
  */
 void	EnemyWithEye::_updateModel() {
+	// move model
 	_model->transform.setPos(position + glm::vec3(movingSize.x / 2, 0, movingSize.z / 2));
 
 	// set model orientation

@@ -108,6 +108,15 @@ bool	ModelsManager::_init(Camera const &cam) {
 
 			_models["fire"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"fire/fire.fbx");
+
+			_models["server"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"server/server.fbx");
+
+			_models["exit_base"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"exit/exit_base.fbx");
+
+			_models["exit_shield"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"exit/exit_shield.fbx");
 		}
 		catch(OpenGLModel::ModelException const & e) {
 			logErr(e.what());
