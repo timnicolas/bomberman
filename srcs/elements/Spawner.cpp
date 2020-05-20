@@ -25,12 +25,15 @@ Spawner::Spawner(SceneGame &game) : AObject(game) {
 	// _typeEnemy = std::vector<std::string>();
 	_frequency = 0;
 	_waitForSpawn = 0;
+	_model2 = nullptr;
+	_drawBifrostTime = 0;
 }
 
 /**
  * @brief Destroy the Spawner:: Spawner object
  */
 Spawner::~Spawner() {
+	delete _model2;
 }
 
 /**
@@ -56,6 +59,8 @@ Spawner &Spawner::operator=(Spawner const &rhs) {
 		_typeEnemy = rhs._typeEnemy;
 		_frequency = rhs._frequency;
 		_waitForSpawn = rhs._waitForSpawn;
+		_model2 = nullptr;
+		_drawBifrostTime = 0;
 	}
 	return *this;
 }
@@ -102,6 +107,39 @@ Spawner &Spawner::setFrequency(int64_t frequency) {
 // -- Methods ------------------------------------------------------------------
 
 /**
+ * @brief Init Spawner
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	Spawner::init() {
+	try {
+		// if exist, delete last model
+		if (_model)
+			delete _model;
+
+		_model = new Model(ModelsManager::getModel("spawner_base"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+
+		if (_model2)
+			delete _model2;
+
+		_model2 = new Model(ModelsManager::getModel("spawner_bifrost"), game.getDtTime(),
+			ETransform((position + glm::vec3(.5, 0, .5))));
+	}
+	catch(ModelsManager::ModelsManagerException const &e) {
+		logErr(e.what());
+		return false;
+	}
+	catch(OpenGLModel::ModelException const &e) {
+		logErr(e.what());
+		return false;
+	}
+
+	return true;
+}
+
+/**
  * @brief update is called each frame.
  *
  * @return true if success
@@ -125,10 +163,22 @@ bool	Spawner::update() {
 			game.levelEnemies++;
 			// reset for new spawn
 			_waitForSpawn = _frequency;
+
+			/* activate the bifrost */
+			_drawBifrostTime = BIFROST_SHOW_DURATION;
+			// set random orientation for the bifrost
+			float	angles[] = {0, 60, 120, 180, 240, 300};
+			float	angle = glm::radians(angles[rand() % 6]);
+			_model2->transform.setRot(angle);
 		} else {
 			// wait a little more time to spawn
 			_waitForSpawn = 1;
 		}
+	}
+
+	// decrement bifrost display time
+	if (_waitForSpawn != _frequency && _drawBifrostTime > 0) {
+		_drawBifrostTime -= game.getDtTime();
 	}
 
 	return true;
@@ -151,6 +201,19 @@ bool	Spawner::postUpdate() {
  */
 bool	Spawner::draw(Gui &gui) {
 	(void)gui;
+
+	// draw model
+	try {
+		_model->draw();
+		if (_drawBifrostTime > 0) {
+			_model2->draw();
+		}
+	}
+	catch(OpenGLModel::ModelException const & e) {
+		logErr(e.what());
+		return false;
+	}
+
 	return true;
 }
 

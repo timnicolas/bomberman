@@ -49,7 +49,6 @@ SceneHelp & SceneHelp::operator=(SceneHelp const & rhs) {
  * @return false if the init failed
  */
 bool			SceneHelp::init() {
-	logDebug("SceneHelp::init");
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
