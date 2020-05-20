@@ -8,14 +8,18 @@
 #include "AObject.hpp"
 #include "AEnemy.hpp"
 
+#define BIFROST_SHOW_DURATION	1
+
 /**
  * @brief spawner objects
  */
 class Spawner : public AObject {
 private:
 	std::vector<std::string>	_typeEnemy;  /**< Spawner enemy type */
-	int64_t						_frequency;  /**< Frequency to spawn */
-	float						_waitForSpawn;  /**< Wait time before first spawn */
+	int64_t		_frequency;  /**< Frequency to spawn */
+	float		_waitForSpawn;  /**< Wait time before first spawn */
+	Model		*_model2;  /**< Second model, used for the transparent tube */
+	float		_drawBifrostTime;  /**< Time left for the bifrost tube to display  */
 
 	Spawner();
 
@@ -34,6 +38,7 @@ public:
 	Spawner &setFrequency(int64_t frequency);
 
 	// Methods
+	bool	init();
 	bool	update();
 	bool	postUpdate();
 	bool	draw(Gui &gui);
