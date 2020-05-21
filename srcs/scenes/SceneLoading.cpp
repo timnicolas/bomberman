@@ -57,7 +57,7 @@ bool			SceneLoading::init() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
-	float menuWidth = winSz.x / 2;
+	float menuWidth = winSz.x * 0.8;
 	float menuHeight = winSz.y / 14;
 
 	try {
@@ -65,8 +65,11 @@ bool			SceneLoading::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Bomberman")
-			.setTextColor(colorise(s.j("colors").j("pink").u("color"), s.j("colors").j("pink").u("alpha")));
+		glm::vec2 imgSize = {menuWidth, menuWidth * 487 / 1190};
+		tmpPos.y -= imgSize.y;
+		addImage(tmpPos, imgSize, "bomberman-assets/imgs/bomberman-logo.png");
+		// addTitle(tmpPos, tmpSize, "Bomberman")
+		// 	.setTextColor(colorise(s.j("colors").j("pink").u("color"), s.j("colors").j("pink").u("alpha")));
 
 		/* background image */
 		std::vector<std::string> allImgs = file::ls(s.s("loadingImgs"));
