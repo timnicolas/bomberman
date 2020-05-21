@@ -101,7 +101,8 @@ bool	SceneGame::update() {
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			if (Inputs::getKeyUp(InputType::ACTION))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
@@ -147,7 +148,8 @@ bool	SceneGame::update() {
 		player->update();
 
 		// load victory menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
@@ -172,7 +174,8 @@ bool	SceneGame::update() {
 		}
 
 		// load loosing menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			// clear game infos.
 			player->resetParams();
 			Save::updateSavedFile(*this, false);
