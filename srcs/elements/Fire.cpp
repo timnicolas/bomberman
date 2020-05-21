@@ -51,7 +51,6 @@ Fire &Fire::operator=(Fire const &rhs) {
 
 // -- Methods ------------------------------------------------------------------
 
-
 /**
  * @brief Init Fire
  *

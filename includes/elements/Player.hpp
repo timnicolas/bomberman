@@ -9,6 +9,7 @@
 #include "Model.hpp"
 
 #define PLAYER_STR "player"
+#define P_WALK_SPEED .5f
 
 /**
  * @brief This is the player object
@@ -17,11 +18,15 @@ class Player : public ACharacter {
 private:
 	Player();
 	// Members
-	int			_toDraw;  /**< To draw */
+	int			_toDraw;  ///< To draw
+	bool		_startWinAnim;  ///< If true, start the end animation
+	glm::vec3	_endPos;  ///< The end door position
+	glm::vec3	_endDir;  ///< The end door direction
 
 	// Methods
 	void	_move();
 	bool	_putBomb();
+	void	_updateModel();
 	void	_updateAnimationState();
 	void	_updateBonusActifsTime();
 
@@ -72,6 +77,8 @@ public:
 	bool			takeBonus(BonusType::Enum bonus, bool silent = false);
 	bool			rmBonus(BonusType::Enum bonus);
 	void			addBomb();
+	void			startWinAnim();
+	void			playPauseAnimation(bool playVal);
 
 	virtual void	animEndCb(std::string animName);
 
