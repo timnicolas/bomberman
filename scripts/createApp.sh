@@ -27,7 +27,7 @@ cp -r bomberman-assets $CONT
 rm -rf $CONT/bomberman-assets/.git
 cp -r shaders $CONT
 
-fileicon set $DIR/$APPNAME bomberman-assets/imgs/icon-app.png
+fileicon set $DIR/$APPNAME bomberman-assets/imgs/icon_app.icns
 ln -s /Applications $DIR/Applications
 
 echo "\x1B[4mIMPORT LIBS ON APP TO FRAMEWORK\x1B[0m"

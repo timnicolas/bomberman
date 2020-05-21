@@ -72,7 +72,7 @@ bool			SceneEndGame::init() {
 		addImage(tmpPos, imgSize, s.s("logo"));
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		addText(tmpPos, {menuWidth, menquHeight}, "Thank's you for playing !")
+		addText(tmpPos, {menuWidth, menuHeight}, "Thank's you for playing !")
 			.setTextAlign(TextAlign::CENTER);
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
