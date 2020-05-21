@@ -175,6 +175,9 @@ bool	initSettings(std::string const & filename) {
 	s.j("audio").add<double>("sound", 1.0).setMin(0.0).setMax(1.0) \
 		.setDescription("The volume of the sounds effects.");
 
+	/* Images */
+	s.add<std::string>("logo", "bomberman-assets/imgs/bomberman-logo.png").setDescription("Logo bomberman");
+
 	/* Folders */
 	s.add<std::string>("mapsPath", "bomberman-assets/maps/").setDescription("Folder with all maps");
 	s.add<std::string>("imgsUI", "bomberman-assets/imgs/UI/").setDescription("Folder with all UI images");
