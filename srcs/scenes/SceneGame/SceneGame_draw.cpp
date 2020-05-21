@@ -75,6 +75,7 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
+	// draw background terrain
 	if (s.j("debug").j("show").b("terrain")) {
 		try {
 			_terrain->draw();
@@ -85,13 +86,14 @@ bool	SceneGame::drawGame() {
 		}
 	}
 
+	// draw floor
 	if (s.j("debug").j("show").b("baseBoard")) {
-		// draw floor
 		_gui->drawCube(Block::FLOOR, {0.0f, -1.5f, 0.0f}, {size.x, 1.5f, size.y});
 	}
 
 	std::vector<AEntity *>  endBlocs;
 
+	// draw board entities
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
@@ -108,6 +110,7 @@ bool	SceneGame::drawGame() {
 		}
 	}
 
+	// draw flyng obstacles
 	for (auto &&board_it0 : boardFly) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
@@ -119,12 +122,15 @@ bool	SceneGame::drawGame() {
 		}
 	}
 
+	// draw enemies
 	for (auto &&enemy : enemies) {
 		if (s.j("debug").j("show").b("entity") && !enemy->draw(*_gui))
 			return false;
 		if (s.j("debug").j("show").b("movingCollider") && !enemy->drawCollider())
 			return false;
 	}
+
+	// draw player
 	if (s.j("debug").j("show").b("entity") && !player->draw(*_gui))
 		return false;
 	if (s.j("debug").j("show").b("movingCollider") && !player->drawCollider())
@@ -134,7 +140,13 @@ bool	SceneGame::drawGame() {
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
 
-	// draw end blocks last for transparency issue
+	// draw spawners
+	for (auto &&spawner : spawners) {
+		if (!spawner->draw(*_gui))
+			return false;
+	}
+
+	// draw end blocks (last for transparency issue)
 	for (AEntity *end : endBlocs) {
 		if (s.j("debug").j("show").b("baseBoard") && !end->draw(*_gui))
 			return false;
@@ -148,6 +160,7 @@ bool	SceneGame::drawGame() {
 	_gui->textureManager->disableTextures();
 	_gui->cubeShader->unuse();
 
+	// draw ui on top
 	if (state == GameState::PLAY
 		&& (allUI.timeLeftImg->getPos() != VOID_SIZE || allUI.timeLeftImgActive->getPos() != VOID_SIZE))
 	{
