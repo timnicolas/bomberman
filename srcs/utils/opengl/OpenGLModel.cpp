@@ -640,7 +640,7 @@ void	OpenGLModel::setMeshTexture(TextureType::Enum type, std::string const meshN
  * @brief print all meshes names
  *
  */
-void	OpenGLModel::printMeshesNames() {
+void	OpenGLModel::printMeshesNames() const {
 	for (auto &it : _meshes) {
 		logInfo('"' << it.first << '"');
 	}

@@ -7,6 +7,8 @@
 #include "AObject.hpp"
 
 #define END_STR "end"
+#define OPEN_PORTAL_TEXTURE "bomberman-assets/3dModels/exit/textures/open_portal_shield.png"
+#define CLOSE_PORTAL_TEXTURE "bomberman-assets/3dModels/exit/textures/close_portal_shield.png"
 
 /**
  * @brief This is the end object
@@ -17,6 +19,7 @@ private:
 	// Members
 	Block::Enum	_texture;  /**< Object texture */
 	bool		_open;  /**< Is open ? (when all flags are destroyed) */
+	Model		*_model2;  /**< second model, used for the transparent tube */
 
 	// Methods
 	std::unordered_set<AEntity *>	_getCollision();
@@ -31,6 +34,7 @@ public:
 	End &operator=(End const &rhs);
 
 	// Methods
+	bool	init();
 	bool	update();
 	bool	draw(Gui &gui);
 

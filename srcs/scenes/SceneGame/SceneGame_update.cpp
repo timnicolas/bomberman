@@ -58,8 +58,12 @@ bool	SceneGame::update() {
 
 	allUI.introText->setEnabled(state == GameState::INTRO);
 
-	if (Inputs::getKeyUp(InputType::CANCEL))
-		state = GameState::PAUSE;
+	if (Inputs::getKeyUp(InputType::CANCEL)) {
+		if (state != GameState::INTRO && state != GameState::WIN && state != GameState::GAME_OVER)
+			state = GameState::PAUSE;
+		else
+			_gui->disableExitForThisFrame();
+	}
 
 	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_H))
 		_loadHelp = true;
@@ -93,10 +97,11 @@ bool	SceneGame::update() {
 			// open pause menu
 			SceneManager::loadScene(SceneNames::PAUSE);
 		}
+		player->playPauseAnimation(false);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
 			if (Inputs::getKeyUp(InputType::ACTION))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
@@ -132,16 +137,17 @@ bool	SceneGame::update() {
 				logErr(e.what());
 			}
 
-			player->setState(EntityState::VICTORY_EMOTE);
-			player->update();
+			player->startWinAnim();
 
 			// start win camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getVictoryAnim());
 		}
 
+		player->update();
+
 		// load victory menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
@@ -166,7 +172,7 @@ bool	SceneGame::update() {
 		}
 
 		// load loosing menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
 			// clear game infos.
 			player->resetParams();
 			Save::updateSavedFile(*this, false);
