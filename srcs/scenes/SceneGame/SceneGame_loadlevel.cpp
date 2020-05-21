@@ -381,6 +381,7 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 		spawnerEntity->setFrequency(spawner->u("frequency"))
 			.setTypeEnemy(typeEnemy)
 			.setPos({spawnerPos.x, 0, spawnerPos.y});
+		spawnerEntity->init();
 		spawners.push_back(spawnerEntity);
 	}
 
