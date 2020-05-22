@@ -1,5 +1,6 @@
 #include "SceneHelp.hpp"
 #include "Bonus.hpp"
+#include "SceneLevelSelection.hpp"
 
 /**
  * @brief Construct a new Scene Help:: Scene Help object
@@ -55,9 +56,13 @@ bool			SceneHelp::init() {
 	float menuWidth = winSz.x * 0.6;
 	float menuHeight = winSz.y / 14;
 
+	_currentPage = 0;
+	_transition = 0;  // reset transition
+
 	try {
 		addExitButton()
-			.addButtonLeftListener(&_states.menu);
+			.setKeyLeftClickScancode(SDL_SCANCODE_ESCAPE)
+			.addButtonLeftListener(&_states.exit);
 
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
@@ -68,21 +73,125 @@ bool			SceneHelp::init() {
 
 		glm::vec2 imgSize = {menuHeight * 0.7, menuHeight * 0.7};
 
-		ABaseUI	*tmpUI;
+		/* create all pages */
+		ABaseUI	*tmpUI = nullptr;
+		int pageID = 0;
+		glm::ivec2 startPos = {
+			(winSz.x / 2) - (menuWidth * 1.2 / 2),
+			tmpPos.y
+		};
+
+		/* page 1 -> game goal */
+		tmpPos = startPos;
+		tmpPos.x = winSz.x / 2 + pageID * winSz.x;
+		allUI.allPages.push_back(std::vector< ABaseUI * >());
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Goal:")
+			.setTextFont("title")
+			.setTextScale(0.7)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 1 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Destroy the computers to unlock the exit door.")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Be careful of enemies who will obstruct your way.")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"Gameplay:")
+			.setTextFont("title")
+			.setTextScale(0.7)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 1 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[MOVING]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.movingText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[BOMB]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.bombText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		tmpUI = &addText(tmpPos, {0, imgSize.y},
+			"[BOMB-DETONATOR]")
+			.setTextFont("text")
+			.setTextScale(HELP_MENU_TEXT_SCALE)
+			.setTextAlign(TextAlign::CENTER);
+		allUI.bombDetonatorText = tmpUI;
+		allUI.allPages[pageID].push_back(tmpUI);
+		tmpPos.y -= 0.8 * menuHeight;
+
+		pageID++;
+
+		/* page 2 -> bonus descriptions */
+		tmpPos = startPos;
+		tmpPos.x += pageID * winSz.x;
+		allUI.allPages.push_back(std::vector< ABaseUI * >());
 		for (auto bonus : Bonus::description) {
-			addImage(tmpPos, imgSize, Bonus::bonusTextures[bonus.first]);
-			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, bonus.second)
+			tmpUI = &addImage(tmpPos, imgSize, Bonus::bonusTextures[bonus.first]);
+			allUI.allPages[pageID].push_back(tmpUI);
+			std::string desc = bonus.second;
+			if (desc.rfind("Bonus ", 0) == 0) {
+				desc.erase(0, strlen("Bonus "));
+			}
+			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, desc)
 				.setTextFont("text")
+				.setTextScale(HELP_MENU_TEXT_SCALE)
 				.setTextAlign(TextAlign::LEFT);
 			if (bonus.first == BonusType::DETONATOR) {
 				allUI.detonatorText = tmpUI;
 			}
+			allUI.allPages[pageID].push_back(tmpUI);
 			tmpPos.y -= 0.8 * menuHeight;
 		}
+		pageID++;
 
-		tmpSize.x = tmpSize.x * 1.3;
-		tmpSize.y = winSz.y - tmpPos.y;
+		_nbPages = pageID;
+
+		/* buttons to switch btw pages */
+		tmpPos.x = 30;
+		tmpPos.y = winSz.y / 2 - menuHeight / 2;
+		tmpSize.x = menuHeight;
+		tmpSize.y = 0;
+		allUI.leftPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
+			.setKeyLeftClickInput(InputType::LEFT)
+			.addButtonLeftListener(&_states.leftMenu);
+
+		tmpPos.x = winSz.x - 30 - tmpSize.x;
+		allUI.rightPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
+			.setKeyLeftClickInput(InputType::RIGHT)
+			.addButtonLeftListener(&_states.rightMenu);
+
+		/* green bg */
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
+		tmpPos.y = menuHeight * 2;
+		tmpSize.x = winSz.x - 2 * tmpPos.x;
+		tmpSize.y = winSz.y - tmpPos.y;
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize);
 
@@ -100,7 +209,37 @@ bool			SceneHelp::init() {
  */
 void SceneHelp::load() {
 	ASceneMenu::load();
+
+	std::string desc = Bonus::description[BonusType::DETONATOR];
+	if (desc.rfind("Bonus ", 0) == 0) {
+		desc.erase(0, strlen("Bonus "));
+	}
 	allUI.detonatorText->setText(Bonus::description[BonusType::DETONATOR]);
+
+	allUI.movingText->setText("Move with: "
+		+ Inputs::getKeyName(InputType::UP) + ", "
+		+ Inputs::getKeyName(InputType::DOWN) + ", "
+		+ Inputs::getKeyName(InputType::LEFT) + ", "
+		+ Inputs::getKeyName(InputType::RIGHT));
+	allUI.bombText->setText("You can drop bombs with " + Inputs::getKeyName(InputType::ACTION));
+	allUI.bombDetonatorText->setText("If you have the detonator bonus, explode bombs with "
+		+ Inputs::getKeyName(InputType::ACTION_2));
+	if (SceneManager::getSceneName() != SceneNames::HELP) {
+		_lastSceneName = SceneManager::getSceneName();
+		if (_lastSceneName == SceneNames::PAUSE || _lastSceneName == SceneNames::GAME) {
+			_draw3dMenu = false;
+		}
+	}
+}
+
+/**
+ * @brief called when the scene is unloaded
+ */
+void SceneHelp::unload() {
+	ASceneMenu::unload();
+	if (_lastSceneName == SceneNames::PAUSE || _lastSceneName == SceneNames::GAME) {
+		_draw3dMenu = true;
+	}
 }
 
 /**
@@ -111,9 +250,84 @@ void SceneHelp::load() {
  */
 bool	SceneHelp::update() {
 	ASceneMenu::update();
-	if (_states.menu || Inputs::getKeyUp(InputType::CANCEL)) {
-		_states.menu = false;
-		SceneManager::loadScene(SceneNames::MAIN_MENU);
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+
+	if (_states.exit || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)) {
+		_states.exit = false;
+		SceneManager::loadScene(_lastSceneName);
 	}
+	else if (_states.leftMenu) {
+		_states.leftMenu = false;
+		setPage(_currentPage - 1);
+	}
+	else if (_states.rightMenu) {
+		_states.rightMenu = false;
+		setPage(_currentPage + 1);
+	}
+
+	/* draw the right page */
+	for (uint32_t i = 0; i < _nbPages; i++) {
+		/* create a smooth transition */
+		float xoffset = -(_currentPage * winSz.x) + _transition * winSz.x;
+		if (_transition > 0) {
+			_transition -= TRANSITION_SPEED;
+			if (_transition <= 0)
+				_transition = 0;
+		}
+		if (_transition < 0) {
+			_transition += TRANSITION_SPEED;
+			if (_transition >= 0)
+				_transition = 0;
+		}
+		for (auto && elem : allUI.allPages[i]) {
+			elem->setPosOffset(glm::vec2(xoffset, 0));
+		}
+	}
+
+	/* disable arrow buttons if first or last level */
+	allUI.leftPage->setEnabled(_currentPage != 0);
+	allUI.rightPage->setEnabled(_currentPage < static_cast<int32_t>(_nbPages - 1));
+
 	return true;
+}
+
+/**
+ * @brief this is the draw function (called every frames)
+ *
+ * @return true if the draw is a success
+ * @return false if there are an error in draw
+ */
+bool SceneHelp::draw() {
+	bool ret = true;
+
+	/* 3d background */
+	if (_draw3dMenu == false && s.j("debug").b("3d-menu")) {
+		SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
+		ret = scGame.draw();  // draw the game if possible
+	}
+	ret = ASceneMenu::draw();
+	return ret & true;
+}
+
+/**
+ * @brief set the current level in selection
+ *
+ * @param page the level ID
+ * @param enableTransition If true, enable smooth transition btw levels
+ */
+void	SceneHelp::setPage(int32_t page, bool enableTransition) {
+	// set right page ID
+	if (page < 0) page = 0;
+	if (page >= static_cast<int32_t>(_nbPages)) page = _nbPages - 1;
+	if (page == _currentPage)
+		return;
+
+	// set transition
+	if (enableTransition) {
+		if (page == _currentPage - 1) _transition = -1;
+		else if (page == _currentPage + 1) _transition = 1;
+		else _transition = 0;
+	}
+
+	_currentPage = page;
 }

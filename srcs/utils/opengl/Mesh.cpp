@@ -2,6 +2,7 @@
 #include "Logging.hpp"
 #include "debug.hpp"
 #include "OpenGLModel.hpp"
+#include "BoxCollider.hpp"
 
 // -- Constructors -------------------------------------------------------------
 /**
@@ -100,6 +101,12 @@ void	Mesh::draw(glm::mat4 const &model) const {
 	// don't draw Mesh outside camera range
 	if (!_openGLModel.isAnimated()) {
 		glm::vec4 newStartPoint = model * glm::vec4(_boundingBox.startPoint, 1.0);
+
+		// show bounding box
+		if (s.j("debug").j("show").b("boundingBox")) {
+			glm::vec4 color = colorise(s.j("colors").j("boundingBox").u("color"), s.j("colors").j("boundingBox").u("alpha"));
+			BoxCollider::drawBox(glm::vec3(newStartPoint), _boundingBox.size, color);
+		}
 
 		if (_openGLModel.getCam().frustumCullingCheckCube(
 			glm::vec3(newStartPoint), _boundingBox.size) == FRCL_OUTSIDE) {

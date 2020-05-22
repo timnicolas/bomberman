@@ -45,9 +45,9 @@ private:
 	BonusType::Enum		_pickBonus();
 
 public:
-	static std::unordered_map<std::string, BonusType::Enum>	bonus;  /**< All bonus (link btw str & enum) */
-	static std::unordered_map<BonusType::Enum, std::string>	description;  /**< All bonus description */
-	static std::unordered_map<BonusType::Enum, std::string>	bonusTextures;  /**< All bonus textures */
+	static std::map<std::string, BonusType::Enum>	bonus;  /**< All bonus (link btw str & enum) */
+	static std::map<BonusType::Enum, std::string>	description;  /**< All bonus description */
+	static std::map<BonusType::Enum, std::string>	bonusTextures;  /**< All bonus textures */
 	// Constructors
 	explicit Bonus(SceneGame &game);
 	~Bonus();

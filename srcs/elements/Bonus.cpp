@@ -19,7 +19,7 @@ std::map<BonusType::Enum, Block::Enum> Bonus::_textures = {
 	{ BonusType::FLAMPASS, Block::BONUS_FLAMPASS },
 };
 
-std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
+std::map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "life", BonusType::LIFE },
 	{ "bombs", BonusType::BOMBS },
 	{ "flames", BonusType::FLAMES },
@@ -33,7 +33,7 @@ std::unordered_map<std::string, BonusType::Enum> Bonus::bonus = {
 	{ "wallpass", BonusType::WALLPASS },
 };
 
-std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
+std::map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::LIFE, "Bonus Life: You earn an extra life." },
 	{ BonusType::BOMBS, "Bonus Bombs: You can put one more bomb simultaneously." },
 	{ BonusType::FLAMES, "Bonus Flames: The bombs explode at a greater range." },
@@ -47,7 +47,7 @@ std::unordered_map<BonusType::Enum, std::string> Bonus::description = {
 	{ BonusType::FLAMPASS, "Bonus Flame Pass: You are not affected by bomb anymore." },
 };
 
-std::unordered_map<BonusType::Enum, std::string> Bonus::bonusTextures = {
+std::map<BonusType::Enum, std::string> Bonus::bonusTextures = {
 	{ BonusType::LIFE, "bomberman-assets/3dModels/bonus/textures/life.png" },
 	{ BonusType::BOMBS, "bomberman-assets/3dModels/bonus/textures/bomb.png" },
 	{ BonusType::FLAMES, "bomberman-assets/3dModels/bonus/textures/flamme.png" },

@@ -158,7 +158,6 @@ bool SceneExit::draw() {
 
 /**
  * @brief Update UI objects.
- *
  */
 void	SceneExit::_updateUI() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
