@@ -65,6 +65,9 @@ bool	SceneGame::update() {
 			_gui->disableExitForThisFrame();
 	}
 
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_H))
+		_loadHelp = true;
+
 	// set all enemies to Idle on win/loose
 	if (state == GameState::WIN || state == GameState::GAME_OVER) {
 		for (auto &&enemy : enemies) {
@@ -82,19 +85,31 @@ bool	SceneGame::update() {
 		}
 	}
 
-	if (state == GameState::PAUSE) {
+	if (state == GameState::PAUSE || _loadHelp) {
 		AudioManager::pauseAllSounds();
-		SceneManager::loadScene(SceneNames::PAUSE);
+		if (_loadHelp) {
+			_loadHelp = false;
+			state = GameState::PAUSE;
+			// open help menu
+			SceneManager::loadScene(SceneNames::HELP);
+		}
+		else {
+			// open pause menu
+			SceneManager::loadScene(SceneNames::PAUSE);
+		}
 		player->playPauseAnimation(false);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			if (Inputs::getKeyUp(InputType::ACTION))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			AudioManager::playMusic(musicLevel, 0.3f, true);
 			state = GameState::PLAY;
+			if (level == 0)
+				_loadHelp = true;
 		}
 		return true;
 	}
@@ -133,7 +148,8 @@ bool	SceneGame::update() {
 		player->update();
 
 		// load victory menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
@@ -158,7 +174,8 @@ bool	SceneGame::update() {
 		}
 
 		// load loosing menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			// clear game infos.
 			player->resetParams();
 			Save::updateSavedFile(*this, false);
@@ -199,6 +216,7 @@ bool	SceneGame::update() {
 				_gui->cam->setMode(CamMode::FPS);
 			}
 		}
+		_gui->enableCursor(_gui->cam->getMode() != CamMode::FPS);  // disable cursor in FPS mode
 	#endif
 
 	// update board entities

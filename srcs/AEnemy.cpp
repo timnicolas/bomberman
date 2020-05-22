@@ -220,7 +220,7 @@ std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
 	// try to move forward
 	glm::vec3 startPos = position;
-	if (startPos != _moveTo(dir, -1)) {
+	if (startPos != _moveTo(dir)) {
 		return true;
 	}
 
@@ -420,14 +420,27 @@ bool AEnemy::_isBlocked() {
 	};
 
 	for (int i = 0; i < 4; i++) {
+		int startVal = nbCollisions;
 		glm::ivec2 tmpPos(ipos.x + nearby[i][0], ipos.y + nearby[i][1]);
 		if (game.positionInGame(glm::vec3(tmpPos.x, position.y, tmpPos.y), size) == false) {
 			continue;
 		}
-		std::unordered_set<AEntity *> collisions = getCollision({tmpPos.x, position.y, tmpPos.y});
+		/* check with static entities */
 		for (auto && entity : getBoard()[tmpPos.x][tmpPos.y]) {
-			if (entity->type == Type::FIRE || _canWalkOnEntity(entity) == false)
+			if (entity->type == Type::FIRE || _canWalkOnEntity(entity) == false) {
 				nbCollisions++;
+				break;
+			}
+		}
+		if (nbCollisions > startVal) {
+			continue;
+		}
+		/* check with enemies */
+		for (auto && entity : game.enemies) {
+			if (entity != this && entity->getIntPos() == tmpPos && position.y <= 0.2) {
+				nbCollisions++;
+				break;
+			}
 		}
 	}
 

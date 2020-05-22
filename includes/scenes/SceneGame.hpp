@@ -131,6 +131,7 @@ protected:
 		ABaseUI *	bonusShieldText;  /**< TextUI for bonusShieldText */
 	};
 	AllUI		allUI;  /**< All UI elements */
+	bool		_loadHelp;  /**< true if you want to load help menu */
 
 	void			_initGameInfos();
 	void			_loadGameInfos();
