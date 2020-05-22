@@ -220,7 +220,7 @@ std::unordered_set<AEntity *>	AEnemy::getCollision(glm::vec3 dest) const {
 bool AEnemy::_baseEnemyMove(Direction::Enum & dir) {
 	// try to move forward
 	glm::vec3 startPos = position;
-	if (startPos != _moveTo(dir, -1)) {
+	if (startPos != _moveTo(dir)) {
 		return true;
 	}
 
@@ -437,7 +437,7 @@ bool AEnemy::_isBlocked() {
 		}
 		/* check with enemies */
 		for (auto && entity : game.enemies) {
-			if (entity != this && entity->getIntPos() == tmpPos && !reinterpret_cast<AObject*>(entity)->isInFlyBoard) {
+			if (entity != this && entity->getIntPos() == tmpPos && position.y <= 0.2) {
 				nbCollisions++;
 				break;
 			}
