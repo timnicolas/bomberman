@@ -58,6 +58,10 @@ int bomberman(int ac, char const ** av) {
 		return EXIT_FAILURE;
 	}
 
+	#if DEBUG
+		Stats::printStats();
+	#endif
+
 	/* save before quit */
 	saveSettings(homeDir+SETTINGS_FILE);
 	return ret;

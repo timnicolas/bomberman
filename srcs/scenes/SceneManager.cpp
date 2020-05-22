@@ -291,7 +291,7 @@ bool SceneManager::_update() {
 	if (!_isInCheatCode && !cheatCodeClosed) {
 		// update the scene
 		if (_sceneMap[_scene]->update() == false) {
-			logErr("Unexpected error when drawing scene");
+			logErr("Unexpected error when updating scene");
 			return false;
 		}
 	}
@@ -320,6 +320,7 @@ bool SceneManager::_draw() {
 
 	// draw the scene
 	if (_sceneMap[_scene]->draw() == false) {
+		logErr("Unexpected error when drawing scene");
 		return false;
 	}
 
