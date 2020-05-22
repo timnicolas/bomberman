@@ -117,6 +117,12 @@ bool	ModelsManager::_init(Camera const &cam) {
 
 			_models["exit_shield"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
 				"exit/exit_shield.fbx");
+
+			_models["spawner_base"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"spawner/spawner_base.fbx");
+
+			_models["spawner_bifrost"] = new OpenGLModel(cam, "bomberman-assets/3dModels/"
+				"spawner/spawner_bifrost.fbx");
 		}
 		catch(OpenGLModel::ModelException const & e) {
 			logErr(e.what());
