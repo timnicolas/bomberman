@@ -437,7 +437,7 @@ bool AEnemy::_isBlocked() {
 		}
 		/* check with enemies */
 		for (auto && entity : game.enemies) {
-			if (entity != this && entity->getIntPos() == tmpPos) {
+			if (entity != this && entity->getIntPos() == tmpPos && !reinterpret_cast<AObject*>(entity)->isInFlyBoard) {
 				nbCollisions++;
 				break;
 			}
