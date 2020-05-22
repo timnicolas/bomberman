@@ -171,6 +171,11 @@ bool	SceneGame::update() {
 			// start loose camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
+
+			if (player->getState() != EntityState::DYING) {
+				player->setState(EntityState::LOOSE_EMOTE);
+				player->update();
+			}
 		}
 
 		// load loosing menu on camera anim end
