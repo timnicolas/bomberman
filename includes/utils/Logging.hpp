@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include "Stats.hpp"
+
 #define COLOR_EOC		"\x1B[0m"
 #define COLOR_RED		"\x1B[31m"
 #define COLOR_GREEN		"\x1B[32m"
