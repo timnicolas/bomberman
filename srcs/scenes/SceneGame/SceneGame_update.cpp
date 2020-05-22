@@ -45,6 +45,11 @@ bool	SceneGame::updateForMenu() {
  * @return false
  */
 bool	SceneGame::update() {
+	entitiesCount.enemy = -1;
+	entitiesCount.staticElements = -1;
+	entitiesCount.players = -1;
+	entitiesCount.total = -1;
+
 	if (level == NO_LEVEL)
 		return true;
 
@@ -225,25 +230,40 @@ bool	SceneGame::update() {
 	#endif
 
 	// update board entities
+	entitiesCount.staticElements = 0;
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
+				entitiesCount.staticElements++;
 				if (!board_it2->update())
 					return false;
 			}
 		}
 	}
+	for (auto &&board_it0 : boardFly) {
+		for (auto &&board_it1 : board_it0) {
+			entitiesCount.staticElements += board_it1.size();
+		}
+	}
+	entitiesCount.enemy = enemies.size();
 	for (auto &&enemy : enemies) {
 		if (!enemy->update())
 			return false;
 	}
+	entitiesCount.staticElements += spawners.size();
 	for (auto &&spawner : spawners) {
 		if (!spawner->update())
 			return false;
 	}
+	entitiesCount.players = 1;
 	if (!player->update()) {
 		return false;
 	}
+
+	entitiesCount.total =
+			entitiesCount.enemy +
+			entitiesCount.staticElements +
+			entitiesCount.players;
 
 	_updateGameInfos();
 
