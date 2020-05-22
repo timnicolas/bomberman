@@ -172,6 +172,17 @@ public:
 	int64_t						enemiesKilled;  /**< Number of enemies killed */
 	std::string					musicLevel;  /**< The level music */
 
+	/**
+	 * @brief Stats about number of entites, bombs, ...
+	 */
+	struct EntitiesCount {
+		int		enemy;  /**< Number of enemy on the game */
+		int		staticElements;  /**< Number of staticElements on the game */
+		int		players;  /**< Number of players on the game */
+		int		total;  /**< Number of total on the game */
+	};
+	EntitiesCount	entitiesCount;  /**< Stats about number of entites, bombs, ... */
+
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);
 	virtual ~SceneGame();
