@@ -100,16 +100,17 @@ void	Mesh::setTexture(TextureType::Enum type, Texture const texture) {
 void	Mesh::draw(glm::mat4 const &model) const {
 	// don't draw Mesh outside camera range
 	if (!_openGLModel.isAnimated()) {
-		glm::vec4 newStartPoint = model * glm::vec4(_boundingBox.startPoint, 1.0);
+		glm::vec4 newCenter = model * glm::vec4(_boundingBox.center, 1.0);
 
 		// show bounding box
 		if (s.j("debug").j("show").b("boundingBox")) {
+			glm::vec3 startPt = glm::vec3(newCenter) - _boundingBox.radius;
+			glm::vec3 size = {_boundingBox.radius * 2, _boundingBox.radius * 2, _boundingBox.radius * 2};
 			glm::vec4 color = colorise(s.j("colors").j("boundingBox").u("color"), s.j("colors").j("boundingBox").u("alpha"));
-			BoxCollider::drawBox(glm::vec3(newStartPoint), _boundingBox.size, color);
+			BoxCollider::drawBox(startPt, size, color);
 		}
-
-		if (_openGLModel.getCam().frustumCullingCheckCube(
-			glm::vec3(newStartPoint), _boundingBox.size) == FRCL_OUTSIDE) {
+		if (_openGLModel.getCam().frustumCullingCheckSphere(
+			glm::vec3(newCenter), _boundingBox.radius) == FRCL_OUTSIDE) {
 			return;
 		}
 	}
