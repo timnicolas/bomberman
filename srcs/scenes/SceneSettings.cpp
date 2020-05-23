@@ -270,7 +270,7 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_reloadWinText = &addText(tmp_pos, tmp_size, "Restart  the  game  to  apply  new  resolution");
 	ptr = &_reloadWinText->setTextAlign(TextAlign::CENTER)
 		.setTextScale(_text_scale)
-		.setTextColor(glm::vec4(1, 0, 0, 1))
+		.setTextColor(colorise(s.j("colors").j("red").u("color")))
 		.setEnabled(false);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
@@ -408,11 +408,11 @@ void					SceneSettings::_updateFullscreenButton() {
 		glm::vec4 color;
 		if (_fullscreen) {
 			symbol = "ON";
-			color = glm::vec4(0.2, 0.8, 0.2, 1.0);
+			color = colorise(s.j("colors").j("white").u("color"));
 		}
 		else {
 			symbol = "OFF";
-			color = glm::vec4(0.8, 0.2, 0.2, 1.0);
+			color = colorise(s.j("colors").j("red").u("color"));
 		}
 		_fullscreen_button->setText(symbol).setTextColor(color);
 	}
@@ -500,11 +500,11 @@ bool					SceneSettings::update() {
 		glm::vec4 color;
 		if (s.j("graphics").b("fitToScreen")) {
 			symbol = "ON";
-			color = glm::vec4(0.2, 0.8, 0.2, 1.0);
+			color = colorise(s.j("colors").j("white").u("color"));
 		}
 		else {
 			symbol = "OFF";
-			color = glm::vec4(0.8, 0.2, 0.2, 1.0);
+			color = colorise(s.j("colors").j("red").u("color"));
 		}
 		_fit_to_screen_button->setText(symbol).setTextColor(color);
 		if (Inputs::getKeyDown(InputType::ACTION)) {

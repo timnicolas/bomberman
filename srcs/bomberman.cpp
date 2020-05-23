@@ -127,6 +127,9 @@ bool	initSettings(std::string const & filename) {
 	s.j("colors").add<SettingsJson>("blue-light");
 		s.j("colors").j("blue-light").add<uint64_t>("color", 0x94A1C7).setMin(0x000000).setMax(0xFFFFFF);
 		s.j("colors").j("blue-light").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
+	s.j("colors").add<SettingsJson>("white");
+		s.j("colors").j("white").add<uint64_t>("color", 0xf8f4ef).setMin(0x000000).setMax(0xFFFFFF);
+		s.j("colors").j("white").add<uint64_t>("alpha", 0xFF).setMin(0x00).setMax(0xFF);
 
 	// font color
 	s.j("colors").add<SettingsJson>("font");
