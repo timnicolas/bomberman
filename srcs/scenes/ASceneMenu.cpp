@@ -129,6 +129,7 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
 		s.j("colors").j("buttons-border").u("color"),
 		s.j("colors").j("buttons-border").u("alpha")
 	));
+	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -233,6 +234,7 @@ RectUI & ASceneMenu::addRect(glm::vec2 pos, glm::vec2 size, glm::vec4 color, glm
 		borderColor = colorise(s.j("colors").j("bg-rect-border").u("color"), s.j("colors").j("bg-rect-border").u("alpha"));
 	ui->setColor(color);
 	ui->setBorderColor(borderColor);
+	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
 	_buttons.push_back(ui);
 	return *ui;
 }
