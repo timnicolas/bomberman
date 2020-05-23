@@ -88,7 +88,12 @@ bool	SceneGame::drawGame() {
 
 	// draw floor
 	if (s.j("debug").j("show").b("baseBoard")) {
-		_gui->drawCube(Block::FLOOR, {0.0f, -1.5f, 0.0f}, {size.x, 1.5f, size.y});
+		for (uint32_t j = 0; j < size.y; j++) {
+			for (uint32_t i = 0; i < size.x; i++) {
+				if (floor[i][j])
+					_gui->drawCube(Block::FLOOR, {i, -1.5f, j}, {1, 1.5f, 1});
+			}
+		}
 	}
 
 	std::vector<AEntity *>  endBlocs;

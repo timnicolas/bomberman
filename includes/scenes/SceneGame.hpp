@@ -144,9 +144,10 @@ protected:
 
 public:
 	// Members
-	static std::map<std::string, Entity>	entitiesCall;  /**< All entity type & functions */
-	std::vector< std::vector< std::vector<AEntity *> > > board;  /**< The base board with all static elements */
-	std::vector< std::vector< std::vector<AEntity *> > > boardFly;  /**< The fly board with all static flying elements */
+	static std::map<std::string, Entity>					entitiesCall;  /**< All entity type & functions */
+	std::vector< std::vector< bool > >						floor;  /**< True if there is a floor here */
+	std::vector< std::vector< std::vector<AEntity *> > >	board;  /**< The base board with all static elements */
+	std::vector< std::vector< std::vector<AEntity *> > >	boardFly;  /**< The fly board with all static flying elements */
 	Player						*player;  /**< The player */
 	std::vector<AEnemy *>		enemies;  /**< All enemies */
 	/**
