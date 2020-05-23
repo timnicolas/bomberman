@@ -171,6 +171,7 @@ SliderUI & ASceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float
 		s.j("colors").j("buttons-border").u("color"),
 		s.j("colors").j("buttons-border").u("alpha")
 	));
+	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
 	ui->setTextColor(colorise(
 		s.j("colors").j("font").u("color"),
 		s.j("colors").j("font").u("alpha")
