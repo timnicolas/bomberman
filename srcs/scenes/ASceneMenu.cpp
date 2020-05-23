@@ -130,6 +130,9 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
 		s.j("colors").j("buttons-border").u("alpha")
 	));
 	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
+	ui->setMouseHoverColorText(colorise(s.j("colors").j("white").u("color")));
+	ui->setMouseClickColor(colorise(s.j("colors").j("black").u("color")));
+	ui->setMouseClickColorText(colorise(s.j("colors").j("red").u("color")));
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -171,6 +174,7 @@ SliderUI & ASceneMenu::addSlider(glm::vec2 pos, glm::vec2 size, float min, float
 		s.j("colors").j("buttons-border").u("color"),
 		s.j("colors").j("buttons-border").u("alpha")
 	));
+	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
 	ui->setTextColor(colorise(
 		s.j("colors").j("font").u("color"),
 		s.j("colors").j("font").u("alpha")
@@ -262,6 +266,12 @@ ImageUI & ASceneMenu::addImage(glm::vec2 pos, glm::vec2 size, std::string const 
  */
 ScrollbarUI & ASceneMenu::addScrollbar(glm::vec2 pos, glm::vec2 size) {
 	ScrollbarUI * ui = new ScrollbarUI(pos, size);
+	glm::vec4 borderColor = colorise(
+		s.j("colors").j("bg-rect-border").u("color"),
+		s.j("colors").j("bg-rect-border").u("alpha")
+	);
+	ui->setBorderColor(borderColor);
+	ui->setBorderSize(_gui->gameInfo.windowSize.x / 266);
 	_buttons.push_back(ui);
 	return *ui;
 }

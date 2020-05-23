@@ -19,7 +19,9 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _borderColor(UI_DEF_BORDER_COLOR),
   _borderSize(UI_DEF_BORDER_SIZE),
   _mouseHoverColor(UI_DEF_MOUSE_HOVER_COLOR),
+  _mouseHoverColorText(UI_DEF_MOUSE_HOVER_COLOR_TEXT),
   _mouseClickColor(UI_DEF_MOUSE_CLICK_COLOR),
+  _mouseClickColorText(UI_DEF_MOUSE_CLICK_COLOR_TEXT),
   _text(UI_DEF_TEXT),
   _textColor(UI_DEF_TEXT_COLOR),
   _textFont(UI_DEF_TEXT_FOND),
@@ -443,6 +445,15 @@ ABaseUI &	ABaseUI::setBorderSize(float size) { _borderSize = size; return *this;
  * @return ABaseUI& A reference to this UI element
  */
 ABaseUI &	ABaseUI::setMouseHoverColor(glm::vec4 color) { _mouseHoverColor = color; return *this; }
+
+/**
+ * @brief Set the mouse hover color text
+ *
+ * @param color Mouse hover color text
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setMouseHoverColorText(glm::vec4 color) { _mouseHoverColorText = color; return *this; }
+
 /**
  * @brief Set the mouse click color
  *
@@ -450,6 +461,14 @@ ABaseUI &	ABaseUI::setMouseHoverColor(glm::vec4 color) { _mouseHoverColor = colo
  * @return ABaseUI& A reference to this UI element
  */
 ABaseUI &	ABaseUI::setMouseClickColor(glm::vec4 color) { _mouseClickColor = color; return *this; }
+
+/**
+ * @brief Set the mouse click color text
+ *
+ * @param color mouse click color text
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setMouseClickColorText(glm::vec4 color) { _mouseClickColorText = color; return *this; }
 
 /**
  * @brief Set the text

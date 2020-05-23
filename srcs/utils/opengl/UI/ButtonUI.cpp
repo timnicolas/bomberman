@@ -56,7 +56,16 @@ void ButtonUI::_draw() {
 	tmpPos.x += _borderSize;
 	tmpSize = _size;
 	tmpSize.x -= _borderSize * 2;
-	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, _text, _textColor, _textAlign, _textPadding);
+	glm::vec4 secColor = _textColor;
+	if (_leftClick) {
+		secColor = _mouseClickColorText;
+		secColor.a = 1;
+	}
+	else if (_mouseHover) {
+		secColor = _mouseHoverColorText;
+		secColor.a = 1;
+	}
+	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, _text, secColor, _textAlign, _textPadding);
 
 	// get center size and position
 	tmpPos = getRealPos();
@@ -70,7 +79,7 @@ void ButtonUI::_draw() {
 	// draw center
 	// set color filter if mouse over or left click
 	float factor = 1;
-	glm::vec4 secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
+	secColor = glm::vec4(0.0, 0.0, 0.0, 0.0);
 	if (_leftClick) {
 		secColor = _mouseClickColor;
 		factor = 1 - secColor.a;

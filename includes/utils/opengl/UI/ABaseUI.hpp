@@ -6,20 +6,22 @@
 #include "Inputs.hpp"
 
 /* def values */
-#define UI_DEF_Z					0
-#define UI_DEF_POS_OFFSET			glm::vec2(0, 0)
-#define UI_DEF_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_VALUE				0
-#define UI_DEF_BORDER_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_BORDER_SIZE			2.0
-#define UI_DEF_MOUSE_HOVER_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.2)
-#define UI_DEF_MOUSE_CLICK_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.5)
-#define UI_DEF_TEXT					""
-#define UI_DEF_TEXT_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_TEXT_FOND			"default"
-#define UI_DEF_TEXT_SCALE			1.0
-#define UI_DEF_TEXT_PADDING			5
-#define UI_DEF_TEXT_ALIGN			TextAlign::CENTER
+#define UI_DEF_Z						0
+#define UI_DEF_POS_OFFSET				glm::vec2(0, 0)
+#define UI_DEF_COLOR					glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_VALUE					0
+#define UI_DEF_BORDER_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_SIZE				2.0
+#define UI_DEF_MOUSE_HOVER_COLOR		glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_MOUSE_HOVER_COLOR_TEXT	glm::vec4(0.0, 0.0, 0.0, 0.2)
+#define UI_DEF_MOUSE_CLICK_COLOR		glm::vec4(0.0, 0.0, 0.0, 0.5)
+#define UI_DEF_MOUSE_CLICK_COLOR_TEXT	glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT						""
+#define UI_DEF_TEXT_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT_FOND				"default"
+#define UI_DEF_TEXT_SCALE				1.0
+#define UI_DEF_TEXT_PADDING				5
+#define UI_DEF_TEXT_ALIGN				TextAlign::CENTER
 
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
@@ -110,7 +112,9 @@ class ABaseUI {
 		virtual ABaseUI &			setBorderSize(float size);
 
 		virtual ABaseUI &			setMouseHoverColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseHoverColorText(glm::vec4 color);
 		virtual ABaseUI &			setMouseClickColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseClickColorText(glm::vec4 color);
 
 		virtual ABaseUI &			setText(std::string const & text);
 		virtual ABaseUI &			setTextColor(glm::vec4 color);
@@ -205,7 +209,9 @@ class ABaseUI {
 		float			_borderSize;  /**< Border size */
 		// mouse effect
 		glm::vec4		_mouseHoverColor;  /**< Color when mouse hover */
+		glm::vec4		_mouseHoverColorText;  /**< Color of text when mouse hover */
 		glm::vec4		_mouseClickColor;  /**< Color when mouse click */
+		glm::vec4		_mouseClickColorText;  /**< Color of text when mouse click */
 		// text
 		std::string		_text;  /**< Text */
 		glm::vec4		_textColor;  /**< Text color */
