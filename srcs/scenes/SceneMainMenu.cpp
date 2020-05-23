@@ -190,7 +190,7 @@ void		SceneMainMenu::_updateUI() {
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.exit->setPos(tmpPos).setSize(tmpSize);
 	tmpSize.x = tmpSize.x * 1.3;
-	tmpSize.y = winSz.y - tmpPos.y;
+	tmpSize.y = winSz.y - tmpPos.y - menuHeight * 3.2;
 	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 	tmpPos.y -= menuHeight * 0.5;
 	allUI.border->setPos(tmpPos).setSize(tmpSize);

@@ -274,6 +274,9 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 		.setTextColor(colorise(s.j("colors").j("red").u("color")))
 		.setEnabled(false);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
+	// tmp_size.y
+	ptr = &addRect(tmp_pos, tmp_size);
+	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
 /**
