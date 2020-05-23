@@ -64,6 +64,8 @@ void ButtonUI::_draw() {
 	else if (_mouseHover) {
 		secColor = _mouseHoverColorText;
 		secColor.a = 1;
+	} else if (_selected) {
+		secColor = _selectedColorText;
 	}
 	_drawText(tmpPos, tmpSize, _z, _textFont, _textScale, _text, secColor, _textAlign, _textPadding);
 
@@ -87,6 +89,10 @@ void ButtonUI::_draw() {
 	}
 	else if (_mouseHover) {
 		secColor = _mouseHoverColor;
+		factor = 1 - secColor.a;
+		secColor.a = 1;
+	} else if (_selected) {
+		secColor = _selectedColor;
 		factor = 1 - secColor.a;
 		secColor.a = 1;
 	}

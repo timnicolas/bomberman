@@ -155,18 +155,19 @@ bool					SceneSettings::init() {
 		tmp_size.x = menu_width / 3 * 0.9;
 		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
 		tmp_pos.y -= tmp_size.y;
-		_paneSelection[0] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Graphics")
+		_paneSelection[SettingsType::GRAPHICS] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Graphics")
+			.setSelected(true)
 			.addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS])
 			.setTextScale(_text_scale)
 			.setTextAlign(TextAlign::CENTER));
 		tmp_pos.x += (menu_width / 3);
-		_paneSelection[1] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Audio")
+		_paneSelection[SettingsType::AUDIO] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Audio")
 			.addButtonLeftListener(&_select_pane[SettingsType::AUDIO])
 			.setKeyLeftClickScancode(SDL_SCANCODE_2)
 			.setTextScale(_text_scale)
 			.setTextAlign(TextAlign::CENTER));
 		tmp_pos.x += (menu_width / 3);
-		_paneSelection[2] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Controls")
+		_paneSelection[SettingsType::CONTROLS] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Controls")
 			.addButtonLeftListener(&_select_pane[SettingsType::CONTROLS])
 			.setKeyLeftClickScancode(SDL_SCANCODE_3)
 			.setTextScale(_text_scale)
@@ -405,16 +406,13 @@ void					SceneSettings::_updateResolutionText() {
 void					SceneSettings::_updateFullscreenButton() {
 	if (_fullscreen_button != nullptr) {
 		std::string symbol;
-		glm::vec4 color;
 		if (_fullscreen) {
 			symbol = "ON";
-			color = colorise(s.j("colors").j("white").u("color"));
 		}
 		else {
 			symbol = "OFF";
-			color = colorise(s.j("colors").j("red").u("color"));
 		}
-		_fullscreen_button->setText(symbol).setTextColor(color);
+		_fullscreen_button->setText(symbol).setSelected(_fullscreen);
 	}
 }
 
@@ -427,9 +425,9 @@ bool					SceneSettings::update() {
 		_resetKeys();
 	}
 	if (_input_configuring >= 0) {
-		_paneSelection[0]->setKeyLeftClickScancode(NO_SCANCODE);
-		_paneSelection[1]->setKeyLeftClickScancode(NO_SCANCODE);
-		_paneSelection[2]->setKeyLeftClickScancode(NO_SCANCODE);
+		_paneSelection[SettingsType::GRAPHICS]->setKeyLeftClickScancode(NO_SCANCODE);
+		_paneSelection[SettingsType::AUDIO]->setKeyLeftClickScancode(NO_SCANCODE);
+		_paneSelection[SettingsType::CONTROLS]->setKeyLeftClickScancode(NO_SCANCODE);
 		if (!Inputs::isConfiguring()) {
 			_key_buttons[_input_configuring]->setText(Inputs::getKeyName(static_cast<InputType::Enum>(_input_configuring)));
 			if (static_cast<InputType::Enum>(_input_configuring) == InputType::ACTION_2) {
@@ -445,9 +443,9 @@ bool					SceneSettings::update() {
 		}
 	}
 	else {
-		_paneSelection[0]->setKeyLeftClickScancode(SDL_SCANCODE_1);
-		_paneSelection[1]->setKeyLeftClickScancode(SDL_SCANCODE_2);
-		_paneSelection[2]->setKeyLeftClickScancode(SDL_SCANCODE_3);
+		_paneSelection[SettingsType::GRAPHICS]->setKeyLeftClickScancode(SDL_SCANCODE_1);
+		_paneSelection[SettingsType::AUDIO]->setKeyLeftClickScancode(SDL_SCANCODE_2);
+		_paneSelection[SettingsType::CONTROLS]->setKeyLeftClickScancode(SDL_SCANCODE_3);
 		for (auto i = 0; i < SettingsType::nb_types; i++) {
 			if (_select_pane[i]) {
 				_selectPane(static_cast<SettingsType::Enum>(i));
@@ -497,16 +495,13 @@ bool					SceneSettings::update() {
 			}
 		}
 		std::string symbol;
-		glm::vec4 color;
 		if (s.j("graphics").b("fitToScreen")) {
 			symbol = "ON";
-			color = colorise(s.j("colors").j("white").u("color"));
 		}
 		else {
 			symbol = "OFF";
-			color = colorise(s.j("colors").j("red").u("color"));
 		}
-		_fit_to_screen_button->setText(symbol).setTextColor(color);
+		_fit_to_screen_button->setText(symbol).setSelected(s.j("graphics").b("fitToScreen"));
 		if (Inputs::getKeyDown(InputType::ACTION)) {
 			try {
 				AudioManager::playSound("sounds/bell.ogg");
@@ -543,6 +538,7 @@ void					SceneSettings::_selectPane(SettingsType::Enum pane_type) {
 	for (auto i = 0; i < SettingsType::nb_types; i++) {
 		for (auto it = _panes[i].begin(); it != _panes[i].end(); it++) {
 			(*it)->setEnabled(i == pane_type);
+			_paneSelection[i]->setSelected(i == pane_type);
 		}
 	}
 }
