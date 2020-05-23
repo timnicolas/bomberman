@@ -534,7 +534,7 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 }
 
 /**
- * @brief Check if a cube or rectangle is inside or outside of the camera
+ * @brief Check if a sphere is inside or outside of the camera
  *
  * @param center The center of the sphere
  * @param radius The radius of the sphere
