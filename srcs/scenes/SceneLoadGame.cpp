@@ -145,8 +145,8 @@ void SceneLoadGame::load() {
 					{savedGamesSize.x * 0.8, tmpSize.y},
 					gameSaved->game->s("Filename")
 				).addButtonLeftValueListener(&_states.selectedGame, i)
-				.setColor(colorise(s.j("colors").j("blue-light").u("color")))
-				.setBorderColor(colorise(s.j("colors").j("blue").u("color")))
+				.setColor(colorise(s.j("colors").j("buttons").u("color")))
+				.setBorderColor(colorise(s.j("colors").j("buttons-border").u("color")))
 				.setTextAlign(TextAlign::LEFT)
 				.setMaster(savedGames).setTextScale(0.6);
 				gameSaved->gameID = i;
@@ -180,22 +180,24 @@ void SceneLoadGame::load() {
 			.setTextFont("text").setTextAlign(TextAlign::LEFT).setMaster(previewGame);
 		tempPrevPos.y = tmpSize.y * 2;
 		previewGameUI.loadGame = &addButton(tempPrevPos, tempPrevSize, "load")
-			// .setTextFont("text")
 			.setColor(colorise(s.j("colors").j("blue").u("color")))
-			.setBorderColor(colorise(s.j("colors").j("blue").u("color")))
+			.setBorderColor(colorise(s.j("colors").j("black").u("color")))
 			.addButtonLeftListener(&_states.loadGame)
 			.setKeyLeftClickInput(InputType::CONFIRM)
 			.setMaster(previewGame);
 		tempPrevPos.y -= tmpSize.y * 1.3;
 		previewGameUI.deleteGame = &addButton(tempPrevPos, tempPrevSize, "delete")
-			// .setTextFont("text")
 			.setColor(colorise(s.j("colors").j("red").u("color")))
-			.setBorderColor(colorise(s.j("colors").j("red").u("color")))
+			.setBorderColor(colorise(s.j("colors").j("black").u("color")))
 			.addButtonLeftListener(&_states.deleteGame)
 			.setKeyLeftClickScancode(SDL_SCANCODE_DELETE)
 			.setMaster(previewGame);
 
 		tmpPos.y -= savedGamesSize.y;
+
+		tmpSize.y = winSz.y - tmpPos.y - menuHeight * 0.5;
+		tmpPos.x = (winSz.x / 2) - ((menuWidth) / 2);
+		addRect(tmpPos, tmpSize);
 
 		_initBG();
 	}
@@ -217,7 +219,8 @@ bool	SceneLoadGame::update() {
 	if (_states.selectedGame != _selectedGame) {
 		for (auto &&gameSaved : _gamesSaved) {
 			if (gameSaved->gameID == _states.selectedGame) {
-				gameSaved->ui->setColor(colorise(s.j("colors").j("blue").u("color")));
+				gameSaved->ui->setColor(colorise(s.j("colors").j("black").u("color")));
+				gameSaved->ui->setTextColor(colorise(s.j("colors").j("red").u("color")));
 				previewGameUI.title->setText(gameSaved->game->s("Filename"));
 				std::time_t dateLastmodified = static_cast<std::time_t>(gameSaved->game->i("date_lastmodified"));
 				std::tm localTime = *std::localtime(&dateLastmodified);
@@ -244,7 +247,8 @@ bool	SceneLoadGame::update() {
 				previewGameUI.scoreTotal->setText("Total points: " + std::to_string(scoreTotal));
 			}
 			if (gameSaved->gameID == _selectedGame) {
-				gameSaved->ui->setColor(colorise(s.j("colors").j("blue-light").u("color")));
+				gameSaved->ui->setColor(colorise(s.j("colors").j("buttons").u("color")));
+				gameSaved->ui->setTextColor(colorise(s.j("colors").j("black").u("color")));
 			}
 		}
 
