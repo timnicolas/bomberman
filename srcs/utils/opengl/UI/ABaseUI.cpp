@@ -10,12 +10,15 @@
  */
 ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
 : _enabled(true),
+  _selected(false),
   _pos(pos),
   _z(UI_DEF_Z),
   _posOffset(UI_DEF_POS_OFFSET),
   _size(size),
   _color(UI_DEF_COLOR),
   _value(UI_DEF_VALUE),
+  _selectedColor(UI_DEF_SELECTED_COLOR),
+  _selectedColorText(UI_DEF_SELECTED_COLOR_TEXT),
   _borderColor(UI_DEF_BORDER_COLOR),
   _borderSize(UI_DEF_BORDER_SIZE),
   _mouseHoverColor(UI_DEF_MOUSE_HOVER_COLOR),
@@ -370,6 +373,13 @@ bool	ABaseUI::isTotallyOutOfMaster() const {
  */
 ABaseUI &	ABaseUI::setEnabled(bool enabled) { _enabled = enabled; return *this; }
 /**
+ * @brief Selected / unselected UI
+ *
+ * @param selected selected
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setSelected(bool selected) { _selected = selected; return *this; }
+/**
  * @brief Set position
  *
  * @param pos Position
@@ -422,6 +432,21 @@ ABaseUI &	ABaseUI::setCalculatedSize() {
  * @return ABaseUI& A reference to this UI element
  */
 ABaseUI &	ABaseUI::setColor(glm::vec4 color) { _color = color; return *this; }
+
+/**
+ * @brief Set the color selected
+ *
+ * @param color Color selected
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setSelectedColor(glm::vec4 color) { _selectedColor = color; return *this; }
+/**
+ * @brief Set the color selected text
+ *
+ * @param color Color selected text
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setSelectedColorText(glm::vec4 color) { _selectedColorText = color; return *this; }
 
 /**
  * @brief Set the border color

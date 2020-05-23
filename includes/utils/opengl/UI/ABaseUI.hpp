@@ -10,6 +10,8 @@
 #define UI_DEF_POS_OFFSET				glm::vec2(0, 0)
 #define UI_DEF_COLOR					glm::vec4(0.0, 0.0, 0.0, 1.0)
 #define UI_DEF_VALUE					0
+#define UI_DEF_SELECTED_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_SELECTED_COLOR_TEXT		glm::vec4(0.0, 0.0, 0.0, 1.0)
 #define UI_DEF_BORDER_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
 #define UI_DEF_BORDER_SIZE				2.0
 #define UI_DEF_MOUSE_HOVER_COLOR		glm::vec4(0.0, 0.0, 0.0, 1.0)
@@ -100,6 +102,7 @@ class ABaseUI {
 		virtual ABaseUI &			setKeyLeftClickInput(InputType::Enum input);
 
 		virtual ABaseUI &			setEnabled(bool enabled);
+		virtual ABaseUI &			setSelected(bool selected);
 		virtual ABaseUI &			setPos(glm::vec2 pos);
 		virtual ABaseUI &			setZ(float z);
 		virtual ABaseUI &			setPosOffset(glm::vec2 offset);
@@ -107,6 +110,10 @@ class ABaseUI {
 		virtual ABaseUI &			setSize(glm::vec2 size);
 		virtual ABaseUI &			setCalculatedSize();
 		virtual ABaseUI &			setColor(glm::vec4 color);
+
+		virtual ABaseUI &			setSelectedColor(glm::vec4 color);
+		virtual ABaseUI &			setSelectedColorText(glm::vec4 color);
+
 
 		virtual ABaseUI &			setBorderColor(glm::vec4 color);
 		virtual ABaseUI &			setBorderSize(float size);
@@ -197,6 +204,7 @@ class ABaseUI {
 
 		// enable functionalities
 		bool			_enabled;  /**< Enable / disable UI */
+		bool			_selected;  /**< Selected / unselected UI */
 		// basics
 		glm::vec2		_pos;  /**< Position */
 		float			_z;  /**< Z position (to transparency) */
@@ -204,6 +212,9 @@ class ABaseUI {
 		glm::vec2		_size;  /**< Size */
 		glm::vec4		_color;  /**< Color */
 		int64_t			_value;  /**< Value */
+		// selected
+		glm::vec4		_selectedColor;  /**< Color when selected */
+		glm::vec4		_selectedColorText;  /**< Color text when selected */
 		// border
 		glm::vec4		_borderColor;  /**< Border color */
 		float			_borderSize;  /**< Border size */

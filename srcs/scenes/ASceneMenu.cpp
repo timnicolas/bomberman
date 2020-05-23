@@ -133,6 +133,8 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
 	ui->setMouseHoverColorText(colorise(s.j("colors").j("white").u("color")));
 	ui->setMouseClickColor(colorise(s.j("colors").j("black").u("color")));
 	ui->setMouseClickColorText(colorise(s.j("colors").j("red").u("color")));
+	ui->setSelectedColor(colorise(s.j("colors").j("black").u("color")));
+	ui->setSelectedColorText(colorise(s.j("colors").j("red").u("color")));
 	_buttons.push_back(ui);
 	return *ui;
 }
