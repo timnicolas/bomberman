@@ -122,6 +122,7 @@ class Camera {
 		void	frustumCullingInit(CAMERA_FLOAT angleDeg, CAMERA_FLOAT ratio, CAMERA_FLOAT nearD, CAMERA_FLOAT farD);
 		int		frustumCullingCheckPoint(CAMERA_VEC3 const &point) const;  // check if a point is inside the camera
 		int		frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 const &size) const;  // check for a cube
+		int		frustumCullingCheckSphere(CAMERA_VEC3 const &center, CAMERA_FLOAT radius) const;  // check for a sphere
 
 		/* follow path */
 		void	resetFollowPath();
