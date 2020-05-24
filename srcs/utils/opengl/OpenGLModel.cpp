@@ -69,6 +69,11 @@ OpenGLModel::~OpenGLModel() {
 	for (auto &it : _meshes) {
 		delete(it.second);
 	}
+
+	// free textures
+	for (auto const &textr : _texturesLoaded) {
+		glDeleteTextures(1, &textr.second.id);
+	}
 }
 
 /**
