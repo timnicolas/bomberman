@@ -68,6 +68,10 @@ Shader::Shader(std::string const vsPath, std::string const fsPath, std::string c
 	uint32_t	fragment = 0;
 	uint32_t	geometry = 0;
 
+	_vsPath = vsPath;
+	_gsPath = gsPath;
+	_fsPath = fsPath;
+
 	fillShaderStr(vsPath, fsPath, gsPath, &vsCode, &fsCode, &gsCode);
 
 	// vertex shader
@@ -377,10 +381,15 @@ void	Shader::checkCompileErrors(uint32_t shader, std::string type) {
 	char	infoLog[1024];
 
 	if (type != "PROGRAM") {
+		std::string file;
+		if (type == "VERTEX") file = _vsPath;
+		else if (type == "GEOMETRY") file = _gsPath;
+		else if (type == "FRAGMENT") file = _fsPath;
+
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 		if (!success) {
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			logErr("Shader Compilation, type: " << type << std::endl << infoLog);
+			logErr("In " << file << " (" << type << " SHADER):" << std::endl << infoLog);
 			throw Shader::ShaderCompileException();
 		}
 	}
