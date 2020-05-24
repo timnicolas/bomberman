@@ -158,8 +158,9 @@ void SceneLoadGame::load() {
 		}
 
 		// Screen Game Preview
-		glm::vec2		previewSize = {menuWidth * (3.0/5.0), menuHeight * 1.3 * 6};
-		glm::vec2		previewPos = {tmpPos.x + savedGamesSize.x, tmpPos.y - previewSize.y};
+		float			borderSize = winSz.x / 266;
+		glm::vec2		previewSize = {menuWidth * (3.0/5.0) + borderSize, menuHeight * 1.3 * 6};
+		glm::vec2		previewPos = {tmpPos.x + savedGamesSize.x - borderSize, tmpPos.y - previewSize.y};
 		ABaseMasterUI	*previewGame = &addScrollbar(previewPos, previewSize);
 		glm::vec2		tempPrevSize = {previewSize.x * 0.8, tmpSize.y};
 		glm::vec2		tempPrevPos = {(previewSize.x / 2) - (previewSize.x * 0.8 / 2), previewSize.y - menuHeight * 1.3};
