@@ -181,7 +181,7 @@ class ABaseUI {
 		void			_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
 			std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
-		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_loadImg(std::string const & filename, bool updateSize = true, bool hover = false);
 		void			_unloadImg();
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color);
 
@@ -232,6 +232,7 @@ class ABaseUI {
 		TextAlign::Enum	_textAlign;  /**< Text align (LEFT, RIGHT, CENTER) */
 		// image
 		GLuint			_imgTextureID;  /**< Image texture ID */
+		GLuint			_imgHoverTextureID;  /**< Image hover texture ID */
 		glm::ivec2		_imgDefSize;  /**< Image default size */
 
 		/* info about mouse */

@@ -110,20 +110,24 @@ std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding)
  *   - if _size.x == 0 && _size.x == 0 -> size auto setted (default size for the image)
  *   - if _size.x == 0 -> width auto setted
  *   - if _size.y == 0 -> height auto setted
- *
+ * @param hover if the image is the hover image. The hover image HAVE TO have the same size of main image.
  * @throw UIException if the image failed to load
  */
-void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
+void ABaseUI::_loadImg(std::string const & filename, bool updateSize, bool hover) {
 	// load the texture
 	try {
-		_imgTextureID = textureFromFile(filename, false, &_imgDefSize);
+		if (!hover) {
+			_imgTextureID = textureFromFile(filename, false, &_imgDefSize);
+		} else {
+			_imgHoverTextureID = textureFromFile(filename, false, &_imgDefSize);
+		}
 	}
 	catch (TextureException const & e) {
 		throw UIException(e.what());
 	}
 
 	// auto set size if needed
-	if (updateSize) {
+	if (updateSize && !hover) {
 		if (_size.x == 0 && _size.y == 0) {
 			_size.x = _imgDefSize.x;
 			_size.y = _imgDefSize.y;
@@ -142,6 +146,9 @@ void ABaseUI::_loadImg(std::string const & filename, bool updateSize) {
  */
 void ABaseUI::_unloadImg() {
 	glDeleteTextures(1, &_imgTextureID);
+	if (_imgHoverTextureID != 0) {
+		glDeleteTextures(1, &_imgHoverTextureID);
+	}
 }
 
 /**
