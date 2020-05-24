@@ -36,6 +36,7 @@ std::map<std::string, SceneGame::Entity> SceneGame::entitiesCall = {
 	{FLAG_STR, {EntityType::BOARD_FLAG, [](SceneGame &game) -> AEntity* {return new Flag(game);}}},
 	{END_STR, {EntityType::BOARD, [](SceneGame &game) -> AEntity* {return new End(game);}}},
 	{"safe", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
+	{"outside", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
 	{"empty", {EntityType::BOARD, [](SceneGame &game) -> AEntity* {(void)game; return nullptr;}}},
 	{ENEMY_BASIC_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyBasic(game);}}},
 	{ENEMY_WITH_EYE_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyWithEye(game);}}},
@@ -70,6 +71,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	enemiesToKill = 0;
 	enemiesKilled = 0;
 	_alarm = false;
+	_loadHelp = false;
 	AudioManager::loadSound(INTROLEVEL_SOUND);
 	AudioManager::loadSound(WIN_SOUND);
 	AudioManager::loadSound(GAME_OVER_SOUND);

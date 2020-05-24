@@ -415,10 +415,11 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 				SceneManager::getScene(SceneNames::LEVEL_SELECTION));
 
 			/* check if the level id is valid */
-			if (scLvlSelect.getNbLevel() <= levelId) {
+			if (scLvlSelect.getNbLevel() < levelId || levelId == 0) {
 				this->logwarn("Invalid level ID: " + args[i], false, true);
 				continue;
 			}
+			levelId -= 1;
 
 			/* add to unlocked list */
 			if (!_isLevelUnlocked(levelId)) {
@@ -429,7 +430,7 @@ int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 					scLvlSelect.setLevel(0, false);
 					scLvlSelect.setLevel(levelId, false);
 				}
-				_addLine("Level " + std::to_string(levelId) + " unlocked");
+				_addLine("Level " + std::to_string(levelId + 1) + " unlocked");
 			}
 		}
 		return CheatcodeAction::CLOSE | CheatcodeAction::TXT_DEF | CheatcodeAction::RESULT_SUCCESS;
