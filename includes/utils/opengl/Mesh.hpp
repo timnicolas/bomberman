@@ -40,8 +40,8 @@ struct	Vertex {
  * @brief Bounding box
  */
 struct	BoundingBox {
-	glm::vec3	startPoint;  /**< The starting point */
-	glm::vec3	size;  /**< The size */
+	glm::vec3	center;  /**< The center */
+	float		radius;  /**< The radius */
 };
 
 /**

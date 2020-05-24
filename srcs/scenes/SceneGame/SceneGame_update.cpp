@@ -45,6 +45,11 @@ bool	SceneGame::updateForMenu() {
  * @return false
  */
 bool	SceneGame::update() {
+	entitiesCount.enemy = -1;
+	entitiesCount.staticElements = -1;
+	entitiesCount.players = -1;
+	entitiesCount.total = -1;
+
 	if (level == NO_LEVEL)
 		return true;
 
@@ -65,6 +70,9 @@ bool	SceneGame::update() {
 			_gui->disableExitForThisFrame();
 	}
 
+	if (Inputs::getKeyByScancodeUp(SDL_SCANCODE_H))
+		_loadHelp = true;
+
 	// set all enemies to Idle on win/loose
 	if (state == GameState::WIN || state == GameState::GAME_OVER) {
 		for (auto &&enemy : enemies) {
@@ -82,19 +90,31 @@ bool	SceneGame::update() {
 		}
 	}
 
-	if (state == GameState::PAUSE) {
+	if (state == GameState::PAUSE || _loadHelp) {
 		AudioManager::pauseAllSounds();
-		SceneManager::loadScene(SceneNames::PAUSE);
+		if (_loadHelp) {
+			_loadHelp = false;
+			state = GameState::PAUSE;
+			// open help menu
+			SceneManager::loadScene(SceneNames::HELP);
+		}
+		else {
+			// open pause menu
+			SceneManager::loadScene(SceneNames::PAUSE);
+		}
 		player->playPauseAnimation(false);
 		return true;
 	}
 	else if (state == GameState::INTRO) {
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			if (Inputs::getKeyUp(InputType::ACTION))
 				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			AudioManager::playMusic(musicLevel, 0.3f, true);
 			state = GameState::PLAY;
+			if (level == 0)
+				_loadHelp = true;
 		}
 		return true;
 	}
@@ -133,7 +153,8 @@ bool	SceneGame::update() {
 		player->update();
 
 		// load victory menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			delete player;
 			player = nullptr;
 			SceneManager::loadScene(SceneNames::VICTORY);
@@ -155,10 +176,16 @@ bool	SceneGame::update() {
 			// start loose camera animation
 			_gui->cam->setMode(CamMode::FOLLOW_PATH);
 			_gui->cam->setFollowPath(_getGameOverAnim());
+
+			if (player->getState() != EntityState::DYING) {
+				player->setState(EntityState::LOOSE_EMOTE);
+				player->update();
+			}
 		}
 
 		// load loosing menu on camera anim end
-		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::ACTION) || Inputs::getKeyUp(InputType::CANCEL)) {
+		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
+			|| Inputs::getKeyUp(InputType::CANCEL)) {
 			// clear game infos.
 			player->resetParams();
 			Save::updateSavedFile(*this, false);
@@ -199,28 +226,44 @@ bool	SceneGame::update() {
 				_gui->cam->setMode(CamMode::FPS);
 			}
 		}
+		_gui->enableCursor(_gui->cam->getMode() != CamMode::FPS);  // disable cursor in FPS mode
 	#endif
 
 	// update board entities
+	entitiesCount.staticElements = 0;
 	for (auto &&board_it0 : board) {
 		for (auto &&board_it1 : board_it0) {
 			for (AEntity *board_it2 : board_it1) {
+				entitiesCount.staticElements++;
 				if (!board_it2->update())
 					return false;
 			}
 		}
 	}
+	for (auto &&board_it0 : boardFly) {
+		for (auto &&board_it1 : board_it0) {
+			entitiesCount.staticElements += board_it1.size();
+		}
+	}
+	entitiesCount.enemy = enemies.size();
 	for (auto &&enemy : enemies) {
 		if (!enemy->update())
 			return false;
 	}
+	entitiesCount.staticElements += spawners.size();
 	for (auto &&spawner : spawners) {
 		if (!spawner->update())
 			return false;
 	}
+	entitiesCount.players = 1;
 	if (!player->update()) {
 		return false;
 	}
+
+	entitiesCount.total =
+			entitiesCount.enemy +
+			entitiesCount.staticElements +
+			entitiesCount.players;
 
 	_updateGameInfos();
 

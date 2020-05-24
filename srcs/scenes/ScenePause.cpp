@@ -75,6 +75,11 @@ bool			ScenePause::init() {
 			.addButtonLeftListener(&_states.restart);
 
 		tmpPos.y -= menuHeight * 1.3;
+		addButton(tmpPos, tmpSize, "help")
+			.setKeyLeftClickScancode(SDL_SCANCODE_H)
+			.addButtonLeftListener(&_states.help);
+
+		tmpPos.y -= menuHeight * 1.3;
 		addButton(tmpPos, tmpSize, "main   menu")
 			.setKeyLeftClickInput(InputType::GOTO_MENU)
 			.addButtonLeftListener(&_states.menu);
@@ -112,13 +117,17 @@ bool	ScenePause::update() {
 	if (_states.resume) {
 		_states.resume = false;
 		AudioManager::resumeAllSounds();
-		SceneManager::loadScene(_lastSceneName);
+		SceneManager::loadScene(SceneNames::GAME);
 	}
 	else if (_states.restart) {
 		_states.restart = false;
 		AudioManager::stopAllSounds();
 		scGame.loadLevel(scGame.level);  // reload the current level
-		SceneManager::loadScene(_lastSceneName);
+		SceneManager::loadScene(SceneNames::GAME);
+	}
+	else if (_states.help) {
+		_states.help = false;
+		SceneManager::loadScene(SceneNames::HELP);
 	}
 	else if (_states.menu) {
 		_states.menu = false;
