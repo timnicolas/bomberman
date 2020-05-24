@@ -274,8 +274,11 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 		.setTextColor(colorise(s.j("colors").j("red").u("color")))
 		.setEnabled(false);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	// tmp_size.y
-	ptr = &addRect(tmp_pos, tmp_size);
+	// border rectangle
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_size.x = menu_width;
+	tmp_size.y = win_size.y - tmp_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
+	ptr = &addRect(tmp_pos, tmp_size).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
@@ -305,6 +308,13 @@ void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, fl
 		_volSliders[i] = reinterpret_cast<SliderUI*>(ptr);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
+	// border rectangle
+	tmp_pos.y -= tmp_size.y * 0.5;
+	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
+	tmp_size.x = menu_width;
+	tmp_size.y = win_size.y - tmp_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
+	ptr = &addRect(tmp_pos, tmp_size).setEnabled(false);
+	_panes[SettingsType::AUDIO].push_front(ptr);
 }
 
 /**
@@ -333,6 +343,11 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		.setEnabled(false);
 	scrollbar = reinterpret_cast<ABaseMasterUI*>(ptr);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
+
+	// border rectangle position
+	glm::vec2 border_pos = tmp_pos;
+	border_pos.y -= menu_height / 24;
+	border_pos.x = (win_size.x / 2) - (menu_width / 2);
 
 	// add buttons
 	tmp_pos.y = scrollbar->getMasterSize().y;
@@ -391,6 +406,12 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		.setTextScale(_text_scale)
 		.setTextAlign(TextAlign::CENTER)
 		.setEnabled(false);
+	_panes[SettingsType::CONTROLS].push_front(ptr);
+
+	// border rectangle
+	tmp_size.x = menu_width;
+	tmp_size.y = win_size.y - border_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
+	ptr = &addRect(border_pos, tmp_size).setEnabled(false);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 }
 
