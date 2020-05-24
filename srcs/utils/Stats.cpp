@@ -39,7 +39,7 @@ void    Stats::printStats() {
                 stat.second.minExecTime.count() << "s");
         }
         if (stat.second.maxExecTime != std::chrono::duration<double>::min()) {
-            logDebug("  min: " << std::fixed << std::setprecision(8) <<
+            logDebug("  max: " << std::fixed << std::setprecision(8) <<
                 stat.second.maxExecTime.count() << "s");
         }
         logDebug("}");
