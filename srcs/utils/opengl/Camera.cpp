@@ -533,6 +533,17 @@ int		Camera::frustumCullingCheckCube(CAMERA_VEC3 const &startPoint, CAMERA_VEC3 
 		return FRCL_INSIDE;
 }
 
+/**
+ * @brief Check if a sphere is inside or outside of the camera
+ *
+ * @param center The center of the sphere
+ * @param radius The radius of the sphere
+ * @return int The point position (FRCL_INSIDE == is inside)
+ */
+int		Camera::frustumCullingCheckSphere(CAMERA_VEC3 const &center, CAMERA_FLOAT radius) const {
+	return frustumCullingCheckCube(center - radius, {radius * 2, radius * 2, radius * 2});
+}
+
 // -- follow path --------------------------------------------------------------
 /**
  * @brief Reset the follow path (for FOLLOW_PATH mode)
