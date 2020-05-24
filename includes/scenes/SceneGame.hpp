@@ -144,9 +144,10 @@ protected:
 
 public:
 	// Members
-	static std::map<std::string, Entity>	entitiesCall;  /**< All entity type & functions */
-	std::vector< std::vector< std::vector<AEntity *> > > board;  /**< The base board with all static elements */
-	std::vector< std::vector< std::vector<AEntity *> > > boardFly;  /**< The fly board with all static flying elements */
+	static std::map<std::string, Entity>					entitiesCall;  /**< All entity type & functions */
+	std::vector< std::vector< bool > >						floor;  /**< True if there is a floor here */
+	std::vector< std::vector< std::vector<AEntity *> > >	board;  /**< The base board with all static elements */
+	std::vector< std::vector< std::vector<AEntity *> > >	boardFly;  /**< The fly board with all static flying elements */
 	Player						*player;  /**< The player */
 	std::vector<AEnemy *>		enemies;  /**< All enemies */
 	/**
@@ -171,6 +172,17 @@ public:
 	int64_t						enemiesToKill;  /**< Enemy to kill to enable end element & finish the level */
 	int64_t						enemiesKilled;  /**< Number of enemies killed */
 	std::string					musicLevel;  /**< The level music */
+
+	/**
+	 * @brief Stats about number of entites, bombs, ...
+	 */
+	struct EntitiesCount {
+		int		enemy;  /**< Number of enemy on the game */
+		int		staticElements;  /**< Number of staticElements on the game */
+		int		players;  /**< Number of players on the game */
+		int		total;  /**< Number of total on the game */
+	};
+	EntitiesCount	entitiesCount;  /**< Stats about number of entites, bombs, ... */
 
 	// Constructors
 	SceneGame(Gui * gui, float const &dtTime);

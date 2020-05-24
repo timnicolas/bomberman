@@ -141,6 +141,9 @@ bool	SceneGame::_initJsonLevel(int32_t levelId) {
 	lvl->add<uint64_t>("wallGenPercent", 40).setMin(0).setMax(100);
 
 	lvl->add<SettingsJson>("objects");
+		// this is outside of the platform (no floor)
+		lvl->j("objects").add<std::string>("outside", ".");
+		// replaced by a crispy wall or nothing (random)
 		lvl->j("objects").add<std::string>("empty", " ");
 		// unique player on game.
 		lvl->j("objects").add<std::string>(PLAYER_STR, "p");
@@ -211,6 +214,7 @@ bool	SceneGame::_unloadLevel() {
 		return true;
 	logDebug("Unload level " << level);
 
+	floor.clear();
 	for (auto &&box : board) {
 		for (auto &&row : box) {
 			std::vector<AEntity *>::iterator element = row.begin();
@@ -285,6 +289,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	// Getting json info
 	size = {lvl.u("width"), lvl.u("height")};
+	floor = std::vector< std::vector< bool > >(size.x,
+			std::vector< bool >(size.y, true));
 	board = std::vector< std::vector<std::vector<AEntity*>> >(size.x,
 			std::vector< std::vector<AEntity*> >(size.y,
 			std::vector< AEntity* >()));
@@ -325,7 +331,10 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 					name = entitYCall.first;
 			}
 			if (name != "") {
-				if (insertEntity(name, {i, j}, false, lvl.u("wallGenPercent")) == false)
+				if (name == "outside") {
+					floor[i][j] = false;  // mo floor -> outside the platform
+				}
+				else if (insertEntity(name, {i, j}, false, lvl.u("wallGenPercent")) == false)
 					throw SceneException("Unexpected error in map loading");
 			}
 			else {
