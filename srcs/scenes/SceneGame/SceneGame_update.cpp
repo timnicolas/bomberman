@@ -337,8 +337,8 @@ void			SceneGame::_updateGameInfos() {
 			tmpPos.x += padding;
 			std::string enemiesStr = std::to_string(enemiesKilled) + "/" + std::to_string(enemiesToKill);
 			glm::vec4 color = enemiesKilled >= enemiesToKill
-												? colorise(s.j("colors").j("blue").u("color"))
-												: colorise(s.j("colors").j("red").u("color"));
+												? colorise(0x39A0DD)
+												: colorise(0xBF001E);
 			allUI.enemiesCounterText->setPos({tmpPos.x, textY}).setText(enemiesStr)
 				.setSize(VOID_POS).setCalculatedSize().setTextColor(color);
 			tmpPos.x += allUI.enemiesCounterText->getSize().x;
