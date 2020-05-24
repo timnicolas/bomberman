@@ -89,12 +89,14 @@ bool			SceneLevelSelection::init() {
 		tmpPos.y = winSz.y / 2 - menuHeight / 2;
 		tmpSize.x = menuHeight;
 		tmpSize.y = 0;
-		allUI.leftArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
+		allUI.leftArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png",
+			s.s("imgsUI") + "/prev_hover.png")
 			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.lastLevel);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
-		allUI.rightArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
+		allUI.rightArrow = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png",
+			s.s("imgsUI") + "/next_hover.png")
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.nextLevel);
 

@@ -32,6 +32,7 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _textPadding(UI_DEF_TEXT_PADDING),
   _textAlign(UI_DEF_TEXT_ALIGN),
   _imgTextureID(0),
+  _imgHoverTextureID(0),
   _imgDefSize({0, 0}),
   _isClickableUI(true),
   _mouseHover(false),

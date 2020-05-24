@@ -9,9 +9,10 @@
  * @param pos The position of the UI element
  * @param size The size of the UI element
  * @param filename The image file
+ * @param filenameHover The image file for hover mouse
  */
 ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
-	std::string const & filename)
+	std::string const & filename, std::string const & filenameHover)
 : ABaseUI(pos, size)
 {
 	// disable color
@@ -20,6 +21,9 @@ ButtonImageUI::ButtonImageUI(glm::vec2 pos, glm::vec2 size,
 
 	// load the image
 	_loadImg(filename, true);
+	if (filenameHover.size()) {
+		_loadImg(filenameHover, false, true);
+	}
 }
 
 /**
@@ -69,11 +73,13 @@ void ButtonImageUI::_draw() {
 
 	// get color (if mouse hover or mouse click)
 	glm::vec4 color = _color;
-	if (_leftClick) {
-		color = _mouseClickColor;
-	}
-	else if (_mouseHover) {
-		color = _mouseHoverColor;
+	if (_imgHoverTextureID == 0) {
+		if (_leftClick) {
+			color = _mouseClickColor;
+		}
+		else if (_mouseHover) {
+			color = _mouseHoverColor;
+		}
 	}
 
 	// get center size and position
@@ -84,5 +90,8 @@ void ButtonImageUI::_draw() {
 	tmpSize.x -= _borderSize * 2;
 	tmpSize.y -= _borderSize * 2;
 	// draw image
+	if ((_leftClick || _mouseHover) && _imgHoverTextureID != 0) {
+		_drawImg(tmpPos, tmpSize, _z, _imgHoverTextureID, color);
+	} else
 	_drawImg(tmpPos, tmpSize, _z, _imgTextureID, color);
 }

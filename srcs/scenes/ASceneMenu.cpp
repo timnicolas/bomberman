@@ -145,12 +145,13 @@ ButtonUI & ASceneMenu::addButton(glm::vec2 pos, glm::vec2 size, std::string cons
  * @param pos the position
  * @param size the size
  * @param filename the path to the image
+ * @param filenameHover the path to the image on hover
  * @return ButtonImageUI& a reference to the element created
  */
 ButtonImageUI & ASceneMenu::addButtonImage(glm::vec2 pos, glm::vec2 size,
-	std::string const & filename)
+	std::string const & filename, std::string const & filenameHover)
 {
-	ButtonImageUI * ui = new ButtonImageUI(pos, size, filename);
+	ButtonImageUI * ui = new ButtonImageUI(pos, size, filename, filenameHover);
 	_buttons.push_back(ui);
 	return *ui;
 }
@@ -316,13 +317,14 @@ TextInputUI & ASceneMenu::addTextInput(glm::vec2 pos, glm::vec2 size, std::strin
 ButtonImageUI & ASceneMenu::addExitButton() {
 	glm::vec2 winSz = _gui->gameInfo.windowSize;
 	std::string filename = s.s("imgsUI") + "/cross.png";
+	std::string filenameHover = s.s("imgsUI") + "/cross_hover.png";
 	glm::vec2 tmpPos;
 	glm::vec2 tmpSize;
 	tmpSize.x = winSz.y * 0.08;
 	tmpSize.y = 0;
 	tmpPos.x = tmpSize.x * 0.5;
 	tmpPos.y = winSz.y - tmpSize.x * 1.5;
-	ButtonImageUI * ui = new ButtonImageUI(tmpPos, tmpSize, filename);
+	ButtonImageUI * ui = new ButtonImageUI(tmpPos, tmpSize, filename, filenameHover);
 	ui->setKeyLeftClickInput(InputType::CANCEL);
 	_buttons.push_back(ui);
 	return *ui;
