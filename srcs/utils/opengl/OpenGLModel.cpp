@@ -270,11 +270,15 @@ void	OpenGLModel::_processMesh(aiMesh *aiMesh, aiScene const *scene) {
 
 	// calculate bounding box
 	BoundingBox	boundingBox;
-	boundingBox.startPoint = glm::vec3(vLimits.xMin, vLimits.yMin, vLimits.zMin);
-	boundingBox.size = glm::vec3(
+	boundingBox.center = glm::vec3(
+		vLimits.xMin + (vLimits.xMax - vLimits.xMin) / 2,
+		vLimits.yMin + (vLimits.yMax - vLimits.yMin) / 2,
+		vLimits.zMin + (vLimits.zMax - vLimits.zMin) / 2
+	);
+	boundingBox.radius = std::max({
 		vLimits.xMax - vLimits.xMin,
 		vLimits.yMax - vLimits.yMin,
-		vLimits.zMax - vLimits.zMin);
+		vLimits.zMax - vLimits.zMin}) / 2;
 
 	// process vertIndices
 	for (uint32_t i = 0; i < aiMesh->mNumFaces; ++i) {
