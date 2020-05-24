@@ -37,6 +37,8 @@ class SceneDebug : public ASceneMenu {
 		bool		_visible;  /**< If FPs are visible or invisible */
 		uint16_t	_fps;  /**< Actual FPS */
 		TextUI		*_fpsText;  /**< FPS text element */
+		TextUI		*_nbentitiesText;  /**< Number of entities text element */
+		TextUI		*_nbenemiesText;  /**< Number of enemies text element */
 };
 
 #endif  // SCENEDEBUG_HPP_

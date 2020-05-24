@@ -37,6 +37,11 @@ bool			SceneGame::init() {
 		i++;
 	}
 
+	entitiesCount.enemy = -1;
+	entitiesCount.staticElements = -1;
+	entitiesCount.players = -1;
+	entitiesCount.total = -1;
+
 	try {
 		/* load all models for menu */
 		_menuModels.player = new Model(ModelsManager::getModel("white"), getDtTime(),

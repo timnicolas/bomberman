@@ -162,7 +162,8 @@ bool	Player::update() {
 		_updateBonusActifsTime();
 
 	// alive in game
-	if (alive && active && _entityState.state != EntityState::DROP_BOMB && !_startWinAnim) {
+	if (alive && active && _entityState.state != EntityState::DROP_BOMB && _entityState.state != EntityState::LOOSE_EMOTE
+	&& !_startWinAnim) {
 		// update invulnerability time
 		if (invulnerable > 0.0f)
 			invulnerable -= game.getDtTime();
@@ -543,6 +544,12 @@ void	Player::_updateAnimationState() {
 				_model->animationSpeed = 1;
 				_model->loopAnimation = true;
 				_model->setAnimation("Armature|dance", &AEntity::animEndCb, this);
+				break;
+			case EntityState::LOOSE_EMOTE:
+				AudioManager::stopSound(PLAYER_RUN_SOUND);
+				_model->animationSpeed = 1;
+				_model->loopAnimation = true;
+				_model->setAnimation("Armature|loosem", &AEntity::animEndCb, this);
 				break;
 			case EntityState::TRANSFORM_OUT:
 				AudioManager::stopSound(PLAYER_RUN_SOUND);
