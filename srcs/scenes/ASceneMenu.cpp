@@ -219,7 +219,9 @@ TextUI & ASceneMenu::addTitle(glm::vec2 pos, glm::vec2 size, std::string const &
 	ui->setTextFont("title");
 	if (size == VOID_SIZE)
 		ui->setCalculatedSize();
-	ui->setTextColor(colorise(s.j("colors").j("font").u("color")));
+	ui->setTextColor(colorise(s.j("colors").j("white").u("color")));
+	ui->setTextOutline(0.3);
+	ui->setTextOutlineColor(colorise(s.j("colors").j("black").u("color")));
 	_buttons.push_back(ui);
 	return *ui;
 }

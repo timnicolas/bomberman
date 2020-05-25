@@ -58,7 +58,6 @@ bool			SceneExit::init() {
 
 	try {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
-		// tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.2) / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
