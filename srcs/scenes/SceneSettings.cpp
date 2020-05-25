@@ -110,11 +110,11 @@ const std::string		SceneSettings::audio_name[3] = {
  * @brief initialize all the UI section. Should not be called twice.
  */
 bool					SceneSettings::init() {
-	glm::vec2 win_size = _gui->gameInfo.windowSize;
-	glm::vec2 tmp_pos;
-	glm::vec2 tmp_size;
-	float menu_width = win_size.x * 0.8;
-	float menu_height = win_size.y * 0.9;
+	glm::vec2 winSz = _gui->gameInfo.windowSize;
+	glm::vec2 tmpPos;
+	glm::vec2 tmpSize;
+	float menuWidth = winSz.x * 0.8;
+	float menuHeight = winSz.y / 14;
 
 	startFitToScreen = s.j("graphics").b("fitToScreen");
 	if (startFitToScreen) {
@@ -146,39 +146,44 @@ bool					SceneSettings::init() {
 	try {
 		addExitButton()
 			.addButtonLeftListener(&_return);
-		tmp_size.x = menu_width;
-		tmp_size.y = menu_height * 0.2;
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-		addTitle(tmp_pos, tmp_size, "Settings");
-		tmp_size.y = menu_height * 0.1;
-		tmp_size.x = menu_width / 3 * 0.9;
-		tmp_pos.x += (menu_width / 3 - tmp_size.x) / 2;
-		tmp_pos.y -= tmp_size.y;
-		_paneSelection[SettingsType::GRAPHICS] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Graphics")
+		// title
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		tmpPos.y = winSz.y - menuHeight * 2;
+		tmpSize.x = menuWidth;
+		tmpSize.y = menuHeight;
+		addTitle(tmpPos, tmpSize, "Settings");
+
+		// buttons
+		tmpSize.y = menuHeight;
+		tmpSize.x = menuWidth / 3 * 0.9;
+		tmpPos.y -= menuHeight * 1.8;
+		tmpPos.x += (menuWidth / 3 - tmpSize.x) / 2;
+		_paneSelection[SettingsType::GRAPHICS] = reinterpret_cast<ButtonUI*>(&addButton(tmpPos, tmpSize, "Graphics")
 			.setSelected(true)
 			.addButtonLeftListener(&_select_pane[SettingsType::GRAPHICS])
 			.setTextScale(_text_scale)
 			.setTextAlign(TextAlign::CENTER));
-		tmp_pos.x += (menu_width / 3);
-		_paneSelection[SettingsType::AUDIO] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Audio")
+		tmpPos.x += (menuWidth / 3);
+		_paneSelection[SettingsType::AUDIO] = reinterpret_cast<ButtonUI*>(&addButton(tmpPos, tmpSize, "Audio")
 			.addButtonLeftListener(&_select_pane[SettingsType::AUDIO])
 			.setKeyLeftClickScancode(SDL_SCANCODE_2)
 			.setTextScale(_text_scale)
 			.setTextAlign(TextAlign::CENTER));
-		tmp_pos.x += (menu_width / 3);
-		_paneSelection[SettingsType::CONTROLS] = reinterpret_cast<ButtonUI*>(&addButton(tmp_pos, tmp_size, "Controls")
+		tmpPos.x += (menuWidth / 3);
+		_paneSelection[SettingsType::CONTROLS] = reinterpret_cast<ButtonUI*>(&addButton(tmpPos, tmpSize, "Controls")
 			.addButtonLeftListener(&_select_pane[SettingsType::CONTROLS])
 			.setKeyLeftClickScancode(SDL_SCANCODE_3)
 			.setTextScale(_text_scale)
 			.setTextAlign(TextAlign::CENTER));
 
+		tmpPos.y -= menuHeight * 1.8;
+
 		/* graphics */
-		_init_graphics_pane(tmp_pos, menu_width, menu_height);
+		_init_graphics_pane(tmpPos, menuWidth, menuHeight);
 		/* audio */
-		_init_audio_pane(tmp_pos, menu_width, menu_height);
+		_init_audio_pane(tmpPos, menuWidth, menuHeight);
 		/* controls */
-		_init_control_pane(tmp_pos, menu_width, menu_height);
+		_init_control_pane(tmpPos, menuWidth, menuHeight);
 		AudioManager::loadSound("sounds/bell.ogg");
 
 		_initBG();
@@ -193,24 +198,23 @@ bool					SceneSettings::init() {
 /**
  * @brief initialize the graphics section. Should not be called twice.
  */
-void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
-	glm::vec2	win_size = _gui->gameInfo.windowSize;
-	glm::vec2	tmp_size;
+void					SceneSettings::_init_graphics_pane(glm::vec2 tmpPos, float menuWidth, float menuHeight) {
+	glm::vec2	winSz = _gui->gameInfo.windowSize;
+	glm::vec2	tmpSize;
 	ABaseUI		*ptr;
 
 	/* fullscreen button */
-	tmp_size.y = menu_height * 0.1;
-	tmp_size.x = menu_width / 3;
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= tmp_size.y * 1.8;
-	ptr = &addText(tmp_pos, tmp_size, "Fullscreen :")
+	tmpSize.y = menuHeight;
+	tmpSize.x = menuWidth / 3;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	ptr = &addText(tmpPos, tmpSize, "Fullscreen :")
 		.setTextAlign(TextAlign::RIGHT)
 		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_size.x = menu_width / 10;
-	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
-	_fullscreen_button = &addButton(tmp_pos, tmp_size, "OFF");
+	tmpSize.x = menuWidth / 10;
+	tmpPos.x += menuWidth / 2 + menuWidth / 6 - tmpSize.x / 2;
+	_fullscreen_button = &addButton(tmpPos, tmpSize, "OFF");
 	ptr = &_fullscreen_button->addButtonLeftListener(&_update_fullscreen)
 		.setKeyLeftClickScancode(SDL_SCANCODE_F)
 		.setTextScale(_text_scale)
@@ -219,18 +223,18 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
 	/* fit to screen */
-	tmp_size.y = menu_height * 0.1;
-	tmp_size.x = menu_width / 3;
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= tmp_size.y * 1.3;
-	ptr = &addText(tmp_pos, tmp_size, "Fit  to  screen :")
+	tmpSize.y = menuHeight;
+	tmpSize.x = menuWidth / 3;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpPos.y -= tmpSize.y * 1.3;
+	ptr = &addText(tmpPos, tmpSize, "Fit  to  screen :")
 		.setTextAlign(TextAlign::RIGHT)
 		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_size.x = menu_width / 10;
-	tmp_pos.x += menu_width / 2 + menu_width / 6 - tmp_size.x / 2;
-	_fit_to_screen_button = &addButton(tmp_pos, tmp_size, "OFF");
+	tmpSize.x = menuWidth / 10;
+	tmpPos.x += menuWidth / 2 + menuWidth / 6 - tmpSize.x / 2;
+	_fit_to_screen_button = &addButton(tmpPos, tmpSize, "OFF");
 	ptr = &_fit_to_screen_button->addButtonLeftListener(&_update_fit_to_screen)
 		.setKeyLeftClickScancode(SDL_SCANCODE_O)
 		.setTextScale(_text_scale)
@@ -238,137 +242,138 @@ void					SceneSettings::_init_graphics_pane(glm::vec2 tmp_pos, float menu_width,
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 
 	/* resolution choice */
-	tmp_size.x = menu_width / 3;
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_pos.y -= tmp_size.y * 1.3;
-	ptr = &addText(tmp_pos, tmp_size, "Resolution :")
+	tmpSize.x = menuWidth / 3;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpPos.y -= tmpSize.y * 1.3;
+	ptr = &addText(tmpPos, tmpSize, "Resolution :")
 		.setTextAlign(TextAlign::RIGHT)
 		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_pos.x += (menu_width / 2);
-	_resolution_text = &addText(tmp_pos, tmp_size, "800x600");
+	tmpPos.x += (menuWidth / 2);
+	_resolution_text = &addText(tmpPos, tmpSize, "800x600");
 	ptr = &_resolution_text->setTextAlign(TextAlign::CENTER)
 		.setTextScale(_text_scale)
 		.setEnabled(true);
 	_updateResolutionText();
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_size.x = menu_width / 14;
-	tmp_pos.x -= tmp_size.x;
-	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/prev.png", s.s("imgsUI") + "/prev_hover.png")
+	tmpSize.x = menuWidth / 14;
+	tmpPos.x -= tmpSize.x;
+	ptr = &addButtonImage(tmpPos, {tmpSize.x, 0}, s.s("imgsUI") + "/prev.png", s.s("imgsUI") + "/prev_hover.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_LEFT)
 		.addButtonLeftListener(&_prev_resolution)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_pos.x += menu_width / 3 + tmp_size.x;
-	ptr = &addButtonImage(tmp_pos, {tmp_size.x, 0}, s.s("imgsUI") + "/next.png", s.s("imgsUI") + "/next_hover.png")
+	tmpPos.x += menuWidth / 3 + tmpSize.x;
+	ptr = &addButtonImage(tmpPos, {tmpSize.x, 0}, s.s("imgsUI") + "/next.png", s.s("imgsUI") + "/next_hover.png")
 		.setKeyLeftClickScancode(SDL_SCANCODE_RIGHT)
 		.addButtonLeftListener(&_next_resolution)
 		.setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
-	tmp_pos.x = (menu_width / 2);
-	tmp_pos.y -= ptr->getSize().y;
-	_reloadWinText = &addText(tmp_pos, tmp_size, "Restart  the  game  to  apply  new  resolution");
+	tmpPos.x = (menuWidth / 2);
+	tmpPos.y -= ptr->getSize().y;
+	_reloadWinText = &addText(tmpPos, tmpSize, "Restart  the  game  to  apply  new  resolution");
 	ptr = &_reloadWinText->setTextAlign(TextAlign::CENTER)
 		.setTextScale(_text_scale)
 		.setTextColor(colorise(s.j("colors").j("red").u("color")))
 		.setEnabled(false);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 	// border rectangle
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_size.x = menu_width;
-	tmp_size.y = win_size.y - tmp_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
-	ptr = &addRect(tmp_pos, tmp_size).setEnabled(true);
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpSize.x = menuWidth;
+	tmpSize.y = winSz.y - tmpPos.y - menuHeight * 2.3;
+	ptr = &addRect(tmpPos, tmpSize).setEnabled(true);
 	_panes[SettingsType::GRAPHICS].push_front(ptr);
 }
 
 /**
  * @brief initialize the audio section. Should not be called twice.
  */
-void					SceneSettings::_init_audio_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
-	glm::vec2	win_size = _gui->gameInfo.windowSize;
-	glm::vec2	tmp_size;
+void					SceneSettings::_init_audio_pane(glm::vec2 tmpPos, float menuWidth, float menuHeight) {
+	glm::vec2	winSz = _gui->gameInfo.windowSize;
+	glm::vec2	tmpSize;
 	ABaseUI		*ptr;
-	float		tmp_val;
+	float		tmpVal;
 
-	tmp_size.y = menu_height * 0.1;
+	tmpSize.y = menuHeight;
 	for (auto i = 0; i < 3; i++) {
-		tmp_size.x = menu_width / 3;
-		tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-		tmp_pos.y -= menu_height * 0.2;
-		ptr = &addText(tmp_pos, tmp_size, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
+		tmpSize.x = menuWidth / 3;
+		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+		if (i != 0)
+			tmpPos.y -= menuHeight * 1.3;
+		ptr = &addText(tmpPos, tmpSize, SceneSettings::audio_name[i] + " :").setTextAlign(TextAlign::RIGHT) \
 			.setTextScale(_text_scale).setEnabled(false);
 		_panes[SettingsType::AUDIO].push_front(ptr);
-		tmp_size.x *= 2;
-		tmp_size.x -= 10 * 2;
-		tmp_pos.x += (menu_width / 3) + 10;
-		tmp_val = s.j("audio").d(SceneSettings::audio_name[i]);
-		ptr = &addSlider(tmp_pos, tmp_size, 0, 100, tmp_val * 100, 1).addSliderListener(&_update_audio[i]) \
+		tmpSize.x *= 2;
+		tmpSize.x -= 10 * 2;
+		tmpPos.x += (menuWidth / 3) + 10;
+		tmpVal = s.j("audio").d(SceneSettings::audio_name[i]);
+		ptr = &addSlider(tmpPos, tmpSize, 0, 100, tmpVal * 100, 1).addSliderListener(&_update_audio[i]) \
 			.addButtonLeftListener(&_save_audio[i]).setTextScale(_text_scale).setEnabled(false);
 		_volSliders[i] = reinterpret_cast<SliderUI*>(ptr);
 		_panes[SettingsType::AUDIO].push_front(ptr);
 	}
 	// border rectangle
-	tmp_pos.y -= tmp_size.y * 0.5;
-	tmp_pos.x = (win_size.x / 2) - (menu_width / 2);
-	tmp_size.x = menu_width;
-	tmp_size.y = win_size.y - tmp_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
-	ptr = &addRect(tmp_pos, tmp_size).setEnabled(false);
+	tmpPos.y -= tmpSize.y * 0.5;
+	tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
+	tmpSize.x = menuWidth;
+	tmpSize.y = winSz.y - tmpPos.y - menuHeight * 2.3;
+	ptr = &addRect(tmpPos, tmpSize).setEnabled(false);
 	_panes[SettingsType::AUDIO].push_front(ptr);
 }
 
 /**
  * @brief initialize the controls section. Should not be called twice.
  */
-void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, float menu_height) {
-	glm::vec2		win_size = _gui->gameInfo.windowSize;
-	glm::vec2		tmp_size;
+void					SceneSettings::_init_control_pane(glm::vec2 tmpPos, float menuWidth, float menuHeight) {
+	glm::vec2		winSz = _gui->gameInfo.windowSize;
+	glm::vec2		tmpSize;
 	ABaseUI *		ptr;
-	std::string		key_name;
+	std::string		keyName;
 	ABaseMasterUI *	scrollbar;
-	float			keyMenuWidth = menu_width / 1.5;
-	float			keyMenuHeight = win_size.x / 25;
-	float			keyMenuPadding = win_size.x * 0.01;
+	float			keyMenuWidth = menuWidth / 1.5;
+	float			keyMenuHeight = winSz.x / 25;
+	float			keyMenuPadding = winSz.x * 0.01;
 
 	Bonus::description[BonusType::DETONATOR] = DETONATOR_DESC \
 		" (" + Inputs::getKeyName(InputType::ACTION_2) + ")";
 
 	// create scrollbar
-	tmp_pos.x = (win_size.x / 2) - ((keyMenuWidth + 2 * keyMenuPadding) / 2);
-	tmp_pos.y = (win_size.y / 20);
-	tmp_size.x = (keyMenuWidth + 3 * keyMenuPadding);
-	tmp_size.y = menu_height * 0.65;
-	ptr = &addScrollbar(tmp_pos, tmp_size)
+	tmpSize.x = (keyMenuWidth + 3 * keyMenuPadding);
+	tmpSize.y = menuHeight * 1.3 * 6;
+	tmpPos.x = (winSz.x / 2) - ((keyMenuWidth + 2 * keyMenuPadding) / 2);
+	tmpPos.y -= tmpSize.y - menuHeight * 1.3;
+	ptr = &addScrollbar(tmpPos, tmpSize)
 		.enableVertScroll(true)
 		.setEnabled(false);
 	scrollbar = reinterpret_cast<ABaseMasterUI*>(ptr);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 
 	// border rectangle position
-	glm::vec2 border_pos = tmp_pos;
-	border_pos.y -= menu_height / 24;
-	border_pos.x = (win_size.x / 2) - (menu_width / 2);
+	glm::vec2 border_pos = tmpPos;
+	border_pos.y -= menuHeight / 2;
+	border_pos.x = (winSz.x / 2) - (menuWidth / 2);
 
 	// add buttons
-	tmp_pos.y = scrollbar->getMasterSize().y;
-	tmp_size.x = (keyMenuWidth - keyMenuPadding) / 2;
-	tmp_size.y = keyMenuHeight;
+	tmpPos.y = scrollbar->getMasterSize().y;
+	tmpSize.x = (keyMenuWidth - keyMenuPadding) / 2;
+	tmpSize.y = keyMenuHeight;
 	for (auto i = 0; i < Inputs::nb_input; i++) {
 		if (Inputs::input_type_name[i] == "cancel") {
 			_key_buttons[i] = nullptr;
 			continue;
 		}
-		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
-		tmp_pos.x = 0;
-		ptr = &addText(tmp_pos, tmp_size, Inputs::input_type_name[i] + " :")
+		tmpPos.y -= keyMenuHeight + keyMenuPadding;
+		tmpPos.x = 0;
+		ptr = &addText(tmpPos, tmpSize, Inputs::input_type_name[i] + " :")
 			.setTextAlign(TextAlign::RIGHT)
 			.setTextScale(_text_scale)
 			.setMaster(scrollbar)
 			.setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
-		tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
-		key_name = Inputs::getKeyName(static_cast<InputType::Enum>(i));
-		ptr = &addButton(tmp_pos, tmp_size, key_name)
+		tmpPos.x = scrollbar->getMasterSize().x - (tmpSize.x + keyMenuPadding);
+		keyName = Inputs::getKeyName(static_cast<InputType::Enum>(i));
+		ptr = &addButton(tmpPos, tmpSize, keyName)
 			.addButtonLeftListener(&_update_key[i])
 			.setTextAlign(TextAlign::CENTER)
 			.setTextScale(_text_scale)
@@ -379,16 +384,16 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	}
 	// add mouse sensitivity slider
 	#if DEBUG
-		tmp_pos.y -= keyMenuHeight + keyMenuPadding;
-		tmp_pos.x = 0;
-		ptr = &addText(tmp_pos, tmp_size, "mouse sensitivity :")
+		tmpPos.y -= keyMenuHeight + keyMenuPadding;
+		tmpPos.x = 0;
+		ptr = &addText(tmpPos, tmpSize, "mouse sensitivity :")
 			.setTextAlign(TextAlign::RIGHT)
 			.setTextScale(_text_scale)
 			.setMaster(scrollbar)
 			.setEnabled(false);
 		_panes[SettingsType::CONTROLS].push_front(ptr);
-		tmp_pos.x = scrollbar->getMasterSize().x - (tmp_size.x + keyMenuPadding);
-		ptr = &addSlider(tmp_pos, tmp_size, 0.1, 3, _update_mouse_sens, 0.05)
+		tmpPos.x = scrollbar->getMasterSize().x - (tmpSize.x + keyMenuPadding);
+		ptr = &addSlider(tmpPos, tmpSize, 0.1, 3, _update_mouse_sens, 0.05)
 			.addSliderListener(&_update_mouse_sens)
 			.addButtonLeftListener(&_save_mouse_sens)
 			.setTextScale(_text_scale)
@@ -397,11 +402,11 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 		_panes[SettingsType::CONTROLS].push_front(ptr);
 	#endif
 	// reset
-	tmp_size.y = menu_height * 0.1;
-	tmp_size.x = menu_width * 0.15;
-	tmp_pos.x = (win_size.x / 2) + (menu_width / 2) - menu_width * 0.1;
-	tmp_pos.y = win_size.y - (win_size.y - menu_height) / 2 - tmp_size.y;
-	ptr = &addButton(tmp_pos, tmp_size, "Reset")
+	tmpSize.y = menuHeight;
+	tmpSize.x = menuWidth * 0.15;
+	tmpPos.x = (winSz.x / 2) + (menuWidth / 2) - menuWidth * 0.1;
+	tmpPos.y = winSz.y - menuHeight * 1.3;
+	ptr = &addButton(tmpPos, tmpSize, "Reset")
 		.addButtonLeftListener(&_reset)
 		.setTextScale(_text_scale)
 		.setTextAlign(TextAlign::CENTER)
@@ -409,9 +414,9 @@ void					SceneSettings::_init_control_pane(glm::vec2 tmp_pos, float menu_width, 
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 
 	// border rectangle
-	tmp_size.x = menu_width;
-	tmp_size.y = win_size.y - border_pos.y - (win_size.y - menu_height) / 2 - menu_height / 6;
-	ptr = &addRect(border_pos, tmp_size).setEnabled(false);
+	tmpSize.x = menuWidth;
+	tmpSize.y = winSz.y - border_pos.y - menuHeight * 2.3;
+	ptr = &addRect(border_pos, tmpSize).setEnabled(false);
 	_panes[SettingsType::CONTROLS].push_front(ptr);
 }
 

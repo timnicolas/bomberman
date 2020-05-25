@@ -31,6 +31,8 @@ ABaseUI::ABaseUI(glm::vec2 pos, glm::vec2 size)
   _textScale(UI_DEF_TEXT_SCALE),
   _textPadding(UI_DEF_TEXT_PADDING),
   _textAlign(UI_DEF_TEXT_ALIGN),
+  _textOutline(UI_DEF_TEXT_OUTLINE),
+  _textOutlineColor(UI_DEF_TEXT_OUTLINE_COLOR),
   _imgTextureID(0),
   _imgHoverTextureID(0),
   _imgDefSize({0, 0}),
@@ -538,6 +540,20 @@ ABaseUI &	ABaseUI::setTextPadding(float padding) { _textPadding = padding; retur
  * @return ABaseUI& A reference to this UI element
  */
 ABaseUI &	ABaseUI::setTextAlign(TextAlign::Enum align) { _textAlign = align; return *this; }
+/**
+ * @brief Set the text outline
+ *
+ * @param outline The text outline
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setTextOutline(float outline) { _textOutline = outline; return *this; }
+/**
+ * @brief Set the text outline color
+ *
+ * @param color Text outline color
+ * @return ABaseUI& A reference to this UI element
+ */
+ABaseUI &	ABaseUI::setTextOutlineColor(glm::vec4 color) { _textOutlineColor = color; return *this; }
 
 /**
  * @brief Set the master object

@@ -24,6 +24,8 @@
 #define UI_DEF_TEXT_SCALE				1.0
 #define UI_DEF_TEXT_PADDING				5
 #define UI_DEF_TEXT_ALIGN				TextAlign::CENTER
+#define UI_DEF_TEXT_OUTLINE				0.0
+#define UI_DEF_TEXT_OUTLINE_COLOR		glm::vec4(0.0, 0.0, 0.0, 1.0)
 
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
@@ -129,6 +131,8 @@ class ABaseUI {
 		virtual ABaseUI &			setTextScale(float scale);
 		virtual ABaseUI &			setTextPadding(float padding);
 		virtual ABaseUI &			setTextAlign(TextAlign::Enum align);
+		virtual ABaseUI &			setTextOutline(float outline);
+		virtual ABaseUI &			setTextOutlineColor(glm::vec4 color);
 
 		/* master */
 		virtual ABaseUI &			setMaster(ABaseMasterUI * master);
@@ -230,6 +234,8 @@ class ABaseUI {
 		float			_textScale;  /**< Text scale */
 		float			_textPadding;  /**< Text padding */
 		TextAlign::Enum	_textAlign;  /**< Text align (LEFT, RIGHT, CENTER) */
+		float			_textOutline;  /**< Text outline size */
+		glm::vec4		_textOutlineColor;  /**< Text outline color */
 		// image
 		GLuint			_imgTextureID;  /**< Image texture ID */
 		GLuint			_imgHoverTextureID;  /**< Image hover texture ID */
