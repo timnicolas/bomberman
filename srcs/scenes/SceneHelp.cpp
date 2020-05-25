@@ -159,7 +159,8 @@ bool			SceneHelp::init() {
 			if (desc.rfind("Bonus ", 0) == 0) {
 				desc.erase(0, strlen("Bonus "));
 			}
-			tmpUI = &addText({tmpPos.x + 35, tmpPos.y}, {menuWidth, imgSize.y}, desc)
+			float widthImage = tmpUI->getSize().x;
+			tmpUI = &addText({tmpPos.x + widthImage * 1.2, tmpPos.y}, {menuWidth, imgSize.y}, desc)
 				.setTextFont("text")
 				.setTextScale(HELP_MENU_TEXT_SCALE)
 				.setTextAlign(TextAlign::LEFT);
