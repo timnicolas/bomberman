@@ -93,8 +93,7 @@ bool			SceneGame::init() {
 
 		// init terrain model
 		if (!_terrain) {
-			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime(),
-			ETransform({0, -2, 0}));
+			_terrain = new Model(ModelsManager::getModel("terrain"), getDtTime());
 		}
 
 		/* loading sentence */
