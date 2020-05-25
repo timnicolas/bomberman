@@ -63,7 +63,7 @@ public:
 											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	static void								pauseSound(std::string sound_name);
 	static void								resumeSound(std::string sound_name);
-	static void								stopSound(std::string sound_name);
+	static void								stopSound(std::string sound_name, int fadeOut = 0);
 	static void								pauseAllSounds();
 	static void								resumeAllSounds();
 	static void								unloadSound(std::string sound_name);
@@ -90,7 +90,7 @@ private:
 											bool loop = false, bool muteMusic = false, int fadeIn = 0);
 	void									_pauseSound(std::string sound_name);
 	void									_resumeSound(std::string sound_name);
-	void									_stopSound(std::string sound_name);
+	void									_stopSound(std::string sound_name, int fadeOut = 0);
 	void									_pauseAllSounds();
 	void									_resumeAllSounds();
 	void									_unloadSound(std::string sound_name);
