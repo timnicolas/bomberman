@@ -64,15 +64,16 @@ bool			SceneVictory::init() {
 		tmpPos.x = (winSz.x / 2) - (menuWidth / 2);
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
-		tmpSize.y = statisticHeight;
+		tmpSize.y = winSz.y / 14;
 		addTitle(tmpPos, tmpSize, "Victory !");
+		tmpSize.y = statisticHeight;
 
 		try {
 			SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(SceneNames::GAME));
 			statistics.level = &addText(
-				{tmpPos.x - 30, tmpPos.y + 30},
+				{tmpPos.x - statisticHeight, tmpPos.y},
 				tmpSize,
-				"LVL " + std::to_string(scGame.score.getLevelId()))
+				"LVL " + std::to_string(scGame.score.getLevelId()) + " :")
 					.setTextAlign(TextAlign::LEFT);
 			tmpPos.y -= statisticHeight;
 			std::vector<Score::Stat> scoreStat;
@@ -85,7 +86,11 @@ bool			SceneVictory::init() {
 						{statisticHeight, statisticHeight},
 						stat.image
 					));
-					statistics.stats.push_back(&addText({tmpPos.x + 32, tmpPos.y}, tmpSize, stat.label)
+					statistics.stats.push_back(&addText(
+						{tmpPos.x + statisticHeight * 1.2, tmpPos.y},
+						tmpSize,
+						stat.label
+					)
 						.setTextAlign(TextAlign::LEFT));
 				} else {
 					statistics.stats.push_back(&addText(tmpPos, tmpSize, stat.label)
@@ -122,7 +127,7 @@ bool			SceneVictory::init() {
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.3;
-		tmpSize.y = winSz.y - tmpPos.y;
+		tmpSize.y = winSz.y - tmpPos.y - menuHeight * 1.8;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize);

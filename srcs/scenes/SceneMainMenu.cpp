@@ -61,7 +61,10 @@ bool			SceneMainMenu::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Bomberman");
+
+		glm::vec2 imgSize = {menuWidth, menuWidth * 350 / 800};
+		tmpPos.y -= imgSize.y / 2;
+		addImage(tmpPos, imgSize, s.s("logo"));
 
 		allUI.continueGame = &addButton(VOID_SIZE, VOID_SIZE, "play")
 			.addButtonLeftListener(&_states.continueGame);
@@ -161,7 +164,7 @@ void		SceneMainMenu::_updateUI() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-	tmpPos.y -= menuHeight * 1.8;
+	tmpPos.y -= menuHeight * 3.2;
 	if (Save::isInstantiate()) {
 		allUI.continueGame->setPos(tmpPos).setSize(tmpSize).setKeyLeftClickInput(InputType::CONFIRM);
 		tmpPos.y -= menuHeight * 1.3;
@@ -187,7 +190,7 @@ void		SceneMainMenu::_updateUI() {
 	tmpPos.y -= menuHeight * 1.3;
 	allUI.exit->setPos(tmpPos).setSize(tmpSize);
 	tmpSize.x = tmpSize.x * 1.3;
-	tmpSize.y = winSz.y - tmpPos.y;
+	tmpSize.y = winSz.y - tmpPos.y - menuHeight * 3.2;
 	tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 	tmpPos.y -= menuHeight * 0.5;
 	allUI.border->setPos(tmpPos).setSize(tmpSize);

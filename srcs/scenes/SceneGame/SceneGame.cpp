@@ -215,7 +215,7 @@ void SceneGame::load() {
 	if (_gui->cam->getMode() == CamMode::FOLLOW_PATH) {
 		state = GameState::INTRO;
 		try {
-			AudioManager::playSound(INTROLEVEL_SOUND, 1.0f, false, false, 2000);
+			AudioManager::playSound(INTROLEVEL_SOUND, 1.0f, false, true, 2000);
 		} catch(Sound::SoundException const & e) {
 			logErr(e.what());
 		}

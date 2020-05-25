@@ -79,11 +79,17 @@ void										Sound::resume() {
 
 /**
  * @brief Stop all the channels playing this sound.
+ *
+ * @param fadeOut Stop sound with a fadeOut effect.
  */
-void										Sound::stop() {
+void										Sound::stop(int fadeOut) {
 	std::unordered_set<int>::iterator it = _currents_channels.begin();
 	while (it != _currents_channels.end()) {
-		Mix_HaltChannel(*it);  // Sound::channelFinished() as callback delete <it>
+		if (fadeOut == 0) {
+			Mix_HaltChannel(*it);  // Sound::channelFinished() as callback delete <it>
+		} else {
+			Mix_FadeOutChannel(*it, fadeOut);
+		}
 		it = _currents_channels.begin();
 	}
 }

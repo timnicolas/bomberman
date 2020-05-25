@@ -114,7 +114,7 @@ TextRender::~TextRender() {
 			glDeleteTextures(1, &elem.second.begin()->second.textureID);
 		}
 	}
-    _shader.unuse();
+	_shader.unuse();
 }
 
 /**
@@ -156,46 +156,79 @@ void TextRender::setWinSize(glm::vec2 winSize) {
  * @param pos The text position
  * @param scale The text scale
  * @param color The text color
+ * @param outline The outline size
+ * @param colorOutline The color of outline
  */
 void TextRender::write(std::string const &fontName, std::string text, glm::vec3 pos,
-GLfloat scale, glm::vec3 color) {
+GLfloat scale, glm::vec3 color, int outline, glm::vec3 colorOutline) {
 	if (font.find(fontName) == font.end()) {
 		logErr("invalid font name " << fontName);
 		return;
 	}
-    _shader.use();
-    _shader.setVec3("textColor", color);
-    glActiveTexture(GL_TEXTURE0);
-    glBindVertexArray(_vao);
+	_shader.use();
+	_shader.setVec3("textColor", color);
+	glActiveTexture(GL_TEXTURE0);
+	glBindVertexArray(_vao);
+	glm::vec3 savePos = pos;
 	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
-        Character ch = font[fontName][*c];
-        GLfloat xpos = pos.x + ch.bearing.x * scale;
-        GLfloat ypos = pos.y - (ch.size.y - ch.bearing.y) * scale;
-        GLfloat w = ch.size.x * scale;
-        GLfloat h = ch.size.y * scale;
-        // set VBO values
-        GLfloat vertices[6][SHADER_TEXT_ROW_SIZE] = {
-            {xpos,     ypos + h, pos.z,   0.0, 0.0},
-            {xpos,     ypos,     pos.z,   0.0, 1.0},
-            {xpos + w, ypos,     pos.z,   1.0, 1.0},
-            {xpos,     ypos + h, pos.z,   0.0, 0.0},
-            {xpos + w, ypos,     pos.z,   1.0, 1.0},
-            {xpos + w, ypos + h, pos.z,   1.0, 0.0},
-		   };
-        // bind char texture
-        glBindTexture(GL_TEXTURE_2D, ch.textureID);
-        // set VBO on shader
-        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        // draw char
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindTexture(GL_TEXTURE_2D, 0);
-        // move cursor to the next character
-        pos.x += (ch.advance >> 6) * scale;
-    }
-    glBindVertexArray(0);
-    _shader.unuse();
+		Character ch = font[fontName][*c];
+		_writeChar(ch, pos, scale);
+		// move cursor to the next character
+		pos.x += (ch.advance >> 6) * scale;
+	}
+	_shader.setVec3("textColor", colorOutline);
+	if (outline > 0) {
+		pos = savePos;
+		for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
+			Character ch = font[fontName][*c];
+			_writeChar(ch, {pos.x + outline, pos.y + outline, pos.z}, scale);
+			_writeChar(ch, {pos.x + outline, pos.y, pos.z}, scale);
+			_writeChar(ch, {pos.x + outline, pos.y - outline, pos.z}, scale);
+			_writeChar(ch, {pos.x, pos.y - outline, pos.z}, scale);
+			_writeChar(ch, {pos.x, pos.y + outline, pos.z}, scale);
+			_writeChar(ch, {pos.x - outline, pos.y + outline, pos.z}, scale);
+			_writeChar(ch, {pos.x - outline, pos.y, pos.z}, scale);
+			_writeChar(ch, {pos.x - outline, pos.y - outline, pos.z}, scale);
+			// move cursor to the next character
+			pos.x += (ch.advance >> 6) * scale;
+		}
+	}
+	glBindVertexArray(0);
+	_shader.unuse();
+}
+
+/**
+ * @brief Write 2D character on screen
+ *
+ * @param c The charater to write
+ * @param fontName The name of the font (choose name when load font)
+ * @param pos The character position
+ * @param scale The character scale
+ * @param color The characater color
+ */
+void TextRender::_writeChar(Character ch, glm::vec3 pos, GLfloat scale) {
+	GLfloat xpos = pos.x + ch.bearing.x * scale;
+	GLfloat ypos = pos.y - (ch.size.y - ch.bearing.y) * scale;
+	GLfloat w = ch.size.x * scale;
+	GLfloat h = ch.size.y * scale;
+	// set VBO values
+	GLfloat vertices[6][SHADER_TEXT_ROW_SIZE] = {
+		{xpos,     ypos + h, pos.z,   0.0, 0.0},
+		{xpos,     ypos,     pos.z,   0.0, 1.0},
+		{xpos + w, ypos,     pos.z,   1.0, 1.0},
+		{xpos,     ypos + h, pos.z,   0.0, 0.0},
+		{xpos + w, ypos,     pos.z,   1.0, 1.0},
+		{xpos + w, ypos + h, pos.z,   1.0, 0.0},
+		};
+	// bind char texture
+	glBindTexture(GL_TEXTURE_2D, ch.textureID);
+	// set VBO on shader
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	// draw char
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 /**
@@ -213,9 +246,9 @@ uint32_t	TextRender::strWidth(std::string const &fontName, std::string text, GLf
 		return 0;
 	}
 	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
-        Character ch = font[fontName][*c];
-        width += (ch.advance >> 6) * scale;
-    }
+		Character ch = font[fontName][*c];
+		width += (ch.advance >> 6) * scale;
+	}
 	return width;
 }
 
@@ -239,12 +272,12 @@ uint32_t	TextRender::strHeight(std::string const &fontName, GLfloat scale, bool 
 		return 0;
 	}
 	for (auto c = text.begin(); c != text.end(); c++) {  // foreach chars
-        Character ch = font[fontName][*c];
+		Character ch = font[fontName][*c];
 		uint32_t tmpH = ch.size.y * scale;
-        if (tmpH > height) {
+		if (tmpH > height) {
 			height = tmpH;
 		}
-    }
+	}
 	return height;
 }
 

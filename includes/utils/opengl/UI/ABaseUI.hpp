@@ -6,20 +6,26 @@
 #include "Inputs.hpp"
 
 /* def values */
-#define UI_DEF_Z					0
-#define UI_DEF_POS_OFFSET			glm::vec2(0, 0)
-#define UI_DEF_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_VALUE				0
-#define UI_DEF_BORDER_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_BORDER_SIZE			2.0
-#define UI_DEF_MOUSE_HOVER_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.2)
-#define UI_DEF_MOUSE_CLICK_COLOR	glm::vec4(0.0, 0.0, 0.0, 0.5)
-#define UI_DEF_TEXT					""
-#define UI_DEF_TEXT_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
-#define UI_DEF_TEXT_FOND			"default"
-#define UI_DEF_TEXT_SCALE			1.0
-#define UI_DEF_TEXT_PADDING			5
-#define UI_DEF_TEXT_ALIGN			TextAlign::CENTER
+#define UI_DEF_Z						0
+#define UI_DEF_POS_OFFSET				glm::vec2(0, 0)
+#define UI_DEF_COLOR					glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_VALUE					0
+#define UI_DEF_SELECTED_COLOR			glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_SELECTED_COLOR_TEXT		glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_BORDER_SIZE				2.0
+#define UI_DEF_MOUSE_HOVER_COLOR		glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_MOUSE_HOVER_COLOR_TEXT	glm::vec4(0.0, 0.0, 0.0, 0.2)
+#define UI_DEF_MOUSE_CLICK_COLOR		glm::vec4(0.0, 0.0, 0.0, 0.5)
+#define UI_DEF_MOUSE_CLICK_COLOR_TEXT	glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT						""
+#define UI_DEF_TEXT_COLOR				glm::vec4(0.0, 0.0, 0.0, 1.0)
+#define UI_DEF_TEXT_FOND				"default"
+#define UI_DEF_TEXT_SCALE				1.0
+#define UI_DEF_TEXT_PADDING				5
+#define UI_DEF_TEXT_ALIGN				TextAlign::CENTER
+#define UI_DEF_TEXT_OUTLINE				0.0
+#define UI_DEF_TEXT_OUTLINE_COLOR		glm::vec4(0.0, 0.0, 0.0, 1.0)
 
 /* rect */
 #define SHADER_RECT_2D_VS "./shaders/rect_2D_vs.glsl"
@@ -98,6 +104,7 @@ class ABaseUI {
 		virtual ABaseUI &			setKeyLeftClickInput(InputType::Enum input);
 
 		virtual ABaseUI &			setEnabled(bool enabled);
+		virtual ABaseUI &			setSelected(bool selected);
 		virtual ABaseUI &			setPos(glm::vec2 pos);
 		virtual ABaseUI &			setZ(float z);
 		virtual ABaseUI &			setPosOffset(glm::vec2 offset);
@@ -106,11 +113,17 @@ class ABaseUI {
 		virtual ABaseUI &			setCalculatedSize();
 		virtual ABaseUI &			setColor(glm::vec4 color);
 
+		virtual ABaseUI &			setSelectedColor(glm::vec4 color);
+		virtual ABaseUI &			setSelectedColorText(glm::vec4 color);
+
+
 		virtual ABaseUI &			setBorderColor(glm::vec4 color);
 		virtual ABaseUI &			setBorderSize(float size);
 
 		virtual ABaseUI &			setMouseHoverColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseHoverColorText(glm::vec4 color);
 		virtual ABaseUI &			setMouseClickColor(glm::vec4 color);
+		virtual ABaseUI &			setMouseClickColorText(glm::vec4 color);
 
 		virtual ABaseUI &			setText(std::string const & text);
 		virtual ABaseUI &			setTextColor(glm::vec4 color);
@@ -118,6 +131,8 @@ class ABaseUI {
 		virtual ABaseUI &			setTextScale(float scale);
 		virtual ABaseUI &			setTextPadding(float padding);
 		virtual ABaseUI &			setTextAlign(TextAlign::Enum align);
+		virtual ABaseUI &			setTextOutline(float outline);
+		virtual ABaseUI &			setTextOutlineColor(glm::vec4 color);
 
 		/* master */
 		virtual ABaseUI &			setMaster(ABaseMasterUI * master);
@@ -170,7 +185,7 @@ class ABaseUI {
 		void			_drawText(glm::vec2 pos, glm::vec2 size, float z, std::string const & font, float scale,
 			std::string const & text, glm::vec4 color, TextAlign::Enum align, float padding);
 		// img
-		void			_loadImg(std::string const & filename, bool updateSize = true);
+		void			_loadImg(std::string const & filename, bool updateSize = true, bool hover = false);
 		void			_unloadImg();
 		void			_drawImg(glm::vec2 pos, glm::vec2 size, float z, GLuint textureID, glm::vec4 color);
 
@@ -193,6 +208,7 @@ class ABaseUI {
 
 		// enable functionalities
 		bool			_enabled;  /**< Enable / disable UI */
+		bool			_selected;  /**< Selected / unselected UI */
 		// basics
 		glm::vec2		_pos;  /**< Position */
 		float			_z;  /**< Z position (to transparency) */
@@ -200,12 +216,17 @@ class ABaseUI {
 		glm::vec2		_size;  /**< Size */
 		glm::vec4		_color;  /**< Color */
 		int64_t			_value;  /**< Value */
+		// selected
+		glm::vec4		_selectedColor;  /**< Color when selected */
+		glm::vec4		_selectedColorText;  /**< Color text when selected */
 		// border
 		glm::vec4		_borderColor;  /**< Border color */
 		float			_borderSize;  /**< Border size */
 		// mouse effect
 		glm::vec4		_mouseHoverColor;  /**< Color when mouse hover */
+		glm::vec4		_mouseHoverColorText;  /**< Color of text when mouse hover */
 		glm::vec4		_mouseClickColor;  /**< Color when mouse click */
+		glm::vec4		_mouseClickColorText;  /**< Color of text when mouse click */
 		// text
 		std::string		_text;  /**< Text */
 		glm::vec4		_textColor;  /**< Text color */
@@ -213,8 +234,11 @@ class ABaseUI {
 		float			_textScale;  /**< Text scale */
 		float			_textPadding;  /**< Text padding */
 		TextAlign::Enum	_textAlign;  /**< Text align (LEFT, RIGHT, CENTER) */
+		float			_textOutline;  /**< Text outline size */
+		glm::vec4		_textOutlineColor;  /**< Text outline color */
 		// image
 		GLuint			_imgTextureID;  /**< Image texture ID */
+		GLuint			_imgHoverTextureID;  /**< Image hover texture ID */
 		glm::ivec2		_imgDefSize;  /**< Image default size */
 
 		/* info about mouse */

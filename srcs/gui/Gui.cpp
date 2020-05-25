@@ -162,7 +162,7 @@ bool	Gui::init() {
 		gameInfo.savedWindowSize.y = s.j("graphics").i("height");
 		gameInfo.isSavedFullscreen = s.j("graphics").b("fullscreen");
 		ABaseUI::init(gameInfo.windowSize, s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size"));
-		ABaseUI::loadFont("title", s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size") * 2);
+		ABaseUI::loadFont("title", s.j("fonts").j("base").s("file"), s.j("fonts").j("base").u("size") * 2.5);
 		ABaseUI::loadFont("cheatcode", s.j("fonts").j("cheatcode").s("file"), s.j("fonts").j("cheatcode").u("size") * 3);
 		ABaseUI::loadFont("text", s.j("fonts").j("text").s("file"), s.j("fonts").j("text").u("size") * 2);
 		ABaseUI::setHelpToogleInput(InputType::SHOW_HELP);

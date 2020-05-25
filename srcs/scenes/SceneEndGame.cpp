@@ -67,36 +67,36 @@ bool			SceneEndGame::init() {
 		tmpPos.y = winSz.y - menuHeight * 2;
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight;
-		addTitle(tmpPos, tmpSize, "Bomberman")
-			.setTextColor(colorise(s.j("colors").j("green").u("color"), s.j("colors").j("green").u("alpha")));
+		glm::vec2 imgSize = {menuWidth, menuWidth * 350 / 800};
+		tmpPos.y -= imgSize.y * 0.8;
+		addImage(tmpPos, imgSize, s.s("logo"));
 
 		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight * 1.3;
+		tmpPos.y += imgSize.y * 0.1;
 		addText(tmpPos, {menuWidth, menuHeight}, "Thank's you for playing !")
 			.setTextAlign(TextAlign::CENTER);
 
-		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight * 1.3;
-		addText(tmpPos, {menuWidth, menuHeight}, "Ernest  Marin")
-			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
+		tmpPos.y = menuHeight / 2;
+		float widthText = winSz.x / 4;
+
+		tmpPos.x = 0;
+		addText(tmpPos, {widthText, menuHeight}, "Ernest  Marin")
+			.setTextColor(colorise(s.j("colors").j("black").u("color"), s.j("colors").j("black").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
-		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight;
-		addText(tmpPos, {menuWidth, menuHeight}, "Emilien  Baudet")
-			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
+		tmpPos.x = 1 * widthText;
+		addText(tmpPos, {widthText, menuHeight}, "Emilien  Baudet")
+			.setTextColor(colorise(s.j("colors").j("black").u("color"), s.j("colors").j("black").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
-		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight;
-		addText(tmpPos, {menuWidth, menuHeight}, "Tim  Nicolas")
-			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
+		tmpPos.x = 2 * widthText;
+		addText(tmpPos, {widthText, menuHeight}, "Tim  Nicolas")
+			.setTextColor(colorise(s.j("colors").j("black").u("color"), s.j("colors").j("black").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
-		tmpPos.x = winSz.x / 2 - menuWidth / 2;
-		tmpPos.y -= menuHeight;
-		addText(tmpPos, {menuWidth, menuHeight}, "Guilhem  Smith")
-			.setTextColor(colorise(s.j("colors").j("orange").u("color"), s.j("colors").j("orange").u("alpha")))
+		tmpPos.x = 3 * widthText;
+		addText(tmpPos, {widthText, menuHeight}, "Guilhem  Smith")
+			.setTextColor(colorise(s.j("colors").j("black").u("color"), s.j("colors").j("black").u("alpha")))
 			.setTextAlign(TextAlign::CENTER);
 
 		_initBG();

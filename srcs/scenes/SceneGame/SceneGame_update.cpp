@@ -93,6 +93,7 @@ bool	SceneGame::update() {
 	if (state == GameState::PAUSE || _loadHelp) {
 		AudioManager::pauseAllSounds();
 		if (_loadHelp) {
+			AudioManager::resumeAllSounds();
 			_loadHelp = false;
 			state = GameState::PAUSE;
 			// open help menu
@@ -108,10 +109,9 @@ bool	SceneGame::update() {
 	else if (state == GameState::INTRO) {
 		if (_gui->cam->isFollowFinished() || Inputs::getKeyUp(InputType::CONFIRM) || Inputs::getKeyUp(InputType::ACTION)
 			|| Inputs::getKeyUp(InputType::CANCEL)) {
-			if (Inputs::getKeyUp(InputType::ACTION))
-				AudioManager::stopSound(INTROLEVEL_SOUND);
 			_gui->cam->setMode(CamMode::STATIC_DEFPOS);
 			AudioManager::playMusic(musicLevel, 0.3f, true);
+			AudioManager::stopSound(INTROLEVEL_SOUND, 500);
 			state = GameState::PLAY;
 			if (level == 0)
 				_loadHelp = true;
@@ -380,8 +380,8 @@ void			SceneGame::_updateGameInfos() {
 			tmpPos.x += padding;
 			std::string enemiesStr = std::to_string(enemiesKilled) + "/" + std::to_string(enemiesToKill);
 			glm::vec4 color = enemiesKilled >= enemiesToKill
-												? colorise(s.j("colors").j("green").u("color"))
-												: colorise(s.j("colors").j("red").u("color"));
+												? colorise(0x39A0DD)
+												: colorise(0xBF001E);
 			allUI.enemiesCounterText->setPos({tmpPos.x, textY}).setText(enemiesStr)
 				.setSize(VOID_POS).setCalculatedSize().setTextColor(color);
 			tmpPos.x += allUI.enemiesCounterText->getSize().x;
