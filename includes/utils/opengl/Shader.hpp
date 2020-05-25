@@ -95,6 +95,10 @@ class Shader {
 
 	private:
 		void	checkCompileErrors(uint32_t shader, std::string type);
+
+		std::string	_vsPath;
+		std::string	_gsPath;
+		std::string	_fsPath;
 };
 
 #endif  // SHADER_HPP_

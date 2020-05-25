@@ -313,6 +313,8 @@ bool	SceneGame::_loadLevel(int32_t levelId) {
 
 	AudioManager::loadMusic(musicLevel);
 
+	_terrain->transform.setPos({5, -2, 0});
+
 	flags = 0;
 	// Get map informations
 	for (uint32_t j = 0; j < size.y; j++) {
