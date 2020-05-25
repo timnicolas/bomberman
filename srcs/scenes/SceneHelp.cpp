@@ -179,20 +179,20 @@ bool			SceneHelp::init() {
 		tmpPos.y = winSz.y / 2 - menuHeight / 2;
 		tmpSize.x = menuHeight;
 		tmpSize.y = 0;
-		allUI.leftPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png")
+		allUI.leftPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/prev.png", s.s("imgsUI") + "/prev_hover.png")
 			.setKeyLeftClickInput(InputType::LEFT)
 			.addButtonLeftListener(&_states.leftMenu);
 
 		tmpPos.x = winSz.x - 30 - tmpSize.x;
-		allUI.rightPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png")
+		allUI.rightPage = &addButtonImage(tmpPos, tmpSize, s.s("imgsUI") + "/next.png", s.s("imgsUI") + "/next_hover.png")
 			.setKeyLeftClickInput(InputType::RIGHT)
 			.addButtonLeftListener(&_states.rightMenu);
 
-		/* green bg */
+		/* background */
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y = menuHeight * 2;
 		tmpSize.x = winSz.x - 2 * tmpPos.x;
-		tmpSize.y = winSz.y - tmpPos.y;
+		tmpSize.y = winSz.y - tmpPos.y - 1.8 * menuHeight;
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize);
 
