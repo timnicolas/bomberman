@@ -417,11 +417,12 @@ void						AudioManager::_resumeSound(std::string sound_name) {
  * @brief Stop all the channels of the sound identified by file name.
  *
  * @param sound_name the file name of the sound.
+ * @param fadeOut the fadeOut effect.
  */
-void						AudioManager::stopSound(std::string sound_name) {
+void						AudioManager::stopSound(std::string sound_name, int fadeOut) {
 	AudioManager &inst = AudioManager::get();
 	if (inst._enabled) {
-		AudioManager::get()._stopSound(sound_name);
+		AudioManager::get()._stopSound(sound_name, fadeOut);
 	}
 	else {
 		logWarn("AudioManager is not enabled.");
@@ -431,11 +432,12 @@ void						AudioManager::stopSound(std::string sound_name) {
  * @brief Stop all the channels of the sound identified by file name.
  *
  * @param sound_name the file name of the sound.
+ * @param fadeOut the fadeOut effect.
  */
-void						AudioManager::_stopSound(std::string sound_name) {
+void						AudioManager::_stopSound(std::string sound_name, int fadeOut) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
-		sound->stop();
+		sound->stop(fadeOut);
 	}
 	catch (std::out_of_range const &oor) {
 		logErr("Trying to stop the sound '" << sound_name << "' but it has not been loaded.");

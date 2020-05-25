@@ -80,7 +80,7 @@ bool			SceneGameOver::init() {
 			.addButtonLeftListener(&_states.exit);
 
 		tmpSize.x = tmpSize.x * 1.3;
-		tmpSize.y = winSz.y - tmpPos.y;
+		tmpSize.y = winSz.y - tmpPos.y - menuHeight * 1.8;
 		tmpPos.x = (winSz.x / 2) - ((menuWidth * 1.3) / 2);
 		tmpPos.y -= menuHeight * 0.5;
 		addRect(tmpPos, tmpSize);

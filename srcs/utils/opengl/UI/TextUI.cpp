@@ -3,7 +3,7 @@
 #include "debug.hpp"
 
 /**
- * @brief Construct a new Text U I:: Text U I object
+ * @brief Construct a new TextUI::TextUI object
  *
  * @param pos The position of the UI element
  * @param size The size of the UI element
@@ -14,7 +14,7 @@ TextUI::TextUI(glm::vec2 pos, glm::vec2 size): ABaseUI(pos, size) {
 }
 
 /**
- * @brief Construct a new Text U I:: Text U I object
+ * @brief Construct a new TextUI::TextUI object
  *
  * @param src The object to do the copy
  */
@@ -23,7 +23,7 @@ TextUI::TextUI(TextUI const & src): ABaseUI(src) {
 }
 
 /**
- * @brief Destroy the Text U I:: Text U I object
+ * @brief Destroy the TextUI::TextUI object
  */
 TextUI::~TextUI() {}
 

@@ -29,7 +29,7 @@ public:
 	int											play(float volume, float env_volume, bool loop = false, int fadeIn = 0);
 	void										pause();
 	void										resume();
-	void										stop();
+	void										stop(int fadeOut = 0);
 	void										updateVolume(float volume);
 	bool										channelFinished(int chan);
 

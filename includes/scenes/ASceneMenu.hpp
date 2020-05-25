@@ -47,7 +47,8 @@ class ASceneMenu : public AScene {
 
 		/* add element */
 		ButtonUI &			addButton(glm::vec2 pos, glm::vec2 size, std::string const & text);
-		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename);
+		ButtonImageUI &		addButtonImage(glm::vec2 pos, glm::vec2 size, std::string const & filename,
+			std::string const & filenameHover = "");
 		SliderUI &			addSlider(glm::vec2 pos, glm::vec2 size, float min, float max, float val, float step);
 		TextUI &			addText(glm::vec2 pos, glm::vec2 size, std::string const & text);
 		TextUI &			addTitle(glm::vec2 pos, glm::vec2 size, std::string const & text);
