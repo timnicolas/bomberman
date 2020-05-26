@@ -40,3 +40,5 @@ libs/*
 configs/*
 bomberman
 saves/*
+.tmpfile.sh
+*.tmp
