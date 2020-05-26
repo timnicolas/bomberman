@@ -437,6 +437,8 @@ void						AudioManager::stopSound(std::string sound_name, int fadeOut) {
 void						AudioManager::_stopSound(std::string sound_name, int fadeOut) {
 	try {
 		Sound	*sound = _sounds.at(sound_name);
+		if ((_volume_master * _volume_sound) == 0)
+			fadeOut = 0;
 		sound->stop(fadeOut);
 	}
 	catch (std::out_of_range const &oor) {
