@@ -145,6 +145,7 @@ class SceneCheatCode : public ASceneMenu {
 		TextUI *						_infoCommandLine;  /**< Line with info about autocompletion */
 		std::deque<TextLine>			_textLines;  /**< All textLines (add with _addLine & logXXX) */
 		ABaseMasterUI *					_masterLines;  /**< Master element of lines */
+		bool							_allLevelsUnlocked;  /**< True if `/unlock all` executed */
 		std::vector<uint32_t>			_levelsUnlocked;  /**< All levels unlocked by command /unlock */
 
 		/* history */

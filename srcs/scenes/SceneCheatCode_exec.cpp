@@ -400,37 +400,50 @@ int SceneCheatCode::_execSummon(std::vector<std::string> const & args) {
  */
 int SceneCheatCode::_execUnlock(std::vector<std::string> const & args) {
 	int success = CheatcodeAction::RESULT_SUCCESS;
+	/* get LevelSelection scene */
+	SceneLevelSelection & scLvlSelect = *reinterpret_cast<SceneLevelSelection *>(
+		SceneManager::getScene(SceneNames::LEVEL_SELECTION));
 
 	std::vector<std::string> names = SceneGame::getAllEntityNames();
 	if (args.size() >=2 ) {
 		for (uint32_t i = 1; i < args.size(); i++) {
-			bool error;
-			uint32_t levelId = _toUint(args[i], error);
-			if (error) {
-				this->logerr("Cannot convert '" + args[i] + "' to unsigned int", false, true);
-				return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
-			}
-			/* get LevelSelection scene */
-			SceneLevelSelection & scLvlSelect = *reinterpret_cast<SceneLevelSelection *>(
-				SceneManager::getScene(SceneNames::LEVEL_SELECTION));
-
-			/* check if the level id is valid */
-			if (scLvlSelect.getNbLevel() < levelId || levelId == 0) {
-				this->logwarn("Invalid level ID: " + args[i], false, true);
-				continue;
-			}
-			levelId -= 1;
-
-			/* add to unlocked list */
-			if (!_isLevelUnlocked(levelId)) {
-				_levelsUnlocked.push_back(levelId);
-
+			if (args[i] == "all") {
 				/* reload screen if needed */
-				if (SceneManager::getSceneName() == SceneNames::LEVEL_SELECTION && scLvlSelect.getCurLevel() == levelId) {
+				if (SceneManager::getSceneName() == SceneNames::LEVEL_SELECTION
+				&& isLevelUnlocked(scLvlSelect.getCurLevel()) == false) {
+					_allLevelsUnlocked = true;
+					uint32_t curLvl = scLvlSelect.getCurLevel();
 					scLvlSelect.setLevel(0, false);
-					scLvlSelect.setLevel(levelId, false);
+					scLvlSelect.setLevel(curLvl, false);
 				}
-				_addLine("Level " + std::to_string(levelId + 1) + " unlocked");
+				_allLevelsUnlocked = true;
+			}
+			else {
+				bool error;
+				uint32_t levelId = _toUint(args[i], error);
+				if (error) {
+					this->logerr("Cannot convert '" + args[i] + "' to unsigned int", false, true);
+					return CheatcodeAction::KEEP_OPEN | CheatcodeAction::TXT_KEEP | CheatcodeAction::RESULT_ERROR;
+				}
+
+				/* check if the level id is valid */
+				if (scLvlSelect.getNbLevel() < levelId || levelId == 0) {
+					this->logwarn("Invalid level ID: " + args[i], false, true);
+					continue;
+				}
+				levelId -= 1;
+
+				/* add to unlocked list */
+				if (!_isLevelUnlocked(levelId)) {
+					_levelsUnlocked.push_back(levelId);
+
+					/* reload screen if needed */
+					if (SceneManager::getSceneName() == SceneNames::LEVEL_SELECTION && scLvlSelect.getCurLevel() == levelId) {
+						scLvlSelect.setLevel(0, false);
+						scLvlSelect.setLevel(levelId, false);
+					}
+					_addLine("Level " + std::to_string(levelId + 1) + " unlocked");
+				}
 			}
 		}
 		return CheatcodeAction::CLOSE | CheatcodeAction::TXT_DEF | CheatcodeAction::RESULT_SUCCESS;
