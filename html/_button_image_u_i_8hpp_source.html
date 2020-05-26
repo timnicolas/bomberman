@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="bomberman-logo-mini.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">bomberman
    </div>
@@ -76,24 +77,25 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_button_image_u_i.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> : <span class="keyword">public</span> <a class="code" href="class_a_base_u_i.html">ABaseUI</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>(glm::vec2 pos, glm::vec2 size, std::string <span class="keyword">const</span> &amp; filename);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>(<a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> <span class="keyword">const</span> &amp; src);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_button_image_u_i.html#aab30f4cb991a1641922855782c6c7964">~ButtonImageUI</a>();</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> &amp; <a class="code" href="class_button_image_u_i.html#a1915cfb56b96a85b1c0fad64508fe9f3">operator=</a>(<a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> <span class="keyword">const</span> &amp; rhs);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">_update</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">_draw</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>(glm::vec2 pos, glm::vec2 size, std::string <span class="keyword">const</span> &amp; filename,</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            std::string <span class="keyword">const</span> &amp; filenameHover = <span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>(<a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> <span class="keyword">const</span> &amp; src);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_button_image_u_i.html#aab30f4cb991a1641922855782c6c7964">~ButtonImageUI</a>();</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> &amp; <a class="code" href="class_button_image_u_i.html#a1915cfb56b96a85b1c0fad64508fe9f3">operator=</a>(<a class="code" href="class_button_image_u_i.html">ButtonImageUI</a> <span class="keyword">const</span> &amp; rhs);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">_update</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span>    <a class="code" href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">_draw</a>();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="class_button_image_u_i.html">ButtonImageUI</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclass_a_base_u_i_html"><div class="ttname"><a href="class_a_base_u_i.html">ABaseUI</a></div><div class="ttdoc">this is the base UI interface</div><div class="ttdef"><b>Definition:</b> ABaseUI.hpp:58</div></div>
+<div class="ttc" id="aclass_a_base_u_i_html"><div class="ttname"><a href="class_a_base_u_i.html">ABaseUI</a></div><div class="ttdoc">this is the base UI interface</div><div class="ttdef"><b>Definition:</b> ABaseUI.hpp:64</div></div>
 <div class="ttc" id="aclass_button_image_u_i_html"><div class="ttname"><a href="class_button_image_u_i.html">ButtonImageUI</a></div><div class="ttdoc">this is the UI for button image</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.hpp:9</div></div>
-<div class="ttc" id="aclass_button_image_u_i_html_aea117caa97ce8cb0d888776a9872a405"><div class="ttname"><a href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">ButtonImageUI::_draw</a></div><div class="ttdeci">virtual void _draw()</div><div class="ttdoc">this is the draw function for UI /!\ -&gt; you need to draw in the reverse order (draw at first the elem...</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:63</div></div>
-<div class="ttc" id="aclass_button_image_u_i_html_aab30f4cb991a1641922855782c6c7964"><div class="ttname"><a href="class_button_image_u_i.html#aab30f4cb991a1641922855782c6c7964">ButtonImageUI::~ButtonImageUI</a></div><div class="ttdeci">virtual ~ButtonImageUI()</div><div class="ttdoc">Destroy the Button Image U I:: Button Image U I object.</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:37</div></div>
-<div class="ttc" id="aclass_button_image_u_i_html_a9f0a37050956baa365de40daf3b05bb5"><div class="ttname"><a href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">ButtonImageUI::_update</a></div><div class="ttdeci">virtual void _update()</div><div class="ttdoc">this is the base update function of UI objects</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:56</div></div>
-<div class="ttc" id="aclass_button_image_u_i_html_a1915cfb56b96a85b1c0fad64508fe9f3"><div class="ttname"><a href="class_button_image_u_i.html#a1915cfb56b96a85b1c0fad64508fe9f3">ButtonImageUI::operator=</a></div><div class="ttdeci">ButtonImageUI &amp; operator=(ButtonImageUI const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:47</div></div>
+<div class="ttc" id="aclass_button_image_u_i_html_aea117caa97ce8cb0d888776a9872a405"><div class="ttname"><a href="class_button_image_u_i.html#aea117caa97ce8cb0d888776a9872a405">ButtonImageUI::_draw</a></div><div class="ttdeci">virtual void _draw()</div><div class="ttdoc">this is the draw function for UI /!\ -&gt; you need to draw in the reverse order (draw at first the elem...</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:67</div></div>
+<div class="ttc" id="aclass_button_image_u_i_html_aab30f4cb991a1641922855782c6c7964"><div class="ttname"><a href="class_button_image_u_i.html#aab30f4cb991a1641922855782c6c7964">ButtonImageUI::~ButtonImageUI</a></div><div class="ttdeci">virtual ~ButtonImageUI()</div><div class="ttdoc">Destroy the Button Image U I:: Button Image U I object.</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:41</div></div>
+<div class="ttc" id="aclass_button_image_u_i_html_a9f0a37050956baa365de40daf3b05bb5"><div class="ttname"><a href="class_button_image_u_i.html#a9f0a37050956baa365de40daf3b05bb5">ButtonImageUI::_update</a></div><div class="ttdeci">virtual void _update()</div><div class="ttdoc">this is the base update function of UI objects</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:60</div></div>
+<div class="ttc" id="aclass_button_image_u_i_html_a1915cfb56b96a85b1c0fad64508fe9f3"><div class="ttname"><a href="class_button_image_u_i.html#a1915cfb56b96a85b1c0fad64508fe9f3">ButtonImageUI::operator=</a></div><div class="ttdeci">ButtonImageUI &amp; operator=(ButtonImageUI const &amp;rhs)</div><div class="ttdoc">Copy this object.</div><div class="ttdef"><b>Definition:</b> ButtonImageUI.cpp:51</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

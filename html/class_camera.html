@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="bomberman-logo-mini.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">bomberman
    </div>
@@ -142,6 +143,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a7baca010a22bac712351e4c6adca5acf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#a7baca010a22bac712351e4c6adca5acf">frustumCullingCheckCube</a> (CAMERA_VEC3 const &amp;startPoint, CAMERA_VEC3 const &amp;size) const</td></tr>
 <tr class="memdesc:a7baca010a22bac712351e4c6adca5acf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a cube or rectangle is inside or outside of the camera.  <a href="class_camera.html#a7baca010a22bac712351e4c6adca5acf">More...</a><br /></td></tr>
 <tr class="separator:a7baca010a22bac712351e4c6adca5acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2be9694e31b56ae806836a81844ad1bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#a2be9694e31b56ae806836a81844ad1bb">frustumCullingCheckSphere</a> (CAMERA_VEC3 const &amp;center, CAMERA_FLOAT radius) const</td></tr>
+<tr class="memdesc:a2be9694e31b56ae806836a81844ad1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a sphere is inside or outside of the camera.  <a href="class_camera.html#a2be9694e31b56ae806836a81844ad1bb">More...</a><br /></td></tr>
+<tr class="separator:a2be9694e31b56ae806836a81844ad1bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a510c9f3ecf465578002fdd03dadb3f6d"><td class="memItemLeft" align="right" valign="top"><a id="a510c9f3ecf465578002fdd03dadb3f6d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera.html#a510c9f3ecf465578002fdd03dadb3f6d">resetFollowPath</a> ()</td></tr>
 <tr class="memdesc:a510c9f3ecf465578002fdd03dadb3f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the follow path (for FOLLOW_PATH mode) <br /></td></tr>
@@ -346,6 +350,44 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">point</td><td>The 3D point </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int The point position (FRCL_INSIDE == is inside) </dd></dl>
+
+</div>
+</div>
+<a id="a2be9694e31b56ae806836a81844ad1bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be9694e31b56ae806836a81844ad1bb">&#9670;&nbsp;</a></span>frustumCullingCheckSphere()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Camera::frustumCullingCheckSphere </td>
+          <td>(</td>
+          <td class="paramtype">CAMERA_VEC3 const &amp;&#160;</td>
+          <td class="paramname"><em>center</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">CAMERA_FLOAT&#160;</td>
+          <td class="paramname"><em>radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if a sphere is inside or outside of the camera. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">center</td><td>The center of the sphere </td></tr>
+    <tr><td class="paramname">radius</td><td>The radius of the sphere </td></tr>
   </table>
   </dd>
 </dl>

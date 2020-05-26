@@ -57,7 +57,7 @@ static void \mbox{\hyperlink{class_audio_manager_ada650abafa8b74a4a0d23cadccee03
 \begin{DoxyCompactList}\small\item\em Pause all the channels of the sound identified by file name. \end{DoxyCompactList}\item 
 static void \mbox{\hyperlink{class_audio_manager_acb3fab4f831354f04948f835b8a6c51a}{resume\+Sound}} (std\+::string sound\+\_\+name)
 \item 
-static void \mbox{\hyperlink{class_audio_manager_a39a5ca72b2201306a7fd1506a3744286}{stop\+Sound}} (std\+::string sound\+\_\+name)
+static void \mbox{\hyperlink{class_audio_manager_a654b86ffde70ecfe92028d6e5a4bd7e0}{stop\+Sound}} (std\+::string sound\+\_\+name, int fade\+Out=0)
 \begin{DoxyCompactList}\small\item\em Stop all the channels of the sound identified by file name. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_audio_manager_aa660fe4ee049d2606471d000c96d50a0}\label{class_audio_manager_aa660fe4ee049d2606471d000c96d50a0}} 
 static void \mbox{\hyperlink{class_audio_manager_aa660fe4ee049d2606471d000c96d50a0}{pause\+All\+Sounds}} ()
@@ -235,11 +235,11 @@ Resume all the channels of the sound identified by file name.
 {\em sound\+\_\+name} & the file name of the sound. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_audio_manager_a39a5ca72b2201306a7fd1506a3744286}\label{class_audio_manager_a39a5ca72b2201306a7fd1506a3744286}} 
+\mbox{\Hypertarget{class_audio_manager_a654b86ffde70ecfe92028d6e5a4bd7e0}\label{class_audio_manager_a654b86ffde70ecfe92028d6e5a4bd7e0}} 
 \index{AudioManager@{AudioManager}!stopSound@{stopSound}}
 \index{stopSound@{stopSound}!AudioManager@{AudioManager}}
 \doxysubsubsection{\texorpdfstring{stopSound()}{stopSound()}}
-{\footnotesize\ttfamily void Audio\+Manager\+::stop\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{sound\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily void Audio\+Manager\+::stop\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{sound\+\_\+name,  }\item[{int}]{fade\+Out = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -248,6 +248,8 @@ Stop all the channels of the sound identified by file name.
 
 \begin{DoxyParams}{Parameters}
 {\em sound\+\_\+name} & the file name of the sound. \\
+\hline
+{\em fade\+Out} & the fade\+Out effect. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_audio_manager_a6abc50fbd069dae8b38bb8d8aa9476cd}\label{class_audio_manager_a6abc50fbd069dae8b38bb8d8aa9476cd}} 

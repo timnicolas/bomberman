@@ -11,7 +11,8 @@ this is the base UI interface
 
 
 
-Inheritance diagram for A\+Base\+UI\+:\nopagebreak
+Inheritance diagram for A\+Base\+UI\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for A\+Base\+UI\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Base\+UI\+:\nopagebreak
+Collaboration diagram for A\+Base\+UI\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -66,6 +68,8 @@ virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{cla
 \begin{DoxyCompactList}\small\item\em Set the left click shortcut. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a9b19e675593c03f7d5becbd580bc418b}{set\+Enabled}} (bool enabled)
 \begin{DoxyCompactList}\small\item\em Enable / disable UI. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_abe931f9a44c29212a667cdd0f1da6365}{set\+Selected}} (bool selected)
+\begin{DoxyCompactList}\small\item\em Selected / unselected UI. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a68ad426cc75f6a61fe000c8e92d4df0c}{set\+Pos}} (glm\+::vec2 pos)
 \begin{DoxyCompactList}\small\item\em Set position. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a9b7e138cf37199808f55a4596efe4ac9}{setZ}} (float z)
@@ -80,14 +84,22 @@ virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{cla
 \begin{DoxyCompactList}\small\item\em Auto calculate size from the text size. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a13a7acc1e7ffa2c139c74e841d744753}{set\+Color}} (glm\+::vec4 color)
 \begin{DoxyCompactList}\small\item\em Set the color. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a048cb78b3a5c32aa7ab844ffa445d7a5}{set\+Selected\+Color}} (glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em Set the color selected. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a5843ff5ba45830356043a6fefc24f798}{set\+Selected\+Color\+Text}} (glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em Set the color selected text. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a16d0d5da4f14b3e43a10f64cefbf8290}{set\+Border\+Color}} (glm\+::vec4 color)
 \begin{DoxyCompactList}\small\item\em Set the border color. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a3028cb83474c9a384dac58d110aa196f}{set\+Border\+Size}} (float size)
 \begin{DoxyCompactList}\small\item\em Set the border size. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a902c194cc52e03a49f52c74bdbe61deb}{set\+Mouse\+Hover\+Color}} (glm\+::vec4 color)
 \begin{DoxyCompactList}\small\item\em Set the mouse hover color. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a27891d827140704a50a25f55c4939c03}{set\+Mouse\+Hover\+Color\+Text}} (glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em Set the mouse hover color text. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_ab93705fee3e6dfdc900bea21a42695e0}{set\+Mouse\+Click\+Color}} (glm\+::vec4 color)
 \begin{DoxyCompactList}\small\item\em Set the mouse click color. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a0afbe90ac3012028bd9895cdfe0d7861}{set\+Mouse\+Click\+Color\+Text}} (glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em Set the mouse click color text. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a82e182bfd577d37224aa49be3f64ac87}{set\+Text}} (std\+::string const \&text)
 \begin{DoxyCompactList}\small\item\em Set the text. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a5d22d531f4fd1d59b9cfff0f2f3e4b8d}{set\+Text\+Color}} (glm\+::vec4 color)
@@ -100,6 +112,10 @@ virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{cla
 \begin{DoxyCompactList}\small\item\em Set the text padding. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a4a88d65cb4a5767c280e0849e56a519b}{set\+Text\+Align}} (Text\+Align\+::\+Enum align)
 \begin{DoxyCompactList}\small\item\em Set the text alignment. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a1bafea512714350e238ef0cf0bd4e416}{set\+Text\+Outline}} (float outline)
+\begin{DoxyCompactList}\small\item\em Set the text outline. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a5490ceb10f7b8184d11bd4cd32a6adeb}{set\+Text\+Outline\+Color}} (glm\+::vec4 color)
+\begin{DoxyCompactList}\small\item\em Set the text outline color. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& \mbox{\hyperlink{class_a_base_u_i_a258f301b41ab8cc9e1b50ca38c27ca78}{set\+Master}} (\mbox{\hyperlink{class_a_base_master_u_i}{A\+Base\+Master\+UI}} $\ast$master)
 \begin{DoxyCompactList}\small\item\em Set the master object. \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_a_base_u_i_af83c894a28e16ae8c008da87a617e8fd}{is\+Partially\+Out\+Of\+Screen}} () const
@@ -182,7 +198,7 @@ void \mbox{\hyperlink{class_a_base_u_i_a5941569c008d51d764db097198bba750}{\+\_\+
 \begin{DoxyCompactList}\small\item\em Draw the border of a rect. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_a_base_u_i_a9cf0a076fd9b8074cf8ffe6a30ec9f90}{\+\_\+draw\+Text}} (glm\+::vec2 pos, glm\+::vec2 size, float z, std\+::string const \&font, float scale, std\+::string const \&text, glm\+::vec4 color, Text\+Align\+::\+Enum align, float padding)
 \begin{DoxyCompactList}\small\item\em Draw text. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}{\+\_\+load\+Img}} (std\+::string const \&filename, bool update\+Size=true)
+void \mbox{\hyperlink{class_a_base_u_i_a240a38aa0552dfa9ea7fcf8f056b3363}{\+\_\+load\+Img}} (std\+::string const \&filename, bool update\+Size=true, bool hover=false)
 \begin{DoxyCompactList}\small\item\em load an image (used in constructors) \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}\label{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}} 
 void \mbox{\hyperlink{class_a_base_u_i_a4483f9f8c5f4f72a185d850ab94e90bb}{\+\_\+unload\+Img}} ()
@@ -200,6 +216,8 @@ virtual void \mbox{\hyperlink{class_a_base_u_i_a1bf435b41e6628dd84633925198e0c8c
 \item 
 bool \mbox{\hyperlink{class_a_base_u_i_a82f9adf5735be7a4ad378b965a8a7125}{\+\_\+enabled}}
 \item 
+bool \mbox{\hyperlink{class_a_base_u_i_aa8591df596571dddb7b0ef87fbd02f69}{\+\_\+selected}}
+\item 
 glm\+::vec2 \mbox{\hyperlink{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}{\+\_\+pos}}
 \item 
 float \mbox{\hyperlink{class_a_base_u_i_a986f2d7749ff6696048a54655d666c43}{\+\_\+z}}
@@ -212,13 +230,21 @@ glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a9c8d48d8e1f311464af573ce44e61a8c}
 \item 
 int64\+\_\+t \mbox{\hyperlink{class_a_base_u_i_acaf5cb113d55cb7b2ab58c9834889936}{\+\_\+value}}
 \item 
+glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a9196333d9132c5d77ad9fe0b433cabd1}{\+\_\+selected\+Color}}
+\item 
+glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a9baedc9a4fa1b9a337ab07a341bb7d3b}{\+\_\+selected\+Color\+Text}}
+\item 
 glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a27c378b1380fdce4db9fb03d43684b93}{\+\_\+border\+Color}}
 \item 
 float \mbox{\hyperlink{class_a_base_u_i_a0d7dc2812e933321513551b5c803a100}{\+\_\+border\+Size}}
 \item 
 glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_aebbf27b207374a6430cc7b66299f2846}{\+\_\+mouse\+Hover\+Color}}
 \item 
+glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a53e79f69ed0c96246d59d113831534e8}{\+\_\+mouse\+Hover\+Color\+Text}}
+\item 
 glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a13e2f41345b37ed5998d93f98fba5f88}{\+\_\+mouse\+Click\+Color}}
+\item 
+glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a6353aeb00c74bb66c65eecb23ff63788}{\+\_\+mouse\+Click\+Color\+Text}}
 \item 
 std\+::string \mbox{\hyperlink{class_a_base_u_i_ada813403e994b73c08d1d069a322e712}{\+\_\+text}}
 \item 
@@ -232,7 +258,13 @@ float \mbox{\hyperlink{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}{\+\_\
 \item 
 Text\+Align\+::\+Enum \mbox{\hyperlink{class_a_base_u_i_a13286189be7e92f8a16e4b386cc55a12}{\+\_\+text\+Align}}
 \item 
+float \mbox{\hyperlink{class_a_base_u_i_af589bc6edf0de106d0086bb90f979a03}{\+\_\+text\+Outline}}
+\item 
+glm\+::vec4 \mbox{\hyperlink{class_a_base_u_i_a774176996863d33eafee46189f4c6674}{\+\_\+text\+Outline\+Color}}
+\item 
 G\+Luint \mbox{\hyperlink{class_a_base_u_i_ab49062eddc5e65d0b0492dff5f9ab68c}{\+\_\+img\+Texture\+ID}}
+\item 
+G\+Luint \mbox{\hyperlink{class_a_base_u_i_a9507b571165a3ec451996c0ec480e64e}{\+\_\+img\+Hover\+Texture\+ID}}
 \item 
 glm\+::ivec2 \mbox{\hyperlink{class_a_base_u_i_a14a4484bb3b54794bde4739f8e4ac54e}{\+\_\+img\+Def\+Size}}
 \item 
@@ -472,11 +504,11 @@ Draw text.
 {\em padding} & The text padding (left \& right) \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}\label{class_a_base_u_i_a844de1b2a7f8ede19b090c3efa4c75da}} 
+\mbox{\Hypertarget{class_a_base_u_i_a240a38aa0552dfa9ea7fcf8f056b3363}\label{class_a_base_u_i_a240a38aa0552dfa9ea7fcf8f056b3363}} 
 \index{ABaseUI@{ABaseUI}!\_loadImg@{\_loadImg}}
 \index{\_loadImg@{\_loadImg}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_loadImg()}{\_loadImg()}}
-{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+load\+Img (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool}]{update\+Size = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void A\+Base\+U\+I\+::\+\_\+load\+Img (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool}]{update\+Size = {\ttfamily true},  }\item[{bool}]{hover = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -490,8 +522,10 @@ load an image (used in constructors)
 \begin{DoxyItemize}
 \item if \+\_\+size.\+x == 0 \&\& \+\_\+size.\+x == 0 -\/$>$ size auto setted (default size for the image)
 \item if \+\_\+size.\+x == 0 -\/$>$ width auto setted
-\item if \+\_\+size.\+y == 0 -\/$>$ height auto setted
+\item if \+\_\+size.\+y == 0 -\/$>$ height auto setted 
 \end{DoxyItemize}\\
+\hline
+{\em hover} & if the image is the hover image. The hover image H\+A\+VE TO have the same size of main image. \\
 \hline
 \end{DoxyParams}
 
@@ -1176,6 +1210,24 @@ Set the mouse click color.
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a0afbe90ac3012028bd9895cdfe0d7861}\label{class_a_base_u_i_a0afbe90ac3012028bd9895cdfe0d7861}} 
+\index{ABaseUI@{ABaseUI}!setMouseClickColorText@{setMouseClickColorText}}
+\index{setMouseClickColorText@{setMouseClickColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setMouseClickColorText()}{setMouseClickColorText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Mouse\+Click\+Color\+Text (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the mouse click color text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & mouse click color text \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_a_base_u_i_a902c194cc52e03a49f52c74bdbe61deb}\label{class_a_base_u_i_a902c194cc52e03a49f52c74bdbe61deb}} 
 \index{ABaseUI@{ABaseUI}!setMouseHoverColor@{setMouseHoverColor}}
 \index{setMouseHoverColor@{setMouseHoverColor}!ABaseUI@{ABaseUI}}
@@ -1189,6 +1241,24 @@ Set the mouse hover color.
 
 \begin{DoxyParams}{Parameters}
 {\em color} & Mouse hover color \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a27891d827140704a50a25f55c4939c03}\label{class_a_base_u_i_a27891d827140704a50a25f55c4939c03}} 
+\index{ABaseUI@{ABaseUI}!setMouseHoverColorText@{setMouseHoverColorText}}
+\index{setMouseHoverColorText@{setMouseHoverColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setMouseHoverColorText()}{setMouseHoverColorText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Mouse\+Hover\+Color\+Text (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the mouse hover color text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Mouse hover color text \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1225,6 +1295,60 @@ Set position offset (to move object whitout change position)
 
 \begin{DoxyParams}{Parameters}
 {\em offset} & The offset \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_abe931f9a44c29212a667cdd0f1da6365}\label{class_a_base_u_i_abe931f9a44c29212a667cdd0f1da6365}} 
+\index{ABaseUI@{ABaseUI}!setSelected@{setSelected}}
+\index{setSelected@{setSelected}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setSelected()}{setSelected()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Selected (\begin{DoxyParamCaption}\item[{bool}]{selected }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Selected / unselected UI. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em selected} & selected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a048cb78b3a5c32aa7ab844ffa445d7a5}\label{class_a_base_u_i_a048cb78b3a5c32aa7ab844ffa445d7a5}} 
+\index{ABaseUI@{ABaseUI}!setSelectedColor@{setSelectedColor}}
+\index{setSelectedColor@{setSelectedColor}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setSelectedColor()}{setSelectedColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Selected\+Color (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the color selected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Color selected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a5843ff5ba45830356043a6fefc24f798}\label{class_a_base_u_i_a5843ff5ba45830356043a6fefc24f798}} 
+\index{ABaseUI@{ABaseUI}!setSelectedColorText@{setSelectedColorText}}
+\index{setSelectedColorText@{setSelectedColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setSelectedColorText()}{setSelectedColorText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Selected\+Color\+Text (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the color selected text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Color selected text \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1319,6 +1443,42 @@ Set the text font.
 
 \begin{DoxyParams}{Parameters}
 {\em font} & The text font \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a1bafea512714350e238ef0cf0bd4e416}\label{class_a_base_u_i_a1bafea512714350e238ef0cf0bd4e416}} 
+\index{ABaseUI@{ABaseUI}!setTextOutline@{setTextOutline}}
+\index{setTextOutline@{setTextOutline}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setTextOutline()}{setTextOutline()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Text\+Outline (\begin{DoxyParamCaption}\item[{float}]{outline }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the text outline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outline} & The text outline \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}}\& A reference to this UI element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_a_base_u_i_a5490ceb10f7b8184d11bd4cd32a6adeb}\label{class_a_base_u_i_a5490ceb10f7b8184d11bd4cd32a6adeb}} 
+\index{ABaseUI@{ABaseUI}!setTextOutlineColor@{setTextOutlineColor}}
+\index{setTextOutlineColor@{setTextOutlineColor}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{setTextOutlineColor()}{setTextOutlineColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_a_base_u_i}{A\+Base\+UI}} \& A\+Base\+U\+I\+::set\+Text\+Outline\+Color (\begin{DoxyParamCaption}\item[{glm\+::vec4}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the text outline color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Text outline color \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1573,7 +1733,13 @@ Help text scale \mbox{\Hypertarget{class_a_base_u_i_a14a4484bb3b54794bde4739f8e4
 \doxysubsubsection{\texorpdfstring{\_imgDefSize}{\_imgDefSize}}
 {\footnotesize\ttfamily glm\+::ivec2 A\+Base\+U\+I\+::\+\_\+img\+Def\+Size\hspace{0.3cm}{\ttfamily [protected]}}
 
-Image default size \mbox{\Hypertarget{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}\label{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}} 
+Image default size \mbox{\Hypertarget{class_a_base_u_i_a9507b571165a3ec451996c0ec480e64e}\label{class_a_base_u_i_a9507b571165a3ec451996c0ec480e64e}} 
+\index{ABaseUI@{ABaseUI}!\_imgHoverTextureID@{\_imgHoverTextureID}}
+\index{\_imgHoverTextureID@{\_imgHoverTextureID}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_imgHoverTextureID}{\_imgHoverTextureID}}
+{\footnotesize\ttfamily G\+Luint A\+Base\+U\+I\+::\+\_\+img\+Hover\+Texture\+ID\hspace{0.3cm}{\ttfamily [protected]}}
+
+Image hover texture ID \mbox{\Hypertarget{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}\label{class_a_base_u_i_a53274b7689fa36bd667645cb80b31e3e}} 
 \index{ABaseUI@{ABaseUI}!\_imgShader@{\_imgShader}}
 \index{\_imgShader@{\_imgShader}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_imgShader}{\_imgShader}}
@@ -1687,7 +1853,13 @@ Master object (if exist) \mbox{\Hypertarget{class_a_base_u_i_a13e2f41345b37ed599
 \doxysubsubsection{\texorpdfstring{\_mouseClickColor}{\_mouseClickColor}}
 {\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+mouse\+Click\+Color\hspace{0.3cm}{\ttfamily [protected]}}
 
-Color when mouse click \mbox{\Hypertarget{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}\label{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}} 
+Color when mouse click \mbox{\Hypertarget{class_a_base_u_i_a6353aeb00c74bb66c65eecb23ff63788}\label{class_a_base_u_i_a6353aeb00c74bb66c65eecb23ff63788}} 
+\index{ABaseUI@{ABaseUI}!\_mouseClickColorText@{\_mouseClickColorText}}
+\index{\_mouseClickColorText@{\_mouseClickColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_mouseClickColorText}{\_mouseClickColorText}}
+{\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+mouse\+Click\+Color\+Text\hspace{0.3cm}{\ttfamily [protected]}}
+
+Color of text when mouse click \mbox{\Hypertarget{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}\label{class_a_base_u_i_a66b70cd45cd3e8daa6c877c728fc61c5}} 
 \index{ABaseUI@{ABaseUI}!\_mouseHover@{\_mouseHover}}
 \index{\_mouseHover@{\_mouseHover}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_mouseHover}{\_mouseHover}}
@@ -1699,7 +1871,13 @@ True if mouse hover \mbox{\Hypertarget{class_a_base_u_i_aebbf27b207374a6430cc7b6
 \doxysubsubsection{\texorpdfstring{\_mouseHoverColor}{\_mouseHoverColor}}
 {\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+mouse\+Hover\+Color\hspace{0.3cm}{\ttfamily [protected]}}
 
-Color when mouse hover \mbox{\Hypertarget{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}\label{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}} 
+Color when mouse hover \mbox{\Hypertarget{class_a_base_u_i_a53e79f69ed0c96246d59d113831534e8}\label{class_a_base_u_i_a53e79f69ed0c96246d59d113831534e8}} 
+\index{ABaseUI@{ABaseUI}!\_mouseHoverColorText@{\_mouseHoverColorText}}
+\index{\_mouseHoverColorText@{\_mouseHoverColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_mouseHoverColorText}{\_mouseHoverColorText}}
+{\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+mouse\+Hover\+Color\+Text\hspace{0.3cm}{\ttfamily [protected]}}
+
+Color of text when mouse hover \mbox{\Hypertarget{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}\label{class_a_base_u_i_a75c94f0cfee77b3af510262e334142cb}} 
 \index{ABaseUI@{ABaseUI}!\_pos@{\_pos}}
 \index{\_pos@{\_pos}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_pos}{\_pos}}
@@ -1766,7 +1944,25 @@ True if right click \mbox{\Hypertarget{class_a_base_u_i_a4656f0b7d85d6ed7911ab8d
 \doxysubsubsection{\texorpdfstring{\_rightListener}{\_rightListener}}
 {\footnotesize\ttfamily bool$\ast$ A\+Base\+U\+I\+::\+\_\+right\+Listener\hspace{0.3cm}{\ttfamily [protected]}}
 
-Right click listener (the bool pointed can automatically set to true) \mbox{\Hypertarget{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}\label{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}} 
+Right click listener (the bool pointed can automatically set to true) \mbox{\Hypertarget{class_a_base_u_i_aa8591df596571dddb7b0ef87fbd02f69}\label{class_a_base_u_i_aa8591df596571dddb7b0ef87fbd02f69}} 
+\index{ABaseUI@{ABaseUI}!\_selected@{\_selected}}
+\index{\_selected@{\_selected}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_selected}{\_selected}}
+{\footnotesize\ttfamily bool A\+Base\+U\+I\+::\+\_\+selected\hspace{0.3cm}{\ttfamily [protected]}}
+
+Selected / unselected UI \mbox{\Hypertarget{class_a_base_u_i_a9196333d9132c5d77ad9fe0b433cabd1}\label{class_a_base_u_i_a9196333d9132c5d77ad9fe0b433cabd1}} 
+\index{ABaseUI@{ABaseUI}!\_selectedColor@{\_selectedColor}}
+\index{\_selectedColor@{\_selectedColor}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_selectedColor}{\_selectedColor}}
+{\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+selected\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+Color when selected \mbox{\Hypertarget{class_a_base_u_i_a9baedc9a4fa1b9a337ab07a341bb7d3b}\label{class_a_base_u_i_a9baedc9a4fa1b9a337ab07a341bb7d3b}} 
+\index{ABaseUI@{ABaseUI}!\_selectedColorText@{\_selectedColorText}}
+\index{\_selectedColorText@{\_selectedColorText}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_selectedColorText}{\_selectedColorText}}
+{\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+selected\+Color\+Text\hspace{0.3cm}{\ttfamily [protected]}}
+
+Color text when selected \mbox{\Hypertarget{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}\label{class_a_base_u_i_a0ffcefb425937777478e713fcedf8426}} 
 \index{ABaseUI@{ABaseUI}!\_showHelp@{\_showHelp}}
 \index{\_showHelp@{\_showHelp}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_showHelp}{\_showHelp}}
@@ -1802,7 +1998,19 @@ Text color \mbox{\Hypertarget{class_a_base_u_i_a14dff508ca40dac0ee7c1b6971f77ffa
 \doxysubsubsection{\texorpdfstring{\_textFont}{\_textFont}}
 {\footnotesize\ttfamily std\+::string A\+Base\+U\+I\+::\+\_\+text\+Font\hspace{0.3cm}{\ttfamily [protected]}}
 
-Text font \mbox{\Hypertarget{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}\label{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}} 
+Text font \mbox{\Hypertarget{class_a_base_u_i_af589bc6edf0de106d0086bb90f979a03}\label{class_a_base_u_i_af589bc6edf0de106d0086bb90f979a03}} 
+\index{ABaseUI@{ABaseUI}!\_textOutline@{\_textOutline}}
+\index{\_textOutline@{\_textOutline}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_textOutline}{\_textOutline}}
+{\footnotesize\ttfamily float A\+Base\+U\+I\+::\+\_\+text\+Outline\hspace{0.3cm}{\ttfamily [protected]}}
+
+Text outline size \mbox{\Hypertarget{class_a_base_u_i_a774176996863d33eafee46189f4c6674}\label{class_a_base_u_i_a774176996863d33eafee46189f4c6674}} 
+\index{ABaseUI@{ABaseUI}!\_textOutlineColor@{\_textOutlineColor}}
+\index{\_textOutlineColor@{\_textOutlineColor}!ABaseUI@{ABaseUI}}
+\doxysubsubsection{\texorpdfstring{\_textOutlineColor}{\_textOutlineColor}}
+{\footnotesize\ttfamily glm\+::vec4 A\+Base\+U\+I\+::\+\_\+text\+Outline\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+Text outline color \mbox{\Hypertarget{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}\label{class_a_base_u_i_a671ff5cf527f5bd46c53aec1e5bf7587}} 
 \index{ABaseUI@{ABaseUI}!\_textPadding@{\_textPadding}}
 \index{\_textPadding@{\_textPadding}!ABaseUI@{ABaseUI}}
 \doxysubsubsection{\texorpdfstring{\_textPadding}{\_textPadding}}

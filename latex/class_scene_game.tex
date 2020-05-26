@@ -11,7 +11,8 @@ This is the game Scene. In this scene, you can play to the game and load levels.
 
 
 
-Inheritance diagram for Scene\+Game\+:\nopagebreak
+Inheritance diagram for Scene\+Game\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Scene\+Game\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Scene\+Game\+:\nopagebreak
+Collaboration diagram for Scene\+Game\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -34,6 +36,8 @@ struct \mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}}
 \begin{DoxyCompactList}\small\item\em All UI elements (bonus, text, ...) \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_scene_game_1_1_bonus_values}{Bonus\+Values}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_bonus}{Bonus}} Information about spawn (number of bonus \& chance to spawn) \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_scene_game_1_1_entities_count}{Entities\+Count}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_stats}{Stats}} about number of entites, bombs, ... \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{class_scene_game_1_1_scene_game_exception}{Scene\+Game\+Exception}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_scene_game}{Scene\+Game}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
@@ -100,6 +104,8 @@ static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_scene_game_a0b6
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
+std\+::vector$<$ std\+::vector$<$ bool $>$ $>$ \mbox{\hyperlink{class_scene_game_a3f5c9fc6974a158f3e606bef4a33e881}{floor}}
+\item 
 std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{board}}
 \item 
 std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{class_scene_game_a8abb19247e59048f4f151f28934325ac}{board\+Fly}}
@@ -135,6 +141,8 @@ int64\+\_\+t \mbox{\hyperlink{class_scene_game_ac4533f3e18e31e85bd626764ee7f26f0
 int64\+\_\+t \mbox{\hyperlink{class_scene_game_a74a292034550a61d53fc19416acc2aaa}{enemies\+Killed}}
 \item 
 std\+::string \mbox{\hyperlink{class_scene_game_a725aea97a7eb7b1ee4ea7808fff9c948}{music\+Level}}
+\item 
+\mbox{\hyperlink{struct_scene_game_1_1_entities_count}{Entities\+Count}} \mbox{\hyperlink{class_scene_game_a8cc1f105984982e09ee8c3ef7d4bf20d}{entities\+Count}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -165,6 +173,8 @@ std\+::vector$<$ \mbox{\hyperlink{struct_cam_point}{Cam\+Point}} $>$ \mbox{\hype
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_scene_game_1_1_all_u_i}{All\+UI}} \mbox{\hyperlink{class_scene_game_ae6a927879520686d867eee29aa67663f}{all\+UI}}
+\item 
+bool \mbox{\hyperlink{class_scene_game_ace4cb459a6b78ff4fa742972d8769460}{\+\_\+load\+Help}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -623,7 +633,13 @@ std\+::ostream\& The ostream obj
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_scene_game_ae6a927879520686d867eee29aa67663f}\label{class_scene_game_ae6a927879520686d867eee29aa67663f}} 
+\mbox{\Hypertarget{class_scene_game_ace4cb459a6b78ff4fa742972d8769460}\label{class_scene_game_ace4cb459a6b78ff4fa742972d8769460}} 
+\index{SceneGame@{SceneGame}!\_loadHelp@{\_loadHelp}}
+\index{\_loadHelp@{\_loadHelp}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{\_loadHelp}{\_loadHelp}}
+{\footnotesize\ttfamily bool Scene\+Game\+::\+\_\+load\+Help\hspace{0.3cm}{\ttfamily [protected]}}
+
+true if you want to load help menu \mbox{\Hypertarget{class_scene_game_ae6a927879520686d867eee29aa67663f}\label{class_scene_game_ae6a927879520686d867eee29aa67663f}} 
 \index{SceneGame@{SceneGame}!allUI@{allUI}}
 \index{allUI@{allUI}!SceneGame@{SceneGame}}
 \doxysubsubsection{\texorpdfstring{allUI}{allUI}}
@@ -682,6 +698,7 @@ Enemy to kill to enable end element \& finish the level \mbox{\Hypertarget{class
 \DoxyCodeLine{    \{FLAG\_STR, \{EntityType::BOARD\_FLAG, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{\textcolor{keywordflow}{return} \textcolor{keyword}{new} \mbox{\hyperlink{class_flag}{Flag}}(game);\}\}\},}
 \DoxyCodeLine{    \{END\_STR, \{EntityType::BOARD, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{\textcolor{keywordflow}{return} \textcolor{keyword}{new} \mbox{\hyperlink{class_end}{End}}(game);\}\}\},}
 \DoxyCodeLine{    \{\textcolor{stringliteral}{"safe"}, \{EntityType::BOARD, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{(void)game; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};\}\}\},}
+\DoxyCodeLine{    \{\textcolor{stringliteral}{"outside"}, \{EntityType::BOARD, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{(void)game; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};\}\}\},}
 \DoxyCodeLine{    \{\textcolor{stringliteral}{"empty"}, \{EntityType::BOARD, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{(void)game; \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};\}\}\},}
 \DoxyCodeLine{    \{ENEMY\_BASIC\_STR, \{EntityType::ENEMY, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{\textcolor{keywordflow}{return} \textcolor{keyword}{new} \mbox{\hyperlink{class_enemy_basic}{EnemyBasic}}(game);\}\}\},}
 \DoxyCodeLine{    \{ENEMY\_WITH\_EYE\_STR, \{EntityType::ENEMY, [](\mbox{\hyperlink{class_scene_game}{SceneGame}} \&game) -\/> \mbox{\hyperlink{class_a_entity}{AEntity}}* \{\textcolor{keywordflow}{return} \textcolor{keyword}{new} \mbox{\hyperlink{class_enemy_with_eye}{EnemyWithEye}}(game);\}\}\},}
@@ -692,13 +709,25 @@ Enemy to kill to enable end element \& finish the level \mbox{\Hypertarget{class
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
-All entity type \& functions \mbox{\Hypertarget{class_scene_game_a53d7732b5968cc22b938451d371592c9}\label{class_scene_game_a53d7732b5968cc22b938451d371592c9}} 
+All entity type \& functions \mbox{\Hypertarget{class_scene_game_a8cc1f105984982e09ee8c3ef7d4bf20d}\label{class_scene_game_a8cc1f105984982e09ee8c3ef7d4bf20d}} 
+\index{SceneGame@{SceneGame}!entitiesCount@{entitiesCount}}
+\index{entitiesCount@{entitiesCount}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{entitiesCount}{entitiesCount}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_game_1_1_entities_count}{Entities\+Count}} Scene\+Game\+::entities\+Count}
+
+\mbox{\hyperlink{class_stats}{Stats}} about number of entites, bombs, ... \mbox{\Hypertarget{class_scene_game_a53d7732b5968cc22b938451d371592c9}\label{class_scene_game_a53d7732b5968cc22b938451d371592c9}} 
 \index{SceneGame@{SceneGame}!flags@{flags}}
 \index{flags@{flags}!SceneGame@{SceneGame}}
 \doxysubsubsection{\texorpdfstring{flags}{flags}}
 {\footnotesize\ttfamily int Scene\+Game\+::flags}
 
-Number of flags on the level \mbox{\Hypertarget{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}\label{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}} 
+Number of flags on the level \mbox{\Hypertarget{class_scene_game_a3f5c9fc6974a158f3e606bef4a33e881}\label{class_scene_game_a3f5c9fc6974a158f3e606bef4a33e881}} 
+\index{SceneGame@{SceneGame}!floor@{floor}}
+\index{floor@{floor}!SceneGame@{SceneGame}}
+\doxysubsubsection{\texorpdfstring{floor}{floor}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ bool $>$ $>$ Scene\+Game\+::floor}
+
+True if there is a floor here \mbox{\Hypertarget{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}\label{class_scene_game_ac35fc86484b9ce8a09efde387e049cb1}} 
 \index{SceneGame@{SceneGame}!level@{level}}
 \index{level@{level}!SceneGame@{SceneGame}}
 \doxysubsubsection{\texorpdfstring{level}{level}}
@@ -769,4 +798,8 @@ Time remaining to do the level
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 includes/scenes/Scene\+Game.\+hpp\item 
-srcs/scenes/Scene\+Game.\+cpp\end{DoxyCompactItemize}
+srcs/scenes/\+Scene\+Game/Scene\+Game.\+cpp\item 
+srcs/scenes/\+Scene\+Game/Scene\+Game\+\_\+draw.\+cpp\item 
+srcs/scenes/\+Scene\+Game/Scene\+Game\+\_\+init.\+cpp\item 
+srcs/scenes/\+Scene\+Game/Scene\+Game\+\_\+loadlevel.\+cpp\item 
+srcs/scenes/\+Scene\+Game/Scene\+Game\+\_\+update.\+cpp\end{DoxyCompactItemize}

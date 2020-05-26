@@ -11,7 +11,8 @@ this is a camera 3D object
 
 
 
-Collaboration diagram for Camera\+:\nopagebreak
+Collaboration diagram for Camera\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -60,6 +61,8 @@ int \mbox{\hyperlink{class_camera_aa7a544e123a54e98509cfc6050869aca}{frustum\+Cu
 \begin{DoxyCompactList}\small\item\em Check if a point is inside or outside the camera. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_camera_a7baca010a22bac712351e4c6adca5acf}{frustum\+Culling\+Check\+Cube}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&start\+Point, C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&size) const
 \begin{DoxyCompactList}\small\item\em Check if a cube or rectangle is inside or outside of the camera. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_camera_a2be9694e31b56ae806836a81844ad1bb}{frustum\+Culling\+Check\+Sphere}} (C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&center, C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT radius) const
+\begin{DoxyCompactList}\small\item\em Check if a sphere is inside or outside of the camera. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}\label{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}} 
 void \mbox{\hyperlink{class_camera_a510c9f3ecf465578002fdd03dadb3f6d}{reset\+Follow\+Path}} ()
 \begin{DoxyCompactList}\small\item\em Reset the follow path (for F\+O\+L\+L\+O\+W\+\_\+\+P\+A\+TH mode) \end{DoxyCompactList}\item 
@@ -190,6 +193,26 @@ Check if a point is inside or outside the camera.
 
 \begin{DoxyParams}{Parameters}
 {\em point} & The 3D point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The point position (F\+R\+C\+L\+\_\+\+I\+N\+S\+I\+DE == is inside) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_camera_a2be9694e31b56ae806836a81844ad1bb}\label{class_camera_a2be9694e31b56ae806836a81844ad1bb}} 
+\index{Camera@{Camera}!frustumCullingCheckSphere@{frustumCullingCheckSphere}}
+\index{frustumCullingCheckSphere@{frustumCullingCheckSphere}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{frustumCullingCheckSphere()}{frustumCullingCheckSphere()}}
+{\footnotesize\ttfamily int Camera\+::frustum\+Culling\+Check\+Sphere (\begin{DoxyParamCaption}\item[{C\+A\+M\+E\+R\+A\+\_\+\+V\+E\+C3 const \&}]{center,  }\item[{C\+A\+M\+E\+R\+A\+\_\+\+F\+L\+O\+AT}]{radius }\end{DoxyParamCaption}) const}
+
+
+
+Check if a sphere is inside or outside of the camera. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & The center of the sphere \\
+\hline
+{\em radius} & The radius of the sphere \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

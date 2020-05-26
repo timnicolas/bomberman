@@ -11,7 +11,8 @@ This is the player object.
 
 
 
-Inheritance diagram for Player\+:\nopagebreak
+Inheritance diagram for Player\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +21,8 @@ Inheritance diagram for Player\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for Player\+:\nopagebreak
+Collaboration diagram for Player\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -65,6 +67,10 @@ bool \mbox{\hyperlink{class_player_abf6efda3ab13411d806493e043c895bf}{rm\+Bonus}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_player}{Player}} remove a $<$ bonus $>$ \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_player_ab01e550627a1b778e1fa09b29fd89a1a}{add\+Bomb}} ()
 \begin{DoxyCompactList}\small\item\em increment bomb, clamp to total\+Bombs \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a887060c225dcc34aa7d029be67033e20}{start\+Win\+Anim}} ()
+\begin{DoxyCompactList}\small\item\em start end animation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_acfee156e2e7cdcb474a1f34fec5bfa6d}{play\+Pause\+Animation}} (bool play\+Val)
+\begin{DoxyCompactList}\small\item\em play/pause animation \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{class_player_a26c511cf5a62d7de26347cdc15df609b}{anim\+End\+Cb}} (std\+::string anim\+Name)
 \begin{DoxyCompactList}\small\item\em called on animation end if passed to \mbox{\hyperlink{class_model}{Model}} \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
@@ -213,6 +219,21 @@ Copy this object.
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_player}{Player}}\& A reference to the copied object 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_player_acfee156e2e7cdcb474a1f34fec5bfa6d}\label{class_player_acfee156e2e7cdcb474a1f34fec5bfa6d}} 
+\index{Player@{Player}!playPauseAnimation@{playPauseAnimation}}
+\index{playPauseAnimation@{playPauseAnimation}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{playPauseAnimation()}{playPauseAnimation()}}
+{\footnotesize\ttfamily void Player\+::play\+Pause\+Animation (\begin{DoxyParamCaption}\item[{bool}]{play\+Val }\end{DoxyParamCaption})}
+
+
+
+play/pause animation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em play\+Val} & the new play value \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}\label{class_player_afdc99f7dc10aa6c2a7c8bb86c7b8beb5}} 
 \index{Player@{Player}!resetParams@{resetParams}}
 \index{resetParams@{resetParams}!Player@{Player}}
@@ -243,6 +264,16 @@ true
 
 false 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a887060c225dcc34aa7d029be67033e20}\label{class_player_a887060c225dcc34aa7d029be67033e20}} 
+\index{Player@{Player}!startWinAnim@{startWinAnim}}
+\index{startWinAnim@{startWinAnim}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{startWinAnim()}{startWinAnim()}}
+{\footnotesize\ttfamily void Player\+::start\+Win\+Anim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+start end animation 
+
 \mbox{\Hypertarget{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}\label{class_player_a7d4df2ce6e2dafb5bfeb179462dc02cb}} 
 \index{Player@{Player}!takeBonus@{takeBonus}}
 \index{takeBonus@{takeBonus}!Player@{Player}}

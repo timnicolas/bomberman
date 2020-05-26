@@ -21,7 +21,8 @@ Inheritance diagram for A\+Scene\+Menu\+:
 \end{figure}
 
 
-Collaboration diagram for A\+Scene\+Menu\+:\nopagebreak
+Collaboration diagram for A\+Scene\+Menu\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -54,7 +55,7 @@ virtual void \mbox{\hyperlink{class_a_scene_menu_ad493937ca0d8ec4d710307593c0e77
 \begin{DoxyCompactList}\small\item\em called when the scene is unloaded \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_button_u_i}{Button\+UI}} \& \mbox{\hyperlink{class_a_scene_menu_a20622fb8d15a21b407d4832e66162cbb}{add\+Button}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&text)
 \begin{DoxyCompactList}\small\item\em add a button in the menu with menu settings \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& \mbox{\hyperlink{class_a_scene_menu_a0c777fee34873f9528c8beb08aa2eca6}{add\+Button\+Image}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename)
+\mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& \mbox{\hyperlink{class_a_scene_menu_a227d6b26f1933a6d4713075181ee0dd6}{add\+Button\+Image}} (glm\+::vec2 pos, glm\+::vec2 size, std\+::string const \&filename, std\+::string const \&filename\+Hover=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em add a button with image in the menu with menu settings \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_slider_u_i}{Slider\+UI}} \& \mbox{\hyperlink{class_a_scene_menu_ad526697a433c9f8e627eb6c147a5bd20}{add\+Slider}} (glm\+::vec2 pos, glm\+::vec2 size, float min, float max, float val, float step)
 \begin{DoxyCompactList}\small\item\em add a slider in the menu with menu settings \end{DoxyCompactList}\item 
@@ -175,11 +176,11 @@ add a button in the menu with menu settings
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_button_u_i}{Button\+UI}}\& a reference to the element created 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_a_scene_menu_a0c777fee34873f9528c8beb08aa2eca6}\label{class_a_scene_menu_a0c777fee34873f9528c8beb08aa2eca6}} 
+\mbox{\Hypertarget{class_a_scene_menu_a227d6b26f1933a6d4713075181ee0dd6}\label{class_a_scene_menu_a227d6b26f1933a6d4713075181ee0dd6}} 
 \index{ASceneMenu@{ASceneMenu}!addButtonImage@{addButtonImage}}
 \index{addButtonImage@{addButtonImage}!ASceneMenu@{ASceneMenu}}
 \doxysubsubsection{\texorpdfstring{addButtonImage()}{addButtonImage()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& A\+Scene\+Menu\+::add\+Button\+Image (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_button_image_u_i}{Button\+Image\+UI}} \& A\+Scene\+Menu\+::add\+Button\+Image (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{std\+::string const \&}]{filename,  }\item[{std\+::string const \&}]{filename\+Hover = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
@@ -192,6 +193,8 @@ add a button with image in the menu with menu settings
 {\em size} & the size \\
 \hline
 {\em filename} & the path to the image \\
+\hline
+{\em filename\+Hover} & the path to the image on hover \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -404,7 +407,7 @@ Implements \mbox{\hyperlink{class_a_scene_a7c303489d4c296482af38aa5deccbd8b}{A\+
 
 
 
-Reimplemented in \mbox{\hyperlink{class_scene_game_a0797fee2de442f68aef19cc5c3299ec3}{Scene\+Game}}, \mbox{\hyperlink{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_loading_ae51a1b4d4f738847d50036c174364f9e}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_game_over_aa9c4f9d3cabdc89176c0113e2864f3e8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_aa59d21ea311bab5163574441f3960734}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}{Scene\+Victory}}.
+Reimplemented in \mbox{\hyperlink{class_scene_game_a0797fee2de442f68aef19cc5c3299ec3}{Scene\+Game}}, \mbox{\hyperlink{class_scene_help_a8f6cc7a52fe41d06815ff10a9ac941a2}{Scene\+Help}}, \mbox{\hyperlink{class_scene_end_game_a145614d80f41512a5bcf539278555d0c}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_exit_a3b7110e736f86836568fdb2f8a997877}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_loading_ae51a1b4d4f738847d50036c174364f9e}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_game_over_aa9c4f9d3cabdc89176c0113e2864f3e8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_aa59d21ea311bab5163574441f3960734}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ac79e3eadfb4bfafa8733888a1e86f57e}{Scene\+Victory}}.
 
 \mbox{\Hypertarget{class_a_scene_menu_a13b29d13f531109e90428c6f14d50e05}\label{class_a_scene_menu_a13b29d13f531109e90428c6f14d50e05}} 
 \index{ASceneMenu@{ASceneMenu}!getNbUIElements@{getNbUIElements}}
@@ -456,7 +459,7 @@ Implements \mbox{\hyperlink{class_a_scene_ad431efa9c183182e8b5abb1bb8437a74}{A\+
 
 
 
-Implemented in \mbox{\hyperlink{class_scene_game_a841268ba3ea129f7c02cfafcafd32a4f}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_aa952941065350cdde0390695b32ac31d}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_a19323950409add2d1b0df92799acf4d2}{Scene\+Settings}}, \mbox{\hyperlink{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_help_adabf402b245092d311b08ec1139aa3c5}{Scene\+Help}}, \mbox{\hyperlink{class_scene_loading_aa0463a9826f1b50e5980e41d57c80778}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a11f68db49f9bf996efb0ce14913e5580}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_exit_ad9168291bb031fee797a7964590e1b73}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_a7ddd370503e10ff64e3d023f0a0acdb8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_pause_ae5e00c5fcd82e97985d93f918b9e4b35}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}{Scene\+Victory}}.
+Implemented in \mbox{\hyperlink{class_scene_game_a841268ba3ea129f7c02cfafcafd32a4f}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_aa952941065350cdde0390695b32ac31d}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_a19323950409add2d1b0df92799acf4d2}{Scene\+Settings}}, \mbox{\hyperlink{class_scene_debug_a4e413808e3d50dd29f9e1d07df4e6c4c}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_help_adabf402b245092d311b08ec1139aa3c5}{Scene\+Help}}, \mbox{\hyperlink{class_scene_level_selection_ab6374f18220f26c22e062bfacc2ff962}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_difficulty_a7fb9dd5ee9d623e346d917cd7a5db956}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a9503a63d52d2a11dbc56c97f35ff6eae}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_loading_aa0463a9826f1b50e5980e41d57c80778}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a11f68db49f9bf996efb0ce14913e5580}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_exit_ad9168291bb031fee797a7964590e1b73}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_a7ddd370503e10ff64e3d023f0a0acdb8}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_load_game_a4ef89351e679b7f681fa55e5f723dd16}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_pause_ae5e00c5fcd82e97985d93f918b9e4b35}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_ab7dc4308732478fa13c8a3209f63e6b7}{Scene\+Victory}}.
 
 \mbox{\Hypertarget{class_a_scene_menu_a3e4fc24a1fb0bcd6296f4856a2e3c611}\label{class_a_scene_menu_a3e4fc24a1fb0bcd6296f4856a2e3c611}} 
 \index{ASceneMenu@{ASceneMenu}!operator=@{operator=}}
@@ -497,7 +500,7 @@ Implements \mbox{\hyperlink{class_a_scene_af3ed61809cc5924b9d5530473576a0c7}{A\+
 
 
 
-Reimplemented in \mbox{\hyperlink{class_scene_game_a5e23048e3ad8c6fde2d753ed7449e2d5}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_ab6ae0c8b3adbce736429e61a27966e31}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_ac32c443d620d0417b301193e87885a91}{Scene\+Settings}}, \mbox{\hyperlink{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}{Scene\+Help}}, \mbox{\hyperlink{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_loading_a5b4f2b636e55908bb2f29180aa875201}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a5d095883d0b1fceb3125ef2689a7a09c}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_ac4547b0ed87f3c324e75dafb8f96b5af}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_a376de6952be83718fb19d268d9327ef6}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}{Scene\+Victory}}.
+Reimplemented in \mbox{\hyperlink{class_scene_game_a5e23048e3ad8c6fde2d753ed7449e2d5}{Scene\+Game}}, \mbox{\hyperlink{class_scene_cheat_code_ab6ae0c8b3adbce736429e61a27966e31}{Scene\+Cheat\+Code}}, \mbox{\hyperlink{class_scene_settings_ac32c443d620d0417b301193e87885a91}{Scene\+Settings}}, \mbox{\hyperlink{class_scene_debug_a97234cec6e43aa3d891e3f6d2ff51528}{Scene\+Debug}}, \mbox{\hyperlink{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}{Scene\+Help}}, \mbox{\hyperlink{class_scene_difficulty_a2a3d3328b04df7047cc03725a9c5eb3c}{Scene\+Difficulty}}, \mbox{\hyperlink{class_scene_end_game_a36b55558e75b9cad9d17a28d8a1ce8d2}{Scene\+End\+Game}}, \mbox{\hyperlink{class_scene_level_selection_a9784885da4583eaba695812bedf8847c}{Scene\+Level\+Selection}}, \mbox{\hyperlink{class_scene_loading_a5b4f2b636e55908bb2f29180aa875201}{Scene\+Loading}}, \mbox{\hyperlink{class_scene_main_menu_a5d095883d0b1fceb3125ef2689a7a09c}{Scene\+Main\+Menu}}, \mbox{\hyperlink{class_scene_load_game_ad33de3b5d98596754f058a4e096ba1b3}{Scene\+Load\+Game}}, \mbox{\hyperlink{class_scene_exit_a60fd49ea48551bd3035efa7cabe4d08d}{Scene\+Exit}}, \mbox{\hyperlink{class_scene_game_over_ac4547b0ed87f3c324e75dafb8f96b5af}{Scene\+Game\+Over}}, \mbox{\hyperlink{class_scene_pause_a376de6952be83718fb19d268d9327ef6}{Scene\+Pause}}, and \mbox{\hyperlink{class_scene_victory_aea51a7b48a3243175e1759b20f853c16}{Scene\+Victory}}.
 
 
 

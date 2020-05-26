@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="bomberman-logo-mini.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">bomberman
    </div>
@@ -114,6 +115,9 @@ $(function() {
 </li>
 <li>_currentLvl
 : <a class="el" href="class_scene_level_selection.html#afa1ff9c9029dd3226dbdc17c46b88081">SceneLevelSelection</a>
+</li>
+<li>_currentPage
+: <a class="el" href="class_scene_help.html#abf3bcfbc83476e78d91dd23be4652a47">SceneHelp</a>
 </li>
 <li>_cursorPos
 : <a class="el" href="class_text_input_u_i.html#a06b223f0059aafca03f51dbe516f7fc7">TextInputUI</a>
@@ -286,6 +290,9 @@ $(function() {
 <li>_imgDefSize
 : <a class="el" href="class_a_base_u_i.html#a14a4484bb3b54794bde4739f8e4ac54e">ABaseUI</a>
 </li>
+<li>_imgHoverTextureID
+: <a class="el" href="class_a_base_u_i.html#a9507b571165a3ec451996c0ec480e64e">ABaseUI</a>
+</li>
 <li>_imgShader
 : <a class="el" href="class_a_base_u_i.html#a53274b7689fa36bd667645cb80b31e3e">ABaseUI</a>
 </li>
@@ -369,6 +376,7 @@ $(function() {
 <li>_lastSceneName
 : <a class="el" href="class_scene_exit.html#ab79e5e47529f081f0ebe4298b5be4c97">SceneExit</a>
 , <a class="el" href="class_scene_game_over.html#abf015c1667f14f83adcd22f5ccdbb360">SceneGameOver</a>
+, <a class="el" href="class_scene_help.html#a9997dedbcb6da1dbed92242a211b0484">SceneHelp</a>
 , <a class="el" href="class_scene_load_game.html#a4615279dd03f5533862a57b54f251970">SceneLoadGame</a>
 , <a class="el" href="class_scene_pause.html#a039f8c0c94692dc50f8ef6f6f4284b9b">ScenePause</a>
 , <a class="el" href="class_scene_victory.html#a72a7535197c55d7e16d70d0beb8641e2">SceneVictory</a>
@@ -388,8 +396,11 @@ $(function() {
 <li>_loadGameInfos()
 : <a class="el" href="class_scene_game.html#a89da32e1946f6ece6085333527501b72">SceneGame</a>
 </li>
+<li>_loadHelp
+: <a class="el" href="class_scene_game.html#ace4cb459a6b78ff4fa742972d8769460">SceneGame</a>
+</li>
 <li>_loadImg()
-: <a class="el" href="class_a_base_u_i.html#a844de1b2a7f8ede19b090c3efa4c75da">ABaseUI</a>
+: <a class="el" href="class_a_base_u_i.html#a240a38aa0552dfa9ea7fcf8f056b3363">ABaseUI</a>
 </li>
 <li>_loadScene()
 : <a class="el" href="class_scene_manager.html#a9209f024c89479aab57bf3277c86a584">SceneManager</a>
@@ -429,11 +440,17 @@ $(function() {
 <li>_mouseClickColor
 : <a class="el" href="class_a_base_u_i.html#a13e2f41345b37ed5998d93f98fba5f88">ABaseUI</a>
 </li>
+<li>_mouseClickColorText
+: <a class="el" href="class_a_base_u_i.html#a6353aeb00c74bb66c65eecb23ff63788">ABaseUI</a>
+</li>
 <li>_mouseHover
 : <a class="el" href="class_a_base_u_i.html#a66b70cd45cd3e8daa6c877c728fc61c5">ABaseUI</a>
 </li>
 <li>_mouseHoverColor
 : <a class="el" href="class_a_base_u_i.html#aebbf27b207374a6430cc7b66299f2846">ABaseUI</a>
+</li>
+<li>_mouseHoverColorText
+: <a class="el" href="class_a_base_u_i.html#a53e79f69ed0c96246d59d113831534e8">ABaseUI</a>
 </li>
 <li>_mouseScrollSpeed
 : <a class="el" href="class_scrollbar_u_i.html#a626bf47cfb0bea04f453029b986341e2">ScrollbarUI</a>
@@ -449,6 +466,9 @@ $(function() {
 </li>
 <li>_name
 : <a class="el" href="class_json_obj.html#a134e8965a7952fcdfc76d0cec76b1251">JsonObj&lt; T &gt;</a>
+</li>
+<li>_nbPages
+: <a class="el" href="class_scene_help.html#a0f208f261ca99f8acc3389c191c67d14">SceneHelp</a>
 </li>
 <li>_openCheatCode()
 : <a class="el" href="class_scene_manager.html#acae2f12e491a06191c50e0459b00b910">SceneManager</a>
@@ -517,6 +537,15 @@ $(function() {
 <li>_scrollbarSize
 : <a class="el" href="class_scrollbar_u_i.html#a6125bbe47abf1518e69299967d19b43a">ScrollbarUI</a>
 </li>
+<li>_selected
+: <a class="el" href="class_a_base_u_i.html#aa8591df596571dddb7b0ef87fbd02f69">ABaseUI</a>
+</li>
+<li>_selectedColor
+: <a class="el" href="class_a_base_u_i.html#a9196333d9132c5d77ad9fe0b433cabd1">ABaseUI</a>
+</li>
+<li>_selectedColorText
+: <a class="el" href="class_a_base_u_i.html#a9baedc9a4fa1b9a337ab07a341bb7d3b">ABaseUI</a>
+</li>
 <li>_selectedGame
 : <a class="el" href="class_scene_load_game.html#aa07779d67adf894e656b24ada2385aa9">SceneLoadGame</a>
 </li>
@@ -569,6 +598,12 @@ $(function() {
 <li>_textFont
 : <a class="el" href="class_a_base_u_i.html#a14dff508ca40dac0ee7c1b6971f77ffa">ABaseUI</a>
 </li>
+<li>_textOutline
+: <a class="el" href="class_a_base_u_i.html#af589bc6edf0de106d0086bb90f979a03">ABaseUI</a>
+</li>
+<li>_textOutlineColor
+: <a class="el" href="class_a_base_u_i.html#a774176996863d33eafee46189f4c6674">ABaseUI</a>
+</li>
 <li>_textPadding
 : <a class="el" href="class_a_base_u_i.html#a671ff5cf527f5bd46c53aec1e5bf7587">ABaseUI</a>
 </li>
@@ -582,7 +617,8 @@ $(function() {
 : <a class="el" href="class_a_entity.html#a771c85ac38a97b2d0772d5bbfa3d8776">AEntity</a>
 </li>
 <li>_transition
-: <a class="el" href="class_scene_level_selection.html#a8933e75587039a89a300a7e68296db2d">SceneLevelSelection</a>
+: <a class="el" href="class_scene_help.html#a8af54e472c2936530460731d84d59f32">SceneHelp</a>
+, <a class="el" href="class_scene_level_selection.html#a8933e75587039a89a300a7e68296db2d">SceneLevelSelection</a>
 </li>
 <li>_unloadImg()
 : <a class="el" href="class_a_base_u_i.html#a4483f9f8c5f4f72a185d850ab94e90bb">ABaseUI</a>

@@ -41,7 +41,7 @@ virtual \mbox{\hyperlink{class_text_render_a1c0bf422181e9a679ce8b43ebd7315ff}{$\
 \begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}{load\+Font}} (std\+::string name, std\+::string const \&filename, uint32\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Load a ttf file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}{write}} (std\+::string const \&font\+Name, std\+::string text, glm\+::vec3 pos, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
+void \mbox{\hyperlink{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}{write}} (std\+::string const \&font\+Name, std\+::string text, glm\+::vec3 pos, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f), int outline=0, glm\+::vec3 color\+Outline=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
 \begin{DoxyCompactList}\small\item\em Write 2D text on screen. \end{DoxyCompactList}\item 
 uint32\+\_\+t \mbox{\hyperlink{class_text_render_a26975c1b71e98bf4d60abfebc2942816}{str\+Width}} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
 \begin{DoxyCompactList}\small\item\em Get the width of a text (in pixel) with a given font and size. \end{DoxyCompactList}\item 
@@ -221,11 +221,11 @@ Get the width of a text (in pixel) with a given font and size.
 \begin{DoxyReturn}{Returns}
 uint32\+\_\+t The text width 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}\label{class_text_render_ab9c82e5be4c8c3e9d6108353770a5de3}} 
+\mbox{\Hypertarget{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}\label{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}} 
 \index{TextRender@{TextRender}!write@{write}}
 \index{write@{write}!TextRender@{TextRender}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}}
-{\footnotesize\ttfamily void Text\+Render\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{glm\+::vec3}]{pos,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{glm\+::vec3}]{color = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Text\+Render\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{glm\+::vec3}]{pos,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{glm\+::vec3}]{color = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)},  }\item[{int}]{outline = {\ttfamily 0},  }\item[{glm\+::vec3}]{color\+Outline = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)} }\end{DoxyParamCaption})}
 
 
 
@@ -242,6 +242,10 @@ Write 2D text on screen.
 {\em scale} & The text scale \\
 \hline
 {\em color} & The text color \\
+\hline
+{\em outline} & The outline size \\
+\hline
+{\em color\+Outline} & The color of outline \\
 \hline
 \end{DoxyParams}
 

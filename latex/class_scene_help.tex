@@ -53,14 +53,29 @@ virtual bool \mbox{\hyperlink{class_scene_help_adabf402b245092d311b08ec1139aa3c5
 \mbox{\Hypertarget{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}\label{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}} 
 virtual void \mbox{\hyperlink{class_scene_help_abba5fe9f2d582141e4b2b39c23a8c696}{load}} ()
 \begin{DoxyCompactList}\small\item\em called when the scene is loaded \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_help_a4087ac75d635f5a5584fada9ec7b664e}\label{class_scene_help_a4087ac75d635f5a5584fada9ec7b664e}} 
+virtual void \mbox{\hyperlink{class_scene_help_a4087ac75d635f5a5584fada9ec7b664e}{unload}} ()
+\begin{DoxyCompactList}\small\item\em called when the scene is unloaded \end{DoxyCompactList}\item 
 virtual bool \mbox{\hyperlink{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}{update}} ()
-\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em this is the update function (called every frames) \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_scene_help_a8f6cc7a52fe41d06815ff10a9ac941a2}{draw}} ()
+\begin{DoxyCompactList}\small\item\em this is the draw function (called every frames) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_help_a176c192d334d8e0a9be2eea5ed3a60f8}{set\+Page}} (int32\+\_\+t page, bool enable\+Transition=true)
+\begin{DoxyCompactList}\small\item\em set the current level in selection \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_scene_help_1_1_buttons_states}{Buttons\+States}} \mbox{\hyperlink{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}{\+\_\+states}}
 \item 
 \mbox{\hyperlink{struct_scene_help_1_1_all_u_i}{All\+UI}} \mbox{\hyperlink{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}{all\+UI}}
+\item 
+std\+::string \mbox{\hyperlink{class_scene_help_a9997dedbcb6da1dbed92242a211b0484}{\+\_\+last\+Scene\+Name}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{class_scene_help_abf3bcfbc83476e78d91dd23be4652a47}{\+\_\+current\+Page}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_scene_help_a0f208f261ca99f8acc3389c191c67d14}{\+\_\+nb\+Pages}}
+\item 
+float \mbox{\hyperlink{class_scene_help_a8af54e472c2936530460731d84d59f32}{\+\_\+transition}}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -104,6 +119,25 @@ Construct a new Scene Help\+:\+: Scene Help object.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_help_a8f6cc7a52fe41d06815ff10a9ac941a2}\label{class_scene_help_a8f6cc7a52fe41d06815ff10a9ac941a2}} 
+\index{SceneHelp@{SceneHelp}!draw@{draw}}
+\index{draw@{draw}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily bool Scene\+Help\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+this is the draw function (called every frames) 
+
+\begin{DoxyReturn}{Returns}
+true if the draw is a success 
+
+false if there are an error in draw 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a5c11f34c83f025e1181219bf25ce4694}{A\+Scene\+Menu}}.
+
 \mbox{\Hypertarget{class_scene_help_adabf402b245092d311b08ec1139aa3c5}\label{class_scene_help_adabf402b245092d311b08ec1139aa3c5}} 
 \index{SceneHelp@{SceneHelp}!init@{init}}
 \index{init@{init}!SceneHelp@{SceneHelp}}
@@ -141,6 +175,23 @@ Overload operator =.
 \begin{DoxyReturn}{Returns}
 \mbox{\hyperlink{class_scene_help}{Scene\+Help}}\& 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_help_a176c192d334d8e0a9be2eea5ed3a60f8}\label{class_scene_help_a176c192d334d8e0a9be2eea5ed3a60f8}} 
+\index{SceneHelp@{SceneHelp}!setPage@{setPage}}
+\index{setPage@{setPage}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{setPage()}{setPage()}}
+{\footnotesize\ttfamily void Scene\+Help\+::set\+Page (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{page,  }\item[{bool}]{enable\+Transition = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+set the current level in selection 
+
+
+\begin{DoxyParams}{Parameters}
+{\em page} & the level ID \\
+\hline
+{\em enable\+Transition} & If true, enable smooth transition btw levels \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}\label{class_scene_help_aa5170e0722a6aecbfeea1f920d09cff7}} 
 \index{SceneHelp@{SceneHelp}!update@{update}}
 \index{update@{update}!SceneHelp@{SceneHelp}}
@@ -163,13 +214,37 @@ Reimplemented from \mbox{\hyperlink{class_a_scene_menu_a1deeb5fd9be97376998cd2af
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}\label{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}} 
+\mbox{\Hypertarget{class_scene_help_abf3bcfbc83476e78d91dd23be4652a47}\label{class_scene_help_abf3bcfbc83476e78d91dd23be4652a47}} 
+\index{SceneHelp@{SceneHelp}!\_currentPage@{\_currentPage}}
+\index{\_currentPage@{\_currentPage}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{\_currentPage}{\_currentPage}}
+{\footnotesize\ttfamily int32\+\_\+t Scene\+Help\+::\+\_\+current\+Page\hspace{0.3cm}{\ttfamily [protected]}}
+
+Current page ID \mbox{\Hypertarget{class_scene_help_a9997dedbcb6da1dbed92242a211b0484}\label{class_scene_help_a9997dedbcb6da1dbed92242a211b0484}} 
+\index{SceneHelp@{SceneHelp}!\_lastSceneName@{\_lastSceneName}}
+\index{\_lastSceneName@{\_lastSceneName}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{\_lastSceneName}{\_lastSceneName}}
+{\footnotesize\ttfamily std\+::string Scene\+Help\+::\+\_\+last\+Scene\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The last scene name \mbox{\Hypertarget{class_scene_help_a0f208f261ca99f8acc3389c191c67d14}\label{class_scene_help_a0f208f261ca99f8acc3389c191c67d14}} 
+\index{SceneHelp@{SceneHelp}!\_nbPages@{\_nbPages}}
+\index{\_nbPages@{\_nbPages}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{\_nbPages}{\_nbPages}}
+{\footnotesize\ttfamily uint32\+\_\+t Scene\+Help\+::\+\_\+nb\+Pages\hspace{0.3cm}{\ttfamily [protected]}}
+
+Total nomber of pages \mbox{\Hypertarget{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}\label{class_scene_help_aea1e6baffbdcee7cd8792ebfa15fbaae}} 
 \index{SceneHelp@{SceneHelp}!\_states@{\_states}}
 \index{\_states@{\_states}!SceneHelp@{SceneHelp}}
 \doxysubsubsection{\texorpdfstring{\_states}{\_states}}
 {\footnotesize\ttfamily \mbox{\hyperlink{struct_scene_help_1_1_buttons_states}{Buttons\+States}} Scene\+Help\+::\+\_\+states\hspace{0.3cm}{\ttfamily [protected]}}
 
-All buttons states \mbox{\Hypertarget{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}\label{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}} 
+All buttons states \mbox{\Hypertarget{class_scene_help_a8af54e472c2936530460731d84d59f32}\label{class_scene_help_a8af54e472c2936530460731d84d59f32}} 
+\index{SceneHelp@{SceneHelp}!\_transition@{\_transition}}
+\index{\_transition@{\_transition}!SceneHelp@{SceneHelp}}
+\doxysubsubsection{\texorpdfstring{\_transition}{\_transition}}
+{\footnotesize\ttfamily float Scene\+Help\+::\+\_\+transition\hspace{0.3cm}{\ttfamily [protected]}}
+
+Used to do a smooth transition \mbox{\Hypertarget{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}\label{class_scene_help_a81b24ca15d36e6e5fb6e25d074a81c40}} 
 \index{SceneHelp@{SceneHelp}!allUI@{allUI}}
 \index{allUI@{allUI}!SceneHelp@{SceneHelp}}
 \doxysubsubsection{\texorpdfstring{allUI}{allUI}}

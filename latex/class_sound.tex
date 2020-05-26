@@ -39,8 +39,7 @@ void \mbox{\hyperlink{class_sound_a65b0f66e9123caed2809da366ac4d377}{pause}} ()
 \mbox{\Hypertarget{class_sound_a6139aff26f5bd3fea27fbef013124afc}\label{class_sound_a6139aff26f5bd3fea27fbef013124afc}} 
 void \mbox{\hyperlink{class_sound_a6139aff26f5bd3fea27fbef013124afc}{resume}} ()
 \begin{DoxyCompactList}\small\item\em Resumes all the channels playing this sound. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}\label{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}} 
-void \mbox{\hyperlink{class_sound_a07c551ab56d2f83a861a2f7fd81b480a}{stop}} ()
+void \mbox{\hyperlink{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}{stop}} (int fade\+Out=0)
 \begin{DoxyCompactList}\small\item\em Stop all the channels playing this sound. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_sound_ab992f2602675183484ba78932c1fca3c}{update\+Volume}} (float volume)
 \begin{DoxyCompactList}\small\item\em Update the volume for all the channels playing this sound. If a channel was set with volume modifier below 1.\+0, the modifier will be conserved. \end{DoxyCompactList}\item 
@@ -119,6 +118,21 @@ int channel used.
 {\em A} & \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}} if the sound failed to be played. Not enough channels are allocated. \\
 \hline
 \end{DoxyExceptions}
+\mbox{\Hypertarget{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}\label{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}} 
+\index{Sound@{Sound}!stop@{stop}}
+\index{stop@{stop}!Sound@{Sound}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void Sound\+::stop (\begin{DoxyParamCaption}\item[{int}]{fade\+Out = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Stop all the channels playing this sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fade\+Out} & Stop sound with a fade\+Out effect. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_sound_ab992f2602675183484ba78932c1fca3c}\label{class_sound_ab992f2602675183484ba78932c1fca3c}} 
 \index{Sound@{Sound}!updateVolume@{updateVolume}}
 \index{updateVolume@{updateVolume}!Sound@{Sound}}
