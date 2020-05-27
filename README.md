@@ -29,7 +29,7 @@ Some hidden debug controls:
 | <kbd>F1</kbd> | Show the menu navigation shortcuts |
 | <kbd>F3</kbd> | Show debugs infos (fps, nb of entities, ...) |
 | <kbd>C</kbd> | Enable Free Flight Camera (only available with the [DEBUG flag](#-manual-installation)) |
-| <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> | Enable Free Flight Camera (only available with the [DEBUG flag](#-manual-installation)) |
+| <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> | Move the camera (only available if Free Flight Camera is enabled) |
 
 ### 💾 save & load system
 
@@ -46,14 +46,14 @@ You can enter cheatcode by pressing the <kbd>/</kbd> key.
 | `/log` \<type> \<message>  | Log a message in the system console, `/log list` to get the list of types.  |
 | `/tp` \<x> \<y>  | Teleport player to a given position (if possible). Use relative position with `~` (~-1, ~3, ...)<br>`/tp ~3 ~`: Tp the player 3 blocks right to you.  |
 | `/getbonus` <bonus ...>  | Get a bonus effect, `/getbonus list` to get the list of bonus.  |
-| `/loop` \<nb> \<commands ...>  | Execute commands `nb` times, example:<br>`/loop 3 "/clear" "/getbonus life"`  |
-| `/exec` \<commands ...>  | Execute multiples commands, example:<br>`/exec "/clear" "/log info \"cleared\""`  |
+| `/loop` \<nb> \<commands&nbsp;...>  | Execute commands `nb` times, example:<br>`/loop 3 "/clear" "/getbonus life"`  |
+| `/exec` \<commands&nbsp;...>  | Execute multiples commands, example:<br>`/exec "/clear" "/log info \"cleared\""`  |
 | `/summon` \<typename> \<x> \<y>  | Summon an entity at specified location, `/summon list` to get the list of entities   |
-| `/unlock` \<levelId ...>  | Unlock specified level  |
-| `/rmbonus` \<bonus, ...>  | Remove a bonus effect `/rmbonus list` to get the list of bonus  |
+| `/unlock` \<levelId&nbsp;...>  | Unlock specified level  |
+| `/rmbonus` \<bonus&nbsp;...>  | Remove a bonus effect `/rmbonus list` to get the list of bonus  |
 | `/restart`   | Restart the current level  |
 | `/debug` [&nbsp;show \| hide \| reset&nbsp;] \<elem ...>  | Show/Hide/Reset debug element, `/debug list` to get the list of elements, example:<br>`/debug show collider`  |
-| `/volume` \<type> \<value>  | Change music/sound volume.  |
+| `/volume` [&nbsp;master | music | sound&nbsp;] \<value>  | Change master/music/sound volume. `/volume list` to get the list of volumes's type |
 
 ## 💻 Installation
 
