@@ -1,5 +1,7 @@
 # bomberman [[42](https://www.42.fr/) project] [![Build Status](https://travis-ci.com/tnicolas42/bomberman.svg?branch=master)](https://travis-ci.com/tnicolas42/bomberman)
 
+![logo](https://github.com/tnicolas42/bomberman-assets/blob/master/imgs/bomberman-logo.png)
+
 ## 💣 The project
 
 A 3d remake of the classic game Bomberman.
@@ -88,9 +90,9 @@ usage: ./bomberman [-u] [--reset] [--reset-settings] [--reset-history] [--reset-
 	-u, --usage: show usage
 ```
 
-### Uninstall projet
+### 🗑 Uninstall projet
 
-To uninstall the project, and remove all settings and saves's games
+To uninstall the project, and remove app, settings and saves's games
 ```
 make uninstall
 ```
