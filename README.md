@@ -26,10 +26,10 @@ Some hidden debug controls:
 
 | Key  | Description |
 | --- | --- |
-| `F1` | Show the menu navigation shortcuts |
-| `F3` | Show debugs infos (fps, nb of entities, ...) |
-| `C` | Enable Free Flight Camera (only available with the [DEBUG flag](### Manual installation)) |
-| `WASD` | Enable Free Flight Camera (only available with the [DEBUG flag](### Manual installation)) |
+| <kbd>F1</kbd> | Show the menu navigation shortcuts |
+| <kbd>F3</kbd> | Show debugs infos (fps, nb of entities, ...) |
+| <kbd>C</kbd> | Enable Free Flight Camera (only available with the [DEBUG flag](#-manual-installation)) |
+| <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> | Enable Free Flight Camera (only available with the [DEBUG flag](#-manual-installation)) |
 
 ### 💾 save & load system
 
@@ -37,23 +37,23 @@ Some hidden debug controls:
 
 ### 👩‍💻 Cheatcodes
 
-You can enter cheatcode by pressing the `/` key.
+You can enter cheatcode by pressing the <kbd>/</kbd> key.
 
 | Command  | Description |
 | --- | --- |
-| `/help` [command, ...]  | Get general help or help on a command.  |
-| `/clear` [history \| all \| lines]  | Clear lines or/and history.  |
-| `/log` <type> <message>  | Log a message in the system console, `/log list` to get the list of types.  |
-| `/tp` <x> <y>  | Teleport player to a given position (if possible). Use relative position with ~ (~-1, ~3, ...)<br>`/tp 3 ~`: Tp the player 3 block right to you.  |
+| `/help` [&nbsp;command, ...&nbsp;]  | Get general help or help on a command.  |
+| `/clear` [&nbsp;history \| all \| lines&nbsp;]  | Clear lines or/and history.  |
+| `/log` \<type> \<message>  | Log a message in the system console, `/log list` to get the list of types.  |
+| `/tp` \<x> \<y>  | Teleport player to a given position (if possible). Use relative position with `~` (~-1, ~3, ...)<br>`/tp ~3 ~`: Tp the player 3 blocks right to you.  |
 | `/getbonus` <bonus ...>  | Get a bonus effect, `/getbonus list` to get the list of bonus.  |
-| `/loop` <nb> <commands ...>  | Execute commands `nb` times, example:<br>`/loop 3 "/clear" "/getbonus life"`  |
-| `/exec` <commands ...>  | Execute multiples commands, example:<br>`/exec "/clear" "/log info \"cleared\""`  |
-| `/summon` <typename> <x> <y>  | Summon an entity at specified location, `/summon list` to get the list of entities   |
-| `/unlock` <levelId ...>  | Unlock specified level  |
-| `/rmbonus` <bonus, ...>  | Remove a bonus effect `/rmbonus list` to get the list of bonus  |
+| `/loop` \<nb> \<commands ...>  | Execute commands `nb` times, example:<br>`/loop 3 "/clear" "/getbonus life"`  |
+| `/exec` \<commands ...>  | Execute multiples commands, example:<br>`/exec "/clear" "/log info \"cleared\""`  |
+| `/summon` \<typename> \<x> \<y>  | Summon an entity at specified location, `/summon list` to get the list of entities   |
+| `/unlock` \<levelId ...>  | Unlock specified level  |
+| `/rmbonus` \<bonus, ...>  | Remove a bonus effect `/rmbonus list` to get the list of bonus  |
 | `/restart`   | Restart the current level  |
-| `/debug` [show\|hide\|reset] <elem ...>  | Show/Hide/Reset debug element, `/debug list` to get the list of elements, example:<br>`/debug show collider`  |
-| `/volume` <type> <value>  | Change music/sound volume.  |
+| `/debug` [&nbsp;show \| hide \| reset&nbsp;] \<elem ...>  | Show/Hide/Reset debug element, `/debug list` to get the list of elements, example:<br>`/debug show collider`  |
+| `/volume` \<type> \<value>  | Change music/sound volume.  |
 
 ## 💻 Installation
 
@@ -104,7 +104,7 @@ If you need to generate a `.dmg` for osx
 make create_dmg
 ```
 
-To get more infos about the makefile commands
+ℹ️ To get more infos about the makefile commands
 ```bash
 make help
 ```
