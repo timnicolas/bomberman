@@ -8,7 +8,7 @@ The project is fully written in C++ with the OpenGL framework.
 
 ### 📚 Rules
 
-Bomberman is a series of video games from Hudson Soft where the player plays a bomber, the aim being to use bomb to protect youself from opponents and exit the level.
+Bomberman is a series of video games from Hudson Soft where the player plays a bomber, the aim being to use bomb to protect yourself from opponents and exit the level.
 
 > View the full game rules in the in-game **help menu**.
 
@@ -57,7 +57,7 @@ You can enter cheatcode by pressing the `/` key.
 
 Bomberman is compatible with **OSX🍎** and **Linux🐧**.
 
-If you are on **OSX🍎** you can directly download the dmg build [here](/release/file.dmg).
+If you are on **OSX🍎** you can directly download the dmg build [here](https://www.dropbox.com/s/uk0l9rlvxbrjpoo/bomberman.dmg?dl=0).
 
 ### 👷 Manual installation
 
@@ -86,6 +86,13 @@ usage: ./bomberman [-u] [--reset] [--reset-settings] [--reset-history] [--reset-
 	--reset-history: reset commands history before starting
 	--reset-saves: reset all users saves before starting
 	-u, --usage: show usage
+```
+
+### Uninstall projet
+
+To uninstall the project, and remove all settings and saves's games
+```
+make uninstall
 ```
 
 ### 🗜 Makefile and Build
