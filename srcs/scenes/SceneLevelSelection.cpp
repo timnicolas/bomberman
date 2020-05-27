@@ -72,10 +72,12 @@ bool			SceneLevelSelection::init() {
 		tmpSize.x = menuWidth;
 		tmpSize.y = menuHeight * 5;
 		tmpPos.x = (winSz.x / 2) - (tmpSize.x / 2);
-		tmpPos.y = menuHeight;
-		allUI.score = &addText(tmpPos, tmpSize, "score");
-		tmpPos.y = menuHeight * 0.8 - menuHeight;
-		allUI.text = &addText(tmpPos, tmpSize, "level");
+		tmpPos.y = winSz.y / 2 - menuHeight / 2;
+		allUI.score = &addText(tmpPos, tmpSize, "score")
+			.setTextColor(colorise(s.j("colors").j("white").u("color")));
+		tmpPos.y -= tmpSize.y;
+		allUI.text = &addText(tmpPos, tmpSize, "level")
+			.setTextColor(colorise(s.j("colors").j("white").u("color")));
 		tmpPos.y = (winSz.y / 2) - (tmpSize.y / 2);
 		for (uint32_t i = 0; i < _states.nbLevel; i++) {
 			addButtonImage(tmpPos, tmpSize, scGame.getLevelImg(i));
