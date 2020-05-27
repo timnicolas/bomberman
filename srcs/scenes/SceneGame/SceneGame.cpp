@@ -225,7 +225,6 @@ void SceneGame::load() {
 	|| state == GameState::GAME_OVER) {
 		state = GameState::PLAY;
 	}
-	_gui->enableCursor(false);
 	player->playPauseAnimation(true);
 }
 /**
