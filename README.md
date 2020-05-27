@@ -111,3 +111,16 @@ make help
 
 ### 📖 The code is fully documented with doxygen
 Check the documentation [here](https://tnicolas42.github.io/bomberman)
+
+## 🦄 Authors
+
+* **Ernest Marin** - [github](https://github.com/zer0nim)
+* **Emilien Baudet** - [github](https://github.com/ebaudet)
+* **Tim Nicolas** - [github](https://github.com/tnicolas42)
+* **Guilhem Smith** - [github](https://github.com/guilhemSmith)
+
+See also the list of [contributors](https://github.com/tnicolas42/bomberman/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
