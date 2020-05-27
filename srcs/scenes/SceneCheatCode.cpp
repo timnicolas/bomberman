@@ -40,7 +40,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 		{"tp", {
 			"<x> <y>",
 			"Teleport to a given position (if possible). You can set relative position with ~ (~-1, ~3, ...)\n"
-				CHEATCODE_TAB"/tp 3 ~ -> tp 3 block right to you",
+				CHEATCODE_TAB"/tp ~3 ~ -> tp 3 block right to you",
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
