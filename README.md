@@ -53,7 +53,7 @@ You can enter cheatcode by pressing the <kbd>/</kbd> key.
 | `/rmbonus` \<bonus&nbsp;...>  | Remove a bonus effect `/rmbonus list` to get the list of bonus  |
 | `/restart`   | Restart the current level  |
 | `/debug` [&nbsp;show \| hide \| reset&nbsp;] \<elem ...>  | Show/Hide/Reset debug element, `/debug list` to get the list of elements, example:<br>`/debug show collider`  |
-| `/volume` [&nbsp;master | music | sound&nbsp;] \<value>  | Change master/music/sound volume. `/volume list` to get the list of volumes's type |
+| `/volume` [&nbsp;master \| music \| sound&nbsp;] \<value>  | Change master/music/sound volume. `/volume list` to get the list of volumes's type |
 
 ## 💻 Installation
 
