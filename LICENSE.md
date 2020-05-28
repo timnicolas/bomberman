@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2020 Tim Nicolas
+Copyright (c) 2020 Tim Nicolas, Ernest Marin, Emilien Baudet, Gilhem Smith
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
