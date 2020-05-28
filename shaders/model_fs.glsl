@@ -39,7 +39,7 @@ uniform DirLight	dirLight;
 vec3 calcDirLight(DirLight light, vec3 norm, vec3 viewDir) {
 	vec3	lightDir = normalize(-fs_in.TangentLightDir);
 	// diffuse
-	float	diff = max(dot(lightDir, norm), 0.0);
+	float	diff = max(dot(lightDir, norm), 0.0);  // result between 0 and 1
 	// specular
 	vec3	halfwayDir = normalize(lightDir + viewDir);
 	float	spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess * 4);
