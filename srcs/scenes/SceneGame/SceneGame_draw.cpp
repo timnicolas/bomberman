@@ -43,28 +43,61 @@ bool	SceneGame::draw() {
  * @return false If failed
  */
 bool	SceneGame::drawForMenu() {
-	/* draw models */
-	try {
-		_menuModels.player->transform.setRot(0);
-		_menuModels.player->transform.setPos({-0.9, 0, 0});
-		if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
-			_menuModels.player->setAnimation("Armature|idle");
-		_menuModels.player->draw();
+	// first pass, draw the scene in framebuffer
+	glBindFramebuffer(GL_FRAMEBUFFER, _blurFbo[0]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
 
-		_menuModels.flower->transform.setRot(0);
-		_menuModels.flower->transform.setPos({0.9, 0, 0});
-		if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
-			_menuModels.flower->setAnimation("Armature|idle");
-		_menuModels.flower->draw();
-	}
-	catch(OpenGLModel::ModelException const & e) {
-		logErr(e.what());
-		return false;
+	{  // draw the scene
+		/* draw models */
+		try {
+			_menuModels.player->transform.setRot(0);
+			_menuModels.player->transform.setPos({-0.9, 0, 0});
+			if (_menuModels.player->getCurrentAnimationName() != "Armature|idle")
+				_menuModels.player->setAnimation("Armature|idle");
+			_menuModels.player->draw();
+
+			_menuModels.flower->transform.setRot(0);
+			_menuModels.flower->transform.setPos({0.9, 0, 0});
+			if (_menuModels.flower->getCurrentAnimationName() != "Armature|idle")
+				_menuModels.flower->setAnimation("Armature|idle");
+			_menuModels.flower->draw();
+		}
+		catch(OpenGLModel::ModelException const & e) {
+			logErr(e.what());
+			return false;
+		}
+
+		// draw skybox
+		glm::mat4	view = _gui->cam->getViewMatrix();
+		_gui->drawSkybox(view);
 	}
 
-	// draw skybox
-	glm::mat4	view = _gui->cam->getViewMatrix();
-	_gui->drawSkybox(view);
+	// Second pass the apply blur effect
+	uint32_t	nbPass = 6;
+	uint32_t	totalPass = nbPass * 2;
+	bool		horizontal = true;
+
+	glDisable(GL_DEPTH_TEST);
+	for (uint32_t i = 0; i < totalPass; ++i) {
+		if (i < totalPass - 1) {
+			glBindFramebuffer(GL_FRAMEBUFFER, _blurFbo[(i + 1) % 2]);
+		}
+		else {
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		}
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		_blurShader->use();
+		_blurShader->setBool("horizontal", horizontal);
+		glBindVertexArray(_ppShVao);
+		glBindTexture(GL_TEXTURE_2D, _blurTexColor[i % 2]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		_blurShader->unuse();
+
+		horizontal = !horizontal;
+	}
+	glEnable(GL_DEPTH_TEST);
 
 	return true;
 }

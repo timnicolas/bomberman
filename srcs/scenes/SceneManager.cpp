@@ -319,11 +319,6 @@ bool SceneManager::_draw() {
 	/* draw */
 	_gui->preDraw();
 
-	// draw debug menu scene
-	if (_sceneMap[SceneNames::DEBUG_MENU]->draw() == false) {
-		return false;
-	}
-
 	// draw the scene
 	if (_scene == SceneNames::GAME) {
 		if (getStatsM<bool, AScene>("SceneGame draw", *_sceneMap[_scene], &AScene::draw) == false) {
@@ -342,6 +337,11 @@ bool SceneManager::_draw() {
 			logErr("Unexpected error when drawing scene");
 			return false;
 		}
+	}
+
+	// draw debug menu scene
+	if (_sceneMap[SceneNames::DEBUG_MENU]->draw() == false) {
+		return false;
 	}
 
 	_gui->postDraw();
