@@ -118,6 +118,9 @@ SceneGame::~SceneGame() {
 	delete _menuModels.crispy;
 	delete _menuModels.follow;
 	delete _terrain;
+
+	glDeleteFramebuffers(2, _blurFbo);
+	glDeleteTextures(2, _blurTexColor);
 }
 
 /**
