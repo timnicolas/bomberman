@@ -13,6 +13,7 @@ SceneDebug::SceneDebug(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
 	_draw3dMenu = false;
+	_blurEnabled = false;
 	_lastUpdateMs = getMs();
 	_fps = SceneManager::getFps();
 }

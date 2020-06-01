@@ -21,6 +21,14 @@
 #define VOID_COLOR glm::vec4 {-1 , -1, -1, -1}
 
 /**
+ * @brief Struct TransparentBox, store transparent ui pos/size for blur effect
+ */
+struct	TransparentBox {
+	glm::vec2	pos;  /**< The box position */
+	glm::vec2	size;  /**< The box size */
+};
+
+/**
  * @brief Scene object to re-implement in all scenes for menu
  *
  * this object contains functions to create buttons, images, ...
@@ -68,6 +76,12 @@ class ASceneMenu : public AScene {
 	protected:
 		std::vector<ABaseUI *>	_buttons;  /**< All UI elements (auto added with addXXX functions) */
 		bool					_draw3dMenu;  /**< True if the menu background is in 3D */
+		/* blur effect */
+		bool	_blurEnabled;  /**< If enabled blur transparent ui */
+		static	std::vector<uint8_t>		_aMaskData;  /**< Blur mask texture raw data */
+		static	std::vector<TransparentBox>	_transparentBoxs;  /**< Transparents box to be blured */
 
-		bool			_initBG();
+		bool	_initBG();
+		bool	_updateAlphaMask();
+		bool	_updateAlphaMaskData();
 };

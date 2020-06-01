@@ -19,6 +19,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
   _historyActID(-1)
 {
 	_draw3dMenu = false;
+	_blurEnabled = false;
 	_commandsList = {
 		{"help", {
 			"[command, ...]",

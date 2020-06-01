@@ -14,6 +14,7 @@ SceneLoading::SceneLoading(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime)
 {
 	_draw3dMenu = false;
+	_blurEnabled = false;
 }
 
 /**
