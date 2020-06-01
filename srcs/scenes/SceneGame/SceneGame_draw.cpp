@@ -91,8 +91,15 @@ bool	SceneGame::drawForMenu() {
 		_blurShader->use();
 		_blurShader->setBool("horizontal", horizontal);
 		glBindVertexArray(_ppShVao);
+		// fbo texture
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, _blurTexColor[i % 2]);
+		// mask texture
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _blurMaskTex);
+		// draw the quad
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glActiveTexture(GL_TEXTURE0);
 		_blurShader->unuse();
 
 		horizontal = !horizontal;

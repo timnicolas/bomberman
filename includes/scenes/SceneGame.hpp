@@ -97,6 +97,7 @@ private:
 	uint32_t	_blurFbo[2];  /**< PostProcess blur framebuffer */
 	uint32_t	_blurTexColor[2];  /**< PostProcess blur texture */
 	uint32_t	_rbo;  /**< renderBufferObject to store depth and stencil buffers */
+	uint32_t	_blurMaskTex;  /**< The blur mask texture */
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
@@ -210,6 +211,7 @@ public:
 	std::string		print() const;
 	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
 	bool			positionInGame(glm::vec3 pos, glm::vec3 sz = glm::vec3(1, 1, 1));
+	bool			updateBlurMaskTex(std::vector<uint8_t> const &aMaskData);
 
 	// SceneGame methods
 	virtual bool	init();

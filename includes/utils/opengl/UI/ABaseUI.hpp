@@ -150,6 +150,8 @@ class ABaseUI {
 		virtual bool				isEnabled() const;
 		virtual glm::vec2 &			getPos();
 		virtual glm::vec2 const &	getPos() const;
+		virtual float				getZ() const;
+		virtual glm::vec4			getColor() const;
 		virtual glm::vec2			getRealPos() const;  // get master + pos + offset
 		virtual glm::vec2 &			getSize();
 		virtual glm::vec2 const &	getSize() const;

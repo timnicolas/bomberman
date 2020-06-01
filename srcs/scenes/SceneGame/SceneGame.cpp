@@ -85,6 +85,7 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime)
 	_terrain = nullptr;
 	_blurShader = 0;
 	_rbo = 0;
+	_blurMaskTex = 0;
 	enemiesToKill = 0;
 	enemiesKilled = 0;
 	_alarm = false;
@@ -121,6 +122,7 @@ SceneGame::~SceneGame() {
 
 	glDeleteFramebuffers(2, _blurFbo);
 	glDeleteTextures(2, _blurTexColor);
+	glDeleteTextures(1, &_blurMaskTex);
 }
 
 /**
