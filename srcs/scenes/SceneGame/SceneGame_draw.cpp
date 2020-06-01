@@ -448,18 +448,11 @@ std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
 			-1,  // speed
 		},
 		{
-			{player->position.x, player->position.y + 20, player->position.z + 5},  // pos
+			{player->position.x, player->position.y + 16, player->position.z + 8},  // pos
 			CamMovement::NoDirection,  // lookDir
 			player->position,  // lookAt
 			false,  // tpTo
 			_gui->cam->movementSpeed / 5,  // speed
-		},
-		{
-			{player->position.x, player->position.y + 1, player->position.z},  // pos
-			CamMovement::NoDirection,  // lookDir
-			player->position,  // lookAt
-			false,  // tpTo
-			_gui->cam->movementSpeed * 5,  // speed
 		},
 	};
 }
