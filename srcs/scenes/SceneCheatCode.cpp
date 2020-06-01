@@ -16,6 +16,7 @@
 SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 : ASceneMenu(gui, dtTime),
   isCmdLnEnabled(true),
+  _allLevelsUnlocked(false),
   _historyActID(-1)
 {
 	_draw3dMenu = false;
@@ -40,7 +41,7 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 		{"tp", {
 			"<x> <y>",
 			"Teleport to a given position (if possible). You can set relative position with ~ (~-1, ~3, ...)\n"
-				CHEATCODE_TAB"/tp 3 ~ -> tp 3 block right to you",
+				CHEATCODE_TAB"/tp ~3 ~ -> tp 3 block right to you",
 			&SceneCheatCode::_execTp,
 		}},
 		{"getbonus", {
@@ -67,8 +68,8 @@ SceneCheatCode::SceneCheatCode(Gui * gui, float const &dtTime)
 			&SceneCheatCode::_execSummon,
 		}},
 		{"unlock", {
-			"<levelId ...>",
-			"Unlock a level by id\n",
+			"<levelId ...> ['all']",
+			"Unlock a level by id (or all levels if /unlock all)\n",
 			&SceneCheatCode::_execUnlock,
 		}},
 		{"rmbonus", {
@@ -795,6 +796,8 @@ bool SceneCheatCode::isLevelUnlocked(uint32_t levelId) {
 	return scCheatCode._isLevelUnlocked(levelId);
 }
 bool SceneCheatCode::_isLevelUnlocked(uint32_t levelId) const {
+	if (_allLevelsUnlocked)
+		return true;
 	return std::find(_levelsUnlocked.begin(), _levelsUnlocked.end(), levelId) != _levelsUnlocked.end();
 }
 
