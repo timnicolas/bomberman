@@ -290,13 +290,7 @@ bool SceneManager::_update() {
 	/* scene */
 	if (!_isInCheatCode && !cheatCodeClosed) {
 		// update the scene
-		if (_scene == SceneNames::GAME) {
-			if (_sceneMap[_scene]->update() == false) {
-				logErr("Unexpected error when updating scene");
-				return false;
-			}
-		}
-		else if (_sceneMap[_scene]->update() == false) {
+		if (_sceneMap[_scene]->update() == false) {
 			logErr("Unexpected error when updating scene");
 			return false;
 		}
@@ -320,13 +314,7 @@ bool SceneManager::_draw() {
 	_gui->preDraw();
 
 	// draw the scene
-	if (_scene == SceneNames::GAME) {
-		if (_sceneMap[_scene]->draw() == false) {
-			logErr("Unexpected error when drawing scene");
-			return false;
-		}
-	}
-	else if (_sceneMap[_scene]->draw() == false) {
+	if (_sceneMap[_scene]->draw() == false) {
 		logErr("Unexpected error when drawing scene");
 		return false;
 	}
