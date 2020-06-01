@@ -79,7 +79,9 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
-	blurFilterBefore();  // blur filter settings, enable framebuffer
+	if (state != GameState::INTRO) {
+		blurFilterBefore();  // blur filter settings, enable framebuffer
+	}
 
 	// draw background terrain
 	if (s.j("debug").j("show").b("terrain")) {
@@ -181,7 +183,9 @@ bool	SceneGame::drawGame() {
 		allUI.introText->draw();
 	}
 
-	blurFilterAfter();  // blur filter postprocess
+	if (state != GameState::INTRO) {
+		blurFilterAfter();  // blur filter postprocess
+	}
 
 	return true;
 }
@@ -192,6 +196,8 @@ bool	SceneGame::drawGame() {
  * @return false If failed
  */
 bool	SceneGame::drawVictory() {
+	blurFilterBefore();  // blur filter settings, enable framebuffer
+
 	/* draw models */
 	try {
 		_menuModels.player->transform.setRot(0);
@@ -215,6 +221,8 @@ bool	SceneGame::drawVictory() {
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
 
+	blurFilterAfter();  // blur filter postprocess
+
 	return true;
 }
 
@@ -224,6 +232,8 @@ bool	SceneGame::drawVictory() {
  * @return false If failed
  */
 bool	SceneGame::drawGameOver() {
+	blurFilterBefore();  // blur filter settings, enable framebuffer
+
 	/* draw models */
 	try {
 		_menuModels.player->transform.setRot(0);
@@ -246,6 +256,8 @@ bool	SceneGame::drawGameOver() {
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
+
+	blurFilterAfter();  // blur filter postprocess
 
 	return true;
 }
