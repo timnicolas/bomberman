@@ -14,13 +14,13 @@ Bomberman is a series of video games from Hudson Soft where the player plays a b
 
 > View the full game rules in the in-game **help menu**.
 
-![example game gif video here](/assets/GIFs/example.gif)
+![demo gif](../media/bombermanDemo.gif?raw=true)
 
 ### ⌨ General controls
 
 You can see and update all controls in the in-game **settings menu**.
 
-![Control menu image here](/assets/GIFs/example.png)
+![control menu](../media/ControlsMenu.png?raw=true)
 
 Some hidden debug controls:
 
@@ -33,11 +33,15 @@ Some hidden debug controls:
 
 ### 💾 save & load system
 
-![save_menu image here](/assets/GIFs/example.png)
+Save and load your progress:
+
+![save menu](../media/saveMenu.png?raw=true)
 
 ### 👩‍💻 Cheatcodes
 
 You can enter cheatcode by pressing the <kbd>/</kbd> key.
+
+![cheatcode menu](../media/cheatcode.png?raw=true)
 
 | Command  | Description |
 | --- | --- |
