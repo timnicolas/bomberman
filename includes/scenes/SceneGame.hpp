@@ -212,6 +212,8 @@ public:
 	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
 	bool			positionInGame(glm::vec3 pos, glm::vec3 sz = glm::vec3(1, 1, 1));
 	bool			updateBlurMaskTex(std::vector<uint8_t> const &aMaskData);
+	void			blurFilterBefore();
+	void			blurFilterAfter();
 
 	// SceneGame methods
 	virtual bool	init();
