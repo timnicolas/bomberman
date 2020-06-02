@@ -43,6 +43,8 @@ bool	SceneGame::draw() {
  * @return false If failed
  */
 bool	SceneGame::drawForMenu() {
+	blurFilterBefore();  // blur filter settings, enable framebuffer
+
 	/* draw models */
 	try {
 		_menuModels.player->transform.setRot(0);
@@ -66,6 +68,8 @@ bool	SceneGame::drawForMenu() {
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
 
+	blurFilterAfter();  // blur filter postprocess
+
 	return true;
 }
 
@@ -75,6 +79,10 @@ bool	SceneGame::drawForMenu() {
  * @return false If failed
  */
 bool	SceneGame::drawGame() {
+	if (state != GameState::INTRO) {
+		blurFilterBefore();  // blur filter settings, enable framebuffer
+	}
+
 	// draw background terrain
 	if (s.j("debug").j("show").b("terrain")) {
 		try {
@@ -175,6 +183,10 @@ bool	SceneGame::drawGame() {
 		allUI.introText->draw();
 	}
 
+	if (state != GameState::INTRO) {
+		blurFilterAfter();  // blur filter postprocess
+	}
+
 	return true;
 }
 
@@ -184,6 +196,8 @@ bool	SceneGame::drawGame() {
  * @return false If failed
  */
 bool	SceneGame::drawVictory() {
+	blurFilterBefore();  // blur filter settings, enable framebuffer
+
 	/* draw models */
 	try {
 		_menuModels.player->transform.setRot(0);
@@ -207,6 +221,8 @@ bool	SceneGame::drawVictory() {
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
 
+	blurFilterAfter();  // blur filter postprocess
+
 	return true;
 }
 
@@ -216,6 +232,8 @@ bool	SceneGame::drawVictory() {
  * @return false If failed
  */
 bool	SceneGame::drawGameOver() {
+	blurFilterBefore();  // blur filter settings, enable framebuffer
+
 	/* draw models */
 	try {
 		_menuModels.player->transform.setRot(0);
@@ -238,6 +256,8 @@ bool	SceneGame::drawGameOver() {
 	// draw skybox
 	glm::mat4	view = _gui->cam->getViewMatrix();
 	_gui->drawSkybox(view);
+
+	blurFilterAfter();  // blur filter postprocess
 
 	return true;
 }
@@ -435,4 +455,51 @@ std::vector<CamPoint>	SceneGame::_getVictoryAnim() const {
 			_gui->cam->movementSpeed / 5,  // speed
 		},
 	};
+}
+
+/**
+ * @brief Call this function before drawing operation you want the ui to blur
+ */
+void	SceneGame::blurFilterBefore() {
+	// first pass, draw the scene in framebuffer
+	glBindFramebuffer(GL_FRAMEBUFFER, _blurFbo[0]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST);
+}
+/**
+ * @brief Call this function after drawing operation you want the ui to blur
+ */
+void	SceneGame::blurFilterAfter() {
+	// Second pass the apply blur effect
+	uint32_t	nbPass = 6;
+	uint32_t	totalPass = nbPass * 2;
+	bool		horizontal = true;
+
+	glDisable(GL_DEPTH_TEST);
+	for (uint32_t i = 0; i < totalPass; ++i) {
+		if (i < totalPass - 1) {
+			glBindFramebuffer(GL_FRAMEBUFFER, _blurFbo[(i + 1) % 2]);
+		}
+		else {
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		}
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		_blurShader->use();
+		_blurShader->setBool("horizontal", horizontal);
+		glBindVertexArray(_ppShVao);
+		// fbo texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, _blurTexColor[i % 2]);
+		// mask texture
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _blurMaskTex);
+		// draw the quad
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glActiveTexture(GL_TEXTURE0);
+		_blurShader->unuse();
+
+		horizontal = !horizontal;
+	}
+	glEnable(GL_DEPTH_TEST);
 }
