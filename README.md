@@ -116,6 +116,9 @@ make help
 ### 📖 The code is fully documented with doxygen
 Check the documentation [here](https://tnicolas42.github.io/bomberman)
 
+### 🍩 3d models
+All 3d models are made by us with blender, some are animated using Mixamo, [Inspect 3d models here](https://sketchfab.com/zer0nim/collections/bomberman).
+
 ## 🦄 Authors
 
 * **Ernest Marin** - [github](https://github.com/zer0nim)
