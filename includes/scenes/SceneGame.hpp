@@ -20,6 +20,10 @@
 
 #define NO_LEVEL -1  // value is no level loaded
 #define LEVEL_INTRO_DURATION 2
+#define BLUR_SHADER_VS "shaders/blur_vs.glsl"
+#define BLUR_SHADER_FS "shaders/blur_fs.glsl"
+#define PP_VAO_WIDTH 4
+#define PP_V_ARRAY_SIZE 24
 
 class Player;
 class AEnemy;
@@ -83,13 +87,23 @@ private:
 		DrawForMenu();
 	};
 	DrawForMenu _menuModels;  /**< All 3D elements to draw */
-	bool	_alarm;  /**< If we want to ring alarm */
-	Model	*_terrain;  /**< The terrain element */
+	bool		_alarm;  /**< If we want to ring alarm */
+	Model		*_terrain;  /**< The terrain element */
+	// post processing stuff
+	Shader		*_blurShader;  /**< PostProcess blur shader */
+	static std::array<float, PP_V_ARRAY_SIZE> const	_ppVertices;  /**< Vertices data */
+	uint32_t	_ppShVbo;  /**< PostProcess vbo */
+	uint32_t	_ppShVao;  /**< PostProcess vao */
+	uint32_t	_blurFbo[2];  /**< PostProcess blur framebuffer */
+	uint32_t	_blurTexColor[2];  /**< PostProcess blur texture */
+	uint32_t	_rbo;  /**< renderBufferObject to store depth and stencil buffers */
+	uint32_t	_blurMaskTex;  /**< The blur mask texture */
 
 	// Methods
 	bool	_loadLevel(int32_t levelId);
 	bool	_unloadLevel();
 	bool	_initJsonLevel(int32_t levelId);
+	bool	_initPostProcess();
 	void	_drawBoard();
 
 protected:
@@ -197,6 +211,9 @@ public:
 	std::string		print() const;
 	bool			clearFromBoard(AEntity *entity, glm::vec2 pos);
 	bool			positionInGame(glm::vec3 pos, glm::vec3 sz = glm::vec3(1, 1, 1));
+	bool			updateBlurMaskTex(std::vector<uint8_t> const &aMaskData);
+	void			blurFilterBefore();
+	void			blurFilterAfter();
 
 	// SceneGame methods
 	virtual bool	init();

@@ -609,6 +609,18 @@ glm::vec2 &			ABaseUI::getPos() { return _pos; }
  */
 glm::vec2 const &	ABaseUI::getPos() const { return _pos; }
 /**
+ * @brief Get the z position
+ *
+ * @return float the z position
+ */
+float				ABaseUI::getZ() const { return _z; }
+/**
+ * @brief Get the ui color
+ *
+ * @return glm::vec4 the ui color in rgba order
+ */
+glm::vec4			ABaseUI::getColor() const { return _color; }
+/**
  * @brief Get the real position (position + master position + offset)
  *
  * @return glm::vec2 The real position

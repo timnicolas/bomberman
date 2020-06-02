@@ -311,7 +311,7 @@ bool	SceneGame::postUpdate() {
 /**
  * @brief Update game informations
  */
-void			SceneGame::_updateGameInfos() {
+void	SceneGame::_updateGameInfos() {
 	glm::vec2	winSz = _gui->gameInfo.windowSize;
 	glm::vec2	tmpPos;
 	float		imgY;
@@ -543,4 +543,47 @@ void			SceneGame::_updateGameInfos() {
 	} catch (ABaseUI::UIException const & e) {
 		logErr(e.what());
 	}
+}
+
+/**
+ * @brief Update the blur Mask texture
+ *
+ * @param aMaskData mask texture raw data
+ * @return true on success
+ * @return false on failure
+ */
+bool	SceneGame::updateBlurMaskTex(std::vector<uint8_t> const &aMaskData) {
+	glm::vec2 winSize = _gui->gameInfo.windowSize;
+
+	// create the texture the first time
+	if (_blurMaskTex == 0) {
+		glGenTextures(1, &_blurMaskTex);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _blurMaskTex);
+		// create the texture
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, winSize.x, winSize.y, 0, GL_RED,
+			GL_UNSIGNED_BYTE, &aMaskData[0]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		// tell
+		_blurShader->use();
+		_blurShader->setInt("sceneTex", 0);
+		_blurShader->setInt("blurMaskTex", 1);
+		_blurShader->unuse();
+	}
+	// else just update the data
+	else {
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, _blurMaskTex);
+		// update texture data
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, winSize.x, winSize.y, GL_RED,
+			GL_UNSIGNED_BYTE, &aMaskData[0]);
+		glBindTexture( GL_TEXTURE_2D, 0);
+	}
+	glActiveTexture(GL_TEXTURE0);
+
+	return true;
 }

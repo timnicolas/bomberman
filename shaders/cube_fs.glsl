@@ -64,7 +64,7 @@ uniform float nightProgress = 0.0;
 vec3 calcDirLight(DirLight light, vec3 norm, vec3 viewDir, vec3 color) {
 	vec3	lightDir = normalize(-light.direction);
 	// diffuse
-	float	diff = max(dot(norm, lightDir), 0.0);
+	float	diff = max(dot(lightDir, norm), 0.0);  // result between 0 and 1
 	// specular
 	vec3 halfwayDir = normalize(lightDir + viewDir);
 	float spec = pow(max(dot(norm, halfwayDir), 0.0), material.shininess * 4);

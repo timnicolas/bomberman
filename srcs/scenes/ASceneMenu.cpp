@@ -10,7 +10,9 @@
  * @param dtTime A reference to the delta time
  */
 ASceneMenu::ASceneMenu(Gui * gui, float const &dtTime)
-: AScene(gui, dtTime), _draw3dMenu(true) {}
+: AScene(gui, dtTime),
+  _draw3dMenu(true),
+  _blurEnabled(true) {}
 
 /**
  * @brief Destroy the ASceneMenu::ASceneMenu object
@@ -87,6 +89,11 @@ bool	ASceneMenu::update() {
  */
 bool	ASceneMenu::draw() {
 	bool ret = true;
+
+	/* update alpha mask used for blur effect */
+	if (_blurEnabled && !_updateAlphaMask()) {
+		return false;
+	}
 
 	/* 3d background */
 	if (_draw3dMenu && s.j("debug").b("3d-menu")) {
@@ -351,6 +358,98 @@ bool ASceneMenu::_initBG() {
 	return true;
 }
 
+/**
+ * @brief Update the transparent ui blur mask
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	ASceneMenu::_updateAlphaMask() {
+	glm::vec2 winSize = _gui->gameInfo.windowSize;
+	bool	maskNeedUpdate = false;
+
+	// init mask texture data container
+	if (ASceneMenu::_aMaskData.empty()) {
+		uint32_t	_dataSize = winSize.x * winSize.y;
+		_aMaskData.insert(_aMaskData.end(), _dataSize, 0);
+		maskNeedUpdate = true;
+	}
+
+	// verify if the mask need an update
+	uint32_t	i = 0;
+	for (auto it = _buttons.begin(); !maskNeedUpdate && it != _buttons.end(); ++it) {
+		float	alpha = (*it)->getColor().a;
+
+		if (alpha > 0.0 && alpha < 1.0 && (*it)->isEnabled()) {
+			if (i >= _transparentBoxs.size() ||
+				_transparentBoxs[i].pos != (*it)->getRealPos() ||
+				_transparentBoxs[i].size != (*it)->getSize()) {
+				maskNeedUpdate = true;
+			}
+			++i;
+		}
+	}
+	if (_transparentBoxs.size() != i) {
+		maskNeedUpdate = true;
+	}
+
+	// update the mask texture if needed
+	if (maskNeedUpdate) {
+		// fill _transparentBoxs with corect items
+		_transparentBoxs.clear();
+		for (auto it = _buttons.begin(); it != _buttons.end(); ++it) {
+			float	alpha = (*it)->getColor().a;
+
+			if (alpha > 0.0 && alpha < 1.0 && (*it)->isEnabled()) {
+				TransparentBox	crntBox;
+				crntBox.pos = (*it)->getRealPos();
+				crntBox.size = (*it)->getSize();
+				_transparentBoxs.push_back(crntBox);
+			}
+		}
+
+		if (!_updateAlphaMaskData()) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+/**
+ * @brief Update _aMaskData by reading _transparentBoxs
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	ASceneMenu::_updateAlphaMaskData() {
+	glm::vec2 winSize = _gui->gameInfo.windowSize;
+
+	// clear the mask
+	std::fill(_aMaskData.begin(), _aMaskData.end(), 0);
+
+	// fill it with _transparentBoxs area
+	for (TransparentBox crntBox : _transparentBoxs) {
+		glm::ivec2	endPos(crntBox.pos + crntBox.size);
+		glm::ivec2	cPos(crntBox.pos);
+		for (; cPos.y < endPos.y; ++cPos.y) {
+			cPos.x = crntBox.pos.x;
+			for (; cPos.x < endPos.x; ++cPos.x) {
+				_aMaskData[cPos.y * winSize.x + cPos.x] = 255;
+			}
+		}
+	}
+
+	// update openGl texture
+	SceneGame & scGame = *reinterpret_cast<SceneGame *>(SceneManager::getScene(
+		SceneNames::GAME));
+	if (!scGame.updateBlurMaskTex(_aMaskData)) {
+		return false;
+	}
+
+	return true;
+}
+
 /* getter */
 /**
  * @brief Get an UI element (button, slider, ...)
@@ -365,3 +464,8 @@ ABaseUI &		ASceneMenu::getUIElement(uint32_t id) { return *_buttons[id]; }
  * @return uint32_t The number of UI elements on the menu
  */
 uint32_t		ASceneMenu::getNbUIElements() const { return _buttons.size(); }
+
+// -- Static members initialisation --------------------------------------------
+
+std::vector<uint8_t>	ASceneMenu::_aMaskData = std::vector<uint8_t>();
+std::vector<TransparentBox>	ASceneMenu::_transparentBoxs = std::vector<TransparentBox>();

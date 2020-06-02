@@ -113,6 +113,93 @@ bool			SceneGame::init() {
 
 	_initGameInfos();
 
+	if (!_initPostProcess()) {
+		logErr("Failed to init postProcess");
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * @brief init postprocess stuff (framebuffer, texture, ...)
+ *
+ * @return true on success
+ * @return false on failure
+ */
+bool	SceneGame::_initPostProcess() {
+	// create framebuffer for post processing blur effects
+	glGenFramebuffers(2, _blurFbo);
+
+	// generate texture for post processing blur effects
+	glGenTextures(2, _blurTexColor);
+
+	for (uint32_t i = 0; i < 2; ++i) {
+		glBindFramebuffer(GL_FRAMEBUFFER, _blurFbo[i]);
+		glBindTexture(GL_TEXTURE_2D, _blurTexColor[i]);
+		//
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _gui->gameInfo.windowSize.x,
+			_gui->gameInfo.windowSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		// attach it to currently bound framebuffer object
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
+			_blurTexColor[i], 0
+		);
+
+		if (i == 0) {
+			// create render buffer object to store the depth and stencil buffers
+			glGenRenderbuffers(1, &_rbo);
+			glBindRenderbuffer(GL_RENDERBUFFER, _rbo);
+			glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8,
+				_gui->gameInfo.windowSize.x, _gui->gameInfo.windowSize.y);
+			glBindRenderbuffer(GL_RENDERBUFFER, 0);
+		}
+		// attach depth and stencil to the render buffer
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
+			GL_RENDERBUFFER, _rbo);
+
+		// check framebuffer status
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+			logErr("FRAMEBUFFER:: Framebuffer is not complete!");
+			return false;
+		}
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
+
+	// create postProcess shader and fill vao
+	if (!_blurShader) {
+		_blurShader = new Shader(BLUR_SHADER_VS, BLUR_SHADER_FS);
+		_blurShader->use();
+
+		// create and bind vao and vbo
+		glGenVertexArrays(1, &_ppShVao);
+		glBindVertexArray(_ppShVao);
+		glGenBuffers(1, &_ppShVbo);
+		glBindBuffer(GL_ARRAY_BUFFER, _ppShVbo);
+
+		// fill buffer
+		glBufferData(GL_ARRAY_BUFFER, _ppVertices.size() * sizeof(float),
+		&_ppVertices[0], GL_STATIC_DRAW);
+
+		// normalized 2d vertex coordinates
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, PP_VAO_WIDTH * sizeof(float),
+		reinterpret_cast<void*>(0));
+		glEnableVertexAttribArray(0);
+		// vertex texture coordinate
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, PP_VAO_WIDTH * sizeof(float),
+		reinterpret_cast<void*>(2 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+
+		// unbind vao / vbo
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+
+		_blurShader->unuse();
+	}
+
 	return true;
 }
 

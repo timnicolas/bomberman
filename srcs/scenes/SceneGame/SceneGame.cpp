@@ -46,6 +46,18 @@ std::map<std::string, SceneGame::Entity> SceneGame::entitiesCall = {
 	{ENEMY_FROG_STR, {EntityType::ENEMY, [](SceneGame &game) -> AEntity* {return new EnemyFrog(game);}}},
 };
 
+// postProcess face vertices
+std::array<float, PP_V_ARRAY_SIZE> const	SceneGame::_ppVertices = {{
+	// x, y in normalized device coord, texCoord.u, texCoord.v
+	-1.0f, 1.0f,  0.0f, 1.0f,
+	-1.0f, -1.0f,  0.0f, 0.0f,
+	1.0f, -1.0f,  1.0f, 0.0f,
+
+	-1.0f, 1.0f,  0.0f, 1.0f,
+	1.0f, -1.0f,  1.0f, 0.0f,
+	1.0f, 1.0f,  1.0f, 1.0f
+}};
+
 // -- Constructors -------------------------------------------------------------
 
 /**
@@ -54,7 +66,10 @@ std::map<std::string, SceneGame::Entity> SceneGame::entitiesCall = {
  * @param gui A pointer on the gui object
  * @param dtTime A reference to the delta time
  */
-SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
+SceneGame::SceneGame(Gui * gui, float const &dtTime)
+: ASceneMenu(gui, dtTime),
+  _blurFbo{0, 0},
+  _blurTexColor{0, 0} {
 	player = nullptr;
 	enemies = std::vector<AEnemy *>();
 	flags = 0;
@@ -68,6 +83,9 @@ SceneGame::SceneGame(Gui * gui, float const &dtTime) : ASceneMenu(gui, dtTime) {
 	levelCrispies = 0;
 	_draw3dMenu = false;  // disable drawing 3D menu
 	_terrain = nullptr;
+	_blurShader = 0;
+	_rbo = 0;
+	_blurMaskTex = 0;
 	enemiesToKill = 0;
 	enemiesKilled = 0;
 	_alarm = false;
@@ -101,6 +119,10 @@ SceneGame::~SceneGame() {
 	delete _menuModels.crispy;
 	delete _menuModels.follow;
 	delete _terrain;
+
+	glDeleteFramebuffers(2, _blurFbo);
+	glDeleteTextures(2, _blurTexColor);
+	glDeleteTextures(1, &_blurMaskTex);
 }
 
 /**
