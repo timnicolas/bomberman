@@ -1,13 +1,12 @@
 <map id="ABaseUI" name="ABaseUI">
-<area shape="rect" id="node1" title="this is the base UI interface" alt="" coords="583,5,786,845"/>
-<area shape="rect" id="node2" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="78,930,259,1301"/>
-<area shape="rect" id="node5" href="$class_button_image_u_i.html" title="this is the UI for button image" alt="" coords="283,1033,422,1198"/>
-<area shape="rect" id="node6" href="$class_button_u_i.html" title="this is the UI for button" alt="" coords="447,1033,549,1198"/>
-<area shape="rect" id="node7" href="$class_image_u_i.html" title="this is the UI for images" alt="" coords="573,1033,673,1198"/>
-<area shape="rect" id="node8" href="$class_rect_u_i.html" title="this is the UI for rectangle" alt="" coords="697,1033,795,1198"/>
-<area shape="rect" id="node9" href="$class_slider_u_i.html" title="this is the UI for slider" alt="" coords="819,981,961,1249"/>
-<area shape="rect" id="node10" href="$class_text_input_u_i.html" title="this is the UI for text input" alt="" coords="985,893,1149,1337"/>
-<area shape="rect" id="node11" href="$class_text_u_i.html" title="this is the UI for text" alt="" coords="1173,1033,1271,1198"/>
-<area shape="rect" id="node3" href="$class_empty_master_u_i.html" title="this is the UI for invisible master object" alt="" coords="5,1554,148,1719"/>
-<area shape="rect" id="node4" href="$class_scrollbar_u_i.html" title="this is the UI for scrollbar" alt="" coords="173,1385,351,1888"/>
+<area shape="rect" id="node2" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="77,930,260,1301"/>
+<area shape="rect" id="node5" href="$class_button_image_u_i.html" title="this is the UI for button image " alt="" coords="285,1033,423,1198"/>
+<area shape="rect" id="node6" href="$class_button_u_i.html" title="this is the UI for button " alt="" coords="448,1033,551,1198"/>
+<area shape="rect" id="node7" href="$class_image_u_i.html" title="this is the UI for images " alt="" coords="575,1033,675,1198"/>
+<area shape="rect" id="node8" href="$class_rect_u_i.html" title="this is the UI for rectangle " alt="" coords="699,1033,796,1198"/>
+<area shape="rect" id="node9" href="$class_slider_u_i.html" title="this is the UI for slider " alt="" coords="820,981,963,1249"/>
+<area shape="rect" id="node10" href="$class_text_input_u_i.html" title="this is the UI for text input " alt="" coords="987,893,1151,1337"/>
+<area shape="rect" id="node11" href="$class_text_u_i.html" title="this is the UI for text " alt="" coords="1175,1033,1272,1198"/>
+<area shape="rect" id="node3" href="$class_empty_master_u_i.html" title="this is the UI for invisible master object " alt="" coords="5,1554,148,1719"/>
+<area shape="rect" id="node4" href="$class_scrollbar_u_i.html" title="this is the UI for scrollbar " alt="" coords="173,1385,351,1888"/>
 </map>

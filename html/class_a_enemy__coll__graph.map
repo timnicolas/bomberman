@@ -1,24 +1,23 @@
 <map id="AEnemy" name="AEnemy">
-<area shape="rect" id="node1" title="This is the base enemy object." alt="" coords="66,2175,220,2619"/>
-<area shape="rect" id="node2" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="45,1488,217,1903"/>
-<area shape="rect" id="node18" href="$class_player.html" title="This is the player object." alt="" coords="244,2233,375,2560"/>
-<area shape="rect" id="node3" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="689,3261,824,3632"/>
-<area shape="rect" id="node4" href="$class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels." alt="" coords="562,2681,721,3199"/>
-<area shape="rect" id="node5" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="399,2270,527,2523"/>
-<area shape="rect" id="node6" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="412,1583,514,1807"/>
-<area shape="rect" id="node7" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="410,710,596,1007"/>
-<area shape="rect" id="node8" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="768,71,875,295"/>
-<area shape="rect" id="node14" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="862,439,1064,1279"/>
-<area shape="rect" id="node9" href="$class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="432,101,574,266"/>
-<area shape="rect" id="node10" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="598,5,733,361"/>
-<area shape="rect" id="node11" href="$struct_game_info.html" title="General information about the game." alt="" coords="265,108,408,259"/>
-<area shape="rect" id="node12" href="$struct_scene_game_1_1_entities_count.html" title="Stats about number of entites, bombs, ..." alt="" coords="551,2336,732,2457"/>
-<area shape="rect" id="node13" href="$struct_scene_game_1_1_all_u_i.html" title="All UI elements (bonus, text, ...)" alt="" coords="702,1927,856,2151"/>
-<area shape="rect" id="node16" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="919,1510,1100,1881"/>
-<area shape="rect" id="node15" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="904,71,1022,295"/>
-<area shape="rect" id="node17" href="$class_score.html" title="Score calculation object." alt="" coords="843,2285,950,2509"/>
-<area shape="rect" id="node19" href="$struct_player_1_1_active_bonus.html" title="All active bonus for the player." alt="" coords="242,1583,383,1807"/>
-<area shape="rect" id="node20" href="$class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings" alt="" coords="746,2813,908,3067"/>
-<area shape="rect" id="node21" href="$class_e_transform.html" title="Class to manage model transformation." alt="" coords="974,2255,1093,2538"/>
-<area shape="rect" id="node22" href="$struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated." alt="" coords="932,2894,1063,2986"/>
+<area shape="rect" id="node2" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...) " alt="" coords="51,1488,223,1903"/>
+<area shape="rect" id="node18" href="$class_player.html" title="This is the player object. " alt="" coords="247,2233,377,2560"/>
+<area shape="rect" id="node3" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...) " alt="" coords="745,3261,879,3632"/>
+<area shape="rect" id="node4" href="$class_scene_game.html" title="This is the game Scene. In this scene, you can play to the game and load levels. " alt="" coords="618,2681,777,3199"/>
+<area shape="rect" id="node5" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu. " alt="" coords="402,2233,582,2560"/>
+<area shape="rect" id="node6" href="$class_a_scene.html" title="base object to implement in all scenes " alt="" coords="441,1583,543,1807"/>
+<area shape="rect" id="node7" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ... " alt="" coords="457,710,644,1007"/>
+<area shape="rect" id="node8" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="821,71,928,295"/>
+<area shape="rect" id="node14" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="915,439,1117,1279"/>
+<area shape="rect" id="node9" href="$class_texture_manager.html" title="This is the main class to manage textures. " alt="" coords="479,101,623,266"/>
+<area shape="rect" id="node10" href="$class_camera.html" title="this is a camera 3D object " alt="" coords="647,5,782,361"/>
+<area shape="rect" id="node11" href="$struct_game_info.html" title="General information about the game. " alt="" coords="311,108,454,259"/>
+<area shape="rect" id="node12" href="$struct_scene_game_1_1_entities_count.html" title="Stats about number of entites, bombs, ... " alt="" coords="607,2336,788,2457"/>
+<area shape="rect" id="node13" href="$struct_scene_game_1_1_all_u_i.html" title="All UI elements (bonus, text, ...) " alt="" coords="757,1927,912,2151"/>
+<area shape="rect" id="node16" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="974,1510,1157,1881"/>
+<area shape="rect" id="node15" href="$class_text_render.html" title="render 2D text on an openGL 3D context " alt="" coords="957,71,1075,295"/>
+<area shape="rect" id="node17" href="$class_score.html" title="Score calculation object. " alt="" coords="899,2285,1005,2509"/>
+<area shape="rect" id="node19" href="$struct_player_1_1_active_bonus.html" title="All active bonus for the player. " alt="" coords="248,1583,389,1807"/>
+<area shape="rect" id="node20" href="$class_model.html" title="class to easy manage OpenGLModel, pos/rot/scale transformations and animations settings ..." alt="" coords="801,2813,964,3067"/>
+<area shape="rect" id="node21" href="$class_e_transform.html" title="Class to manage model transformation. " alt="" coords="1030,2255,1149,2538"/>
+<area shape="rect" id="node22" href="$struct_entity_state_1_1_struct.html" title="Used to save the state and a bool to know if the state has been updated. " alt="" coords="988,2894,1119,2986"/>
 </map>

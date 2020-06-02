@@ -1,5 +1,5 @@
-\hypertarget{class_image_atlas_render}{}\doxysection{Image\+Atlas\+Render Class Reference}
-\label{class_image_atlas_render}\index{ImageAtlasRender@{ImageAtlasRender}}
+\hypertarget{class_image_atlas_render}{}\section{Image\+Atlas\+Render Class Reference}
+\label{class_image_atlas_render}\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}}
 
 
 Render an image atlas (load png \& draw image by ID)  
@@ -11,51 +11,52 @@ Render an image atlas (load png \& draw image by ID)
 
 
 
-Collaboration diagram for Image\+Atlas\+Render\+:\nopagebreak
+Collaboration diagram for Image\+Atlas\+Render\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=199pt]{class_image_atlas_render__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{class_image_atlas_render_1_1_image_render_error}{Image\+Render\+Error}}
+class \hyperlink{class_image_atlas_render_1_1_image_render_error}{Image\+Render\+Error}
 \begin{DoxyCompactList}\small\item\em Image render exception. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{class_image_atlas_render_1_1_load_image_exception}{Load\+Image\+Exception}}
+class \hyperlink{class_image_atlas_render_1_1_load_image_exception}{Load\+Image\+Exception}
 \begin{DoxyCompactList}\small\item\em Load image exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}{Image\+Atlas\+Render}} (\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} const \&texture\+Manager, uint32\+\_\+t width, uint32\+\_\+t height)
+\hyperlink{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}{Image\+Atlas\+Render} (\hyperlink{class_texture_manager}{Texture\+Manager} const \&texture\+Manager, uint32\+\_\+t width, uint32\+\_\+t height)
 \begin{DoxyCompactList}\small\item\em Construct a new Image Atlas Render\+:\+: Image Atlas Render object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}{Image\+Atlas\+Render}} (\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&src)
+\hyperlink{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}{Image\+Atlas\+Render} (\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} const \&src)
 \begin{DoxyCompactList}\small\item\em Construct a new Image Atlas Render\+:\+: Image Atlas Render object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_image_atlas_render_a6041bd00a0a0fe26deeec02354778ae1}\label{class_image_atlas_render_a6041bd00a0a0fe26deeec02354778ae1}} 
-virtual \mbox{\hyperlink{class_image_atlas_render_a6041bd00a0a0fe26deeec02354778ae1}{$\sim$\+Image\+Atlas\+Render}} ()
+virtual \hyperlink{class_image_atlas_render_a6041bd00a0a0fe26deeec02354778ae1}{$\sim$\+Image\+Atlas\+Render} ()
 \begin{DoxyCompactList}\small\item\em Destroy the Image Atlas Render\+:\+: Image Atlas Render object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} \& \mbox{\hyperlink{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}{operator=}} (\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&rhs)
+\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} \& \hyperlink{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}{operator=} (\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} const \&rhs)
 \begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}{draw}} (glm\+::vec2 pos, glm\+::vec2 size, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
+void \hyperlink{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}{draw} (glm\+::vec2 pos, glm\+::vec2 size, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
 \begin{DoxyCompactList}\small\item\em Draw an image on the screen. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}{draw}} (float posx, float posy, float w, float h, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
+void \hyperlink{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}{draw} (float posx, float posy, float w, float h, int tex\+ID, glm\+::vec4 color=glm\+::vec4(1, 1, 1, 1))
 \begin{DoxyCompactList}\small\item\em Draw an image on the screen. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_shader}{Shader}} \& \mbox{\hyperlink{class_image_atlas_render_aba25059e07e686b04ccbf5840790849d}{get\+Shader}} ()
+\hyperlink{class_shader}{Shader} \& \hyperlink{class_image_atlas_render_aba25059e07e686b04ccbf5840790849d}{get\+Shader} ()
 \begin{DoxyCompactList}\small\item\em Get the shader. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_shader}{Shader}} const  \& \mbox{\hyperlink{class_image_atlas_render_a4c72d64708b498abcddfb27c9851503c}{get\+Shader}} () const
+\hyperlink{class_shader}{Shader} const  \& \hyperlink{class_image_atlas_render_a4c72d64708b498abcddfb27c9851503c}{get\+Shader} () const
 \begin{DoxyCompactList}\small\item\em Get the shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\subsection{Detailed Description}
 Render an image atlas (load png \& draw image by ID) 
 
-\doxysubsection{Constructor \& Destructor Documentation}
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}\label{class_image_atlas_render_a0ae44d3e6a32ca9c6c1134a48bf882ad}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!ImageAtlasRender@{ImageAtlasRender}}
-\index{ImageAtlasRender@{ImageAtlasRender}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{ImageAtlasRender()}{ImageAtlasRender()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily Image\+Atlas\+Render\+::\+Image\+Atlas\+Render (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} const \&}]{texture\+Manager,  }\item[{uint32\+\_\+t}]{width,  }\item[{uint32\+\_\+t}]{height }\end{DoxyParamCaption})}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{Image\+Atlas\+Render()}{ImageAtlasRender()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Image\+Atlas\+Render\+::\+Image\+Atlas\+Render (\begin{DoxyParamCaption}\item[{\hyperlink{class_texture_manager}{Texture\+Manager} const \&}]{texture\+Manager,  }\item[{uint32\+\_\+t}]{width,  }\item[{uint32\+\_\+t}]{height }\end{DoxyParamCaption})}
 
 
 
@@ -63,7 +64,7 @@ Construct a new Image Atlas Render\+:\+: Image Atlas Render object.
 
 
 \begin{DoxyParams}{Parameters}
-{\em texture\+Manager} & \mbox{\hyperlink{class_texture_manager}{Texture\+Manager}} object \\
+{\em texture\+Manager} & \hyperlink{class_texture_manager}{Texture\+Manager} object \\
 \hline
 {\em width} & Image width \\
 \hline
@@ -71,10 +72,10 @@ Construct a new Image Atlas Render\+:\+: Image Atlas Render object.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}\label{class_image_atlas_render_a32e495960aaf9c0945c3dcebe5467f6f}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!ImageAtlasRender@{ImageAtlasRender}}
-\index{ImageAtlasRender@{ImageAtlasRender}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{ImageAtlasRender()}{ImageAtlasRender()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Image\+Atlas\+Render\+::\+Image\+Atlas\+Render (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&}]{src }\end{DoxyParamCaption})}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{Image\+Atlas\+Render()}{ImageAtlasRender()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Image\+Atlas\+Render\+::\+Image\+Atlas\+Render (\begin{DoxyParamCaption}\item[{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} const \&}]{src }\end{DoxyParamCaption})}
 
 
 
@@ -87,11 +88,32 @@ Construct a new Image Atlas Render\+:\+: Image Atlas Render object.
 \end{DoxyParams}
 
 
-\doxysubsection{Member Function Documentation}
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}\label{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}} 
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!draw@{draw}}
+\index{draw@{draw}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Image\+Atlas\+Render\+::draw (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{int}]{tex\+ID,  }\item[{glm\+::vec4}]{color = {\ttfamily glm\+:\+:vec4(1,~1,~1,~1)} }\end{DoxyParamCaption})}
+
+
+
+Draw an image on the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Position of the image \\
+\hline
+{\em size} & Size of the image \\
+\hline
+{\em tex\+ID} & \hyperlink{struct_texture}{Texture} ID of the image \\
+\hline
+{\em color} & Color of the image \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}\label{class_image_atlas_render_af663fd9ccfb255a56835a11dfa549eea}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!draw@{draw}}
-\index{draw@{draw}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!draw@{draw}}
+\index{draw@{draw}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Image\+Atlas\+Render\+::draw (\begin{DoxyParamCaption}\item[{float}]{posx,  }\item[{float}]{posy,  }\item[{float}]{w,  }\item[{float}]{h,  }\item[{int}]{tex\+ID,  }\item[{glm\+::vec4}]{color = {\ttfamily glm\+:\+:vec4(1,~1,~1,~1)} }\end{DoxyParamCaption})}
 
 
@@ -108,63 +130,42 @@ Draw an image on the screen.
 \hline
 {\em h} & Height of the image \\
 \hline
-{\em tex\+ID} & \mbox{\hyperlink{struct_texture}{Texture}} ID of the image \\
-\hline
-{\em color} & Color of the image \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}\label{class_image_atlas_render_a62a3811954993e291ea33a0f818fed49}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!draw@{draw}}
-\index{draw@{draw}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{draw()}{draw()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void Image\+Atlas\+Render\+::draw (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{pos,  }\item[{glm\+::vec2}]{size,  }\item[{int}]{tex\+ID,  }\item[{glm\+::vec4}]{color = {\ttfamily glm\+:\+:vec4(1,~1,~1,~1)} }\end{DoxyParamCaption})}
-
-
-
-Draw an image on the screen. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em pos} & Position of the image \\
-\hline
-{\em size} & Size of the image \\
-\hline
-{\em tex\+ID} & \mbox{\hyperlink{struct_texture}{Texture}} ID of the image \\
+{\em tex\+ID} & \hyperlink{struct_texture}{Texture} ID of the image \\
 \hline
 {\em color} & Color of the image \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_image_atlas_render_aba25059e07e686b04ccbf5840790849d}\label{class_image_atlas_render_aba25059e07e686b04ccbf5840790849d}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!getShader@{getShader}}
-\index{getShader@{getShader}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{getShader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_shader}{Shader}} \& Image\+Atlas\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!get\+Shader@{get\+Shader}}
+\index{get\+Shader@{get\+Shader}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{get\+Shader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{class_shader}{Shader} \& Image\+Atlas\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Get the shader. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_shader}{Shader}}\& The shader 
+\hyperlink{class_shader}{Shader}\& The shader 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_image_atlas_render_a4c72d64708b498abcddfb27c9851503c}\label{class_image_atlas_render_a4c72d64708b498abcddfb27c9851503c}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!getShader@{getShader}}
-\index{getShader@{getShader}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{getShader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_shader}{Shader}} const  \& Image\+Atlas\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!get\+Shader@{get\+Shader}}
+\index{get\+Shader@{get\+Shader}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{get\+Shader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{class_shader}{Shader} const  \& Image\+Atlas\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
 Get the shader. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_shader}{Shader}}\& The shader 
+\hyperlink{class_shader}{Shader}\& The shader 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}\label{class_image_atlas_render_a069c9bdf26534ddc159545eb27186745}} 
-\index{ImageAtlasRender@{ImageAtlasRender}!operator=@{operator=}}
-\index{operator=@{operator=}!ImageAtlasRender@{ImageAtlasRender}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} \& Image\+Atlas\+Render\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}} const \&}]{rhs }\end{DoxyParamCaption})}
+\index{Image\+Atlas\+Render@{Image\+Atlas\+Render}!operator=@{operator=}}
+\index{operator=@{operator=}!Image\+Atlas\+Render@{Image\+Atlas\+Render}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} \& Image\+Atlas\+Render\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render} const \&}]{rhs }\end{DoxyParamCaption})}
 
 
 
@@ -176,7 +177,7 @@ Copy this object.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}}\& A reference to the copied object 
+\hyperlink{class_image_atlas_render}{Image\+Atlas\+Render}\& A reference to the copied object 
 \end{DoxyReturn}
 
 

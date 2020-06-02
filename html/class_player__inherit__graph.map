@@ -1,5 +1,4 @@
 <map id="Player" name="Player">
-<area shape="rect" id="node1" title="This is the player object." alt="" coords="26,931,157,1272"/>
-<area shape="rect" id="node2" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...)" alt="" coords="5,468,177,883"/>
-<area shape="rect" id="node3" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="24,5,159,420"/>
+<area shape="rect" id="node2" href="$class_a_character.html" title="This is the base for Charactere (Player, AI, ...) " alt="" coords="5,468,177,883"/>
+<area shape="rect" id="node3" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...) " alt="" coords="24,5,159,420"/>
 </map>

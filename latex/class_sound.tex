@@ -1,8 +1,8 @@
-\hypertarget{class_sound}{}\doxysection{Sound Class Reference}
+\hypertarget{class_sound}{}\section{Sound Class Reference}
 \label{class_sound}\index{Sound@{Sound}}
 
 
-\mbox{\hyperlink{class_sound}{Sound}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}.  
+\hyperlink{class_sound}{Sound} class for \hyperlink{class_audio_manager}{Audio\+Manager}.  
 
 
 
@@ -11,68 +11,69 @@
 
 
 
-Collaboration diagram for Sound\+:\nopagebreak
+Collaboration diagram for Sound\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=182pt]{class_sound__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_sound}{Sound}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+class \hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_sound}{Sound} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_sound_a33747a0bca54f777d0da6f300b8f23f0}{Sound}} (std\+::string filename)
-\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. \end{DoxyCompactList}\item 
+\hyperlink{class_sound_a33747a0bca54f777d0da6f300b8f23f0}{Sound} (std\+::string filename)
+\begin{DoxyCompactList}\small\item\em Construct a new \hyperlink{class_sound}{Sound}\+:\+: \hyperlink{class_sound}{Sound} object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_sound_a0907389078bf740be2a5763366ad3376}\label{class_sound_a0907389078bf740be2a5763366ad3376}} 
-\mbox{\hyperlink{class_sound_a0907389078bf740be2a5763366ad3376}{$\sim$\+Sound}} ()
-\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}{play}} (float volume, float env\+\_\+volume, bool loop=false, int fade\+In=0)
+\hyperlink{class_sound_a0907389078bf740be2a5763366ad3376}{$\sim$\+Sound} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \hyperlink{class_sound}{Sound}\+:\+: \hyperlink{class_sound}{Sound} object. \end{DoxyCompactList}\item 
+int \hyperlink{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}{play} (float volume, float env\+\_\+volume, bool loop=false, int fade\+In=0)
 \begin{DoxyCompactList}\small\item\em Play the sound at the specified volume. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_sound_a65b0f66e9123caed2809da366ac4d377}\label{class_sound_a65b0f66e9123caed2809da366ac4d377}} 
-void \mbox{\hyperlink{class_sound_a65b0f66e9123caed2809da366ac4d377}{pause}} ()
+void \hyperlink{class_sound_a65b0f66e9123caed2809da366ac4d377}{pause} ()
 \begin{DoxyCompactList}\small\item\em Pause all the channels playing this sound. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_sound_a6139aff26f5bd3fea27fbef013124afc}\label{class_sound_a6139aff26f5bd3fea27fbef013124afc}} 
-void \mbox{\hyperlink{class_sound_a6139aff26f5bd3fea27fbef013124afc}{resume}} ()
+void \hyperlink{class_sound_a6139aff26f5bd3fea27fbef013124afc}{resume} ()
 \begin{DoxyCompactList}\small\item\em Resumes all the channels playing this sound. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}{stop}} (int fade\+Out=0)
+void \hyperlink{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}{stop} (int fade\+Out=0)
 \begin{DoxyCompactList}\small\item\em Stop all the channels playing this sound. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_sound_ab992f2602675183484ba78932c1fca3c}{update\+Volume}} (float volume)
+void \hyperlink{class_sound_ab992f2602675183484ba78932c1fca3c}{update\+Volume} (float volume)
 \begin{DoxyCompactList}\small\item\em Update the volume for all the channels playing this sound. If a channel was set with volume modifier below 1.\+0, the modifier will be conserved. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_sound_a30c16881e13d91d31553af3b17886a5c}{channel\+Finished}} (int chan)
+bool \hyperlink{class_sound_a30c16881e13d91d31553af3b17886a5c}{channel\+Finished} (int chan)
 \begin{DoxyCompactList}\small\item\em Remove the specified channel from the list of used channels if found in it. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
-\mbox{\hyperlink{class_sound}{Sound}} class for \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}}. 
+\subsection{Detailed Description}
+\hyperlink{class_sound}{Sound} class for \hyperlink{class_audio_manager}{Audio\+Manager}. 
 
-\doxysubsection{Constructor \& Destructor Documentation}
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_sound_a33747a0bca54f777d0da6f300b8f23f0}\label{class_sound_a33747a0bca54f777d0da6f300b8f23f0}} 
 \index{Sound@{Sound}!Sound@{Sound}}
 \index{Sound@{Sound}!Sound@{Sound}}
-\doxysubsubsection{\texorpdfstring{Sound()}{Sound()}}
+\subsubsection{\texorpdfstring{Sound()}{Sound()}}
 {\footnotesize\ttfamily Sound\+::\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
-Construct a new \mbox{\hyperlink{class_sound}{Sound}}\+:\+: \mbox{\hyperlink{class_sound}{Sound}} object. 
+Construct a new \hyperlink{class_sound}{Sound}\+:\+: \hyperlink{class_sound}{Sound} object. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & \mbox{\hyperlink{class_sound}{Sound}} filename \\
+{\em filename} & \hyperlink{class_sound}{Sound} filename \\
 \hline
 \end{DoxyParams}
 
 
-\doxysubsection{Member Function Documentation}
+\subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_sound_a30c16881e13d91d31553af3b17886a5c}\label{class_sound_a30c16881e13d91d31553af3b17886a5c}} 
-\index{Sound@{Sound}!channelFinished@{channelFinished}}
-\index{channelFinished@{channelFinished}!Sound@{Sound}}
-\doxysubsubsection{\texorpdfstring{channelFinished()}{channelFinished()}}
+\index{Sound@{Sound}!channel\+Finished@{channel\+Finished}}
+\index{channel\+Finished@{channel\+Finished}!Sound@{Sound}}
+\subsubsection{\texorpdfstring{channel\+Finished()}{channelFinished()}}
 {\footnotesize\ttfamily bool Sound\+::channel\+Finished (\begin{DoxyParamCaption}\item[{int}]{chan }\end{DoxyParamCaption})}
 
 
@@ -92,7 +93,7 @@ false otherwise.
 \mbox{\Hypertarget{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}\label{class_sound_ad5edcf094481b5b2f5e12451a4c99a13}} 
 \index{Sound@{Sound}!play@{play}}
 \index{play@{play}!Sound@{Sound}}
-\doxysubsubsection{\texorpdfstring{play()}{play()}}
+\subsubsection{\texorpdfstring{play()}{play()}}
 {\footnotesize\ttfamily int Sound\+::play (\begin{DoxyParamCaption}\item[{float}]{volume,  }\item[{float}]{env\+\_\+volume,  }\item[{bool}]{loop = {\ttfamily false},  }\item[{int}]{fade\+In = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
@@ -115,13 +116,13 @@ int channel used.
 \end{DoxyReturn}
 
 \begin{DoxyExceptions}{Exceptions}
-{\em A} & \mbox{\hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception}} if the sound failed to be played. Not enough channels are allocated. \\
+{\em A} & \hyperlink{class_sound_1_1_sound_exception}{Sound\+Exception} if the sound failed to be played. Not enough channels are allocated. \\
 \hline
 \end{DoxyExceptions}
 \mbox{\Hypertarget{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}\label{class_sound_a67d1d3e523a556d9396d7ec29f038a7b}} 
 \index{Sound@{Sound}!stop@{stop}}
 \index{stop@{stop}!Sound@{Sound}}
-\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
 {\footnotesize\ttfamily void Sound\+::stop (\begin{DoxyParamCaption}\item[{int}]{fade\+Out = {\ttfamily 0} }\end{DoxyParamCaption})}
 
 
@@ -134,9 +135,9 @@ Stop all the channels playing this sound.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_sound_ab992f2602675183484ba78932c1fca3c}\label{class_sound_ab992f2602675183484ba78932c1fca3c}} 
-\index{Sound@{Sound}!updateVolume@{updateVolume}}
-\index{updateVolume@{updateVolume}!Sound@{Sound}}
-\doxysubsubsection{\texorpdfstring{updateVolume()}{updateVolume()}}
+\index{Sound@{Sound}!update\+Volume@{update\+Volume}}
+\index{update\+Volume@{update\+Volume}!Sound@{Sound}}
+\subsubsection{\texorpdfstring{update\+Volume()}{updateVolume()}}
 {\footnotesize\ttfamily void Sound\+::update\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})}
 
 

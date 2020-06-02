@@ -1,5 +1,5 @@
-\hypertarget{class_text_render}{}\doxysection{Text\+Render Class Reference}
-\label{class_text_render}\index{TextRender@{TextRender}}
+\hypertarget{class_text_render}{}\section{Text\+Render Class Reference}
+\label{class_text_render}\index{Text\+Render@{Text\+Render}}
 
 
 render 2D text on an open\+GL 3D context  
@@ -11,63 +11,64 @@ render 2D text on an open\+GL 3D context
 
 
 
-Collaboration diagram for Text\+Render\+:\nopagebreak
+Collaboration diagram for Text\+Render\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=168pt]{class_text_render__coll__graph}
+\includegraphics[width=169pt]{class_text_render__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{struct_text_render_1_1_character}{Character}}
+struct \hyperlink{struct_text_render_1_1_character}{Character}
 \begin{DoxyCompactList}\small\item\em All information about char (foreach characters) \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{class_text_render_1_1_load_text_render_exception}{Load\+Text\+Render\+Exception}}
-\begin{DoxyCompactList}\small\item\em Exception when loading text (\mbox{\hyperlink{class_text_render}{Text\+Render}}) \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{class_text_render_1_1_text_render_error}{Text\+Render\+Error}}
+class \hyperlink{class_text_render_1_1_load_text_render_exception}{Load\+Text\+Render\+Exception}
+\begin{DoxyCompactList}\small\item\em Exception when loading text (\hyperlink{class_text_render}{Text\+Render}) \end{DoxyCompactList}\item 
+class \hyperlink{class_text_render_1_1_text_render_error}{Text\+Render\+Error}
 \begin{DoxyCompactList}\small\item\em Text render exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}{Text\+Render}} (uint32\+\_\+t width, uint32\+\_\+t height)
+\hyperlink{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}{Text\+Render} (uint32\+\_\+t width, uint32\+\_\+t height)
 \begin{DoxyCompactList}\small\item\em Construct a new Text Render\+:\+: Text Render object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_text_render_a019cb58785504de382da100b05a06a36}{Text\+Render}} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&src)
+\hyperlink{class_text_render_a019cb58785504de382da100b05a06a36}{Text\+Render} (\hyperlink{class_text_render}{Text\+Render} const \&src)
 \begin{DoxyCompactList}\small\item\em Construct a new Text Render\+:\+: Text Render object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_text_render_a1c0bf422181e9a679ce8b43ebd7315ff}\label{class_text_render_a1c0bf422181e9a679ce8b43ebd7315ff}} 
-virtual \mbox{\hyperlink{class_text_render_a1c0bf422181e9a679ce8b43ebd7315ff}{$\sim$\+Text\+Render}} ()
+virtual \hyperlink{class_text_render_a1c0bf422181e9a679ce8b43ebd7315ff}{$\sim$\+Text\+Render} ()
 \begin{DoxyCompactList}\small\item\em Destroy the Text Render\+:\+: Text Render object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_text_render}{Text\+Render}} \& \mbox{\hyperlink{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}{operator=}} (\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&rhs)
+\hyperlink{class_text_render}{Text\+Render} \& \hyperlink{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}{operator=} (\hyperlink{class_text_render}{Text\+Render} const \&rhs)
 \begin{DoxyCompactList}\small\item\em Copy this object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}{load\+Font}} (std\+::string name, std\+::string const \&filename, uint32\+\_\+t size)
+void \hyperlink{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}{load\+Font} (std\+::string name, std\+::string const \&filename, uint32\+\_\+t size)
 \begin{DoxyCompactList}\small\item\em Load a ttf file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}{write}} (std\+::string const \&font\+Name, std\+::string text, glm\+::vec3 pos, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f), int outline=0, glm\+::vec3 color\+Outline=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
+void \hyperlink{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}{write} (std\+::string const \&font\+Name, std\+::string text, glm\+::vec3 pos, G\+Lfloat scale=1, glm\+::vec3 color=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f), int outline=0, glm\+::vec3 color\+Outline=glm\+::vec3(1.\+0f, 1.\+0f, 1.\+0f))
 \begin{DoxyCompactList}\small\item\em Write 2D text on screen. \end{DoxyCompactList}\item 
-uint32\+\_\+t \mbox{\hyperlink{class_text_render_a26975c1b71e98bf4d60abfebc2942816}{str\+Width}} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
+uint32\+\_\+t \hyperlink{class_text_render_a26975c1b71e98bf4d60abfebc2942816}{str\+Width} (std\+::string const \&font\+Name, std\+::string text, G\+Lfloat scale=1)
 \begin{DoxyCompactList}\small\item\em Get the width of a text (in pixel) with a given font and size. \end{DoxyCompactList}\item 
-uint32\+\_\+t \mbox{\hyperlink{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}{str\+Height}} (std\+::string const \&font\+Name, G\+Lfloat scale=1, bool full\+Height=false)
+uint32\+\_\+t \hyperlink{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}{str\+Height} (std\+::string const \&font\+Name, G\+Lfloat scale=1, bool full\+Height=false)
 \begin{DoxyCompactList}\small\item\em Get the height of a text (in pixel) with a given font and size. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}{set\+Win\+Size}} (glm\+::vec2 win\+Size)
+void \hyperlink{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}{set\+Win\+Size} (glm\+::vec2 win\+Size)
 \begin{DoxyCompactList}\small\item\em Call this function when the window is resized. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_shader}{Shader}} \& \mbox{\hyperlink{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}{get\+Shader}} ()
+\hyperlink{class_shader}{Shader} \& \hyperlink{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}{get\+Shader} ()
 \begin{DoxyCompactList}\small\item\em Get the shader. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_shader}{Shader}} const  \& \mbox{\hyperlink{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}{get\+Shader}} () const
+\hyperlink{class_shader}{Shader} const  \& \hyperlink{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}{get\+Shader} () const
 \begin{DoxyCompactList}\small\item\em Get the shader. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::map$<$ std\+::string, std\+::map$<$ G\+Lchar, \mbox{\hyperlink{struct_text_render_1_1_character}{Character}} $>$ $>$ \mbox{\hyperlink{class_text_render_a0c196776d7ad5f5bb52928edd5727144}{font}}
+std\+::map$<$ std\+::string, std\+::map$<$ G\+Lchar, \hyperlink{struct_text_render_1_1_character}{Character} $>$ $>$ \hyperlink{class_text_render_a0c196776d7ad5f5bb52928edd5727144}{font}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\subsection{Detailed Description}
 render 2D text on an open\+GL 3D context 
 
-\doxysubsection{Constructor \& Destructor Documentation}
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}\label{class_text_render_a57d8bcb3c499312eaf9752b340066e2b}} 
-\index{TextRender@{TextRender}!TextRender@{TextRender}}
-\index{TextRender@{TextRender}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{TextRender()}{TextRender()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\index{Text\+Render@{Text\+Render}!Text\+Render@{Text\+Render}}
+\index{Text\+Render@{Text\+Render}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{Text\+Render()}{TextRender()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily Text\+Render\+::\+Text\+Render (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{width,  }\item[{uint32\+\_\+t}]{height }\end{DoxyParamCaption})}
 
 
@@ -82,10 +83,10 @@ Construct a new Text Render\+:\+: Text Render object.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_text_render_a019cb58785504de382da100b05a06a36}\label{class_text_render_a019cb58785504de382da100b05a06a36}} 
-\index{TextRender@{TextRender}!TextRender@{TextRender}}
-\index{TextRender@{TextRender}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{TextRender()}{TextRender()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily Text\+Render\+::\+Text\+Render (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&}]{src }\end{DoxyParamCaption})}
+\index{Text\+Render@{Text\+Render}!Text\+Render@{Text\+Render}}
+\index{Text\+Render@{Text\+Render}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{Text\+Render()}{TextRender()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Text\+Render\+::\+Text\+Render (\begin{DoxyParamCaption}\item[{\hyperlink{class_text_render}{Text\+Render} const \&}]{src }\end{DoxyParamCaption})}
 
 
 
@@ -98,37 +99,37 @@ Construct a new Text Render\+:\+: Text Render object.
 \end{DoxyParams}
 
 
-\doxysubsection{Member Function Documentation}
+\subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}\label{class_text_render_afcb6b4a05cfabeb19c1f6d16ed1635ea}} 
-\index{TextRender@{TextRender}!getShader@{getShader}}
-\index{getShader@{getShader}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{getShader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_shader}{Shader}} \& Text\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\index{Text\+Render@{Text\+Render}!get\+Shader@{get\+Shader}}
+\index{get\+Shader@{get\+Shader}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{get\+Shader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{class_shader}{Shader} \& Text\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Get the shader. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_shader}{Shader}}\& \mbox{\hyperlink{class_shader}{Shader}} reference 
+\hyperlink{class_shader}{Shader}\& \hyperlink{class_shader}{Shader} reference 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}\label{class_text_render_a2f313ec58b45ca41ec145f898aa35dc5}} 
-\index{TextRender@{TextRender}!getShader@{getShader}}
-\index{getShader@{getShader}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{getShader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_shader}{Shader}} const  \& Text\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+\index{Text\+Render@{Text\+Render}!get\+Shader@{get\+Shader}}
+\index{get\+Shader@{get\+Shader}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{get\+Shader()}{getShader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{class_shader}{Shader} const  \& Text\+Render\+::get\+Shader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
 Get the shader. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_shader}{Shader}}\& \mbox{\hyperlink{class_shader}{Shader}} reference 
+\hyperlink{class_shader}{Shader}\& \hyperlink{class_shader}{Shader} reference 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}\label{class_text_render_a61b2b17f3c5ac1d4c9abe657ffa3a573}} 
-\index{TextRender@{TextRender}!loadFont@{loadFont}}
-\index{loadFont@{loadFont}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{loadFont()}{loadFont()}}
+\index{Text\+Render@{Text\+Render}!load\+Font@{load\+Font}}
+\index{load\+Font@{load\+Font}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{load\+Font()}{loadFont()}}
 {\footnotesize\ttfamily void Text\+Render\+::load\+Font (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string const \&}]{filename,  }\item[{uint32\+\_\+t}]{size }\end{DoxyParamCaption})}
 
 
@@ -145,10 +146,10 @@ Load a ttf file.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}\label{class_text_render_a598a2b1f47fee7d8bb466e3e656f2446}} 
-\index{TextRender@{TextRender}!operator=@{operator=}}
-\index{operator=@{operator=}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_text_render}{Text\+Render}} \& Text\+Render\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_text_render}{Text\+Render}} const \&}]{rhs }\end{DoxyParamCaption})}
+\index{Text\+Render@{Text\+Render}!operator=@{operator=}}
+\index{operator=@{operator=}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_text_render}{Text\+Render} \& Text\+Render\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_text_render}{Text\+Render} const \&}]{rhs }\end{DoxyParamCaption})}
 
 
 
@@ -160,12 +161,12 @@ Copy this object.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_text_render}{Text\+Render}}\& A reference to the copied object 
+\hyperlink{class_text_render}{Text\+Render}\& A reference to the copied object 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}\label{class_text_render_a5faff9b32e8be1d14d1f9c4a8b66ebcc}} 
-\index{TextRender@{TextRender}!setWinSize@{setWinSize}}
-\index{setWinSize@{setWinSize}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{setWinSize()}{setWinSize()}}
+\index{Text\+Render@{Text\+Render}!set\+Win\+Size@{set\+Win\+Size}}
+\index{set\+Win\+Size@{set\+Win\+Size}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{set\+Win\+Size()}{setWinSize()}}
 {\footnotesize\ttfamily void Text\+Render\+::set\+Win\+Size (\begin{DoxyParamCaption}\item[{glm\+::vec2}]{win\+Size }\end{DoxyParamCaption})}
 
 
@@ -178,9 +179,9 @@ Call this function when the window is resized.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}\label{class_text_render_adcc7c69ed41b00e24e67de1d00a7da35}} 
-\index{TextRender@{TextRender}!strHeight@{strHeight}}
-\index{strHeight@{strHeight}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{strHeight()}{strHeight()}}
+\index{Text\+Render@{Text\+Render}!str\+Height@{str\+Height}}
+\index{str\+Height@{str\+Height}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{str\+Height()}{strHeight()}}
 {\footnotesize\ttfamily uint32\+\_\+t Text\+Render\+::str\+Height (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{bool}]{full\+Height = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
@@ -200,9 +201,9 @@ Get the height of a text (in pixel) with a given font and size.
 uint32\+\_\+t The text height 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_render_a26975c1b71e98bf4d60abfebc2942816}\label{class_text_render_a26975c1b71e98bf4d60abfebc2942816}} 
-\index{TextRender@{TextRender}!strWidth@{strWidth}}
-\index{strWidth@{strWidth}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{strWidth()}{strWidth()}}
+\index{Text\+Render@{Text\+Render}!str\+Width@{str\+Width}}
+\index{str\+Width@{str\+Width}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{str\+Width()}{strWidth()}}
 {\footnotesize\ttfamily uint32\+\_\+t Text\+Render\+::str\+Width (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1} }\end{DoxyParamCaption})}
 
 
@@ -222,9 +223,9 @@ Get the width of a text (in pixel) with a given font and size.
 uint32\+\_\+t The text width 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}\label{class_text_render_a12af20faf1e488c6fc99cffc44c0d43b}} 
-\index{TextRender@{TextRender}!write@{write}}
-\index{write@{write}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{write()}{write()}}
+\index{Text\+Render@{Text\+Render}!write@{write}}
+\index{write@{write}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{write()}{write()}}
 {\footnotesize\ttfamily void Text\+Render\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{font\+Name,  }\item[{std\+::string}]{text,  }\item[{glm\+::vec3}]{pos,  }\item[{G\+Lfloat}]{scale = {\ttfamily 1},  }\item[{glm\+::vec3}]{color = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)},  }\item[{int}]{outline = {\ttfamily 0},  }\item[{glm\+::vec3}]{color\+Outline = {\ttfamily glm\+:\+:vec3(1.0f,~1.0f,~1.0f)} }\end{DoxyParamCaption})}
 
 
@@ -250,12 +251,12 @@ Write 2D text on screen.
 \end{DoxyParams}
 
 
-\doxysubsection{Member Data Documentation}
+\subsection{Member Data Documentation}
 \mbox{\Hypertarget{class_text_render_a0c196776d7ad5f5bb52928edd5727144}\label{class_text_render_a0c196776d7ad5f5bb52928edd5727144}} 
-\index{TextRender@{TextRender}!font@{font}}
-\index{font@{font}!TextRender@{TextRender}}
-\doxysubsubsection{\texorpdfstring{font}{font}}
-{\footnotesize\ttfamily std\+::map$<$std\+::string, std\+::map$<$G\+Lchar, \mbox{\hyperlink{struct_text_render_1_1_character}{Character}}$>$ $>$ Text\+Render\+::font}
+\index{Text\+Render@{Text\+Render}!font@{font}}
+\index{font@{font}!Text\+Render@{Text\+Render}}
+\subsubsection{\texorpdfstring{font}{font}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string, std\+::map$<$G\+Lchar, \hyperlink{struct_text_render_1_1_character}{Character}$>$ $>$ Text\+Render\+::font}
 
 All character info foreach fonts 
 

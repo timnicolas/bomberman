@@ -1,15 +1,14 @@
 <map id="SceneLevelSelection" name="SceneLevelSelection">
-<area shape="rect" id="node1" title="menu for the level selection" alt="" coords="281,2212,453,2436"/>
-<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="303,1896,431,2149"/>
-<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="343,1459,446,1683"/>
-<area shape="rect" id="node4" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="308,710,495,1007"/>
-<area shape="rect" id="node5" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="175,71,281,295"/>
-<area shape="rect" id="node11" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="76,439,279,1279"/>
-<area shape="rect" id="node6" href="$class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="645,101,787,266"/>
-<area shape="rect" id="node7" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="319,5,454,361"/>
-<area shape="rect" id="node8" href="$struct_game_info.html" title="General information about the game." alt="" coords="478,108,621,259"/>
-<area shape="rect" id="node9" href="$struct_scene_level_selection_1_1_buttons_states.html" title="All buttons states." alt="" coords="455,1940,599,2105"/>
-<area shape="rect" id="node10" href="$struct_scene_level_selection_1_1_all_u_i.html" title="All UI elements." alt="" coords="57,1780,201,1872"/>
-<area shape="rect" id="node13" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="129,1385,311,1756"/>
-<area shape="rect" id="node12" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="5,71,123,295"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu. " alt="" coords="281,1896,461,2223"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes " alt="" coords="344,1459,447,1683"/>
+<area shape="rect" id="node4" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ... " alt="" coords="309,710,495,1007"/>
+<area shape="rect" id="node5" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="175,71,282,295"/>
+<area shape="rect" id="node11" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="77,439,279,1279"/>
+<area shape="rect" id="node6" href="$class_texture_manager.html" title="This is the main class to manage textures. " alt="" coords="646,101,790,266"/>
+<area shape="rect" id="node7" href="$class_camera.html" title="this is a camera 3D object " alt="" coords="320,5,455,361"/>
+<area shape="rect" id="node8" href="$struct_game_info.html" title="General information about the game. " alt="" coords="479,108,621,259"/>
+<area shape="rect" id="node9" href="$struct_scene_level_selection_1_1_buttons_states.html" title="All buttons states. " alt="" coords="486,1977,630,2142"/>
+<area shape="rect" id="node10" href="$struct_scene_level_selection_1_1_all_u_i.html" title="All UI elements. " alt="" coords="53,1780,197,1872"/>
+<area shape="rect" id="node13" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="129,1385,312,1756"/>
+<area shape="rect" id="node12" href="$class_text_render.html" title="render 2D text on an openGL 3D context " alt="" coords="5,71,124,295"/>
 </map>

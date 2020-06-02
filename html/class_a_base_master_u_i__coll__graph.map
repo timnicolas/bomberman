@@ -1,6 +1,5 @@
 <map id="ABaseMasterUI" name="ABaseMasterUI">
-<area shape="rect" id="node1" title="this is the UI for all master objects" alt="" coords="5,5,187,376"/>
-<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="135,453,337,1293"/>
-<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="211,79,317,303"/>
-<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="341,79,459,303"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="137,453,339,1293"/>
+<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="213,79,319,303"/>
+<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context " alt="" coords="344,79,463,303"/>
 </map>

@@ -1,8 +1,7 @@
 <map id="SceneLoadGame::GameSaved" name="SceneLoadGame::GameSaved">
-<area shape="rect" id="node1" title="All information &amp; UI of a saved game (from a json file)" alt="" coords="215,1349,417,1441"/>
-<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="28,307,231,1147"/>
-<area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="5,1209,187,1580"/>
-<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="8,5,115,229"/>
-<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="139,5,256,229"/>
-<area shape="rect" id="node6" href="$class_settings_json.html" title="this is the settings master object" alt="" coords="255,571,382,883"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="29,307,231,1147"/>
+<area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="5,1209,188,1580"/>
+<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="9,5,115,229"/>
+<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context " alt="" coords="140,5,259,229"/>
+<area shape="rect" id="node6" href="$class_settings_json.html" title="this is the settings master object " alt="" coords="256,571,383,883"/>
 </map>

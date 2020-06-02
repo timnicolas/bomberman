@@ -1,5 +1,3 @@
 <map id="TextRender::LoadTextRenderException" name="TextRender::LoadTextRenderException">
-<area shape="rect" id="node1" title="Exception when loading text (TextRender)" alt="" coords="5,256,197,348"/>
-<area shape="rect" id="node2" href="$class_text_render_1_1_text_render_error.html" title="Text render exception." alt="" coords="5,131,197,208"/>
-<area shape="rect" id="node3" title=" " alt="" coords="49,5,153,83"/>
+<area shape="rect" id="node2" href="$class_text_render_1_1_text_render_error.html" title="Text render exception. " alt="" coords="5,131,200,208"/>
 </map>

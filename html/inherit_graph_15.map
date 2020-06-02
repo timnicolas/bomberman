@@ -1,10 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,110,84,137"/>
-<area shape="rect" id="node2" href="$class_image_atlas_render_1_1_image_render_error.html" title="Image render exception." alt="" coords="132,19,348,60"/>
-<area shape="rect" id="node4" href="$class_shader_1_1_shader_error.html" title="Shader exception." alt="" coords="170,110,310,137"/>
-<area shape="rect" id="node7" href="$class_text_render_1_1_text_render_error.html" title="Text render exception." alt="" coords="144,165,336,191"/>
-<area shape="rect" id="node3" href="$class_image_atlas_render_1_1_load_image_exception.html" title="Load image exception." alt="" coords="404,5,607,47"/>
-<area shape="rect" id="node5" href="$class_shader_1_1_shader_compile_exception.html" title="Shader compilation exception." alt="" coords="396,71,615,98"/>
-<area shape="rect" id="node6" href="$class_shader_1_1_shader_linking_exception.html" title="Shader linking exception." alt="" coords="400,122,611,149"/>
-<area shape="rect" id="node8" href="$class_text_render_1_1_load_text_render_exception.html" title="Exception when loading text (TextRender)" alt="" coords="409,173,601,215"/>
+<area shape="rect" id="node2" href="$class_image_atlas_render_1_1_image_render_error.html" title="Image render exception. " alt="" coords="132,19,348,60"/>
+<area shape="rect" id="node4" href="$class_shader_1_1_shader_error.html" title="Shader exception. " alt="" coords="170,110,310,137"/>
+<area shape="rect" id="node7" href="$class_text_render_1_1_text_render_error.html" title="Text render exception. " alt="" coords="143,165,337,191"/>
+<area shape="rect" id="node3" href="$class_image_atlas_render_1_1_load_image_exception.html" title="Load image exception. " alt="" coords="404,5,607,47"/>
+<area shape="rect" id="node5" href="$class_shader_1_1_shader_compile_exception.html" title="Shader compilation exception. " alt="" coords="396,71,615,98"/>
+<area shape="rect" id="node6" href="$class_shader_1_1_shader_linking_exception.html" title="Shader linking exception. " alt="" coords="400,122,611,149"/>
+<area shape="rect" id="node8" href="$class_text_render_1_1_load_text_render_exception.html" title="Exception when loading text (TextRender) " alt="" coords="408,173,603,215"/>
 </map>

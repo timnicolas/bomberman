@@ -1,7 +1,6 @@
 <map id="TextUI" name="TextUI">
-<area shape="rect" id="node1" title="this is the UI for text" alt="" coords="5,1312,103,1477"/>
-<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="73,307,275,1147"/>
-<area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="127,1209,309,1580"/>
-<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="53,5,159,229"/>
-<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context" alt="" coords="183,5,301,229"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="73,307,275,1147"/>
+<area shape="rect" id="node5" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="127,1209,309,1580"/>
+<area shape="rect" id="node3" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="53,5,159,229"/>
+<area shape="rect" id="node4" href="$class_text_render.html" title="render 2D text on an openGL 3D context " alt="" coords="184,5,303,229"/>
 </map>

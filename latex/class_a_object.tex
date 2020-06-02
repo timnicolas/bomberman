@@ -1,8 +1,8 @@
-\hypertarget{class_a_object}{}\doxysection{A\+Object Class Reference}
-\label{class_a_object}\index{AObject@{AObject}}
+\hypertarget{class_a_object}{}\section{A\+Object Class Reference}
+\label{class_a_object}\index{A\+Object@{A\+Object}}
 
 
-This is the base class for objects (\mbox{\hyperlink{class_bomb}{Bomb}}, wall, ...)  
+This is the base class for objects (\hyperlink{class_bomb}{Bomb}, wall, ...)  
 
 
 
@@ -11,7 +11,8 @@ This is the base class for objects (\mbox{\hyperlink{class_bomb}{Bomb}}, wall, .
 
 
 
-Inheritance diagram for A\+Object\+:\nopagebreak
+Inheritance diagram for A\+Object\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,67 +21,68 @@ Inheritance diagram for A\+Object\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for A\+Object\+:\nopagebreak
+Collaboration diagram for A\+Object\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=550pt]{class_a_object__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{class_a_object_1_1_a_object_exception}{A\+Object\+Exception}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_a_object}{A\+Object}} Exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+class \hyperlink{class_a_object_1_1_a_object_exception}{A\+Object\+Exception}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_a_object}{A\+Object} Exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_a_object_aac94ec1c7dd0ec00fda2a79f12195cf2}{A\+Object}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&\mbox{\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game}})
+\hyperlink{class_a_object_aac94ec1c7dd0ec00fda2a79f12195cf2}{A\+Object} (\hyperlink{class_scene_game}{Scene\+Game} \&\hyperlink{class_a_entity_aa2c05db944a8b7487eb8470dd20211ab}{game})
 \begin{DoxyCompactList}\small\item\em Construct a new A\+Object\+::\+A\+Object object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_a_object_ac17f3a1944792c280a3cbd83d839bc4e}\label{class_a_object_ac17f3a1944792c280a3cbd83d839bc4e}} 
-virtual \mbox{\hyperlink{class_a_object_ac17f3a1944792c280a3cbd83d839bc4e}{$\sim$\+A\+Object}} ()
+virtual \hyperlink{class_a_object_ac17f3a1944792c280a3cbd83d839bc4e}{$\sim$\+A\+Object} ()
 \begin{DoxyCompactList}\small\item\em Destroy the A\+Object\+::\+A\+Object object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_a_object_a278727c68ad694b228c2f24e5e6d358a}{A\+Object}} (\mbox{\hyperlink{class_a_object}{A\+Object}} const \&src)
+\hyperlink{class_a_object_a278727c68ad694b228c2f24e5e6d358a}{A\+Object} (\hyperlink{class_a_object}{A\+Object} const \&src)
 \begin{DoxyCompactList}\small\item\em Construct a new A\+Object\+::\+A\+Object object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{class_a_object}{A\+Object}} \& \mbox{\hyperlink{class_a_object_a9752ad3eadac3a51ef78d81a34fc5bcd}{operator=}} (\mbox{\hyperlink{class_a_object}{A\+Object}} const \&rhs)
+\hyperlink{class_a_object}{A\+Object} \& \hyperlink{class_a_object_a9752ad3eadac3a51ef78d81a34fc5bcd}{operator=} (\hyperlink{class_a_object}{A\+Object} const \&rhs)
 \begin{DoxyCompactList}\small\item\em Overloaded operator. \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{update}} ()=0
+virtual bool \hyperlink{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}{update} ()=0
 \begin{DoxyCompactList}\small\item\em Update object. Called on every frames. \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{draw}} (\mbox{\hyperlink{class_gui}{Gui}} \&gui)=0
+virtual bool \hyperlink{class_a_object_a5e454e13e04ee937c20a465244cf748a}{draw} (\hyperlink{class_gui}{Gui} \&gui)=0
 \begin{DoxyCompactList}\small\item\em Draw object. Called on every frames. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_a_object_ac254ff8c08640e01dd5fbe030b4d89bc}{set\+Pos}} (glm\+::vec3 pos=V\+O\+I\+D\+\_\+\+P\+O\+S3)
+void \hyperlink{class_a_object_ac254ff8c08640e01dd5fbe030b4d89bc}{set\+Pos} (glm\+::vec3 pos=V\+O\+I\+D\+\_\+\+P\+O\+S3)
 \begin{DoxyCompactList}\small\item\em Set the position of the object according of his position on the board. \end{DoxyCompactList}\item 
-glm\+::vec3 \mbox{\hyperlink{class_a_object_ab5840de6100bba8bf93a186a0a802708}{get\+Pos}} () const
-\begin{DoxyCompactList}\small\item\em Get the position of the current \mbox{\hyperlink{class_a_object}{A\+Object}} in the \mbox{\hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{Scene\+Game\+::board}} of this-\/$>$game. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_a_object_a39b1720ae5a820512ab4db0906f03b15}{take\+Damage}} (int damage)
+glm\+::vec3 \hyperlink{class_a_object_ab5840de6100bba8bf93a186a0a802708}{get\+Pos} () const
+\begin{DoxyCompactList}\small\item\em Get the position of the current \hyperlink{class_a_object}{A\+Object} in the \hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{Scene\+Game\+::board} of this-\/$>$game. \end{DoxyCompactList}\item 
+bool \hyperlink{class_a_object_a39b1720ae5a820512ab4db0906f03b15}{take\+Damage} (int damage)
 \begin{DoxyCompactList}\small\item\em Take\+Damage put an object to die. \end{DoxyCompactList}\item 
-virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& \mbox{\hyperlink{class_a_object_ac4a82eef484c0f7bf3547a7f7f6dce7e}{get\+Board}} () const
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \hyperlink{class_a_entity}{A\+Entity} $\ast$ $>$ $>$ $>$ const  \& \hyperlink{class_a_object_ac4a82eef484c0f7bf3547a7f7f6dce7e}{get\+Board} () const
 \begin{DoxyCompactList}\small\item\em Get the board (game.\+board or game.\+board\+Fly) \end{DoxyCompactList}\item 
-virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \& \mbox{\hyperlink{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}{get\+Board}} ()
+virtual std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \hyperlink{class_a_entity}{A\+Entity} $\ast$ $>$ $>$ $>$ \& \hyperlink{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}{get\+Board} ()
 \begin{DoxyCompactList}\small\item\em Get the board (game.\+board or game.\+board\+Fly) \end{DoxyCompactList}\item 
-virtual bool \mbox{\hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{init}} ()
-\begin{DoxyCompactList}\small\item\em Init \mbox{\hyperlink{class_a_object}{A\+Object}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+virtual bool \hyperlink{class_a_object_afa83ef1c900a47453524219788327b86}{init} ()
+\begin{DoxyCompactList}\small\item\em Init \hyperlink{class_a_object}{A\+Object}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{class_a_object_a32efabd4a159239aaebc75c15e542a35}{is\+In\+Fly\+Board}}
+bool \hyperlink{class_a_object_a32efabd4a159239aaebc75c15e542a35}{is\+In\+Fly\+Board}
 \end{DoxyCompactItemize}
-\doxysubsection*{Protected Attributes}
+\subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::string \mbox{\hyperlink{class_a_object_abd487a37ad66b909b7d082c9655d43e0}{\+\_\+sound\+Of\+Death}}
+std\+::string \hyperlink{class_a_object_abd487a37ad66b909b7d082c9655d43e0}{\+\_\+sound\+Of\+Death}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
-This is the base class for objects (\mbox{\hyperlink{class_bomb}{Bomb}}, wall, ...) 
+\subsection{Detailed Description}
+This is the base class for objects (\hyperlink{class_bomb}{Bomb}, wall, ...) 
 
-\doxysubsection{Constructor \& Destructor Documentation}
+\subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_a_object_aac94ec1c7dd0ec00fda2a79f12195cf2}\label{class_a_object_aac94ec1c7dd0ec00fda2a79f12195cf2}} 
-\index{AObject@{AObject}!AObject@{AObject}}
-\index{AObject@{AObject}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{AObject()}{AObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily A\+Object\+::\+A\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+\index{A\+Object@{A\+Object}!A\+Object@{A\+Object}}
+\index{A\+Object@{A\+Object}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{A\+Object()}{AObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily A\+Object\+::\+A\+Object (\begin{DoxyParamCaption}\item[{\hyperlink{class_scene_game}{Scene\+Game} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -88,14 +90,14 @@ Construct a new A\+Object\+::\+A\+Object object.
 
 
 \begin{DoxyParams}{Parameters}
-{\em game} & A reference to the \mbox{\hyperlink{class_scene_game}{Scene\+Game}} object \\
+{\em game} & A reference to the \hyperlink{class_scene_game}{Scene\+Game} object \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_a_object_a278727c68ad694b228c2f24e5e6d358a}\label{class_a_object_a278727c68ad694b228c2f24e5e6d358a}} 
-\index{AObject@{AObject}!AObject@{AObject}}
-\index{AObject@{AObject}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{AObject()}{AObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily A\+Object\+::\+A\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_object}{A\+Object}} const \&}]{src }\end{DoxyParamCaption})}
+\index{A\+Object@{A\+Object}!A\+Object@{A\+Object}}
+\index{A\+Object@{A\+Object}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{A\+Object()}{AObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily A\+Object\+::\+A\+Object (\begin{DoxyParamCaption}\item[{\hyperlink{class_a_object}{A\+Object} const \&}]{src }\end{DoxyParamCaption})}
 
 
 
@@ -103,17 +105,17 @@ Construct a new A\+Object\+::\+A\+Object object.
 
 
 \begin{DoxyParams}{Parameters}
-{\em src} & A \mbox{\hyperlink{class_a_object}{A\+Object}} element to copy \\
+{\em src} & A \hyperlink{class_a_object}{A\+Object} element to copy \\
 \hline
 \end{DoxyParams}
 
 
-\doxysubsection{Member Function Documentation}
+\subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_a_object_a5e454e13e04ee937c20a465244cf748a}\label{class_a_object_a5e454e13e04ee937c20a465244cf748a}} 
-\index{AObject@{AObject}!draw@{draw}}
-\index{draw@{draw}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
-{\footnotesize\ttfamily virtual bool A\+Object\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_gui}{Gui}} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+\index{A\+Object@{A\+Object}!draw@{draw}}
+\index{draw@{draw}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily virtual bool A\+Object\+::draw (\begin{DoxyParamCaption}\item[{\hyperlink{class_gui}{Gui} \&}]{gui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -124,34 +126,17 @@ false If failed
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}{A\+Entity}}.
+Implements \hyperlink{class_a_entity_ad9404a7cae108eb81d881d256cacdc12}{A\+Entity}.
 
 
 
-Implemented in \mbox{\hyperlink{class_bonus_acdb40deca7be37984084fb3d4fef85ed}{Bonus}}, \mbox{\hyperlink{class_spawner_a1532fd875b6a3aacb617b1111b818f01}{Spawner}}, \mbox{\hyperlink{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}{Bomb}}, \mbox{\hyperlink{class_end_aad5c7ef71927eddfd634e0a0879cb99a}{End}}, \mbox{\hyperlink{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}{Crispy}}, \mbox{\hyperlink{class_wall_ab3ea42b91f7830d22782901d61be505f}{Wall}}, \mbox{\hyperlink{class_flag_ae24cc9c0e3cc3378e12af9f40c0ee93d}{Flag}}, and \mbox{\hyperlink{class_fire_a622efdbee6254c463250b6d9033428eb}{Fire}}.
-
-\mbox{\Hypertarget{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}\label{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}} 
-\index{AObject@{AObject}!getBoard@{getBoard}}
-\index{getBoard@{getBoard}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{getBoard()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ \& A\+Object\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Get the board (game.\+board or game.\+board\+Fly) 
-
-\begin{DoxyReturn}{Returns}
-std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$\& A reference to the board 
-\end{DoxyReturn}
-
-
-Implements \mbox{\hyperlink{class_a_entity_a44aa82958386de50cd9a6c836461114a}{A\+Entity}}.
+Implemented in \hyperlink{class_bonus_acdb40deca7be37984084fb3d4fef85ed}{Bonus}, \hyperlink{class_spawner_a1532fd875b6a3aacb617b1111b818f01}{Spawner}, \hyperlink{class_bomb_ae0ea4aa0ce14d353ad63c31cccc2a69d}{Bomb}, \hyperlink{class_end_aad5c7ef71927eddfd634e0a0879cb99a}{End}, \hyperlink{class_crispy_a266bebd70e55a7d08ba1688af0f4adf0}{Crispy}, \hyperlink{class_wall_ab3ea42b91f7830d22782901d61be505f}{Wall}, \hyperlink{class_flag_ae24cc9c0e3cc3378e12af9f40c0ee93d}{Flag}, and \hyperlink{class_fire_a622efdbee6254c463250b6d9033428eb}{Fire}.
 
 \mbox{\Hypertarget{class_a_object_ac4a82eef484c0f7bf3547a7f7f6dce7e}\label{class_a_object_ac4a82eef484c0f7bf3547a7f7f6dce7e}} 
-\index{AObject@{AObject}!getBoard@{getBoard}}
-\index{getBoard@{getBoard}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{getBoard()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{class_a_entity}{A\+Entity}} $\ast$ $>$ $>$ $>$ const  \& A\+Object\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+\index{A\+Object@{A\+Object}!get\+Board@{get\+Board}}
+\index{get\+Board@{get\+Board}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{get\+Board()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \hyperlink{class_a_entity}{A\+Entity} $\ast$ $>$ $>$ $>$ const  \& A\+Object\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -162,34 +147,51 @@ std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$\
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}{A\+Entity}}.
+Implements \hyperlink{class_a_entity_a9ed84c8f926cf6032be480ebba7d1820}{A\+Entity}.
+
+\mbox{\Hypertarget{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}\label{class_a_object_aba4b07c0456b2c3d42a71529ef40f2d5}} 
+\index{A\+Object@{A\+Object}!get\+Board@{get\+Board}}
+\index{get\+Board@{get\+Board}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{get\+Board()}{getBoard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ std\+::vector$<$ \hyperlink{class_a_entity}{A\+Entity} $\ast$ $>$ $>$ $>$ \& A\+Object\+::get\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the board (game.\+board or game.\+board\+Fly) 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$ std\+::vector$<$ std\+::vector$<$\+A\+Entity $\ast$$>$ $>$ $>$\& A reference to the board 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_a_entity_a44aa82958386de50cd9a6c836461114a}{A\+Entity}.
 
 \mbox{\Hypertarget{class_a_object_ab5840de6100bba8bf93a186a0a802708}\label{class_a_object_ab5840de6100bba8bf93a186a0a802708}} 
-\index{AObject@{AObject}!getPos@{getPos}}
-\index{getPos@{getPos}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{getPos()}{getPos()}}
+\index{A\+Object@{A\+Object}!get\+Pos@{get\+Pos}}
+\index{get\+Pos@{get\+Pos}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{get\+Pos()}{getPos()}}
 {\footnotesize\ttfamily glm\+::vec3 A\+Object\+::get\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Get the position of the current \mbox{\hyperlink{class_a_object}{A\+Object}} in the \mbox{\hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{Scene\+Game\+::board}} of this-\/$>$game. 
+Get the position of the current \hyperlink{class_a_object}{A\+Object} in the \hyperlink{class_scene_game_a2306af8a268c9d476d1060fa3daa1ac5}{Scene\+Game\+::board} of this-\/$>$game. 
 
 \begin{DoxyReturn}{Returns}
 glm\+::vec2 
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}{A\+Entity}}.
+Implements \hyperlink{class_a_entity_afbdb591f06debd7e20e0cb98f14717e4}{A\+Entity}.
 
 \mbox{\Hypertarget{class_a_object_afa83ef1c900a47453524219788327b86}\label{class_a_object_afa83ef1c900a47453524219788327b86}} 
-\index{AObject@{AObject}!init@{init}}
-\index{init@{init}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{init()}{init()}}
+\index{A\+Object@{A\+Object}!init@{init}}
+\index{init@{init}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{init()}{init()}}
 {\footnotesize\ttfamily bool A\+Object\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
-Init \mbox{\hyperlink{class_a_object}{A\+Object}}. 
+Init \hyperlink{class_a_object}{A\+Object}. 
 
 \begin{DoxyReturn}{Returns}
 true on success 
@@ -198,17 +200,17 @@ false on failure
 \end{DoxyReturn}
 
 
-Reimplemented from \mbox{\hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}}.
+Reimplemented from \hyperlink{class_a_entity_a450361b684fa02e4ffe0ba406b8e3b30}{A\+Entity}.
 
 
 
-Reimplemented in \mbox{\hyperlink{class_bonus_a976414b70e76b18dadeae3f316a22547}{Bonus}}, \mbox{\hyperlink{class_spawner_a274d6abcfeb55784de07f3c36ae923ce}{Spawner}}, \mbox{\hyperlink{class_end_a1c57c2279d61916ea97aed566e8b3663}{End}}, \mbox{\hyperlink{class_bomb_a4a3f751937f59953f4cf585b07c9684c}{Bomb}}, \mbox{\hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{Crispy}}, \mbox{\hyperlink{class_flag_abdb7a9ef47dd6ea6a24beec99b372f11}{Flag}}, and \mbox{\hyperlink{class_fire_ae6456b9911e675ed1fb030f5f9e89cc8}{Fire}}.
+Reimplemented in \hyperlink{class_bonus_a976414b70e76b18dadeae3f316a22547}{Bonus}, \hyperlink{class_spawner_a274d6abcfeb55784de07f3c36ae923ce}{Spawner}, \hyperlink{class_end_a1c57c2279d61916ea97aed566e8b3663}{End}, \hyperlink{class_bomb_a4a3f751937f59953f4cf585b07c9684c}{Bomb}, \hyperlink{class_crispy_aef91bfa94d0506d25b4cf78098e57912}{Crispy}, \hyperlink{class_flag_abdb7a9ef47dd6ea6a24beec99b372f11}{Flag}, and \hyperlink{class_fire_ae6456b9911e675ed1fb030f5f9e89cc8}{Fire}.
 
 \mbox{\Hypertarget{class_a_object_a9752ad3eadac3a51ef78d81a34fc5bcd}\label{class_a_object_a9752ad3eadac3a51ef78d81a34fc5bcd}} 
-\index{AObject@{AObject}!operator=@{operator=}}
-\index{operator=@{operator=}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_a_object}{A\+Object}} \& A\+Object\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_a_object}{A\+Object}} const \&}]{rhs }\end{DoxyParamCaption})}
+\index{A\+Object@{A\+Object}!operator=@{operator=}}
+\index{operator=@{operator=}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_a_object}{A\+Object} \& A\+Object\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_a_object}{A\+Object} const \&}]{rhs }\end{DoxyParamCaption})}
 
 
 
@@ -220,12 +222,12 @@ Overloaded operator.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_a_entity}{A\+Entity}}\& A ref to a new object 
+\hyperlink{class_a_entity}{A\+Entity}\& A ref to a new object 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_a_object_ac254ff8c08640e01dd5fbe030b4d89bc}\label{class_a_object_ac254ff8c08640e01dd5fbe030b4d89bc}} 
-\index{AObject@{AObject}!setPos@{setPos}}
-\index{setPos@{setPos}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{setPos()}{setPos()}}
+\index{A\+Object@{A\+Object}!set\+Pos@{set\+Pos}}
+\index{set\+Pos@{set\+Pos}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{set\+Pos()}{setPos()}}
 {\footnotesize\ttfamily void A\+Object\+::set\+Pos (\begin{DoxyParamCaption}\item[{glm\+::vec3}]{pos = {\ttfamily VOID\+\_\+POS3} }\end{DoxyParamCaption})}
 
 
@@ -238,9 +240,9 @@ Set the position of the object according of his position on the board.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_a_object_a39b1720ae5a820512ab4db0906f03b15}\label{class_a_object_a39b1720ae5a820512ab4db0906f03b15}} 
-\index{AObject@{AObject}!takeDamage@{takeDamage}}
-\index{takeDamage@{takeDamage}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{takeDamage()}{takeDamage()}}
+\index{A\+Object@{A\+Object}!take\+Damage@{take\+Damage}}
+\index{take\+Damage@{take\+Damage}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{take\+Damage()}{takeDamage()}}
 {\footnotesize\ttfamily bool A\+Object\+::take\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
@@ -259,16 +261,16 @@ false if damage not taken
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity_ac01e24195a8ba249c855120ac017770e}{A\+Entity}}.
+Implements \hyperlink{class_a_entity_ac01e24195a8ba249c855120ac017770e}{A\+Entity}.
 
 
 
-Reimplemented in \mbox{\hyperlink{class_bomb_ac51b260cdfef0cde903a88003994276e}{Bomb}}.
+Reimplemented in \hyperlink{class_bomb_ac51b260cdfef0cde903a88003994276e}{Bomb}.
 
 \mbox{\Hypertarget{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}\label{class_a_object_af35bb4b68af0a11bb1fcf617bde41ecd}} 
-\index{AObject@{AObject}!update@{update}}
-\index{update@{update}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{update()}{update()}}
+\index{A\+Object@{A\+Object}!update@{update}}
+\index{update@{update}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{update()}{update()}}
 {\footnotesize\ttfamily virtual bool A\+Object\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
@@ -280,25 +282,25 @@ false If failed
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}{A\+Entity}}.
+Implements \hyperlink{class_a_entity_adcfd3958ca43b8efd7cc58e7106a26a8}{A\+Entity}.
 
 
 
-Implemented in \mbox{\hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{Bonus}}, \mbox{\hyperlink{class_spawner_a9325e76299405d5d74abfb72f4ea2380}{Spawner}}, \mbox{\hyperlink{class_end_a7154532cce1c86f4f5bfa98eb0c25574}{End}}, \mbox{\hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{Bomb}}, \mbox{\hyperlink{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}{Wall}}, \mbox{\hyperlink{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}{Crispy}}, \mbox{\hyperlink{class_flag_adeaab6cd88bbc3284f8b4f1b2f78242b}{Flag}}, and \mbox{\hyperlink{class_fire_a86114cf78108a4b202b75e1f383b3e00}{Fire}}.
+Implemented in \hyperlink{class_bonus_a0dd8aa4474c3d1ef494ed8a916cc16cd}{Bonus}, \hyperlink{class_spawner_a9325e76299405d5d74abfb72f4ea2380}{Spawner}, \hyperlink{class_end_a7154532cce1c86f4f5bfa98eb0c25574}{End}, \hyperlink{class_bomb_a9808d8efcc57b9ce7b0bd48d95875aad}{Bomb}, \hyperlink{class_wall_a29d3c4daa11dbb20d758b1fc285ed7a4}{Wall}, \hyperlink{class_crispy_ab33c8c68fa636df5721581e8f68ceae3}{Crispy}, \hyperlink{class_flag_adeaab6cd88bbc3284f8b4f1b2f78242b}{Flag}, and \hyperlink{class_fire_a86114cf78108a4b202b75e1f383b3e00}{Fire}.
 
 
 
-\doxysubsection{Member Data Documentation}
+\subsection{Member Data Documentation}
 \mbox{\Hypertarget{class_a_object_abd487a37ad66b909b7d082c9655d43e0}\label{class_a_object_abd487a37ad66b909b7d082c9655d43e0}} 
-\index{AObject@{AObject}!\_soundOfDeath@{\_soundOfDeath}}
-\index{\_soundOfDeath@{\_soundOfDeath}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{\_soundOfDeath}{\_soundOfDeath}}
+\index{A\+Object@{A\+Object}!\+\_\+sound\+Of\+Death@{\+\_\+sound\+Of\+Death}}
+\index{\+\_\+sound\+Of\+Death@{\+\_\+sound\+Of\+Death}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{\+\_\+sound\+Of\+Death}{\_soundOfDeath}}
 {\footnotesize\ttfamily std\+::string A\+Object\+::\+\_\+sound\+Of\+Death\hspace{0.3cm}{\ttfamily [protected]}}
 
 The sound when an enemy die \mbox{\Hypertarget{class_a_object_a32efabd4a159239aaebc75c15e542a35}\label{class_a_object_a32efabd4a159239aaebc75c15e542a35}} 
-\index{AObject@{AObject}!isInFlyBoard@{isInFlyBoard}}
-\index{isInFlyBoard@{isInFlyBoard}!AObject@{AObject}}
-\doxysubsubsection{\texorpdfstring{isInFlyBoard}{isInFlyBoard}}
+\index{A\+Object@{A\+Object}!is\+In\+Fly\+Board@{is\+In\+Fly\+Board}}
+\index{is\+In\+Fly\+Board@{is\+In\+Fly\+Board}!A\+Object@{A\+Object}}
+\subsubsection{\texorpdfstring{is\+In\+Fly\+Board}{isInFlyBoard}}
 {\footnotesize\ttfamily bool A\+Object\+::is\+In\+Fly\+Board}
 
 True if the entity fly 

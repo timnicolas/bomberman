@@ -1,5 +1,4 @@
 <map id="SceneDifficulty" name="SceneDifficulty">
-<area shape="rect" id="node1" title="Menu to choose dificulty (when starting a new game)" alt="" coords="5,593,144,773"/>
-<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="11,292,139,545"/>
-<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="23,5,126,244"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu. " alt="" coords="5,292,185,619"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes " alt="" coords="44,5,147,244"/>
 </map>

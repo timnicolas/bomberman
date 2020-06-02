@@ -1,11 +1,10 @@
 <map id="SceneGameOver" name="SceneGameOver">
-<area shape="rect" id="node1" title="menu for game over" alt="" coords="311,1373,462,1553"/>
-<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu." alt="" coords="225,1057,353,1311"/>
-<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes" alt="" coords="238,784,341,1008"/>
-<area shape="rect" id="node4" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="196,424,383,721"/>
-<area shape="rect" id="node5" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="5,71,112,295"/>
-<area shape="rect" id="node6" href="$class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="137,101,279,266"/>
-<area shape="rect" id="node7" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="303,5,438,361"/>
-<area shape="rect" id="node8" href="$struct_game_info.html" title="General information about the game." alt="" coords="462,108,605,259"/>
-<area shape="rect" id="node9" href="$struct_scene_game_over_1_1_buttons_states.html" title="All buttons states." alt="" coords="377,1131,591,1237"/>
+<area shape="rect" id="node2" href="$class_a_scene_menu.html" title="Scene object to re&#45;implement in all scenes for menu. " alt="" coords="199,1057,379,1384"/>
+<area shape="rect" id="node3" href="$class_a_scene.html" title="base object to implement in all scenes " alt="" coords="238,784,341,1008"/>
+<area shape="rect" id="node4" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ... " alt="" coords="196,424,383,721"/>
+<area shape="rect" id="node5" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="5,71,112,295"/>
+<area shape="rect" id="node6" href="$class_texture_manager.html" title="This is the main class to manage textures. " alt="" coords="136,101,280,266"/>
+<area shape="rect" id="node7" href="$class_camera.html" title="this is a camera 3D object " alt="" coords="305,5,439,361"/>
+<area shape="rect" id="node8" href="$struct_game_info.html" title="General information about the game. " alt="" coords="463,108,606,259"/>
+<area shape="rect" id="node9" href="$struct_scene_game_over_1_1_buttons_states.html" title="All buttons states. " alt="" coords="404,1167,617,1274"/>
 </map>

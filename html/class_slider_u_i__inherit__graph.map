@@ -1,4 +1,3 @@
 <map id="SliderUI" name="SliderUI">
-<area shape="rect" id="node1" title="this is the UI for slider" alt="" coords="35,893,178,1161"/>
-<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="5,5,208,845"/>
+<area shape="rect" id="node2" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="5,5,208,845"/>
 </map>

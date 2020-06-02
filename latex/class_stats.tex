@@ -1,8 +1,8 @@
-\hypertarget{class_stats}{}\doxysection{Stats Class Reference}
+\hypertarget{class_stats}{}\section{Stats Class Reference}
 \label{class_stats}\index{Stats@{Stats}}
 
 
-\mbox{\hyperlink{class_stats}{Stats}} object to manage functions calls stats.  
+\hyperlink{class_stats}{Stats} object to manage functions calls stats.  
 
 
 
@@ -11,49 +11,50 @@
 
 
 
-Collaboration diagram for Stats\+:\nopagebreak
+Collaboration diagram for Stats\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=154pt]{class_stats__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Public Member Functions}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_stats_aed79e2b7167040dada2cb2ba8b90ad9b}\label{class_stats_aed79e2b7167040dada2cb2ba8b90ad9b}} 
-\mbox{\hyperlink{class_stats_aed79e2b7167040dada2cb2ba8b90ad9b}{Stats}} ()
-\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{class_stats}{Stats}} object. \end{DoxyCompactList}\item 
+\hyperlink{class_stats_aed79e2b7167040dada2cb2ba8b90ad9b}{Stats} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \hyperlink{class_stats}{Stats} object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_stats_ad32aee12c7d460325f8d7a31159e8acc}\label{class_stats_ad32aee12c7d460325f8d7a31159e8acc}} 
-\mbox{\hyperlink{class_stats_ad32aee12c7d460325f8d7a31159e8acc}{$\sim$\+Stats}} ()
-\begin{DoxyCompactList}\small\item\em Destroy a \mbox{\hyperlink{class_stats}{Stats}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Static Public Member Functions}
+\hyperlink{class_stats_ad32aee12c7d460325f8d7a31159e8acc}{$\sim$\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Destroy a \hyperlink{class_stats}{Stats} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{class_stats_a4a300a5e0856dee0d136ac3828cd28bb}{start\+Stats}} (std\+::string name)
+static std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point \hyperlink{class_stats_a4a300a5e0856dee0d136ac3828cd28bb}{start\+Stats} (std\+::string name)
 \begin{DoxyCompactList}\small\item\em Called by get\+Stats to init the stats, no need to manually call. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_stats_abda60b41a2aebd705b4a7dbf3f3cc384}\label{class_stats_abda60b41a2aebd705b4a7dbf3f3cc384}} 
-static void \mbox{\hyperlink{class_stats_abda60b41a2aebd705b4a7dbf3f3cc384}{end\+Stats}} (std\+::string name, std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point start\+Exec\+Time)
+static void \hyperlink{class_stats_abda60b41a2aebd705b4a7dbf3f3cc384}{end\+Stats} (std\+::string name, std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point start\+Exec\+Time)
 \begin{DoxyCompactList}\small\item\em Called by get\+Stats to stop the stats count, no need to manually call. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_stats_ab11b92ed03af0b394839c19529e045b4}\label{class_stats_ab11b92ed03af0b394839c19529e045b4}} 
-static void \mbox{\hyperlink{class_stats_ab11b92ed03af0b394839c19529e045b4}{print\+Stats}} ()
+static void \hyperlink{class_stats_ab11b92ed03af0b394839c19529e045b4}{print\+Stats} ()
 \begin{DoxyCompactList}\small\item\em Print functions stats, print only the one that has been called with get\+Stats. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Static Public Attributes}
+\subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_stats_abbdb294499c6a8ce43bcf41f996f7902}\label{class_stats_abbdb294499c6a8ce43bcf41f996f7902}} 
-static std\+::unordered\+\_\+map$<$ std\+::string, struct \mbox{\hyperlink{structs_stat}{s\+Stat}} $>$ \mbox{\hyperlink{class_stats_abbdb294499c6a8ce43bcf41f996f7902}{stats}} = \{\}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_stats}{Stats}} are stored here. \end{DoxyCompactList}\end{DoxyCompactItemize}
+static std\+::unordered\+\_\+map$<$ std\+::string, struct \hyperlink{structs_stat}{s\+Stat} $>$ \hyperlink{class_stats_abbdb294499c6a8ce43bcf41f996f7902}{stats} = \{\}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_stats}{Stats} are stored here. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
-\mbox{\hyperlink{class_stats}{Stats}} object to manage functions calls stats. 
+\subsection{Detailed Description}
+\hyperlink{class_stats}{Stats} object to manage functions calls stats. 
 
-\doxysubsection{Member Function Documentation}
+\subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_stats_a4a300a5e0856dee0d136ac3828cd28bb}\label{class_stats_a4a300a5e0856dee0d136ac3828cd28bb}} 
-\index{Stats@{Stats}!startStats@{startStats}}
-\index{startStats@{startStats}!Stats@{Stats}}
-\doxysubsubsection{\texorpdfstring{startStats()}{startStats()}}
+\index{Stats@{Stats}!start\+Stats@{start\+Stats}}
+\index{start\+Stats@{start\+Stats}!Stats@{Stats}}
+\subsubsection{\texorpdfstring{start\+Stats()}{startStats()}}
 {\footnotesize\ttfamily std\+::chrono\+::high\+\_\+resolution\+\_\+clock\+::time\+\_\+point Stats\+::start\+Stats (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 

@@ -1,5 +1,4 @@
 <map id="EmptyMasterUI" name="EmptyMasterUI">
-<area shape="rect" id="node1" title="this is the UI for invisible master object" alt="" coords="35,1312,178,1477"/>
-<area shape="rect" id="node2" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects" alt="" coords="16,893,197,1264"/>
-<area shape="rect" id="node3" href="$class_a_base_u_i.html" title="this is the base UI interface" alt="" coords="5,5,208,845"/>
+<area shape="rect" id="node2" href="$class_a_base_master_u_i.html" title="this is the UI for all master objects " alt="" coords="15,893,198,1264"/>
+<area shape="rect" id="node3" href="$class_a_base_u_i.html" title="this is the base UI interface " alt="" coords="5,5,208,845"/>
 </map>

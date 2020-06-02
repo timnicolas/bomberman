@@ -1,12 +1,11 @@
 <map id="AObject" name="AObject">
-<area shape="rect" id="node1" title="This is the base class for objects (Bomb, wall, ...)" alt="" coords="519,468,643,721"/>
-<area shape="rect" id="node3" href="$class_bomb.html" title="This is the bomb object." alt="" coords="5,777,135,1001"/>
-<area shape="rect" id="node4" href="$class_bonus.html" title="Bonus object." alt="" coords="159,769,288,1008"/>
-<area shape="rect" id="node5" href="$class_crispy.html" title="Crispy wall object." alt="" coords="313,791,443,986"/>
-<area shape="rect" id="node6" href="$class_end.html" title="This is the end object." alt="" coords="468,806,565,971"/>
-<area shape="rect" id="node7" href="$class_fire.html" title="Fire on bombs objects." alt="" coords="590,799,699,979"/>
-<area shape="rect" id="node8" href="$class_flag.html" title="This is the flag object." alt="" coords="723,799,833,979"/>
-<area shape="rect" id="node9" href="$class_spawner.html" title="spawner objects" alt="" coords="857,777,989,1001"/>
-<area shape="rect" id="node10" href="$class_wall.html" title="This is the wall object." alt="" coords="1013,813,1111,964"/>
-<area shape="rect" id="node2" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...)" alt="" coords="513,5,648,420"/>
+<area shape="rect" id="node3" href="$class_bomb.html" title="This is the bomb object. " alt="" coords="5,777,135,1001"/>
+<area shape="rect" id="node4" href="$class_bonus.html" title="Bonus object. " alt="" coords="159,769,288,1008"/>
+<area shape="rect" id="node5" href="$class_crispy.html" title="Crispy wall object. " alt="" coords="313,791,443,986"/>
+<area shape="rect" id="node6" href="$class_end.html" title="This is the end object. " alt="" coords="468,806,565,971"/>
+<area shape="rect" id="node7" href="$class_fire.html" title="Fire on bombs objects. " alt="" coords="590,799,699,979"/>
+<area shape="rect" id="node8" href="$class_flag.html" title="This is the flag object. " alt="" coords="723,799,833,979"/>
+<area shape="rect" id="node9" href="$class_spawner.html" title="spawner objects " alt="" coords="857,777,990,1001"/>
+<area shape="rect" id="node10" href="$class_wall.html" title="This is the wall object. " alt="" coords="1015,813,1112,964"/>
+<area shape="rect" id="node2" href="$class_a_entity.html" title="This is the base class for entity (Charactere, Objects, ...) " alt="" coords="513,5,648,420"/>
 </map>

@@ -1,8 +1,7 @@
 <map id="BoxCollider" name="BoxCollider">
-<area shape="rect" id="node1" title="This is the box collider object." alt="" coords="12,784,143,1052"/>
-<area shape="rect" id="node2" href="$class_shader.html" title="Shader class used to manage shader compilation." alt="" coords="5,71,112,295"/>
-<area shape="rect" id="node3" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ..." alt="" coords="161,424,348,721"/>
-<area shape="rect" id="node4" href="$class_texture_manager.html" title="This is the main class to manage textures." alt="" coords="138,101,281,266"/>
-<area shape="rect" id="node5" href="$class_camera.html" title="this is a camera 3D object" alt="" coords="305,5,439,361"/>
-<area shape="rect" id="node6" href="$struct_game_info.html" title="General information about the game." alt="" coords="463,108,606,259"/>
+<area shape="rect" id="node2" href="$class_shader.html" title="Shader class used to manage shader compilation. " alt="" coords="5,71,112,295"/>
+<area shape="rect" id="node3" href="$class_gui.html" title="This is the GUI class with function to init window, draw, ... " alt="" coords="161,424,348,721"/>
+<area shape="rect" id="node4" href="$class_texture_manager.html" title="This is the main class to manage textures. " alt="" coords="137,101,281,266"/>
+<area shape="rect" id="node5" href="$class_camera.html" title="this is a camera 3D object " alt="" coords="306,5,441,361"/>
+<area shape="rect" id="node6" href="$struct_game_info.html" title="General information about the game. " alt="" coords="465,108,607,259"/>
 </map>

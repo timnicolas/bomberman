@@ -1,4 +1,4 @@
-\hypertarget{class_save}{}\doxysection{Save Class Reference}
+\hypertarget{class_save}{}\section{Save Class Reference}
 \label{class_save}\index{Save@{Save}}
 
 
@@ -11,94 +11,84 @@ class to manage saved games.
 
 
 
-Collaboration diagram for Save\+:\nopagebreak
+Collaboration diagram for Save\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=196pt]{class_save__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
+\subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{class_save_1_1_save_exception}{Save\+Exception}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_save}{Save}} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Member Functions}
+class \hyperlink{class_save_1_1_save_exception}{Save\+Exception}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_save}{Save} exception. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_save_a41dec94fb3d6fcce23117a20507c5d0d}\label{class_save_a41dec94fb3d6fcce23117a20507c5d0d}} 
-virtual \mbox{\hyperlink{class_save_a41dec94fb3d6fcce23117a20507c5d0d}{$\sim$\+Save}} ()
-\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{class_save}{Save}}\+:\+: \mbox{\hyperlink{class_save}{Save}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Static Public Member Functions}
+virtual \hyperlink{class_save_a41dec94fb3d6fcce23117a20507c5d0d}{$\sim$\+Save} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \hyperlink{class_save}{Save}\+:\+: \hyperlink{class_save}{Save} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{class_save}{Save}} \& \mbox{\hyperlink{class_save_a469d2ef2ac6a27eda2907e69ab033def}{get}} ()
-\begin{DoxyCompactList}\small\item\em Return a reference to the singleton \mbox{\hyperlink{class_save}{Save}}. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_save}{Save}} \& \mbox{\hyperlink{class_save_af278065bd4e223f0681f1e496dc61da6}{load\+Game}} (std\+::string filename)
+static \hyperlink{class_save}{Save} \& \hyperlink{class_save_a469d2ef2ac6a27eda2907e69ab033def}{get} ()
+\begin{DoxyCompactList}\small\item\em Return a reference to the singleton \hyperlink{class_save}{Save}. \end{DoxyCompactList}\item 
+static \hyperlink{class_save}{Save} \& \hyperlink{class_save_af278065bd4e223f0681f1e496dc61da6}{load\+Game} (std\+::string filename)
 \begin{DoxyCompactList}\small\item\em Load filename to actual save. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_save}{Save}} \& \mbox{\hyperlink{class_save_aee5c805551d1a4492c3a44a3645343b6}{new\+Game}} ()
+static \hyperlink{class_save}{Save} \& \hyperlink{class_save_aee5c805551d1a4492c3a44a3645343b6}{new\+Game} ()
 \begin{DoxyCompactList}\small\item\em New Game create a new file with the current \+\_\+time. \end{DoxyCompactList}\item 
-static std\+::string \mbox{\hyperlink{class_save_ac33997c07a1209006b6b7edbcc6673a1}{get\+Filename}} (bool temporary)
+static std\+::string \hyperlink{class_save_ac33997c07a1209006b6b7edbcc6673a1}{get\+Filename} (bool temporary)
 \begin{DoxyCompactList}\small\item\em Get filename. \end{DoxyCompactList}\item 
-static std\+::string \mbox{\hyperlink{class_save_a63783fbc06b4c10803b4551aacdde2c8}{get\+File\+Name\+Regex}} (bool temporary)
+static std\+::string \hyperlink{class_save_a63783fbc06b4c10803b4551aacdde2c8}{get\+File\+Name\+Regex} (bool temporary)
 \begin{DoxyCompactList}\small\item\em Get Regex to certificate a correct name file. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a3427a3913b8a9e724c0a70de39e3799a}{is\+Instantiate}} ()
+static bool \hyperlink{class_save_a3427a3913b8a9e724c0a70de39e3799a}{is\+Instantiate} ()
 \begin{DoxyCompactList}\small\item\em Know if is instantiate. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a9efc33ad84705535d96b193d06426922}{is\+Saved}} ()
+static bool \hyperlink{class_save_a9efc33ad84705535d96b193d06426922}{is\+Saved} ()
 \begin{DoxyCompactList}\small\item\em Know if the game is saved. \end{DoxyCompactList}\item 
-static \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $\ast$ \mbox{\hyperlink{class_save_ab3878ea5a5b26b5d1829a98a38d78ffa}{init\+Json}} (std\+::string filename, bool new\+File=false)
+static \hyperlink{class_settings_json}{Settings\+Json} $\ast$ \hyperlink{class_save_ab3878ea5a5b26b5d1829a98a38d78ffa}{init\+Json} (std\+::string filename, bool new\+File=false)
 \begin{DoxyCompactList}\small\item\em Define Json format to saved file. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}{update\+Saved\+File}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&game, bool succeed\+Level)
+static bool \hyperlink{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}{update\+Saved\+File} (\hyperlink{class_scene_game}{Scene\+Game} \&game, bool succeed\+Level)
 \begin{DoxyCompactList}\small\item\em Update Saved File Informations. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_aa9264e3e576763299af4df148700e266}{load\+States\+Saved}} (\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&game)
+static bool \hyperlink{class_save_aa9264e3e576763299af4df148700e266}{load\+States\+Saved} (\hyperlink{class_scene_game}{Scene\+Game} \&game)
 \begin{DoxyCompactList}\small\item\em Load information from saved files. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a75601bb68eba4ed487d5176acf6f51e9}{is\+Level\+Done}} (int32\+\_\+t level\+Id)
+static bool \hyperlink{class_save_a75601bb68eba4ed487d5176acf6f51e9}{is\+Level\+Done} (int32\+\_\+t level\+Id)
 \begin{DoxyCompactList}\small\item\em Check if the Level $<$ level\+Id $>$ has already been done. \end{DoxyCompactList}\item 
-static int \mbox{\hyperlink{class_save_a802b6d258310bab2945abd9653360fe5}{get\+Level\+Score}} (int32\+\_\+t level\+Id)
+static int \hyperlink{class_save_a802b6d258310bab2945abd9653360fe5}{get\+Level\+Score} (int32\+\_\+t level\+Id)
 \begin{DoxyCompactList}\small\item\em Get score for given level\+Id. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a6423aab69350aaafaad752830e191840}{set\+Level\+Done}} (int32\+\_\+t level\+Id, int32\+\_\+t score)
+static bool \hyperlink{class_save_a6423aab69350aaafaad752830e191840}{set\+Level\+Done} (int32\+\_\+t level\+Id, int32\+\_\+t score)
 \begin{DoxyCompactList}\small\item\em Set a level as done. \end{DoxyCompactList}\item 
-static void \mbox{\hyperlink{class_save_ae4305a76f306f9d7ca5991c881d7c98b}{set\+Difficulty}} (uint difficulty)
+static void \hyperlink{class_save_ae4305a76f306f9d7ca5991c881d7c98b}{set\+Difficulty} (uint difficulty)
 \begin{DoxyCompactList}\small\item\em Set difficulty of the game. \end{DoxyCompactList}\item 
-static uint \mbox{\hyperlink{class_save_acc628465cba884e99fea348066c1eec9}{get\+Difficulty}} ()
+static uint \hyperlink{class_save_acc628465cba884e99fea348066c1eec9}{get\+Difficulty} ()
 \begin{DoxyCompactList}\small\item\em Get difficulty of the game. \end{DoxyCompactList}\item 
-static bool \mbox{\hyperlink{class_save_a2edbb08ba5ec1f0e9291d246580bd295}{save}} (bool temporary=false)
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_save}{Save}} method to file. \end{DoxyCompactList}\item 
-static void \mbox{\hyperlink{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}{delete\+Temp}} ()
+static bool \hyperlink{class_save_a2edbb08ba5ec1f0e9291d246580bd295}{save} (bool temporary=false)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_save}{Save} method to file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}\label{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}} 
+static void \hyperlink{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}{delete\+Temp} ()
 \begin{DoxyCompactList}\small\item\em Delete temporary file. \end{DoxyCompactList}\item 
-static std\+::time\+\_\+t \mbox{\hyperlink{class_save_af0cd86308d28ff115d3588369baa529a}{filename\+To\+Timestamp}} (std\+::string filename, bool temporary)
+static std\+::time\+\_\+t \hyperlink{class_save_af0cd86308d28ff115d3588369baa529a}{filename\+To\+Timestamp} (std\+::string filename, bool temporary)
 \begin{DoxyCompactList}\small\item\em Convert the filename to timestamp. \end{DoxyCompactList}\item 
-static std\+::string \mbox{\hyperlink{class_save_af787535a55af6b09cd0834a979661120}{timestamp\+To\+File\+Name}} (time\+\_\+t timestamp)
+static std\+::string \hyperlink{class_save_af787535a55af6b09cd0834a979661120}{timestamp\+To\+File\+Name} (time\+\_\+t timestamp)
 \begin{DoxyCompactList}\small\item\em Return formated filename from a timestamp. \end{DoxyCompactList}\item 
-static int \mbox{\hyperlink{class_save_aa772c37949dfc374249fdaf4016be3a6}{get\+Last\+Unlocked\+Level}} ()
+static int \hyperlink{class_save_aa772c37949dfc374249fdaf4016be3a6}{get\+Last\+Unlocked\+Level} ()
 \begin{DoxyCompactList}\small\item\em Get last unclocked level. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Friends}
+\subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
-std\+::ostream \& \mbox{\hyperlink{class_save_a3cd403916354948cd0ec21803ec2f78f}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{class_save}{Save}} \&my\+\_\+class)
+std\+::ostream \& \hyperlink{class_save_a3cd403916354948cd0ec21803ec2f78f}{operator$<$$<$} (std\+::ostream \&os, const \hyperlink{class_save}{Save} \&my\+\_\+class)
 \begin{DoxyCompactList}\small\item\em Operator to display object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\subsection{Detailed Description}
 class to manage saved games. 
 
-
-
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}\label{class_save_a1e4c91355cf5b8e6ee29734f619a20a5}} 
-\index{Save@{Save}!deleteTemp@{deleteTemp}}
-\index{deleteTemp@{deleteTemp}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{deleteTemp()}{deleteTemp()}}
-{\footnotesize\ttfamily void Save\+::delete\+Temp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Delete temporary file. 
-
+\subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_save_af0cd86308d28ff115d3588369baa529a}\label{class_save_af0cd86308d28ff115d3588369baa529a}} 
-\index{Save@{Save}!filenameToTimestamp@{filenameToTimestamp}}
-\index{filenameToTimestamp@{filenameToTimestamp}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{filenameToTimestamp()}{filenameToTimestamp()}}
+\index{Save@{Save}!filename\+To\+Timestamp@{filename\+To\+Timestamp}}
+\index{filename\+To\+Timestamp@{filename\+To\+Timestamp}!Save@{Save}}
+\subsubsection{\texorpdfstring{filename\+To\+Timestamp()}{filenameToTimestamp()}}
 {\footnotesize\ttfamily std\+::time\+\_\+t Save\+::filename\+To\+Timestamp (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{bool}]{temporary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -118,20 +108,20 @@ time\+\_\+t time of filename.
 \mbox{\Hypertarget{class_save_a469d2ef2ac6a27eda2907e69ab033def}\label{class_save_a469d2ef2ac6a27eda2907e69ab033def}} 
 \index{Save@{Save}!get@{get}}
 \index{get@{get}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{get()}{get()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_save}{Save}} \& Save\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \hyperlink{class_save}{Save} \& Save\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Return a reference to the singleton \mbox{\hyperlink{class_save}{Save}}. 
+Return a reference to the singleton \hyperlink{class_save}{Save}. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_save}{Save}}\& the reference to the singleton. 
+\hyperlink{class_save}{Save}\& the reference to the singleton. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_acc628465cba884e99fea348066c1eec9}\label{class_save_acc628465cba884e99fea348066c1eec9}} 
-\index{Save@{Save}!getDifficulty@{getDifficulty}}
-\index{getDifficulty@{getDifficulty}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{getDifficulty()}{getDifficulty()}}
+\index{Save@{Save}!get\+Difficulty@{get\+Difficulty}}
+\index{get\+Difficulty@{get\+Difficulty}!Save@{Save}}
+\subsubsection{\texorpdfstring{get\+Difficulty()}{getDifficulty()}}
 {\footnotesize\ttfamily uint Save\+::get\+Difficulty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -142,9 +132,9 @@ Get difficulty of the game.
 uint difficulty (lower is more difficult) 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_ac33997c07a1209006b6b7edbcc6673a1}\label{class_save_ac33997c07a1209006b6b7edbcc6673a1}} 
-\index{Save@{Save}!getFilename@{getFilename}}
-\index{getFilename@{getFilename}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{getFilename()}{getFilename()}}
+\index{Save@{Save}!get\+Filename@{get\+Filename}}
+\index{get\+Filename@{get\+Filename}!Save@{Save}}
+\subsubsection{\texorpdfstring{get\+Filename()}{getFilename()}}
 {\footnotesize\ttfamily std\+::string Save\+::get\+Filename (\begin{DoxyParamCaption}\item[{bool}]{temporary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -160,9 +150,9 @@ Get filename.
 std\+::string 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a63783fbc06b4c10803b4551aacdde2c8}\label{class_save_a63783fbc06b4c10803b4551aacdde2c8}} 
-\index{Save@{Save}!getFileNameRegex@{getFileNameRegex}}
-\index{getFileNameRegex@{getFileNameRegex}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{getFileNameRegex()}{getFileNameRegex()}}
+\index{Save@{Save}!get\+File\+Name\+Regex@{get\+File\+Name\+Regex}}
+\index{get\+File\+Name\+Regex@{get\+File\+Name\+Regex}!Save@{Save}}
+\subsubsection{\texorpdfstring{get\+File\+Name\+Regex()}{getFileNameRegex()}}
 {\footnotesize\ttfamily std\+::string Save\+::get\+File\+Name\+Regex (\begin{DoxyParamCaption}\item[{bool}]{temporary }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -178,9 +168,9 @@ Get Regex to certificate a correct name file.
 std\+::string regex 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_aa772c37949dfc374249fdaf4016be3a6}\label{class_save_aa772c37949dfc374249fdaf4016be3a6}} 
-\index{Save@{Save}!getLastUnlockedLevel@{getLastUnlockedLevel}}
-\index{getLastUnlockedLevel@{getLastUnlockedLevel}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{getLastUnlockedLevel()}{getLastUnlockedLevel()}}
+\index{Save@{Save}!get\+Last\+Unlocked\+Level@{get\+Last\+Unlocked\+Level}}
+\index{get\+Last\+Unlocked\+Level@{get\+Last\+Unlocked\+Level}!Save@{Save}}
+\subsubsection{\texorpdfstring{get\+Last\+Unlocked\+Level()}{getLastUnlockedLevel()}}
 {\footnotesize\ttfamily int Save\+::get\+Last\+Unlocked\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -191,9 +181,9 @@ Get last unclocked level.
 int ID of the level 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a802b6d258310bab2945abd9653360fe5}\label{class_save_a802b6d258310bab2945abd9653360fe5}} 
-\index{Save@{Save}!getLevelScore@{getLevelScore}}
-\index{getLevelScore@{getLevelScore}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{getLevelScore()}{getLevelScore()}}
+\index{Save@{Save}!get\+Level\+Score@{get\+Level\+Score}}
+\index{get\+Level\+Score@{get\+Level\+Score}!Save@{Save}}
+\subsubsection{\texorpdfstring{get\+Level\+Score()}{getLevelScore()}}
 {\footnotesize\ttfamily int Save\+::get\+Level\+Score (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -209,10 +199,10 @@ Get score for given level\+Id.
 int score. 0 is returned if not score for the given level. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_ab3878ea5a5b26b5d1829a98a38d78ffa}\label{class_save_ab3878ea5a5b26b5d1829a98a38d78ffa}} 
-\index{Save@{Save}!initJson@{initJson}}
-\index{initJson@{initJson}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{initJson()}{initJson()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_settings_json}{Settings\+Json}} $\ast$ Save\+::init\+Json (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{bool}]{new\+File = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\index{Save@{Save}!init\+Json@{init\+Json}}
+\index{init\+Json@{init\+Json}!Save@{Save}}
+\subsubsection{\texorpdfstring{init\+Json()}{initJson()}}
+{\footnotesize\ttfamily \hyperlink{class_settings_json}{Settings\+Json} $\ast$ Save\+::init\+Json (\begin{DoxyParamCaption}\item[{std\+::string}]{filename,  }\item[{bool}]{new\+File = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -231,9 +221,9 @@ true
 false 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a3427a3913b8a9e724c0a70de39e3799a}\label{class_save_a3427a3913b8a9e724c0a70de39e3799a}} 
-\index{Save@{Save}!isInstantiate@{isInstantiate}}
-\index{isInstantiate@{isInstantiate}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{isInstantiate()}{isInstantiate()}}
+\index{Save@{Save}!is\+Instantiate@{is\+Instantiate}}
+\index{is\+Instantiate@{is\+Instantiate}!Save@{Save}}
+\subsubsection{\texorpdfstring{is\+Instantiate()}{isInstantiate()}}
 {\footnotesize\ttfamily bool Save\+::is\+Instantiate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -244,9 +234,9 @@ Know if is instantiate.
 true If instantiate 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a75601bb68eba4ed487d5176acf6f51e9}\label{class_save_a75601bb68eba4ed487d5176acf6f51e9}} 
-\index{Save@{Save}!isLevelDone@{isLevelDone}}
-\index{isLevelDone@{isLevelDone}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{isLevelDone()}{isLevelDone()}}
+\index{Save@{Save}!is\+Level\+Done@{is\+Level\+Done}}
+\index{is\+Level\+Done@{is\+Level\+Done}!Save@{Save}}
+\subsubsection{\texorpdfstring{is\+Level\+Done()}{isLevelDone()}}
 {\footnotesize\ttfamily bool Save\+::is\+Level\+Done (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -262,9 +252,9 @@ Check if the Level $<$ level\+Id $>$ has already been done.
 true If the level is done 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a9efc33ad84705535d96b193d06426922}\label{class_save_a9efc33ad84705535d96b193d06426922}} 
-\index{Save@{Save}!isSaved@{isSaved}}
-\index{isSaved@{isSaved}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{isSaved()}{isSaved()}}
+\index{Save@{Save}!is\+Saved@{is\+Saved}}
+\index{is\+Saved@{is\+Saved}!Save@{Save}}
+\subsubsection{\texorpdfstring{is\+Saved()}{isSaved()}}
 {\footnotesize\ttfamily bool Save\+::is\+Saved (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -275,10 +265,10 @@ Know if the game is saved.
 true If saved 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_af278065bd4e223f0681f1e496dc61da6}\label{class_save_af278065bd4e223f0681f1e496dc61da6}} 
-\index{Save@{Save}!loadGame@{loadGame}}
-\index{loadGame@{loadGame}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{loadGame()}{loadGame()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_save}{Save}} \& Save\+::load\+Game (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\index{Save@{Save}!load\+Game@{load\+Game}}
+\index{load\+Game@{load\+Game}!Save@{Save}}
+\subsubsection{\texorpdfstring{load\+Game()}{loadGame()}}
+{\footnotesize\ttfamily \hyperlink{class_save}{Save} \& Save\+::load\+Game (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -290,13 +280,13 @@ Load filename to actual save.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_save}{Save}}\& this 
+\hyperlink{class_save}{Save}\& this 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_aa9264e3e576763299af4df148700e266}\label{class_save_aa9264e3e576763299af4df148700e266}} 
-\index{Save@{Save}!loadStatesSaved@{loadStatesSaved}}
-\index{loadStatesSaved@{loadStatesSaved}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{loadStatesSaved()}{loadStatesSaved()}}
-{\footnotesize\ttfamily bool Save\+::load\+States\+Saved (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\index{Save@{Save}!load\+States\+Saved@{load\+States\+Saved}}
+\index{load\+States\+Saved@{load\+States\+Saved}!Save@{Save}}
+\subsubsection{\texorpdfstring{load\+States\+Saved()}{loadStatesSaved()}}
+{\footnotesize\ttfamily bool Save\+::load\+States\+Saved (\begin{DoxyParamCaption}\item[{\hyperlink{class_scene_game}{Scene\+Game} \&}]{game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -313,27 +303,27 @@ true
 false 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_aee5c805551d1a4492c3a44a3645343b6}\label{class_save_aee5c805551d1a4492c3a44a3645343b6}} 
-\index{Save@{Save}!newGame@{newGame}}
-\index{newGame@{newGame}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{newGame()}{newGame()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_save}{Save}} \& Save\+::new\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\index{Save@{Save}!new\+Game@{new\+Game}}
+\index{new\+Game@{new\+Game}!Save@{Save}}
+\subsubsection{\texorpdfstring{new\+Game()}{newGame()}}
+{\footnotesize\ttfamily \hyperlink{class_save}{Save} \& Save\+::new\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
 New Game create a new file with the current \+\_\+time. 
 
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{class_save}{Save}}\& this 
+\hyperlink{class_save}{Save}\& this 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a2edbb08ba5ec1f0e9291d246580bd295}\label{class_save_a2edbb08ba5ec1f0e9291d246580bd295}} 
 \index{Save@{Save}!save@{save}}
 \index{save@{save}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{save()}{save()}}
+\subsubsection{\texorpdfstring{save()}{save()}}
 {\footnotesize\ttfamily bool Save\+::save (\begin{DoxyParamCaption}\item[{bool}]{temporary = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-\mbox{\hyperlink{class_save}{Save}} method to file. 
+\hyperlink{class_save}{Save} method to file. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -346,9 +336,9 @@ true
 false 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_ae4305a76f306f9d7ca5991c881d7c98b}\label{class_save_ae4305a76f306f9d7ca5991c881d7c98b}} 
-\index{Save@{Save}!setDifficulty@{setDifficulty}}
-\index{setDifficulty@{setDifficulty}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{setDifficulty()}{setDifficulty()}}
+\index{Save@{Save}!set\+Difficulty@{set\+Difficulty}}
+\index{set\+Difficulty@{set\+Difficulty}!Save@{Save}}
+\subsubsection{\texorpdfstring{set\+Difficulty()}{setDifficulty()}}
 {\footnotesize\ttfamily void Save\+::set\+Difficulty (\begin{DoxyParamCaption}\item[{uint}]{difficulty }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -361,9 +351,9 @@ Set difficulty of the game.
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_save_a6423aab69350aaafaad752830e191840}\label{class_save_a6423aab69350aaafaad752830e191840}} 
-\index{Save@{Save}!setLevelDone@{setLevelDone}}
-\index{setLevelDone@{setLevelDone}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{setLevelDone()}{setLevelDone()}}
+\index{Save@{Save}!set\+Level\+Done@{set\+Level\+Done}}
+\index{set\+Level\+Done@{set\+Level\+Done}!Save@{Save}}
+\subsubsection{\texorpdfstring{set\+Level\+Done()}{setLevelDone()}}
 {\footnotesize\ttfamily bool Save\+::set\+Level\+Done (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{level\+Id,  }\item[{int32\+\_\+t}]{score }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -381,9 +371,9 @@ Set a level as done.
 false If failed 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_af787535a55af6b09cd0834a979661120}\label{class_save_af787535a55af6b09cd0834a979661120}} 
-\index{Save@{Save}!timestampToFileName@{timestampToFileName}}
-\index{timestampToFileName@{timestampToFileName}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{timestampToFileName()}{timestampToFileName()}}
+\index{Save@{Save}!timestamp\+To\+File\+Name@{timestamp\+To\+File\+Name}}
+\index{timestamp\+To\+File\+Name@{timestamp\+To\+File\+Name}!Save@{Save}}
+\subsubsection{\texorpdfstring{timestamp\+To\+File\+Name()}{timestampToFileName()}}
 {\footnotesize\ttfamily std\+::string Save\+::timestamp\+To\+File\+Name (\begin{DoxyParamCaption}\item[{time\+\_\+t}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
@@ -399,10 +389,10 @@ Return formated filename from a timestamp.
 std\+::string filename 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}\label{class_save_a858a98bf0dd78395f5f7bee7bbdc7f57}} 
-\index{Save@{Save}!updateSavedFile@{updateSavedFile}}
-\index{updateSavedFile@{updateSavedFile}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{updateSavedFile()}{updateSavedFile()}}
-{\footnotesize\ttfamily bool Save\+::update\+Saved\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_game}{Scene\+Game}} \&}]{game,  }\item[{bool}]{succeed\+Level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\index{Save@{Save}!update\+Saved\+File@{update\+Saved\+File}}
+\index{update\+Saved\+File@{update\+Saved\+File}!Save@{Save}}
+\subsubsection{\texorpdfstring{update\+Saved\+File()}{updateSavedFile()}}
+{\footnotesize\ttfamily bool Save\+::update\+Saved\+File (\begin{DoxyParamCaption}\item[{\hyperlink{class_scene_game}{Scene\+Game} \&}]{game,  }\item[{bool}]{succeed\+Level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -422,12 +412,12 @@ false
 \end{DoxyReturn}
 
 
-\doxysubsection{Friends And Related Function Documentation}
+\subsection{Friends And Related Function Documentation}
 \mbox{\Hypertarget{class_save_a3cd403916354948cd0ec21803ec2f78f}\label{class_save_a3cd403916354948cd0ec21803ec2f78f}} 
 \index{Save@{Save}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!Save@{Save}}
-\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
-{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{class_save}{Save}} \&}]{my\+\_\+class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+\subsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \hyperlink{class_save}{Save} \&}]{my\+\_\+class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
 
 
 
