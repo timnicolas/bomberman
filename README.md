@@ -63,7 +63,7 @@ You can enter cheatcode by pressing the <kbd>/</kbd> key.
 
 Bomberman is compatible with **OSX🍎** and **Linux🐧**.
 
-If you are on **OSX🍎** you can directly download the dmg build [here](https://www.dropbox.com/s/uk0l9rlvxbrjpoo/bomberman.dmg?dl=0).
+If you are on **OSX🍎** you can directly download the dmg build **[here](https://www.dropbox.com/s/isqd7lx4sto9yso/bomberman.dmg?dl=0)**.
 
 ### 👷 Manual installation
 
