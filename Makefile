@@ -88,6 +88,7 @@ SRCS_DIR	= srcs
 OBJS_DIR	= objs
 INC_DIR		= includes
 LIBS_DIR	= libs
+BREW_DIR    = /opt/homebrew
 DEP_DIR		= .dep
 # this will create a DEBUG file if we are in debug mode (make DEBUG=1)
 DEBUG_DIR	= $(DEP_DIR)
@@ -292,12 +293,12 @@ LIBS_HEAD =	glad/glad.h \
 			stb_image.h \
 
 # all flags for libs
-LIBS_FLAGS =	-L ~/.brew/lib -l SDL2 -l SDL2_mixer -l assimp \
-				-L ~/.brew/opt/freetype/lib -lfreetype \
+LIBS_FLAGS =	-L $(BREW_DIR)/lib -l SDL2 -l SDL2_mixer -l assimp \
+				-L $(BREW_DIR)/opt/freetype/lib -lfreetype \
 				-lboost_filesystem \
 
 # flags for libs on OSX only
-LIBS_FLAGS_OSX =	-rpath ~/.brew/lib -framework OpenGL
+LIBS_FLAGS_OSX =	-rpath $(BREW_DIR)/lib -framework OpenGL
 
 # flags for libs on LINUX only
 LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
@@ -306,10 +307,10 @@ LIBS_FLAGS_LINUX =	-Wl,-rpath,/usr/lib/x86_64-linux-gnu -lGL -lGLU \
 					-L libs/assimp-5.0.1/build/code \
 
 # includes dir for external libs
-LIBS_INC =	~/.brew/include \
+LIBS_INC =	$(BREW_DIR)/include \
 			$(LIBS_DIR) \
 			/usr/local/opt/freetype/include/freetype2 \
-			~/.brew/opt/freetype/include/freetype2 \
+			$(BREW_DIR)/opt/freetype/include/freetype2 \
 			/usr/include/freetype2 \
 			/usr/include/assimp \
 			/usr/include/SDL2 \
