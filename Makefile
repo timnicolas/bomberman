@@ -69,7 +69,9 @@ ARGS =
 # compiler (g++ or clang++)
 CC = g++
 # flags for compilation
-CFLAGS = -Ofast -std=c++17 -Wall -Wextra -Wno-deprecated
+# `-Ofast` enables fast-math assumptions that break code using NaN/infinity,
+# including the vendored nlohmann/json header.
+CFLAGS = -O3 -std=c++17 -Wall -Wextra -Wno-deprecated
 # flags only for debug mode (make DEBUG=1)
 DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
